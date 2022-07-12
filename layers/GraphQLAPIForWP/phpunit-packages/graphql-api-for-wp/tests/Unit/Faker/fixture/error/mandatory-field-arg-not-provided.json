@@ -11,6 +11,11 @@
       "extensions": {
         "type": "Post",
         "field": "implements",
+        "path": [
+          "implements",
+          "posts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e29"
       }
     },
@@ -25,6 +30,11 @@
       "extensions": {
         "type": "Post",
         "field": "isObjectType",
+        "path": [
+          "isObjectType",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e29"
       }
     },
@@ -39,6 +49,11 @@
       "extensions": {
         "type": "Page",
         "field": "isObjectType",
+        "path": [
+          "isObjectType",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e29"
       }
     }

@@ -4,18 +4,29 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use GFAPI;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP_Newsletter_GFHelpers;
 use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptionMutationResolver;
 
 class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUnsubscriptionMutationResolver
 {
-    protected function validateData(&$errors, $newsletter_data): void
+    protected function validateData(array $newsletter_data, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): void
     {
-        parent::validateData($errors, $newsletter_data);
+        parent::validateData($newsletter_data, $objectTypeFieldResolutionFeedbackStore);
 
         if (empty($newsletter_data['entry-id'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
             $errors[] = $this->getTranslationAPI()->__('Your email is not subscribed to our newsletter.', 'gravityforms-pop-genericforms');
         }
     }

@@ -58,8 +58,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     ): bool;
     public function collectFieldValidationDeprecationMessages(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     public function resolveValue(
@@ -148,13 +147,12 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     ): ?string;
     /**
      * Custom validations
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): array;
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
     /**
      * @param array<string,mixed> $fieldArgs
      * @return CheckpointInterface[]

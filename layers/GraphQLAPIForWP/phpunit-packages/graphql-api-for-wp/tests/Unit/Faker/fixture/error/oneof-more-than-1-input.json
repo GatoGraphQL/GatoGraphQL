@@ -4,13 +4,19 @@
       "message": "The oneof input object 'UserByInput' must receive exactly 1 input, but '2' inputs were provided ('id', 'username')",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 12
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "user(by: {id: 1, username: \"themedemos\"})",
+        "field": "user(by: {id: 1, username: \"themedemos\"}) { ... }",
+        "path": [
+          "{id: 1, username: \"themedemos\"}",
+          "(by: {id: 1, username: \"themedemos\"})",
+          "user(by: {id: 1, username: \"themedemos\"}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e6"
       }
     }

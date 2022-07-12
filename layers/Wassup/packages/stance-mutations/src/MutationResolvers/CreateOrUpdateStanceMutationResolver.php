@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
@@ -21,12 +22,14 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
         return $this->create($fieldDataAccessor);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         if ($this->isUpdate($fieldDataAccessor)) {
-            return $this->validateUpdateErrors($fieldDataAccessor);
+            return $this->validateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         }
-        return $this->validateCreateErrors($fieldDataAccessor);
+        return $this->validateCreateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**

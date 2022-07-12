@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
@@ -17,7 +17,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
@@ -184,11 +184,12 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
     final public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
         if (!($inputValue instanceof stdClass)) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E15,
@@ -197,18 +198,18 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                             $inputValue
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             return null;
         }
-        return $this->coerceInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
+        return $this->coerceInputObjectValue($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function coerceInputObjectValue(
         stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?stdClass {
         $coercedInputValue = new stdClass();
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
@@ -258,8 +259,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             // Check that the input field exists
             $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
             if ($inputFieldTypeResolver === null) {
-                $schemaInputValidationFeedbackStore->addError(
-                    new SchemaInputValidationFeedback(
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             InputValueCoercionErrorFeedbackItemProvider::class,
                             InputValueCoercionErrorFeedbackItemProvider::E4,
@@ -268,8 +269,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                                 $this->getMaybeNamespacedTypeName(),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this
+                        $astNode,
                     ),
                 );
                 continue;
@@ -313,7 +313,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
 
             // Validate that the expected array/non-array input is provided
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
@@ -322,37 +322,40 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsNonNullArrayItemsType,
                 $inputFieldIsArrayOfArraysType,
                 $inputFieldIsNonNullArrayOfArraysItemsType,
-                $separateSchemaInputValidationFeedbackStore,
+                $astNode,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
-                $separateSchemaInputValidationFeedbackStore,
+                $astNode,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
             // Custom validations for the field
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->validateCoercedInputFieldValue(
                 $inputFieldTypeResolver,
                 $inputFieldName,
                 $coercedInputFieldValue,
-                $separateSchemaInputValidationFeedbackStore,
+                $astNode,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
@@ -373,8 +376,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E5,
@@ -383,15 +386,14 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             continue;
         }
 
         // If there was any error, return it
-        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
@@ -428,7 +430,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
     }
 
@@ -544,28 +547,30 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->consolidatedInputFieldExtensionsCache[$inputFieldName];
     }
     /**
-     * Validate constraints on the input field's value
-     *
-     * @return FeedbackItemResolution[] Errors
+     * Validate constraints on the input's value
      */
-    final public function validateInputValue(stdClass $inputValue): array
-    {
-        $errors = [];
+    final public function validateInputValue(
+        stdClass $inputValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
-            $errors = array_merge(
-                $errors,
-                $this->validateInputFieldValue($inputFieldName, $inputFieldValue)
+            $this->validateInputFieldValue(
+                $inputFieldName,
+                $inputFieldValue,
+                $astNode,
+                $objectTypeFieldResolutionFeedbackStore,
             );
         }
-        return $errors;
     }
     /**
      * Validate constraints on the input field's value
-     *
-     * @return FeedbackItemResolution[] Errors
      */
-    protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
-    {
-        return [];
+    protected function validateInputFieldValue(
+        string $inputFieldName,
+        mixed $inputFieldValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
     }
 }

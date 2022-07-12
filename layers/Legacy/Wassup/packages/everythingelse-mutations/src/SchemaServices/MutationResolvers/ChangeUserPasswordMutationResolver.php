@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\Exception\AbstractException;
 use PoP\UserAccount\FunctionAPIFactory;
 
 class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         // Validate Password
         // Check current password really belongs to the user
@@ -25,52 +27,81 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
 
         if (!$current_password) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('Please provide the current password.', 'pop-application');
         } elseif (!$cmsuseraccountapi->checkPassword($fieldDataAccessor->getValue('user_id'), $current_password)) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('Current password is incorrect.', 'pop-application');
         }
 
         if (!$password) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The password must be at least 8 characters long.', 'pop-application');
         } else {
             if (!$repeatpassword) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->getTranslationAPI()->__('Please confirm the password.', 'pop-application');
             } elseif ($password !== $repeatpassword) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->getTranslationAPI()->__('Passwords do not match.', 'pop-application');
             }
         }
-        return $errors;
     }
 
     protected function executeChangepassword($user_data)

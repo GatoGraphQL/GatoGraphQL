@@ -10,10 +10,12 @@
       ],
       "extensions": {
         "type": "Post",
+        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "id": 1724,
-        "fields": [
-          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
-          "resolveValueAndMerge"
+        "path": [
+          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "customPost(by: {id: 1724}) { ... }",
+          "query { ... }"
         ],
         "code": "PoP\\ComponentModel\\1"
       }

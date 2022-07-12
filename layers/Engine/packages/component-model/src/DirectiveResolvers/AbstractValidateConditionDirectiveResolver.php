@@ -11,7 +11,6 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractValidateConditionDirectiveResolver extends AbstractValidateDirectiveResolver
@@ -32,7 +31,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         if ($this->isValidatingDirective()) {
             return PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE;
         }
-        return PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE;
+        return PipelinePositions::BEFORE_RESOLVE;
     }
 
     /**
@@ -57,17 +56,14 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
             $failedFields,
             $fields
         );
-        foreach ($fields as $field) {
-            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                new SchemaFeedback(
-                    $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $fields),
-                    LocationHelper::getNonSpecificLocation(),
-                    $relationalTypeResolver,
-                    $field,
-                    $this->directive,
-                )
-            );
-        }
+        $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+            new SchemaFeedback(
+                $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $fields),
+                $this->directive,
+                $relationalTypeResolver,
+                $fields,
+            )
+        );
     }
 
     /**

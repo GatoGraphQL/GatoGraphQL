@@ -83,9 +83,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
         if ($this->supportsTitle() && empty($fieldDataAccessor->getValue(MutationInputProperties::TITLE))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('The title cannot be empty', 'pop-application');
         }
@@ -97,18 +102,28 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
         if (empty($fieldDataAccessor->getValue(MutationInputProperties::CONTENT))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('The content cannot be empty', 'pop-application');
         }
 
         if ($this->isFeaturedImageMandatory() && empty($fieldDataAccessor->getValue(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('The featured image has not been set', 'pop-application');
         }
@@ -118,25 +133,40 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             if (empty($fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES))) {
                 if ($validateCategories == self::VALIDATECATEGORIESTYPE_ATLEASTONE) {
                     // @todo Migrate from string to FeedbackItemProvider
-                    // $errors[] = new FeedbackItemResolution(
-                    //     MutationErrorFeedbackItemProvider::class,
-                    //     MutationErrorFeedbackItemProvider::E1,
-                    // );
+                // $objectTypeFieldResolutionFeedbackStore->addError(
+                //     new ObjectTypeFieldResolutionFeedback(
+                //         new FeedbackItemResolution(
+                //             MutationErrorFeedbackItemProvider::class,
+                //             MutationErrorFeedbackItemProvider::E1,
+                //         ),
+                //         $fieldDataAccessor->getField(),
+                //     )
+                // );
                     $errors[] = $category_error_msgs['empty-categories'];
                 } elseif ($validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
                     // @todo Migrate from string to FeedbackItemProvider
-                    // $errors[] = new FeedbackItemResolution(
-                    //     MutationErrorFeedbackItemProvider::class,
-                    //     MutationErrorFeedbackItemProvider::E1,
-                    // );
+                // $objectTypeFieldResolutionFeedbackStore->addError(
+                //     new ObjectTypeFieldResolutionFeedback(
+                //         new FeedbackItemResolution(
+                //             MutationErrorFeedbackItemProvider::class,
+                //             MutationErrorFeedbackItemProvider::E1,
+                //         ),
+                //         $fieldDataAccessor->getField(),
+                //     )
+                // );
                     $errors[] = $category_error_msgs['empty-category'];
                 }
             } elseif (count($fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES)) > 1 && $validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $category_error_msgs['only-one'];
             }
         }
@@ -151,9 +181,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
         if ($fieldDataAccessor->hasValue(MutationInputProperties::REFERENCES) && in_array($fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor->getValue(MutationInputProperties::REFERENCES))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('The post cannot be a response to itself', 'pop-postscreation');
         }
@@ -170,9 +205,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
         if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(CustomPostStatus::DRAFT, CustomPostStatus::PENDING, CustomPostStatus::PUBLISH))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;

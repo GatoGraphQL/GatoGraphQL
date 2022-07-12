@@ -5,26 +5,55 @@
       "locations": [
         {
           "line": 2,
-          "column": 3
+          "column": 42
         }
       ],
       "extensions": {
         "type": "QueryRoot",
         "field": "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+        "path": [
+          "(type: \"DoesntMatter\")",
+          "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e27"
       }
     },
     {
-      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'someType', 'anotherType'",
+      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'someType'",
       "locations": [
         {
           "line": 3,
-          "column": 13
+          "column": 52
         }
       ],
       "extensions": {
         "type": "QueryRoot",
         "field": "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+        "path": [
+          "(someType: \"DoesntMatter\")",
+          "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+          "query { ... }"
+        ],
+        "code": "PoP\\ComponentModel\\e27"
+      }
+    },
+    {
+      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'anotherType'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 78
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "field": "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+        "path": [
+          "(anotherType: \"AlsoDoesntMatter\")",
+          "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e27"
       }
     }

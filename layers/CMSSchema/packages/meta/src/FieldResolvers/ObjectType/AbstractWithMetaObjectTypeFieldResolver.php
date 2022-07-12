@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -45,30 +47,33 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
 
     /**
      * Custom validations
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): array {
-        $errors = parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor);
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'metaValue':
             case 'metaValues':
                 if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($fieldDataAccessor->getValue('key'))) {
-                    $errors[] = new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E1,
-                        [
-                            $fieldDataAccessor->getValue('key'),
-                        ]
+                    $field = $fieldDataAccessor->getField();
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E1,
+                                [
+                                    $fieldDataAccessor->getValue('key'),
+                                ]
+                            ),
+                            $field->getArgument('key') ?? $field,
+                        )
                     );
                 }
                 break;
         }
-
-        return $errors;
     }
 
     public function validateResolvedFieldType(

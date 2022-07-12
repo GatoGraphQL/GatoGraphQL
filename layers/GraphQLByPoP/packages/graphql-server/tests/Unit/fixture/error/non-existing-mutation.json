@@ -11,6 +11,10 @@
             "extensions": {
                 "type": "MutationRoot",
                 "field": "nonExisting",
+                "path": [
+                    "nonExisting",
+                    "mutation { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         }

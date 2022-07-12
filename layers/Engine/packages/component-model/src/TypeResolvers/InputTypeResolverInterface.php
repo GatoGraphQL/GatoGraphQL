@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
 /**
@@ -25,7 +26,7 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      * into the corresponding scalar entity (in this case, a String).
      *
      * Return `null` if the coercing cannot be done, and add an error
-     * with a descriptive message to `$schemaInputValidationFeedbackStore`.
+     * with a descriptive message to `$objectTypeFieldResolutionFeedbackStore`.
      *
      * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
      * @return string|int|float|bool|object|null the coerced (custom) scalar, or `null` if it can't be done
@@ -34,6 +35,7 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null;
 }

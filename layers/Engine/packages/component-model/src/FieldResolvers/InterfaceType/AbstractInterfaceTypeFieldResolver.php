@@ -6,10 +6,10 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
@@ -22,6 +22,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
@@ -432,19 +433,18 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /**
      * Validate the constraints for a field argument
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldArgValue(
         string $fieldName,
         string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
+        mixed $fieldArgValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->validateFieldArgValue($fieldName, $fieldArgName, $fieldArgValue);
+            $schemaDefinitionResolver->validateFieldArgValue($fieldName, $fieldArgName, $fieldArgValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
         }
-        return [];
     }
 
     /**

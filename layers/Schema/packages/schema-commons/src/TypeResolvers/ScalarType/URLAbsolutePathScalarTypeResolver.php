@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
 /**
@@ -32,17 +33,18 @@ class URLAbsolutePathScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsString($inputValue, $separateSchemaInputValidationFeedbackStore);
-        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateIsString($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
-        $this->validateFilterVar('http://www.example.com' . $inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_URL);
-        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+        $this->validateFilterVar('http://www.example.com' . $inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore, \FILTER_VALIDATE_URL);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 

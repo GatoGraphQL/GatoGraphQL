@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FlagMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP_EmailSender_Utils;
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP_EmailSender_Utils;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 class FlagCustomPostMutationResolver extends AbstractMutationResolver
@@ -25,48 +26,74 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         if (empty($fieldDataAccessor->getValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($fieldDataAccessor->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
         if (empty($fieldDataAccessor->getValue('whyflag'))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('Why flag cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($fieldDataAccessor->getValue('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
@@ -74,14 +101,18 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $target = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->getValue('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->__('The requested post does not exist.', 'pop-genericforms');
             }
         }
-        return $errors;
     }
 
     /**

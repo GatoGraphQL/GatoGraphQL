@@ -102,9 +102,8 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
-                    $field,
-                    $id,
-                    $this->directive
+                    $this->directive,
+                    [$id => new EngineIterationFieldSet([$field])]
                 );
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     continue;
@@ -125,9 +124,8 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
-                    $field,
-                    $id,
-                    $this->directive
+                    $this->directive,
+                    [$id => new EngineIterationFieldSet([$field])]
                 );
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     continue;

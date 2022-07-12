@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 /**
@@ -43,12 +43,13 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsNotStdClass($inputValue, $separateSchemaInputValidationFeedbackStore);
-        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateIsNotStdClass($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
@@ -58,8 +59,8 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
          * @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
          */
         if (is_float($inputValue) || is_bool($inputValue)) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E17,
@@ -67,8 +68,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             return null;

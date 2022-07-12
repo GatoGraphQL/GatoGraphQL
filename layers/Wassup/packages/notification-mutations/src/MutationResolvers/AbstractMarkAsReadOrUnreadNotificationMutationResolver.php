@@ -4,23 +4,30 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP_Notifications_API;
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP_Notifications_API;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $histid = $fieldDataAccessor->getValue('histid');
         if (!$histid) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('This URL is incorrect.', 'pop-notifications');
         } else {
@@ -28,14 +35,18 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
             $notification = PoP_Notifications_API::getNotification($histid);
             if (!$notification) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->__('This notification does not exist.', 'pop-notifications');
             }
         }
-        return $errors;
     }
 
     protected function additionals($histid, FieldDataAccessorInterface $fieldDataAccessor): void

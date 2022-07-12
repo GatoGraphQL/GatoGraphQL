@@ -8,8 +8,6 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 class FragmentReference extends AbstractAst implements FragmentBondInterface
 {
-    protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
-
     public function __construct(
         protected readonly string $name,
         Location $location,
@@ -25,14 +23,12 @@ class FragmentReference extends AbstractAst implements FragmentBondInterface
         );
     }
 
-    public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
+    protected function doAsASTNodeString(): string
     {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface
-    {
-        return $this->parent;
+        return sprintf(
+            '...%s',
+            $this->name
+        );
     }
 
     public function getName(): string

@@ -9,8 +9,6 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 class Argument extends AbstractAst
 {
-    protected FieldInterface|Directive $parent;
-
     public function __construct(
         protected readonly string $name,
         protected WithValueInterface $value,
@@ -28,14 +26,13 @@ class Argument extends AbstractAst
         );
     }
 
-    public function setParent(FieldInterface|Directive $parent): void
+    protected function doAsASTNodeString(): string
     {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): FieldInterface|Directive
-    {
-        return $this->parent;
+        return sprintf(
+            '(%s: %s)',
+            $this->name,
+            $this->value->asQueryString()
+        );
     }
 
     public function getName(): string

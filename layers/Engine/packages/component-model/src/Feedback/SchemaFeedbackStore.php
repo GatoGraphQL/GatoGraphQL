@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class SchemaFeedbackStore
@@ -52,58 +51,54 @@ class SchemaFeedbackStore
         );
     }
 
+    /**
+     * @param FieldInterface[] $fields
+     */
     public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldInterface $field,
-        ?Directive $directive = null,
+        array $fields,
     ): void {
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackError,
                 $relationalTypeResolver,
-                $field,
-                $directive,
+                $fields,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
             $this->warnings[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackWarning,
                 $relationalTypeResolver,
-                $field,
-                $directive,
+                $fields,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
             $this->deprecations[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackDeprecation,
                 $relationalTypeResolver,
-                $field,
-                $directive,
+                $fields,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
             $this->notices[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackNotice,
                 $relationalTypeResolver,
-                $field,
-                $directive,
+                $fields,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getSuggestions() as $objectTypeFieldResolutionFeedbackSuggestion) {
             $this->suggestions[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackSuggestion,
                 $relationalTypeResolver,
-                $field,
-                $directive,
+                $fields,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
             $this->logs[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackLog,
                 $relationalTypeResolver,
-                $field,
-                $directive,
+                $fields,
             );
         }
     }

@@ -11,8 +11,6 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
-    protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
-
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
@@ -63,14 +61,12 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
         );
     }
 
-    public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
+    protected function doAsASTNodeString(): string
     {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface
-    {
-        return $this->parent;
+        return sprintf(
+            '...on %s { ... }',
+            $this->typeName,
+        );
     }
 
     public function getTypeName(): string

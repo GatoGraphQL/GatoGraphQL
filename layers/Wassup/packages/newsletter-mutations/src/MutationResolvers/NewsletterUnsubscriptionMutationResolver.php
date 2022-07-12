@@ -4,31 +4,43 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP_GenericForms_NewsletterUtils;
-use PoP_EmailSender_Utils;
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP_EmailSender_Utils;
+use PoP_GenericForms_NewsletterUtils;
 
 class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         if (empty($fieldDataAccessor->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
@@ -37,9 +49,14 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         $makesure_string = $this->__('Please make sure you have clicked on the unsubscription link in the newsletter.', 'pop-genericforms');
         if (empty($fieldDataAccessor->getValue('verificationcode'))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = sprintf(
                 $placeholder_string,
@@ -48,17 +65,22 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             );
         }
 
-        if ($errors) {
-            return $errors;
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
         }
 
         // Verify that the verification code corresponds to the email
         $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($fieldDataAccessor->getValue('email'));
         if ($verificationcode != $fieldDataAccessor->getValue('verificationcode')) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = sprintf(
                 $placeholder_string,
@@ -66,13 +88,12 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
                 $makesure_string
             );
         }
-        if ($errors) {
-            return $errors;
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
         }
 
         $newsletter_data = $this->getNewsletterData($fieldDataAccessor);
-        $this->validateData($errors, $newsletter_data);
-        return $errors;
+        $this->validateData($newsletter_data, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
@@ -93,7 +114,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override by Gravity Forms
      */
-    protected function validateData(&$errors, $newsletter_data): void
+    protected function validateData(array $newsletter_data, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): void
     {
     }
 

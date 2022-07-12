@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 class Literal extends AbstractAst implements CoercibleArgumentValueAstInterface
 {
-    protected InputList|InputObject|Argument $parent;
-
     public function __construct(
         protected string|int|float|bool|null $value,
         Location $location
@@ -24,14 +21,9 @@ class Literal extends AbstractAst implements CoercibleArgumentValueAstInterface
         return $this->getGraphQLQueryStringFormatter()->getLiteralAsQueryString($this->value);
     }
 
-    public function setParent(InputList|InputObject|Argument $parent): void
+    protected function doAsASTNodeString(): string
     {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): InputList|InputObject|Argument
-    {
-        return $this->parent;
+        return $this->getGraphQLQueryStringFormatter()->getLiteralAsQueryString($this->value);
     }
 
     /**

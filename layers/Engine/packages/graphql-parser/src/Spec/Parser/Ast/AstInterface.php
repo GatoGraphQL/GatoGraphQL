@@ -7,4 +7,5 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 interface AstInterface extends LocatableInterface
 {
     public function asQueryString(): string;
+    public function asASTNodeString(): string;
 }

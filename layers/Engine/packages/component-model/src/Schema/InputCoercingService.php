@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
@@ -13,8 +13,8 @@ use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
@@ -124,14 +124,15 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsNonNullArrayItemsType,
         bool $inputIsArrayOfArraysType,
         bool $inputIsNonNullArrayOfArraysItemsType,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (
             !$inputIsArrayType
             && is_array($inputValue)
         ) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E8,
@@ -140,8 +141,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             json_encode($inputValue),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -153,8 +153,8 @@ class InputCoercingService implements InputCoercingServiceInterface
             $inputValueAsString = $inputValue instanceof stdClass
                 ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($inputValue)
                 : $inputValue;
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E9,
@@ -163,8 +163,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             $inputValueAsString,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -177,8 +176,8 @@ class InputCoercingService implements InputCoercingServiceInterface
                 fn ($arrayItem) => $arrayItem === null
             )
         ) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E10,
@@ -186,8 +185,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             $inputName,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -200,8 +198,8 @@ class InputCoercingService implements InputCoercingServiceInterface
                 fn ($arrayItem) => is_array($arrayItem)
             )
         ) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E11,
@@ -210,8 +208,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             json_encode($inputValue),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -225,8 +222,8 @@ class InputCoercingService implements InputCoercingServiceInterface
                 fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
             )
         ) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E12,
@@ -235,8 +232,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             json_encode($inputValue),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -252,8 +248,8 @@ class InputCoercingService implements InputCoercingServiceInterface
                 ) !== [],
             )
         ) {
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E13,
@@ -261,8 +257,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             $inputName,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -278,7 +273,8 @@ class InputCoercingService implements InputCoercingServiceInterface
         mixed $inputValue,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         if ($inputValue === null) {
             return $inputValue;
@@ -289,7 +285,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             return array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
-                    fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $schemaInputValidationFeedbackStore),
+                    fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
                     $arrayArgValueElem
                 ),
                 $inputValue
@@ -299,12 +295,12 @@ class InputCoercingService implements InputCoercingServiceInterface
             /** @var array $inputValue */
             // If the value is an array, then cast each element to the item type
             return array_map(
-                fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem, $schemaInputValidationFeedbackStore),
+                fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
                 $inputValue
             );
         }
         // Otherwise, simply cast the given value directly
-        return $inputTypeResolver->coerceValue($inputValue, $schemaInputValidationFeedbackStore);
+        return $inputTypeResolver->coerceValue($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**

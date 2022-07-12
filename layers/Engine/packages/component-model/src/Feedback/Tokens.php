@@ -6,11 +6,9 @@ namespace PoP\ComponentModel\Feedback;
 
 class Tokens
 {
-    const PATH = 'path';
-    const NAME = 'name';
-    const MESSAGE = 'message';
-    const LOCATIONS = 'locations';
-    const NESTED = 'nested';
-    const EXTENSIONS = 'extensions';
-    const ARGUMENT_PATH = 'argumentPath';
+    public const MESSAGE = 'message';
+    public const LOCATIONS = 'locations';
+    public const EXTENSIONS = 'extensions';
+    public const PATH = 'path';
+    public const FIELD = 'field';
 }

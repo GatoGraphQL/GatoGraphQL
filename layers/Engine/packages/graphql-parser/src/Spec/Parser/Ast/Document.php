@@ -11,13 +11,23 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
+use SplObjectStorage;
 
 class Document implements DocumentInterface
 {
     use StandaloneServiceTrait;
+
+    /**
+     * Keep a reference to the dictionary of all ancestors
+     * for each AST node.
+     *
+     * @var SplObjectStorage<AstInterface,AstInterface>|null
+     */
+    protected ?SplObjectStorage $astNodeAncestors = null;
 
     public function __construct(
         /** @var OperationInterface[] */
@@ -686,32 +696,39 @@ class Document implements DocumentInterface
     }
 
     /**
-     * For all elements in the AST, inject them their parent.
-     * This enables them to re-create the path to them,
-     * from the root of the document.
+     * Create a dictionary mapping every element of the AST
+     * to their parent. This is useful to report the full
+     * path to an AST node in the query when displaying errors.
+     *
+     * @return SplObjectStorage<AstInterface,AstInterface>
      */
-    public function setAncestorsInAST(): self
+    public function getASTNodeAncestors(): SplObjectStorage
     {
-        foreach ($this->operations as $operation) {
-            $this->setAncestorsUnderOperation($operation);
+        if ($this->astNodeAncestors === null) {
+            /** @var SplObjectStorage<AstInterface,AstInterface> */
+            $astNodeAncestors = new SplObjectStorage();
+            $this->astNodeAncestors = $astNodeAncestors;
+            foreach ($this->operations as $operation) {
+                $this->setAncestorsUnderOperation($operation);
+            }
+            foreach ($this->fragments as $fragment) {
+                $this->setAncestorsUnderFragment($fragment);
+            }
         }
-        foreach ($this->fragments as $fragment) {
-            $this->setAncestorsUnderFragment($fragment);
-        }
-        return $this;
+        return $this->astNodeAncestors;
     }
 
     private function setAncestorsUnderOperation(OperationInterface $operation): void
     {
         foreach ($operation->getVariables() as $variable) {
-            $variable->setParent($operation);
+            $this->astNodeAncestors[$variable] = $operation;
         }
         foreach ($operation->getDirectives() as $directive) {
-            $directive->setParent($operation);
+            $this->astNodeAncestors[$directive] = $operation;
             $this->setAncestorsUnderDirective($directive);
         }
         foreach ($operation->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
-            $fieldOrFragmentBond->setParent($operation);
+            $this->astNodeAncestors[$fieldOrFragmentBond] = $operation;
             $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
         }
     }
@@ -719,7 +736,7 @@ class Document implements DocumentInterface
     private function setAncestorsUnderDirective(Directive $directive): void
     {
         foreach ($directive->getArguments() as $argument) {
-            $argument->setParent($directive);
+            $this->astNodeAncestors[$argument] = $directive;
             $this->setAncestorsUnderArgument($argument);
         }
     }
@@ -727,8 +744,62 @@ class Document implements DocumentInterface
     private function setAncestorsUnderArgument(Argument $argument): void
     {
         /** @var Enum|InputList|InputObject|Literal|VariableReference */
-        $argumentValue = $argument->getValueAST();
-        $argumentValue->setParent($argument);
+        $argumentValueAST = $argument->getValueAST();
+        $this->astNodeAncestors[$argumentValueAST] = $argument;
+
+        $this->setAncestorsUnderArgumentValueAst($argumentValueAST);
+    }
+
+    private function setAncestorsUnderArgumentValueAst(Enum|InputList|InputObject|Literal|VariableReference $argumentValueAST): void
+    {
+        if ($argumentValueAST instanceof InputList) {
+            /** @var InputList */
+            $inputList = $argumentValueAST;
+            $this->setAncestorsUnderInputList($inputList);
+        }
+        if ($argumentValueAST instanceof InputObject) {
+            /** @var InputObject */
+            $inputObject = $argumentValueAST;
+            $this->setAncestorsUnderInputObject($inputObject);
+        }
+    }
+
+    private function setAncestorsUnderInputList(InputList $inputList): void
+    {
+        foreach ($inputList->getAstValue() as $astValue) {
+            if (
+                !(
+                $astValue instanceof Enum
+                || $astValue instanceof InputList
+                || $astValue instanceof InputObject
+                || $astValue instanceof Literal
+                || $astValue instanceof VariableReference
+                )
+            ) {
+                continue;
+            }
+            $this->astNodeAncestors[$astValue] = $inputList;
+            $this->setAncestorsUnderArgumentValueAst($astValue);
+        }
+    }
+
+    private function setAncestorsUnderInputObject(InputObject $inputObject): void
+    {
+        foreach ((array) $inputObject->getAstValue() as $astValue) {
+            if (
+                !(
+                $astValue instanceof Enum
+                || $astValue instanceof InputList
+                || $astValue instanceof InputObject
+                || $astValue instanceof Literal
+                || $astValue instanceof VariableReference
+                )
+            ) {
+                continue;
+            }
+            $this->astNodeAncestors[$astValue] = $inputObject;
+            $this->setAncestorsUnderArgumentValueAst($astValue);
+        }
     }
 
     private function setAncestorsUnderFieldOrFragmentBond(FieldInterface|FragmentBondInterface $fieldOrFragmentBond): void
@@ -737,11 +808,11 @@ class Document implements DocumentInterface
             /** @var LeafField */
             $leafField = $fieldOrFragmentBond;
             foreach ($leafField->getArguments() as $argument) {
-                $argument->setParent($leafField);
+                $this->astNodeAncestors[$argument] = $leafField;
                 $this->setAncestorsUnderArgument($argument);
             }
             foreach ($leafField->getDirectives() as $directive) {
-                $directive->setParent($leafField);
+                $this->astNodeAncestors[$directive] = $leafField;
                 $this->setAncestorsUnderDirective($directive);
             }
             return;
@@ -750,15 +821,15 @@ class Document implements DocumentInterface
             /** @var RelationalField */
             $relationalField = $fieldOrFragmentBond;
             foreach ($relationalField->getArguments() as $argument) {
-                $argument->setParent($relationalField);
+                $this->astNodeAncestors[$argument] = $relationalField;
                 $this->setAncestorsUnderArgument($argument);
             }
             foreach ($relationalField->getDirectives() as $directive) {
-                $directive->setParent($relationalField);
+                $this->astNodeAncestors[$directive] = $relationalField;
                 $this->setAncestorsUnderDirective($directive);
             }
             foreach ($relationalField->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
-                $fieldOrFragmentBond->setParent($relationalField);
+                $this->astNodeAncestors[$fieldOrFragmentBond] = $relationalField;
                 $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
             }
             return;
@@ -767,11 +838,11 @@ class Document implements DocumentInterface
             /** @var InlineFragment */
             $inlineFragment = $fieldOrFragmentBond;
             foreach ($inlineFragment->getDirectives() as $directive) {
-                $directive->setParent($inlineFragment);
+                $this->astNodeAncestors[$directive] = $inlineFragment;
                 $this->setAncestorsUnderDirective($directive);
             }
             foreach ($inlineFragment->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
-                $fieldOrFragmentBond->setParent($inlineFragment);
+                $this->astNodeAncestors[$fieldOrFragmentBond] = $inlineFragment;
                 $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
             }
             return;
@@ -784,11 +855,11 @@ class Document implements DocumentInterface
     private function setAncestorsUnderFragment(Fragment $fragment): void
     {
         foreach ($fragment->getDirectives() as $directive) {
-            $directive->setParent($fragment);
+            $this->astNodeAncestors[$directive] = $fragment;
             $this->setAncestorsUnderDirective($directive);
         }
         foreach ($fragment->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
-            $fieldOrFragmentBond->setParent($fragment);
+            $this->astNodeAncestors[$fieldOrFragmentBond] = $fragment;
             $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
         }
     }

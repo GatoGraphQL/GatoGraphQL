@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP_Forms_ConfigurationUtils;
 use GD_Captcha;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\EditUsers\FunctionAPIFactory;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Exception\GenericClientException;
+use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP_Forms_ConfigurationUtils;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 {
@@ -22,13 +23,20 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return 'subscriber';
     }
 
-    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         if (empty($fieldDataAccessor->getValue('first_name'))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The name cannot be empty', 'pop-application');
         }
@@ -37,16 +45,26 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $user_email = $fieldDataAccessor->getValue('user_email');
         if ($user_email === '') {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The e-mail cannot be empty', 'pop-application');
         } elseif (! is_email($user_email)) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The email address isn&#8217;t correct.', 'pop-application');
         }
@@ -56,38 +74,60 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             $emaildomain = substr($user_email, 1 + strpos($user_email, '@'));
             if (in_array($emaildomain, $limited_email_domains) == false) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->getTranslationAPI()->__('That email address is not allowed!', 'pop-application');
             }
         }
     }
 
-    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateCreateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Check the username
         $user_login = $fieldDataAccessor->getValue('username');
         if ($user_login == '') {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The username cannot be empty.', 'pop-application');
         } elseif (!validate_username($user_login)) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('This username is invalid because it uses illegal characters. Please enter a valid username.', 'pop-application');
         } elseif (username_exists($user_login)) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('This username is already registered. Please choose another one.', 'pop-application');
         }
@@ -96,9 +136,14 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $user_email = $fieldDataAccessor->getValue('user_email');
         if (email_exists($user_email)) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('This email is already registered, please choose another one.', 'pop-application');
         }
@@ -109,32 +154,52 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         if (!$password) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The password must be at least 8 characters long.', 'pop-application');
         } else {
             if (!$repeatpassword) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->getTranslationAPI()->__('Please confirm the password.', 'pop-application');
             } elseif ($password !== $repeatpassword) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->getTranslationAPI()->__('Passwords do not match.', 'pop-application');
             }
         }
@@ -146,10 +211,15 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $e->getMessage();
             }
         }
@@ -158,17 +228,24 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateUpdateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $user_id = $fieldDataAccessor->getValue('user_id');
         $user_email = $fieldDataAccessor->getValue('user_email');
 
         $email_user_id = email_exists($user_email);
         if ($email_user_id && $email_user_id !== $user_id) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('That email address already exists in our system!', 'pop-application');
         }
@@ -273,16 +350,16 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $fieldDataAccessor);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
-        $this->validateContent($errors, $fieldDataAccessor);
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $this->validateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if (App::getState('is-user-logged-in')) {
-            $this->validateUpdateContent($errors, $fieldDataAccessor);
+            $this->validateUpdateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         } else {
-            $this->validateCreateContent($errors, $fieldDataAccessor);
+            $this->validateCreateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         }
-        return $errors;
     }
 
     /**
@@ -307,8 +384,9 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the created entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function create(FieldDataAccessorInterface $fieldDataAccessor): string | int
-    {
+    protected function create(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string | int {
         $user_id = $this->createuser($fieldDataAccessor);
 
         // Allow for additional operations (eg: set Action categories)

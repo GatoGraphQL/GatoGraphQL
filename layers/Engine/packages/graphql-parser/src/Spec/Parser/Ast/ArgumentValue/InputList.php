@@ -6,15 +6,12 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 class InputList extends AbstractAst implements CoercibleArgumentValueAstInterface, WithAstValueInterface
 {
-    protected InputList|InputObject|Argument $parent;
-
     /** @var mixed[] */
     protected ?array $cachedValue = null;
 
@@ -33,14 +30,9 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
         return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
     }
 
-    public function setParent(InputList|InputObject|Argument $parent): void
+    protected function doAsASTNodeString(): string
     {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): InputList|InputObject|Argument
-    {
-        return $this->parent;
+        return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
     }
 
     /**

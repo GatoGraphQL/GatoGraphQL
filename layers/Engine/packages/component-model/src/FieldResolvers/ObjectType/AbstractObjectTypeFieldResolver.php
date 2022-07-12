@@ -21,8 +21,8 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefi
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
@@ -39,8 +39,8 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
@@ -607,20 +607,19 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Validate the constraints for a field argument
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
+        mixed $fieldArgValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->validateFieldArgValue($objectTypeResolver, $fieldName, $fieldArgName, $fieldArgValue);
+            $schemaDefinitionResolver->validateFieldArgValue($objectTypeResolver, $fieldName, $fieldArgName, $fieldArgValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
         }
-        return [];
     }
 
     public function isGlobal(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
@@ -701,23 +700,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Custom validations
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): array {
-        return [];
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
     }
 
     public function collectFieldValidationDeprecationMessages(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName);
+        $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $field->getName());
         if ($fieldDeprecationMessage !== null) {
             $objectTypeFieldResolutionFeedbackStore->addDeprecation(
                 new ObjectTypeFieldResolutionFeedback(
@@ -725,12 +721,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         DeprecationFeedbackItemProvider::class,
                         DeprecationFeedbackItemProvider::D1,
                         [
-                            $fieldName,
+                            $field->getName(),
                             $fieldDeprecationMessage,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
+                    $field,
                 )
             );
         }
@@ -1065,8 +1060,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                                 $e->getTraceAsString(),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
+                        $fieldDataAccessor->getField(),
                     )
                 );
             }
@@ -1102,8 +1096,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $feedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
+                    $fieldDataAccessor->getField(),
                 )
             );
             return null;

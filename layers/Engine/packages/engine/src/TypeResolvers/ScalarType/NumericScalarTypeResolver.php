@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use CastToType;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
 class NumericScalarTypeResolver extends AbstractScalarTypeResolver
@@ -26,12 +27,13 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsNotStdClass($inputValue, $separateSchemaInputValidationFeedbackStore);
-        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateIsNotStdClass($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
         $castInputValue = CastToType::_int($inputValue);
@@ -42,7 +44,7 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
         if ($castInputValue !== null) {
             return (float) $castInputValue;
         }
-        $this->addDefaultError($inputValue, $schemaInputValidationFeedbackStore);
+        $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
         return null;
     }
 }

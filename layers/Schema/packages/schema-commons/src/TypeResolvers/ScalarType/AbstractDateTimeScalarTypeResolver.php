@@ -6,11 +6,11 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
 use DateTime;
 use DateTimeInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use stdClass;
 
@@ -32,12 +32,13 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsString($inputValue, $separateSchemaInputValidationFeedbackStore);
-        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateIsString($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
@@ -54,8 +55,8 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
             return $dt;
         }
 
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E1,
@@ -64,8 +65,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
                         $this->getDateTimeFormat(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
         return null;

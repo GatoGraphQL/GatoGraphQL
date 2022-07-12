@@ -7,12 +7,12 @@ namespace PoP\ComponentModel\Feedback;
 class EngineIterationFeedbackStore
 {
     public SchemaFeedbackStore $schemaFeedbackStore;
-    public ObjectFeedbackStore $objectFeedbackStore;
+    public ObjectResolutionFeedbackStore $objectFeedbackStore;
 
     public function __construct()
     {
         $this->schemaFeedbackStore = new SchemaFeedbackStore();
-        $this->objectFeedbackStore = new ObjectFeedbackStore();
+        $this->objectFeedbackStore = new ObjectResolutionFeedbackStore();
     }
 
     public function incorporate(

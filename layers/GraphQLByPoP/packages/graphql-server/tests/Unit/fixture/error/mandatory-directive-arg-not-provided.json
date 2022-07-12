@@ -4,13 +4,18 @@
       "message": "Argument 'if' in directive 'skip' cannot be empty",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 7
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "id<skip>",
+        "field": "id @skip",
+        "path": [
+          "@skip",
+          "id @skip",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e24"
       }
     }

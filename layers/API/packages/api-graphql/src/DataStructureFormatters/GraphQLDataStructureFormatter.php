@@ -28,7 +28,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // Add feedback
         $errors = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
-            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
         );
@@ -53,7 +52,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             if ($moduleConfiguration->enableProactiveFeedbackWarnings()) {
                 $warnings = array_merge(
                     $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                     $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                     $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                 );
@@ -99,7 +97,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             if ($moduleConfiguration->enableProactiveFeedbackLogs()) {
                 $logs = array_merge(
                     $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] ?? []),
-                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? []),
                     $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::LOG] ?? []),
                     $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::LOG] ?? []),
                 );
@@ -151,48 +148,28 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($locations = $item[Tokens::LOCATIONS] ?? null) {
             $entry['locations'] = $locations;
         }
-        if ($name = $item[Tokens::NAME] ?? null) {
-            $entry['name'] = $name;
-        }
-        // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
                 $this->getObjectEntryExtensions($typeOutputKey, $id, $item),
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
-            $entry['extensions'] = $this->reformatExtensions($extensions);
+            $entry['extensions'] = $extensions;
         }
-        // }
         return $entry;
-    }
-
-    /**
-     * Enable to modify the shape of the extensions.
-     *
-     * @param array<string,mixed> $extensions
-     * @return array<string,mixed>
-     */
-    protected function reformatExtensions(array $extensions): array
-    {
-        // Recursive call for nested elements
-        foreach (($extensions[Tokens::NESTED] ?? []) as $index => $nested) {
-            if (!isset($nested[Tokens::EXTENSIONS])) {
-                continue;
-            }
-            $extensions[Tokens::NESTED][$index][Tokens::EXTENSIONS] = $this->reformatExtensions($nested[Tokens::EXTENSIONS]);
-        }
-        return $extensions;
     }
 
     protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
     {
-        return [
-            'type' => 'dataObject',
-            'entityTypeOutputKey' => $typeOutputKey,
-            'id' => $id,
-            'path' => $item[Tokens::PATH] ?? [],
+        $extensions = [
+            'type' => $typeOutputKey,
         ];
+        if ($field = $item[Tokens::FIELD] ?? null) {
+            $extensions['field'] = $field;
+        }
+        $extensions['id'] = $id;
+        $extensions['path'] = $item[Tokens::PATH];
+        return $extensions;
     }
 
     /**
@@ -223,53 +200,27 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($locations = $item[Tokens::LOCATIONS] ?? null) {
             $entry['locations'] = $locations;
         }
-        if ($name = $item[Tokens::NAME] ?? null) {
-            $entry['name'] = $name;
-        }
-        // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
                 $this->getSchemaEntryExtensions($typeOutputKey, $item),
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
-            $entry['extensions'] = $this->reformatExtensions($extensions);
+            $entry['extensions'] = $extensions;
         }
-        // }
         return $entry;
     }
 
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
-        return [
-            'type' => 'schema',
-            'entityTypeOutputKey' => $typeOutputKey,
-            'path' => $item[Tokens::PATH] ?? [],
+        $extensions = [
+            'type' => $typeOutputKey,
         ];
-    }
-
-    protected function reformatDocumentEntries($entries)
-    {
-        $ret = [];
-        foreach ($entries as $entry) {
-            $ret[] = $this->getDocumentEntry($entry);
+        if ($field = $item[Tokens::FIELD] ?? null) {
+            $extensions['field'] = $field;
         }
-        return $ret;
-    }
-
-    protected function getDocumentEntry(array $entry): array
-    {
-        if ($extensions = $entry[Tokens::EXTENSIONS] ?? null) {
-            $entry['extensions'] = $this->reformatExtensions($extensions);
-        }
-        return $entry;
-    }
-
-    protected function getDocumentEntryExtensions(): array
-    {
-        return [
-            'type' => 'document',
-        ];
+        $extensions['path'] = $item[Tokens::PATH];
+        return $extensions;
     }
 
     protected function reformatGeneralEntries($entries)
@@ -283,12 +234,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     protected function getGeneralEntry(string $message, array $extensions): array
     {
-        $entry = [
+        return [
             'message' => $message,
         ];
-        if ($extensions = $this->getDocumentEntryExtensions()) {
-            $entry['extensions'] = $this->reformatExtensions($extensions);
-        };
-        return $entry;
     }
 }

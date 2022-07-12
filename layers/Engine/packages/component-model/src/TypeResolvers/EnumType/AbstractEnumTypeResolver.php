@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
@@ -79,12 +79,13 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsString($inputValue, $separateSchemaInputValidationFeedbackStore);
-        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateIsString($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
@@ -94,8 +95,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                 $enumValues,
                 fn (string $enumValue) => empty($this->getConsolidatedEnumValueDeprecationMessage($enumValue))
             );
-            $schemaInputValidationFeedbackStore->addError(
-                new SchemaInputValidationFeedback(
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E14,
@@ -105,8 +106,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                             implode($this->__('\', \''), $nonDeprecatedEnumValues)
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             return null;
@@ -116,7 +116,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
     final protected function validateIsString(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (is_string($inputValue)) {
             return;
@@ -124,8 +125,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         $inputValueAsString = $inputValue instanceof stdClass
             ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($inputValue)
             : (string) $inputValue;
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E18,
@@ -134,8 +135,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }

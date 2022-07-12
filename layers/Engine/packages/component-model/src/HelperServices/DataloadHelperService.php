@@ -14,7 +14,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -64,7 +63,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $variables, $objectTypeFieldResolutionFeedbackStore);
-        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $field);
+        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, [$field]);
         if (
             $subcomponentFieldNodeTypeResolver === null
             || !($subcomponentFieldNodeTypeResolver instanceof RelationalTypeResolverInterface)
@@ -85,9 +84,9 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                                 $subcomponent_data_field_outputkey,
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
                         $field,
+                        $objectTypeResolver,
+                        [$field],
                     )
                 );
             }

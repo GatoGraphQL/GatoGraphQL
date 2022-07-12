@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\UserMeta\Utils;
 
 /**
@@ -87,18 +88,24 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $user_id = $fieldDataAccessor->getValue('user_id');
         if (!$user_id) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The user is missing', 'ure-pop');
-            return $errors;
+            return;
         }
 
         // $nonce = $fieldDataAccessor->getValue('nonce');
@@ -110,12 +117,16 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         $status = $fieldDataAccessor->getValue('status');
         if (!$status) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The status has not been set', 'ure-pop');
         }
-        return $errors;
     }
 }

@@ -4,13 +4,19 @@
       "message": "There is no input field 'nonExistingArg' in input object 'RootAddCommentToCustomPostFilterInput'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 33
         }
       ],
       "extensions": {
         "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\", nonExistingArg: \"Doesnt Matter\"})",
+        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\", nonExistingArg: \"Doesnt Matter\"}) { ... }",
+        "path": [
+          "{comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\", nonExistingArg: \"Doesnt Matter\"}",
+          "(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\", nonExistingArg: \"Doesnt Matter\"})",
+          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\", nonExistingArg: \"Doesnt Matter\"}) { ... }",
+          "mutation { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e4"
       }
     }
