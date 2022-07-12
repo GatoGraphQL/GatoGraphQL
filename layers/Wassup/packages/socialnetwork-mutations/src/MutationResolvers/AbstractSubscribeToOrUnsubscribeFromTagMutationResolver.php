@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
@@ -25,27 +26,27 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = parent::validateErrors($fieldDataAccessor);
-        if (!$errors) {
-            $target_id = $fieldDataAccessor->getValue('target_id');
-
-            // Make sure the post exists
-            $target = $this->getPostTagTypeAPI()->getTag($target_id);
-            if (!$target) {
-                // @todo Migrate from string to FeedbackItemProvider
-            // $objectTypeFieldResolutionFeedbackStore->addError(
-            //     new ObjectTypeFieldResolutionFeedback(
-            //         new FeedbackItemResolution(
-            //             MutationErrorFeedbackItemProvider::class,
-            //             MutationErrorFeedbackItemProvider::E1,
-            //         ),
-            //         $fieldDataAccessor->getField(),
-            //     )
-            // );
-                $errors[] = $this->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
-            }
+        parent::validateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
         }
-        return $errors;
+        $target_id = $fieldDataAccessor->getValue('target_id');
+
+        // Make sure the post exists
+        $target = $this->getPostTagTypeAPI()->getTag($target_id);
+        if (!$target) {
+            // @todo Migrate from string to FeedbackItemProvider
+        // $objectTypeFieldResolutionFeedbackStore->addError(
+        //     new ObjectTypeFieldResolutionFeedback(
+        //         new FeedbackItemResolution(
+        //             MutationErrorFeedbackItemProvider::class,
+        //             MutationErrorFeedbackItemProvider::E1,
+        //         ),
+        //         $fieldDataAccessor->getField(),
+        //     )
+        // );
+            $errors[] = $this->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
+        }
     }
 
     protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void

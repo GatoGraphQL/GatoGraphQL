@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\UserMeta\Utils;
 
 /**
@@ -91,7 +92,6 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = [];
         $user_id = $fieldDataAccessor->getValue('user_id');
         if (!$user_id) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -105,7 +105,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
             //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('The user is missing', 'ure-pop');
-            return $errors;
+            return;
         }
 
         // $nonce = $fieldDataAccessor->getValue('nonce');
@@ -128,6 +128,5 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->getTranslationAPI()->__('The status has not been set', 'ure-pop');
         }
-        return $errors;
     }
 }

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP_EmailSender_Utils;
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP_EmailSender_Utils;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 class ContactUserMutationResolver extends AbstractMutationResolver
@@ -29,7 +30,6 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = [];
         if (empty($fieldDataAccessor->getValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
@@ -112,7 +112,6 @@ class ContactUserMutationResolver extends AbstractMutationResolver
                 $errors[] = $this->__('The requested user does not exist.', 'pop-genericforms');
             }
         }
-        return $errors;
     }
 
     /**

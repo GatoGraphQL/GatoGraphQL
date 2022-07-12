@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP_GenericForms_NewsletterUtils;
-use PoP_EmailSender_Utils;
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP_EmailSender_Utils;
+use PoP_GenericForms_NewsletterUtils;
 
 class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 {
@@ -18,7 +19,6 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = [];
         if (empty($fieldDataAccessor->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
@@ -65,8 +65,8 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             );
         }
 
-        if ($errors) {
-            return $errors;
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
         }
 
         // Verify that the verification code corresponds to the email
@@ -88,13 +88,12 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
                 $makesure_string
             );
         }
-        if ($errors) {
-            return $errors;
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
         }
 
         $newsletter_data = $this->getNewsletterData($fieldDataAccessor);
-        $this->validateData($errors, $newsletter_data);
-        return $errors;
+        $this->validateData($newsletter_data, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
@@ -115,7 +114,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override by Gravity Forms
      */
-    protected function validateData(&$errors, $newsletter_data): void
+    protected function validateData(array $newsletter_data, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): void
     {
     }
 

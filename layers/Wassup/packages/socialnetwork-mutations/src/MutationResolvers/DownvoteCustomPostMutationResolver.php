@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\UserMeta\Utils;
 
 class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
@@ -26,31 +27,32 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = parent::validateErrors($fieldDataAccessor);
-        if (!$errors) {
-            $user_id = App::getState('current-user-id');
-            $target_id = $fieldDataAccessor->getValue('target_id');
-
-            // Check that the logged in user has not already recommended this post
-            $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
-            if (in_array($target_id, $value)) {
-                // @todo Migrate from string to FeedbackItemProvider
-            // $objectTypeFieldResolutionFeedbackStore->addError(
-            //     new ObjectTypeFieldResolutionFeedback(
-            //         new FeedbackItemResolution(
-            //             MutationErrorFeedbackItemProvider::class,
-            //             MutationErrorFeedbackItemProvider::E1,
-            //         ),
-            //         $fieldDataAccessor->getField(),
-            //     )
-            // );
-                $errors[] = sprintf(
-                    $this->__('You have already down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $this->getCustomPostTypeAPI()->getTitle($target_id)
-                );
-            }
+        parent::validateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
         }
-        return $errors;
+        
+        $user_id = App::getState('current-user-id');
+        $target_id = $fieldDataAccessor->getValue('target_id');
+
+        // Check that the logged in user has not already recommended this post
+        $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
+        if (in_array($target_id, $value)) {
+            // @todo Migrate from string to FeedbackItemProvider
+        // $objectTypeFieldResolutionFeedbackStore->addError(
+        //     new ObjectTypeFieldResolutionFeedback(
+        //         new FeedbackItemResolution(
+        //             MutationErrorFeedbackItemProvider::class,
+        //             MutationErrorFeedbackItemProvider::E1,
+        //         ),
+        //         $fieldDataAccessor->getField(),
+        //     )
+        // );
+            $errors[] = sprintf(
+                $this->__('You have already down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
+                $this->getCustomPostTypeAPI()->getTitle($target_id)
+            );
+        }
     }
 
     /**

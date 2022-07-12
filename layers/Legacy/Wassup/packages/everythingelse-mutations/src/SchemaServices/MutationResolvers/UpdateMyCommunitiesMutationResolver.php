@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserMeta\Utils;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
@@ -74,7 +75,6 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = [];
         $user_id = $fieldDataAccessor->getValue('user_id');
 
         // Validate the Community doesn't belong to itself as a member
@@ -91,7 +91,6 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->getTranslationAPI()->__('You are not allowed to be a member of yourself!', 'ure-pop');
         }
-        return $errors;
     }
 
     /**

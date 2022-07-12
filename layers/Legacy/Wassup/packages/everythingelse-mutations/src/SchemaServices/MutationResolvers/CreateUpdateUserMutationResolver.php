@@ -23,8 +23,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return 'subscriber';
     }
 
-    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         if (empty($fieldDataAccessor->getValue('first_name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
@@ -86,8 +88,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateCreateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Check the username
         $user_login = $fieldDataAccessor->getValue('username');
         if ($user_login == '') {
@@ -224,8 +228,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateUpdateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $user_id = $fieldDataAccessor->getValue('user_id');
         $user_email = $fieldDataAccessor->getValue('user_email');
 
@@ -348,14 +354,12 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = [];
-        $this->validateContent($errors, $fieldDataAccessor);
+        $this->validateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if (App::getState('is-user-logged-in')) {
-            $this->validateUpdateContent($errors, $fieldDataAccessor);
+            $this->validateUpdateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         } else {
-            $this->validateCreateContent($errors, $fieldDataAccessor);
+            $this->validateCreateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         }
-        return $errors;
     }
 
     /**
