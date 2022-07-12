@@ -41,7 +41,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      *   - directive
      *   - fields <= baseline
      */
-    protected function addFieldOrDirectiveEntryToExtensions(array &$extensions, array $item): void
+    protected function addASTNodePathEntryToExtensions(array &$extensions, array $item): void
     {
         // Single field
         $fields = $item[Tokens::PATH] ?? [];
@@ -102,7 +102,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             'type' => $typeOutputKey,
             'id' => $id,
         ];
-        $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
+        $this->addASTNodePathEntryToExtensions($extensions, $item);
         return $extensions;
     }
 
@@ -114,7 +114,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         $extensions = [
             'type' => $typeOutputKey,
         ];
-        $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
+        $this->addASTNodePathEntryToExtensions($extensions, $item);
         return $extensions;
     }
 
