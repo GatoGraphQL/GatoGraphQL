@@ -2252,9 +2252,7 @@ class Engine implements EngineInterface
         $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
         $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         $astNode = $objectOrSchemaFeedback->getAstNode();
-        $path = $astNode instanceof FieldInterface
-            ? $astNode->asFieldOutputQueryString()
-            : $astNode->asQueryString();
+        $path = $astNode->asASTNodeString();
         return [
             Tokens::MESSAGE => $message,
             Tokens::PATH => [$path],
