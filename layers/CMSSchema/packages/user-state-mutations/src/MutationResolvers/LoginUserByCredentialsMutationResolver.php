@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -42,27 +44,40 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = [];
         $username_or_email = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
         $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
 
         if (!$username_or_email) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E2,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
             );
         }
         if (!$pwd) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
             );
         }
 
         if (App::getState('is-user-logged-in')) {
-            $errors[] = $this->getUserAlreadyLoggedInError(App::getState('current-user-id'));
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getUserAlreadyLoggedInError(App::getState('current-user-id')),
+                    $fieldDataAccessor->getField(),
+                )
+            );
         }
-        return $errors;
     }
 
     protected function getUserAlreadyLoggedInError(string | int $user_id): FeedbackItemResolution

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\Root\Exception\AbstractException;
-use PoP\Root\App;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
@@ -32,11 +34,13 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
     ): void {
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
         if ($errorFeedbackItemResolution !== null) {
-            return [
-                $errorFeedbackItemResolution,
-            ];
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $errorFeedbackItemResolution,
+                    $fieldDataAccessor->getField(),
+                )
+            );
         }
-        return [];
     }
     /**
      * @throws AbstractException In case of error
