@@ -2164,27 +2164,9 @@ class Engine implements EngineInterface
         ObjectResolutionFeedbackInterface $objectFeedback,
         SplObjectStorage $iterationObjectFeedbackEntries
     ): void {
-        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
+        $entry = $this->getObjectOrSchemaFeedbackEntries($objectFeedback);
         foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
-                $feedbackItemResolution = $objectFeedback->getFeedbackItemResolution();
-                /** @var Directive */
-                $directive = $objectFeedback->getAstNode();
-                $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
-                $entry = [
-                    Tokens::MESSAGE => $objectFeedback->getFeedbackItemResolution()->getMessage(),
-                    Tokens::PATH => [$directive->asQueryString()],
-                    Tokens::LOCATIONS => [$directive->getLocation()->toArray()],
-                    Tokens::EXTENSIONS => array_merge(
-                        $objectFeedback->getExtensions(),
-                        [
-                            'code' => $feedbackItemResolution->getNamespacedCode(),
-                        ],
-                        $specifiedByURL !== null ? [
-                            'specifiedBy' => $specifiedByURL,
-                        ] : []
-                    ),
-                ];
                 $objectFeedbackEntriesStorage = $objectFeedbackEntries[$id] ?? new SplObjectStorage();
                 $fieldObjectFeedbackEntries = $objectFeedbackEntries[$id][$field] ?? [];
                 $fieldObjectFeedbackEntries[] = $entry;
@@ -2282,8 +2264,8 @@ class Engine implements EngineInterface
         SchemaFeedbackInterface $schemaFeedback,
         SplObjectStorage $iterationSchemaFeedbackEntries
     ): void {
-        $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
+        $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$schemaFeedback->getField()] ?? [];
         $fieldSchemaFeedbackEntries[] = $entry;
         $schemaFeedbackEntries[$schemaFeedback->getField()] = $fieldSchemaFeedbackEntries;
@@ -2297,14 +2279,17 @@ class Engine implements EngineInterface
         ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
     ): array {
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
-        $directive = $objectOrSchemaFeedback->getDirective();
+        $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
         $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
+        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectOrSchemaFeedback->getRelationalTypeResolver()] ?? [];
+        $astNode = $objectOrSchemaFeedback->getAstNode();
+        $path = $astNode instanceof FieldInterface
+            ? $astNode->asFieldOutputQueryString()
+            : $astNode->asQueryString();
         return [
-            Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
-            Tokens::PATH => $directive !== null
-                ? [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString(), $directive->asQueryString()]
-                : [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString()],
-            Tokens::LOCATIONS => [$objectOrSchemaFeedback->getAstNode()->getLocation()->toArray()],
+            Tokens::MESSAGE => $message,
+            Tokens::PATH => [$path],
+            Tokens::LOCATIONS => [$astNode->getLocation()->toArray()],
             Tokens::EXTENSIONS => array_merge(
                 $objectOrSchemaFeedback->getExtensions(),
                 [
