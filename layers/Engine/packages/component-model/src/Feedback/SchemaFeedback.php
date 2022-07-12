@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
@@ -42,6 +41,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
             $objectTypeFieldResolutionFeedback->getAstNode(),
             $relationalTypeResolver,
+            $fields,
             $objectTypeFieldResolutionFeedback->getExtensions(),
         );
     }
