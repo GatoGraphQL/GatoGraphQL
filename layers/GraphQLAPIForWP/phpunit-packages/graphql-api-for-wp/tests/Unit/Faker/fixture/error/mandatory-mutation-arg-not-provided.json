@@ -10,7 +10,11 @@
       ],
       "extensions": {
         "type": "MutationRoot",
-        "field": "addCommentToCustomPost",
+        "field": "addCommentToCustomPost { ... }",
+        "path": [
+          "addCommentToCustomPost { ... }",
+          "mutation { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e29"
       }
     }
