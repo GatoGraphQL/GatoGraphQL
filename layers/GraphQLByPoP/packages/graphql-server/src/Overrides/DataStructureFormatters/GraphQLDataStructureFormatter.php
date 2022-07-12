@@ -84,13 +84,4 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             'path' => $item[Tokens::PATH],
         ];
     }
-
-    /**
-     * Change properties for GraphQL
-     */
-    protected function getDocumentEntryExtensions(): array
-    {
-        // Do not print "type" => "query"
-        return [];
-    }
 }

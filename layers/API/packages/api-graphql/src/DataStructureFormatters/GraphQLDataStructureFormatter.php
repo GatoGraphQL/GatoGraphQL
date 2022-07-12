@@ -188,7 +188,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             'type' => 'dataObject',
             'entityTypeOutputKey' => $typeOutputKey,
             'id' => $id,
-            'path' => $item[Tokens::PATH] ?? [],
+            'path' => $item[Tokens::PATH],
         ];
     }
 
@@ -256,12 +256,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     protected function getGeneralEntry(string $message, array $extensions): array
     {
-        $entry = [
+        return [
             'message' => $message,
         ];
-        if ($extensions = $this->getDocumentEntryExtensions()) {
-            $entry['extensions'] = $this->reformatExtensions($extensions);
-        };
-        return $entry;
     }
 }
