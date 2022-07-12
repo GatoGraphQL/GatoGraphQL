@@ -30,6 +30,11 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
         return $this->getGraphQLQueryStringFormatter()->getObjectAsQueryString($this->object);
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        return $this->getGraphQLQueryStringFormatter()->getObjectAsQueryString($this->object);
+    }
+
     /**
      * Transform from Ast to actual value.
      * Eg: replace VariableReferences with their value,

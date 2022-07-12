@@ -53,6 +53,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -2252,13 +2253,34 @@ class Engine implements EngineInterface
         $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
         $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         $astNode = $objectOrSchemaFeedback->getAstNode();
-        $path = $astNode instanceof FieldInterface
-            ? $astNode->asFieldOutputQueryString()
-            : $astNode->asQueryString();
-        return [
+        $location = $astNode->getLocation()->toArray();
+        /**
+         * Re-create the path to the AST node
+         *
+         * @var string[]
+         */
+        $astNodePath = [];
+        /**
+         * Closest Field to where the feedback was produced:
+         * either the AST node directly if that's the Field,
+         * its parent for an Argument, or nothing if a Directive.
+         *
+         * @var FieldInterface|null
+         */
+        $field = null;
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
+        while ($astNode !== null) {
+            $astNodePath[] = $astNode->asASTNodeString();
+            if ($field === null && $astNode instanceof FieldInterface) {
+                $field = $astNode;
+            }
+            // Move to the ancestor AST node
+            $astNode = $documentASTNodeAncestors[$astNode] ?? null;
+        }
+        $entry = [
             Tokens::MESSAGE => $message,
-            Tokens::PATH => [$path],
-            Tokens::LOCATIONS => [$astNode->getLocation()->toArray()],
+            Tokens::LOCATIONS => [$location],
             Tokens::EXTENSIONS => array_merge(
                 $objectOrSchemaFeedback->getExtensions(),
                 [
@@ -2268,7 +2290,12 @@ class Engine implements EngineInterface
                     'specifiedBy' => $specifiedByURL,
                 ] : []
             ),
+            Tokens::PATH => $astNodePath,
         ];
+        if ($field !== null) {
+            $entry[Tokens::FIELD] = $field->asASTNodeString();
+        }
+        return $entry;
     }
 
     /**

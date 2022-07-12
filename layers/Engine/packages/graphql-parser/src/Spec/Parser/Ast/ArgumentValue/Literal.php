@@ -21,6 +21,11 @@ class Literal extends AbstractAst implements CoercibleArgumentValueAstInterface
         return $this->getGraphQLQueryStringFormatter()->getLiteralAsQueryString($this->value);
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        return $this->getGraphQLQueryStringFormatter()->getLiteralAsQueryString($this->value);
+    }
+
     /**
      * @return string|int|float|bool|null
      */

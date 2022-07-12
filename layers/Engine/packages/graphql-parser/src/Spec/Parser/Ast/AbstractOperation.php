@@ -81,6 +81,33 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         );
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        // Generate the string for variables
+        $strOperationVariables = '';
+        if ($this->variables !== []) {
+            $strVariables = [];
+            foreach ($this->variables as $variable) {
+                $strVariables[] = $variable->asQueryString();
+            }
+            $strOperationVariables = sprintf(
+                '(%s)',
+                implode(', ', $strVariables)
+            );
+        }
+        $operationDefinition = sprintf(
+            '%s%s',
+            $this->name,
+            $strOperationVariables,
+        );
+        return sprintf(
+            '%s%s { ... }',
+            $this->getOperationType(),
+            /** @phpstan-ignore-next-line */
+            $operationDefinition !== '' ? ' ' . $operationDefinition : '',
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;

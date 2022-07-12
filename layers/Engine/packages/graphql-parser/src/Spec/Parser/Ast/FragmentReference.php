@@ -23,6 +23,14 @@ class FragmentReference extends AbstractAst implements FragmentBondInterface
         );
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        return sprintf(
+            '...%s',
+            $this->name
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;

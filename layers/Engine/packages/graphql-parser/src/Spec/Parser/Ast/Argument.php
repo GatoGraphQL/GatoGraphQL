@@ -26,6 +26,15 @@ class Argument extends AbstractAst
         );
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        return sprintf(
+            '(%s: %s)',
+            $this->name,
+            $this->value->asQueryString()
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;

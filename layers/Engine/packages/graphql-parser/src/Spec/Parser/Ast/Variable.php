@@ -59,6 +59,26 @@ class Variable extends AbstractAst implements WithValueInterface
         );
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        $strType = $this->type;
+        if ($this->isArray) {
+            if ($this->isArrayElementRequired) {
+                $strType .= '!';
+            }
+            $strType = sprintf('[%s]', $strType);
+        }
+        if ($this->isRequired) {
+            $strType .= '!';
+        }
+        return sprintf(
+            '$%s: %s%s',
+            $this->name,
+            $strType,
+            $this->hasDefaultValue() ? sprintf(' = %s', $this->getDefaultValueAST()->asQueryString()) : ''
+        );
+    }
+
     public function setContext(?Context $context): void
     {
         $this->context = $context;
