@@ -34,7 +34,6 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
-        ?Directive $directive,
     ): self {
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),

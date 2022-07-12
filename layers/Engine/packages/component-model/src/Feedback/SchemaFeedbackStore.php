@@ -63,7 +63,6 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackError,
                 $relationalTypeResolver,
                 $field,
-                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
@@ -71,7 +70,6 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackWarning,
                 $relationalTypeResolver,
                 $field,
-                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
@@ -79,7 +77,6 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackDeprecation,
                 $relationalTypeResolver,
                 $field,
-                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
@@ -87,7 +84,6 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackNotice,
                 $relationalTypeResolver,
                 $field,
-                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getSuggestions() as $objectTypeFieldResolutionFeedbackSuggestion) {
@@ -95,7 +91,6 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackSuggestion,
                 $relationalTypeResolver,
                 $field,
-                $directive,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
@@ -103,7 +98,6 @@ class SchemaFeedbackStore
                 $objectTypeFieldResolutionFeedbackLog,
                 $relationalTypeResolver,
                 $field,
-                $directive,
             );
         }
     }
