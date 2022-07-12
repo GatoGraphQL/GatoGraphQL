@@ -213,19 +213,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                             $errorMessage
                         );
                     }
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::E1,
-                                [
-                                    $errorMessage,
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                        )
-                    );
+                    // @todo Temporarily hack fix: Need to pass astNode but don't have it, so commented
+                    // $objectTypeFieldResolutionFeedbackStore->addError(
+                    //     new ObjectTypeFieldResolutionFeedback(
+                    //         new FeedbackItemResolution(
+                    //             GenericFeedbackItemProvider::class,
+                    //             GenericFeedbackItemProvider::E1,
+                    //             [
+                    //                 $errorMessage,
+                    //             ]
+                    //         ),
+                    //         LocationHelper::getNonSpecificLocation(),
+                    //         $relationalTypeResolver,
+                    //     )
+                    // );
                     // Ignore extracting this argument
                     continue;
                 }
@@ -255,19 +256,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $this->getFieldName($fieldOrDirective),
                         $fieldOrDirectiveArgName
                     );
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::E1,
-                                [
-                                    $errorMessage,
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                        )
-                    );
+                    // @todo Temporarily hack fix: Need to pass astNode but don't have it, so commented
+                    // $objectTypeFieldResolutionFeedbackStore->addError(
+                    //     new ObjectTypeFieldResolutionFeedback(
+                    //         new FeedbackItemResolution(
+                    //             GenericFeedbackItemProvider::class,
+                    //             GenericFeedbackItemProvider::E1,
+                    //             [
+                    //                 $errorMessage,
+                    //             ]
+                    //         ),
+                    //         LocationHelper::getNonSpecificLocation(),
+                    //         $relationalTypeResolver,
+                    //     )
+                    // );
                     if ($resolverType === ResolverTypes::DIRECTIVE && !$setFailingFieldResponseAsNull) {
                         $errorMessage = sprintf(
                             $this->__('%s. The directive has been ignored', 'component-model'),
@@ -1069,19 +1071,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $expressionName = substr($fieldArgValue, strlen('$__'));
         if (!isset($expressions[$expressionName])) {
             // If the expression is not set, then show the error under entry "expressionErrors"
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E14,
-                        [
-                            $expressionName,
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $relationalTypeResolver,
-                )
-            );
+            // @todo Temporarily hack fix: Need to pass astNode but don't have it, so commented
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             ErrorFeedbackItemProvider::class,
+            //             ErrorFeedbackItemProvider::E14,
+            //             [
+            //                 $expressionName,
+            //             ]
+            //         ),
+            //         LocationHelper::getNonSpecificLocation(),
+            //         $relationalTypeResolver,
+            //     )
+            // );
             return null;
         }
         return $expressions[$expressionName];
