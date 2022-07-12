@@ -65,7 +65,8 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
                         $this->name,
                     ]
                 ),
-                $this->getLocation()
+                $this->getLocation(),
+                $this
             );
         }
         return $this->context->getVariableValue($this->name);

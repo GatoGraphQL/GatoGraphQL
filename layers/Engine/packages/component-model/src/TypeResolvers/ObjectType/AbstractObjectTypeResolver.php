@@ -1332,7 +1332,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): ?array {
         try {
             $fieldData = $field->getArgumentKeyValues();
-        } catch (InvalidDynamicContextException $e) {
+        } catch (InvalidDynamicContextException $invalidDynamicContextException) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -1341,10 +1341,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         [
                             $field->getName(),
                             $this->getMaybeNamespacedTypeName(),
-                            $e->getMessage(),
+                            $invalidDynamicContextException->getMessage(),
                         ]
                     ),
-                    $field,
+                    $invalidDynamicContextException->getDynamicVariableReference(),
                 )
             );
             return null;
