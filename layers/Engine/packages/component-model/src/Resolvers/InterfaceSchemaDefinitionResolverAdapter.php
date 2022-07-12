@@ -10,7 +10,6 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldSchemaDefinition
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 
 /**
  * A TypeResolver may be useful when retrieving the schema from a ObjectTypeFieldResolver,

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
@@ -31,27 +33,36 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
     abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
         if ($errorFeedbackItemResolution !== null) {
-            return [
-                $errorFeedbackItemResolution,
-            ];
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $errorFeedbackItemResolution,
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return;
         }
 
-        $errors = [];
         if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E1,
-                [
-                    $this->getEntityName(),
-                ]
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E1,
+                        [
+                            $this->getEntityName(),
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
             );
         }
-        return $errors;
     }
 
     protected function getEntityName(): string

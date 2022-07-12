@@ -8,12 +8,14 @@ use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
@@ -77,11 +79,13 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             ErrorTypes::CODES => ResponseConstants::ERRORCODES,
         ];
         $errorTypeKey = $errorTypeKeys[$errorType];
-        if ($errors = $mutationResolver->validateErrors($fieldDataAccessorForMutation)) {
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // @todo Migrate from string to FeedbackItemProvider
             $mutationResponse[$errorTypeKey] = array_map(
-                fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
-                $errors
+                fn (ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback) => $objectTypeFieldResolutionFeedback->getFeedbackItemResolution()->getMessage(),
+                $objectTypeFieldResolutionFeedbackStore->getErrors()
             );
             if ($this->skipDataloadIfError()) {
                 // Bring no results

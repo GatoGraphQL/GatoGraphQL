@@ -23,9 +23,14 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         // For highlights, we only add 1 reference, and not more.
         if (!$fieldDataAccessor->getValue('highlightedpost')) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->__('No post has been highlighted', 'poptheme-wassup');
         } else {
@@ -33,19 +38,29 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
             $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->getValue('highlightedpost'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->__('The highlighted post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
                 if ($this->getCustomPostTypeAPI()->getStatus($referenced) != CustomPostStatus::PUBLISH) {
                     // @todo Migrate from string to FeedbackItemProvider
-                    // $errors[] = new FeedbackItemResolution(
-                    //     MutationErrorFeedbackItemProvider::class,
-                    //     MutationErrorFeedbackItemProvider::E1,
-                    // );
+                // $objectTypeFieldResolutionFeedbackStore->addError(
+                //     new ObjectTypeFieldResolutionFeedback(
+                //         new FeedbackItemResolution(
+                //             MutationErrorFeedbackItemProvider::class,
+                //             MutationErrorFeedbackItemProvider::E1,
+                //         ),
+                //         $fieldDataAccessor->getField(),
+                //     )
+                // );
                     $errors[] = $this->__('The highlighted post is not published yet', 'poptheme-wassup');
                 }
             }

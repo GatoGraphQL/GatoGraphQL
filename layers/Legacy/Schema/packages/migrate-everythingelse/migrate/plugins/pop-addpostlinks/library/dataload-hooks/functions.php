@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
@@ -28,16 +29,21 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         );
     }
 
-    public function validateContent($errors_in_array, WithArgumentsInterface $withArgumentsAST)
-    {
-        $errors = &$errors_in_array[0];
-
+    public function validateContent(
+        WithArgumentsInterface $withArgumentsAST,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         if ($link = $withArgumentsAST->getArgumentValue('link')) {
             if (!isValidUrl($link)) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
+                // $objectTypeFieldResolutionFeedbackStore->addError(
+                //     new ObjectTypeFieldResolutionFeedback(
+                //         new FeedbackItemResolution(
+                //             MutationErrorFeedbackItemProvider::class,
+                //             MutationErrorFeedbackItemProvider::E1,
+                //         ),
+                //         $fieldDataAccessor->getField(),
+                //     )
                 // );
                 $errors[] = TranslationAPIFacade::getInstance()->__('The external link has an invalid format', 'pop-addpostlinks');
             }
