@@ -43,25 +43,9 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      */
     protected function addASTNodePathEntryToExtensions(array &$extensions, array $item): void
     {
-        // Single field
-        $fields = $item[Tokens::PATH] ?? [];
-        if (count($fields) == 1) {
-            $extensions['field'] = $fields[0];
-            return;
-        }
-        // Two fields: it may be a directive
-        if (count($fields) == 2) {
-            // @todo Temporary hack to fix tests, will be removed soon anyway
-            if (str_starts_with($fields[1], '@')) {
-                $fields[1] = substr($fields[1], 1);
-            }
-            // $maybeField = $fields[0];
-            // $maybeDirective = $fields[1];
-            // $extensions['directive'] = $maybeDirective;
-            // return;
-        }
-        // Many fields
-        $extensions['fields'] = $fields;
+        /** @var string[] */
+        $path = $item[Tokens::PATH];
+        $extensions['path'] = $path;
     }
     /**
      * Convert the argumentPath from array to string.
