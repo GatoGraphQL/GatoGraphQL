@@ -1305,12 +1305,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 )
             );
         } elseif ($removeFieldIfDirectiveFailed) {
-            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
-            // if (count($failedFields) == 1) {
-            //     $message = $this->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
-            // } else {
-            //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
-            // }
             $engineIterationFeedbackStore->objectFeedbackStore->addError(
                 new ObjectResolutionFeedback(
                     $feedbackItemResolution,
@@ -1320,35 +1314,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $idFieldSetToRemove
                 )
             );
-            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
-            // $objectErrors[$id][] = [
-            //     Tokens::PATH => [$failedField, $this->directive],
-            //     Tokens::MESSAGE => sprintf(
-            //         $message,
-            //         $failureMessage,
-            //         implode($this->__('\', \''), $failedFields)
-            //     ),
-            // ];
-        } else {
-            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
-            // if (count($failedFields) === 1) {
-            //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
-            // } else {
-            //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
-            // }
-            // foreach ($idFieldSetToRemove as $id => $fieldSet) {
-            //     foreach ($fieldSet->fields as $failedField) {
-            //         $objectWarnings[$id][] = [
-            //             Tokens::PATH => [$failedField, $this->directive],
-            //             Tokens::MESSAGE => sprintf(
-            //                 $message,
-            //                 $failureMessage,
-            //                 $directiveName,
-            //                 implode($this->__('\', \''), $failedFields)
-            //             ),
-            //         ];
-            //     }
-            // }
         }
     }
 
