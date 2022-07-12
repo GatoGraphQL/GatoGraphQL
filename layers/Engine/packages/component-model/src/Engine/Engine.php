@@ -2266,9 +2266,11 @@ class Engine implements EngineInterface
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
         $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
-        $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$schemaFeedback->getField()] ?? [];
-        $fieldSchemaFeedbackEntries[] = $entry;
-        $schemaFeedbackEntries[$schemaFeedback->getField()] = $fieldSchemaFeedbackEntries;
+        foreach ($schemaFeedback->getFields() as $field) {
+            $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$field] ?? [];
+            $fieldSchemaFeedbackEntries[] = $entry;
+            $schemaFeedbackEntries[$field] = $fieldSchemaFeedbackEntries;
+        }
         $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] = $schemaFeedbackEntries;
     }
 
