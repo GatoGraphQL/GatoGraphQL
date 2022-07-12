@@ -17,6 +17,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -184,6 +185,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
     final public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         if (!($inputValue instanceof stdClass)) {
@@ -203,11 +205,12 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
             return null;
         }
-        return $this->coerceInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
+        return $this->coerceInputObjectValue($inputValue, $astNode, $schemaInputValidationFeedbackStore);
     }
 
     protected function coerceInputObjectValue(
         stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): ?stdClass {
         $coercedInputValue = new stdClass();
@@ -336,6 +339,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
+                $astNode,
                 $separateSchemaInputValidationFeedbackStore,
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);

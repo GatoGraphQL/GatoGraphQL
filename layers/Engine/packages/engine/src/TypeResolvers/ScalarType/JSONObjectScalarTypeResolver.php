@@ -6,6 +6,7 @@ namespace PoP\Engine\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
 /**
@@ -33,6 +34,7 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         if (!($inputValue instanceof stdClass)) {

@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use CastToType;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
 /**
@@ -24,6 +25,7 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
 /**
@@ -21,6 +22,7 @@ abstract class AbstractOneofQueryableInputObjectTypeResolver extends AbstractQue
      */
     protected function coerceInputObjectValue(
         stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): ?stdClass {
         $this->validateOneofInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
@@ -28,6 +30,6 @@ abstract class AbstractOneofQueryableInputObjectTypeResolver extends AbstractQue
             return null;
         }
 
-        return parent::coerceInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
+        return parent::coerceInputObjectValue($inputValue, $astNode, $schemaInputValidationFeedbackStore);
     }
 }

@@ -291,7 +291,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             return array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
-                    fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $schemaInputValidationFeedbackStore),
+                    fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $astNode, $schemaInputValidationFeedbackStore),
                     $arrayArgValueElem
                 ),
                 $inputValue
@@ -301,12 +301,12 @@ class InputCoercingService implements InputCoercingServiceInterface
             /** @var array $inputValue */
             // If the value is an array, then cast each element to the item type
             return array_map(
-                fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem, $schemaInputValidationFeedbackStore),
+                fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem, $astNode, $schemaInputValidationFeedbackStore),
                 $inputValue
             );
         }
         // Otherwise, simply cast the given value directly
-        return $inputTypeResolver->coerceValue($inputValue, $schemaInputValidationFeedbackStore);
+        return $inputTypeResolver->coerceValue($inputValue, $astNode, $schemaInputValidationFeedbackStore);
     }
 
     /**

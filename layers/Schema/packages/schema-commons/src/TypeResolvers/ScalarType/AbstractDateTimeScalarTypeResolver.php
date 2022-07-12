@@ -6,11 +6,12 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
 use DateTime;
 use DateTimeInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use stdClass;
 
@@ -32,6 +33,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
