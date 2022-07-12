@@ -10,6 +10,5 @@ class Tokens
     const NAME = 'name';
     const MESSAGE = 'message';
     const LOCATIONS = 'locations';
-    const NESTED = 'nested';
     const EXTENSIONS = 'extensions';
 }
