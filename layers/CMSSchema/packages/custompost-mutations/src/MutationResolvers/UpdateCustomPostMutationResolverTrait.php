@@ -25,10 +25,10 @@ trait UpdateCustomPostMutationResolverTrait
      */
     abstract protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int;
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         return $this->validateUpdateErrors($fieldDataAccessor);
     }

@@ -38,7 +38,10 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         $errors = [];
         $username_or_email = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);

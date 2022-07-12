@@ -273,7 +273,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $fieldDataAccessor);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         $errors = [];
         $this->validateContent($errors, $fieldDataAccessor);

@@ -25,10 +25,10 @@ trait CreateCustomPostMutationResolverTrait
      */
     abstract protected function create(FieldDataAccessorInterface $fieldDataAccessor): string | int;
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         return $this->validateCreateErrors($fieldDataAccessor);
     }

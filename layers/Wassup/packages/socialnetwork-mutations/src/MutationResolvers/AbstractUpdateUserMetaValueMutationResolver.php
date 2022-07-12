@@ -11,7 +11,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         $errors = [];
         $target_id = $fieldDataAccessor->getValue('target_id');

@@ -13,7 +13,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class ContactUsMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         $errors = [];
         if (empty($fieldDataAccessor->getValue('name'))) {

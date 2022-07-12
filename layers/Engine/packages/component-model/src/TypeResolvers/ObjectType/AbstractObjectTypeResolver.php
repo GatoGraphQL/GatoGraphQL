@@ -768,15 +768,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($mutationResolver !== null && $objectTypeFieldResolver->validateMutationOnObject($this, $fieldDataAccessor->getFieldName())) {
             // Validate on the object
             $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessorForMutation);
-            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        $fieldDataAccessor->getField(),
-                    )
-                );
-            }
+            $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
             return;
         }
 
@@ -1463,8 +1455,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
 
-        $errorFeedbackItemResolutions = [];
-
         /**
          * Validations:
          *
@@ -1494,22 +1484,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $field->getName());
         if ($mutationResolver !== null && $validateMutation) {
             $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
-            $errorFeedbackItemResolutions = array_merge(
-                $errorFeedbackItemResolutions,
-                $mutationResolver->validateErrors($fieldDataAccessorForMutation)
-            );
-        }
-
-        if ($errorFeedbackItemResolutions !== []) {
-            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        $field,
-                    )
-                );
-            }
-            return;
+            $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
         }
     }
 

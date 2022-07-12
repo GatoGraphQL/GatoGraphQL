@@ -21,7 +21,10 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {

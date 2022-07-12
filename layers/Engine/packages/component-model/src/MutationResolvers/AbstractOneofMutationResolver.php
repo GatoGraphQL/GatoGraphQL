@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\InputObjectSubpropertyFieldDataAccessor;
@@ -146,23 +148,28 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @return FeedbackItemResolution[]
      */
-    final public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
+    final public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         try {
             [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
-            return $inputFieldMutationResolver->validateErrors($fieldDataAccessor);
+            $inputFieldMutationResolver->validateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         } catch (QueryResolutionException $e) {
             // Return the error message from the exception
-            return [
-                new FeedbackItemResolution(
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E1,
-                    [
-                        $e->getMessage(),
-                    ]
-                ),
-            ];
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E1,
+                        [
+                            $e->getMessage(),
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
         }
     }
 

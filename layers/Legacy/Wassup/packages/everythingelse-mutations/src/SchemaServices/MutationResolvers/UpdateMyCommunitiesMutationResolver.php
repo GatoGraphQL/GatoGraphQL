@@ -70,7 +70,10 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         // return $update || empty($banned_communities);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         $errors = [];
         $user_id = $fieldDataAccessor->getValue('user_id');

@@ -12,7 +12,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         $errors = [];
         $histid = $fieldDataAccessor->getValue('histid');

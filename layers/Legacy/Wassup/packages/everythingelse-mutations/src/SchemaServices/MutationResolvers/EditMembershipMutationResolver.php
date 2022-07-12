@@ -87,7 +87,10 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void
     {
         $errors = [];
         $user_id = $fieldDataAccessor->getValue('user_id');
