@@ -28,8 +28,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = [];
         if (empty($fieldDataAccessor->getValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider

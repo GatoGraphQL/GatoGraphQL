@@ -14,8 +14,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
             $user_id = App::getState('current-user-id');

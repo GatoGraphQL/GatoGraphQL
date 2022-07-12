@@ -16,8 +16,7 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = [];
         if (empty($fieldDataAccessor->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider

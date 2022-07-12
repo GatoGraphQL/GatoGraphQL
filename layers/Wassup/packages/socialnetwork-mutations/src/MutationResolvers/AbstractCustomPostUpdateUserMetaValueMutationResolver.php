@@ -30,8 +30,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
             $target_id = $fieldDataAccessor->getValue('target_id');

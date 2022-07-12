@@ -50,8 +50,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = [];
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
         $this->validateCaptcha($errors, $fieldDataAccessor);

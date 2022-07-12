@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 
 trait UpdateCustomPostMutationResolverTrait
@@ -14,27 +15,31 @@ trait UpdateCustomPostMutationResolverTrait
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
-        return $this->update($fieldDataAccessor);
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        $objectTypeFieldResolutionFeedbackStore
+    ): mixed {
+        return $this->update($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    abstract protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int;
+    abstract protected function update(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string | int;
 
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
-        return $this->validateUpdateErrors($fieldDataAccessor);
+    ): void {
+        $this->validateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    abstract protected function validateUpdateErrors(FieldDataAccessorInterface $fieldDataAccessor): array;
+    abstract protected function validateUpdateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
 }

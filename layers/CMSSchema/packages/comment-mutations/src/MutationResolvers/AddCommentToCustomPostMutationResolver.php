@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -59,7 +60,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errors = [];
+        $field = $fieldDataAccessor->getField();
 
         // Check that the user is logged-in
         /** @var ModuleConfiguration */
@@ -67,40 +68,63 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         if ($moduleConfiguration->mustUserBeLoggedInToAddComment()) {
             $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
             if ($errorFeedbackItemResolution !== null) {
-                return [
-                    $errorFeedbackItemResolution,
-                ];
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $field,
+                    )
+                );
+                return;
             }
         } elseif ($moduleConfiguration->requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
             if (!$fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_NAME)) {
-                $errors[] = new FeedbackItemResolution(
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E2,
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E2,
+                        ),
+                        $field,
+                    )
                 );
             }
             if (!$fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_EMAIL)) {
-                $errors[] = new FeedbackItemResolution(
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E3,
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E3,
+                        ),
+                        $field,
+                    )
                 );
             }
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
         if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID) && !$fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID)) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E4,
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E4,
+                    ),
+                    $field,
+                )
             );
         }
         if (!$fieldDataAccessor->getValue(MutationInputProperties::COMMENT)) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E5,
+                    ),
+                    $field,
+                )
             );
         }
-        return $errors;
     }
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution

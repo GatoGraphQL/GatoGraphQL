@@ -73,8 +73,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = [];
         $user_id = $fieldDataAccessor->getValue('user_id');
 

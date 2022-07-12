@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 
 trait CreateCustomPostMutationResolverTrait
@@ -28,13 +29,12 @@ trait CreateCustomPostMutationResolverTrait
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
-        return $this->validateCreateErrors($fieldDataAccessor);
+    ): void {
+        $this->validateCreateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    abstract protected function validateCreateErrors(FieldDataAccessorInterface $fieldDataAccessor): array;
+    abstract protected function validateCreateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
 }

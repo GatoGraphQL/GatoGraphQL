@@ -16,8 +16,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = [];
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         // Validate Password

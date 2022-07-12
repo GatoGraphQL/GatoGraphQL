@@ -276,8 +276,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = [];
         $this->validateContent($errors, $fieldDataAccessor);
         if (App::getState('is-user-logged-in')) {

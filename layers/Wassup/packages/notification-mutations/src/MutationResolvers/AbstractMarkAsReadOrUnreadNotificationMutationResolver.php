@@ -15,8 +15,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void
-    {
+    ): void {
         $errors = [];
         $histid = $fieldDataAccessor->getValue('histid');
         if (!$histid) {
