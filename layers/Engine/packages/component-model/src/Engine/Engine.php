@@ -2165,6 +2165,7 @@ class Engine implements EngineInterface
         SplObjectStorage $iterationObjectFeedbackEntries
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackEntries($objectFeedback);
+        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
         foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
                 $objectFeedbackEntriesStorage = $objectFeedbackEntries[$id] ?? new SplObjectStorage();
@@ -2283,7 +2284,6 @@ class Engine implements EngineInterface
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
         $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
         $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
-        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectOrSchemaFeedback->getRelationalTypeResolver()] ?? [];
         $astNode = $objectOrSchemaFeedback->getAstNode();
         $path = $astNode instanceof FieldInterface
             ? $astNode->asFieldOutputQueryString()
