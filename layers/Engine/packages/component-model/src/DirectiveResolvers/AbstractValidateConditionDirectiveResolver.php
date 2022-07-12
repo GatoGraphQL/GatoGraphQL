@@ -57,17 +57,14 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
             $failedFields,
             $fields
         );
-        foreach ($fields as $field) {
-            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                new SchemaFeedback(
-                    $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $fields),
-                    LocationHelper::getNonSpecificLocation(),
-                    $relationalTypeResolver,
-                    $field,
-                    $this->directive,
-                )
-            );
-        }
+        $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+            new SchemaFeedback(
+                $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $fields),
+                $this->directive,
+                $relationalTypeResolver,
+                $fields,
+            )
+        );
     }
 
     /**

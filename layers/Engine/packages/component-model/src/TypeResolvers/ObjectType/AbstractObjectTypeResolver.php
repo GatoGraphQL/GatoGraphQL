@@ -1121,9 +1121,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $this->getMaybeNamespacedTypeName()
                             ]
                         ),
-                        $field->getLocation(),
-                        $this,
                         $field,
+                        $this,
+                        [$field],
                     )
                 );
             }

@@ -77,11 +77,14 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
 
     /**
      * Enable the directiveResolver to validate the directive arguments in a custom way
+     *
+     * @param FieldInterface[] $fields
      */
     public function validateDirectiveArgumentsForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
 

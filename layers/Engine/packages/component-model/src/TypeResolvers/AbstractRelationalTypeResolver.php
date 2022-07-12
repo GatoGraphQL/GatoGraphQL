@@ -270,54 +270,52 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveResolvers = $this->getFieldDirectiveResolvers($directive, $directiveFields[$directive]);
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolvers === null) {
-                foreach ($directiveFields[$directive] as $field) {
-                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                        new SchemaFeedback(
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E20,
-                                [
-                                    $directive->getName(),
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $this,
-                            $field,
-                        )
-                    );
-                }
+                $fields = $directiveFields[$directive];
+                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E20,
+                            [
+                                $directive->getName(),
+                            ]
+                        ),
+                        $directive,
+                        $this,
+                        $fields,
+                    )
+                );
                 continue;
             }
             $directiveArgs = $directive->getArguments();
 
             if ($fieldDirectiveResolvers->count() === 0) {
-                foreach ($directiveFields[$directive] as $field) {
-                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                        new SchemaFeedback(
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E21,
-                                [
-                                    $directive->getName(),
-                                    json_encode(array_map(
-                                        fn (Argument $argument) => $argument->asQueryString(),
-                                        $directiveArgs
-                                    )),
-                                    implode(
-                                        $this->__('\', \'', 'component-model'),
-                                        array_map(
-                                            fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                                            $directiveFields[$directive]
-                                        )
-                                    ),
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $this,
-                            $field,
-                        )
-                    );
-                }
+                $fields = $directiveFields[$directive];
+                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E21,
+                            [
+                                $directive->getName(),
+                                json_encode(array_map(
+                                    fn (Argument $argument) => $argument->asQueryString(),
+                                    $directiveArgs
+                                )),
+                                implode(
+                                    $this->__('\', \'', 'component-model'),
+                                    array_map(
+                                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                                        $directiveFields[$directive]
+                                    )
+                                ),
+                            ]
+                        ),
+                        $directive,
+                        $this,
+                        $fields,
+                    )
+                );
                 continue;
             }
 
@@ -335,9 +333,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     $field->asFieldOutputQueryString(),
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
+                            $directive,
                             $this,
-                            $field,
+                            [$field],
                         )
                     );
                     continue;
@@ -379,53 +377,50 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Validate against the directiveResolver
             if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directive)) {
                 foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                    foreach ($directiveFields[$directive] as $field) {
-                        $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                            new SchemaFeedback(
-                                $errorFeedbackItemResolution,
-                                LocationHelper::getNonSpecificLocation(),
-                                $this,
-                                $field,
-                            )
-                        );
-                    }
+                    $fields = $directiveFields[$directive];
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            $errorFeedbackItemResolution,
+                            $directive,
+                            $this,
+                            $fields,
+                        )
+                    );
                 }
                 continue;
             }
 
             // Check for warnings
             if ($warningFeedbackItemResolution = $directiveResolverInstance->resolveDirectiveWarning($this)) {
-                foreach ($directiveFields[$directive] as $field) {
-                    $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
-                        new SchemaFeedback(
-                            $warningFeedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $this,
-                            $field,
-                        )
-                    );
-                }
+                $fields = $directiveFields[$directive];
+                $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
+                    new SchemaFeedback(
+                        $warningFeedbackItemResolution,
+                        $directive,
+                        $this,
+                        $fields,
+                    )
+                );
             }
 
             // Check for deprecations
             if ($deprecationMessage = $directiveResolverInstance->getDirectiveDeprecationMessage($this)) {
-                foreach ($directiveFields[$directive] as $field) {
-                    $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
-                        new SchemaFeedback(
-                            new FeedbackItemResolution(
-                                DeprecationFeedbackItemProvider::class,
-                                DeprecationFeedbackItemProvider::D1,
-                                [
-                                    $directiveName,
-                                    $deprecationMessage,
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $this,
-                            $field,
-                        )
-                    );
-                }
+                $fields = $directiveFields[$directive];
+                $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            DeprecationFeedbackItemProvider::class,
+                            DeprecationFeedbackItemProvider::D1,
+                            [
+                                $directiveName,
+                                $deprecationMessage,
+                            ]
+                        ),
+                        $directive,
+                        $this,
+                        $fields,
+                    )
+                );
             }
 
             // Validate if the directive can be executed multiple times on each field
@@ -445,7 +440,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $directiveResolverFields,
                         $alreadyProcessingFields
                     );
-                    foreach ($alreadyProcessingFields as $field) {
+                    if ($alreadyProcessingFields !== []) {
                         $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                             new SchemaFeedback(
                                 new FeedbackItemResolution(
@@ -462,9 +457,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                         ),
                                     ]
                                 ),
-                                LocationHelper::getNonSpecificLocation(),
+                                $directive,
                                 $this,
-                                $field,
+                                $alreadyProcessingFields,
                             )
                         );
                     }
@@ -615,9 +610,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaFeedbackStore->addError(
                     new SchemaFeedback(
                         $this->getUnresolvedObjectIDErrorFeedbackItemResolution($unresolvedObjectID),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
                         $failedField,
+                        $this,
+                        [$failedField],
                     )
                 );
             }

@@ -85,9 +85,9 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                                 $subcomponent_data_field_outputkey,
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
                         $field,
+                        $objectTypeResolver,
+                        [$field],
                     )
                 );
             }

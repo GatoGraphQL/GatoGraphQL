@@ -357,11 +357,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
+        $fields = $directiveFields[$directive];
         if ($directiveArgs !== null) {
-            $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $engineIterationFeedbackStore);
+            $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $fields, $engineIterationFeedbackStore);
         }
         // Transfer the feedback
-        $fields = $directiveFields[$directive];
         $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $relationalTypeResolver,

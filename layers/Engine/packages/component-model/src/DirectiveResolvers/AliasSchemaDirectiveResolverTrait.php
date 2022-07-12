@@ -237,11 +237,14 @@ trait AliasSchemaDirectiveResolverTrait
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
+     *
+     * @param FieldInterface[] $fields
      */
     public function validateDirectiveArgumentsForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
@@ -249,6 +252,7 @@ trait AliasSchemaDirectiveResolverTrait
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
+            $fields,
             $engineIterationFeedbackStore,
         );
     }

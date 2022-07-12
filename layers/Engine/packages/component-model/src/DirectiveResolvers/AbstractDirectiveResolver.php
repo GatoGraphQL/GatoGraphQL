@@ -299,11 +299,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * By default, validate if there are deprecated fields
+     *
+     * @param FieldInterface[] $fields
      */
     public function validateDirectiveArgumentsForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations(
@@ -317,6 +320,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $deprecationFeedbackItemResolution,
                     $this->directive,
                     $relationalTypeResolver,
+                    $fields,
                 )
             );
         }
