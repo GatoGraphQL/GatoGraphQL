@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-
 interface ObjectTypeFieldResolutionFeedbackInterface extends QueryFeedbackInterface
 {
-    public function getDirective(): Directive;
 }

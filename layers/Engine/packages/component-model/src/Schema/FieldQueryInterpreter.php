@@ -446,6 +446,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                 $objectTypeFieldResolutionFeedbackStore,
                 $relationalTypeResolver,
+                $directiveResolver->getDirective(),
                 [$objectID => new EngineIterationFieldSet([$field])],
             );
         }

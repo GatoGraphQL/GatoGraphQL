@@ -45,12 +45,13 @@ class ObjectResolutionFeedback extends AbstractQueryFeedback implements ObjectRe
     public static function fromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
+        Directive $directive,
         array $idFieldSet,
     ): self {
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
             $objectTypeFieldResolutionFeedback->getAstNode(),
-            $objectTypeFieldResolutionFeedback->getDirective(),
+            $directive,
             $relationalTypeResolver,
             $idFieldSet,
             $objectTypeFieldResolutionFeedback->getExtensions(),

@@ -59,12 +59,14 @@ class ObjectResolutionFeedbackStore
     public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         RelationalTypeResolverInterface $relationalTypeResolver,
+        Directive $directive,
         array $idFieldSet,
     ): void {
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackError,
                 $relationalTypeResolver,
+                $directive,
                 $idFieldSet,
             );
         }
@@ -72,6 +74,7 @@ class ObjectResolutionFeedbackStore
             $this->warnings[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackWarning,
                 $relationalTypeResolver,
+                $directive,
                 $idFieldSet,
             );
         }
@@ -79,6 +82,7 @@ class ObjectResolutionFeedbackStore
             $this->deprecations[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackDeprecation,
                 $relationalTypeResolver,
+                $directive,
                 $idFieldSet,
             );
         }
@@ -86,6 +90,7 @@ class ObjectResolutionFeedbackStore
             $this->notices[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackNotice,
                 $relationalTypeResolver,
+                $directive,
                 $idFieldSet,
             );
         }
@@ -93,6 +98,7 @@ class ObjectResolutionFeedbackStore
             $this->suggestions[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackSuggestion,
                 $relationalTypeResolver,
+                $directive,
                 $idFieldSet,
             );
         }
@@ -100,6 +106,7 @@ class ObjectResolutionFeedbackStore
             $this->logs[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackLog,
                 $relationalTypeResolver,
+                $directive,
                 $idFieldSet,
             );
         }
