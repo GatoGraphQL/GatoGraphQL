@@ -1078,7 +1078,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then skip processing that field altogether
             /** @var array<string|int,FieldInterface[]> */
             $errorIDFields = [];
-            $schemaErrorFailingFields = [];
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->removeFieldIfDirectiveFailed()) {
@@ -1094,6 +1093,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 if ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() !== []) {
                     // Extract the failing fields from the errors
+                    $schemaErrorFailingFields = [];
                     foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
                         $schemaErrorFailingFields = array_merge(
                             $schemaErrorFailingFields,
@@ -1155,17 +1155,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveFields,
                     $directiveDirectFields
                 );
-                // Remove those fields which have a failing directive
-                $directiveDirectFieldsToProcess = array_diff(
-                    $directiveDirectFieldsToProcess,
-                    $schemaErrorFailingFields
-                );
                 // From the fields, reconstitute the $idFieldSet for each directive, and build the array to pass to the pipeline, for each directive (stage)
                 /** @var array<string|int,EngineIterationFieldSet> */
                 $idFieldSet = [];
                 foreach ($directiveDirectFieldsToProcess as $field) {
                     $ids = $directiveFieldIDs[$directive][$field];
                     foreach ($ids as $id) {
+                        // If the $id/$field had an error, skip
+                        if (isset($errorIDFields[$id]) && in_array($field, $errorIDFields[$id])) {
+                            continue;
+                        }
                         $idFieldSet[$id] ??= new EngineIterationFieldSet();
                         $idFieldSet[$id]->fields[] = $field;
                         /** @var FieldInterface[]|null */
