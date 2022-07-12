@@ -95,6 +95,28 @@ abstract class AbstractField extends AbstractAst implements FieldInterface, With
         );
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        // Generate the string for arguments
+        $strFieldArguments = '';
+        if ($this->getArguments() !== []) {
+            $strArguments = [];
+            foreach ($this->getArguments() as $argument) {
+                $strArguments[] = $argument->asASTNodeString();
+            }
+            $strFieldArguments = sprintf(
+                '(%s)',
+                implode(', ', $strArguments)
+            );
+        }
+        return sprintf(
+            '%s%s%s',
+            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
+            $this->getName(),
+            $strFieldArguments,
+        );
+    }
+
     public function asFieldOutputQueryString(): string
     {
         // Generate the string for arguments

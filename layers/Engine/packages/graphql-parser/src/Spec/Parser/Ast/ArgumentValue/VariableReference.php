@@ -32,6 +32,14 @@ class VariableReference extends AbstractAst implements VariableReferenceInterfac
         );
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        return sprintf(
+            '$%s',
+            $this->name
+        );
+    }
+
     public function getVariable(): ?Variable
     {
         return $this->variable;

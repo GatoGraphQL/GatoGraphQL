@@ -61,6 +61,14 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
         );
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        return sprintf(
+            '...on %s',
+            $this->typeName,
+        );
+    }
+
     public function getTypeName(): string
     {
         return $this->typeName;

@@ -30,6 +30,11 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
         return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
+    }
+
     /**
      * Transform from Ast to actual value.
      * Eg: replace VariableReferences with their value,

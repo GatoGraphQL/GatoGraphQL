@@ -14,6 +14,7 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     use StandaloneServiceTrait;
 
     protected ?string $queryString = null;
+    protected ?string $astNodeString = null;
 
     private ?GraphQLQueryStringFormatterInterface $graphQLQueryStringFormatter = null;
 
@@ -50,4 +51,14 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     }
 
     abstract protected function doAsQueryString(): string;
+
+    final public function asASTNodeString(): string
+    {
+        if ($this->astNodeString === null) {
+            $this->astNodeString = $this->doAsASTNodeString();
+        }
+        return $this->astNodeString;
+    }
+
+    abstract protected function doAsASTNodeString(): string;
 }

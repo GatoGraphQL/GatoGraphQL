@@ -21,6 +21,11 @@ class Enum extends AbstractAst implements CoercibleArgumentValueAstInterface
         return $this->enumValue;
     }
 
+    protected function doAsASTNodeString(): string
+    {
+        return $this->enumValue;
+    }
+
     /**
      * @return string
      */
