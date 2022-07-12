@@ -95,16 +95,31 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 implode(', ', $strVariables)
             );
         }
+
+        // Generate the string for directives
+        $strOperationDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = [];
+            foreach ($this->directives as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strOperationDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+
         $operationDefinition = sprintf(
             '%s%s',
             $this->name,
             $strOperationVariables,
         );
         return sprintf(
-            '%s%s { ... }',
+            '%s%s%s { ... }',
             $this->getOperationType(),
             /** @phpstan-ignore-next-line */
             $operationDefinition !== '' ? ' ' . $operationDefinition : '',
+            $strOperationDirectives,
         );
     }
 
