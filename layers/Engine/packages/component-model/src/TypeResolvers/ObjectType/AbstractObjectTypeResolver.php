@@ -1187,7 +1187,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $this,
-            $field,
+            [$field],
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
@@ -1272,7 +1272,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $this,
-            $field,
+            [$field],
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;

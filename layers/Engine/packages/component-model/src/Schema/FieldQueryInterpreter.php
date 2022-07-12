@@ -362,13 +362,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         // Transfer the feedback
         $fields = $directiveFields[$directive];
-        foreach ($fields as $field) {
-            $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-                $objectTypeFieldResolutionFeedbackStore,
-                $relationalTypeResolver,
-                $field,
-            );
-        }
+        $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+            $objectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $fields,
+        );
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {

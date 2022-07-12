@@ -30,10 +30,13 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         );
     }
 
+    /**
+     * @param FieldInterface[] $fields
+     */
     public static function fromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldInterface $field,
+        array $fields,
     ): self {
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
