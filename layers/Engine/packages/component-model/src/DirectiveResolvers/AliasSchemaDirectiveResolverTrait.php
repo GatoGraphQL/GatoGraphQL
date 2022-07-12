@@ -242,14 +242,14 @@ trait AliasSchemaDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->validateDirectiveArgumentsForSchema(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
-            $objectTypeFieldResolutionFeedbackStore,
+            $engineIterationFeedbackStore,
         );
     }
 

@@ -15,6 +15,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -303,7 +304,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations(
             $relationalTypeResolver,
@@ -311,10 +312,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveArgs
         );
         foreach ($deprecationFeedbackItemResolutions as $deprecationFeedbackItemResolution) {
-            $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                new ObjectTypeFieldResolutionFeedback(
+            $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
+                new SchemaFeedback(
                     $deprecationFeedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
+                    $this->directive,
                     $relationalTypeResolver,
                 )
             );
