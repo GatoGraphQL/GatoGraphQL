@@ -151,7 +151,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($name = $item[Tokens::NAME] ?? null) {
             $entry['name'] = $name;
         }
-        // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
                 $this->getObjectEntryExtensions($typeOutputKey, $id, $item),
@@ -160,7 +159,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         ) {
             $entry['extensions'] = $this->reformatExtensions($extensions);
         }
-        // }
         return $entry;
     }
 
@@ -222,7 +220,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($name = $item[Tokens::NAME] ?? null) {
             $entry['name'] = $name;
         }
-        // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
                 $this->getSchemaEntryExtensions($typeOutputKey, $item),
@@ -231,7 +228,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         ) {
             $entry['extensions'] = $this->reformatExtensions($extensions);
         }
-        // }
         return $entry;
     }
 
