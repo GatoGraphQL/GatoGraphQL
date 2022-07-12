@@ -33,21 +33,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     }
 
     /**
-     * Change properties for GraphQL.
-     *
-     * Rename the fields to the most appropriate name:
-     *
-     *   - field
-     *   - directive
-     *   - fields <= baseline
-     */
-    protected function addASTNodePathEntryToExtensions(array &$extensions, array $item): void
-    {
-        /** @var string[] */
-        $path = $item[Tokens::PATH];
-        $extensions['path'] = $path;
-    }
-    /**
      * Convert the argumentPath from array to string.
      *
      * The field or directive argument name is appended ":", and input fields
@@ -82,12 +67,11 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      */
     protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
     {
-        $extensions = [
+        return [
             'type' => $typeOutputKey,
             'id' => $id,
+            'path' => $item[Tokens::PATH],
         ];
-        $this->addASTNodePathEntryToExtensions($extensions, $item);
-        return $extensions;
     }
 
     /**
@@ -95,11 +79,10 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      */
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
-        $extensions = [
+        return [
             'type' => $typeOutputKey,
+            'path' => $item[Tokens::PATH],
         ];
-        $this->addASTNodePathEntryToExtensions($extensions, $item);
-        return $extensions;
     }
 
     /**
