@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 
 trait CreateCustomPostMutationResolverTrait

@@ -26,7 +26,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
-use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver implements InterfaceTypeFieldResolverInterface
 {
