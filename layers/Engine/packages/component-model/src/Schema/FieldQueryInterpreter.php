@@ -598,7 +598,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             );
 
             // @todo Invented new Argument to comply with new signature, make sure to be gone!
-            $astNode = new Argument($argName, new Literal($argValue, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation());
+            $astNode = new Argument($argName, new Literal(/*$argValue*/null, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation());
 
             // Validate that the expected array/non-array input is provided
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
