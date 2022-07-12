@@ -161,11 +161,15 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
     {
-        return [
+        $extensions = [
             'type' => $typeOutputKey,
-            'id' => $id,
-            'path' => $item[Tokens::PATH],
         ];
+        if ($field = $item[Tokens::FIELD]) {
+            $extensions['field'] = $field;
+        }
+        $extensions['id'] = $id;
+        $extensions['path'] = $item[Tokens::PATH];
+        return $extensions;
     }
 
     /**
@@ -209,10 +213,14 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
-        return [
+        $extensions = [
             'type' => $typeOutputKey,
-            'path' => $item[Tokens::PATH],
         ];
+        if ($field = $item[Tokens::FIELD]) {
+            $extensions['field'] = $field;
+        }
+        $extensions['path'] = $item[Tokens::PATH];
+        return $extensions;
     }
 
     protected function reformatGeneralEntries($entries)
