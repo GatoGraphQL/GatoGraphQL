@@ -5,13 +5,14 @@
             "locations": [
                 {
                     "line": 3,
-                    "column": 16
+                    "column": 26
                 }
             ],
             "extensions": {
                 "type": "__Schema",
                 "field": "directives(ofKinds: \"query\") { ... }",
                 "path": [
+                    "\"query\"",
                     "(ofKinds: \"query\")",
                     "directives(ofKinds: \"query\") { ... }",
                     "__schema { ... }",
