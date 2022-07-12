@@ -1079,36 +1079,37 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $schemaErrorFailingFields = [];
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if (
-                $separateEngineIterationFeedbackStore->hasErrors()
-                && $moduleConfiguration->removeFieldIfDirectiveFailed()
-            ) {
-                // Extract the failing fields from the errors
-                foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
-                    foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
-                        foreach ($fieldSet->fields as $field) {
-                            $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
-                            $resolvedIDFieldValues[$id][$field] = null;
+            if ($moduleConfiguration->removeFieldIfDirectiveFailed()) {
+                if ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() !== []) {
+                    foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
+                        foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
+                            foreach ($fieldSet->fields as $field) {
+                                $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
+                                $resolvedIDFieldValues[$id][$field] = null;
+                            }
                         }
                     }
                 }
-                foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
-                    $schemaErrorFailingFields = array_merge(
-                        $schemaErrorFailingFields,
-                        $schemaFeedback->getFields()
-                    );
-                }
-                $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
-                // Set those fields as null
-                foreach ($directives as $directive) {
-                    foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
-                        $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
-                        $failingFields = array_intersect(
-                            $fieldSet->fields,
-                            $schemaErrorFailingFields
+                if ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() !== []) {
+                    // Extract the failing fields from the errors
+                    foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
+                        $schemaErrorFailingFields = array_merge(
+                            $schemaErrorFailingFields,
+                            $schemaFeedback->getFields()
                         );
-                        foreach ($failingFields as $field) {
-                            $resolvedIDFieldValues[$id][$field] = null;
+                    }
+                    $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
+                    // Set those fields as null
+                    foreach ($directives as $directive) {
+                        foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
+                            $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
+                            $failingFields = array_intersect(
+                                $fieldSet->fields,
+                                $schemaErrorFailingFields
+                            );
+                            foreach ($failingFields as $field) {
+                                $resolvedIDFieldValues[$id][$field] = null;
+                            }
                         }
                     }
                 }
