@@ -10,10 +10,11 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
+                "field": "myPosts(pagination: {limit: 3}) { ... }",
                 "id": "root",
-                "fields": [
-                    "myPosts(pagination: {limit: 3})",
-                    "resolveValueAndMerge"
+                "path": [
+                    "myPosts(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
                 ],
                 "code": "PoPCMSSchema\\UserState\\1"
             }
@@ -28,10 +29,11 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
+                "field": "me { ... }",
                 "id": "root",
-                "fields": [
-                    "me",
-                    "resolveValueAndMerge"
+                "path": [
+                    "me { ... }",
+                    "query { ... }"
                 ],
                 "code": "PoPCMSSchema\\UserState\\1"
             }
