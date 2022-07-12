@@ -110,6 +110,14 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 $fieldOrDirectiveArgIsArrayOfArraysType,
             );
 
+            // Cast (or "coerce" in GraphQL terms) the value
+            if ($withArgumentsAST->hasArgument($argName)) {
+                /** @var Argument */
+                $astNode = $withArgumentsAST->getArgument($argName);
+            } else {
+                $astNode = $withArgumentsAST;
+            }
+            
             // Validate that the expected array/non-array input is provided
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
@@ -120,6 +128,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
+                $astNode,
                 $separateSchemaInputValidationFeedbackStore,
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
@@ -127,13 +136,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 continue;
             }
 
-            // Cast (or "coerce" in GraphQL terms) the value
-            if ($withArgumentsAST->hasArgument($argName)) {
-                /** @var Argument */
-                $astNode = $withArgumentsAST->getArgument($argName);
-            } else {
-                $astNode = $withArgumentsAST;
-            }
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,

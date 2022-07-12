@@ -603,6 +603,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsArrayOfArraysType,
             );
 
+            // @todo Invented new Argument to comply with new signature, make sure to be gone!
+            $astNode = new Argument($argName, new Literal($argValue, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation());
+
             // Validate that the expected array/non-array input is provided
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
@@ -613,6 +616,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
+                $astNode,
                 $separateSchemaInputValidationFeedbackStore,
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
@@ -628,8 +632,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
-                // @todo Invented new Argument to comply with new signature, make sure to be gone!
-                new Argument($argName, new Literal($argValue, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()),
+                $astNode,
                 $separateSchemaInputValidationFeedbackStore,
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);

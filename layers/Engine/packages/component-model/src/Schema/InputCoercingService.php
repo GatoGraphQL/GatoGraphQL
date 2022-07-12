@@ -125,6 +125,7 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsNonNullArrayItemsType,
         bool $inputIsArrayOfArraysType,
         bool $inputIsNonNullArrayOfArraysItemsType,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
         if (

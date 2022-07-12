@@ -325,6 +325,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsNonNullArrayItemsType,
                 $inputFieldIsArrayOfArraysType,
                 $inputFieldIsNonNullArrayOfArraysItemsType,
+                $astNode,
                 $separateSchemaInputValidationFeedbackStore,
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);

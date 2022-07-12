@@ -56,6 +56,7 @@ interface InputCoercingServiceInterface
         bool $inputIsNonNullArrayItemsType,
         bool $inputIsArrayOfArraysType,
         bool $inputIsNonNullArrayOfArraysItemsType,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void;
 
