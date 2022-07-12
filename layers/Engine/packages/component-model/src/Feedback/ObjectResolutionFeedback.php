@@ -11,12 +11,12 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 /**
- * The ObjectFeedback is used to store errors that happen during
+ * The ObjectResolutionFeedback is used to store errors that happen during
  * a directive pipeline stage. The `$astNode` is where the error
  * happens, and the `$directive` is the Directive executing that
  * stage on the pipeline.
  */
-class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInterface
+class ObjectResolutionFeedback extends AbstractQueryFeedback implements ObjectResolutionFeedbackInterface
 {
     /**
      * @param AstInterface $astNode AST node where the error happens (eg: an Argument inside the Directive)

@@ -12,7 +12,7 @@ use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -363,7 +363,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ) {
                 foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                        new ObjectFeedback(
+                        new ObjectResolutionFeedback(
                             $errorFeedbackItemResolution,
                             $this->directive,
                             $this->directive,
@@ -1153,7 +1153,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addLog(
-                        new ObjectFeedback(
+                        new ObjectResolutionFeedback(
                             new FeedbackItemResolution(
                                 ErrorFeedbackItemProvider::class,
                                 ErrorFeedbackItemProvider::E11A,
@@ -1293,7 +1293,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // Show the failureMessage either as error or as warning
         if ($setFailingFieldResponseAsNull) {
             $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                new ObjectFeedback(
+                new ObjectResolutionFeedback(
                     $feedbackItemResolution,
                     $this->directive,
                     $this->directive,
@@ -1309,7 +1309,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             // }
             $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                new ObjectFeedback(
+                new ObjectResolutionFeedback(
                     $feedbackItemResolution,
                     $this->directive,
                     $this->directive,

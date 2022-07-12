@@ -33,8 +33,8 @@ use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
-use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
-use PoP\ComponentModel\Feedback\ObjectFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -2072,7 +2072,7 @@ class Engine implements EngineInterface
 
     private function transferObjectFeedback(
         array $idObjects,
-        ObjectFeedbackStore $objectFeedbackStore,
+        ObjectResolutionFeedbackStore $objectFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
         /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
@@ -2161,7 +2161,7 @@ class Engine implements EngineInterface
     }
 
     private function transferObjectFeedbackEntries(
-        ObjectFeedbackInterface $objectFeedback,
+        ObjectResolutionFeedbackInterface $objectFeedback,
         SplObjectStorage $iterationObjectFeedbackEntries
     ): void {
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
@@ -2294,7 +2294,7 @@ class Engine implements EngineInterface
      * @return array<string,mixed>
      */
     private function getObjectOrSchemaFeedbackEntries(
-        ObjectFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
+        ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
     ): array {
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
         $directive = $objectOrSchemaFeedback->getDirective();
