@@ -61,27 +61,4 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
 
         return $extensions;
     }
-
-    /**
-     * Change properties for GraphQL
-     */
-    protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
-    {
-        return [
-            'type' => $typeOutputKey,
-            'id' => $id,
-            'path' => $item[Tokens::PATH],
-        ];
-    }
-
-    /**
-     * Change properties for GraphQL
-     */
-    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
-    {
-        return [
-            'type' => $typeOutputKey,
-            'path' => $item[Tokens::PATH],
-        ];
-    }
 }

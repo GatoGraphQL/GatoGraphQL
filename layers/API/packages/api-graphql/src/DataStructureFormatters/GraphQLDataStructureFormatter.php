@@ -185,8 +185,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
     {
         return [
-            'type' => 'dataObject',
-            'entityTypeOutputKey' => $typeOutputKey,
+            'type' => $typeOutputKey,
             'id' => $id,
             'path' => $item[Tokens::PATH],
         ];
@@ -239,8 +238,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
         return [
-            'type' => 'schema',
-            'entityTypeOutputKey' => $typeOutputKey,
+            'type' => $typeOutputKey,
             'path' => $item[Tokens::PATH],
         ];
     }
