@@ -97,6 +97,19 @@ abstract class AbstractField extends AbstractAst implements FieldInterface, With
 
     protected function doAsASTNodeString(): string
     {
+        // Generate the string for directives
+        $strFieldDirectives = '';
+        if ($this->getDirectives() !== []) {
+            $strDirectives = [];
+            foreach ($this->getDirectives() as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strFieldDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+
         // Generate the string for arguments
         $strFieldArguments = '';
         if ($this->getArguments() !== []) {
@@ -109,11 +122,13 @@ abstract class AbstractField extends AbstractAst implements FieldInterface, With
                 implode(', ', $strArguments)
             );
         }
+
         return sprintf(
-            '%s%s%s',
+            '%s%s%s%s',
             $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
             $this->getName(),
             $strFieldArguments,
+            $strFieldDirectives,
         );
     }
 
