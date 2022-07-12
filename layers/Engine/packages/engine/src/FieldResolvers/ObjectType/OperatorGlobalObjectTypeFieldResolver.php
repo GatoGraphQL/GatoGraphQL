@@ -266,8 +266,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                                     $e->getMessage(),
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver,
+                            $fieldDataAccessor->getField(),
                         )
                     );
                     return null;
@@ -292,8 +291,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                                     $e->getMessage(),
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver,
+                            $fieldDataAccessor->getField(),
                         )
                     );
                     return null;

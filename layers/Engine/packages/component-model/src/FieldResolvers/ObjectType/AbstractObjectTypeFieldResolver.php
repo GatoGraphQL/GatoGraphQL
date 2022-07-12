@@ -1065,8 +1065,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                                 $e->getTraceAsString(),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
+                        $fieldDataAccessor->getField(),
                     )
                 );
             }
@@ -1102,8 +1101,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $feedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
+                    $fieldDataAccessor->getField(),
                 )
             );
             return null;
