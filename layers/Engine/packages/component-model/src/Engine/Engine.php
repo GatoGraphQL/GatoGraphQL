@@ -53,6 +53,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -2252,11 +2253,21 @@ class Engine implements EngineInterface
         $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
         $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         $astNode = $objectOrSchemaFeedback->getAstNode();
-        $path = $astNode->asASTNodeString();
+        $location = $astNode->getLocation()->toArray();
+        /**
+         * Re-create the path to the AST node
+         */
+        $astNodePath = [];
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
+        while ($astNode !== null) {
+            $astNodePath[] = $astNode->asASTNodeString();
+            $astNode = $documentASTNodeAncestors[$astNode] ?? null;
+        }
         return [
             Tokens::MESSAGE => $message,
-            Tokens::PATH => [$path],
-            Tokens::LOCATIONS => [$astNode->getLocation()->toArray()],
+            Tokens::PATH => $astNodePath,
+            Tokens::LOCATIONS => [$location],
             Tokens::EXTENSIONS => array_merge(
                 $objectOrSchemaFeedback->getExtensions(),
                 [
