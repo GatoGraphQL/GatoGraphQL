@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
 /**
@@ -53,9 +54,11 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
     public function getInputFieldSchemaDefinition(string $inputFieldName): array;
     /**
      * Validate constraints on the input's value
-     *
-     * @return FeedbackItemResolution[] Errors
      */
-    public function validateInputValue(stdClass $inputValue): array;
+    public function validateInputValue(
+        stdClass $inputValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
     public function hasMandatoryInputFields(): bool;
 }

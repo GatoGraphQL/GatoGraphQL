@@ -147,13 +147,12 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     ): ?string;
     /**
      * Custom validations
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): array;
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
     /**
      * @param array<string,mixed> $fieldArgs
      * @return CheckpointInterface[]

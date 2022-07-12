@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use GD_Captcha;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP_EmailSender_Utils;
-use PoP_FormUtils;
-use GD_Captcha;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Exception\GenericClientException;
+use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP_EmailSender_Utils;
+use PoP_FormUtils;
 
 abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResolver
 {
@@ -34,40 +37,57 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         return false;
     }
 
-    protected function validateCaptcha(&$errors, &$fieldDataAccessor): void
-    {
+    protected function validateCaptcha(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Validate the captcha
         if (!PoP_FormUtils::useLoggedinuserData() || !App::getState('is-user-logged-in')) {
             $captcha = $fieldDataAccessor->getValue('captcha');
             try {
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
-                $errors[] = $e->getMessage();
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            GenericFeedbackItemProvider::class,
+                            GenericFeedbackItemProvider::E1,
+                            [
+                                $e->getMessage(),
+                            ]
+                        ),
+                        $fieldDataAccessor->getField(),
+                    )
+                );
             }
         }
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
-        $this->validateCaptcha($errors, $fieldDataAccessor);
+        $this->validateCaptcha($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        if ($errors) {
-            return $errors;
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
         }
 
         $emails = $fieldDataAccessor->getValue('emails');
         if (empty($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('Email(s) cannot be empty.', 'pop-coreprocessors');
         }
-
-        return $errors;
     }
 
     protected function getInvalidEmails(array $emails): array

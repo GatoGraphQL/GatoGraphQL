@@ -112,7 +112,8 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             // Cast (or "coerce" in GraphQL terms) the value
             if ($withArgumentsAST->hasArgument($argName)) {
                 /** @var Argument */
-                $astNode = $withArgumentsAST->getArgument($argName);
+                $argument = $withArgumentsAST->getArgument($argName);
+                $astNode = $argument->getValueAST();
             } else {
                 $astNode = $withArgumentsAST;
             }

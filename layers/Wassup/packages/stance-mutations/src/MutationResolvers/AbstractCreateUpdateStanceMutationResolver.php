@@ -25,19 +25,29 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
             $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->getValue('stancetarget'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
                 if ($this->getCustomPostTypeAPI()->getStatus($referenced) != CustomPostStatus::PUBLISH) {
                     // @todo Migrate from string to FeedbackItemProvider
-                    // $errors[] = new FeedbackItemResolution(
-                    //     MutationErrorFeedbackItemProvider::class,
-                    //     MutationErrorFeedbackItemProvider::E1,
-                    // );
+                // $objectTypeFieldResolutionFeedbackStore->addError(
+                //     new ObjectTypeFieldResolutionFeedback(
+                //         new FeedbackItemResolution(
+                //             MutationErrorFeedbackItemProvider::class,
+                //             MutationErrorFeedbackItemProvider::E1,
+                //         ),
+                //         $fieldDataAccessor->getField(),
+                //     )
+                // );
                     $errors[] = $this->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -103,9 +113,14 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
                 );
             }
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = sprintf(
                 $this->__('%s. <a href="%s" target="%s">Edit?</a>', 'pop-userstance'),

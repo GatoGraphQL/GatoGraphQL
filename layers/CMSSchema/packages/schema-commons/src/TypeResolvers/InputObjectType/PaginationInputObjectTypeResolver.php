@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\SchemaCommons\FeedbackItemProviders\FeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\FilterInputs\LimitFilterInput;
@@ -89,25 +92,24 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
 
     /**
      * Validate constraints on the input field's value
-     *
-     * @return FeedbackItemResolution[] Errors
      */
-    protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
-    {
-        $errors = parent::validateInputFieldValue($inputFieldName, $inputFieldValue);
+    protected function validateInputFieldValue(
+        string $inputFieldName,
+        mixed $inputFieldValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        parent::validateInputFieldValue($inputFieldName, $inputFieldValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
 
         if ($inputFieldName === 'limit' && $this->getMaxLimit() !== null) {
-            if (
-                $maybeErrorFeedbackItemResolution = $this->validateLimitInputField(
-                    $this->getMaxLimit(),
-                    $inputFieldName,
-                    $inputFieldValue
-                )
-            ) {
-                $errors[] = $maybeErrorFeedbackItemResolution;
-            }
+            $this->validateLimitInputField(
+                $this->getMaxLimit(),
+                $inputFieldName,
+                $inputFieldValue,
+                $astNode,
+                $objectTypeFieldResolutionFeedbackStore
+            );
         }
-        return $errors;
     }
 
     protected function getMaxLimit(): ?int
@@ -121,37 +123,49 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     protected function validateLimitInputField(
         int $maxLimit,
         string $inputFieldName,
-        mixed $inputFieldValue
-    ): ?FeedbackItemResolution {
+        mixed $inputFieldValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Check the value is not below what is accepted
         $minLimit = $maxLimit === -1 ? -1 : 1;
         if ($inputFieldValue < $minLimit) {
-            return new FeedbackItemResolution(
-                FeedbackItemProvider::class,
-                FeedbackItemProvider::E1,
-                [
-                    $inputFieldName,
-                    $this->getMaybeNamespacedTypeName(),
-                    $minLimit,
-                ]
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E1,
+                        [
+                            $inputFieldName,
+                            $this->getMaybeNamespacedTypeName(),
+                            $minLimit,
+                        ]
+                    ),
+                    $astNode,
+                )
             );
+            return;
         }
 
         // Check the value is not below the max limit
         if ($maxLimit !== -1 && $inputFieldValue > $maxLimit) {
-            return new FeedbackItemResolution(
-                FeedbackItemProvider::class,
-                FeedbackItemProvider::E2,
-                [
-                    $inputFieldName,
-                    $this->getMaybeNamespacedTypeName(),
-                    $maxLimit,
-                    $inputFieldValue,
-                ]
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E2,
+                        [
+                            $inputFieldName,
+                            $this->getMaybeNamespacedTypeName(),
+                            $maxLimit,
+                            $inputFieldValue,
+                        ]
+                    ),
+                    $astNode,
+                )
             );
+            return;
         }
-
-        return null;
     }
 
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface

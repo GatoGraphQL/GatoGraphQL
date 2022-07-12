@@ -547,28 +547,30 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->consolidatedInputFieldExtensionsCache[$inputFieldName];
     }
     /**
-     * Validate constraints on the input field's value
-     *
-     * @return FeedbackItemResolution[] Errors
+     * Validate constraints on the input's value
      */
-    final public function validateInputValue(stdClass $inputValue): array
-    {
-        $errors = [];
+    final public function validateInputValue(
+        stdClass $inputValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
-            $errors = array_merge(
-                $errors,
-                $this->validateInputFieldValue($inputFieldName, $inputFieldValue)
+            $this->validateInputFieldValue(
+                $inputFieldName,
+                $inputFieldValue,
+                $astNode,
+                $objectTypeFieldResolutionFeedbackStore,
             );
         }
-        return $errors;
     }
     /**
      * Validate constraints on the input field's value
-     *
-     * @return FeedbackItemResolution[] Errors
      */
-    protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
-    {
-        return [];
+    protected function validateInputFieldValue(
+        string $inputFieldName,
+        mixed $inputFieldValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
     }
 }

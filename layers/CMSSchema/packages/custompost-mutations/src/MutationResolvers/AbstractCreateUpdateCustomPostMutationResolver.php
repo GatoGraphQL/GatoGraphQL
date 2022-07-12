@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
@@ -75,65 +77,60 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
     }
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    protected function validateCreateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
-
-        // If there are errors here, don't keep validating others
-        $this->validateCreateUpdateErrors($errors, $fieldDataAccessor);
-        if ($errors) {
-            return $errors;
+    protected function validateCreateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $this->validateCreateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== null) {
+            return;
         }
 
         // If already exists any of these errors above, return errors
-        $this->validateCreate($errors, $fieldDataAccessor);
-        if ($errors) {
-            return $errors;
+        /** @phpstan-ignore-next-line */
+        $this->validateCreate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== null) {
+            return;
         }
 
-        $this->validateContent($errors, $fieldDataAccessor);
-        $this->validateCreateContent($errors, $fieldDataAccessor);
-
-        return $errors;
+        $this->validateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $this->validateCreateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    protected function validateUpdateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $errors = [];
-
+    protected function validateUpdateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // If there are errors here, don't keep validating others
-        $this->validateCreateUpdateErrors($errors, $fieldDataAccessor);
-        if ($errors) {
-            return $errors;
+        $this->validateCreateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== null) {
+            return;
         }
 
         // If already exists any of these errors above, return errors
-        $this->validateUpdate($errors, $fieldDataAccessor);
-        if ($errors) {
-            return $errors;
+        /** @phpstan-ignore-next-line */
+        $this->validateUpdate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== null) {
+            return;
         }
 
-        $this->validateContent($errors, $fieldDataAccessor);
-        $this->validateUpdateContent($errors, $fieldDataAccessor);
-
-        return $errors;
+        $this->validateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $this->validateUpdateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    /**
-     * @param FeedbackItemResolution[] $errors
-     */
-    protected function validateCreateUpdateErrors(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateCreateUpdateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
         if ($errorFeedbackItemResolution !== null) {
-            $errors[] = $errorFeedbackItemResolution;
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $errorFeedbackItemResolution,
+                    $fieldDataAccessor->getField(),
+                )
+            );
             return;
         }
 
@@ -147,9 +144,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                 $editCustomPostsCapability
             )
         ) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E2,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
             );
             return;
         }
@@ -163,9 +165,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                     $publishCustomPostsCapability
                 )
             ) {
-                $errors[] = new FeedbackItemResolution(
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E3,
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E3,
+                        ),
+                        $fieldDataAccessor->getField(),
+                    )
                 );
                 return;
             }
@@ -180,21 +187,25 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         );
     }
 
-    /**
-     * @param FeedbackItemResolution[] $errors
-     */
-    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Validate that the status is valid
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
             $status = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
             if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues())) {
-                $errors[] = new FeedbackItemResolution(
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E5,
-                    [
-                        $status
-                    ]
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E5,
+                            [
+                                $status
+                            ]
+                        ),
+                        $fieldDataAccessor->getField(),
+                    )
                 );
             }
         }
@@ -202,64 +213,75 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // Allow plugins to add validation for their fields
         App::doAction(
             self::HOOK_VALIDATE_CONTENT,
-            array(&$errors),
-            $fieldDataAccessor
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore
         );
     }
 
-    /**
-     * @param FeedbackItemResolution[] $errors
-     */
-    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateCreateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
     }
 
-    /**
-     * @param FeedbackItemResolution[] $errors
-     */
-    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateUpdateContent(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
     }
 
-    /**
-     * @param FeedbackItemResolution[] $errors
-     */
-    protected function validateCreate(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateCreate(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Either the title or the content must be set
         if (
             !$fieldDataAccessor->hasValue(MutationInputProperties::TITLE)
             && !$fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)
         ) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E4,
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E4,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
             );
         }
     }
 
-    /**
-     * @param FeedbackItemResolution[] $errors
-     */
-    protected function validateUpdate(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function validateUpdate(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         if (!$customPostID) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E6,
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E6,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
             );
             return;
         }
 
         $post = $this->getCustomPostTypeAPI()->getCustomPost($customPostID);
         if (!$post) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E7,
-                [
-                    $customPostID,
-                ]
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E7,
+                        [
+                            $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
             );
             return;
         }
@@ -267,12 +289,17 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         // Check that the user has access to the edited custom post
         $userID = App::getState('current-user-id');
         if (!$this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
-            $errors[] = new FeedbackItemResolution(
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E8,
-                [
-                    $customPostID,
-                ]
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E8,
+                        [
+                            $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
             );
             return;
         }
@@ -390,8 +417,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int The ID of the created entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function create(FieldDataAccessorInterface $fieldDataAccessor): string | int
-    {
+    protected function create(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string | int {
         $post_data = $this->getCreateCustomPostData($fieldDataAccessor);
         $customPostID = $this->executeCreateCustomPost($post_data);
 
