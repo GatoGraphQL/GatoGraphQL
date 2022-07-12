@@ -14,7 +14,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
 {
     /**
-     * @param AstInterface $astNode AST node where the error happens (eg: a Field, or an Argument inside a Field)
+     * @param AstInterface $astNode AST node where the error happens (eg: a Field, a Directive, an Argument, etc)
      * @param @var array<string, mixed> $extensions
      */
     public function __construct(
