@@ -19,7 +19,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Exception\RuntimeOperationException;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {

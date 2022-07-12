@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjec
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;

@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
@@ -117,7 +116,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             } else {
                 $astNode = $withArgumentsAST;
             }
-            
+
             // Validate that the expected array/non-array input is provided
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(

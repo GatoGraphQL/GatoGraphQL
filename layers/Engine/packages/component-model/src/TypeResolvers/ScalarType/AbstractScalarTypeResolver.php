@@ -10,7 +10,6 @@ use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItem
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
