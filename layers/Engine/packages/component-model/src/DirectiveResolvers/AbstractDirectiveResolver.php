@@ -366,6 +366,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         new ObjectFeedback(
                             $errorFeedbackItemResolution,
                             $this->directive,
+                            $this->directive,
                             $relationalTypeResolver,
                             [$objectID => new EngineIterationFieldSet($fields)]
                         )
@@ -1163,6 +1164,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                                 ]
                             ),
                             $this->directive,
+                            $this->directive,
                             $relationalTypeResolver,
                             $idFieldSet,
                         )
@@ -1294,6 +1296,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 new ObjectFeedback(
                     $feedbackItemResolution,
                     $this->directive,
+                    $this->directive,
                     $relationalTypeResolver,
                     $idFieldSetToRemove
                 )
@@ -1308,6 +1311,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $engineIterationFeedbackStore->objectFeedbackStore->addError(
                 new ObjectFeedback(
                     $feedbackItemResolution,
+                    $this->directive,
                     $this->directive,
                     $relationalTypeResolver,
                     $idFieldSetToRemove

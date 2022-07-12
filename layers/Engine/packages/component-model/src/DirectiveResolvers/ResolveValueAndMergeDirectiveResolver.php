@@ -120,6 +120,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                             ]
                         ),
                         $this->directive,
+                        $this->directive,
                         $relationalTypeResolver,
                         [$id => $fieldSet]
                     )

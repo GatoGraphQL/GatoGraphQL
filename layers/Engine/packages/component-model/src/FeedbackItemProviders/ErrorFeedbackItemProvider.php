@@ -110,7 +110,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E11 => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E11A => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
-            self::E13 => $this->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
+            self::E13 => $this->__('Object with ID \'%s\' does not exist or cannot be retrieved', 'component-model'),
             self::E14 => $this->__('Expression \'%s\' is undefined', 'component-model'),
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E16 => $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
