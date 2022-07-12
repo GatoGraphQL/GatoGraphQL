@@ -4,13 +4,19 @@
       "message": "There is no input field 'authorName' in input object 'RootAddCommentToCustomPostFilterInput'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 33
         }
       ],
       "extensions": {
         "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
+        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+        "path": [
+          "{comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}",
+          "(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
+          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "mutation { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e4"
       }
     },
@@ -18,13 +24,19 @@
       "message": "There is no input field 'authorEmail' in input object 'RootAddCommentToCustomPostFilterInput'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 33
         }
       ],
       "extensions": {
         "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
+        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+        "path": [
+          "{comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}",
+          "(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
+          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "mutation { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e4"
       }
     }
