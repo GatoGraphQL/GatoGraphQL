@@ -51,8 +51,11 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         return $this->relationalTypeResolver;
     }
 
-    public function getField(): FieldInterface
+    /**
+     * @return FieldInterface[]
+     */
+    public function getFields(): array
     {
-        return $this->field;
+        return $this->fields;
     }
 }
