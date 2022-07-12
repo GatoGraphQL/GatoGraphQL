@@ -9,6 +9,7 @@ use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
@@ -46,6 +47,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
     public function castArguments(
         array $argumentKeyValues,
         array $argumentSchemaDefinition,
+        WithArgumentsInterface $withArgumentsAST,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): array {
         // Cast all argument values
