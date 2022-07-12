@@ -1076,6 +1076,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
             // If any directive failed validation and the field must be set to `null`,
             // then skip processing that field altogether
+            /** @var array<string|int,FieldInterface[]> */
+            $errorIDFields = [];
             $schemaErrorFailingFields = [];
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1083,10 +1085,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 if ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() !== []) {
                     foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
                         foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
-                            foreach ($fieldSet->fields as $field) {
-                                $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
-                                $resolvedIDFieldValues[$id][$field] = null;
-                            }
+                            $errorIDFields[$id] = array_merge(
+                                $errorIDFields[$id] ?? [],
+                                $fieldSet->fields
+                            );
                         }
                     }
                 }
@@ -1102,16 +1104,22 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     // Set those fields as null
                     foreach ($directives as $directive) {
                         foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
-                            $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
                             $failingFields = array_intersect(
                                 $fieldSet->fields,
                                 $schemaErrorFailingFields
                             );
-                            foreach ($failingFields as $field) {
-                                $resolvedIDFieldValues[$id][$field] = null;
-                            }
+                            $errorIDFields[$id] = array_merge(
+                                $errorIDFields[$id] ?? [],
+                                $failingFields
+                            );
                         }
                     }
+                }
+            }
+            foreach ($errorIDFields as $id => $fields) {
+                $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
+                foreach ($fields as $field) {
+                    $resolvedIDFieldValues[$id][$field] = null;
                 }
             }
 
