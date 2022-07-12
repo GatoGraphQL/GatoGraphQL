@@ -27,6 +27,8 @@ use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
@@ -626,6 +628,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
+                // @todo Invented new Argument to comply with new signature, make sure to be gone!
+                new Argument($argName, new Literal($argValue, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()),
                 $separateSchemaInputValidationFeedbackStore,
             );
             $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);

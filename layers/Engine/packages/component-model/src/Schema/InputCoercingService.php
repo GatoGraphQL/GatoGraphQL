@@ -13,6 +13,7 @@ use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -278,6 +279,7 @@ class InputCoercingService implements InputCoercingServiceInterface
         mixed $inputValue,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): mixed {
         if ($inputValue === null) {

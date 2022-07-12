@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\Schema;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 
 interface InputCoercingServiceInterface
@@ -67,6 +68,7 @@ interface InputCoercingServiceInterface
         mixed $inputValue,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): mixed;
 
