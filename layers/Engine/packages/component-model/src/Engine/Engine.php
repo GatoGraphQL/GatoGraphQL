@@ -2264,9 +2264,8 @@ class Engine implements EngineInterface
             $astNodePath[] = $astNode->asASTNodeString();
             $astNode = $documentASTNodeAncestors[$astNode] ?? null;
         }
-        return [
+        $entry = [
             Tokens::MESSAGE => $message,
-            Tokens::PATH => $astNodePath,
             Tokens::LOCATIONS => [$location],
             Tokens::EXTENSIONS => array_merge(
                 $objectOrSchemaFeedback->getExtensions(),
@@ -2277,7 +2276,9 @@ class Engine implements EngineInterface
                     'specifiedBy' => $specifiedByURL,
                 ] : []
             ),
+            Tokens::PATH => $astNodePath,
         ];
+        return $entry;
     }
 
     /**
