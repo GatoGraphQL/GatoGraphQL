@@ -1087,8 +1087,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $error) {
                     $schemaErrorFailingFields[] = $error->getField();
                 }
-                foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $error) {
-                    $schemaErrorFailingFields[] = $error->getField();
+                foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
+                    $schemaErrorFailingFields = array_merge(
+                        $schemaErrorFailingFields,
+                        $schemaFeedback->getFields()
+                    );
                 }
                 $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
