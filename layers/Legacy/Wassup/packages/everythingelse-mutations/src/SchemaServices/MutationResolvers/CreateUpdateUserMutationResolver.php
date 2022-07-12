@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP_Forms_ConfigurationUtils;
 use GD_Captcha;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\EditUsers\FunctionAPIFactory;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Exception\GenericClientException;
+use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP_Forms_ConfigurationUtils;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 {
@@ -309,8 +310,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the created entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function create(FieldDataAccessorInterface $fieldDataAccessor): string | int
-    {
+    protected function create(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string | int {
         $user_id = $this->createuser($fieldDataAccessor);
 
         // Allow for additional operations (eg: set Action categories)

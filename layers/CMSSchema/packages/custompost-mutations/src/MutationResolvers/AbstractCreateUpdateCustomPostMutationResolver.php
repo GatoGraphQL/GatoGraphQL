@@ -415,8 +415,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int The ID of the created entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function create(FieldDataAccessorInterface $fieldDataAccessor): string | int
-    {
+    protected function create(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string | int {
         $post_data = $this->getCreateCustomPostData($fieldDataAccessor);
         $customPostID = $this->executeCreateCustomPost($post_data);
 
