@@ -103,6 +103,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         return sprintf(
             '%s%s { ... }',
             $this->getOperationType(),
+            /** @phpstan-ignore-next-line */
             $operationDefinition !== '' ? ' ' . $operationDefinition : '',
         );
     }
