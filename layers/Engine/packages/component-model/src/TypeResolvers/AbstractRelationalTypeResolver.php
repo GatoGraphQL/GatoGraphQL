@@ -1086,10 +1086,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // Extract the failing fields from the errors
                 foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
                     foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
-                        $schemaErrorFailingFields = array_merge(
-                            $schemaErrorFailingFields,
-                            $fieldSet->fields
-                        );
+                        foreach ($fieldSet->fields as $field) {
+                            $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
+                            $resolvedIDFieldValues[$id][$field] = null;
+                        }
                     }
                 }
                 foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
