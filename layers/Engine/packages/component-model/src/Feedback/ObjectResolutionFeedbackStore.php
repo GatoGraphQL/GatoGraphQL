@@ -54,7 +54,7 @@ class ObjectResolutionFeedbackStore
     }
 
     /**
-     * @var array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

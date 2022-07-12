@@ -716,7 +716,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName);
+        $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $field->getName());
         if ($fieldDeprecationMessage !== null) {
             $objectTypeFieldResolutionFeedbackStore->addDeprecation(
                 new ObjectTypeFieldResolutionFeedback(

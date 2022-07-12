@@ -15,7 +15,7 @@ abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFe
 {
     /**
      * @param AstInterface $astNode AST node where the error happens (eg: a Field, a Directive, an Argument, etc)
-     * @param @var array<string, mixed> $extensions
+     * @param array<string, mixed> $extensions
      */
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
