@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
-interface DocumentFeedbackInterface extends QueryFeedbackInterface
+interface DocumentFeedbackInterface extends FeedbackInterface
 {
 }
