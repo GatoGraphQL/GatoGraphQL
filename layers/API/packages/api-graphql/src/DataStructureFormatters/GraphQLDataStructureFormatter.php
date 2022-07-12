@@ -164,7 +164,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $extensions = [
             'type' => $typeOutputKey,
         ];
-        if ($field = $item[Tokens::FIELD]) {
+        if ($field = $item[Tokens::FIELD] ?? null) {
             $extensions['field'] = $field;
         }
         $extensions['id'] = $id;
@@ -216,7 +216,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $extensions = [
             'type' => $typeOutputKey,
         ];
-        if ($field = $item[Tokens::FIELD]) {
+        if ($field = $item[Tokens::FIELD] ?? null) {
             $extensions['field'] = $field;
         }
         $extensions['path'] = $item[Tokens::PATH];
