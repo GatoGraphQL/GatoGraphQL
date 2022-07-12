@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 
 trait UpdateCustomPostMutationResolverTrait
@@ -17,9 +16,8 @@ trait UpdateCustomPostMutationResolverTrait
      */
     public function executeMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
-        $objectTypeFieldResolutionFeedbackStore
     ): mixed {
-        return $this->update($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        return $this->update($fieldDataAccessor);
     }
 
     /**
@@ -28,7 +26,6 @@ trait UpdateCustomPostMutationResolverTrait
      */
     abstract protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string | int;
 
     public function validateErrors(

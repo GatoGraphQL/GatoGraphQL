@@ -312,7 +312,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string | int {
         $user_id = $this->createuser($fieldDataAccessor);
 
