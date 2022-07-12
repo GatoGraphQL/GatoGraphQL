@@ -762,6 +762,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         /**
+         * Custom validations by the field resolver
+         */
+        $objectTypeFieldResolver->validateFieldDataForObject($this, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+
+        /**
          * If a MutationResolver is declared, let it validate the schema
          */
         $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $fieldDataAccessor->getFieldName());
@@ -769,13 +774,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Validate on the object
             $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
             $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
-            return;
         }
-
-        /**
-         * Custom validations by the field resolver
-         */
-        $objectTypeFieldResolver->validateFieldDataForObject($this, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     final protected function getFieldArgumentsSchemaDefinition(FieldInterface $field): ?array
