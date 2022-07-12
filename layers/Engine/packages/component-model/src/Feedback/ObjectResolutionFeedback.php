@@ -27,8 +27,8 @@ class ObjectResolutionFeedback extends AbstractQueryFeedback implements ObjectRe
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
         AstInterface $astNode,
-        protected Directive $directive,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
+        protected Directive $directive,
         protected array $idFieldSet,
         array $extensions = [],
     ) {
@@ -51,8 +51,8 @@ class ObjectResolutionFeedback extends AbstractQueryFeedback implements ObjectRe
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
             $objectTypeFieldResolutionFeedback->getAstNode(),
-            $directive,
             $relationalTypeResolver,
+            $directive,
             $idFieldSet,
             $objectTypeFieldResolutionFeedback->getExtensions(),
         );
