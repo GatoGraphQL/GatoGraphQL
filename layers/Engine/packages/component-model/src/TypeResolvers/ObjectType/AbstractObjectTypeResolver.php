@@ -1597,8 +1597,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     /**
      * Validate the constraints for the field arguments
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     private function validateFieldArgumentConstraints(
         array $fieldData,

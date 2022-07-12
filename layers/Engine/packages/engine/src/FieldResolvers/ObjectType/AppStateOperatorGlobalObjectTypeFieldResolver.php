@@ -110,8 +110,6 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
 
     /**
      * Custom validations
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,

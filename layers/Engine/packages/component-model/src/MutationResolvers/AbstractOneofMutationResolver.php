@@ -146,7 +146,6 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
 
     /**
      * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
-     * @return FeedbackItemResolution[]
      */
     final public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
