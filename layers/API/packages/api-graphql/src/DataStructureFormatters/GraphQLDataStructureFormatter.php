@@ -148,9 +148,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($locations = $item[Tokens::LOCATIONS] ?? null) {
             $entry['locations'] = $locations;
         }
-        if ($name = $item[Tokens::NAME] ?? null) {
-            $entry['name'] = $name;
-        }
         if (
             $extensions = array_merge(
                 $this->getObjectEntryExtensions($typeOutputKey, $id, $item),
@@ -198,9 +195,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
         if ($locations = $item[Tokens::LOCATIONS] ?? null) {
             $entry['locations'] = $locations;
-        }
-        if ($name = $item[Tokens::NAME] ?? null) {
-            $entry['name'] = $name;
         }
         if (
             $extensions = array_merge(
