@@ -102,7 +102,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface, With
         if ($this->getArguments() !== []) {
             $strArguments = [];
             foreach ($this->getArguments() as $argument) {
-                $strArguments[] = $argument->asASTNodeString();
+                $strArguments[] = $argument->asQueryString();
             }
             $strFieldArguments = sprintf(
                 '(%s)',

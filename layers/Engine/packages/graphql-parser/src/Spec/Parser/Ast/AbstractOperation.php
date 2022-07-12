@@ -88,7 +88,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         if ($this->variables !== []) {
             $strVariables = [];
             foreach ($this->variables as $variable) {
-                $strVariables[] = $variable->asASTNodeString();
+                $strVariables[] = $variable->asQueryString();
             }
             $strOperationVariables = sprintf(
                 '(%s)',

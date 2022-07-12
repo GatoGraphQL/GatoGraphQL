@@ -29,9 +29,9 @@ class Argument extends AbstractAst
     protected function doAsASTNodeString(): string
     {
         return sprintf(
-            '%s: %s',
+            '(%s: %s)',
             $this->name,
-            $this->value->asASTNodeString()
+            $this->value->asQueryString()
         );
     }
 

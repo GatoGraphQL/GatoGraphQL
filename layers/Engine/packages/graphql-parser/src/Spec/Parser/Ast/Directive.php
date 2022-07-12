@@ -48,7 +48,7 @@ class Directive extends AbstractAst implements WithNameInterface, WithArgumentsI
         if ($this->arguments !== []) {
             $strArguments = [];
             foreach ($this->arguments as $argument) {
-                $strArguments[] = $argument->asASTNodeString();
+                $strArguments[] = $argument->asQueryString();
             }
             $strDirectiveArguments = sprintf(
                 '(%s)',
