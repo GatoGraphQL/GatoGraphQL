@@ -11,6 +11,10 @@
       "extensions": {
         "type": "QueryRoot",
         "field": "echo(value: null)",
+        "path": [
+          "echo(value: null)",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e29"
       }
     }
