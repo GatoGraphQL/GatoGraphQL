@@ -10,7 +10,11 @@
       ],
       "extensions": {
         "type": "MutationRoot",
-        "field": "loginUser",
+        "field": "loginUser { ... }",
+        "path": [
+          "loginUser { ... }",
+          "mutation { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e29"
       }
     }
