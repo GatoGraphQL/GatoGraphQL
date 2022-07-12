@@ -14,7 +14,6 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -235,8 +234,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolutionFeedbackStore->addWarning(
                     new ObjectTypeFieldResolutionFeedback(
                         $warningFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $fieldDataAccessor->getField(),
                     )
                 );
             }
@@ -386,8 +384,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             $this->getID($object),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this,
+                    $field,
                 )
             );
             return null;
@@ -463,8 +460,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $e->getTraceAsString()
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $field,
                     )
                 );
             }
@@ -500,8 +496,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $feedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
-                    $this,
+                    $field,
                 )
             );
             return null;
@@ -552,8 +547,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $field->getName(),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $field,
                     )
                 );
                 return null;
@@ -601,8 +595,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $field,
                     )
                 );
                 return null;
@@ -628,8 +621,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $valueAsString,
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $field,
                     )
                 );
                 return null;
@@ -652,8 +644,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $field->getName(),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $field,
                     )
                 );
                 return null;
@@ -677,8 +668,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $field,
                     )
                 );
                 return null;
@@ -702,8 +692,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $field,
                     )
                 );
                 return null;
@@ -729,8 +718,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $field->getName(),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
+                        $field,
                     )
                 );
                 return null;
@@ -766,8 +754,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $feedbackItemResolution,
-                        $fieldDataAccessor->getField()->getLocation(),
-                        $this
+                        $fieldDataAccessor->getField(),
                     )
                 );
                 return;
@@ -786,8 +773,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $errorFeedbackItemResolution,
-                        $fieldDataAccessor->getField()->getLocation(),
-                        $this,
+                        $fieldDataAccessor->getField(),
                     )
                 );
             }
@@ -1135,9 +1121,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 $this->getMaybeNamespacedTypeName()
                             ]
                         ),
-                        $field->getLocation(),
-                        $this,
                         $field,
+                        $this,
+                        [$field],
                     )
                 );
             }
@@ -1201,7 +1187,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $this,
-            $field,
+            [$field],
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
@@ -1286,7 +1272,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $this,
-            $field,
+            [$field],
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
@@ -1345,7 +1331,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): ?array {
         try {
             $fieldData = $field->getArgumentKeyValues();
-        } catch (InvalidDynamicContextException $e) {
+        } catch (InvalidDynamicContextException $invalidDynamicContextException) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -1354,11 +1340,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         [
                             $field->getName(),
                             $this->getMaybeNamespacedTypeName(),
-                            $e->getMessage(),
+                            $invalidDynamicContextException->getMessage(),
                         ]
                     ),
-                    $field->getLocation(),
-                    $this,
+                    $invalidDynamicContextException->getDynamicVariableReference(),
                 )
             );
             return null;
@@ -1376,8 +1361,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $fieldData,
                         $field,
                     ),
-                    $field->getLocation(),
-                    $this,
+                    $field,
                 )
             );
             return null;
@@ -1395,10 +1379,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Cast the Arguments, return if any of them produced an error
          */
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $fieldData = $this->getSchemaCastingService()->castArguments($fieldData, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
-        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $fieldData = $this->getSchemaCastingService()->castArguments(
+            $fieldData,
+            $fieldArgsSchemaDefinition,
+            $field,
+            $separateObjectTypeFieldResolutionFeedbackStore,
+        );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
@@ -1448,7 +1437,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
 
         // Collect the deprecations from the queried fields
-        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldData, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field, $objectTypeFieldResolutionFeedbackStore);
 
         /**
          * Validations:
@@ -1479,8 +1468,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $errorFeedbackItemResolution,
-                        $field->getLocation(),
-                        $this,
+                        $field,
                     )
                 );
             }
@@ -1525,8 +1513,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $errorFeedbackItemResolution,
-                        $field->getLocation(),
-                        $this,
+                        $field,
                     )
                 );
             }

@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -237,19 +236,23 @@ trait AliasSchemaDirectiveResolverTrait
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
+     *
+     * @param FieldInterface[] $fields
      */
     public function validateDirectiveArgumentsForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array $fields,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->validateDirectiveArgumentsForSchema(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
-            $objectTypeFieldResolutionFeedbackStore,
+            $fields,
+            $engineIterationFeedbackStore,
         );
     }
 

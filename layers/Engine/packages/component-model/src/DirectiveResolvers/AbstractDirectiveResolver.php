@@ -12,9 +12,8 @@ use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectFeedback;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -298,12 +297,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * By default, validate if there are deprecated fields
+     *
+     * @param FieldInterface[] $fields
      */
     public function validateDirectiveArgumentsForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array $fields,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations(
             $relationalTypeResolver,
@@ -311,11 +313,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveArgs
         );
         foreach ($deprecationFeedbackItemResolutions as $deprecationFeedbackItemResolution) {
-            $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                new ObjectTypeFieldResolutionFeedback(
+            $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
+                new SchemaFeedback(
                     $deprecationFeedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
+                    $this->directive,
                     $relationalTypeResolver,
+                    $fields,
                 )
             );
         }
@@ -361,19 +364,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $relationalTypeResolver,
                 )
             ) {
-                foreach ($fields as $field) {
-                    foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                        $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                            new ObjectFeedback(
-                                $errorFeedbackItemResolution,
-                                LocationHelper::getNonSpecificLocation(),
-                                $relationalTypeResolver,
-                                $field,
-                                $objectID,
-                                $this->directive,
-                            )
-                        );
-                    }
+                foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectResolutionFeedback(
+                            $errorFeedbackItemResolution,
+                            $this->directive,
+                            $relationalTypeResolver,
+                            $this->directive,
+                            [$objectID => new EngineIterationFieldSet($fields)]
+                        )
+                    );
                 }
             }
         }
@@ -1155,28 +1155,23 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
-                    foreach ($idFieldSet as $id => $fieldSet) {
-                        foreach ($fieldSet->fields as $field) {
-                            $engineIterationFeedbackStore->objectFeedbackStore->addLog(
-                                new ObjectFeedback(
-                                    new FeedbackItemResolution(
-                                        ErrorFeedbackItemProvider::class,
-                                        ErrorFeedbackItemProvider::E11A,
-                                        [
-                                            $this->directive->asQueryString(),
-                                            $e->getMessage(),
-                                            $e->getTraceAsString(),
-                                        ]
-                                    ),
-                                    LocationHelper::getNonSpecificLocation(),
-                                    $relationalTypeResolver,
-                                    $field,
-                                    $id,
-                                    $this->directive
-                                )
-                            );
-                        }
-                    }
+                    $engineIterationFeedbackStore->objectFeedbackStore->addLog(
+                        new ObjectResolutionFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E11A,
+                                [
+                                    $this->directive->asQueryString(),
+                                    $e->getMessage(),
+                                    $e->getTraceAsString(),
+                                ]
+                            ),
+                            $this->directive,
+                            $relationalTypeResolver,
+                            $this->directive,
+                            $idFieldSet,
+                        )
+                    );
                 }
                 $feedbackItemResolution = $moduleConfiguration->sendExceptionErrorMessages()
                     ? ($moduleConfiguration->sendExceptionTraces()
@@ -1300,20 +1295,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
         // Show the failureMessage either as error or as warning
         if ($setFailingFieldResponseAsNull) {
-            foreach ($idFieldSetToRemove as $id => $fieldSet) {
-                foreach ($fieldSet->fields as $failedField) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                        new ObjectFeedback(
-                            $feedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                            $failedField,
-                            $id,
-                            $this->directive,
-                        )
-                    );
-                }
-            }
+            $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                new ObjectResolutionFeedback(
+                    $feedbackItemResolution,
+                    $this->directive,
+                    $relationalTypeResolver,
+                    $this->directive,
+                    $idFieldSetToRemove
+                )
+            );
         } elseif ($removeFieldIfDirectiveFailed) {
             // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
             // if (count($failedFields) == 1) {
@@ -1321,29 +1311,24 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // } else {
             //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             // }
-            foreach ($idFieldSetToRemove as $id => $fieldSet) {
-                foreach ($fieldSet->fields as $failedField) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                        new ObjectFeedback(
-                            $feedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                            $failedField,
-                            $id,
-                            $this->directive,
-                        )
-                    );
-                    // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
-                    // $objectErrors[$id][] = [
-                    //     Tokens::PATH => [$failedField, $this->directive],
-                    //     Tokens::MESSAGE => sprintf(
-                    //         $message,
-                    //         $failureMessage,
-                    //         implode($this->__('\', \''), $failedFields)
-                    //     ),
-                    // ];
-                }
-            }
+            $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                new ObjectResolutionFeedback(
+                    $feedbackItemResolution,
+                    $this->directive,
+                    $relationalTypeResolver,
+                    $this->directive,
+                    $idFieldSetToRemove
+                )
+            );
+            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
+            // $objectErrors[$id][] = [
+            //     Tokens::PATH => [$failedField, $this->directive],
+            //     Tokens::MESSAGE => sprintf(
+            //         $message,
+            //         $failureMessage,
+            //         implode($this->__('\', \''), $failedFields)
+            //     ),
+            // ];
         } else {
             // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
             // if (count($failedFields) === 1) {
@@ -1482,40 +1467,5 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];
-    }
-
-    protected function maybeNestDirectiveFeedback(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        // @todo Display the nested errors in the output, currently they are not!
-        // @todo Also integrate it with "why" in errors:
-        // @see https://github.com/graphql/graphql-spec/issues/893
-        $disabled = true;
-        /** @phpstan-ignore-next-line */
-        if ($disabled) {
-            return;
-        }
-        // If there was an error, add it as nested
-        /** @phpstan-ignore-next-line */
-        $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
-        if ($errors !== []) {
-            $objectTypeFieldResolutionFeedbackStore->setErrors([]);
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E5,
-                        [
-                            $this->directive->asQueryString(),
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $relationalTypeResolver,
-                    [],
-                    $errors
-                )
-            );
-        }
     }
 }

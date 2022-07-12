@@ -22,7 +22,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -432,6 +431,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // Check that a typeResolver from this Union can process this object, or return an arror
         $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
         if ($targetObjectTypeResolver === null) {
+            $field = $fieldOrFieldDataAccessor instanceof FieldInterface
+                ? $fieldOrFieldDataAccessor
+                : $fieldOrFieldDataAccessor->getField();
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -441,8 +443,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                             $this->getOutputService()->jsonEncodeArrayOrStdClassValue($object),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this,
+                    $field,
                 )
             );
             return null;

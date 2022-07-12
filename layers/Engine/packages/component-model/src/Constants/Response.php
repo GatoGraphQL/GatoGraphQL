@@ -13,7 +13,6 @@ class Response
     public final const ERROR = 'error';
     public final const MULTIPLE_ROUTES = 'multiple-routes';
     public final const GENERAL_FEEDBACK = 'generalFeedback';
-    public final const DOCUMENT_FEEDBACK = 'documentFeedback';
     public final const OBJECT_FEEDBACK = 'objectFeedback';
     public final const SCHEMA_FEEDBACK = 'schemaFeedback';
 }

@@ -147,7 +147,7 @@ class GraphQLServer implements GraphQLServerInterface
             $appStateManager->override('does-api-query-have-errors', true);
         }
         $appStateManager->override('executable-document-ast', $executableDocument);
-        $appStateManager->override('document-ast-node-ancestors', $executableDocument->getDocument()->getASTNodeAncestors());
+        $appStateManager->override('document-ast-node-ancestors', $executableDocument?->getDocument()->getASTNodeAncestors());
 
 
         /**

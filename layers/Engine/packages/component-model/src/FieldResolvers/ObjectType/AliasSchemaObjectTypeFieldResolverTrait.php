@@ -134,15 +134,13 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function collectFieldValidationDeprecationMessages(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         $aliasedObjectTypeFieldResolver->collectFieldValidationDeprecationMessages(
             $objectTypeResolver,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs,
+            $this->getAliasedField($field),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }

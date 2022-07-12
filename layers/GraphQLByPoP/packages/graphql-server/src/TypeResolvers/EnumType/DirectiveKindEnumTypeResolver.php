@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\Directives\DirectiveKinds;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use stdClass;
 
@@ -42,13 +43,14 @@ class DirectiveKindEnumTypeResolver extends AbstractIntrospectionEnumTypeResolve
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
         // Validate type first
         if (!is_string($inputValue)) {
-            return parent::coerceValue($inputValue, $schemaInputValidationFeedbackStore);
+            return parent::coerceValue($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
         }
-        return parent::coerceValue(strtolower($inputValue), $schemaInputValidationFeedbackStore);
+        return parent::coerceValue(strtolower($inputValue), $astNode, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**

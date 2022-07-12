@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPWPSchema\Meta\Constants\MetaQueryCompareByOperators;
 use PoPWPSchema\Meta\Constants\MetaQueryValueTypes;
@@ -126,7 +126,8 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         switch ($inputFieldName) {
             case 'key':
@@ -137,8 +138,8 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
                         $this->getAllowOrDenyBehavior(),
                     )
                 ) {
-                    $schemaInputValidationFeedbackStore->addError(
-                        new SchemaInputValidationFeedback(
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 FeedbackItemProvider::class,
                                 FeedbackItemProvider::E1,
@@ -146,8 +147,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
                                     $coercedInputFieldValue,
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $inputFieldTypeResolver
+                            $astNode,
                         ),
                     );
                     return;
@@ -158,7 +158,8 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
             $inputFieldTypeResolver,
             $inputFieldName,
             $coercedInputFieldValue,
-            $schemaInputValidationFeedbackStore,
+            $astNode,
+            $objectTypeFieldResolutionFeedbackStore,
         );
     }
 

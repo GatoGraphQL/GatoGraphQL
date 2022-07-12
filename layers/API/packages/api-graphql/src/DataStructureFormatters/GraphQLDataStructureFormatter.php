@@ -28,7 +28,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // Add feedback
         $errors = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
-            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
         );
@@ -53,7 +52,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             if ($moduleConfiguration->enableProactiveFeedbackWarnings()) {
                 $warnings = array_merge(
                     $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                     $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                     $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                 );
@@ -99,7 +97,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             if ($moduleConfiguration->enableProactiveFeedbackLogs()) {
                 $logs = array_merge(
                     $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] ?? []),
-                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? []),
                     $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::LOG] ?? []),
                     $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::LOG] ?? []),
                 );
@@ -245,30 +242,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             'type' => 'schema',
             'entityTypeOutputKey' => $typeOutputKey,
             'path' => $item[Tokens::PATH] ?? [],
-        ];
-    }
-
-    protected function reformatDocumentEntries($entries)
-    {
-        $ret = [];
-        foreach ($entries as $entry) {
-            $ret[] = $this->getDocumentEntry($entry);
-        }
-        return $ret;
-    }
-
-    protected function getDocumentEntry(array $entry): array
-    {
-        if ($extensions = $entry[Tokens::EXTENSIONS] ?? null) {
-            $entry['extensions'] = $this->reformatExtensions($extensions);
-        }
-        return $entry;
-    }
-
-    protected function getDocumentEntryExtensions(): array
-    {
-        return [
-            'type' => 'document',
         ];
     }
 

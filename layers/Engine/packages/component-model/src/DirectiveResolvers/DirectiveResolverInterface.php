@@ -8,7 +8,6 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -77,12 +76,15 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
 
     /**
      * Enable the directiveResolver to validate the directive arguments in a custom way
+     *
+     * @param FieldInterface[] $fields
      */
     public function validateDirectiveArgumentsForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array $fields,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
 
     /**

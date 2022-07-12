@@ -4,30 +4,31 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 /**
- * The SchemaFeedback is used to store errors that relate to the
- * schema, and for which some Field value must be set to `null`.
- * The `$astNode` is where the error happens (eg: it could be a
- * Field or Directive or Argument), and the `$fields` are all the
- * Fields that must be set to `null` (we'd normally the field to be only 1,
- * but if the $astNode is a Directive, then it can affect multiple Fields).
+ * The ObjectResolutionFeedback is used to store errors that happen during
+ * a directive pipeline stage. The `$astNode` is where the error
+ * happens, and the `$directive` is the Directive executing that
+ * stage on the pipeline.
  */
-class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInterface
+class ObjectResolutionFeedback extends AbstractQueryFeedback implements ObjectResolutionFeedbackInterface
 {
     /**
-     * @param FieldInterface[] $fields All the affected fields (eg: those to be resolved as `null` in case of error)
+     * @param Directive $directive At what stage from the Directive pipeline does the error happen
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<string, mixed> $extensions
      */
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
         AstInterface $astNode,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-        protected array $fields,
+        protected Directive $directive,
+        protected array $idFieldSet,
         array $extensions = [],
     ) {
         parent::__construct(
@@ -38,20 +39,27 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
     }
 
     /**
-     * @param FieldInterface[] $fields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     public static function fromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $fields,
+        Directive $directive,
+        array $idFieldSet,
     ): self {
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
             $objectTypeFieldResolutionFeedback->getAstNode(),
             $relationalTypeResolver,
-            $fields,
+            $directive,
+            $idFieldSet,
             $objectTypeFieldResolutionFeedback->getExtensions(),
         );
+    }
+
+    public function getDirective(): Directive
+    {
+        return $this->directive;
     }
 
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface
@@ -60,10 +68,10 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
     }
 
     /**
-     * @return FieldInterface[]
+     * @return array<string|int,EngineIterationFieldSet>
      */
-    public function getFields(): array
+    public function getIDFieldSet(): array
     {
-        return $this->fields;
+        return $this->idFieldSet;
     }
 }

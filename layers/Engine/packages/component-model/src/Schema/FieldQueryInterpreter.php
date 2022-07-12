@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
@@ -26,6 +24,8 @@ use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
@@ -212,19 +212,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                             $errorMessage
                         );
                     }
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::E1,
-                                [
-                                    $errorMessage,
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                        )
-                    );
+                    // @todo Temporarily hack fix: Need to pass astNode but don't have it, so commented
+                    // $objectTypeFieldResolutionFeedbackStore->addError(
+                    //     new ObjectTypeFieldResolutionFeedback(
+                    //         new FeedbackItemResolution(
+                    //             GenericFeedbackItemProvider::class,
+                    //             GenericFeedbackItemProvider::E1,
+                    //             [
+                    //                 $errorMessage,
+                    //             ]
+                    //         ),
+                    //         LocationHelper::getNonSpecificLocation(),
+                    //         $relationalTypeResolver,
+                    //     )
+                    // );
                     // Ignore extracting this argument
                     continue;
                 }
@@ -254,19 +255,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                         $this->getFieldName($fieldOrDirective),
                         $fieldOrDirectiveArgName
                     );
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::E1,
-                                [
-                                    $errorMessage,
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                        )
-                    );
+                    // @todo Temporarily hack fix: Need to pass astNode but don't have it, so commented
+                    // $objectTypeFieldResolutionFeedbackStore->addError(
+                    //     new ObjectTypeFieldResolutionFeedback(
+                    //         new FeedbackItemResolution(
+                    //             GenericFeedbackItemProvider::class,
+                    //             GenericFeedbackItemProvider::E1,
+                    //             [
+                    //                 $errorMessage,
+                    //             ]
+                    //         ),
+                    //         LocationHelper::getNonSpecificLocation(),
+                    //         $relationalTypeResolver,
+                    //     )
+                    // );
                     if ($resolverType === ResolverTypes::DIRECTIVE && !$setFailingFieldResponseAsNull) {
                         $errorMessage = sprintf(
                             $this->__('%s. The directive has been ignored', 'component-model'),
@@ -355,18 +357,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
         // Enable the directiveResolver to add its own code validations
+        $fields = $directiveFields[$directive];
         if ($directiveArgs !== null) {
-            $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
+            $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $fields, $engineIterationFeedbackStore);
         }
         // Transfer the feedback
-        $fields = $directiveFields[$directive];
-        foreach ($fields as $field) {
-            $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-                $objectTypeFieldResolutionFeedbackStore,
-                $relationalTypeResolver,
-                $field,
-            );
-        }
+        $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+            $objectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $fields,
+        );
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -445,8 +445,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                 $objectTypeFieldResolutionFeedbackStore,
                 $relationalTypeResolver,
-                $field,
-                $objectID,
+                $directiveResolver->getDirective(),
+                [$objectID => new EngineIterationFieldSet([$field])],
             );
         }
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -504,17 +504,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         bool $forSchema
     ): array {
         $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
-        $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $castDirectiveArguments = $this->castFieldOrDirectiveArguments(
             $relationalTypeResolver,
             $directiveArgs,
             $directiveArgSchemaDefinition,
-            $schemaInputValidationFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
             $forSchema
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation(
-            $schemaInputValidationFeedbackStore,
-            $relationalTypeResolver,
+        $objectTypeFieldResolutionFeedbackStore->incorporate(
+            $objectTypeFieldResolutionFeedbackStore,
         );
         return $castDirectiveArguments;
     }
@@ -523,7 +522,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldOrDirectiveArgs,
         array $fieldOrDirectiveArgSchemaDefinition,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         bool $forSchema
     ): array {
         // Cast all argument values
@@ -598,8 +597,11 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsArrayOfArraysType,
             );
 
+            // @todo Invented new Argument to comply with new signature, make sure to be gone!
+            $astNode = new Argument($argName, new Literal(/*$argValue*/null, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation());
+
             // Validate that the expected array/non-array input is provided
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -608,25 +610,27 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
-                $separateSchemaInputValidationFeedbackStore,
+                $astNode,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 $fieldOrDirectiveArgs[$argName] = null;
                 continue;
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
-                $separateSchemaInputValidationFeedbackStore,
+                $astNode,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 $fieldOrDirectiveArgs[$argName] = null;
                 continue;
             }
@@ -640,8 +644,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
                 foreach ($deprecationMessages as $deprecationMessage) {
-                    $schemaInputValidationFeedbackStore->addDeprecation(
-                        new SchemaInputValidationFeedback(
+                    $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                        new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 GenericFeedbackItemProvider::class,
                                 GenericFeedbackItemProvider::D1,
@@ -649,8 +653,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                                     $deprecationMessage,
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $fieldOrDirectiveArgTypeResolver,
+                            $astNode,
                         )
                     );
                 }
@@ -1068,19 +1071,20 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $expressionName = substr($fieldArgValue, strlen('$__'));
         if (!isset($expressions[$expressionName])) {
             // If the expression is not set, then show the error under entry "expressionErrors"
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E14,
-                        [
-                            $expressionName,
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $relationalTypeResolver,
-                )
-            );
+            // @todo Temporarily hack fix: Need to pass astNode but don't have it, so commented
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             ErrorFeedbackItemProvider::class,
+            //             ErrorFeedbackItemProvider::E14,
+            //             [
+            //                 $expressionName,
+            //             ]
+            //         ),
+            //         LocationHelper::getNonSpecificLocation(),
+            //         $relationalTypeResolver,
+            //     )
+            // );
             return null;
         }
         return $expressions[$expressionName];

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
@@ -46,7 +47,8 @@ class SchemaCastingService implements SchemaCastingServiceInterface
     public function castArguments(
         array $argumentKeyValues,
         array $argumentSchemaDefinition,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        WithArgumentsInterface $withArgumentsAST,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         // Cast all argument values
         foreach ($argumentKeyValues as $argName => $argValue) {
@@ -107,8 +109,16 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 $fieldOrDirectiveArgIsArrayOfArraysType,
             );
 
+            // Cast (or "coerce" in GraphQL terms) the value
+            if ($withArgumentsAST->hasArgument($argName)) {
+                /** @var Argument */
+                $astNode = $withArgumentsAST->getArgument($argName);
+            } else {
+                $astNode = $withArgumentsAST;
+            }
+
             // Validate that the expected array/non-array input is provided
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -117,24 +127,25 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
-                $separateSchemaInputValidationFeedbackStore,
+                $astNode,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
-            // Cast (or "coerce" in GraphQL terms) the value
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
-                $separateSchemaInputValidationFeedbackStore,
+                $astNode,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
@@ -152,8 +163,8 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
                 foreach ($deprecationMessages as $deprecationMessage) {
-                    $schemaInputValidationFeedbackStore->addDeprecation(
-                        new SchemaInputValidationFeedback(
+                    $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                        new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 GenericFeedbackItemProvider::class,
                                 GenericFeedbackItemProvider::D1,
@@ -161,8 +172,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                                     $deprecationMessage,
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $fieldOrDirectiveArgTypeResolver,
+                            $astNode,
                         )
                     );
                 }

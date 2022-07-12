@@ -40,7 +40,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
@@ -713,11 +712,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     public function collectFieldValidationDeprecationMessages(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName);
+        $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $field->getName());
         if ($fieldDeprecationMessage !== null) {
             $objectTypeFieldResolutionFeedbackStore->addDeprecation(
                 new ObjectTypeFieldResolutionFeedback(
@@ -725,12 +723,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         DeprecationFeedbackItemProvider::class,
                         DeprecationFeedbackItemProvider::D1,
                         [
-                            $fieldName,
+                            $field->getName(),
                             $fieldDeprecationMessage,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
+                    $field,
                 )
             );
         }
@@ -1065,8 +1062,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                                 $e->getTraceAsString(),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
+                        $fieldDataAccessor->getField(),
                     )
                 );
             }
@@ -1102,8 +1098,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $feedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
+                    $fieldDataAccessor->getField(),
                 )
             );
             return null;

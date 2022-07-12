@@ -19,7 +19,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Exception\RuntimeOperationException;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -266,8 +265,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                                     $e->getMessage(),
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver,
+                            $fieldDataAccessor->getField(),
                         )
                     );
                     return null;
@@ -292,8 +290,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                                     $e->getMessage(),
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver,
+                            $fieldDataAccessor->getField(),
                         )
                     );
                     return null;

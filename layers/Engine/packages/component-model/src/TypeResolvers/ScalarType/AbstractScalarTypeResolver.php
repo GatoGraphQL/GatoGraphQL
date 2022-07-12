@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
@@ -62,13 +62,14 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
 
     final protected function validateIsNotStdClass(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (!($inputValue instanceof stdClass)) {
             return;
         }
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E1,
@@ -76,15 +77,15 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }
 
     final protected function validateFilterVar(
         mixed $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         int $filter,
         array|int $options = [],
     ): void {
@@ -92,8 +93,8 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         if ($valid !== false) {
             return;
         }
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E2,
@@ -102,21 +103,21 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }
 
     final protected function validateIsString(
         string|int|float|bool|stdClass $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (is_string($inputValue)) {
             return;
         }
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E3,
@@ -124,18 +125,18 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }
 
     protected function addDefaultError(
         mixed $inputValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E16,
@@ -144,8 +145,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }

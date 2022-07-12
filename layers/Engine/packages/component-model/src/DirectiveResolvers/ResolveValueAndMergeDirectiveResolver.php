@@ -8,7 +8,7 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
@@ -19,7 +19,6 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -110,24 +109,21 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                foreach ($fieldSet->fields as $field) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                        new ObjectFeedback(
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E13,
-                                [
-                                    $id,
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                            $field,
-                            $id,
-                            $this->directive,
-                        )
-                    );
-                }
+                $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                    new ObjectResolutionFeedback(
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E13,
+                            [
+                                $id,
+                            ]
+                        ),
+                        $this->directive,
+                        $relationalTypeResolver,
+                        $this->directive,
+                        [$id => $fieldSet]
+                    )
+                );
                 // This is currently pointing to NULL and returning this entry in the database. Remove it
                 // (this will also avoid errors in the Engine, which expects this result to be an array and can't be null)
                 unset($resolvedIDFieldValues[$id]);
@@ -272,9 +268,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $relationalTypeResolver,
-            $field,
-            $id,
-            $this->directive
+            $this->directive,
+            [$id => new EngineIterationFieldSet([$field])]
         );
 
         // 3. Add the output in the DB
