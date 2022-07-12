@@ -34,10 +34,15 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             $target = $this->getUserTypeAPI()->getUserByID($target_id);
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->__('The requested user does not exist.', 'pop-coreprocessors');
             }
         }

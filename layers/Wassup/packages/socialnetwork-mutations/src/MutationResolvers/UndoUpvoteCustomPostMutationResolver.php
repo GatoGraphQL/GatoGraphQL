@@ -24,10 +24,15 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
             if (!in_array($target_id, $value)) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = sprintf(
                     $this->__('You had not up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getCustomPostTypeAPI()->getTitle($target_id)

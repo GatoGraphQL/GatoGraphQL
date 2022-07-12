@@ -14,9 +14,14 @@ class LoginUserByCredentialsMutationResolver extends UpstreamLoginUserByCredenti
     {
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         // @todo Migrate from string to FeedbackItemProvider
-        // $errors[] = new FeedbackItemResolution(
-        //     MutationErrorFeedbackItemProvider::class,
-        //     MutationErrorFeedbackItemProvider::E1,
+        // $objectTypeFieldResolutionFeedbackStore->addError(
+        //     new ObjectTypeFieldResolutionFeedback(
+        //         new FeedbackItemResolution(
+        //             MutationErrorFeedbackItemProvider::class,
+        //             MutationErrorFeedbackItemProvider::E1,
+        //         ),
+        //         $fieldDataAccessor->getField(),
+        //     )
         // );
         return sprintf(
             $this->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'user-state-mutations'),

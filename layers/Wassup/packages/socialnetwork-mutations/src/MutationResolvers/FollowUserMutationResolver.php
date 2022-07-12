@@ -22,20 +22,30 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
 
             if ($user_id == $target_id) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->__('You can\'t follow yourself!', 'pop-coreprocessors');
             } else {
                 // Check that the logged in user does not currently follow that user
                 $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
                 if (in_array($target_id, $value)) {
                     // @todo Migrate from string to FeedbackItemProvider
-                    // $errors[] = new FeedbackItemResolution(
-                    //     MutationErrorFeedbackItemProvider::class,
-                    //     MutationErrorFeedbackItemProvider::E1,
-                    // );
+                // $objectTypeFieldResolutionFeedbackStore->addError(
+                //     new ObjectTypeFieldResolutionFeedback(
+                //         new FeedbackItemResolution(
+                //             MutationErrorFeedbackItemProvider::class,
+                //             MutationErrorFeedbackItemProvider::E1,
+                //         ),
+                //         $fieldDataAccessor->getField(),
+                //     )
+                // );
                     $errors[] = sprintf(
                         $this->__('You are already following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                         $this->getUserTypeAPI()->getUserDisplayName($target_id)

@@ -39,20 +39,30 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
             $target = $this->getCustomPostTypeAPI()->getCustomPost($target_id);
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = $this->__('The requested post does not exist.', 'pop-coreprocessors');
             } else {
                 // Make sure this target accepts this functionality. Eg: Not all posts can be Recommended or Up/Down-voted.
                 // Discussion can be recommended only, Highlight up/down-voted only
                 if (!$this->eligible($target)) {
                     // @todo Migrate from string to FeedbackItemProvider
-                    // $errors[] = new FeedbackItemResolution(
-                    //     MutationErrorFeedbackItemProvider::class,
-                    //     MutationErrorFeedbackItemProvider::E1,
-                    // );
+                // $objectTypeFieldResolutionFeedbackStore->addError(
+                //     new ObjectTypeFieldResolutionFeedback(
+                //         new FeedbackItemResolution(
+                //             MutationErrorFeedbackItemProvider::class,
+                //             MutationErrorFeedbackItemProvider::E1,
+                //         ),
+                //         $fieldDataAccessor->getField(),
+                //     )
+                // );
                     $errors[] = $this->__('The requested functionality does not apply on this post.', 'pop-coreprocessors');
                 }
             }

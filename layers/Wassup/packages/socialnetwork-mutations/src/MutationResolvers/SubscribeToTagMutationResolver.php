@@ -27,10 +27,15 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
                 $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
                 $tag = $this->getPostTagTypeAPI()->getTag($target_id);
                 // @todo Migrate from string to FeedbackItemProvider
-                // $errors[] = new FeedbackItemResolution(
-                //     MutationErrorFeedbackItemProvider::class,
-                //     MutationErrorFeedbackItemProvider::E1,
-                // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
                 $errors[] = sprintf(
                     $this->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)

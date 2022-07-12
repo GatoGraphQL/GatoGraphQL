@@ -80,9 +80,14 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         // Validate the Community doesn't belong to itself as a member
         if (in_array($user_id, $fieldDataAccessor->getValue('communities'))) {
             // @todo Migrate from string to FeedbackItemProvider
-            // $errors[] = new FeedbackItemResolution(
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E1,
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
             // );
             $errors[] = $this->getTranslationAPI()->__('You are not allowed to be a member of yourself!', 'ure-pop');
         }
