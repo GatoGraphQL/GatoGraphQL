@@ -241,7 +241,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return [
             'type' => 'schema',
             'entityTypeOutputKey' => $typeOutputKey,
-            'path' => $item[Tokens::PATH] ?? [],
+            'path' => $item[Tokens::PATH],
         ];
     }
 
