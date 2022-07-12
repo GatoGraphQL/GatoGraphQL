@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Directive 'validate' can be executed only once for field(s) 'self<validate>'",
+      "message": "Directive 'serializeLeafOutputTypeValues' can be executed only once for field(s) 'self<serializeLeafOutputTypeValues>'",
       "locations": [
         {
           "line": 1,
@@ -10,7 +10,7 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "self<validate>",
+        "field": "self<serializeLeafOutputTypeValues>",
         "code": "PoP\\ComponentModel\\e23"
       }
     }
