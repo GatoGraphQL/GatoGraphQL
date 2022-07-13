@@ -27,12 +27,5 @@ interface FieldQueryInterpreterInterface
      */
     public function getArrayAsStringForQuery(array $fieldArgValue): string;
     public function getObjectAsStringForQuery(stdClass $fieldArgValue): string;
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
-    public function getFieldArgsAsString(
-        array $fieldArgs,
-        bool $addFieldArgSymbolsIfEmpty = false
-    ): string;
     public function wrapStringInQuotes(string $value): string;
 }

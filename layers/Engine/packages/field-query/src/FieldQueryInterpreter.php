@@ -300,67 +300,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
-     */
-    public function getFieldArgsAsString(
-        array $fieldArgs,
-        bool $addFieldArgSymbolsIfEmpty = false
-    ): string {
-        if (!$fieldArgs) {
-            if ($addFieldArgSymbolsIfEmpty) {
-                return
-                    QuerySyntax::SYMBOL_FIELDARGS_OPENING .
-                    QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
-            }
-            return '';
-        }
-        $elems = [];
-        foreach ($fieldArgs as $fieldArgKey => $fieldArgValue) {
-            // If it is null, the unquoted `null` string will be represented as null
-            if ($fieldArgValue === null) {
-                $fieldArgValue = 'null';
-            } elseif (is_bool($fieldArgValue)) {
-                /**
-                 * @todo Temporary addition to match `asQueryString` in the AST
-                 * Before it printed "1" and "0" as true/false
-                 */
-                $fieldArgValue = $fieldArgValue ? 'true' : 'false';
-            } elseif (is_array($fieldArgValue)) {
-                // Convert from array to its representation of array in a string
-                $fieldArgValue = $this->getArrayAsStringForQuery($fieldArgValue);
-            } elseif ($fieldArgValue instanceof stdClass) {
-                // Convert from array to its representation of object in a string
-                $fieldArgValue = $this->getObjectAsStringForQuery($fieldArgValue);
-            } elseif (is_object($fieldArgValue)) {
-                /**
-                 * This function accepts objects because it is called
-                 * after calling `coerceValue`, so a string like `2020-01-01`
-                 * will be transformed to a `Date` object
-                 */
-                $fieldArgValue = $this->wrapStringInQuotes($this->serializeObject($fieldArgValue));
-            } elseif (is_string($fieldArgValue)) {
-                // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
-                // inside of it (eg: it if has a ",", it will split the element there when decoding again
-                // from string to array in `getField`)
-                $fieldArgValue = $this->maybeWrapStringInQuotes($fieldArgValue);
-            }
-            /**
-             * @todo Temporary addition to match `asQueryString` in the AST
-             * Added an extra " "
-             */
-            $elems[] = $fieldArgKey . QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR . ' ' . $fieldArgValue;
-        }
-        return
-            QuerySyntax::SYMBOL_FIELDARGS_OPENING .
-            /**
-             * @todo Temporary addition to match `asQueryString` in the AST
-             * Added an extra " "
-             */
-            implode(QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR . ' ', $elems) .
-            QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
-    }
-
-    /**
      * This is the base implementation. Override function whenever
      * the object does not contain `__serialize`
      */
