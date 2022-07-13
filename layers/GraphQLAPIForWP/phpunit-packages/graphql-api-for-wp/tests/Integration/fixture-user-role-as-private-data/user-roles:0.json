@@ -11,6 +11,10 @@
       "extensions": {
         "type": "QueryRoot",
         "field": "roleNames",
+        "path": [
+          "roleNames",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -24,7 +28,11 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "roles",
+        "field": "roles { ... }",
+        "path": [
+          "roles { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -32,13 +40,19 @@
       "message": "There is no input field 'roles' in input object 'UsersFilterInput'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 14,
+          "column": 17
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]})",
+        "field": "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]}) { ... }",
+        "path": [
+          "{roles: [\"administrator\"], excludeRoles: [\"subscriber\"]}",
+          "(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]})",
+          "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e4"
       }
     },
@@ -46,13 +60,19 @@
       "message": "There is no input field 'excludeRoles' in input object 'UsersFilterInput'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 14,
+          "column": 17
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]})",
+        "field": "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]}) { ... }",
+        "path": [
+          "{roles: [\"administrator\"], excludeRoles: [\"subscriber\"]}",
+          "(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]})",
+          "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e4"
       }
     },
@@ -67,6 +87,11 @@
       "extensions": {
         "type": "User",
         "field": "roleNames",
+        "path": [
+          "roleNames",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -81,6 +106,11 @@
       "extensions": {
         "type": "User",
         "field": "hasRole(role: \"administrator\")",
+        "path": [
+          "hasRole(role: \"administrator\")",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -95,6 +125,11 @@
       "extensions": {
         "type": "User",
         "field": "hasAnyRole(roles: [\"administrator\"])",
+        "path": [
+          "hasAnyRole(roles: [\"administrator\"])",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -108,7 +143,12 @@
       ],
       "extensions": {
         "type": "User",
-        "field": "roles",
+        "field": "roles { ... }",
+        "path": [
+          "roles { ... }",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }
