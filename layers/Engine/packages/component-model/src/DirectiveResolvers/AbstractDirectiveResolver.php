@@ -230,12 +230,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->directiveData = $this->getDirectiveData(
+        $directiveData = $this->getDirectiveData(
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
         );
-        $this->setHasValidationErrors($this->directiveData === null);
+        if ($directiveData === null) {
+            $this->setHasValidationErrors(true);
+            return;
+        }
+        $this->directiveData = $directiveData;
     }
 
     /**
