@@ -347,18 +347,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING;
     }
 
-    protected function getFieldAliasAsString(?string $fieldAlias = null): string
-    {
-        if (!$fieldAlias) {
-            return '';
-        }
-        /**
-         * @todo Temporary addition to match `asQueryString` in the AST
-         * Added an extra " "
-         */
-        return $fieldAlias . QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . ' ';
-    }
-
     protected function getFieldSkipOutputIfNullAsString(?bool $skipOutputIfNull = false): string
     {
         if (!$skipOutputIfNull) {
