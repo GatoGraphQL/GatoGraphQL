@@ -376,7 +376,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          *
          * - constraints of the arguments
          */
-        $this->validateFieldArgumentConstraints(
+        $this->validateDirectiveArgumentConstraints(
             $directiveData,
             $relationalTypeResolver,
             $fields,
@@ -470,7 +470,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param FieldInterface[] $fields
      */
-    private function validateFieldArgumentConstraints(
+    private function validateDirectiveArgumentConstraints(
         array $directiveData,
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
