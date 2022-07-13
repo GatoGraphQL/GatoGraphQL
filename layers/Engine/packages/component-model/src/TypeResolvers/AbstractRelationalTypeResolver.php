@@ -290,8 +290,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 );
                 continue;
             }
-            $directiveArgs = $directive->getArguments();
-
             if ($fieldDirectiveResolvers->count() === 0) {
                 $fields = $directiveFields[$directive];
                 $engineIterationFeedbackStore->schemaFeedbackStore->addError(
@@ -303,7 +301,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 $directive->getName(),
                                 json_encode(array_map(
                                     fn (Argument $argument) => $argument->asQueryString(),
-                                    $directiveArgs
+                                    $directive->getArguments()
                                 )),
                                 implode(
                                     $this->__('\', \'', 'component-model'),
@@ -332,7 +330,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 ErrorFeedbackItemProvider::E22,
                                 [
                                     $directive->getName(),
-                                    json_encode($directiveArgs),
+                                    json_encode(array_map(
+                                        fn (Argument $argument) => $argument->asQueryString(),
+                                        $directive->getArguments()
+                                    )),
                                     $field->asFieldOutputQueryString(),
                                 ]
                             ),
