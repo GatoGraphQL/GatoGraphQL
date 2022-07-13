@@ -13,8 +13,6 @@ use stdClass;
 
 class InputObject extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
-    protected ?stdClass $cachedValue = null;
-
     /**
      * @param stdClass $object Elements inside can be WithValueInterface or native types (array, int, string, etc)
      */
@@ -45,17 +43,6 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
      */
     final public function getValue(): mixed
     {
-        if ($this->cachedValue === null) {
-            $this->cachedValue = $this->doGetValue();
-        }
-        return $this->cachedValue;
-    }
-
-    /**
-     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
-     */
-    protected function doGetValue(): stdClass
-    {
         $object = new stdClass();
         foreach ((array) $this->object as $key => $value) {
             if ($value instanceof WithValueInterface) {
@@ -73,10 +60,5 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
     public function getAstValue(): mixed
     {
         return $this->object;
-    }
-
-    public function resetCachedValue(): void
-    {
-        $this->cachedValue = null;
     }
 }
