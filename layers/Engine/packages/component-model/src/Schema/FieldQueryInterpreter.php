@@ -310,16 +310,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldOrDirectiveArgs;
     }
 
-    protected function castDirectiveArgumentsForObject(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directive,
-        array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $directive, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, false);
-    }
-
     /**
      * @return array<string, InputTypeResolverInterface>
      */
