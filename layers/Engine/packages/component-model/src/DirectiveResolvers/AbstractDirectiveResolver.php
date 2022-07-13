@@ -27,6 +27,7 @@ use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -100,6 +101,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?VersioningServiceInterface $versioningService = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?SchemaCastingServiceInterface $schemaCastingService = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -148,6 +150,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+    final public function setSchemaCastingService(SchemaCastingServiceInterface $schemaCastingService): void
+    {
+        $this->schemaCastingService = $schemaCastingService;
+    }
+    final protected function getSchemaCastingService(): SchemaCastingServiceInterface
+    {
+        return $this->schemaCastingService ??= $this->instanceManager->getInstance(SchemaCastingServiceInterface::class);
     }
 
     /**
@@ -279,37 +289,28 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $directiveData = $this->getSchemaCastingService()->castArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
-            $field,
+            $this->directive,
             $separateObjectTypeFieldResolutionFeedbackStore,
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return null;
-        }
-
-        /**
-         * Allow to inject additional arguments
-         */
-        $directiveData = $objectTypeFieldResolver->prepareFieldData(
-            $directiveData,
-            $this,
-            $field,
-            $objectTypeFieldResolutionFeedbackStore
+        $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+            $separateObjectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $fields,
         );
-        if ($directiveData === null) {
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
         /**
          * Perform validations
          */
-        $this->validateFieldData(
+        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+        $this->validateDirectiveData(
             $directiveData,
-            $field,
-            !$objectTypeFieldResolver->validateMutationOnObject($this, $this->directive->getName()),
-            $objectTypeFieldResolutionFeedbackStore,
+            $separateEngineIterationFeedbackStore,
         );
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
+        if ($separateEngineIterationFeedbackStore->hasErrors()) {
             return null;
         }
 
@@ -321,10 +322,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string,mixed> $directiveData
      */
-    protected function validateFieldData(
+    protected function validateDirectiveData(
         array $directiveData,
-        FieldInterface $field,
-        bool $validateMutation,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         /** @var array */
