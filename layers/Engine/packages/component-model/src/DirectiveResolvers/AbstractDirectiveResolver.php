@@ -30,6 +30,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -340,22 +341,23 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
          */
+        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
         $this->validateNonMissingMandatoryDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
-            $engineIterationFeedbackStore,
+            $separateEngineIterationFeedbackStore,
         );
         $this->validateOnlyExistingDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
-            $engineIterationFeedbackStore,
+            $separateEngineIterationFeedbackStore,
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
+        if ($separateEngineIterationFeedbackStore->hasErrors()) {
             return;
         }
 
@@ -363,33 +365,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * Validations:
          *
          * - constraints of the arguments
-         * - custom constraints of the arguments set by the field resolver
-         * - mutation custom validations
          */
-        $directiveDataAccessor = $this->createFieldDataAccessor(
-            $field,
-            $directiveData,
-        );
         $this->validateFieldArgumentConstraints(
             $directiveData,
-            $objectTypeFieldResolver,
-            $field,
-            $objectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $fields,
+            $engineIterationFeedbackStore,
         );
-        $objectTypeFieldResolver->validateFieldKeyValues(
-            $this,
-            $directiveDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        /**
-         * If a MutationResolver is declared, let it validate the schema
-         */
-        $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $this->directive->getName());
-        if ($mutationResolver !== null && $validateMutation) {
-            $directiveDataAccessorForMutation = $this->getFieldDataAccessorForMutation($directiveDataAccessor);
-            $mutationResolver->validateErrors($directiveDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
-        }
     }
 
     /**
@@ -474,37 +456,37 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Validate the constraints for the field arguments
+     * Validate the constraints for the directive arguments
+     *
+     * @param FieldInterface[] $fields
      */
     private function validateFieldArgumentConstraints(
         array $directiveData,
-        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
-        FieldInterface $field,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $fieldArgNameTypeResolvers = $objectTypeFieldResolver->getConsolidatedFieldArgNameTypeResolvers($this, $this->directive->getName());
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $directiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
         foreach ($directiveData as $argName => $argValue) {
-            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
-            $astNode = $field->getArgument($argName) ?? $field;
+            $directiveArgTypeResolver = $directiveArgNameTypeResolvers[$argName];
+            $astNode = $this->directive->getArgument($argName) ?? $this->directive;
             /**
              * If the field is an InputObject, let it perform validations on its input fields.
              */
-            if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface) {
-                $fieldArgTypeResolver->validateInputValue(
+            if ($directiveArgTypeResolver instanceof InputObjectTypeResolverInterface) {
+                $directiveArgTypeResolver->validateInputValue(
                     $argValue,
                     $astNode,
                     $objectTypeFieldResolutionFeedbackStore,
                 );
             }
-            $objectTypeFieldResolver->validateFieldArgValue(
-                $this,
-                $this->directive->getName(),
-                $argName,
-                $argValue,
-                $astNode,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
         }
+        $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+            $objectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $fields,
+        );
     }
 
     final protected function integrateDefaultDirectiveArguments(RelationalTypeResolverInterface $relationalTypeResolver): void
