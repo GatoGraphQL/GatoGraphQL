@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 abstract class AbstractField extends AbstractAst implements FieldInterface, WithNameInterface, WithArgumentsInterface
@@ -147,48 +146,11 @@ abstract class AbstractField extends AbstractAst implements FieldInterface, With
             );
         }
 
-        /**
-         * @todo Temporarily calling ->asQueryString, must work with AST directly!
-         */
-        $strFieldDirectives = $this->getDirectivesQueryString($this->getDirectives());
-        return sprintf(
-            '%s%s%s%s',
-            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
-            $this->getName(),
-            $strFieldArguments,
-            $strFieldDirectives,
-        );
-        /** @phpstan-ignore-next-line */
         return sprintf(
             '%s%s%s',
             $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
             $this->getName(),
             $strFieldArguments,
         );
-    }
-
-    /**
-     * @todo Temporarily calling ->asQueryString, must work with AST directly!
-     * @todo Completely remove this function!!!!
-     * @param Directive[] $directives
-     */
-    private function getDirectivesQueryString(array $directives): string
-    {
-        $strFieldDirectives = '';
-        if ($directives !== []) {
-            $directiveQueryStrings = [];
-            foreach ($directives as $directive) {
-                // Remove the initial "@"
-                $directiveQueryString = substr($directive->asQueryString(), 1);
-                if ($directive instanceof MetaDirective) {
-                    /** @var MetaDirective */
-                    $metaDirective = $directive;
-                    $directiveQueryString .= $this->getDirectivesQueryString($metaDirective->getNestedDirectives());
-                }
-                $directiveQueryStrings[] = $directiveQueryString;
-            }
-            $strFieldDirectives .= '<' . implode(', ', $directiveQueryStrings) . '>';
-        }
-        return $strFieldDirectives;
     }
 }
