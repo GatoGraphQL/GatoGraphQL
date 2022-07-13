@@ -31,7 +31,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->__('User roles', 'user-roles');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         $role = $object;
         return $role->name;

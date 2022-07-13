@@ -12,7 +12,7 @@ class ObjectPropertyResolver extends \PoPCMSSchema\Pages\ObjectPropertyResolver_
      * Get the ID of the static page for the homepage
      * Returns an ID (int? string?) or null
      */
-    public function getHomeStaticPageID(): string | int
+    public function getHomeStaticPageID(): string|int
     {
         if (get_option('show_on_front') !== 'page') {
             // Errors go in here

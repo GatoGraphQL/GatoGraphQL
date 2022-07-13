@@ -33,7 +33,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return $object instanceof WP_User;
     }
 
-    protected function getUserBy(string $property, string | int $propertyValue): ?object
+    protected function getUserBy(string $property, string|int $propertyValue): ?object
     {
         $user = get_user_by($property, $propertyValue);
         if ($user === false) {
@@ -42,7 +42,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return $user;
     }
 
-    public function getUserByID(string | int $userID): ?object
+    public function getUserByID(string|int $userID): ?object
     {
         return $this->getUserBy('id', $userID);
     }
@@ -335,7 +335,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     {
         return $this->getUserProperty('user_nicename', $userObjectOrID);
     }
-    public function getUserID(object $user): string | int
+    public function getUserID(object $user): string|int
     {
         return $user->ID;
     }

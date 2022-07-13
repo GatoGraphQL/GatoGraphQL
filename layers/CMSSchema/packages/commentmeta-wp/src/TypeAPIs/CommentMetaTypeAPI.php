@@ -12,7 +12,7 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.
      */
-    protected function doGetCommentMeta(string | int $commentID, string $key, bool $single = false): mixed
+    protected function doGetCommentMeta(string|int $commentID, string $key, bool $single = false): mixed
     {
         // This function does not differentiate between a stored empty value,
         // and a non-existing key! So if empty, treat it as non-existant and return null

@@ -116,7 +116,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     //     return parent::getNature($component);
     // }
 
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string|int|array
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_CONTENT:

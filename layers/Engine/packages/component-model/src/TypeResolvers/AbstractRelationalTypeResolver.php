@@ -124,12 +124,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param string|int|array<string|int> $objectIDOrIDs
      * @return string|int|array<string|int>
      */
-    public function getQualifiedDBObjectIDOrIDs(string | int | array $objectIDOrIDs): string | int | array
+    public function getQualifiedDBObjectIDOrIDs(string|int|array $objectIDOrIDs): string|int|array
     {
         // Add the type before the ID
         $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : [$objectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
-            fn (int | string $id) => UnionTypeHelpers::getObjectComposedTypeAndID(
+            fn (int|string $id) => UnionTypeHelpers::getObjectComposedTypeAndID(
                 $this,
                 $id
             ),
@@ -624,7 +624,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             $idFieldSet = array_filter(
                 $idFieldSet,
-                fn (int | string $id) => !in_array($id, $unresolvedObjectIDs),
+                fn (int|string $id) => !in_array($id, $unresolvedObjectIDs),
                 ARRAY_FILTER_USE_KEY
             );
         }
@@ -646,7 +646,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $idObjects;
     }
 
-    protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
+    protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string|int $objectID): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             ErrorFeedbackItemProvider::class,
@@ -919,7 +919,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param array<string,Directive[]> $mandatoryDirectivesForFields Key: '*' (for all) or fieldName, Value: List of Directives
      * @param Directive[] $mandatorySystemDirectives
      */
-    protected function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $fieldSet): void
+    protected function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string|int $id, EngineIterationFieldSet $fieldSet): void
     {
         foreach ($fields as $field) {
             if (!$this->fieldDirectives->contains($field)) {

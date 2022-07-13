@@ -17,7 +17,7 @@ class PostTagTypeMutationAPI implements PostTagTypeMutationAPIInterface
      *
      * @param string[] $tags
      */
-    public function setTags(int | string $postID, array $tags, bool $append = false): void
+    public function setTags(int|string $postID, array $tags, bool $append = false): void
     {
         \wp_set_post_terms($postID, $tags, 'post_tag', $append);
     }

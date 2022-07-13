@@ -31,7 +31,7 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return $this->__('Schema type, to implement the introspection fields', 'graphql-server');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         /** @var Schema */
         $schema = $object;

@@ -155,17 +155,17 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         return $count;
     }
 
-    public function getComment(string | int $comment_id): ?object
+    public function getComment(string|int $comment_id): ?object
     {
         return get_comment($comment_id);
     }
 
-    public function getCommentNumber(string | int $post_id): int
+    public function getCommentNumber(string|int $post_id): int
     {
         return (int) get_comments_number((int) $post_id);
     }
 
-    public function areCommentsOpen(string | int $post_id): bool
+    public function areCommentsOpen(string|int $post_id): bool
     {
         return comments_open((int)$post_id);
     }
@@ -202,7 +202,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         // Do not allow HTML tags
         return strip_tags($comment->comment_content);
     }
-    public function getCommentPostId(object $comment): string | int
+    public function getCommentPostId(object $comment): string|int
     {
         /** @var WP_Comment */
         $comment = $comment;
@@ -233,7 +233,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         };
         return CommentStatus::HOLD;
     }
-    public function getCommentParent(object $comment): string | int | null
+    public function getCommentParent(object $comment): string|int|null
     {
         /** @var WP_Comment */
         $comment = $comment;
@@ -248,7 +248,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         /** @var WP_Comment $comment*/
         return $gmt ? $comment->comment_date_gmt : $comment->comment_date;
     }
-    public function getCommentId(object $comment): string | int
+    public function getCommentId(object $comment): string|int
     {
         /** @var WP_Comment */
         $comment = $comment;

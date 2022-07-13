@@ -17,7 +17,7 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
     /**
      * Return the post's ID
      */
-    public function getID(object $post): string | int
+    public function getID(object $post): string|int
     {
         return $post->ID;
     }
@@ -33,7 +33,7 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
     /**
      * Get the highlight with provided ID or, if it doesn't exist, null
      */
-    public function getHighlight(int | string $id): ?object
+    public function getHighlight(int|string $id): ?object
     {
         $post = get_post($id);
         if (!$post || $post->post_type !== \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
@@ -45,7 +45,7 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
     /**
      * Indicate if an highlight with provided ID exists
      */
-    public function highlightExists(int | string $id): bool
+    public function highlightExists(int|string $id): bool
     {
         return $this->getHighlight($id) !== null;
     }

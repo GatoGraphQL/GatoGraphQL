@@ -41,7 +41,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
         );
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         /** @var Root */
         $root = $object;

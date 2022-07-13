@@ -61,7 +61,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         }
         return $tag->name;
     }
-    public function getTag(string | int $tagID): object
+    public function getTag(string|int $tagID): object
     {
         return get_tag($tagID, $this->getTagTaxonomyName());
     }
@@ -69,12 +69,12 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         return get_term_by('name', $tagName, $this->getTagTaxonomyName());
     }
-    public function getCustomPostTags(string | int $customPostID, array $query = [], array $options = []): array
+    public function getCustomPostTags(string|int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
         return wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
     }
-    public function getCustomPostTagCount(string | int $customPostID, array $query = [], array $options = []): int
+    public function getCustomPostTagCount(string|int $customPostID, array $query = [], array $options = []): int
     {
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_tags`,
@@ -167,7 +167,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         }
         return $tag->count;
     }
-    public function getTagID(object $tag): string | int
+    public function getTagID(object $tag): string|int
     {
         return $tag->term_id;
     }

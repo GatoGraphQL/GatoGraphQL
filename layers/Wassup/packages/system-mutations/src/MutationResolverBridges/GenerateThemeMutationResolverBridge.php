@@ -24,7 +24,7 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
     {
         return $this->getGenerateThemeMutationResolver();
     }
-    public function getSuccessString(string | int $result_id): ?string
+    public function getSuccessString(string|int $result_id): ?string
     {
         return $this->__('System action "generate theme" executed successfully.', 'pop-system');
     }

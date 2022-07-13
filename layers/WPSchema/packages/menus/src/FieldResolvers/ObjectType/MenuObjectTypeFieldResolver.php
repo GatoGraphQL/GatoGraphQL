@@ -123,7 +123,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return array_keys(
                     array_filter(
                         $locationMenuIDs,
-                        fn (string | int $locationMenuID) => $locationMenuID === $menuID
+                        fn (string|int $locationMenuID) => $locationMenuID === $menuID
                     )
                 );
         }

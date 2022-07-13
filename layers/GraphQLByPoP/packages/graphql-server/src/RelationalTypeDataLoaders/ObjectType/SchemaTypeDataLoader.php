@@ -50,7 +50,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->getSchemaObjectTypeResolver();
     }
 
-    protected function getObjectTypeNewInstance(int | string $id): mixed
+    protected function getObjectTypeNewInstance(int|string $id): mixed
     {
         $fullSchemaDefinition = $this->getSchemaDefinitionReferenceRegistry()->getFullSchemaDefinitionForGraphQL();
         return new Schema(

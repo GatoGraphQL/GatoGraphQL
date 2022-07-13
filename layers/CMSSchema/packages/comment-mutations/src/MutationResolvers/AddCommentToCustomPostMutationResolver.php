@@ -135,7 +135,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         );
     }
 
-    protected function additionals(string | int $comment_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(string|int $comment_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction('gd_addcomment', $comment_id, $fieldDataAccessor);
     }
@@ -182,7 +182,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     /**
      * @throws CommentCRUDMutationException In case of error
      */
-    protected function insertComment(array $comment_data): string | int
+    protected function insertComment(array $comment_data): string|int
     {
         return $this->getCommentTypeMutationAPI()->insertComment($comment_data);
     }

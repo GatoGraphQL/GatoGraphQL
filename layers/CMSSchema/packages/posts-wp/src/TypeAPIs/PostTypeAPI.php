@@ -62,7 +62,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     /**
      * Get the post with provided ID or, if it doesn't exist, null
      */
-    public function getPost(int | string $id): ?object
+    public function getPost(int|string $id): ?object
     {
         $post = get_post($id);
         if ($post === null || $post->post_type !== 'post') {
@@ -74,7 +74,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     /**
      * Indicate if an post with provided ID exists
      */
-    public function postExists(int | string $id): bool
+    public function postExists(int|string $id): bool
     {
         return $this->getPost($id) !== null;
     }

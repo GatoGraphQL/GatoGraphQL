@@ -31,7 +31,7 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->getTranslationAPI()->__('Notifications for the user', 'notifications');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         $notification = $object;
         return $notification->histid;

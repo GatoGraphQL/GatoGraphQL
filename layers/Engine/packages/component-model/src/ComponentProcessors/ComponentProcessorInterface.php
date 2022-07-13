@@ -85,7 +85,7 @@ interface ComponentProcessorInterface
     public function getImmutableDatasetsettings(Component $component, array &$props): array;
     public function getDatasetOutputKeys(Component $component, array &$props): array;
     public function getDatasource(Component $component, array &$props): string;
-    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null;
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null;
     public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface;
     public function getComponentMutationResolverBridge(Component $component): ?ComponentMutationResolverBridgeInterface;
     public function prepareDataPropertiesAfterMutationExecution(Component $component, array &$props, array &$data_properties): void;

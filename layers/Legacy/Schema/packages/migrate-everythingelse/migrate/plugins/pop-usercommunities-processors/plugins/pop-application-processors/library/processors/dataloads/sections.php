@@ -200,7 +200,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         return $ret;
     }
 
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string|int|array
     {
         $ret = parent::getObjectIDOrIDs($component, $props, $data_properties);
 

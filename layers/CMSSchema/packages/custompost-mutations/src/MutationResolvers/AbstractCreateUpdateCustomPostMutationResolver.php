@@ -305,13 +305,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    protected function additionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
-    protected function updateAdditionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
+    protected function updateAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
     }
-    protected function createAdditionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function createAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
 
@@ -358,16 +358,16 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int the ID of the updated custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    protected function executeUpdateCustomPost(array $post_data): string | int
+    protected function executeUpdateCustomPost(array $post_data): string|int
     {
         return $this->getCustomPostTypeMutationAPI()->updateCustomPost($post_data);
     }
 
-    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataAccessor, int | string $customPostID): void
+    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataAccessor, int|string $customPostID): void
     {
     }
 
-    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getUpdateCustomPostDataLog(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [
             'previous-status' => $this->getCustomPostTypeAPI()->getStatus($customPostID),
@@ -378,7 +378,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
     {
         $post_data = $this->getUpdateCustomPostData($fieldDataAccessor);
         $customPostID = $post_data['id'];
@@ -408,7 +408,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int the ID of the created custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function executeCreateCustomPost(array $post_data): string | int
+    protected function executeCreateCustomPost(array $post_data): string|int
     {
         return $this->getCustomPostTypeMutationAPI()->createCustomPost($post_data);
     }
@@ -419,7 +419,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string | int {
+    ): string|int {
         $post_data = $this->getCreateCustomPostData($fieldDataAccessor);
         $customPostID = $this->executeCreateCustomPost($post_data);
 

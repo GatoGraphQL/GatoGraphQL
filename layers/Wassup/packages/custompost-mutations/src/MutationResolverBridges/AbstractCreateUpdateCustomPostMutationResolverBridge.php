@@ -41,7 +41,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    protected function modifyDataProperties(array &$data_properties, string | int $result_id): void
+    protected function modifyDataProperties(array &$data_properties, string|int $result_id): void
     {
         parent::modifyDataProperties($data_properties, $result_id);
 
@@ -55,7 +55,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     /**
      * The ID comes directly as a parameter in the request, it's not a form field
      */
-    protected function getUpdateCustomPostID(): string | int | null
+    protected function getUpdateCustomPostID(): string|int|null
     {
         return App::request(InputNames::POST_ID) ?? App::query(InputNames::POST_ID);
     }
@@ -181,7 +181,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return null;
     }
 
-    public function getSuccessString(string | int $result_id): ?string
+    public function getSuccessString(string|int $result_id): ?string
     {
         $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
         if ($status == CustomPostStatus::PUBLISH) {

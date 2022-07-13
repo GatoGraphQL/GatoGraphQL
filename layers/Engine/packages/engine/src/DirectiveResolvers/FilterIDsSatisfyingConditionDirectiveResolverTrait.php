@@ -46,7 +46,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         // Calculate the $idFieldSet that must be removed from all the upcoming stages of the pipeline
         $idFieldSetToRemove = array_filter(
             $idFieldSet,
-            fn (int | string $id) => in_array($id, $idsToRemove),
+            fn (int|string $id) => in_array($id, $idsToRemove),
             ARRAY_FILTER_USE_KEY
         );
         $this->removeIDFieldSet(

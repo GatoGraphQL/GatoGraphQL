@@ -41,7 +41,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->__('Representation of a user', 'users');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         $user = $object;
         return $this->getUserTypeAPI()->getUserID($user);

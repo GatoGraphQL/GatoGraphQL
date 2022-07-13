@@ -232,7 +232,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         // }
     }
 
-    protected function additionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::additionals($customPostID, $fieldDataAccessor);
 
@@ -321,7 +321,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $this->maybeAddParentCategories($cats);
     }
 
-    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataAccessor, int | string $customPostID): void
+    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataAccessor, int|string $customPostID): void
     {
         parent::createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
@@ -330,7 +330,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
-    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getUpdateCustomPostDataLog(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $log = parent::getUpdateCustomPostDataLog($customPostID, $fieldDataAccessor);
 

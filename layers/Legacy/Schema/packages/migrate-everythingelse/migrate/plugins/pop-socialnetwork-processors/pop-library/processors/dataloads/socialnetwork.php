@@ -110,7 +110,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $ret;
     }
 
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string|int|array
     {
         // All of these modules require the user to be logged in
         if (!\PoP\Root\App::getState('is-user-logged-in')) {

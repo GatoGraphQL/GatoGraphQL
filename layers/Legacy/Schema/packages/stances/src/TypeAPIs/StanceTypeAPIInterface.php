@@ -12,7 +12,7 @@ interface StanceTypeAPIInterface
     /**
      * Return the stance's ID
      */
-    public function getID(object $stance): string | int;
+    public function getID(object $stance): string|int;
     /**
      * Indicates if the passed object is of type Stance
      */
@@ -20,9 +20,9 @@ interface StanceTypeAPIInterface
     /**
      * Get the stance with provided ID or, if it doesn't exist, null
      */
-    public function getStance(int | string $id): ?object;
+    public function getStance(int|string $id): ?object;
     /**
      * Indicate if an stance with provided ID exists
      */
-    public function stanceExists(int | string $id): bool;
+    public function stanceExists(int|string $id): bool;
 }

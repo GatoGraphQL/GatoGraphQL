@@ -31,7 +31,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
         return $this->__('Representation of a GraphQL type\'s field', 'graphql-server');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         /** @var Field */
         $field = $object;

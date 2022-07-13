@@ -23,7 +23,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      *
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it (for the UnionTypeResolver)
      */
-    public function getID(object $object): string | int | null;
+    public function getID(object $object): string|int|null;
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface;
     /**
      * @return InterfaceTypeResolverInterface[]
@@ -33,7 +33,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @param string|int|array<string|int> $objectIDOrIDs
      * @return string|int|array<string|int>
      */
-    public function getQualifiedDBObjectIDOrIDs(string | int | array $objectIDOrIDs): string | int | array;
+    public function getQualifiedDBObjectIDOrIDs(string|int|array $objectIDOrIDs): string|int|array;
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */

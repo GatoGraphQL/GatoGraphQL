@@ -213,7 +213,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return $ret;
     }
 
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string|int|array
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:

@@ -24,7 +24,7 @@ class GenerateSystemMutationResolverBridge extends AbstractSystemComponentMutati
     {
         return $this->getGenerateSystemMutationResolver();
     }
-    public function getSuccessString(string | int $result_id): ?string
+    public function getSuccessString(string|int $result_id): ?string
     {
         return $this->__('System action "generate" executed successfully.', 'pop-system');
     }

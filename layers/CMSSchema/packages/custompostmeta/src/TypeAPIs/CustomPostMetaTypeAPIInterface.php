@@ -18,5 +18,5 @@ interface CustomPostMetaTypeAPIInterface extends MetaTypeAPIInterface
      * @param array<string,mixed> $options
      * @throws MetaKeyNotAllowedException
      */
-    public function getCustomPostMeta(string | int $customPostID, string $key, bool $single = false, array $options = []): mixed;
+    public function getCustomPostMeta(string|int $customPostID, string $key, bool $single = false, array $options = []): mixed;
 }

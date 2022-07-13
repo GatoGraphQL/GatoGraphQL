@@ -45,7 +45,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
      * @return string|int the ID of the created custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    public function createCustomPost(array $data): string | int
+    public function createCustomPost(array $data): string|int
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
@@ -67,7 +67,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
      * @return string|int the ID of the updated custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    public function updateCustomPost(array $data): string | int
+    public function updateCustomPost(array $data): string|int
     {
         // Convert the parameters
         $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
@@ -84,7 +84,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         return $postID;
     }
 
-    public function canUserEditCustomPost(string | int $userID, string | int $customPostID): bool
+    public function canUserEditCustomPost(string|int $userID, string|int $customPostID): bool
     {
         return \user_can($userID, 'edit_post', $customPostID);
     }

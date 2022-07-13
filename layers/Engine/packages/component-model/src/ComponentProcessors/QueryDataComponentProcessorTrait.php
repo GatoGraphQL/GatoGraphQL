@@ -84,7 +84,7 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
     {
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;

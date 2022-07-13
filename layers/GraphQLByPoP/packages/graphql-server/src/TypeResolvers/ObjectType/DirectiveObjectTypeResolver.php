@@ -31,7 +31,7 @@ class DirectiveObjectTypeResolver extends AbstractIntrospectionObjectTypeResolve
         return $this->__('A GraphQL directive in the data graph', 'graphql-server');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         /** @var Directive */
         $directive = $object;

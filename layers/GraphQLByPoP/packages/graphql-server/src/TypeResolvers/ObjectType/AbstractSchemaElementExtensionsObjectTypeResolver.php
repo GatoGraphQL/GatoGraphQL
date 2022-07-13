@@ -38,7 +38,7 @@ abstract class AbstractSchemaElementExtensionsObjectTypeResolver extends Abstrac
     }
     abstract protected function getIntrospectionTypeName(): string;
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         /** @var SchemaDefinitionReferenceObjectInterface $object */
         return $object->getID();

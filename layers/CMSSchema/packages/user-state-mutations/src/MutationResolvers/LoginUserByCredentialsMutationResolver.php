@@ -80,7 +80,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function getUserAlreadyLoggedInError(string | int $user_id): FeedbackItemResolution
+    protected function getUserAlreadyLoggedInError(string|int $user_id): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,

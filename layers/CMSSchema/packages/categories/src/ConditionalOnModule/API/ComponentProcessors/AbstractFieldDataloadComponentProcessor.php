@@ -39,7 +39,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         );
     }
 
-    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY:

@@ -56,7 +56,7 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
     {
         $user_id = App::getState('current-user-id');
         $target_id = $fieldDataAccessor->getValue('target_id');

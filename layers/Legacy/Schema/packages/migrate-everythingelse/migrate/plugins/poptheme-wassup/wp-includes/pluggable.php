@@ -47,7 +47,7 @@ endif;
 //  * @since 2.0.3
 //  *
 //  * @param string $nonce Nonce that was used in the form to verify
-//  * @param string | int $action Should give context to what is taking place and be the same when nonce was created.
+//  * @param string|int $action Should give context to what is taking place and be the same when nonce was created.
 //  * @return bool Whether the nonce check passed or failed.
 //  */
 // function wp_verify_nonce($nonce, $action = -1) {
@@ -85,7 +85,7 @@ endif;
 //  *
 //  * @since 2.0.3
 //  *
-//  * @param string | int $action Scalar value to add context to the nonce.
+//  * @param string|int $action Scalar value to add context to the nonce.
 //  * @return string The one use form token
 //  */
 // function wp_create_nonce($action = -1) {
@@ -118,7 +118,7 @@ if (!function_exists('wp_verify_nonce')) :
      * @since 2.0.3
      *
      * @param  string     $nonce  Nonce that was used in the form to verify
-     * @param  string | int $action Should give context to what is taking place and be the same when nonce was created.
+     * @param  string|int $action Should give context to what is taking place and be the same when nonce was created.
      * @return false|int False if the nonce is invalid, 1 if the nonce is valid and generated between
      *                   0-12 hours ago, 2 if the nonce is valid and generated between 12-24 hours ago.
      */
@@ -166,7 +166,7 @@ if (!function_exists('wp_verify_nonce')) :
          * @since 4.4.0
          *
          * @param string     $nonce  The invalid nonce.
-         * @param string | int $action The nonce action.
+         * @param string|int $action The nonce action.
          * @param WP_User    $user   The current user object.
          * @param string     $token  The user's session token.
          */
@@ -185,7 +185,7 @@ if (!function_exists('wp_create_nonce')) :
      * @since 2.0.3
      * @since 4.0.0 Session tokens were integrated with nonce creation
      *
-     * @param  string | int $action Scalar value to add context to the nonce.
+     * @param  string|int $action Scalar value to add context to the nonce.
      * @return string The token.
      */
     function wp_create_nonce($action = -1)

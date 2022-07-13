@@ -12,7 +12,7 @@ interface CustomPostTypeAPIInterface
     /**
      * Return the object's ID
      */
-    public function getID(object $customPostObject): string | int;
+    public function getID(object $customPostObject): string|int;
     public function getContent(string|int|object $customPostObjectOrID): ?string;
     public function getRawContent(string|int|object $customPostObjectOrID): ?string;
     public function getPermalink(string|int|object $customPostObjectOrID): ?string;
@@ -26,7 +26,7 @@ interface CustomPostTypeAPIInterface
     /**
      * Get the custom post with provided ID or, if it doesn't exist, null
      */
-    public function getCustomPost(int | string $id): ?object;
+    public function getCustomPost(int|string $id): ?object;
     public function getCustomPostType(string|int|object $objectOrID): string;
     /**
      * If param "status" in $query is not passed, it defaults to "publish"

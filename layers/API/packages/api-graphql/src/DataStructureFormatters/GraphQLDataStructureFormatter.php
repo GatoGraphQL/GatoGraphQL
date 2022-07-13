@@ -139,7 +139,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
-    protected function getObjectEntry(string $typeOutputKey, string | int $id, array $item): array
+    protected function getObjectEntry(string $typeOutputKey, string|int $id, array $item): array
     {
         $entry = [];
         if ($message = $item[Tokens::MESSAGE] ?? null) {
@@ -159,7 +159,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
-    protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
+    protected function getObjectEntryExtensions(string $typeOutputKey, int|string $id, array $item): array
     {
         $extensions = [
             'type' => $typeOutputKey,

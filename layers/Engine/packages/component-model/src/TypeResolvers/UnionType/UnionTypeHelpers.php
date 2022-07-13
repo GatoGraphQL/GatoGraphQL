@@ -32,7 +32,7 @@ class UnionTypeHelpers
     /**
      * Extracts the ID from the object ID
      */
-    public static function extractDBObjectID(string $composedDBObjectTypeAndID): string | int
+    public static function extractDBObjectID(string $composedDBObjectTypeAndID): string|int
     {
         $elements = explode(
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR,
@@ -46,7 +46,7 @@ class UnionTypeHelpers
     /**
      * Creates a composed string containing the type and ID of the resolvedObject
      */
-    public static function getObjectComposedTypeAndID(RelationalTypeResolverInterface $relationalTypeResolver, int | string $id): string
+    public static function getObjectComposedTypeAndID(RelationalTypeResolverInterface $relationalTypeResolver, int|string $id): string
     {
         return
             $relationalTypeResolver->getTypeOutputKey() .

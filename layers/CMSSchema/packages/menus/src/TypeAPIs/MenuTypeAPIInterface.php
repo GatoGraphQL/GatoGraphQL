@@ -11,13 +11,13 @@ use PoPCMSSchema\Menus\ObjectModels\MenuItem;
  */
 interface MenuTypeAPIInterface
 {
-    public function getMenu(string | int $menuID): ?object;
+    public function getMenu(string|int $menuID): ?object;
     /**
      * @return MenuItem[]
      */
     public function getMenuItems(string|int|object $menuObjectOrID): array;
-    public function getMenuID(object $menu): string | int;
-    public function getMenuIDFromMenuName(string $menuName): string | int | null;
+    public function getMenuID(object $menu): string|int;
+    public function getMenuIDFromMenuName(string $menuName): string|int|null;
     /**
      * @param array<string, mixed> $query
      * @param array<string, mixed> $options

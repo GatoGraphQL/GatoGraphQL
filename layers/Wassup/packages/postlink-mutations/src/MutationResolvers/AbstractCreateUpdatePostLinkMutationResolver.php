@@ -25,7 +25,7 @@ abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCrea
         MutationResolverUtils::validateContent($errors, $fieldDataAccessor);
     }
 
-    protected function additionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(string|int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::additionals($post_id, $fieldDataAccessor);
 

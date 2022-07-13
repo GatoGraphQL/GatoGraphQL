@@ -92,7 +92,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
         parent::initModelProps($component, $props);
     }
 
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string|int|array
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_CONTACTUSER:

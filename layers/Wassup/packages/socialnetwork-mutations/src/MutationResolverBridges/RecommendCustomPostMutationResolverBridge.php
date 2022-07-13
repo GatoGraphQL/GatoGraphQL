@@ -30,7 +30,7 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
         return false;
     }
 
-    public function getSuccessString(string | int $result_id): ?string
+    public function getSuccessString(string|int $result_id): ?string
     {
         return sprintf(
             $this->__('You have recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),

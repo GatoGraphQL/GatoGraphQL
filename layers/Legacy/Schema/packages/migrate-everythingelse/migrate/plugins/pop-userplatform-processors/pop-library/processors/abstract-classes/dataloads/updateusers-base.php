@@ -4,7 +4,7 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_Processor_CreateUpdateUserDataloadsBase
 {
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string|int|array
     {
         return \PoP\Root\App::getState('current-user-id');
     }

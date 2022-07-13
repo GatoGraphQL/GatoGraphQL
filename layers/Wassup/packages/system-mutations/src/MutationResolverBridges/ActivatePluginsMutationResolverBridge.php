@@ -25,7 +25,7 @@ class ActivatePluginsMutationResolverBridge extends AbstractSystemComponentMutat
         return $this->getActivatePluginsMutationResolver();
     }
 
-    public function getSuccessString(string | int $result_ids): ?string
+    public function getSuccessString(string|int $result_ids): ?string
     {
         return $result_ids ? sprintf(
             $this->__('Successfully activated plugins: %s.', 'pop-system-wp'),

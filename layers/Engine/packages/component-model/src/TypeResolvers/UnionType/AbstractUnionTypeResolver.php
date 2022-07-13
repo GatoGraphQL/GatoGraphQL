@@ -81,7 +81,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * @param string|int|array<string|int> $objectIDOrIDs
      * @return string|int|array<string|int>
      */
-    public function getQualifiedDBObjectIDOrIDs(string | int | array $objectIDOrIDs): string | int | array
+    public function getQualifiedDBObjectIDOrIDs(string|int|array $objectIDOrIDs): string|int|array
     {
         $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : [$objectIDOrIDs];
         $objectIDTargetObjectTypeResolvers = $this->getObjectIDTargetTypeResolvers($objectIDs);
@@ -232,7 +232,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      *
      * @return string|int|null the ID of the passed object, or `null` if there is no resolver to handle it
      */
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
         if ($targetObjectTypeResolver === null) {
@@ -364,7 +364,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $objectTypeResolverPickers;
     }
 
-    public function getObjectTypeResolverForObject(string | int $objectID): ?ObjectTypeResolverInterface
+    public function getObjectTypeResolverForObject(string|int $objectID): ?ObjectTypeResolverInterface
     {
         // Among all registered fieldresolvers, check if any is able to process the object, through function `process`
         // Important: iterate from back to front, because more general components (eg: Users) are defined first,
@@ -408,7 +408,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
+    protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string|int $objectID): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             ErrorFeedbackItemProvider::class,

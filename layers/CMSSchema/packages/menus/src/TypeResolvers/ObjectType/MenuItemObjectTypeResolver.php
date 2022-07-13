@@ -32,7 +32,7 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->__('Items (links, pages, etc) added to a menu', 'menus');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         /** @var MenuItem */
         $menuItem = $object;

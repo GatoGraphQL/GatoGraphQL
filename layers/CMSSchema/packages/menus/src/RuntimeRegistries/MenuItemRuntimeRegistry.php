@@ -24,13 +24,13 @@ class MenuItemRuntimeRegistry implements MenuItemRuntimeRegistryInterface
         }
     }
 
-    public function getMenuItem(string | int $id): ?MenuItem
+    public function getMenuItem(string|int $id): ?MenuItem
     {
         return $this->menuItems[$id] ?? null;
     }
 
     /** @return array<string|int,MenuItem> */
-    public function getMenuItemChildren(string | int $id): array
+    public function getMenuItemChildren(string|int $id): array
     {
         return $this->menuItemsByParent[$id] ?? [];
     }

@@ -40,7 +40,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         return $this->__('Highlight', 'poptheme-wassup');
     }
 
-    public function getSuccessString(string | int $result_id): ?string
+    public function getSuccessString(string|int $result_id): ?string
     {
         $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
         if ($status == CustomPostStatus::PUBLISH) {

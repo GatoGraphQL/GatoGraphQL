@@ -35,7 +35,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeSetCategories(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    public function maybeSetCategories(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Only for that specific CPT
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {

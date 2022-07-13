@@ -145,7 +145,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     //     return $post_data;
     // }
 
-    protected function createAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function createAdditionals(string|int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::createAdditionals($post_id, $fieldDataAccessor);
 
@@ -157,7 +157,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $fieldDataAccessor);
     }
 
-    protected function updateAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
+    protected function updateAdditionals(string|int $post_id, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
         parent::updateAdditionals($post_id, $fieldDataAccessor, $log);
 

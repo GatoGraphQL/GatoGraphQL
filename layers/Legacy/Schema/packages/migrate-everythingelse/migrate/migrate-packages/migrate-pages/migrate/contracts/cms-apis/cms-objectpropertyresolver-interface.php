@@ -8,5 +8,5 @@ interface ObjectPropertyResolver
      * Get the ID of the static page for the homepage
      * Returns an ID (int? string?) or null
      */
-    public function getHomeStaticPageID(): string | int;
+    public function getHomeStaticPageID(): string|int;
 }

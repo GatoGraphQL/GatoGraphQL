@@ -41,7 +41,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
         return false;
     }
 
-    public function getSuccessString(string | int $result_id): ?string
+    public function getSuccessString(string|int $result_id): ?string
     {
         $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $tag = $this->getPostTagTypeAPI()->getTag($result_id);

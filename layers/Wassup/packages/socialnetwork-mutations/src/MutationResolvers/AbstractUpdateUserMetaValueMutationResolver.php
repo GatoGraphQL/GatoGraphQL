@@ -40,7 +40,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
     {
         $target_id = $fieldDataAccessor->getValue('target_id');
         return $target_id;

@@ -32,7 +32,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->__('User avatar', 'user-avatars');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         /** @var UserAvatar */
         $userAvatar = $object;

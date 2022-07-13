@@ -16,7 +16,7 @@ class UserAvatarRuntimeRegistry implements UserAvatarRuntimeRegistryInterface
         $this->userAvatars[$userAvatar->id] = $userAvatar;
     }
 
-    public function getUserAvatar(string | int $id): ?UserAvatar
+    public function getUserAvatar(string|int $id): ?UserAvatar
     {
         return $this->userAvatars[$id] ?? null;
     }

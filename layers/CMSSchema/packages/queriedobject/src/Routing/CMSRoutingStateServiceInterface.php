@@ -14,5 +14,5 @@ interface CMSRoutingStateServiceInterface
     /**
      * Get the ID of the currently queried object
      */
-    public function getQueriedObjectId(): string | int | null;
+    public function getQueriedObjectId(): string|int|null;
 }

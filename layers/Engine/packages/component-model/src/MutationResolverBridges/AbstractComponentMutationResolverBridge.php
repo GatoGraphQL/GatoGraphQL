@@ -37,7 +37,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function getSuccessString(string | int $resultID): ?string
+    public function getSuccessString(string|int $resultID): ?string
     {
         return null;
     }
@@ -45,7 +45,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     /**
      * @return string[]
      */
-    public function getSuccessStrings(string | int $resultID): array
+    public function getSuccessStrings(string|int $resultID): array
     {
         $success_string = $this->getSuccessString($resultID);
         return $success_string !== null ? [$success_string] : [];
@@ -169,7 +169,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $fieldDataAccessorForMutation;
     }
 
-    protected function modifyDataProperties(array &$data_properties, string | int $resultID): void
+    protected function modifyDataProperties(array &$data_properties, string|int $resultID): void
     {
     }
 }

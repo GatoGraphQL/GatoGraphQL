@@ -35,7 +35,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     /**
      * Return the post's ID
      */
-    public function getID(object $customPost): string | int
+    public function getID(object $customPost): string|int
     {
         return $customPost->ID;
     }
@@ -374,7 +374,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     /**
      * Get the post with provided ID or, if it doesn't exist, null
      */
-    public function getCustomPost(int | string $id): ?object
+    public function getCustomPost(int|string $id): ?object
     {
         return get_post($id);
     }

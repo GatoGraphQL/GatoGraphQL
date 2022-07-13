@@ -21,7 +21,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    public function getMenu(string | int $menuID): ?object
+    public function getMenu(string|int $menuID): ?object
     {
         $object = wp_get_nav_menu_object($menuID);
         // If the object is not found, it returns `false`. Return `null` instead
@@ -61,12 +61,12 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         );
     }
 
-    public function getMenuID(object $menu): string | int
+    public function getMenuID(object $menu): string|int
     {
         return $menu->term_id;
     }
 
-    public function getMenuIDFromMenuName(string $menuName): string | int | null
+    public function getMenuIDFromMenuName(string $menuName): string|int|null
     {
         if ($menuObject = $this->getMenuObject($menuName)) {
             return $menuObject->term_id;

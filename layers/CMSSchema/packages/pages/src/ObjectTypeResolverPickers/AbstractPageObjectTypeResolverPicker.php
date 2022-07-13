@@ -41,7 +41,7 @@ abstract class AbstractPageObjectTypeResolverPicker extends AbstractObjectTypeRe
         return $this->getPageTypeAPI()->isInstanceOfPageType($object);
     }
 
-    public function isIDOfType(string | int $objectID): bool
+    public function isIDOfType(string|int $objectID): bool
     {
         return $this->getPageTypeAPI()->pageExists($objectID);
     }

@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
         return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
     }
 
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string|int|array
     {
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
         if ($menuName = $query_args['menu']) {

@@ -48,7 +48,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string|int|array
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:

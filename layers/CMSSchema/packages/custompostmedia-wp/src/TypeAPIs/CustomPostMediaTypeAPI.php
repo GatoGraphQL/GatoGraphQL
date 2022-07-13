@@ -14,12 +14,12 @@ use function has_post_thumbnail;
  */
 class CustomPostMediaTypeAPI implements CustomPostMediaTypeAPIInterface
 {
-    public function hasCustomPostThumbnail(string | int $post_id): bool
+    public function hasCustomPostThumbnail(string|int $post_id): bool
     {
         return has_post_thumbnail($post_id);
     }
 
-    public function getCustomPostThumbnailID(string | int $post_id): string | int | null
+    public function getCustomPostThumbnailID(string|int $post_id): string|int|null
     {
         if ($id = get_post_thumbnail_id($post_id)) {
             return (int)$id;

@@ -18,11 +18,11 @@ interface PostTypeAPIInterface extends CustomPostTypeAPIInterface
     /**
      * Indicate if an post with provided ID exists
      */
-    public function postExists(int | string $id): bool;
+    public function postExists(int|string $id): bool;
     /**
      * Get the post with provided ID or, if it doesn't exist, null
      */
-    public function getPost(int | string $id): ?object;
+    public function getPost(int|string $id): ?object;
     /**
      * Get the list of posts.
      * If param "status" in $query is not passed, it defaults to "publish"

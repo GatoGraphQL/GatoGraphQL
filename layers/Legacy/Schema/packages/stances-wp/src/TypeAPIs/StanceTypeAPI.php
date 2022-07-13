@@ -17,7 +17,7 @@ class StanceTypeAPI implements StanceTypeAPIInterface
     /**
      * Return the post's ID
      */
-    public function getID(object $post): string | int
+    public function getID(object $post): string|int
     {
         return $post->ID;
     }
@@ -33,7 +33,7 @@ class StanceTypeAPI implements StanceTypeAPIInterface
     /**
      * Get the stance with provided ID or, if it doesn't exist, null
      */
-    public function getStance(int | string $id): ?object
+    public function getStance(int|string $id): ?object
     {
         $post = get_post($id);
         if (!$post || $post->post_type !== \POP_USERSTANCE_POSTTYPE_USERSTANCE) {
@@ -45,7 +45,7 @@ class StanceTypeAPI implements StanceTypeAPIInterface
     /**
      * Indicate if an stance with provided ID exists
      */
-    public function stanceExists(int | string $id): bool
+    public function stanceExists(int|string $id): bool
     {
         return $this->getStance($id) !== null;
     }

@@ -366,7 +366,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the updated entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
     {
         // Do the Post update
         $user_id = $this->updateuser($fieldDataAccessor);
@@ -386,7 +386,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string | int {
+    ): string|int {
         $user_id = $this->createuser($fieldDataAccessor);
 
         // Allow for additional operations (eg: set Action categories)

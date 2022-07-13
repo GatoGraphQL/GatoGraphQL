@@ -41,7 +41,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         ];
     }
 
-    protected function getTerm(string | int $termObjectID, string $taxonomy = ''): ?WP_Term
+    protected function getTerm(string|int $termObjectID, string $taxonomy = ''): ?WP_Term
     {
         $term = get_term($termObjectID, $taxonomy);
         if ($term instanceof WP_Error) {

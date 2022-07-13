@@ -37,7 +37,7 @@ class MutationResolverHookSet extends AbstractHookSet
     /**
      * If entry "featuredImageID" has an ID, set it. If it is null, remove it
      */
-    public function setOrRemoveFeaturedImage(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    public function setOrRemoveFeaturedImage(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         if (!$fieldDataAccessor->hasValue(MutationInputProperties::FEATUREDIMAGE_ID)) {
             return;

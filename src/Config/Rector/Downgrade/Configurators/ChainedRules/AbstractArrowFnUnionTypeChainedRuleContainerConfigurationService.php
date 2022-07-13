@@ -9,9 +9,9 @@ use Rector\DowngradePhp80\Rector\FunctionLike\DowngradeUnionTypeDeclarationRecto
 /**
  * Hack to fix bug.
  *
- * `fn(int | string $foo)` requires 2 steps to be downgraded:
+ * `fn(int|string $foo)` requires 2 steps to be downgraded:
  *
- *   1. function(int | string $foo)
+ *   1. function(int|string $foo)
  *   2. function($foo)
  *
  * Because of chained rules not taking place, manually execute the 2nd rule

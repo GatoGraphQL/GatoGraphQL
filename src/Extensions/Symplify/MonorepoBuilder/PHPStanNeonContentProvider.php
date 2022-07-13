@@ -34,7 +34,7 @@ final class PHPStanNeonContentProvider
     /**
      * Merge all common includes together, and all paths to package configs
      */
-    public function provideContent(array $packagesToSkip = [], string | int $level = 'max'): string
+    public function provideContent(array $packagesToSkip = [], string|int $level = 'max'): string
     {
         $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages(true, $packagesToSkip);
 

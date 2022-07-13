@@ -26,7 +26,7 @@ trait UpdateCustomPostMutationResolverTrait
      */
     abstract protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string | int;
+    ): string|int;
 
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,

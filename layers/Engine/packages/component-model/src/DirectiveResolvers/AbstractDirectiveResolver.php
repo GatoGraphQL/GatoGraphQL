@@ -648,7 +648,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return mixed[]
      */
-    protected function getExpressionsForObject(int | string $id, array $variables, array $messages): array
+    protected function getExpressionsForObject(int|string $id, array $variables, array $messages): array
     {
         // Create a custom $variables containing all the properties from $resolvedIDFieldValues for this object
         // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
@@ -704,7 +704,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @return mixed[]
      */
-    protected function getExpressionsForObjectAndField(int | string $id, FieldInterface $field, array $variables, array $messages): array
+    protected function getExpressionsForObjectAndField(int|string $id, FieldInterface $field, array $variables, array $messages): array
     {
         return array_merge(
             $this->getExpressionsForObject($id, $variables, $messages),
@@ -712,23 +712,23 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         );
     }
 
-    protected function addExpressionForObject(int | string $id, string $key, mixed $value, array &$messages): void
+    protected function addExpressionForObject(int|string $id, string $key, mixed $value, array &$messages): void
     {
         $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] = $value;
     }
 
-    protected function addExpressionForObjectAndField(int | string $id, FieldInterface $field, string $key, mixed $value, array &$messages): void
+    protected function addExpressionForObjectAndField(int|string $id, FieldInterface $field, string $key, mixed $value, array &$messages): void
     {
         $this->addExpressionForObject($id, $key, $value, $messages);
         $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()][$key] = $value;
     }
 
-    protected function getExpressionForObject(int | string $id, string $key, array $messages): mixed
+    protected function getExpressionForObject(int|string $id, string $key, array $messages): mixed
     {
         return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] ?? null;
     }
 
-    protected function getExpressionForObjectAndField(int | string $id, FieldInterface $field, string $key, array $messages): mixed
+    protected function getExpressionForObjectAndField(int|string $id, FieldInterface $field, string $key, array $messages): mixed
     {
         return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()][$key] ?? $this->getExpressionForObject($id, $key, $messages);
     }

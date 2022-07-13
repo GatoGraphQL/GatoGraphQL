@@ -26,7 +26,7 @@ trait CreateCustomPostMutationResolverTrait
      */
     abstract protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string | int;
+    ): string|int;
 
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,

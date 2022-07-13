@@ -57,7 +57,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return ($object instanceof WP_Taxonomy) && $object->hierarchical;
     }
 
-    public function getCategoryID(object $cat): string | int
+    public function getCategoryID(object $cat): string|int
     {
         return $cat->term_id;
     }
@@ -74,13 +74,13 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     {
         return get_term_by('name', $category_name, $this->getCategoryTaxonomyName());
     }
-    public function getCustomPostCategories(string | int $customPostID, array $query = [], array $options = []): array
+    public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
 
         return wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
     }
-    public function getCustomPostCategoryCount(string | int $customPostID, array $query = [], array $options = []): int
+    public function getCustomPostCategoryCount(string|int $customPostID, array $query = [], array $options = []): int
     {
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
@@ -238,7 +238,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $category->name;
     }
 
-    public function getCategoryParentID(string|int|object $catObjectOrID): string | int | null
+    public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         // If it has no parent, it is assigned 0. In that case, return null

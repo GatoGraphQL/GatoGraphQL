@@ -72,7 +72,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         }
     }
 
-    protected function createAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function createAdditionals(string|int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::createAdditionals($post_id, $fieldDataAccessor);
 
@@ -82,7 +82,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         App::doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $fieldDataAccessor);
     }
 
-    protected function updateAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
+    protected function updateAdditionals(string|int $post_id, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
         parent::updateAdditionals($post_id, $fieldDataAccessor, $log);
 

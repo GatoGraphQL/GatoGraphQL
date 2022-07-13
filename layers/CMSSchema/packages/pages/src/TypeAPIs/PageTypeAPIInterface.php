@@ -18,13 +18,13 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
     /**
      * Indicate if an page with provided ID exists
      */
-    public function pageExists(int | string $id): bool;
+    public function pageExists(int|string $id): bool;
     /**
      * Get the page with provided ID or, if it doesn't exist, null
      */
-    public function getPage(int | string $id): ?object;
-    public function getParentPage(int | string | object $pageObjectOrID): ?object;
-    public function getParentPageID(int | string | object $pageObjectOrID): int | string | null;
+    public function getPage(int|string $id): ?object;
+    public function getParentPage(int|string|object $pageObjectOrID): ?object;
+    public function getParentPageID(int|string|object $pageObjectOrID): int|string|null;
     /**
      * Get the list of pages.
      * If param "status" in $query is not passed, it defaults to "publish"
@@ -40,5 +40,5 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      */
     public function getPageCustomPostType(): string;
 
-    public function getPageId(object $page): string | int;
+    public function getPageId(object $page): string|int;
 }

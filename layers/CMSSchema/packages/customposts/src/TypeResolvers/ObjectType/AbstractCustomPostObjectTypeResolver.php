@@ -25,7 +25,7 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
         return $this->__('Representation of a custom post', 'customposts');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         return $this->getCustomPostTypeAPI()->getID($object);
     }

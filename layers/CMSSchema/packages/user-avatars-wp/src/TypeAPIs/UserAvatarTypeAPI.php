@@ -12,7 +12,7 @@ class UserAvatarTypeAPI implements UserAvatarTypeAPIInterface
 {
     use BasicServiceTrait;
 
-    protected function getUserID(string|int|object $userObjectOrID): string | int
+    protected function getUserID(string|int|object $userObjectOrID): string|int
     {
         if (is_object($userObjectOrID)) {
             /** @var WP_User */

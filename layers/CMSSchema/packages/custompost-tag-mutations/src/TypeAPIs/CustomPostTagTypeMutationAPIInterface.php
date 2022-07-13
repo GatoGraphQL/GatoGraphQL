@@ -9,5 +9,5 @@ interface CustomPostTagTypeMutationAPIInterface
     /**
      * @param string[] $tags
      */
-    public function setTags(int | string $postID, array $tags, bool $append = false): void;
+    public function setTags(int|string $postID, array $tags, bool $append = false): void;
 }

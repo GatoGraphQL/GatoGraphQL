@@ -18,7 +18,7 @@ class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
     /**
      * @throws CommentCRUDMutationException In case of error
      */
-    public function insertComment(array $comment_data): string | int
+    public function insertComment(array $comment_data): string|int
     {
         // Convert the parameters
         if (isset($comment_data['userID'])) {

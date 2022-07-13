@@ -181,7 +181,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      */
     private function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string | int $id,
+        string|int $id,
         object $object,
         array $fieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
@@ -213,7 +213,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      */
     private function resolveValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string | int $id,
+        string|int $id,
         object $object,
         FieldInterface $field,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,

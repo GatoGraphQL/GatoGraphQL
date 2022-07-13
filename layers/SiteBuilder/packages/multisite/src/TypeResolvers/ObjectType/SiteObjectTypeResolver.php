@@ -32,7 +32,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
         return $this->__('Obtain properties belonging to the site (name, domain, configuration options, etc)', 'multisite');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         /** @var Site */
         $site = $object;

@@ -16,7 +16,7 @@ abstract class AbstractCategoryObjectTypeResolver extends AbstractTaxonomyObject
         return $this->__('Representation of a category, added to a custom post', 'categories');
     }
 
-    public function getID(object $object): string | int | null
+    public function getID(object $object): string|int|null
     {
         $categoryTypeAPI = $this->getCategoryTypeAPI();
         $category = $object;
