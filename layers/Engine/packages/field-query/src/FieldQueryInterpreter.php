@@ -346,12 +346,4 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $value .
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING;
     }
-
-    protected function getFieldSkipOutputIfNullAsString(?bool $skipOutputIfNull = false): string
-    {
-        if (!$skipOutputIfNull) {
-            return '';
-        }
-        return QuerySyntax::SYMBOL_SKIPOUTPUTIFNULL;
-    }
 }
