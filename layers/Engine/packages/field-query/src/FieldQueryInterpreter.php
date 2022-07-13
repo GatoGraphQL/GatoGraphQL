@@ -12,9 +12,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
     use BasicServiceTrait;
 
-    public final const ALIAS_POSITION_KEY = 'pos';
-    public final const ALIAS_LENGTH_KEY = 'length';
-
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?QueryParserInterface $queryParser = null;
 
