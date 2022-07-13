@@ -145,23 +145,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         );
     }
 
-    public function isFieldArgumentValueAField(mixed $fieldArgValue): bool
-    {
-        // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
-        // then it is a field
-        return
-            !empty($fieldArgValue)
-            && is_string($fieldArgValue)
-            && substr(
-                $fieldArgValue,
-                -1 * strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING)
-            ) == QuerySyntax::SYMBOL_FIELDARGS_CLOSING
-            // Please notice: if position is 0 (i.e. for a string "(something)") then it's not a field,
-            // since the fieldName is missing
-            // Then it's ok asking for strpos: either `false` or `0` must both fail
-            && strpos($fieldArgValue, QuerySyntax::SYMBOL_FIELDARGS_OPENING);
-    }
-
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool
     {
         /**
