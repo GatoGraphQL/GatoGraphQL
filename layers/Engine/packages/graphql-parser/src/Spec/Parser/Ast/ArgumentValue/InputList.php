@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class InputList extends AbstractAst implements CoercibleArgumentValueAstInterface, WithAstValueInterface
+class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
     /** @var mixed[] */
     protected ?array $cachedValue = null;
@@ -66,15 +66,6 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
             $list[$key] = $value;
         }
         return $list;
-    }
-
-    /**
-     * @param array<mixed> $list
-     */
-    public function setValue(mixed $list): void
-    {
-        $this->resetCachedValue();
-        $this->list = $list;
     }
 
     /**
