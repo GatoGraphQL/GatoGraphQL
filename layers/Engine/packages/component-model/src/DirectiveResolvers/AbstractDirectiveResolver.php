@@ -1188,7 +1188,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
              */
-            if ($versionConstraint = $this->directiveArgsForSchema[SchemaDefinition::VERSION_CONSTRAINT] ?? null) {
+            if ($versionConstraint = $this->directiveArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null) {
                 /**
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */
