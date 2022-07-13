@@ -199,22 +199,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             && !$this->isFieldArgumentValueAnExpression($fieldArgValue);
     }
 
-    protected function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool
-    {
-        // If it starts with "[" and finishes with "]"
-        return
-            is_string($fieldArgValue)
-            && substr(
-                $fieldArgValue,
-                0,
-                strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING)
-            ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING
-            && substr(
-                $fieldArgValue,
-                -1 * strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING)
-            ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING;
-    }
-
     protected function isFieldArgumentValueAnObjectRepresentedAsString(mixed $fieldArgValue): bool
     {
         // If it starts with "{" and finishes with "}"
