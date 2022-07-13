@@ -363,6 +363,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolver->prepareDirective(
                 $this,
                 $directiveResolverFields,
+                $variables,
                 $engineIterationFeedbackStore,
             );
             

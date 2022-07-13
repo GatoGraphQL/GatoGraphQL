@@ -42,15 +42,18 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
      * If it has nestedDirectives, extract them and validate them
      *
      * @param FieldInterface[] $fields
+     * @param array<string,mixed> $variables
      */
     public function prepareDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
+        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         parent::prepareDirective(
             $relationalTypeResolver,
             $fields,
+            $variables,
             $engineIterationFeedbackStore,
         );
         if ($this->hasValidationErrors) {
