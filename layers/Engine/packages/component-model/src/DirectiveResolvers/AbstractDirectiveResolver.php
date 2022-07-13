@@ -642,17 +642,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Custom validations. Function to override
-     *
-     * @return FeedbackItemResolution[] Errors
-     */
-    protected function doResolveSchemaValidationErrors(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-    ): array {
-        return [];
-    }
-
-    /**
      * Combine the directiveArgs with the object's expressions
      *
      * @param array<string,mixed> $expressions
