@@ -10,7 +10,11 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "roles",
+                "field": "roles { ... }",
+                "path": [
+                    "roles { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         }
