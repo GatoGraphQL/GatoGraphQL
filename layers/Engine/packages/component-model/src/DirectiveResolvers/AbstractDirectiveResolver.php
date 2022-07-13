@@ -24,7 +24,6 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
-use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
@@ -78,9 +77,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected array $schemaDirectiveArgsCache = [];
 
     /**
+     * To be set only if there were no validation errors.
+     *
      * @var array<string,mixed>
      */
-    protected array $directiveData;
+    protected array $directiveArgs;
     protected bool $hasValidationErrors;
     
     /**
@@ -239,7 +240,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $this->setHasValidationErrors(true);
             return;
         }
-        $this->directiveData = $directiveData;
+        $this->directiveArgs = $directiveData;
     }
 
     /**
