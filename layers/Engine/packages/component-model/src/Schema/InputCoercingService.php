@@ -43,51 +43,6 @@ class InputCoercingService implements InputCoercingServiceInterface
      *
      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
      */
-    public function maybeConvertInputValueASTFromSingleToList(
-        WithValueInterface $inputValueAST,
-        bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType,
-    ): WithValueInterface {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (
-            $inputValueAST instanceof InputList
-            || !$moduleConfiguration->convertInputValueFromSingleToList()
-        ) {
-            return $inputValueAST;
-        }
-        if ($inputIsArrayOfArraysType) {
-            return new InputList(
-                [
-                    new InputList(
-                        [
-                            $inputValueAST,
-                        ],
-                        $inputValueAST->getLocation()
-                    ),
-                ],
-                $inputValueAST->getLocation()
-            );
-        }
-        if ($inputIsArrayType) {
-            return new InputList(
-                [
-                    $inputValueAST,
-                ],
-                $inputValueAST->getLocation()
-            );
-        }
-        return $inputValueAST;
-    }
-
-    /**
-     * Support passing a single value where a list is expected:
-     * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
-     *
-     * Defined in the GraphQL spec.
-     *
-     * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
-     */
     public function maybeConvertInputValueFromSingleToList(
         mixed $inputValue,
         bool $inputIsArrayType,
