@@ -140,29 +140,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
     }
 
-    protected function castDirectiveArguments(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directive,
-        array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        bool $forSchema
-    ): array {
-        $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
-        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $castDirectiveArguments = $this->castFieldOrDirectiveArguments(
-            $relationalTypeResolver,
-            $directiveArgs,
-            $directiveArgSchemaDefinition,
-            $objectTypeFieldResolutionFeedbackStore,
-            $forSchema
-        );
-        $objectTypeFieldResolutionFeedbackStore->incorporate(
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        return $castDirectiveArguments;
-    }
-
     protected function castFieldOrDirectiveArguments(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldOrDirectiveArgs,
