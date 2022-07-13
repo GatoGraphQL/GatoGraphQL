@@ -1538,21 +1538,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $mandatoryFieldArgNames,
             fn (string $fieldArgName) => ($fieldData[$fieldArgName] ?? null) === null
         ));
-        if ($missingMandatoryFieldArgNames !== []) {
+        foreach ($missingMandatoryFieldArgNames as $missingMandatoryFieldArgName) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E29,
                         [
-                            count($missingMandatoryFieldArgNames) === 1
-                                ? $missingMandatoryFieldArgNames[0]
-                                : implode($this->getTranslationAPI()->__('\', \''), $missingMandatoryFieldArgNames),
+                            $missingMandatoryFieldArgName,
                             $field->getName(),
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    $field,
+                    $field->getArgument($missingMandatoryFieldArgName) ?? $field,
                 )
             );
         }

@@ -308,6 +308,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->validateDirectiveData(
             $directiveData,
             $relationalTypeResolver,
+            $fields,
             $separateEngineIterationFeedbackStore,
         );
         $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
@@ -322,10 +323,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Validate the field data
      *
      * @param array<string,mixed> $directiveData
+     * @param FieldInterface[] $fields
      */
     protected function validateDirectiveData(
         array $directiveData,
         RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         /** @var array */
@@ -341,6 +344,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->validateNonMissingMandatoryDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
+            $relationalTypeResolver,
+            $fields,
             $engineIterationFeedbackStore,
         );
         $this->validateOnlyExistingFieldArguments(
@@ -398,32 +403,34 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *   Eg: `{ id @skip(if: "") }` <= will be coerced to `false`
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
+     * @param FieldInterface[] $fields
      */
     private function validateNonMissingMandatoryDirectiveArguments(
         array $directiveData,
         array $directiveArgsSchemaDefinition,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $mandatoryFieldArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($directiveArgsSchemaDefinition);
-        $missingMandatoryFieldArgNames = array_values(array_filter(
-            $mandatoryFieldArgNames,
-            fn (string $fieldArgName) => ($directiveData[$fieldArgName] ?? null) === null
+        $mandatoryDirectiveArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($directiveArgsSchemaDefinition);
+        $missingMandatoryDirectiveArgNames = array_values(array_filter(
+            $mandatoryDirectiveArgNames,
+            fn (string $directiveArgName) => ($directiveData[$directiveArgName] ?? null) === null
         ));
-        if ($missingMandatoryFieldArgNames !== []) {
+        foreach ($missingMandatoryDirectiveArgNames as $missingMandatoryDirectiveArgName) {
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E29,
+                        ErrorFeedbackItemProvider::E30,
                         [
-                            count($missingMandatoryFieldArgNames) === 1
-                                ? $missingMandatoryFieldArgNames[0]
-                                : implode($this->getTranslationAPI()->__('\', \''), $missingMandatoryFieldArgNames),
+                            $missingMandatoryDirectiveArgName,
                             $this->directive->getName(),
-                            $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    $field,
+                    $this->directive->getArgument($missingMandatoryDirectiveArgName) ?? $this->directive,
+                    $relationalTypeResolver,
+                    $fields,
                 )
             );
         }
