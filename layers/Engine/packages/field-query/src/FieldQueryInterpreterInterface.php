@@ -21,10 +21,5 @@ interface FieldQueryInterpreterInterface
      * @return array<string, int>|null
      */
     public function getFieldAliasPositionSpanInField(string $field): ?array;
-    /**
-     * @param array<string, mixed> $fieldArgValue
-     */
-    public function getArrayAsStringForQuery(array $fieldArgValue): string;
-    public function getObjectAsStringForQuery(stdClass $fieldArgValue): string;
     public function wrapStringInQuotes(string $value): string;
 }
