@@ -218,8 +218,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $fields,
             $engineIterationFeedbackStore,
         );
+        $this->setHasValidationErrors($directiveData === null);
         if ($directiveData === null) {
-            $this->setHasValidationErrors(true);
             return;
         }
         $this->directiveArgs = $directiveData;
