@@ -15,19 +15,6 @@ use SplObjectStorage;
 
 interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterInterface
 {
-    /**
-     * @param FieldInterface[] $fields
-     */
-    public function extractDirectiveArgumentsForObject(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        object $object,
-        array $fields,
-        Directive $directive,
-        array $variables,
-        array $expressions,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array;
     public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed;
     public function maybeConvertFieldArgumentArrayOrObjectValue(mixed $fieldArgValue, ?array $variables = null): mixed;
     public function resolveExpression(

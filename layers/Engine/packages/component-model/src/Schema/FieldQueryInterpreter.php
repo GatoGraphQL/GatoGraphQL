@@ -353,61 +353,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldOrDirectiveArgs;
     }
 
-    /**
-     * @param FieldInterface[] $fields
-     */
-    public function extractDirectiveArgumentsForObject(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        object $object,
-        array $fields,
-        Directive $directive,
-        array $variables,
-        array $expressions,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
-        $fieldDirective = $directive->asQueryString();
-        // @todo Temporary hack: remove the leading "@", not expected by PQL
-        $fieldDirective = substr($fieldDirective, 1);
-        $validAndResolvedDirective = $fieldDirective;
-        $directiveName = $directive->getName();
-        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
-            $directiveResolver,
-            $relationalTypeResolver,
-            $fieldDirective,
-            $variables,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        // Only need to extract arguments if they have fields or arrays
-        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
-        // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
-        // Transfer the feedback
-        $objectID = $relationalTypeResolver->getID($object);
-        foreach ($fields as $field) {
-            $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-                $objectTypeFieldResolutionFeedbackStore,
-                $relationalTypeResolver,
-                $directiveResolver->getDirective(),
-                [$objectID => new EngineIterationFieldSet([$field])],
-            );
-        }
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            $validAndResolvedDirective = null;
-        } elseif ($extractedDirectiveArgs !== $directiveArgs) {
-            // There are 2 reasons why the fieldDirective might have changed:
-            // 1. validField: There are $objectWarnings: remove the directiveArgs that failed
-            // 2. resolvedField: Some directiveArg was a variable: replace it with its value
-            $validAndResolvedDirective = $this->replaceFieldArgs($fieldDirective, $directiveArgs);
-        }
-        return [
-            $validAndResolvedDirective,
-            $directiveName,
-            $directiveArgs,
-        ];
-    }
-
     protected function extractFieldOrDirectiveArgumentsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
