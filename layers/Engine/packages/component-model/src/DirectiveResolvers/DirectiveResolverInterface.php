@@ -75,17 +75,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * By default, use the Query type
      */
     public function getDirectiveKind(): string;
-    /**
-     * Extract and validate the directive arguments
-     *
-     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     */
-    public function dissectAndValidateDirectiveForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        SplObjectStorage $directiveFields,
-        array &$variables,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array;
 
     /**
      * Enable the directiveResolver to validate the directive arguments in a custom way

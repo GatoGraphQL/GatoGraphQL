@@ -521,44 +521,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Extract and validate the directive arguments
-     *
-     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     */
-    public function dissectAndValidateDirectiveForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        SplObjectStorage $directiveFields,
-        array &$variables,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
-        // First validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
-        list(
-            $validDirective,
-            $directiveName,
-            $directiveArgs,
-        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForSchema(
-            $this,
-            $relationalTypeResolver,
-            $this->directive,
-            $directiveFields,
-            $variables,
-            $engineIterationFeedbackStore,
-            $this->disableDynamicFieldsFromDirectiveArgs()
-        );
-
-        // Store the args, they may be used in `resolveDirective`
-        if ($directiveArgs !== null) {
-            $this->directiveArgsForSchema = $directiveArgs;
-        }
-
-        return [
-            $validDirective,
-            $directiveName,
-            $directiveArgs,
-        ];
-    }
-
-    /**
      * By default, validate if there are deprecated fields
      *
      * @param FieldInterface[] $fields
