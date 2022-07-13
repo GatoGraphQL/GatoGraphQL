@@ -84,32 +84,6 @@ trait ObjectTypeOrDirectiveResolverTrait
         return $fieldOrDirectiveData;
     }
 
-    /**
-     * @todo Fix integrate with Directive
-     * @todo Replace with addDefaultFieldOrDirectiveArguments
-     * @param array<string,mixed> $argumentNameDefaultValues
-     */
-    final protected function deprecatedIntegrateDefaultFieldOrDirectiveArguments(
-        FieldInterface|Directive $fieldOrDirective,
-        array $argumentNameDefaultValues,
-    ): void {
-        foreach ($argumentNameDefaultValues as $argName => $argValue) {
-            // If the argument does not exist, add a new one
-            if ($fieldOrDirective->hasArgument($argName)) {
-                continue;
-            }
-
-            $directiveArgValueAST = $this->getArgumentValueAsAST($argValue);
-            $fieldOrDirective->addArgument(
-                new Argument(
-                    $argName,
-                    $directiveArgValueAST,
-                    LocationHelper::getNonSpecificLocation()
-                )
-            );
-        }
-    }
-
     final protected function getArgumentValueAsAST(mixed $argumentValue): WithValueInterface
     {
         if (is_array($argumentValue)) {

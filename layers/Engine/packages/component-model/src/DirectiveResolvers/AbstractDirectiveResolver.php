@@ -229,8 +229,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        // @todo Remove commented line
-        // $this->integrateDefaultDirectiveArguments($relationalTypeResolver);
         $this->directiveData = $this->getDirectiveData(
             $relationalTypeResolver,
             $fields,
@@ -486,19 +484,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectTypeFieldResolutionFeedbackStore,
             $relationalTypeResolver,
             $fields,
-        );
-    }
-
-    final protected function integrateDefaultDirectiveArguments(RelationalTypeResolverInterface $relationalTypeResolver): void
-    {
-        $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($relationalTypeResolver);
-        if ($directiveArgumentNameDefaultValues === null) {
-            return;
-        }
-        // @todo Fix integrate with Directive
-        $this->deprecatedIntegrateDefaultFieldOrDirectiveArguments(
-            $this->directive,
-            $directiveArgumentNameDefaultValues,
         );
     }
 
