@@ -35,11 +35,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     private array $directiveSchemaDefinitionArgsCache = [];
 
-    protected function getVariablesHash(?array $variables): string
-    {
-        return (string)hash('crc32', json_encode($variables ?? []));
-    }
-
     /**
      * @return array<string, InputTypeResolverInterface>
      */
