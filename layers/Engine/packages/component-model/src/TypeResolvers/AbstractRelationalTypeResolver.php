@@ -514,10 +514,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveResolver,
                     $directive,
                 );
-                $directiveResolverFields[$uniqueDirectiveResolver] ??= [];
-                $directiveResolverFields[$uniqueDirectiveResolver][] = $field;
-                // As this instance can process the directive and the field, we found it, then end the loop
                 $fieldDirectiveResolvers[$field] = $uniqueDirectiveResolver;
+                
+                // Store the fields to initialize and validate the directive
+                $directiveResolverFieldsUniqueDirectiveResolver = $directiveResolverFields[$uniqueDirectiveResolver] ?? [];
+                $directiveResolverFieldsUniqueDirectiveResolver[] = $field;
+                $directiveResolverFields[$uniqueDirectiveResolver] = $directiveResolverFieldsUniqueDirectiveResolver;
+                
+                // As this instance can process the directive and the field, we found it, then end the loop
                 break;
             }
         }
