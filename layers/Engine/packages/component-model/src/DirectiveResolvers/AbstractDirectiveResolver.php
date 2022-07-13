@@ -87,10 +87,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @var array<string,mixed>
      */
-    protected array $directiveArgsForSchema = [];
-    /**
-     * @var array<string,mixed>
-     */
     protected array $directiveArgsForObjects = [];
 
     /**
