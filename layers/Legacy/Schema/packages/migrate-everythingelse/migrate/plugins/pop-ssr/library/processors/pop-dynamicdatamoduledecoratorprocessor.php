@@ -172,7 +172,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($component, $props);
         foreach ($processor->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-            $subcomponent_data_field = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
+            $subcomponent_data_field = $relationalComponentFieldNode->getField();
             $subcomponent_components_data_properties = array(
                 DataProperties::DIRECT_COMPONENT_FIELD_NODES => array(),
                 // @todo Migrate 'subcomponents' from array to SplObjectStorage

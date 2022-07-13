@@ -202,8 +202,8 @@ class PoP_SSR_EngineInitialization_Hooks
                 foreach ($databases as $dbName => $database) {
                     foreach ($data_fields[$dbName] as $data_field) {
                         /** @var ComponentFieldNodeInterface $data_field */
-                        if (isset($database[$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()])) {
-                            $dynamicdatabases[$dbName][$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()] = $database[$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()];
+                        if (isset($database[$typeOutputKey][$object_id][$data_field->getUniqueID()])) {
+                            $dynamicdatabases[$dbName][$typeOutputKey][$object_id][$data_field->getUniqueID()] = $database[$typeOutputKey][$object_id][$data_field->getUniqueID()];
                         }
                     }
                 }
@@ -216,11 +216,10 @@ class PoP_SSR_EngineInitialization_Hooks
                     /** @var FieldInterface $field */
                     /** @var array<string,mixed> */
                     $subcomponent_data_properties = $subcomponents[$field];
-                    $subcomponent_data_field = $field->asFieldOutputQueryString();
                     // Check if the subcomponent data fields lives under database or userstatedatabase
                     $sourcedb = null;
                     foreach ($data_fields as $dbName => $db_data_fields) {
-                        if (in_array($subcomponent_data_field, $db_data_fields)) {
+                        if (in_array($field, $db_data_fields)) {
                             $sourcedb = &$databases[$dbName];
                             break;
                         }
