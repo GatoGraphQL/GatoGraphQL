@@ -545,7 +545,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
         }
         /**
-         * Validate the DirectiveResolvers
+         * Validate and initialize the DirectiveResolvers
          *
          * @var DirectiveResolverInterface $directiveResolver
          */

@@ -80,7 +80,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @var array<string,mixed>
      */
-    protected ?array $directiveData = null;
+    protected array $directiveData;
     
     /**
      * @var array<string,mixed>
