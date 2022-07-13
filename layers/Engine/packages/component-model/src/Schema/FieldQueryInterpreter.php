@@ -140,31 +140,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
     }
 
-    protected function validateExtractedFieldOrDirectiveArgumentsForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $fieldOrDirective,
-        array $fieldOrDirectiveArgs,
-        array $variables,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        // The UnionTypeResolver cannot validate, it needs to delegate to each targetObjectTypeResolver
-        // which will be done on Object, not on Schema.
-        // This situation can only happen for Directive
-        // (which can receive RelationalType), not for Field (which receives ObjectType)
-        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            return $fieldOrDirectiveArgs;
-        }
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
-        foreach ($fieldOrDirectiveArgs as $argName => $argValue) {
-            // Nested dynamic fields: Validation, warnings and deprecations
-            $this->collectFieldArgumentValueErrorQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-            $this->collectFieldArgumentValueWarningQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-            $this->collectFieldArgumentValueDeprecationQualifiedEntriesForSchema($objectTypeResolver, $argValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-        }
-        return $fieldOrDirectiveArgs;
-    }
-
     protected function extractFieldOrDirectiveArgumentsForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
