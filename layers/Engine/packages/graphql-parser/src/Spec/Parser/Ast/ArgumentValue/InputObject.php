@@ -68,15 +68,6 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
     }
 
     /**
-     * @param stdClass $object
-     */
-    public function setValue(mixed $object): void
-    {
-        $this->resetCachedValue();
-        $this->object = $object;
-    }
-
-    /**
      * @return stdClass
      */
     public function getAstValue(): mixed

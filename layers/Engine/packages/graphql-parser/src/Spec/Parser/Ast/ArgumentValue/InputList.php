@@ -69,15 +69,6 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
     }
 
     /**
-     * @param array<mixed> $list
-     */
-    public function setValue(mixed $list): void
-    {
-        $this->resetCachedValue();
-        $this->list = $list;
-    }
-
-    /**
      * @return mixed[]
      */
     public function getAstValue(): mixed

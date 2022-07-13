@@ -33,12 +33,4 @@ class Literal extends AbstractAst implements CoercibleArgumentValueAstInterface
     {
         return $this->value;
     }
-
-    /**
-     * @param string|int|float|bool|null $value
-     */
-    public function setValue(mixed $value): void
-    {
-        $this->value = $value;
-    }
 }
