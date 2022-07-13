@@ -67,8 +67,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldNamesToResolve(): array
     {
-        // Only register them for the standard GraphQL,
-        // or for PQL if explicitly enabled
         if (!App::getState('graphql-introspection-enabled')) {
             return [];
         }
