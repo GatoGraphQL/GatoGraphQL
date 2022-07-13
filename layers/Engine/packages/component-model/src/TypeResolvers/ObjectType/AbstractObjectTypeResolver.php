@@ -1323,18 +1323,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         try {
             $fieldData = $field->getArgumentKeyValues();
         } catch (InvalidDynamicContextException $invalidDynamicContextException) {
+            $dynamicVariableReference = $invalidDynamicContextException->getDynamicVariableReference();
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E31,
                         [
-                            $field->getName(),
-                            $this->getMaybeNamespacedTypeName(),
+                            $dynamicVariableReference->getName(),
                             $invalidDynamicContextException->getMessage(),
                         ]
                     ),
-                    $invalidDynamicContextException->getDynamicVariableReference(),
+                    $dynamicVariableReference,
                 )
             );
             return null;

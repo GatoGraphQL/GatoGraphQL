@@ -242,18 +242,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         try {
             $directiveData = $this->directive->getArgumentKeyValues();
         } catch (InvalidDynamicContextException $invalidDynamicContextException) {
+            $dynamicVariableReference = $invalidDynamicContextException->getDynamicVariableReference();
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E31,
                         [
-                            $this->directive->getName(),
-                            $this->getMaybeNamespacedTypeName(),
+                            $dynamicVariableReference->getName(),
                             $invalidDynamicContextException->getMessage(),
                         ]
                     ),
-                    $invalidDynamicContextException->getDynamicVariableReference(),
+                    $dynamicVariableReference,
                     $relationalTypeResolver,
                     $fields,
                 )
