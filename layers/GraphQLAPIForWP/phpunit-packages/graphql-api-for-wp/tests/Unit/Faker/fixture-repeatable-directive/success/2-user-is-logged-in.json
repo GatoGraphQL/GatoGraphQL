@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "You must have role 'subscriber' to access field(s) 'hi: echo(value: \"Hi there\")<validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])>' for type 'QueryRoot'",
+      "message": "You must have role 'subscriber' to access field(s) 'hi: echo(value: \"Hi there\")' for type 'QueryRoot'",
       "locations": [
         {
           "line": 7,
