@@ -11,6 +11,10 @@
       "extensions": {
         "type": "QueryRoot",
         "field": "capabilities",
+        "path": [
+          "capabilities",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -25,6 +29,11 @@
       "extensions": {
         "type": "User",
         "field": "capabilities",
+        "path": [
+          "capabilities",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -39,6 +48,11 @@
       "extensions": {
         "type": "User",
         "field": "hasCapability(capability: \"manage_options\")",
+        "path": [
+          "hasCapability(capability: \"manage_options\")",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -53,6 +67,11 @@
       "extensions": {
         "type": "User",
         "field": "hasAnyCapability(capabilities: [\"manage_options\"])",
+        "path": [
+          "hasAnyCapability(capabilities: [\"manage_options\"])",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }
