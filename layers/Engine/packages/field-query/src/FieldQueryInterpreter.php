@@ -198,20 +198,4 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             // If it starts with "$__", it is an expression, not a variable
             && !$this->isFieldArgumentValueAnExpression($fieldArgValue);
     }
-
-    protected function isFieldArgumentValueAnObjectRepresentedAsString(mixed $fieldArgValue): bool
-    {
-        // If it starts with "{" and finishes with "}"
-        return
-            is_string($fieldArgValue)
-            && substr(
-                $fieldArgValue,
-                0,
-                strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING)
-            ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING
-            && substr(
-                $fieldArgValue,
-                -1 * strlen(QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING)
-            ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING;
-    }
 }
