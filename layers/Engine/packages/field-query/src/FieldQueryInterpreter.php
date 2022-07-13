@@ -199,14 +199,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             && !$this->isFieldArgumentValueAnExpression($fieldArgValue);
     }
 
-    public function isFieldArgumentValueDynamic(mixed $fieldArgValue): bool
-    {
-        return
-            $this->isFieldArgumentValueAField($fieldArgValue) ||
-            $this->isFieldArgumentValueAnExpression($fieldArgValue) ||
-            $this->isFieldArgumentValueAVariable($fieldArgValue);
-    }
-
     protected function isFieldArgumentValueAnArrayRepresentedAsString(mixed $fieldArgValue): bool
     {
         // If it starts with "[" and finishes with "]"
