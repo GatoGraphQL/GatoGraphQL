@@ -1604,7 +1604,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
             $astNode = $field->getArgument($argName) ?? $field;
             /**
-             * If the field is an InputObject, let it perform validations on its input fields.
+             * If the arg is an InputObject, let it perform validations on its input fields.
              */
             if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface) {
                 $fieldArgTypeResolver->validateInputValue(

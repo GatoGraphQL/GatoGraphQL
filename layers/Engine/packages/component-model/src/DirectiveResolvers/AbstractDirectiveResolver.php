@@ -181,7 +181,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Invoked when creating the non-shared directive instance
-     * to resolve a field in the pipeline
+     * to resolve a directive in the pipeline
      */
     final public function setDirective(Directive $directive): void
     {
@@ -330,7 +330,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Validate the field data
+     * Validate the directive data
      *
      * @param array<string,mixed> $directiveData
      * @param FieldInterface[] $fields
@@ -481,7 +481,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveArgTypeResolver = $directiveArgNameTypeResolvers[$argName];
             $astNode = $this->directive->getArgument($argName) ?? $this->directive;
             /**
-             * If the field is an InputObject, let it perform validations on its input fields.
+             * If the arg is an InputObject, let it perform validations on its input fields.
              */
             if ($directiveArgTypeResolver instanceof InputObjectTypeResolverInterface) {
                 $directiveArgTypeResolver->validateInputValue(
