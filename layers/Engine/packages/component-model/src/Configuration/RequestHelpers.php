@@ -18,7 +18,7 @@ class RequestHelpers
     {
         if (RootEnvironment::isApplicationEnvironmentDev() && App::getRequest()->query->has('XDEBUG_TRIGGER')) {
             $url = GeneralUtils::addQueryArgs([
-                FrameworkParams::XDEBUG_TRIGGER => '',
+                FrameworkParams::XDEBUG_TRIGGER => App::getRequest()->query->get('XDEBUG_TRIGGER'),
             ], $url);
         }
         return $url;
