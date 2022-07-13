@@ -270,7 +270,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveResolvers = $this->getFieldDirectiveResolvers(
                 $directive,
                 $directiveFields[$directive],
-                $engineIterationFeedbackStore,
             );
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolvers === null) {
@@ -358,16 +357,22 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          */
         /** @var DirectiveResolverInterface $directiveResolver */
         foreach ($directiveResolverInstanceFields as $directiveResolver) {
+            /** @var FieldInterface[] */
+            $directiveResolverFields = $directiveResolverInstanceFields[$directiveResolver];
+            $directiveResolver->prepareDirective(
+                $this,
+                $directiveResolverFields,
+                $engineIterationFeedbackStore,
+            );
+            
             /**
-             * If the DirectiveResolver has errors, they have already been
+             * If the DirectiveResolver has errors, they have just been
              * added to the FeedbackStore, so just skip.
              */
             if ($directiveResolver->hasValidationErrors()) {
                 continue;
             }
 
-            /** @var FieldInterface[] */
-            $directiveResolverFields = $directiveResolverInstanceFields[$directiveResolver];
             $directive = $directiveResolver->getDirective();
             $directiveName = $directive->getName();
 
@@ -465,7 +470,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function getFieldDirectiveResolvers(
         Directive $directive,
         array $fields,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
         $directiveName = $directive->getName();
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
@@ -489,12 +493,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          * @var SplObjectStorage<FieldInterface,DirectiveResolverInterface>
          */
         $fieldDirectiveResolvers = new SplObjectStorage();
-        /**
-         * Store fields per directiveResolver
-         *
-         * @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
-         */
-        $directiveResolverFields = new SplObjectStorage();
         foreach ($fields as $field) {
             /**
              * Check that at least one class which deals with this directiveName can satisfy
@@ -510,34 +508,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                  * Create a non-shared directiveResolver instance to handle
                  * this specific $directive object instance.
                  */
-                $uniqueDirectiveResolver = $this->getUniqueDirectiveResolverForDirective(
+                $fieldDirectiveResolvers[$field] = $this->getUniqueDirectiveResolverForDirective(
                     $directiveResolver,
                     $directive,
                 );
-                $fieldDirectiveResolvers[$field] = $uniqueDirectiveResolver;
-                
-                // Store the fields to initialize and validate the directive
-                $directiveResolverFieldsUniqueDirectiveResolver = $directiveResolverFields[$uniqueDirectiveResolver] ?? [];
-                $directiveResolverFieldsUniqueDirectiveResolver[] = $field;
-                $directiveResolverFields[$uniqueDirectiveResolver] = $directiveResolverFieldsUniqueDirectiveResolver;
                 
                 // As this instance can process the directive and the field, we found it, then end the loop
                 break;
             }
-        }
-        /**
-         * Validate and initialize the DirectiveResolvers
-         *
-         * @var DirectiveResolverInterface $directiveResolver
-         */
-        foreach ($directiveResolverFields as $directiveResolver) {
-            /** @var FieldInterface[] */
-            $fields = $directiveResolverFields[$directiveResolver];
-            $directiveResolver->prepareDirective(
-                $this,
-                $fields,
-                $engineIterationFeedbackStore,
-            );
         }
         return $fieldDirectiveResolvers;
     }
