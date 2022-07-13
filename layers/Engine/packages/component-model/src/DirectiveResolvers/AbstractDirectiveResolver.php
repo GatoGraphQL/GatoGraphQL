@@ -85,11 +85,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected bool $hasValidationErrors;
     
     /**
-     * @var array<string,mixed>
-     */
-    protected array $directiveArgsForObjects = [];
-
-    /**
      * @var array<string,array>
      */
     protected array $schemaDefinitionForDirectiveCache = [];
@@ -579,7 +574,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
         // Store the args, they may be used in `resolveDirective`
         $objectID = $relationalTypeResolver->getID($object);
-        $this->directiveArgsForObjects[$objectID] = $directiveArgs;
 
         /**
          * Validate directive argument constraints, only if there are no previous errors
