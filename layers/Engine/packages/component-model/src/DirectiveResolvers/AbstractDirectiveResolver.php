@@ -628,43 +628,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Validate the constraints for the directive arguments
-     *
-     * @return FeedbackItemResolution[] Errors
-     */
-    final protected function resolveDirectiveArgumentErrors(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-    ): array {
-        $errors = [];
-        foreach ($this->directive->getArguments() as $argument) {
-            try {
-                if (
-                    $maybeErrorFeedbackItemResolutions = $this->validateDirectiveArgValue(
-                        $relationalTypeResolver,
-                        $this->directive->getName(),
-                        $argument->getName(),
-                        $argument->getValue()
-                    )
-                ) {
-                    $errors = array_merge(
-                        $errors,
-                        $maybeErrorFeedbackItemResolutions
-                    );
-                }
-            } catch (InvalidDynamicContextException $e) {
-                $errors[] = new FeedbackItemResolution(
-                    GenericFeedbackItemProvider::class,
-                    GenericFeedbackItemProvider::E1,
-                    [
-                        $e->getMessage(),
-                    ]
-                );
-            }
-        }
-        return $errors;
-    }
-
-    /**
      * Validate the constraints for a directive argument
      *
      * @return FeedbackItemResolution[] Errors
