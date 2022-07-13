@@ -261,30 +261,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return null;
         }
 
-        /**
-         * Check that the field has been defined in the schema
-         */
         $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
-        if ($directiveArgsSchemaDefinition === null) {
-            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                new SchemaFeedback(
-                    $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution(
-                        $directiveData,
-                        $field,
-                    ),
-                    $field,
-                )
-            );
-            return null;
-        }
 
         /**
          * Add the default Argument values
          */
-        $fieldArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($directiveArgsSchemaDefinition);
+        $directiveArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($directiveArgsSchemaDefinition);
         $directiveData = $this->addDefaultFieldOrDirectiveArguments(
             $directiveData,
-            $fieldArgumentNameDefaultValues,
+            $directiveArgumentNameDefaultValues,
         );
 
         /**
@@ -536,17 +521,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getDirectiveArgumentNameDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver): ?array
     {
         $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
-        if ($directiveArgsSchemaDefinition === null) {
-            return null;
-        }
-
         return $this->getFieldOrDirectiveArgumentNameDefaultValues($directiveArgsSchemaDefinition);
     }
 
-    final protected function getDirectiveArgumentsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): ?array
+    final protected function getDirectiveArgumentsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
-        return $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null;
+        return $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? [];
     }
 
     /**
