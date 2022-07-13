@@ -1520,7 +1520,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * but not if the value is empty such as '""' or [],
      * because empty values could be allowed.
      *
-     * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
+     * OK: `setTagsOnPost(tags: [])` (where `tags` is mandatory)
+     * Error: `setTagsOnPost(tags: null)` or `setTagsOnPost`
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
      */
