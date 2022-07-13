@@ -353,46 +353,23 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
         }
 
-        // Validate all the directiveResolvers in the field
+        /**
+         * Validate all the directiveResolvers in the field.
+         */
         /** @var DirectiveResolverInterface $directiveResolver */
         foreach ($directiveResolverInstanceFields as $directiveResolver) {
+            /**
+             * If the DirectiveResolver has errors, they have already been
+             * added to the FeedbackStore, so just skip.
+             */
+            if ($directiveResolver->hasValidationErrors()) {
+                continue;
+            }
+
             /** @var FieldInterface[] */
             $directiveResolverFields = $directiveResolverInstanceFields[$directiveResolver];
             $directive = $directiveResolver->getDirective();
             $directiveName = $directive->getName();
-
-            // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
-            $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
-            list(
-                $validFieldDirective,
-                $directiveName,
-                $directiveArgs,
-            ) = $directiveResolver->dissectAndValidateDirectiveForSchema(
-                $this,
-                $directiveFields,
-                $variables,
-                $separateEngineIterationFeedbackStore,
-            );
-            $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-            if ($separateEngineIterationFeedbackStore->hasErrors()) {
-                continue;
-            }
-
-            // Validate against the directiveResolver
-            if ($maybeErrorFeedbackItemResolutions = $directiveResolver->resolveDirectiveValidationErrors($this, $directive)) {
-                foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                    $fields = $directiveFields[$directive];
-                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                        new SchemaFeedback(
-                            $errorFeedbackItemResolution,
-                            $directive,
-                            $this,
-                            $fields,
-                        )
-                    );
-                }
-                continue;
-            }
 
             // Check for warnings
             if ($warningFeedbackItemResolution = $directiveResolver->resolveDirectiveWarning($this)) {
