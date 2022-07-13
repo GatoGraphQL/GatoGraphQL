@@ -10,7 +10,11 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "schemaConfigurations",
+        "field": "schemaConfigurations { ... }",
+        "path": [
+          "schemaConfigurations { ... }",
+          "query GetSchemaConfigurations { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }
