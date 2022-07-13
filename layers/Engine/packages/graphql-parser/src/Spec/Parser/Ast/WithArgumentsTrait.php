@@ -53,13 +53,6 @@ trait WithArgumentsTrait
         return null;
     }
 
-    public function addArgument(Argument $argument): void
-    {
-        $this->argumentKeyValues = null;
-        $this->arguments[] = $argument;
-        $this->nameArguments[$argument->getName()] = $argument;
-    }
-
     /**
      * @param Argument[] $arguments
      */
