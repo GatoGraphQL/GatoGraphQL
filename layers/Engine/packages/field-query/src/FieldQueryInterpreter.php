@@ -5,32 +5,10 @@ declare(strict_types=1);
 namespace PoP\FieldQuery;
 
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\QueryParsing\QueryParserInterface;
-use stdClass;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
     use BasicServiceTrait;
-
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
-    private ?QueryParserInterface $queryParser = null;
-
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
-    }
-    final public function setQueryParser(QueryParserInterface $queryParser): void
-    {
-        $this->queryParser = $queryParser;
-    }
-    final protected function getQueryParser(): QueryParserInterface
-    {
-        return $this->queryParser ??= $this->instanceManager->getInstance(QueryParserInterface::class);
-    }
 
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool
     {

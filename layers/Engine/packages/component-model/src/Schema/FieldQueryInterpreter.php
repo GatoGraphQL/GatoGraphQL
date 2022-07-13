@@ -35,35 +35,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     private array $directiveSchemaDefinitionArgsCache = [];
 
-    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
-    private ?InputCoercingServiceInterface $inputCoercingService = null;
-    private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
-
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
-    {
-        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
-    final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
-    {
-        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
-    }
-    final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
-    {
-        $this->inputCoercingService = $inputCoercingService;
-    }
-    final protected function getInputCoercingService(): InputCoercingServiceInterface
-    {
-        return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
-    }
-    final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
-    {
-        $this->objectSerializationManager = $objectSerializationManager;
-    }
-    final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
-    {
-        return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
-    }
-
     protected function getVariablesHash(?array $variables): string
     {
         return (string)hash('crc32', json_encode($variables ?? []));
