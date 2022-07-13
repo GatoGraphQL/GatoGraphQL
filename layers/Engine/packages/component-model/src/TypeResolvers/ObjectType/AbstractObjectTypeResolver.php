@@ -1516,12 +1516,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * Validate that if the key is missing or is `null`,
-     * but not if the value is empty such as '""' or [],
-     * because empty values could be allowed.
+     * If the key is missing or is `null` then it's an error.
      *
-     *   OK: `setTagsOnPost(tags: [])` (where `tags` is mandatory)
-     *   Error: `setTagsOnPost(tags: null)` or `setTagsOnPost`
+     *   Eg (arg `tags` is mandatory):
+     *   `{ setTagsOnPost(tags: null) }` or `{ setTagsOnPost }`
+     * 
+     * If the value is empty, such as '""' or [], then it's OK.
+     *
+     *   Eg: `{ setTagsOnPost(tags: []) }`
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
      */

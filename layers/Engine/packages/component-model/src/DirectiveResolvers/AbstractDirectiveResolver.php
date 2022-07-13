@@ -307,6 +307,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
         $this->validateDirectiveData(
             $directiveData,
+            $relationalTypeResolver,
             $separateEngineIterationFeedbackStore,
         );
         $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
@@ -324,15 +325,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected function validateDirectiveData(
         array $directiveData,
+        RelationalTypeResolverInterface $relationalTypeResolver,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         /** @var array */
-        $directiveArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
-        /** @var ObjectTypeFieldResolverInterface */
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-
-        // Collect the deprecations from the queried fields
-        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field, $objectTypeFieldResolutionFeedbackStore);
+        $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
 
         /**
          * Validations:
@@ -341,11 +338,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * - no non-existing arg has been provided
          */
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $this->validateNonMissingMandatoryFieldArguments(
+        $this->validateNonMissingMandatoryDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
-            $field,
-            $separateObjectTypeFieldResolutionFeedbackStore
+            $engineIterationFeedbackStore,
         );
         $this->validateOnlyExistingFieldArguments(
             $directiveData,
@@ -392,18 +388,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Validate that if the key is missing or is `null`,
-     * but not if the value is empty such as '""' or [],
-     * because empty values could be allowed.
+     * If the key is missing or is `null` then it's an error.
      *
-     * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
+     *   Eg (arg `tags` is mandatory):
+     *   `{ id @skip(if: null) }` or `{ id @skip }`
+     * 
+     * If the value is empty, such as '""' or [], then it's OK.
      *
-     * @param array<string,mixed> $directiveArgsSchemaDefinition
+     *   Eg: `{ id @skip(if: "") }` <= will be coerced to `false`
+     *
+     * @param array<string,mixed> $fieldArgsSchemaDefinition
      */
-    private function validateNonMissingMandatoryFieldArguments(
+    private function validateNonMissingMandatoryDirectiveArguments(
         array $directiveData,
         array $directiveArgsSchemaDefinition,
-        FieldInterface $field,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $mandatoryFieldArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($directiveArgsSchemaDefinition);
