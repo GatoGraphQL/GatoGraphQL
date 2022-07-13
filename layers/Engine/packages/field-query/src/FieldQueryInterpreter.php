@@ -293,13 +293,4 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             self::ALIAS_LENGTH_KEY => strlen($alias) + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX),
         ];
     }
-
-    /**
-     * This is the base implementation. Override function whenever
-     * the object does not contain `__serialize`
-     */
-    protected function serializeObject(object $object): string
-    {
-        return $object->__serialize();
-    }
 }

@@ -234,12 +234,4 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         return $expressions[$expressionName];
     }
-
-    protected function serializeObject(object $object): string
-    {
-        if ($object instanceof WithValueInterface) {
-            return $object->getValue();
-        }
-        return $this->getObjectSerializationManager()->serialize($object);
-    }
 }
