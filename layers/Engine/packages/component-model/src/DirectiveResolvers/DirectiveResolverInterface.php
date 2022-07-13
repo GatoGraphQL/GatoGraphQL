@@ -77,19 +77,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function getDirectiveKind(): string;
 
     /**
-     * Enable the directiveResolver to validate the directive arguments in a custom way
-     *
-     * @param FieldInterface[] $fields
-     */
-    public function validateDirectiveArgumentsForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs,
-        array $fields,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array;
-
-    /**
      * Define where to place the directive in the directive execution pipeline
      *
      * 2 directives are mandatory, and executed in this order:
