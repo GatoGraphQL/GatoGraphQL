@@ -547,65 +547,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * @param FieldInterface[] $fields
-     */
-    public function dissectAndValidateDirectiveForObject(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        object $object,
-        array $fields,
-        array &$variables,
-        array &$expressions,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
-        list(
-            $validDirective,
-            $directiveName,
-            $directiveArgs,
-        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject(
-            $this,
-            $relationalTypeResolver,
-            $object,
-            $fields,
-            $this->directive,
-            $variables,
-            $expressions,
-            $engineIterationFeedbackStore
-        );
-
-        // Store the args, they may be used in `resolveDirective`
-        $objectID = $relationalTypeResolver->getID($object);
-
-        /**
-         * Validate directive argument constraints, only if there are no previous errors
-         */
-        if (!$engineIterationFeedbackStore->hasErrors()) {
-            if (
-                $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
-                    $relationalTypeResolver,
-                )
-            ) {
-                foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                        new ObjectResolutionFeedback(
-                            $errorFeedbackItemResolution,
-                            $this->directive,
-                            $relationalTypeResolver,
-                            $this->directive,
-                            [$objectID => new EngineIterationFieldSet($fields)]
-                        )
-                    );
-                }
-            }
-        }
-
-        return [
-            $validDirective,
-            $directiveName,
-            $directiveArgs,
-        ];
-    }
-
-    /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
      */
