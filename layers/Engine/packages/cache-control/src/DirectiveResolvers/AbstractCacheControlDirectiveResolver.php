@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\CacheControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -90,33 +93,35 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
 
     /**
      * Validate the constraints for a directive argument
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     protected function validateDirectiveArgValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
         string $directiveArgName,
-        mixed $directiveArgValue
-    ): array {
-        $errors = parent::validateDirectiveArgValue(
-            $relationalTypeResolver,
-            $directiveName,
+        mixed $directiveArgValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        parent::validateDirectiveArgValue(
             $directiveArgName,
             $directiveArgValue,
+            $astNode,
+            $objectTypeFieldResolutionFeedbackStore,
         );
 
         switch ($directiveArgName) {
             case 'maxAge':
                 if ($directiveArgValue < 0) {
-                    $errors[] = new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E1,
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E1,
+                            ),
+                            $astNode,
+                        )
                     );
                 }
                 break;
         }
-        return $errors;
     }
 
     /**

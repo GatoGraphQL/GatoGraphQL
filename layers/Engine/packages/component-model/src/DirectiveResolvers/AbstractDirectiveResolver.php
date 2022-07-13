@@ -39,6 +39,7 @@ use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -491,6 +492,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $objectTypeFieldResolutionFeedbackStore,
                 );
             }
+            $this->validateDirectiveArgValue(
+                $argName,
+                $argValue,
+                $astNode,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         }
         $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
@@ -629,16 +636,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Validate the constraints for a directive argument
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     protected function validateDirectiveArgValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
         string $directiveArgName,
-        mixed $directiveArgValue
-    ): array {
-        return [];
+        mixed $directiveArgValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
     }
 
     /**
