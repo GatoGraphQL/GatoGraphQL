@@ -264,9 +264,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /**
          * Check that the field has been defined in the schema
          */
-        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        if ($fieldArgsSchemaDefinition === null || $objectTypeFieldResolver === null) {
+        $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
+        if ($directiveArgsSchemaDefinition === null) {
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution(
@@ -282,7 +281,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /**
          * Add the default Argument values
          */
-        $fieldArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($fieldArgsSchemaDefinition);
+        $fieldArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($directiveArgsSchemaDefinition);
         $directiveData = $this->addDefaultFieldOrDirectiveArguments(
             $directiveData,
             $fieldArgumentNameDefaultValues,
@@ -294,7 +293,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $directiveData = $this->getSchemaCastingService()->castArguments(
             $directiveData,
-            $fieldArgsSchemaDefinition,
+            $directiveArgsSchemaDefinition,
             $field,
             $separateObjectTypeFieldResolutionFeedbackStore,
         );
@@ -344,7 +343,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         /** @var array */
-        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        $directiveArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         /** @var ObjectTypeFieldResolverInterface */
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
 
@@ -360,13 +359,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->validateNonMissingMandatoryFieldArguments(
             $directiveData,
-            $fieldArgsSchemaDefinition,
+            $directiveArgsSchemaDefinition,
             $field,
             $separateObjectTypeFieldResolutionFeedbackStore
         );
         $this->validateOnlyExistingFieldArguments(
             $directiveData,
-            $fieldArgsSchemaDefinition,
+            $directiveArgsSchemaDefinition,
             $field,
             $separateObjectTypeFieldResolutionFeedbackStore
         );
@@ -415,15 +414,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
      *
-     * @param array<string,mixed> $fieldArgsSchemaDefinition
+     * @param array<string,mixed> $directiveArgsSchemaDefinition
      */
     private function validateNonMissingMandatoryFieldArguments(
         array $directiveData,
-        array $fieldArgsSchemaDefinition,
+        array $directiveArgsSchemaDefinition,
         FieldInterface $field,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $mandatoryFieldArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($fieldArgsSchemaDefinition);
+        $mandatoryFieldArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($directiveArgsSchemaDefinition);
         $missingMandatoryFieldArgNames = array_values(array_filter(
             $mandatoryFieldArgNames,
             fn (string $fieldArgName) => ($directiveData[$fieldArgName] ?? null) === null
@@ -452,17 +451,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Return an error if the query contains argument(s) that
      * does not exist in the field.
      *
-     * @param array<string,mixed> $fieldArgsSchemaDefinition
+     * @param array<string,mixed> $directiveArgsSchemaDefinition
      */
     private function validateOnlyExistingFieldArguments(
         array $directiveData,
-        array $fieldArgsSchemaDefinition,
+        array $directiveArgsSchemaDefinition,
         FieldInterface $field,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $nonExistingArgNames = array_values(array_diff(
             array_keys($directiveData),
-            array_keys($fieldArgsSchemaDefinition)
+            array_keys($directiveArgsSchemaDefinition)
         ));
         foreach ($nonExistingArgNames as $nonExistingArgName) {
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
@@ -547,12 +546,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getDirectiveArgumentsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): ?array
     {
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
-        $directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? [];
-        if ($directiveArgsSchemaDefinition === null) {
-            return null;
-        }
-
-        return $directiveArgsSchemaDefinition;
+        return $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? null;
     }
 
     /**

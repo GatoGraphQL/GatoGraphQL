@@ -783,12 +783,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($fieldSchemaDefinition === null) {
             return null;
         }
-        $fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
-        if ($fieldArgsSchemaDefinition === null) {
-            return null;
-        }
-
-        return $fieldArgsSchemaDefinition;
+        return $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? null;
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
