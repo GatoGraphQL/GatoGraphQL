@@ -340,7 +340,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
          */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->validateNonMissingMandatoryDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
@@ -348,11 +347,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $fields,
             $engineIterationFeedbackStore,
         );
-        $this->validateOnlyExistingFieldArguments(
+        $this->validateOnlyExistingDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
-            $field,
-            $separateObjectTypeFieldResolutionFeedbackStore
+            $relationalTypeResolver,
+            $fields,
+            $engineIterationFeedbackStore,
         );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -438,14 +438,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Return an error if the query contains argument(s) that
-     * does not exist in the field.
+     * does not exist in the directive.
      *
      * @param array<string,mixed> $directiveArgsSchemaDefinition
+     * @param FieldInterface[] $fields
      */
-    private function validateOnlyExistingFieldArguments(
+    private function validateOnlyExistingDirectiveArguments(
         array $directiveData,
         array $directiveArgsSchemaDefinition,
-        FieldInterface $field,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $nonExistingArgNames = array_values(array_diff(
@@ -457,14 +459,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 new SchemaFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E27,
+                        ErrorFeedbackItemProvider::E28,
                         [
                             $this->directive->getName(),
-                            $this->getMaybeNamespacedTypeName(),
                             $nonExistingArgName,
                         ]
                     ),
-                    $field->getArgument($nonExistingArgName) ?? $field,
+                    $this->directive->getArgument($nonExistingArgName) ?? $this->directive,
+                    $relationalTypeResolver,
+                    $fields,
                 )
             );
         }
