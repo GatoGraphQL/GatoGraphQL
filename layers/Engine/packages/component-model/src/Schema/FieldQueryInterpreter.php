@@ -369,69 +369,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgValue;
     }
 
-    /**
-     * The value may be:
-     * - A variable, if it starts with "$"
-     * - A string, if it is surrounded with double quotes ("...")
-     * - An array, if it is surrounded with brackets and split with commas ([..., ..., ...])
-     * - A number
-     * - A field
-     */
-    protected function maybeResolveFieldArgumentValueForObject(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        object $object,
-        mixed $fieldArgValue,
-        ?array $variables,
-        ?array $expressions,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): mixed {
-        // If it is an array, apply this function on all elements
-        if (is_array($fieldArgValue)) {
-            return array_map(
-                function ($fieldArgValueElem) use ($relationalTypeResolver, $object, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore) {
-                    return $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldArgValueElem, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
-                },
-                (array)$fieldArgValue
-            );
-        }
-
-        // Execute as expression
-        if ($this->isFieldArgumentValueAnExpression($fieldArgValue)) {
-            // Expressions: allow to pass a field argument "key:%input%", which is passed when executing the directive through $expressions
-            // Trim it so that "%{ self }%" is equivalent to "%{self}%". This is needed to set expressions through Symfony's DependencyInjection component (since %...% is reserved for its own parameters!)
-            return $this->resolveExpression(
-                $relationalTypeResolver,
-                $fieldArgValue,
-                $expressions,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        // @todo Watch out! Commented logic because composable fields are not used anymore, and didn't want to migrate $objectTypeResolver->collectFieldValidationErrors( using FieldInterface
-        // if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-        //     // Execute as field
-        //     // It is important to force the validation, because if a needed argument is provided with an error, it needs to be validated, casted and filtered out,
-        //     // and if this wrong param is not "dynamic", then the validation would not take place
-        //     $options = [
-        //         AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
-        //     ];
-        //     $resolvedValue = $relationalTypeResolver->resolveValue(
-        //         $object,
-        //         (string)$fieldArgValue,
-        //         $variables,
-        //         $expressions,
-        //         $objectTypeFieldResolutionFeedbackStore,
-        //         $options
-        //     );
-        //     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-        //         return null;
-        //     }
-        //     return $resolvedValue;
-        // }
-
-        return $fieldArgValue;
-    }
-
     public function resolveExpression(
         RelationalTypeResolverInterface $relationalTypeResolver,
         mixed $fieldArgValue,
