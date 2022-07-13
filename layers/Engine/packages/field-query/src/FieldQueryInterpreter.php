@@ -184,18 +184,4 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         // If it starts with "$_", it is a dynamic variable
         return is_string($fieldArgValue) && str_starts_with($fieldArgValue, '$__');
     }
-
-    public function isFieldArgumentValueAVariable(mixed $fieldArgValue): bool
-    {
-        // If it starts with "$", it is a variable
-        return
-            is_string($fieldArgValue)
-            && substr(
-                $fieldArgValue,
-                0,
-                strlen(QuerySyntax::SYMBOL_VARIABLE_PREFIX)
-            ) == QuerySyntax::SYMBOL_VARIABLE_PREFIX
-            // If it starts with "$__", it is an expression, not a variable
-            && !$this->isFieldArgumentValueAnExpression($fieldArgValue);
-    }
 }
