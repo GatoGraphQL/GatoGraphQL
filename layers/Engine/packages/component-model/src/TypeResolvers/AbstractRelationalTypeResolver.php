@@ -506,9 +506,18 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             return null;
         }
 
-        // Calculate directiveResolvers per field
-        /** @var SplObjectStorage<FieldInterface,DirectiveResolverInterface> */
+        /**
+         * Calculate directiveResolvers per field
+         *
+         * @var SplObjectStorage<FieldInterface,DirectiveResolverInterface>
+         */
         $fieldDirectiveResolvers = new SplObjectStorage();
+        /**
+         * Store fields per directiveResolver
+         *
+         * @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
+         */
+        $directiveResolverFields = new SplObjectStorage();
         foreach ($fields as $field) {
             /**
              * Check that at least one class which deals with this directiveName can satisfy
@@ -524,14 +533,30 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                  * Create a non-shared directiveResolver instance to handle
                  * this specific $directive object instance.
                  */
-                $fieldDirectiveResolvers[$field] = $this->getUniqueDirectiveResolverForDirective(
+                $uniqueDirectiveResolver = $this->getUniqueDirectiveResolverForDirective(
                     $directiveResolver,
                     $directive,
-                    $engineIterationFeedbackStore,
                 );
+                $directiveResolverFields[$uniqueDirectiveResolver] ??= [];
+                $directiveResolverFields[$uniqueDirectiveResolver][] = $field;
                 // As this instance can process the directive and the field, we found it, then end the loop
+                $fieldDirectiveResolvers[$field] = $uniqueDirectiveResolver;
                 break;
             }
+        }
+        /**
+         * Validate the DirectiveResolvers
+         *
+         * @var DirectiveResolverInterface $directiveResolver
+         */
+        foreach ($directiveResolverFields as $directiveResolver) {
+            /** @var FieldInterface[] */
+            $fields = $directiveResolverFields[$directiveResolver];
+            $directiveResolver->prepareDirective(
+                $this,
+                $fields,
+                $engineIterationFeedbackStore,
+            );
         }
         return $fieldDirectiveResolvers;
     }
@@ -543,16 +568,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function getUniqueDirectiveResolverForDirective(
         DirectiveResolverInterface $directiveResolver,
         Directive $directive,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): DirectiveResolverInterface {
         $directiveResolverClass = get_class($directiveResolver);
         // Get the instance from the cache if it exists, or create it if not
         if (!isset($this->directiveResolverClassDirectivesCache[$directiveResolverClass]) || !$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->contains($directive)) {
             $uniqueDirectiveResolver = clone $directiveResolver;
-            $uniqueDirectiveResolver->setAndPrepareDirective(
-                $this,
+            $uniqueDirectiveResolver->setDirective(
                 $directive,
-                $engineIterationFeedbackStore,
             );
             $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ??= new SplObjectStorage();
             $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive] = $uniqueDirectiveResolver;

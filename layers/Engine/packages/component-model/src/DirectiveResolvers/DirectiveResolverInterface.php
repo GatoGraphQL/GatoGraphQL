@@ -29,14 +29,21 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function getDirectiveName(): string;
     public function getDirective(): Directive;
     /**
-     * Set the Directive to be resolved by the DirectiveResolver,
-     * and initialize the Directive with additional information,
-     * such as adding the default Argument AST objects which
-     * were not provided in the query.
+     * Set the Directive to be resolved by the DirectiveResolver.
      */
-    public function setAndPrepareDirective(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+    public function setDirective(
         Directive $directive,
+    ): void;
+    /**
+     * Validate and initialize the Directive, such as adding
+     * the default values for Arguments which were not provided
+     * in the query.
+     *
+     * @param FieldInterface[] $fields
+     */
+    public function prepareDirective(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void;
     /**
