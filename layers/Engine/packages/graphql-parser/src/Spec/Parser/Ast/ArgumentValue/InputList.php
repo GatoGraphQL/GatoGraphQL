@@ -12,9 +12,6 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
-    /** @var mixed[] */
-    protected ?array $cachedValue = null;
-
     /**
      * @param mixed[] $list Elements inside can be WithValueInterface or native types (array, int, string, etc)
      */
@@ -45,18 +42,6 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
      */
     final public function getValue(): mixed
     {
-        if ($this->cachedValue === null) {
-            $this->cachedValue = $this->doGetValue();
-        }
-        return $this->cachedValue;
-    }
-
-    /**
-     * @return mixed[]
-     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
-     */
-    public function doGetValue(): array
-    {
         $list = [];
         foreach ($this->list as $key => $value) {
             if ($value instanceof WithValueInterface) {
@@ -74,10 +59,5 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
     public function getAstValue(): mixed
     {
         return $this->list;
-    }
-
-    public function resetCachedValue(): void
-    {
-        $this->cachedValue = null;
     }
 }
