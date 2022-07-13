@@ -47,6 +47,11 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void;
     /**
+     * After calling `prepareDirective`, indicate if casting
+     * the Directive Arguments produced any error.
+     */
+    public function hasValidationErrors(): bool;
+    /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
      */

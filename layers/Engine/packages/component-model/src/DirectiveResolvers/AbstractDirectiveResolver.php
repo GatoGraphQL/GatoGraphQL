@@ -81,6 +81,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * @var array<string,mixed>
      */
     protected array $directiveData;
+    protected bool $hasValidationErrors;
     
     /**
      * @var array<string,mixed>
@@ -234,6 +235,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $fields,
             $engineIterationFeedbackStore,
         );
+        $this->hasValidationErrors = $this->directiveData === null;
+    }
+
+    /**
+     * After calling `prepareDirective`, indicate if casting
+     * the Directive Arguments produced any error.
+     */
+    public function hasValidationErrors(): bool
+    {
+        return $this->hasValidationErrors;
     }
 
     /**
