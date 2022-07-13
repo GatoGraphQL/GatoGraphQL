@@ -513,18 +513,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? [];
     }
 
-    /**
-     * By default, validate if there are deprecated fields
-     *
-     * @param FieldInterface[] $fields
-     */
-    public function validateDirectiveArgumentsForSchema(
+    protected function collectDirectiveValidationDeprecations(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
+    ): void {
         $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations(
             $relationalTypeResolver,
             $directiveName,
@@ -540,7 +535,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 )
             );
         }
-        return $directiveArgs;
     }
 
     /**
