@@ -93,58 +93,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return trim($field);
     }
 
-    public function getFieldArgs(string $field): ?string
-    {
-        if (!isset($this->fieldArgsCache[$field])) {
-            $this->fieldArgsCache[$field] = $this->doGetFieldArgs($field);
-        }
-        return $this->fieldArgsCache[$field];
-    }
-
-    protected function doGetFieldArgs(string $field): ?string
-    {
-        // We check that the format is "$fieldName($prop1;$prop2;...;$propN)"
-        // or also with [] at the end: "$fieldName($prop1;$prop2;...;$propN)[somename]"
-        list(
-            $fieldArgsOpeningSymbolPos,
-            $fieldArgsClosingSymbolPos
-        ) = QueryHelpers::listFieldArgsSymbolPositions($field);
-
-        // If there are no "(" and ")" then there are no field args
-        if ($fieldArgsClosingSymbolPos === false && $fieldArgsOpeningSymbolPos === false) {
-            return null;
-        }
-        // If there is only one of them, it's a query error, so discard the query bit
-        if (
-            (
-                $fieldArgsClosingSymbolPos === false
-                && $fieldArgsOpeningSymbolPos !== false
-            )
-            || (
-                $fieldArgsClosingSymbolPos !== false
-                && $fieldArgsOpeningSymbolPos === false
-            )
-        ) {
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->__(
-                    'Arguments \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
-                    'field-query'
-                ),
-                $field,
-                QuerySyntax::SYMBOL_FIELDARGS_OPENING,
-                QuerySyntax::SYMBOL_FIELDARGS_CLOSING
-            ));
-            return null;
-        }
-
-        // We have field args. Extract them, including the brackets
-        return substr(
-            $field,
-            (int)$fieldArgsOpeningSymbolPos,
-            $fieldArgsClosingSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING) - $fieldArgsOpeningSymbolPos
-        );
-    }
-
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool
     {
         /**

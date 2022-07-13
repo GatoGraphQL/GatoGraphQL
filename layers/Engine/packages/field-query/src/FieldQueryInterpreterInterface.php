@@ -9,6 +9,5 @@ use stdClass;
 interface FieldQueryInterpreterInterface
 {
     public function getFieldName(string $field): string;
-    public function getFieldArgs(string $field): ?string;
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool;
 }
