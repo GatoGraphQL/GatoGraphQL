@@ -328,62 +328,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
     }
 
-    /**
-     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     */
-    public function extractDirectiveArgumentsForSchema(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        Directive $directive,
-        SplObjectStorage $directiveFields,
-        array $variables,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        bool $disableDynamicFields = false
-    ): array {
-        $fieldDirective = $directive->asQueryString();
-        // @todo Temporary hack: remove the leading "@", not expected by PQL
-        $fieldDirective = substr($fieldDirective, 1);
-        $validAndResolvedDirective = $fieldDirective;
-        $directiveName = $directive->getName();
-        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
-            $directiveResolver,
-            $relationalTypeResolver,
-            $fieldDirective,
-            $variables,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        $directiveArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($relationalTypeResolver, $fieldDirective, $directiveArgs, $variables, $objectTypeFieldResolutionFeedbackStore);
-        // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $directiveArgs = $this->castAndValidateDirectiveArgumentsForSchema($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $disableDynamicFields);
-        // Enable the directiveResolver to add its own code validations
-        $fields = $directiveFields[$directive];
-        if ($directiveArgs !== null) {
-            $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $fields, $engineIterationFeedbackStore);
-        }
-        // Transfer the feedback
-        $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-            $objectTypeFieldResolutionFeedbackStore,
-            $relationalTypeResolver,
-            $fields,
-        );
-
-        // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            $validAndResolvedDirective = null;
-        } elseif ($extractedDirectiveArgs !== $directiveArgs) {
-            // There are 2 reasons why the fieldDirective might have changed:
-            // 1. validField: There are $schemaWarnings: remove the directiveArgs that failed
-            // 2. resolvedField: Some directiveArg was a variable: replace it with its value
-            $validAndResolvedDirective = $this->replaceFieldArgs($fieldDirective, $directiveArgs);
-        }
-        return [
-            $validAndResolvedDirective,
-            $directiveName,
-            $directiveArgs,
-        ];
-    }
-
     protected function validateExtractedFieldOrDirectiveArgumentsForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldOrDirective,

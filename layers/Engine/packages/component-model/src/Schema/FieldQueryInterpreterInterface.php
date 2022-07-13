@@ -16,18 +16,6 @@ use SplObjectStorage;
 interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterInterface
 {
     /**
-     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     */
-    public function extractDirectiveArgumentsForSchema(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        Directive $directive,
-        SplObjectStorage $directiveFields,
-        array $variables,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        bool $disableDynamicFields = false
-    ): array;
-    /**
      * @param FieldInterface[] $fields
      */
     public function extractDirectiveArgumentsForObject(
