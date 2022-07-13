@@ -39,51 +39,50 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     }
 
     /**
-     * Extract and validate the directive arguments
+     * If it has nestedDirectives, extract them and validate them
      *
-     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     * @param FieldInterface[] $fields
      */
-    public function dissectAndValidateDirectiveForSchema(
+    public function prepareDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        SplObjectStorage $directiveFields,
-        array &$variables,
+        array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
-        // If it has nestedDirectives, extract them and validate them
+    ): void {
+        parent::prepareDirective(
+            $relationalTypeResolver,
+            $fields,
+            $engineIterationFeedbackStore,
+        );
+        if ($this->hasValidationErrors) {
+            return;
+        }
+
         /** @var MetaDirective */
         $metaDirective = $this->directive;
         $nestedDirectives = $metaDirective->getNestedDirectives();
-        if ($nestedDirectives !== []) {
-            // Each composed directive will deal with the same fields as the current directive
-            $nestedDirectiveFields = $directiveFields;
-            foreach ($nestedDirectives as $nestedDirective) {
-                $nestedDirectiveFields[$nestedDirective] = $directiveFields[$this->directive];
-            }
-            $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
-            $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
-                $nestedDirectives,
-                $nestedDirectiveFields,
-                $variables,
-                $separateEngineIterationFeedbackStore,
-            );
-            $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-            // If there is any error, then we also can't proceed with the current directive.
-            // Throw an error for this level, and underlying errors as nested
-            if ($separateEngineIterationFeedbackStore->hasErrors()) {
-                return [
-                    null, // $validDirective
-                    null, // $directiveName
-                    null, // $directiveArgs
-                ];
-            }
+        if ($nestedDirectives === []) {
+            return;
         }
 
-        return parent::dissectAndValidateDirectiveForSchema(
-            $relationalTypeResolver,
-            $directiveFields,
+        /**
+         * Each composed directive will deal with the same fields
+         * as the current directive.
+         *
+         * @var SplObjectStorage<Directive,FieldInterface[]>
+         */
+        $nestedDirectiveFields = new SplObjectStorage();
+        foreach ($nestedDirectives as $nestedDirective) {
+            $nestedDirectiveFields[$nestedDirective] = $fields;
+        }
+        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+        $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
+            $nestedDirectives,
+            $nestedDirectiveFields,
             $variables,
-            $engineIterationFeedbackStore,
+            $separateEngineIterationFeedbackStore,
         );
+        $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
+        $this->setHasValidationErrors($separateEngineIterationFeedbackStore->hasErrors());
     }
 
     /**

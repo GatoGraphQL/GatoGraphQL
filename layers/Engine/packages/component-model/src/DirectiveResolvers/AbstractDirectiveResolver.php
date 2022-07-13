@@ -235,7 +235,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $fields,
             $engineIterationFeedbackStore,
         );
-        $this->hasValidationErrors = $this->directiveData === null;
+        $this->setHasValidationErrors($this->directiveData === null);
     }
 
     /**
@@ -245,6 +245,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function hasValidationErrors(): bool
     {
         return $this->hasValidationErrors;
+    }
+
+    protected function setHasValidationErrors(bool $hasValidationErrors): void
+    {
+        $this->hasValidationErrors = $hasValidationErrors;
     }
 
     /**
