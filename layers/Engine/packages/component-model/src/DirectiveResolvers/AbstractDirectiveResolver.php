@@ -749,6 +749,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
+     * Combine the directiveArgs with the object's expressions
+     *
+     * @param array<string,mixed> $expressions
+     * @return array<string,mixed>
+     */
+    protected function getObjectDirectiveArgs(array $expressions): array
+    {
+        return array_merge(
+            $this->directiveArgs,
+            $expressions
+        );
+    }
+
+    /**
      * @return mixed[]
      */
     protected function getExpressionsForObject(int | string $id, array $variables, array $messages): array
