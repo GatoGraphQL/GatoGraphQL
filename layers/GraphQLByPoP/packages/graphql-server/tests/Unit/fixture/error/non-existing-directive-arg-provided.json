@@ -4,18 +4,24 @@
       "message": "On directive 'skip', there is no argument with name 'unless'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 23
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "id<skip(if: false, unless: true)>",
-        "code": "PoP\\Root\\e1"
+        "field": "id @skip(if: false, unless: true)",
+        "path": [
+          "(unless: true)",
+          "@skip(if: false, unless: true)",
+          "id @skip(if: false, unless: true)",
+          "query { ... }"
+        ],
+        "code": "PoP\\ComponentModel\\e28"
       }
     }
   ],
   "data": {
-    "id": "root"
+    "id": null
   }
 }
