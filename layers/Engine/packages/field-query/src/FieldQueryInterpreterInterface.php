@@ -21,5 +21,4 @@ interface FieldQueryInterpreterInterface
      * @return array<string, int>|null
      */
     public function getFieldAliasPositionSpanInField(string $field): ?array;
-    public function wrapStringInQuotes(string $value): string;
 }
