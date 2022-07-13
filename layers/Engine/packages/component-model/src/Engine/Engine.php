@@ -2137,7 +2137,7 @@ class Engine implements EngineInterface
         foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
                 $objectFeedbackEntriesStorage = $objectFeedbackEntries[$id] ?? new SplObjectStorage();
-                $fieldObjectFeedbackEntries = $objectFeedbackEntries[$id][$field] ?? [];
+                $fieldObjectFeedbackEntries = $objectFeedbackEntriesStorage[$field] ?? [];
                 $fieldObjectFeedbackEntries[] = $entry;
                 $objectFeedbackEntriesStorage[$field] = $fieldObjectFeedbackEntries;
                 $objectFeedbackEntries[$id] = $objectFeedbackEntriesStorage;
