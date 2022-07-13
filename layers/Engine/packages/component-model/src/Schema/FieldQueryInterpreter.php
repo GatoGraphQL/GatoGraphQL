@@ -310,19 +310,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldOrDirectiveArgs;
     }
 
-    protected function castDirectiveArgumentsForSchema(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $fieldDirective,
-        array $directiveArgs,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        bool $disableDynamicFields = false
-    ): array {
-        // If the directive doesn't allow dynamic fields (Eg: <cacheControl(maxAge:id())>), then treat it as not for schema
-        $forSchema = !$disableDynamicFields;
-        return $this->castDirectiveArguments($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore, $forSchema);
-    }
-
     protected function castDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
