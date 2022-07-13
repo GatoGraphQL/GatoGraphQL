@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class Literal extends AbstractAst implements CoercibleArgumentValueAstInterface
+class Literal extends AbstractAst implements ArgumentValueAstInterface
 {
     public function __construct(
         protected string|int|float|bool|null $value,

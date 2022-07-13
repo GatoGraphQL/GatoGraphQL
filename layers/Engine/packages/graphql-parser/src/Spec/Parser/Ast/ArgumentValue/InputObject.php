@@ -11,7 +11,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use stdClass;
 
-class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterface, WithAstValueInterface
+class InputObject extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
     protected ?stdClass $cachedValue = null;
 
