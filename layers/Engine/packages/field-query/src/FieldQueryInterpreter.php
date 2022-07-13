@@ -294,11 +294,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         ];
     }
 
-    public function getFieldDirectiveArgs(string $fieldDirective): ?string
-    {
-        return $this->getFieldArgs($fieldDirective);
-    }
-
     /**
      * This is the base implementation. Override function whenever
      * the object does not contain `__serialize`
