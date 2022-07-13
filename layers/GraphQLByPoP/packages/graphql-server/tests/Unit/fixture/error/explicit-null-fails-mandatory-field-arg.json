@@ -5,13 +5,14 @@
       "locations": [
         {
           "line": 2,
-          "column": 3
+          "column": 8
         }
       ],
       "extensions": {
         "type": "QueryRoot",
         "field": "echo(value: null)",
         "path": [
+          "(value: null)",
           "echo(value: null)",
           "query { ... }"
         ],
