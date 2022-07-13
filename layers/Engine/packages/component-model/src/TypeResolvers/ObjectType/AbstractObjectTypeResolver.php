@@ -1520,7 +1520,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      *   Eg (arg `tags` is mandatory):
      *   `{ setTagsOnPost(tags: null) }` or `{ setTagsOnPost }`
-     * 
+     *
      * If the value is empty, such as '""' or [], then it's OK.
      *
      *   Eg: `{ setTagsOnPost(tags: []) }`

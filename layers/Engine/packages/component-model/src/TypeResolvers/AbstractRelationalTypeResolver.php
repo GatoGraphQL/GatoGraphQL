@@ -366,7 +366,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $variables,
                 $engineIterationFeedbackStore,
             );
-            
+
             /**
              * If the DirectiveResolver has errors, they have just been
              * added to the FeedbackStore, so just skip.
@@ -514,7 +514,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveResolver,
                     $directive,
                 );
-                
+
                 // As this instance can process the directive and the field, we found it, then end the loop
                 break;
             }

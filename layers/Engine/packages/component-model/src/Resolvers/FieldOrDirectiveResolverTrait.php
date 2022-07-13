@@ -7,9 +7,6 @@ namespace PoP\ComponentModel\Resolvers;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Translation\TranslationAPIInterface;
 

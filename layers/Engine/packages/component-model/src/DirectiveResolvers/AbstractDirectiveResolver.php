@@ -84,7 +84,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected array $directiveArgs;
     protected bool $hasValidationErrors;
-    
+
     /**
      * @var array<string,array>
      */
@@ -382,7 +382,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      *   Eg (arg `tags` is mandatory):
      *   `{ id @skip(if: null) }` or `{ id @skip }`
-     * 
+     *
      * If the value is empty, such as '""' or [], then it's OK.
      *
      *   Eg: `{ id @skip(if: "") }` <= will be coerced to `false`
