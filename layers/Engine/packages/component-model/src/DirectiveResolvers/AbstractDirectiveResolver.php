@@ -692,64 +692,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * @return FeedbackItemResolution[] Errors
-     */
-    public function resolveDirectiveValidationErrors(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        Directive $directive,
-    ): array {
-        /**
-         * Validate all mandatory args have been provided
-         */
-        $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
-        $mandatoryConsolidatedDirectiveArgNames = array_keys(array_filter(
-            $consolidatedDirectiveArgNameTypeResolvers,
-            fn (string $directiveArgName) => ($this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
-            ARRAY_FILTER_USE_KEY
-        ));
-        try {
-            /**
-             * @todo Replace with validateNotMissingFieldOrDirectiveArguments
-             * @todo Remove the try/catch then
-             */
-            if (
-                $maybeErrorFeedbackItemResolution = $this->deprecatedValidateNotMissingFieldOrDirectiveArguments(
-                    $mandatoryConsolidatedDirectiveArgNames,
-                    $directive,
-                    ResolverTypes::DIRECTIVE
-                )
-            ) {
-                return [$maybeErrorFeedbackItemResolution];
-            }
-        } catch (InvalidDynamicContextException $e) {
-            $feedbackItemResolution = new FeedbackItemResolution(
-                GenericFeedbackItemProvider::class,
-                GenericFeedbackItemProvider::E1,
-                [
-                    $e->getMessage(),
-                ]
-            );
-            return [$feedbackItemResolution];
-        }
-
-        /**
-         * Validate directive argument constraints
-         */
-        if (
-            $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
-                $relationalTypeResolver,
-            )
-        ) {
-            return $maybeErrorFeedbackItemResolutions;
-        }
-
-        // Custom validations
-        return $this->doResolveSchemaValidationErrors(
-            $relationalTypeResolver,
-        );
-    }
-
-    /**
      * Validate the constraints for the directive arguments
      *
      * @return FeedbackItemResolution[] Errors
