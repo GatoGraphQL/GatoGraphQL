@@ -106,41 +106,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     }
 
     /**
-     * Replace the fieldArgs in the field
-     *
-     * @param array<string, mixed> $fieldArgs
-     */
-    protected function replaceFieldArgs(string $field, array $fieldArgs): string
-    {
-        // Return a new field, replacing its fieldArgs (if any) with the provided ones
-        // Used when validating a field and removing the fieldArgs that threw a warning
-        list(
-            $fieldArgsOpeningSymbolPos,
-            $fieldArgsClosingSymbolPos
-        ) = QueryHelpers::listFieldArgsSymbolPositions($field);
-
-        // If it currently has fieldArgs, append the fieldArgs after the fieldName
-        if ($fieldArgsOpeningSymbolPos !== false && $fieldArgsClosingSymbolPos !== false) {
-            $fieldName = $this->getFieldName($field);
-            return substr(
-                $field,
-                0,
-                $fieldArgsOpeningSymbolPos
-            ) .
-            $this->getFieldArgsAsString($fieldArgs) .
-            substr(
-                $field,
-                $fieldArgsClosingSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING)
-            );
-        }
-
-        // Otherwise there are none. Then add the fieldArgs between the fieldName and whatever may come after
-        // (alias, directives, or nothing)
-        $fieldName = $this->getFieldName($field);
-        return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
-    }
-
-    /**
      * @return array<string, InputTypeResolverInterface>
      */
     protected function getDirectiveArgumentNameTypeResolvers(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
