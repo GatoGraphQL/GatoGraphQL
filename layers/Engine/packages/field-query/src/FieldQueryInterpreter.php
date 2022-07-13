@@ -310,35 +310,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             && str_ends_with($value, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
     }
 
-    /**
-     * If it is not a function, then wrap the string between quotes to avoid
-     * special symbols inside of it generating trouble
-     * Eg: it if has a ",", it will split the element there
-     * when decoding again from string to array in `getField`
-     */
-    protected function maybeWrapStringInQuotes(string $value): string
-    {
-        // Check if it has the quotes already, or if it is a function
-        if ($this->isStringWrappedInQuotes($value) || $this->isFieldArgumentValueDynamic($value)) {
-            return $value;
-        }
-
-        /**
-         * If it is an ENUM, don't add quotes.
-         *
-         * Because we don't know if it is or not, just assume that
-         * it's an ENUM if it's a single word where all chars
-         * are UPPERCASE or "_" (so horrible!!!!)
-         *
-         * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
-         */
-        if (preg_match('/^[A-Z][A-Z_]+$/', $value)) {
-            return $value;
-        }
-
-        return $this->wrapStringInQuotes($value);
-    }
-
     public function wrapStringInQuotes(string $value): string
     {
         return
