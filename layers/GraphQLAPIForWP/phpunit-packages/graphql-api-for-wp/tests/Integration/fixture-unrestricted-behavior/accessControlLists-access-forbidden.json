@@ -10,7 +10,11 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "accessControlLists",
+        "field": "accessControlLists { ... }",
+        "path": [
+          "accessControlLists { ... }",
+          "query GetAccessControlLists { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }

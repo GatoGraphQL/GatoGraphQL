@@ -48,7 +48,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
             return true;
         }
 
-        $roles = $this->directiveArgsForSchema['roles'];
+        $roles = $this->directiveArgs['roles'];
         $userID = App::getState('current-user-id');
         $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($userID);
         return !empty(array_intersect($roles, $userRoles));
@@ -59,7 +59,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
      */
     protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
-        $roles = $this->directiveArgsForSchema['roles'];
+        $roles = $this->directiveArgs['roles'];
         $isValidatingDirective = $this->isValidatingDirective();
         $code = (count($roles) === 1)
             ? ($isValidatingDirective ? FeedbackItemProvider::E5 : FeedbackItemProvider::E6)

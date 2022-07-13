@@ -11,6 +11,11 @@
       "extensions": {
         "type": "User",
         "field": "email",
+        "path": [
+          "email",
+          "user(by: {id: 2}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }

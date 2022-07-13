@@ -10,7 +10,11 @@
       ],
       "extensions": {
         "type": "MutationRoot",
-        "field": "post(by: {id: 13})",
+        "field": "post(by: {id: 13}) { ... }",
+        "path": [
+          "post(by: {id: 13}) { ... }",
+          "mutation { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }

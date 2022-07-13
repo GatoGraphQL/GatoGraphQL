@@ -11,6 +11,11 @@
       "extensions": {
         "type": "User",
         "field": "lastName",
+        "path": [
+          "lastName",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }

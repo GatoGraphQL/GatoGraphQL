@@ -10,9 +10,8 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "fields": [
-                    "customPosts(pagination: {limit: 3})",
-                    "validateDoesLoggedInUserHaveAnyRole(roles: [\"author\"])"
+                "path": [
+                    "@validateDoesLoggedInUserHaveAnyRole(roles: [\"author\"])"
                 ],
                 "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
             }
@@ -28,6 +27,10 @@
             "extensions": {
                 "type": "Post",
                 "field": "title",
+                "path": [
+                    "title",
+                    "fragment IsCustomPostData on IsCustomPost { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
@@ -41,15 +44,14 @@
             ],
             "extensions": {
                 "type": "Post",
-                "fields": [
-                    "customPostType",
-                    "disableAccess"
+                "path": [
+                    "@disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'comments<skip(if: false)>' for type 'Post'",
+            "message": "You must not be logged in to access directives in field(s) 'comments' for type 'Post'",
             "locations": [
                 {
                     "line": 1,
@@ -58,9 +60,8 @@
             ],
             "extensions": {
                 "type": "Post",
-                "fields": [
-                    "comments<skip(if: false)>",
-                    "validateIsUserNotLoggedInForDirectives"
+                "path": [
+                    "@validateIsUserNotLoggedInForDirectives"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
             }
@@ -76,6 +77,10 @@
             "extensions": {
                 "type": "Page",
                 "field": "title",
+                "path": [
+                    "title",
+                    "fragment IsCustomPostData on IsCustomPost { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
@@ -89,15 +94,14 @@
             ],
             "extensions": {
                 "type": "Page",
-                "fields": [
-                    "customPostType",
-                    "disableAccess"
+                "path": [
+                    "@disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'comments<skip(if: false)>' for type 'Page'",
+            "message": "You must not be logged in to access directives in field(s) 'comments' for type 'Page'",
             "locations": [
                 {
                     "line": 1,
@@ -106,9 +110,8 @@
             ],
             "extensions": {
                 "type": "Page",
-                "fields": [
-                    "comments<skip(if: false)>",
-                    "validateIsUserNotLoggedInForDirectives"
+                "path": [
+                    "@validateIsUserNotLoggedInForDirectives"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
             }
@@ -124,6 +127,11 @@
             "extensions": {
                 "type": "User",
                 "field": "websiteURL",
+                "path": [
+                    "websiteURL",
+                    "users(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
@@ -137,7 +145,12 @@
             ],
             "extensions": {
                 "type": "User",
-                "field": "self",
+                "field": "self { ... }",
+                "path": [
+                    "self { ... }",
+                    "users(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
@@ -151,9 +164,8 @@
             ],
             "extensions": {
                 "type": "User",
-                "fields": [
-                    "firstName",
-                    "validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
+                "path": [
+                    "@validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
                 ],
                 "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
             }
@@ -168,9 +180,8 @@
             ],
             "extensions": {
                 "type": "User",
-                "fields": [
-                    "lastName",
-                    "disableAccess"
+                "path": [
+                    "@disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
@@ -185,15 +196,14 @@
             ],
             "extensions": {
                 "type": "User",
-                "fields": [
-                    "name",
-                    "disableAccess"
+                "path": [
+                    "@disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'nicename<skip(if: false)>' for type 'User'",
+            "message": "You must not be logged in to access directives in field(s) 'nicename' for type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -202,9 +212,8 @@
             ],
             "extensions": {
                 "type": "User",
-                "fields": [
-                    "nicename<skip(if: false)>",
-                    "validateIsUserNotLoggedInForDirectives"
+                "path": [
+                    "@validateIsUserNotLoggedInForDirectives"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
             }

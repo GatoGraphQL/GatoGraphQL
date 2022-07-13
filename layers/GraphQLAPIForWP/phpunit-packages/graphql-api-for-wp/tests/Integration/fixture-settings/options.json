@@ -5,12 +5,17 @@
       "locations": [
         {
           "line": 2,
-          "column": 15
+          "column": 27
         }
       ],
       "extensions": {
         "type": "QueryRoot",
         "field": "adminEmail: optionValue(name: \"admin_email\")",
+        "path": [
+          "(name: \"admin_email\")",
+          "adminEmail: optionValue(name: \"admin_email\")",
+          "query { ... }"
+        ],
         "code": "PoPCMSSchema\\Settings\\e1"
       }
     }

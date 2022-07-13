@@ -7,9 +7,6 @@ namespace PoP\ComponentModel\Resolvers;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Translation\TranslationAPIInterface;
 
@@ -54,49 +51,6 @@ trait FieldOrDirectiveResolverTrait
                         implode($this->getTranslationAPI()->__('\', \''), $missing),
                         $type,
                         $fieldOrDirectiveDataAccessor->getFieldName()
-                    ]
-                );
-        }
-        return null;
-    }
-
-    /**
-     * Validate that if the key is missing or is `null`,
-     * but not if the value is empty such as '""' or [],
-     * because empty values could be allowed.
-     *
-     * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
-     *
-     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
-     * @todo Remove this function! Must use validateNotMissingFieldOrDirectiveArguments
-     */
-    private function deprecatedValidateNotMissingFieldOrDirectiveArguments(
-        array $mandatoryFieldOrDirectiveArgNames,
-        FieldInterface|Directive $fieldOrDirective,
-        string $type
-    ): ?FeedbackItemResolution {
-        $missing = array_values(array_filter(
-            $mandatoryFieldOrDirectiveArgNames,
-            fn (string $fieldArgName) => $fieldOrDirective->getArgumentValue($fieldArgName) === null
-        ));
-        if ($missing !== []) {
-            return count($missing) === 1 ?
-                new FeedbackItemResolution(
-                    ErrorFeedbackItemProvider::class,
-                    ErrorFeedbackItemProvider::E24,
-                    [
-                        $missing[0],
-                        $type,
-                        $fieldOrDirective->getName()
-                    ]
-                )
-                : new FeedbackItemResolution(
-                    ErrorFeedbackItemProvider::class,
-                    ErrorFeedbackItemProvider::E25,
-                    [
-                        implode($this->getTranslationAPI()->__('\', \''), $missing),
-                        $type,
-                        $fieldOrDirective->getName()
                     ]
                 );
         }

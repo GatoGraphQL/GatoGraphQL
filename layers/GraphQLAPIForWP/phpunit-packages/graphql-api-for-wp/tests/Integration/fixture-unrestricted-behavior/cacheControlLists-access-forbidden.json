@@ -10,7 +10,11 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "cacheControlLists",
+        "field": "cacheControlLists { ... }",
+        "path": [
+          "cacheControlLists { ... }",
+          "query GetCacheControlLists { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }

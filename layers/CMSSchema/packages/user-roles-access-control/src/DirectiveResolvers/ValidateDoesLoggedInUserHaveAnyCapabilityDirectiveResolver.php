@@ -48,7 +48,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
             return true;
         }
 
-        $capabilities = $this->directiveArgsForSchema['capabilities'];
+        $capabilities = $this->directiveArgs['capabilities'];
         $userID = App::getState('current-user-id');
         $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($userID);
         return !empty(array_intersect($capabilities, $userCapabilities));
@@ -59,7 +59,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
      */
     protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
-        $capabilities = $this->directiveArgsForSchema['capabilities'];
+        $capabilities = $this->directiveArgs['capabilities'];
         $isValidatingDirective = $this->isValidatingDirective();
         $code = (count($capabilities) === 1)
             ? ($isValidatingDirective ? FeedbackItemProvider::E1 : FeedbackItemProvider::E2)

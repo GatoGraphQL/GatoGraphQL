@@ -4,27 +4,41 @@
             "message": "Cannot cast value '1.1' for type 'Boolean'",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 3,
+                    "column": 27
                 }
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "withFloat: id<skip(if: 1.1)>",
+                "field": "withFloat: id @skip(if: 1.1)",
+                "path": [
+                    "1.1",
+                    "(if: 1.1)",
+                    "@skip(if: 1.1)",
+                    "withFloat: id @skip(if: 1.1)",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
         {
-            "message": "Argument 'if' does not expect an array, but array '[\"true\"]' was provided",
+            "message": "Argument 'if' does not expect an array, but array '[true]' was provided",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 4,
+                    "column": 27
                 }
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "withFloat: id<skip(if: 1.1)>",
+                "field": "withArray: id @skip(if: [true])",
+                "path": [
+                    "[true]",
+                    "(if: [true])",
+                    "@skip(if: [true])",
+                    "withArray: id @skip(if: [true])",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e8"
             }
         },
@@ -32,13 +46,20 @@
             "message": "An object cannot be casted to type 'Boolean'",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 5,
+                    "column": 33
                 }
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "withFloat: id<skip(if: 1.1)>",
+                "field": "withInputObject: id @skip(if: {condition: false})",
+                "path": [
+                    "{condition: false}",
+                    "(if: {condition: false})",
+                    "@skip(if: {condition: false})",
+                    "withInputObject: id @skip(if: {condition: false})",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e1"
             }
         }

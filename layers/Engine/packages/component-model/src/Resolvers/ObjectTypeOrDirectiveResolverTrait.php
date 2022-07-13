@@ -6,12 +6,9 @@ namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use stdClass;
@@ -82,32 +79,6 @@ trait ObjectTypeOrDirectiveResolverTrait
             $fieldOrDirectiveData[$argName] = $argDefaultValue;
         }
         return $fieldOrDirectiveData;
-    }
-
-    /**
-     * @todo Fix integrate with Directive
-     * @todo Replace with addDefaultFieldOrDirectiveArguments
-     * @param array<string,mixed> $argumentNameDefaultValues
-     */
-    final protected function deprecatedIntegrateDefaultFieldOrDirectiveArguments(
-        FieldInterface|Directive $fieldOrDirective,
-        array $argumentNameDefaultValues,
-    ): void {
-        foreach ($argumentNameDefaultValues as $argName => $argValue) {
-            // If the argument does not exist, add a new one
-            if ($fieldOrDirective->hasArgument($argName)) {
-                continue;
-            }
-
-            $directiveArgValueAST = $this->getArgumentValueAsAST($argValue);
-            $fieldOrDirective->addArgument(
-                new Argument(
-                    $argName,
-                    $directiveArgValueAST,
-                    LocationHelper::getNonSpecificLocation()
-                )
-            );
-        }
     }
 
     final protected function getArgumentValueAsAST(mixed $argumentValue): WithValueInterface

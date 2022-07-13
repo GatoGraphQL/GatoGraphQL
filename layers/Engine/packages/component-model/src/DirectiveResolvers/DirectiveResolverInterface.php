@@ -29,15 +29,30 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function getDirectiveName(): string;
     public function getDirective(): Directive;
     /**
-     * Set the Directive to be resolved by the DirectiveResolver,
-     * and initialize the Directive with additional information,
-     * such as adding the default Argument AST objects which
-     * were not provided in the query.
+     * Set the Directive to be resolved by the DirectiveResolver.
      */
-    public function setAndPrepareDirective(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+    public function setDirective(
         Directive $directive,
     ): void;
+    /**
+     * Validate and initialize the Directive, such as adding
+     * the default values for Arguments which were not provided
+     * in the query.
+     *
+     * @param FieldInterface[] $fields
+     * @param array<string,mixed> $variables
+     */
+    public function prepareDirective(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
+        array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void;
+    /**
+     * After calling `prepareDirective`, indicate if casting
+     * the Directive Arguments produced any error.
+     */
+    public function hasValidationErrors(): bool;
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
@@ -62,30 +77,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * By default, use the Query type
      */
     public function getDirectiveKind(): string;
-    /**
-     * Extract and validate the directive arguments
-     *
-     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     */
-    public function dissectAndValidateDirectiveForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        SplObjectStorage $directiveFields,
-        array &$variables,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array;
-
-    /**
-     * Enable the directiveResolver to validate the directive arguments in a custom way
-     *
-     * @param FieldInterface[] $fields
-     */
-    public function validateDirectiveArgumentsForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs,
-        array $fields,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array;
 
     /**
      * Define where to place the directive in the directive execution pipeline
@@ -176,13 +167,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function hasDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface;
 
-    /**
-     * @return FeedbackItemResolution[] Errors
-     */
-    public function resolveDirectiveValidationErrors(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        Directive $directive,
-    ): array;
     public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution;
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     /**

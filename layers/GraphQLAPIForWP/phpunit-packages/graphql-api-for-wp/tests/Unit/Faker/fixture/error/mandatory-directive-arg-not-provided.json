@@ -17,7 +17,7 @@
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e24"
+        "code": "PoP\\ComponentModel\\e30"
       }
     },
     {
@@ -37,7 +37,7 @@
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e24"
+        "code": "PoP\\ComponentModel\\e30"
       }
     }
   ],

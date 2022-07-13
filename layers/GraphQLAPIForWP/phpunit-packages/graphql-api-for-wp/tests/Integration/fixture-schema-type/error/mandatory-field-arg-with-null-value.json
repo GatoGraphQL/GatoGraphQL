@@ -5,12 +5,18 @@
             "locations": [
                 {
                     "line": 8,
-                    "column": 5
+                    "column": 12
                 }
             ],
             "extensions": {
                 "type": "User",
-                "field": "avatar(size: null)",
+                "field": "avatar(size: null) { ... }",
+                "path": [
+                    "(size: null)",
+                    "avatar(size: null) { ... }",
+                    "user(by: {id: 1}) { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e29"
             }
         }

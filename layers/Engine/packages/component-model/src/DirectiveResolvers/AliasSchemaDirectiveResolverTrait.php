@@ -216,48 +216,6 @@ trait AliasSchemaDirectiveResolverTrait
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
-     *
-     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     */
-    public function dissectAndValidateDirectiveForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        SplObjectStorage $directiveFields,
-        array &$variables,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->dissectAndValidateDirectiveForSchema(
-            $relationalTypeResolver,
-            $directiveFields,
-            $variables,
-            $engineIterationFeedbackStore,
-        );
-    }
-
-    /**
-     * Proxy pattern: execute same function on the aliased DirectiveResolver
-     *
-     * @param FieldInterface[] $fields
-     */
-    public function validateDirectiveArgumentsForSchema(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs,
-        array $fields,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->validateDirectiveArgumentsForSchema(
-            $relationalTypeResolver,
-            $directiveName,
-            $directiveArgs,
-            $fields,
-            $engineIterationFeedbackStore,
-        );
-    }
-
-    /**
-     * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
     public function getPipelinePosition(): string
     {

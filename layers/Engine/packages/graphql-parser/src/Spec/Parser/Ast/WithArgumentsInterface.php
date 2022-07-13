@@ -20,11 +20,6 @@ interface WithArgumentsInterface extends AstInterface
     public function getArgumentValue(string $name): mixed;
 
     /**
-     * @internal Method used by the Engine to add default arguments. Don't call otherwise!
-     */
-    public function addArgument(Argument $argument): void;
-
-    /**
      * @return array<string,mixed>
      */
     public function getArgumentKeyValues(): array;

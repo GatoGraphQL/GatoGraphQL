@@ -10,9 +10,8 @@
       ],
       "extensions": {
         "type": "User",
-        "fields": [
-          "lastName",
-          "disableAccess"
+        "path": [
+          "@disableAccess"
         ],
         "code": "PoP\\AccessControl\\e2"
       }

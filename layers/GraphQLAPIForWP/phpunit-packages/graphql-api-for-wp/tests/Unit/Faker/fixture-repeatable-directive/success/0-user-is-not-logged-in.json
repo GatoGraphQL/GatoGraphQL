@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "You must be logged in to access field(s) 'hi: echo(value: \"Hi there\")<validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])>', 'self<validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"])>' for type 'QueryRoot'",
+      "message": "You must be logged in to access field(s) 'hi: echo(value: \"Hi there\")', 'self' for type 'QueryRoot'",
       "locations": [
         {
           "line": 1,
@@ -17,7 +17,7 @@
       }
     },
     {
-      "message": "You must be logged in to access field(s) 'hi: echo(value: \"Hi there\")<validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])>', 'self<validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"])>' for type 'QueryRoot'",
+      "message": "You must be logged in to access field(s) 'hi: echo(value: \"Hi there\")', 'self' for type 'QueryRoot'",
       "locations": [
         {
           "line": 1,

@@ -783,12 +783,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($fieldSchemaDefinition === null) {
             return null;
         }
-        $fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
-        if ($fieldArgsSchemaDefinition === null) {
-            return null;
-        }
-
-        return $fieldArgsSchemaDefinition;
+        return $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
@@ -1323,18 +1318,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         try {
             $fieldData = $field->getArgumentKeyValues();
         } catch (InvalidDynamicContextException $invalidDynamicContextException) {
+            $dynamicVariableReference = $invalidDynamicContextException->getDynamicVariableReference();
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E31,
                         [
-                            $field->getName(),
-                            $this->getMaybeNamespacedTypeName(),
+                            $dynamicVariableReference->getName(),
                             $invalidDynamicContextException->getMessage(),
                         ]
                     ),
-                    $invalidDynamicContextException->getDynamicVariableReference(),
+                    $dynamicVariableReference,
                 )
             );
             return null;
@@ -1521,11 +1516,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * Validate that if the key is missing or is `null`,
-     * but not if the value is empty such as '""' or [],
-     * because empty values could be allowed.
+     * If the key is missing or is `null` then it's an error.
      *
-     * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
+     *   Eg (arg `tags` is mandatory):
+     *   `{ setTagsOnPost(tags: null) }` or `{ setTagsOnPost }`
+     *
+     * If the value is empty, such as '""' or [], then it's OK.
+     *
+     *   Eg: `{ setTagsOnPost(tags: []) }`
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
      */
@@ -1540,21 +1538,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $mandatoryFieldArgNames,
             fn (string $fieldArgName) => ($fieldData[$fieldArgName] ?? null) === null
         ));
-        if ($missingMandatoryFieldArgNames !== []) {
+        foreach ($missingMandatoryFieldArgNames as $missingMandatoryFieldArgName) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E29,
                         [
-                            count($missingMandatoryFieldArgNames) === 1
-                                ? $missingMandatoryFieldArgNames[0]
-                                : implode($this->getTranslationAPI()->__('\', \''), $missingMandatoryFieldArgNames),
+                            $missingMandatoryFieldArgName,
                             $field->getName(),
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    $field,
+                    $field->getArgument($missingMandatoryFieldArgName) ?? $field,
                 )
             );
         }
@@ -1608,7 +1604,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
             $astNode = $field->getArgument($argName) ?? $field;
             /**
-             * If the field is an InputObject, let it perform validations on its input fields.
+             * If the arg is an InputObject, let it perform validations on its input fields.
              */
             if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface) {
                 $fieldArgTypeResolver->validateInputValue(
