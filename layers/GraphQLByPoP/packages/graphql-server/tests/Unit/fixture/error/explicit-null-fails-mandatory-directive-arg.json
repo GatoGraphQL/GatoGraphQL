@@ -5,18 +5,19 @@
       "locations": [
         {
           "line": 2,
-          "column": 7
+          "column": 12
         }
       ],
       "extensions": {
         "type": "QueryRoot",
         "field": "id @skip(if: null)",
         "path": [
+          "(if: null)",
           "@skip(if: null)",
           "id @skip(if: null)",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e24"
+        "code": "PoP\\ComponentModel\\e30"
       }
     }
   ],
