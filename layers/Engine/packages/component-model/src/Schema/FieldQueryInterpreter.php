@@ -105,58 +105,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return (string)hash('crc32', json_encode($variables ?? []));
     }
 
-    public function extractDirectiveArguments(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $fieldDirective,
-        array $variables,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        $variablesHash = $this->getVariablesHash($variables);
-        $relationalTypeResolverClass = get_class($relationalTypeResolver);
-        /**
-         * @todo The cache was commented because it doesn't contain the Errors, and this method is called more than once, so the 2nd time fieldArgs will be `null` and produce exception
-         */
-        // if (!isset($this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash])) {
-            $this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash] = $this->doExtractDirectiveArguments(
-                $directiveResolver,
-                $relationalTypeResolver,
-                $fieldDirective,
-                $variables,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        // }
-        return $this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash];
-    }
-
-    protected function doExtractDirectiveArguments(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $fieldDirective,
-        ?array $variables,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($directiveResolver, $relationalTypeResolver);
-        // Iterate all the elements, and extract them into the array
-        if ($directiveArgElems = QueryHelpers::getFieldArgElements($this->getFieldDirectiveArgs($fieldDirective))) {
-            $directiveArgumentNameTypeResolvers = $this->getDirectiveArgumentNameTypeResolvers($directiveResolver, $relationalTypeResolver);
-            $orderedDirectiveArgNamesEnabled = $directiveResolver->enableOrderedSchemaDirectiveArgs($relationalTypeResolver);
-            return $this->extractAndValidateFielOrDirectiveArguments(
-                $relationalTypeResolver,
-                $fieldDirective,
-                $directiveArgElems,
-                $orderedDirectiveArgNamesEnabled,
-                $directiveArgumentNameTypeResolvers,
-                $directiveArgumentNameDefaultValues,
-                $variables,
-                $objectTypeFieldResolutionFeedbackStore,
-                ResolverTypes::DIRECTIVE
-            );
-        }
-
-        return $directiveArgumentNameDefaultValues;
-    }
-
     /**
      * Extract the arguments for either the field or directive.
      * If the argument name has not been provided,
