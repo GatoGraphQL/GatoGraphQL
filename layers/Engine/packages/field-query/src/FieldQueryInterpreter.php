@@ -303,13 +303,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return $object->__serialize();
     }
 
-    protected function isStringWrappedInQuotes(string $value): bool
-    {
-        return
-            str_starts_with($value, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING)
-            && str_ends_with($value, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
-    }
-
     public function wrapStringInQuotes(string $value): string
     {
         return
