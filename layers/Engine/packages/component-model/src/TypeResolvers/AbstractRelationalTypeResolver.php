@@ -306,7 +306,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 implode(
                                     $this->__('\', \'', 'component-model'),
                                     array_map(
-                                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                                        fn (FieldInterface $field) => $field->asASTNodeString(),
                                         $directiveFields[$directive]
                                     )
                                 ),
@@ -334,7 +334,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                         fn (Argument $argument) => $argument->asQueryString(),
                                         $directive->getArguments()
                                     )),
-                                    $field->asFieldOutputQueryString(),
+                                    $field->asASTNodeString(),
                                 ]
                             ),
                             $directive,
@@ -439,7 +439,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                         implode(
                                             '\', \'',
                                             array_map(
-                                                fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                                                fn (FieldInterface $field) => $field->asASTNodeString(),
                                                 $alreadyProcessingFields
                                             )
                                         ),

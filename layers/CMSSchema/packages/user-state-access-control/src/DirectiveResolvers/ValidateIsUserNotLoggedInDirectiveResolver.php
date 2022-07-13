@@ -52,7 +52,7 @@ class ValidateIsUserNotLoggedInDirectiveResolver extends AbstractValidateCheckpo
                 implode(
                     $this->__('\', \''),
                     array_map(
-                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                        fn (FieldInterface $field) => $field->asASTNodeString(),
                         $failedFields
                     )
                 ),

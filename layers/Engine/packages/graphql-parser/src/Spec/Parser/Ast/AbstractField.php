@@ -67,7 +67,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface, With
         if ($this->uniqueID === null) {
             $location = $this->getLocation();
             $locationComment = ' # Location: ' . $location->getLine() . 'x' . $location->getColumn();
-            $this->uniqueID = $this->asFieldOutputQueryString() . $locationComment;
+            $this->uniqueID = $this->asASTNodeString() . $locationComment;
         }
         return $this->uniqueID;
     }

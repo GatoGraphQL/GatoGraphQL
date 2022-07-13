@@ -76,7 +76,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
                 implode(
                     $this->__('\', \''),
                     array_map(
-                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                        fn (FieldInterface $field) => $field->asASTNodeString(),
                         $failedFields
                     )
                 ),
