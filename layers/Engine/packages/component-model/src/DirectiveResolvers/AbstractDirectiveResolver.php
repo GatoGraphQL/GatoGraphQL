@@ -202,16 +202,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * If a directive does not operate over the objects, then it must not allow to add fields or dynamic values in the directive arguments
-     * Otherwise, it can lead to errors, since the field would never be transformed/casted to the expected type
-     * Eg: <cacheControl(maxAge:id())>
-     */
-    protected function disableDynamicFieldsFromDirectiveArgs(): bool
-    {
-        return false;
-    }
-
-    /**
      * Initialize the Directive with additional information,
      * such as adding the default Argument AST objects which
      * were not provided in the query.

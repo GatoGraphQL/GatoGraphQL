@@ -125,15 +125,6 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     }
 
     /**
-     * Do not allow dynamic fields, or it may throw an exception
-     * Eg: <cacheControl(maxAge:id())>
-     */
-    protected function disableDynamicFieldsFromDirectiveArgs(): bool
-    {
-        return true;
-    }
-
-    /**
      * Get the cache control for this field, and set it on the Engine
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
