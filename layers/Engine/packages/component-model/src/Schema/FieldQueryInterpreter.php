@@ -140,37 +140,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
     }
 
-    protected function extractFieldOrDirectiveArgumentsForObject(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        object $object,
-        array $fieldOrDirectiveArgs,
-        ?array $variables,
-        ?array $expressions,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        // Only need to extract arguments if they have fields or arrays
-        if (
-            FieldQueryUtils::isAnyFieldArgumentValueDynamic(
-                array_values(
-                    $fieldOrDirectiveArgs
-                )
-            )
-        ) {
-            foreach ($fieldOrDirectiveArgs as $fieldOrDirectiveArgName => $fieldOrDirectiveArgValue) {
-                $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-                $fieldOrDirectiveArgValue = $this->maybeResolveFieldArgumentValueForObject($relationalTypeResolver, $object, $fieldOrDirectiveArgValue, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
-                $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-                // Validate it
-                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                    $fieldOrDirectiveArgs[$fieldOrDirectiveArgName] = null;
-                    continue;
-                }
-                $fieldOrDirectiveArgs[$fieldOrDirectiveArgName] = $fieldOrDirectiveArgValue;
-            }
-        }
-        return $fieldOrDirectiveArgs;
-    }
-
     protected function castDirectiveArguments(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
