@@ -19,25 +19,9 @@ use stdClass;
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
     /**
-     * @var array<string, array>
-     */
-    private array $extractedFieldArgumentsCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $extractedDirectiveArgumentsCache = [];
-    /**
-     * @var array<string, array<string, array<string, InputTypeResolverInterface>|null>>
-     */
-    private array $fieldArgumentNameTypeResolversCache = [];
-    /**
      * @var array<string, array<string, array<string, InputTypeResolverInterface>>>
      */
     private array $directiveArgumentNameTypeResolversCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $fieldArgumentNameDefaultValuesCache = [];
     /**
      * @var array<string, array>
      */

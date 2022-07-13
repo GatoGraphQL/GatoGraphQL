@@ -385,7 +385,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      *   Eg: `{ id @skip(if: "") }` <= will be coerced to `false`
      *
-     * @param array<string,mixed> $fieldArgsSchemaDefinition
+     * @param array<string,mixed> $directiveArgsSchemaDefinition
      * @param FieldInterface[] $fields
      */
     private function validateNonMissingMandatoryDirectiveArguments(

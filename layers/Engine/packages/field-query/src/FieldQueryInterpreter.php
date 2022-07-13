@@ -12,20 +12,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
     use BasicServiceTrait;
 
-    // Cache the output from functions
-    /**
-     * @var array<string, string>
-     */
-    private array $fieldNamesCache = [];
-    /**
-     * @var array<string, string|null>
-     */
-    private array $fieldArgsCache = [];
-    /**
-     * @var array<string, array<string, int>|null>
-     */
-    private array $fieldAliasPositionSpansCache = [];
-
     public final const ALIAS_POSITION_KEY = 'pos';
     public final const ALIAS_LENGTH_KEY = 'length';
 
