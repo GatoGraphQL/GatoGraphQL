@@ -49,50 +49,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return $this->queryParser ??= $this->instanceManager->getInstance(QueryParserInterface::class);
     }
 
-    public function getFieldName(string $field): string
-    {
-        if (!isset($this->fieldNamesCache[$field])) {
-            $this->fieldNamesCache[$field] = $this->doGetFieldName($field);
-        }
-        return $this->fieldNamesCache[$field];
-    }
-
-    protected function doGetFieldName(string $field): string
-    {
-        // Successively search for the position of some edge symbol
-        // Everything before "@" (for the alias)
-        $pos = QueryHelpers::findFieldAliasSymbolPosition($field);
-        if ($pos !== false) {
-            $field = trim(substr($field, $pos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)));
-        }
-
-        // Everything before "(" (for the fieldArgs)
-        list($pos) = QueryHelpers::listFieldArgsSymbolPositions($field);
-        // Everything before "?" (for "skip output if null")
-        if ($pos === false) {
-            $pos = QueryHelpers::findSkipOutputIfNullSymbolPosition($field);
-        }
-        // Everything before "<" (for the field directive)
-        if ($pos === false) {
-            list($pos) = QueryHelpers::listFieldDirectivesSymbolPositions($field);
-        }
-        // If the field name is missing, show an error
-        if ($pos === 0) {
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->__('Name in \'%s\' is missing', 'field-query'),
-                $field
-            ));
-            return '';
-        }
-        // Extract the query until the found position
-        if ($pos !== false) {
-            return trim(substr($field, 0, $pos));
-        }
-        // No fieldArgs, no alias => The field is the fieldName
-        // Do trim for it there is a space, passed from copy/pasting the query in the browser (eg: "if (...)")
-        return trim($field);
-    }
-
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool
     {
         /**
