@@ -2139,7 +2139,8 @@ class Engine implements EngineInterface
                 /** @var SplObjectStorage<FieldInterface,mixed> */
                 $idTargetObjectFeedbackEntries = $targetIterationObjectFeedbackEntries[$idTargetObjectTypeResolver] ?? new SplObjectStorage();
                 foreach ($fieldSet->fields as $field) {
-                    if (!$iterationObjectFeedbackEntries->contains($relationalTypeResolver)
+                    if (
+                        !$iterationObjectFeedbackEntries->contains($relationalTypeResolver)
                         || !$iterationObjectFeedbackEntries[$relationalTypeResolver]->contains($field)
                     ) {
                         continue;
