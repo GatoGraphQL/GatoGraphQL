@@ -380,7 +380,7 @@ class Document implements DocumentInterface
                                 $variableName,
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation()
+                        $variable->getLocation()
                     );
                 }
                 $variableNames[] = $variableName;
