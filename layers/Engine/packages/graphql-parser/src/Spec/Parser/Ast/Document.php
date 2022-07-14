@@ -12,7 +12,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
@@ -111,7 +111,7 @@ class Document implements DocumentInterface
                     GraphQLSpecErrorFeedbackItemProvider::class,
                     GraphQLSpecErrorFeedbackItemProvider::E_6_1_C,
                 ),
-                LocationHelper::getNonSpecificLocation()
+                new Location(1, 1)
             );
         }
     }
@@ -127,7 +127,7 @@ class Document implements DocumentInterface
                     GraphQLSpecErrorFeedbackItemProvider::class,
                     GraphQLSpecErrorFeedbackItemProvider::E_6_1_D,
                 ),
-                LocationHelper::getNonSpecificLocation()
+                new Location(1, 1)
             );
         }
     }
@@ -149,7 +149,7 @@ class Document implements DocumentInterface
                             $operationName,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $operation->getLocation()
                 );
             }
             $operationNames[] = $operationName;
@@ -171,7 +171,7 @@ class Document implements DocumentInterface
                         GraphQLSpecErrorFeedbackItemProvider::class,
                         GraphQLSpecErrorFeedbackItemProvider::E_5_2_2_1,
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $operation->getLocation()
                 );
             }
         }
@@ -273,7 +273,7 @@ class Document implements DocumentInterface
                             $fragmentName,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $fragment->getLocation()
                 );
             }
             $fragmentNames[] = $fragmentName;
@@ -379,7 +379,7 @@ class Document implements DocumentInterface
                                 $variableName,
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation()
+                        $variable->getLocation()
                     );
                 }
                 $variableNames[] = $variableName;

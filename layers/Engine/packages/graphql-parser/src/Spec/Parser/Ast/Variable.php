@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
@@ -15,6 +14,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 
@@ -130,19 +130,16 @@ class Variable extends AbstractAst implements WithValueInterface
      *
      * @return InputList|InputObject|Literal|Enum|null
      * @throws InvalidRequestException
+     * @throws ShouldNotHappenException When context not set
      */
     public function getValue(): mixed
     {
         if ($this->context === null) {
-            throw new InvalidRequestException(
-                new FeedbackItemResolution(
-                    FeedbackItemProvider::class,
-                    FeedbackItemProvider::E2,
-                    [
-                        $this->name,
-                    ]
-                ),
-                $this->getLocation()
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Context has not been set for Variable object (with name \'%s\')', 'graphql-server'),
+                    $this->name,
+                )
             );
         }
         if ($this->context->hasVariableValue($this->name)) {

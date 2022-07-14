@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Execution;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Exception\ShouldNotHappenException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class ExecutableDocument implements ExecutableDocumentInterface
@@ -86,19 +85,22 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     protected function assertAndGetRequestedOperations(): array
     {
+        $operations = $this->document->getOperations();
         if ($this->context->getOperationName() === '') {
             // It can't be 0, or validation already fails in Document
-            if (count($this->document->getOperations()) > 1) {
+            $operationCount = count($operations);
+            if ($operationCount > 1) {
+                $lastOperation = $operations[$operationCount - 1];
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLSpecErrorFeedbackItemProvider::class,
                         GraphQLSpecErrorFeedbackItemProvider::E_6_1_B,
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $lastOperation->getLocation()
                 );
             }
             // There is exactly 1 operation
-            return $this->document->getOperations();
+            return $operations;
         }
 
         $requestedOperations = array_values(array_filter(
@@ -106,6 +108,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName()
         ));
         if ($requestedOperations === []) {
+            $firstOperation = $operations[0];
             throw new InvalidRequestException(
                 new FeedbackItemResolution(
                     GraphQLSpecErrorFeedbackItemProvider::class,
@@ -114,7 +117,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                          $this->context->getOperationName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation()
+                $firstOperation->getLocation()
             );
         }
         return $requestedOperations;
@@ -170,19 +173,16 @@ class ExecutableDocument implements ExecutableDocumentInterface
     /**
      * @return OperationInterface[]
      * @throws InvalidRequestException
+     * @throws ShouldNotHappenException When this function is not executed with the expected sequence
      */
     public function getRequestedOperations(): array
     {
         if ($this->requestedOperations === null) {
-            throw new InvalidRequestException(
-                new FeedbackItemResolution(
-                    FeedbackItemProvider::class,
-                    FeedbackItemProvider::E1,
-                    [
-                         __FUNCTION__,
-                    ]
-                ),
-                LocationHelper::getNonSpecificLocation()
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Before executing `%s`, must call `validateAndInitialize`', 'graphql-server'),
+                    __FUNCTION__,
+                )
             );
         }
         return $this->requestedOperations;
