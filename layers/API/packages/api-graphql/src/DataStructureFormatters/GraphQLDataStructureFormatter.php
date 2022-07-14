@@ -116,15 +116,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function reformatObjectEntries(array $entries): array
     {
         $ret = [];
-        foreach ($entries as $typeOutputKey => $id_fieldItems) {
-            foreach ($id_fieldItems as $id => $fieldItems) {
-                /** @var FieldInterface $field */
-                foreach ($fieldItems as $field) {
-                    /** @var array<string,mixed> */
-                    $items = $fieldItems[$field];
-                    foreach ($items as $item) {
-                        $ret[] = $this->getObjectEntry($typeOutputKey, $id, $item);
-                    }
+        foreach ($entries as $typeOutputKey => $fieldItems) {
+            /** @var FieldInterface $field */
+            foreach ($fieldItems as $field) {
+                /** @var array<string,mixed> */
+                $items = $fieldItems[$field];
+                foreach ($items as $item) {
+                    $ret[] = $this->getObjectEntry($typeOutputKey, $item);
                 }
             }
         }
@@ -139,7 +137,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
-    protected function getObjectEntry(string $typeOutputKey, string|int $id, array $item): array
+    protected function getObjectEntry(string $typeOutputKey, array $item): array
     {
         $entry = [];
         if ($message = $item[Tokens::MESSAGE] ?? null) {
@@ -150,7 +148,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
         if (
             $extensions = array_merge(
-                $this->getObjectEntryExtensions($typeOutputKey, $id, $item),
+                $this->getObjectEntryExtensions($typeOutputKey, $item),
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
@@ -159,7 +157,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
-    protected function getObjectEntryExtensions(string $typeOutputKey, int|string $id, array $item): array
+    protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
     {
         $extensions = [
             'type' => $typeOutputKey,
@@ -167,7 +165,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($field = $item[Tokens::FIELD] ?? null) {
             $extensions['field'] = $field;
         }
-        $extensions['id'] = $id;
+        /** @var array<string|int> */
+        $ids = $item[Tokens::IDS];
+        if (count($ids) === 1) {
+            $extensions['id'] = $ids[0];
+        } else {
+            $extensions['ids'] = implode(
+                $this->__(', ', 'api-graphql'),
+                $ids
+            );
+        }
         $extensions['path'] = $item[Tokens::PATH];
         return $extensions;
     }

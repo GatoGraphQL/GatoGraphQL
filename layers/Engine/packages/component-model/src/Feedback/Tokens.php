@@ -11,4 +11,5 @@ class Tokens
     public const EXTENSIONS = 'extensions';
     public const PATH = 'path';
     public const FIELD = 'field';
+    public const IDS = 'ids';
 }

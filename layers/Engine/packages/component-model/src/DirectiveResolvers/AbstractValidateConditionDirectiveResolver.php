@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
-use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -83,7 +82,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @param FieldInterface[]
+     * @return FieldInterface[]
      */
     protected function getFieldsFromIDFieldSet(array $idFieldSet): array
     {

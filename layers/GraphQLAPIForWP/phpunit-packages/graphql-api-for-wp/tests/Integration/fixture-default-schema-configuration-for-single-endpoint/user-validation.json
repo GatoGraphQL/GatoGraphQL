@@ -84,6 +84,7 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
+                "field": "customPosts(pagination: {limit: 3}) { ... }",
                 "id": "root",
                 "path": [
                     "@validateDoesLoggedInUserHaveAnyRole(roles: [\"author\"])"
@@ -101,7 +102,8 @@
             ],
             "extensions": {
                 "type": "Post",
-                "id": 1,
+                "field": "customPostType",
+                "ids": "1, 28, 25",
                 "path": [
                     "@disableAccess"
                 ],
@@ -118,75 +120,8 @@
             ],
             "extensions": {
                 "type": "Post",
-                "id": 1,
-                "path": [
-                    "@validateIsUserNotLoggedInForDirectives"
-                ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
-            }
-        },
-        {
-            "message": "Access to field(s) 'customPostType' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "Post",
-                "id": 28,
-                "path": [
-                    "@disableAccess"
-                ],
-                "code": "PoP\\AccessControl\\e2"
-            }
-        },
-        {
-            "message": "You must not be logged in to access directives in field(s) 'comments' for type 'Post'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "Post",
-                "id": 28,
-                "path": [
-                    "@validateIsUserNotLoggedInForDirectives"
-                ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
-            }
-        },
-        {
-            "message": "Access to field(s) 'customPostType' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "Post",
-                "id": 25,
-                "path": [
-                    "@disableAccess"
-                ],
-                "code": "PoP\\AccessControl\\e2"
-            }
-        },
-        {
-            "message": "You must not be logged in to access directives in field(s) 'comments' for type 'Post'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "Post",
-                "id": 25,
+                "field": "comments @skip(if: false) { ... }",
+                "ids": "1, 28, 25",
                 "path": [
                     "@validateIsUserNotLoggedInForDirectives"
                 ],
@@ -203,6 +138,7 @@
             ],
             "extensions": {
                 "type": "Page",
+                "field": "customPostType",
                 "id": 2,
                 "path": [
                     "@disableAccess"
@@ -220,6 +156,7 @@
             ],
             "extensions": {
                 "type": "Page",
+                "field": "comments @skip(if: false) { ... }",
                 "id": 2,
                 "path": [
                     "@validateIsUserNotLoggedInForDirectives"
@@ -237,7 +174,8 @@
             ],
             "extensions": {
                 "type": "User",
-                "id": 6,
+                "field": "firstName",
+                "ids": "6, 5, 4",
                 "path": [
                     "@validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
                 ],
@@ -254,7 +192,8 @@
             ],
             "extensions": {
                 "type": "User",
-                "id": 6,
+                "field": "lastName",
+                "ids": "6, 5, 4",
                 "path": [
                     "@disableAccess"
                 ],
@@ -271,7 +210,8 @@
             ],
             "extensions": {
                 "type": "User",
-                "id": 6,
+                "field": "name",
+                "ids": "6, 5, 4",
                 "path": [
                     "@disableAccess"
                 ],
@@ -288,143 +228,8 @@
             ],
             "extensions": {
                 "type": "User",
-                "id": 6,
-                "path": [
-                    "@validateIsUserNotLoggedInForDirectives"
-                ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
-            }
-        },
-        {
-            "message": "You must have role 'subscriber' to access field(s) 'firstName' for type 'User'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "id": 5,
-                "path": [
-                    "@validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
-                ],
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
-            }
-        },
-        {
-            "message": "Access to field(s) 'lastName', 'name' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "id": 5,
-                "path": [
-                    "@disableAccess"
-                ],
-                "code": "PoP\\AccessControl\\e2"
-            }
-        },
-        {
-            "message": "Access to field(s) 'lastName', 'name' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "id": 5,
-                "path": [
-                    "@disableAccess"
-                ],
-                "code": "PoP\\AccessControl\\e2"
-            }
-        },
-        {
-            "message": "You must not be logged in to access directives in field(s) 'nicename' for type 'User'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "id": 5,
-                "path": [
-                    "@validateIsUserNotLoggedInForDirectives"
-                ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
-            }
-        },
-        {
-            "message": "You must have role 'subscriber' to access field(s) 'firstName' for type 'User'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "id": 4,
-                "path": [
-                    "@validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
-                ],
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
-            }
-        },
-        {
-            "message": "Access to field(s) 'lastName', 'name' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "id": 4,
-                "path": [
-                    "@disableAccess"
-                ],
-                "code": "PoP\\AccessControl\\e2"
-            }
-        },
-        {
-            "message": "Access to field(s) 'lastName', 'name' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "id": 4,
-                "path": [
-                    "@disableAccess"
-                ],
-                "code": "PoP\\AccessControl\\e2"
-            }
-        },
-        {
-            "message": "You must not be logged in to access directives in field(s) 'nicename' for type 'User'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "id": 4,
+                "field": "nicename @skip(if: false)",
+                "ids": "6, 5, 4",
                 "path": [
                     "@validateIsUserNotLoggedInForDirectives"
                 ],

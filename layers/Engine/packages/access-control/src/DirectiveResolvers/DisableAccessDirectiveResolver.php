@@ -6,6 +6,7 @@ namespace PoP\AccessControl\DirectiveResolvers;
 
 use PoP\AccessControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;

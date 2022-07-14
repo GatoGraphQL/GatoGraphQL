@@ -83,7 +83,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         /** @var MetaDirective */
         $metaDirective = $this->directive;
         $nestedDirectives = $metaDirective->getNestedDirectives();
-        
+
         /**
          * Validate that there are composed directives
          */
