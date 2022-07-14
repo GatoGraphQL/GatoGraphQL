@@ -55,9 +55,9 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
     }
 
     /**
-     * @param FieldInterface[] $failedFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $idFieldSet): FeedbackItemResolution
     {
         $capabilities = $this->directiveArgs['capabilities'];
         $isValidatingDirective = $this->isValidatingDirective();
@@ -77,7 +77,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
                     $this->__('\', \''),
                     array_map(
                         fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                        $failedFields
+                        $this->getFieldsFromIDFieldSet($idFieldSet)
                     )
                 ),
                 $relationalTypeResolver->getMaybeNamespacedTypeName(),

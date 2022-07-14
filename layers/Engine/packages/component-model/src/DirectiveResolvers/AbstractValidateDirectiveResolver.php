@@ -83,39 +83,18 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        // Validate that the schema and the provided data match, eg: passing mandatory values
-        // (Such as fieldArg "status" for field "isStatus")
-        // Combine all the fields under all IDs
-        $fields = $failedFields = [];
-        foreach ($idFieldSet as $id => $fieldSet) {
-            $fields = array_values(array_unique(array_merge(
-                $fields,
-                $fieldSet->fields
-            )));
-        }
-        $this->validateFields(
+        $failedIDFieldSet = $this->validateIDFieldSet(
             $relationalTypeResolver,
-            $fields,
+            $idFieldSet,
             $fieldDataAccessProvider,
             $variables,
             $engineIterationFeedbackStore,
-            $failedFields
         );
 
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
-        if ($failedFields) {
-            /** @var array<string|int,EngineIterationFieldSet> */
-            $idFieldSetToRemove = [];
-            foreach ($idFieldSet as $id => $fieldSet) {
-                $idFieldSetToRemove[$id] = new EngineIterationFieldSet(
-                    array_intersect(
-                        $fieldSet->fields,
-                        $failedFields
-                    )
-                );
-            }
+        if ($failedIDFieldSet !== []) {
             $this->removeIDFieldSet(
-                $idFieldSetToRemove,
+                $failedIDFieldSet,
                 $succeedingPipelineIDFieldSet
             );
             /** @var ModuleConfiguration */
@@ -123,7 +102,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
             if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
                 $this->setIDFieldSetAsNull(
                     $relationalTypeResolver,
-                    $idFieldSetToRemove,
+                    $failedIDFieldSet,
                     $idObjects,
                     $resolvedIDFieldValues,
                 );
@@ -132,15 +111,14 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     }
 
     /**
-     * @param FieldInterface[] $fields
-     * @param FieldInterface[] $failedFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @return array<string|int,EngineIterationFieldSet> Failed $idFieldSet
      */
-    abstract protected function validateFields(
+    abstract protected function validateIDFieldSet(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $fields,
+        array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$failedFields,
-    ): void;
+    ): array;
 }
