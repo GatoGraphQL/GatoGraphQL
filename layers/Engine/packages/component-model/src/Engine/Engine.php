@@ -1961,56 +1961,6 @@ class Engine implements EngineInterface
         }
     }
 
-    // /**
-    //  * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationEntries
-    //  * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
-    //  */
-    // protected function addObjectEntriesToDestinationArray(
-    //     SplObjectStorage $iterationEntries,
-    //     array &$destination,
-    //     array $idObjects,
-    // ): void {
-    //     if ($iterationEntries->count() === 0) {
-    //         return;
-    //     }
-
-    //     /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
-    //     foreach ($iterationEntries as $iterationRelationalTypeResolver) {
-    //         $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
-    //         $entries = $iterationEntries[$iterationRelationalTypeResolver];
-    //         $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
-    //         foreach ($dbNameEntries as $dbName => $entries) {
-    //             $destination[$dbName] ??= [];
-    //             $this->addDatasetToDatabase($destination[$dbName], $iterationRelationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
-    //         }
-    //     }
-    // }
-
-    // /**
-    //  * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationEntries
-    //  * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
-    //  */
-    // protected function addSchemaEntriesToDestinationArray(
-    //     SplObjectStorage $iterationEntries,
-    //     array &$destination,
-    // ): void {
-    //     if ($iterationEntries->count() === 0) {
-    //         return;
-    //     }
-    //     /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
-    //     foreach ($iterationEntries as $iterationRelationalTypeResolver) {
-    //         $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
-    //         $entries = $iterationEntries[$iterationRelationalTypeResolver];
-    //         $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
-    //         foreach ($dbNameEntries as $dbName => $entries) {
-    //             /** @var SplObjectStorage<FieldInterface,mixed> */
-    //             $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
-    //             $destinationSplObjectStorage->addAll($entries);
-    //             $destination[$dbName][$typeOutputKey] = $destinationSplObjectStorage;
-    //         }
-    //     }
-    // }
-
     /**
      * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationEntries
      * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
