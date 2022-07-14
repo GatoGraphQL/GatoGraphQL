@@ -22,7 +22,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 

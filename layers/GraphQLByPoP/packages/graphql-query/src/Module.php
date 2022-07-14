@@ -18,16 +18,4 @@ class Module extends AbstractModule
             \PoPAPI\GraphQLAPI\Module::class,
         ];
     }
-
-    /**
-     * Initialize services
-     *
-     * @param string[] $skipSchemaModuleClasses
-     */
-    protected function initializeContainerServices(
-        bool $skipSchema,
-        array $skipSchemaModuleClasses,
-    ): void {
-        $this->initServices(dirname(__DIR__));
-    }
 }

@@ -2,14 +2,11 @@
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\Root\AbstractTestCase;
 use PoP\Root\Exception\ShouldNotHappenException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 
 class VariableTest extends AbstractTestCase
 {
