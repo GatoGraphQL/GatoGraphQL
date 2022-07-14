@@ -1,0 +1,10 @@
+{  
+  # Both Post and Page entries
+  customPosts (filter: { ids: [1724, 358, 733, 735, 555] }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title @validateIsUserLoggedIn
+    }
+  }
+}

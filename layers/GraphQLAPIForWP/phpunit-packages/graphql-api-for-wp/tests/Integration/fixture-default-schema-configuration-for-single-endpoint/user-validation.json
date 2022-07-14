@@ -103,7 +103,7 @@
             "extensions": {
                 "type": "Post",
                 "field": "customPostType",
-                "ids": "1, 28, 25",
+                "ids": [1, 28, 25],
                 "path": [
                     "@disableAccess"
                 ],
@@ -121,7 +121,7 @@
             "extensions": {
                 "type": "Post",
                 "field": "comments @skip(if: false) { ... }",
-                "ids": "1, 28, 25",
+                "ids": [1, 28, 25],
                 "path": [
                     "@validateIsUserNotLoggedInForDirectives"
                 ],
@@ -175,7 +175,7 @@
             "extensions": {
                 "type": "User",
                 "field": "firstName",
-                "ids": "6, 5, 4",
+                "ids": [6, 5, 4],
                 "path": [
                     "@validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
                 ],
@@ -193,7 +193,7 @@
             "extensions": {
                 "type": "User",
                 "field": "lastName",
-                "ids": "6, 5, 4",
+                "ids": [6, 5, 4],
                 "path": [
                     "@disableAccess"
                 ],
@@ -211,7 +211,7 @@
             "extensions": {
                 "type": "User",
                 "field": "name",
-                "ids": "6, 5, 4",
+                "ids": [6, 5, 4],
                 "path": [
                     "@disableAccess"
                 ],
@@ -229,7 +229,7 @@
             "extensions": {
                 "type": "User",
                 "field": "nicename @skip(if: false)",
-                "ids": "6, 5, 4",
+                "ids": [6, 5, 4],
                 "path": [
                     "@validateIsUserNotLoggedInForDirectives"
                 ],

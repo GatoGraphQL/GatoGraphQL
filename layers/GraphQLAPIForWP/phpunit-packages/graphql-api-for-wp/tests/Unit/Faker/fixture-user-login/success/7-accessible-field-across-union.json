@@ -1,0 +1,31 @@
+{
+    "data": {
+        "customPosts": [
+            {
+                "__typename": "Post",
+                "id": 1724,
+                "title": "Keyboard navigation"
+            },
+            {
+                "__typename": "Post",
+                "id": 358,
+                "title": "Post Format: Standard"
+            },
+            {
+                "__typename": "Page",
+                "id": 733,
+                "title": "Page A"
+            },
+            {
+                "__typename": "Page",
+                "id": 735,
+                "title": "Page B"
+            },
+            {
+                "__typename": "Post",
+                "id": 555,
+                "title": "Post Format: Gallery"
+            }
+        ]
+    }
+}
