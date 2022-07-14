@@ -1,0 +1,64 @@
+{
+  "errors": [
+    {
+      "message": "Mutations cannot be executed",
+      "locations": [
+        {
+          "line": 8,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "type": "Post",
+        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+        "path": [
+          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "query { ... }"
+        ],
+        "code": "PoP\\ComponentModel\\1"
+      }
+    },
+    {
+      "message": "Mutations cannot be executed",
+      "locations": [
+        {
+          "line": 8,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "type": "Page",
+        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+        "path": [
+          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "query { ... }"
+        ],
+        "code": "PoP\\ComponentModel\\1"
+      }
+    }
+  ],
+  "data": {
+    "customPosts": [
+      {
+        "__typename": "Post",
+        "id": 1724,
+        "customPostType": "post",
+        "addComment": null
+      },
+      {
+        "__typename": "Post",
+        "id": 358,
+        "customPostType": "post",
+        "addComment": null
+      },
+      {
+        "__typename": "Page",
+        "id": 733,
+        "customPostType": "page",
+        "addComment": null
+      }
+    ]
+  }
+}

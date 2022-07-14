@@ -26,6 +26,7 @@ class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstra
             ...[
                 \PoPWPSchema\Users\Module::class,
                 \PoPWPSchema\Posts\Module::class,
+                \PoPWPSchema\Pages\Module::class,
                 \PoPWPSchema\Comments\Module::class,
                 \PoPCMSSchema\CommentMutationsWP\Module::class,
             ]
