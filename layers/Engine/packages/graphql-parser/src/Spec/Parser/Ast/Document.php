@@ -274,7 +274,7 @@ class Document implements DocumentInterface
                             $fragmentName,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $fragment->getLocation()
                 );
             }
             $fragmentNames[] = $fragmentName;
