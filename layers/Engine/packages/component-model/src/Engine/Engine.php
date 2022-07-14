@@ -2260,25 +2260,14 @@ class Engine implements EngineInterface
          * @var string[]
          */
         $astNodePath = [];
-        /**
-         * Closest Field to where the feedback was produced:
-         * either the AST node directly if that's the Field,
-         * its parent for an Argument, or nothing if a Directive.
-         *
-         * @var FieldInterface|null
-         */
-        $field = null;
         /** @var SplObjectStorage<AstInterface,AstInterface> */
         $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
         while ($astNode !== null) {
             $astNodePath[] = $astNode->asASTNodeString();
-            if ($field === null && $astNode instanceof FieldInterface) {
-                $field = $astNode;
-            }
             // Move to the ancestor AST node
             $astNode = $documentASTNodeAncestors[$astNode] ?? null;
         }
-        $entry = [
+        return [
             Tokens::MESSAGE => $message,
             Tokens::LOCATIONS => [$location],
             Tokens::EXTENSIONS => array_merge(
@@ -2292,10 +2281,6 @@ class Engine implements EngineInterface
             ),
             Tokens::PATH => $astNodePath,
         ];
-        if ($field !== null) {
-            $entry[Tokens::FIELD] = $field->asASTNodeString();
-        }
-        return $entry;
     }
 
     /**
