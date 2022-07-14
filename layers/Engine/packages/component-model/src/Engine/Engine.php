@@ -1912,16 +1912,16 @@ class Engine implements EngineInterface
                 $queryDocumentErrors[] = $queryDocumentError;
             }
         }
-        $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
-        $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
+        $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
+        $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
 
         // Warnings
         if ($sendFeedbackWarnings) {
             if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
             }
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::WARNING, $schemaFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::WARNING, $schemaFeedbackEntries[FeedbackCategories::WARNING]);
         }
 
         // Deprecations
@@ -1929,8 +1929,8 @@ class Engine implements EngineInterface
             if ($generalDeprecations = $generalFeedbackStore->getDeprecations()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::DEPRECATION] = $this->getGeneralFeedbackEntriesForOutput($generalDeprecations);
             }
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::DEPRECATION, $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::DEPRECATION, $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
         }
 
         // Notices
@@ -1938,8 +1938,8 @@ class Engine implements EngineInterface
             if ($generalNotices = $generalFeedbackStore->getNotices()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::NOTICE] = $this->getGeneralFeedbackEntriesForOutput($generalNotices);
             }
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
 
         // Suggestions
@@ -1947,8 +1947,8 @@ class Engine implements EngineInterface
             if ($generalSuggestions = $generalFeedbackStore->getSuggestions()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::SUGGESTION] = $this->getGeneralFeedbackEntriesForOutput($generalSuggestions);
             }
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::SUGGESTION, $objectFeedbackEntries[FeedbackCategories::SUGGESTION]);
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::SUGGESTION, $schemaFeedbackEntries[FeedbackCategories::SUGGESTION]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::SUGGESTION, $objectFeedbackEntries[FeedbackCategories::SUGGESTION]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::SUGGESTION, $schemaFeedbackEntries[FeedbackCategories::SUGGESTION]);
         }
 
         // Logs
@@ -1956,8 +1956,8 @@ class Engine implements EngineInterface
             if ($generalLogs = $generalFeedbackStore->getLogs()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] = $this->getGeneralFeedbackEntriesForOutput($generalLogs);
             }
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
-            $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
         }
     }
 
@@ -2600,7 +2600,7 @@ class Engine implements EngineInterface
         }
     }
 
-    protected function maybeCombineAndAddSchemaEntries(array &$ret, string $name, array $entries): void
+    protected function maybeCombineAndAddObjectOrSchemaEntries(array &$ret, string $name, array $entries): void
     {
         if ($entries === []) {
             return;
