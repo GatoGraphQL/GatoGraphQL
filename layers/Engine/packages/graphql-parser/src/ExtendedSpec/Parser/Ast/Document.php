@@ -68,4 +68,18 @@ class Document extends UpstreamDocument
             $this->assertArgumentsUniqueInDirectives($metaDirective->getNestedDirectives());
         }
     }
+
+    protected function setAncestorsUnderDirective(Directive $directive): void
+    {
+        parent::setAncestorsUnderDirective($directive);
+
+        if ($directive instanceof MetaDirective) {
+            /** @var MetaDirective */
+            $metaDirective = $directive;
+            foreach ($metaDirective->getNestedDirectives() as $nestedDirective) {
+                $this->astNodeAncestors[$nestedDirective] = $directive;
+                $this->setAncestorsUnderDirective($nestedDirective);
+            }
+        }
+    }
 }

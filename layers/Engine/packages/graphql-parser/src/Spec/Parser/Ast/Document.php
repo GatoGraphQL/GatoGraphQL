@@ -718,7 +718,7 @@ class Document implements DocumentInterface
         return $this->astNodeAncestors;
     }
 
-    private function setAncestorsUnderOperation(OperationInterface $operation): void
+    protected function setAncestorsUnderOperation(OperationInterface $operation): void
     {
         foreach ($operation->getVariables() as $variable) {
             $this->astNodeAncestors[$variable] = $operation;
@@ -733,7 +733,7 @@ class Document implements DocumentInterface
         }
     }
 
-    private function setAncestorsUnderDirective(Directive $directive): void
+    protected function setAncestorsUnderDirective(Directive $directive): void
     {
         foreach ($directive->getArguments() as $argument) {
             $this->astNodeAncestors[$argument] = $directive;
@@ -741,7 +741,7 @@ class Document implements DocumentInterface
         }
     }
 
-    private function setAncestorsUnderArgument(Argument $argument): void
+    protected function setAncestorsUnderArgument(Argument $argument): void
     {
         /** @var Enum|InputList|InputObject|Literal|VariableReference */
         $argumentValueAST = $argument->getValueAST();
@@ -750,7 +750,7 @@ class Document implements DocumentInterface
         $this->setAncestorsUnderArgumentValueAst($argumentValueAST);
     }
 
-    private function setAncestorsUnderArgumentValueAst(Enum|InputList|InputObject|Literal|VariableReference $argumentValueAST): void
+    protected function setAncestorsUnderArgumentValueAst(Enum|InputList|InputObject|Literal|VariableReference $argumentValueAST): void
     {
         if ($argumentValueAST instanceof InputList) {
             /** @var InputList */
@@ -764,7 +764,7 @@ class Document implements DocumentInterface
         }
     }
 
-    private function setAncestorsUnderInputList(InputList $inputList): void
+    protected function setAncestorsUnderInputList(InputList $inputList): void
     {
         foreach ($inputList->getAstValue() as $astValue) {
             if (
@@ -783,7 +783,7 @@ class Document implements DocumentInterface
         }
     }
 
-    private function setAncestorsUnderInputObject(InputObject $inputObject): void
+    protected function setAncestorsUnderInputObject(InputObject $inputObject): void
     {
         foreach ((array) $inputObject->getAstValue() as $astValue) {
             if (
@@ -802,7 +802,7 @@ class Document implements DocumentInterface
         }
     }
 
-    private function setAncestorsUnderFieldOrFragmentBond(FieldInterface|FragmentBondInterface $fieldOrFragmentBond): void
+    protected function setAncestorsUnderFieldOrFragmentBond(FieldInterface|FragmentBondInterface $fieldOrFragmentBond): void
     {
         if ($fieldOrFragmentBond instanceof LeafField) {
             /** @var LeafField */
@@ -852,7 +852,7 @@ class Document implements DocumentInterface
         // Nothing to set here
     }
 
-    private function setAncestorsUnderFragment(Fragment $fragment): void
+    protected function setAncestorsUnderFragment(Fragment $fragment): void
     {
         foreach ($fragment->getDirectives() as $directive) {
             $this->astNodeAncestors[$directive] = $fragment;
