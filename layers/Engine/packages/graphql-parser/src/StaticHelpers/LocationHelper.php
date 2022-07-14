@@ -8,6 +8,8 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 class LocationHelper
 {
+    public static ?Location $nonExistingLocation = null;
+
     /**
      * Use a non-existing location to indicate that the
      * AST node was created on runtime, and is not to be
@@ -23,6 +25,9 @@ class LocationHelper
      */
     public static function getNonSpecificLocation(): Location
     {
-        return new Location(-1, -1);
+        if (self::$nonExistingLocation === null) {
+            self::$nonExistingLocation = new Location(-1, -1);
+        }
+        return self::$nonExistingLocation;
     }
 }
