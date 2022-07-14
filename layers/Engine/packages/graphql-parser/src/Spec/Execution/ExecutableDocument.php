@@ -88,17 +88,20 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         if ($this->context->getOperationName() === '') {
             // It can't be 0, or validation already fails in Document
-            if (count($this->document->getOperations()) > 1) {
+            $operations = $this->document->getOperations();
+            $operationCount = count($operations);
+            if ($operationCount > 1) {
+                $lastOperation = $operations[$operationCount - 1];
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLSpecErrorFeedbackItemProvider::class,
                         GraphQLSpecErrorFeedbackItemProvider::E_6_1_B,
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $lastOperation->getLocation()
                 );
             }
             // There is exactly 1 operation
-            return $this->document->getOperations();
+            return $operations;
         }
 
         $requestedOperations = array_values(array_filter(
