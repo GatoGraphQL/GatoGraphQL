@@ -14,6 +14,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E3A = 'e3a';
     public final const E4 = 'e4';
     public final const E5 = 'e5';
+    public final const E5A = 'e5a';
     public final const E6 = 'e6';
     public final const E6A = 'e6a';
     public final const E7 = 'e7';
@@ -54,6 +55,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3A,
             self::E4,
             self::E5,
+            self::E5A,
             self::E6,
             self::E6A,
             self::E7,
@@ -97,7 +99,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3 => $this->__('Resolving field \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E3A => $this->__('Resolving field \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E4 => $this->__('Resolving field \'%s\' triggered an exception, please contact the admin', 'component-model'),
-            self::E5 => $this->__('Directive \'%s\' could not be resolved due to its nested error(s)', 'component-model'),
+            self::E5 => $this->__('Meta directive \'%s\' has no composed directives', 'component-model'),
+            self::E5A => $this->__('The directive pipeline for \'%s\' is empty', 'component-model'),
             self::E6 => $this->__('Resolving mutation \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E6A => $this->__('Resolving mutation \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E7 => $this->__('Resolving mutation \'%s\' triggered an exception, please contact the admin', 'component-model'),

@@ -57,36 +57,32 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             return;
         }
 
+        $nestedDirectivePipelineData = $this->getNestedDirectivePipelineData(
+            $relationalTypeResolver,
+            $fields,
+            $engineIterationFeedbackStore,
+        );
+        if ($nestedDirectivePipelineData === null) {
+            $this->setHasValidationErrors(true);
+            return;
+        }
+        $this->nestedDirectivePipelineData = $nestedDirectivePipelineData;
+    }
+
+    protected function getNestedDirectivePipelineData(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?array {
         /** @var MetaDirective */
         $metaDirective = $this->directive;
         $nestedDirectives = $metaDirective->getNestedDirectives();
-        if ($nestedDirectives === []) {
-            return;
-        }
-
-        /**
-         * Each composed directive will deal with the same fields
-         * as the current directive.
-         *
-         * @var SplObjectStorage<Directive,FieldInterface[]>
-         */
-        $nestedDirectiveFields = new SplObjectStorage();
-        foreach ($nestedDirectives as $nestedDirective) {
-            $nestedDirectiveFields[$nestedDirective] = $fields;
-        }
-        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
-        $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
-            $nestedDirectives,
-            $nestedDirectiveFields,
-            $variables,
-            $separateEngineIterationFeedbackStore,
-        );
-
+        
         /**
          * Validate that there are composed directives
          */
-        if ($this->nestedDirectivePipelineData->count() === 0) {
-            $separateEngineIterationFeedbackStore->schemaFeedbackStore->addError(
+        if ($nestedDirectives === []) {
+            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
@@ -100,9 +96,53 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
                     $fields,
                 )
             );
+            return null;
         }
+
+        /**
+         * Each composed directive will deal with the same fields
+         * as the current directive.
+         *
+         * @var SplObjectStorage<Directive,FieldInterface[]>
+         */
+        $nestedDirectiveFields = new SplObjectStorage();
+        foreach ($nestedDirectives as $nestedDirective) {
+            $nestedDirectiveFields[$nestedDirective] = $fields;
+        }
+        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+        $nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
+            $nestedDirectives,
+            $nestedDirectiveFields,
+            $variables,
+            $separateEngineIterationFeedbackStore,
+        );
         $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-        $this->setHasValidationErrors($separateEngineIterationFeedbackStore->hasErrors());
+        if ($separateEngineIterationFeedbackStore->hasErrors()) {
+            return null;
+        }
+
+        /**
+         * Validate that the directive pipeline was created successfully
+         */
+        if ($nestedDirectivePipelineData->count() === 0) {
+            $separateEngineIterationFeedbackStore->schemaFeedbackStore->addError(
+                new SchemaFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E5A,
+                        [
+                            $this->getDirectiveName(),
+                        ]
+                    ),
+                    $this->directive,
+                    $relationalTypeResolver,
+                    $fields,
+                )
+            );
+            return null;
+        }
+
+        return $nestedDirectivePipelineData;
     }
 
     /**
