@@ -2241,7 +2241,9 @@ class Engine implements EngineInterface
                 $entry,
                 $field,
             );
-            $fieldEntry[Tokens::IDS] = array_keys($idFieldSet);
+            /** @var array<string|int> */
+            $ids = $fieldIDs[$field];
+            $fieldEntry[Tokens::IDS] = $ids;
             $fieldObjectFeedbackEntries = $objectFeedbackEntries[$field] ?? [];
             $fieldObjectFeedbackEntries[] = $fieldEntry;
             $objectFeedbackEntries[$field] = $fieldObjectFeedbackEntries;
