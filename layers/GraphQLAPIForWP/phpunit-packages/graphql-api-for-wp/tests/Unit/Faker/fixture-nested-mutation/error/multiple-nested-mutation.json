@@ -11,27 +11,6 @@
       "extensions": {
         "type": "Post",
         "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
-        "id": 1724,
-        "path": [
-          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
-          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
-          "query { ... }"
-        ],
-        "code": "PoP\\ComponentModel\\1"
-      }
-    },
-    {
-      "message": "Mutations cannot be executed",
-      "locations": [
-        {
-          "line": 8,
-          "column": 5
-        }
-      ],
-      "extensions": {
-        "type": "Post",
-        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
-        "id": 358,
         "path": [
           "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
@@ -51,7 +30,6 @@
       "extensions": {
         "type": "Page",
         "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
-        "id": 733,
         "path": [
           "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
