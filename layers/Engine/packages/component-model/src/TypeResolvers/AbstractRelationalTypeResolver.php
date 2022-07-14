@@ -597,13 +597,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Show an error for all objects that couldn't be processed
         $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($idObjects));
         $unresolvedObjectIDs = [];
-        $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
             $failedFields = $idFieldSet[$unresolvedObjectID]->fields ?? [];
-            // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
+            /**
+             * Add in $schemaErrors instead of $objectErrors because in the
+             * latter one it will attempt to fetch the ID from the object,
+             * which it can't do.
+             */
             foreach ($failedFields as $failedField) {
-                $schemaFeedbackStore->addError(
+                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                     new SchemaFeedback(
                         $this->getUnresolvedObjectIDErrorFeedbackItemResolution($unresolvedObjectID),
                         $failedField,
