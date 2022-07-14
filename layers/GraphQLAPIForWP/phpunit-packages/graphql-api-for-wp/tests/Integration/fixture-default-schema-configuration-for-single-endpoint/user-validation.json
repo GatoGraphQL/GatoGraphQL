@@ -76,12 +76,6 @@
         },
         {
             "message": "You must have role 'author' to access field(s) 'customPosts(pagination: {limit: 3})' for type 'QueryRoot'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "QueryRoot",
                 "field": "customPosts(pagination: {limit: 3}) { ... }",
@@ -94,16 +88,14 @@
         },
         {
             "message": "Access to field(s) 'customPostType' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "Post",
                 "field": "customPostType",
-                "ids": [1, 28, 25],
+                "ids": [
+                    1,
+                    28,
+                    25
+                ],
                 "path": [
                     "@disableAccess"
                 ],
@@ -112,16 +104,14 @@
         },
         {
             "message": "You must not be logged in to access directives in field(s) 'comments' for type 'Post'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "Post",
                 "field": "comments @skip(if: false) { ... }",
-                "ids": [1, 28, 25],
+                "ids": [
+                    1,
+                    28,
+                    25
+                ],
                 "path": [
                     "@validateIsUserNotLoggedInForDirectives"
                 ],
@@ -130,12 +120,6 @@
         },
         {
             "message": "Access to field(s) 'customPostType' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "Page",
                 "field": "customPostType",
@@ -148,12 +132,6 @@
         },
         {
             "message": "You must not be logged in to access directives in field(s) 'comments' for type 'Page'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "Page",
                 "field": "comments @skip(if: false) { ... }",
@@ -166,16 +144,14 @@
         },
         {
             "message": "You must have role 'subscriber' to access field(s) 'firstName' for type 'User'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "User",
                 "field": "firstName",
-                "ids": [6, 5, 4],
+                "ids": [
+                    6,
+                    5,
+                    4
+                ],
                 "path": [
                     "@validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
                 ],
@@ -184,16 +160,14 @@
         },
         {
             "message": "Access to field(s) 'lastName', 'name' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "User",
                 "field": "lastName",
-                "ids": [6, 5, 4],
+                "ids": [
+                    6,
+                    5,
+                    4
+                ],
                 "path": [
                     "@disableAccess"
                 ],
@@ -202,16 +176,14 @@
         },
         {
             "message": "Access to field(s) 'lastName', 'name' has been disabled",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "User",
                 "field": "name",
-                "ids": [6, 5, 4],
+                "ids": [
+                    6,
+                    5,
+                    4
+                ],
                 "path": [
                     "@disableAccess"
                 ],
@@ -220,16 +192,14 @@
         },
         {
             "message": "You must not be logged in to access directives in field(s) 'nicename' for type 'User'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
             "extensions": {
                 "type": "User",
                 "field": "nicename @skip(if: false)",
-                "ids": [6, 5, 4],
+                "ids": [
+                    6,
+                    5,
+                    4
+                ],
                 "path": [
                     "@validateIsUserNotLoggedInForDirectives"
                 ],
