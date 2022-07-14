@@ -252,6 +252,21 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $this->getObjectTypeResolversFromPickers($objectTypeResolverPickers);
     }
 
+    /**
+     * @return array<string,ObjectTypeResolverInterface> Key: TypeOutputKey, Value: ObjectTypeResolver
+     */
+    public function getTargetTypeOutputKeyObjectTypeResolvers(): array
+    {
+        $targetTypeOutputKeyObjectTypeResolvers = [];
+        foreach ($this->getTargetObjectTypeResolvers() as $objectTypeResolver) {
+            $targetTypeOutputKeyObjectTypeResolvers[$objectTypeResolver->getTypeOutputKey()] = $objectTypeResolver;
+        }
+        return $targetTypeOutputKeyObjectTypeResolvers;
+    }
+
+    /**
+     * @return ObjectTypeResolverInterface[]
+     */
     protected function getObjectTypeResolversFromPickers(array $objectTypeResolverPickers): array
     {
         return array_map(

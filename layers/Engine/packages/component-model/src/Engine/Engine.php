@@ -2111,7 +2111,7 @@ class Engine implements EngineInterface
 
             /** @var UnionTypeResolverInterface */
             $unionTypeResolver = $relationalTypeResolver;
-            $targetObjectTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
+            $targetTypeOutputKeyObjectTypeResolvers = $unionTypeResolver->getTargetTypeOutputKeyObjectTypeResolvers();
             /** @var SplObjectStorage<RelationalTypeResolverInterface,array<string|int,EngineIterationFieldSet>> */
             $targetObjectTypeResolverIDFieldSet = new SplObjectStorage();
             foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
@@ -2124,13 +2124,7 @@ class Engine implements EngineInterface
                     $objectTypeOutputKey,
                     $id
                 ) = UnionTypeHelpers::extractObjectTypeAndID($id);
-                $idTargetObjectTypeResolvers = array_values(array_filter(
-                    $targetObjectTypeResolvers,
-                    fn (ObjectTypeResolverInterface $objectTypeResolver) => $objectTypeResolver->getTypeOutputKey() === $objectTypeOutputKey
-                ));
-                $idTargetObjectTypeResolver = $idTargetObjectTypeResolvers !== []
-                    ? $idTargetObjectTypeResolvers[0]
-                    : $relationalTypeResolver;
+                $idTargetObjectTypeResolver = $targetTypeOutputKeyObjectTypeResolvers[$objectTypeOutputKey] ?? $relationalTypeResolver;
 
                 $idTargetObjectTypeResolverIDFieldSet = $targetObjectTypeResolverIDFieldSet[$idTargetObjectTypeResolver] ?? [];
                 $idTargetObjectTypeResolverIDFieldSet[$id] = $fieldSet;
