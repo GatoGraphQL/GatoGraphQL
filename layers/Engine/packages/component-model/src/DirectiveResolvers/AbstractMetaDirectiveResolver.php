@@ -60,6 +60,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         $nestedDirectivePipelineData = $this->getNestedDirectivePipelineData(
             $relationalTypeResolver,
             $fields,
+            $variables,
             $engineIterationFeedbackStore,
         );
         if ($nestedDirectivePipelineData === null) {
@@ -76,6 +77,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     protected function getNestedDirectivePipelineData(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
+        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
         /** @var MetaDirective */
