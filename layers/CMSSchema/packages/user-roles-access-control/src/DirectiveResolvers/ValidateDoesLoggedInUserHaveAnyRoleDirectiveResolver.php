@@ -63,13 +63,11 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
      * Add the errors to the FeedbackStore
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return array<string|int,EngineIterationFieldSet> Failed $idFieldSet
      */
     protected function addUnsuccessfulValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $roles = $this->directiveArgs['roles'];

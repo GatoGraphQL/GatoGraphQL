@@ -31,13 +31,11 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
      * Add the errors to the FeedbackStore
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return array<string|int,EngineIterationFieldSet> Failed $idFieldSet
      */
     protected function addUnsuccessfulValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $fieldIDs = MethodHelpers::orderIDsByDirectFields($idFieldSet);

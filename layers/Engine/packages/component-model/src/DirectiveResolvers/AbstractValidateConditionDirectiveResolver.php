@@ -51,7 +51,6 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
             $relationalTypeResolver,
             $idFieldSet,
             $fieldDataAccessProvider,
-            $variables,
             $engineIterationFeedbackStore,
         );
         return $idFieldSet;
@@ -61,18 +60,16 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
      * Condition to validate. Return `true` for success, `false` for failure
      */
     abstract protected function isValidationSuccessful(RelationalTypeResolverInterface $relationalTypeResolver): bool;
-    
+
     /**
      * Add the errors to the FeedbackStore
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return array<string|int,EngineIterationFieldSet> Failed $idFieldSet
      */
     abstract protected function addUnsuccessfulValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void;
 
