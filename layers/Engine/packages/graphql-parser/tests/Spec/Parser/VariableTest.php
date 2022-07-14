@@ -29,7 +29,7 @@ class VariableTest extends AbstractTestCase
     {
         $this->expectException(ShouldNotHappenException::class);
         $this->expectExceptionMessage(sprintf(
-            'Context has not been set for variable \'%s\'',
+            'Context has not been set for Variable object (with name \'%s\')',
             'foo'
         ));
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));

@@ -137,7 +137,7 @@ class Variable extends AbstractAst implements WithValueInterface
         if ($this->context === null) {
             throw new ShouldNotHappenException(
                 sprintf(
-                    $this->__('Context has not been set for variable \'%s\'', 'graphql-server'),
+                    $this->__('Context has not been set for Variable object (with name \'%s\')', 'graphql-server'),
                     $this->name,
                 )
             );
