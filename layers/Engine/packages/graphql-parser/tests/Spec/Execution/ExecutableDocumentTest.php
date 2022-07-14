@@ -16,6 +16,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class ExecutableDocumentTest extends AbstractTestCase
@@ -227,8 +228,11 @@ class ExecutableDocumentTest extends AbstractTestCase
 
     public function testNonInitializedRequest()
     {
-        $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage((new FeedbackItemResolution(FeedbackItemProvider::class, FeedbackItemProvider::E1, ['getRequestedOperations']))->getMessage());
+        $this->expectException(ShouldNotHappenException::class);
+        $this->expectExceptionMessage(sprintf(
+            'Before executing `%s`, must call `validateAndInitialize`',
+            'getRequestedOperations'
+        ));
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();

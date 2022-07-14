@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Execution;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Exception\ShouldNotHappenException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class ExecutableDocument implements ExecutableDocumentInterface
@@ -174,19 +173,16 @@ class ExecutableDocument implements ExecutableDocumentInterface
     /**
      * @return OperationInterface[]
      * @throws InvalidRequestException
+     * @throws ShouldNotHappenException When this function is not executed with the expected sequence
      */
     public function getRequestedOperations(): array
     {
         if ($this->requestedOperations === null) {
-            throw new InvalidRequestException(
-                new FeedbackItemResolution(
-                    FeedbackItemProvider::class,
-                    FeedbackItemProvider::E1,
-                    [
-                         __FUNCTION__,
-                    ]
-                ),
-                LocationHelper::getNonSpecificLocation()
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Before executing `%s`, must call `validateAndInitialize`', 'graphql-server'),
+                    __FUNCTION__,
+                )
             );
         }
         return $this->requestedOperations;

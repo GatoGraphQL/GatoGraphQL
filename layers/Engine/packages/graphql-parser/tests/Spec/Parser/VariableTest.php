@@ -2,13 +2,14 @@
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\Root\AbstractTestCase;
+use PoP\Root\Exception\ShouldNotHappenException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class VariableTest extends AbstractTestCase
 {
@@ -26,8 +27,11 @@ class VariableTest extends AbstractTestCase
 
     public function testGetNullValueException()
     {
-        $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage((new FeedbackItemResolution(FeedbackItemProvider::class, FeedbackItemProvider::E2, ['foo']))->getMessage());
+        $this->expectException(ShouldNotHappenException::class);
+        $this->expectExceptionMessage(sprintf(
+            'Context has not been set for variable \'%s\'',
+            'foo'
+        ));
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->getValue();
     }
