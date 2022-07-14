@@ -128,7 +128,7 @@ class Document implements DocumentInterface
                     GraphQLSpecErrorFeedbackItemProvider::class,
                     GraphQLSpecErrorFeedbackItemProvider::E_6_1_D,
                 ),
-                LocationHelper::getNonSpecificLocation()
+                new Location(1, 1)
             );
         }
     }
