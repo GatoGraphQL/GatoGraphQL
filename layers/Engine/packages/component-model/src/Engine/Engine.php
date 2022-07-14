@@ -2168,7 +2168,7 @@ class Engine implements EngineInterface
                 $entry,
                 $field,
             );
-            $entry[Tokens::IDS] = $ids;
+            $fieldEntry[Tokens::IDS] = $ids;
             $fieldObjectFeedbackEntries = $objectFeedbackEntries[$field] ?? [];
             $fieldObjectFeedbackEntries[] = $fieldEntry;
             $objectFeedbackEntries[$field] = $fieldObjectFeedbackEntries;
