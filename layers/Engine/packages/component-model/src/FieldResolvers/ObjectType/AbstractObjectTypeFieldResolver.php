@@ -8,7 +8,6 @@ use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -100,7 +99,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?VersioningServiceInterface $versioningService = null;
-    private ?EnabledMutationsCheckpoint $enabledMutationsCheckpoint = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -157,14 +155,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getVersioningService(): VersioningServiceInterface
     {
         return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
-    }
-    final public function setEnabledMutationsCheckpoint(EnabledMutationsCheckpoint $enabledMutationsCheckpoint): void
-    {
-        $this->enabledMutationsCheckpoint = $enabledMutationsCheckpoint;
-    }
-    final protected function getEnabledMutationsCheckpoint(): EnabledMutationsCheckpoint
-    {
-        return $this->enabledMutationsCheckpoint ??= $this->instanceManager->getInstance(EnabledMutationsCheckpoint::class);
     }
 
     final public function getClassesToAttachTo(): array
@@ -944,12 +934,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         string $fieldName,
         array $fieldArgs
     ): array {
-        $validationCheckpoints = [];
-        // Check that mutations can be executed
-        if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
-            $validationCheckpoints[] = $this->getEnabledMutationsCheckpoint();
-        }
-        return $validationCheckpoints;
+        return [];
     }
 
     public function validateFieldDataForObject(
