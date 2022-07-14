@@ -1,11 +1,11 @@
 {
   "errors": [
     {
-      "message": "You must be logged in to access field(s) 'title' for type 'CustomPostUnion'",
+      "message": "You must be logged in to access field 'title' for type 'CustomPostUnion'",
       "locations": [
         {
           "line": 7,
-          "column": 14
+          "column": 7
         }
       ],
       "extensions": {
@@ -17,7 +17,6 @@
           555
         ],
         "path": [
-          "@validateIsUserLoggedIn",
           "title @validateIsUserLoggedIn",
           "...on IsCustomPost { ... }",
           "customPosts(filter: {ids: [1724, 358, 733, 735, 555]}) { ... }",
@@ -27,11 +26,11 @@
       }
     },
     {
-      "message": "You must be logged in to access field(s) 'title' for type 'CustomPostUnion'",
+      "message": "You must be logged in to access field 'title' for type 'CustomPostUnion'",
       "locations": [
         {
           "line": 7,
-          "column": 14
+          "column": 7
         }
       ],
       "extensions": {
@@ -42,7 +41,6 @@
           735
         ],
         "path": [
-          "@validateIsUserLoggedIn",
           "title @validateIsUserLoggedIn",
           "...on IsCustomPost { ... }",
           "customPosts(filter: {ids: [1724, 358, 733, 735, 555]}) { ... }",
