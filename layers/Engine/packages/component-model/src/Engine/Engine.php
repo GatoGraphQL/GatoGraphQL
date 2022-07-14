@@ -2153,36 +2153,103 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationObjectFeedbackEntries
+     */
     private function transferObjectFeedbackEntries(
         ObjectResolutionFeedbackInterface $objectFeedback,
         SplObjectStorage $iterationObjectFeedbackEntries
     ): void {
+        $relationalTypeResolver = $objectFeedback->getRelationalTypeResolver();
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+            /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+            $targetIterationObjectFeedbackEntries = new SplObjectStorage();
+
+            /** @var UnionTypeResolverInterface */
+            $unionTypeResolver = $relationalTypeResolver;
+            $targetObjectTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
+            /** @var SplObjectStorage<RelationalTypeResolverInterface,array<string|int,EngineIterationFieldSet>> */
+            $targetObjectTypeResolverIDFieldSet = new SplObjectStorage();
+            foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
+                /**
+                 * If the type data resolver is union, the typeOutputKey where the value is stored
+                 * is contained in the ID itself, with format typeOutputKey/ID.
+                 * Remove this information, and get purely the ID
+                 */
+                list(
+                    $objectTypeOutputKey,
+                    $id
+                ) = UnionTypeHelpers::extractObjectTypeAndID($id);
+                $idTargetObjectTypeResolvers = array_values(array_filter(
+                    $targetObjectTypeResolvers,
+                    fn (ObjectTypeResolverInterface $objectTypeResolver) => $objectTypeResolver->getTypeOutputKey() === $objectTypeOutputKey
+                ));
+                $idTargetObjectTypeResolver = $idTargetObjectTypeResolvers !== []
+                    ? $idTargetObjectTypeResolvers[0]
+                    : $relationalTypeResolver;
+
+                $idTargetObjectTypeResolverIDFieldSet = $targetObjectTypeResolverIDFieldSet[$idTargetObjectTypeResolver] ?? [];
+                $idTargetObjectTypeResolverIDFieldSet[$id] = $fieldSet;
+                $targetObjectTypeResolverIDFieldSet[$idTargetObjectTypeResolver] = $idTargetObjectTypeResolverIDFieldSet;
+
+                $idTargetObjectFeedbackEntries = $targetIterationObjectFeedbackEntries[$idTargetObjectTypeResolver] ?? new SplObjectStorage();
+                foreach ($fieldSet->fields as $field) {
+                    if (!$iterationObjectFeedbackEntries->contains($relationalTypeResolver)
+                        || !$iterationObjectFeedbackEntries[$relationalTypeResolver]->contains($field)
+                    ) {
+                        continue;
+                    }
+                    $idTargetObjectFeedbackEntries[$field] = $iterationObjectFeedbackEntries[$relationalTypeResolver][$field];
+                }
+                $targetIterationObjectFeedbackEntries[$idTargetObjectTypeResolver] = $idTargetObjectFeedbackEntries;
+            }
+            /** @var RelationalTypeResolverInterface $targetObjectTypeResolver */
+            foreach ($targetIterationObjectFeedbackEntries as $targetObjectTypeResolver) {
+                $this->doTransferObjectFeedbackEntries(
+                    $objectFeedback,
+                    $iterationObjectFeedbackEntries,
+                    $targetObjectTypeResolver,
+                    $targetObjectTypeResolverIDFieldSet[$targetObjectTypeResolver]
+                );
+            }
+            return;
+        }
+
+        $this->doTransferObjectFeedbackEntries(
+            $objectFeedback,
+            $iterationObjectFeedbackEntries,
+            $objectFeedback->getRelationalTypeResolver(),
+            $objectFeedback->getIDFieldSet(),
+        );
+    }
+
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     */
+    private function doTransferObjectFeedbackEntries(
+        ObjectResolutionFeedbackInterface $objectFeedback,
+        SplObjectStorage $iterationObjectFeedbackEntries,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idFieldSet,
+    ): void {
         $entry = $this->getObjectFeedbackEntry($objectFeedback);
-        $fieldIDs = $this->orderIDsByDirectFields($objectFeedback->getIDFieldSet());
-        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
+        $fieldIDs = $this->orderIDsByDirectFields($idFieldSet);
+        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$relationalTypeResolver] ?? new SplObjectStorage();
         /** @var FieldInterface $field */
         foreach ($fieldIDs as $field) {
-            /** @var array<string|int> */
-            $ids = $fieldIDs[$field];
-            /**
-             * If the type data resolver is union, the typeOutputKey where the value is stored
-             * is contained in the ID itself, with format typeOutputKey/ID.
-             * Remove this information, and get purely the ID
-             */
-            $ids = array_map(
-                fn (string|int $maybeComposedID) => UnionTypeHelpers::extractObjectTypeAndID($maybeComposedID)[1],
-                $ids
-            );
             $fieldEntry = $this->addFieldToObjectOrSchemaFeedbackEntry(
                 $entry,
                 $field,
             );
-            $fieldEntry[Tokens::IDS] = $ids;
+            // /** @var array<string|int> */
+            // $ids = $fieldIDs[$field];
+            // $fieldEntry[Tokens::IDS] = $ids;
+            $fieldEntry[Tokens::IDS] = array_keys($idFieldSet);
             $fieldObjectFeedbackEntries = $objectFeedbackEntries[$field] ?? [];
             $fieldObjectFeedbackEntries[] = $fieldEntry;
             $objectFeedbackEntries[$field] = $fieldObjectFeedbackEntries;
         }
-        $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] = $objectFeedbackEntries;
+        $iterationObjectFeedbackEntries[$relationalTypeResolver] = $objectFeedbackEntries;
     }
 
 
