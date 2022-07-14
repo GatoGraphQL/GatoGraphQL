@@ -2132,7 +2132,7 @@ class Engine implements EngineInterface
         ObjectResolutionFeedbackInterface $objectFeedback,
         SplObjectStorage $iterationObjectFeedbackEntries
     ): void {
-        $entry = $this->getObjectOrSchemaFeedbackEntries($objectFeedback);
+        $entry = $this->getObjectFeedbackEntry($objectFeedback);
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
         foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
@@ -2233,7 +2233,7 @@ class Engine implements EngineInterface
         SchemaFeedbackInterface $schemaFeedback,
         SplObjectStorage $iterationSchemaFeedbackEntries
     ): void {
-        $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
+        $entry = $this->getSchemaFeedbackEntry($schemaFeedback);
         $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         foreach ($schemaFeedback->getFields() as $field) {
             $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$field] ?? [];
@@ -2246,7 +2246,7 @@ class Engine implements EngineInterface
     /**
      * @return array<string,mixed>
      */
-    private function getObjectOrSchemaFeedbackEntries(
+    private function getObjectOrSchemaFeedbackCommonEntry(
         ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
     ): array {
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
@@ -2295,6 +2295,26 @@ class Engine implements EngineInterface
         if ($field !== null) {
             $entry[Tokens::FIELD] = $field->asASTNodeString();
         }
+        return $entry;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function getObjectFeedbackEntry(
+        ObjectResolutionFeedbackInterface $objectFeedback,
+    ): array {
+        $entry = $this->getObjectOrSchemaFeedbackCommonEntry($objectFeedback);
+        return $entry;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function getSchemaFeedbackEntry(
+        SchemaFeedbackInterface $schemaFeedback,
+    ): array {
+        $entry = $this->getObjectOrSchemaFeedbackCommonEntry($schemaFeedback);
         return $entry;
     }
 
