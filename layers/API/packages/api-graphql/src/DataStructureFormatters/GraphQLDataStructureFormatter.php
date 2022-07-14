@@ -116,12 +116,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function reformatObjectEntries($entries): array
     {
         $ret = [];
-        foreach ($entries as $typeOutputKey => $id_storage) {
-            foreach ($id_storage as $id => $storage) {
-                foreach ($storage as $field) {
-                    /** @var FieldInterface $field */
-                    $items = $storage[$field];
-                    /** @var array<string,mixed> $items */
+        foreach ($entries as $typeOutputKey => $id_fieldItems) {
+            foreach ($id_fieldItems as $id => $fieldItems) {
+                /** @var FieldInterface $field */
+                foreach ($fieldItems as $field) {
+                    /** @var array<string,mixed> */
+                    $items = $fieldItems[$field];
                     foreach ($items as $item) {
                         $ret[] = $this->getObjectEntry($typeOutputKey, $id, $item);
                     }
