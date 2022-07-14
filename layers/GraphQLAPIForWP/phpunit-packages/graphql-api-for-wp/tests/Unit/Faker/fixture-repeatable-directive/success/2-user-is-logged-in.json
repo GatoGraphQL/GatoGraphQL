@@ -1,11 +1,11 @@
 {
   "errors": [
     {
-      "message": "You must have role 'subscriber' to access field(s) 'hi: echo(value: \"Hi there\")' for type 'QueryRoot'",
+      "message": "You must have role 'subscriber' to access field 'hi: echo(value: \"Hi there\")' for type 'QueryRoot'",
       "locations": [
         {
           "line": 7,
-          "column": 178
+          "column": 7
         }
       ],
       "extensions": {
@@ -13,7 +13,6 @@
         "field": "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
         "id": "root",
         "path": [
-          "@validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
           "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
           "query { ... }"
         ],

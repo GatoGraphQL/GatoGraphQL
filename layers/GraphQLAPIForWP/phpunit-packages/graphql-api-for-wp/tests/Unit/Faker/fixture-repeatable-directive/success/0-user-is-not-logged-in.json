@@ -1,25 +1,39 @@
 {
   "errors": [
     {
-      "message": "You must be logged in to access field(s) 'hi: echo(value: \"Hi there\")', 'self' for type 'QueryRoot'",
+      "message": "You must be logged in to access field 'hi: echo(value: \"Hi there\")' for type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 7,
+          "column": 7
+        }
+      ],
       "extensions": {
         "type": "QueryRoot",
         "field": "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
         "id": "root",
         "path": [
-          "@validateIsUserLoggedIn"
+          "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
+          "query { ... }"
         ],
         "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
       }
     },
     {
-      "message": "You must be logged in to access field(s) 'hi: echo(value: \"Hi there\")', 'self' for type 'QueryRoot'",
+      "message": "You must be logged in to access field 'self' for type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 3
+        }
+      ],
       "extensions": {
         "type": "QueryRoot",
         "field": "self @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) { ... }",
         "id": "root",
         "path": [
-          "@validateIsUserLoggedIn"
+          "self @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) { ... }",
+          "query { ... }"
         ],
         "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
       }
