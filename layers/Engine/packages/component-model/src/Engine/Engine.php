@@ -2341,6 +2341,7 @@ class Engine implements EngineInterface
         }
         $entry = [
             Tokens::MESSAGE => $message,
+            Tokens::PATH => $astNodePath,
             Tokens::EXTENSIONS => array_merge(
                 $objectOrSchemaFeedback->getExtensions(),
                 [
@@ -2350,7 +2351,6 @@ class Engine implements EngineInterface
                     'specifiedBy' => $specifiedByURL,
                 ] : []
             ),
-            Tokens::PATH => $astNodePath,
         ];
         if ($location !== LocationHelper::getNonSpecificLocation()) {
             $entry[Tokens::LOCATIONS] = [$location];
