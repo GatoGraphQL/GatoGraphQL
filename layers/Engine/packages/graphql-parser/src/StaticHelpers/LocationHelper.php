@@ -6,13 +6,33 @@ namespace PoP\GraphQLParser\StaticHelpers;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-/**
- * Temporary class until fully migrating the Engine to GraphQL
- */
 class LocationHelper
 {
+    /**
+     * Use a single instance throghout the app, so that
+     * comparing the Location object by reference (as to
+     * decide to not print it) works well
+     */
+    public static ?Location $nonSpecificLocation = null;
+
+    /**
+     * Use a non-existing location to indicate that the
+     * AST node was created on runtime, and is not to be
+     * found on the GraphQL query.
+     *
+     * Eg of runtime AST nodes:
+     *
+     * - @resolveValueAndMerge
+     * - @serializeLeafOutputTypeValues
+     * - Directives added via `getMandatoryDirectivesForFields`
+     *
+     * This Location will not be printed on the GraphQL response
+     */
     public static function getNonSpecificLocation(): Location
     {
-        return new Location(1, 1);
+        if (self::$nonSpecificLocation === null) {
+            self::$nonSpecificLocation = new Location(-1, -1);
+        }
+        return self::$nonSpecificLocation;
     }
 }

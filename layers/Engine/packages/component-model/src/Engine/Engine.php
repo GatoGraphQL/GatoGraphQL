@@ -55,6 +55,7 @@ use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
@@ -2322,9 +2323,8 @@ class Engine implements EngineInterface
     ): array {
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
         $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
-        $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         $astNode = $objectOrSchemaFeedback->getAstNode();
-        $location = $astNode->getLocation()->toArray();
+        $location = $astNode->getLocation();
         /**
          * Re-create the path to the AST node
          *
@@ -2338,20 +2338,34 @@ class Engine implements EngineInterface
             // Move to the ancestor AST node
             $astNode = $documentASTNodeAncestors[$astNode] ?? null;
         }
-        return [
+        $entry = [
             Tokens::MESSAGE => $message,
-            Tokens::LOCATIONS => [$location],
-            Tokens::EXTENSIONS => array_merge(
-                $objectOrSchemaFeedback->getExtensions(),
-                [
-                    'code' => $feedbackItemResolution->getNamespacedCode(),
-                ],
-                $specifiedByURL !== null ? [
-                    'specifiedBy' => $specifiedByURL,
-                ] : []
-            ),
             Tokens::PATH => $astNodePath,
         ];
+        if ($location !== LocationHelper::getNonSpecificLocation()) {
+            $entry[Tokens::LOCATIONS] = [$location->toArray()];
+        }
+        $entry[Tokens::EXTENSIONS] = $this->getObjectOrSchemaFeedbackEntryExtensions(
+            $objectOrSchemaFeedback,
+            $feedbackItemResolution,
+        );
+        return $entry;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function getObjectOrSchemaFeedbackEntryExtensions(
+        ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
+        FeedbackItemResolution $feedbackItemResolution,
+    ): array {
+        $extensions = $objectOrSchemaFeedback->getExtensions();
+        $extensions['code'] = $feedbackItemResolution->getNamespacedCode();
+        $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
+        if ($specifiedByURL !== null) {
+            $extensions['specifiedBy'] = $specifiedByURL;
+        }
+        return $extensions;
     }
 
     /**
