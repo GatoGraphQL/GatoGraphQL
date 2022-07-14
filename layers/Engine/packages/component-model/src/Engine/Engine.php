@@ -2323,7 +2323,6 @@ class Engine implements EngineInterface
     ): array {
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
         $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
-        $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         $astNode = $objectOrSchemaFeedback->getAstNode();
         $location = $astNode->getLocation()->toArray();
         /**
