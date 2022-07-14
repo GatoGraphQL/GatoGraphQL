@@ -17,6 +17,7 @@ use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
@@ -78,7 +79,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected function assertFragmentSpreadTypesExistInSchema(): void
     {
         foreach ($this->document->getFragments() as $fragment) {
-            $this->assertFragmentSpreadTypeExistsInSchema($fragment->getModel());
+            $this->assertFragmentSpreadTypeExistsInSchema($fragment->getModel(), $fragment);
             $this->assertInlineFragmentSpreadTypesInFieldsOrFragmentsExistInSchema($fragment->getFieldsOrFragmentBonds());
         }
         foreach ($this->document->getOperations() as $operation) {
@@ -90,8 +91,10 @@ class ExecutableDocument extends UpstreamExecutableDocument
      * @throws InvalidRequestException
      * @see https://spec.graphql.org/draft/#sec-Fragment-Spread-Type-Existence
      */
-    protected function assertFragmentSpreadTypeExistsInSchema(string $fragmentSpreadType): void
-    {
+    protected function assertFragmentSpreadTypeExistsInSchema(
+        string $fragmentSpreadType,
+        Fragment|InlineFragment $astNode,
+    ): void {
         foreach ($this->compositeUnionTypeResolvers as $typeResolver) {
             if (
                 $this->isTypeResolverForFragmentSpreadType(
@@ -123,7 +126,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
                             $fragmentSpreadType,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $astNode->getLocation()
                 );
             }
         }
@@ -135,7 +138,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
                     $fragmentSpreadType,
                 ]
             ),
-            LocationHelper::getNonSpecificLocation()
+            $astNode->getLocation()
         );
     }
 
@@ -177,7 +180,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
             if ($fieldOrFragmentBond instanceof InlineFragment) {
                 /** @var InlineFragment */
                 $inlineFragment = $fieldOrFragmentBond;
-                $this->assertFragmentSpreadTypeExistsInSchema($inlineFragment->getTypeName());
+                $this->assertFragmentSpreadTypeExistsInSchema($inlineFragment->getTypeName(), $inlineFragment);
                 $this->assertInlineFragmentSpreadTypesInFieldsOrFragmentsExistInSchema($inlineFragment->getFieldsOrFragmentBonds());
                 continue;
             }
