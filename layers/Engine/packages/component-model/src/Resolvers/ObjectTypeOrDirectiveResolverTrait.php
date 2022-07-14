@@ -6,11 +6,6 @@ namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use stdClass;
 
 trait ObjectTypeOrDirectiveResolverTrait
@@ -79,25 +74,5 @@ trait ObjectTypeOrDirectiveResolverTrait
             $fieldOrDirectiveData[$argName] = $argDefaultValue;
         }
         return $fieldOrDirectiveData;
-    }
-
-    final protected function getArgumentValueAsAST(mixed $argumentValue): WithValueInterface
-    {
-        if (is_array($argumentValue)) {
-            return new InputList(
-                $argumentValue,
-                LocationHelper::getNonSpecificLocation()
-            );
-        }
-        if ($argumentValue instanceof stdClass) {
-            return new InputObject(
-                $argumentValue,
-                LocationHelper::getNonSpecificLocation()
-            );
-        }
-        return new Literal(
-            $argumentValue,
-            LocationHelper::getNonSpecificLocation()
-        );
     }
 }
