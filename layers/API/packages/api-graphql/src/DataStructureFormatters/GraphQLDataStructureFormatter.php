@@ -167,10 +167,14 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
         /** @var array<string|int> */
         $ids = $item[Tokens::IDS];
-        $extensions['id(s)'] = implode(
-            $this->__(',', 'api-graphql'),
-            $ids
-        );
+        if (count($ids) === 1) {
+            $extensions['id'] = $ids[0];
+        } else {
+            $extensions['ids'] = implode(
+                $this->__(',', 'api-graphql'),
+                $ids
+            );
+        }
         $extensions['path'] = $item[Tokens::PATH];
         return $extensions;
     }
