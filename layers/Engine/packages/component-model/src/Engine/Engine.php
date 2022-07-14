@@ -2186,7 +2186,7 @@ class Engine implements EngineInterface
                 $idTargetObjectTypeResolverIDFieldSet[$id] = $fieldSet;
                 $targetObjectTypeResolverIDFieldSet[$idTargetObjectTypeResolver] = $idTargetObjectTypeResolverIDFieldSet;
 
-                /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+                /** @var SplObjectStorage<FieldInterface,mixed> */
                 $idTargetObjectFeedbackEntries = $targetIterationObjectFeedbackEntries[$idTargetObjectTypeResolver] ?? new SplObjectStorage();
                 foreach ($fieldSet->fields as $field) {
                     if (!$iterationObjectFeedbackEntries->contains($relationalTypeResolver)
@@ -2230,6 +2230,7 @@ class Engine implements EngineInterface
     ): void {
         $entry = $this->getObjectFeedbackEntry($objectFeedback);
         $fieldIDs = $this->orderIDsByDirectFields($idFieldSet);
+        /** @var SplObjectStorage<FieldInterface,mixed> */
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$relationalTypeResolver] ?? new SplObjectStorage();
         /** @var FieldInterface $field */
         foreach ($fieldIDs as $field) {
