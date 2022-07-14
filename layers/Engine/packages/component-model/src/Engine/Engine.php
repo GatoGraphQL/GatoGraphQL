@@ -2342,19 +2342,19 @@ class Engine implements EngineInterface
         $entry = [
             Tokens::MESSAGE => $message,
             Tokens::PATH => $astNodePath,
-            Tokens::EXTENSIONS => array_merge(
-                $objectOrSchemaFeedback->getExtensions(),
-                [
-                    'code' => $feedbackItemResolution->getNamespacedCode(),
-                ],
-                $specifiedByURL !== null ? [
-                    'specifiedBy' => $specifiedByURL,
-                ] : []
-            ),
         ];
         if ($location !== LocationHelper::getNonSpecificLocation()) {
             $entry[Tokens::LOCATIONS] = [$location];
         }
+        $entry[Tokens::EXTENSIONS] = array_merge(
+            $objectOrSchemaFeedback->getExtensions(),
+            [
+                'code' => $feedbackItemResolution->getNamespacedCode(),
+            ],
+            $specifiedByURL !== null ? [
+                'specifiedBy' => $specifiedByURL,
+            ] : []
+        );
         return $entry;
     }
 
