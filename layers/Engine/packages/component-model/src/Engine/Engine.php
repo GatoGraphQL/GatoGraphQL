@@ -2133,19 +2133,22 @@ class Engine implements EngineInterface
         SplObjectStorage $iterationObjectFeedbackEntries
     ): void {
         $entry = $this->getObjectFeedbackEntry($objectFeedback);
+        $fieldIDs = $this->orderIDsByDirectFields($objectFeedback->getIDFieldSet());
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
-        foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
-            foreach ($fieldSet->fields as $field) {
-                $fieldEntry = $this->addFieldToObjectOrSchemaFeedbackEntry(
-                    $entry,
-                    $field,
-                );
-                $objectFeedbackEntriesStorage = $objectFeedbackEntries[$id] ?? new SplObjectStorage();
-                $fieldObjectFeedbackEntries = $objectFeedbackEntriesStorage[$field] ?? [];
-                $fieldObjectFeedbackEntries[] = $fieldEntry;
-                $objectFeedbackEntriesStorage[$field] = $fieldObjectFeedbackEntries;
-                $objectFeedbackEntries[$id] = $objectFeedbackEntriesStorage;
-            }
+        /** @var FieldInterface $field */
+        foreach ($fieldIDs as $field) {
+            /** @var array<string|int> */
+            $ids = $fieldIDs[$field];
+            $fieldEntry = $this->addFieldToObjectOrSchemaFeedbackEntry(
+                $entry,
+                $field,
+            );
+            $entry[Tokens::IDS] = $ids;
+            $objectFeedbackEntriesStorage = $objectFeedbackEntries[$id] ?? new SplObjectStorage();
+            $fieldObjectFeedbackEntries = $objectFeedbackEntriesStorage[$field] ?? [];
+            $fieldObjectFeedbackEntries[] = $fieldEntry;
+            $objectFeedbackEntriesStorage[$field] = $fieldObjectFeedbackEntries;
+            $objectFeedbackEntries[$id] = $objectFeedbackEntriesStorage;
         }
         $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] = $objectFeedbackEntries;
     }
