@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
