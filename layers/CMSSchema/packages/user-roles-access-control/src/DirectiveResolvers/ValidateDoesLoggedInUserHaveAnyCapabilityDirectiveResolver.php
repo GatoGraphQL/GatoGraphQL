@@ -83,11 +83,6 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         foreach ($fieldIDs as $field) {
             /** @var array<string|int> */
             $ids = $fieldIDs[$field];
-            $fieldIDFieldSet = [];
-            $fieldEngineIterationFieldSet = new EngineIterationFieldSet([$field]);
-            foreach ($ids as $id) {
-                $fieldIDFieldSet[$id] = $fieldEngineIterationFieldSet;
-            }
             $engineIterationFeedbackStore->objectFeedbackStore->addError(
                 new ObjectResolutionFeedback(
                     new FeedbackItemResolution(
@@ -105,7 +100,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
                     $field,
                     $relationalTypeResolver,
                     $this->directive,
-                    $fieldIDFieldSet,
+                    $this->getFieldIDSetForField($field, $ids),
                 )
             );
         }

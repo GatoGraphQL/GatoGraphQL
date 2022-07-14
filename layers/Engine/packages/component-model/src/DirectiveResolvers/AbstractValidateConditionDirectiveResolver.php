@@ -84,4 +84,18 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     {
         return false;
     }
+
+    /**
+     * @param array<string|int> $ids
+     * @return array<string|int,EngineIterationFieldSet>
+     */
+    protected function getFieldIDSetForField(FieldInterface $field, array $ids): array
+    {
+        $fieldIDFieldSet = [];
+        $fieldEngineIterationFieldSet = new EngineIterationFieldSet([$field]);
+        foreach ($ids as $id) {
+            $fieldIDFieldSet[$id] = $fieldEngineIterationFieldSet;
+        }
+        return $fieldIDFieldSet;
+    }
 }

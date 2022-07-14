@@ -6,7 +6,11 @@ namespace PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -56,34 +60,50 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     }
 
     /**
+     * Add the errors to the FeedbackStore
+     *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @return array<string|int,EngineIterationFieldSet> Failed $idFieldSet
      */
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $idFieldSet): FeedbackItemResolution
-    {
+    protected function addUnsuccessfulValidationErrors(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        array &$variables,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void {
         $roles = $this->directiveArgs['roles'];
         $isValidatingDirective = $this->isValidatingDirective();
         $code = (count($roles) === 1)
             ? ($isValidatingDirective ? FeedbackItemProvider::E5 : FeedbackItemProvider::E6)
             : ($isValidatingDirective ? FeedbackItemProvider::E7 : FeedbackItemProvider::E8);
 
-        return new FeedbackItemResolution(
-            FeedbackItemProvider::class,
-            $code,
-            [
-                implode(
-                    $this->__('\', \''),
-                    $roles
-                ),
-                implode(
-                    $this->__('\', \''),
-                    array_map(
-                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                        $this->getFieldsFromIDFieldSet($idFieldSet)
-                    )
-                ),
-                $relationalTypeResolver->getMaybeNamespacedTypeName(),
-            ]
-        );
+        $fieldIDs = MethodHelpers::orderIDsByDirectFields($idFieldSet);
+        /** @var FieldInterface $field */
+        foreach ($fieldIDs as $field) {
+            /** @var array<string|int> */
+            $ids = $fieldIDs[$field];
+            $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                new ObjectResolutionFeedback(
+                    new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        $code,
+                        [
+                            implode(
+                                $this->__('\', \''),
+                                $roles
+                            ),
+                            $field->asFieldOutputQueryString(),
+                            $relationalTypeResolver->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    $field,
+                    $relationalTypeResolver,
+                    $this->directive,
+                    $this->getFieldIDSetForField($field, $ids),
+                )
+            );
+        }
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
