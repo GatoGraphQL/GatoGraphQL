@@ -2360,12 +2360,8 @@ class Engine implements EngineInterface
         ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
         FeedbackItemResolution $feedbackItemResolution,
     ): array {
-        $extensions = array_merge(
-            $objectOrSchemaFeedback->getExtensions(),
-            [
-                'code' => $feedbackItemResolution->getNamespacedCode(),
-            ]
-        );
+        $extensions = $objectOrSchemaFeedback->getExtensions();
+        $extensions['code'] = $feedbackItemResolution->getNamespacedCode();
         $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         if ($specifiedByURL !== null) {
             $extensions['specifiedBy'] = $specifiedByURL;
