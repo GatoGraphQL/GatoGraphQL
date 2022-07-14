@@ -150,7 +150,7 @@ class Document implements DocumentInterface
                             $operationName,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $operation->getLocation()
                 );
             }
             $operationNames[] = $operationName;
@@ -172,7 +172,7 @@ class Document implements DocumentInterface
                         GraphQLSpecErrorFeedbackItemProvider::class,
                         GraphQLSpecErrorFeedbackItemProvider::E_5_2_2_1,
                     ),
-                    LocationHelper::getNonSpecificLocation()
+                    $operation->getLocation()
                 );
             }
         }
