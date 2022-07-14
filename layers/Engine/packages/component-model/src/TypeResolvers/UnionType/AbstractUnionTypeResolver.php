@@ -199,13 +199,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          * Remove this information, and get purely the ID
          */
         $objectIDs = array_map(
-            function ($composedID) {
-                list(
-                    $typeOutputKey,
-                    $id
-                ) = UnionTypeHelpers::extractObjectTypeAndID($composedID);
-                return $id;
-            },
+            fn (string|int $maybeComposedID) => UnionTypeHelpers::extractObjectTypeAndID($maybeComposedID)[1],
             array_keys($idFieldSet)
         );
         $objectIDTargetTypeResolvers = $this->getObjectIDTargetTypeResolvers($objectIDs);
