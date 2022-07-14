@@ -47,6 +47,7 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -2175,7 +2176,7 @@ class Engine implements EngineInterface
         array $idFieldSet,
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackCommonEntry($objectFeedback);
-        $fieldIDs = $this->orderIDsByDirectFields($idFieldSet);
+        $fieldIDs = MethodHelpers::orderIDsByDirectFields($idFieldSet);
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$relationalTypeResolver] ?? new SplObjectStorage();
         /** @var FieldInterface $field */
@@ -2192,26 +2193,6 @@ class Engine implements EngineInterface
             $objectFeedbackEntries[$field] = $fieldObjectFeedbackEntries;
         }
         $iterationObjectFeedbackEntries[$relationalTypeResolver] = $objectFeedbackEntries;
-    }
-
-
-    /**
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return SplObjectStorage<FieldInterface,array<string|int>>
-     */
-    private function orderIDsByDirectFields(
-        array $idFieldSet
-    ): SplObjectStorage {
-        /** @var SplObjectStorage<FieldInterface,array<string|int>> */
-        $fieldIDs = new SplObjectStorage();
-        foreach ($idFieldSet as $id => $fieldSet) {
-            foreach ($fieldSet->fields as $field) {
-                $ids = $fieldIDs[$field] ?? [];
-                $ids[] = $id;
-                $fieldIDs[$field] = $ids;
-            }
-        }
-        return $fieldIDs;
     }
 
     private function transferSchemaFeedback(

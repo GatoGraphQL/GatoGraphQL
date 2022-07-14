@@ -38,14 +38,14 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must have capability \'%1$s\' to access directives in field(s) \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
-            self::E2 => $this->__('You must have capability \'%1$s\' to access field(s) \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
-            self::E3 => $this->__('You must have any capability from among \'%1$s\' to access directives in field(s) \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
-            self::E4 => $this->__('You must have any capability from among \'%1$s\' to access field(s) \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
-            self::E5 => $this->__('You must have role \'%1$s\' to access directives in field(s) \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
-            self::E6 => $this->__('You must have role \'%1$s\' to access field(s) \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
-            self::E7 => $this->__('You must have any role from among \'%1$s\' to access directives in field(s) \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
-            self::E8 => $this->__('You must have any role from among \'%1$s\' to access field(s) \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
+            self::E1 => $this->__('You must have capability \'%1$s\' to access directives in field \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
+            self::E2 => $this->__('You must have capability \'%1$s\' to access field \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
+            self::E3 => $this->__('You must have any capability from among \'%1$s\' to access directives in field \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
+            self::E4 => $this->__('You must have any capability from among \'%1$s\' to access field \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
+            self::E5 => $this->__('You must have role \'%1$s\' to access directives in field \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
+            self::E6 => $this->__('You must have role \'%1$s\' to access field \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
+            self::E7 => $this->__('You must have any role from among \'%1$s\' to access directives in field \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
+            self::E8 => $this->__('You must have any role from among \'%1$s\' to access field \'%2$s\' for type \'%3$s\'', 'user-roles-access-control'),
             default => parent::getMessagePlaceholder($code),
         };
     }

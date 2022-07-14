@@ -7,6 +7,10 @@ namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -42,24 +46,38 @@ class ValidateIsUserNotLoggedInDirectiveResolver extends AbstractValidateCheckpo
     }
 
     /**
+     * Add the errors to the FeedbackStore
+     *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $idFieldSet): FeedbackItemResolution
-    {
-        return new FeedbackItemResolution(
-            FeedbackItemProvider::class,
-            $this->isValidatingDirective() ? FeedbackItemProvider::E3 : FeedbackItemProvider::E4,
-            [
-                implode(
-                    $this->__('\', \''),
-                    array_map(
-                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                        $this->getFieldsFromIDFieldSet($idFieldSet)
-                    )
-                ),
-                $relationalTypeResolver->getMaybeNamespacedTypeName(),
-            ]
-        );
+    protected function addUnsuccessfulValidationErrors(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void {
+        $fieldIDs = MethodHelpers::orderIDsByDirectFields($idFieldSet);
+        /** @var FieldInterface $field */
+        foreach ($fieldIDs as $field) {
+            /** @var array<string|int> */
+            $ids = $fieldIDs[$field];
+            $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                new ObjectResolutionFeedback(
+                    new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        $this->isValidatingDirective() ? FeedbackItemProvider::E3 : FeedbackItemProvider::E4,
+                        [
+                            $field->asFieldOutputQueryString(),
+                            $relationalTypeResolver->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    $field,
+                    $relationalTypeResolver,
+                    $this->directive,
+                    $this->getFieldIDSetForField($field, $ids),
+                )
+            );
+        }
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
