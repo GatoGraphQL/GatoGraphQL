@@ -2144,11 +2144,9 @@ class Engine implements EngineInterface
                 $field,
             );
             $entry[Tokens::IDS] = $ids;
-            $objectFeedbackEntriesStorage = $objectFeedbackEntries[$id] ?? new SplObjectStorage();
-            $fieldObjectFeedbackEntries = $objectFeedbackEntriesStorage[$field] ?? [];
+            $fieldObjectFeedbackEntries = $objectFeedbackEntries[$field] ?? [];
             $fieldObjectFeedbackEntries[] = $fieldEntry;
-            $objectFeedbackEntriesStorage[$field] = $fieldObjectFeedbackEntries;
-            $objectFeedbackEntries[$id] = $objectFeedbackEntriesStorage;
+            $objectFeedbackEntries[$field] = $fieldObjectFeedbackEntries;
         }
         $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] = $objectFeedbackEntries;
     }
