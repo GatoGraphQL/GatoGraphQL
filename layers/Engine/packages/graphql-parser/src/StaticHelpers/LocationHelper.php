@@ -13,7 +13,7 @@ class LocationHelper
      * comparing the Location object by reference (as to
      * decide to not print it) works well
      */
-    public static ?Location $nonExistingLocation = null;
+    public static ?Location $nonSpecificLocation = null;
 
     /**
      * Use a non-existing location to indicate that the
@@ -30,9 +30,9 @@ class LocationHelper
      */
     public static function getNonSpecificLocation(): Location
     {
-        if (self::$nonExistingLocation === null) {
-            self::$nonExistingLocation = new Location(-1, -1);
+        if (self::$nonSpecificLocation === null) {
+            self::$nonSpecificLocation = new Location(-1, -1);
         }
-        return self::$nonExistingLocation;
+        return self::$nonSpecificLocation;
     }
 }
