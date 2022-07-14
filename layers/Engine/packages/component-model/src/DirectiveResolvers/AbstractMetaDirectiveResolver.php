@@ -69,11 +69,15 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         $this->nestedDirectivePipelineData = $nestedDirectivePipelineData;
     }
 
+    /**
+     * @param FieldInterface[] $fields
+     * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>|null
+     */
     protected function getNestedDirectivePipelineData(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): ?array {
+    ): ?SplObjectStorage {
         /** @var MetaDirective */
         $metaDirective = $this->directive;
         $nestedDirectives = $metaDirective->getNestedDirectives();
