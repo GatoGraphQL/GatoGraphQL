@@ -2136,9 +2136,13 @@ class Engine implements EngineInterface
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
         foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
+                $fieldEntry = $this->addFieldToObjectOrSchemaFeedbackEntry(
+                    $entry,
+                    $field,
+                );
                 $objectFeedbackEntriesStorage = $objectFeedbackEntries[$id] ?? new SplObjectStorage();
                 $fieldObjectFeedbackEntries = $objectFeedbackEntriesStorage[$field] ?? [];
-                $fieldObjectFeedbackEntries[] = $entry;
+                $fieldObjectFeedbackEntries[] = $fieldEntry;
                 $objectFeedbackEntriesStorage[$field] = $fieldObjectFeedbackEntries;
                 $objectFeedbackEntries[$id] = $objectFeedbackEntriesStorage;
             }
@@ -2237,7 +2241,11 @@ class Engine implements EngineInterface
         $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         foreach ($schemaFeedback->getFields() as $field) {
             $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$field] ?? [];
-            $fieldSchemaFeedbackEntries[] = $entry;
+            $fieldEntry = $this->addFieldToObjectOrSchemaFeedbackEntry(
+                $entry,
+                $field,
+            );
+            $fieldSchemaFeedbackEntries[] = $fieldEntry;
             $schemaFeedbackEntries[$field] = $fieldSchemaFeedbackEntries;
         }
         $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] = $schemaFeedbackEntries;
@@ -2281,6 +2289,22 @@ class Engine implements EngineInterface
             ),
             Tokens::PATH => $astNodePath,
         ];
+    }
+
+    /**
+     * @param array<string,mixed> $entry
+     * @return array<string,mixed>
+     */
+    private function addFieldToObjectOrSchemaFeedbackEntry(
+        array $entry,
+        FieldInterface $field,
+    ): array {
+        return array_merge(
+            $entry,
+            [
+                Tokens::FIELD => $field->asASTNodeString(),
+            ]
+        );
     }
 
     /**
