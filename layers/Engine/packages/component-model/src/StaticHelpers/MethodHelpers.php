@@ -27,4 +27,21 @@ class MethodHelpers
         }
         return $fieldIDs;
     }
+
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @return FieldInterface[]
+     */
+    public static function getFieldsFromIDFieldSet(array $idFieldSet): array
+    {
+        /** @var FieldInterface[] */
+        $fields = [];
+        foreach ($idFieldSet as $id => $fieldSet) {
+            $fields = array_merge(
+                $fields,
+                $fieldSet->fields
+            );
+        }
+        return array_values(array_unique($fields));
+    }
 }
