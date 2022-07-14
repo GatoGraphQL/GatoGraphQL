@@ -2150,6 +2150,26 @@ class Engine implements EngineInterface
         $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] = $objectFeedbackEntries;
     }
 
+
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @return SplObjectStorage<FieldInterface,array<string|int>
+     */
+    private function orderIDsByDirectFields(
+        array $idFieldSet
+    ): SplObjectStorage {
+        /** @var SplObjectStorage<FieldInterface,array<string|int> */
+        $fieldIDs = new SplObjectStorage();
+        foreach ($idFieldSet as $id => $fieldSet) {
+            foreach ($fieldSet->fields as $field) {
+                $ids = $fieldIDs[$field] ?? [];
+                $ids[] = $id;
+                $fieldIDs[$field] = $ids;
+            }
+        }
+        return $fieldIDs;
+    }
+
     private function transferSchemaFeedback(
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
