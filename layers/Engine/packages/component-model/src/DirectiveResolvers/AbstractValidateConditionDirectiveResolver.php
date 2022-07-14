@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
@@ -35,35 +36,30 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     }
 
     /**
-     * Validate a custom condition
-     *
-     * @param FieldInterface[] $fields
-     * @param FieldInterface[] $failedFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @return array<string|int,EngineIterationFieldSet> Failed $idFieldSet
      */
-    protected function validateFields(
+    protected function validateIDFieldSet(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $fields,
+        array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$failedFields,
-    ): void {
+    ): array {
         if ($this->isValidationSuccessful($relationalTypeResolver)) {
-            return;
+            return [];
         }
         // All fields failed
-        $failedFields = array_merge(
-            $failedFields,
-            $fields
-        );
-        $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-            new SchemaFeedback(
-                $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $fields),
+        $engineIterationFeedbackStore->objectFeedbackStore->addError(
+            new ObjectResolutionFeedback(
+                $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $idFieldSet),
                 $this->directive,
                 $relationalTypeResolver,
-                $fields,
+                $this->directive,
+                $idFieldSet,
             )
         );
+        return $idFieldSet;
     }
 
     /**
@@ -81,22 +77,24 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     }
 
     /**
-     * @param FieldInterface[] $failedFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
+    abstract protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $idFieldSet): FeedbackItemResolution;
+
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param FieldInterface[]
+     */
+    protected function getFieldsFromIDFieldSet(array $idFieldSet): array
     {
-        return new FeedbackItemResolution(
-            ErrorFeedbackItemProvider::class,
-            $this->isValidatingDirective() ? ErrorFeedbackItemProvider::E18 : ErrorFeedbackItemProvider::E19,
-            [
-                implode(
-                    $this->__('\', \''),
-                    array_map(
-                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                        $failedFields
-                    )
-                ),
-            ]
-        );
+        /** @var FieldInterface[] */
+        $fields = [];
+        foreach ($idFieldSet as $id => $fieldSet) {
+            $fields = array_merge(
+                $fields,
+                $fieldSet->fields
+            );
+        }
+        return array_values(array_unique($fields));
     }
 }

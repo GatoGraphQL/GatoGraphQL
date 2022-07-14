@@ -29,8 +29,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E15 = 'e15';
     public final const E16 = 'e16';
     public final const E17 = 'e17';
-    public final const E18 = 'e18';
-    public final const E19 = 'e19';
     public final const E20 = 'e20';
     public final const E21 = 'e21';
     public final const E22 = 'e22';
@@ -70,8 +68,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E15,
             self::E16,
             self::E17,
-            self::E18,
-            self::E19,
             self::E20,
             self::E21,
             self::E22,
@@ -115,8 +111,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E16 => $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
             self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
-            self::E18 => $this->__('Validation failed for directives in fields \'%s\'', 'component-model') ,
-            self::E19 => $this->__('Validation failed for fields \'%s\'', 'component-model'),
             self::E20 => $this->__('There is no directive with name \'%s\'', 'component-model'),
             self::E21 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
             self::E22 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),

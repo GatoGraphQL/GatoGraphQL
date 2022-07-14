@@ -10,6 +10,7 @@
       ],
       "extensions": {
         "type": "QueryRoot",
+        "id": "root",
         "path": [
           "@validateIsUserLoggedIn"
         ],
@@ -26,6 +27,7 @@
       ],
       "extensions": {
         "type": "QueryRoot",
+        "id": "root",
         "path": [
           "@validateIsUserLoggedIn"
         ],
