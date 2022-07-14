@@ -137,7 +137,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
-    protected function getObjectEntry(string $typeOutputKey, array $item): array
+    protected function getObjectOrSchemaCommonEntry(string $typeOutputKey, array $item): array
     {
         $entry = [];
         if ($message = $item[Tokens::MESSAGE] ?? null) {
@@ -146,6 +146,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($locations = $item[Tokens::LOCATIONS] ?? null) {
             $entry['locations'] = $locations;
         }
+        return $entry;
+    }
+
+    protected function getObjectEntry(string $typeOutputKey, array $item): array
+    {
+        $entry = $this->getObjectOrSchemaCommonEntry($typeOutputKey, $item);
         if (
             $extensions = array_merge(
                 $this->getObjectEntryExtensions($typeOutputKey, $item),
@@ -197,13 +203,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     protected function getSchemaEntry(string $typeOutputKey, array $item): array
     {
-        $entry = [];
-        if ($message = $item[Tokens::MESSAGE] ?? null) {
-            $entry['message'] = $message;
-        }
-        if ($locations = $item[Tokens::LOCATIONS] ?? null) {
-            $entry['locations'] = $locations;
-        }
+        $entry = $this->getObjectOrSchemaCommonEntry($typeOutputKey, $item);
         if (
             $extensions = array_merge(
                 $this->getSchemaEntryExtensions($typeOutputKey, $item),
