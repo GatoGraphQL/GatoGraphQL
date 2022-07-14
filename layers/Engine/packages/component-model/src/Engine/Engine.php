@@ -2186,6 +2186,7 @@ class Engine implements EngineInterface
                 $idTargetObjectTypeResolverIDFieldSet[$id] = $fieldSet;
                 $targetObjectTypeResolverIDFieldSet[$idTargetObjectTypeResolver] = $idTargetObjectTypeResolverIDFieldSet;
 
+                /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
                 $idTargetObjectFeedbackEntries = $targetIterationObjectFeedbackEntries[$idTargetObjectTypeResolver] ?? new SplObjectStorage();
                 foreach ($fieldSet->fields as $field) {
                     if (!$iterationObjectFeedbackEntries->contains($relationalTypeResolver)
@@ -2218,6 +2219,7 @@ class Engine implements EngineInterface
     }
 
     /**
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationObjectFeedbackEntries
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     private function doTransferObjectFeedbackEntries(
@@ -2248,12 +2250,12 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return SplObjectStorage<FieldInterface,array<string|int>
+     * @return SplObjectStorage<FieldInterface,array<string|int>>
      */
     private function orderIDsByDirectFields(
         array $idFieldSet
     ): SplObjectStorage {
-        /** @var SplObjectStorage<FieldInterface,array<string|int> */
+        /** @var SplObjectStorage<FieldInterface,array<string|int>> */
         $fieldIDs = new SplObjectStorage();
         foreach ($idFieldSet as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
