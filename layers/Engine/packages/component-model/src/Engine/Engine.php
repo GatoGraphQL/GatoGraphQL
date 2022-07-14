@@ -2164,6 +2164,15 @@ class Engine implements EngineInterface
         foreach ($fieldIDs as $field) {
             /** @var array<string|int> */
             $ids = $fieldIDs[$field];
+            /**
+             * If the type data resolver is union, the typeOutputKey where the value is stored
+             * is contained in the ID itself, with format typeOutputKey/ID.
+             * Remove this information, and get purely the ID
+             */
+            $ids = array_map(
+                fn (string|int $maybeComposedID) => UnionTypeHelpers::extractObjectTypeAndID($maybeComposedID)[1],
+                $ids
+            );
             $fieldEntry = $this->addFieldToObjectOrSchemaFeedbackEntry(
                 $entry,
                 $field,
