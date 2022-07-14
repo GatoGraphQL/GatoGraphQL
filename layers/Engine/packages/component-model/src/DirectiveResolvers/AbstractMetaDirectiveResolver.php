@@ -6,6 +6,8 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
@@ -14,6 +16,7 @@ use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
@@ -84,6 +87,26 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             $variables,
             $separateEngineIterationFeedbackStore,
         );
+
+        /**
+         * Validate that there are composed directives
+         */
+        if ($this->nestedDirectivePipelineData->count() === 0) {
+            $separateEngineIterationFeedbackStore->schemaFeedbackStore->addError(
+                new SchemaFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E5,
+                        [
+                            $this->getDirectiveName(),
+                        ]
+                    ),
+                    $this->directive,
+                    $relationalTypeResolver,
+                    $fields,
+                )
+            );
+        }
         $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
         $this->setHasValidationErrors($separateEngineIterationFeedbackStore->hasErrors());
     }
