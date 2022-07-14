@@ -10,6 +10,7 @@
       ],
       "extensions": {
         "type": "QueryRoot",
+        "field": "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
         "id": "root",
         "path": [
           "@validateIsUserLoggedIn"
@@ -27,6 +28,7 @@
       ],
       "extensions": {
         "type": "QueryRoot",
+        "field": "self @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) { ... }",
         "id": "root",
         "path": [
           "@validateIsUserLoggedIn"
