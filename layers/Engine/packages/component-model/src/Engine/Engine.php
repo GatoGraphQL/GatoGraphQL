@@ -2346,17 +2346,31 @@ class Engine implements EngineInterface
         if ($location !== LocationHelper::getNonSpecificLocation()) {
             $entry[Tokens::LOCATIONS] = [$location];
         }
+        $entry[Tokens::EXTENSIONS] = $this->getObjectOrSchemaFeedbackEntryExtensions(
+            $objectOrSchemaFeedback,
+            $feedbackItemResolution,
+        );
+        return $entry;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function getObjectOrSchemaFeedbackEntryExtensions(
+        ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
+        FeedbackItemResolution $feedbackItemResolution,
+    ): array {
         $extensions = array_merge(
             $objectOrSchemaFeedback->getExtensions(),
             [
                 'code' => $feedbackItemResolution->getNamespacedCode(),
             ]
         );
+        $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         if ($specifiedByURL !== null) {
             $extensions['specifiedBy'] = $specifiedByURL;
         }
-        $entry[Tokens::EXTENSIONS] = $extensions;
-        return $entry;
+        return $extensions;
     }
 
     /**
