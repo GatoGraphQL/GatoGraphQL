@@ -1741,7 +1741,7 @@ class Engine implements EngineInterface
                  */
                 foreach ($idFieldSet as $id => $fieldSet) {
                     // If it failed to load the item, it will be null
-                    $iterationResolvedFieldValues = $iterationResolvedIDFieldValues[$id];
+                    $iterationResolvedFieldValues = $iterationResolvedIDFieldValues[$id] ?? null;
                     if ($iterationResolvedFieldValues === null) {
                         continue;
                     }
