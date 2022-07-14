@@ -24,12 +24,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
     protected SplObjectStorage $nestedDirectivePipelineData;
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->nestedDirectivePipelineData = new SplObjectStorage();
-    }
-
     public function isDirectiveEnabled(): bool
     {
         /** @var ModuleConfiguration */
