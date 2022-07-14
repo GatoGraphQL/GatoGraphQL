@@ -8,6 +8,11 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 class LocationHelper
 {
+    /**
+     * Use a single instance throghout the app, so that
+     * comparing the Location object by reference (as to
+     * decide to not print it) works well
+     */
     public static ?Location $nonExistingLocation = null;
 
     /**
