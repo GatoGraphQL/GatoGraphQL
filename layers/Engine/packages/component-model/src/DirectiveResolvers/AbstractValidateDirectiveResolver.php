@@ -28,7 +28,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     }
 
     /**
-     * Each validate can execute multiple times (eg: an added @validateIsUserLoggedIn)
+     * Each validate can execute multiple times (eg: several @validateDoesLoggedInUserHaveAnyCapability)
      */
     public function isRepeatable(): bool
     {
