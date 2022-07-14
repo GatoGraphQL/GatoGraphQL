@@ -2346,15 +2346,16 @@ class Engine implements EngineInterface
         if ($location !== LocationHelper::getNonSpecificLocation()) {
             $entry[Tokens::LOCATIONS] = [$location];
         }
-        $entry[Tokens::EXTENSIONS] = array_merge(
+        $extensions = array_merge(
             $objectOrSchemaFeedback->getExtensions(),
             [
                 'code' => $feedbackItemResolution->getNamespacedCode(),
-            ],
-            $specifiedByURL !== null ? [
-                'specifiedBy' => $specifiedByURL,
-            ] : []
+            ]
         );
+        if ($specifiedByURL !== null) {
+            $extensions['specifiedBy'] = $specifiedByURL;
+        }
+        $entry[Tokens::EXTENSIONS] = $extensions;
         return $entry;
     }
 
