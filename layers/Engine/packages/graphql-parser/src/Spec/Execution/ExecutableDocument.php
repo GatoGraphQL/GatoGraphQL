@@ -86,9 +86,9 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     protected function assertAndGetRequestedOperations(): array
     {
+        $operations = $this->document->getOperations();
         if ($this->context->getOperationName() === '') {
             // It can't be 0, or validation already fails in Document
-            $operations = $this->document->getOperations();
             $operationCount = count($operations);
             if ($operationCount > 1) {
                 $lastOperation = $operations[$operationCount - 1];
@@ -109,6 +109,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName()
         ));
         if ($requestedOperations === []) {
+            $firstOperation = $operations[0];
             throw new InvalidRequestException(
                 new FeedbackItemResolution(
                     GraphQLSpecErrorFeedbackItemProvider::class,
@@ -117,7 +118,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                          $this->context->getOperationName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation()
+                $firstOperation->getLocation()
             );
         }
         return $requestedOperations;
