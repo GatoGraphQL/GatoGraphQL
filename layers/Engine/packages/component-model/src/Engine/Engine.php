@@ -1912,7 +1912,7 @@ class Engine implements EngineInterface
                 $queryDocumentErrors[] = $queryDocumentError;
             }
         }
-        $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
+        $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
         $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
 
         // Warnings
@@ -1920,7 +1920,7 @@ class Engine implements EngineInterface
             if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
             }
-            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::WARNING, $schemaFeedbackEntries[FeedbackCategories::WARNING]);
         }
 
@@ -1929,7 +1929,7 @@ class Engine implements EngineInterface
             if ($generalDeprecations = $generalFeedbackStore->getDeprecations()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::DEPRECATION] = $this->getGeneralFeedbackEntriesForOutput($generalDeprecations);
             }
-            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::DEPRECATION, $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
         }
 
@@ -1938,7 +1938,7 @@ class Engine implements EngineInterface
             if ($generalNotices = $generalFeedbackStore->getNotices()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::NOTICE] = $this->getGeneralFeedbackEntriesForOutput($generalNotices);
             }
-            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
         }
 
@@ -1947,7 +1947,7 @@ class Engine implements EngineInterface
             if ($generalSuggestions = $generalFeedbackStore->getSuggestions()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::SUGGESTION] = $this->getGeneralFeedbackEntriesForOutput($generalSuggestions);
             }
-            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::SUGGESTION, $objectFeedbackEntries[FeedbackCategories::SUGGESTION]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::SUGGESTION, $objectFeedbackEntries[FeedbackCategories::SUGGESTION]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::SUGGESTION, $schemaFeedbackEntries[FeedbackCategories::SUGGESTION]);
         }
 
@@ -1956,41 +1956,66 @@ class Engine implements EngineInterface
             if ($generalLogs = $generalFeedbackStore->getLogs()) {
                 $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] = $this->getGeneralFeedbackEntriesForOutput($generalLogs);
             }
-            $this->maybeCombineAndAddDatabaseEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
+            $this->maybeCombineAndAddSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
             $this->maybeCombineAndAddSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
         }
     }
 
-    /**
-     * @param SplObjectStorage<RelationalTypeResolverInterface,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $iterationEntries
-     * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
-     */
-    protected function addObjectEntriesToDestinationArray(
-        SplObjectStorage $iterationEntries,
-        array &$destination,
-        array $idObjects,
-    ): void {
-        if ($iterationEntries->count() === 0) {
-            return;
-        }
+    // /**
+    //  * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationEntries
+    //  * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
+    //  */
+    // protected function addObjectEntriesToDestinationArray(
+    //     SplObjectStorage $iterationEntries,
+    //     array &$destination,
+    //     array $idObjects,
+    // ): void {
+    //     if ($iterationEntries->count() === 0) {
+    //         return;
+    //     }
 
-        /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
-        foreach ($iterationEntries as $iterationRelationalTypeResolver) {
-            $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
-            $entries = $iterationEntries[$iterationRelationalTypeResolver];
-            $dbNameEntries = $this->moveEntriesWithIDUnderDBName($entries, $iterationRelationalTypeResolver);
-            foreach ($dbNameEntries as $dbName => $entries) {
-                $destination[$dbName] ??= [];
-                $this->addDatasetToDatabase($destination[$dbName], $iterationRelationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
-            }
-        }
-    }
+    //     /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
+    //     foreach ($iterationEntries as $iterationRelationalTypeResolver) {
+    //         $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
+    //         $entries = $iterationEntries[$iterationRelationalTypeResolver];
+    //         $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
+    //         foreach ($dbNameEntries as $dbName => $entries) {
+    //             $destination[$dbName] ??= [];
+    //             $this->addDatasetToDatabase($destination[$dbName], $iterationRelationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
+    //         }
+    //     }
+    // }
+
+    // /**
+    //  * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationEntries
+    //  * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
+    //  */
+    // protected function addSchemaEntriesToDestinationArray(
+    //     SplObjectStorage $iterationEntries,
+    //     array &$destination,
+    // ): void {
+    //     if ($iterationEntries->count() === 0) {
+    //         return;
+    //     }
+    //     /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
+    //     foreach ($iterationEntries as $iterationRelationalTypeResolver) {
+    //         $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
+    //         $entries = $iterationEntries[$iterationRelationalTypeResolver];
+    //         $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
+    //         foreach ($dbNameEntries as $dbName => $entries) {
+    //             /** @var SplObjectStorage<FieldInterface,mixed> */
+    //             $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
+    //             $destinationSplObjectStorage->addAll($entries);
+    //             $destination[$dbName][$typeOutputKey] = $destinationSplObjectStorage;
+    //         }
+    //     }
+    // }
 
     /**
      * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationEntries
      * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
      */
-    protected function addSchemaEntriesToDestinationArray(
+    protected function addFeedbackEntries(
         SplObjectStorage $iterationEntries,
         array &$destination,
     ): void {
@@ -2043,7 +2068,7 @@ class Engine implements EngineInterface
         ObjectResolutionFeedbackStore $objectFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectErrors = new SplObjectStorage();
         foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $this->transferObjectFeedbackEntries(
@@ -2051,13 +2076,13 @@ class Engine implements EngineInterface
                 $iterationObjectErrors,
             );
         }
-        $this->addObjectEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationObjectErrors,
             $objectFeedbackEntries[FeedbackCategories::ERROR],
             $idObjects
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectWarnings = new SplObjectStorage();
         foreach ($objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
@@ -2065,13 +2090,13 @@ class Engine implements EngineInterface
                 $iterationObjectWarnings,
             );
         }
-        $this->addObjectEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationObjectWarnings,
             $objectFeedbackEntries[FeedbackCategories::WARNING],
             $idObjects
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectDeprecations = new SplObjectStorage();
         foreach ($objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
             $this->transferObjectFeedbackEntries(
@@ -2079,13 +2104,13 @@ class Engine implements EngineInterface
                 $iterationObjectDeprecations,
             );
         }
-        $this->addObjectEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationObjectDeprecations,
             $objectFeedbackEntries[FeedbackCategories::DEPRECATION],
             $idObjects
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectNotices = new SplObjectStorage();
         foreach ($objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
@@ -2093,13 +2118,13 @@ class Engine implements EngineInterface
                 $iterationObjectNotices,
             );
         }
-        $this->addObjectEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationObjectNotices,
             $objectFeedbackEntries[FeedbackCategories::NOTICE],
             $idObjects
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectSuggestions = new SplObjectStorage();
         foreach ($objectFeedbackStore->getSuggestions() as $objectFeedbackSuggestion) {
             $this->transferObjectFeedbackEntries(
@@ -2107,13 +2132,13 @@ class Engine implements EngineInterface
                 $iterationObjectSuggestions,
             );
         }
-        $this->addObjectEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationObjectSuggestions,
             $objectFeedbackEntries[FeedbackCategories::SUGGESTION],
             $idObjects
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectLogs = new SplObjectStorage();
         foreach ($objectFeedbackStore->getLogs() as $objectFeedbackLog) {
             $this->transferObjectFeedbackEntries(
@@ -2121,7 +2146,7 @@ class Engine implements EngineInterface
                 $iterationObjectLogs,
             );
         }
-        $this->addObjectEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationObjectLogs,
             $objectFeedbackEntries[FeedbackCategories::LOG],
             $idObjects
@@ -2134,7 +2159,7 @@ class Engine implements EngineInterface
     ): void {
         $entry = $this->getObjectFeedbackEntry($objectFeedback);
         $fieldIDs = $this->orderIDsByDirectFields($objectFeedback->getIDFieldSet());
-        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
+        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         /** @var FieldInterface $field */
         foreach ($fieldIDs as $field) {
             /** @var array<string|int> */
@@ -2183,7 +2208,7 @@ class Engine implements EngineInterface
                 $iterationSchemaErrors,
             );
         }
-        $this->addSchemaEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationSchemaErrors,
             $schemaFeedbackEntries[FeedbackCategories::ERROR],
         );
@@ -2196,7 +2221,7 @@ class Engine implements EngineInterface
                 $iterationSchemaWarnings,
             );
         }
-        $this->addSchemaEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationSchemaWarnings,
             $schemaFeedbackEntries[FeedbackCategories::WARNING],
         );
@@ -2209,7 +2234,7 @@ class Engine implements EngineInterface
                 $iterationSchemaDeprecations,
             );
         }
-        $this->addSchemaEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationSchemaDeprecations,
             $schemaFeedbackEntries[FeedbackCategories::DEPRECATION],
         );
@@ -2222,7 +2247,7 @@ class Engine implements EngineInterface
                 $iterationSchemaNotices,
             );
         }
-        $this->addSchemaEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationSchemaNotices,
             $schemaFeedbackEntries[FeedbackCategories::NOTICE],
         );
@@ -2235,7 +2260,7 @@ class Engine implements EngineInterface
                 $iterationSchemaSuggestions,
             );
         }
-        $this->addSchemaEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationSchemaSuggestions,
             $schemaFeedbackEntries[FeedbackCategories::SUGGESTION],
         );
@@ -2248,7 +2273,7 @@ class Engine implements EngineInterface
                 $iterationSchemaLogs,
             );
         }
-        $this->addSchemaEntriesToDestinationArray(
+        $this->addFeedbackEntries(
             $iterationSchemaLogs,
             $schemaFeedbackEntries[FeedbackCategories::LOG],
         );
