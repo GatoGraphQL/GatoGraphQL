@@ -2228,7 +2228,7 @@ class Engine implements EngineInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
     ): void {
-        $entry = $this->getObjectFeedbackEntry($objectFeedback);
+        $entry = $this->getObjectOrSchemaFeedbackCommonEntry($objectFeedback);
         $fieldIDs = $this->orderIDsByDirectFields($idFieldSet);
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$relationalTypeResolver] ?? new SplObjectStorage();
@@ -2355,7 +2355,7 @@ class Engine implements EngineInterface
         SchemaFeedbackInterface $schemaFeedback,
         SplObjectStorage $iterationSchemaFeedbackEntries
     ): void {
-        $entry = $this->getSchemaFeedbackEntry($schemaFeedback);
+        $entry = $this->getObjectOrSchemaFeedbackCommonEntry($schemaFeedback);
         $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         foreach ($schemaFeedback->getFields() as $field) {
             $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$field] ?? [];
@@ -2423,26 +2423,6 @@ class Engine implements EngineInterface
                 Tokens::FIELD => $field->asASTNodeString(),
             ]
         );
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function getObjectFeedbackEntry(
-        ObjectResolutionFeedbackInterface $objectFeedback,
-    ): array {
-        $entry = $this->getObjectOrSchemaFeedbackCommonEntry($objectFeedback);
-        return $entry;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function getSchemaFeedbackEntry(
-        SchemaFeedbackInterface $schemaFeedback,
-    ): array {
-        $entry = $this->getObjectOrSchemaFeedbackCommonEntry($schemaFeedback);
-        return $entry;
     }
 
     /**
