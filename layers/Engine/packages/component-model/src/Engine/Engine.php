@@ -2078,8 +2078,7 @@ class Engine implements EngineInterface
         }
         $this->addFeedbackEntries(
             $iterationObjectErrors,
-            $objectFeedbackEntries[FeedbackCategories::ERROR],
-            $idObjects
+            $objectFeedbackEntries[FeedbackCategories::ERROR]
         );
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
@@ -2092,8 +2091,7 @@ class Engine implements EngineInterface
         }
         $this->addFeedbackEntries(
             $iterationObjectWarnings,
-            $objectFeedbackEntries[FeedbackCategories::WARNING],
-            $idObjects
+            $objectFeedbackEntries[FeedbackCategories::WARNING]
         );
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
@@ -2106,8 +2104,7 @@ class Engine implements EngineInterface
         }
         $this->addFeedbackEntries(
             $iterationObjectDeprecations,
-            $objectFeedbackEntries[FeedbackCategories::DEPRECATION],
-            $idObjects
+            $objectFeedbackEntries[FeedbackCategories::DEPRECATION]
         );
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
@@ -2120,8 +2117,7 @@ class Engine implements EngineInterface
         }
         $this->addFeedbackEntries(
             $iterationObjectNotices,
-            $objectFeedbackEntries[FeedbackCategories::NOTICE],
-            $idObjects
+            $objectFeedbackEntries[FeedbackCategories::NOTICE]
         );
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
@@ -2134,8 +2130,7 @@ class Engine implements EngineInterface
         }
         $this->addFeedbackEntries(
             $iterationObjectSuggestions,
-            $objectFeedbackEntries[FeedbackCategories::SUGGESTION],
-            $idObjects
+            $objectFeedbackEntries[FeedbackCategories::SUGGESTION]
         );
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
@@ -2148,8 +2143,7 @@ class Engine implements EngineInterface
         }
         $this->addFeedbackEntries(
             $iterationObjectLogs,
-            $objectFeedbackEntries[FeedbackCategories::LOG],
-            $idObjects
+            $objectFeedbackEntries[FeedbackCategories::LOG]
         );
     }
 
