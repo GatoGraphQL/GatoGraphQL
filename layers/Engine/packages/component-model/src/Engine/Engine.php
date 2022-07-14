@@ -2324,7 +2324,7 @@ class Engine implements EngineInterface
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
         $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
         $astNode = $objectOrSchemaFeedback->getAstNode();
-        $location = $astNode->getLocation()->toArray();
+        $location = $astNode->getLocation();
         /**
          * Re-create the path to the AST node
          *
@@ -2343,7 +2343,7 @@ class Engine implements EngineInterface
             Tokens::PATH => $astNodePath,
         ];
         if ($location !== LocationHelper::getNonSpecificLocation()) {
-            $entry[Tokens::LOCATIONS] = [$location];
+            $entry[Tokens::LOCATIONS] = [$location->toArray()];
         }
         $entry[Tokens::EXTENSIONS] = $this->getObjectOrSchemaFeedbackEntryExtensions(
             $objectOrSchemaFeedback,
