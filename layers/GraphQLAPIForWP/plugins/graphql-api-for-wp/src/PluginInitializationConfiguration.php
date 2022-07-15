@@ -587,10 +587,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         ];
         $moduleClassConfiguration[\PoP\ComponentModel\Module::class] = [
             /**
-             * Treat casting failures as errors, not warnings
-             */
-            ComponentModelEnvironment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS => true,
-            /**
              * Treat querying for an undefined field/directive arg as an error, not a warning
              */
             ComponentModelEnvironment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS => true,

@@ -130,23 +130,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * By default, errors produced from casting a type (eg: "3.5 to int")
-     * are treated as warnings, not errors
-     */
-    public function treatTypeCoercingFailuresAsErrors(): bool
-    {
-        $envVariable = Environment::TREAT_TYPE_COERCING_FAILURES_AS_ERRORS;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
-    /**
      * By default, querying for a field or directive argument
      * which has not been defined in the schema
      * is treated as a warning, not an error
