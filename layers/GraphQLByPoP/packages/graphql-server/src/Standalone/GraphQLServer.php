@@ -111,6 +111,9 @@ class GraphQLServer implements GraphQLServerInterface
         array $variables = [],
         ?string $operationName = null
     ): Response {
+        // Override the previous response, if any
+        App::regenerateResponse();
+        
         $engine = EngineFacade::getInstance();
         $engine->initializeState();
 
