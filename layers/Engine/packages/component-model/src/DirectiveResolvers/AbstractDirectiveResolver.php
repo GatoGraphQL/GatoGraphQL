@@ -1359,6 +1359,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     */
+    protected function setFailingFieldResponseAsNull(
+        array &$resolvedIDFieldValues,
+        array $idFieldSet,
+    ): void {
+        foreach ($idFieldSet as $id => $fieldSet) {
+            foreach ($fieldSet->fields as $field) {
+                $resolvedIDFieldValues[$id][$field] = null;
+            }
+        }
+    }
+
+    /**
      * Return the object implementing the schema definition for this DirectiveResolver.
      * By default, it is this same object
      */
@@ -1473,22 +1488,5 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];
-    }
-
-    /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     */
-    protected function setFailingFieldResponseAsNull(
-        array &$resolvedIDFieldValues,
-        array $idFieldSet,
-    ): void {
-        foreach ($idFieldSet as $id => $fieldSet) {
-            foreach ($fieldSet->fields as $field) {
-                $resolvedIDFieldValues[$id][$field] = null;
-            }
-        }
-    }
-
-    
+    }    
 }
