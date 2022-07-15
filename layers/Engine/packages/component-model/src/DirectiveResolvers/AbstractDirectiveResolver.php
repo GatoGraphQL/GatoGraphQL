@@ -1342,37 +1342,34 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $succeedingPipelineIDFieldSet
             );
         }
-        $setFailingFieldResponseAsNull = $moduleConfiguration->setFailingFieldResponseAsNull();
-        if ($setFailingFieldResponseAsNull) {
-            $this->setIDFieldSetAsNull(
-                $relationalTypeResolver,
-                $idFieldSetToRemove,
-                $idObjects,
-                $resolvedIDFieldValues,
-            );
-        }
+        $this->setFailingFieldResponseAsNull(
+            $resolvedIDFieldValues,
+            $idFieldSetToRemove,
+        );
 
-        // Show the failureMessage either as error or as warning
-        if ($setFailingFieldResponseAsNull) {
-            $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                new ObjectResolutionFeedback(
-                    $feedbackItemResolution,
-                    $this->directive,
-                    $relationalTypeResolver,
-                    $this->directive,
-                    $idFieldSetToRemove
-                )
-            );
-        } elseif ($removeFieldIfDirectiveFailed) {
-            $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                new ObjectResolutionFeedback(
-                    $feedbackItemResolution,
-                    $this->directive,
-                    $relationalTypeResolver,
-                    $this->directive,
-                    $idFieldSetToRemove
-                )
-            );
+        $engineIterationFeedbackStore->objectFeedbackStore->addError(
+            new ObjectResolutionFeedback(
+                $feedbackItemResolution,
+                $this->directive,
+                $relationalTypeResolver,
+                $this->directive,
+                $idFieldSetToRemove
+            )
+        );
+    }
+
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     */
+    protected function setFailingFieldResponseAsNull(
+        array &$resolvedIDFieldValues,
+        array $idFieldSet,
+    ): void {
+        foreach ($idFieldSet as $id => $fieldSet) {
+            foreach ($fieldSet->fields as $field) {
+                $resolvedIDFieldValues[$id][$field] = null;
+            }
         }
     }
 
@@ -1491,5 +1488,5 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];
-    }
+    }    
 }

@@ -165,27 +165,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * The GraphQL spec indicates that, when a field produces an error (during
-     * value resolution or coercion) then its response must be set as null:
-     *
-     *   If a field error is raised while resolving a field, it is handled as though the field returned null, and the error must be added to the "errors" list in the response.
-     *
-     * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
-     */
-    public function setFailingFieldResponseAsNull(): bool
-    {
-        $envVariable = Environment::SET_FAILING_FIELD_RESPONSE_AS_NULL;
-        $defaultValue = true;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
-    /**
      * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
      */
     public function removeFieldIfDirectiveFailed(): bool

@@ -595,10 +595,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             ComponentModelEnvironment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS => true,
             /**
-             * Show a `null` entry in the response for failing fields
-             */
-            ComponentModelEnvironment::SET_FAILING_FIELD_RESPONSE_AS_NULL => true,
-            /**
              * If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
              */
             ComponentModelEnvironment::REMOVE_FIELD_IF_DIRECTIVE_FAILED => true,
