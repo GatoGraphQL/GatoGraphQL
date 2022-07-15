@@ -2363,6 +2363,9 @@ class Engine implements EngineInterface
     }
 
     /**
+     * Place the Field under a different key if the AST
+     * node was created on runtime.
+     *
      * @param array<string,mixed> $entry
      * @return array<string,mixed>
      */
@@ -2370,10 +2373,14 @@ class Engine implements EngineInterface
         array $entry,
         FieldInterface $field,
     ): array {
+        $key = Tokens::FIELD;
+        if ($field->getLocation() === LocationHelper::getNonSpecificLocation()) {
+            $key = Tokens::DYNAMIC_FIELD;
+        }
         return array_merge(
             $entry,
             [
-                Tokens::FIELD => $field->asASTNodeString(),
+                $key => $field->asASTNodeString(),
             ]
         );
     }

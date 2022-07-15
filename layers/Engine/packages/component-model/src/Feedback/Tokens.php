@@ -11,5 +11,6 @@ class Tokens
     public const EXTENSIONS = 'extensions';
     public const PATH = 'path';
     public const FIELD = 'field';
+    public const DYNAMIC_FIELD = 'dynamicField';
     public const IDS = 'ids';
 }
