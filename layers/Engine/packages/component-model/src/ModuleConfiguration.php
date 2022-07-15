@@ -165,12 +165,14 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
+     * Indicate: If a directive fails, then set those fields in `null`
+     * and remove the affected IDs/fields from the upcoming stages
+     * of the directive pipeline execution.
      */
     public function setFieldAsNullIfDirectiveFailed(): bool
     {
         $envVariable = Environment::SET_FIELD_AS_NULL_IF_DIRECTIVE_FAILED;
-        $defaultValue = false;
+        $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
