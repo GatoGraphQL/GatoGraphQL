@@ -560,6 +560,29 @@ class Engine implements EngineInterface
             );
         }
 
+        $schemaFeedbackEntries = $objectFeedbackEntries = [
+            FeedbackCategories::ERROR => [],
+            FeedbackCategories::WARNING => [],
+            FeedbackCategories::DEPRECATION => [],
+            FeedbackCategories::NOTICE => [],
+            FeedbackCategories::SUGGESTION => [],
+            FeedbackCategories::LOG => [],
+        ];
+        
+        /**
+         * Transfer all schema errors from parsing the GraphQL query
+         * to create the initial Component Model hierarchy.
+         *
+         * Eg: requesting a nested field from a leaf field:
+         * 
+         *   `{ id { id } }`
+         */
+        $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
+        $this->transferSchemaFeedback(
+            $schemaFeedbackStore,
+            $schemaFeedbackEntries,
+        );
+        
         // Comment Leo 20/01/2018: we must first initialize all the settings, and only later add the data.
         // That is because calculating the data may need the values from the settings. Eg: for the resourceLoader,
         // calculating $loadingframe_resources needs to know all the Handlebars templates from the sitemapping as to generate file "resources.js",
@@ -577,10 +600,20 @@ class Engine implements EngineInterface
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
                 $data = array_merge(
                     $data,
-                    $this->generateDatabases()
+                    $this->generateDatabases($schemaFeedbackEntries, $objectFeedbackEntries)
                 );
             }
         }
+
+        /**
+         * Add the feedback into the output:
+         * errors, warnings, deprecations, notices, logs and suggestions.
+         */
+        $this->combineAndAddFeedbackEntries(
+            $data,
+            $schemaFeedbackEntries,
+            $objectFeedbackEntries,
+        );
 
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
@@ -1635,8 +1668,10 @@ class Engine implements EngineInterface
         return $dbname_entries;
     }
 
-    protected function generateDatabases(): array
-    {
+    protected function generateDatabases(
+        array &$schemaFeedbackEntries,
+        array &$objectFeedbackEntries,
+    ): array {
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
@@ -1649,14 +1684,6 @@ class Engine implements EngineInterface
 
         /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
         $previouslyResolvedIDFieldValues = [];
-        $objectFeedbackEntries = $schemaFeedbackEntries = [
-            FeedbackCategories::ERROR => [],
-            FeedbackCategories::WARNING => [],
-            FeedbackCategories::DEPRECATION => [],
-            FeedbackCategories::NOTICE => [],
-            FeedbackCategories::SUGGESTION => [],
-            FeedbackCategories::LOG => [],
-        ];
         $engineState->nocache_fields = [];
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
@@ -1865,10 +1892,6 @@ class Engine implements EngineInterface
         $ret = [];
         $this->maybeCombineAndAddDatabaseEntries($ret, 'databases', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionTypeOutputKeyIDs', $unionTypeOutputKeyIDs);
-
-        // Add the feedback (errors, warnings, deprecations, notices, etc) into the output
-        $this->combineAndAddFeedbackEntries($ret, $objectFeedbackEntries, $schemaFeedbackEntries);
-
         return $ret;
     }
 
@@ -1877,14 +1900,14 @@ class Engine implements EngineInterface
      * into the output.
      */
     protected function combineAndAddFeedbackEntries(
-        array &$ret,
-        array $objectFeedbackEntries,
+        array &$data,
         array $schemaFeedbackEntries,
+        array $objectFeedbackEntries,
     ): void {
-        $ret[Response::GENERAL_FEEDBACK] = [];
-        $ret[Response::DOCUMENT_FEEDBACK] = [];
-        $ret[Response::SCHEMA_FEEDBACK] = [];
-        $ret[Response::OBJECT_FEEDBACK] = [];
+        $data[Response::GENERAL_FEEDBACK] = [];
+        $data[Response::DOCUMENT_FEEDBACK] = [];
+        $data[Response::SCHEMA_FEEDBACK] = [];
+        $data[Response::OBJECT_FEEDBACK] = [];
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1898,12 +1921,13 @@ class Engine implements EngineInterface
         // Errors
         $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
         if ($generalErrors = $generalFeedbackStore->getErrors()) {
-            $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
+            $data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
         }
         $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
         if ($documentErrors = $documentFeedbackStore->getErrors()) {
-            $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $this->getDocumentFeedbackEntriesForOutput($documentErrors);
+            $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $this->getDocumentFeedbackEntriesForOutput($documentErrors);
         }
+
         // @todo Remove alongside FeedbackMessageStore!
         if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
             $queryDocumentErrors = [];
@@ -1921,67 +1945,67 @@ class Engine implements EngineInterface
                 $queryDocumentErrors[] = $queryDocumentError;
             }
         }
-        $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
-        $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
+        $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
+        $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
 
         // Warnings
         if ($sendFeedbackWarnings) {
             if ($generalWarnings = $generalFeedbackStore->getWarnings()) {
-                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
+                $data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] = $this->getGeneralFeedbackEntriesForOutput($generalWarnings);
             }
             if ($documentWarnings = $documentFeedbackStore->getWarnings()) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = $this->getDocumentFeedbackEntriesForOutput($documentWarnings);
+                $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] = $this->getDocumentFeedbackEntriesForOutput($documentWarnings);
             }
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::WARNING, $schemaFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::SCHEMA_FEEDBACK], FeedbackCategories::WARNING, $schemaFeedbackEntries[FeedbackCategories::WARNING]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::OBJECT_FEEDBACK], FeedbackCategories::WARNING, $objectFeedbackEntries[FeedbackCategories::WARNING]);
         }
 
         // Deprecations
         if ($sendFeedbackDeprecations) {
             if ($generalDeprecations = $generalFeedbackStore->getDeprecations()) {
-                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::DEPRECATION] = $this->getGeneralFeedbackEntriesForOutput($generalDeprecations);
+                $data[Response::GENERAL_FEEDBACK][FeedbackCategories::DEPRECATION] = $this->getGeneralFeedbackEntriesForOutput($generalDeprecations);
             }
             if ($documentDeprecations = $documentFeedbackStore->getDeprecations()) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::DEPRECATION] = $this->getDocumentFeedbackEntriesForOutput($documentDeprecations);
+                $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::DEPRECATION] = $this->getDocumentFeedbackEntriesForOutput($documentDeprecations);
             }
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::DEPRECATION, $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::SCHEMA_FEEDBACK], FeedbackCategories::DEPRECATION, $schemaFeedbackEntries[FeedbackCategories::DEPRECATION]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::OBJECT_FEEDBACK], FeedbackCategories::DEPRECATION, $objectFeedbackEntries[FeedbackCategories::DEPRECATION]);
         }
 
         // Notices
         if ($sendFeedbackNotices) {
             if ($generalNotices = $generalFeedbackStore->getNotices()) {
-                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::NOTICE] = $this->getGeneralFeedbackEntriesForOutput($generalNotices);
+                $data[Response::GENERAL_FEEDBACK][FeedbackCategories::NOTICE] = $this->getGeneralFeedbackEntriesForOutput($generalNotices);
             }
             if ($documentNotices = $documentFeedbackStore->getNotices()) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::NOTICE] = $this->getDocumentFeedbackEntriesForOutput($documentNotices);
+                $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::NOTICE] = $this->getDocumentFeedbackEntriesForOutput($documentNotices);
             }
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::SCHEMA_FEEDBACK], FeedbackCategories::NOTICE, $schemaFeedbackEntries[FeedbackCategories::NOTICE]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::OBJECT_FEEDBACK], FeedbackCategories::NOTICE, $objectFeedbackEntries[FeedbackCategories::NOTICE]);
         }
 
         // Suggestions
         if ($sendFeedbackSuggestions) {
             if ($generalSuggestions = $generalFeedbackStore->getSuggestions()) {
-                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::SUGGESTION] = $this->getGeneralFeedbackEntriesForOutput($generalSuggestions);
+                $data[Response::GENERAL_FEEDBACK][FeedbackCategories::SUGGESTION] = $this->getGeneralFeedbackEntriesForOutput($generalSuggestions);
             }
             if ($documentSuggestions = $documentFeedbackStore->getSuggestions()) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::SUGGESTION] = $this->getDocumentFeedbackEntriesForOutput($documentSuggestions);
+                $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::SUGGESTION] = $this->getDocumentFeedbackEntriesForOutput($documentSuggestions);
             }
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::SUGGESTION, $objectFeedbackEntries[FeedbackCategories::SUGGESTION]);
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::SUGGESTION, $schemaFeedbackEntries[FeedbackCategories::SUGGESTION]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::SCHEMA_FEEDBACK], FeedbackCategories::SUGGESTION, $schemaFeedbackEntries[FeedbackCategories::SUGGESTION]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::OBJECT_FEEDBACK], FeedbackCategories::SUGGESTION, $objectFeedbackEntries[FeedbackCategories::SUGGESTION]);
         }
 
         // Logs
         if ($sendFeedbackLogs) {
             if ($generalLogs = $generalFeedbackStore->getLogs()) {
-                $ret[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] = $this->getGeneralFeedbackEntriesForOutput($generalLogs);
+                $data[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] = $this->getGeneralFeedbackEntriesForOutput($generalLogs);
             }
             if ($documentLogs = $documentFeedbackStore->getLogs()) {
-                $ret[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = $this->getDocumentFeedbackEntriesForOutput($documentLogs);
+                $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] = $this->getDocumentFeedbackEntriesForOutput($documentLogs);
             }
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
-            $this->maybeCombineAndAddObjectOrSchemaEntries($ret[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::SCHEMA_FEEDBACK], FeedbackCategories::LOG, $schemaFeedbackEntries[FeedbackCategories::LOG]);
+            $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::OBJECT_FEEDBACK], FeedbackCategories::LOG, $objectFeedbackEntries[FeedbackCategories::LOG]);
         }
     }
 
@@ -2023,16 +2047,6 @@ class Engine implements EngineInterface
         );
         $this->transferSchemaFeedback(
             $engineIterationFeedbackStore->schemaFeedbackStore,
-            $schemaFeedbackEntries,
-        );
-
-        /**
-         * The SchemaFeedbackStore is processed also within each iteration.
-         * It processes the information here, and at the end of the loop
-         * it will regenerated a new instance for the next iteration.
-         */
-        $this->transferSchemaFeedback(
-            App::getFeedbackStore()->schemaFeedbackStore,
             $schemaFeedbackEntries,
         );
     }
