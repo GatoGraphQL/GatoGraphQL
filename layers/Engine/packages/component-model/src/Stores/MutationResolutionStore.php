@@ -11,11 +11,6 @@ class MutationResolutionStore implements MutationResolutionStoreInterface
      */
     private array $results = [];
 
-    public function clearResults(): void
-    {
-        $this->results = [];
-    }
-
     public function setResult(object $object, mixed $result): void
     {
         $this->results[get_class($object)] = $result;
