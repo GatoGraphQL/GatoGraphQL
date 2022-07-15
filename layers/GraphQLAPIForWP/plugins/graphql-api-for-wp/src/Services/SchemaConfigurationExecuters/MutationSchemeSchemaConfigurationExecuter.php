@@ -59,7 +59,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
             );
             \add_filter(
                 $hookName,
-                fn () => $mutationScheme != MutationSchemes::STANDARD,
+                fn () => $mutationScheme !== MutationSchemes::STANDARD,
                 PHP_INT_MAX
             );
             $hookName = ModuleConfigurationHelpers::getHookName(
@@ -68,7 +68,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
             );
             \add_filter(
                 $hookName,
-                fn () => $mutationScheme == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
+                fn () => $mutationScheme === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
                 PHP_INT_MAX
             );
         }
