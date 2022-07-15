@@ -111,8 +111,8 @@ class GraphQLServer implements GraphQLServerInterface
         array $variables = [],
         ?string $operationName = null
     ): Response {
-        // Override the previous response, if any
-        App::regenerateResponse();
+        $engine = EngineFacade::getInstance();
+        $engine->initializeState();
 
         $passingQuery = is_string($queryOrExecutableDocument);
         if ($passingQuery) {
@@ -174,7 +174,6 @@ class GraphQLServer implements GraphQLServerInterface
         }
 
         // Generate the data, print the response to buffer, and send headers
-        $engine = EngineFacade::getInstance();
         $engine->generateDataAndPrepareResponse();
 
         // Return the Response, so the client can retrieve content and headers

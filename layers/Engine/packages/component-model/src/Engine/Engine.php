@@ -355,6 +355,14 @@ class Engine implements EngineInterface
         return array($has_extra_routes, $model_instance_id, $current_uri);
     }
 
+    /** Must call before `generateDataAndPrepareResponse` */
+    public function initializeState(): void
+    {
+        App::regenerateResponse();
+        App::regenerateFeedbackStore();
+        App::regenerateTracingStore();
+    }
+
     public function generateDataAndPrepareResponse(): void
     {
         $this->generateData();

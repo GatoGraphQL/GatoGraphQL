@@ -63,8 +63,6 @@ class App implements AppInterface
         self::$moduleManager = $moduleManager ?? static::createComponentManager();
         self::$appStateManager = $appStateManager ?? static::createAppStateManager();
 
-        static::regenerateResponse();
-
         // Inject the Components slated for initialization
         self::$appLoader->addModuleClassesToInitialize(self::$moduleClassesToInitialize);
         self::$moduleClassesToInitialize = [];
