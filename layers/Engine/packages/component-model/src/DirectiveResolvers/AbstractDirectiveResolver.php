@@ -1340,11 +1340,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $idFieldSetToRemove,
                 $succeedingPipelineIDFieldSet
             );
+            $this->setFailingFieldResponseAsNull(
+                $resolvedIDFieldValues,
+                $idFieldSetToRemove,
+            );
         }
-        $this->setFailingFieldResponseAsNull(
-            $resolvedIDFieldValues,
-            $idFieldSetToRemove,
-        );
 
         $engineIterationFeedbackStore->objectFeedbackStore->addError(
             new ObjectResolutionFeedback(
