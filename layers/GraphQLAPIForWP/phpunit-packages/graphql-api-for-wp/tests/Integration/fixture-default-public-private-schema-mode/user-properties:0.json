@@ -2,12 +2,20 @@
   "errors": [
     {
       "message": "Access to field(s) 'lastName' has been disabled",
+      "locations": [
+        {
+          "line": 4,
+          "column": 5
+        }
+      ],
       "extensions": {
         "type": "User",
         "field": "lastName",
         "id": 1,
         "path": [
-          "@disableAccess"
+          "lastName",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
         ],
         "code": "PoP\\AccessControl\\e2"
       }
