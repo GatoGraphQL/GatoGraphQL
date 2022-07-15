@@ -11,7 +11,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
  * Error that concern the GraphQL query. the `$astNode` is the
  * node in the AST where the error happens.
  */
-abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
+abstract class AbstractQueryFeedback extends AbstractDocumentFeedback implements QueryFeedbackInterface
 {
     /**
      * @param AstInterface $astNode AST node where the error happens (eg: a Field, a Directive, an Argument, etc)
@@ -25,6 +25,7 @@ abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFe
     ) {
         parent::__construct(
             $feedbackItemResolution,
+            $astNode->getLocation(),
             $extensions,
         );
     }

@@ -2305,7 +2305,7 @@ class Engine implements EngineInterface
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
         $message = $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage();
         $astNode = $objectOrSchemaFeedback->getAstNode();
-        $location = $astNode->getLocation();
+        $location = $objectOrSchemaFeedback->getLocation();
         /**
          * Re-create the path to the AST node
          *
