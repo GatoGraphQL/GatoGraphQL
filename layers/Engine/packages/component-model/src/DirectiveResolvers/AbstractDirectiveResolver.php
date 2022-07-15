@@ -1492,4 +1492,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];
     }
+
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     */
+    protected function setFailingFieldResponseAsNull(
+        array &$resolvedIDFieldValues,
+        array $idFieldSet,
+    ): void {
+        foreach ($idFieldSet as $id => $fieldSet) {
+            foreach ($fieldSet->fields as $field) {
+                $resolvedIDFieldValues[$id][$field] = null;
+            }
+        }
+    }
+
+    
 }
