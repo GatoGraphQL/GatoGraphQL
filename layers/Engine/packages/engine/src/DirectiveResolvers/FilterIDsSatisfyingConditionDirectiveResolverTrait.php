@@ -50,8 +50,8 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
             ARRAY_FILTER_USE_KEY
         );
         $this->removeIDFieldSet(
+            $succeedingPipelineIDFieldSet,
             $idFieldSetToRemove,
-            $succeedingPipelineIDFieldSet
         );
     }
 }
