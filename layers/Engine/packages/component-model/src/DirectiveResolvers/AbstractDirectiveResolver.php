@@ -1335,8 +1335,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $setFieldAsNullIfDirectiveFailed = $moduleConfiguration->setFieldAsNullIfDirectiveFailed();
-        if ($setFieldAsNullIfDirectiveFailed) {
+        if ($moduleConfiguration->setFieldAsNullIfDirectiveFailed()) {
             $this->removeIDFieldSet(
                 $idFieldSetToRemove,
                 $succeedingPipelineIDFieldSet
