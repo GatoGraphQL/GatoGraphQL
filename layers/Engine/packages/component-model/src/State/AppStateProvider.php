@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\State;
 
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Variables\VariableManagerInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
@@ -21,6 +22,7 @@ class AppStateProvider extends AbstractAppStateProvider
 {
     private ?VariableManagerInterface $fieldQueryInterpreter = null;
     private ?ComponentFilterManagerInterface $componentFilterManager = null;
+    private ?EngineInterface $engine = null;
 
     final public function setVariableManager(VariableManagerInterface $fieldQueryInterpreter): void
     {
@@ -37,6 +39,14 @@ class AppStateProvider extends AbstractAppStateProvider
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
         return $this->componentFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
+    }
+    final public function setEngine(EngineInterface $engine): void
+    {
+        $this->engine = $engine;
+    }
+    final protected function getEngine(): EngineInterface
+    {
+        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 
     public function initialize(array &$state): void
@@ -75,5 +85,18 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequest);
         $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequest);
         $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequest);
+    }
+
+    /**
+     * Must initialize the Engine state before parsing the GraphQL query in:
+     *
+     * @see layers/API/packages/api/src/State/AppStateProvider.php
+     *
+     * Otherwise, if there's an error (eg: empty query), it throws
+     * an exception when adding it to the FeedbackStore
+     */
+    public function execute(array &$state): void
+    {
+        $this->getEngine()->initializeState();
     }
 }

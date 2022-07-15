@@ -14,11 +14,14 @@ use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
 use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
@@ -73,11 +76,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $query = $state['query'];
-        if ($query === null || trim($query) === '') {
-            /**
-             * No need to return any error here, that will be done
-             * when processing the query in the Engine
-             */
+        if ($query === null) {
             return;
         }
 
