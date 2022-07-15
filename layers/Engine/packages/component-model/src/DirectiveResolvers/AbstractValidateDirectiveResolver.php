@@ -8,11 +8,8 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\App;
 use SplObjectStorage;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -97,16 +94,10 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $failedIDFieldSet,
                 $succeedingPipelineIDFieldSet
             );
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
-                $this->setIDFieldSetAsNull(
-                    $relationalTypeResolver,
-                    $failedIDFieldSet,
-                    $idObjects,
-                    $resolvedIDFieldValues,
-                );
-            }
+            $this->setFailingFieldResponseAsNull(
+                $resolvedIDFieldValues,
+                $failedIDFieldSet,
+            );
         }
     }
 

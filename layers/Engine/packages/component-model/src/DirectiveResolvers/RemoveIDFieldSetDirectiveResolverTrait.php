@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use SplObjectStorage;
 
 trait RemoveIDFieldSetDirectiveResolverTrait
 {
@@ -33,27 +30,6 @@ trait RemoveIDFieldSetDirectiveResolverTrait
                 foreach ($fieldSet->fields as $removeField) {
                     $pipelineStageIDFieldSet[$id]->conditionalFields->detach($removeField);
                 }
-            }
-        }
-    }
-
-    /**
-     * For GraphQL, set the response for the failing field as null
-     *
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSetToSetAsNull
-     * @param array<string|int,object> $idObjects
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     */
-    protected function setIDFieldSetAsNull(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idFieldSetToSetAsNull,
-        array $idObjects,
-        array &$resolvedIDFieldValues,
-    ): void {
-        foreach (array_keys($idFieldSetToSetAsNull) as $id) {
-            $fieldsToSetAsNullForID = $idFieldSetToSetAsNull[$id]->fields;
-            foreach ($fieldsToSetAsNullForID as $field) {
-                $resolvedIDFieldValues[$id][$field] = null;
             }
         }
     }
