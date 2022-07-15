@@ -30,17 +30,12 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         } else {
             $endpointURL = $this->maybeAddXDebugTriggerParam($endpointURL);
         }
-        $body = '';
-        if ($query !== '' || $variables !== [] || $operationName !== '') {
-            $body = json_encode([
-                'query' => $query,
-                'variables' => $variables,
-                'operationName' => $operationName,
-            ]);
-        }
-        if ($body !== '') {
-            $options['body'] = $body;
-        }
+
+        $options['body'] = json_encode([
+            'query' => $query,
+            'variables' => $variables,
+            'operationName' => $operationName,
+        ]);
 
         $response = $client->request(
             $method ?? $this->getMethod(),
