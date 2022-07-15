@@ -157,8 +157,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $entry = [
             'message' => $item[Tokens::MESSAGE],
-            'locations' => $item[Tokens::LOCATIONS],
         ];
+        if ($locations = $item[Tokens::LOCATIONS]) {
+            $entry['locations'] = $locations;
+        }
         if ($extensions = $item[Tokens::EXTENSIONS]) {
             $entry['extensions'] = $extensions;
         }
@@ -188,8 +190,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $entry = [
             'message' => $item[Tokens::MESSAGE],
-            'locations' => $item[Tokens::LOCATIONS],
         ];
+        if ($locations = $item[Tokens::LOCATIONS]) {
+            $entry['locations'] = $locations;
+        }
         if (
             $extensions = array_merge(
                 $this->getSchemaEntryExtensions($typeOutputKey, $item),
@@ -236,8 +240,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $entry = [
             'message' => $item[Tokens::MESSAGE],
-            'locations' => $item[Tokens::LOCATIONS],
         ];
+        if ($locations = $item[Tokens::LOCATIONS]) {
+            $entry['locations'] = $locations;
+        }
         if (
             $extensions = array_merge(
                 $this->getObjectEntryExtensions($typeOutputKey, $item),
