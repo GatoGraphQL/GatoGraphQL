@@ -597,7 +597,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             /**
              * If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
              */
-            ComponentModelEnvironment::REMOVE_FIELD_IF_DIRECTIVE_FAILED => true,
+            ComponentModelEnvironment::SET_FIELD_AS_NULL_IF_DIRECTIVE_FAILED => true,
             /**
              * Do not expose the `DangerouslyNonSpecificScalar` scalar type
              */

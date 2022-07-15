@@ -169,7 +169,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      */
     public function setFieldAsNullIfDirectiveFailed(): bool
     {
-        $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
+        $envVariable = Environment::SET_FIELD_AS_NULL_IF_DIRECTIVE_FAILED;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
