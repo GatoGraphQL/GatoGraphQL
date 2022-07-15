@@ -1072,41 +1072,37 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then skip processing that field altogether
             /** @var array<string|int,FieldInterface[]> */
             $errorIDFields = [];
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->setFieldAsNullIfDirectiveFailed()) {
-                if ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() !== []) {
-                    foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
-                        foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
-                            $errorIDFields[$id] = array_merge(
-                                $errorIDFields[$id] ?? [],
-                                $fieldSet->fields
-                            );
-                        }
-                    }
-                }
-                if ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() !== []) {
-                    // Extract the failing fields from the errors
-                    $schemaErrorFailingFields = [];
-                    foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
-                        $schemaErrorFailingFields = array_merge(
-                            $schemaErrorFailingFields,
-                            $schemaFeedback->getFields()
+            if ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() !== []) {
+                foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
+                    foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
+                        $errorIDFields[$id] = array_merge(
+                            $errorIDFields[$id] ?? [],
+                            $fieldSet->fields
                         );
                     }
-                    $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
-                    // Set those fields as null
-                    foreach ($directives as $directive) {
-                        foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
-                            $failingFields = array_intersect(
-                                $fieldSet->fields,
-                                $schemaErrorFailingFields
-                            );
-                            $errorIDFields[$id] = array_merge(
-                                $errorIDFields[$id] ?? [],
-                                $failingFields
-                            );
-                        }
+                }
+            }
+            if ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() !== []) {
+                // Extract the failing fields from the errors
+                $schemaErrorFailingFields = [];
+                foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
+                    $schemaErrorFailingFields = array_merge(
+                        $schemaErrorFailingFields,
+                        $schemaFeedback->getFields()
+                    );
+                }
+                $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
+                // Set those fields as null
+                foreach ($directives as $directive) {
+                    foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
+                        $failingFields = array_intersect(
+                            $fieldSet->fields,
+                            $schemaErrorFailingFields
+                        );
+                        $errorIDFields[$id] = array_merge(
+                            $errorIDFields[$id] ?? [],
+                            $failingFields
+                        );
                     }
                 }
             }
