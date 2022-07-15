@@ -130,24 +130,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * By default, querying for a field or directive argument
-     * which has not been defined in the schema
-     * is treated as a warning, not an error
-     */
-    public function treatUndefinedFieldOrDirectiveArgsAsErrors(): bool
-    {
-        $envVariable = Environment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
-    /**
      * Indicate: If a directive fails, then set those fields in `null`
      * and remove the affected IDs/fields from the upcoming stages
      * of the directive pipeline execution.

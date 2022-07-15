@@ -587,10 +587,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         ];
         $moduleClassConfiguration[\PoP\ComponentModel\Module::class] = [
             /**
-             * Treat querying for an undefined field/directive arg as an error, not a warning
-             */
-            ComponentModelEnvironment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS => true,
-            /**
              * Do not expose the `DangerouslyNonSpecificScalar` scalar type
              */
             ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_NON_SPECIFIC_SCALAR_TYPE_IN_SCHEMA => true,
