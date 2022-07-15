@@ -1074,7 +1074,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $errorIDFields = [];
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->removeFieldIfDirectiveFailed()) {
+            if ($moduleConfiguration->setFieldAsNullIfDirectiveFailed()) {
                 if ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() !== []) {
                     foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
                         foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {

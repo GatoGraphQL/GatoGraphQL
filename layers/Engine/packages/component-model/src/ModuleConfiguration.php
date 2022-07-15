@@ -167,7 +167,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     /**
      * Indicate: If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
      */
-    public function removeFieldIfDirectiveFailed(): bool
+    public function setFieldAsNullIfDirectiveFailed(): bool
     {
         $envVariable = Environment::REMOVE_FIELD_IF_DIRECTIVE_FAILED;
         $defaultValue = false;
