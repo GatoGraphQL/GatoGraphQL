@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
@@ -30,7 +31,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
-use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
@@ -268,6 +268,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function initModelProps(Component $component, array &$props): void
     {
+        $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
         // Set property "succeeding-typeResolver" on every component, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             $this->setProp($component, $props, 'succeeding-typeResolver', $relationalTypeResolver);
@@ -281,7 +282,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $this->setProp($subcomponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-                $subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                /**
+                 * Also add errors to the feedback (eg: `{ id { id } }`)
+                 */
+                $subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                    $relationalTypeResolver,
+                    $relationalComponentFieldNode->getField(),
+                    $schemaFeedbackStore,
+                );
                 if (!$subcomponent_typeResolver) {
                     continue;
                 }
@@ -296,7 +304,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                    $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                    /**
+                     * Also add errors to the feedback (eg: `{ id { id } }`)
+                     */
+                    $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                        $relationalTypeResolver,
+                        $relationalComponentFieldNode->getField(),
+                        $schemaFeedbackStore,
+                    );
                     if (!$subcomponentTypeResolver) {
                         continue;
                     }
@@ -732,8 +747,18 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // This prop is set for both dataloading and non-dataloading components
         if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-                // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                /**
+                 * If passing a subcomponent fieldname that doesn't exist to the API,
+                 * then $subcomponent_typeResolver_class will be empty.
+                 *
+                 * If there is an error in the query, eg: `{ id { id } }`,
+                 * it was already added in `initModelProps`
+                 */
+                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                    $relationalTypeResolver,
+                    $relationalComponentFieldNode->getField(),
+                    null,
+                );
                 if ($typeResolver === null) {
                     continue;
                 }
@@ -747,9 +772,23 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                    // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                    /**
+                     * If passing a subcomponent fieldname that doesn't exist to the API,
+                     * then $subcomponent_typeResolver_class will be empty.
+                     *
+                     * If there is an error in the query, eg: `{ id { id } }`,
+                     * it was already added in `initModelProps`
+                     */
+                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                        $relationalTypeResolver,
+                        $relationalComponentFieldNode->getField(),
+                        null,
+                    );
                     if ($typeResolver === null) {
+                        /**
+                         * This is an error in the query, eg: `{ id { id } }`,
+                         * but the error was already added in `initModelProps`
+                         */
                         continue;
                     }
                     /** @var FieldInterface[] */

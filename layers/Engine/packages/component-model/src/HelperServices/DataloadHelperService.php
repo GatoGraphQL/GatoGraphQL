@@ -8,6 +8,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
+use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -44,10 +45,21 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     /**
      * Accept RelationalTypeResolverInterface as param, instead of the more natural
      * ObjectTypeResolverInterface, to make it easy within the application to check
-     * for this result without checking in advance what's the typeResolver
+     * for this result without checking in advance what's the typeResolver.
+     *
+     * If the FeedbackStore is provided, report errors in the GraphQL query,
+     * such as nested fields requested on leaf fields:
+     *
+     *   `{ id { id } }`
+     *
+     * This is optional as this method is called in multiple places,
+     * but the error needs to be added only once.
      */
-    public function getTypeResolverFromSubcomponentField(RelationalTypeResolverInterface $relationalTypeResolver, FieldInterface $field): ?RelationalTypeResolverInterface
-    {
+    public function getTypeResolverFromSubcomponentField(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        FieldInterface $field,
+        ?SchemaFeedbackStore $schemaFeedbackStore,
+    ): ?RelationalTypeResolverInterface {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
          * (that depends on each object), it can't resolve this functionality
@@ -63,7 +75,9 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $variables, $objectTypeFieldResolutionFeedbackStore);
-        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, [$field]);
+        if ($schemaFeedbackStore !== null) {
+            $schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, [$field]);
+        }
         if (
             $subcomponentFieldNodeTypeResolver === null
             || !($subcomponentFieldNodeTypeResolver instanceof RelationalTypeResolverInterface)
@@ -73,22 +87,24 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             // 1. No ObjectTypeFieldResolver
             // 2. No FieldDefaultTypeDataLoader
             if ($objectTypeResolver->hasObjectTypeFieldResolversForField($field)) {
-                // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-                $subcomponent_data_field_outputkey = $field->getOutputKey();
-                App::getFeedbackStore()->schemaFeedbackStore->addError(
-                    new SchemaFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E1,
-                            [
-                                $subcomponent_data_field_outputkey,
-                            ]
-                        ),
-                        $field,
-                        $objectTypeResolver,
-                        [$field],
-                    )
-                );
+                if ($schemaFeedbackStore !== null) {
+                    // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
+                    $subcomponent_data_field_outputkey = $field->getOutputKey();
+                    $schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E1,
+                                [
+                                    $subcomponent_data_field_outputkey,
+                                ]
+                            ),
+                            $field,
+                            $objectTypeResolver,
+                            [$field],
+                        )
+                    );
+                }
             }
             return null;
         }
