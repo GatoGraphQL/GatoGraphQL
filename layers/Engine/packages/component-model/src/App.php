@@ -20,15 +20,10 @@ use PoP\Root\App\AbstractRootAppProxy;
  */
 class App extends AbstractRootAppProxy implements AppInterface
 {
-    protected static EngineState $engineState;
     protected static FeedbackStore $feedbackStore;
     protected static TracingStore $tracingStore;
+    protected static EngineState $engineState;
     protected static MutationResolutionStoreInterface $mutationResolutionStore;
-
-    public static function getEngineState(): EngineState
-    {
-        return self::$engineState;
-    }
 
     public static function getFeedbackStore(): FeedbackStore
     {
@@ -40,14 +35,14 @@ class App extends AbstractRootAppProxy implements AppInterface
         return self::$tracingStore;
     }
 
+    public static function getEngineState(): EngineState
+    {
+        return self::$engineState;
+    }
+
     public static function getMutationResolutionStore(): MutationResolutionStoreInterface
     {
         return self::$mutationResolutionStore;
-    }
-
-    public static function regenerateEngineState(): void
-    {
-        self::$engineState = new EngineState();
     }
 
     public static function regenerateFeedbackStore(): void
@@ -58,6 +53,11 @@ class App extends AbstractRootAppProxy implements AppInterface
     public static function regenerateTracingStore(): void
     {
         self::$tracingStore = new TracingStore();
+    }
+
+    public static function regenerateEngineState(): void
+    {
+        self::$engineState = new EngineState();
     }
 
     public static function regenerateMutationResolutionStore(): void
