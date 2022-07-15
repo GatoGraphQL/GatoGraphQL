@@ -55,7 +55,6 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
-use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -88,7 +87,6 @@ class Engine implements EngineInterface
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;
-    private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?ComponentPathHelpersInterface $componentPathHelpers = null;
     private ?ComponentPathManagerInterface $componentPathManager = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
@@ -128,14 +126,6 @@ class Engine implements EngineInterface
     final protected function getModelInstance(): ModelInstanceInterface
     {
         return $this->modelInstance ??= $this->instanceManager->getInstance(ModelInstanceInterface::class);
-    }
-    final public function setFeedbackMessageStore(FeedbackMessageStoreInterface $feedbackMessageStore): void
-    {
-        $this->feedbackMessageStore = $feedbackMessageStore;
-    }
-    final protected function getFeedbackMessageStore(): FeedbackMessageStoreInterface
-    {
-        return $this->feedbackMessageStore ??= $this->instanceManager->getInstance(FeedbackMessageStoreInterface::class);
     }
     final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
@@ -457,11 +447,6 @@ class Engine implements EngineInterface
 
         // Keep only the data that is needed to be sent, and encode it as JSON
         $this->calculateOutputData();
-
-        /**
-         * @todo Remove this temporary code to remove feedback state
-         */
-        $this->getFeedbackMessageStore()->clearAll();
     }
 
     protected function formatData(): void
@@ -1934,23 +1919,6 @@ class Engine implements EngineInterface
             $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $this->getDocumentFeedbackEntriesForOutput($documentErrors);
         }
 
-        // @todo Remove alongside FeedbackMessageStore!
-        if ($queryErrors = $this->getFeedbackMessageStore()->getQueryErrors()) {
-            $queryDocumentErrors = [];
-            foreach ($queryErrors as $message => $extensions) {
-                $queryDocumentError =  [
-                    Tokens::MESSAGE => $message,
-                ];
-                if ($locations = $extensions['locations'] ?? null) {
-                    $queryDocumentError[Tokens::LOCATIONS] = $locations;
-                    unset($extensions['locations']);
-                }
-                if ($extensions !== []) {
-                    $queryDocumentError[Tokens::EXTENSIONS] = $extensions;
-                }
-                $queryDocumentErrors[] = $queryDocumentError;
-            }
-        }
         $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::SCHEMA_FEEDBACK], FeedbackCategories::ERROR, $schemaFeedbackEntries[FeedbackCategories::ERROR]);
         $this->maybeCombineAndAddObjectOrSchemaEntries($data[Response::OBJECT_FEEDBACK], FeedbackCategories::ERROR, $objectFeedbackEntries[FeedbackCategories::ERROR]);
 

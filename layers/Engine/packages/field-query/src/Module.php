@@ -17,16 +17,4 @@ class Module extends AbstractModule
             \PoP\QueryParsing\Module::class,
         ];
     }
-
-    /**
-     * Initialize services
-     *
-     * @param string[] $skipSchemaModuleClasses
-     */
-    protected function initializeContainerServices(
-        bool $skipSchema,
-        array $skipSchemaModuleClasses,
-    ): void {
-        $this->initServices(dirname(__DIR__));
-    }
 }
