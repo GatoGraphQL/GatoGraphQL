@@ -142,7 +142,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_8_5 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
             self::E_6_1_A => $this->__('Operation with name \'%s\' does not exist', 'graphql-server'),
             self::E_6_1_B => $this->__('When the document contains more than one operation, the operation name to execute must be provided', 'graphql-server'),
-            self::E_6_1_C => $this->__('The query has not been provided', 'graphql-server'),
+            self::E_6_1_C => $this->__('The document is empty', 'graphql-server'),
             self::E_6_1_D => $this->__('No operations defined in the document', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };

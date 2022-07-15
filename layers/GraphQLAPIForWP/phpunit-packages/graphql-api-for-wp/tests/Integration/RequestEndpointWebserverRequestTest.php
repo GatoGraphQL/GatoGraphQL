@@ -174,7 +174,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
             {
                 "errors": [
                     {
-                        "message": "The query has not been provided",
+                        "message": "The document is empty",
                         "locations": [
                             {
                                 "line": 1,
