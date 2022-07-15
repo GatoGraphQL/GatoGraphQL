@@ -2311,8 +2311,6 @@ class Engine implements EngineInterface
     private function getObjectOrSchemaFeedbackCommonEntry(
         ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
     ): array {
-        $astNode = $objectOrSchemaFeedback->getAstNode();
-        $location = $objectOrSchemaFeedback->getLocation();
         /**
          * Re-create the path to the AST node
          *
@@ -2321,22 +2319,26 @@ class Engine implements EngineInterface
         $astNodePath = [];
         /** @var SplObjectStorage<AstInterface,AstInterface> */
         $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
+        $astNode = $objectOrSchemaFeedback->getAstNode();
         while ($astNode !== null) {
             $astNodePath[] = $astNode->asASTNodeString();
             // Move to the ancestor AST node
             $astNode = $documentASTNodeAncestors[$astNode] ?? null;
         }
-        $entry = [
-            Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
-            Tokens::PATH => $astNodePath,
-        ];
+        $locations = [];
+        $location = $objectOrSchemaFeedback->getLocation();
         if ($location !== LocationHelper::getNonSpecificLocation()) {
-            $entry[Tokens::LOCATIONS] = [$location->toArray()];
+            $locations[] = $location->toArray();
         }
-        $entry[Tokens::EXTENSIONS] = $this->getFeedbackEntryExtensions(
+        $extensions = $this->getFeedbackEntryExtensions(
             $objectOrSchemaFeedback,
         );
-        return $entry;
+        return [
+            Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
+            Tokens::PATH => $astNodePath,
+            Tokens::LOCATIONS => $locations,
+            Tokens::EXTENSIONS => $extensions,
+        ];
     }
 
     /**
@@ -2397,16 +2399,18 @@ class Engine implements EngineInterface
     {
         $output = [];
         foreach ($documentFeedbackEntries as $documentFeedbackEntry) {
+            $locations = [];
+            $location = $documentFeedbackEntry->getLocation();
+            if ($location !== LocationHelper::getNonSpecificLocation()) {
+                $locations[] = $location->toArray();
+            }
             $entry = [
                 Tokens::MESSAGE => $documentFeedbackEntry->getFeedbackItemResolution()->getMessage(),
+                Tokens::LOCATIONS => $locations,
                 Tokens::EXTENSIONS => $this->getFeedbackEntryExtensions(
                     $documentFeedbackEntry,
                 ),
             ];
-            $location = $documentFeedbackEntry->getLocation();
-            if ($location !== LocationHelper::getNonSpecificLocation()) {
-                $entry[Tokens::LOCATIONS] = [$location->toArray()];
-            }
             $output[] = $entry;
         }
         return $output;
@@ -2622,6 +2626,9 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>> $entries
+     */
     protected function maybeCombineAndAddObjectOrSchemaEntries(array &$ret, string $name, array $entries): void
     {
         if ($entries === []) {
@@ -2639,12 +2646,26 @@ class Engine implements EngineInterface
         if ($dboutputmode == DatabasesOutputModes::COMBINED) {
             // Filter to make sure there are entries
             if ($entries = array_filter($entries)) {
+                /** @var array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> */
                 $combined_databases = [];
                 foreach ($entries as $database_name => $database) {
-                    $combined_databases = array_merge_recursive(
-                        $combined_databases,
-                        $database
-                    );
+                    foreach ($database as $typeOutputKey => $fieldEntries) {
+                        /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
+                        $combinedDatabasesType = $combined_databases[$typeOutputKey] ?? new SplObjectStorage();
+                        /** @var FieldInterface $field */
+                        foreach ($fieldEntries as $field) {
+                            /** @var array<string,mixed> */
+                            $combinedDatabasesTypeField = $combinedDatabasesType[$field] ?? [];
+                            /** @var array<string,mixed> */
+                            $entries = $fieldEntries[$field];
+                            $combinedDatabasesTypeField = array_merge(
+                                $combinedDatabasesTypeField,
+                                $entries
+                            );
+                            $combinedDatabasesType[$field] = $combinedDatabasesTypeField;
+                        }
+                        $combined_databases[$typeOutputKey] = $combinedDatabasesType;
+                    }
                 }
                 $ret[$name] = $combined_databases;
             }
