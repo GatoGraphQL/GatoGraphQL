@@ -18,6 +18,8 @@ interface EngineInterface
     public function getEntryComponent(): Component;
     public function getExtraRoutes(): array;
     public function listExtraRouteVars(): array;
+    /** Must call before `generateDataAndPrepareResponse` */
+    public function initializeState(): void;
     public function generateDataAndPrepareResponse(): void;
     public function calculateOutputData(): void;
     public function getModelPropsComponentTree(Component $component): array;

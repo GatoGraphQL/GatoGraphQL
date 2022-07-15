@@ -28,6 +28,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // Add feedback
         $errors = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
         );
@@ -52,11 +53,25 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             if ($moduleConfiguration->enableProactiveFeedbackWarnings()) {
                 $warnings = array_merge(
                     $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                     $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                     $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
                 );
                 if ($warnings !== []) {
                     $ret['extensions']['warnings'] = $warnings;
+                }
+            }
+
+            // Logs
+            if ($moduleConfiguration->enableProactiveFeedbackLogs()) {
+                $logs = array_merge(
+                    $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] ?? []),
+                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? []),
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::LOG] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::LOG] ?? []),
+                );
+                if ($logs !== []) {
+                    $ret['extensions']['logs'] = $logs;
                 }
             }
 
@@ -92,18 +107,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                     $ret['extensions']['suggestions'] = $notices;
                 }
             }
-
-            // Logs
-            if ($moduleConfiguration->enableProactiveFeedbackLogs()) {
-                $logs = array_merge(
-                    $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] ?? []),
-                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::LOG] ?? []),
-                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::LOG] ?? []),
-                );
-                if ($logs !== []) {
-                    $ret['extensions']['logs'] = $logs;
-                }
-            }
         }
 
         if ($resultData = parent::getFormattedData($data)) {
@@ -111,6 +114,103 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         return $ret;
+    }
+
+    /**
+     * Indicate if to add entry "extensions" as a top-level entry
+     */
+    protected function addTopLevelExtensionsEntryToResponse(): bool
+    {
+        return true;
+    }
+
+    protected function reformatGeneralEntries(array $entries): array
+    {
+        $ret = [];
+        foreach ($entries as $item) {
+            $ret[] = $this->getGeneralEntry($item);
+        }
+        return $ret;
+    }
+
+    protected function getGeneralEntry(array $item): array
+    {
+        $entry = [
+            'message' => $item[Tokens::MESSAGE],
+        ];
+        if ($extensions = $item[Tokens::EXTENSIONS]) {
+            $entry['extensions'] = $extensions;
+        }
+        return $entry;
+    }
+
+    protected function reformatDocumentEntries(array $entries): array
+    {
+        $ret = [];
+        foreach ($entries as $item) {
+            $ret[] = $this->getDocumentEntry($item);
+        }
+        return $ret;
+    }
+
+    protected function getDocumentEntry(array $item): array
+    {
+        $entry = [
+            'message' => $item[Tokens::MESSAGE],
+            'locations' => $item[Tokens::LOCATIONS],
+        ];
+        if ($extensions = $item[Tokens::EXTENSIONS]) {
+            $entry['extensions'] = $extensions;
+        }
+        return $entry;
+    }
+
+    /**
+     * @param array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> $entries
+     */
+    protected function reformatSchemaEntries(array $entries): array
+    {
+        $ret = [];
+        foreach ($entries as $typeOutputKey => $storage) {
+            foreach ($storage as $field) {
+                /** @var FieldInterface $field */
+                $items = $storage[$field];
+                /** @var array<string,mixed> $items */
+                foreach ($items as $item) {
+                    $ret[] = $this->getSchemaEntry($typeOutputKey, $item);
+                }
+            }
+        }
+        return $ret;
+    }
+
+    protected function getSchemaEntry(string $typeOutputKey, array $item): array
+    {
+        $entry = [
+            'message' => $item[Tokens::MESSAGE],
+            'locations' => $item[Tokens::LOCATIONS],
+        ];
+        if (
+            $extensions = array_merge(
+                $this->getSchemaEntryExtensions($typeOutputKey, $item),
+                $item[Tokens::EXTENSIONS] ?? []
+            )
+        ) {
+            $entry['extensions'] = $extensions;
+        }
+        return $entry;
+    }
+
+    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
+    {
+        $extensions = [
+            'type' => $typeOutputKey,
+        ];
+        if ($field = $item[Tokens::FIELD] ?? null) {
+            $extensions['field'] = $field;
+        }
+        $extensions['path'] = $item[Tokens::PATH];
+        return $extensions;
     }
 
     protected function reformatObjectEntries(array $entries): array
@@ -129,29 +229,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
-    /**
-     * Indicate if to add entry "extensions" as a top-level entry
-     */
-    protected function addTopLevelExtensionsEntryToResponse(): bool
-    {
-        return true;
-    }
-
-    protected function getObjectOrSchemaCommonEntry(string $typeOutputKey, array $item): array
-    {
-        $entry = [];
-        if ($message = $item[Tokens::MESSAGE] ?? null) {
-            $entry['message'] = $message;
-        }
-        if ($locations = $item[Tokens::LOCATIONS] ?? null) {
-            $entry['locations'] = $locations;
-        }
-        return $entry;
-    }
-
     protected function getObjectEntry(string $typeOutputKey, array $item): array
     {
-        $entry = $this->getObjectOrSchemaCommonEntry($typeOutputKey, $item);
+        $entry = [
+            'message' => $item[Tokens::MESSAGE],
+            'locations' => $item[Tokens::LOCATIONS],
+        ];
         if (
             $extensions = array_merge(
                 $this->getObjectEntryExtensions($typeOutputKey, $item),
@@ -180,66 +263,5 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
         $extensions['path'] = $item[Tokens::PATH];
         return $extensions;
-    }
-
-    /**
-     * @param array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> $entries
-     */
-    protected function reformatSchemaEntries(array $entries): array
-    {
-        $ret = [];
-        foreach ($entries as $typeOutputKey => $storage) {
-            foreach ($storage as $field) {
-                /** @var FieldInterface $field */
-                $items = $storage[$field];
-                /** @var array<string,mixed> $items */
-                foreach ($items as $item) {
-                    $ret[] = $this->getSchemaEntry($typeOutputKey, $item);
-                }
-            }
-        }
-        return $ret;
-    }
-
-    protected function getSchemaEntry(string $typeOutputKey, array $item): array
-    {
-        $entry = $this->getObjectOrSchemaCommonEntry($typeOutputKey, $item);
-        if (
-            $extensions = array_merge(
-                $this->getSchemaEntryExtensions($typeOutputKey, $item),
-                $item[Tokens::EXTENSIONS] ?? []
-            )
-        ) {
-            $entry['extensions'] = $extensions;
-        }
-        return $entry;
-    }
-
-    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
-    {
-        $extensions = [
-            'type' => $typeOutputKey,
-        ];
-        if ($field = $item[Tokens::FIELD] ?? null) {
-            $extensions['field'] = $field;
-        }
-        $extensions['path'] = $item[Tokens::PATH];
-        return $extensions;
-    }
-
-    protected function reformatGeneralEntries($entries)
-    {
-        $ret = [];
-        foreach ($entries as $message => $extensions) {
-            $ret[] = $this->getGeneralEntry($message, $extensions);
-        }
-        return $ret;
-    }
-
-    protected function getGeneralEntry(string $message, array $extensions): array
-    {
-        return [
-            'message' => $message,
-        ];
     }
 }

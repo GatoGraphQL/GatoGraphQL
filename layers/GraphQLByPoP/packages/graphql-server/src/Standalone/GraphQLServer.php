@@ -6,18 +6,19 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
-use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
-use PoP\Root\App;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
+use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLServer implements GraphQLServerInterface
@@ -110,8 +111,8 @@ class GraphQLServer implements GraphQLServerInterface
         array $variables = [],
         ?string $operationName = null
     ): Response {
-        // Override the previous response, if any
-        App::regenerateResponse();
+        $engine = EngineFacade::getInstance();
+        $engine->initializeState();
 
         $passingQuery = is_string($queryOrExecutableDocument);
         if ($passingQuery) {
@@ -142,9 +143,13 @@ class GraphQLServer implements GraphQLServerInterface
                 $executableDocument->validateAndInitialize();
             }
         } catch (SyntaxErrorException | InvalidRequestException $e) {
-            // @todo Show GraphQL error in client
-            // ...
             $appStateManager->override('does-api-query-have-errors', true);
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new DocumentFeedback(
+                    $e->getFeedbackItemResolution(),
+                    $e->getLocation(),
+                )
+            );
         }
         $appStateManager->override('executable-document-ast', $executableDocument);
         $appStateManager->override('document-ast-node-ancestors', $executableDocument?->getDocument()->getASTNodeAncestors());
@@ -169,7 +174,6 @@ class GraphQLServer implements GraphQLServerInterface
         }
 
         // Generate the data, print the response to buffer, and send headers
-        $engine = EngineFacade::getInstance();
         $engine->generateDataAndPrepareResponse();
 
         // Return the Response, so the client can retrieve content and headers

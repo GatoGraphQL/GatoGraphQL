@@ -6,11 +6,7 @@ namespace PoP\ComponentModel\Feedback;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 
-interface QueryFeedbackInterface extends FeedbackInterface
+interface QueryFeedbackInterface extends DocumentFeedbackInterface
 {
     public function getAstNode(): AstInterface;
-    /**
-     * @return array<string, mixed>
-     */
-    public function getExtensions(): array;
 }

@@ -63,6 +63,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
     public function testEnableModifyingEngineBehaviorViaRequestEnvVar(): void
     {
         $engine = $this->getService(EngineInterface::class);
+        $engine->initializeState();
         $engine->generateDataAndPrepareResponse();
         $this->assertEquals(
             App::getResponse()->headers->get('content-type'),

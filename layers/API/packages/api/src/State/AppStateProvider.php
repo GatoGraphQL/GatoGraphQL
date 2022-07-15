@@ -9,6 +9,7 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
+use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
@@ -92,9 +93,13 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['executable-document-ast'] = $executableDocument;
             $state['document-ast-node-ancestors'] = $executableDocument->getDocument()->getASTNodeAncestors();
         } catch (SyntaxErrorException | InvalidRequestException $e) {
-            // @todo Show GraphQL error in client
-            // ...
             $state['does-api-query-have-errors'] = true;
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new DocumentFeedback(
+                    $e->getFeedbackItemResolution(),
+                    $e->getLocation(),
+                )
+            );
         }
     }
 }

@@ -4,8 +4,8 @@
             "message": "Fragment spread type 'NonExistingType' is not defined in the schema",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 11,
+                    "column": 27
                 }
             ],
             "extensions": {
