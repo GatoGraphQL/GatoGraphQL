@@ -41,15 +41,22 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $state['graphql-operation-type'] = null;
-
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $state['nested-mutations-enabled'] = $moduleConfiguration->enableNestedMutations();
-        $state['graphql-introspection-enabled'] = $moduleConfiguration->enableGraphQLIntrospection() ?? true;
+        $state['nested-mutations-enabled'] = false;
+        $state['graphql-introspection-enabled'] = true;
     }
 
     public function execute(array &$state): void
     {
+        /**
+         * These settings can be on the `execute` stage as to
+         * allow the SchemaConfigurationExecuter to set its
+         * hooks first.
+         */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $state['nested-mutations-enabled'] = $moduleConfiguration->enableNestedMutations();
+        $state['graphql-introspection-enabled'] = $moduleConfiguration->enableGraphQLIntrospection() ?? true;
+
         if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
             return;
         }
