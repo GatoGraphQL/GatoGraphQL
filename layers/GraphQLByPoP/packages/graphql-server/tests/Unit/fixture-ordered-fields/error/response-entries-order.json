@@ -9,12 +9,12 @@
                 }
             ],
             "extensions": {
-                "type": "QueryRoot",
-                "field": "nonExisting",
                 "path": [
                     "nonExisting",
                     "query { ... }"
                 ],
+                "type": "QueryRoot",
+                "field": "nonExisting",
                 "code": "PoP\\ComponentModel\\e16"
             }
         }
