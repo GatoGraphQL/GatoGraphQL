@@ -82,14 +82,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $this->validateCreateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== null) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
 
         // If already exists any of these errors above, return errors
         /** @phpstan-ignore-next-line */
         $this->validateCreate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== null) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
 
@@ -103,14 +103,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     ): void {
         // If there are errors here, don't keep validating others
         $this->validateCreateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== null) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
 
         // If already exists any of these errors above, return errors
         /** @phpstan-ignore-next-line */
         $this->validateUpdate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== null) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
 
