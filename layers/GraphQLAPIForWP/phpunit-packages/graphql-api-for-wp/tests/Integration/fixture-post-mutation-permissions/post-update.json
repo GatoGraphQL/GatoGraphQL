@@ -9,12 +9,14 @@
         }
       ],
       "extensions": {
-        "type": "Post",
-        "id": 1,
-        "fields": [
-          "update(input: {title: \"Hello world! 33333\"})",
-          "resolveValueAndMerge"
+        "path": [
+          "update(input: {title: \"Hello world! 33333\"}) { ... }",
+          "disallowedPost: post(by: {id: 1}) { ... }",
+          "mutation { ... }"
         ],
+        "type": "Post",
+        "field": "update(input: {title: \"Hello world! 33333\"}) { ... }",
+        "id": 1,
         "code": "PoPCMSSchema\\CustomPostMutations\\e8"
       }
     }
