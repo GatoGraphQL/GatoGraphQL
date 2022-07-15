@@ -2,25 +2,17 @@
     "errors": [
         {
             "message": "Either the DataLoader can't load data, or no TypeResolver resolves, object with ID '733'",
-            "locations": [],
             "extensions": {
                 "type": "CustomPostUnion",
-                "field": "_id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])",
-                "path": [
-                    "_id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])"
-                ],
+                "dynamicField": "_id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])",
                 "code": "PoP\\ComponentModel\\e10"
             }
         },
         {
             "message": "Either the DataLoader can't load data, or no TypeResolver resolves, object with ID '735'",
-            "locations": [],
             "extensions": {
                 "type": "CustomPostUnion",
-                "field": "_id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])",
-                "path": [
-                    "_id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])"
-                ],
+                "dynamicField": "_id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])",
                 "code": "PoP\\ComponentModel\\e10"
             }
         },
@@ -33,13 +25,13 @@
                 }
             ],
             "extensions": {
-                "type": "CustomPostUnion",
-                "field": "__typename",
                 "path": [
                     "__typename",
                     "customPosts(filter: {ids: [1724, 358, 733, 735, 555]}) { ... }",
                     "query { ... }"
                 ],
+                "type": "CustomPostUnion",
+                "field": "__typename",
                 "code": "PoP\\ComponentModel\\e10"
             }
         },
@@ -52,13 +44,13 @@
                 }
             ],
             "extensions": {
-                "type": "CustomPostUnion",
-                "field": "__typename",
                 "path": [
                     "__typename",
                     "customPosts(filter: {ids: [1724, 358, 733, 735, 555]}) { ... }",
                     "query { ... }"
                 ],
+                "type": "CustomPostUnion",
+                "field": "__typename",
                 "code": "PoP\\ComponentModel\\e10"
             }
         }

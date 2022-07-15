@@ -157,8 +157,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $entry = [
             'message' => $item[Tokens::MESSAGE],
-            'locations' => $item[Tokens::LOCATIONS],
         ];
+        if ($locations = $item[Tokens::LOCATIONS]) {
+            $entry['locations'] = $locations;
+        }
         if ($extensions = $item[Tokens::EXTENSIONS]) {
             $entry['extensions'] = $extensions;
         }
@@ -188,8 +190,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $entry = [
             'message' => $item[Tokens::MESSAGE],
-            'locations' => $item[Tokens::LOCATIONS],
         ];
+        if ($locations = $item[Tokens::LOCATIONS]) {
+            $entry['locations'] = $locations;
+        }
         if (
             $extensions = array_merge(
                 $this->getSchemaEntryExtensions($typeOutputKey, $item),
@@ -203,13 +207,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
-        $extensions = [
-            'type' => $typeOutputKey,
-        ];
+        $extensions = [];
+        if ($path = $item[Tokens::PATH]) {
+            $extensions['path'] = $path;
+        }
+        $extensions['type'] = $typeOutputKey;
         if ($field = $item[Tokens::FIELD] ?? null) {
             $extensions['field'] = $field;
+        } elseif ($dynamicField = $item[Tokens::DYNAMIC_FIELD] ?? null) {
+            $extensions['dynamicField'] = $dynamicField;
         }
-        $extensions['path'] = $item[Tokens::PATH];
         return $extensions;
     }
 
@@ -233,8 +240,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $entry = [
             'message' => $item[Tokens::MESSAGE],
-            'locations' => $item[Tokens::LOCATIONS],
         ];
+        if ($locations = $item[Tokens::LOCATIONS]) {
+            $entry['locations'] = $locations;
+        }
         if (
             $extensions = array_merge(
                 $this->getObjectEntryExtensions($typeOutputKey, $item),
@@ -246,14 +255,14 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
+    /**
+     * The entry is similar to Schema, plus the
+     * addition of the object ID/IDs
+     */
     protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
     {
-        $extensions = [
-            'type' => $typeOutputKey,
-        ];
-        if ($field = $item[Tokens::FIELD] ?? null) {
-            $extensions['field'] = $field;
-        }
+        $extensions = $this->getSchemaEntryExtensions($typeOutputKey, $item);
+
         /** @var array<string|int> */
         $ids = $item[Tokens::IDS];
         if (count($ids) === 1) {
@@ -261,7 +270,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         } else {
             $extensions['ids'] = $ids;
         }
-        $extensions['path'] = $item[Tokens::PATH];
+
         return $extensions;
     }
 }

@@ -2312,7 +2312,10 @@ class Engine implements EngineInterface
         ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
     ): array {
         /**
-         * Re-create the path to the AST node
+         * Re-create the path to the AST node.
+         *
+         * Skip if the AST node was created on runtime.
+         * Eg: _id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])
          *
          * @var string[]
          */
@@ -2320,10 +2323,12 @@ class Engine implements EngineInterface
         /** @var SplObjectStorage<AstInterface,AstInterface> */
         $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
         $astNode = $objectOrSchemaFeedback->getAstNode();
-        while ($astNode !== null) {
-            $astNodePath[] = $astNode->asASTNodeString();
-            // Move to the ancestor AST node
-            $astNode = $documentASTNodeAncestors[$astNode] ?? null;
+        if ($astNode->getLocation() !== LocationHelper::getNonSpecificLocation()) {
+            while ($astNode !== null) {
+                $astNodePath[] = $astNode->asASTNodeString();
+                // Move to the ancestor AST node
+                $astNode = $documentASTNodeAncestors[$astNode] ?? null;
+            }
         }
         $locations = [];
         $location = $objectOrSchemaFeedback->getLocation();
@@ -2358,6 +2363,9 @@ class Engine implements EngineInterface
     }
 
     /**
+     * Place the Field under a different key if the AST
+     * node was created on runtime.
+     *
      * @param array<string,mixed> $entry
      * @return array<string,mixed>
      */
@@ -2365,10 +2373,14 @@ class Engine implements EngineInterface
         array $entry,
         FieldInterface $field,
     ): array {
+        $key = Tokens::FIELD;
+        if ($field->getLocation() === LocationHelper::getNonSpecificLocation()) {
+            $key = Tokens::DYNAMIC_FIELD;
+        }
         return array_merge(
             $entry,
             [
-                Tokens::FIELD => $field->asASTNodeString(),
+                $key => $field->asASTNodeString(),
             ]
         );
     }
