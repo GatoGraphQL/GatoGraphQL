@@ -595,10 +595,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             ComponentModelEnvironment::TREAT_UNDEFINED_FIELD_OR_DIRECTIVE_ARGS_AS_ERRORS => true,
             /**
-             * If a directive fails, then remove the affected IDs/fields from the upcoming stages of the directive pipeline execution
-             */
-            ComponentModelEnvironment::REMOVE_FIELD_IF_DIRECTIVE_FAILED => true,
-            /**
              * Do not expose the `DangerouslyNonSpecificScalar` scalar type
              */
             ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_NON_SPECIFIC_SCALAR_TYPE_IN_SCHEMA => true,

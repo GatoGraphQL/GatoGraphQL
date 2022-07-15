@@ -113,7 +113,7 @@ class GraphQLServer implements GraphQLServerInterface
     ): Response {
         // Override the previous response, if any
         App::regenerateResponse();
-        
+
         $engine = EngineFacade::getInstance();
         $engine->initializeState();
 

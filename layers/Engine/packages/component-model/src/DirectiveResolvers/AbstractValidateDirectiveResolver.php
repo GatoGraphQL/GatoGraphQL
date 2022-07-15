@@ -91,8 +91,8 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
         if ($failedIDFieldSet !== []) {
             $this->removeIDFieldSet(
+                $succeedingPipelineIDFieldSet,
                 $failedIDFieldSet,
-                $succeedingPipelineIDFieldSet
             );
             $this->setFailingFieldResponseAsNull(
                 $resolvedIDFieldValues,

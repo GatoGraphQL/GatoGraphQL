@@ -9,12 +9,12 @@ use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 trait RemoveIDFieldSetDirectiveResolverTrait
 {
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSetToRemove
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSetToRemove
      */
     protected function removeIDFieldSet(
+        array &$succeedingPipelineIDFieldSet,
         array $idFieldSetToRemove,
-        array &$succeedingPipelineIDFieldSet
     ): void {
         // For each combination of ID and field, remove them from the upcoming pipeline stages
         foreach ($idFieldSetToRemove as $id => $fieldSet) {

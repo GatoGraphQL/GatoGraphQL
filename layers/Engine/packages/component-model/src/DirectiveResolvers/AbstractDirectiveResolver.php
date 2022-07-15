@@ -1335,17 +1335,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $removeFieldIfDirectiveFailed = $moduleConfiguration->removeFieldIfDirectiveFailed();
-        if ($removeFieldIfDirectiveFailed) {
+        if ($moduleConfiguration->setFieldAsNullIfDirectiveFailed()) {
             $this->removeIDFieldSet(
+                $succeedingPipelineIDFieldSet,
                 $idFieldSetToRemove,
-                $succeedingPipelineIDFieldSet
+            );
+            $this->setFailingFieldResponseAsNull(
+                $resolvedIDFieldValues,
+                $idFieldSetToRemove,
             );
         }
-        $this->setFailingFieldResponseAsNull(
-            $resolvedIDFieldValues,
-            $idFieldSetToRemove,
-        );
 
         $engineIterationFeedbackStore->objectFeedbackStore->addError(
             new ObjectResolutionFeedback(
@@ -1488,5 +1487,5 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];
-    }    
+    }
 }
