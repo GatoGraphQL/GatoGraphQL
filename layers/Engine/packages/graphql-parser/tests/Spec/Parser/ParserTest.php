@@ -1024,6 +1024,7 @@ GRAPHQL;
     public function queryWithDirectiveProvider()
     {
         $formatVariable = new Variable('format', 'String', true, false, false, new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));
         return [
             // Directive in RelationalField
             [
@@ -1156,7 +1157,7 @@ GRAPHQL;
                         new QueryOperation(
                             'GetUsersName',
                             [
-                                $formatVariable
+                                $formatVariable2
                             ],
                             [],
                             [
@@ -1166,9 +1167,9 @@ GRAPHQL;
                                     [],
                                     [
                                         new LeafField('name', null, [], [
-                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable, new Location(4, 32)), new Location(4, 24))], new Location(4, 18)),
+                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable2, new Location(4, 32)), new Location(4, 24))], new Location(4, 18)),
                                             new Directive('someOtherDirective', [], new Location(5, 18)),
-                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable, new Location(6, 32)), new Location(6, 24))], new Location(6, 18)),
+                                            new Directive('style', [new Argument('format', new VariableReference('format', $formatVariable2, new Location(6, 32)), new Location(6, 24))], new Location(6, 18)),
                                             new Directive('someOtherDirective', [], new Location(7, 18)),
                                         ], new Location(3, 13)),
                                     ],
