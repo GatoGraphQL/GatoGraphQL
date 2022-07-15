@@ -11,15 +11,12 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
@@ -223,17 +220,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $setFailingFieldResponseAsNull = $moduleConfiguration->setFailingFieldResponseAsNull();
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             /** @var UnionTypeResolverInterface */
             $unionTypeResolver = $relationalTypeResolver;
             $objectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
             if ($objectTypeResolver === null) {
-                if ($setFailingFieldResponseAsNull) {
-                    $resolvedIDFieldValues[$id][$field] = null;
-                }
+                // Set the response for the failing field as null
+                $resolvedIDFieldValues[$id][$field] = null;
                 return;
             }
         } else {
@@ -249,9 +242,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $object,
         );
         if ($fieldData === null) {
-            if ($setFailingFieldResponseAsNull) {
-                $resolvedIDFieldValues[$id][$field] = null;
-            }
+            // Set the response for the failing field as null
+            $resolvedIDFieldValues[$id][$field] = null;
             return;
         }
         $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
@@ -274,10 +266,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
         // 3. Add the output in the DB
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            // For GraphQL, set the response for the failing field as null
-            if ($setFailingFieldResponseAsNull) {
-                $resolvedIDFieldValues[$id][$field] = null;
-            }
+            // Set the response for the failing field as null
+            $resolvedIDFieldValues[$id][$field] = null;
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
