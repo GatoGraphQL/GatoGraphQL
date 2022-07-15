@@ -19,23 +19,16 @@ abstract class AbstractDocumentFeedback extends AbstractFeedback implements Docu
         FeedbackItemResolution $feedbackItemResolution,
         protected Location $location,
         /** @var array<string, mixed> */
-        protected array $extensions = [],
+        array $extensions = [],
     ) {
         parent::__construct(
             $feedbackItemResolution,
+            $extensions,
         );
     }
 
     public function getLocation(): Location
     {
         return $this->location;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getExtensions(): array
-    {
-        return $this->extensions;
     }
 }

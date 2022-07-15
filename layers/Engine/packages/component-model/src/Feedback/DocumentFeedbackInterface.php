@@ -9,8 +9,4 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 interface DocumentFeedbackInterface extends FeedbackInterface
 {
     public function getLocation(): Location;
-    /**
-     * @return array<string, mixed>
-     */
-    public function getExtensions(): array;
 }
