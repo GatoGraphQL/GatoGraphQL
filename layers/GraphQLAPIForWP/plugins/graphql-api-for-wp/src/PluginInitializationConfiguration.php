@@ -169,7 +169,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_MODE,
                 // It is stored as string "private" in DB, and must be passed as bool `true` to component
-                'callback' => fn ($value) => $value == SchemaModes::PRIVATE_SCHEMA_MODE,
+                'callback' => fn ($value) => $value === SchemaModes::PRIVATE_SCHEMA_MODE,
             ],
             // Enable individual access control for the schema mode?
             [
@@ -196,7 +196,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
-                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value != MutationSchemes::STANDARD,
+                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value !== MutationSchemes::STANDARD,
             ],
             // Disable redundant mutation fields in the root type?
             [
@@ -204,7 +204,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
-                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value == MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
+                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
             // Cache-Control default max-age
             [
