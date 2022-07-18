@@ -87,7 +87,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // If already exists any of these errors above, return errors
-        /** @phpstan-ignore-next-line */
         $this->validateCreate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
@@ -108,7 +107,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // If already exists any of these errors above, return errors
-        /** @phpstan-ignore-next-line */
         $this->validateUpdate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
