@@ -41,8 +41,6 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $state['graphql-operation-type'] = null;
-        $state['nested-mutations-enabled'] = false;
-        $state['graphql-introspection-enabled'] = true;
     }
 
     public function execute(array &$state): void
