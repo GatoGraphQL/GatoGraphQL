@@ -91,7 +91,7 @@ class AppStateProvider extends AbstractAppStateProvider
      *
      * Otherwise, if there's an error (eg: empty query), it throws
      * an exception when adding it to the FeedbackStore.     *
-     * 
+     *
      * Call ModuleConfiguration only after hooks from
      * SchemaConfigurationExecuter have been initialized.
      * That's why these are called on `execute` and not `initialize`.
@@ -102,7 +102,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
         $state['are-mutations-enabled'] = $moduleConfiguration->enableMutations();
-        
+
         $this->getEngine()->initializeState();
     }
 }
