@@ -46,11 +46,12 @@ class AppStateProvider extends AbstractAppStateProvider
     public function execute(array &$state): void
     {
         /**
-         * These settings can be on the `execute` stage as to
-         * allow the SchemaConfigurationExecuter to set its
-         * hooks first.
+         * Call ModuleConfiguration only after hooks from
+         * SchemaConfigurationExecuter have been initialized.
+         * That's why these are called on `execute` and not `initialize`.
+         *
+         * @var ModuleConfiguration
          */
-        /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['nested-mutations-enabled'] = $moduleConfiguration->enableNestedMutations();
         $state['graphql-introspection-enabled'] = $moduleConfiguration->enableGraphQLIntrospection() ?? true;

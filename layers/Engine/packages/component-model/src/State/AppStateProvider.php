@@ -51,11 +51,6 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
-        $state['are-mutations-enabled'] = $moduleConfiguration->enableMutations();
-
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getVariableManager()->getVariablesFromRequest();
 
@@ -77,6 +72,8 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['directive-version-constraints'] = null;
         }
 
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $enableModifyingEngineBehaviorViaRequest = $moduleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequest);
         $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequest);
@@ -93,10 +90,19 @@ class AppStateProvider extends AbstractAppStateProvider
      * @see layers/API/packages/api/src/State/AppStateProvider.php
      *
      * Otherwise, if there's an error (eg: empty query), it throws
-     * an exception when adding it to the FeedbackStore
+     * an exception when adding it to the FeedbackStore.     *
+     * 
+     * Call ModuleConfiguration only after hooks from
+     * SchemaConfigurationExecuter have been initialized.
+     * That's why these are called on `execute` and not `initialize`.
      */
     public function execute(array &$state): void
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
+        $state['are-mutations-enabled'] = $moduleConfiguration->enableMutations();
+        
         $this->getEngine()->initializeState();
     }
 }
