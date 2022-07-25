@@ -35,7 +35,7 @@ use function rest_url;
  *   https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/module-settings/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
  * ```
  */
-class SettingsAdminRESTController extends AbstractAdminRESTController
+class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
 {
     use WithModuleParamRESTControllerTrait;
     use WithFlushRewriteRulesRESTControllerTrait;
