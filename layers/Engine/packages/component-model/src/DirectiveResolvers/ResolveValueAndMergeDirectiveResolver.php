@@ -87,7 +87,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
-    private function resolveValueForObjects(
+    protected function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idObjects,
         array $idFieldSet,
@@ -176,7 +176,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
-    private function resolveValuesForObject(
+    protected function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string|int $id,
         object $object,
@@ -208,7 +208,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
-    private function resolveValueForObject(
+    protected function resolveValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string|int $id,
         object $object,
