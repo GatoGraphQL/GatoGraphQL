@@ -21,7 +21,7 @@ class SchemaServiceYamlFileLoader extends YamlFileLoader
     public function __construct(
         ContainerBuilder $container,
         FileLocatorInterface $locator,
-        protected bool $autoconfigure = true
+        protected bool $autoconfigure,
     ) {
         parent::__construct($container, $locator);
     }
