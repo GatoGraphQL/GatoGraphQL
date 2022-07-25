@@ -18,14 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 trait ServiceYamlFileLoaderTrait
 {
-    public function __construct(
-        ContainerBuilder $container,
-        FileLocatorInterface $locator,
-        protected bool $autoconfigure = true
-    ) {
-        parent::__construct($container, $locator);
-    }
-
     protected function customizeYamlFileDefinition(array $content): array
     {
         if ($content['services']['_defaults']['autoconfigure'] ?? null) {
