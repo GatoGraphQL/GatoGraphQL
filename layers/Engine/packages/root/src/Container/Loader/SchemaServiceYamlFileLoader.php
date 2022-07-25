@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 /**
  * Override the Symfony class, to:
- * 
+ *
  * - always inject the "autoconfigure" property
  * - add the required tag "container.ignore_attributes" to avoid PHP 8's attributes
  */
@@ -32,7 +32,7 @@ class SchemaServiceYamlFileLoader extends YamlFileLoader
         if ($content === null) {
             return null;
         }
-        
+
         $content['services']['_defaults']['autoconfigure'] = $this->autoconfigure;
         return $this->customizeYamlFileDefinition($content);
     }

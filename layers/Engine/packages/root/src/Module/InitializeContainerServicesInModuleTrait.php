@@ -9,7 +9,6 @@ use PoP\Root\Container\Loader\SchemaServiceYamlFileLoader;
 use PoP\Root\Container\Loader\ServiceYamlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 trait InitializeContainerServicesInModuleTrait
 {

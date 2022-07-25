@@ -34,7 +34,7 @@ class ServiceYamlFileLoader extends YamlFileLoader
         if ($content === null) {
             return null;
         }
-        
+
         return $this->customizeYamlFileDefinition($content);
     }
 }
