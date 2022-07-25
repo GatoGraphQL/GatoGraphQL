@@ -27,12 +27,8 @@ trait ServiceYamlFileLoaderTrait
         parent::__construct($container, $locator);
     }
 
-    protected function getFileDefinition(string $file): ?array
+    protected function customizeYamlFileDefinition(array $content): array
     {
-        $content = parent::loadFile($file);
-        if ($content === null) {
-            return null;
-        }
         if ($content['services']['_defaults']['autoconfigure'] ?? null) {
             $content['services']['_defaults']['tags'] ??= [];
             $content['services']['_defaults']['tags'][] = 'container.ignore_attributes';

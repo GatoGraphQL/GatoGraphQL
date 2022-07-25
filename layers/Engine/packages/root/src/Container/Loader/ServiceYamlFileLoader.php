@@ -18,6 +18,8 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
  */
 class ServiceYamlFileLoader extends YamlFileLoader
 {
+    use ServiceYamlFileLoaderTrait;
+
     public function __construct(
         ContainerBuilder $container,
         FileLocatorInterface $locator,
@@ -29,7 +31,10 @@ class ServiceYamlFileLoader extends YamlFileLoader
     protected function loadFile(string $file): ?array
     {
         $content = parent::loadFile($file);
-        $content['services']['_defaults']['autoconfigure'] = $this->autoconfigure;
-        return $content;
+        if ($content === null) {
+            return null;
+        }
+        
+        return $this->customizeYamlFileDefinition($content);
     }
 }
