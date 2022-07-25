@@ -6,6 +6,7 @@ namespace PoP\Root\Module;
 
 use PoP\Root\App;
 use PoP\Root\Container\Loader\SchemaServiceYamlFileLoader;
+use PoP\Root\Container\Loader\ServiceYamlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -41,7 +42,7 @@ trait InitializeContainerServicesInModuleTrait
         string $fileName
     ): void {
         $modulePath = $this->getModulePath($moduleDir, $configPath);
-        $loader = new YamlFileLoader($containerBuilder, new FileLocator($modulePath));
+        $loader = new ServiceYamlFileLoader($containerBuilder, new FileLocator($modulePath));
         $loader->load($fileName);
     }
 
