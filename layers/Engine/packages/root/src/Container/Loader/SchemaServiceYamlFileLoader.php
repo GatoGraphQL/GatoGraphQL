@@ -8,6 +8,12 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
+/**
+ * Override the Symfony class, to:
+ * 
+ * - always inject the "autoconfigure" property
+ * - add the required tag "container.ignore_attributes" to avoid PHP 8's attributes
+ */
 class SchemaServiceYamlFileLoader extends YamlFileLoader
 {
     public function __construct(
@@ -18,10 +24,6 @@ class SchemaServiceYamlFileLoader extends YamlFileLoader
         parent::__construct($container, $locator);
     }
 
-    /**
-     * Override the Symfony class, to always inject the
-     * "autoconfigure" property
-     */
     protected function loadFile(string $file): ?array
     {
         $content = parent::loadFile($file);
