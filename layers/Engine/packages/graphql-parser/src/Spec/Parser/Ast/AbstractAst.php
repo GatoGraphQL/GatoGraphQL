@@ -9,7 +9,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
-abstract class AbstractAst implements AstInterface, LocatableInterface
+abstract class AbstractAst implements AstInterface
 {
     use StandaloneServiceTrait;
 

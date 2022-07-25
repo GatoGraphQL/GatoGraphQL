@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-abstract class AbstractField extends AbstractAst implements FieldInterface, WithNameInterface, WithArgumentsInterface
+abstract class AbstractField extends AbstractAst implements FieldInterface
 {
     use WithArgumentsTrait;
     use WithDirectivesTrait;
