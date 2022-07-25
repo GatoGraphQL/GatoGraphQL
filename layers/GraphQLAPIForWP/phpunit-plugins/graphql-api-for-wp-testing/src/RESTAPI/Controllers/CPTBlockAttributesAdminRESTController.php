@@ -9,12 +9,10 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -37,13 +35,6 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     use WithFlushRewriteRulesRESTControllerTrait;
 
     protected string $restBase = 'cpt-block-attributes';
-
-    private ?SettingsNormalizerInterface $settingsNormalizer = null;
-
-    final protected function getSettingsNormalizer(): SettingsNormalizerInterface
-    {
-        return $this->settingsNormalizer ??= InstanceManagerFacade::getInstance()->getInstance(SettingsNormalizerInterface::class);
-    }
 
     /**
      * @return array<string,array<array<string,mixed>>> Array of [$route => [$options]]
@@ -303,8 +294,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             $optionValues = $params[Params::OPTION_VALUES];
             $module = $this->getModuleByID($moduleID);
 
-            // Normalize the values
-            $normalizedOptionValues = $this->getSettingsNormalizer()->normalizeModuleSettings($module, $optionValues);
+            $normalizedOptionValues = $optionValues;
 
             // Store in the DB
             $userSettingsManager = UserSettingsManagerFacade::getInstance();
