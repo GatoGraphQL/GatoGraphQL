@@ -32,7 +32,7 @@ abstract class AbstractAttachExtensionCompilerPass extends AbstractCompilerPass
                  * Then, if autoconfigure => false, the service is registered in the container,
                  * but the class is not attached.
                  * This is used for disabling the Schema services,
-                 * together with ForceAutoconfigureYamlFileLoader
+                 * together with SchemaServiceYamlFileLoader
                  */
                 if ($definition->isAutoconfigured()) {
                     $attachExtensionServiceDefinition->addMethodCall(

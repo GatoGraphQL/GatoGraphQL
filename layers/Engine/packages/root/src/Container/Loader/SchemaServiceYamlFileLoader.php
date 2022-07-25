@@ -8,7 +8,7 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class ForceAutoconfigureYamlFileLoader extends YamlFileLoader
+class SchemaServiceYamlFileLoader extends YamlFileLoader
 {
     public function __construct(
         ContainerBuilder $container,
