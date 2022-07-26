@@ -18,7 +18,10 @@ class Environment
     public static function getSupportedPluginNamespaces(): array
     {
         return getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES') !== false
-            ? array_map(trim(...), explode(',', getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES')))
+            ? array_map(
+                trim(...),
+                explode(',', getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES'))
+            )
             : ['GraphQLAPI'];
     }
 }
