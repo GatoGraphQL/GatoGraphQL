@@ -20,7 +20,7 @@ class AdminRESTAPIEndpointManager extends AbstractRESTAPIEndpointManager
             new ModuleSettingsAdminRESTController(),
             new ModulesAdminRESTController(),
             new CPTBlockAttributesAdminRESTController(
-                'GraphQLAPI\GraphQLAPI',
+                ['GraphQLAPI\GraphQLAPI'],
             ),
         ];
     }
