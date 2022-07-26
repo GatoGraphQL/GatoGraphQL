@@ -1,0 +1,25 @@
+{
+  "errors": [
+    {
+      "message": "There is no field 'post' on type 'MutationRoot'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post(by: {id: 28}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "post(by: {id: 28}) { ... }",
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    }
+  ],
+  "data": {
+    "post": null
+  }
+}
