@@ -19,6 +19,6 @@ class Environment
     {
         return getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES') !== false
             ? array_map(trim(...), explode(',', getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES')))
-            : ['GraphQLAPI\GraphQLAPI'];
+            : ['GraphQLAPI'];
     }
 }
