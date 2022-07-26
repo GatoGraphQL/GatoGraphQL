@@ -6,9 +6,11 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
@@ -37,6 +39,13 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     use WithFlushRewriteRulesRESTControllerTrait;
 
     protected string $restBase = 'cpt-block-attributes';
+    /** @var string[]|null */
+    protected ?array $supportedCustomPostTypes = null;
+
+    public function __construct(
+        protected string $pluginNamespace,
+    ) {
+    }
 
     /**
      * @return array<string,array<array<string,mixed>>> Array of [$route => [$options]]
@@ -169,7 +178,8 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             );
 		}
 
-		if (!in_array($post->post_type, $this->supportedCustomPostTypes)) {
+        $supportedCustomPostTypes = $this->getSupportedCustomPostTypes();
+		if (!in_array($post->post_type, $supportedCustomPostTypes)) {
 			return new WP_Error(
                 'rest_post_invalid_id',
                 sprintf(
@@ -177,7 +187,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     $post->post_type,
                     implode(
                         __('\', \'', 'graphql-api-testing'),
-                        $this->supportedCustomPostTypes
+                        $supportedCustomPostTypes
                     )
                 ),
                 [
@@ -188,6 +198,43 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 
 		return $post;
 	}
+
+    /**
+     * Get the CPTs from this plugin
+     *
+     * @return string[]
+     */
+    protected function getSupportedCustomPostTypes(): array
+    {
+        if ($this->supportedCustomPostTypes === null) {
+            $this->supportedCustomPostTypes = $this->doGetSupportedCustomPostTypes();
+        }
+        return $this->supportedCustomPostTypes;
+    }
+
+    /**
+     * Get the CPTs from this plugin
+     *
+     * @return string[]
+     */
+    protected function doGetSupportedCustomPostTypes(): array
+    {
+        $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
+        // Filter the ones that belong to this plugin
+        // Use $serviceDefinitionID for if the class is overriden
+        $customPostTypes = array_values(array_filter(
+            $customPostTypeRegistry->getCustomPostTypes(),
+            fn (string $serviceDefinitionID) => str_starts_with(
+                $serviceDefinitionID,
+                $this->pluginNamespace . '\\'
+            ),
+            ARRAY_FILTER_USE_KEY
+        ));
+        return array_map(
+            fn (CustomPostTypeInterface $customPostType) => $customPostType->getCustomPostType(),
+            $customPostTypes
+        );
+    }
 
     public function retrieveAllItems(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
