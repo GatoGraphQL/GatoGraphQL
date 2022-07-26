@@ -1,0 +1,26 @@
+{
+    "errors": [
+        {
+            "message": "You must have role 'author' to access field 'customPosts(pagination: {limit: 3})' for type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "customPosts(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "customPosts(pagination: {limit: 3}) { ... }",
+                "id": "root",
+                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+            }
+        }
+    ],
+    "data": {
+        "customPosts": null
+    }
+}
