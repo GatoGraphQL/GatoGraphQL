@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
 
 class Environment
 {
-    public final const PHPUNIT_SUPPORTED_PLUGIN_NAMESPACES = 'PHPUNIT_SUPPORTED_PLUGIN_NAMESPACES';
+    public final const INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES = 'INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES';
 
     /**
      * Provide the plugin namespaces (eg: also for extensions) for which
@@ -17,8 +17,8 @@ class Environment
      */
     public static function getSupportedPluginNamespaces(): array
     {
-        return getenv('PHPUNIT_SUPPORTED_PLUGIN_NAMESPACES') !== false
-            ? array_map(trim(...), explode(',', getenv('PHPUNIT_SUPPORTED_PLUGIN_NAMESPACES')))
+        return getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES') !== false
+            ? array_map(trim(...), explode(',', getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES')))
             : ['GraphQLAPI\GraphQLAPI'];
     }
 }
