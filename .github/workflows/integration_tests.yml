@@ -8,9 +8,9 @@ env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
-    provide_data:
+    main:
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
-        name: Provide configuration data
+        name: Launch InstaWP instance and execute integration tests against it
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
@@ -29,15 +29,7 @@ jobs:
             -   id: output_data
                 run: |
                     echo "::set-output name=additional_integration_test_plugins::$(vendor/bin/monorepo-builder additional-integration-test-plugins --config=config/monorepo-builder/additional-integration-test-plugins.php)"
-            
-        outputs:
-            additional_integration_test_plugins: ${{ steps.output_data.outputs.additional_integration_test_plugins }}
     
-    retrieve_artifact_url:
-        needs: provide_data
-        name: Retrieve the artifact URL
-        runs-on: ubuntu-latest
-        steps:
             -   name: Retrieve artifact URLs from GitHub workflow
                 uses: actions/github-script@v6
                 id: artifact-url
@@ -53,22 +45,14 @@ jobs:
                         // Allow installing additional plugins, set via the monorepo configuration
                         const artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
                             return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link') + '.zip'
-                        }).concat(${{ needs.provide_data.outputs.additional_integration_test_plugins }});
+                        }).concat(${{ steps.output_data.outputs.additional_integration_test_plugins }});
                         return artifactURLs.join(',');
                     result-encoding: string
 
             -   name: Artifact URL for InstaWP
                 run: echo "Artifact URL for InstaWP - ${{ steps.artifact-url.outputs.result }}"
                 shell: bash
-
-        outputs:
-            artifact-url: ${{ steps.artifact-url.outputs.result }}
-
-    launch_instawp_instance:
-        needs: retrieve_artifact_url
-        name: Launch InstaWP instance
-        runs-on: ubuntu-latest
-        steps:
+                
             -   name: Create InstaWP instance
                 uses: instawp/wordpress-testing-automation@main
                 id: create-instawp
@@ -78,7 +62,7 @@ jobs:
                     INSTAWP_TEMPLATE_SLUG: ${{ secrets.INSTAWP_TEMPLATE_SLUG }}
                     REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
                     INSTAWP_ACTION: create-site-template
-                    ARTIFACT_URL: ${{ needs.retrieve_artifact_url.outputs.artifact-url }}
+                    ARTIFACT_URL: ${{ steps.artifact-url.outputs.result }}
 
             -   name: InstaWP instance URL
                 run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
@@ -94,14 +78,6 @@ jobs:
                 run: sleep 15s
                 shell: bash
 
-        outputs:
-            instawp-domain: ${{ steps.extract-instawp-domain.outputs.instawp-domain }}
-
-    execute_integration_tests:
-        needs: launch_instawp_instance
-        name: Execute integration tests
-        runs-on: ubuntu-latest
-        steps:
             -   name: Checkout code
                 uses: actions/checkout@v2
                 with:
@@ -120,18 +96,13 @@ jobs:
 
             -   name: Run tests
                 run: |
-                    INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch_instawp_instance.outputs.instawp-domain }} \
+                    INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ steps.extract-instawp-domain.outputs.instawp-domain }} \
                     INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME=${{ secrets.INSTAWP_ADMIN_USER_USERNAME }} \
                     INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD=${{ secrets.INSTAWP_ADMIN_USER_PASSWORD }} \
                     vendor/bin/phpunit --filter=Integration
 
-    destroy_instawp_after_testing:
-        needs: execute_integration_tests
-        if: ${{ always() }}
-        name: Destroy InstaWP instance
-        runs-on: ubuntu-latest
-        steps:
             -   uses: instawp/wordpress-testing-automation@main
+                name: Destroy InstaWP instance
                 id: destroy-instawp
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
