@@ -320,18 +320,32 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         $blocks = \parse_blocks($customPost->post_content);
         $block = $this->getBlock($blockNamespace, $blockID, $blocks);
         if ($block === null) {
+            $errorData = [
+                Params::STATE => [
+                    Params::CUSTOM_POST_ID => $customPostID,
+                    Params::BLOCK_NAMESPACE => $blockNamespace,
+                    Params::BLOCK_ID => $blockID,
+                ],
+            ];
+            [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
+            if ($blockPosition === 0) {
+                return new WP_Error(
+                    '1',
+                    sprintf(
+                        __('There is no block with name \'%s\'', 'graphql-api-testing'),
+                        $blockNamespacedName
+                    ),
+                    $errorData
+                );
+            }
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('There is no block with ID \'%s\'', 'graphql-api-testing'),
-                    $blockID
+                    __('There is no block with name \'%s\' on position \'%s\'', 'graphql-api-testing'),
+                    $blockNamespacedName,
+                    $blockPosition
                 ),
-                [
-                    Params::STATE => [
-                        Params::CUSTOM_POST_ID => $customPostID,
-                        Params::BLOCK_ID => $blockID,
-                    ],
-                ]
+                $errorData
             );
         }
         return $this->prepareItemForResponse($customPostID, $block);
