@@ -144,6 +144,6 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
     }
 
     abstract protected function getCustomPostID(string $dataName): int;
-    
+
     abstract protected function getBlockNamespacedID(string $dataName): string;
 }
