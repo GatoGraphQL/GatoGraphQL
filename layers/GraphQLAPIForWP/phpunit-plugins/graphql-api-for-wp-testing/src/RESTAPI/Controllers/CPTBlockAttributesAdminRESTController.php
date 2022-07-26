@@ -1,0 +1,544 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
+
+use Exception;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
+use WP_Error;
+use WP_Post;
+use WP_REST_Request;
+use WP_REST_Response;
+use WP_REST_Server;
+
+use function get_post;
+use function rest_ensure_response;
+use function rest_url;
+use function serialize_blocks;
+
+/**
+ * Visualize and modify the attributes of a block inside a custom post, including:
+ *
+ * - Schema Configurators
+ * - Custom Endpoints
+ * - Persisted Queries
+ * - ACLs
+ * - CCLs
+ *
+ * Example to execute a block attribute update:
+ *
+ * ```bash
+ * curl -i --insecure \
+ *   --user "admin:{applicationPassword}" \
+ *   -X POST \
+ *   -H "Content-Type: application/json" \
+ *   -d '{"blockAttributeValues": {"mutationScheme": "nested"}}' \
+ *   https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/cpt-block-attributes/191/graphql-api/schema-config-mutation-scheme
+ * ```
+ */
+class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
+{
+    use WithFlushRewriteRulesRESTControllerTrait;
+
+    protected const BLOCK_ID_SEPARATOR = ':';
+
+    protected string $restBase = 'cpt-block-attributes';
+    /** @var string[]|null */
+    protected ?array $supportedCustomPostTypes = null;
+    /** @var array<string,int> Count block position, to generate the blockID */
+    protected array $blockNameCounter = [];
+
+    public function __construct(
+        protected string $pluginNamespace,
+    ) {
+    }
+
+    /**
+     * @return array<string,array<array<string,mixed>>> Array of [$route => [$options]]
+     */
+    protected function getRouteOptions(): array
+    {
+        return [
+            $this->restBase . '/(?P<customPostID>[\d]+)' => [
+                [
+                    'methods' => WP_REST_Server::READABLE,
+                    'callback' => $this->retrieveAllItems(...),
+                    // Allow anyone to read the modules
+                    'permission_callback' => '__return_true',
+                    'args' => [
+                        Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+                    ],
+                ],
+            ],
+            $this->restBase . '/(?P<customPostID>[\d]+)/(?P<blockNamespace>[a-zA-Z_-]+)/(?P<blockID>[a-zA-Z_-]+)' => [
+                [
+                    'methods' => WP_REST_Server::READABLE,
+                    'callback' => $this->retrieveItem(...),
+                    // Allow anyone to read the modules
+                    'permission_callback' => '__return_true',
+                    'args' => [
+                        Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+                        Params::BLOCK_NAMESPACE => $this->getBlockNamespaceParamArgs(),
+                        Params::BLOCK_ID => $this->getBlockIDParamArgs(),
+                    ],
+                ],
+                [
+                    'methods' => WP_REST_Server::CREATABLE,
+                    'callback' => $this->updateItem(...),
+                    // only the Admin can execute the modification
+                    'permission_callback' => $this->checkAdminPermission(...),
+                    'args' => [
+                        Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+                        Params::BLOCK_NAMESPACE => $this->getBlockNamespaceParamArgs(),
+                        Params::BLOCK_ID => $this->getBlockIDParamArgs(),
+                        Params::BLOCK_ATTRIBUTE_VALUES => [
+                            'description' => __('Array of [\'block attribute\' => \'value\']', 'graphql-api-testing'),
+                            'type' => 'object',
+                            // 'properties' => [
+                            //     'attribute'  => [
+                            //         'type' => 'string',
+                            //         'required' => true,
+                            //     ],
+                            //     'value' => [
+                            //         'required' => true,
+                            //     ],
+                            // ],
+                            'required' => true,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getCustomPostIDParamArgs(): array
+    {
+        return [
+            'description' => __('Custom Post ID', 'graphql-api-testing'),
+            'type' => 'integer',
+            'required' => true,
+            'validate_callback' => $this->validateCustomPost(...),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getBlockNamespaceParamArgs(): array
+    {
+        return [
+            'description' => __('Block namespace', 'graphql-api-testing'),
+            'type' => 'string',
+            'required' => true,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getBlockIDParamArgs(): array
+    {
+        return [
+            'description' => __('Block ID, composed as "blockName:number", where ":number" defaults to ":0" (i.e. either first or only block with that name)', 'graphql-api-testing'),
+            'type' => 'string',
+            'required' => true,
+        ];
+    }
+
+    /**
+     * Validate there is a custom post with this ID
+     */
+    protected function validateCustomPost(string $customPostID): bool|WP_Error
+    {
+        $post = $this->getCustomPost((int)$customPostID);
+        if (is_wp_error($post)) {
+            return $post;
+        }
+        return true;
+    }
+
+    /**
+     * @return WP_Post|WP_Error Custom post object if ID is valid, WP_Error otherwise.
+     */
+    protected function getCustomPost(int $customPostID): WP_Post|WP_Error
+    {
+        if ($customPostID <= 0) {
+            return new WP_Error(
+                'rest_post_invalid_id',
+                __('Invalid custom post ID', 'graphql-api-testing'),
+                [
+                    Params::STATE => [
+                        Params::CUSTOM_POST_ID => $customPostID,
+                    ],
+                ]
+            );
+        }
+
+        $post = get_post($customPostID);
+        if (empty($post) || empty($post->ID)) {
+            return new WP_Error(
+                'rest_post_invalid_id',
+                sprintf(
+                    __('There is no custom post with ID \'%s\'', 'graphql-api-testing'),
+                    $customPostID
+                ),
+                [
+                    Params::STATE => [
+                        Params::CUSTOM_POST_ID => $customPostID,
+                    ],
+                ]
+            );
+        }
+
+        $supportedCustomPostTypes = $this->getSupportedCustomPostTypes();
+        if (!in_array($post->post_type, $supportedCustomPostTypes)) {
+            return new WP_Error(
+                'rest_post_invalid_id',
+                sprintf(
+                    __('Custom post is of unsupported custom post type \'%s\' (supported custom post types are: \'%s\')', 'graphql-api-testing'),
+                    $post->post_type,
+                    implode(
+                        __('\', \'', 'graphql-api-testing'),
+                        $supportedCustomPostTypes
+                    )
+                ),
+                [
+                    Params::STATE => [
+                        Params::CUSTOM_POST_ID => $customPostID,
+                    ],
+                ]
+            );
+        }
+
+        return $post;
+    }
+
+    /**
+     * Get the CPTs from this plugin
+     *
+     * @return string[]
+     */
+    protected function getSupportedCustomPostTypes(): array
+    {
+        if ($this->supportedCustomPostTypes === null) {
+            $this->supportedCustomPostTypes = $this->doGetSupportedCustomPostTypes();
+        }
+        return $this->supportedCustomPostTypes;
+    }
+
+    /**
+     * Get the CPTs from this plugin
+     *
+     * @return string[]
+     */
+    protected function doGetSupportedCustomPostTypes(): array
+    {
+        $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
+        // Filter the ones that belong to this plugin
+        // Use $serviceDefinitionID for if the class is overriden
+        $customPostTypes = array_values(array_filter(
+            $customPostTypeRegistry->getCustomPostTypes(),
+            fn (string $serviceDefinitionID) => str_starts_with(
+                $serviceDefinitionID,
+                $this->pluginNamespace . '\\'
+            ),
+            ARRAY_FILTER_USE_KEY
+        ));
+        return array_map(
+            fn (CustomPostTypeInterface $customPostType) => $customPostType->getCustomPostType(),
+            $customPostTypes
+        );
+    }
+
+    public function retrieveAllItems(WP_REST_Request $request): WP_REST_Response|WP_Error
+    {
+        $params = $request->get_params();
+        $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+        /** @var WP_Post */
+        $customPost = $this->getCustomPost($customPostID);
+        $blocks = \parse_blocks($customPost->post_content);
+        return rest_ensure_response(
+            $this->prepareItemsForResponse($customPostID, $blocks)
+        );
+    }
+
+    /**
+     * @param array<array<string,mixed>> $blocks
+     * @return array<int,mixed>
+     */
+    protected function prepareItemsForResponse(int $customPostID, array $blocks): array
+    {
+        $items = [];
+        foreach ($blocks as $block) {
+            if (empty($block['blockName'])) {
+                continue;
+            }
+            $items[] = $this->prepare_response_for_collection(
+                $this->prepareItemForResponse($customPostID, $block)
+            );
+        }
+        return $items;
+    }
+
+    /**
+     * @param array<string,mixed> $block
+     */
+    protected function prepareItemForResponse(int $customPostID, array $block): WP_REST_Response
+    {
+        $item = $this->prepareItem($block);
+        $response = rest_ensure_response($item);
+        $response->add_links($this->prepareLinks($customPostID, $block));
+        return $response;
+    }
+
+    /**
+     * @param array<string,mixed> $block
+     * @return array<string,mixed>
+     */
+    protected function prepareItem(array $block): array
+    {
+        return [
+            ResponseKeys::BLOCK_NAME => $block['blockName'],
+            ResponseKeys::BLOCK_ATTRS => $block['attrs'],
+        ];
+    }
+
+    public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
+    {
+        $params = $request->get_params();
+        $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+        $blockNamespace = $params[Params::BLOCK_NAMESPACE];
+        $blockID = $params[Params::BLOCK_ID];
+        /** @var WP_Post */
+        $customPost = $this->getCustomPost($customPostID);
+        $blocks = \parse_blocks($customPost->post_content);
+        $block = $this->getBlock($blockNamespace, $blockID, $blocks);
+        if ($block === null) {
+            return $this->getNonExistingBlockError(
+                $customPostID,
+                $blockNamespace,
+                $blockID,
+            );
+        }
+        return $this->prepareItemForResponse($customPostID, $block);
+    }
+
+    public function getNonExistingBlockError(
+        int $customPostID,
+        string $blockNamespace,
+        string $blockID,
+    ): WP_Error {
+        $errorData = [
+            Params::STATE => [
+                Params::CUSTOM_POST_ID => $customPostID,
+                Params::BLOCK_NAMESPACE => $blockNamespace,
+                Params::BLOCK_ID => $blockID,
+            ],
+        ];
+        [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
+        if ($blockPosition === 0) {
+            return new WP_Error(
+                '1',
+                sprintf(
+                    __('There is no block with name \'%s\'', 'graphql-api-testing'),
+                    $blockNamespacedName
+                ),
+                $errorData
+            );
+        }
+        return new WP_Error(
+            '1',
+            sprintf(
+                __('There is no block with name \'%s\' on position \'%s\'', 'graphql-api-testing'),
+                $blockNamespacedName,
+                $blockPosition
+            ),
+            $errorData
+        );
+    }
+
+    /**
+     * Retrieve the block with that ID:
+     *
+     * - With the right blockName
+     * - At the right position
+     *
+     * @param array<array<string,mixed>> $blocks
+     * @return array<string,mixed>|null
+     */
+    protected function getBlock(string $blockNamespace, string $blockID, array $blocks): ?array
+    {
+        [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
+        $blockCounter = 0;
+        foreach ($blocks as $block) {
+            if ($block['blockName'] !== $blockNamespacedName) {
+                continue;
+            }
+            if ($blockCounter !== $blockPosition) {
+                $blockCounter++;
+                continue;
+            }
+            return $block;
+        }
+        return null;
+    }
+
+    protected function getBlockNamespacedNameAndPosition(string $blockNamespace, string $blockID): array
+    {
+        $blockNamespacedID = $blockNamespace . '/' . $blockID;
+        $parts = explode(self::BLOCK_ID_SEPARATOR, $blockNamespacedID);
+        return [$parts[0], (int) ($parts[1] ?? 0)];
+    }
+
+    /**
+     * @param array<string,mixed> $block
+     * @return array<string,mixed>
+     */
+    protected function prepareLinks(int $customPostID, array $block): array
+    {
+        $blockNamespacedName = $block['blockName'];
+        $blockPosition = $this->blockNameCounter[$blockNamespacedName] ?? 0;
+        $this->blockNameCounter[$blockNamespacedName] = $blockPosition + 1;
+        return [
+            'self' => [
+                'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s/%s',
+                        $this->getNamespace(),
+                        $this->restBase,
+                        $customPostID,
+                        $this->getBlockID($blockNamespacedName, $blockPosition),
+                    )
+                ),
+            ],
+            'collection' => [
+                'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s',
+                        $this->getNamespace(),
+                        $this->restBase,
+                        $customPostID,
+                    )
+                ),
+            ],
+        ];
+    }
+
+    protected function getBlockID(string $blockNamespacedName, int $blockPosition): string
+    {
+        if ($blockPosition === 0) {
+            return $blockNamespacedName;
+        }
+        return $blockNamespacedName . self::BLOCK_ID_SEPARATOR . $blockPosition;
+    }
+
+    public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
+    {
+        $response = new RESTResponse();
+
+        try {
+            $params = $request->get_params();
+            $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+            $blockNamespace = $params[Params::BLOCK_NAMESPACE];
+            $blockID = $params[Params::BLOCK_ID];
+            $blockAttributeValues = $params[Params::BLOCK_ATTRIBUTE_VALUES];
+            /** @var WP_Post */
+            $customPost = $this->getCustomPost($customPostID);
+            $blocks = \parse_blocks($customPost->post_content);
+
+            /**
+             * Find the block and update the attributes
+             */
+            [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
+            $blockCounter = 0;
+            $found = false;
+            foreach ($blocks as &$block) {
+                if ($block['blockName'] !== $blockNamespacedName) {
+                    continue;
+                }
+                if ($blockCounter !== $blockPosition) {
+                    $blockCounter++;
+                    continue;
+                }
+                // Found the block
+                $found = true;
+                $block['attrs'] = $blockAttributeValues;
+                break;
+            }
+            if (!$found) {
+                return $this->getNonExistingBlockError(
+                    $customPostID,
+                    $blockNamespace,
+                    $blockID,
+                );
+            }
+
+            /**
+             * @see https://developer.wordpress.org/reference/functions/serialize_blocks/
+             */
+            $content = serialize_blocks($blocks);
+            wp_update_post([
+                'ID' => $customPostID,
+                'post_content'  => $content
+            ]);
+
+            /**
+             * Flush rewrite rules in the next request.
+             * Eg: after changing the path of the GraphiQL
+             * client for the single endpoint,
+             * accessing the previous path must produce a 404.
+             *
+             * Not all settings need flushing, so check first.
+             */
+            if ($this->shouldFlushRewriteRules($blockAttributeValues)) {
+                $this->enqueueFlushRewriteRules();
+            }
+
+            // Success!
+            $response->status = ResponseStatus::SUCCESS;
+            $response->message = $blockPosition === 0
+                ? sprintf(
+                    __('Attributes for block \'%s\' have been updated successfully', 'graphql-api-testing'),
+                    $blockNamespacedName,
+                )
+                : sprintf(
+                    __('Attributes for block \'%s\' on position \'%s\' have been updated successfully', 'graphql-api-testing'),
+                    $blockNamespacedName,
+                    $blockPosition
+                );
+        } catch (Exception $e) {
+            $response->status = ResponseStatus::ERROR;
+            $response->message = $e->getMessage();
+        }
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Some options need be flushed, others not.
+     * To find out, check the settings inputs.
+     *
+     * Inputs that need flushing (implemented so far):
+     *
+     * - Path (eg: GraphiQL/Voyager clients)
+     *
+     * @param array<string,mixed> $blockAttributeValues
+     */
+    protected function shouldFlushRewriteRules(array $blockAttributeValues): bool
+    {
+        return array_key_exists(
+            ModuleSettingOptions::PATH,
+            $blockAttributeValues
+        );
+    }
+}

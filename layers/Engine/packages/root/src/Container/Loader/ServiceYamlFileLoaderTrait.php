@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container\Loader;
 
-use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 /**
  * Trait to help override the Symfony class, to:
  *

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints;
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\AbstractRESTController;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\CPTBlockAttributesAdminRESTController;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\ModulesAdminRESTController;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\ModuleSettingsAdminRESTController;
 
@@ -18,6 +19,9 @@ class AdminRESTAPIEndpointManager extends AbstractRESTAPIEndpointManager
         return [
             new ModuleSettingsAdminRESTController(),
             new ModulesAdminRESTController(),
+            new CPTBlockAttributesAdminRESTController(
+                'GraphQLAPI\GraphQLAPI',
+            ),
         ];
     }
 }
