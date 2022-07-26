@@ -159,7 +159,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                 'rest_post_invalid_id',
                 __('Invalid custom post ID', 'graphql-api-testing'),
                 [
-                    Params::STATE => $customPostID,
+                    Params::STATE => [
+                        Params::CUSTOM_POST_ID => $customPostID,
+                    ],
                 ]
             );
 		}
@@ -173,7 +175,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     $customPostID
                 ),
                 [
-                    Params::STATE => $customPostID,
+                    Params::STATE => [
+                        Params::CUSTOM_POST_ID => $customPostID,
+                    ],
                 ]
             );
 		}
@@ -191,7 +195,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     )
                 ),
                 [
-                    Params::STATE => $customPostID,
+                    Params::STATE => [
+                        Params::CUSTOM_POST_ID => $customPostID,
+                    ],
                 ]
             );
 		}
