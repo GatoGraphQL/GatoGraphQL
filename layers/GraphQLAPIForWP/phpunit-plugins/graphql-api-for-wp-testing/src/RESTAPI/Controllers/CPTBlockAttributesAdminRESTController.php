@@ -14,10 +14,12 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use WP_Error;
+use WP_Post;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
 
+use function get_post;
 use function rest_ensure_response;
 use function rest_url;
 
@@ -122,7 +124,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
      */
     protected function validateCustomPost(string $customPostID): bool|WP_Error
     {
-        $post = $this->get_post($customPostID);
+        $post = $this->getCustomPost((int)$customPostID);
 		if (is_wp_error($post)) {
 			return $post;
 		}
@@ -141,20 +143,47 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
      *
      * @see wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php
 	 */
-	protected function get_post( $id ) {
-		$error = new WP_Error(
-			'rest_post_invalid_id',
-			__( 'Invalid post ID.' ),
-			array( 'status' => 404 )
-		);
-
-		if ( (int) $id <= 0 ) {
-			return $error;
+	protected function getCustomPost(int $customPostID): WP_Post|WP_Error
+    {
+		if ($customPostID <= 0) {
+            return new WP_Error(
+                'rest_post_invalid_id',
+                __('Invalid custom post ID', 'graphql-api-testing'),
+                [
+                    Params::STATE => $customPostID,
+                ]
+            );
 		}
 
-		$post = get_post( (int) $id );
-		if ( empty( $post ) || empty( $post->ID ) || $this->post_type !== $post->post_type ) {
-			return $error;
+		$post = get_post($customPostID);
+		if (empty($post) || empty($post->ID)) {
+			return new WP_Error(
+                'rest_post_invalid_id',
+                sprintf(
+                    __('There is no custom post with ID \'%s\'', 'graphql-api-testing'),
+                    $customPostID
+                ),
+                [
+                    Params::STATE => $customPostID,
+                ]
+            );
+		}
+
+		if (!in_array($post->post_type, $this->supportedCustomPostTypes)) {
+			return new WP_Error(
+                'rest_post_invalid_id',
+                sprintf(
+                    __('Custom post is of unsupported custom post type \'%s\' (supported custom post types are: \'%s\')', 'graphql-api-testing'),
+                    $post->post_type,
+                    implode(
+                        __('\', \'', 'graphql-api-testing'),
+                        $this->supportedCustomPostTypes
+                    )
+                ),
+                [
+                    Params::STATE => $customPostID,
+                ]
+            );
 		}
 
 		return $post;
@@ -164,8 +193,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     {
         $items = [];
         $params = $request->get_params();
-        $customPostID = $params[Params::CUSTOM_POST_ID];
-        $customPost = $this->get_post($customPostID);
+        $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+        /** @var WP_Post */
+        $customPost = $this->getCustomPost($customPostID);
         $blocks = \parse_blocks($customPost->post_content);
         foreach ($blocks as $block) {
             $items[$block['blockName']] = $block['attrs'];
@@ -215,8 +245,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $params = $request->get_params();
-        $customPostID = $params[Params::CUSTOM_POST_ID];
-        $customPost = $this->get_post($customPostID);
+        $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+        /** @var WP_Post */
+        $customPost = $this->getCustomPost($customPostID);
         // $item = $this->prepareItemForResponse($module);
         $item = null;
         return rest_ensure_response($item);
