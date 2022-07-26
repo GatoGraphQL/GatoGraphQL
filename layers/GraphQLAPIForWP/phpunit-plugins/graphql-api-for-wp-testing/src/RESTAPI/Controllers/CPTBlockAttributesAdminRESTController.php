@@ -313,11 +313,12 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     {
         $params = $request->get_params();
         $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+        $blockNamespace = $params[Params::BLOCK_NAMESPACE];
         $blockID = $params[Params::BLOCK_ID];
         /** @var WP_Post */
         $customPost = $this->getCustomPost($customPostID);
         $blocks = \parse_blocks($customPost->post_content);
-        $block = $this->getBlock($blockID, $blocks);
+        $block = $this->getBlock($blockNamespace, $blockID, $blocks);
         if ($block === null) {
             return new WP_Error(
                 '1',
@@ -345,12 +346,12 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
      * @param array<array<string,mixed>> $blocks
      * @return array<string,mixed>|null
      */
-    protected function getBlock(string $blockID, array $blocks): ?array
+    protected function getBlock(string $blockNamespace, string $blockID, array $blocks): ?array
     {
-        [$blockName, $blockPosition] = $this->getBlockNameAndPosition($blockID);
+        [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
         $blockCounter = 0;
         foreach ($blocks as $block) {
-            if ($block['blockName'] !== $blockName) {
+            if ($block['blockName'] !== $blockNamespacedName) {
                 continue;
             }
             if ($blockCounter !== $blockPosition) {
@@ -362,15 +363,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         return null;
     }
 
-    protected function getBlockID(string $blockName, int $blockPosition): string
-    {
-        if ($blockPosition === 0) {
-            return $blockName;
-        }
-        return $blockName . ':' . $blockPosition;
-    }
-
-    protected function getBlockNameAndPosition(string $blockID): array
+    protected function getBlockNamespacedNameAndPosition(string $blockID): array
     {
         $parts = explode(':', $blockID);
         return [$parts[0], (int) ($parts[1] ?? 0)];
@@ -382,9 +375,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
      */
     protected function prepareLinks(int $customPostID, array $block): array
     {
-        $blockName = $block['blockName'];
-        $blockPosition = $this->blockNameCounter[$blockName] ?? 0;
-        $this->blockNameCounter[$blockName] = $blockPosition + 1;
+        $blockNamespacedName = $block['blockName'];
+        $blockPosition = $this->blockNameCounter[$blockNamespacedName] ?? 0;
+        $this->blockNameCounter[$blockNamespacedName] = $blockPosition + 1;
         return [
             'self' => [
                 'href' => rest_url(
@@ -393,11 +386,19 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                         $this->getNamespace(),
                         $this->restBase,
                         $customPostID,
-                        $this->getBlockID($blockName, $blockPosition),
+                        $this->getBlockID($blockNamespacedName, $blockPosition),
                     )
                 ),
             ],
         ];
+    }
+
+    protected function getBlockID(string $blockNamespacedName, int $blockPosition): string
+    {
+        if ($blockPosition === 0) {
+            return $blockNamespacedName;
+        }
+        return $blockNamespacedName . ':' . $blockPosition;
     }
 
     public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
