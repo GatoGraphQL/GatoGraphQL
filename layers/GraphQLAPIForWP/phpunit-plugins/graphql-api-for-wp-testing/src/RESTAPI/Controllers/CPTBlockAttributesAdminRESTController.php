@@ -251,6 +251,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         $customPost = $this->getCustomPost($customPostID);
         $blocks = \parse_blocks($customPost->post_content);
         foreach ($blocks as $block) {
+            if (empty($block['blockName'])) {
+                continue;
+            }
             $items[] = $this->prepare_response_for_collection(
                 $this->prepareItemForResponse($customPostID, $block)
             );
