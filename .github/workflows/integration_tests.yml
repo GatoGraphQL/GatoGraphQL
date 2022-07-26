@@ -85,8 +85,8 @@ jobs:
                     INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD=${{ secrets.INSTAWP_ADMIN_USER_PASSWORD }} \
                     vendor/bin/phpunit --filter=Integration
 
-            -   uses: instawp/wordpress-testing-automation@main
-                name: Destroy InstaWP instance
+            -   name: Destroy InstaWP instance
+                uses: instawp/wordpress-testing-automation@main
                 id: destroy-instawp
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
