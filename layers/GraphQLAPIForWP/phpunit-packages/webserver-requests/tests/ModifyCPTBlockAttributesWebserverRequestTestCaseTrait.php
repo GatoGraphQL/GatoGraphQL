@@ -14,7 +14,10 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
     use ExecuteRESTWebserverRequestTestCaseTrait;
 
-    protected mixed $previousBlockAttributesValue;
+    /**
+     * @var array<mixed>
+     */
+    protected array $previousBlockAttributesValue;
 
     abstract public static function assertEquals($expected, $actual, string $message = ''): void;
     abstract public static function assertNotEquals($expected, $actual, string $message = ''): void;
@@ -48,7 +51,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
             $this->previousBlockAttributesValue,
             sprintf(
                 'The new value to execute the REST API call to modify the CPT block attributes is \'%s\', but this is the same as the current value, and these must be different.',
-                is_array($newValue) ? json_encode($newValue) : $newValue
+                json_encode($newValue)
             )
         );
 
@@ -59,7 +62,10 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
         );
     }
 
-    abstract protected function getCPTBlockAttributesNewValue(): mixed;
+    /**
+     * @return array<mixed>
+     */
+    abstract protected function getCPTBlockAttributesNewValue(): array;
 
     /**
      * Execute a REST API to restore the client path after the test
