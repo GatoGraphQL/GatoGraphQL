@@ -1,0 +1,25 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'roles' on type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "field": "roles { ... }",
+                "path": [
+                    "roles { ... }",
+                    "query { ... }"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        }
+    ],
+    "data": {
+        "roles": null
+    }
+}
