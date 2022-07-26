@@ -161,18 +161,18 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected function validateCustomPost(string $customPostID): bool|WP_Error
     {
         $post = $this->getCustomPost((int)$customPostID);
-		if (is_wp_error($post)) {
-			return $post;
-		}
+        if (is_wp_error($post)) {
+            return $post;
+        }
         return true;
     }
 
-	/**
-	 * @return WP_Post|WP_Error Custom post object if ID is valid, WP_Error otherwise.
-	 */
-	protected function getCustomPost(int $customPostID): WP_Post|WP_Error
+    /**
+     * @return WP_Post|WP_Error Custom post object if ID is valid, WP_Error otherwise.
+     */
+    protected function getCustomPost(int $customPostID): WP_Post|WP_Error
     {
-		if ($customPostID <= 0) {
+        if ($customPostID <= 0) {
             return new WP_Error(
                 'rest_post_invalid_id',
                 __('Invalid custom post ID', 'graphql-api-testing'),
@@ -182,11 +182,11 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     ],
                 ]
             );
-		}
+        }
 
-		$post = get_post($customPostID);
-		if (empty($post) || empty($post->ID)) {
-			return new WP_Error(
+        $post = get_post($customPostID);
+        if (empty($post) || empty($post->ID)) {
+            return new WP_Error(
                 'rest_post_invalid_id',
                 sprintf(
                     __('There is no custom post with ID \'%s\'', 'graphql-api-testing'),
@@ -198,11 +198,11 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     ],
                 ]
             );
-		}
+        }
 
         $supportedCustomPostTypes = $this->getSupportedCustomPostTypes();
-		if (!in_array($post->post_type, $supportedCustomPostTypes)) {
-			return new WP_Error(
+        if (!in_array($post->post_type, $supportedCustomPostTypes)) {
+            return new WP_Error(
                 'rest_post_invalid_id',
                 sprintf(
                     __('Custom post is of unsupported custom post type \'%s\' (supported custom post types are: \'%s\')', 'graphql-api-testing'),
@@ -218,10 +218,10 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     ],
                 ]
             );
-		}
+        }
 
-		return $post;
-	}
+        return $post;
+    }
 
     /**
      * Get the CPTs from this plugin
@@ -455,7 +455,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             /** @var WP_Post */
             $customPost = $this->getCustomPost($customPostID);
             $blocks = \parse_blocks($customPost->post_content);
-            
+
             /**
              * Find the block and update the attributes
              */
