@@ -64,7 +64,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     ],
                 ],
             ],
-            $this->restBase . '/(?P<customPostID>[\d]+)/(?P<blockID>[a-zA-Z_-]+)' => [
+            $this->restBase . '/(?P<customPostID>[\d]+)/(?P<blockNamespace>[a-zA-Z_-]+)/(?P<blockID>[a-zA-Z_-]+)' => [
                 [
                     'methods' => WP_REST_Server::READABLE,
                     'callback' => $this->retrieveItem(...),
@@ -72,6 +72,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     'permission_callback' => '__return_true',
                     'args' => [
                         Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+                        Params::BLOCK_NAMESPACE => $this->getBlockNamespaceParamArgs(),
                         Params::BLOCK_ID => $this->getBlockIDParamArgs(),
                     ],
                 ],
@@ -82,6 +83,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
                         Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+                        Params::BLOCK_NAMESPACE => $this->getBlockNamespaceParamArgs(),
                         Params::BLOCK_ID => $this->getBlockIDParamArgs(),
                         Params::BLOCK_ATTRIBUTE_VALUES => [
                             'description' => __('Array of [\'attribute\' => \'value\']. Different blocks can normally contain different attributes', 'graphql-api-testing'),
@@ -113,6 +115,18 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             'type' => 'integer',
             'required' => true,
             'validate_callback' => $this->validateCustomPost(...),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getBlockNamespaceParamArgs(): array
+    {
+        return [
+            'description' => __('Block namespace', 'graphql-api-testing'),
+            'type' => 'string',
+            'required' => true,
         ];
     }
 
