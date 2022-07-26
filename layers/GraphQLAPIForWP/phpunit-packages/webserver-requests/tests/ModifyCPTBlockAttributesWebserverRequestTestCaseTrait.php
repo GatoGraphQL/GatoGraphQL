@@ -117,7 +117,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
 
     protected function executeRESTEndpointToUpdateCPTBlockAttributes(
         string $dataName,
-        mixed $value,
+        array $value,
     ): void {
         $client = static::getClient();
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::CPT_BLOCK_ATTRIBUTES;
