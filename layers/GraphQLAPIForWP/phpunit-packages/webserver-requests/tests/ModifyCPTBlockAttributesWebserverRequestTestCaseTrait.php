@@ -134,7 +134,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
          * In that case, pass an empty string instead of an empty array,
          * then it works!
          */
-        $options['query'][Params::BLOCK_ATTRIBUTE_VALUES] = $value === [] ? '' : $value;
+        $options['query'][Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES] = json_encode($value);
         $response = $client->post(
             $endpointURL,
             $options,

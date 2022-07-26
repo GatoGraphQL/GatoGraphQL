@@ -99,18 +99,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                         Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
                         Params::BLOCK_NAMESPACE => $this->getBlockNamespaceParamArgs(),
                         Params::BLOCK_ID => $this->getBlockIDParamArgs(),
-                        Params::BLOCK_ATTRIBUTE_VALUES => [
-                            'description' => __('Array of [\'block attribute\' => \'value\']', 'graphql-api-testing'),
-                            'type' => 'object',
-                            // 'properties' => [
-                            //     'attribute'  => [
-                            //         'type' => 'string',
-                            //         'required' => true,
-                            //     ],
-                            //     'value' => [
-                            //         'required' => true,
-                            //     ],
-                            // ],
+                        Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES => [
+                            'description' => __('JSON-encoded array of [\'block attribute\' => \'value\']', 'graphql-api-testing'),
+                            'type' => 'string',
                             'required' => true,
                         ],
                     ],
@@ -455,7 +446,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             $customPostID = (int)$params[Params::CUSTOM_POST_ID];
             $blockNamespace = $params[Params::BLOCK_NAMESPACE];
             $blockID = $params[Params::BLOCK_ID];
-            $blockAttributeValues = $params[Params::BLOCK_ATTRIBUTE_VALUES];
+            $blockAttributeValues = json_decode($params[Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES], true);
             /** @var WP_Post */
             $customPost = $this->getCustomPost($customPostID);
             $blocks = \parse_blocks($customPost->post_content);

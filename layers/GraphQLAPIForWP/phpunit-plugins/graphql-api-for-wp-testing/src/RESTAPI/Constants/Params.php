@@ -12,5 +12,5 @@ class Params
     final public const CUSTOM_POST_ID = 'customPostID';
     final public const BLOCK_NAMESPACE = 'blockNamespace';
     final public const BLOCK_ID = 'blockID';
-    final public const BLOCK_ATTRIBUTE_VALUES = 'blockAttributeValues';
+    final public const JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES = 'jsonEncodedBlockAttributeValues';
 }
