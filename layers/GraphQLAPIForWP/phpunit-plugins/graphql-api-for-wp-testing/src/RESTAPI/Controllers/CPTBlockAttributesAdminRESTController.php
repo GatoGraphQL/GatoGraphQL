@@ -7,9 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 use Exception;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
@@ -41,6 +39,8 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected string $restBase = 'cpt-block-attributes';
     /** @var string[]|null */
     protected ?array $supportedCustomPostTypes = null;
+    /** @var array<string,int> Count block position, to generate the blockID */
+    protected array $blockNameCounter = [];
 
     public function __construct(
         protected string $pluginNamespace,
@@ -251,51 +251,33 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         $customPost = $this->getCustomPost($customPostID);
         $blocks = \parse_blocks($customPost->post_content);
         foreach ($blocks as $block) {
-            $item = [
-                'blockName' => $block['blockName'],
-                'attrs' => $block['attrs'],
-            ];
-            $items[$block['blockName']] = $item;
+            $items[] = $this->prepare_response_for_collection(
+                $this->prepareItemForResponse($customPostID, $block)
+            );
         }
         return rest_ensure_response($items);
     }
 
-    protected function prepareItemForResponse(string $module): WP_REST_Response
+    /**
+     * @param array<string,mixed> $block
+     */
+    protected function prepareItemForResponse(int $customPostID, array $block): WP_REST_Response
     {
-        $item = $this->prepareItem($module);
+        $item = $this->prepareItem($block);
         $response = rest_ensure_response($item);
-        $response->add_links($this->prepareLinks($module));
+        $response->add_links($this->prepareLinks($customPostID, $block));
         return $response;
     }
 
     /**
+     * @param array<string,mixed> $block
      * @return array<string,mixed>
      */
-    protected function prepareItem(string $module): array
+    protected function prepareItem(array $block): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $moduleResolver = $moduleRegistry->getModuleResolver($module);
-
-        /**
-         * Append the settings value, store in the DB, to the description
-         * of the settings, which is defined by code.
-         */
-        $settings = $moduleResolver->getSettings($module);
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $editableSettings = [];
-        foreach ($settings as $setting) {
-            // There are non-editable inputs, to show information. Skip those
-            $input = $setting[Properties::INPUT] ?? null;
-            if ($input === null) {
-                continue;
-            }
-            $setting[ResponseKeys::VALUE] = $userSettingsManager->getSetting($module, $input);
-            $editableSettings[] = $setting;
-        }
         return [
-            ResponseKeys::MODULE => $module,
-            ResponseKeys::ID => $moduleResolver->getID($module),
-            ResponseKeys::SETTINGS => $editableSettings,
+            ResponseKeys::BLOCK_NAME => $block['blockName'],
+            ResponseKeys::BLOCK_ATTRS => $block['attrs'],
         ];
     }
 
@@ -311,13 +293,15 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     }
 
     /**
+     * @param array<string,mixed> $block
      * @return array<string,mixed>
      */
-    protected function prepareLinks(string $module): array
+    protected function prepareLinks(int $customPostID, array $block): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $customPostID = $moduleResolver->getID($module);
+        $blockName = $block['blockName'];
+        $blockPosition = $this->blockNameCounter[$blockName] ?? 0;
+        $this->blockNameCounter[$blockName] = $blockPosition + 1;
+        $blockID = $blockPosition === 0 ? $blockName : $blockName . ':' . $blockPosition;
         return [
             'self' => [
                 'href' => rest_url(
@@ -329,22 +313,14 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     )
                 ),
             ],
-            'collection' => [
+            'block' => [
                 'href' => rest_url(
                     sprintf(
-                        '%s/%s',
+                        '%s/%s/%s/%s',
                         $this->getNamespace(),
                         $this->restBase,
-                    )
-                ),
-            ],
-            'module' => [
-                'href' => rest_url(
-                    sprintf(
-                        '%s/%s/%s',
-                        $this->getNamespace(),
-                        'modules',
                         $customPostID,
+                        $blockID,
                     )
                 ),
             ],

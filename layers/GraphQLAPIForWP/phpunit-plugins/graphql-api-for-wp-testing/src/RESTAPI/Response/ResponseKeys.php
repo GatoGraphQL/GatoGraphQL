@@ -10,4 +10,6 @@ class ResponseKeys
     public const ID = 'id';
     public const SETTINGS = 'settings';
     public const VALUE = 'value';
+    public const BLOCK_NAME = 'blockName';
+    public const BLOCK_ATTRS = 'attrs';
 }
