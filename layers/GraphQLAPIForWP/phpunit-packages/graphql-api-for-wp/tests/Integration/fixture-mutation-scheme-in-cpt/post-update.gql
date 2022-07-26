@@ -1,0 +1,15 @@
+mutation {
+  post(by: {id: 28}) {
+    title
+    update(input: {
+      title: "HTTP caching improves performance 33333"
+    }) {
+      title
+      update(input: {
+        title: "HTTP caching improves performance"
+      }) {
+        title
+      }
+    }
+  }
+}

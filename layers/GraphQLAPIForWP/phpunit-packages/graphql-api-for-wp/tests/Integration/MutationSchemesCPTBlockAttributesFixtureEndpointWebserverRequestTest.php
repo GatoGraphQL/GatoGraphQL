@@ -24,7 +24,7 @@ class MutationSchemesCPTBlockAttributesFixtureEndpointWebserverRequestTest exten
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-post-mutation-permissions';
+        return __DIR__ . '/fixture-mutation-scheme-in-cpt';
     }
 
     protected function getCPTBlockAttributesNewValue(): array
