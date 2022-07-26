@@ -47,7 +47,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 {
     use WithFlushRewriteRulesRESTControllerTrait;
 
-    protected static const BLOCK_ID_SEPARATOR = ':';
+    protected const BLOCK_ID_SEPARATOR = ':';
 
     protected string $restBase = 'cpt-block-attributes';
     /** @var string[]|null */
