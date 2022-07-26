@@ -168,16 +168,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     }
 
 	/**
-	 * Get the post, if the ID is valid.
-	 *
-	 * @since 4.7.2
-	 *
-	 * @param int $id Supplied ID.
-	 * @return WP_Post|WP_Error Post object if ID is valid, WP_Error otherwise.
-     *
-     * Function copied from WordPress core.
-     *
-     * @see wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php
+	 * @return WP_Post|WP_Error Custom post object if ID is valid, WP_Error otherwise.
 	 */
 	protected function getCustomPost(int $customPostID): WP_Post|WP_Error
     {
@@ -283,7 +274,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 
     /**
      * @param array<array<string,mixed>> $blocks
-     * @return array<string,mixed>
+     * @return array<int,mixed>
      */
     protected function prepareItemsForResponse(int $customPostID, array $blocks): array
     {
