@@ -85,59 +85,11 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                             //     ],
                             // ],
                             'required' => true,
-                            'validate_callback' => $this->validateOptions(...),
                         ],
                     ],
                 ],
             ],
         ];
-    }
-
-    /**
-     * Validate the module has the given option
-     */
-    protected function validateOptions(
-        array $optionValues,
-        WP_REST_Request $request,
-    ): bool|WP_Error {
-        $customPostID = $request->get_param(Params::CUSTOM_POST_ID);
-        $module = $this->getModuleByID($customPostID);
-        if ($module === null) {
-            /**
-             * No need to provide an error message, since it's already done
-             * when validating the customPostID
-             */
-            return false;
-        }
-
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $moduleSettings = $moduleResolver->getSettings($module);
-        foreach ((array) $optionValues as $option => $value) {
-            $found = false;
-            foreach ($moduleSettings as $moduleSetting) {
-                if ($moduleSetting[Properties::INPUT] === $option) {
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
-                return new WP_Error(
-                    '1',
-                    sprintf(
-                        __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api-testing'),
-                        $option,
-                        $module,
-                        $customPostID
-                    ),
-                    [
-                        Params::CUSTOM_POST_ID => $customPostID,
-                        Params::BLOCK_ATTRIBUTE_VALUES => [$option => $value],
-                    ]
-                );
-            }
-        }
-        return true;
     }
 
     /**
