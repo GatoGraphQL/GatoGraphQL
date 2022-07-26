@@ -7,7 +7,6 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 use Exception;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
@@ -47,6 +46,8 @@ use function serialize_blocks;
 class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 {
     use WithFlushRewriteRulesRESTControllerTrait;
+
+    protected static const BLOCK_ID_SEPARATOR = ':';
 
     protected string $restBase = 'cpt-block-attributes';
     /** @var string[]|null */
@@ -404,7 +405,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected function getBlockNamespacedNameAndPosition(string $blockNamespace, string $blockID): array
     {
         $blockNamespacedID = $blockNamespace . '/' . $blockID;
-        $parts = explode(':', $blockNamespacedID);
+        $parts = explode(self::BLOCK_ID_SEPARATOR, $blockNamespacedID);
         return [$parts[0], (int) ($parts[1] ?? 0)];
     }
 
@@ -447,7 +448,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         if ($blockPosition === 0) {
             return $blockNamespacedName;
         }
-        return $blockNamespacedName . ':' . $blockPosition;
+        return $blockNamespacedName . self::BLOCK_ID_SEPARATOR . $blockPosition;
     }
 
     public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
