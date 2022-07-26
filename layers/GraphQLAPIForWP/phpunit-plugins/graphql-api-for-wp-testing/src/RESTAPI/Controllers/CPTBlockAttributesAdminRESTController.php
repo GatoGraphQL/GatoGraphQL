@@ -31,6 +31,17 @@ use function rest_url;
  * - Persisted Queries
  * - ACLs
  * - CCLs
+ *
+ * Example to execute a block attribute update:
+ *
+ * ```bash
+ * curl -i --insecure \
+ *   --user "admin:{applicationPassword}" \
+ *   -X POST \
+ *   -H "Content-Type: application/json" \
+ *   -d '{"blockAttributeValues": {"mutationScheme": "nested"}}' \
+ *   https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/cpt-block-attributes/191/graphql-api/schema-config-mutation-scheme
+ * ```
  */
 class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 {
