@@ -56,7 +56,8 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected array $blockNameCounter = [];
 
     public function __construct(
-        protected string $pluginNamespace,
+        /** @var string[] */
+        protected array $pluginNamespaces,
     ) {
     }
 
@@ -237,20 +238,23 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     }
 
     /**
-     * Get the CPTs from this plugin
+     * Get the CPTs from any of the provided plugins
      *
      * @return string[]
      */
     protected function doGetSupportedCustomPostTypes(): array
     {
         $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
-        // Filter the ones that belong to this plugin
+        // Filter the ones that belong to any of the provided plugins
         // Use $serviceDefinitionID for if the class is overriden
         $customPostTypes = array_values(array_filter(
             $customPostTypeRegistry->getCustomPostTypes(),
-            fn (string $serviceDefinitionID) => str_starts_with(
-                $serviceDefinitionID,
-                $this->pluginNamespace . '\\'
+            fn (string $serviceDefinitionID) => [] !== array_filter(
+                $this->pluginNamespaces,
+                fn (string $pluginNamespace) => str_starts_with(
+                    $serviceDefinitionID,
+                    $pluginNamespace . '\\'
+                ),
             ),
             ARRAY_FILTER_USE_KEY
         ));
