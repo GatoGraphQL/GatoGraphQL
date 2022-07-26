@@ -377,9 +377,10 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         return null;
     }
 
-    protected function getBlockNamespacedNameAndPosition(string $blockID): array
+    protected function getBlockNamespacedNameAndPosition(string $blockNamespace, string $blockID): array
     {
-        $parts = explode(':', $blockID);
+        $blockNamespacedID = $blockNamespace . '/' . $blockID;
+        $parts = explode(':', $blockNamespacedID);
         return [$parts[0], (int) ($parts[1] ?? 0)];
     }
 
