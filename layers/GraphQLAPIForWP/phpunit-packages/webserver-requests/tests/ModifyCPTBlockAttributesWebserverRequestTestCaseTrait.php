@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
@@ -48,7 +47,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
             $newValue,
             $this->previousBlockAttributesValue,
             sprintf(
-                'The new value to execute the REST API call to modify the plugin settings is \'%s\', but this is the same as the current value, and these must be different.',
+                'The new value to execute the REST API call to modify the CPT block attributes is \'%s\', but this is the same as the current value, and these must be different.',
                 is_array($newValue) ? json_encode($newValue) : $newValue
             )
         );
@@ -84,27 +83,20 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
      */
     protected function getCPTBlockAttributesOriginalValue(): mixed
     {
-        $pluginSettings = $this->executeRESTEndpointToGetCPTBlockAttributes(
+        return $this->executeRESTEndpointToGetCPTBlockAttributes(
             $this->dataName(),
         );
-        $input = $this->getSettingsKey();
-        $pluginInputSettings = array_values(array_filter(
-            $pluginSettings,
-            fn (array $pluginSetting) => $pluginSetting[Properties::INPUT] === $input,
-        ));
-        $this->assertEquals(count($pluginInputSettings), 1);
-        $pluginInputSetting = $pluginInputSettings[0];
-        return $pluginInputSetting[ResponseKeys::VALUE];
     }
 
     protected function executeRESTEndpointToGetCPTBlockAttributes(
         string $dataName,
     ): array {
         $client = static::getClient();
-        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE_SETTINGS;
+        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::CPT_BLOCK_ATTRIBUTES;
         $endpointURL = sprintf(
             $endpointURLPlaceholder,
-            $this->getModuleID($dataName),
+            $this->getCustomPostID($dataName),
+            $this->getBlockNamespacedID($dataName),
         );
         $options = $this->getRESTEndpointRequestOptions();
         $response = $client->get(
@@ -114,7 +106,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
         // Assert the REST API call is successful, or already fail the test
         $this->assertRESTGetCallIsSuccessful($response);
         $endpointResponse = json_decode($response->getBody()->__toString(), true);
-        return $endpointResponse[ResponseKeys::SETTINGS];
+        return $endpointResponse[ResponseKeys::BLOCK_ATTRS];
     }
 
     protected function executeRESTEndpointToUpdateCPTBlockAttributes(
@@ -122,24 +114,14 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
         mixed $value,
     ): void {
         $client = static::getClient();
-        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE_SETTINGS;
+        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::CPT_BLOCK_ATTRIBUTES;
         $endpointURL = sprintf(
             $endpointURLPlaceholder,
-            $this->getModuleID($dataName),
+            $this->getCustomPostID($dataName),
+            $this->getBlockNamespacedID($dataName),
         );
         $options = $this->getRESTEndpointRequestOptions();
-        $options['query'][Params::OPTION_VALUES] = [
-            /**
-             * For some reason, passing an empty array doesn't work,
-             * it doesn't append it to the "query". Eg:
-             *
-             *   ["entries" => []] (for User Meta entries)
-             *
-             * In that case, pass an empty string instead of an empty array,
-             * then it works!
-             */
-            $this->getSettingsKey() => $value === [] ? '' : $value,
-        ];
+        $options['query'][Params::BLOCK_ATTRIBUTE_VALUES] = $value;
         $response = $client->post(
             $endpointURL,
             $options,
@@ -148,12 +130,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
         $this->assertRESTPostCallIsSuccessful($response);
     }
 
-    abstract protected function getSettingsKey(): string;
-
-    /**
-     * To visualize the list of all the modules, and find the "moduleID":
-     *
-     * @see https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules
-     */
-    abstract protected function getModuleID(string $dataName): string;
+    abstract protected function getCustomPostID(string $dataName): int;
+    
+    abstract protected function getBlockNamespacedID(string $dataName): string;
 }
