@@ -53,42 +53,42 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     ],
                 ],
             ],
-            $this->restBase . '/(?P<customPostID>[\d]+)/(?P<blockID>[a-zA-Z_-]+)' => [
-                [
-                    'methods' => WP_REST_Server::READABLE,
-                    'callback' => $this->retrieveItem(...),
-                    // Allow anyone to read the modules
-                    'permission_callback' => '__return_true',
-                    'args' => [
-                        Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
-                        Params::BLOCK_ID => $this->getBlockIDParamArgs(),
-                    ],
-                ],
-                [
-                    'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => $this->updateItem(...),
-                    // only the Admin can execute the modification
-                    'permission_callback' => $this->checkAdminPermission(...),
-                    'args' => [
-                        Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
-                        Params::BLOCK_ID => $this->getBlockIDParamArgs(),
-                        Params::BLOCK_ATTRIBUTE_VALUES => [
-                            'description' => __('Array of [\'attribute\' => \'value\']. Different blocks can normally contain different attributes', 'graphql-api-testing'),
-                            'type' => 'object',
-                            // 'properties' => [
-                            //     'attribute'  => [
-                            //         'type' => 'string',
-                            //         'required' => true,
-                            //     ],
-                            //     'value' => [
-                            //         'required' => true,
-                            //     ],
-                            // ],
-                            'required' => true,
-                        ],
-                    ],
-                ],
-            ],
+            // $this->restBase . '/(?P<customPostID>[\d]+)/(?P<blockID>[a-zA-Z_-]+)' => [
+            //     [
+            //         'methods' => WP_REST_Server::READABLE,
+            //         'callback' => $this->retrieveItem(...),
+            //         // Allow anyone to read the modules
+            //         'permission_callback' => '__return_true',
+            //         'args' => [
+            //             Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+            //             Params::BLOCK_ID => $this->getBlockIDParamArgs(),
+            //         ],
+            //     ],
+            //     [
+            //         'methods' => WP_REST_Server::CREATABLE,
+            //         'callback' => $this->updateItem(...),
+            //         // only the Admin can execute the modification
+            //         'permission_callback' => $this->checkAdminPermission(...),
+            //         'args' => [
+            //             Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+            //             Params::BLOCK_ID => $this->getBlockIDParamArgs(),
+            //             Params::BLOCK_ATTRIBUTE_VALUES => [
+            //                 'description' => __('Array of [\'attribute\' => \'value\']. Different blocks can normally contain different attributes', 'graphql-api-testing'),
+            //                 'type' => 'object',
+            //                 // 'properties' => [
+            //                 //     'attribute'  => [
+            //                 //         'type' => 'string',
+            //                 //         'required' => true,
+            //                 //     ],
+            //                 //     'value' => [
+            //                 //         'required' => true,
+            //                 //     ],
+            //                 // ],
+            //                 'required' => true,
+            //             ],
+            //         ],
+            //     ],
+            // ],
         ];
     }
 
@@ -111,7 +111,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected function getBlockIDParamArgs(): array
     {
         return [
-            'description' => __('Block ID => blockName:number, with ":number" defaulting to ":0" (i.e. either first or only block with that name)', 'graphql-api-testing'),
+            'description' => __('Block ID, composed as "blockName:number", where ":number" defaults to ":0" (i.e. either first or only block with that name)', 'graphql-api-testing'),
             'type' => 'string',
             'required' => true,
         ];
@@ -160,28 +160,15 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 		return $post;
 	}
 
-    public function getModuleByID(string $customPostID): ?string
-    {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $modules = $moduleRegistry->getAllModules();
-        foreach ($modules as $module) {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            if ($customPostID === $moduleResolver->getID($module)) {
-                return $module;
-            }
-        }
-        return null;
-    }
-
     public function retrieveAllItems(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $items = [];
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $modules = $moduleRegistry->getAllModules();
-        foreach ($modules as $module) {
-            $items[] = $this->prepare_response_for_collection(
-                $this->prepareItemForResponse($module)
-            );
+        $params = $request->get_params();
+        $customPostID = $params[Params::CUSTOM_POST_ID];
+        $customPost = $this->get_post($customPostID);
+        $blocks = \parse_blocks($customPost->post_content);
+        foreach ($blocks as $block) {
+            $items[$block['blockName']] = $block['attrs'];
         }
         return rest_ensure_response($items);
     }
@@ -229,8 +216,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     {
         $params = $request->get_params();
         $customPostID = $params[Params::CUSTOM_POST_ID];
-        $module = $this->getModuleByID($customPostID);
-        $item = $this->prepareItemForResponse($module);
+        $customPost = $this->get_post($customPostID);
+        // $item = $this->prepareItemForResponse($module);
+        $item = null;
         return rest_ensure_response($item);
     }
 
@@ -283,7 +271,8 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             $params = $request->get_params();
             $customPostID = $params[Params::CUSTOM_POST_ID];
             $optionValues = $params[Params::BLOCK_ATTRIBUTE_VALUES];
-            $module = $this->getModuleByID($customPostID);
+            // $module = $this->getModuleByID($customPostID);
+            $module = $customPostID;
 
             $normalizedOptionValues = $optionValues;
 
