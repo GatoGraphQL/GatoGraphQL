@@ -258,12 +258,23 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 
     public function retrieveAllItems(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
-        $items = [];
         $params = $request->get_params();
         $customPostID = (int)$params[Params::CUSTOM_POST_ID];
         /** @var WP_Post */
         $customPost = $this->getCustomPost($customPostID);
         $blocks = \parse_blocks($customPost->post_content);
+        return rest_ensure_response(
+            $this->prepareBlocksForResponse($customPostID, $blocks)
+        );
+    }
+
+    /**
+     * @param array<array<string,mixed>> $blocks
+     * @return array<string,mixed>
+     */
+    protected function prepareBlocksForResponse(int $customPostID, array $blocks): array
+    {
+        $items = [];
         foreach ($blocks as $block) {
             if (empty($block['blockName'])) {
                 continue;
@@ -272,7 +283,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                 $this->prepareItemForResponse($customPostID, $block)
             );
         }
-        return rest_ensure_response($items);
+        return $items;
     }
 
     /**
