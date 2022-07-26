@@ -127,7 +127,14 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
             $this->getBlockNamespacedID($dataName),
         );
         $options = $this->getRESTEndpointRequestOptions();
-        $options['query'][Params::BLOCK_ATTRIBUTE_VALUES] = $value;
+        /**
+         * For some reason, passing an empty array doesn't work,
+         * it doesn't append it to the "query".
+         *
+         * In that case, pass an empty string instead of an empty array,
+         * then it works!
+         */
+        $options['query'][Params::BLOCK_ATTRIBUTE_VALUES] = $value === [] ? '' : $value;
         $response = $client->post(
             $endpointURL,
             $options,
