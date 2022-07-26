@@ -72,11 +72,11 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     'args' => [
                         Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
                         Params::BLOCK_ID => $this->getBlockIDParamArgs(),
-                        Params::OPTION_VALUES => [
-                            'description' => __('Array of [\'option\' (also called \'input\' in the settings) => \'value\']. Different modules can receive different options', 'graphql-api-testing'),
+                        Params::BLOCK_ATTRIBUTE_VALUES => [
+                            'description' => __('Array of [\'attribute\' => \'value\']. Different blocks can normally contain different attributes', 'graphql-api-testing'),
                             'type' => 'object',
                             // 'properties' => [
-                            //     'option'  => [
+                            //     'attribute'  => [
                             //         'type' => 'string',
                             //         'required' => true,
                             //     ],
@@ -132,7 +132,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     ),
                     [
                         Params::CUSTOM_POST_ID => $customPostID,
-                        Params::OPTION_VALUES => [$option => $value],
+                        Params::BLOCK_ATTRIBUTE_VALUES => [$option => $value],
                     ]
                 );
             }
@@ -330,7 +330,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         try {
             $params = $request->get_params();
             $customPostID = $params[Params::CUSTOM_POST_ID];
-            $optionValues = $params[Params::OPTION_VALUES];
+            $optionValues = $params[Params::BLOCK_ATTRIBUTE_VALUES];
             $module = $this->getModuleByID($customPostID);
 
             $normalizedOptionValues = $optionValues;
