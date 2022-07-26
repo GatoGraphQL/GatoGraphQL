@@ -42,22 +42,26 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected function getRouteOptions(): array
     {
         return [
-            $this->restBase => [
+            $this->restBase . '/(?P<customPostID>[\d]+)' => [
                 [
                     'methods' => WP_REST_Server::READABLE,
                     'callback' => $this->retrieveAllItems(...),
                     // Allow anyone to read the modules
                     'permission_callback' => '__return_true',
+                    'args' => [
+                        Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+                    ],
                 ],
             ],
-            $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
+            $this->restBase . '/(?P<customPostID>[\d]+)/(?P<blockID>[a-zA-Z_-]+)' => [
                 [
                     'methods' => WP_REST_Server::READABLE,
                     'callback' => $this->retrieveItem(...),
                     // Allow anyone to read the modules
                     'permission_callback' => '__return_true',
                     'args' => [
-                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
+                        Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+                        Params::BLOCK_ID => $this->getBlockIDParamArgs(),
                     ],
                 ],
                 [
@@ -66,7 +70,8 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     // only the Admin can execute the modification
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
-                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
+                        Params::CUSTOM_POST_ID => $this->getCustomPostIDParamArgs(),
+                        Params::BLOCK_ID => $this->getBlockIDParamArgs(),
                         Params::OPTION_VALUES => [
                             'description' => __('Array of [\'option\' (also called \'input\' in the settings) => \'value\']. Different modules can receive different options', 'graphql-api-testing'),
                             'type' => 'object',
@@ -95,12 +100,12 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         array $optionValues,
         WP_REST_Request $request,
     ): bool|WP_Error {
-        $moduleID = $request->get_param(Params::MODULE_ID);
-        $module = $this->getModuleByID($moduleID);
+        $customPostID = $request->get_param(Params::CUSTOM_POST_ID);
+        $module = $this->getModuleByID($customPostID);
         if ($module === null) {
             /**
              * No need to provide an error message, since it's already done
-             * when validating the moduleID
+             * when validating the customPostID
              */
             return false;
         }
@@ -123,10 +128,10 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                         __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api-testing'),
                         $option,
                         $module,
-                        $moduleID
+                        $customPostID
                     ),
                     [
-                        Params::MODULE_ID => $moduleID,
+                        Params::CUSTOM_POST_ID => $customPostID,
                         Params::OPTION_VALUES => [$option => $value],
                     ]
                 );
@@ -138,44 +143,78 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     /**
      * @return array<string,mixed>
      */
-    protected function getModuleIDParamArgs(): array
+    protected function getCustomPostIDParamArgs(): array
     {
         return [
-            'description' => __('Module ID', 'graphql-api-testing'),
-            'type' => 'string',
+            'description' => __('Custom Post ID', 'graphql-api-testing'),
+            'type' => 'integer',
             'required' => true,
-            'validate_callback' => $this->validateModule(...),
+            'validate_callback' => $this->validateCustomPost(...),
         ];
     }
 
     /**
-     * Validate there is a module with this ID
+     * @return array<string,mixed>
      */
-    protected function validateModule(string $moduleID): bool|WP_Error
+    protected function getBlockIDParamArgs(): array
     {
-        $module = $this->getModuleByID($moduleID);
-        if ($module === null) {
-            return new WP_Error(
-                '1',
-                sprintf(
-                    __('There is no module with ID \'%s\'', 'graphql-api'),
-                    $moduleID
-                ),
-                [
-                    'moduleID' => $moduleID,
-                ]
-            );
-        }
+        return [
+            'description' => __('Block ID => blockName:number, with ":number" defaulting to ":0" (i.e. either first or only block with that name)', 'graphql-api-testing'),
+            'type' => 'string',
+            'required' => true,
+        ];
+    }
+
+    /**
+     * Validate there is a custom post with this ID
+     */
+    protected function validateCustomPost(string $customPostID): bool|WP_Error
+    {
+        $post = $this->get_post($customPostID);
+		if (is_wp_error($post)) {
+			return $post;
+		}
         return true;
     }
 
-    public function getModuleByID(string $moduleID): ?string
+	/**
+	 * Get the post, if the ID is valid.
+	 *
+	 * @since 4.7.2
+	 *
+	 * @param int $id Supplied ID.
+	 * @return WP_Post|WP_Error Post object if ID is valid, WP_Error otherwise.
+     *
+     * Function copied from WordPress core.
+     *
+     * @see wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php
+	 */
+	protected function get_post( $id ) {
+		$error = new WP_Error(
+			'rest_post_invalid_id',
+			__( 'Invalid post ID.' ),
+			array( 'status' => 404 )
+		);
+
+		if ( (int) $id <= 0 ) {
+			return $error;
+		}
+
+		$post = get_post( (int) $id );
+		if ( empty( $post ) || empty( $post->ID ) || $this->post_type !== $post->post_type ) {
+			return $error;
+		}
+
+		return $post;
+	}
+
+    public function getModuleByID(string $customPostID): ?string
     {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            if ($moduleID === $moduleResolver->getID($module)) {
+            if ($customPostID === $moduleResolver->getID($module)) {
                 return $module;
             }
         }
@@ -237,8 +276,8 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $params = $request->get_params();
-        $moduleID = $params[Params::MODULE_ID];
-        $module = $this->getModuleByID($moduleID);
+        $customPostID = $params[Params::CUSTOM_POST_ID];
+        $module = $this->getModuleByID($customPostID);
         $item = $this->prepareItemForResponse($module);
         return rest_ensure_response($item);
     }
@@ -250,7 +289,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $moduleID = $moduleResolver->getID($module);
+        $customPostID = $moduleResolver->getID($module);
         return [
             'self' => [
                 'href' => rest_url(
@@ -258,7 +297,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                         '%s/%s/%s',
                         $this->getNamespace(),
                         $this->restBase,
-                        $moduleID,
+                        $customPostID,
                     )
                 ),
             ],
@@ -277,7 +316,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                         '%s/%s/%s',
                         $this->getNamespace(),
                         'modules',
-                        $moduleID,
+                        $customPostID,
                     )
                 ),
             ],
@@ -290,9 +329,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 
         try {
             $params = $request->get_params();
-            $moduleID = $params[Params::MODULE_ID];
+            $customPostID = $params[Params::CUSTOM_POST_ID];
             $optionValues = $params[Params::OPTION_VALUES];
-            $module = $this->getModuleByID($moduleID);
+            $module = $this->getModuleByID($customPostID);
 
             $normalizedOptionValues = $optionValues;
 
@@ -317,7 +356,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             $response->message = sprintf(
                 __('Settings for module \'%s\' (with ID \'%s\') have been updated successfully', 'graphql-api-testing'),
                 $module,
-                $moduleID
+                $customPostID
             );
         } catch (Exception $e) {
             $response->status = ResponseStatus::ERROR;
