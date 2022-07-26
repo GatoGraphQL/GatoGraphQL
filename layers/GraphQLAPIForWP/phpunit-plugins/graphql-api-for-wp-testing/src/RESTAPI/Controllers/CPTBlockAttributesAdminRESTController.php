@@ -463,8 +463,30 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             /** @var WP_Post */
             $customPost = $this->getCustomPost($customPostID);
             $blocks = \parse_blocks($customPost->post_content);
-            $block = $this->getBlock($blockNamespace, $blockID, $blocks);
-            if ($block === null) {
+            
+            /**
+             * Find the block and update the attributes
+             */
+            [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
+            $blockCounter = 0;
+            $found = false;
+            foreach ($blocks as &$block) {
+                if ($block['blockName'] !== $blockNamespacedName) {
+                    continue;
+                }
+                if ($blockCounter !== $blockPosition) {
+                    $blockCounter++;
+                    continue;
+                }
+                // Found the block
+                $found = true;
+                $block['attrs'] = array_merge(
+                    $block['attrs'] ?? [],
+                    $blockAttributeValues
+                );
+                break;
+            }
+            if (!$found) {
                 return $this->getNonExistingBlockError(
                     $customPostID,
                     $blockNamespace,
@@ -495,7 +517,6 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 
             // Success!
             $response->status = ResponseStatus::SUCCESS;
-            [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
             $response->message = $blockPosition === 0
                 ? sprintf(
                     __('Attributes for block \'%s\' have been updated successfully', 'graphql-api-testing'),
