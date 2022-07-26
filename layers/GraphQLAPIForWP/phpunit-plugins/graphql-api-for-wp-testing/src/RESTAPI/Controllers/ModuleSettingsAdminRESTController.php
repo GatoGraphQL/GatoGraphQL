@@ -80,9 +80,9 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
                         Params::MODULE_ID => $this->getModuleIDParamArgs(),
-                        Params::OPTION_VALUES => [
-                            'description' => __('Array of [\'option\' (also called \'input\' in the settings) => \'value\']. Different modules can receive different options', 'graphql-api-testing'),
-                            'type' => 'object',
+                        Params::JSON_ENCODED_OPTION_VALUES => [
+                            'description' => __('JSON-encoded array of [\'option\' (also called \'input\' in the settings) => \'value\']. Different modules can receive different options', 'graphql-api-testing'),
+                            'type' => 'string',
                             // 'properties' => [
                             //     'option'  => [
                             //         'type' => 'string',
@@ -105,9 +105,10 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
      * Validate the module has the given option
      */
     protected function validateOptions(
-        array $optionValues,
+        string $jsonEncodedOptionValues,
         WP_REST_Request $request,
     ): bool|WP_Error {
+        $optionValues = json_decode($jsonEncodedOptionValues, true);
         $moduleID = $request->get_param(Params::MODULE_ID);
         $module = $this->getModuleByID($moduleID);
         if ($module === null) {
@@ -140,7 +141,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
                     ),
                     [
                         Params::MODULE_ID => $moduleID,
-                        Params::OPTION_VALUES => [$option => $value],
+                        Params::JSON_ENCODED_OPTION_VALUES => $jsonEncodedOptionValues,
                     ]
                 );
             }
@@ -257,7 +258,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
         try {
             $params = $request->get_params();
             $moduleID = $params[Params::MODULE_ID];
-            $optionValues = $params[Params::OPTION_VALUES];
+            $optionValues = json_decode($params[Params::JSON_ENCODED_OPTION_VALUES], true);
             $module = $this->getModuleByID($moduleID);
 
             // Normalize the values
