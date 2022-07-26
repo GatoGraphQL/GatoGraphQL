@@ -405,6 +405,16 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                     )
                 ),
             ],
+            'collection' => [
+                'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s',
+                        $this->getNamespace(),
+                        $this->restBase,
+                        $customPostID,
+                    )
+                ),
+            ],
         ];
     }
 
