@@ -264,7 +264,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         $customPost = $this->getCustomPost($customPostID);
         $blocks = \parse_blocks($customPost->post_content);
         return rest_ensure_response(
-            $this->prepareBlocksForResponse($customPostID, $blocks)
+            $this->prepareItemsForResponse($customPostID, $blocks)
         );
     }
 
@@ -272,7 +272,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
      * @param array<array<string,mixed>> $blocks
      * @return array<string,mixed>
      */
-    protected function prepareBlocksForResponse(int $customPostID, array $blocks): array
+    protected function prepareItemsForResponse(int $customPostID, array $blocks): array
     {
         $items = [];
         foreach ($blocks as $block) {
@@ -313,11 +313,67 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     {
         $params = $request->get_params();
         $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+        $blockID = $params[Params::BLOCK_ID];
         /** @var WP_Post */
         $customPost = $this->getCustomPost($customPostID);
-        // $item = $this->prepareItemForResponse($module);
-        $item = null;
-        return rest_ensure_response($item);
+        $blocks = \parse_blocks($customPost->post_content);
+        $block = $this->getBlock($blockID, $blocks);
+        if ($block === null) {
+            return new WP_Error(
+                '1',
+                sprintf(
+                    __('There is no block with ID \'%s\'', 'graphql-api-testing'),
+                    $blockID
+                ),
+                [
+                    Params::STATE => [
+                        Params::CUSTOM_POST_ID => $customPostID,
+                        Params::BLOCK_ID => $blockID,
+                    ],
+                ]
+            );
+        }
+        return $this->prepareItemForResponse($customPostID, $block);
+    }
+
+    /**
+     * Retrieve the block with that ID:
+     *
+     * - With the right blockName
+     * - At the right position
+     *
+     * @param array<array<string,mixed>> $blocks
+     * @return array<string,mixed>|null
+     */
+    protected function getBlock(string $blockID, array $blocks): ?array
+    {
+        [$blockName, $blockPosition] = $this->getBlockNameAndPosition($blockID);
+        $blockCounter = 0;
+        foreach ($blocks as $block) {
+            if ($block['blockName'] !== $blockName) {
+                continue;
+            }
+            if ($blockCounter !== $blockPosition) {
+                $blockCounter++;
+                continue;
+            }
+            return $block;
+        }
+        return null;
+    }
+
+    protected function getBlockID(string $blockName, int $blockPosition): string
+    {
+        if ($blockPosition === 0) {
+            return $blockName;
+        }
+        return $blockName . ':' . $blockPosition;
+    }
+
+    protected function getBlockNameAndPosition(string $blockID): array
+    {
+        $parts = explode(':', $blockID);
+        return [$parts[0], (int) ($parts[1] ?? 0)];
     }
 
     /**
@@ -329,7 +385,6 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         $blockName = $block['blockName'];
         $blockPosition = $this->blockNameCounter[$blockName] ?? 0;
         $this->blockNameCounter[$blockName] = $blockPosition + 1;
-        $blockID = $blockPosition === 0 ? $blockName : $blockName . ':' . $blockPosition;
         return [
             'self' => [
                 'href' => rest_url(
@@ -338,7 +393,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                         $this->getNamespace(),
                         $this->restBase,
                         $customPostID,
-                        $blockID,
+                        $this->getBlockID($blockName, $blockPosition),
                     )
                 ),
             ],
