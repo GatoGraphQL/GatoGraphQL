@@ -309,16 +309,6 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             'self' => [
                 'href' => rest_url(
                     sprintf(
-                        '%s/%s/%s',
-                        $this->getNamespace(),
-                        $this->restBase,
-                        $customPostID,
-                    )
-                ),
-            ],
-            'block' => [
-                'href' => rest_url(
-                    sprintf(
                         '%s/%s/%s/%s',
                         $this->getNamespace(),
                         $this->restBase,
