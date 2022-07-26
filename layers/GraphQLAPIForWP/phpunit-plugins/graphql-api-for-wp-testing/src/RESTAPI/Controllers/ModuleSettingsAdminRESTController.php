@@ -31,7 +31,7 @@ use function rest_url;
  *   --user "admin:{applicationPassword}" \
  *   -X POST \
  *   -H "Content-Type: application/json" \
- *   -d '{"optionValues": {"path": "/anotherGraphiQL/"}}' \
+ *   -d '{"jsonEncodedOptionValues": "{\"path\":\"/anotherGraphiQL/\"}"}' \
  *   https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/module-settings/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
  * ```
  */
