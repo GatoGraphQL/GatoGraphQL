@@ -78,22 +78,6 @@ jobs:
                 run: sleep 15s
                 shell: bash
 
-            -   name: Checkout code
-                uses: actions/checkout@v2
-                with:
-                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
-
-            -   name: Set-up PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: 8.1
-                    coverage: none
-                env:
-                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            -   name: Install Composer dependencies
-                uses: "ramsey/composer-install@v1"
-
             -   name: Run tests
                 run: |
                     INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ steps.extract-instawp-domain.outputs.instawp-domain }} \
