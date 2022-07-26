@@ -9,6 +9,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\ModifyPluginSettingsWebserverRequestT
 abstract class AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use ModifyPluginSettingsWebserverRequestTestCaseTrait;
+    use ModifyValueFixtureEndpointWebserverRequestTestCaseTrait;
 
     protected function setUp(): void
     {
@@ -24,13 +25,8 @@ abstract class AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCa
         parent::tearDown();
     }
 
-    /**
-     * Use the ending ":0" to denote the "before" test, i.e.
-     * testing that the current value in the DB produces a certain
-     * result
-     */
     protected function executePluginSettingsSetUpTearDown(string $dataName): bool
     {
-        return !str_ends_with($dataName, ':0');
+        return $this->executeSetUpTearDownUnlessIsOriginalTestCase($dataName);
     }
 }
