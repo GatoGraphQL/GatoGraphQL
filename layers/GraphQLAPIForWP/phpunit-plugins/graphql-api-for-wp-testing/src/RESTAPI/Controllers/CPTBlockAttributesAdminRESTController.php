@@ -86,7 +86,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                         Params::BLOCK_NAMESPACE => $this->getBlockNamespaceParamArgs(),
                         Params::BLOCK_ID => $this->getBlockIDParamArgs(),
                         Params::BLOCK_ATTRIBUTE_VALUES => [
-                            'description' => __('Array of [\'attribute\' => \'value\']. Different blocks can normally contain different attributes', 'graphql-api-testing'),
+                            'description' => __('Array of [\'block attribute\' => \'value\']', 'graphql-api-testing'),
                             'type' => 'object',
                             // 'properties' => [
                             //     'attribute'  => [
@@ -433,11 +433,11 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         try {
             $params = $request->get_params();
             $customPostID = $params[Params::CUSTOM_POST_ID];
-            $optionValues = $params[Params::BLOCK_ATTRIBUTE_VALUES];
+            $blockAttributeValues = $params[Params::BLOCK_ATTRIBUTE_VALUES];
             // $module = $this->getModuleByID($customPostID);
             $module = $customPostID;
 
-            $normalizedOptionValues = $optionValues;
+            $normalizedOptionValues = $blockAttributeValues;
 
             // Store in the DB
             $userSettingsManager = UserSettingsManagerFacade::getInstance();
@@ -451,7 +451,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
              *
              * Not all settings need flushing, so check first.
              */
-            if ($this->shouldFlushRewriteRules($optionValues)) {
+            if ($this->shouldFlushRewriteRules($blockAttributeValues)) {
                 $this->enqueueFlushRewriteRules();
             }
 
@@ -478,13 +478,13 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
      *
      * - Path (eg: GraphiQL/Voyager clients)
      *
-     * @param array<string,mixed> $optionValues
+     * @param array<string,mixed> $blockAttributeValues
      */
-    protected function shouldFlushRewriteRules(array $optionValues): bool
+    protected function shouldFlushRewriteRules(array $blockAttributeValues): bool
     {
         return array_key_exists(
             ModuleSettingOptions::PATH,
-            $optionValues
+            $blockAttributeValues
         );
     }
 }
