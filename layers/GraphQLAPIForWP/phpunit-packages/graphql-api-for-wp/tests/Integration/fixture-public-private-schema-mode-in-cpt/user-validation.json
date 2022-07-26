@@ -1,0 +1,25 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'customPosts' on type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "customPosts(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "customPosts(pagination: {limit: 3}) { ... }",
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        }
+    ],
+    "data": {
+        "customPosts": null
+    }
+}
