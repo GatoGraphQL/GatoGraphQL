@@ -446,7 +446,25 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             $customPostID = (int)$params[Params::CUSTOM_POST_ID];
             $blockNamespace = $params[Params::BLOCK_NAMESPACE];
             $blockID = $params[Params::BLOCK_ID];
-            $blockAttributeValues = json_decode($params[Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES], true);
+            $jsonEncodedBlockAttributeValues = $params[Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES];
+            $blockAttributeValues = json_decode($jsonEncodedBlockAttributeValues, true);
+            if ($blockAttributeValues === null) {
+                return new WP_Error(
+                    '1',
+                    sprintf(
+                        __('Property \'%s\' is not JSON-encoded properly', 'graphql-api-testing'),
+                        Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES,
+                    ),
+                    [
+                        Params::STATE => [
+                            Params::CUSTOM_POST_ID => $customPostID,
+                            Params::BLOCK_NAMESPACE => $blockNamespace,
+                            Params::BLOCK_ID => $blockID,
+                            Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES => $jsonEncodedBlockAttributeValues,
+                        ],
+                    ]
+                );
+            }
             /** @var WP_Post */
             $customPost = $this->getCustomPost($customPostID);
             $blocks = \parse_blocks($customPost->post_content);

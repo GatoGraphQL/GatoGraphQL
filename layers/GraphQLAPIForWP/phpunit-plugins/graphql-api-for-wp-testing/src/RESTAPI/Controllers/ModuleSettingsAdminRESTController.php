@@ -110,6 +110,21 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
     ): bool|WP_Error {
         $optionValues = json_decode($jsonEncodedOptionValues, true);
         $moduleID = $request->get_param(Params::MODULE_ID);
+        if ($optionValues === null) {
+            return new WP_Error(
+                '1',
+                sprintf(
+                    __('Property \'%s\' is not JSON-encoded properly', 'graphql-api-testing'),
+                    Params::JSON_ENCODED_OPTION_VALUES,
+                ),
+                [
+                    Params::STATE => [
+                        Params::MODULE_ID => $moduleID,
+                        Params::JSON_ENCODED_OPTION_VALUES => $jsonEncodedOptionValues,
+                    ],
+                ]
+            );
+        }
         $module = $this->getModuleByID($moduleID);
         if ($module === null) {
             /**
