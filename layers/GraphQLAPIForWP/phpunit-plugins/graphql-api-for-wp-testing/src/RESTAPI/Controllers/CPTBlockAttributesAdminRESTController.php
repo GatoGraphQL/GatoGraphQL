@@ -22,6 +22,7 @@ use WP_REST_Server;
 use function get_post;
 use function rest_ensure_response;
 use function rest_url;
+use function serialize_blocks;
 
 /**
  * Visualize and modify the attributes of a block inside a custom post, including:
@@ -331,35 +332,47 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         $blocks = \parse_blocks($customPost->post_content);
         $block = $this->getBlock($blockNamespace, $blockID, $blocks);
         if ($block === null) {
-            $errorData = [
-                Params::STATE => [
-                    Params::CUSTOM_POST_ID => $customPostID,
-                    Params::BLOCK_NAMESPACE => $blockNamespace,
-                    Params::BLOCK_ID => $blockID,
-                ],
-            ];
-            [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
-            if ($blockPosition === 0) {
-                return new WP_Error(
-                    '1',
-                    sprintf(
-                        __('There is no block with name \'%s\'', 'graphql-api-testing'),
-                        $blockNamespacedName
-                    ),
-                    $errorData
-                );
-            }
+            return $this->getNonExistingBlockError(
+                $customPostID,
+                $blockNamespace,
+                $blockID,
+            );
+        }
+        return $this->prepareItemForResponse($customPostID, $block);
+    }
+
+    public function getNonExistingBlockError(
+        int $customPostID,
+        string $blockNamespace,
+        string $blockID,
+    ): WP_Error {
+        $errorData = [
+            Params::STATE => [
+                Params::CUSTOM_POST_ID => $customPostID,
+                Params::BLOCK_NAMESPACE => $blockNamespace,
+                Params::BLOCK_ID => $blockID,
+            ],
+        ];
+        [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
+        if ($blockPosition === 0) {
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('There is no block with name \'%s\' on position \'%s\'', 'graphql-api-testing'),
-                    $blockNamespacedName,
-                    $blockPosition
+                    __('There is no block with name \'%s\'', 'graphql-api-testing'),
+                    $blockNamespacedName
                 ),
                 $errorData
             );
         }
-        return $this->prepareItemForResponse($customPostID, $block);
+        return new WP_Error(
+            '1',
+            sprintf(
+                __('There is no block with name \'%s\' on position \'%s\'', 'graphql-api-testing'),
+                $blockNamespacedName,
+                $blockPosition
+            ),
+            $errorData
+        );
     }
 
     /**
@@ -443,16 +456,30 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 
         try {
             $params = $request->get_params();
-            $customPostID = $params[Params::CUSTOM_POST_ID];
+            $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+            $blockNamespace = $params[Params::BLOCK_NAMESPACE];
+            $blockID = $params[Params::BLOCK_ID];
             $blockAttributeValues = $params[Params::BLOCK_ATTRIBUTE_VALUES];
-            // $module = $this->getModuleByID($customPostID);
-            $module = $customPostID;
+            /** @var WP_Post */
+            $customPost = $this->getCustomPost($customPostID);
+            $blocks = \parse_blocks($customPost->post_content);
+            $block = $this->getBlock($blockNamespace, $blockID, $blocks);
+            if ($block === null) {
+                return $this->getNonExistingBlockError(
+                    $customPostID,
+                    $blockNamespace,
+                    $blockID,
+                );
+            }
 
-            $normalizedOptionValues = $blockAttributeValues;
-
-            // Store in the DB
-            $userSettingsManager = UserSettingsManagerFacade::getInstance();
-            $userSettingsManager->setSettings($module, $normalizedOptionValues);
+            /**
+             * @see https://developer.wordpress.org/reference/functions/serialize_blocks/
+             */
+            $content = serialize_blocks($blocks);
+            wp_update_post([
+                'ID' => $customPostID,
+                'post_content'  => $content
+            ]);
 
             /**
              * Flush rewrite rules in the next request.
@@ -468,11 +495,17 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 
             // Success!
             $response->status = ResponseStatus::SUCCESS;
-            $response->message = sprintf(
-                __('Settings for module \'%s\' (with ID \'%s\') have been updated successfully', 'graphql-api-testing'),
-                $module,
-                $customPostID
-            );
+            [$blockNamespacedName, $blockPosition] = $this->getBlockNamespacedNameAndPosition($blockNamespace, $blockID);
+            $response->message = $blockPosition === 0
+                ? sprintf(
+                    __('Attributes for block \'%s\' have been updated successfully', 'graphql-api-testing'),
+                    $blockNamespacedName,
+                )
+                : sprintf(
+                    __('Attributes for block \'%s\' on position \'%s\' have been updated successfully', 'graphql-api-testing'),
+                    $blockNamespacedName,
+                    $blockPosition
+                );
         } catch (Exception $e) {
             $response->status = ResponseStatus::ERROR;
             $response->message = $e->getMessage();
