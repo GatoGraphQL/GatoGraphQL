@@ -480,10 +480,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                 }
                 // Found the block
                 $found = true;
-                $block['attrs'] = array_merge(
-                    $block['attrs'] ?? [],
-                    $blockAttributeValues
-                );
+                $block['attrs'] = $blockAttributeValues;
                 break;
             }
             if (!$found) {
