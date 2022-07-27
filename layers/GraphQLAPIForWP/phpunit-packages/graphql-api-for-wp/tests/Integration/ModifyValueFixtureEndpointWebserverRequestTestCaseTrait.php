@@ -15,4 +15,29 @@ trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
     {
         return !str_ends_with($dataName, ':0');
     }
+
+    /**
+     * Execute the original test case first
+     *
+     * @param array<string,mixed> $providerItems
+     * @return array<string,mixed>
+     */
+    protected function reorderProviderEndpointEntriesToExecuteOriginalTestFirst(array $providerItems): array
+    {
+        $originalTestProviderItems = array_filter(
+            $providerItems,
+            fn (string $fixtureName) => str_ends_with($fixtureName, ':0'),
+            ARRAY_FILTER_USE_KEY
+        );
+        if ($originalTestProviderItems === []) {
+            return $providerItems;
+        }
+        return array_merge(
+            $originalTestProviderItems,
+            array_diff_key(
+                $providerItems,
+                $originalTestProviderItems,
+            )
+        );
+    }
 }
