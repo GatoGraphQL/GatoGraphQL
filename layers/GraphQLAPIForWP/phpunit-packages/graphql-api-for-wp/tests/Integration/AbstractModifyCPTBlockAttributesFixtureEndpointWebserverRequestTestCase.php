@@ -29,4 +29,13 @@ abstract class AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTe
     {
         return $this->executeSetUpTearDownUnlessIsOriginalTestCase($dataName);
     }
+
+    /**
+     * @param array<string,mixed> $providerItems
+     * @return array<string,mixed>
+     */
+    protected function customizeProviderEndpointEntries(array $providerItems): array
+    {
+        return $this->reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
+    }
 }
