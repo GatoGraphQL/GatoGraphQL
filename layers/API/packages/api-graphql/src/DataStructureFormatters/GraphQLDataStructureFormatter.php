@@ -102,12 +102,12 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         // Suggestions
-        $notices = array_merge(
+        $suggestions = array_merge(
             $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
             $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
         );
-        if ($notices !== []) {
-            $ret['extensions']['suggestions'] = $notices;
+        if ($suggestions !== []) {
+            $ret['extensions']['suggestions'] = $suggestions;
         }
     }
 
