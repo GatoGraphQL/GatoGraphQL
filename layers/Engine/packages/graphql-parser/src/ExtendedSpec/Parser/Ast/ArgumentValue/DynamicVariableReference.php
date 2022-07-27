@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\Root\App;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class DynamicVariableReference extends AbstractDynamicVariableReference
@@ -30,21 +29,16 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
      *      i.e. where a "dynamic" value was defined (eg: via @export)
      *   3. (If it does not exist) Return error
      *
-     * @throws InvalidRequestException
      * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     public function getValue(): mixed
     {
         if ($this->context === null) {
-            throw new InvalidRequestException(
-                new FeedbackItemResolution(
-                    GraphQLExtendedSpecFeedbackItemProvider::class,
-                    GraphQLExtendedSpecFeedbackItemProvider::E1,
-                    [
-                        $this->name,
-                    ]
-                ),
-                $this->getLocation()
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Context has not been set for dynamic variable reference \'%s\'', 'graphql-parser'),
+                    $this->name
+                )
             );
         }
         
