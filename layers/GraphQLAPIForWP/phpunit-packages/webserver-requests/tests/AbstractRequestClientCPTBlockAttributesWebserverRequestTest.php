@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 
 /**
@@ -76,7 +75,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest exten
             BlockAttributeNames::IS_ENABLED => $this->isUpdatedClientEnabled(),
         ];
     }
-    
+
     /**
      * The default state is for the clients to be enabled.
      * Then, when updated, they will be disabled.
