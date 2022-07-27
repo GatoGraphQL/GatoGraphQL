@@ -9,6 +9,7 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
+use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class DynamicVariableReference extends AbstractDynamicVariableReference
@@ -21,13 +22,16 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
     }
 
     /**
-     * Get the value directly from the context
-     * as to handle dynamic variables
+     * The value for the requested variable follows this logic:
+     *
+     *   1. Get the value from the Context,
+     *      i.e. where a "static" Variable was defined
+     *   2. (If it does not exist) Get the value from the AppState,
+     *      i.e. where a "dynamic" value was defined (eg: via @export)
+     *   3. (If it does not exist) Return error
      *
      * @throws InvalidRequestException
      * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
-     *
-     * @todo Review this logic, it must not work! How to pass the context to the AST? Checking for the variable must instead be done against $variable in ->resolveValue
      */
     public function getValue(): mixed
     {
@@ -43,19 +47,29 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
                 $this->getLocation()
             );
         }
-        if (!$this->context->hasVariableValue($this->name)) {
-            throw new InvalidDynamicContextException(
-                new FeedbackItemResolution(
-                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                    GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
-                    [
-                        $this->name,
-                    ]
-                ),
-                $this->getLocation(),
-                $this
-            );
+        
+        // 1. Treat the variable as "static"
+        if ($this->context->hasVariableValue($this->name)) {
+            return $this->context->getVariableValue($this->name);
         }
-        return $this->context->getVariableValue($this->name);
+
+        // 2. Treat the variable as "dynamic"
+        $dynamicVariables = App::getState('document-dynamic-variables');
+        if (array_key_exists($this->name, $dynamicVariables)) {
+            return $dynamicVariables[$this->name];
+        }
+
+        // 3. Variable is nowhere defined => Error
+        throw new InvalidDynamicContextException(
+            new FeedbackItemResolution(
+                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
+                [
+                    $this->name,
+                ]
+            ),
+            $this->getLocation(),
+            $this
+        );
     }
 }
