@@ -130,6 +130,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('query', $query);
         $appStateManager->override('variables', $variables);
+        $appStateManager->override('document-dynamic-variables', []);
         $appStateManager->override('operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);

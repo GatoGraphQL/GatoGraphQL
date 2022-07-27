@@ -54,6 +54,12 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getVariableManager()->getVariablesFromRequest();
 
+        /**
+         * Dynamic variables are those generated on runtime
+         * when resolving the GraphQL query, eg: via @export
+         */
+        $state['document-dynamic-variables'] = [];
+
         /** @var RootModuleConfiguration */
         $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
