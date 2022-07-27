@@ -41,6 +41,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
@@ -55,6 +56,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -67,6 +69,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
@@ -81,6 +84,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Message cannot be empty.', 'pop-genericforms');
         }
 
@@ -95,6 +99,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('The requested user cannot be empty.', 'pop-genericforms');
         } else {
             $target = $this->getUserTypeAPI()->getUserByID($fieldDataAccessor->getValue('target-id'));

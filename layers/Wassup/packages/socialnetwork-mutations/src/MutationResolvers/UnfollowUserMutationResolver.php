@@ -28,15 +28,16 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
         $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
         if (!in_array($target_id, $value)) {
             // @todo Migrate from string to FeedbackItemProvider
-        // $objectTypeFieldResolutionFeedbackStore->addError(
-        //     new ObjectTypeFieldResolutionFeedback(
-        //         new FeedbackItemResolution(
-        //             MutationErrorFeedbackItemProvider::class,
-        //             MutationErrorFeedbackItemProvider::E1,
-        //         ),
-        //         $fieldDataAccessor->getField(),
-        //     )
-        // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
+            $errors = [];
             $errors[] = sprintf(
                 $this->__('You were not following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                 $this->getUserTypeAPI()->getUserDisplayName($target_id)

@@ -29,6 +29,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
         if (empty($fieldDataAccessor->getValue('email'))) {
@@ -42,6 +43,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -54,6 +56,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
         if (empty($fieldDataAccessor->getValue('message'))) {
@@ -67,6 +70,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Message cannot be empty.', 'pop-genericforms');
         }
     }

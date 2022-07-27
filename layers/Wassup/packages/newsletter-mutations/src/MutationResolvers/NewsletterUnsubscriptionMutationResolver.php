@@ -30,6 +30,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -42,6 +43,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
@@ -58,6 +60,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = sprintf(
                 $placeholder_string,
                 $this->__('The verification code is missing.', 'pop-genericforms'),
@@ -82,6 +85,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = sprintf(
                 $placeholder_string,
                 $this->__('The verification code does not match the email.', 'pop-genericforms'),

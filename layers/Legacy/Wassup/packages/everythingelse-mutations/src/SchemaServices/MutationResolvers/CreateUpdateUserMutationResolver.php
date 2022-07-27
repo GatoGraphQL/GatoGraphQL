@@ -38,6 +38,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('The name cannot be empty', 'pop-application');
         }
 
@@ -54,6 +55,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('The e-mail cannot be empty', 'pop-application');
         } elseif (! is_email($user_email)) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -66,6 +68,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('The email address isn&#8217;t correct.', 'pop-application');
         }
 
@@ -105,6 +108,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('The username cannot be empty.', 'pop-application');
         } elseif (!validate_username($user_login)) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -117,6 +121,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('This username is invalid because it uses illegal characters. Please enter a valid username.', 'pop-application');
         } elseif (username_exists($user_login)) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -129,6 +134,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('This username is already registered. Please choose another one.', 'pop-application');
         }
 
@@ -145,6 +151,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('This email is already registered, please choose another one.', 'pop-application');
         }
 
@@ -163,6 +170,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -175,6 +183,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('The password must be at least 8 characters long.', 'pop-application');
         } else {
             if (!$repeatpassword) {
@@ -247,6 +256,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('That email address already exists in our system!', 'pop-application');
         }
     }

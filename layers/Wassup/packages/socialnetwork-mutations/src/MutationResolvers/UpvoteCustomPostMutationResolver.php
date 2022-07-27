@@ -39,15 +39,16 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
         if (in_array($target_id, $value)) {
             // @todo Migrate from string to FeedbackItemProvider
-        // $objectTypeFieldResolutionFeedbackStore->addError(
-        //     new ObjectTypeFieldResolutionFeedback(
-        //         new FeedbackItemResolution(
-        //             MutationErrorFeedbackItemProvider::class,
-        //             MutationErrorFeedbackItemProvider::E1,
-        //         ),
-        //         $fieldDataAccessor->getField(),
-        //     )
-        // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
+            $errors = [];
             $errors[] = sprintf(
                 $this->__('You have already up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                 $this->getCustomPostTypeAPI()->getTitle($target_id)

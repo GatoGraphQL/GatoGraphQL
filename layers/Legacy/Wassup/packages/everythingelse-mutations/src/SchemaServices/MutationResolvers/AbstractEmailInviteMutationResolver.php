@@ -86,6 +86,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('Email(s) cannot be empty.', 'pop-coreprocessors');
         }
     }

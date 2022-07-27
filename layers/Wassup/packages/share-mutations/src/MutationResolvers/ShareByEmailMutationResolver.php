@@ -29,6 +29,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
@@ -43,6 +44,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -55,6 +57,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
@@ -69,6 +72,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('The shared-page URL cannot be empty.', 'pop-genericforms');
         }
 
@@ -83,6 +87,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('The shared-page title cannot be empty.', 'pop-genericforms');
         }
     }

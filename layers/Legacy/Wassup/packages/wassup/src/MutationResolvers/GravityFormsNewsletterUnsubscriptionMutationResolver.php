@@ -27,6 +27,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('Your email is not subscribed to our newsletter.', 'gravityforms-pop-genericforms');
         }
     }

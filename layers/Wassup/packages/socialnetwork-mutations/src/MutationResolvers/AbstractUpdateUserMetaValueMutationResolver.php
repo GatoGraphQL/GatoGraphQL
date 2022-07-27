@@ -28,6 +28,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('This URL is incorrect.', 'pop-coreprocessors');
         }
     }

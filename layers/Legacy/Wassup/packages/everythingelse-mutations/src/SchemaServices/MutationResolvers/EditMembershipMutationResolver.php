@@ -104,6 +104,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('The user is missing', 'ure-pop');
             return;
         }
@@ -126,6 +127,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('The status has not been set', 'ure-pop');
         }
     }

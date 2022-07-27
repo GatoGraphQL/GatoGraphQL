@@ -31,15 +31,16 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
             $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
             $tag = $this->getPostTagTypeAPI()->getTag($target_id);
             // @todo Migrate from string to FeedbackItemProvider
-        // $objectTypeFieldResolutionFeedbackStore->addError(
-        //     new ObjectTypeFieldResolutionFeedback(
-        //         new FeedbackItemResolution(
-        //             MutationErrorFeedbackItemProvider::class,
-        //             MutationErrorFeedbackItemProvider::E1,
-        //         ),
-        //         $fieldDataAccessor->getField(),
-        //     )
-        // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
+            $errors = [];
             $errors[] = sprintf(
                 $this->__('You had not subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                 $applicationtaxonomyapi->getTagSymbolName($tag)

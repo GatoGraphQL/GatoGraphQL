@@ -102,6 +102,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Enter a username or e-mail address.');
         } elseif (strpos($user_login, '@')) {
             $user = $this->getUserTypeAPI()->getUserByEmail(trim($user_login));
@@ -134,6 +135,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Invalid username or e-mail.');
         }
     }

@@ -92,6 +92,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('The title cannot be empty', 'pop-application');
         }
 
@@ -111,6 +112,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('The content cannot be empty', 'pop-application');
         }
 
@@ -125,6 +127,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('The featured image has not been set', 'pop-application');
         }
 
@@ -190,6 +193,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('The post cannot be a response to itself', 'pop-postscreation');
         }
     }
@@ -214,6 +218,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }

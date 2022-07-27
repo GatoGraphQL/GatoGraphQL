@@ -32,6 +32,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post

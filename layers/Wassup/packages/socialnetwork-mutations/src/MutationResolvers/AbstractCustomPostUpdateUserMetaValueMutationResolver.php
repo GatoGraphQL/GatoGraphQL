@@ -42,15 +42,16 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         $target = $this->getCustomPostTypeAPI()->getCustomPost($target_id);
         if (!$target) {
             // @todo Migrate from string to FeedbackItemProvider
-        // $objectTypeFieldResolutionFeedbackStore->addError(
-        //     new ObjectTypeFieldResolutionFeedback(
-        //         new FeedbackItemResolution(
-        //             MutationErrorFeedbackItemProvider::class,
-        //             MutationErrorFeedbackItemProvider::E1,
-        //         ),
-        //         $fieldDataAccessor->getField(),
-        //     )
-        // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
+            $errors = [];
             $errors[] = $this->__('The requested post does not exist.', 'pop-coreprocessors');
         } else {
             // Make sure this target accepts this functionality. Eg: Not all posts can be Recommended or Up/Down-voted.

@@ -89,6 +89,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->getTranslationAPI()->__('You are not allowed to be a member of yourself!', 'ure-pop');
         }
     }

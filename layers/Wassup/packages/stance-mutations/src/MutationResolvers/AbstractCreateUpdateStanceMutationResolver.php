@@ -122,6 +122,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = sprintf(
                 $this->__('%s. <a href="%s" target="%s">Edit?</a>', 'pop-userstance'),
                 $error,

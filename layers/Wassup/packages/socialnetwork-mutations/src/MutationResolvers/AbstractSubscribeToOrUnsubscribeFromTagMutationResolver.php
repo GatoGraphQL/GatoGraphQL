@@ -36,15 +36,16 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         $target = $this->getPostTagTypeAPI()->getTag($target_id);
         if (!$target) {
             // @todo Migrate from string to FeedbackItemProvider
-        // $objectTypeFieldResolutionFeedbackStore->addError(
-        //     new ObjectTypeFieldResolutionFeedback(
-        //         new FeedbackItemResolution(
-        //             MutationErrorFeedbackItemProvider::class,
-        //             MutationErrorFeedbackItemProvider::E1,
-        //         ),
-        //         $fieldDataAccessor->getField(),
-        //     )
-        // );
+            // $objectTypeFieldResolutionFeedbackStore->addError(
+            //     new ObjectTypeFieldResolutionFeedback(
+            //         new FeedbackItemResolution(
+            //             MutationErrorFeedbackItemProvider::class,
+            //             MutationErrorFeedbackItemProvider::E1,
+            //         ),
+            //         $fieldDataAccessor->getField(),
+            //     )
+            // );
+            $errors = [];
             $errors[] = $this->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
         }
     }

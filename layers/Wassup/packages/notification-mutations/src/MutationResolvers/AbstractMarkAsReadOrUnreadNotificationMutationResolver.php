@@ -29,6 +29,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
             //         $fieldDataAccessor->getField(),
             //     )
             // );
+            $errors = [];
             $errors[] = $this->__('This URL is incorrect.', 'pop-notifications');
         } else {
             // $notification = AAL_Main::instance()->api->getNotification($histid);
