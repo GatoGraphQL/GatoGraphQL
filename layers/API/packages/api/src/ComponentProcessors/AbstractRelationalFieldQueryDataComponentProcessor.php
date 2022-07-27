@@ -33,7 +33,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * the same instance must be retrieved in every case.
      * Then, cache and reuse every created field
      *
-     * @var array<string,LeafField>
+     * @var array<string,FieldInterface>
      */
     private array $fieldInstanceContainer = [];
 
@@ -189,15 +189,28 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $operation = $requestedOperations[$operationOrder];
             $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
             for ($i = 0; $i < $operationOrder; $i++) {
-                $fieldOrFragmentBonds = [
-                    new RelationalField(
+                /**
+                 * Use an alias to both help visualize which is the field (optional),
+                 * and get its cached instance (mandatory!)
+                 */
+                $alias = sprintf(
+                    '_%s_op%s_level%s_',
+                    'dynamicSelf',
+                    $operationOrder,
+                    $i
+                );                
+                if (!isset($this->fieldInstanceContainer[$alias])) {
+                    $this->fieldInstanceContainer[$alias] = new RelationalField(
                         'self',
                         null,
                         [],
                         $fieldOrFragmentBonds,
                         [],
                         LocationHelper::getNonSpecificLocation()
-                    ),
+                    );
+                }
+                $fieldOrFragmentBonds = [
+                    $this->fieldInstanceContainer[$alias],
                 ];
             }
             $fieldFragmentModelsTuples = array_merge(
