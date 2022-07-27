@@ -146,7 +146,16 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $operation = $requestedOperations[$operationOrder];
             $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
             for ($i = 0; $i < $operationOrder; $i++) {
-
+                $fieldOrFragmentBonds = [
+                    new RelationalField(
+                        'self',
+                        null,
+                        [],
+                        $fieldOrFragmentBonds,
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
+                ];
             }
             $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
         }
