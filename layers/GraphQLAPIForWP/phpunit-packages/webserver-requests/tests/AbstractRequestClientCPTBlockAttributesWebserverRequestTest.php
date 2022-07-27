@@ -38,14 +38,27 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest exten
         );
     }
 
-    protected function provideClientEnabledDisabledEntries(): array
+    /**
+     * Provide always two conditions to test:
+     *
+     * - Before update: custom header is present (or not)
+     * - After update: custom header is not present (or is)
+     *
+     * @return array<string,array<mixed>>
+     */
+    final protected function provideClientEnabledDisabledEntries(): array
     {
+        $isUpdatedClientEnabled = $this->isUpdatedClientEnabled();
         return [
-            'original' => [true],
-            'updated' => [false],
+            'original' => [!$isUpdatedClientEnabled],
+            'updated' => [$isUpdatedClientEnabled],
         ];
     }
 
+    /**
+     * The client will always return a 200 status, whether
+     * enabled or disabled. The difference is the custom header.
+     */
     protected function doTestClientEnabledDisabled(
         string $clientURL,
         bool $enabled,
@@ -59,4 +72,6 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest exten
     }
 
     abstract protected function getClientURL(): string;
+    
+    abstract protected function isUpdatedClientEnabled(): bool;
 }
