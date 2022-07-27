@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ComponentProcessors;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\ComponentProcessors\AbstractQueryDataComponentProcessor;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
-use PoP\ComponentModel\ComponentProcessors\AbstractQueryDataComponentProcessor;
-use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -130,11 +130,80 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     ): array {
         $fragments = $executableDocument->getDocument()->getFragments();
         $fieldFragmentModelsTuples = [];
-        foreach ($executableDocument->getRequestedOperations() as $operation) {
+        $requestedOperations = $executableDocument->getRequestedOperations();
+
+        /**
+         * Multiple Query Execution: In order to have the fields
+         * of the subsequent operations be resolved in the same
+         * order as the operations (which is necessary for `@export`
+         * to work), then wrap them on a "self" field.
+         *
+         * For instance, in the following GraphQL query:
+         *
+         *     query One {
+         *       user(by: {id: 1}) {
+         *         name @export(as: "_name")
+         *       }
+         *     }
+         *
+         *     query Two {
+         *       firstEcho: echo(value: $_name) @upperCase @export(as: "_ucName")
+         *     }
+         *
+         *     query Three {
+         *       secondEcho: echo(value: $_ucName)
+         *     }
+         *
+         * `firstEcho` is normally resolved on the first iteration for `Root`,
+         * that is before `name @export(as: "_name")` is resolved on the
+         * second iteration on `User`.
+         *
+         * For that reason, the fields are wrapped in `self`, and the query
+         * above is converted to:
+         *
+         *     query One {
+         *       user(by: {id: 1}) {
+         *         name @export(as: "_name")
+         *       }
+         *     }
+         *
+         *     query Two {
+         *       self {
+         *         firstEcho: echo(value: $_name) @upperCase @export(as: "_ucName")
+         *       }
+         *     }
+         *
+         *     query Three {
+         *       self {
+         *         self {
+         *           secondEcho: echo(value: $_ucName)
+         *         }
+         *       }
+         *     }
+         *
+         * Now, `firstEcho` is resolved on the third iteration (second on `Root`),
+         * which is after `name @export(as: "_name")`.
+         */
+        $requestedOperationsCount = count($requestedOperations);
+        for ($operationOrder = 0; $operationOrder < $requestedOperationsCount; $operationOrder++) {
+            $operation = $requestedOperations[$operationOrder];
+            $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
+            for ($i = 0; $i < $operationOrder; $i++) {
+                $fieldOrFragmentBonds = [
+                    new RelationalField(
+                        'self',
+                        null,
+                        [],
+                        $fieldOrFragmentBonds,
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
+                ];
+            }
             $fieldFragmentModelsTuples = array_merge(
                 $fieldFragmentModelsTuples,
                 $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
-                    $operation->getFieldsOrFragmentBonds(),
+                    $fieldOrFragmentBonds,
                     $fragments,
                     $recursive
                 )
