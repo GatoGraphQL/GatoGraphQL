@@ -18,6 +18,7 @@ use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
 
+use function add_magic_quotes;
 use function get_post;
 use function rest_ensure_response;
 use function rest_url;
@@ -500,10 +501,18 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
              * @see https://developer.wordpress.org/reference/functions/serialize_blocks/
              */
             $content = serialize_blocks($blocks);
-            wp_update_post([
+            /**
+             * Must use `add_magic_quotes` to prevent the data within from being corrupted.
+             *
+             * Eg: "graphiql" block contains "\n" inside the GraphQL query and
+             * variables, and these would be removed, corrupting these contents.
+             *
+             * @see https://core.trac.wordpress.org/ticket/21767
+             */
+            wp_update_post(add_magic_quotes([
                 'ID' => $customPostID,
                 'post_content'  => $content
-            ]);
+            ]));
 
             /**
              * Flush rewrite rules in the next request.
