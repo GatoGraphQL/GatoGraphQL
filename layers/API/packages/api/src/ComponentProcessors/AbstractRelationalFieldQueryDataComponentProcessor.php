@@ -153,7 +153,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          *     query Three {
          *       secondEcho: echo(value: $_ucName)
          *     }
-         * 
+         *
          * `firstEcho` is normally resolved on the first iteration for `Root`,
          * that is before `name @export(as: "_name")` is resolved on the
          * second iteration on `User`.
