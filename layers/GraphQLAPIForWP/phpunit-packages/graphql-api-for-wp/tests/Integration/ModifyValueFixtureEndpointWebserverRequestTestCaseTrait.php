@@ -6,6 +6,11 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
 {
+    protected function isOriginalTestCase(string $dataName): bool
+    {
+        return str_ends_with($dataName, ':0');
+    }
+
     /**
      * Use the ending ":0" to denote the "before" test, i.e.
      * testing that the current value in the DB produces a certain
@@ -13,7 +18,7 @@ trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
      */
     protected function executeSetUpTearDownUnlessIsOriginalTestCase(string $dataName): bool
     {
-        return !str_ends_with($dataName, ':0');
+        return !$this->isOriginalTestCase($dataName);
     }
 
     /**
@@ -26,7 +31,7 @@ trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
     {
         $originalTestProviderItems = array_filter(
             $providerItems,
-            fn (string $fixtureName) => str_ends_with($fixtureName, ':0'),
+            fn (string $fixtureName) => $this->isOriginalTestCase($fixtureName),
             ARRAY_FILTER_USE_KEY
         );
         if ($originalTestProviderItems === []) {
