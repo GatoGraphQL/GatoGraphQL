@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
+use PoP\Root\App;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class DynamicVariableReference extends AbstractDynamicVariableReference
@@ -21,54 +21,49 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
     }
 
     /**
-     * Get the value directly from the context
-     * as to handle dynamic variables
+     * The value for the requested variable follows this logic:
      *
-     * @throws InvalidRequestException
+     *   1. Get the value from the Context,
+     *      i.e. where a "static" Variable was defined
+     *   2. (If it does not exist) Get the value from the AppState,
+     *      i.e. where a "dynamic" value was defined (eg: via @export)
+     *   3. (If it does not exist) Return error
+     *
      * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
-     *
-     * @todo Review this logic, it must not work! How to pass the context to the AST? Checking for the variable must instead be done against $variable in ->resolveValue
      */
     public function getValue(): mixed
     {
-        /**
-         * @todo Remove this temporary hack to support expressions (until the engine is migrated to AST).
-         *
-         * This temporary logic returns value "$__expressionName",
-         * to be processed as an expression on runtime.
-         *
-         * Switched from "%{...}%" to "$__..."
-         * @todo Convert expressions from "$__" to "$"
-         */
-        if (str_starts_with($this->name, '__')) {
-            return '$' . $this->name;
+        if ($this->context === null) {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Context has not been set for dynamic variable reference \'%s\'', 'graphql-parser'),
+                    $this->name
+                )
+            );
         }
 
-        if ($this->context === null) {
-            throw new InvalidRequestException(
-                new FeedbackItemResolution(
-                    GraphQLExtendedSpecFeedbackItemProvider::class,
-                    GraphQLExtendedSpecFeedbackItemProvider::E1,
-                    [
-                        $this->name,
-                    ]
-                ),
-                $this->getLocation()
-            );
+        // 1. Treat the variable as "static"
+        if ($this->context->hasVariableValue($this->name)) {
+            return $this->context->getVariableValue($this->name);
         }
-        if (!$this->context->hasVariableValue($this->name)) {
-            throw new InvalidDynamicContextException(
-                new FeedbackItemResolution(
-                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                    GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
-                    [
-                        $this->name,
-                    ]
-                ),
-                $this->getLocation(),
-                $this
-            );
+
+        // 2. Treat the variable as "dynamic"
+        $dynamicVariables = App::getState('document-dynamic-variables');
+        if (array_key_exists($this->name, $dynamicVariables)) {
+            return $dynamicVariables[$this->name];
         }
-        return $this->context->getVariableValue($this->name);
+
+        // 3. Variable is nowhere defined => Error
+        throw new InvalidDynamicContextException(
+            new FeedbackItemResolution(
+                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
+                [
+                    $this->name,
+                ]
+            ),
+            $this->getLocation(),
+            $this
+        );
     }
 }
