@@ -36,72 +36,79 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $ret['errors'] = $errors;
         }
 
-        /**
-         * "warnings", "deprecations" and "logs" are top-level entries:
-         * since they are not part of the spec, place them under
-         * the top-level entry "extensions":
-         *
-         * > This entry is reserved for implementors to extend the protocol however they see fit,
-         * > and hence there are no additional restrictions on its contents.
-         *
-         * @see http://spec.graphql.org/June2018/#sec-Response-Format
-         */
-        if ($this->addTopLevelExtensionsEntryToResponse()) {
-            // Warnings
-            $warnings = array_merge(
-                $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-                $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-                $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-                $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
-            );
-            if ($warnings !== []) {
-                $ret['extensions']['warnings'] = $warnings;
-            }
-
-            // Logs
-            $logs = array_merge(
-                $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] ?? []),
-                $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? []),
-                $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::LOG] ?? []),
-                $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::LOG] ?? []),
-            );
-            if ($logs !== []) {
-                $ret['extensions']['logs'] = $logs;
-            }
-
-            // Deprecations
-            $deprecations = array_merge(
-                $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
-                $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
-            );
-            if ($deprecations !== []) {
-                $ret['extensions']['deprecations'] = $deprecations;
-            }
-
-            // Notices
-            $notices = array_merge(
-                $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
-                $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
-            );
-            if ($notices !== []) {
-                $ret['extensions']['notices'] = $notices;
-            }
-
-            // Suggestions
-            $notices = array_merge(
-                $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
-                $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
-            );
-            if ($notices !== []) {
-                $ret['extensions']['suggestions'] = $notices;
-            }
-        }
+        $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
 
         if ($resultData = parent::getFormattedData($data)) {
             $ret['data'] = $resultData;
         }
 
         return $ret;
+    }
+
+    /**
+     * "warnings", "deprecations" and "logs" are top-level entries:
+     * since they are not part of the spec, place them under
+     * the top-level entry "extensions":
+     *
+     * > This entry is reserved for implementors to extend the protocol however they see fit,
+     * > and hence there are no additional restrictions on its contents.
+     *
+     * @see http://spec.graphql.org/June2018/#sec-Response-Format
+     */
+    protected function maybeAddTopLevelExtensionsEntryToResponse(array &$ret, array $data): void
+    {
+        if (!$this->addTopLevelExtensionsEntryToResponse()) {
+            return;
+        }
+
+        // Warnings
+        $warnings = array_merge(
+            $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+        );
+        if ($warnings !== []) {
+            $ret['extensions']['warnings'] = $warnings;
+        }
+
+        // Logs
+        $logs = array_merge(
+            $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] ?? []),
+            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? []),
+            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::LOG] ?? []),
+            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::LOG] ?? []),
+        );
+        if ($logs !== []) {
+            $ret['extensions']['logs'] = $logs;
+        }
+
+        // Deprecations
+        $deprecations = array_merge(
+            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
+            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
+        );
+        if ($deprecations !== []) {
+            $ret['extensions']['deprecations'] = $deprecations;
+        }
+
+        // Notices
+        $notices = array_merge(
+            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
+            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
+        );
+        if ($notices !== []) {
+            $ret['extensions']['notices'] = $notices;
+        }
+
+        // Suggestions
+        $notices = array_merge(
+            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
+            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
+        );
+        if ($notices !== []) {
+            $ret['extensions']['suggestions'] = $notices;
+        }
     }
 
     /**
