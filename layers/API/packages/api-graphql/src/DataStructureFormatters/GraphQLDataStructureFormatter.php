@@ -94,6 +94,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
         // Notices
         $notices = array_merge(
+            $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
+            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
             $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
             $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
         );
@@ -103,6 +105,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
         // Suggestions
         $suggestions = array_merge(
+            $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
+            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
             $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
             $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
         );
