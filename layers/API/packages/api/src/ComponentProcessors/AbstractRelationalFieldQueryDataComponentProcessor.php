@@ -137,10 +137,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          * Multiple Query Execution: In order to have the fields
          * of the operations be resolved in the same order as the
          * operations, wrap them on a "self" field.
-         *
-         * @var SplObjectStorage<OperationInterface,FieldInterface[]|FragmentBondInterface[]>
          */
-        $operationFieldOrFragmentBonds = new SplObjectStorage();
         $requestedOperationsCount = count($requestedOperations);
         for ($operationOrder = 0; $operationOrder < $requestedOperationsCount; $operationOrder++) {
             $operation = $requestedOperations[$operationOrder];
@@ -157,10 +154,6 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                     ),
                 ];
             }
-            $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
-        }
-        foreach ($requestedOperations as $operation) {
-            $fieldOrFragmentBonds = $operationFieldOrFragmentBonds[$operation];
             $fieldFragmentModelsTuples = array_merge(
                 $fieldFragmentModelsTuples,
                 $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
