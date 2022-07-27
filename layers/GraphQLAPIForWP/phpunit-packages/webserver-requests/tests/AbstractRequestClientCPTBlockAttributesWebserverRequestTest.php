@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 
@@ -14,28 +15,35 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest exten
 {
     use RequestURLWebserverRequestTestCaseTrait;
 
+    protected const ORIGINAL_DATA_NAME = 'original';
+    protected const UPDATED_DATA_NAME = 'updated';
+
+    /**
+     * Depending on the condition, either execute the
+     * REST endpoint to update the CPT block attribute
+     * or not.
+     */
     protected function executeCPTBlockAttributesSetUpTearDown(string $dataName): bool
     {
-        if ($dataName === 'original') {
+        if ($dataName === self::ORIGINAL_DATA_NAME) {
             return false;
         }
-        return true;
+        if ($dataName === self::UPDATED_DATA_NAME) {
+            return true;
+        }
+        return parent::executeCPTBlockAttributesSetUpTearDown($dataName);
     }
 
     /**
-     * Test that:
+     * The client will always return a 200 status, whether
+     * enabled or disabled. The difference is the custom header.
      *
-     * 1. The enabled client returns a 200
-     * 2. The disabled client returns a 404
-     * 
      * @dataProvider provideClientEnabledDisabledEntries
      */
     public function testClientEnabledDisabled(bool $enabled): void
     {
-        $this->doTestClientEnabledDisabled(
-            $this->getClientURL(),
-            $enabled,
-        );
+        $clientURL = $this->getClientURL();
+        $this->doTestEnabledOrDisabledPath($clientURL, 200, null, $enabled);
     }
 
     /**
@@ -50,20 +58,9 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest exten
     {
         $isUpdatedClientEnabled = $this->isUpdatedClientEnabled();
         return [
-            'original' => [!$isUpdatedClientEnabled],
-            'updated' => [$isUpdatedClientEnabled],
+            self::ORIGINAL_DATA_NAME => [!$isUpdatedClientEnabled],
+            self::UPDATED_DATA_NAME => [$isUpdatedClientEnabled],
         ];
-    }
-
-    /**
-     * The client will always return a 200 status, whether
-     * enabled or disabled. The difference is the custom header.
-     */
-    protected function doTestClientEnabledDisabled(
-        string $clientURL,
-        bool $enabled,
-    ): void {
-        $this->doTestEnabledOrDisabledPath($clientURL, 200, null, $enabled);
     }
 
     protected function getCustomHeader(): ?string
@@ -72,6 +69,20 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest exten
     }
 
     abstract protected function getClientURL(): string;
+
+    protected function getCPTBlockAttributesNewValue(): array
+    {
+        return [
+            BlockAttributeNames::IS_ENABLED => $this->isUpdatedClientEnabled(),
+        ];
+    }
     
-    abstract protected function isUpdatedClientEnabled(): bool;
+    /**
+     * The default state is for the clients to be enabled.
+     * Then, when updated, they will be disabled.
+     */
+    protected function isUpdatedClientEnabled(): bool
+    {
+        return false;
+    }
 }

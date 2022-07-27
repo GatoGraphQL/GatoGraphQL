@@ -29,14 +29,12 @@ class ExposeGraphiQLClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebse
 
     protected function getClientURL(): string
     {
+        /**
+         * This endpoint:
+         *
+         * - Originally has the client enabled
+         */
         return 'graphql/website/?view=graphiql';
-    }
-
-    protected function getCPTBlockAttributesNewValue(): array
-    {
-        return [
-            BlockAttributeNames::IS_ENABLED => false,
-        ];
     }
 
     protected function getCustomPostID(string $dataName): int
