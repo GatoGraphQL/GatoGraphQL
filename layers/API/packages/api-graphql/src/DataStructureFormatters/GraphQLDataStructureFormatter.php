@@ -61,6 +61,15 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             return;
         }
 
+        // Deprecations
+        $deprecations = array_merge(
+            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
+            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
+        );
+        if ($deprecations !== []) {
+            $ret['extensions']['deprecations'] = $deprecations;
+        }
+
         // Warnings
         $warnings = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
@@ -81,15 +90,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         );
         if ($logs !== []) {
             $ret['extensions']['logs'] = $logs;
-        }
-
-        // Deprecations
-        $deprecations = array_merge(
-            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
-            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
-        );
-        if ($deprecations !== []) {
-            $ret['extensions']['deprecations'] = $deprecations;
         }
 
         // Notices
