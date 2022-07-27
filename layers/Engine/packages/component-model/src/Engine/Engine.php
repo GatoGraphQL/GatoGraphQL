@@ -1754,26 +1754,6 @@ class Engine implements EngineInterface
              * thus caching most of the website even for logged-in users
              */
             if ($iterationResolvedIDFieldValues) {
-                /**
-                 * Conditional data fields: Store the loaded IDs/fields in an object,
-                 * to avoid fetching them again in later iterations on the same typeResolver
-                 * To find out if they were loaded, validate against the DBObject,
-                 * to see if it has those properties
-                 */
-                foreach ($idFieldSet as $id => $fieldSet) {
-                    // If it failed to load the item, it will be null
-                    $iterationResolvedFieldValues = $iterationResolvedIDFieldValues[$id] ?? null;
-                    if ($iterationResolvedFieldValues === null) {
-                        continue;
-                    }
-                    /** @var FieldInterface[] */
-                    $resolvedDirectFields = iterator_to_array($iterationResolvedFieldValues);
-                    $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
-                        $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
-                        $resolvedDirectFields
-                    );
-                }
-
                 // If the type is union, then add the type corresponding to each object on its ID
                 $resolvedIDFieldValues = $this->moveEntriesWithIDUnderDBName($iterationResolvedIDFieldValues, $relationalTypeResolver);
                 foreach ($resolvedIDFieldValues as $dbName => $entries) {
