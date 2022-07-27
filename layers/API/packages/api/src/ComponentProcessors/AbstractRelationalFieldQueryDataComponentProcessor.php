@@ -130,7 +130,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     ): array {
         $fragments = $executableDocument->getDocument()->getFragments();
         $fieldFragmentModelsTuples = [];
-        foreach ($executableDocument->getRequestedOperations() as $operation) {
+        $requestedOperations = $executableDocument->getRequestedOperations();
+        foreach ($requestedOperations as $operation) {
             $fieldFragmentModelsTuples = array_merge(
                 $fieldFragmentModelsTuples,
                 $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
