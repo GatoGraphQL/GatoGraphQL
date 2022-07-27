@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ComponentProcessors;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\ComponentProcessors\AbstractQueryDataComponentProcessor;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
-use PoP\ComponentModel\ComponentProcessors\AbstractQueryDataComponentProcessor;
-use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -20,8 +20,10 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use SplObjectStorage;
 
 abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
 {
@@ -131,11 +133,29 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         $fragments = $executableDocument->getDocument()->getFragments();
         $fieldFragmentModelsTuples = [];
         $requestedOperations = $executableDocument->getRequestedOperations();
+        /**
+         * Multiple Query Execution: In order to have the fields
+         * of the operations be resolved in the same order as the
+         * operations, wrap them on a "self" field.
+         *
+         * @var SplObjectStorage<OperationInterface,FieldInterface[]|FragmentBondInterface[]>
+         */
+        $operationFieldOrFragmentBonds = new SplObjectStorage();
+        $requestedOperationsCount = count($requestedOperations);
+        for ($operationOrder = 0; $operationOrder < $requestedOperationsCount; $operationOrder++) {
+            $operation = $requestedOperations[$operationOrder];
+            $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
+            for ($i = 0; $i < $operationOrder; $i++) {
+
+            }
+            $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
+        }
         foreach ($requestedOperations as $operation) {
+            $fieldOrFragmentBonds = $operationFieldOrFragmentBonds[$operation];
             $fieldFragmentModelsTuples = array_merge(
                 $fieldFragmentModelsTuples,
                 $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
-                    $operation->getFieldsOrFragmentBonds(),
+                    $fieldOrFragmentBonds,
                     $fragments,
                     $recursive
                 )
