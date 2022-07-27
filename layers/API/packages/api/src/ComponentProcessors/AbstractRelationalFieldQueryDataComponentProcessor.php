@@ -202,7 +202,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 if (!isset($this->fieldInstanceContainer[$alias])) {
                     $this->fieldInstanceContainer[$alias] = new RelationalField(
                         'self',
-                        null,
+                        $alias,
                         [],
                         $fieldOrFragmentBonds,
                         [],
@@ -226,16 +226,29 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
 
     /**
-     * ID to uniquely identify the AST element
+     * ID to uniquely identify the AST element.
+     *
+     * As dynamically-generated AST elements share the
+     * same location (and so 2 objects could produce the same ID),
+     * also append the unique object hash for them.
      */
     protected function getFieldUniqueID(FieldInterface $field, bool $aliasFriendly = false): string
     {
-        return sprintf(
+        $location = $field->getLocation();
+        $fieldUniqueID = sprintf(
             $aliasFriendly ? '%s%sx%s' : '%s([%s,%s])',
             $field->getAlias() ?? $field->getName(),
-            $field->getLocation()->getLine(),
-            $field->getLocation()->getColumn()
+            $location->getLine(),
+            $location->getColumn()
         );
+        if ($location === LocationHelper::getNonSpecificLocation()) {
+            return sprintf(
+                '%s #%s',
+                $fieldUniqueID,
+                spl_object_hash($field)
+            );
+        }
+        return $fieldUniqueID;
     }
 
     /**
