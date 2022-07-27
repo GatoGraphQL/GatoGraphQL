@@ -4,37 +4,20 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestClientCPTBlockAttributesWebserverRequestTest;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 
-class ExposeGraphiQLClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractRequestClientCPTBlockAttributesWebserverRequestTest
+class ExposeGraphiQLClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractExposeClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTest
 {
     public const WEBSITE_CUSTOM_ENDPOINT_ID = 196;
 
-    // protected function getEndpoint(): string
-    // {
-    //     /**
-    //      * This endpoint:
-    //      *
-    //      * - Originally has the Schema Configuration "Website" (with ID 191)
-    //      * - Then changed to "Power users" (with ID 261)
-    //      */
-    //     return 'graphql/website/';
-    // }
-
-    // protected function getFixtureFolder(): string
-    // {
-    //     return __DIR__ . '/fixture-schema-config-on-custom-endpoint-in-cpt';
-    // }
-
-    protected function getClientURL(): string
+    protected function getEndpoint(): string
     {
-        /**
-         * This endpoint:
-         *
-         * - Originally has the client enabled
-         */
-        return 'graphql/website/?view=graphiql';
+        return 'graphql/website/';
+    }
+
+    protected function getClientName(): string
+    {
+        return RequestParams::VIEW_GRAPHIQL;
     }
 
     protected function getCustomPostID(string $dataName): int
