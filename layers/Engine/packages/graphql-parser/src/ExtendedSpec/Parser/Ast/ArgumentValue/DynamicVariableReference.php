@@ -41,7 +41,7 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
                 )
             );
         }
-        
+
         // 1. Treat the variable as "static"
         if ($this->context->hasVariableValue($this->name)) {
             return $this->context->getVariableValue($this->name);

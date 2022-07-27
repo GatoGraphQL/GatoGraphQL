@@ -198,7 +198,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                     'dynamicSelf',
                     $operationOrder,
                     $i
-                );                
+                );
                 if (!isset($this->fieldInstanceContainer[$alias])) {
                     $this->fieldInstanceContainer[$alias] = new RelationalField(
                         'self',
