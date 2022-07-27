@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use function getenv;
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
@@ -15,6 +13,8 @@ use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationN
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
+
+use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
