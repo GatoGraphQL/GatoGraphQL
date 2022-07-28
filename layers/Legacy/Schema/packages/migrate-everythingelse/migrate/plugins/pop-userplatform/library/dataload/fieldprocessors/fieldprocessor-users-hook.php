@@ -84,7 +84,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
     ): mixed {
         $user = $object;
 
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'shortDescription':
                 return gdGetUserShortdescription($objectTypeResolver->getID($user));
 
