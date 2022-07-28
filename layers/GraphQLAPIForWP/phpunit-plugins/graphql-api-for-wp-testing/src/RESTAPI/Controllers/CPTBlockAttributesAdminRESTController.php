@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
@@ -46,8 +45,6 @@ use function serialize_blocks;
  */
 class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
 {
-    use WithFlushRewriteRulesRESTControllerTrait;
-
     protected const BLOCK_ID_SEPARATOR = ':';
 
     protected string $restBase = 'cpt-block-attributes';
@@ -514,18 +511,6 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                 'post_content'  => $content
             ]));
 
-            /**
-             * Flush rewrite rules in the next request.
-             * Eg: after changing the path of the GraphiQL
-             * client for the single endpoint,
-             * accessing the previous path must produce a 404.
-             *
-             * Not all settings need flushing, so check first.
-             */
-            if ($this->shouldFlushRewriteRules($blockAttributeValues)) {
-                $this->enqueueFlushRewriteRules();
-            }
-
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = $blockPosition === 0
@@ -544,23 +529,5 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         }
 
         return rest_ensure_response($response);
-    }
-
-    /**
-     * Some options need be flushed, others not.
-     * To find out, check the settings inputs.
-     *
-     * Inputs that need flushing (implemented so far):
-     *
-     * - Path (eg: GraphiQL/Voyager clients)
-     *
-     * @param array<string,mixed> $blockAttributeValues
-     */
-    protected function shouldFlushRewriteRules(array $blockAttributeValues): bool
-    {
-        return array_key_exists(
-            ModuleSettingOptions::PATH,
-            $blockAttributeValues
-        );
     }
 }
