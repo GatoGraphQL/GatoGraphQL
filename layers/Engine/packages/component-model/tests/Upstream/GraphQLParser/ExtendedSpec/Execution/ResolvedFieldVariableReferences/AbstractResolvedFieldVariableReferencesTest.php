@@ -203,7 +203,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
      * - circular references
      * - self referencing field
      * - self referencing field from directive
-     * 
+     *
      * Their ASTs cannot be constructed, because there are no setters,
      * and the __construct from Field and ResolvedFieldVariableReference
      * depend on each other.

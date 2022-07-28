@@ -530,7 +530,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                 return $previousFieldsOrFragmentBonds;
             }
             $previousFieldsOrFragmentBonds[] = $fieldOrFragmentBond;
-        } 
+        }
         throw new ShouldNotHappenException(
             sprintf(
                 $this->__('Field \'%s\' is not contained within the `$fieldsOrFragmentBonds` array'),
