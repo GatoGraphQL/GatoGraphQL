@@ -29,6 +29,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
@@ -525,7 +526,20 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): array {
-        return $fieldsOrFragmentBonds;
+        $previousFieldsOrFragmentBonds = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            // We found the Field, everything else is the "previous" ones
+            if ($fieldOrFragmentBond === $field) {
+                return $previousFieldsOrFragmentBonds;
+            }
+            $previousFieldsOrFragmentBonds[] = $fieldOrFragmentBond;
+        } 
+        throw new ShouldNotHappenException(
+            sprintf(
+                $this->__('Field \'%s\' is not contained within the `$fieldsOrFragmentBonds` array'),
+                $field->asFieldOutputQueryString()
+            )
+        );
     }
 
     /**
