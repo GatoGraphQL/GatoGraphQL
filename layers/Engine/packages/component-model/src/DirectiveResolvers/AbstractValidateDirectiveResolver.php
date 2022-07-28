@@ -58,7 +58,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
             $idFieldSet,
             $fieldDataAccessProvider,
             $succeedingPipelineIDFieldSet,
-            $idObjects,
             $resolvedIDFieldValues,
             $engineIterationFeedbackStore,
         );
@@ -73,7 +72,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$succeedingPipelineIDFieldSet,
-        array $idObjects,
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
