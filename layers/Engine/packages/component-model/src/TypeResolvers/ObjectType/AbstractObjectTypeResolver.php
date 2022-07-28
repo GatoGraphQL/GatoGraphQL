@@ -48,6 +48,8 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 use stdClass;
 
+use function Patchwork\always;
+
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
     use ObjectTypeOrDirectiveResolverTrait;
@@ -511,6 +513,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 )
             );
             return null;
+        } finally {
+            /**
+             * Set the resolved value (null or otherwise) to the AppState
+             * to resolve the FieldValuePromises
+             *
+             * @var SplObjectStorage<FieldInterface,mixed>
+             */
+            $resolvedFieldValues = App::getState('resolved-field-values');
+            $resolvedFieldValues[$field] = $value;
+
+            $appStateManager = App::getAppStateManager();
+            $appStateManager->override('resolved-field-values', $resolvedFieldValues);
         }
 
         /**
