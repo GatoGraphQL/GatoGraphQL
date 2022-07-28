@@ -452,6 +452,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * }
      * ```
      *
+     * This strategy also avoid a field referencing itself:
+     *
+     * ```
+     * {
+     *   field: echo(value: $field)
+     * }
+     * ```
+     *
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
