@@ -85,6 +85,16 @@
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GraphQLAPIForWP/plugins/extension-demo/composer.local.json",
             "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/extension-demo"
         ],
+        "optimize-autoloader": [
+            "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
+            "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing",
+            "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GraphQLAPIForWP/plugins/extension-demo"
+        ],
+        "deoptimize-autoloader": [
+            "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
+            "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing",
+            "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GraphQLAPIForWP/plugins/extension-demo"
+        ],
         "log-server-errors": "lando logs -t -f | grep \"php:error\"",
         "log-server-warnings": "lando logs -t -f | grep \"php:warn\"",
         "enable-caching": "lando wp config set GRAPHQL_API_DISABLE_CACHING false --raw --path=wordpress",
