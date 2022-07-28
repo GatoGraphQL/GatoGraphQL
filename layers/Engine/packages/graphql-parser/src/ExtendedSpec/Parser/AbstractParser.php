@@ -490,7 +490,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $previousFieldsOrFragmentBonds = $this->getPreviousFieldsOrFragmentBonds(
             $field,
             $fieldsOrFragmentBonds,
-            $fragments
         );
 
         // Check if there is a field with the variable name
@@ -518,13 +517,11 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * appear _before_ the provided field
      *
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
      * @return FieldInterface[]|FragmentBondInterface[]
      */
     protected function getPreviousFieldsOrFragmentBonds(
         FieldInterface $field,
         array $fieldsOrFragmentBonds,
-        array $fragments,
     ): array {
         $previousFieldsOrFragmentBonds = [];
         foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
