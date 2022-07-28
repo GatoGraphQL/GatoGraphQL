@@ -206,7 +206,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             PipelinePositions::BEGINNING => [],
             PipelinePositions::BEFORE_RESOLVE => [],
             PipelinePositions::AFTER_RESOLVE => [],
-            PipelinePositions::BEFORE_RESOLVE => [],
+            PipelinePositions::BEFORE_SERIALIZE => [],
             PipelinePositions::AFTER_SERIALIZE => [],
             PipelinePositions::END => [],
         ];
