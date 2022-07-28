@@ -26,7 +26,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install Composer dependencies
-                uses: "ramsey/composer-install@v1"
+                uses: "ramsey/composer-install@v2"
 
             -   name: Regenerate Monorepo PHPStan config
                 run: vendor/bin/monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi

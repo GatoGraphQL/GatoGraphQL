@@ -24,7 +24,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: "ramsey/composer-install@v1"
+            -   uses: "ramsey/composer-install@v2"
 
             -   id: output_data
                 run: |
@@ -52,7 +52,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install Composer dependencies
-                uses: "ramsey/composer-install@v1"
+                uses: "ramsey/composer-install@v2"
 
             -   name: Run PHP Code Sniffer
                 run: vendor/bin/phpcs -n src ${{ needs.provide_data.outputs.package_code_paths }}
