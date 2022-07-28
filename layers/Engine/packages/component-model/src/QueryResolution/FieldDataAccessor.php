@@ -8,6 +8,15 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
+    /**
+     * A ResolvedFieldValueReference will return a FieldValuePromise,
+     * which must be resolved to the actual value after its corresponding
+     * Field was resolved.
+     *
+     * @var array<string,mixed>
+     */
+    protected ?array $resolvedFieldArgs = null;
+
     public function __construct(
         protected FieldInterface $field,
         /** @var array<string,mixed> */
@@ -38,7 +47,18 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      */
     protected function getKeyValuesSource(): array
     {
-        return $this->fieldArgs;
+        return $this->getResolvedFieldArgs();
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getResolvedFieldArgs(): array
+    {
+        if ($this->resolvedFieldArgs === null) {
+            $this->resolvedFieldArgs = $this->fieldArgs;
+        }
+        return $this->resolvedFieldArgs;
     }
 
     /**

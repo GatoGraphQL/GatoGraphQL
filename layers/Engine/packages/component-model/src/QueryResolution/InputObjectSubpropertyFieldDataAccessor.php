@@ -39,7 +39,7 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
      */
     protected function getInputObjectValue(): stdClass
     {
-        $inputObjectValue = $this->fieldArgs[$this->getInputObjectSubpropertyName()];
+        $inputObjectValue = $this->getResolvedFieldArgs()[$this->getInputObjectSubpropertyName()];
         if (!($inputObjectValue instanceof stdClass)) {
             throw new ShouldNotHappenException(
                 sprintf(
