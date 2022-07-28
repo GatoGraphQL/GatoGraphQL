@@ -16,9 +16,9 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
     public function __construct(
         FieldInterface $field,
         protected string $inputObjectSubpropertyName,
-        array $normalizedValues,
+        array $fieldArgs,
     ) {
-        parent::__construct($field, $normalizedValues);
+        parent::__construct($field, $fieldArgs);
     }
 
     public function getInputObjectSubpropertyName(): string
@@ -39,7 +39,7 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
      */
     protected function getInputObjectValue(): stdClass
     {
-        $inputObjectValue = $this->normalizedValues[$this->getInputObjectSubpropertyName()];
+        $inputObjectValue = $this->fieldArgs[$this->getInputObjectSubpropertyName()];
         if (!($inputObjectValue instanceof stdClass)) {
             throw new ShouldNotHappenException(
                 sprintf(
