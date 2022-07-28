@@ -29,7 +29,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         $idsSatisfyingCondition = [];
         foreach (array_keys($idFieldSet) as $id) {
             // Validate directive args for the object
-            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+            $expressions = $this->getExpressionsForObject($id, $messages);
             $objectDirectiveArgs = $this->getObjectDirectiveArgs($expressions);
             if ($objectDirectiveArgs['if'] ?? null) {
                 $idsSatisfyingCondition[] = $id;

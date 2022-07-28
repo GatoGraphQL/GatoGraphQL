@@ -126,7 +126,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 continue;
             }
 
-            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+            $expressions = $this->getExpressionsForObject($id, $messages);
             $this->resolveValuesForObject(
                 $relationalTypeResolver,
                 $id,
