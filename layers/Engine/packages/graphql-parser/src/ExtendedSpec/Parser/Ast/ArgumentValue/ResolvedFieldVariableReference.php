@@ -6,7 +6,6 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\ExtendedSpec\Execution\FieldValuePromise;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 class ResolvedFieldVariableReference extends AbstractDynamicVariableReference

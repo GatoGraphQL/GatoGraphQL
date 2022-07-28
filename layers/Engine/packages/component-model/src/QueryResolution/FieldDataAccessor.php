@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
     /**
-     * A ResolvedFieldValueReference will return a FieldValuePromise,
+     * A ResolvedFieldVariableReference will return a FieldValuePromise,
      * which must be resolved to the actual value after its corresponding
      * Field was resolved.
      *
