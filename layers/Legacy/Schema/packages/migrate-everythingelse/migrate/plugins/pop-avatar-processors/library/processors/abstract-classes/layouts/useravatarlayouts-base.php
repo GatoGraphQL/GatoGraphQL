@@ -1,5 +1,5 @@
 <?php
-use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
+use PoP\ConfigurationComponentModel\Facades\HelperServices\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_UserAvatarLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {

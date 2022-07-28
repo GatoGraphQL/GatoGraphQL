@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService;
+namespace PoP\ConfigurationComponentModel\Facades\HelperServices;
 
 use PoP\Root\App;
 use PoP\ConfigurationComponentModel\HelperServices\TypeResolverHelperServiceInterface;

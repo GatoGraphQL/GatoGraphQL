@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Facades\Schema;
+namespace PoP\Engine\Facades\HelperServices;
 
 use PoP\Root\App;
 use PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface;

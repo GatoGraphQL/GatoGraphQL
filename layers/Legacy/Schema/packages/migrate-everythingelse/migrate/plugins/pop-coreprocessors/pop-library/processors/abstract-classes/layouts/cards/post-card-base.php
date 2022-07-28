@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
+use PoP\ConfigurationComponentModel\Facades\HelperServices\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_PostCardLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
