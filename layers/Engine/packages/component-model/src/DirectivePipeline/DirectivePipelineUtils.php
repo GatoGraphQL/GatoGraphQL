@@ -56,7 +56,6 @@ class DirectivePipelineUtils
             &$payload['pipelineIDFieldSet'],
             &$payload['pipelineFieldDataAccessProviders'],
             &$payload['resolvedIDFieldValues'],
-            &$payload['variables'],
             &$payload['messages'],
             &$payload['engineIterationFeedbackStore'],
         ];
