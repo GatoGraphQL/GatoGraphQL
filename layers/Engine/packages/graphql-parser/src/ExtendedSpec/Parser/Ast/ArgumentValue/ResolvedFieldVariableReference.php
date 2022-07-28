@@ -11,27 +11,12 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 class ResolvedFieldVariableReference extends AbstractDynamicVariableReference
 {
-    protected FieldInterface $field;
-
     public function __construct(
         string $name,
-        FieldInterface $field,
+        protected FieldInterface $field,
         Location $location,
     ) {
-        // Remove the directives from the field
-        $this->field = new LeafField(
-            $field->getName(),
-            $field->getAlias(),
-            $field->getArguments(),
-            [],
-            $location
-        );
         parent::__construct($name, $location);
-    }
-
-    public function getField(): FieldInterface
-    {
-        return $this->field;
     }
 
     public function getValue(): mixed
