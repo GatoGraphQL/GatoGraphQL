@@ -101,7 +101,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 $value = array();
                 $type = strtolower($objectTypeResolver->getTypeName());
                 // If it has categories, use it. Otherwise, only use the post type
-                if ($cats = $objectTypeResolver->resolveValue($post, 'categories', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($cats = $objectTypeResolver->resolveValue($post, 'categories', $objectTypeFieldResolutionFeedbackStore, $options)) {
                     foreach ($cats as $cat) {
                         $value[] = $type.'-'.$cat;
                     }

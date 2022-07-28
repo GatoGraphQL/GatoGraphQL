@@ -87,9 +87,9 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
 
             case 'hasOrganizationDetails':
                 return
-                    $objectTypeResolver->resolveValue($user, 'organizationtypes', $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
-                    $objectTypeResolver->resolveValue($user, 'organizationcategories', $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
-                    $objectTypeResolver->resolveValue($user, 'contactPerson', $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
+                    $objectTypeResolver->resolveValue($user, 'organizationtypes', $objectTypeFieldResolutionFeedbackStore, $options) ||
+                    $objectTypeResolver->resolveValue($user, 'organizationcategories', $objectTypeFieldResolutionFeedbackStore, $options) ||
+                    $objectTypeResolver->resolveValue($user, 'contactPerson', $objectTypeFieldResolutionFeedbackStore, $options) ||
                     $objectTypeResolver->resolveValue($user, 'contactNumber', $objectTypeFieldResolutionFeedbackStore);
         }
 

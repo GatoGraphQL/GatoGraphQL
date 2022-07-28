@@ -67,7 +67,7 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
                 return URE_CommunityUtils::getCommunityMembers($objectTypeResolver->getID($user));
 
             case 'hasMembers':
-                return !empty($objectTypeResolver->resolveValue($user, 'members', $expressions, $objectTypeFieldResolutionFeedbackStore, $options));
+                return !empty($objectTypeResolver->resolveValue($user, 'members', $objectTypeFieldResolutionFeedbackStore, $options));
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

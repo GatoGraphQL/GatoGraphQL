@@ -64,7 +64,7 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
                 return \PoPCMSSchema\UserMeta\Utils::getUserMeta($objectTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS);
 
             case 'hasIndividualDetails':
-                return !empty($objectTypeResolver->resolveValue($user, 'individualinterests', $expressions, $objectTypeFieldResolutionFeedbackStore, $options));
+                return !empty($objectTypeResolver->resolveValue($user, 'individualinterests', $objectTypeFieldResolutionFeedbackStore, $options));
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

@@ -68,7 +68,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
         switch ($field->getName()) {
             case 'multilayoutKeys':
                 return array(
-                    $objectTypeResolver->resolveValue($user, 'role', $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
+                    $objectTypeResolver->resolveValue($user, 'role', $objectTypeFieldResolutionFeedbackStore, $options),
                 );
 
              // Needed for tinyMCE-mention plug-in
