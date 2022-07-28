@@ -474,24 +474,50 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /** @var DynamicVariableReference */
         $dynamicVariableReference = $argument->getValueAST();
 
+        /**
+         * Make sure the field appears _before_ the reference,
+         * to avoid circular references.
+         */
+        $previousFieldsOrFragmentBonds = $this->getPreviousFieldsOrFragmentBonds(
+            // $field,
+            $fieldsOrFragmentBonds,
+            $fragments
+        );
+
         // Check if there is a field with the variable name
         $referencedFieldNameOrAlias = $this->getQueryAugmenterService()->extractDynamicVariableName($dynamicVariableReference->getName());
-        $field = $this->findFieldInQueryBlock(
+        $referencedField = $this->findFieldInQueryBlock(
             $referencedFieldNameOrAlias,
-            $fieldsOrFragmentBonds,
+            $previousFieldsOrFragmentBonds,
             $fragments,
         );
-        if ($field === null) {
+        if ($referencedField === null) {
             return;
         }
 
         // Replace the "Dynamic Variables Reference" with "Resolved Field Variable Reference"
         $resolvedFieldVariableReference = new ResolvedFieldVariableReference(
             $dynamicVariableReference->getName(),
-            $field,
+            $referencedField,
             $dynamicVariableReference->getLocation()
         );
         $argument->setValueAST($resolvedFieldVariableReference);
+    }
+
+    /**
+     * Calculate the list of fields and fragment bonds that
+     * appear _before_ the provided field
+     *
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param Fragment[] $fragments
+     * @return FieldInterface[]|FragmentBondInterface[]
+     */
+    protected function getPreviousFieldsOrFragmentBonds(
+        // FieldInterface $field,
+        array $fieldsOrFragmentBonds,
+        array $fragments,
+    ): array {
+        return $fieldsOrFragmentBonds;
     }
 
     /**
