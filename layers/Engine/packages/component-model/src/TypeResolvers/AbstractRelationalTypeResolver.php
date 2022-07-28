@@ -1189,7 +1189,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $unionTypeOutputKeyIDs,
                 $previouslyResolvedIDFieldValues,
                 $resolvedIDFieldValues,
-                $variables,
                 $messages,
                 $engineIterationFeedbackStore,
             );

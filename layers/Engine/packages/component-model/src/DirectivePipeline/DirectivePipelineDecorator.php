@@ -34,7 +34,6 @@ class DirectivePipelineDecorator
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
