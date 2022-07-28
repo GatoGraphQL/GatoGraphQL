@@ -4,14 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
+use PoP\ComponentModel\App;
+use PoP\GraphQLParser\ExtendedSpec\Execution\FieldValuePromise;
+use PoP\GraphQLParser\Module;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
+    /**
+     * A ResolvedFieldValueReference will return a FieldValuePromise,
+     * which must be resolved to the actual value after its corresponding
+     * Field was resolved.
+     *
+     * @var array<string,mixed>
+     */
+    protected ?array $resolvedFieldArgs = null;
+
     public function __construct(
         protected FieldInterface $field,
         /** @var array<string,mixed> */
-        protected array $normalizedValues,
+        protected array $fieldArgs,
     ) {
     }
 
@@ -38,7 +51,44 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      */
     protected function getKeyValuesSource(): array
     {
-        return $this->normalizedValues;
+        return $this->getResolvedFieldArgs();
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getResolvedFieldArgs(): array
+    {
+        if ($this->resolvedFieldArgs === null) {
+            $this->resolvedFieldArgs = $this->resolveFieldArgs($this->fieldArgs);
+        }
+        return $this->resolvedFieldArgs;
+    }
+
+    /**
+     * Resolve all the FieldValuePromise to their resolved values.
+     *
+     * @return array<string,mixed>
+     */
+    protected function resolveFieldArgs(array $fieldArgs): array
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableResolvedFieldVariableReferences()) {
+            return $fieldArgs;
+        }
+
+        $resolvedFieldArgs = [];
+        foreach ($fieldArgs as $key => $value) {
+            if ($value instanceof FieldValuePromise) {
+                /** @var FieldValuePromise */
+                $fieldValuePromise = $value;
+                $resolvedFieldArgs[$key] = $fieldValuePromise->resolveValue();
+                continue;
+            }
+            $resolvedFieldArgs[$key] = $value;
+        }
+        return $resolvedFieldArgs;
     }
 
     /**
