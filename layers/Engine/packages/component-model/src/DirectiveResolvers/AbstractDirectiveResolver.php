@@ -1198,7 +1198,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $pipelineIDFieldSet,
                     $pipelineFieldDataAccessProviders,
                     $resolvedIDFieldValues,
-                    $variables,
                     $messages,
                     $engineIterationFeedbackStore,
                 );
