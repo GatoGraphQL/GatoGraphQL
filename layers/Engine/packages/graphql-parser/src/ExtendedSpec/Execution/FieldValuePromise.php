@@ -12,4 +12,9 @@ class FieldValuePromise
         public readonly FieldInterface $field,
     ) {
     }
+
+    public function resolveValue(): mixed
+    {
+        return null;
+    }
 }

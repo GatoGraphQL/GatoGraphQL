@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
+use PoP\ComponentModel\App;
+use PoP\GraphQLParser\ExtendedSpec\Execution\FieldValuePromise;
+use PoP\GraphQLParser\Module;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class FieldDataAccessor implements FieldDataAccessorInterface
@@ -56,9 +60,35 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     protected function getResolvedFieldArgs(): array
     {
         if ($this->resolvedFieldArgs === null) {
-            $this->resolvedFieldArgs = $this->fieldArgs;
+            $this->resolvedFieldArgs = $this->resolveFieldArgs($this->fieldArgs);
         }
         return $this->resolvedFieldArgs;
+    }
+
+    /**
+     * Resolve all the FieldValuePromise to their resolved values.
+     *
+     * @return array<string,mixed>
+     */
+    protected function resolveFieldArgs(array $fieldArgs): array
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableResolvedFieldVariableReferences()) {
+            return $fieldArgs;
+        }
+
+        $resolvedFieldArgs = [];
+        foreach ($fieldArgs as $key => $value) {
+            if ($value instanceof FieldValuePromise) {
+                /** @var FieldValuePromise */
+                $fieldValuePromise = $value;
+                $resolvedFieldArgs[$key] = $fieldValuePromise->resolveValue();
+                continue;
+            }
+            $resolvedFieldArgs[$key] = $value;
+        }
+        return $resolvedFieldArgs;
     }
 
     /**
