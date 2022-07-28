@@ -374,12 +374,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                 $fieldsOrFragmentBonds,
                 $fragments,
             );
-            $this->replaceResolvedFieldVariableReferencesInDirectives(
-                $field,
-                $field->getDirectives(),
-                $fieldsOrFragmentBonds,
-                $fragments,
-            );
             if ($field instanceof RelationalField) {
                 /** @var RelationalField */
                 $relationalField = $field;
@@ -388,38 +382,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                     $fragments,
                 );
             }
-        }
-    }
-
-    /**
-     * @param Directive[] $directives
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
-     */
-    protected function replaceResolvedFieldVariableReferencesInDirectives(
-        FieldInterface $field,
-        array $directives,
-        array $fieldsOrFragmentBonds,
-        array $fragments,
-    ): void {
-        foreach ($directives as $directive) {
-            $this->replaceResolvedFieldVariableReferencesInArguments(
-                $field,
-                $directive->getArguments(),
-                $fieldsOrFragmentBonds,
-                $fragments,
-            );
-            if (!($directive instanceof MetaDirective)) {
-                continue;
-            }
-            /** @var MetaDirective */
-            $metaDirective = $directive;
-            $this->replaceResolvedFieldVariableReferencesInDirectives(
-                $field,
-                $metaDirective->getNestedDirectives(),
-                $fieldsOrFragmentBonds,
-                $fragments,
-            );
         }
     }
 
