@@ -368,11 +368,13 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             /** @var FieldInterface */
             $field = $fieldOrFragmentBond;
             $this->replaceResolvedFieldVariableReferencesInArguments(
+                $field,
                 $field->getArguments(),
                 $fieldsOrFragmentBonds,
                 $fragments,
             );
             $this->replaceResolvedFieldVariableReferencesInDirectives(
+                $field,
                 $field->getDirectives(),
                 $fieldsOrFragmentBonds,
                 $fragments,
@@ -394,12 +396,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param Fragment[] $fragments
      */
     protected function replaceResolvedFieldVariableReferencesInDirectives(
+        FieldInterface $field,
         array $directives,
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): void {
         foreach ($directives as $directive) {
             $this->replaceResolvedFieldVariableReferencesInArguments(
+                $field,
                 $directive->getArguments(),
                 $fieldsOrFragmentBonds,
                 $fragments,
@@ -410,6 +414,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             /** @var MetaDirective */
             $metaDirective = $directive;
             $this->replaceResolvedFieldVariableReferencesInDirectives(
+                $field,
                 $metaDirective->getNestedDirectives(),
                 $fieldsOrFragmentBonds,
                 $fragments,
@@ -423,12 +428,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param Fragment[] $fragments
      */
     protected function replaceResolvedFieldVariableReferencesInArguments(
+        FieldInterface $field,
         array $arguments,
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): void {
         foreach ($arguments as $argument) {
             $this->replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
+                $field,
                 $argument,
                 $fieldsOrFragmentBonds,
                 $fragments,
@@ -464,6 +471,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param Fragment[] $fragments
      */
     protected function replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
+        FieldInterface $field,
         Argument $argument,
         array $fieldsOrFragmentBonds,
         array $fragments,
@@ -479,7 +487,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * to avoid circular references.
          */
         $previousFieldsOrFragmentBonds = $this->getPreviousFieldsOrFragmentBonds(
-            // $field,
+            $field,
             $fieldsOrFragmentBonds,
             $fragments
         );
@@ -513,7 +521,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @return FieldInterface[]|FragmentBondInterface[]
      */
     protected function getPreviousFieldsOrFragmentBonds(
-        // FieldInterface $field,
+        FieldInterface $field,
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): array {
