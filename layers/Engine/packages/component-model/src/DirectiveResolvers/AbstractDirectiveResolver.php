@@ -731,7 +731,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function getPipelinePosition(): string
     {
-        return PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE;
+        return PipelinePositions::AFTER_RESOLVE;
     }
 
     /**
