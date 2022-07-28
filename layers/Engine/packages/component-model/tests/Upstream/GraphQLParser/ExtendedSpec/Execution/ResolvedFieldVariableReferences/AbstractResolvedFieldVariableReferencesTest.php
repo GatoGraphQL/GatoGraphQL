@@ -344,7 +344,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
     }
 
     /**
-     * Variable references inside directives must also be resolved.
+     * Variable references inside directives are not supported.
      */
     public function testReferenceInDirectives(): void
     {
@@ -376,12 +376,8 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             [],
             new Location(3, 27)
         );
-        $dynamicVariableReference = static::enabled()
-            ? new ResolvedFieldVariableReference('_userList', $field, new Location(8, 28))
-            : new DynamicVariableReference('_userList', new Location(8, 28));
-        if (!static::enabled()) {
-            $dynamicVariableReference->setContext($context);
-        }
+        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(8, 28));
+        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -470,7 +466,8 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
     }
 
     /**
-     * Variable references inside directives must also be resolved.
+     * Variable references inside directives are not supported,
+     * but test anyway passing a reference that does not exist.
      */
     public function testNonExistingFieldVariableReferencesInDirectives(): void
     {
