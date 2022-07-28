@@ -29,6 +29,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
@@ -368,11 +369,13 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             /** @var FieldInterface */
             $field = $fieldOrFragmentBond;
             $this->replaceResolvedFieldVariableReferencesInArguments(
+                $field,
                 $field->getArguments(),
                 $fieldsOrFragmentBonds,
                 $fragments,
             );
             $this->replaceResolvedFieldVariableReferencesInDirectives(
+                $field,
                 $field->getDirectives(),
                 $fieldsOrFragmentBonds,
                 $fragments,
@@ -394,12 +397,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param Fragment[] $fragments
      */
     protected function replaceResolvedFieldVariableReferencesInDirectives(
+        FieldInterface $field,
         array $directives,
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): void {
         foreach ($directives as $directive) {
             $this->replaceResolvedFieldVariableReferencesInArguments(
+                $field,
                 $directive->getArguments(),
                 $fieldsOrFragmentBonds,
                 $fragments,
@@ -410,6 +415,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             /** @var MetaDirective */
             $metaDirective = $directive;
             $this->replaceResolvedFieldVariableReferencesInDirectives(
+                $field,
                 $metaDirective->getNestedDirectives(),
                 $fieldsOrFragmentBonds,
                 $fragments,
@@ -423,12 +429,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param Fragment[] $fragments
      */
     protected function replaceResolvedFieldVariableReferencesInArguments(
+        FieldInterface $field,
         array $arguments,
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): void {
         foreach ($arguments as $argument) {
             $this->replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
+                $field,
                 $argument,
                 $fieldsOrFragmentBonds,
                 $fragments,
@@ -442,10 +450,29 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * with the corresponding Resolved Field Variable Reference
      * to that field.
      *
+     * Only accept fields that have appeared before, as to avoid
+     * circular recursions:
+     *
+     * ```
+     * {
+     *   first: echo(value: $second)
+     *   second: echo(value: $first)
+     * }
+     * ```
+     *
+     * This strategy also avoid a field referencing itself:
+     *
+     * ```
+     * {
+     *   field: echo(value: $field)
+     * }
+     * ```
+     *
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
     protected function replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
+        FieldInterface $field,
         Argument $argument,
         array $fieldsOrFragmentBonds,
         array $fragments,
@@ -456,24 +483,60 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /** @var DynamicVariableReference */
         $dynamicVariableReference = $argument->getValueAST();
 
+        /**
+         * Make sure the field appears _before_ the reference,
+         * to avoid circular references.
+         */
+        $previousFieldsOrFragmentBonds = $this->getPreviousFieldsOrFragmentBonds(
+            $field,
+            $fieldsOrFragmentBonds,
+        );
+
         // Check if there is a field with the variable name
         $referencedFieldNameOrAlias = $this->getQueryAugmenterService()->extractDynamicVariableName($dynamicVariableReference->getName());
-        $field = $this->findFieldInQueryBlock(
+        $referencedField = $this->findFieldInQueryBlock(
             $referencedFieldNameOrAlias,
-            $fieldsOrFragmentBonds,
+            $previousFieldsOrFragmentBonds,
             $fragments,
         );
-        if ($field === null) {
+        if ($referencedField === null) {
             return;
         }
 
         // Replace the "Dynamic Variables Reference" with "Resolved Field Variable Reference"
         $resolvedFieldVariableReference = new ResolvedFieldVariableReference(
             $dynamicVariableReference->getName(),
-            $field,
+            $referencedField,
             $dynamicVariableReference->getLocation()
         );
         $argument->setValueAST($resolvedFieldVariableReference);
+    }
+
+    /**
+     * Calculate the list of fields and fragment bonds that
+     * appear _before_ the provided field
+     *
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @return FieldInterface[]|FragmentBondInterface[]
+     */
+    protected function getPreviousFieldsOrFragmentBonds(
+        FieldInterface $field,
+        array $fieldsOrFragmentBonds,
+    ): array {
+        $previousFieldsOrFragmentBonds = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            // We found the Field, everything else is the "previous" ones
+            if ($fieldOrFragmentBond === $field) {
+                return $previousFieldsOrFragmentBonds;
+            }
+            $previousFieldsOrFragmentBonds[] = $fieldOrFragmentBond;
+        }
+        throw new ShouldNotHappenException(
+            sprintf(
+                $this->__('Field \'%s\' is not contained within the `$fieldsOrFragmentBonds` array'),
+                $field->asFieldOutputQueryString()
+            )
+        );
     }
 
     /**

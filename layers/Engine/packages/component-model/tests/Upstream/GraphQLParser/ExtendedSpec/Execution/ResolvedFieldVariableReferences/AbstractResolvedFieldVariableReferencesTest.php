@@ -138,9 +138,10 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
     }
 
     /**
-     * Adding the reference first, the field resolution after.
+     * Adding the reference first, the field resolution after,
+     * must not work (as to avoid potential circular references)
      */
-    public function testInverseOrder(): void
+    public function testNoInverseOrder(): void
     {
         $query = '
             {
@@ -171,11 +172,89 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             [],
             new Location(8, 27)
         );
-        $dynamicVariableReference = static::enabled()
-            ? new ResolvedFieldVariableReference('_userList', $field, new Location(4, 29))
-            : new DynamicVariableReference('_userList', new Location(4, 29));
+        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(4, 29));
+        $dynamicVariableReference->setContext($context);
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                new LeafField(
+                    'extract',
+                    'userListLang',
+                    [
+                        new Argument('object', $dynamicVariableReference, new Location(4, 21)),
+                        new Argument('path', new Literal('lang', new Location(5, 28)), new Location(5, 21)),
+                    ],
+                    [],
+                    new Location(3, 31)
+                ),
+                $field,
+            ],
+            new Location(2, 13)
+        );
+
+        $this->executeValidation($query, $context, $queryOperation);
+    }
+
+    /**
+     * Testing several examples cannot be achieved:
+     *
+     * - circular references
+     * - self referencing field
+     * - self referencing field from directive
+     *
+     * Their ASTs cannot be constructed, because there are no setters,
+     * and the __construct from Field and ResolvedFieldVariableReference
+     * depend on each other.
+     *
+     * Test via Integration test then.
+     */
+    /*
+    public function disabledTestNoCircularReferences(): void
+    {
+        $query = '
+            {
+                userListLang: extract(
+                    object: $_userList,
+                    path: "lang"
+                )
+
+                userList: getJSON(
+                    url: "https://someurl.com/rest/users",
+                    source: $_userListLang
+                )
+            }
+        ';
+        $context = new Context('');
+        $field = new LeafField(
+            'getJSON',
+            'userList',
+            [
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(9, 27)
+                    ),
+                    new Location(9, 21)
+                ),
+                new Argument(
+                    'source',
+                    $dynamicVariableReference2, // This reference does not exist yet!
+                    new Location(10, 24)
+                ),
+            ],
+            [],
+            new Location(8, 27)
+        );
+        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(4, 29));
+        $dynamicVariableReference->setContext($context);
+        $dynamicVariableReference2 = static::enabled()
+            ? new ResolvedFieldVariableReference('_userListLang', $field, new Location(10, 29))
+            : new DynamicVariableReference('_userListLang', new Location(10, 29));
         if (!static::enabled()) {
-            $dynamicVariableReference->setContext($context);
+            $dynamicVariableReference2->setContext($context);
         }
         $queryOperation = new QueryOperation(
             '',
@@ -199,6 +278,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
 
         $this->executeValidation($query, $context, $queryOperation);
     }
+    */
 
     /**
      * Referencing the fieldName.
