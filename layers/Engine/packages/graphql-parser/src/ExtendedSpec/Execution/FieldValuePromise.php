@@ -26,7 +26,7 @@ class FieldValuePromise
         if (!$resolvedFieldValues->contains($this->field)) {
             throw new ShouldNotHappenException(
                 sprintf(
-                    $this->__('The FieldValuePromise cannot resolve field \'%s\'','graphql-parser'),
+                    $this->__('The FieldValuePromise cannot resolve field \'%s\'', 'graphql-parser'),
                     $this->field->asFieldOutputQueryString()
                 )
             );
