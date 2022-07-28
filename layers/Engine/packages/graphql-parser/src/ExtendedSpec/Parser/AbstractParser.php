@@ -442,6 +442,16 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * with the corresponding Resolved Field Variable Reference
      * to that field.
      *
+     * Only accept fields that have appeared before, as to avoid
+     * circular recursions:
+     *
+     * ```
+     * {
+     *   first: echo(value: $second)
+     *   second: echo(value: $first)
+     * }
+     * ```
+     *
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
