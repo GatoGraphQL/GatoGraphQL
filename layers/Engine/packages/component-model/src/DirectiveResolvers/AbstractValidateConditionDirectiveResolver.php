@@ -40,7 +40,6 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         if ($this->isValidationSuccessful($relationalTypeResolver)) {

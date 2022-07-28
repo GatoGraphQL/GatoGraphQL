@@ -61,7 +61,6 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
         array &$succeedingPipelineIDFieldSet,
         array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -98,7 +97,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
             }
             foreach ($fieldSet->fields as $field) {
                 $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $separateObjectTypeFieldResolutionFeedbackStore);
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
@@ -120,7 +119,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
                 }
 
                 /** @var int */
-                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field, $separateObjectTypeFieldResolutionFeedbackStore);
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,

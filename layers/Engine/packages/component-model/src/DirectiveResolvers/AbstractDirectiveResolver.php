@@ -207,12 +207,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * were not provided in the query.
      *
      * @param FieldInterface[] $fields
-     * @param array<string,mixed> $variables
      */
     public function prepareDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $directiveData = $this->getDirectiveData(
@@ -648,15 +646,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return mixed[]
      */
-    protected function getExpressionsForObject(int|string $id, array $variables, array $messages): array
+    protected function getExpressionsForObject(int|string $id, array $messages): array
     {
-        // Create a custom $variables containing all the properties from $resolvedIDFieldValues for this object
-        // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
-        // Otherwise it can't, since the fieldResolver doesn't have access to either $resolvedIDFieldValues
-        return array_merge(
-            $variables,
-            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id] ?? []
-        );
+        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id] ?? [];
     }
 
     /**
@@ -704,10 +696,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @return mixed[]
      */
-    protected function getExpressionsForObjectAndField(int|string $id, FieldInterface $field, array $variables, array $messages): array
+    protected function getExpressionsForObjectAndField(int|string $id, FieldInterface $field, array $messages): array
     {
         return array_merge(
-            $this->getExpressionsForObject($id, $variables, $messages),
+            $this->getExpressionsForObject($id, $messages),
             $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()] ?? []
         );
     }
@@ -1144,7 +1136,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $pipelineIDFieldSet,
             $pipelineFieldDataAccessProviders,
             $resolvedIDFieldValues,
-            $variables,
             $messages,
             /** @var EngineIterationFeedbackStore */
             $engineIterationFeedbackStore,
@@ -1174,7 +1165,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $idObjects,
         //     $resolvedIDFieldValues,
         //     $previouslyResolvedIDFieldValues,
-        //     $variables,
         //     $messages,
         // );
 
@@ -1198,7 +1188,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $pipelineIDFieldSet,
                     $pipelineFieldDataAccessProviders,
                     $resolvedIDFieldValues,
-                    $variables,
                     $messages,
                     $engineIterationFeedbackStore,
                 );
@@ -1284,7 +1273,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $pipelineIDFieldSet,
             $pipelineFieldDataAccessProviders,
             $resolvedIDFieldValues,
-            $variables,
             $messages,
             $engineIterationFeedbackStore,
         );

@@ -61,7 +61,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$succeedingPipelineIDFieldSet,
         array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -76,7 +75,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $fieldDataAccessProvider,
             $resolvedIDFieldValues,
             $previouslyResolvedIDFieldValues,
-            $variables,
             $messages,
             $engineIterationFeedbackStore,
         );
@@ -94,7 +92,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -127,7 +124,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 continue;
             }
 
-            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+            $expressions = $this->getExpressionsForObject($id, $messages);
             $this->resolveValuesForObject(
                 $relationalTypeResolver,
                 $id,
@@ -136,7 +133,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
-                $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
             );
@@ -184,7 +180,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
-        array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -197,7 +192,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
-                $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
             );
@@ -216,7 +210,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
-        array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {

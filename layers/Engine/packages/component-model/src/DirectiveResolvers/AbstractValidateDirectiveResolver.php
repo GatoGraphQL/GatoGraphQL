@@ -50,7 +50,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$succeedingPipelineIDFieldSet,
         array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -59,9 +58,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
             $idFieldSet,
             $fieldDataAccessProvider,
             $succeedingPipelineIDFieldSet,
-            $idObjects,
             $resolvedIDFieldValues,
-            $variables,
             $engineIterationFeedbackStore,
         );
     }
@@ -75,16 +72,13 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$succeedingPipelineIDFieldSet,
-        array $idObjects,
         array &$resolvedIDFieldValues,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $failedIDFieldSet = $this->validateIDFieldSet(
             $relationalTypeResolver,
             $idFieldSet,
             $fieldDataAccessProvider,
-            $variables,
             $engineIterationFeedbackStore,
         );
 
@@ -109,7 +103,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
 }

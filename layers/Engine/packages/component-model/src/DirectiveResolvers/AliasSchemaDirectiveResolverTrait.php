@@ -284,7 +284,6 @@ trait AliasSchemaDirectiveResolverTrait
         array &$succeedingPipelineIDFieldSet,
         array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -300,7 +299,6 @@ trait AliasSchemaDirectiveResolverTrait
             $succeedingPipelineIDFieldSet,
             $succeedingPipelineFieldDataAccessProviders,
             $resolvedIDFieldValues,
-            $variables,
             $messages,
             $engineIterationFeedbackStore,
         );

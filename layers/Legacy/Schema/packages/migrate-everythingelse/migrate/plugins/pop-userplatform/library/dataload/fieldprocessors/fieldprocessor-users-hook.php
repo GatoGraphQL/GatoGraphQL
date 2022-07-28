@@ -84,7 +84,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
     ): mixed {
         $user = $object;
 
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'shortDescription':
                 return gdGetUserShortdescription($objectTypeResolver->getID($user));
 
@@ -98,7 +98,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
             case 'contact':
                 $value = array();
                 // This one is a quasi copy/paste from the typeResolver
-                if ($user_url = $objectTypeResolver->resolveValue($user, 'websiteURL', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($user_url = $objectTypeResolver->resolveValue($user, 'websiteURL', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Website', 'pop-coreprocessors'),
                         'url' => maybeAddHttp($user_url),
@@ -107,8 +107,8 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                         'fontawesome' => 'fa-home',
                     );
                 }
-                if ($objectTypeResolver->resolveValue($user, 'displayEmail', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
-                    if ($email = $objectTypeResolver->resolveValue($user, 'email', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($objectTypeResolver->resolveValue($user, 'displayEmail', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                    if ($email = $objectTypeResolver->resolveValue($user, 'email', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                         $value[] = array(
                             'fontawesome' => 'fa-envelope',
                             'tooltip' => TranslationAPIFacade::getInstance()->__('Email', 'pop-coreprocessors'),
@@ -117,7 +117,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                         );
                     }
                 }
-                // if ($blog = $objectTypeResolver->resolveValue($user, 'blog', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                // if ($blog = $objectTypeResolver->resolveValue($user, 'blog', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
 
                 //     $value[] = array(
                 //         'tooltip' => TranslationAPIFacade::getInstance()->__('Blog', 'poptheme-wassup'),
@@ -127,7 +127,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                 //         'fontawesome' => 'fa-pencil',
                 //     );
                 // }
-                if ($facebook = $objectTypeResolver->resolveValue($user, 'facebook', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($facebook = $objectTypeResolver->resolveValue($user, 'facebook', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Facebook', 'poptheme-wassup'),
                         'fontawesome' => 'fa-facebook',
@@ -136,7 +136,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                         'target' => '_blank'
                     );
                 }
-                if ($twitter = $objectTypeResolver->resolveValue($user, 'twitter', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($twitter = $objectTypeResolver->resolveValue($user, 'twitter', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Twitter', 'poptheme-wassup'),
                         'fontawesome' => 'fa-twitter',
@@ -145,7 +145,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                         'target' => '_blank'
                     );
                 }
-                if ($linkedin = $objectTypeResolver->resolveValue($user, 'linkedin', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($linkedin = $objectTypeResolver->resolveValue($user, 'linkedin', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('LinkedIn', 'poptheme-wassup'),
                         'url' => maybeAddHttp($linkedin),
@@ -154,7 +154,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                         'fontawesome' => 'fa-linkedin'
                     );
                 }
-                if ($youtube = $objectTypeResolver->resolveValue($user, 'youtube', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($youtube = $objectTypeResolver->resolveValue($user, 'youtube', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Youtube', 'poptheme-wassup'),
                         'url' => maybeAddHttp($youtube),
@@ -163,7 +163,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                         'fontawesome' => 'fa-youtube',
                     );
                 }
-                if ($instagram = $objectTypeResolver->resolveValue($user, 'instagram', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($instagram = $objectTypeResolver->resolveValue($user, 'instagram', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Instagram', 'poptheme-wassup'),
                         'url' => maybeAddHttp($instagram),

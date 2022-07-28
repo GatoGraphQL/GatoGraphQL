@@ -34,7 +34,6 @@ class DirectivePipelineDecorator
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -48,7 +47,6 @@ class DirectivePipelineDecorator
                 $pipelineIDFieldSet,
                 $pipelineFieldDataAccessProviders,
                 $resolvedIDFieldValues,
-                $variables,
                 $messages,
                 $engineIterationFeedbackStore,
             )
@@ -65,7 +63,6 @@ class DirectivePipelineDecorator
             $pipelineFieldDataAccessProviders,
             /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> */
             $resolvedIDFieldValues,
-            $variables,
             $messages,
             $engineIterationFeedbackStore,
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);

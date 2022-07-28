@@ -185,13 +185,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @param Directive[] $directives
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     * @param array<string,mixed> $variables
      * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
      */
     public function resolveDirectivesIntoPipelineData(
         array $directives,
         SplObjectStorage $directiveFields,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
         /**
@@ -216,7 +214,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $directiveResolverFields = $this->validateAndResolveDirectiveResolverToFields(
             $directives,
             $directiveFields,
-            $variables,
             $engineIterationFeedbackStore,
         );
 
@@ -248,13 +245,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @param Directive[] $directives
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     * @param array<string,mixed> $variables
      * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
      */
     protected function validateAndResolveDirectiveResolverToFields(
         array $directives,
         SplObjectStorage $directiveFields,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
         /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
@@ -361,7 +356,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolver->prepareDirective(
                 $this,
                 $directiveResolverFields,
-                $variables,
                 $engineIterationFeedbackStore,
             );
 
@@ -569,7 +563,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -643,7 +636,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $idObjects,
             $previouslyResolvedIDFieldValues,
             $resolvedIDFieldValues,
-            $variables,
             $messages,
             $engineIterationFeedbackStore,
         );
@@ -1000,7 +992,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array $idObjects,
         array $previouslyResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -1065,7 +1056,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
                 $directives,
                 $directiveFields,
-                $variables,
                 $separateEngineIterationFeedbackStore,
             );
             $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
@@ -1189,7 +1179,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $unionTypeOutputKeyIDs,
                 $previouslyResolvedIDFieldValues,
                 $resolvedIDFieldValues,
-                $variables,
                 $messages,
                 $engineIterationFeedbackStore,
             );

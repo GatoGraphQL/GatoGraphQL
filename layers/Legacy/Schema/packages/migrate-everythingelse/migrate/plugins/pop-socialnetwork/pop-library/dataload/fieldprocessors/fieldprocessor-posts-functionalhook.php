@@ -82,7 +82,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST));
 
             case 'recommendPostCountPlus1':
-                if ($count = $objectTypeResolver->resolveValue($object, 'recommendPostCount', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($count = $objectTypeResolver->resolveValue($object, 'recommendPostCount', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     return $count+1;
                 }
                 return 1;
@@ -98,7 +98,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST));
 
             case 'upvotePostCountPlus1':
-                if ($count = $objectTypeResolver->resolveValue($object, 'upvotePostCount', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($count = $objectTypeResolver->resolveValue($object, 'upvotePostCount', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     return $count+1;
                 }
                 return 1;
@@ -114,7 +114,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST));
 
             case 'downvotePostCountPlus1':
-                if ($count = $objectTypeResolver->resolveValue($object, 'downvotePostCount', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($count = $objectTypeResolver->resolveValue($object, 'downvotePostCount', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     return $count+1;
                 }
                 return 1;

@@ -28,7 +28,6 @@ class DirectivePipelineUtils
         array &$pipelineIDFieldSet,
         array &$pipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -41,7 +40,6 @@ class DirectivePipelineUtils
             'pipelineIDFieldSet' => &$pipelineIDFieldSet,
             'pipelineFieldDataAccessProviders' => &$pipelineFieldDataAccessProviders,
             'resolvedIDFieldValues' => &$resolvedIDFieldValues,
-            'variables' => &$variables,
             'messages' => &$messages,
             'engineIterationFeedbackStore' => &$engineIterationFeedbackStore,
         ];
@@ -58,7 +56,6 @@ class DirectivePipelineUtils
             &$payload['pipelineIDFieldSet'],
             &$payload['pipelineFieldDataAccessProviders'],
             &$payload['resolvedIDFieldValues'],
-            &$payload['variables'],
             &$payload['messages'],
             &$payload['engineIterationFeedbackStore'],
         ];
