@@ -71,9 +71,8 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         $objectTypeResolver = $relationalTypeResolver;
 
         // If this field doesn't have a typeResolver, show a schema error
-        $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $objectTypeFieldResolutionFeedbackStore);
         if ($schemaFeedbackStore !== null) {
             $schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, [$field]);
         }

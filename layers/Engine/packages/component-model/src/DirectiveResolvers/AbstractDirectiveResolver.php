@@ -207,12 +207,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * were not provided in the query.
      *
      * @param FieldInterface[] $fields
-     * @param array<string,mixed> $variables
      */
     public function prepareDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $directiveData = $this->getDirectiveData(
@@ -1138,7 +1136,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $pipelineIDFieldSet,
             $pipelineFieldDataAccessProviders,
             $resolvedIDFieldValues,
-            $variables,
             $messages,
             /** @var EngineIterationFeedbackStore */
             $engineIterationFeedbackStore,
@@ -1168,7 +1165,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $idObjects,
         //     $resolvedIDFieldValues,
         //     $previouslyResolvedIDFieldValues,
-        //     $variables,
         //     $messages,
         // );
 
@@ -1277,7 +1273,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $pipelineIDFieldSet,
             $pipelineFieldDataAccessProviders,
             $resolvedIDFieldValues,
-            $variables,
             $messages,
             $engineIterationFeedbackStore,
         );

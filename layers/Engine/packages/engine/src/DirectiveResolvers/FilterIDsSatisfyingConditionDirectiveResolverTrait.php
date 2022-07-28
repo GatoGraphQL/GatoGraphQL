@@ -21,7 +21,6 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idObjects,
         array $idFieldSet,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {

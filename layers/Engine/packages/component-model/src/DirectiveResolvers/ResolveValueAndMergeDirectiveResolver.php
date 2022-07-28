@@ -75,7 +75,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $fieldDataAccessProvider,
             $resolvedIDFieldValues,
             $previouslyResolvedIDFieldValues,
-            $variables,
             $messages,
             $engineIterationFeedbackStore,
         );
@@ -93,7 +92,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -135,7 +133,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
-                $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
             );
@@ -183,7 +180,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
-        array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -196,7 +192,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
-                $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
             );
@@ -215,7 +210,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
-        array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {

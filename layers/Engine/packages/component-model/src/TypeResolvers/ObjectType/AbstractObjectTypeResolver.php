@@ -232,7 +232,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function collectFieldValidationWarnings(
         FieldDataAccessorInterface $fieldDataAccessor,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
@@ -254,7 +253,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function collectFieldDeprecations(
         FieldDataAccessorInterface $fieldDataAccessor,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
@@ -277,7 +275,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function getFieldTypeModifiers(
         FieldInterface $field,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?int {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
@@ -290,7 +287,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function getFieldMutationResolver(
         FieldInterface $field,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);

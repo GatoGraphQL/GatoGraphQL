@@ -39,18 +39,15 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
      * If it has nestedDirectives, extract them and validate them
      *
      * @param FieldInterface[] $fields
-     * @param array<string,mixed> $variables
      */
     public function prepareDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         parent::prepareDirective(
             $relationalTypeResolver,
             $fields,
-            $variables,
             $engineIterationFeedbackStore,
         );
         if ($this->hasValidationErrors) {
@@ -60,7 +57,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         $nestedDirectivePipelineData = $this->getNestedDirectivePipelineData(
             $relationalTypeResolver,
             $fields,
-            $variables,
             $engineIterationFeedbackStore,
         );
         if ($nestedDirectivePipelineData === null) {
@@ -77,7 +73,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     protected function getNestedDirectivePipelineData(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
         /** @var MetaDirective */
@@ -119,7 +114,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         $nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
             $nestedDirectives,
             $nestedDirectiveFields,
-            $variables,
             $separateEngineIterationFeedbackStore,
         );
         $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);

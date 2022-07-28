@@ -48,7 +48,6 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
-        array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
@@ -71,13 +70,11 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      *
      * @param Directive[] $directives
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     * @param array<string,mixed> $variables
      * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
      */
     public function resolveDirectivesIntoPipelineData(
         array $directives,
         SplObjectStorage $directiveFields,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage;
 

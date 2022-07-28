@@ -40,12 +40,10 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * in the query.
      *
      * @param FieldInterface[] $fields
-     * @param array<string,mixed> $variables
      */
     public function prepareDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
-        array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void;
     /**

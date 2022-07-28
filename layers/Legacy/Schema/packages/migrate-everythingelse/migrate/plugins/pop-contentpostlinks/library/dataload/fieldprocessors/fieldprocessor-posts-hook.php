@@ -164,7 +164,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return $linkcategories->getSelectedValue();
 
             case 'hasLinkCategories':
-                if ($objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
+                if ($objectTypeResolver->resolveValue($post, 'linkcategories', $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     return true;
                 }
                 return false;

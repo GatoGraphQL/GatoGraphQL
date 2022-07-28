@@ -22,12 +22,10 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool;
     public function collectFieldValidationWarnings(
         FieldDataAccessorInterface $fieldDataAccessor,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     public function collectFieldDeprecations(
         FieldDataAccessorInterface $fieldDataAccessor,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     public function getFieldTypeResolver(
@@ -36,12 +34,10 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     ): ?ConcreteTypeResolverInterface;
     public function getFieldTypeModifiers(
         FieldInterface $field,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?int;
     public function getFieldMutationResolver(
         FieldInterface $field,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface;
     public function isFieldAMutation(FieldInterface|string $fieldOrFieldName): ?bool;
