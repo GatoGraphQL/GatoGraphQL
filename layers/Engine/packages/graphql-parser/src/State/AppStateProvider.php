@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\State;
 
 use PoP\Root\State\AbstractAppStateProvider;
+use SplObjectStorage;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
@@ -15,5 +16,14 @@ class AppStateProvider extends AbstractAppStateProvider
          * when resolving the GraphQL query, eg: via @export
          */
         $state['document-dynamic-variables'] = [];
+
+        /**
+         * After resolving the Field, store its value in
+         * the AppState to resolve FieldValuePromises
+         *
+         * @var SplObjectStorage<FieldInterface,mixed>
+         */
+        $resolvedFieldValues = new SplObjectStorage();
+        $state['resolved-field-values'] = $resolvedFieldValues;
     }
 }
