@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\State;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\State\AbstractAppStateProvider;
 use SplObjectStorage;
 

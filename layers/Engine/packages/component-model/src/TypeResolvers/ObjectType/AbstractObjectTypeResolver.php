@@ -48,8 +48,6 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 use stdClass;
 
-use function Patchwork\always;
-
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
     use ObjectTypeOrDirectiveResolverTrait;
