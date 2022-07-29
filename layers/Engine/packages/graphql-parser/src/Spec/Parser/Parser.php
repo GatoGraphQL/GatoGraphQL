@@ -399,8 +399,12 @@ class Parser extends Tokenizer implements ParserInterface
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         if ($this->match(Token::TYPE_LBRACE)) {
+            $this->beforeParsingFieldsOrFragmentBonds();
+
             /** @var array<FieldInterface|FragmentBondInterface> */
             $fieldsOrFragmentBonds = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type);
+
+            $this->afterParsingFieldsOrFragmentBonds();
 
             if (!$fieldsOrFragmentBonds) {
                 throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
@@ -414,6 +418,14 @@ class Parser extends Tokenizer implements ParserInterface
         }
 
         return $this->createLeafField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+    }
+
+    protected function beforeParsingFieldsOrFragmentBonds(): void
+    {
+    }
+
+    protected function afterParsingFieldsOrFragmentBonds(): void
+    {
     }
 
     /**
