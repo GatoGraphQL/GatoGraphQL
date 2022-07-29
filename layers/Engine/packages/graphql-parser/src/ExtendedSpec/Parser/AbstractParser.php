@@ -24,16 +24,20 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
-use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
+    /** @var array<FieldInterface[]> */
+    protected array $siblingFields = [];
+
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
@@ -53,6 +57,72 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     final protected function getDirectiveRegistry(): DirectiveRegistryInterface
     {
         return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
+    }
+
+    protected function parseOperation(string $type): OperationInterface
+    {
+        $this->siblingFields = [
+            [], // This is the first level
+        ];
+
+        return parent::parseOperation($type);
+    }
+
+    protected function beforeParsingFieldsOrFragmentBonds(): void
+    {
+        array_unshift($this->siblingFields, [[]]);
+    }
+
+    protected function afterParsingFieldsOrFragmentBonds(): void
+    {
+        array_shift($this->siblingFields);
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     * @param Directive[] $directives
+     */
+    protected function createRelationalField(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $fieldsOrFragmentBonds,
+        array $directives,
+        Location $location
+    ): RelationalField {
+        $relationalField = parent::createRelationalField(
+            $name,
+            $alias,
+            $arguments,
+            $fieldsOrFragmentBonds,
+            $directives,
+            $location
+        );
+        $this->siblingFields[0][] = $relationalField;
+        return $relationalField;
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param Directive[] $directives
+     */
+    protected function createLeafField(
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $directives,
+        Location $location,
+    ): LeafField {
+        $leafField = parent::createLeafField(
+            $name,
+            $alias,
+            $arguments,
+            $directives,
+            $location,
+        );
+        $this->siblingFields[0][] = $leafField;
+        return $leafField;
     }
 
     /**
@@ -289,8 +359,20 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         ?Variable $variable,
         Location $location,
     ): VariableReference {
+        if ($this->getQueryAugmenterService()->isObjectResolvedFieldValueReference($name, $variable)) {
+            /**
+             * Make sure the field appears _before_ the reference,
+             * to avoid circular references.
+             */
+            $name = $this->getQueryAugmenterService()->extractObjectResolvedFieldName($name);
+            $field = $this->findFieldWithNameWithinCurrentSiblingFields($name);
+            if ($field !== null) {
+                return $this->createObjectResolvedFieldValueReference($name, $field, $location);
+            }
+        }
+
         if ($this->getQueryAugmenterService()->isDynamicVariableReference($name, $variable)) {
-            return new DynamicVariableReference($name, $location);
+            return $this->createDynamicVariableReference($name, $location);
         }
 
         return parent::createVariableReference(
@@ -300,110 +382,24 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         );
     }
 
-    public function createDocument(
-        /** @var OperationInterface[] */
-        array $operations,
-        /** @var Fragment[] */
-        array $fragments,
-    ) {
-        $document = new Document(
-            $operations,
-            $fragments,
-        );
-
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
-            $this->replaceObjectResolvedFieldValueReferences($document);
-        }
-
-        if ($moduleConfiguration->enableMultiFieldDirectives()) {
-            $this->spreadMultiFieldDirectives($document);
-        }
-
-        return $document;
-    }
-
-    /**
-     * Iterate the elements in the Document AST, and replace the
-     * "Dynamic Variables References" with "Resolved Field Variable References"
-     */
-    protected function replaceObjectResolvedFieldValueReferences(
-        Document $document,
-    ): void {
-        foreach ($document->getOperations() as $operation) {
-            $this->replaceObjectResolvedFieldValueReferencesInFieldsOrInlineFragments(
-                $operation->getFieldsOrFragmentBonds(),
-                $document->getFragments(),
-            );
-        }
-        foreach ($document->getFragments() as $fragment) {
-            $this->replaceObjectResolvedFieldValueReferencesInFieldsOrInlineFragments(
-                $fragment->getFieldsOrFragmentBonds(),
-                $document->getFragments(),
-            );
-        }
-    }
-
-    /**
-     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
-     */
-    protected function replaceObjectResolvedFieldValueReferencesInFieldsOrInlineFragments(
-        array $fieldsOrFragmentBonds,
-        array $fragments,
-    ): void {
-        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
-            if ($fieldOrFragmentBond instanceof FragmentReference) {
-                continue;
-            }
-            if ($fieldOrFragmentBond instanceof InlineFragment) {
-                /** @var InlineFragment */
-                $inlineFragment = $fieldOrFragmentBond;
-                $this->replaceObjectResolvedFieldValueReferencesInFieldsOrInlineFragments(
-                    $inlineFragment->getFieldsOrFragmentBonds(),
-                    $fragments,
-                );
-                continue;
-            }
-            /** @var FieldInterface */
-            $field = $fieldOrFragmentBond;
-            $this->replaceObjectResolvedFieldValueReferencesInArguments(
-                $field,
-                $field->getArguments(),
-                $fieldsOrFragmentBonds,
-                $fragments,
-            );
-            if ($field instanceof RelationalField) {
-                /** @var RelationalField */
-                $relationalField = $field;
-                $this->replaceObjectResolvedFieldValueReferencesInFieldsOrInlineFragments(
-                    $relationalField->getFieldsOrFragmentBonds(),
-                    $fragments,
-                );
+    protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
+    {
+        foreach ($this->siblingFields[0] as $field) {
+            if (
+                ($field->getAlias() !== null && $field->getAlias() === $referencedFieldNameOrAlias)
+                || ($field->getAlias() === null && $field->getName() === $referencedFieldNameOrAlias)
+            ) {
+                return $field;
             }
         }
+        return null;
     }
 
-    /**
-     * @param Argument[] $arguments
-     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
-     */
-    protected function replaceObjectResolvedFieldValueReferencesInArguments(
-        FieldInterface $field,
-        array $arguments,
-        array $fieldsOrFragmentBonds,
-        array $fragments,
-    ): void {
-        foreach ($arguments as $argument) {
-            $this->replaceDynamicVariableReferenceWithObjectResolvedFieldValueReference(
-                $field,
-                $argument,
-                $fieldsOrFragmentBonds,
-                $fragments,
-            );
-        }
+    protected function createDynamicVariableReference(
+        string $name,
+        Location $location,
+    ): VariableReference {
+        return new DynamicVariableReference($name, $location);
     }
 
     /**
@@ -433,72 +429,36 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
-    protected function replaceDynamicVariableReferenceWithObjectResolvedFieldValueReference(
+    protected function createObjectResolvedFieldValueReference(
+        string $name,
         FieldInterface $field,
-        Argument $argument,
-        array $fieldsOrFragmentBonds,
-        array $fragments,
-    ): void {
-        if (!($argument->getValueAST() instanceof DynamicVariableReference)) {
-            return;
-        }
-        /** @var DynamicVariableReference */
-        $dynamicVariableReference = $argument->getValueAST();
-
-        /**
-         * Make sure the field appears _before_ the reference,
-         * to avoid circular references.
-         */
-        $previousFieldsOrFragmentBonds = $this->getPreviousFieldsOrFragmentBonds(
+        Location $location,
+    ): ObjectResolvedFieldValueReference {
+        return new ObjectResolvedFieldValueReference(
+            $name,
             $field,
-            $fieldsOrFragmentBonds,
+            $location,
         );
-
-        // Check if there is a field with the variable name
-        $referencedFieldNameOrAlias = $this->getQueryAugmenterService()->extractDynamicVariableName($dynamicVariableReference->getName());
-        $referencedField = $this->findFieldInQueryBlock(
-            $referencedFieldNameOrAlias,
-            $previousFieldsOrFragmentBonds,
-            $fragments,
-        );
-        if ($referencedField === null) {
-            return;
-        }
-
-        // Replace the "Dynamic Variables Reference" with "Resolved Field Variable Reference"
-        $objectResolvedFieldValueReference = new ObjectResolvedFieldValueReference(
-            $dynamicVariableReference->getName(),
-            $referencedField,
-            $dynamicVariableReference->getLocation()
-        );
-        $argument->setValueAST($objectResolvedFieldValueReference);
     }
 
-    /**
-     * Calculate the list of fields and fragment bonds that
-     * appear _before_ the provided field
-     *
-     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @return array<FieldInterface|FragmentBondInterface>
-     */
-    protected function getPreviousFieldsOrFragmentBonds(
-        FieldInterface $field,
-        array $fieldsOrFragmentBonds,
-    ): array {
-        $previousFieldsOrFragmentBonds = [];
-        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
-            // We found the Field, everything else is the "previous" ones
-            if ($fieldOrFragmentBond === $field) {
-                return $previousFieldsOrFragmentBonds;
-            }
-            $previousFieldsOrFragmentBonds[] = $fieldOrFragmentBond;
-        }
-        throw new ShouldNotHappenException(
-            sprintf(
-                $this->__('Field \'%s\' is not contained within the `$fieldsOrFragmentBonds` array'),
-                $field->asFieldOutputQueryString()
-            )
+    public function createDocument(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ) {
+        $document = new Document(
+            $operations,
+            $fragments,
         );
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableMultiFieldDirectives()) {
+            $this->spreadMultiFieldDirectives($document);
+        }
+
+        return $document;
     }
 
     /**
@@ -698,78 +658,5 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
              */
             $field->addDirective($directive);
         }
-    }
-
-    /**
-     * Find the field in the same query block,
-     * or return `null` if there is none.
-     *
-     * The referenced field is the field alias, if it is defined,
-     * or the field name otherwise.
-     *
-     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
-     */
-    protected function findFieldInQueryBlock(
-        string $referencedFieldNameOrAlias,
-        array $fieldsOrFragmentBonds,
-        array $fragments,
-    ): ?FieldInterface {
-        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
-            if ($fieldOrFragmentBond instanceof FragmentReference) {
-                /** @var FragmentReference */
-                $fragmentReference = $fieldOrFragmentBond;
-                $fragment = $this->getFragment($fragmentReference->getName(), $fragments);
-                if ($fragment === null) {
-                    continue;
-                }
-                $referencedField = $this->findFieldInQueryBlock(
-                    $referencedFieldNameOrAlias,
-                    $fragment->getFieldsOrFragmentBonds(),
-                    $fragments,
-                );
-                if ($referencedField !== null) {
-                    return $referencedField;
-                }
-                continue;
-            }
-            if ($fieldOrFragmentBond instanceof InlineFragment) {
-                /** @var InlineFragment */
-                $inlineFragment = $fieldOrFragmentBond;
-                $referencedField = $this->findFieldInQueryBlock(
-                    $referencedFieldNameOrAlias,
-                    $inlineFragment->getFieldsOrFragmentBonds(),
-                    $fragments,
-                );
-                if ($referencedField !== null) {
-                    return $referencedField;
-                }
-                continue;
-            }
-            /** @var FieldInterface */
-            $field = $fieldOrFragmentBond;
-            if (
-                ($field->getAlias() !== null && $field->getAlias() === $referencedFieldNameOrAlias)
-                || ($field->getAlias() === null && $field->getName() === $referencedFieldNameOrAlias)
-            ) {
-                return $field;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * @param Fragment[] $fragments
-     */
-    protected function getFragment(
-        string $fragmentName,
-        array $fragments,
-    ): ?Fragment {
-        foreach ($fragments as $fragment) {
-            if ($fragment->getName() === $fragmentName) {
-                return $fragment;
-            }
-        }
-        return null;
     }
 }

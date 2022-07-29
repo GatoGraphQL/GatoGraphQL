@@ -30,7 +30,18 @@ interface QueryAugmenterServiceInterface
     ): bool;
 
     /**
-     * Actual name of the dynamic variable (without the leading "_")
+     * If referencing a variable that starts with "__", the variable
+     * has not been defined in the operation, and there's a field
+     * in the same query block, then it's a reference to the value
+     * of the resolved field on the same object
      */
-    public function extractDynamicVariableName(string $name): string;
+    public function isObjectResolvedFieldValueReference(
+        string $name,
+        ?Variable $variable,
+    ): bool;
+
+    /**
+     * Actual name of the field (without the leading "__")
+     */
+    public function extractObjectResolvedFieldName(string $name): string;
 }
