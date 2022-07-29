@@ -54,7 +54,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      *
      * @var array<FieldInterface[]>
      */
-    protected array $parsedFieldBlock = [];
+    protected array $parsedFieldBlockStack = [];
 
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
@@ -79,7 +79,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     protected function parseOperation(string $type): OperationInterface
     {
-        $this->parsedFieldBlock = [
+        $this->parsedFieldBlockStack = [
             [], // This is the first level
         ];
 
@@ -91,7 +91,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     protected function beforeParsingFieldsOrFragmentBonds(): void
     {
-        array_unshift($this->parsedFieldBlock, [[]]);
+        array_unshift($this->parsedFieldBlockStack, [[]]);
     }
 
     /**
@@ -99,7 +99,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     protected function afterParsingFieldsOrFragmentBonds(): void
     {
-        array_shift($this->parsedFieldBlock);
+        array_shift($this->parsedFieldBlockStack);
     }
 
     /**
@@ -135,7 +135,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function addFieldToCurrentlyParsedFieldBlock(
         FieldInterface $field,
     ): void {
-        $this->parsedFieldBlock[0][] = $field;
+        $this->parsedFieldBlockStack[0][] = $field;
     }
 
     /**
@@ -419,7 +419,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
     {
-        foreach ($this->parsedFieldBlock[0] as $field) {
+        foreach ($this->parsedFieldBlockStack[0] as $field) {
             if (
                 ($field->getAlias() !== null && $field->getAlias() === $referencedFieldNameOrAlias)
                 || ($field->getAlias() === null && $field->getName() === $referencedFieldNameOrAlias)
