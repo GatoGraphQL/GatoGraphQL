@@ -6,7 +6,10 @@ namespace PoPAPI\API\QueryResolution;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -98,9 +101,12 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
             $queryTwoOperation,
         ];
 
-        $queryASTTransformationService = $this->getQueryASTTransformationService();
-        $operationFieldAndFragmentBonds = $queryASTTransformationService->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations);
+        /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface> */
+        $expectedOperationFieldAndFragmentBonds = new SplObjectStorage();
 
-        $this->assertEquals(new SplObjectStorage(), $operationFieldAndFragmentBonds);
+        $this->assertEquals(
+            $expectedOperationFieldAndFragmentBonds,
+            $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations)
+        );
     }
 }
