@@ -35,7 +35,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
         $enableMultipleQueryExecution = $moduleConfiguration->enableMultipleQueryExecution();
         
-        /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface> */
+        /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> */
         $operationFieldOrFragmentBonds = new SplObjectStorage();
         $operationsCount = count($operations);
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
