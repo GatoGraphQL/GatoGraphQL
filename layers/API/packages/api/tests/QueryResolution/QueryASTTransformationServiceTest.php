@@ -98,91 +98,42 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
     }
 
     /**
-     * Also append a Fragment Reference and recalculate:
+     * The Fragment Reference is the winning one
      *
      *   ```
      *   query {
-     *     film(id: 1) { # level 1
-     *       title # level 2
-     *       director { # level 2
-     *         name # level 3 # <= maximum depth!
-     *       }
-     *     }
-     *     post(id: 2) { # level 1
-     *       title # level 2
-     *     }
-     *     ...RootData
+     *     id # level 1
+     *     ...RootData # level 1
      *   }
      *
      *   fragment RootData on QueryRoot {
-     *     id
-     *     self {
-     *       id
+     *     id # + 1
+     *     self { # + 1
+     *       id # + 2
      *     }
      *   }
      *   ```
      */
     public function testOperationWithFragmentMaximumFieldDepth()
     {
-        $leafField2 = new LeafField('name', null, [], [], new Location(6, 23));
-        $relationalField2 = new RelationalField(
-            'director',
-            null,
-            [],
-            [
-                $leafField2,
-            ],
-            [],
-            new Location(5, 21)
-        );
-        $leafField1 = new LeafField('title', null, [], [], new Location(4, 21));
-        $argument1 = new Argument('id', new Literal(1, new Location(3, 26)), new Location(3, 22));
-        $relationalField1 = new RelationalField(
-            'film',
-            null,
-            [
-                $argument1,
-            ],
-            [
-                $leafField1,
-                $relationalField2,
-            ],
-            [],
-            new Location(3, 17)
-        );
-        $argument2 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
-        $leafField3 = new LeafField('title', null, [], [], new Location(10, 21));
-        $relationalField3 = new RelationalField(
-            'post',
-            null,
-            [
-                $argument2,
-            ],
-            [
-                $leafField3,
-            ],
-            [],
-            new Location(9, 17)
-        );
-
-        $fragmentReference = new FragmentReference('RootData', new Location(12, 17));
+        $leafField = new LeafField('id', null, [], [], new Location(3, 17));
+        $fragmentReference = new FragmentReference('RootData', new Location(4, 17));
         $operation = new QueryOperation(
             '',
             [],
             [],
             [
-                $relationalField1,
-                $relationalField3,
+                $leafField,
                 $fragmentReference,
             ],
             new Location(8, 19)
         );
 
         $fragmentFields = [
-            new LeafField('id', null, [], [], new Location(16, 17)),
+            new LeafField('id', null, [], [], new Location(8, 17)),
             new RelationalField('id', null, [], [
-                new LeafField('id', null, [], [], new Location(18, 19))
-            ], [], new Location(17, 17)),
+                new LeafField('id', null, [], [], new Location(10, 19))
+            ], [], new Location(9, 17)),
         ];
         $fragment = new Fragment('RootData', 'QueryRoot', [], $fragmentFields, new Location(15, 15));
         $fragments = [
@@ -191,7 +142,72 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
 
         $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, $fragments);
         $this->assertEquals(
-            6,
+            3,
+            $operationMaximumFieldDepth
+        );
+    }
+
+    /**
+     * The Fragment Reference is the winning one
+     *
+     *   ```
+     *   query {
+     *     id # level 1
+     *     ...RootData # level 1
+     *     self { # level 1
+     *       ...RootData # level 2
+     *     }
+     *   }
+     *
+     *   fragment RootData on QueryRoot {
+     *     id # + 1
+     *     self { # + 1
+     *       id # + 2
+     *     }
+     *   }
+     *   ```
+     */
+    public function testOperationWithNestedFragmentMaximumFieldDepth()
+    {
+        $leafField = new LeafField('id', null, [], [], new Location(3, 17));
+        $fragmentReference2 = new FragmentReference('RootData', new Location(6, 19));
+        $relationalField = new RelationalField(
+            'self',
+            null,
+            [],
+            [
+                $fragmentReference2,
+            ],
+            [],
+            new Location(5, 17)
+        );
+        $fragmentReference1 = new FragmentReference('RootData', new Location(4, 17));
+        $operation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $leafField,
+                $fragmentReference1,
+                $relationalField,
+            ],
+            new Location(8, 19)
+        );
+
+        $fragmentFields = [
+            new LeafField('id', null, [], [], new Location(10, 17)),
+            new RelationalField('id', null, [], [
+                new LeafField('id', null, [], [], new Location(12, 19))
+            ], [], new Location(11, 17)),
+        ];
+        $fragment = new Fragment('RootData', 'QueryRoot', [], $fragmentFields, new Location(17, 15));
+        $fragments = [
+            $fragment,
+        ];
+
+        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, $fragments);
+        $this->assertEquals(
+            4,
             $operationMaximumFieldDepth
         );
     }
