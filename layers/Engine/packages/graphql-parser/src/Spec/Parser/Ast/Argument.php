@@ -46,14 +46,6 @@ class Argument extends AbstractAst
     }
 
     /**
-     * @internal Called only by the Engine, don't access otherwise!
-     */
-    public function setValueAST(WithValueInterface $value): void
-    {
-        $this->value = $value;
-    }
-
-    /**
      * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     final public function getValue(): mixed
