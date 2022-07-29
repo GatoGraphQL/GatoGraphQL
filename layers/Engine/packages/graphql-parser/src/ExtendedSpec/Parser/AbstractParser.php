@@ -346,7 +346,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
     protected function replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(
@@ -387,7 +387,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
     protected function replaceResolvedFieldVariableReferencesInArguments(
@@ -430,7 +430,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * }
      * ```
      *
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
     protected function replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
@@ -478,8 +478,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Calculate the list of fields and fragment bonds that
      * appear _before_ the provided field
      *
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
-     * @return FieldInterface[]|FragmentBondInterface[]
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     * @return array<FieldInterface|FragmentBondInterface>
      */
     protected function getPreviousFieldsOrFragmentBonds(
         FieldInterface $field,
@@ -523,7 +523,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
     protected function spreadMultiFieldDirectivesInFieldsOrInlineFragments(
@@ -567,7 +567,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     protected function maybeSpreadDirectiveToFields(
@@ -623,7 +623,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Append the directive to the fields on the defined
      * relative positions to its left.
      *
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     protected function spreadDirectiveToFields(
@@ -707,7 +707,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * The referenced field is the field alias, if it is defined,
      * or the field name otherwise.
      *
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
     protected function findFieldInQueryBlock(

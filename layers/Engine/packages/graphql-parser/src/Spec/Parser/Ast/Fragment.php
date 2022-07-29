@@ -13,7 +13,7 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
 
     /**
      * @param Directive[] $directives
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      */
     public function __construct(
         protected readonly string $name,

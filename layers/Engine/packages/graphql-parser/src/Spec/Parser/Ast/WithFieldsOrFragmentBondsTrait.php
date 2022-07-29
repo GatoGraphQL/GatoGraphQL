@@ -6,11 +6,11 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 trait WithFieldsOrFragmentBondsTrait
 {
-    /** @var FieldInterface[]|FragmentBondInterface[] */
+    /** @var array<FieldInterface|FragmentBondInterface> */
     protected array $fieldsOrFragmentBonds;
 
     /**
-     * @return FieldInterface[]|FragmentBondInterface[]
+     * @return array<FieldInterface|FragmentBondInterface>
      */
     public function getFieldsOrFragmentBonds(): array
     {
@@ -18,7 +18,7 @@ trait WithFieldsOrFragmentBondsTrait
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      */
     private function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
     {

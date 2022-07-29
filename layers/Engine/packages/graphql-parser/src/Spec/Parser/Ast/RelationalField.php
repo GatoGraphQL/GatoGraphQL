@@ -12,7 +12,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     public function __construct(

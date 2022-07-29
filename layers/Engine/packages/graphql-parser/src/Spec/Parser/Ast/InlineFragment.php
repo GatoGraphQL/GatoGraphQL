@@ -12,7 +12,7 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
     use WithFieldsOrFragmentBondsTrait;
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     public function __construct(

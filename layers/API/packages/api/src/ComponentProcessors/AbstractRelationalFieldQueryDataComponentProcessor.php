@@ -487,7 +487,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      * @return FieldFragmentModelsTuple[] A list of the fields and what fragment "models" they need to satisfy to be resolved
      */

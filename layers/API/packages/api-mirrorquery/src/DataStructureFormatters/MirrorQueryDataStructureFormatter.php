@@ -68,7 +68,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      * @return FieldInterface[]
      */

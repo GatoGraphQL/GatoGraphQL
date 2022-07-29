@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 interface WithFieldsOrFragmentBondsInterface
 {
     /**
-     * @return FieldInterface[]|FragmentBondInterface[]
+     * @return array<FieldInterface|FragmentBondInterface>
      */
     public function getFieldsOrFragmentBonds(): array;
 }

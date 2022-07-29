@@ -17,7 +17,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         protected readonly array $variables,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var FieldInterface[]|FragmentBondInterface[] */
+        /** @var array<FieldInterface|FragmentBondInterface> */
         array $fieldsOrFragmentBonds,
         Location $location,
     ) {

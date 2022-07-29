@@ -158,7 +158,7 @@ class Parser extends Tokenizer implements ParserInterface
         array $variables,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var FieldInterface[]|FragmentBondInterface[] */
+        /** @var array<FieldInterface|FragmentBondInterface> */
         array $fieldsOrFragmentBonds,
         Location $location,
     ) {
@@ -171,7 +171,7 @@ class Parser extends Tokenizer implements ParserInterface
         array $variables,
         /** @var Directive[] $directives */
         array $directives,
-        /** @var FieldInterface[]|FragmentBondInterface[] */
+        /** @var array<FieldInterface|FragmentBondInterface> */
         array $fieldsOrFragmentBonds,
         Location $location,
     ) {
@@ -179,7 +179,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @return FieldInterface[]|FragmentBondInterface[]
+     * @return array<FieldInterface|FragmentBondInterface>
      */
     protected function parseBody(string $token): array
     {
@@ -399,7 +399,7 @@ class Parser extends Tokenizer implements ParserInterface
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         if ($this->match(Token::TYPE_LBRACE)) {
-            /** @var FieldInterface[]|FragmentBondInterface[] */
+            /** @var array<FieldInterface|FragmentBondInterface> */
             $fieldsOrFragmentBonds = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type);
 
             if (!$fieldsOrFragmentBonds) {
@@ -418,7 +418,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     protected function createRelationalField(

@@ -154,7 +154,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @throws InvalidRequestException
      */
     protected function assertInlineFragmentSpreadTypesInFieldsOrFragmentsExistInSchema(array $fieldsOrFragmentBonds): void

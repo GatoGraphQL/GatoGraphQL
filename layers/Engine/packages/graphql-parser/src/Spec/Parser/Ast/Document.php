@@ -213,7 +213,7 @@ class Document implements DocumentInterface
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param string[] $referencedFragmentNames To stop cyclical fragments
      * @return FragmentReference[]
      */
@@ -434,7 +434,7 @@ class Document implements DocumentInterface
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @return VariableReference[]
      */
     protected function getVariableReferencesInFieldsOrFragments(array $fieldsOrFragmentBonds): array
@@ -632,7 +632,7 @@ class Document implements DocumentInterface
     }
 
     /**
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @throws InvalidRequestException
      */
     protected function assertArgumentsUniqueInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): void
