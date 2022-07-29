@@ -210,9 +210,10 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
             );
         }
 
+        $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations);
         $this->assertEquals(
             $expectedOperationFieldAndFragmentBonds,
-            $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations)
+            $operationFieldAndFragmentBonds
         );
     }
 }
