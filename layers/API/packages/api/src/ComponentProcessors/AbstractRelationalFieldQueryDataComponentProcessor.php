@@ -144,7 +144,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         $fieldFragmentModelsTuples = [];
         $fragments = $executableDocument->getDocument()->getFragments();
         $requestedOperations = $executableDocument->getRequestedOperations();
-        
+
         /**
          * Multiple Query Execution: In order to have the fields
          * of the subsequent operations be resolved in the same

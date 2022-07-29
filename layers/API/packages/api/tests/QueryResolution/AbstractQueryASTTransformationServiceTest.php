@@ -15,7 +15,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\AbstractTestCase;
 use SplObjectStorage;
@@ -43,7 +42,7 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
     {
         /**
          * This is the AST for this GraphQL query:
-         * 
+         *
          *   ```
          *   query One {
          *     film(id: 1) {
@@ -93,7 +92,7 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
             ],
             new Location(2, 19)
         );
-        
+
         $argument2 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
         $leafField2 = new LeafField('title', null, [], [], new Location(10, 21));
         $relationalField2 = new RelationalField(
