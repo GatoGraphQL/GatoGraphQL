@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\QueryResolution;
 
 use function max;
+
 use PoP\ComponentModel\App;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
@@ -14,7 +15,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -43,7 +43,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> */
         $operationFieldOrFragmentBonds = new SplObjectStorage();
         $operationsCount = count($operations);
-        
+
         /**
          * If there's only 1 operation, then return its contents directly
          * (no need to calculate anything!).
@@ -220,7 +220,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         if ($fieldOrFragmentBond instanceof RelationalField) {
             /** @var RelationalField */
             $relationalField = $fieldOrFragmentBond;
-            
+
             /**
              * Also handle the boundaries: an empty relational field
              */
@@ -235,7 +235,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             );
             return max($depths);
         }
-        
+
         /**
          * Both Fragment References and Inline Fragments also do +1
          * because the engine will add an extra conditional module
@@ -246,7 +246,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         if ($fieldOrFragmentBond instanceof InlineFragment) {
             /** @var InlineFragment */
             $inlineFragment = $fieldOrFragmentBond;
-            
+
             /**
              * Also handle the boundaries: an empty inline fragment
              */
@@ -268,7 +268,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         if ($fragment === null) {
             return $accumulator;
         }
-            
+
         /**
          * Also handle the boundaries: an empty fragment
          */
