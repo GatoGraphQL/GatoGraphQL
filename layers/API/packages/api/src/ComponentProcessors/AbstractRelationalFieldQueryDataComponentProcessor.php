@@ -22,6 +22,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface;
 
 abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
 {
@@ -36,6 +37,17 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * @var array<string,FieldInterface>
      */
     private array $fieldInstanceContainer = [];
+
+    private ?QueryASTTransformationServiceInterface $queryASTTransformationService = null;
+
+    final public function setQueryASTTransformationService(QueryASTTransformationServiceInterface $queryASTTransformationService): void
+    {
+        $this->queryASTTransformationService = $queryASTTransformationService;
+    }
+    final protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
+    {
+        return $this->queryASTTransformationService ??= $this->instanceManager->getInstance(QueryASTTransformationServiceInterface::class);
+    }
 
     /**
      * @return FieldFragmentModelsTuple[]
