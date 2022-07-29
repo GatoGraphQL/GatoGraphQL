@@ -417,7 +417,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
     {
-        foreach ($this->parsedFieldBlockStack[0] as $field) {
+        if ($this->parsedFieldBlockStack === []) {
+            return null;
+        }
+
+        $currentlyParsedBlockFields = $this->parsedFieldBlockStack[0];
+        foreach ($currentlyParsedBlockFields as $field) {
             if (
                 ($field->getAlias() !== null && $field->getAlias() === $referencedFieldNameOrAlias)
                 || ($field->getAlias() === null && $field->getName() === $referencedFieldNameOrAlias)
