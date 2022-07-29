@@ -35,7 +35,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * the same instance must be retrieved in every case.
      * Then, cache and reuse every created field
      *
-     * @var array<string,LeafField>
+     * @var array<string,array<string,LeafField>>
      */
     private array $fieldInstanceContainer = [];
 
@@ -386,6 +386,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $fragmentModelListNameFields[$fragmentModelListName][] = $field;
         }
 
+        $query = App::getState('query');
+
         /**
          * Then iterate the list of all fragment model sets and, for each,
          * create a Conditional object with all the nested modules,
@@ -451,8 +453,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
              * and it's different objects, even if with the same properties,
              * it doesn't retrieve it.
              */
-            if (!isset($this->fieldInstanceContainer[$alias])) {
-                $this->fieldInstanceContainer[$alias] = new LeafField(
+            if (!isset($this->fieldInstanceContainer[$query][$alias])) {
+                $this->fieldInstanceContainer[$query][$alias] = new LeafField(
                     'isTypeOrImplementsAll',
                     $alias,
                     [
@@ -469,7 +471,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                     LocationHelper::getNonSpecificLocation()
                 );
             }
-            $leafField = $this->fieldInstanceContainer[$alias];
+            $leafField = $this->fieldInstanceContainer[$query][$alias];
 
             /**
              * Create a new field that will evaluate if the fragment

@@ -27,7 +27,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      * the same instance must be retrieved in every case.
      * Then, cache and reuse every created field
      *
-     * @var array<string,RelationalField>
+     * @var array<string,array<string,RelationalField>>
      */
     private array $fieldInstanceContainer = [];
 
@@ -65,6 +65,26 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             }
             return $operationFieldOrFragmentBonds;
         }
+
+        /**
+         * The cache must be stored per query, or otherwise
+         * executing multiple PHPUnit tests may access the
+         * same cached objects and produce errors.
+         */
+        $reconstructedQuery = implode(
+            PHP_EOL,
+            array_merge(
+                array_map(
+                    fn (OperationInterface $operation) => $operation->asQueryString(),
+                    $operations
+                ),
+                array_map(
+                    fn (Fragment $fragment) => $fragment->asQueryString(),
+                    $fragments
+                )
+            )
+        );
+        $queryHash = hash('md5', $reconstructedQuery);
 
         /**
          * Wrap subsequent queries "field and fragment bonds" under
@@ -163,8 +183,8 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     $operationOrder,
                     $accumulatedMaximumFieldDepth - $level
                 );
-                if (!isset($this->fieldInstanceContainer[$alias])) {
-                    $this->fieldInstanceContainer[$alias] = new RelationalField(
+                if (!isset($this->fieldInstanceContainer[$queryHash][$alias])) {
+                    $this->fieldInstanceContainer[$queryHash][$alias] = new RelationalField(
                         'self',
                         $alias,
                         [],
@@ -174,7 +194,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     );
                 }
                 $fieldOrFragmentBonds = [
-                    $this->fieldInstanceContainer[$alias],
+                    $this->fieldInstanceContainer[$queryHash][$alias],
                 ];
             }
             $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
