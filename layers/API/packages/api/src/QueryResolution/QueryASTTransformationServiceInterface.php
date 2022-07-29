@@ -63,6 +63,14 @@ interface QueryASTTransformationServiceInterface
      * Now, `firstEcho` is resolved on the third iteration (second on `Root`),
      * which is after `name @export(as: "_name")`.
      *
+     * --------------------------------------------------------------------
+     *
+     * If Multiple Query Execution is disabled, then there's no need
+     * to wrap the fields under "self".
+     *
+     * As a result, fields from different queries will be resolved
+     * all together.
+     *
      * @param OperationInterface[] $operations
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>
      */

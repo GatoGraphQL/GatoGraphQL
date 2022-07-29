@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\QueryResolution;
 
+use PoP\ComponentModel\App;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
@@ -28,12 +31,28 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      */
     public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): SplObjectStorage
     {
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        $enableMultipleQueryExecution = $moduleConfiguration->enableMultipleQueryExecution();
+        
         /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface> */
         $operationFieldOrFragmentBonds = new SplObjectStorage();
         $operationsCount = count($operations);
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
             $operation = $operations[$operationOrder];
             $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
+
+            /**
+             * If Multiple Query Execution is disabled, then there's no need
+             * to wrap the fields under "self".
+             *
+             * As a result, fields from different queries will be resolved
+             * all together.
+             */
+            if (!$enableMultipleQueryExecution) {
+                $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
+                continue;
+            }
             for ($i = 0; $i < $operationOrder; $i++) {
                 /**
                  * Use an alias to both help visualize which is the field (optional),
