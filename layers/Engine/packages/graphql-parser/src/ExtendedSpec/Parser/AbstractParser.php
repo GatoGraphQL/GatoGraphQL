@@ -95,7 +95,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     }
 
     /**
-     * Remove the block of [Field]
+     * Remove the (now previous) block of [Field]
      */
     protected function afterParsingFieldsOrFragmentBonds(): void
     {
