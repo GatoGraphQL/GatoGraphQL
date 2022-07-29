@@ -61,6 +61,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
          * Wrap subsequent queries "field and fragment bonds" under
          * the required multiple levels of `self`
          */
+        $accumulatedMaximumFieldDepth = 0;
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
             $operation = $operations[$operationOrder];
             $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
@@ -139,7 +140,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
              *   }
              *   ```
              */
-            for ($i = 0; $i < $operationOrder; $i++) {
+            for ($level = 0; $level < $accumulatedMaximumFieldDepth; $level++) {
                 /**
                  * Use an alias to both help visualize which is the field (optional),
                  * and get its cached instance (mandatory!)
@@ -148,7 +149,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     '_%s_op%s_level%s_',
                     'dynamicSelf',
                     $operationOrder,
-                    $i
+                    $level
                 );
                 if (!isset($this->fieldInstanceContainer[$alias])) {
                     $this->fieldInstanceContainer[$alias] = new RelationalField(
