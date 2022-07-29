@@ -219,11 +219,18 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             return max($depths);
         }
         
+        /**
+         * Both Fragment References and Inline Fragments also do +1
+         * because the engine will add an extra conditional module
+         * to calculate these (with alias "_..._isTypeOrImplementsAll_..._").
+         *
+         * @see layers/API/packages/api/src/ComponentProcessors/AbstractRelationalFieldQueryDataComponentProcessor.php
+         */
         if ($fieldOrFragmentBond instanceof InlineFragment) {
             /** @var InlineFragment */
             $inlineFragment = $fieldOrFragmentBond;
             $depths = array_map(
-                fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth($accumulator, $fieldOrFragmentBond, $fragments),
+                fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1 + $accumulator, $fieldOrFragmentBond, $fragments),
                 $inlineFragment->getFieldsOrFragmentBonds()
             );
             return max($depths);
@@ -236,7 +243,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             return $accumulator;
         }
         $depths = array_map(
-            fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth($accumulator, $fieldOrFragmentBond, $fragments),
+            fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1 + $accumulator, $fieldOrFragmentBond, $fragments),
             $fragment->getFieldsOrFragmentBonds()
         );
         return max($depths);
