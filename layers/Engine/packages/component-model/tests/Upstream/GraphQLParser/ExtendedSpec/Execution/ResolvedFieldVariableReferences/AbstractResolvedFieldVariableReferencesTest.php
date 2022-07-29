@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ResolvedFieldVariableReferences;
+namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ObjectResolvedFieldVariableReferences;
 
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -30,13 +30,13 @@ use PoP\Root\AbstractTestCase;
  *  *
  *   Then:
  *     AST entity `DynamicVariableReference` must be replaced with
- *     AST entity `ResolvedFieldVariableReference`
+ *     AST entity `ObjectResolvedFieldVariableReference`
  *
  * When disabled:
  *
  *   AST entity `DynamicVariableReference` remains as is
  */
-abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestCase
+abstract class AbstractObjectResolvedFieldVariableReferencesTest extends AbstractTestCase
 {
     /**
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
@@ -59,7 +59,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
     /**
      * Referencing by alias.
      */
-    public function testResolvedFieldVariableReferences(): void
+    public function testObjectResolvedFieldVariableReferences(): void
     {
         $query = '
             {
@@ -91,7 +91,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             new Location(3, 27)
         );
         $dynamicVariableReference = static::enabled()
-            ? new ResolvedFieldVariableReference('_userList', $field, new Location(8, 29))
+            ? new ObjectResolvedFieldVariableReference('_userList', $field, new Location(8, 29))
             : new DynamicVariableReference('_userList', new Location(8, 29));
         if (!static::enabled()) {
             $dynamicVariableReference->setContext($context);
@@ -205,7 +205,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
      * - self referencing field from directive
      *
      * Their ASTs cannot be constructed, because there are no setters,
-     * and the __construct from Field and ResolvedFieldVariableReference
+     * and the __construct from Field and ObjectResolvedFieldVariableReference
      * depend on each other.
      *
      * Test via Integration test then.
@@ -251,7 +251,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(4, 29));
         $dynamicVariableReference->setContext($context);
         $dynamicVariableReference2 = static::enabled()
-            ? new ResolvedFieldVariableReference('_userListLang', $field, new Location(10, 29))
+            ? new ObjectResolvedFieldVariableReference('_userListLang', $field, new Location(10, 29))
             : new DynamicVariableReference('_userListLang', new Location(10, 29));
         if (!static::enabled()) {
             $dynamicVariableReference2->setContext($context);
@@ -315,7 +315,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             new Location(3, 17)
         );
         $dynamicVariableReference = static::enabled()
-            ? new ResolvedFieldVariableReference('_getJSON', $field, new Location(8, 29))
+            ? new ObjectResolvedFieldVariableReference('_getJSON', $field, new Location(8, 29))
             : new DynamicVariableReference('_getJSON', new Location(8, 29));
         if (!static::enabled()) {
             $dynamicVariableReference->setContext($context);
@@ -629,7 +629,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             new Location(14, 27)
         );
         $dynamicVariableReference = static::enabled()
-            ? new ResolvedFieldVariableReference('_userList', $field, new Location(7, 33))
+            ? new ObjectResolvedFieldVariableReference('_userList', $field, new Location(7, 33))
             : new DynamicVariableReference('_userList', new Location(7, 33));
         if (!static::enabled()) {
             $dynamicVariableReference->setContext($context);
@@ -705,7 +705,7 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             new Location(5, 35)
         );
         $dynamicVariableReference = static::enabled()
-            ? new ResolvedFieldVariableReference('_userList', $field, new Location(11, 33))
+            ? new ObjectResolvedFieldVariableReference('_userList', $field, new Location(11, 33))
             : new DynamicVariableReference('_userList', new Location(11, 33));
         if (!static::enabled()) {
             $dynamicVariableReference->setContext($context);

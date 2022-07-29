@@ -9,7 +9,7 @@ use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
@@ -313,8 +313,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableResolvedFieldVariableReferences()) {
-            $this->replaceResolvedFieldVariableReferences($document);
+        if ($moduleConfiguration->enableObjectResolvedFieldVariableReferences()) {
+            $this->replaceObjectResolvedFieldVariableReferences($document);
         }
 
         if ($moduleConfiguration->enableMultiFieldDirectives()) {
@@ -328,17 +328,17 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Iterate the elements in the Document AST, and replace the
      * "Dynamic Variables References" with "Resolved Field Variable References"
      */
-    protected function replaceResolvedFieldVariableReferences(
+    protected function replaceObjectResolvedFieldVariableReferences(
         Document $document,
     ): void {
         foreach ($document->getOperations() as $operation) {
-            $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(
+            $this->replaceObjectResolvedFieldVariableReferencesInFieldsOrInlineFragments(
                 $operation->getFieldsOrFragmentBonds(),
                 $document->getFragments(),
             );
         }
         foreach ($document->getFragments() as $fragment) {
-            $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(
+            $this->replaceObjectResolvedFieldVariableReferencesInFieldsOrInlineFragments(
                 $fragment->getFieldsOrFragmentBonds(),
                 $document->getFragments(),
             );
@@ -349,7 +349,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
-    protected function replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(
+    protected function replaceObjectResolvedFieldVariableReferencesInFieldsOrInlineFragments(
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): void {
@@ -360,7 +360,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             if ($fieldOrFragmentBond instanceof InlineFragment) {
                 /** @var InlineFragment */
                 $inlineFragment = $fieldOrFragmentBond;
-                $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(
+                $this->replaceObjectResolvedFieldVariableReferencesInFieldsOrInlineFragments(
                     $inlineFragment->getFieldsOrFragmentBonds(),
                     $fragments,
                 );
@@ -368,7 +368,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             }
             /** @var FieldInterface */
             $field = $fieldOrFragmentBond;
-            $this->replaceResolvedFieldVariableReferencesInArguments(
+            $this->replaceObjectResolvedFieldVariableReferencesInArguments(
                 $field,
                 $field->getArguments(),
                 $fieldsOrFragmentBonds,
@@ -377,7 +377,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             if ($field instanceof RelationalField) {
                 /** @var RelationalField */
                 $relationalField = $field;
-                $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(
+                $this->replaceObjectResolvedFieldVariableReferencesInFieldsOrInlineFragments(
                     $relationalField->getFieldsOrFragmentBonds(),
                     $fragments,
                 );
@@ -390,14 +390,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
-    protected function replaceResolvedFieldVariableReferencesInArguments(
+    protected function replaceObjectResolvedFieldVariableReferencesInArguments(
         FieldInterface $field,
         array $arguments,
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): void {
         foreach ($arguments as $argument) {
-            $this->replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
+            $this->replaceDynamicVariableReferenceWithObjectResolvedFieldVariableReference(
                 $field,
                 $argument,
                 $fieldsOrFragmentBonds,
@@ -433,7 +433,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
      */
-    protected function replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
+    protected function replaceDynamicVariableReferenceWithObjectResolvedFieldVariableReference(
         FieldInterface $field,
         Argument $argument,
         array $fieldsOrFragmentBonds,
@@ -466,7 +466,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
 
         // Replace the "Dynamic Variables Reference" with "Resolved Field Variable Reference"
-        $resolvedFieldVariableReference = new ResolvedFieldVariableReference(
+        $resolvedFieldVariableReference = new ObjectResolvedFieldVariableReference(
             $dynamicVariableReference->getName(),
             $referencedField,
             $dynamicVariableReference->getLocation()
