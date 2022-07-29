@@ -14,6 +14,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use SplObjectStorage;
 
+use function max;
+
 class QueryASTTransformationService implements QueryASTTransformationServiceInterface
 {
     /**
@@ -179,6 +181,15 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
     }
 
     public function getOperationMaximumFieldDepth(OperationInterface $operation): int
+    {
+        $depths = array_map(
+            $this->getFieldOrFragmentBondDepth(...),
+            $operation->getFieldsOrFragmentBonds()
+        );
+        return max($depths);
+    }
+
+    protected function getFieldOrFragmentBondDepth(FieldInterface|FragmentBondInterface $fieldOrFragmentBond): int
     {
         return 0;
     }
