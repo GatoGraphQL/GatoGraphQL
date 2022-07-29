@@ -63,14 +63,31 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
             );
     }
 
+    public function isObjectResolvedFieldValueReference(
+        string $name,
+        ?Variable $variable,
+    ): bool {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
+            return false;
+        }
+
+        return $variable === null
+            && \str_starts_with(
+                $name,
+                QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
+            );
+    }
+
     /**
-     * Actual name of the dynamic variable (without the leading "_")
+     * Actual name of the field (without the leading "__")
      */
-    public function extractDynamicVariableName(string $name): string
+    public function extractObjectResolvedFieldName(string $name): string
     {
         return substr(
             $name,
-            strlen(QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX)
+            strlen(QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX)
         );
     }
 }

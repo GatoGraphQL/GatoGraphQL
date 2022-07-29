@@ -399,8 +399,12 @@ class Parser extends Tokenizer implements ParserInterface
         $directives   = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
         if ($this->match(Token::TYPE_LBRACE)) {
+            $this->beforeParsingFieldsOrFragmentBonds();
+
             /** @var array<FieldInterface|FragmentBondInterface> */
             $fieldsOrFragmentBonds = $this->parseBody($type === Token::TYPE_INLINE_FRAGMENT ? Token::TYPE_QUERY : $type);
+
+            $this->afterParsingFieldsOrFragmentBonds();
 
             if (!$fieldsOrFragmentBonds) {
                 throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
@@ -414,6 +418,20 @@ class Parser extends Tokenizer implements ParserInterface
         }
 
         return $this->createLeafField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+    }
+
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
+    protected function beforeParsingFieldsOrFragmentBonds(): void
+    {
+    }
+
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
+    protected function afterParsingFieldsOrFragmentBonds(): void
+    {
     }
 
     /**
@@ -521,10 +539,28 @@ class Parser extends Tokenizer implements ParserInterface
     {
         $this->expect(Token::TYPE_AT);
 
+        $this->beforeParsingDirectiveArgumentList();
+
         $nameToken = $this->eatIdentifierToken();
         $args      = $this->match(Token::TYPE_LPAREN) ? $this->parseArgumentList() : [];
 
+        $this->afterParsingDirectiveArgumentList();
+
         return $this->createDirective($nameToken->getData(), $args, $this->getTokenLocation($nameToken));
+    }
+
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
+    protected function beforeParsingDirectiveArgumentList(): void
+    {
+    }
+
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
+    protected function afterParsingDirectiveArgumentList(): void
+    {
     }
 
     /**

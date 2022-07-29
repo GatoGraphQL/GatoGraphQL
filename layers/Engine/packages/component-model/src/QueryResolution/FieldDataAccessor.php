@@ -9,6 +9,7 @@ use PoP\GraphQLParser\ExtendedSpec\Execution\ObjectFieldValuePromise;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use stdClass;
 
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
@@ -86,6 +87,37 @@ class FieldDataAccessor implements FieldDataAccessorInterface
                 $resolvedFieldArgs[$key] = $objectFieldValuePromise->resolveValue();
                 continue;
             }
+
+            /**
+             * An ObjectResolvedFieldValueReference could be provided in a List input:
+             *
+             *   ```
+             *   {
+             *     id
+             *     echo(value: [$_id])
+             *   }
+             *   ```
+             */
+            if (is_array($value)) {
+                $resolvedFieldArgs[$key] = $this->resolveFieldArgs($value);
+                continue;
+            }
+
+            /**
+             * An ObjectResolvedFieldValueReference could be provided in an InputObject:
+             *
+             *   ```
+             *   {
+             *     id
+             *     echo(value: {id: $_id})
+             *   }
+             *   ```
+             */
+            if ($value instanceof stdClass) {
+                $resolvedFieldArgs[$key] = (object) $this->resolveFieldArgs((array) $value);
+                continue;
+            }
+
             $resolvedFieldArgs[$key] = $value;
         }
         return $resolvedFieldArgs;
