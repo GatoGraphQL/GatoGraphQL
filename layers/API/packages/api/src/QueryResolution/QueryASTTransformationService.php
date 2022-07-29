@@ -71,7 +71,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
          * executing multiple PHPUnit tests may access the
          * same cached objects and produce errors.
          */
-        $reconstructedQuery = implode(
+        $reconstructedDocument = implode(
             PHP_EOL,
             array_merge(
                 array_map(
@@ -84,7 +84,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                 )
             )
         );
-        $queryHash = hash('md5', $reconstructedQuery);
+        $documentHash = hash('md5', $reconstructedDocument);
 
         /**
          * Wrap subsequent queries "field and fragment bonds" under
@@ -183,8 +183,8 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     $operationOrder,
                     $accumulatedMaximumFieldDepth - $level
                 );
-                if (!isset($this->fieldInstanceContainer[$queryHash][$alias])) {
-                    $this->fieldInstanceContainer[$queryHash][$alias] = new RelationalField(
+                if (!isset($this->fieldInstanceContainer[$documentHash][$alias])) {
+                    $this->fieldInstanceContainer[$documentHash][$alias] = new RelationalField(
                         'self',
                         $alias,
                         [],
@@ -194,7 +194,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     );
                 }
                 $fieldOrFragmentBonds = [
-                    $this->fieldInstanceContainer[$queryHash][$alias],
+                    $this->fieldInstanceContainer[$documentHash][$alias],
                 ];
             }
             $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
