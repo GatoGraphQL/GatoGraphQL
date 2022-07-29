@@ -123,8 +123,19 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $directives,
             $location
         );
-        $this->parsedFieldBlock[0][] = $relationalField;
+        $this->addFieldToCurrentlyParsedFieldBlock($relationalField);
         return $relationalField;
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     * @param Directive[] $directives
+     */
+    protected function addFieldToCurrentlyParsedFieldBlock(
+        FieldInterface $field,
+    ): void {
+        $this->parsedFieldBlock[0][] = $field;
     }
 
     /**
@@ -145,7 +156,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $directives,
             $location,
         );
-        $this->parsedFieldBlock[0][] = $leafField;
+        $this->addFieldToCurrentlyParsedFieldBlock($leafField);
         return $leafField;
     }
 
