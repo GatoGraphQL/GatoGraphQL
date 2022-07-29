@@ -589,7 +589,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
     }
 
     /**
-     * The field can be resolved within a fragment.
+     * The field cannot be resolved within a fragment.
      */
     public function testInFragments(): void
     {
@@ -628,12 +628,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(14, 27)
         );
-        $dynamicVariableReference = static::enabled()
-            ? new ObjectResolvedFieldValueReference('_userList', $field, new Location(7, 33))
-            : new DynamicVariableReference('_userList', new Location(7, 33));
-        if (!static::enabled()) {
-            $dynamicVariableReference->setContext($context);
-        }
+        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(7, 33));
+        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -667,7 +663,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
     }
 
     /**
-     * The field can be resolved within an inline fragment.
+     * The field cannot be resolved within an inline fragment.
      */
     public function testInInlineFragments(): void
     {
@@ -704,12 +700,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(5, 35)
         );
-        $dynamicVariableReference = static::enabled()
-            ? new ObjectResolvedFieldValueReference('_userList', $field, new Location(11, 33))
-            : new DynamicVariableReference('_userList', new Location(11, 33));
-        if (!static::enabled()) {
-            $dynamicVariableReference->setContext($context);
-        }
+        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(11, 33));
+        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
