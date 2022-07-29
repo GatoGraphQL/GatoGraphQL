@@ -117,7 +117,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
                 $relationalField1,
                 $relationalField3,
             ],
-            new Location(8, 19)
+            new Location(2, 15)
         );
         $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
         $this->assertEquals(
@@ -155,7 +155,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
                 $leafField,
                 $fragmentReference,
             ],
-            new Location(8, 19)
+            new Location(2, 15)
         );
 
         $fragmentFields = [
@@ -220,7 +220,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
                 $fragmentReference1,
                 $relationalField,
             ],
-            new Location(8, 19)
+            new Location(2, 15)
         );
 
         $fragmentFields = [
@@ -285,7 +285,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
                 $leafField1,
                 $relationalField,
             ],
-            new Location(8, 19)
+            new Location(2, 15)
         );
 
         $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
