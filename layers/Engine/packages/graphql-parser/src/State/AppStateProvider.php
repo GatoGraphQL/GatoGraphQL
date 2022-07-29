@@ -24,7 +24,7 @@ class AppStateProvider extends AbstractAppStateProvider
          *
          * @var SplObjectStorage<FieldInterface,mixed>
          */
-        $resolvedFieldValues = new SplObjectStorage();
-        $state['engine-iteration-object-resolved-field-values'] = $resolvedFieldValues;
+        $objectResolvedFieldValues = new SplObjectStorage();
+        $state['engine-iteration-object-resolved-field-values'] = $objectResolvedFieldValues;
     }
 }

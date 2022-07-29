@@ -139,8 +139,8 @@ class GraphQLServer implements GraphQLServerInterface
         /**
          * @var SplObjectStorage<FieldInterface,mixed>
          */
-        $resolvedFieldValues = new SplObjectStorage();
-        $appStateManager->override('engine-iteration-object-resolved-field-values', $resolvedFieldValues);
+        $objectResolvedFieldValues = new SplObjectStorage();
+        $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
 
         // Convert the GraphQL query to AST
         try {
