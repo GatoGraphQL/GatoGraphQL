@@ -539,10 +539,28 @@ class Parser extends Tokenizer implements ParserInterface
     {
         $this->expect(Token::TYPE_AT);
 
+        $this->beforeParsingDirectiveArgumentList();
+
         $nameToken = $this->eatIdentifierToken();
         $args      = $this->match(Token::TYPE_LPAREN) ? $this->parseArgumentList() : [];
 
+        $this->afterParsingDirectiveArgumentList();
+
         return $this->createDirective($nameToken->getData(), $args, $this->getTokenLocation($nameToken));
+    }
+
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
+    protected function beforeParsingDirectiveArgumentList(): void
+    {
+    }
+
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
+    protected function afterParsingDirectiveArgumentList(): void
+    {
     }
 
     /**

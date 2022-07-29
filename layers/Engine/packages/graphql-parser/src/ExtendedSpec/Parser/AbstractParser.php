@@ -56,6 +56,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     protected array $parsedFieldBlockStack = [];
 
+    /**
+     * ObjectResolvedFieldValueReferences are not supported
+     * within Directive Arguments.
+     */
+    protected bool $parsingDirectiveArgumentList = false;
+
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
@@ -98,6 +104,24 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function afterParsingFieldsOrFragmentBonds(): void
     {
         array_shift($this->parsedFieldBlockStack);
+    }
+
+    /**
+     * ObjectResolvedFieldValueReferences are not supported
+     * within Directive Arguments
+     */
+    protected function beforeParsingDirectiveArgumentList(): void
+    {
+        $this->parsingDirectiveArgumentList = true;
+    }
+
+    /**
+     * ObjectResolvedFieldValueReferences are not supported
+     * within Directive Arguments
+     */
+    protected function afterParsingDirectiveArgumentList(): void
+    {
+        $this->parsingDirectiveArgumentList = false;
     }
 
     /**
@@ -392,7 +416,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         ?Variable $variable,
         Location $location,
     ): VariableReference {
-        if ($this->getQueryAugmenterService()->isObjectResolvedFieldValueReference($name, $variable)) {
+        if (!$this->parsingDirectiveArgumentList
+            && $this->getQueryAugmenterService()->isObjectResolvedFieldValueReference($name, $variable)
+        ) {
             /**
              * Make sure the field appears _before_ the reference,
              * to avoid circular references.
