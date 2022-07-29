@@ -66,7 +66,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
              *       field {
              *         field {
              *           field {
-             *             maximumDepthField: field
+             *             firstQueryMaximumDepthField: field
              *           }
              *         }
              *       }
@@ -74,7 +74,11 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
              *   }
              *
              *   query Two {
-             *     field # <= Must be resolved after "maximumDepthField"
+             *     secondQueryField: field # <= Must be resolved after "firstQueryMaximumDepthField"
+             *   }
+             *
+             *   query Three {
+             *     field # <= Must be resolved after "secondQueryField"
              *   }
              *   ```
              *
@@ -86,7 +90,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
              *       field {
              *         field {
              *           field {
-             *             maximumDepthField: field
+             *             firstQueryMaximumDepthField: field
              *           }
              *         }
              *       }
@@ -99,7 +103,23 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
              *         self {
              *           self {
              *             self {
-             *               field # <= Must be resolved after "maximumDepthField"
+             *               secondQueryField: field # <= Must be resolved after "firstQueryMaximumDepthField"
+             *             }
+             *           }
+             *         }
+             *       }
+             *     }
+             *   }
+             *
+             *   query Three {
+             *     self {
+             *       self {
+             *         self {
+             *           self {
+             *             self {
+             *               self {
+             *                 field # <= Must be resolved after "secondQueryField"
+             *               }
              *             }
              *           }
              *         }
