@@ -19,7 +19,7 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\AbstractTestCase;
 use SplObjectStorage;
 
-abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCase
+abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServiceTest extends AbstractTestCase
 {
     /**
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
@@ -38,7 +38,7 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
         return $this->getService(QueryASTTransformationServiceInterface::class);
     }
 
-    public function testQueryASTTransformationService()
+    public function testPrepareOperationFieldAndFragmentBondsForMultipleQueryExecution()
     {
         /**
          * This is the AST for this GraphQL query:
@@ -47,6 +47,7 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
          *   query One {
          *     film(id: 1) {
          *       title
+         *     }
          *   }
          *
          *   query Two {
