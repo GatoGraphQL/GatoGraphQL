@@ -399,8 +399,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
              * Make sure the field appears _before_ the reference,
              * to avoid circular references.
              */
-            $name = $this->getQueryAugmenterService()->extractObjectResolvedFieldName($name);
-            $field = $this->findFieldWithNameWithinCurrentSiblingFields($name);
+            $fieldNameOrAlias = $this->getQueryAugmenterService()->extractObjectResolvedFieldName($name);
+            $field = $this->findFieldWithNameWithinCurrentSiblingFields($fieldNameOrAlias);
             if ($field !== null) {
                 return $this->createObjectResolvedFieldValueReference($name, $field, $location);
             }
