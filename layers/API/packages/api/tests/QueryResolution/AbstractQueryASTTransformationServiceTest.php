@@ -6,8 +6,10 @@ namespace PoPAPI\API\QueryResolution;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
@@ -53,9 +55,20 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
          *       title
          *     }
          *   }
+         *
+         *   query Three {
+         *     id
+         *     ...on QueryRoot @outside {
+         *       __typename
+         *     }
+         *     users {
+         *       name
+         *       surname
+         *     }
+         *   }
          *   ```
          *
-         * @see layers/API/packages/api/tests/QueryResolution/AbstractMultipleQueryExecutionTest.php Original query test
+         * @see layers/API/packages/api/tests/QueryResolution/AbstractMultipleQueryExecutionTest.php Query based on example test there (and then completed a bit more)
          */
         $argument1 = new Argument('id', new Literal(1, new Location(3, 26)), new Location(3, 22));
         $leafField1 = new LeafField('title', null, [], [], new Location(4, 21));
@@ -80,6 +93,7 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
             ],
             new Location(2, 19)
         );
+        
         $argument2 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
         $leafField2 = new LeafField('title', null, [], [], new Location(10, 21));
         $relationalField2 = new RelationalField(
@@ -103,9 +117,48 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
             ],
             new Location(8, 19)
         );
+
+        $leafField31 = new LeafField('id', null, [], [], new Location(15, 17));
+        $leafField32 = new LeafField('__typename', null, [], [], new Location(17, 19));
+        $inlineFragment3 = new InlineFragment(
+            'QueryRoot',
+            [
+                $leafField32
+            ],
+            [
+                new Directive('outside', [], new Location(16, 33))
+            ],
+            new Location(16, 17)
+        );
+        $leafField33 = new LeafField('name', null, [], [], new Location(20, 19));
+        $leafField34 = new LeafField('surname', null, [], [], new Location(21, 19));
+        $relationalField3 = new RelationalField(
+            'users',
+            null,
+            [],
+            [
+                $leafField33,
+                $leafField34,
+            ],
+            [],
+            new Location(19, 17)
+        );
+        $queryThreeOperation = new QueryOperation(
+            'Three',
+            [],
+            [],
+            [
+                $leafField31,
+                $inlineFragment3,
+                $relationalField3
+            ],
+            new Location(8, 19)
+        );
+
         $operations = [
             $queryOneOperation,
             $queryTwoOperation,
+            $queryThreeOperation,
         ];
 
         /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface> */
@@ -116,15 +169,41 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
 
         if (!static::enabled()) {
             $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
-                $relationalField2
+                $relationalField2,
+            ];
+            $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
+                $leafField31,
+                $inlineFragment3,
+                $relationalField3,
             ];
         } else {
             $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = new RelationalField(
                 'self',
-                '_dynamicSelf_op0_level0_',
+                '_dynamicSelf_op1_level0_',
                 [],
                 [
-                    $relationalField2
+                    $relationalField2,
+                ],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            );
+            $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = new RelationalField(
+                'self',
+                '_dynamicSelf_op2_level0_',
+                [],
+                [
+                    new RelationalField(
+                        'self',
+                        '_dynamicSelf_op2_level1_',
+                        [],
+                        [
+                            $leafField31,
+                            $inlineFragment3,
+                            $relationalField3,
+                        ],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                 ],
                 [],
                 LocationHelper::getNonSpecificLocation()
