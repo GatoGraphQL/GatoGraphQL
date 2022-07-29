@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
     /**
-     * A ObjectResolvedFieldVariableReference will return a ObjectFieldValuePromise,
+     * A ObjectResolvedFieldValueReference will return a ObjectFieldValuePromise,
      * which must be resolved to the actual value after its corresponding
      * Field was resolved.
      *
@@ -74,7 +74,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableObjectResolvedFieldVariableReferences()) {
+        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
             return $fieldArgs;
         }
 

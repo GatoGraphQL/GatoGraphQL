@@ -8,7 +8,7 @@ use PoP\GraphQLParser\ExtendedSpec\Execution\ObjectFieldValuePromise;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class ObjectResolvedFieldVariableReference extends AbstractDynamicVariableReference
+class ObjectResolvedFieldValueReference extends AbstractDynamicVariableReference
 {
     public function __construct(
         string $name,
