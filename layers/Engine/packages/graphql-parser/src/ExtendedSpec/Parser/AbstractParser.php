@@ -79,9 +79,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     protected function parseOperation(string $type): OperationInterface
     {
-        $this->parsedFieldBlockStack = [
-            [], // This is the first level
-        ];
+        $this->parsedFieldBlockStack = [];
 
         return parent::parseOperation($type);
     }
