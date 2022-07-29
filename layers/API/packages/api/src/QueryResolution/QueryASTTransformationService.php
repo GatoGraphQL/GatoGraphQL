@@ -14,11 +14,22 @@ use SplObjectStorage;
 class QueryASTTransformationService implements QueryASTTransformationServiceInterface
 {
     /**
+     * Because fields are stored in SplObjectStorage,
+     * the same instance must be retrieved in every case.
+     * Then, cache and reuse every created field
+     *
+     * @var array<string,RelationalField>
+     */
+    private array $fieldInstanceContainer = [];
+
+    /**
      * @param OperationInterface[] $operations
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>
      */
     public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): SplObjectStorage
     {
+        /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface> */
+        $operationFieldOrFragmentBonds = new SplObjectStorage();
         $operationsCount = count($operations);
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
             $operation = $operations[$operationOrder];
@@ -48,7 +59,8 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     $this->fieldInstanceContainer[$alias],
                 ];
             }
+            $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
         }
-        return $operations;
+        return $operationFieldOrFragmentBonds;
     }
 }

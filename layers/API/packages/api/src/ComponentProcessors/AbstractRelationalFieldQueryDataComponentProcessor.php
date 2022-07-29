@@ -34,7 +34,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * the same instance must be retrieved in every case.
      * Then, cache and reuse every created field
      *
-     * @var array<string,FieldInterface>
+     * @var array<string,LeafField>
      */
     private array $fieldInstanceContainer = [];
 
