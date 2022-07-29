@@ -189,12 +189,12 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
             );
             $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = new RelationalField(
                 'self',
-                '_dynamicSelf_op2_level0_',
+                '_dynamicSelf_op2_level1_',
                 [],
                 [
                     new RelationalField(
                         'self',
-                        '_dynamicSelf_op2_level1_',
+                        '_dynamicSelf_op2_level0_',
                         [],
                         [
                             $leafField31,
