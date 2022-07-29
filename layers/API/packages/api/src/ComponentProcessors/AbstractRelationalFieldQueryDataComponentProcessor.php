@@ -20,6 +20,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface;
