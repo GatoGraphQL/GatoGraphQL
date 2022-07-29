@@ -22,8 +22,8 @@ class FieldValuePromise
     public function resolveValue(): mixed
     {
         /** @var SplObjectStorage<FieldInterface,mixed> */
-        $resolvedFieldValues = App::getState('resolved-field-values');
-        if (!$resolvedFieldValues->contains($this->field)) {
+        $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
+        if (!$objectResolvedFieldValues->contains($this->field)) {
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__('The FieldValuePromise cannot resolve field \'%s\'', 'graphql-parser'),
@@ -32,6 +32,6 @@ class FieldValuePromise
             );
         }
 
-        return $resolvedFieldValues[$this->field];
+        return $objectResolvedFieldValues[$this->field];
     }
 }

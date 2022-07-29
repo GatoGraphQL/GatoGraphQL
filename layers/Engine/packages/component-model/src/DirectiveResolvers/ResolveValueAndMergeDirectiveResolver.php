@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
@@ -183,6 +184,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        /**
+         * Before resolving the fields for the current
+         * object (executed in the Engine Iteration),
+         * reset the AppState concerning FieldValuePromises.
+         */
+        $this->resetAppStateForFieldValuePromises();
         foreach ($fieldSet as $field) {
             $this->resolveValueForObject(
                 $relationalTypeResolver,
@@ -196,6 +203,37 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $engineIterationFeedbackStore,
             );
         }
+    }
+
+    /**
+     * Reset the AppState concerning FieldValuePromises
+     */
+    protected function resetAppStateForFieldValuePromises(): void
+    {
+        /**
+         * @var SplObjectStorage<FieldInterface,mixed>
+         */
+        $objectResolvedFieldValues = new SplObjectStorage();
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
+    }
+
+    /**
+     * Set the resolved value (null or otherwise) to the AppState
+     * to resolve the FieldValuePromises
+     */
+    protected function setAppStateForFieldValuePromises(
+        FieldInterface $field,
+        mixed $value,
+    ): void {
+        /**
+         * @var SplObjectStorage<FieldInterface,mixed>
+         */
+        $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
+        $objectResolvedFieldValues[$field] = $value;
+
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
     }
 
     /**
@@ -237,6 +275,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         if ($fieldData === null) {
             // Set the response for the failing field as null
             $resolvedIDFieldValues[$id][$field] = null;
+            $this->setAppStateForFieldValuePromises($field, null);
             return;
         }
         $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
@@ -261,10 +300,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // Set the response for the failing field as null
             $resolvedIDFieldValues[$id][$field] = null;
+            $this->setAppStateForFieldValuePromises($field, null);
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
         $resolvedIDFieldValues[$id][$field] = $value;
+        $this->setAppStateForFieldValuePromises($field, $value);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

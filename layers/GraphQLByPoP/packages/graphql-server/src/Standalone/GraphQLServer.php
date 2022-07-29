@@ -14,14 +14,12 @@ use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use SplObjectStorage;
 
 class GraphQLServer implements GraphQLServerInterface
 {
@@ -136,11 +134,6 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
-        /**
-         * @var SplObjectStorage<FieldInterface,mixed>
-         */
-        $resolvedFieldValues = new SplObjectStorage();
-        $appStateManager->override('resolved-field-values', $resolvedFieldValues);
 
         // Convert the GraphQL query to AST
         try {
