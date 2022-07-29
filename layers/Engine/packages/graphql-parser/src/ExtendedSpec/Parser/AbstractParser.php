@@ -149,11 +149,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         return $relationalField;
     }
 
-    /**
-     * @param Argument[] $arguments
-     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @param Directive[] $directives
-     */
     protected function addFieldToCurrentlyParsedFieldBlock(
         FieldInterface $field,
     ): void {
@@ -489,9 +484,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      *   field: echo(value: $field)
      * }
      * ```
-     *
-     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
      */
     protected function createObjectResolvedFieldValueReference(
         string $name,
