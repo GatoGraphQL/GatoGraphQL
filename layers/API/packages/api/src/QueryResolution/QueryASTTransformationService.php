@@ -31,28 +31,39 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      */
     public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): SplObjectStorage
     {
-        /** @var GraphQLParserModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
-        $enableMultipleQueryExecution = $moduleConfiguration->enableMultipleQueryExecution();
-
         /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> */
         $operationFieldOrFragmentBonds = new SplObjectStorage();
         $operationsCount = count($operations);
+        
+        /**
+         * If there's only 1 operation, then return its contents directly
+         * (no need to calculate anything!).
+         *
+         * ----------------------------------------------------------------
+         *
+         * If Multiple Query Execution is disabled, then there's no need
+         * to wrap the fields under "self".
+         *
+         * As a result, fields from different queries will be resolved
+         * all together.
+         *
+         * @var GraphQLParserModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        if ($operationsCount === 1 || !$moduleConfiguration->enableMultipleQueryExecution()) {
+            foreach ($operations as $operation) {
+                $operationFieldOrFragmentBonds[$operation] = $operation->getFieldsOrFragmentBonds();
+            }
+            return $operationFieldOrFragmentBonds;
+        }
+
+        /**
+         * Wrap subsequent queries "field and fragment bonds" under
+         * the required multiple levels of `self`
+         */
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
             $operation = $operations[$operationOrder];
             $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
-
-            /**
-             * If Multiple Query Execution is disabled, then there's no need
-             * to wrap the fields under "self".
-             *
-             * As a result, fields from different queries will be resolved
-             * all together.
-             */
-            if (!$enableMultipleQueryExecution) {
-                $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
-                continue;
-            }
 
             /**
              * Each level needs to add as many "self" as the sum of the
