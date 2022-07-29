@@ -9,7 +9,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -20,16 +19,6 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
     protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {
         return $this->getService(QueryASTTransformationServiceInterface::class);
-    }
-
-    public function testOperationMaximumFieldDepth()
-    {
-        $operation = $this->getOperationAST();
-        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
-        $this->assertEquals(
-            3,
-            $operationMaximumFieldDepth
-        );
     }
 
     /**
@@ -49,7 +38,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   }
      *   ```
      */
-    protected function getOperationAST(): OperationInterface
+    public function testOperationMaximumFieldDepth()
     {
         $leafField2 = new LeafField('name', null, [], [], new Location(6, 23));
         $relationalField2 = new RelationalField(
@@ -91,7 +80,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
             [],
             new Location(9, 17)
         );
-        return new QueryOperation(
+        $operation = new QueryOperation(
             '',
             [],
             [],
@@ -100,6 +89,11 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
                 $relationalField3,
             ],
             new Location(8, 19)
+        );
+        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
+        $this->assertEquals(
+            3,
+            $operationMaximumFieldDepth
         );
     }
 
@@ -130,19 +124,57 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      */
     public function testOperationMaximumFieldDepthWithFragment()
     {
-        $commonOperation = $this->getOperationAST();
+        $leafField2 = new LeafField('name', null, [], [], new Location(6, 23));
+        $relationalField2 = new RelationalField(
+            'director',
+            null,
+            [],
+            [
+                $leafField2,
+            ],
+            [],
+            new Location(5, 21)
+        );
+        $leafField1 = new LeafField('title', null, [], [], new Location(4, 21));
+        $argument1 = new Argument('id', new Literal(1, new Location(3, 26)), new Location(3, 22));
+        $relationalField1 = new RelationalField(
+            'film',
+            null,
+            [
+                $argument1,
+            ],
+            [
+                $leafField1,
+                $relationalField2,
+            ],
+            [],
+            new Location(3, 17)
+        );
+        $argument2 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
+        $leafField3 = new LeafField('title', null, [], [], new Location(10, 21));
+        $relationalField3 = new RelationalField(
+            'post',
+            null,
+            [
+                $argument2,
+            ],
+            [
+                $leafField3,
+            ],
+            [],
+            new Location(9, 17)
+        );
 
         $fragmentReference = new FragmentReference('RootData', new Location(12, 17));
         $operation = new QueryOperation(
             '',
             [],
             [],
-            array_merge(
-                $commonOperation->getFieldsOrFragmentBonds(),
-                [
-                    $fragmentReference,
-                ]
-            ),
+            [
+                $relationalField1,
+                $relationalField3,
+                $fragmentReference,
+            ],
             new Location(8, 19)
         );
 
