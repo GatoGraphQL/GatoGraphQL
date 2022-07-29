@@ -14,6 +14,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\AbstractTestCase;
 use SplObjectStorage;
 
@@ -56,43 +57,49 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
          *
          * @see layers/API/packages/api/tests/QueryResolution/AbstractMultipleQueryExecutionTest.php Original query test
          */
+        $argument1 = new Argument('id', new Literal(1, new Location(3, 26)), new Location(3, 22));
+        $leafField1 = new LeafField('title', null, [], [], new Location(4, 21));
+        $relationalField1 = new RelationalField(
+            'film',
+            null,
+            [
+                $argument1,
+            ],
+            [
+                $leafField1,
+            ],
+            [],
+            new Location(3, 17)
+        );
         $queryOneOperation = new QueryOperation(
             'One',
             [],
             [],
             [
-                new RelationalField(
-                    'film',
-                    null,
-                    [
-                        new Argument('id', new Literal(1, new Location(3, 26)), new Location(3, 22)),
-                    ],
-                    [
-                        new LeafField('title', null, [], [], new Location(4, 21)),
-                    ],
-                    [],
-                    new Location(3, 17)
-                )
+                $relationalField1
             ],
             new Location(2, 19)
+        );
+        $argument2 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
+        $leafField2 = new LeafField('title', null, [], [], new Location(10, 21));
+        $relationalField2 = new RelationalField(
+            'post',
+            null,
+            [
+                $argument2,
+            ],
+            [
+                $leafField2,
+            ],
+            [],
+            new Location(9, 17)
         );
         $queryTwoOperation = new QueryOperation(
             'Two',
             [],
             [],
             [
-                new RelationalField(
-                    'post',
-                    null,
-                    [
-                        new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22)),
-                    ],
-                    [
-                        new LeafField('title', null, [], [], new Location(10, 21)),
-                    ],
-                    [],
-                    new Location(9, 17)
-                )
+                $relationalField2
             ],
             new Location(8, 19)
         );
@@ -103,6 +110,26 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
 
         /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface> */
         $expectedOperationFieldAndFragmentBonds = new SplObjectStorage();
+        $expectedOperationFieldAndFragmentBonds[$queryOneOperation] = [
+            $relationalField1
+        ];
+
+        if (!static::enabled()) {
+            $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
+                $relationalField2
+            ];
+        } else {
+            $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = new RelationalField(
+                'self',
+                '_dynamicSelf_op0_level0_',
+                [],
+                [
+                    $relationalField2
+                ],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
 
         $this->assertEquals(
             $expectedOperationFieldAndFragmentBonds,
