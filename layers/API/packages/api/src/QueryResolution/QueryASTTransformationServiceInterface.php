@@ -70,6 +70,81 @@ interface QueryASTTransformationServiceInterface
      *
      * --------------------------------------------------------------------
      *
+     * Each level needs to add as many "self" as the sum of the
+     * maximum field depth in all previous queries, so that
+     * the 1st field in the subsequent operation is executed
+     * after the deepest field in the previous query:
+     *
+     *   ```
+     *   query One {
+     *     field {
+     *       field {
+     *         field {
+     *           field {
+     *             firstQueryMaximumDepthField: field
+     *           }
+     *         }
+     *       }
+     *     }
+     *   }
+     *
+     *   query Two {
+     *     secondQueryField: field # <= Must be resolved after "firstQueryMaximumDepthField"
+     *   }
+     *
+     *   query Three {
+     *     field # <= Must be resolved after "secondQueryField"
+     *   }
+     *   ```
+     *
+     * This will then become:
+     *
+     *   ```
+     *   query One {
+     *     field {
+     *       field {
+     *         field {
+     *           field {
+     *             firstQueryMaximumDepthField: field
+     *           }
+     *         }
+     *       }
+     *     }
+     *   }
+     *
+     *   query Two {
+     *     self {
+     *       self {
+     *         self {
+     *           self {
+     *             self {
+     *               secondQueryField: field # <= Must be resolved after "firstQueryMaximumDepthField"
+     *             }
+     *           }
+     *         }
+     *       }
+     *     }
+     *   }
+     *
+     *   query Three {
+     *     self {
+     *       self {
+     *         self {
+     *           self {
+     *             self {
+     *               self {
+     *                 field # <= Must be resolved after "secondQueryField"
+     *               }
+     *             }
+     *           }
+     *         }
+     *       }
+     *     }
+     *   }
+     *   ```
+     *
+     * --------------------------------------------------------------------
+     *
      * If Multiple Query Execution is disabled, then there's no need
      * to wrap the fields under "self".
      *
