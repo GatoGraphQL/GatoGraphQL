@@ -161,7 +161,7 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
             $queryThreeOperation,
         ];
 
-        /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface> */
+        /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> */
         $expectedOperationFieldAndFragmentBonds = new SplObjectStorage();
         $expectedOperationFieldAndFragmentBonds[$queryOneOperation] = [
             $relationalField1
@@ -211,9 +211,26 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
         }
 
         $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations);
+
+        /**
+         * Doing `assertEquals` on SplObjectStorage doesn't work!
+         * So compare the multiple elements 1 by 1.
+         */
         $this->assertEquals(
-            $expectedOperationFieldAndFragmentBonds,
-            $operationFieldAndFragmentBonds
+            $expectedOperationFieldAndFragmentBonds->count(),
+            $operationFieldAndFragmentBonds->count()
         );
+        /** @var OperationInterface $operation */
+        foreach ($expectedOperationFieldAndFragmentBonds as $operation) {
+            $expectedFieldAndFragmentBonds = $expectedOperationFieldAndFragmentBonds[$operation];
+            $this->assertContains(
+                $operation,
+                $operationFieldAndFragmentBonds
+            );
+            $this->assertEquals(
+                $expectedFieldAndFragmentBonds,
+                $operationFieldAndFragmentBonds[$operation]
+            );
+        }
     }
 }
