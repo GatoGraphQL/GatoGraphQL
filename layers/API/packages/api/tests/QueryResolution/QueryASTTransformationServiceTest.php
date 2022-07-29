@@ -6,6 +6,8 @@ namespace PoPAPI\API\QueryResolution;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
@@ -92,6 +94,61 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
         $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
         $this->assertEquals(
             3,
+            $operationMaximumFieldDepth
+        );
+
+        /**
+         * Also append a Fragment Reference and recalculate:
+         *
+         *   ```
+         *   query {
+         *     film(id: 1) { # level 1
+         *       title # level 2
+         *       director { # level 2
+         *         name # level 3 # <= maximum depth!
+         *       }
+         *     }
+         *     post(id: 2) { # level 1
+         *       title # level 2
+         *     }
+         *     ...RootData
+         *   }
+         *
+         *   fragment RootData on QueryRoot {
+         *     id
+         *     self {
+         *       id
+         *     }
+         *   }
+         *   ```
+         */
+        $fragmentReference = new FragmentReference('RootData', new Location(12, 17));
+        $operation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $relationalField1,
+                $relationalField3,
+                $fragmentReference,
+            ],
+            new Location(8, 19)
+        );
+
+        $fragmentFields = [
+            new LeafField('id', null, [], [], new Location(16, 17)),
+            new RelationalField('id', null, [], [
+                new LeafField('id', null, [], [], new Location(18, 19))
+            ], [], new Location(17, 17)),
+        ];
+        $fragment = new Fragment('RootData', 'QueryRoot', [], $fragmentFields, new Location(15, 15));
+        $fragments = [
+            $fragment,
+        ];
+
+        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, $fragments);
+        $this->assertEquals(
+            6,
             $operationMaximumFieldDepth
         );
     }
