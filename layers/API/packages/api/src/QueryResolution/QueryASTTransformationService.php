@@ -166,7 +166,17 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                 ];
             }
             $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
+
+            /**
+             * Add the maximum depth of this operation to the counter
+             */
+            $accumulatedMaximumFieldDepth += $this->getOperationMaximumFieldDepth($operation);
         }
         return $operationFieldOrFragmentBonds;
+    }
+
+    public function getOperationMaximumFieldDepth(OperationInterface $operation): int
+    {
+        return 0;
     }
 }

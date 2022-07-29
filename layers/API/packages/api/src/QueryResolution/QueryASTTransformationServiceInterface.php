@@ -75,4 +75,22 @@ interface QueryASTTransformationServiceInterface
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
     public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): SplObjectStorage;
+    /**
+     * Calculate the maximum field depth in an operation.
+     *
+     * Eg: this query has maximum field depth 4:
+     *
+     * ```
+     * {
+     *   level1 {
+     *     level2 {
+     *       level3 {
+     *         level4 # <= maximum depth field
+     *       }
+     *     }
+     *   }
+     * }
+     * ```
+     */
+    public function getOperationMaximumFieldDepth(OperationInterface $operation): int;
 }
