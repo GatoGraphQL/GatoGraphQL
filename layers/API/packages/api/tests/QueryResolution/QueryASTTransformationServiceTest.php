@@ -89,7 +89,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
             new Location(8, 19)
         );
 
-        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation);
+        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
         $this->assertEquals(
             3,
             $operationMaximumFieldDepth

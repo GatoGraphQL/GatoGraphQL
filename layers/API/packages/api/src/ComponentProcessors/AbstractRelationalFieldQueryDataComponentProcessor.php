@@ -151,7 +151,10 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          * order as the operations (which is necessary for `@export`
          * to work), then wrap them on a "self" field.
          */
-        $operationFieldOrFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($requestedOperations);
+        $operationFieldOrFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+            $requestedOperations,
+            $fragments,
+        );
         /** @var OperationInterface $operation */
         foreach ($operationFieldOrFragmentBonds as $operation) {
             $fieldOrFragmentBonds = $operationFieldOrFragmentBonds[$operation];

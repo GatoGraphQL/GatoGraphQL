@@ -33,10 +33,13 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
 
     /**
      * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
-    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): SplObjectStorage
-    {
+    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+        array $operations,
+        array $fragments,
+    ): SplObjectStorage {
         /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> */
         $operationFieldOrFragmentBonds = new SplObjectStorage();
         $operationsCount = count($operations);
@@ -179,21 +182,27 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             /**
              * Add the maximum depth of this operation to the counter
              */
-            $accumulatedMaximumFieldDepth += $this->getOperationMaximumFieldDepth($operation);
+            $accumulatedMaximumFieldDepth += $this->getOperationMaximumFieldDepth($operation, $fragments);
         }
         return $operationFieldOrFragmentBonds;
     }
 
-    public function getOperationMaximumFieldDepth(OperationInterface $operation): int
+    /**
+     * @param Fragment[] $fragments
+     */
+    public function getOperationMaximumFieldDepth(OperationInterface $operation, array $fragments): int
     {
         $depths = array_map(
-            fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth($fieldOrFragmentBond, 1),
+            fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1, $fieldOrFragmentBond, $fragments),
             $operation->getFieldsOrFragmentBonds()
         );
         return max($depths);
     }
 
-    protected function getFieldOrFragmentBondDepth(FieldInterface|FragmentBondInterface $fieldOrFragmentBond, int $accumulator): int
+    /**
+     * @param Fragment[] $fragments
+     */
+    protected function getFieldOrFragmentBondDepth(int $accumulator, FieldInterface|FragmentBondInterface $fieldOrFragmentBond, array $fragments): int
     {
         if ($fieldOrFragmentBond instanceof LeafField) {
             // Reached last level
@@ -204,7 +213,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             /** @var RelationalField */
             $relationalField = $fieldOrFragmentBond;
             $depths = array_map(
-                fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth($fieldOrFragmentBond, 1 + $accumulator),
+                fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1 + $accumulator, $fieldOrFragmentBond, $fragments),
                 $relationalField->getFieldsOrFragmentBonds()
             );
             return max($depths);
@@ -214,7 +223,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             /** @var InlineFragment */
             $inlineFragment = $fieldOrFragmentBond;
             $depths = array_map(
-                fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth($fieldOrFragmentBond, $accumulator),
+                fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth($accumulator, $fieldOrFragmentBond, $fragments),
                 $inlineFragment->getFieldsOrFragmentBonds()
             );
             return max($depths);
@@ -227,7 +236,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             return $accumulator;
         }
         $depths = array_map(
-            fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth($fieldOrFragmentBond, $accumulator),
+            fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth($accumulator, $fieldOrFragmentBond, $fragments),
             $fragment->getFieldsOrFragmentBonds()
         );
         return max($depths);

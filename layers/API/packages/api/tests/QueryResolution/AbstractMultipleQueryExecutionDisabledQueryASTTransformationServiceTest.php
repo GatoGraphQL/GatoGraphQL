@@ -241,7 +241,7 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
             ];
         }
 
-        $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations);
+        $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations, []);
 
         /**
          * Doing `assertEquals` on SplObjectStorage doesn't work!

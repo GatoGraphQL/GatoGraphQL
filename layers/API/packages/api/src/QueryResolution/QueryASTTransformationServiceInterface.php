@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\QueryResolution;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use SplObjectStorage;
@@ -72,9 +73,13 @@ interface QueryASTTransformationServiceInterface
      * all together.
      *
      * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
-    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): SplObjectStorage;
+    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+        array $operations,
+        array $fragments,
+    ): SplObjectStorage;
     /**
      * Calculate the maximum field depth in an operation.
      *
@@ -91,6 +96,8 @@ interface QueryASTTransformationServiceInterface
      *   }
      * }
      * ```
+     *
+     * @param Fragment[] $fragments
      */
-    public function getOperationMaximumFieldDepth(OperationInterface $operation): int;
+    public function getOperationMaximumFieldDepth(OperationInterface $operation, array $fragments): int;
 }
