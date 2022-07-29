@@ -254,7 +254,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      */
     protected function getFragment(string $name, array $fragments): ?Fragment
     {
-        foreach ($this->fragments as $fragment) {
+        foreach ($fragments as $fragment) {
             if ($fragment->getName() === $name) {
                 return $fragment;
             }
