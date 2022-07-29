@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\ComponentModel\App;
-use PoP\GraphQLParser\ExtendedSpec\Execution\FieldValuePromise;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ObjectFieldValuePromise;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
     /**
-     * A ResolvedFieldVariableReference will return a FieldValuePromise,
+     * A ResolvedFieldVariableReference will return a ObjectFieldValuePromise,
      * which must be resolved to the actual value after its corresponding
      * Field was resolved.
      *
@@ -66,7 +66,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * Resolve all the FieldValuePromise to their resolved values.
+     * Resolve all the ObjectFieldValuePromise to their resolved values.
      *
      * @return array<string,mixed>
      */
@@ -80,8 +80,8 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
         $resolvedFieldArgs = [];
         foreach ($fieldArgs as $key => $value) {
-            if ($value instanceof FieldValuePromise) {
-                /** @var FieldValuePromise */
+            if ($value instanceof ObjectFieldValuePromise) {
+                /** @var ObjectFieldValuePromise */
                 $fieldValuePromise = $value;
                 $resolvedFieldArgs[$key] = $fieldValuePromise->resolveValue();
                 continue;

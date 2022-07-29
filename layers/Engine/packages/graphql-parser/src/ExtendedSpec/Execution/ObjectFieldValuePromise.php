@@ -10,7 +10,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
 
-class FieldValuePromise
+class ObjectFieldValuePromise
 {
     use StandaloneServiceTrait;
 
@@ -26,7 +26,7 @@ class FieldValuePromise
         if (!$objectResolvedFieldValues->contains($this->field)) {
             throw new ShouldNotHappenException(
                 sprintf(
-                    $this->__('The FieldValuePromise cannot resolve field \'%s\'', 'graphql-parser'),
+                    $this->__('The ObjectFieldValuePromise cannot resolve field \'%s\'', 'graphql-parser'),
                     $this->field->asFieldOutputQueryString()
                 )
             );
