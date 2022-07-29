@@ -61,7 +61,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function enableResolvedFieldVariableReferences(): bool
+    public function enableObjectResolvedFieldValueReferences(): bool
     {
         if (!$this->enableDynamicVariables()) {
             return false;

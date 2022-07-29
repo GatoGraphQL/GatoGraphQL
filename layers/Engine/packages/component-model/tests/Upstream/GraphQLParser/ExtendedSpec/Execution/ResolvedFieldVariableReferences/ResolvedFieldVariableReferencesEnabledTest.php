@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ResolvedFieldVariableReferences;
+namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ObjectResolvedFieldValueReferences;
 
-class ResolvedFieldVariableReferencesEnabledTest extends AbstractResolvedFieldVariableReferencesTest
+class ObjectResolvedFieldValueReferencesEnabledTest extends AbstractObjectResolvedFieldValueReferencesTest
 {
     protected static function enabled(): bool
     {
