@@ -59,7 +59,10 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
 
         /**
          * Wrap subsequent queries "field and fragment bonds" under
-         * the required multiple levels of `self`
+         * the required multiple levels of `self`.
+         *
+         * Because it starts in `0`, the first operation will not
+         * receive any `self`
          */
         $accumulatedMaximumFieldDepth = 0;
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
