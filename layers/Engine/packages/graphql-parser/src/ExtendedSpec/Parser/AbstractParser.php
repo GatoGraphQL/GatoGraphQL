@@ -466,12 +466,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
 
         // Replace the "Dynamic Variables Reference" with "Resolved Field Variable Reference"
-        $resolvedFieldVariableReference = new ObjectResolvedFieldValueReference(
+        $objectResolvedFieldValueReference = new ObjectResolvedFieldValueReference(
             $dynamicVariableReference->getName(),
             $referencedField,
             $dynamicVariableReference->getLocation()
         );
-        $argument->setValueAST($resolvedFieldVariableReference);
+        $argument->setValueAST($objectResolvedFieldValueReference);
     }
 
     /**
