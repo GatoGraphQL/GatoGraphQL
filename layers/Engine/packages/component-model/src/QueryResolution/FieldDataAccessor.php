@@ -82,8 +82,8 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         foreach ($fieldArgs as $key => $value) {
             if ($value instanceof ObjectFieldValuePromise) {
                 /** @var ObjectFieldValuePromise */
-                $fieldValuePromise = $value;
-                $resolvedFieldArgs[$key] = $fieldValuePromise->resolveValue();
+                $objectFieldValuePromise = $value;
+                $resolvedFieldArgs[$key] = $objectFieldValuePromise->resolveValue();
                 continue;
             }
             $resolvedFieldArgs[$key] = $value;
