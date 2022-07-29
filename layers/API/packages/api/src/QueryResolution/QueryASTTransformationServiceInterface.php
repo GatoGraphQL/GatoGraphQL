@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\QueryResolution;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use SplObjectStorage;
@@ -48,20 +49,99 @@ interface QueryASTTransformationServiceInterface
      *
      *     query Two {
      *       self {
-     *         firstEcho: echo(value: $_name) @upperCase @export(as: "_ucName")
+     *         self {
+     *           firstEcho: echo(value: $_name) @upperCase @export(as: "_ucName")
+     *         }
      *       }
      *     }
      *
      *     query Three {
      *       self {
      *         self {
-     *           secondEcho: echo(value: $_ucName)
+     *           self {
+     *             secondEcho: echo(value: $_ucName)
+     *           }
      *         }
      *       }
      *     }
      *
      * Now, `firstEcho` is resolved on the third iteration (second on `Root`),
      * which is after `name @export(as: "_name")`.
+     *
+     * --------------------------------------------------------------------
+     *
+     * Each level needs to add as many "self" as the sum of the
+     * maximum field depth in all previous queries, so that
+     * the 1st field in the subsequent operation is executed
+     * after the deepest field in the previous query:
+     *
+     *   ```
+     *   query One {
+     *     field {
+     *       field {
+     *         field {
+     *           field {
+     *             firstQueryMaximumDepthField: field
+     *           }
+     *         }
+     *       }
+     *     }
+     *   }
+     *
+     *   query Two {
+     *     secondQueryField: field # <= Must be resolved after "firstQueryMaximumDepthField"
+     *   }
+     *
+     *   query Three {
+     *     field # <= Must be resolved after "secondQueryField"
+     *   }
+     *   ```
+     *
+     * This will then become:
+     *
+     *   ```
+     *   query One {
+     *     field {
+     *       field {
+     *         field {
+     *           field {
+     *             firstQueryMaximumDepthField: field
+     *           }
+     *         }
+     *       }
+     *     }
+     *   }
+     *
+     *   query Two {
+     *     self {
+     *       self {
+     *         self {
+     *           self {
+     *             self {
+     *               secondQueryField: field # <= Must be resolved after "firstQueryMaximumDepthField"
+     *             }
+     *           }
+     *         }
+     *       }
+     *     }
+     *   }
+     *
+     *   query Three {
+     *     self {
+     *       self {
+     *         self {
+     *           self {
+     *             self {
+     *               self {
+     *                 field # <= Must be resolved after "secondQueryField"
+     *               }
+     *             }
+     *           }
+     *         }
+     *       }
+     *     }
+     *   }
+     *   ```
      *
      * --------------------------------------------------------------------
      *
@@ -72,7 +152,32 @@ interface QueryASTTransformationServiceInterface
      * all together.
      *
      * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
-    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): SplObjectStorage;
+    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+        array $operations,
+        array $fragments,
+    ): SplObjectStorage;
+
+    /**
+     * Calculate the maximum field depth in an operation.
+     *
+     * Eg: this query has maximum field depth 4:
+     *
+     * ```
+     * {
+     *   level1 {
+     *     level2 {
+     *       level3 {
+     *         level4 # <= maximum depth field
+     *       }
+     *     }
+     *   }
+     * }
+     * ```
+     *
+     * @param Fragment[] $fragments
+     */
+    public function getOperationMaximumFieldDepth(OperationInterface $operation, array $fragments): int;
 }
