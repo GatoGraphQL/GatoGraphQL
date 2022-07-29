@@ -220,9 +220,18 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         if ($fieldOrFragmentBond instanceof RelationalField) {
             /** @var RelationalField */
             $relationalField = $fieldOrFragmentBond;
+            
+            /**
+             * Also handle the boundaries: an empty relational field
+             */
+            $fieldsOrFragmentBonds = $relationalField->getFieldsOrFragmentBonds();
+            if ($fieldsOrFragmentBonds === []) {
+                return $accumulator;
+            }
+
             $depths = array_map(
                 fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1 + $accumulator, $fieldOrFragmentBond, $fragments),
-                $relationalField->getFieldsOrFragmentBonds()
+                $fieldsOrFragmentBonds
             );
             return max($depths);
         }
@@ -237,9 +246,18 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         if ($fieldOrFragmentBond instanceof InlineFragment) {
             /** @var InlineFragment */
             $inlineFragment = $fieldOrFragmentBond;
+            
+            /**
+             * Also handle the boundaries: an empty inline fragment
+             */
+            $fieldsOrFragmentBonds = $inlineFragment->getFieldsOrFragmentBonds();
+            if ($fieldsOrFragmentBonds === []) {
+                return $accumulator;
+            }
+
             $depths = array_map(
                 fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1 + $accumulator, $fieldOrFragmentBond, $fragments),
-                $inlineFragment->getFieldsOrFragmentBonds()
+                $fieldsOrFragmentBonds
             );
             return max($depths);
         }
@@ -250,9 +268,18 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         if ($fragment === null) {
             return $accumulator;
         }
+            
+        /**
+         * Also handle the boundaries: an empty fragment
+         */
+        $fieldsOrFragmentBonds = $fragment->getFieldsOrFragmentBonds();
+        if ($fieldsOrFragmentBonds === []) {
+            return $accumulator;
+        }
+
         $depths = array_map(
             fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1 + $accumulator, $fieldOrFragmentBond, $fragments),
-            $fragment->getFieldsOrFragmentBonds()
+            $fieldsOrFragmentBonds
         );
         return max($depths);
     }
