@@ -122,7 +122,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   }
      *   ```
      */
-    public function testOperationMaximumFieldDepthWithFragment()
+    public function testOperationWithFragmentMaximumFieldDepth()
     {
         $leafField2 = new LeafField('name', null, [], [], new Location(6, 23));
         $relationalField2 = new RelationalField(
