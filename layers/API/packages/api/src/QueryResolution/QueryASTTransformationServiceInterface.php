@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\QueryResolution;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
+use SplObjectStorage;
 
 interface QueryASTTransformationServiceInterface
 {
@@ -61,7 +64,7 @@ interface QueryASTTransformationServiceInterface
      * which is after `name @export(as: "_name")`.
      *
      * @param OperationInterface[] $operations
-     * @return OperationInterface[]
+     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>
      */
-    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): array;
+    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): SplObjectStorage;
 }
