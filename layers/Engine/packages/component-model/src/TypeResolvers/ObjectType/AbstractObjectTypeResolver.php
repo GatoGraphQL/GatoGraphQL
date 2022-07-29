@@ -505,19 +505,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $field,
                 )
             );
+            return null;
         }
-
-        /**
-         * Set the resolved value (null or otherwise) to the AppState
-         * to resolve the FieldValuePromises
-         *
-         * @var SplObjectStorage<FieldInterface,mixed>
-         */
-        $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
-        $objectResolvedFieldValues[$field] = $value;
-
-        $appStateManager = App::getAppStateManager();
-        $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
 
         /**
          * If there were errors, return already
