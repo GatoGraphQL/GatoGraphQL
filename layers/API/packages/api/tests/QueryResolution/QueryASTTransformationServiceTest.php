@@ -9,6 +9,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -23,23 +24,33 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
 
     public function testOperationMaximumFieldDepth()
     {
-        /**
-         * This is the AST for this GraphQL query:
-         *
-         *   ```
-         *   query {
-         *     film(id: 1) { # level 1
-         *       title # level 2
-         *       director { # level 2
-         *         name # level 3 # <= maximum depth!
-         *       }
-         *     }
-         *     post(id: 2) { # level 1
-         *       title # level 2
-         *     }
-         *   }
-         *   ```
-         */
+        $operation = $this->getOperationAST();
+        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
+        $this->assertEquals(
+            3,
+            $operationMaximumFieldDepth
+        );
+    }
+
+    /**
+     * This is the AST for this GraphQL query:
+     *
+     *   ```
+     *   query {
+     *     film(id: 1) { # level 1
+     *       title # level 2
+     *       director { # level 2
+     *         name # level 3 # <= maximum depth!
+     *       }
+     *     }
+     *     post(id: 2) { # level 1
+     *       title # level 2
+     *     }
+     *   }
+     *   ```
+     */
+    protected function getOperationAST(): OperationInterface
+    {
         $leafField2 = new LeafField('name', null, [], [], new Location(6, 23));
         $relationalField2 = new RelationalField(
             'director',
@@ -80,7 +91,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
             [],
             new Location(9, 17)
         );
-        $operation = new QueryOperation(
+        return new QueryOperation(
             '',
             [],
             [],
@@ -90,48 +101,48 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
             ],
             new Location(8, 19)
         );
+    }
 
-        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
-        $this->assertEquals(
-            3,
-            $operationMaximumFieldDepth
-        );
+    /**
+     * Also append a Fragment Reference and recalculate:
+     *
+     *   ```
+     *   query {
+     *     film(id: 1) { # level 1
+     *       title # level 2
+     *       director { # level 2
+     *         name # level 3 # <= maximum depth!
+     *       }
+     *     }
+     *     post(id: 2) { # level 1
+     *       title # level 2
+     *     }
+     *     ...RootData
+     *   }
+     *
+     *   fragment RootData on QueryRoot {
+     *     id
+     *     self {
+     *       id
+     *     }
+     *   }
+     *   ```
+     */
+    public function testOperationMaximumFieldDepthWithFragment()
+    {
+        $commonOperation = $this->getOperationAST();
 
-        /**
-         * Also append a Fragment Reference and recalculate:
-         *
-         *   ```
-         *   query {
-         *     film(id: 1) { # level 1
-         *       title # level 2
-         *       director { # level 2
-         *         name # level 3 # <= maximum depth!
-         *       }
-         *     }
-         *     post(id: 2) { # level 1
-         *       title # level 2
-         *     }
-         *     ...RootData
-         *   }
-         *
-         *   fragment RootData on QueryRoot {
-         *     id
-         *     self {
-         *       id
-         *     }
-         *   }
-         *   ```
-         */
         $fragmentReference = new FragmentReference('RootData', new Location(12, 17));
         $operation = new QueryOperation(
             '',
             [],
             [],
-            [
-                $relationalField1,
-                $relationalField3,
-                $fragmentReference,
-            ],
+            array_merge(
+                $commonOperation->getFieldsOrFragmentBonds(),
+                [
+                    $fragmentReference,
+                ]
+            ),
             new Location(8, 19)
         );
 
