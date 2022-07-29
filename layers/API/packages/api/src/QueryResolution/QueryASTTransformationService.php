@@ -14,7 +14,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      * @param OperationInterface[] $operations
      * @return OperationInterface[]
      */
-    public function convertOperationsForMultipleQueryExecution(array $operations): array
+    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): array
     {
         $operationsCount = count($operations);
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {

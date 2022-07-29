@@ -63,5 +63,5 @@ interface QueryASTTransformationServiceInterface
      * @param OperationInterface[] $operations
      * @return OperationInterface[]
      */
-    public function convertOperationsForMultipleQueryExecution(array $operations): array;
+    public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(array $operations): array;
 }
