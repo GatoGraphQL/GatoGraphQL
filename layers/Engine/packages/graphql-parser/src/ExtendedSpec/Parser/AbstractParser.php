@@ -411,7 +411,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         ?Variable $variable,
         Location $location,
     ): VariableReference {
-        if (!$this->parsingDirectiveArgumentList
+        if (
+            !$this->parsingDirectiveArgumentList
             && $this->getQueryAugmenterService()->isObjectResolvedFieldValueReference($name, $variable)
         ) {
             /**
