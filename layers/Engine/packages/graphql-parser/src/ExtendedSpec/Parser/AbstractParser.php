@@ -91,7 +91,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     protected function beforeParsingFieldsOrFragmentBonds(): void
     {
-        array_unshift($this->parsedFieldBlockStack, [[]]);
+        array_unshift($this->parsedFieldBlockStack, []);
     }
 
     /**
