@@ -53,6 +53,61 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                 $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
                 continue;
             }
+
+            /**
+             * Each level needs to add as many "self" as the sum of the
+             * maximum field depth in all previous queries, so that
+             * the 1st field in the subsequent operation is executed
+             * after the deepest field in the previous query:
+             *
+             *   ```
+             *   query One {
+             *     field {
+             *       field {
+             *         field {
+             *           field {
+             *             maximumDepthField: field
+             *           }
+             *         }
+             *       }
+             *     }
+             *   }
+             *
+             *   query Two {
+             *     field # <= Must be resolved after "maximumDepthField"
+             *   }
+             *   ```
+             *
+             * This will then become:
+             *
+             *   ```
+             *   query One {
+             *     field {
+             *       field {
+             *         field {
+             *           field {
+             *             maximumDepthField: field
+             *           }
+             *         }
+             *       }
+             *     }
+             *   }
+             *
+             *   query Two {
+             *     self {
+             *       self {
+             *         self {
+             *           self {
+             *             self {
+             *               field # <= Must be resolved after "maximumDepthField"
+             *             }
+             *           }
+             *         }
+             *       }
+             *     }
+             *   }
+             *   ```
+             */
             for ($i = 0; $i < $operationOrder; $i++) {
                 /**
                  * Use an alias to both help visualize which is the field (optional),
