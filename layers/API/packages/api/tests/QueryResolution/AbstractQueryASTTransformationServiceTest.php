@@ -179,10 +179,19 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
             $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
                 new RelationalField(
                     'self',
-                    '_dynamicSelf_op1_level0_',
+                    '_dynamicSelf_op1_level1_',
                     [],
                     [
-                        $relationalField2,
+                        new RelationalField(
+                            'self',
+                            '_dynamicSelf_op1_level2_',
+                            [],
+                            [
+                                $relationalField2,
+                            ],
+                            [],
+                            LocationHelper::getNonSpecificLocation()
+                        ),
                     ],
                     [],
                     LocationHelper::getNonSpecificLocation()
@@ -199,9 +208,27 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
                             '_dynamicSelf_op2_level2_',
                             [],
                             [
-                                $leafField31,
-                                $inlineFragment3,
-                                $relationalField3,
+                                new RelationalField(
+                                    'self',
+                                    '_dynamicSelf_op2_level3_',
+                                    [],
+                                    [
+                                        new RelationalField(
+                                            'self',
+                                            '_dynamicSelf_op2_level4_',
+                                            [],
+                                            [
+                                                $leafField31,
+                                                $inlineFragment3,
+                                                $relationalField3,
+                                            ],
+                                            [],
+                                            LocationHelper::getNonSpecificLocation()
+                                        ),
+                                    ],
+                                    [],
+                                    LocationHelper::getNonSpecificLocation()
+                                ),
                             ],
                             [],
                             LocationHelper::getNonSpecificLocation()
