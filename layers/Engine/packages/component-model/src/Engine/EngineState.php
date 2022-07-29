@@ -65,7 +65,7 @@ class EngineState
          * After executing `resolveValue` on the Object/UnionTypeResolver,
          * store the results to re-use for subsequent calls for same object/field.
          *
-         * This is mandatory due to the "Resolved Field Variable References",
+         * This is mandatory due to the "Object Resolved Field Value References",
          * which re-create the same field in the AST.
          *
          * For instance, in this query, the `id` field is created twice in the AST:

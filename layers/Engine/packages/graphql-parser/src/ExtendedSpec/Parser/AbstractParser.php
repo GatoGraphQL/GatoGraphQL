@@ -469,7 +469,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     /**
      * If a Dynamic Variable Reference has the same name as a
      * field resolved in the same query block, then replace it
-     * with the corresponding Resolved Field Variable Reference
+     * with the corresponding Object Resolved Field Value Reference
      * to that field.
      *
      * Only accept fields that have appeared before, as to avoid
