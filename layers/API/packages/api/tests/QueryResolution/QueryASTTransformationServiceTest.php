@@ -27,6 +27,34 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *
      *   ```
      *   query {
+     *     id # level 1
+     *   }
+     *   ```
+     */
+    public function testOperationWithLeafFieldMaximumFieldDepth()
+    {
+        $leafField = new LeafField('id', null, [], [], new Location(3, 17));
+        $operation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $leafField,
+            ],
+            new Location(2, 15)
+        );
+        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
+        $this->assertEquals(
+            1,
+            $operationMaximumFieldDepth
+        );
+    }
+
+    /**
+     * This is the AST for this GraphQL query:
+     *
+     *   ```
+     *   query {
      *     film(id: 1) { # level 1
      *       title # level 2
      *       director { # level 2
@@ -39,7 +67,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   }
      *   ```
      */
-    public function testOperationMaximumFieldDepth()
+    public function testOperationWithRelationalFieldMaximumFieldDepth()
     {
         $leafField2 = new LeafField('name', null, [], [], new Location(6, 23));
         $relationalField2 = new RelationalField(
