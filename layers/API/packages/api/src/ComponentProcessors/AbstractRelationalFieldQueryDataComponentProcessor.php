@@ -140,8 +140,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         ExecutableDocument $executableDocument,
         bool $recursive,
     ): array {
-        $fragments = $executableDocument->getDocument()->getFragments();
         $fieldFragmentModelsTuples = [];
+        $fragments = $executableDocument->getDocument()->getFragments();
         $requestedOperations = $executableDocument->getRequestedOperations();
         
         /**
