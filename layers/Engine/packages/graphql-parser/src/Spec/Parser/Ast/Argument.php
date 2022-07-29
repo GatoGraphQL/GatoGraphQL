@@ -45,6 +45,9 @@ class Argument extends AbstractAst
         return $this->value;
     }
 
+    /**
+     * @internal Called only by the Engine, don't access otherwise!
+     */
     public function setValueAST(WithValueInterface $value): void
     {
         $this->value = $value;
