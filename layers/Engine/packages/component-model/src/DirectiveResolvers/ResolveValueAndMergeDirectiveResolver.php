@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
@@ -183,6 +184,17 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        /**
+         * Before resolving the fields for the current
+         * object (executed in the Engine Iteration),
+         * reset the AppState concerning FieldValuePromises.
+         *
+         * @var SplObjectStorage<FieldInterface,mixed>
+         */
+        $objectResolvedFieldValues = new SplObjectStorage();
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
+
         foreach ($fieldSet as $field) {
             $this->resolveValueForObject(
                 $relationalTypeResolver,
