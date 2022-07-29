@@ -505,7 +505,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $field,
                 )
             );
-            return null;
         }
 
         /**
