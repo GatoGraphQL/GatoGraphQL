@@ -8,6 +8,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
@@ -208,6 +209,60 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
         $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, $fragments);
         $this->assertEquals(
             4,
+            $operationMaximumFieldDepth
+        );
+    }
+
+    /**
+     * The Fragment Reference is the winning one
+     *
+     *   ```
+     *   query {
+     *     id # level 1
+     *     self { # level 1
+     *       ...on QueryRoot { # level 2
+     *         id # level 3
+     *       }
+     *     }
+     *   }
+     *   ```
+     */
+    public function testOperationWithNestedInlineFragmentMaximumFieldDepth()
+    {
+        $leafField1 = new LeafField('id', null, [], [], new Location(3, 17));
+        $leafField2 = new LeafField('id', null, [], [], new Location(6, 21));
+        $inlineFragment = new InlineFragment(
+            'QueryRoot',
+            [
+                $leafField2
+            ],
+            [],
+            new Location(5, 19)
+        );
+        $relationalField = new RelationalField(
+            'self',
+            null,
+            [],
+            [
+                $inlineFragment,
+            ],
+            [],
+            new Location(5, 17)
+        );
+        $operation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $leafField1,
+                $relationalField,
+            ],
+            new Location(8, 19)
+        );
+
+        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
+        $this->assertEquals(
+            3,
             $operationMaximumFieldDepth
         );
     }
