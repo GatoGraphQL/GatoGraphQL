@@ -49,14 +49,18 @@ interface QueryASTTransformationServiceInterface
      *
      *     query Two {
      *       self {
-     *         firstEcho: echo(value: $_name) @upperCase @export(as: "_ucName")
+     *         self {
+     *           firstEcho: echo(value: $_name) @upperCase @export(as: "_ucName")
+     *         }
      *       }
      *     }
      *
      *     query Three {
      *       self {
      *         self {
-     *           secondEcho: echo(value: $_ucName)
+     *           self {
+     *             secondEcho: echo(value: $_ucName)
+     *           }
      *         }
      *       }
      *     }
@@ -80,6 +84,7 @@ interface QueryASTTransformationServiceInterface
         array $operations,
         array $fragments,
     ): SplObjectStorage;
+
     /**
      * Calculate the maximum field depth in an operation.
      *
