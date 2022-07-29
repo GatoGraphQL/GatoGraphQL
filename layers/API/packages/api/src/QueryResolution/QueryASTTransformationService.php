@@ -192,9 +192,17 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      */
     public function getOperationMaximumFieldDepth(OperationInterface $operation, array $fragments): int
     {
+        /**
+         * Also handle the boundaries: an empty operation
+         */
+        $fieldsOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
+        if ($fieldsOrFragmentBonds === []) {
+            return 0;
+        }
+
         $depths = array_map(
             fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1, $fieldOrFragmentBond, $fragments),
-            $operation->getFieldsOrFragmentBonds()
+            $fieldsOrFragmentBonds
         );
         return max($depths);
     }

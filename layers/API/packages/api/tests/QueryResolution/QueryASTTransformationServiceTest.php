@@ -23,6 +23,30 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
     }
 
     /**
+     * This is the AST for this GraphQL query (it's a not valid one!):
+     *
+     *   ```
+     *   {}
+     *   ```
+     */
+    public function testEmptyOperationMaximumFieldDepth()
+    {
+        $operation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+            ],
+            new Location(2, 15)
+        );
+        $operationMaximumFieldDepth = $this->getQueryASTTransformationService()->getOperationMaximumFieldDepth($operation, []);
+        $this->assertEquals(
+            0,
+            $operationMaximumFieldDepth
+        );
+    }
+
+    /**
      * This is the AST for this GraphQL query:
      *
      *   ```
