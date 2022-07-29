@@ -177,37 +177,41 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
                 $relationalField3,
             ];
         } else {
-            $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = new RelationalField(
-                'self',
-                '_dynamicSelf_op1_level0_',
-                [],
-                [
-                    $relationalField2,
-                ],
-                [],
-                LocationHelper::getNonSpecificLocation()
-            );
-            $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = new RelationalField(
-                'self',
-                '_dynamicSelf_op2_level1_',
-                [],
-                [
-                    new RelationalField(
-                        'self',
-                        '_dynamicSelf_op2_level0_',
-                        [],
-                        [
-                            $leafField31,
-                            $inlineFragment3,
-                            $relationalField3,
-                        ],
-                        [],
-                        LocationHelper::getNonSpecificLocation()
-                    ),
-                ],
-                [],
-                LocationHelper::getNonSpecificLocation()
-            );
+            $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
+                new RelationalField(
+                    'self',
+                    '_dynamicSelf_op1_level0_',
+                    [],
+                    [
+                        $relationalField2,
+                    ],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                )
+            ];
+            $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
+                new RelationalField(
+                    'self',
+                    '_dynamicSelf_op2_level1_',
+                    [],
+                    [
+                        new RelationalField(
+                            'self',
+                            '_dynamicSelf_op2_level0_',
+                            [],
+                            [
+                                $leafField31,
+                                $inlineFragment3,
+                                $relationalField3,
+                            ],
+                            [],
+                            LocationHelper::getNonSpecificLocation()
+                        ),
+                    ],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                )
+            ];
         }
 
         $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations);
