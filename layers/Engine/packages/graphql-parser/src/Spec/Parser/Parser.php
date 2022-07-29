@@ -420,10 +420,16 @@ class Parser extends Tokenizer implements ParserInterface
         return $this->createLeafField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
     }
 
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
     protected function beforeParsingFieldsOrFragmentBonds(): void
     {
     }
 
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
     protected function afterParsingFieldsOrFragmentBonds(): void
     {
     }

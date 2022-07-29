@@ -35,8 +35,26 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
-    /** @var array<FieldInterface[]> */
-    protected array $siblingFields = [];
+    /**
+     * Use this variable to keep track of which are the
+     * fields already defined inside the current block.
+     * It will be used to identify ObjectResolvedFieldValueReferences,
+     * i.e. a variable with a name to an existing and previous field:
+     *
+     * ```
+     * {
+     *   someField
+     *   echo(value: $__someField)
+     * }
+     * ```
+     *
+     * The variable is a stack composed of [Field],
+     * with the first item in the stack being the
+     * current level being parsed.
+     *
+     * @var array<FieldInterface[]>
+     */
+    protected array $parsedFieldBlock = [];
 
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
@@ -61,21 +79,27 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     protected function parseOperation(string $type): OperationInterface
     {
-        $this->siblingFields = [
+        $this->parsedFieldBlock = [
             [], // This is the first level
         ];
 
         return parent::parseOperation($type);
     }
 
+    /**
+     * Append a new, empty block of [Field]
+     */
     protected function beforeParsingFieldsOrFragmentBonds(): void
     {
-        array_unshift($this->siblingFields, [[]]);
+        array_unshift($this->parsedFieldBlock, [[]]);
     }
 
+    /**
+     * Remove the block of [Field]
+     */
     protected function afterParsingFieldsOrFragmentBonds(): void
     {
-        array_shift($this->siblingFields);
+        array_shift($this->parsedFieldBlock);
     }
 
     /**
@@ -99,7 +123,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $directives,
             $location
         );
-        $this->siblingFields[0][] = $relationalField;
+        $this->parsedFieldBlock[0][] = $relationalField;
         return $relationalField;
     }
 
@@ -121,7 +145,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $directives,
             $location,
         );
-        $this->siblingFields[0][] = $leafField;
+        $this->parsedFieldBlock[0][] = $leafField;
         return $leafField;
     }
 
@@ -384,7 +408,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
     {
-        foreach ($this->siblingFields[0] as $field) {
+        foreach ($this->parsedFieldBlock[0] as $field) {
             if (
                 ($field->getAlias() !== null && $field->getAlias() === $referencedFieldNameOrAlias)
                 || ($field->getAlias() === null && $field->getName() === $referencedFieldNameOrAlias)
