@@ -22,7 +22,7 @@ class FieldValuePromise
     public function resolveValue(): mixed
     {
         /** @var SplObjectStorage<FieldInterface,mixed> */
-        $resolvedFieldValues = App::getState('resolved-field-values');
+        $resolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
         if (!$resolvedFieldValues->contains($this->field)) {
             throw new ShouldNotHappenException(
                 sprintf(
