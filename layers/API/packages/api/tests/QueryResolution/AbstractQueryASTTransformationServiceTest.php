@@ -196,7 +196,7 @@ abstract class AbstractQueryASTTransformationServiceTest extends AbstractTestCas
                     [
                         new RelationalField(
                             'self',
-                            '_dynamicSelf_op2_level0_',
+                            '_dynamicSelf_op2_level2_',
                             [],
                             [
                                 $leafField31,

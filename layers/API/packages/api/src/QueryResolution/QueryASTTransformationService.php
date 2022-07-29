@@ -152,7 +152,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     '_%s_op%s_level%s_',
                     'dynamicSelf',
                     $operationOrder,
-                    $level
+                    $accumulatedMaximumFieldDepth - $level
                 );
                 if (!isset($this->fieldInstanceContainer[$alias])) {
                     $this->fieldInstanceContainer[$alias] = new RelationalField(
