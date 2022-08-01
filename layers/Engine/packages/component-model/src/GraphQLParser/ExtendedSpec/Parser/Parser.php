@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
+use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
@@ -42,6 +43,17 @@ class Parser extends AbstractParser
     protected function getMetaDirectiveResolver(string $directiveName): ?MetaDirectiveResolverInterface
     {
         return $this->getMetaDirectiveRegistry()->getMetaDirectiveResolver($directiveName);
+    }
+
+    protected function isDynamicVariableDefinerDirective(string $directiveName): bool
+    {
+        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directiveName);
+        return $dynamicVariableDefinerDirectiveResolver !== null;
+    }
+
+    protected function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface
+    {
+        return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerDirectiveResolver($directiveName);
     }
 
     protected function getAffectDirectivesUnderPosArgument(
