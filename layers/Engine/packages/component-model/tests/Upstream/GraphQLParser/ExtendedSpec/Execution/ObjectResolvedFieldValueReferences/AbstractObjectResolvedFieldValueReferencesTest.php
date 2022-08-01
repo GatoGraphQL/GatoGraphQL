@@ -93,9 +93,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
         $dynamicVariableReference = static::enabled()
             ? new ObjectResolvedFieldValueReference('_userList', $field, new Location(8, 29))
             : new DynamicVariableReference('_userList', new Location(8, 29));
-        if (!static::enabled()) {
-            $dynamicVariableReference->setContext($context);
-        }
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -173,7 +170,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(8, 27)
         );
         $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(4, 29));
-        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -317,9 +313,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
         $dynamicVariableReference = static::enabled()
             ? new ObjectResolvedFieldValueReference('_getJSON', $field, new Location(8, 29))
             : new DynamicVariableReference('_getJSON', new Location(8, 29));
-        if (!static::enabled()) {
-            $dynamicVariableReference->setContext($context);
-        }
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -377,7 +370,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(3, 27)
         );
         $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(8, 28));
-        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -441,7 +433,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(3, 27)
         );
         $dynamicVariableReference = new DynamicVariableReference('_nonExistingField', new Location(8, 29));
-        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -500,7 +491,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(3, 27)
         );
         $dynamicVariableReference = new DynamicVariableReference('_nonExistingField', new Location(8, 28));
-        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -564,7 +554,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(3, 27)
         );
         $dynamicVariableReference = new DynamicVariableReference('_getJSON', new Location(8, 29));
-        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -629,7 +618,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(14, 27)
         );
         $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(7, 33));
-        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -701,7 +689,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(5, 35)
         );
         $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(11, 33));
-        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -779,7 +766,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(3, 27)
         );
         $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(9, 33));
-        $dynamicVariableReference->setContext($context);
         $queryOperation = new QueryOperation(
             '',
             [],
