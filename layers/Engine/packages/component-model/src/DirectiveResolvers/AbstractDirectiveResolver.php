@@ -36,7 +36,6 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
-use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -251,28 +250,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?array {
-        try {
-            $directiveData = $this->directive->getArgumentKeyValues();
-        } catch (InvalidDynamicContextException $invalidDynamicContextException) {
-            $dynamicVariableReference = $invalidDynamicContextException->getDynamicVariableReference();
-            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                new SchemaFeedback(
-                    new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E31,
-                        [
-                            $dynamicVariableReference->getName(),
-                            $invalidDynamicContextException->getMessage(),
-                        ]
-                    ),
-                    $dynamicVariableReference,
-                    $relationalTypeResolver,
-                    $fields,
-                )
-            );
-            return null;
-        }
-
+        $directiveData = $this->directive->getArgumentKeyValues();
         $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
 
         /**
