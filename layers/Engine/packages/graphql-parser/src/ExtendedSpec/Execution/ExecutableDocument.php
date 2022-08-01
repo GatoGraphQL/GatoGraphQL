@@ -46,29 +46,6 @@ class ExecutableDocument extends UpstreamExecutableDocument
         return parent::assertAndGetRequestedOperations();
     }
 
-    protected function propagateContext(OperationInterface $operation, ?Context $context): void
-    {
-        parent::propagateContext($operation, $context);
-
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableDynamicVariables()) {
-            return;
-        }
-
-        foreach ($this->document->getOperations() as $operation) {
-            $variableReferences = $this->document->getVariableReferencesInOperation($operation);
-            /** @var DynamicVariableReference[] */
-            $dynamicVariableReferences = array_filter(
-                $variableReferences,
-                fn (VariableReference $variableReference) => $variableReference instanceof DynamicVariableReference
-            );
-            foreach ($dynamicVariableReferences as $dynamicVariableReference) {
-                $dynamicVariableReference->setContext($context);
-            }
-        }
-    }
-
     /**
      * Override: If no operationName was provided, then it's assigned to __ALL
      */

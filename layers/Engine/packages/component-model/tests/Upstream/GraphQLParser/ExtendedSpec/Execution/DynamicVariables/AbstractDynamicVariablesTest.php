@@ -163,7 +163,6 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         $executableDocument->validateAndInitialize();
         if ($this->enabled()) {
             $variableReference = new DynamicVariableReference($variableName, new Location(3, 26));
-            $variableReference->setContext($context);
             $this->assertEquals(
                 [
                     $this->getQueryOperation(null, $variableReference),
