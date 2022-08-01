@@ -143,6 +143,9 @@ class Document extends UpstreamDocument
             new FeedbackItemResolution(
                 GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                 GraphQLExtendedSpecErrorFeedbackItemProvider::E7,
+                [
+                    $referencedDynamicVariable->getName(),
+                ]
             ),
             $referencedDynamicVariable->getLocation()
         );
