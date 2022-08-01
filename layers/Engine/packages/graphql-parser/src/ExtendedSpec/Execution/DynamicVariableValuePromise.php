@@ -20,6 +20,9 @@ class DynamicVariableValuePromise implements DeferredValuePromiseInterface
     ) {
     }
 
+    /**
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
+     */
     public function resolveValue(): mixed
     {
         $dynamicVariables = App::getState('document-dynamic-variables');

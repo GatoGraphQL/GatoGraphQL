@@ -7,7 +7,6 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
-use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
@@ -387,7 +386,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     /**
      * @return int[]
      * @throws InvalidRequestException
-     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     protected function getAffectDirectivesUnderPosArgumentValue(
         Directive $directive,
@@ -675,7 +673,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     protected function maybeSpreadDirectiveToFields(
         Directive $directive,
@@ -731,7 +728,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * relative positions to its left.
      *
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     protected function spreadDirectiveToFields(
         Directive $directive,
