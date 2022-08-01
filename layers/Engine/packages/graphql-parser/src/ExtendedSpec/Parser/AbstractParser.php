@@ -515,7 +515,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * If there's a variable with that name, then it has priority
          */
-        if ($variable === null) {
+        if ($variable !== null) {
             return false;
         }
 
