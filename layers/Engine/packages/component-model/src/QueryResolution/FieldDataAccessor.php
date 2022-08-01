@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\ComponentModel\App;
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
@@ -49,6 +50,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     protected function getKeyValuesSource(): array
     {
@@ -57,6 +59,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     protected function getResolvedFieldArgs(): array
     {
@@ -70,6 +73,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      * Resolve all the DeferredValuePromiseInterface to their resolved values.
      *
      * @return array<string,mixed>
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     protected function resolveFieldArgs(array $fieldArgs): array
     {
@@ -125,6 +129,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     public function getKeyValues(): array
     {
