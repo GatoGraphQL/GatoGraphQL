@@ -245,7 +245,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         if ($dynamicVariableDefinerDirectiveResolver === null) {
             return;
         }
-        
+
         /**
          * Obtain the name under which to export the value,
          * and stored in the the "parsed" list.
@@ -806,7 +806,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $field->addDirective($directive);
         }
     }
-    
+
     final protected function isDynamicVariableDefinerDirective(string $directiveName): bool
     {
         $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directiveName);

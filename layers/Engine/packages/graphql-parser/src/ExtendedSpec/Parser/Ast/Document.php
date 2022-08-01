@@ -38,7 +38,7 @@ class Document extends UpstreamDocument
     {
         return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
     }
-    
+
     /**
      * Do not validate if dynamic variables have been
      * defined in the Operation
@@ -118,7 +118,7 @@ class Document extends UpstreamDocument
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->enableDynamicVariables()) {
             $this->assertNonSharedVariableAndDynamicVariableNames();
-        }        
+        }
     }
 
     /**
