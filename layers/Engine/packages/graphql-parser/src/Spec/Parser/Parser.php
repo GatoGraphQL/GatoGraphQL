@@ -567,7 +567,7 @@ class Parser extends Tokenizer implements ParserInterface
      * @param Argument[] $arguments
      */
     protected function createDirective(
-        $name,
+        string $name,
         array $arguments,
         Location $location,
     ): Directive {

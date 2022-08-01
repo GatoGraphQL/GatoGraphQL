@@ -203,6 +203,67 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         return $directives;
     }
 
+
+
+    /**
+     * Store the "DynamicVariableDefiner" Directives
+     *
+     * @param Argument[] $arguments
+     */
+    protected function createDirective(
+        string $name,
+        array $arguments,
+        Location $location,
+    ): Directive {
+        $directive = parent::createDirective(
+            $name,
+            $arguments,
+            $location,
+        );
+
+        $this->maybeStoreDirectiveAsDynamicVariableDefiner($directive);
+
+        return $directive;
+    }
+
+    /**
+     * Store the "DynamicVariableDefiner" Directives
+     */
+    protected function maybeStoreDirectiveAsDynamicVariableDefiner(
+        Directive $directive
+    ): void {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableDynamicVariables()) {
+            return;
+        }
+
+        /**
+         * Check if this Directive is a "DynamicVariableDefiner"
+         */
+        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive->getName());
+        if ($dynamicVariableDefinerDirectiveResolver === null) {
+            return;
+        }
+        
+        /**
+         * Obtain the name under which to export the value, and check
+         * if there's a Variable with the same name.
+         * If there is, then the the normal (static) Variable has priority,
+         * and so the Dynamic Variable is not assigned
+         */
+        $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
+        $exportUnderVariableName = (string)$directive->getArgument($exportUnderVariableNameArgumentName)->getValue();
+        if ($this->findVariable($exportUnderVariableName) !== null) {
+            return;
+        }
+
+        /**
+         * It's a Dynamic Variable!
+         */
+        $this->parsedDynamicVariableDefinerDirectives[] = $directive;
+    }
+
     /**
      * Replace `Directive` with `MetaDirective`, and nest the affected
      * directives inside.
@@ -451,12 +512,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         string $variableName,
         ?Variable $variable,
     ): bool {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableDynamicVariables()) {
-            return false;
-        }
-
         /**
          * If there's a variable with that name, then it has priority
          */
@@ -473,7 +528,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             /** @var DynamicVariableDefinerDirectiveResolverInterface */
             $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($dynamicVariableDefinerDirective->getName());
             $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
-            $exportUnderVariableName = $dynamicVariableDefinerDirective->getArgument($exportUnderVariableNameArgumentName)->getValue();
+            $exportUnderVariableName = (string)$dynamicVariableDefinerDirective->getArgument($exportUnderVariableNameArgumentName)->getValue();
             if ($exportUnderVariableName === $variableName) {
                 return true;
             }
