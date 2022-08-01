@@ -221,7 +221,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $location,
         );
 
-        $this->maybeStoreDirectiveAsDynamicVariableDefiner($directive);
+        $this->maybeStoreParsedDefinedDynamicVariableName($directive);
 
         return $directive;
     }
@@ -229,7 +229,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     /**
      * Store the "DynamicVariableDefiner" Directives
      */
-    protected function maybeStoreDirectiveAsDynamicVariableDefiner(
+    protected function maybeStoreParsedDefinedDynamicVariableName(
         Directive $directive
     ): void {
         /** @var ModuleConfiguration */
