@@ -448,7 +448,21 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return false;
         }
 
-        return $variable === null;
+        /**
+         * If there's a variable with that name, then it has priority
+         */
+        if ($variable === null) {
+            return false;
+        }
+
+        /**
+         * Check that any previous DynamicVariableDefinerDirective
+         * (such as `@export` has been defined in the query, and
+         * setting the variable under the provided name
+         * (such as `@export(as: "variableName")`)
+         */
+
+        return true;
     }
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
