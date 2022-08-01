@@ -43,7 +43,7 @@ class DocumentTest extends AbstractTestCase
         $parser = $this->getParser();
         $document = $parser->parse('
             query One {
-                id @upperCase @export(as: "_id")
+                id @export(as: "_id")
             }
             
             query Two {
@@ -63,7 +63,7 @@ class DocumentTest extends AbstractTestCase
         $parser = $this->getParser();
         $document = $parser->parse('
             query One {
-                id @upperCase @export(as: "_id")
+                id @export(as: "_id")
             }
             
             query Two($_id: ID!) {
@@ -82,7 +82,7 @@ class DocumentTest extends AbstractTestCase
         $parser = $this->getParser();
         $document = $parser->parse('
             query One {
-                id @upperCase @export(as: "_id")
+                id @export(as: "_id")
             }
             
             query Two {
