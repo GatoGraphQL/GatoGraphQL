@@ -34,7 +34,6 @@ class DynamicVariableValuePromise implements DeferredValuePromiseInterface
                         $this->dynamicVariableReference->getName(),
                     ]
                 ),
-                $this->dynamicVariableReference->getLocation(),
                 $this->dynamicVariableReference
             );
         }
