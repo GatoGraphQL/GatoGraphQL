@@ -68,9 +68,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * DynamicVariableDefinerDirectives (such as `@export`)
      * have been already parsed in the query.
      *
-     * @var Directive[]
+     * @var string[]
      */
-    protected array $parsedDynamicVariableDefinerDirectives = [];
+    protected array $parsedDefinedDynamicVariableNames = [];
 
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
@@ -261,7 +261,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * It's a Dynamic Variable!
          */
-        $this->parsedDynamicVariableDefinerDirectives[] = $directive;
+        $this->parsedDefinedDynamicVariableNames[] = $exportUnderVariableName;
     }
 
     /**
@@ -521,20 +521,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         /**
          * Check that any previous "DynamicVariableDefiner" Directive
-         * has been defined in the query, and setting the variable
-         * under the provided name. Eg: `@export(as: "someVariableName")`
+         * has defined the same dynamic variable name.
+         * Eg: `@export(as: "someVariableName")`
          */
-        foreach ($this->parsedDynamicVariableDefinerDirectives as $dynamicVariableDefinerDirective) {
-            /** @var DynamicVariableDefinerDirectiveResolverInterface */
-            $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($dynamicVariableDefinerDirective->getName());
-            $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
-            $exportUnderVariableName = (string)$dynamicVariableDefinerDirective->getArgument($exportUnderVariableNameArgumentName)->getValue();
-            if ($exportUnderVariableName === $variableName) {
-                return true;
-            }
-        }
-
-        return false;
+        return in_array($variableName, $this->parsedDefinedDynamicVariableNames);
     }
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
