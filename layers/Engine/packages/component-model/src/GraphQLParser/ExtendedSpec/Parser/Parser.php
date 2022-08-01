@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
+use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -13,6 +14,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 class Parser extends AbstractParser
 {
     private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
+    private ?DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry = null;
 
     final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
     {
@@ -21,6 +23,14 @@ class Parser extends AbstractParser
     final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
     {
         return $this->metaDirectiveRegistry ??= $this->instanceManager->getInstance(MetaDirectiveRegistryInterface::class);
+    }
+    final public function setDynamicVariableDefinerDirectiveRegistry(DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry): void
+    {
+        $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
+    }
+    final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
+    {
+        return $this->dynamicVariableDefinerDirectiveRegistry ??= $this->instanceManager->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
     }
 
     protected function isMetaDirective(string $directiveName): bool
