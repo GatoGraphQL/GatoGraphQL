@@ -716,4 +716,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $field->addDirective($directive);
         }
     }
+    
+    abstract protected function isDynamicVariableDefinerDirective(string $directiveName): bool;
 }
