@@ -46,23 +46,6 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
         return null;
     }
 
-    public function isDynamicVariableReference(
-        string $name,
-        ?Variable $variable,
-    ): bool {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableDynamicVariables()) {
-            return false;
-        }
-
-        return $variable === null
-            && \str_starts_with(
-                $name,
-                QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX
-            );
-    }
-
     public function isObjectResolvedFieldValueReference(
         string $name,
         ?Variable $variable,

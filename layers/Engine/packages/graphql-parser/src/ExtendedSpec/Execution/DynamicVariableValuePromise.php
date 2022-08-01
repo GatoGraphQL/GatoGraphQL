@@ -24,7 +24,7 @@ class DynamicVariableValuePromise implements DeferredValuePromiseInterface
     {
         $dynamicVariables = App::getState('document-dynamic-variables');
         $variableName = $this->dynamicVariableReference->getName();
-        if (!array_key_exists($variableName, $dynamicVariables)) {            
+        if (!array_key_exists($variableName, $dynamicVariables)) {
             // Variable is nowhere defined => Error
             throw new InvalidDynamicContextException(
                 new FeedbackItemResolution(

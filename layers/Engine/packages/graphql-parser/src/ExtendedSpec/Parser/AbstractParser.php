@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
@@ -61,6 +62,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * within Directive Arguments.
      */
     protected bool $parsingDirectiveArgumentList = false;
+
+    /**
+     * Use this variable to keep track of which
+     * DynamicVariableDefinerDirectives (such as `@export`)
+     * have been already parsed in the query.
+     *
+     * @var string[]
+     */
+    protected array $parsedDefinedDynamicVariableNames = [];
 
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
@@ -191,6 +201,67 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
 
         return $directives;
+    }
+
+
+
+    /**
+     * Store the "DynamicVariableDefiner" Directives
+     *
+     * @param Argument[] $arguments
+     */
+    protected function createDirective(
+        string $name,
+        array $arguments,
+        Location $location,
+    ): Directive {
+        $directive = parent::createDirective(
+            $name,
+            $arguments,
+            $location,
+        );
+
+        $this->maybeStoreParsedDefinedDynamicVariableName($directive);
+
+        return $directive;
+    }
+
+    /**
+     * Store the "DynamicVariableDefiner" Directives
+     */
+    protected function maybeStoreParsedDefinedDynamicVariableName(
+        Directive $directive
+    ): void {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableDynamicVariables()) {
+            return;
+        }
+
+        /**
+         * Check if this Directive is a "DynamicVariableDefiner"
+         */
+        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive->getName());
+        if ($dynamicVariableDefinerDirectiveResolver === null) {
+            return;
+        }
+
+        /**
+         * Obtain the name under which to export the value,
+         * and stored in the the "parsed" list.
+         *
+         * There is no need to check if there's a (static) Variable with
+         * the same name, as that validation will happen in the Document.
+         *
+         * @see layers/Engine/packages/graphql-parser/src/ExtendedSpec/Parser/Ast/Document.php
+         */
+        $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
+        $exportUnderVariableNameArgument = $directive->getArgument($exportUnderVariableNameArgumentName);
+        if ($exportUnderVariableNameArgument === null) {
+            return;
+        }
+        $exportUnderVariableName = (string)$exportUnderVariableNameArgument->getValue();
+        $this->parsedDefinedDynamicVariableNames[] = $exportUnderVariableName;
     }
 
     /**
@@ -426,7 +497,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             }
         }
 
-        if ($this->getQueryAugmenterService()->isDynamicVariableReference($name, $variable)) {
+        if ($this->isDynamicVariableReference($name, $variable)) {
             return $this->createDynamicVariableReference($name, $location);
         }
 
@@ -435,6 +506,25 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $variable,
             $location,
         );
+    }
+
+    protected function isDynamicVariableReference(
+        string $variableName,
+        ?Variable $variable,
+    ): bool {
+        /**
+         * If there's a variable with that name, then it has priority
+         */
+        if ($variable !== null) {
+            return false;
+        }
+
+        /**
+         * Check that any previous "DynamicVariableDefiner" Directive
+         * has defined the same dynamic variable name.
+         * Eg: `@export(as: "someVariableName")`
+         */
+        return in_array($variableName, $this->parsedDefinedDynamicVariableNames);
     }
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
@@ -716,4 +806,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $field->addDirective($directive);
         }
     }
+
+    final protected function isDynamicVariableDefinerDirective(string $directiveName): bool
+    {
+        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directiveName);
+        return $dynamicVariableDefinerDirectiveResolver !== null;
+    }
+
+    abstract protected function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface;
 }
