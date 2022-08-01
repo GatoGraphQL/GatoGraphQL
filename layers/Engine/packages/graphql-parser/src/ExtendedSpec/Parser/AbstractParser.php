@@ -8,6 +8,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
@@ -426,7 +427,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             }
         }
 
-        if ($this->getQueryAugmenterService()->isDynamicVariableReference($name, $variable)) {
+        if ($this->isDynamicVariableReference($name, $variable)) {
             return $this->createDynamicVariableReference($name, $location);
         }
 
@@ -435,6 +436,23 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $variable,
             $location,
         );
+    }
+
+    protected function isDynamicVariableReference(
+        string $name,
+        ?Variable $variable,
+    ): bool {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableDynamicVariables()) {
+            return false;
+        }
+
+        return $variable === null
+            && \str_starts_with(
+                $name,
+                QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX
+            );
     }
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface

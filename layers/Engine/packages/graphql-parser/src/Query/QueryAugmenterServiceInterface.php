@@ -21,15 +21,6 @@ interface QueryAugmenterServiceInterface
     public function getMultipleQueryExecutionOperations(string $operationName, array $operations): ?array;
 
     /**
-     * If referencing a variable that starts with "_", and the variable
-     * has not been defined in the operation, then it's a dynamic variable
-     */
-    public function isDynamicVariableReference(
-        string $name,
-        ?Variable $variable,
-    ): bool;
-
-    /**
      * If referencing a variable that starts with "__", the variable
      * has not been defined in the operation, and there's a field
      * in the same query block, then it's a reference to the value
