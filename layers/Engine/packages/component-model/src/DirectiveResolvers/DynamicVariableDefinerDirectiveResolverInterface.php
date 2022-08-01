@@ -7,15 +7,10 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 interface DynamicVariableDefinerDirectiveResolverInterface extends DirectiveResolverInterface
 {
     /**
-     * Name for the directive arg to indicate which directives
-     * are being nested, by indicating their relative position
-     * to the meta-directive.
+     * Name for the directive arg to indicate the name of the
+     * dynamic variable.
      *
-     * Eg: @foreach(affectDirectivesUnderPos: [1]) @translate
+     * Eg: @export(as: "variableName")
      */
-    public function getAffectDirectivesUnderPosArgumentName(): string;
-    /**
-     * @return int[]|null
-     */
-    public function getAffectDirectivesUnderPosArgumentDefaultValue(): ?array;
+    public function getExportUnderVariableNameArgumentName(): string;
 }
