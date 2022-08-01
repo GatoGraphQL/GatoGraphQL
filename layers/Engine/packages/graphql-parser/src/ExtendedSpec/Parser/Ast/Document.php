@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReferenceInterface;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document as UpstreamDocument;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class Document extends UpstreamDocument
 {
@@ -81,5 +84,67 @@ class Document extends UpstreamDocument
                 $this->setAncestorsUnderDirective($nestedDirective);
             }
         }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    public function validate(): void
+    {
+        parent::validate();
+        $this->assertNonSharedVariableAndDynamicVariableNames();
+    }
+
+    /**
+     * Validate that all throughout the GraphQL query,
+     * no Dynamic Variable has the same name as a normal
+     * (static) Variable.
+     *
+     * @throws InvalidRequestException
+     */
+    protected function assertNonSharedVariableAndDynamicVariableNames(): void
+    {
+        $referencedVariables = [];
+        $referencedDynamicVariables = [];
+        foreach ($this->getOperations() as $operation) {
+            foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
+                if ($variableReference instanceof DynamicVariableReference) {
+                    $referencedDynamicVariables[] = $variableReference;
+                } else {
+                    $referencedVariables[] = $variableReference;
+                }
+            }
+        }
+
+        /**
+         * Organize by name and astNode, as to give the Location of the error.
+         * Notice that only 1 Location is raised, even if the error happens
+         * on multiple places.
+         */
+        $referencedVariableNames = [];
+        foreach ($referencedVariables as $referencedVariable) {
+            $referencedVariableNames[$referencedVariable->getName()] = $referencedVariable;
+        }
+        $referencedDynamicVariableNames = [];
+        foreach ($referencedDynamicVariables as $referencedDynamicVariable) {
+            $referencedDynamicVariableNames[$referencedDynamicVariable->getName()] = $referencedDynamicVariable;
+        }
+        /** @var array<string,DynamicVariableReference> */
+        $sharedVariableNames = array_intersect_key(
+            $referencedDynamicVariableNames,
+            $referencedVariableNames
+        );
+        if ($sharedVariableNames === []) {
+            return;
+        }
+
+        $referencedDynamicVariable = array_shift($sharedVariableNames);        
+        throw new InvalidRequestException(
+            new FeedbackItemResolution(
+                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                GraphQLExtendedSpecErrorFeedbackItemProvider::E7,
+            ),
+            $referencedDynamicVariable->getLocation()
+        );
     }
 }
