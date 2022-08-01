@@ -45,12 +45,6 @@ class Parser extends AbstractParser
         return $this->getMetaDirectiveRegistry()->getMetaDirectiveResolver($directiveName);
     }
 
-    protected function isDynamicVariableDefinerDirective(string $directiveName): bool
-    {
-        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directiveName);
-        return $dynamicVariableDefinerDirectiveResolver !== null;
-    }
-
     protected function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface
     {
         return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerDirectiveResolver($directiveName);

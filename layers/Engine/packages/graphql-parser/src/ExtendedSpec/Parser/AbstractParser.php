@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
@@ -62,6 +62,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * within Directive Arguments.
      */
     protected bool $parsingDirectiveArgumentList = false;
+
+    /**
+     * Use this variable to keep track of which
+     * DynamicVariableDefinerDirectives (such as `@export`)
+     * have been already parsed in the query.
+     *
+     * @var Directive[]
+     */
+    protected array $parsedDynamicVariableDefinerDirectives = [];
 
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
@@ -439,7 +448,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     }
 
     protected function isDynamicVariableReference(
-        string $name,
+        string $variableName,
         ?Variable $variable,
     ): bool {
         /** @var ModuleConfiguration */
@@ -456,13 +465,21 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
 
         /**
-         * Check that any previous DynamicVariableDefinerDirective
-         * (such as `@export` has been defined in the query, and
-         * setting the variable under the provided name
-         * (such as `@export(as: "variableName")`)
+         * Check that any previous "DynamicVariableDefiner" Directive
+         * has been defined in the query, and setting the variable
+         * under the provided name. Eg: `@export(as: "someVariableName")`
          */
+        foreach ($this->parsedDynamicVariableDefinerDirectives as $dynamicVariableDefinerDirective) {
+            /** @var DynamicVariableDefinerDirectiveResolverInterface */
+            $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($dynamicVariableDefinerDirective->getName());
+            $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
+            $exportUnderVariableName = $dynamicVariableDefinerDirective->getArgument($exportUnderVariableNameArgumentName)->getValue();
+            if ($exportUnderVariableName === $variableName) {
+                return true;
+            }
+        }
 
-        return true;
+        return false;
     }
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
@@ -745,5 +762,11 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
     }
     
-    abstract protected function isDynamicVariableDefinerDirective(string $directiveName): bool;
+    final protected function isDynamicVariableDefinerDirective(string $directiveName): bool
+    {
+        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directiveName);
+        return $dynamicVariableDefinerDirectiveResolver !== null;
+    }
+
+    abstract protected function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface;
 }
