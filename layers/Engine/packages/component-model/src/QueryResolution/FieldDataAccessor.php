@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\ComponentModel\App;
-use PoP\GraphQLParser\ExtendedSpec\Execution\ObjectFieldValuePromise;
+use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -14,7 +14,7 @@ use stdClass;
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
     /**
-     * A ObjectResolvedFieldValueReference will return a ObjectFieldValuePromise,
+     * A ObjectResolvedFieldValueReference will return a DeferredValuePromiseInterface,
      * which must be resolved to the actual value after its corresponding
      * Field was resolved.
      *
@@ -67,7 +67,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * Resolve all the ObjectFieldValuePromise to their resolved values.
+     * Resolve all the DeferredValuePromiseInterface to their resolved values.
      *
      * @return array<string,mixed>
      */
@@ -81,10 +81,10 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
         $resolvedFieldArgs = [];
         foreach ($fieldArgs as $key => $value) {
-            if ($value instanceof ObjectFieldValuePromise) {
-                /** @var ObjectFieldValuePromise */
-                $objectFieldValuePromise = $value;
-                $resolvedFieldArgs[$key] = $objectFieldValuePromise->resolveValue();
+            if ($value instanceof DeferredValuePromiseInterface) {
+                /** @var DeferredValuePromiseInterface */
+                $deferredValuePromise = $value;
+                $resolvedFieldArgs[$key] = $deferredValuePromise->resolveValue();
                 continue;
             }
 

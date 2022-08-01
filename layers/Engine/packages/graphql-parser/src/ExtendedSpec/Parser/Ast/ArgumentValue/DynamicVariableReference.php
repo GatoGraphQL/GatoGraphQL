@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\ExtendedSpec\Execution\DynamicVariableValuePromise;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoP\Root\App;
 use PoP\Root\Exception\ShouldNotHappenException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 
 class DynamicVariableReference extends AbstractDynamicVariableReference
 {
@@ -47,23 +45,6 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
             return $this->context->getVariableValue($this->name);
         }
 
-        // 2. Treat the variable as "dynamic"
-        $dynamicVariables = App::getState('document-dynamic-variables');
-        if (array_key_exists($this->name, $dynamicVariables)) {
-            return $dynamicVariables[$this->name];
-        }
-
-        // 3. Variable is nowhere defined => Error
-        throw new InvalidDynamicContextException(
-            new FeedbackItemResolution(
-                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
-                [
-                    $this->name,
-                ]
-            ),
-            $this->getLocation(),
-            $this
-        );
+        return new DynamicVariableValuePromise($this);
     }
 }

@@ -10,7 +10,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
 
-class ObjectFieldValuePromise
+class ObjectFieldValuePromise implements DeferredValuePromiseInterface
 {
     use StandaloneServiceTrait;
 

@@ -12,7 +12,7 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\GraphQLParser\ExtendedSpec\Execution\ObjectFieldValuePromise;
+use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -233,14 +233,14 @@ class InputCoercingService implements InputCoercingServiceInterface
         /**
          * If it is a null, nothing to coerce.
          *
-         * If it is a ObjectFieldValuePromise, then we don't have the
+         * If it is a DeferredValuePromiseInterface, then we don't have the
          * value yet, so it can't be coerced.
          *
          * This has the implications that ObjectFieldValueReference
          * are not coerced!!! The output must already be the same
          * type as the input, and there's no validation to enforce it.
          */
-        if ($inputValue === null || $inputValue instanceof ObjectFieldValuePromise) {
+        if ($inputValue === null || $inputValue instanceof DeferredValuePromiseInterface) {
             return $inputValue;
         }
         if ($inputIsArrayOfArraysType) {
@@ -249,7 +249,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             return array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? $arrayArgValueElem : array_map(
-                    fn (mixed $arrayOfArraysArgValueElem) => ($arrayOfArraysArgValueElem === null || $arrayOfArraysArgValueElem instanceof ObjectFieldValuePromise) ? $arrayOfArraysArgValueElem : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
+                    fn (mixed $arrayOfArraysArgValueElem) => ($arrayOfArraysArgValueElem === null || $arrayOfArraysArgValueElem instanceof DeferredValuePromiseInterface) ? $arrayOfArraysArgValueElem : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
                     $arrayArgValueElem
                 ),
                 $inputValue
@@ -259,7 +259,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             /** @var array $inputValue */
             // If the value is an array, then cast each element to the item type
             return array_map(
-                fn (mixed $arrayArgValueElem) => ($arrayArgValueElem === null || $arrayArgValueElem instanceof ObjectFieldValuePromise) ? $arrayArgValueElem : $inputTypeResolver->coerceValue($arrayArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
+                fn (mixed $arrayArgValueElem) => ($arrayArgValueElem === null || $arrayArgValueElem instanceof DeferredValuePromiseInterface) ? $arrayArgValueElem : $inputTypeResolver->coerceValue($arrayArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
                 $inputValue
             );
         }
