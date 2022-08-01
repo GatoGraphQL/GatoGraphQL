@@ -155,7 +155,7 @@ class Document extends UpstreamDocument
 
         /** @var array<string,Argument> */
         $sharedVariableNames = array_intersect_key(
-            $dynamicVariableDefinitionArguments,
+            $dynamicVariableNames,
             $variableNames
         );
         if ($sharedVariableNames === []) {
