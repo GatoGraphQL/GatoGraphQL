@@ -162,13 +162,13 @@ class Document extends UpstreamDocument
             return;
         }
 
-        $dynamicVariableDefinitionArgument = array_shift($sharedVariableNames);        
+        $dynamicVariableName = key($sharedVariableNames);        
         throw new InvalidRequestException(
             new FeedbackItemResolution(
                 GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                 GraphQLExtendedSpecErrorFeedbackItemProvider::E7,
                 [
-                    $dynamicVariableDefinitionArgument->getName(),
+                    $dynamicVariableName,
                 ]
             ),
             $dynamicVariableDefinitionArgument->getLocation()
