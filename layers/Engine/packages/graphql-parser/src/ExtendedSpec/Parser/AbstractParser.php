@@ -448,11 +448,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return false;
         }
 
-        return $variable === null
-            && \str_starts_with(
-                $name,
-                QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX
-            );
+        return $variable === null;
     }
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
