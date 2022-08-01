@@ -247,20 +247,20 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
         
         /**
-         * Obtain the name under which to export the value, and check
-         * if there's a Variable with the same name.
-         * If there is, then the the normal (static) Variable has priority,
-         * and so the Dynamic Variable is not assigned
+         * Obtain the name under which to export the value,
+         * and stored in the the "parsed" list.
+         *
+         * There is no need to check if there's a (static) Variable with
+         * the same name, as that validation will happen in the Document.
+         *
+         * @see layers/Engine/packages/graphql-parser/src/ExtendedSpec/Parser/Ast/Document.php
          */
         $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
-        $exportUnderVariableName = (string)$directive->getArgument($exportUnderVariableNameArgumentName)->getValue();
-        if ($this->findVariable($exportUnderVariableName) !== null) {
+        $exportUnderVariableNameArgument = $directive->getArgument($exportUnderVariableNameArgumentName);
+        if ($exportUnderVariableNameArgument === null) {
             return;
         }
-
-        /**
-         * It's a Dynamic Variable!
-         */
+        $exportUnderVariableName = (string)$exportUnderVariableNameArgument->getValue();
         $this->parsedDefinedDynamicVariableNames[] = $exportUnderVariableName;
     }
 

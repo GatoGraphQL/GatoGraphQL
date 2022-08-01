@@ -4,20 +4,39 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
+use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
+use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReferenceInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document as UpstreamDocument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\App;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class Document extends UpstreamDocument
 {
+    private ?DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry = null;
+
+    final public function setDynamicVariableDefinerDirectiveRegistry(DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry): void
+    {
+        $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
+    }
+    final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
+    {
+        return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
+    }
+    
     /**
      * Do not validate if dynamic variables have been
      * defined in the Operation
@@ -92,7 +111,12 @@ class Document extends UpstreamDocument
     public function validate(): void
     {
         parent::validate();
-        $this->assertNonSharedVariableAndDynamicVariableNames();
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableDynamicVariables()) {
+            $this->assertNonSharedVariableAndDynamicVariableNames();
+        }        
     }
 
     /**
@@ -104,50 +128,164 @@ class Document extends UpstreamDocument
      */
     protected function assertNonSharedVariableAndDynamicVariableNames(): void
     {
-        $referencedVariables = [];
-        $referencedDynamicVariables = [];
+        $variables = [];
         foreach ($this->getOperations() as $operation) {
-            foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
-                if ($variableReference instanceof DynamicVariableReference) {
-                    $referencedDynamicVariables[] = $variableReference;
-                } else {
-                    $referencedVariables[] = $variableReference;
-                }
-            }
+            $variables = array_merge(
+                $variables,
+                $operation->getVariables()
+            );
         }
+
+        $dynamicVariableDefinitionArguments = $this->getDynamicVariableDefinitionArguments();
 
         /**
          * Organize by name and astNode, as to give the Location of the error.
          * Notice that only 1 Location is raised, even if the error happens
          * on multiple places.
          */
-        $referencedVariableNames = [];
-        foreach ($referencedVariables as $referencedVariable) {
-            $referencedVariableNames[$referencedVariable->getName()] = $referencedVariable;
+        $variableNames = [];
+        foreach ($variables as $variable) {
+            $variableNames[$variable->getName()] = $variable;
         }
-        $referencedDynamicVariableNames = [];
-        foreach ($referencedDynamicVariables as $referencedDynamicVariable) {
-            $referencedDynamicVariableNames[$referencedDynamicVariable->getName()] = $referencedDynamicVariable;
+        $dynamicVariableNames = [];
+        foreach ($dynamicVariableDefinitionArguments as $dynamicVariableDefinitionArgument) {
+            $dynamicVariableName = (string)$dynamicVariableDefinitionArgument->getValue();
+            $dynamicVariableNames[$dynamicVariableName] = $dynamicVariableDefinitionArgument;
         }
-        /** @var array<string,DynamicVariableReference> */
+
+        /** @var array<string,Argument> */
         $sharedVariableNames = array_intersect_key(
-            $referencedDynamicVariableNames,
-            $referencedVariableNames
+            $dynamicVariableDefinitionArguments,
+            $variableNames
         );
         if ($sharedVariableNames === []) {
             return;
         }
 
-        $referencedDynamicVariable = array_shift($sharedVariableNames);        
+        $dynamicVariableDefinitionArgument = array_shift($sharedVariableNames);        
         throw new InvalidRequestException(
             new FeedbackItemResolution(
                 GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                 GraphQLExtendedSpecErrorFeedbackItemProvider::E7,
                 [
-                    $referencedDynamicVariable->getName(),
+                    $dynamicVariableDefinitionArgument->getName(),
                 ]
             ),
-            $referencedDynamicVariable->getLocation()
+            $dynamicVariableDefinitionArgument->getLocation()
         );
+    }
+
+    /**
+     * @return Argument[]
+     */
+    protected function getDynamicVariableDefinitionArguments(): array
+    {
+        $dynamicVariableDefinitionArguments = [];
+        foreach ($this->getOperations() as $operation) {
+            $dynamicVariableDefinitionArguments = array_merge(
+                $dynamicVariableDefinitionArguments,
+                $this->getDynamicVariableDefinitionArgumentsInOperation($operation),
+            );
+        }
+        foreach ($this->getFragments() as $fragment) {
+            $dynamicVariableDefinitionArguments = array_merge(
+                $dynamicVariableDefinitionArguments,
+                $this->getDynamicVariableDefinitionArgumentsInFragment($fragment),
+            );
+        }
+        return $dynamicVariableDefinitionArguments;
+    }
+
+    /**
+     * @return Argument[]
+     */
+    protected function getDynamicVariableDefinitionArgumentsInOperation(OperationInterface $operation): array
+    {
+        return array_merge(
+            $this->getDynamicVariableDefinitionArgumentsInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds()),
+            $this->getDynamicVariableDefinitionArgumentsInDirectives($operation->getDirectives()),
+        );
+    }
+
+    /**
+     * @return Argument[]
+     */
+    protected function getDynamicVariableDefinitionArgumentsInFragment(Fragment $fragment): array
+    {
+        return array_merge(
+            $this->getDynamicVariableDefinitionArgumentsInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds()),
+            $this->getDynamicVariableDefinitionArgumentsInDirectives($fragment->getDirectives()),
+        );
+    }
+
+    /**
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     * @return Argument[]
+     */
+    protected function getDynamicVariableDefinitionArgumentsInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): array
+    {
+        $dynamicVariableDefinitionArguments = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $dynamicVariableDefinitionArguments = array_merge(
+                    $dynamicVariableDefinitionArguments,
+                    $this->getDynamicVariableDefinitionArgumentsInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $dynamicVariableDefinitionArguments = array_merge(
+                $dynamicVariableDefinitionArguments,
+                $this->getDynamicVariableDefinitionArgumentsInDirectives($field->getDirectives())
+            );
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $dynamicVariableDefinitionArguments = array_merge(
+                    $dynamicVariableDefinitionArguments,
+                    $this->getDynamicVariableDefinitionArgumentsInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds())
+                );
+            }
+        }
+        return $dynamicVariableDefinitionArguments;
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @return Argument[]
+     */
+    protected function getDynamicVariableDefinitionArgumentsInDirectives(array $directives): array
+    {
+        $dynamicVariableDefinitionArguments = [];
+        foreach ($directives as $directive) {
+            /**
+             * Check if this Directive is a "DynamicVariableDefiner"
+             */
+            $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive->getName());
+            if ($dynamicVariableDefinerDirectiveResolver === null) {
+                continue;
+            }
+            /**
+             * Get the Argument under which the Dynamic Variable is defined
+             */
+            $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
+            $exportUnderVariableNameArgument = $directive->getArgument($exportUnderVariableNameArgumentName);
+            if ($exportUnderVariableNameArgument === null) {
+                continue;
+            }
+            $dynamicVariableDefinitionArguments[] = $exportUnderVariableNameArgument;
+        }
+        return $dynamicVariableDefinitionArguments;
+    }
+
+    protected function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface
+    {
+        return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerDirectiveResolver($directiveName);
     }
 }
