@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
-use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 
