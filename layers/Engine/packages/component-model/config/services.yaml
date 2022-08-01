@@ -123,6 +123,9 @@ services:
     PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface:
         class: \PoP\ComponentModel\Registries\MetaDirectiveRegistry
 
+    PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface:
+        class: \PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistry
+
     PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
         class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
 
