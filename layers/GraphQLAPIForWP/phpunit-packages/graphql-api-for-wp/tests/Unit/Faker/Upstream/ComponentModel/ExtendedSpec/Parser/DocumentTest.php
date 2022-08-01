@@ -74,4 +74,27 @@ class DocumentTest extends AbstractTestCase
         ');
         $document->validate();
     }
+
+    public function testSharedNameBetweenVariableAndDynamicVariableAgain()
+    {
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLExtendedSpecErrorFeedbackItemProvider::class, GraphQLExtendedSpecErrorFeedbackItemProvider::E7, ['_id']))->getMessage());
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query One {
+                id @upperCase @export(as: "_id")
+            }
+            
+            query Two {
+                mirrorDynamicVariable: echo(value: $_id)
+            }
+            
+            query Three($_id: ID!) {
+                mirrorVariable: echo(value: $_id)
+            }
+            
+            query __ALL { id }
+        ');
+        $document->validate();
+    }
 }
