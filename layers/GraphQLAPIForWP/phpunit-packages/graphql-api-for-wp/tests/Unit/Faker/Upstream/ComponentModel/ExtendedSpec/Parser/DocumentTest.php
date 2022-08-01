@@ -38,7 +38,25 @@ class DocumentTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    public function testSharedNameBetweenVariableAndStaticVariable()
+    public function testDynamicVariable()
+    {
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query One {
+                id @upperCase @export(as: "_id")
+            }
+            
+            query Two {
+                mirror: echo(value: $_id)
+            }
+            
+            query __ALL { id }
+        ');
+        $document->validate();
+        $this->assertTrue(true);
+    }
+
+    public function testSharedNameBetweenVariableAndDynamicVariable()
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLExtendedSpecErrorFeedbackItemProvider::class, GraphQLExtendedSpecErrorFeedbackItemProvider::E7, ['_id']))->getMessage());
