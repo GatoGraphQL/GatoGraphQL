@@ -6,6 +6,6 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReferenceInterface;
 
-interface DynamicVariableReferenceInterface extends VariableReferenceInterface
+interface RuntimeVariableReferenceInterface extends VariableReferenceInterface
 {
 }
