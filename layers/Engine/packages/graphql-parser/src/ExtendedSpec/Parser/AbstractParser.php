@@ -13,7 +13,6 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
-use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -69,17 +68,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @var string[]
      */
     protected array $parsedDefinedDynamicVariableNames = [];
-
-    private ?QueryAugmenterServiceInterface $queryHelperService = null;
-
-    final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryHelperService): void
-    {
-        $this->queryHelperService = $queryHelperService;
-    }
-    final protected function getQueryAugmenterService(): QueryAugmenterServiceInterface
-    {
-        return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryAugmenterServiceInterface::class);
-    }
 
     protected function parseOperation(string $type): OperationInterface
     {
