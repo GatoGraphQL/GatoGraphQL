@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Exception\Parser;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-final class InvalidDynamicContextException extends AbstractParserException
+final class InvalidDynamicContextException extends InvalidRequestException
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
@@ -15,7 +15,7 @@ final class InvalidDynamicContextException extends AbstractParserException
     ) {
         parent::__construct(
             $feedbackItemResolution,
-            $dynamicVariableReference->getLocation(),
+            $dynamicVariableReference,
         );
     }
 
