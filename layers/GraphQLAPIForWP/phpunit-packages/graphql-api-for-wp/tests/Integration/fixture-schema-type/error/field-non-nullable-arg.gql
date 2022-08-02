@@ -1,11 +1,9 @@
 ################################################
-# dateStr(format:) is not mandatory, but it cannot be null,
-# hence in this query, as the variable value is not provided,
-# it will inject `null`, and the validation must kick in
+# dateStr(format:) cannot be null
 ################################################
-query ($missingFormat: String) {
+query {
   posts(pagination: { limit: 3 }) {
     id
-    dateStr(format: $missingFormat)
+    dateStr(format: null)
   }
 }
