@@ -36,6 +36,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -1154,6 +1155,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
             $feedbackItemResolution = null;
+            $astNode = null;
             try {
                 $this->resolveDirective(
                     $relationalTypeResolver,
@@ -1177,6 +1179,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         $e->getMessage(),
                     ]
                 );
+                if ($e instanceof InvalidRequestException) {
+                    /** @var InvalidRequestException */
+                    $invalidRequestException = $e;
+                    $astNode = $invalidRequestException->getAstNode();
+                }
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1234,7 +1241,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     [],
                     $idFieldSet,
                     $pipelineIDFieldSet,
-                    $idObjects,
+                    $astNode ?? $this->directive,
                     $resolvedIDFieldValues,
                     $engineIterationFeedbackStore,
                 );
@@ -1270,7 +1277,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $failedFields,
         array $idFieldSet,
         array &$succeedingPipelineIDFieldSet,
-        array $idObjects,
+        AstInterface $astNode,
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -1315,7 +1322,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $engineIterationFeedbackStore->objectFeedbackStore->addError(
             new ObjectResolutionFeedback(
                 $feedbackItemResolution,
-                $this->directive,
+                $astNode,
                 $relationalTypeResolver,
                 $this->directive,
                 $idFieldSetToRemove
