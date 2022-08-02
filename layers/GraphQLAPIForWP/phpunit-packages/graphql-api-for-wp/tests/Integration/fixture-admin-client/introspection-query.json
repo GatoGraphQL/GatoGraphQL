@@ -146,9 +146,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -173,9 +177,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -183,9 +191,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -610,9 +622,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -637,9 +653,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -647,9 +667,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -835,9 +859,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -862,9 +890,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -872,9 +904,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -1074,9 +1110,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -1101,9 +1141,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -1111,9 +1155,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -1201,9 +1249,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -1228,9 +1280,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -1238,9 +1294,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -2296,9 +2356,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -2323,9 +2387,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -2333,9 +2401,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -2537,9 +2609,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -2564,9 +2640,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -2574,9 +2654,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -3035,9 +3119,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -3062,9 +3150,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -3072,9 +3164,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -3276,9 +3372,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -3303,9 +3403,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -3313,9 +3417,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -4355,15 +4463,19 @@
                   "name": "status",
                   "description": "Status of the comment",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[CommentStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[CommentStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "CommentStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[CommentStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "CommentStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "CommentStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "CommentStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -4482,15 +4594,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -4500,15 +4616,19 @@
                   "name": "customPostTypes",
                   "description": "Return results from Union of the Custom Post Types",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[CustomPostEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[CustomPostEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "CustomPostEnum!",
+                      "kind": "LIST",
+                      "name": "[CustomPostEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "CustomPostEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "CustomPostEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "CustomPostEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -4627,15 +4747,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -4645,15 +4769,19 @@
                   "name": "customPostTypes",
                   "description": "Return results from Custom Post Types",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[GenericCustomPostEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[GenericCustomPostEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "GenericCustomPostEnum!",
+                      "kind": "LIST",
+                      "name": "[GenericCustomPostEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "GenericCustomPostEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "GenericCustomPostEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "GenericCustomPostEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -5042,15 +5170,19 @@
                   "name": "status",
                   "description": "Status of the comment",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[CommentStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[CommentStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "CommentStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[CommentStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "CommentStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "CommentStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "CommentStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -5169,15 +5301,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -5187,15 +5323,19 @@
                   "name": "customPostTypes",
                   "description": "Return results from Union of the Custom Post Types",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[CustomPostEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[CustomPostEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "CustomPostEnum!",
+                      "kind": "LIST",
+                      "name": "[CustomPostEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "CustomPostEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "CustomPostEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "CustomPostEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -5314,15 +5454,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -5635,15 +5779,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -6315,15 +6463,19 @@
                   "name": "status",
                   "description": "Status of the comment",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[CommentStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[CommentStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "CommentStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[CommentStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "CommentStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "CommentStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "CommentStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -6469,15 +6621,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -6487,15 +6643,19 @@
                   "name": "customPostTypes",
                   "description": "Return results from Union of the Custom Post Types",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[CustomPostEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[CustomPostEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "CustomPostEnum!",
+                      "kind": "LIST",
+                      "name": "[CustomPostEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "CustomPostEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "CustomPostEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "CustomPostEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -6614,15 +6774,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -6632,15 +6796,19 @@
                   "name": "customPostTypes",
                   "description": "Return results from Custom Post Types",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[GenericCustomPostEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[GenericCustomPostEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "GenericCustomPostEnum!",
+                      "kind": "LIST",
+                      "name": "[GenericCustomPostEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "GenericCustomPostEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "GenericCustomPostEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "GenericCustomPostEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -7080,15 +7248,19 @@
                   "name": "status",
                   "description": "Status of the comment",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[CommentStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[CommentStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "CommentStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[CommentStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "CommentStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "CommentStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "CommentStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -7207,15 +7379,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -7225,15 +7401,19 @@
                   "name": "customPostTypes",
                   "description": "Return results from Union of the Custom Post Types",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[CustomPostEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[CustomPostEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "CustomPostEnum!",
+                      "kind": "LIST",
+                      "name": "[CustomPostEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "CustomPostEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "CustomPostEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "CustomPostEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -7352,15 +7532,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -7673,15 +7857,19 @@
                   "name": "status",
                   "description": "Custom Post Status",
                   "type": {
-                    "kind": "LIST",
-                    "name": "[FilterCustomPostStatusEnum!]",
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
                     "ofType": {
-                      "kind": "NON_NULL",
-                      "name": "FilterCustomPostStatusEnum!",
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
                       "ofType": {
-                        "kind": "ENUM",
-                        "name": "FilterCustomPostStatusEnum",
-                        "ofType": null
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
                       }
                     }
                   },
@@ -9045,9 +9233,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 }
@@ -10910,9 +11102,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -10937,9 +11133,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -10947,9 +11147,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -11017,9 +11221,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -11044,9 +11252,13 @@
                   "name": "format",
                   "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": "\"F j, Y\""
                 },
@@ -11054,9 +11266,13 @@
                   "name": "gmt",
                   "description": "Whether to retrieve the date as UTC or GMT timezone",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
