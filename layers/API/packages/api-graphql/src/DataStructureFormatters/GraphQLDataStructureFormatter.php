@@ -157,10 +157,24 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($locations = $item[Tokens::LOCATIONS]) {
             $entry['locations'] = $locations;
         }
-        if ($extensions = $item[Tokens::EXTENSIONS]) {
+        if (
+            $extensions = array_merge(
+                $this->getDocumentEntryExtensions($item),
+                $item[Tokens::EXTENSIONS] ?? []
+            )
+        ) {
             $entry['extensions'] = $extensions;
         }
         return $entry;
+    }
+
+    protected function getDocumentEntryExtensions(array $item): array
+    {
+        $extensions = [];
+        if ($path = $item[Tokens::PATH]) {
+            $extensions['path'] = $path;
+        }
+        return $extensions;
     }
 
     /**
