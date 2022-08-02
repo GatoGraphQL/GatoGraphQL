@@ -317,7 +317,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                                 $directive->getName(),
                             ]
                         ),
-                        $directive->getLocation()
+                        $directive
                     );
                 }
                 $composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
@@ -404,7 +404,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         $directive->getName(),
                     ]
                 ),
-                $argument->getLocation()
+                $argument
             );
         }
 
@@ -423,7 +423,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         $directive->getName(),
                     ]
                 ),
-                $argument->getLocation()
+                $argument
             );
         }
 
@@ -439,7 +439,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                             $argumentValueItem === null ? 'null' : $argumentValueItem,
                         ]
                     ),
-                    $argument->getLocation()
+                    $argument
                 );
             }
             $nestedDirectivePos = $directivePos + (int)$argumentValueItem;
@@ -454,7 +454,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                             $argument->getName(),
                         ]
                     ),
-                    $argument->getLocation()
+                    $argument
                 );
             }
         }
@@ -755,7 +755,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                             $affectedFieldPosition === null ? 'null' : $affectedFieldPosition,
                         ]
                     ),
-                    $argument->getLocation()
+                    $argument
                 );
             }
 
@@ -771,7 +771,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                             $argument->getName(),
                         ]
                     ),
-                    $argument->getLocation()
+                    $argument
                 );
             }
 
@@ -791,7 +791,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                             $argument->getName(),
                         ]
                     ),
-                    $argument->getLocation()
+                    $argument
                 );
             }
             /** @var FieldInterface $field */

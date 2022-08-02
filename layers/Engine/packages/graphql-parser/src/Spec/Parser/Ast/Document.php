@@ -149,7 +149,7 @@ class Document implements DocumentInterface
                             $operationName,
                         ]
                     ),
-                    $operation->getLocation()
+                    $operation
                 );
             }
             $operationNames[] = $operationName;
@@ -171,7 +171,7 @@ class Document implements DocumentInterface
                         GraphQLSpecErrorFeedbackItemProvider::class,
                         GraphQLSpecErrorFeedbackItemProvider::E_5_2_2_1,
                     ),
-                    $operation->getLocation()
+                    $operation
                 );
             }
         }
@@ -195,7 +195,7 @@ class Document implements DocumentInterface
                             $fragmentReference->getName(),
                         ]
                     ),
-                    $fragmentReference->getLocation()
+                    $fragmentReference
                 );
             }
         }
@@ -273,7 +273,7 @@ class Document implements DocumentInterface
                             $fragmentName,
                         ]
                     ),
-                    $fragment->getLocation()
+                    $fragment
                 );
             }
             $fragmentNames[] = $fragmentName;
@@ -299,7 +299,7 @@ class Document implements DocumentInterface
                             $fragmentReference->getName(),
                         ]
                     ),
-                    $fragmentReference->getLocation()
+                    $fragmentReference
                 );
             }
         }
@@ -356,7 +356,7 @@ class Document implements DocumentInterface
                         $fragment->getName(),
                     ]
                 ),
-                $fragment->getLocation()
+                $fragment
             );
         }
     }
@@ -379,7 +379,7 @@ class Document implements DocumentInterface
                                 $variableName,
                             ]
                         ),
-                        $variable->getLocation()
+                        $variable
                     );
                 }
                 $variableNames[] = $variableName;
@@ -405,7 +405,7 @@ class Document implements DocumentInterface
                             $variableReference->getName(),
                         ]
                     ),
-                    $variableReference->getLocation()
+                    $variableReference
                 );
             }
         }
@@ -594,7 +594,7 @@ class Document implements DocumentInterface
                             $variable->getName(),
                         ]
                     ),
-                    $variable->getLocation()
+                    $variable
                 );
             }
         }
@@ -688,7 +688,7 @@ class Document implements DocumentInterface
                             $argumentName,
                         ]
                     ),
-                    $argument->getLocation()
+                    $argument
                 );
             }
             $argumentNames[] = $argumentName;

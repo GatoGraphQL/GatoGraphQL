@@ -125,7 +125,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
                             $fragmentSpreadType,
                         ]
                     ),
-                    $astNode->getLocation()
+                    $astNode
                 );
             }
         }
@@ -137,7 +137,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
                     $fragmentSpreadType,
                 ]
             ),
-            $astNode->getLocation()
+            $astNode
         );
     }
 

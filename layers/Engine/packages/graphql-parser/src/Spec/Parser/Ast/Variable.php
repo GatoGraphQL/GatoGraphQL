@@ -157,7 +157,7 @@ class Variable extends AbstractAst implements WithValueInterface
                         $this->name,
                     ]
                 ),
-                $this->getLocation()
+                $this
             );
         }
         return null;

@@ -10,6 +10,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
+use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
@@ -146,14 +147,22 @@ class GraphQLServer implements GraphQLServerInterface
             } else {
                 $executableDocument->validateAndInitialize();
             }
-        } catch (SyntaxErrorException | InvalidRequestException $e) {
-            $appStateManager->override('does-api-query-have-errors', true);
-            App::getFeedbackStore()->documentFeedbackStore->addError(
-                new DocumentFeedback(
-                    $e->getFeedbackItemResolution(),
-                    $e->getLocation(),
-                )
-            );
+        } catch (SyntaxErrorException | InvalidRequestException $exception) {
+            $state['does-api-query-have-errors'] = true;
+            if ($exception instanceof SyntaxErrorException) {
+                $syntaxErrorException = $exception;
+                $feedback = new DocumentFeedback(
+                    $syntaxErrorException->getFeedbackItemResolution(),
+                    $syntaxErrorException->getLocation(),
+                );
+            } else {
+                $invalidRequestException = $exception;
+                $feedback = new QueryFeedback(
+                    $invalidRequestException->getFeedbackItemResolution(),
+                    $invalidRequestException->getAstNode(),
+                );
+            }
+            App::getFeedbackStore()->documentFeedbackStore->addError($feedback);
         }
         $appStateManager->override('executable-document-ast', $executableDocument);
         $appStateManager->override('document-ast-node-ancestors', $executableDocument?->getDocument()->getASTNodeAncestors());
