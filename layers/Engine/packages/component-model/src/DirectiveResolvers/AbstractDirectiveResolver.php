@@ -390,7 +390,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             $this->directive->getName(),
                         ]
                     ),
-                    $this->directive->getArgument($missingMandatoryDirectiveArgName) ?? $this->directive,
+                    $this->directive->getArgument($missingMandatoryDirectiveArgName)?->getValueAST()
+                        ?? $this->directive->getArgument($missingMandatoryDirectiveArgName)
+                        ?? $this->directive,
                     $relationalTypeResolver,
                     $fields,
                 )
