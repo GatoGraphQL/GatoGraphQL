@@ -1733,4 +1733,19 @@ GRAPHQL;
           }
         ');
     }
+
+    public function testVariableReferenceStartingWithNumber()
+    {
+        $this->expectException(SyntaxErrorException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, ['NUMBER']))->getMessage());
+        $parser = $this->getParser();
+        $parser->parse('
+          query{
+            posts {
+              id
+              dateStr(format: $1)
+            }
+          }
+        ');
+    }
 }
