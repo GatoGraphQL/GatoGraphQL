@@ -319,6 +319,10 @@ abstract class AbstractDocument extends UpstreamDocument
         $resolvedFieldValueReferenceNames = [];
         foreach ($resolvedFieldValueReferences as $resolvedFieldValueReference) {
             $resolvedFieldValueReferenceName = $resolvedFieldValueReference->getName();
+            // If many AST nodes fail, and they have the same name, show the 1st one
+            if (isset($resolvedFieldValueReferenceNames[$resolvedFieldValueReferenceName])) {
+                continue;
+            }
             $resolvedFieldValueReferenceNames[$resolvedFieldValueReferenceName] = $resolvedFieldValueReference;
         }
 
