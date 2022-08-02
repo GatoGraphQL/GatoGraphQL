@@ -338,7 +338,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                 GraphQLExtendedSpecErrorFeedbackItemProvider::E8,
                 [
-                    $resolvedFieldValueReferenceName,
+                    '$' . $resolvedFieldValueReferenceName,
                 ]
             ),
             $resolvedFieldValueReference
