@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReferenceInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\RuntimeVariableReferenceInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
@@ -37,9 +37,7 @@ abstract class AbstractDocument extends UpstreamDocument
     protected function isVariableDefined(
         VariableReference $variableReference,
     ): bool {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableDynamicVariables() && $variableReference instanceof DynamicVariableReferenceInterface) {
+        if ($variableReference instanceof RuntimeVariableReferenceInterface) {
             return true;
         }
         return parent::isVariableDefined($variableReference);
