@@ -88,10 +88,7 @@ class AppStateProvider extends AbstractAppStateProvider
                 $variableValues,
                 $operationName
             );
-            $state['executable-document-ast'] = $executableDocument;
-            $state['document-ast-node-ancestors'] = $executableDocument->getDocument()->getASTNodeAncestors();
         } catch (SyntaxErrorException $syntaxErrorException) {
-            $state['does-api-query-have-errors'] = true;
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(
                     $syntaxErrorException->getFeedbackItemResolution(),
@@ -100,17 +97,29 @@ class AppStateProvider extends AbstractAppStateProvider
             );
         }
 
-        try {
-            $executableDocument->validateAndInitialize();
-        } catch (InvalidRequestException $invalidRequestException) {
-            $state['executable-document-ast'] = null;
+        if ($executableDocument !== null) {
+            /**
+             * Calculate now, as it's useful also if the validation
+             * of the ExecutableDocument has errors.
+             */
+            $state['document-ast-node-ancestors'] = $executableDocument->getDocument()->getASTNodeAncestors();
+
+            try {
+                $executableDocument->validateAndInitialize();
+            } catch (InvalidRequestException $invalidRequestException) {
+                $executableDocument = null;
+                App::getFeedbackStore()->documentFeedbackStore->addError(
+                    new QueryFeedback(
+                        $invalidRequestException->getFeedbackItemResolution(),
+                        $invalidRequestException->getAstNode(),
+                    )
+                );
+            }
+        }
+
+        $state['executable-document-ast'] = $executableDocument;
+        if ($executableDocument === null) {
             $state['does-api-query-have-errors'] = true;
-            App::getFeedbackStore()->documentFeedbackStore->addError(
-                new QueryFeedback(
-                    $invalidRequestException->getFeedbackItemResolution(),
-                    $invalidRequestException->getAstNode(),
-                )
-            );
         }
     }
 }

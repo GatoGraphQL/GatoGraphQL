@@ -137,16 +137,14 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
 
         // Convert the GraphQL query to AST
+        $executableDocument = null;
         try {
             $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variables,
                 $operationName
             );
-            $appStateManager->override('executable-document-ast', $executableDocument);
-            $appStateManager->override('document-ast-node-ancestors', $executableDocument->getDocument()->getASTNodeAncestors());
         } catch (SyntaxErrorException $syntaxErrorException) {
-            $appStateManager->override('does-api-query-have-errors', true);
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(
                     $syntaxErrorException->getFeedbackItemResolution(),
@@ -155,19 +153,27 @@ class GraphQLServer implements GraphQLServerInterface
             );
         }
 
-        try {
-            $executableDocument->validateAndInitialize();
-        } catch (InvalidRequestException $invalidRequestException) {
-            $executableDocument = null;
-            $appStateManager->override('executable-document-ast', null);
-            $appStateManager->override('does-api-query-have-errors', true);
-            App::getFeedbackStore()->documentFeedbackStore->addError(
-                new QueryFeedback(
-                    $invalidRequestException->getFeedbackItemResolution(),
-                    $invalidRequestException->getAstNode(),
-                )
-            );
+        if ($executableDocument !== null) {
+            /**
+             * Calculate now, as it's useful also if the validation
+             * of the ExecutableDocument has errors.
+             */
+            $appStateManager->override('document-ast-node-ancestors', $executableDocument->getDocument()->getASTNodeAncestors());
+
+            try {
+                $executableDocument->validateAndInitialize();
+            } catch (InvalidRequestException $invalidRequestException) {
+                $executableDocument = null;
+                App::getFeedbackStore()->documentFeedbackStore->addError(
+                    new QueryFeedback(
+                        $invalidRequestException->getFeedbackItemResolution(),
+                        $invalidRequestException->getAstNode(),
+                    )
+                );
+            }
         }
+
+        $appStateManager->override('executable-document-ast', $executableDocument);
 
         /**
          * Set the operation type and, based on it, if mutations are supported.
@@ -179,6 +185,8 @@ class GraphQLServer implements GraphQLServerInterface
             $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
             $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
         } else {
+            $appStateManager->override('does-api-query-have-errors', true);
+
             // Reset to the initial state
             $appStateManager->override('graphql-operation-type', null);
 
