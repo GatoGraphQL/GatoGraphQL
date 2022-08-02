@@ -95,7 +95,8 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
             $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($filterInput);
             if ($filterInputName === $fieldArgName) {
                 $fieldFilterInputTypeModifiers = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeModifiers($component);
-                if ($this->makeFieldFilterInputMandatoryIfHasDefaultValue($component, $fieldArgName)
+                if (
+                    $this->makeFieldFilterInputMandatoryIfHasDefaultValue($component, $fieldArgName)
                     && null !== $this->getFieldFilterInputDefaultValue($component, $fieldArgName)
                 ) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
