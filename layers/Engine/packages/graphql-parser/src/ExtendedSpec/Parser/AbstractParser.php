@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
@@ -468,13 +469,13 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     ): VariableReference {
         if (
             !$this->parsingDirectiveArgumentList
-            && $this->getQueryAugmenterService()->isObjectResolvedFieldValueReference($name, $variable)
+            && $this->isObjectResolvedFieldValueReference($name)
         ) {
             /**
              * Make sure the field appears _before_ the reference,
              * to avoid circular references.
              */
-            $fieldNameOrAlias = $this->getQueryAugmenterService()->extractObjectResolvedFieldName($name);
+            $fieldNameOrAlias = $this->extractObjectResolvedFieldName($name);
             $field = $this->findFieldWithNameWithinCurrentSiblingFields($fieldNameOrAlias);
             if ($field !== null) {
                 return $this->createObjectResolvedFieldValueReference($name, $field, $location);
@@ -489,6 +490,38 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $name,
             $variable,
             $location,
+        );
+    }
+
+    /**
+     * If referencing a variable that starts with "__", the variable
+     * has not been defined in the operation, and there's a field
+     * in the same query block, then it's a reference to the value
+     * of the resolved field on the same object
+     */
+    protected function isObjectResolvedFieldValueReference(
+        string $name,
+    ): bool {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
+            return false;
+        }
+
+        return \str_starts_with(
+            $name,
+            QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
+        );
+    }
+
+    /**
+     * Actual name of the field (without the leading "__")
+     */
+    protected function extractObjectResolvedFieldName(string $name): string
+    {
+        return substr(
+            $name,
+            strlen(QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX)
         );
     }
 

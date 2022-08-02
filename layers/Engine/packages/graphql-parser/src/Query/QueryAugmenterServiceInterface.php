@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Query;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 
 interface QueryAugmenterServiceInterface
@@ -19,20 +18,4 @@ interface QueryAugmenterServiceInterface
      * @return OperationInterface[]|null
      */
     public function getMultipleQueryExecutionOperations(string $operationName, array $operations): ?array;
-
-    /**
-     * If referencing a variable that starts with "__", the variable
-     * has not been defined in the operation, and there's a field
-     * in the same query block, then it's a reference to the value
-     * of the resolved field on the same object
-     */
-    public function isObjectResolvedFieldValueReference(
-        string $name,
-        ?Variable $variable,
-    ): bool;
-
-    /**
-     * Actual name of the field (without the leading "__")
-     */
-    public function extractObjectResolvedFieldName(string $name): string;
 }
