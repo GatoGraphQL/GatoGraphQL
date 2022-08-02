@@ -107,12 +107,18 @@ abstract class AbstractDocument extends UpstreamDocument
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableDynamicVariables()) {
+        $enableDynamicVariables = $moduleConfiguration->enableDynamicVariables();
+        if ($enableDynamicVariables) {
             $this->assertNonSharedVariableAndDynamicVariableNames();
         }
 
-        if ($moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
+        $enableObjectResolvedFieldValueReferences = $moduleConfiguration->enableObjectResolvedFieldValueReferences();
+        if ($enableObjectResolvedFieldValueReferences) {
             $this->assertNonSharedVariableAndResolvedFieldValueReferenceNames();
+        }
+
+        if ($enableDynamicVariables && $enableObjectResolvedFieldValueReferences) {
+            $this->assertNonSharedDynamicVariableAndResolvedFieldValueReferenceNames();
         }
     }
 
@@ -469,5 +475,93 @@ abstract class AbstractDocument extends UpstreamDocument
             );
         }
         return $objectResolvedFieldValueReferences;
+    }
+
+    /**
+     * Validate that all Resolved Field Value References
+     * do not share the same name with a Dynamic Variable
+     *
+     * @throws InvalidRequestException
+     */
+    protected function assertNonSharedDynamicVariableAndResolvedFieldValueReferenceNames(): void
+    {
+        $dynamicVariableDefinitionArguments = $this->getDynamicVariableDefinitionArguments();
+        $objectResolvedFieldValueReferences = $this->getObjectResolvedFieldValueReferences();
+
+        /**
+         * Organize by name and astNode, as to give the Location of the error.
+         * Notice that only 1 Location is raised, even if the error happens
+         * on multiple places.
+         */
+        $dynamicVariableNames = [];
+        foreach ($dynamicVariableDefinitionArguments as $dynamicVariableDefinitionArgument) {
+            $dynamicVariableName = (string)$dynamicVariableDefinitionArgument->getValue();
+            // If many AST nodes fail, and they have the same name, show the 1st one
+            if (isset($dynamicVariableNames[$dynamicVariableName])) {
+                continue;
+            }
+            $dynamicVariableNames[$dynamicVariableName] = $dynamicVariableDefinitionArgument;
+        }
+        $objectResolvedFieldValueReferenceNames = [];
+        foreach ($objectResolvedFieldValueReferences as $objectResolvedFieldValueReference) {
+            $objectResolvedFieldValueReferenceName = $objectResolvedFieldValueReference->getName();
+            // If many AST nodes fail, and they have the same name, show the 1st one
+            if (isset($objectResolvedFieldValueReferenceNames[$objectResolvedFieldValueReferenceName])) {
+                continue;
+            }
+            $objectResolvedFieldValueReferenceNames[$objectResolvedFieldValueReferenceName] = $objectResolvedFieldValueReference;
+        }
+
+        /** @var array<string,Argument> */
+        $sharedVariableNames = array_intersect_key(
+            $dynamicVariableNames,
+            $objectResolvedFieldValueReferenceNames
+        );
+        if ($sharedVariableNames === []) {
+            return;
+        }
+
+        $dynamicVariableName = key($sharedVariableNames);
+        $dynamicVariableDefinitionArgument = $sharedVariableNames[$dynamicVariableName];
+        throw new InvalidRequestException(
+            new FeedbackItemResolution(
+                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                GraphQLExtendedSpecErrorFeedbackItemProvider::E9,
+                [
+                    $dynamicVariableName,
+                    '$' . $dynamicVariableName,
+                ]
+            ),
+            $dynamicVariableDefinitionArgument->getValueAST()
+        );
+    }
+
+    /**
+     * @return ObjectResolvedFieldValueReference[]
+     */
+    protected function getObjectResolvedFieldValueReferences(): array
+    {
+        $objectResolvedFieldValueReference = [];
+        foreach ($this->getOperations() as $operation) {
+            $objectResolvedFieldValueReference = array_merge(
+                $objectResolvedFieldValueReference,
+                $this->getObjectResolvedFieldValueReferencesInOperation($operation),
+            );
+        }
+        foreach ($this->getFragments() as $fragment) {
+            $objectResolvedFieldValueReference = array_merge(
+                $objectResolvedFieldValueReference,
+                $this->getObjectResolvedFieldValueReferencesInFragment($fragment),
+            );
+        }
+        return $objectResolvedFieldValueReference;
+    }
+
+    /**
+     * @return ObjectResolvedFieldValueReference[]
+     */
+    protected function getObjectResolvedFieldValueReferencesInFragment(Fragment $fragment): array
+    {
+        return $this->getObjectResolvedFieldValueReferencesInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds());
     }
 }
