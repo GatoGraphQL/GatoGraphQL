@@ -318,8 +318,8 @@ abstract class AbstractDocument extends UpstreamDocument
         }
         $resolvedFieldValueReferenceNames = [];
         foreach ($resolvedFieldValueReferences as $resolvedFieldValueReference) {
-            $dynamicVariableName = (string)$resolvedFieldValueReference->getValue();
-            $resolvedFieldValueReferenceNames[$dynamicVariableName] = $resolvedFieldValueReference;
+            $resolvedFieldValueReferenceName = $resolvedFieldValueReference->getName();
+            $resolvedFieldValueReferenceNames[$resolvedFieldValueReferenceName] = $resolvedFieldValueReference;
         }
 
         /** @var array<string,Argument> */
