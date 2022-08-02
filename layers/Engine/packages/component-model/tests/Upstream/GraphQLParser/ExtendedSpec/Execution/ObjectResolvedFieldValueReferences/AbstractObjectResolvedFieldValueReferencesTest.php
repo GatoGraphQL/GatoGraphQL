@@ -11,6 +11,7 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
@@ -90,9 +91,9 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $dynamicVariableReference = static::enabled()
+        $variableReference = static::enabled()
             ? new ObjectResolvedFieldValueReference('_userList', $field, new Location(8, 29))
-            : new DynamicVariableReference('_userList', new Location(8, 29));
+            : new VariableReference('_userList', null, new Location(8, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -103,7 +104,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     'extract',
                     'userListLang',
                     [
-                        new Argument('object', $dynamicVariableReference, new Location(8, 21)),
+                        new Argument('object', $variableReference, new Location(8, 21)),
                         new Argument('path', new Literal('lang', new Location(9, 28)), new Location(9, 21)),
                     ],
                     [],
@@ -113,10 +114,10 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
-    protected function executeValidation(
+    protected function executeAssertion(
         string $query,
         Context $context,
         QueryOperation $queryOperation
@@ -125,12 +126,11 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             $this->getParser()->parse($query),
             $context,
         );
-        $executableDocument->validateAndInitialize();
         $this->assertEquals(
             [
                 $queryOperation,
             ],
-            $executableDocument->getRequestedOperations()
+            $executableDocument->getDocument()->getOperations()
         );
     }
 
@@ -169,7 +169,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(8, 27)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(4, 29));
+        $variableReference = new VariableReference('_userList', null, new Location(4, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -179,7 +179,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     'extract',
                     'userListLang',
                     [
-                        new Argument('object', $dynamicVariableReference, new Location(4, 21)),
+                        new Argument('object', $variableReference, new Location(4, 21)),
                         new Argument('path', new Literal('lang', new Location(5, 28)), new Location(5, 21)),
                     ],
                     [],
@@ -190,7 +190,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
     /**
@@ -244,11 +244,11 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(8, 27)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(4, 29));
-        $dynamicVariableReference->setContext($context);
+        $variableReference = new VariableReference('_userList', null, new Location(4, 29));
+        $variableReference->setContext($context);
         $dynamicVariableReference2 = static::enabled()
             ? new ObjectResolvedFieldValueReference('_userListLang', $field, new Location(10, 29))
-            : new DynamicVariableReference('_userListLang', new Location(10, 29));
+            : new VariableReference('_userListLang', null, new Location(10, 29));
         if (!static::enabled()) {
             $dynamicVariableReference2->setContext($context);
         }
@@ -261,7 +261,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     'extract',
                     'userListLang',
                     [
-                        new Argument('object', $dynamicVariableReference, new Location(4, 21)),
+                        new Argument('object', $variableReference, new Location(4, 21)),
                         new Argument('path', new Literal('lang', new Location(5, 28)), new Location(5, 21)),
                     ],
                     [],
@@ -272,7 +272,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
     */
 
@@ -310,9 +310,9 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 17)
         );
-        $dynamicVariableReference = static::enabled()
+        $variableReference = static::enabled()
             ? new ObjectResolvedFieldValueReference('_getJSON', $field, new Location(8, 29))
-            : new DynamicVariableReference('_getJSON', new Location(8, 29));
+            : new VariableReference('_getJSON', null, new Location(8, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -323,7 +323,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     'extract',
                     'userListLang',
                     [
-                        new Argument('object', $dynamicVariableReference, new Location(8, 21)),
+                        new Argument('object', $variableReference, new Location(8, 21)),
                         new Argument('path', new Literal('lang', new Location(9, 28)), new Location(9, 21)),
                     ],
                     [],
@@ -333,7 +333,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
     /**
@@ -369,7 +369,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(8, 28));
+        $variableReference = new VariableReference('_userList', null, new Location(8, 28));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -384,7 +384,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                         new Directive(
                             'default',
                             [
-                                new Argument('value', $dynamicVariableReference, new Location(8, 21)),
+                                new Argument('value', $variableReference, new Location(8, 21)),
                             ],
                             new Location(7, 40)
                         )
@@ -395,7 +395,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
     /**
@@ -432,7 +432,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_nonExistingField', new Location(8, 29));
+        $variableReference = new VariableReference('_nonExistingField', null, new Location(8, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -443,7 +443,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     'extract',
                     'userListLang',
                     [
-                        new Argument('object', $dynamicVariableReference, new Location(8, 21)),
+                        new Argument('object', $variableReference, new Location(8, 21)),
                         new Argument('path', new Literal('lang', new Location(9, 28)), new Location(9, 21)),
                     ],
                     [],
@@ -453,7 +453,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
     /**
@@ -490,7 +490,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_nonExistingField', new Location(8, 28));
+        $variableReference = new VariableReference('_nonExistingField', null, new Location(8, 28));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -505,7 +505,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                         new Directive(
                             'default',
                             [
-                                new Argument('value', $dynamicVariableReference, new Location(8, 21)),
+                                new Argument('value', $variableReference, new Location(8, 21)),
                             ],
                             new Location(7, 40)
                         )
@@ -516,7 +516,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
     /**
@@ -553,7 +553,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_getJSON', new Location(8, 29));
+        $variableReference = new VariableReference('_getJSON', null, new Location(8, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -564,7 +564,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     'extract',
                     'userListLang',
                     [
-                        new Argument('object', $dynamicVariableReference, new Location(8, 21)),
+                        new Argument('object', $variableReference, new Location(8, 21)),
                         new Argument('path', new Literal('lang', new Location(9, 28)), new Location(9, 21)),
                     ],
                     [],
@@ -574,7 +574,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
     /**
@@ -617,7 +617,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(14, 27)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(7, 33));
+        $variableReference = new VariableReference('_userList', null, new Location(7, 33));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -633,7 +633,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                             'extract',
                             'userListLang',
                             [
-                                new Argument('object', $dynamicVariableReference, new Location(7, 25)),
+                                new Argument('object', $variableReference, new Location(7, 25)),
                                 new Argument('path', new Literal('lang', new Location(8, 32)), new Location(8, 25)),
                             ],
                             [],
@@ -647,7 +647,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 19)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
     /**
@@ -688,7 +688,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(5, 35)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(11, 33));
+        $variableReference = new VariableReference('_userList', null, new Location(11, 33));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -711,7 +711,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                             'extract',
                             'userListLang',
                             [
-                                new Argument('object', $dynamicVariableReference, new Location(11, 25)),
+                                new Argument('object', $variableReference, new Location(11, 25)),
                                 new Argument('path', new Literal('lang', new Location(12, 32)), new Location(12, 25)),
                             ],
                             [],
@@ -725,7 +725,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 19)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 
     /**
@@ -765,7 +765,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(9, 33));
+        $variableReference = new VariableReference('_userList', null, new Location(9, 33));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -781,7 +781,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                             'extract',
                             'userListLang',
                             [
-                                new Argument('object', $dynamicVariableReference, new Location(9, 25)),
+                                new Argument('object', $variableReference, new Location(9, 25)),
                                 new Argument('path', new Literal('lang', new Location(10, 32)), new Location(10, 25)),
                             ],
                             [],
@@ -795,6 +795,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeValidation($query, $context, $queryOperation);
+        $this->executeAssertion($query, $context, $queryOperation);
     }
 }
