@@ -81,6 +81,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $variableValues = $state['variables'];
         $operationName = $state['operation-name'];
 
+        $executableDocument = null;
         try {
             $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
@@ -89,23 +90,27 @@ class AppStateProvider extends AbstractAppStateProvider
             );
             $state['executable-document-ast'] = $executableDocument;
             $state['document-ast-node-ancestors'] = $executableDocument->getDocument()->getASTNodeAncestors();
-            $executableDocument->validateAndInitialize();
-        } catch (SyntaxErrorException | InvalidRequestException $exception) {
+        } catch (SyntaxErrorException $syntaxErrorException) {
             $state['does-api-query-have-errors'] = true;
-            if ($exception instanceof SyntaxErrorException) {
-                $syntaxErrorException = $exception;
-                $feedback = new DocumentFeedback(
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new DocumentFeedback(
                     $syntaxErrorException->getFeedbackItemResolution(),
                     $syntaxErrorException->getLocation(),
-                );
-            } else {
-                $invalidRequestException = $exception;
-                $feedback = new QueryFeedback(
+                )
+            );
+        }
+
+        try {
+            $executableDocument->validateAndInitialize();
+        } catch (InvalidRequestException $invalidRequestException) {
+            $state['executable-document-ast'] = null;
+            $state['does-api-query-have-errors'] = true;
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new QueryFeedback(
                     $invalidRequestException->getFeedbackItemResolution(),
                     $invalidRequestException->getAstNode(),
-                );
-            }
-            App::getFeedbackStore()->documentFeedbackStore->addError($feedback);
+                )
+            );
         }
     }
 }

@@ -138,34 +138,36 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Convert the GraphQL query to AST
         try {
-            if ($passingQuery) {
-                $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
-                    $query,
-                    $variables,
-                    $operationName
-                );
-            }
-            $executableDocument->validateAndInitialize();
-        } catch (SyntaxErrorException | InvalidRequestException $exception) {
-            $state['does-api-query-have-errors'] = true;
-            if ($exception instanceof SyntaxErrorException) {
-                $syntaxErrorException = $exception;
-                $feedback = new DocumentFeedback(
+            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
+                $query,
+                $variables,
+                $operationName
+            );
+            $appStateManager->override('executable-document-ast', $executableDocument);
+            $appStateManager->override('document-ast-node-ancestors', $executableDocument->getDocument()->getASTNodeAncestors());
+        } catch (SyntaxErrorException $syntaxErrorException) {
+            $appStateManager->override('does-api-query-have-errors', true);
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new DocumentFeedback(
                     $syntaxErrorException->getFeedbackItemResolution(),
                     $syntaxErrorException->getLocation(),
-                );
-            } else {
-                $invalidRequestException = $exception;
-                $feedback = new QueryFeedback(
+                )
+            );
+        }
+
+        try {
+            $executableDocument->validateAndInitialize();
+        } catch (InvalidRequestException $invalidRequestException) {
+            $executableDocument = null;
+            $appStateManager->override('executable-document-ast', null);
+            $appStateManager->override('does-api-query-have-errors', true);
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new QueryFeedback(
                     $invalidRequestException->getFeedbackItemResolution(),
                     $invalidRequestException->getAstNode(),
-                );
-            }
-            App::getFeedbackStore()->documentFeedbackStore->addError($feedback);
+                )
+            );
         }
-        $appStateManager->override('executable-document-ast', $executableDocument);
-        $appStateManager->override('document-ast-node-ancestors', $executableDocument?->getDocument()->getASTNodeAncestors());
-
 
         /**
          * Set the operation type and, based on it, if mutations are supported.
