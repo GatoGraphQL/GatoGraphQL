@@ -13,7 +13,10 @@ final class InvalidDynamicContextException extends AbstractParserException
         FeedbackItemResolution $feedbackItemResolution,
         private readonly DynamicVariableReference $dynamicVariableReference,
     ) {
-        parent::__construct($feedbackItemResolution, $dynamicVariableReference->getLocation());
+        parent::__construct(
+            $feedbackItemResolution,
+            $dynamicVariableReference->getLocation(),
+        );
     }
 
     public function getDynamicVariableReference(): DynamicVariableReference

@@ -36,6 +36,7 @@ use PoP\ComponentModel\Feedback\FeedbackInterface;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -2284,25 +2285,7 @@ class Engine implements EngineInterface
     private function getObjectOrSchemaFeedbackCommonEntry(
         ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
     ): array {
-        /**
-         * Re-create the path to the AST node.
-         *
-         * Skip if the AST node was created on runtime.
-         * Eg: _id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])
-         *
-         * @var string[]
-         */
-        $astNodePath = [];
-        /** @var SplObjectStorage<AstInterface,AstInterface> */
-        $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
         $astNode = $objectOrSchemaFeedback->getAstNode();
-        if ($astNode->getLocation() !== LocationHelper::getNonSpecificLocation()) {
-            while ($astNode !== null) {
-                $astNodePath[] = $astNode->asASTNodeString();
-                // Move to the ancestor AST node
-                $astNode = $documentASTNodeAncestors[$astNode] ?? null;
-            }
-        }
         $locations = [];
         $location = $objectOrSchemaFeedback->getLocation();
         if ($location !== LocationHelper::getNonSpecificLocation()) {
@@ -2313,10 +2296,34 @@ class Engine implements EngineInterface
         );
         return [
             Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
-            Tokens::PATH => $astNodePath,
+            Tokens::PATH => $this->getASTNodePath($astNode),
             Tokens::LOCATIONS => $locations,
             Tokens::EXTENSIONS => $extensions,
         ];
+    }
+
+    /**
+     * Re-create the path to the AST node.
+     *
+     * Skip if the AST node was created on runtime.
+     * Eg: _id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])
+     *
+     * @return string[]
+     */
+    private function getASTNodePath(AstInterface $astNode): array
+    {
+        if ($astNode->getLocation() === LocationHelper::getNonSpecificLocation()) {
+            return [];
+        }
+        $astNodePath = [];
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
+        while ($astNode !== null) {
+            $astNodePath[] = $astNode->asASTNodeString();
+            // Move to the ancestor AST node
+            $astNode = $documentASTNodeAncestors[$astNode] ?? null;
+        }
+        return $astNodePath;
     }
 
     /**
@@ -2396,6 +2403,15 @@ class Engine implements EngineInterface
                     $documentFeedbackEntry,
                 ),
             ];
+            /**
+             * If also passing the AST node to the DocumentFeedback,
+             * then print the path
+             */
+            if ($documentFeedbackEntry instanceof QueryFeedbackInterface) {
+                /** @var QueryFeedbackInterface */
+                $queryFeedbackEntry = $documentFeedbackEntry;
+                $entry[Tokens::PATH] = $this->getASTNodePath($queryFeedbackEntry->getAstNode());
+            }
             $output[] = $entry;
         }
         return $output;

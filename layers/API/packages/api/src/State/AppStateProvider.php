@@ -10,6 +10,7 @@ use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
+use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
@@ -80,22 +81,45 @@ class AppStateProvider extends AbstractAppStateProvider
         $variableValues = $state['variables'];
         $operationName = $state['operation-name'];
 
+        $executableDocument = null;
         try {
             $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variableValues,
                 $operationName
             );
-            $state['executable-document-ast'] = $executableDocument;
-            $state['document-ast-node-ancestors'] = $executableDocument->getDocument()->getASTNodeAncestors();
-        } catch (SyntaxErrorException | InvalidRequestException $e) {
-            $state['does-api-query-have-errors'] = true;
+        } catch (SyntaxErrorException $syntaxErrorException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(
-                    $e->getFeedbackItemResolution(),
-                    $e->getLocation(),
+                    $syntaxErrorException->getFeedbackItemResolution(),
+                    $syntaxErrorException->getLocation(),
                 )
             );
+        }
+
+        if ($executableDocument !== null) {
+            /**
+             * Calculate now, as it's useful also if the validation
+             * of the ExecutableDocument has errors.
+             */
+            $state['document-ast-node-ancestors'] = $executableDocument->getDocument()->getASTNodeAncestors();
+
+            try {
+                $executableDocument->validateAndInitialize();
+            } catch (InvalidRequestException $invalidRequestException) {
+                $executableDocument = null;
+                App::getFeedbackStore()->documentFeedbackStore->addError(
+                    new QueryFeedback(
+                        $invalidRequestException->getFeedbackItemResolution(),
+                        $invalidRequestException->getAstNode(),
+                    )
+                );
+            }
+        }
+
+        $state['executable-document-ast'] = $executableDocument;
+        if ($executableDocument === null) {
+            $state['does-api-query-have-errors'] = true;
         }
     }
 }

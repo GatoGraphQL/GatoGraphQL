@@ -9,6 +9,14 @@
                 }
             ],
             "extensions": {
+                "path": [
+                    "...on NonExistingType { ... }",
+                    "...on QueryRoot { ... }",
+                    "...on QueryRoot { ... }",
+                    "...on QueryRoot { ... }",
+                    "self { ... }",
+                    "query { ... }"
+                ],
                 "code": "gql-5.5.1.2",
                 "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Fragment-Spread-Type-Existence"
             }

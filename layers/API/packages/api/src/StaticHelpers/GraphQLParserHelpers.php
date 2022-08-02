@@ -28,13 +28,9 @@ class GraphQLParserHelpers
         ?string $operationName,
     ): ExecutableDocument {
         $document = static::getParser()->parse($query);
-        /** @var ExecutableDocument */
-        $executableDocument = (
-            new ExecutableDocument(
-                $document,
-                new Context($operationName, $variableValues)
-            )
-        )->validateAndInitialize();
-        return $executableDocument;
+        return new ExecutableDocument(
+            $document,
+            new Context($operationName, $variableValues)
+        );
     }
 }

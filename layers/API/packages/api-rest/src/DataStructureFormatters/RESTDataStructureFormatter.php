@@ -52,6 +52,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $variableValues,
                 null,
             );
+            $executableDocument->validateAndInitialize();
         } catch (SyntaxErrorException | InvalidRequestException $e) {
             return [];
         }

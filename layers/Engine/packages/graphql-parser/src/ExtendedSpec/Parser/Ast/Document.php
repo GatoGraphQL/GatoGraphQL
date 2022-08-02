@@ -174,7 +174,7 @@ class Document extends UpstreamDocument
                     $dynamicVariableName,
                 ]
             ),
-            $dynamicVariableDefinitionArgument->getValueAST()->getLocation()
+            $dynamicVariableDefinitionArgument->getValueAST()
         );
     }
 

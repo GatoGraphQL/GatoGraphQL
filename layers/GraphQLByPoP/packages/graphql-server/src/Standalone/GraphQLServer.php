@@ -10,6 +10,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
+use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
@@ -136,28 +137,43 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
 
         // Convert the GraphQL query to AST
+        $executableDocument = null;
         try {
-            if ($passingQuery) {
-                $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
-                    $query,
-                    $variables,
-                    $operationName
-                );
-            } else {
-                $executableDocument->validateAndInitialize();
-            }
-        } catch (SyntaxErrorException | InvalidRequestException $e) {
-            $appStateManager->override('does-api-query-have-errors', true);
+            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
+                $query,
+                $variables,
+                $operationName
+            );
+        } catch (SyntaxErrorException $syntaxErrorException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(
-                    $e->getFeedbackItemResolution(),
-                    $e->getLocation(),
+                    $syntaxErrorException->getFeedbackItemResolution(),
+                    $syntaxErrorException->getLocation(),
                 )
             );
         }
-        $appStateManager->override('executable-document-ast', $executableDocument);
-        $appStateManager->override('document-ast-node-ancestors', $executableDocument?->getDocument()->getASTNodeAncestors());
 
+        if ($executableDocument !== null) {
+            /**
+             * Calculate now, as it's useful also if the validation
+             * of the ExecutableDocument has errors.
+             */
+            $appStateManager->override('document-ast-node-ancestors', $executableDocument->getDocument()->getASTNodeAncestors());
+
+            try {
+                $executableDocument->validateAndInitialize();
+            } catch (InvalidRequestException $invalidRequestException) {
+                $executableDocument = null;
+                App::getFeedbackStore()->documentFeedbackStore->addError(
+                    new QueryFeedback(
+                        $invalidRequestException->getFeedbackItemResolution(),
+                        $invalidRequestException->getAstNode(),
+                    )
+                );
+            }
+        }
+
+        $appStateManager->override('executable-document-ast', $executableDocument);
 
         /**
          * Set the operation type and, based on it, if mutations are supported.
@@ -169,6 +185,8 @@ class GraphQLServer implements GraphQLServerInterface
             $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
             $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
         } else {
+            $appStateManager->override('does-api-query-have-errors', true);
+
             // Reset to the initial state
             $appStateManager->override('graphql-operation-type', null);
 

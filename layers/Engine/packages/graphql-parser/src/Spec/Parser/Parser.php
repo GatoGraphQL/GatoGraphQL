@@ -39,6 +39,9 @@ class Parser extends Tokenizer implements ParserInterface
     /** @var Variable[] */
     protected array $variables = [];
 
+    /**
+     * @throws SyntaxErrorException
+     */
     public function parse(string $source): Document
     {
         $this->init($source);

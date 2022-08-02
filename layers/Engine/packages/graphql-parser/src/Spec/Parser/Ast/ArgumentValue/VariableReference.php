@@ -66,7 +66,7 @@ class VariableReference extends AbstractAst implements VariableReferenceInterfac
                         $this->name,
                     ]
                 ),
-                $this->getLocation()
+                $this
             );
         }
 

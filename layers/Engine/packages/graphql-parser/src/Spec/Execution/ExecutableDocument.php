@@ -37,7 +37,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     /**
      * @throws InvalidRequestException
      */
-    public function validateAndInitialize(): self
+    public function validateAndInitialize(): void
     {
         $this->requestedOperations = null;
 
@@ -50,8 +50,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
         foreach ($this->requestedOperations as $operation) {
             $this->propagateContext($operation, $this->context);
         }
-
-        return $this;
     }
 
     /**
@@ -96,7 +94,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                         GraphQLSpecErrorFeedbackItemProvider::class,
                         GraphQLSpecErrorFeedbackItemProvider::E_6_1_B,
                     ),
-                    $lastOperation->getLocation()
+                    $lastOperation
                 );
             }
             // There is exactly 1 operation
@@ -117,7 +115,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                          $this->context->getOperationName(),
                     ]
                 ),
-                $firstOperation->getLocation()
+                $firstOperation
             );
         }
         return $requestedOperations;
@@ -157,7 +155,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
                              $variableReference->getName(),
                         ]
                     ),
-                    $variableReference->getLocation()
+                    $variableReference
                 );
             }
         }
