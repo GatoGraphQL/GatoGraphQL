@@ -63,10 +63,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function enableObjectResolvedFieldValueReferences(): bool
     {
-        if (!$this->enableDynamicVariables()) {
-            return false;
-        }
-
         $envVariable = Environment::ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
