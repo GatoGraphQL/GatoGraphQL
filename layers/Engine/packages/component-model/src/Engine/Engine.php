@@ -36,6 +36,7 @@ use PoP\ComponentModel\Feedback\FeedbackInterface;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -2402,6 +2403,15 @@ class Engine implements EngineInterface
                     $documentFeedbackEntry,
                 ),
             ];
+            /**
+             * If also passing the AST node to the DocumentFeedback,
+             * then print the path
+             */
+            if ($documentFeedbackEntry instanceof QueryFeedbackInterface) {
+                /** @var QueryFeedbackInterface */
+                $queryFeedbackEntry = $documentFeedbackEntry;
+                $entry[Tokens::PATH] = $this->getASTNodePath($queryFeedbackEntry->getAstNode());
+            }
             $output[] = $entry;
         }
         return $output;
