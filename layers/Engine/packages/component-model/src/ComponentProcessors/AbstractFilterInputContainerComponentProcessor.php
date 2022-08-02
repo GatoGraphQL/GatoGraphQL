@@ -89,14 +89,34 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
     public function getFieldFilterInputTypeModifiers(Component $component, string $fieldArgName): int
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponents($component);
-        foreach ($filterQueryArgsModules as $component) {
+        foreach ($filterQueryArgsModules as $filterInput) {
             /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($component);
-            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($component);
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterInput);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($filterInput);
             if ($filterInputName === $fieldArgName) {
-                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeModifiers($component);
+                $fieldFilterInputTypeModifiers = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeModifiers($component);
+                if (
+                    $this->makeFieldFilterInputMandatoryIfHasDefaultValue($component, $fieldArgName)
+                    && null !== $this->getFieldFilterInputDefaultValue($component, $fieldArgName)
+                ) {
+                    return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
+                }
+                return $fieldFilterInputTypeModifiers;
             }
         }
         return SchemaTypeModifiers::NONE;
+    }
+
+    /**
+     * Is the input that has a default value also mandatory?
+     *
+     * This helps avoid errors from expecting type `string` in
+     * some PHP function and receiving `null`.
+     *
+     * Eg: { posts { dateStr(format: null) } }
+     */
+    protected function makeFieldFilterInputMandatoryIfHasDefaultValue(Component $component, string $fieldArgName): bool
+    {
+        return true;
     }
 }

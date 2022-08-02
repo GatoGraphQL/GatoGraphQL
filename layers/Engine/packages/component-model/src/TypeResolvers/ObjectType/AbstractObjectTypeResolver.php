@@ -1572,7 +1572,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    $field->getArgument($missingMandatoryFieldArgName) ?? $field,
+                    $field->getArgument($missingMandatoryFieldArgName)?->getValueAST()
+                        ?? $field->getArgument($missingMandatoryFieldArgName)
+                        ?? $field,
                 )
             );
         }

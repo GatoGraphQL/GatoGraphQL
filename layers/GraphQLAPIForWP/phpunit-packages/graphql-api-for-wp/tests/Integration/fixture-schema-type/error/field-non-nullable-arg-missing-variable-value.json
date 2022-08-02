@@ -1,0 +1,41 @@
+{
+    "errors": [
+        {
+            "message": "Argument 'format' in field 'dateStr' of type 'Post' cannot be empty or null",
+            "locations": [
+                {
+                    "line": 9,
+                    "column": 21
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "$missingFormat",
+                    "(format: $missingFormat)",
+                    "dateStr(format: $missingFormat)",
+                    "posts(pagination: {limit: 3}) { ... }",
+                    "query ($missingFormat: String) { ... }"
+                ],
+                "type": "Post",
+                "field": "dateStr(format: $missingFormat)",
+                "code": "PoP\\ComponentModel\\e29"
+            }
+        }
+    ],
+    "data": {
+        "posts": [
+            {
+                "id": 1,
+                "dateStr": null
+            },
+            {
+                "id": 28,
+                "dateStr": null
+            },
+            {
+                "id": 25,
+                "dateStr": null
+            }
+        ]
+    }
+}

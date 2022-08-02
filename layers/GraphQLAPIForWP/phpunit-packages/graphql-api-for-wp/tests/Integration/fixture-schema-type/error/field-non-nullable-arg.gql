@@ -1,0 +1,9 @@
+################################################
+# dateStr(format:) cannot be null
+################################################
+query {
+  posts(pagination: { limit: 3 }) {
+    id
+    dateStr(format: null)
+  }
+}
