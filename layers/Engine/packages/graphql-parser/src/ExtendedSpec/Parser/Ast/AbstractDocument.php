@@ -147,6 +147,10 @@ abstract class AbstractDocument extends UpstreamDocument
         $dynamicVariableNames = [];
         foreach ($dynamicVariableDefinitionArguments as $dynamicVariableDefinitionArgument) {
             $dynamicVariableName = (string)$dynamicVariableDefinitionArgument->getValue();
+            // If many AST nodes fail, and they have the same name, show the 1st one
+            if (isset($dynamicVariableNames[$dynamicVariableName])) {
+                continue;
+            }
             $dynamicVariableNames[$dynamicVariableName] = $dynamicVariableDefinitionArgument;
         }
 
