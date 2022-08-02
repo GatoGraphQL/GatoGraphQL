@@ -5,11 +5,12 @@
             "locations": [
                 {
                     "line": 9,
-                    "column": 13
+                    "column": 21
                 }
             ],
             "extensions": {
                 "path": [
+                    "$missingFormat",
                     "(format: $missingFormat)",
                     "dateStr(format: $missingFormat)",
                     "posts(pagination: {limit: 3}) { ... }",
