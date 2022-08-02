@@ -10,7 +10,11 @@
             ],
             "extensions": {
                 "path": [
-                    "$include"
+                    "$include",
+                    "(if: $include)",
+                    "@include(if: $include)",
+                    "self @include(if: $include) { ... }",
+                    "query SomeQuery($include: Boolean!) { ... }"
                 ],
                 "code": "gql-5.8.5",
                 "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-All-Variable-Usages-are-Allowed"

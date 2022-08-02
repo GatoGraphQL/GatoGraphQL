@@ -10,7 +10,9 @@
       ],
       "extensions": {
         "path": [
-          "...on NonExistingType { ... }"
+          "...on NonExistingType { ... }",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
         ],
         "code": "gql-5.5.1.2",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Fragment-Spread-Type-Existence"

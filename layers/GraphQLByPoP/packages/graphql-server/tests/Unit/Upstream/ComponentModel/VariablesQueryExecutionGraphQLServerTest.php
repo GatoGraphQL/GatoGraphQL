@@ -43,6 +43,9 @@ class VariablesQueryExecutionGraphQLServerTest extends AbstractGraphQLServerTest
                                 'code' => $feedbackItemResolution->getNamespacedCode(),
                                 'path' => [
                                     '$id',
+                                    '(value: $id)',
+                                    'echo(value: $id)',
+                                    'query Echo { ... }',
                                 ],
                                 'specifiedBy' => $feedbackItemResolution->getSpecifiedByURL()
                             ],
