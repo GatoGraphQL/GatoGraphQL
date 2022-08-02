@@ -13,6 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
@@ -111,7 +112,8 @@ class Document implements DocumentInterface
                     GraphQLSpecErrorFeedbackItemProvider::class,
                     GraphQLSpecErrorFeedbackItemProvider::E_6_1_C,
                 ),
-                new Location(1, 1)
+                // Create a new Object as to pass the Location
+                new QueryOperation('', [], [], [], LocationHelper::getNonSpecificLocation())
             );
         }
     }
@@ -127,7 +129,8 @@ class Document implements DocumentInterface
                     GraphQLSpecErrorFeedbackItemProvider::class,
                     GraphQLSpecErrorFeedbackItemProvider::E_6_1_D,
                 ),
-                new Location(1, 1)
+                // Create a new Object as to pass the Location
+                new QueryOperation('', [], [], [], LocationHelper::getNonSpecificLocation())
             );
         }
     }
