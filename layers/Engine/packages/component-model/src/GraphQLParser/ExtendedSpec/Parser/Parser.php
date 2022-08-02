@@ -6,11 +6,15 @@ namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
+use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
 use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 
 class Parser extends AbstractParser
 {
@@ -71,5 +75,17 @@ class Parser extends AbstractParser
         /** @var MetaDirectiveResolverInterface */
         $metaDirectiveResolver = $this->getMetaDirectiveResolver($directive->getName());
         return $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
+    }
+
+    protected function createDocumentInstance(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ): AbstractDocument {
+        return new Document(
+            $operations,
+            $fragments,
+        );
     }
 }

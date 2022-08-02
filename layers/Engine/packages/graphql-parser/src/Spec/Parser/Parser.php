@@ -85,7 +85,7 @@ class Parser extends Tokenizer implements ParserInterface
         array $operations,
         /** @var Fragment[] */
         array $fragments,
-    ) {
+    ): Document {
         return new Document(
             $operations,
             $fragments,
