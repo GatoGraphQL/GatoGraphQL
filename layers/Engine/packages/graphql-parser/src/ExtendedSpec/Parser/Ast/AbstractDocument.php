@@ -529,6 +529,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 GraphQLExtendedSpecErrorFeedbackItemProvider::E9,
                 [
                     $dynamicVariableName,
+                    '$' . $dynamicVariableName,
                 ]
             ),
             $dynamicVariableDefinitionArgument->getValueAST()
