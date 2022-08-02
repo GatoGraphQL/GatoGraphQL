@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'if' in directive 'skip' cannot be empty",
+      "message": "Argument 'if' in directive 'skip' cannot be empty or null",
       "locations": [
         {
           "line": 2,
@@ -9,13 +9,13 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "id @skip",
         "path": [
           "@skip",
           "id @skip",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "id @skip",
         "code": "PoP\\ComponentModel\\e30"
       }
     }

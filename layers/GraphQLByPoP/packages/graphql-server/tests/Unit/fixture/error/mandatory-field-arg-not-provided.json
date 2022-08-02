@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'interface' in field 'implements' of type 'QueryRoot' cannot be empty",
+      "message": "Argument 'interface' in field 'implements' of type 'QueryRoot' cannot be empty or null",
       "locations": [
         {
           "line": 2,
@@ -9,12 +9,12 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "implements",
         "path": [
           "implements",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "implements",
         "code": "PoP\\ComponentModel\\e29"
       }
     }

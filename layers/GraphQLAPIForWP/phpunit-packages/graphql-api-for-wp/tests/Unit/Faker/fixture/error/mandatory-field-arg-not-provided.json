@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'interface' in field 'implements' of type 'Post' cannot be empty",
+      "message": "Argument 'interface' in field 'implements' of type 'Post' cannot be empty or null",
       "locations": [
         {
           "line": 3,
@@ -9,18 +9,18 @@
         }
       ],
       "extensions": {
-        "type": "Post",
-        "field": "implements",
         "path": [
           "implements",
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
+        "type": "Post",
+        "field": "implements",
         "code": "PoP\\ComponentModel\\e29"
       }
     },
     {
-      "message": "Argument 'type' in field 'isObjectType' of type 'Post' cannot be empty",
+      "message": "Argument 'type' in field 'isObjectType' of type 'Post' cannot be empty or null",
       "locations": [
         {
           "line": 6,
@@ -28,18 +28,18 @@
         }
       ],
       "extensions": {
+        "path": [
+          "isObjectType",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "type": "Post",
         "field": "isObjectType",
-        "path": [
-          "isObjectType",
-          "customPosts(pagination: {limit: 3}) { ... }",
-          "query { ... }"
-        ],
         "code": "PoP\\ComponentModel\\e29"
       }
     },
     {
-      "message": "Argument 'type' in field 'isObjectType' of type 'Page' cannot be empty",
+      "message": "Argument 'type' in field 'isObjectType' of type 'Page' cannot be empty or null",
       "locations": [
         {
           "line": 6,
@@ -47,13 +47,13 @@
         }
       ],
       "extensions": {
-        "type": "Page",
-        "field": "isObjectType",
         "path": [
           "isObjectType",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
+        "type": "Page",
+        "field": "isObjectType",
         "code": "PoP\\ComponentModel\\e29"
       }
     }
