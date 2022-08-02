@@ -1718,4 +1718,19 @@ GRAPHQL;
             }
         ');
     }
+
+    public function testVariableStartingWithNumber()
+    {
+        $this->expectException(SyntaxErrorException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, ['NUMBER']))->getMessage());
+        $parser = $this->getParser();
+        $parser->parse('
+          query($1:String){
+            posts {
+              id
+              dateStr(format: $1)
+            }
+          }
+        ');
+    }
 }
