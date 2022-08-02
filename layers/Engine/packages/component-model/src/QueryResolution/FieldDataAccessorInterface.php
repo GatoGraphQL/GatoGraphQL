@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface FieldDataAccessorInterface
@@ -16,6 +17,7 @@ interface FieldDataAccessorInterface
     public function getProperties(): array;
     /**
      * @return array<string,mixed>
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     public function getKeyValues(): array;
     public function hasValue(string $propertyName): bool;
