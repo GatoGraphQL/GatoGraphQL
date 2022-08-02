@@ -117,4 +117,13 @@ class Parser extends AbstractParser
         $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
         return $directive->getArgument($exportUnderVariableNameArgumentName);
     }
+
+    protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string
+    {
+        $directiveResolver = $this->getDirectiveResolver($directive->getName());
+        if ($directiveResolver === null) {
+            return null;
+        }
+        return $directiveResolver->getAffectAdditionalFieldsUnderPosArgumentName();
+    }
 }

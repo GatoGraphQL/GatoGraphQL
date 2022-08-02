@@ -697,11 +697,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function getAffectAdditionalFieldsUnderPosArgument(
         Directive $directive,
     ): ?Argument {
-        $directiveResolver = $this->getDirectiveResolver($directive->getName());
-        if ($directiveResolver === null) {
-            return null;
-        }
-        $affectAdditionalFieldsUnderPosArgName = $directiveResolver->getAffectAdditionalFieldsUnderPosArgumentName();
+        $affectAdditionalFieldsUnderPosArgName = $this->getAffectAdditionalFieldsUnderPosArgumentName($directive);
         if ($affectAdditionalFieldsUnderPosArgName === null) {
             // Disabled for the directive
             return null;
@@ -797,4 +793,5 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
     abstract protected function getExportUnderVariableNameArgumentName(Directive $directive): ?Argument;
+    abstract protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string;
 }
