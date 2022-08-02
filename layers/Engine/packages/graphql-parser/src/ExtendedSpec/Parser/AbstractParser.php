@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
@@ -12,7 +13,6 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
-use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -68,17 +68,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @var string[]
      */
     protected array $parsedDefinedDynamicVariableNames = [];
-
-    private ?QueryAugmenterServiceInterface $queryHelperService = null;
-
-    final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryHelperService): void
-    {
-        $this->queryHelperService = $queryHelperService;
-    }
-    final protected function getQueryAugmenterService(): QueryAugmenterServiceInterface
-    {
-        return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryAugmenterServiceInterface::class);
-    }
 
     protected function parseOperation(string $type): OperationInterface
     {
@@ -466,19 +455,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         ?Variable $variable,
         Location $location,
     ): VariableReference {
-        if (
-            !$this->parsingDirectiveArgumentList
-            && $this->getQueryAugmenterService()->isObjectResolvedFieldValueReference($name, $variable)
-        ) {
-            /**
-             * Make sure the field appears _before_ the reference,
-             * to avoid circular references.
-             */
-            $fieldNameOrAlias = $this->getQueryAugmenterService()->extractObjectResolvedFieldName($name);
-            $field = $this->findFieldWithNameWithinCurrentSiblingFields($fieldNameOrAlias);
-            if ($field !== null) {
-                return $this->createObjectResolvedFieldValueReference($name, $field, $location);
-            }
+        $resolvedFieldValueReferenceField = $this->findResolvedFieldValueReferenceField($name);
+        if ($resolvedFieldValueReferenceField !== null) {
+            return $this->createObjectResolvedFieldValueReference($name, $resolvedFieldValueReferenceField, $location);
         }
 
         if ($this->isDynamicVariableReference($name, $variable)) {
@@ -489,6 +468,53 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $name,
             $variable,
             $location,
+        );
+    }
+
+    /**
+     * If referencing a variable that starts with "__", the variable
+     * has not been defined in the operation, and there's a field
+     * in the same query block, then it's a reference to the value
+     * of the resolved field on the same object
+     */
+    protected function findResolvedFieldValueReferenceField(
+        string $name,
+    ): ?FieldInterface {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
+            return null;
+        }
+
+        if ($this->parsingDirectiveArgumentList) {
+            return null;
+        }
+
+        if (
+            !str_starts_with(
+                $name,
+                QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
+            )
+        ) {
+            return null;
+        }
+
+        /**
+         * Make sure the field appears _before_ the reference,
+         * to avoid circular references.
+         */
+        $fieldNameOrAlias = $this->extractObjectResolvedFieldName($name);
+        return $this->findFieldWithNameWithinCurrentSiblingFields($fieldNameOrAlias);
+    }
+
+    /**
+     * Actual name of the field (without the leading "__")
+     */
+    protected function extractObjectResolvedFieldName(string $name): string
+    {
+        return substr(
+            $name,
+            strlen(QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX)
         );
     }
 

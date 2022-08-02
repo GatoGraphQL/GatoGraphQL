@@ -7,8 +7,6 @@ namespace PoP\GraphQLParser\Query;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
-use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
-use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 
@@ -44,33 +42,5 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
             return $nonAllOperations;
         }
         return null;
-    }
-
-    public function isObjectResolvedFieldValueReference(
-        string $name,
-        ?Variable $variable,
-    ): bool {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
-            return false;
-        }
-
-        return $variable === null
-            && \str_starts_with(
-                $name,
-                QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
-            );
-    }
-
-    /**
-     * Actual name of the field (without the leading "__")
-     */
-    public function extractObjectResolvedFieldName(string $name): string
-    {
-        return substr(
-            $name,
-            strlen(QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX)
-        );
     }
 }

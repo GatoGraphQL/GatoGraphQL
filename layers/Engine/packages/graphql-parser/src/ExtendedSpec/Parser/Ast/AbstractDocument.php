@@ -6,10 +6,13 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReferenceInterface;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document as UpstreamDocument;
@@ -20,6 +23,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
@@ -104,6 +109,10 @@ abstract class AbstractDocument extends UpstreamDocument
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->enableDynamicVariables()) {
             $this->assertNonSharedVariableAndDynamicVariableNames();
+        }
+
+        if ($moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
+            $this->assertNonSharedVariableAndResolvedFieldValueReferenceNames();
         }
     }
 
@@ -276,4 +285,185 @@ abstract class AbstractDocument extends UpstreamDocument
 
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
     abstract protected function getExportUnderVariableNameArgumentName(Directive $directive): ?Argument;
+
+    /**
+     * Validate that all Resolved Field Value References
+     * do not share the same name with a Variable
+     *
+     * @throws InvalidRequestException
+     */
+    protected function assertNonSharedVariableAndResolvedFieldValueReferenceNames(): void
+    {
+        foreach ($this->getOperations() as $operation) {
+            $this->assertNonSharedVariableAndResolvedFieldValueReferenceNamesInOperation($operation);
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertNonSharedVariableAndResolvedFieldValueReferenceNamesInOperation(OperationInterface $operation): void
+    {
+        $variables = $operation->getVariables();
+        $resolvedFieldValueReferences = $this->getObjectResolvedFieldValueReferencesInOperation($operation);
+
+        /**
+         * Organize by name and astNode, as to give the Location of the error.
+         * Notice that only 1 Location is raised, even if the error happens
+         * on multiple places.
+         */
+        $variableNames = [];
+        foreach ($variables as $variable) {
+            $variableNames[$variable->getName()] = $variable;
+        }
+        $resolvedFieldValueReferenceNames = [];
+        foreach ($resolvedFieldValueReferences as $resolvedFieldValueReference) {
+            $resolvedFieldValueReferenceName = $resolvedFieldValueReference->getName();
+            // If many AST nodes fail, and they have the same name, show the 1st one
+            if (isset($resolvedFieldValueReferenceNames[$resolvedFieldValueReferenceName])) {
+                continue;
+            }
+            $resolvedFieldValueReferenceNames[$resolvedFieldValueReferenceName] = $resolvedFieldValueReference;
+        }
+
+        /** @var array<string,Argument> */
+        $sharedVariableNames = array_intersect_key(
+            $resolvedFieldValueReferenceNames,
+            $variableNames
+        );
+        if ($sharedVariableNames === []) {
+            return;
+        }
+
+        $resolvedFieldValueReferenceName = key($sharedVariableNames);
+        $resolvedFieldValueReference = $sharedVariableNames[$resolvedFieldValueReferenceName];
+        throw new InvalidRequestException(
+            new FeedbackItemResolution(
+                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                GraphQLExtendedSpecErrorFeedbackItemProvider::E8,
+                [
+                    '$' . $resolvedFieldValueReferenceName,
+                ]
+            ),
+            $resolvedFieldValueReference
+        );
+    }
+
+    /**
+     * @return ObjectResolvedFieldValueReference[]
+     */
+    protected function getObjectResolvedFieldValueReferencesInOperation(OperationInterface $operation): array
+    {
+        return $this->getObjectResolvedFieldValueReferencesInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds());
+    }
+
+    /**
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     * @return ObjectResolvedFieldValueReference[]
+     */
+    protected function getObjectResolvedFieldValueReferencesInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): array
+    {
+        $objectResolvedFieldValueReferences = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $objectResolvedFieldValueReferences = array_merge(
+                    $objectResolvedFieldValueReferences,
+                    $this->getObjectResolvedFieldValueReferencesInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $objectResolvedFieldValueReferences = array_merge(
+                $objectResolvedFieldValueReferences,
+                $this->getObjectResolvedFieldValueReferencesInArguments($field->getArguments())
+            );
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $objectResolvedFieldValueReferences = array_merge(
+                    $objectResolvedFieldValueReferences,
+                    $this->getObjectResolvedFieldValueReferencesInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds())
+                );
+            }
+        }
+        return $objectResolvedFieldValueReferences;
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @return ObjectResolvedFieldValueReference[]
+     */
+    protected function getObjectResolvedFieldValueReferencesInArguments(array $arguments): array
+    {
+        $objectResolvedFieldValueReferences = [];
+        foreach ($arguments as $argument) {
+            $objectResolvedFieldValueReferences = array_merge(
+                $objectResolvedFieldValueReferences,
+                $this->getObjectResolvedFieldValueReferencesInArgumentValue($argument->getValueAST())
+            );
+        }
+        return $objectResolvedFieldValueReferences;
+    }
+
+    /**
+     * @param WithValueInterface|array<WithValueInterface|array<mixed>> $argumentValue
+     * @return ObjectResolvedFieldValueReference[]
+     */
+    protected function getObjectResolvedFieldValueReferencesInArgumentValue(WithValueInterface|array $argumentValue): array
+    {
+        if ($argumentValue instanceof ObjectResolvedFieldValueReference) {
+            return [$argumentValue];
+        }
+        if (!(is_array($argumentValue) || $argumentValue instanceof InputObject || $argumentValue instanceof InputList)) {
+            return [];
+        }
+
+        // Get references within InputObjects and Lists
+        $objectResolvedFieldValueReferences = [];
+        /**
+         * Handle array of arrays. Eg:
+         *
+         * ```
+         * query UpperCaseText($text: String!) {
+         *   echo(value: [[$text]])
+         * }
+         * ```
+         */
+        if (is_array($argumentValue)) {
+            foreach ($argumentValue as $listValue) {
+                if (!(is_array($listValue) || $listValue instanceof ObjectResolvedFieldValueReference || $listValue instanceof WithValueInterface)) {
+                    continue;
+                }
+                /** @var WithValueInterface|array $listValue */
+                $objectResolvedFieldValueReferences = array_merge(
+                    $objectResolvedFieldValueReferences,
+                    $this->getObjectResolvedFieldValueReferencesInArgumentValue($listValue)
+                );
+            }
+            return $objectResolvedFieldValueReferences;
+        }
+        /** @var WithAstValueInterface $argumentValue */
+        $listValues = (array)$argumentValue->getAstValue();
+        foreach ($listValues as $listValue) {
+            if (!(is_array($listValue) || $listValue instanceof ObjectResolvedFieldValueReference || $listValue instanceof WithValueInterface)) {
+                continue;
+            }
+            if ($listValue instanceof ObjectResolvedFieldValueReference) {
+                $objectResolvedFieldValueReferences[] = $listValue;
+                continue;
+            }
+            /** @var WithValueInterface|array $listValue */
+            $objectResolvedFieldValueReferences = array_merge(
+                $objectResolvedFieldValueReferences,
+                $this->getObjectResolvedFieldValueReferencesInArgumentValue($listValue)
+            );
+        }
+        return $objectResolvedFieldValueReferences;
+    }
 }
