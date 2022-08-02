@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\QueryResolution;
 
-use function max;
-
 use PoP\ComponentModel\App;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
@@ -19,6 +17,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use SplObjectStorage;
+
+use function max;
 
 class QueryASTTransformationService implements QueryASTTransformationServiceInterface
 {
