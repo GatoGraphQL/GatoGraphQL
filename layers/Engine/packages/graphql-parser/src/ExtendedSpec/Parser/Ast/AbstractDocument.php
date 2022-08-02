@@ -23,6 +23,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -411,10 +412,10 @@ abstract class AbstractDocument extends UpstreamDocument
     }
 
     /**
-     * @param Argument[] $arguments
+     * @param WithValueInterface|array<WithValueInterface|array<mixed>> $argumentValue
      * @return ObjectResolvedFieldValueReference[]
      */
-    protected function getObjectResolvedFieldValueReferencesInArgumentValue(WithValueInterface $argumentValue): array
+    protected function getObjectResolvedFieldValueReferencesInArgumentValue(WithValueInterface|array $argumentValue): array
     {
         if ($argumentValue instanceof ObjectResolvedFieldValueReference) {
             return [$argumentValue];
