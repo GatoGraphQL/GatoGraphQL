@@ -455,19 +455,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         ?Variable $variable,
         Location $location,
     ): VariableReference {
-        if (
-            !$this->parsingDirectiveArgumentList
-            && $this->isObjectResolvedFieldValueReference($name)
-        ) {
-            /**
-             * Make sure the field appears _before_ the reference,
-             * to avoid circular references.
-             */
-            $fieldNameOrAlias = $this->extractObjectResolvedFieldName($name);
-            $field = $this->findFieldWithNameWithinCurrentSiblingFields($fieldNameOrAlias);
-            if ($field !== null) {
-                return $this->createObjectResolvedFieldValueReference($name, $field, $location);
-            }
+        $resolvedFieldValueReferenceField = $this->findResolvedFieldValueReferenceField($name);
+        if ($resolvedFieldValueReferenceField !== null) {
+            return $this->createObjectResolvedFieldValueReference($name, $resolvedFieldValueReferenceField, $location);
         }
 
         if ($this->isDynamicVariableReference($name, $variable)) {
@@ -487,19 +477,32 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * in the same query block, then it's a reference to the value
      * of the resolved field on the same object
      */
-    protected function isObjectResolvedFieldValueReference(
+    protected function findResolvedFieldValueReferenceField(
         string $name,
-    ): bool {
+    ): ?FieldInterface {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
-            return false;
+            return null;
         }
 
-        return \str_starts_with(
+        if ($this->parsingDirectiveArgumentList) {
+            return null;
+        }
+
+        if (!str_starts_with(
             $name,
             QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
-        );
+        )) {
+            return null;
+        }
+
+        /**
+         * Make sure the field appears _before_ the reference,
+         * to avoid circular references.
+         */
+        $fieldNameOrAlias = $this->extractObjectResolvedFieldName($name);
+        return $this->findFieldWithNameWithinCurrentSiblingFields($fieldNameOrAlias);
     }
 
     /**
