@@ -89,6 +89,7 @@ class AppStateProvider extends AbstractAppStateProvider
             );
             $state['executable-document-ast'] = $executableDocument;
             $state['document-ast-node-ancestors'] = $executableDocument->getDocument()->getASTNodeAncestors();
+            $executableDocument->validateAndInitialize();
         } catch (SyntaxErrorException | InvalidRequestException $exception) {
             $state['does-api-query-have-errors'] = true;
             if ($exception instanceof SyntaxErrorException) {

@@ -144,9 +144,8 @@ class GraphQLServer implements GraphQLServerInterface
                     $variables,
                     $operationName
                 );
-            } else {
-                $executableDocument->validateAndInitialize();
             }
+            $executableDocument->validateAndInitialize();
         } catch (SyntaxErrorException | InvalidRequestException $exception) {
             $state['does-api-query-have-errors'] = true;
             if ($exception instanceof SyntaxErrorException) {
