@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
-use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
-use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReferenceInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
@@ -23,22 +21,10 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\App;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class Document extends UpstreamDocument
+abstract class AbstractDocument extends UpstreamDocument
 {
-    private ?DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry = null;
-
-    final public function setDynamicVariableDefinerDirectiveRegistry(DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry): void
-    {
-        $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
-    }
-    final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
-    {
-        return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
-    }
-
     /**
      * Do not validate if dynamic variables have been
      * defined in the Operation
@@ -270,25 +256,24 @@ class Document extends UpstreamDocument
             /**
              * Check if this Directive is a "DynamicVariableDefiner"
              */
-            $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive->getName());
-            if ($dynamicVariableDefinerDirectiveResolver === null) {
+            if (!$this->isDynamicVariableDefinerDirective($directive)) {
                 continue;
             }
             /**
              * Get the Argument under which the Dynamic Variable is defined
              */
-            $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
-            $exportUnderVariableNameArgument = $directive->getArgument($exportUnderVariableNameArgumentName);
+            $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgumentName($directive);
             if ($exportUnderVariableNameArgument === null) {
                 continue;
             }
+            /**
+             * All success!
+             */
             $dynamicVariableDefinitionArguments[] = $exportUnderVariableNameArgument;
         }
         return $dynamicVariableDefinitionArguments;
     }
 
-    protected function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface
-    {
-        return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerDirectiveResolver($directiveName);
-    }
+    abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
+    abstract protected function getExportUnderVariableNameArgumentName(Directive $directive): ?Argument;
 }

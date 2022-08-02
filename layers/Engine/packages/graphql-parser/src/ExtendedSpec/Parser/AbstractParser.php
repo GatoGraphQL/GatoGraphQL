@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
-use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module;
@@ -19,6 +16,7 @@ use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -72,7 +70,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected array $parsedDefinedDynamicVariableNames = [];
 
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
-    private ?DirectiveRegistryInterface $directiveRegistry = null;
 
     final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryHelperService): void
     {
@@ -81,15 +78,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     final protected function getQueryAugmenterService(): QueryAugmenterServiceInterface
     {
         return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryAugmenterServiceInterface::class);
-    }
-
-    final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
-    {
-        $this->directiveRegistry = $directiveRegistry;
-    }
-    final protected function getDirectiveRegistry(): DirectiveRegistryInterface
-    {
-        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
     }
 
     protected function parseOperation(string $type): OperationInterface
@@ -240,8 +228,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * Check if this Directive is a "DynamicVariableDefiner"
          */
-        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive->getName());
-        if ($dynamicVariableDefinerDirectiveResolver === null) {
+        if (!$this->isDynamicVariableDefinerDirective($directive)) {
             return;
         }
 
@@ -254,8 +241,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          *
          * @see layers/Engine/packages/graphql-parser/src/ExtendedSpec/Parser/Ast/Document.php
          */
-        $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
-        $exportUnderVariableNameArgument = $directive->getArgument($exportUnderVariableNameArgumentName);
+        $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgumentName($directive);
         if ($exportUnderVariableNameArgument === null) {
             return;
         }
@@ -591,8 +577,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         array $operations,
         /** @var Fragment[] */
         array $fragments,
-    ) {
-        $document = new Document(
+    ): Document {
+        $document = $this->createDocumentInstance(
             $operations,
             $fragments,
         );
@@ -605,6 +591,17 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         return $document;
     }
+
+    /**
+     * Set the instance with the implementation
+     * from ComponentModel
+     */
+    abstract protected function createDocumentInstance(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ): AbstractDocument;
 
     /**
      * Iterate the elements in the Document AST, and whenever a Directive
@@ -700,11 +697,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function getAffectAdditionalFieldsUnderPosArgument(
         Directive $directive,
     ): ?Argument {
-        $directiveResolver = $this->getDirectiveResolver($directive->getName());
-        if ($directiveResolver === null) {
-            return null;
-        }
-        $affectAdditionalFieldsUnderPosArgName = $directiveResolver->getAffectAdditionalFieldsUnderPosArgumentName();
+        $affectAdditionalFieldsUnderPosArgName = $this->getAffectAdditionalFieldsUnderPosArgumentName($directive);
         if ($affectAdditionalFieldsUnderPosArgName === null) {
             // Disabled for the directive
             return null;
@@ -716,11 +709,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return $argument;
         }
         return null;
-    }
-
-    protected function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
-    {
-        return $this->getDirectiveRegistry()->getDirectiveResolver($directiveName);
     }
 
     /**
@@ -803,11 +791,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
     }
 
-    final protected function isDynamicVariableDefinerDirective(string $directiveName): bool
-    {
-        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directiveName);
-        return $dynamicVariableDefinerDirectiveResolver !== null;
-    }
-
-    abstract protected function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface;
+    abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
+    abstract protected function getExportUnderVariableNameArgumentName(Directive $directive): ?Argument;
+    abstract protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string;
 }
