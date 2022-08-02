@@ -490,10 +490,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return null;
         }
 
-        if (!str_starts_with(
-            $name,
-            QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
-        )) {
+        if (
+            !str_starts_with(
+                $name,
+                QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
+            )
+        ) {
             return null;
         }
 
