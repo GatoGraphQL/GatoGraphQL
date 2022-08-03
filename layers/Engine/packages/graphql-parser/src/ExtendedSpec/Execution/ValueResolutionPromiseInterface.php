@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
 
-interface DeferredValuePromiseInterface
+interface ValueResolutionPromiseInterface
 {
     /**
      * @throws AbstractDeferredValuePromiseException

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ValueResolutionPromiseInterface;
 use stdClass;
 
 trait WithArgumentsTrait
@@ -101,7 +101,7 @@ trait WithArgumentsTrait
     protected function doHasArgumentReferencingResolvedOnEngineIterationPromise(array $values): mixed
     {
         foreach ($values as $value) {
-            if ($value instanceof DeferredValuePromiseInterface) {
+            if ($value instanceof ValueResolutionPromiseInterface) {
                 return true;
             }
             if (is_array($value) && $this->doHasArgumentReferencingResolvedOnEngineIterationPromise($value)) {
@@ -125,7 +125,7 @@ trait WithArgumentsTrait
     protected function doHasArgumentReferencingResolvedOnObjectPromise(array $values): mixed
     {
         foreach ($values as $value) {
-            if ($value instanceof DeferredValuePromiseInterface) {
+            if ($value instanceof ValueResolutionPromiseInterface) {
                 return true;
             }
             if (is_array($value) && $this->doHasArgumentReferencingResolvedOnObjectPromise($value)) {

@@ -11,7 +11,7 @@ use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItem
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class DynamicVariableValuePromise implements DeferredValuePromiseInterface
+class DynamicVariableValuePromise implements ValueResolutionPromiseInterface
 {
     use StandaloneServiceTrait;
 

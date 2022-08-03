@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\ComponentModel\App;
 use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
-use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ValueResolutionPromiseInterface;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -15,7 +15,7 @@ use stdClass;
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
     /**
-     * A ObjectResolvedFieldValueReference will return a DeferredValuePromiseInterface,
+     * A ObjectResolvedFieldValueReference will return a ValueResolutionPromiseInterface,
      * which must be resolved to the actual value after its corresponding
      * Field was resolved.
      *
@@ -62,7 +62,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * Resolve all the DeferredValuePromiseInterface to their resolved values.
+     * Resolve all the ValueResolutionPromiseInterface to their resolved values.
      *
      * @return array<string,mixed>
      * @throws AbstractDeferredValuePromiseException
@@ -77,8 +77,8 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
         $resolvedFieldArgs = [];
         foreach ($fieldArgs as $key => $value) {
-            if ($value instanceof DeferredValuePromiseInterface) {
-                /** @var DeferredValuePromiseInterface */
+            if ($value instanceof ValueResolutionPromiseInterface) {
+                /** @var ValueResolutionPromiseInterface */
                 $deferredValuePromise = $value;
                 $resolvedFieldArgs[$key] = $deferredValuePromise->resolveValue();
                 continue;
