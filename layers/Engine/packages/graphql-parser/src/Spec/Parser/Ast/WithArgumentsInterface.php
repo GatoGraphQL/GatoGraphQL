@@ -23,4 +23,6 @@ interface WithArgumentsInterface extends AstInterface
      * @return array<string,mixed>
      */
     public function getArgumentKeyValues(): array;
+
+    public function hasAnyArgumentReferencingValuePromise(): bool;
 }

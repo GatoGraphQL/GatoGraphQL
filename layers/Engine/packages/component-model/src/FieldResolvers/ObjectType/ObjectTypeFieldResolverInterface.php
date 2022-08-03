@@ -127,6 +127,23 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         object $object,
     ): void;
     /**
+     * This method is executed AFTER the casting of the fieldArgs
+     * has taken place! Then, it can further add elements to the
+     * input which are not in the Schema definition of the input.
+     *
+     * It's use is with nested mutations, as to set the missing
+     * "id" value that comes from the object, and is not provided
+     * via an input to the mutation.
+     *
+     * @param array<string,mixed> $fieldDataForMutationForObject
+     */
+    public function prepareFieldDataForMutationForObject(
+        array &$fieldDataForMutationForObject,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+        object $object,
+    ): void;
+    /**
      * Indicate: if the field has a single field argument, which is of type InputObject,
      * then retrieve the value for its input fields?
      *

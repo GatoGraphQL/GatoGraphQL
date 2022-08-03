@@ -137,16 +137,16 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * @param array<string,mixed> $fieldDataForObject
+     * @param array<string,mixed> $fieldDataForMutationForObject
      */
-    public function prepareFieldDataForObject(
-        array &$fieldDataForObject,
+    public function prepareFieldDataForMutationForObject(
+        array &$fieldDataForMutationForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareFieldDataForObject(
-            $fieldDataForObject,
+        parent::prepareFieldDataForMutationForObject(
+            $fieldDataForMutationForObject,
             $objectTypeResolver,
             $field,
             $object,
@@ -155,7 +155,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($field->getName()) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
-                $fieldDataForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
+                $fieldDataForMutationForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
     }

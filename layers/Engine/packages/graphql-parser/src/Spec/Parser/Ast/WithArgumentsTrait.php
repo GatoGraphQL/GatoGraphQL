@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
+use stdClass;
+
 trait WithArgumentsTrait
 {
     /** @var Argument[] */
@@ -14,7 +17,7 @@ trait WithArgumentsTrait
 
     /** @var array<string,mixed>|null */
     protected ?array $argumentKeyValues = null;
-
+    protected ?bool $hasAnyArgumentReferencingValuePromise = null;
 
     public function hasArguments(): bool
     {
@@ -74,5 +77,29 @@ trait WithArgumentsTrait
             $this->argumentKeyValues[$argument->getName()] = $argument->getValue();
         }
         return $this->argumentKeyValues;
+    }
+
+    public function hasAnyArgumentReferencingValuePromise(): bool
+    {
+        if ($this->hasAnyArgumentReferencingValuePromise === null) {
+            $this->hasAnyArgumentReferencingValuePromise = $this->hasArgumentReferencingValuePromise($this->getArgumentKeyValues());
+        }
+        return $this->hasAnyArgumentReferencingValuePromise;
+    }
+
+    protected function hasArgumentReferencingValuePromise(array $values): mixed
+    {
+        foreach ($values as $value) {
+            if ($value instanceof DeferredValuePromiseInterface) {
+                return true;
+            }
+            if (is_array($value) && $this->hasArgumentReferencingValuePromise($value)) {
+                return true;
+            }
+            if ($value instanceof stdClass && $this->hasArgumentReferencingValuePromise((array)$value)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1028,6 +1028,19 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         try {
+            if ($this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
+                $fieldArgs = $fieldDataAccessor->getFieldArgs();
+                $this->prepareFieldDataForMutationForObject(
+                    $fieldArgs,
+                    $objectTypeResolver,
+                    $fieldDataAccessor->getField(),
+                    $object,
+                );
+                $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
+                    $fieldDataAccessor->getField(),
+                    $fieldArgs
+                );
+            }
             $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
             return $mutationResolver->executeMutation($fieldDataAccessorForMutation);
         } catch (Exception $e) {
@@ -1093,6 +1106,25 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function prepareFieldDataForObject(
         array &$fieldDataForObject,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+        object $object,
+    ): void {
+    }
+
+    /**
+     * This method is executed AFTER the casting of the fieldArgs
+     * has taken place! Then, it can further add elements to the
+     * input which are not in the Schema definition of the input.
+     *
+     * It's use is with nested mutations, as to set the missing
+     * "id" value that comes from the object, and is not provided
+     * via an input to the mutation.
+     *
+     * @param array<string,mixed> $fieldDataForMutationForObject
+     */
+    public function prepareFieldDataForMutationForObject(
+        array &$fieldDataForMutationForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,

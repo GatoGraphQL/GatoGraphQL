@@ -414,11 +414,24 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
 
+        /**
+         * Among Promises, we have:
+         *
+         * 1. Resolved Field Value Reference: it is resolved at the object level
+         * 2. Dynamic Variable Reference: it is resolved at the Engine iteration level
+         *
+         * Then #2 could be optimized, executing the casting/validation below
+         * only once for all fields/objects in the current Engine iteration,
+         * instead of once per object.
+         *
+         * But for simplicity, it's done here.
+         */
+        $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
-        if ($validateSchemaOnObject) {
-            $fieldArgs = null;
+        if ($hasAnyArgumentReferencingValuePromise || $validateSchemaOnObject) {
+            $fieldData = null;
             try {
-                $fieldArgs = $fieldDataAccessor->getFieldArgs();
+                $fieldData = $fieldDataAccessor->getFieldArgs();
             } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -429,8 +442,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return null;
             }
 
-            $this->validateFieldData(
-                $fieldArgs,
+            /**
+             * Cast the Arguments, return if any of them produced an error
+             */
+            $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+            $fieldData = $this->getSchemaCastingService()->castArguments(
+                $fieldData,
+                $fieldArgsSchemaDefinition,
+                $field,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
+
+            $this->validateVariableOnObjectResolutionFieldData(
+                $fieldData,
                 $field,
                 false, // Mutation validation will be performed always in validateFieldDataForObject
                 $objectTypeFieldResolutionFeedbackStore,
@@ -438,6 +465,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
             }
+
+            /**
+             * Re-recreate the data, containing the casted arguments
+             */
+            $fieldDataAccessor = $this->createFieldDataAccessor(
+                $field,
+                $fieldData,
+            );
         }
 
         /**
@@ -805,7 +840,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Validate on the object
             $fieldDataAccessorForMutation = null;
             try {
-                $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
+                $objectTypeFieldResolver->prepareFieldDataForMutationForObject(
+                    $fieldArgs,
+                    $this,
+                    $fieldDataAccessor->getField(),
+                    $object,
+                );
+                $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation(
+                    $this->createFieldDataAccessor(
+                        $fieldDataAccessor->getField(),
+                        $fieldArgs
+                    )
+                );
             } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1358,6 +1404,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $fieldData = $field->getArgumentKeyValues();
+        $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
+
         /**
          * Check that the field has been defined in the schema
          */
@@ -1416,28 +1464,52 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Perform validations
          */
-        $this->validateFieldData(
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateInvariableOnObjectResolutionFieldData(
             $fieldData,
             $field,
-            !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
-            $objectTypeFieldResolutionFeedbackStore,
+            $separateObjectTypeFieldResolutionFeedbackStore,
         );
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
+        }
+
+        /**
+         * If there is a promise, this method cannot be executed.
+         * It will be done later, after promises are resolved
+         * to an actual value when resolving the object.
+         */
+        if (!$hasAnyArgumentReferencingValuePromise) {
+            $this->validateVariableOnObjectResolutionFieldData(
+                $fieldData,
+                $field,
+                !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
         }
 
         return $fieldData;
     }
 
     /**
-     * Validate the field data
+     * Validate those elements of the fieldData
+     * which will not be different when evaluated on
+     * the schema or the object.
+     *
+     * Hence, this function needs be called only once
+     * at the beginning, and not when the fieldArgs
+     * are resolved for the object (eg: because they
+     * contain Promises).
      *
      * @param array<string,mixed> $fieldData
      */
-    protected function validateFieldData(
+    protected function validateInvariableOnObjectResolutionFieldData(
         array $fieldData,
         FieldInterface $field,
-        bool $validateMutation,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         /** @var array */
@@ -1451,17 +1523,49 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Validations:
          *
-         * - no mandatory arg is missing
          * - no non-existing arg has been provided
          */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $this->validateNonMissingMandatoryFieldArguments(
+        $this->validateOnlyExistingFieldArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field,
-            $separateObjectTypeFieldResolutionFeedbackStore
+            $objectTypeFieldResolutionFeedbackStore
         );
-        $this->validateOnlyExistingFieldArguments(
+    }
+
+    /**
+     * Validate those elements of the fieldData which will be different
+     * when evaluated on the schema or the object (eg: they contain Promises).
+     *
+     * There are 2 different opportunities when this method can be executed:
+     *
+     * 1. On the schema:
+     *    When the fieldArgs already contain all the resolved data
+     *
+     * 2. On the object, either when:
+     *
+     *   1. The fieldArgs contain Promises, which will be resolved
+     *      by the time ->resolveValue is executed on the object
+     *   2. When a field is dynamically created (eg: `@applyFunction`)
+     *
+     * @param array<string,mixed> $fieldData
+     */
+    protected function validateVariableOnObjectResolutionFieldData(
+        array $fieldData,
+        FieldInterface $field,
+        bool $validateMutation,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        /** @var array */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+
+        /**
+         * Validations:
+         *
+         * - no mandatory arg is missing or is null
+         */
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateNonMissingOrNullMandatoryFieldArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field,
@@ -1483,6 +1587,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $field,
             $fieldData,
         );
+        /** @var ObjectTypeFieldResolverInterface */
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         $this->validateFieldArgumentConstraints(
             $fieldData,
             $objectTypeFieldResolver,
@@ -1598,7 +1704,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
      */
-    private function validateNonMissingMandatoryFieldArguments(
+    private function validateNonMissingOrNullMandatoryFieldArguments(
         array $fieldData,
         array $fieldArgsSchemaDefinition,
         FieldInterface $field,
