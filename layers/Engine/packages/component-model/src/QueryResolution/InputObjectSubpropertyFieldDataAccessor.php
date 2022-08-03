@@ -17,9 +17,9 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
     public function __construct(
         FieldInterface $field,
         protected string $inputObjectSubpropertyName,
-        array $fieldArgs,
+        array $unresolvedFieldArgs,
     ) {
-        parent::__construct($field, $fieldArgs);
+        parent::__construct($field, $unresolvedFieldArgs);
     }
 
     public function getInputObjectSubpropertyName(): string

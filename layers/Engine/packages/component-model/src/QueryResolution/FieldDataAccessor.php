@@ -26,7 +26,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     public function __construct(
         protected FieldInterface $field,
         /** @var array<string,mixed> */
-        protected array $fieldArgs,
+        protected array $unresolvedFieldArgs,
     ) {
     }
 
@@ -48,6 +48,13 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     {
         return $this->getResolvedFieldArgs();
     }
+    /**
+     * @return array<string,mixed>
+     */
+    public function getUnresolvedFieldArgs(): array
+    {
+        return $this->unresolvedFieldArgs;
+    }
 
     /**
      * @return array<string,mixed>
@@ -56,7 +63,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     protected function getResolvedFieldArgs(): array
     {
         if ($this->resolvedFieldArgs === null) {
-            $this->resolvedFieldArgs = $this->doGetResolvedFieldArgs($this->fieldArgs);
+            $this->resolvedFieldArgs = $this->doGetResolvedFieldArgs($this->unresolvedFieldArgs);
         }
         return $this->resolvedFieldArgs;
     }
