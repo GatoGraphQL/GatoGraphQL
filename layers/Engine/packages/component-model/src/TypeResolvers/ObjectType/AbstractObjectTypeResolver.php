@@ -1358,6 +1358,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $fieldData = $field->getArgumentKeyValues();
+        $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
+
         /**
          * Check that the field has been defined in the schema
          */
@@ -1427,14 +1429,21 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        $this->validateVariableOnObjectResolutionFieldData(
-            $fieldData,
-            $field,
-            !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return null;
+        /**
+         * If there is a promise, this method cannot be executed.
+         * It will be done later, after promises are resolved
+         * to an actual value when resolving the object.
+         */
+        if (!$hasAnyArgumentReferencingValuePromise) {
+            $this->validateVariableOnObjectResolutionFieldData(
+                $fieldData,
+                $field,
+                !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
         }
 
         return $fieldData;
