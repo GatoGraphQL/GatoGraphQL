@@ -8,7 +8,7 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\RuntimeVariableRefer
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-final class InvalidDynamicContextException extends AbstractParserException implements QueryExceptionInterface
+final class InvalidRuntimeVariableReferenceException extends AbstractParserException implements QueryExceptionInterface
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
