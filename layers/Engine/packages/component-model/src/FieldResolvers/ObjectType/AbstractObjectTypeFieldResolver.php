@@ -1028,7 +1028,23 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         try {
-            $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
+            if ($this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
+                $fieldArgs = $fieldDataAccessor->getFieldArgs();
+                $this->prepareFieldDataForMutationForObject(
+                    $fieldArgs,
+                    $objectTypeResolver,
+                    $fieldDataAccessor->getField(),
+                    $object,
+                );
+                $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation(
+                    $objectTypeResolver->createFieldDataAccessor(
+                        $fieldDataAccessor->getField(),
+                        $fieldArgs
+                    )
+                );
+            } else {
+                $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
+            }
             return $mutationResolver->executeMutation($fieldDataAccessorForMutation);
         } catch (Exception $e) {
             /** @var ModuleConfiguration */
@@ -1093,6 +1109,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function prepareFieldDataForObject(
         array &$fieldDataForObject,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+        object $object,
+    ): void {
+    }
+
+    /**
+     * @param array<string,mixed> $fieldDataForMutationForObject
+     */
+    public function prepareFieldDataForMutationForObject(
+        array &$fieldDataForMutationForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,

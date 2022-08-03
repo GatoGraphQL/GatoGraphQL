@@ -100,16 +100,16 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
     }
 
     /**
-     * @param array<string,mixed> $fieldDataForObject
+     * @param array<string,mixed> $fieldDataForMutationForObject
      */
-    public function prepareFieldDataForObject(
-        array &$fieldDataForObject,
+    public function prepareFieldDataForMutationForObject(
+        array &$fieldDataForMutationForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareFieldDataForObject(
-            $fieldDataForObject,
+        parent::prepareFieldDataForMutationForObject(
+            $fieldDataForMutationForObject,
             $objectTypeResolver,
             $field,
             $object,
@@ -117,7 +117,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         $customPost = $object;
         switch ($field->getName()) {
             case 'addComment':
-                $fieldDataForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
+                $fieldDataForMutationForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
     }

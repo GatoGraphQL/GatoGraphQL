@@ -828,7 +828,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Validate on the object
             $fieldDataAccessorForMutation = null;
             try {
-                $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
+                $objectTypeFieldResolver->prepareFieldDataForMutationForObject(
+                    $fieldArgs,
+                    $this,
+                    $fieldDataAccessor->getField(),
+                    $object,
+                );
+                $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation(
+                    $this->createFieldDataAccessor(
+                        $fieldDataAccessor->getField(),
+                        $fieldArgs
+                    )
+                );
             } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(

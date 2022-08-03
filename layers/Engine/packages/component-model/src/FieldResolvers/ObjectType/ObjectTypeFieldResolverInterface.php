@@ -127,6 +127,15 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         object $object,
     ): void;
     /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForMutationForObject(
+        array &$fieldDataForMutationForObject,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+        object $object,
+    ): void;
+    /**
      * Indicate: if the field has a single field argument, which is of type InputObject,
      * then retrieve the value for its input fields?
      *
