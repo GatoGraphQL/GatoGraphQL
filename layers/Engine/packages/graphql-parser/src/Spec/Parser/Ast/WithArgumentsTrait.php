@@ -6,7 +6,6 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\ExtendedSpec\Execution\ResolvableOnEngineIterationValueResolutionPromiseInterface;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ResolvableOnObjectValueResolutionPromiseInterface;
-use PoP\GraphQLParser\ExtendedSpec\Execution\ValueResolutionPromiseInterface;
 use stdClass;
 
 trait WithArgumentsTrait

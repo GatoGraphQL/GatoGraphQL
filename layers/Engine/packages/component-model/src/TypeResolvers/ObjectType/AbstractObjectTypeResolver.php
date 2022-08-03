@@ -751,7 +751,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * 1. Resolved Field Value Reference:
      *    It must be resolved at the Object level, so its resoluton here
      *    is suitable.
-     * 
+     *
      * 2. Dynamic Variable Reference:
      *    It can be resolved at the Engine iteration level, but it's easier
      *    to resolve it here. To optimize it (and avoid executing the same
