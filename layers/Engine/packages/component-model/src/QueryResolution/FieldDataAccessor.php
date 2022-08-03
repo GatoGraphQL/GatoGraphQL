@@ -56,7 +56,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     protected function getResolvedFieldArgs(): array
     {
         if ($this->resolvedFieldArgs === null) {
-            $this->resolvedFieldArgs = $this->resolveFieldArgs($this->fieldArgs);
+            $this->resolvedFieldArgs = $this->doGetResolvedFieldArgs($this->fieldArgs);
         }
         return $this->resolvedFieldArgs;
     }
@@ -67,7 +67,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      * @return array<string,mixed>
      * @throws DeferredValuePromiseExceptionInterface
      */
-    protected function resolveFieldArgs(array $fieldArgs): array
+    private function doGetResolvedFieldArgs(array $fieldArgs): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -95,7 +95,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
              *   ```
              */
             if (is_array($value)) {
-                $resolvedFieldArgs[$key] = $this->resolveFieldArgs($value);
+                $resolvedFieldArgs[$key] = $this->doGetResolvedFieldArgs($value);
                 continue;
             }
 
@@ -110,7 +110,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
              *   ```
              */
             if ($value instanceof stdClass) {
-                $resolvedFieldArgs[$key] = (object) $this->resolveFieldArgs((array) $value);
+                $resolvedFieldArgs[$key] = (object) $this->doGetResolvedFieldArgs((array) $value);
                 continue;
             }
 
