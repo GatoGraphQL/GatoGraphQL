@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
-use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
+use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 
 interface ValueResolutionPromiseInterface
 {
     /**
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     public function resolveValue(): mixed;
 }

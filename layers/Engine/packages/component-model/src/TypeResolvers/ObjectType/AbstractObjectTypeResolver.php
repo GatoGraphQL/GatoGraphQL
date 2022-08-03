@@ -38,7 +38,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
-use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
+use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -432,7 +432,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldData = null;
             try {
                 $fieldData = $fieldDataAccessor->getFieldArgs();
-            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+            } catch (AbstractValueResolutionPromiseException $deferredValuePromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $deferredValuePromiseException->getFeedbackItemResolution(),
@@ -794,7 +794,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldArgs = null;
         try {
             $fieldArgs = $fieldDataAccessor->getFieldArgs();
-        } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+        } catch (AbstractValueResolutionPromiseException $deferredValuePromiseException) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $deferredValuePromiseException->getFeedbackItemResolution(),
@@ -852,7 +852,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $fieldArgs
                     )
                 );
-            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+            } catch (AbstractValueResolutionPromiseException $deferredValuePromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $deferredValuePromiseException->getFeedbackItemResolution(),
@@ -1609,7 +1609,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldDataAccessorForMutation = null;
             try {
                 $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
-            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+            } catch (AbstractValueResolutionPromiseException $deferredValuePromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $deferredValuePromiseException->getFeedbackItemResolution(),
@@ -1821,7 +1821,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * directly (eg: "title", "content" and "status"), and these may be
      * contained under a subproperty (eg: "input") from the original fieldData.
      *
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     public function getFieldDataAccessorForMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
