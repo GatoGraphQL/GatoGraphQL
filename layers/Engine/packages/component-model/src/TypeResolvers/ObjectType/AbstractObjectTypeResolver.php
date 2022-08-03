@@ -429,6 +429,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return null;
             }
 
+            $this->validateInvariableOnObjectResolutionFieldData(
+                $fieldArgs,
+                $field,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
             $this->validateFieldData(
                 $fieldArgs,
                 $field,
@@ -1416,6 +1421,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Perform validations
          */
+        $this->validateInvariableOnObjectResolutionFieldData(
+            $fieldData,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
         $this->validateFieldData(
             $fieldData,
             $field,
@@ -1427,6 +1437,39 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         return $fieldData;
+    }
+
+    /**
+     * Validate those elements of the fieldData
+     * which will not be different when evaluated on
+     * the schema or the object.
+     *
+     * @param array<string,mixed> $fieldData
+     */
+    protected function validateInvariableOnObjectResolutionFieldData(
+        array $fieldData,
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        /** @var array */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        /** @var ObjectTypeFieldResolverInterface */
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+
+        // Collect the deprecations from the queried fields
+        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field, $objectTypeFieldResolutionFeedbackStore);
+
+        /**
+         * Validations:
+         *
+         * - no non-existing arg has been provided
+         */
+        $this->validateOnlyExistingFieldArguments(
+            $fieldData,
+            $fieldArgsSchemaDefinition,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore
+        );
     }
 
     /**
@@ -1449,26 +1492,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): void {
         /** @var array */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
-        /** @var ObjectTypeFieldResolverInterface */
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-
-        // Collect the deprecations from the queried fields
-        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field, $objectTypeFieldResolutionFeedbackStore);
-
+        
         /**
          * Validations:
          *
          * - no mandatory arg is missing
-         * - no non-existing arg has been provided
          */
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->validateNonMissingMandatoryFieldArguments(
-            $fieldData,
-            $fieldArgsSchemaDefinition,
-            $field,
-            $separateObjectTypeFieldResolutionFeedbackStore
-        );
-        $this->validateOnlyExistingFieldArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field,
@@ -1490,6 +1521,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $field,
             $fieldData,
         );
+        /** @var ObjectTypeFieldResolverInterface */
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         $this->validateFieldArgumentConstraints(
             $fieldData,
             $objectTypeFieldResolver,
