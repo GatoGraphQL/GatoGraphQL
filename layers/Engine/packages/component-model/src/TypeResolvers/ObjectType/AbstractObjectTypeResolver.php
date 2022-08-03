@@ -429,11 +429,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return null;
             }
 
-            $this->validateInvariableOnObjectResolutionFieldData(
-                $fieldArgs,
-                $field,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
             $this->validateFieldData(
                 $fieldArgs,
                 $field,
