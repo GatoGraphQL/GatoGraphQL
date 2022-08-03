@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Exception;
 
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\GraphQLParser\Exception\LocationableExceptionInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Exception\AbstractClientException;
 
-abstract class AbstractLocationableException extends AbstractClientException implements LocationableExceptionInterface
+abstract class AbstractLocationableException extends AbstractClientException
 {
     public function __construct(
         private readonly FeedbackItemResolution $feedbackItemResolution,
