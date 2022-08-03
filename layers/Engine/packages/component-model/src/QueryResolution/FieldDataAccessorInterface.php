@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
-use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
+use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface FieldDataAccessorInterface
@@ -13,7 +13,7 @@ interface FieldDataAccessorInterface
     public function getFieldName(): string;
     /**
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     public function getFieldArgs(): array;
     /**
@@ -22,15 +22,15 @@ interface FieldDataAccessorInterface
     public function getUnresolvedFieldArgs(): array;
     /**
      * @return string[]
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     public function getProperties(): array;
     /**
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     public function hasValue(string $propertyName): bool;
     /**
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     public function getValue(string $propertyName): mixed;
 }

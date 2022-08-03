@@ -39,7 +39,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
-use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
+use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -420,7 +420,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgs = null;
             try {
                 $fieldArgs = $fieldDataAccessor->getFieldArgs();
-            } catch (DeferredValuePromiseExceptionInterface $deferredValuePromiseException) {
+            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $deferredValuePromiseException->getFeedbackItemResolution(),
@@ -760,7 +760,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldArgs = null;
         try {
             $fieldArgs = $fieldDataAccessor->getFieldArgs();
-        } catch (DeferredValuePromiseExceptionInterface $deferredValuePromiseException) {
+        } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $deferredValuePromiseException->getFeedbackItemResolution(),

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\ComponentModel\App;
-use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
+use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
@@ -42,7 +42,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     public function getFieldArgs(): array
     {
@@ -58,7 +58,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     protected function getResolvedFieldArgs(): array
     {
@@ -72,7 +72,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      * Resolve all the DeferredValuePromiseInterface to their resolved values.
      *
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     private function doGetResolvedFieldArgs(array $fieldArgs): array
     {
@@ -128,7 +128,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return string[]
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     public function getProperties(): array
     {
@@ -136,7 +136,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     public function hasValue(string $propertyName): bool
     {
@@ -144,7 +144,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     public function getValue(string $propertyName): mixed
     {

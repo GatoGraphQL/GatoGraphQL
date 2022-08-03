@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
-use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
+use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
@@ -29,7 +29,7 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
 
     /**
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface
+     * @throws AbstractDeferredValuePromiseException
      */
     protected function getResolvedFieldArgs(): array
     {
