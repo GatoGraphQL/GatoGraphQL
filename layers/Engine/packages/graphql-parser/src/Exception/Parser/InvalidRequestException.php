@@ -4,24 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Exception\Parser;
 
-use PoP\GraphQLParser\Exception\QueryExceptionInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\GraphQLParser\Exception\AbstractQueryException;
 
-final class InvalidRequestException extends AbstractLocationableException implements QueryExceptionInterface
+final class InvalidRequestException extends AbstractQueryException
 {
-    public function __construct(
-        FeedbackItemResolution $feedbackItemResolution,
-        private readonly AstInterface $astNode,
-    ) {
-        parent::__construct(
-            $feedbackItemResolution,
-            $astNode->getLocation(),
-        );
-    }
-
-    public function getAstNode(): AstInterface
-    {
-        return $this->astNode;
-    }
 }

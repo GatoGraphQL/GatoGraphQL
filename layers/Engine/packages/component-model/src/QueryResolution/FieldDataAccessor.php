@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\ComponentModel\App;
-use PoP\GraphQLParser\Exception\Parser\DeferredValuePromiseExceptionInterface;
+use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
 use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;

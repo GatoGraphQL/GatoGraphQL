@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\Root\Services\StandaloneServiceTrait;
-use PoP\GraphQLParser\Exception\Parser\InvalidRuntimeVariableReferenceException;
+use PoP\GraphQLParser\Exception\InvalidRuntimeVariableReferenceException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\Root\App;

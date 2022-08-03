@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
-use PoP\GraphQLParser\Exception\Parser\DeferredValuePromiseExceptionInterface;
+use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface FieldDataAccessorInterface

@@ -36,7 +36,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
-use PoP\GraphQLParser\Exception\QueryExceptionInterface;
+use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -1173,7 +1173,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $messages,
                     $engineIterationFeedbackStore,
                 );
-            } catch (QueryExceptionInterface $queryException) {
+            } catch (AbstractQueryException $queryException) {
                 $feedbackItemResolution = $queryException->getFeedbackItemResolution();
                 $astNode = $queryException->getAstNode();
             } catch (AbstractClientException $e) {
