@@ -18,6 +18,8 @@ trait WithArgumentsTrait
     /** @var array<string,mixed>|null */
     protected ?array $argumentKeyValues = null;
     protected ?bool $hasArgumentReferencingPromise = null;
+    protected ?bool $hasArgumentReferencingResolvedOnEngineIterationPromise = null;
+    protected ?bool $hasArgumentReferencingResolvedOnObjectPromise = null;
 
     public function hasArguments(): bool
     {
@@ -82,21 +84,54 @@ trait WithArgumentsTrait
     public function hasArgumentReferencingPromise(): bool
     {
         if ($this->hasArgumentReferencingPromise === null) {
-            $this->hasArgumentReferencingPromise = $this->doHasArgumentReferencingPromise($this->getArgumentKeyValues());
+            $this->hasArgumentReferencingPromise = $this->hasArgumentReferencingResolvedOnEngineIterationPromise()
+                || $this->hasArgumentReferencingResolvedOnObjectPromise();
         }
         return $this->hasArgumentReferencingPromise;
     }
 
-    protected function doHasArgumentReferencingPromise(array $values): mixed
+    public function hasArgumentReferencingResolvedOnEngineIterationPromise(): bool
+    {
+        if ($this->hasArgumentReferencingResolvedOnEngineIterationPromise === null) {
+            $this->hasArgumentReferencingResolvedOnEngineIterationPromise = $this->doHasArgumentReferencingResolvedOnEngineIterationPromise($this->getArgumentKeyValues());
+        }
+        return $this->hasArgumentReferencingResolvedOnEngineIterationPromise;
+    }
+
+    protected function doHasArgumentReferencingResolvedOnEngineIterationPromise(array $values): mixed
     {
         foreach ($values as $value) {
             if ($value instanceof DeferredValuePromiseInterface) {
                 return true;
             }
-            if (is_array($value) && $this->doHasArgumentReferencingPromise($value)) {
+            if (is_array($value) && $this->doHasArgumentReferencingResolvedOnEngineIterationPromise($value)) {
                 return true;
             }
-            if ($value instanceof stdClass && $this->doHasArgumentReferencingPromise((array)$value)) {
+            if ($value instanceof stdClass && $this->doHasArgumentReferencingResolvedOnEngineIterationPromise((array)$value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasArgumentReferencingResolvedOnObjectPromise(): bool
+    {
+        if ($this->hasArgumentReferencingResolvedOnObjectPromise === null) {
+            $this->hasArgumentReferencingResolvedOnObjectPromise = $this->doHasArgumentReferencingResolvedOnObjectPromise($this->getArgumentKeyValues());
+        }
+        return $this->hasArgumentReferencingResolvedOnObjectPromise;
+    }
+
+    protected function doHasArgumentReferencingResolvedOnObjectPromise(array $values): mixed
+    {
+        foreach ($values as $value) {
+            if ($value instanceof DeferredValuePromiseInterface) {
+                return true;
+            }
+            if (is_array($value) && $this->doHasArgumentReferencingResolvedOnObjectPromise($value)) {
+                return true;
+            }
+            if ($value instanceof stdClass && $this->doHasArgumentReferencingResolvedOnObjectPromise((array)$value)) {
                 return true;
             }
         }
