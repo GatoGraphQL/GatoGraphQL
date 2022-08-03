@@ -24,5 +24,5 @@ interface WithArgumentsInterface extends AstInterface
      */
     public function getArgumentKeyValues(): array;
 
-    public function hasAnyArgumentReferencingValuePromise(): bool;
+    public function hasArgumentReferencingPromise(): bool;
 }

@@ -426,9 +426,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          *
          * But for simplicity, it's done here.
          */
-        $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
+        $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
-        if ($hasAnyArgumentReferencingValuePromise || $validateSchemaOnObject) {
+        if ($hasArgumentReferencingPromise || $validateSchemaOnObject) {
             $fieldData = null;
             try {
                 $fieldData = $fieldDataAccessor->getFieldArgs();
@@ -1404,7 +1404,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $fieldData = $field->getArgumentKeyValues();
-        $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
+        $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
 
         /**
          * Check that the field has been defined in the schema
@@ -1480,7 +1480,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * It will be done later, after promises are resolved
          * to an actual value when resolving the object.
          */
-        if (!$hasAnyArgumentReferencingValuePromise) {
+        if (!$hasArgumentReferencingPromise) {
             $this->validateVariableOnObjectResolutionFieldData(
                 $fieldData,
                 $field,

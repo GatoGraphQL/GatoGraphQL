@@ -17,7 +17,7 @@ trait WithArgumentsTrait
 
     /** @var array<string,mixed>|null */
     protected ?array $argumentKeyValues = null;
-    protected ?bool $hasAnyArgumentReferencingValuePromise = null;
+    protected ?bool $hasArgumentReferencingPromise = null;
 
     public function hasArguments(): bool
     {
@@ -79,12 +79,12 @@ trait WithArgumentsTrait
         return $this->argumentKeyValues;
     }
 
-    public function hasAnyArgumentReferencingValuePromise(): bool
+    public function hasArgumentReferencingPromise(): bool
     {
-        if ($this->hasAnyArgumentReferencingValuePromise === null) {
-            $this->hasAnyArgumentReferencingValuePromise = $this->hasArgumentReferencingValuePromise($this->getArgumentKeyValues());
+        if ($this->hasArgumentReferencingPromise === null) {
+            $this->hasArgumentReferencingPromise = $this->hasArgumentReferencingValuePromise($this->getArgumentKeyValues());
         }
-        return $this->hasAnyArgumentReferencingValuePromise;
+        return $this->hasArgumentReferencingPromise;
     }
 
     protected function hasArgumentReferencingValuePromise(array $values): mixed
