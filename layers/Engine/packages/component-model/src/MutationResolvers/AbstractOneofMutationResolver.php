@@ -215,6 +215,9 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         return [$inputFieldMutationResolver, $oneOfFieldDataAccessor];
     }
 
+    /**
+     * @throws AbstractDeferredValuePromiseException
+     */
     final protected function getOneOfFieldDataAccessor(
         InputObjectSubpropertyFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor,
         string $oneOfPropertyName,
@@ -222,7 +225,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         return new InputObjectSubpropertyFieldDataAccessor(
             $inputObjectFieldArgumentFieldDataAccessor->getField(),
             $oneOfPropertyName,
-            $inputObjectFieldArgumentFieldDataAccessor->getUnresolvedFieldArgs()
+            $inputObjectFieldArgumentFieldDataAccessor->getFieldArgs()
         );
     }
 }

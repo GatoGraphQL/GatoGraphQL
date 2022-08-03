@@ -48,13 +48,6 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     {
         return $this->getResolvedFieldArgs();
     }
-    /**
-     * @return array<string,mixed>
-     */
-    public function getUnresolvedFieldArgs(): array
-    {
-        return $this->unresolvedFieldArgs;
-    }
 
     /**
      * @return array<string,mixed>

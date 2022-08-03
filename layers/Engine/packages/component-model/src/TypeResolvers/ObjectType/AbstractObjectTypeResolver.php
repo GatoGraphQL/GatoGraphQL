@@ -804,7 +804,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $fieldDataAccessor->getFieldName());
         if ($mutationResolver !== null && $objectTypeFieldResolver->validateMutationOnObject($this, $fieldDataAccessor->getFieldName())) {
             // Validate on the object
-            $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
+            $fieldDataAccessorForMutation = null;
+            try {
+                $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
+            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $deferredValuePromiseException->getFeedbackItemResolution(),
+                        $deferredValuePromiseException->getAstNode(),
+                    )
+                );
+                return;
+            }
             $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
         }
     }
@@ -1490,7 +1501,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          */
         $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $field->getName());
         if ($mutationResolver !== null && $validateMutation) {
-            $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
+            $fieldDataAccessorForMutation = null;
+            try {
+                $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
+            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $deferredValuePromiseException->getFeedbackItemResolution(),
+                        $deferredValuePromiseException->getAstNode(),
+                    )
+                );
+                return;
+            }
             $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
         }
 
@@ -1693,6 +1715,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * The mutation resolver might expect to receive the data properties
      * directly (eg: "title", "content" and "status"), and these may be
      * contained under a subproperty (eg: "input") from the original fieldData.
+     *
+     * @throws AbstractDeferredValuePromiseException
      */
     public function getFieldDataAccessorForMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -1706,7 +1730,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $fieldDataAccessorForMutation = new InputObjectSubpropertyFieldDataAccessor(
                         $fieldDataAccessor->getField(),
                         $inputObjectSubpropertyName,
-                        $fieldDataAccessor->getUnresolvedFieldArgs(),
+                        $fieldDataAccessor->getFieldArgs(),
                     );
                 }
             }

@@ -17,10 +17,6 @@ interface FieldDataAccessorInterface
      */
     public function getFieldArgs(): array;
     /**
-     * @return array<string,mixed>
-     */
-    public function getUnresolvedFieldArgs(): array;
-    /**
      * @return string[]
      * @throws AbstractDeferredValuePromiseException
      */
