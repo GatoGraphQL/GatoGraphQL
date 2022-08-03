@@ -33,23 +33,24 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
      */
     protected function getKeyValuesSource(): array
     {
-        return (array) $this->getInputObjectValue();
+        return (array) $this->getInputObjectValue(parent::getKeyValuesSource());
     }
 
     /**
+     * @param array<string,mixed> $fieldArgs
      * @throws ShouldNotHappenException If the argument value under the provided inputName is not an InputObject
-     * @throws InvalidRuntimeVariableReferenceException
      */
-    protected function getInputObjectValue(): stdClass
+    private function getInputObjectValue(array $fieldArgs): stdClass
     {
-        $inputObjectValue = $this->getResolvedFieldArgs()[$this->getInputObjectSubpropertyName()];
+        $inputObjectSubpropertyName = $this->getInputObjectSubpropertyName();
+        $inputObjectValue = $fieldArgs[$inputObjectSubpropertyName];
         if (!($inputObjectValue instanceof stdClass)) {
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__(
                         'Input value under argument \'%s\' is not an InputObject type'
                     ),
-                    $this->getInputObjectSubpropertyName()
+                    $inputObjectSubpropertyName
                 )
             );
         }
