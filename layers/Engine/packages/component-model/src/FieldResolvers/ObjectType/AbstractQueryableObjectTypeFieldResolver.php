@@ -108,14 +108,16 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $filteringQueryArgs = [];
-        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        $fieldArgs = $fieldDataAccessor->getFieldArgs();
+        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             /** @var FilterDataComponentProcessorInterface */
             $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingComponent);
-            $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($filterDataloadingComponent, $filteringQueryArgs, $fieldDataAccessor->getFieldArgs());
+            $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($filterDataloadingComponent, $filteringQueryArgs, $fieldArgs);
         }
         // InputObjects can also provide filtering query values
-        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldDataAccessor->getFieldName());
-        foreach ($fieldDataAccessor->getFieldArgs() as $argName => $argValue) {
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        foreach ($fieldArgs as $argName => $argValue) {
             $fieldArgTypeResolver = $consolidatedFieldArgNameTypeResolvers[$argName];
             if (!($fieldArgTypeResolver instanceof QueryableInputObjectTypeResolverInterface)) {
                 continue;
