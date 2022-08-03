@@ -429,7 +429,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return null;
             }
 
-            $this->validateFieldData(
+            $this->validateVariableOnObjectResolutionFieldData(
                 $fieldArgs,
                 $field,
                 false, // Mutation validation will be performed always in validateFieldDataForObject
@@ -1427,7 +1427,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        $this->validateFieldData(
+        $this->validateVariableOnObjectResolutionFieldData(
             $fieldData,
             $field,
             !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
@@ -1490,7 +1490,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @param array<string,mixed> $fieldData
      */
-    protected function validateFieldData(
+    protected function validateVariableOnObjectResolutionFieldData(
         array $fieldData,
         FieldInterface $field,
         bool $validateMutation,
