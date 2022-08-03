@@ -50,7 +50,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface When accessing non-declared Dynamic Variables
+     * @throws DeferredValuePromiseExceptionInterface
      */
     protected function getKeyValuesSource(): array
     {
@@ -59,7 +59,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface When accessing non-declared Dynamic Variables
+     * @throws DeferredValuePromiseExceptionInterface
      */
     protected function getResolvedFieldArgs(): array
     {
@@ -73,7 +73,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      * Resolve all the DeferredValuePromiseInterface to their resolved values.
      *
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface When accessing non-declared Dynamic Variables
+     * @throws DeferredValuePromiseExceptionInterface
      */
     protected function resolveFieldArgs(array $fieldArgs): array
     {
@@ -129,7 +129,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface When accessing non-declared Dynamic Variables
+     * @throws DeferredValuePromiseExceptionInterface
      */
     public function getKeyValues(): array
     {

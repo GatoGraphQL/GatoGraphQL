@@ -17,7 +17,7 @@ interface FieldDataAccessorInterface
     public function getProperties(): array;
     /**
      * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface When accessing non-declared Dynamic Variables
+     * @throws DeferredValuePromiseExceptionInterface
      */
     public function getKeyValues(): array;
     public function hasValue(string $propertyName): bool;
