@@ -36,7 +36,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\QueryExceptionInterface;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -1181,10 +1181,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         $e->getMessage(),
                     ]
                 );
-                if ($e instanceof InvalidRequestException) {
-                    /** @var InvalidRequestException */
-                    $invalidRequestException = $e;
-                    $astNode = $invalidRequestException->getAstNode();
+                if ($e instanceof QueryExceptionInterface) {
+                    /** @var QueryExceptionInterface */
+                    $queryExceptionInterface = $e;
+                    $astNode = $queryExceptionInterface->getAstNode();
                 }
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
