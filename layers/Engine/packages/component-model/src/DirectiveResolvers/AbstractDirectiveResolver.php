@@ -36,7 +36,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
-use PoP\GraphQLParser\Exception\Parser\QueryExceptionInterface;
+use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -1173,6 +1173,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $messages,
                     $engineIterationFeedbackStore,
                 );
+            } catch (AbstractQueryException $queryException) {
+                $feedbackItemResolution = $queryException->getFeedbackItemResolution();
+                $astNode = $queryException->getAstNode();
             } catch (AbstractClientException $e) {
                 $feedbackItemResolution = new FeedbackItemResolution(
                     GenericFeedbackItemProvider::class,
@@ -1181,11 +1184,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         $e->getMessage(),
                     ]
                 );
-                if ($e instanceof QueryExceptionInterface) {
-                    /** @var QueryExceptionInterface */
-                    $queryExceptionInterface = $e;
-                    $astNode = $queryExceptionInterface->getAstNode();
-                }
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

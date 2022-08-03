@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
+use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
@@ -16,9 +17,9 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
     public function __construct(
         FieldInterface $field,
         protected string $inputObjectSubpropertyName,
-        array $fieldArgs,
+        array $unresolvedFieldArgs,
     ) {
-        parent::__construct($field, $fieldArgs);
+        parent::__construct($field, $unresolvedFieldArgs);
     }
 
     public function getInputObjectSubpropertyName(): string
@@ -28,25 +29,28 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
 
     /**
      * @return array<string,mixed>
+     * @throws AbstractDeferredValuePromiseException
      */
-    protected function getKeyValuesSource(): array
+    protected function getResolvedFieldArgs(): array
     {
-        return (array) $this->getInputObjectValue();
+        return (array) $this->getInputObjectValue(parent::getResolvedFieldArgs());
     }
 
     /**
+     * @param array<string,mixed> $fieldArgs
      * @throws ShouldNotHappenException If the argument value under the provided inputName is not an InputObject
      */
-    protected function getInputObjectValue(): stdClass
+    private function getInputObjectValue(array $fieldArgs): stdClass
     {
-        $inputObjectValue = $this->getResolvedFieldArgs()[$this->getInputObjectSubpropertyName()];
+        $inputObjectSubpropertyName = $this->getInputObjectSubpropertyName();
+        $inputObjectValue = $fieldArgs[$inputObjectSubpropertyName];
         if (!($inputObjectValue instanceof stdClass)) {
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__(
                         'Input value under argument \'%s\' is not an InputObject type'
                     ),
-                    $this->getInputObjectSubpropertyName()
+                    $inputObjectSubpropertyName
                 )
             );
         }

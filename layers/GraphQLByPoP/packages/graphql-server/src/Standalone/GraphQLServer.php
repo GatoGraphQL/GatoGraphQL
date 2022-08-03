@@ -13,8 +13,8 @@ use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
-use PoP\GraphQLParser\Exception\Parser\QueryExceptionInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Response\Schemes;
@@ -162,7 +162,7 @@ class GraphQLServer implements GraphQLServerInterface
 
             try {
                 $executableDocument->validateAndInitialize();
-            } catch (QueryExceptionInterface $queryException) {
+            } catch (AbstractQueryException $queryException) {
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(
                     new QueryFeedback(

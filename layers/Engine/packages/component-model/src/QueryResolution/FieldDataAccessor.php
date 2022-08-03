@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\ComponentModel\App;
-use PoP\GraphQLParser\Exception\Parser\InvalidRuntimeVariableReferenceException;
+use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
@@ -26,7 +26,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     public function __construct(
         protected FieldInterface $field,
         /** @var array<string,mixed> */
-        protected array $fieldArgs,
+        protected array $unresolvedFieldArgs,
     ) {
     }
 
@@ -41,30 +41,22 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * @return string[]
-     */
-    public function getProperties(): array
-    {
-        return array_keys($this->getKeyValuesSource());
-    }
-
-    /**
      * @return array<string,mixed>
-     * @throws InvalidRuntimeVariableReferenceException When accessing non-declared Dynamic Variables
+     * @throws AbstractDeferredValuePromiseException
      */
-    protected function getKeyValuesSource(): array
+    public function getFieldArgs(): array
     {
         return $this->getResolvedFieldArgs();
     }
 
     /**
      * @return array<string,mixed>
-     * @throws InvalidRuntimeVariableReferenceException When accessing non-declared Dynamic Variables
+     * @throws AbstractDeferredValuePromiseException
      */
     protected function getResolvedFieldArgs(): array
     {
         if ($this->resolvedFieldArgs === null) {
-            $this->resolvedFieldArgs = $this->resolveFieldArgs($this->fieldArgs);
+            $this->resolvedFieldArgs = $this->doGetResolvedFieldArgs($this->unresolvedFieldArgs);
         }
         return $this->resolvedFieldArgs;
     }
@@ -73,9 +65,9 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      * Resolve all the DeferredValuePromiseInterface to their resolved values.
      *
      * @return array<string,mixed>
-     * @throws InvalidRuntimeVariableReferenceException When accessing non-declared Dynamic Variables
+     * @throws AbstractDeferredValuePromiseException
      */
-    protected function resolveFieldArgs(array $fieldArgs): array
+    private function doGetResolvedFieldArgs(array $fieldArgs): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -103,7 +95,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
              *   ```
              */
             if (is_array($value)) {
-                $resolvedFieldArgs[$key] = $this->resolveFieldArgs($value);
+                $resolvedFieldArgs[$key] = $this->doGetResolvedFieldArgs($value);
                 continue;
             }
 
@@ -118,7 +110,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
              *   ```
              */
             if ($value instanceof stdClass) {
-                $resolvedFieldArgs[$key] = (object) $this->resolveFieldArgs((array) $value);
+                $resolvedFieldArgs[$key] = (object) $this->doGetResolvedFieldArgs((array) $value);
                 continue;
             }
 
@@ -128,21 +120,27 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * @return array<string,mixed>
-     * @throws InvalidRuntimeVariableReferenceException When accessing non-declared Dynamic Variables
+     * @return string[]
+     * @throws AbstractDeferredValuePromiseException
      */
-    public function getKeyValues(): array
+    public function getProperties(): array
     {
-        return $this->getKeyValuesSource();
+        return array_keys($this->getResolvedFieldArgs());
     }
 
+    /**
+     * @throws AbstractDeferredValuePromiseException
+     */
     public function hasValue(string $propertyName): bool
     {
-        return array_key_exists($propertyName, $this->getKeyValuesSource());
+        return array_key_exists($propertyName, $this->getResolvedFieldArgs());
     }
 
+    /**
+     * @throws AbstractDeferredValuePromiseException
+     */
     public function getValue(string $propertyName): mixed
     {
-        return $this->getKeyValuesSource()[$propertyName] ?? null;
+        return $this->getResolvedFieldArgs()[$propertyName] ?? null;
     }
 }

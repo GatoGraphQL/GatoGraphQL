@@ -123,7 +123,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         if (!$this->aliasedFieldDataAccessorCache->contains($fieldDataAccessor)) {
             $this->aliasedFieldDataAccessorCache[$fieldDataAccessor] = $objectTypeResolver->createFieldDataAccessor(
                 $this->getAliasedField($fieldDataAccessor->getField()),
-                $fieldDataAccessor->getKeyValues()
+                $fieldDataAccessor->getFieldArgs()
             );
         }
         return $this->aliasedFieldDataAccessorCache[$fieldDataAccessor];

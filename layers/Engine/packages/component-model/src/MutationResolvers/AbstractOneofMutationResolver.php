@@ -11,6 +11,7 @@ use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\InputObjectSubpropertyFieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\InputObjectSubpropertyFieldDataAccessorInterface;
+use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -113,6 +114,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * to avoid throwing an Exception
      *
      * @throws QueryResolutionException If more than 1 argument is passed to the field executing the OneofMutation
+     * @throws AbstractDeferredValuePromiseException
      */
     protected function getOneofInputObjectPropertyName(FieldDataAccessorInterface $fieldDataAccessor): string
     {
@@ -146,6 +148,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
 
     /**
      * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
+     * @throws AbstractDeferredValuePromiseException
      */
     final public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -175,6 +178,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     /**
      * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @return FeedbackItemResolution[]
+     * @throws AbstractDeferredValuePromiseException
      */
     final public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
     {
@@ -191,6 +195,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     /**
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
+     * @throws AbstractDeferredValuePromiseException
      */
     final protected function getInputFieldMutationResolverAndOneOfFieldDataAccessor(InputObjectSubpropertyFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor): array
     {
@@ -210,6 +215,9 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         return [$inputFieldMutationResolver, $oneOfFieldDataAccessor];
     }
 
+    /**
+     * @throws AbstractDeferredValuePromiseException
+     */
     final protected function getOneOfFieldDataAccessor(
         InputObjectSubpropertyFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor,
         string $oneOfPropertyName,
@@ -217,7 +225,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         return new InputObjectSubpropertyFieldDataAccessor(
             $inputObjectFieldArgumentFieldDataAccessor->getField(),
             $oneOfPropertyName,
-            $inputObjectFieldArgumentFieldDataAccessor->getKeyValues()
+            $inputObjectFieldArgumentFieldDataAccessor->getFieldArgs()
         );
     }
 }
