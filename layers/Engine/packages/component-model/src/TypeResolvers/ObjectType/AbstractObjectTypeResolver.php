@@ -414,8 +414,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
 
+        $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
-        if ($validateSchemaOnObject) {
+        if ($hasAnyArgumentReferencingValuePromise || $validateSchemaOnObject) {
             $fieldArgs = null;
             try {
                 $fieldArgs = $fieldDataAccessor->getFieldArgs();
