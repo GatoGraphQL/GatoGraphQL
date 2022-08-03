@@ -785,6 +785,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $valueResolutionPromiseException->getAstNode(),
                 )
             );
+            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor] = null;
+            }
             return null;
         }
 
@@ -799,6 +802,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor] = null;
+            }
             return null;
         }
 
@@ -809,6 +815,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor] = null;
+            }
             return null;
         }
 
