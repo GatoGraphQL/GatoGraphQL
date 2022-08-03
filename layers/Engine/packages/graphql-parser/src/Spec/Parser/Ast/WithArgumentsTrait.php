@@ -82,21 +82,21 @@ trait WithArgumentsTrait
     public function hasArgumentReferencingPromise(): bool
     {
         if ($this->hasArgumentReferencingPromise === null) {
-            $this->hasArgumentReferencingPromise = $this->hasArgumentReferencingValuePromise($this->getArgumentKeyValues());
+            $this->hasArgumentReferencingPromise = $this->doHasArgumentReferencingPromise($this->getArgumentKeyValues());
         }
         return $this->hasArgumentReferencingPromise;
     }
 
-    protected function hasArgumentReferencingValuePromise(array $values): mixed
+    protected function doHasArgumentReferencingPromise(array $values): mixed
     {
         foreach ($values as $value) {
             if ($value instanceof DeferredValuePromiseInterface) {
                 return true;
             }
-            if (is_array($value) && $this->hasArgumentReferencingValuePromise($value)) {
+            if (is_array($value) && $this->doHasArgumentReferencingPromise($value)) {
                 return true;
             }
-            if ($value instanceof stdClass && $this->hasArgumentReferencingValuePromise((array)$value)) {
+            if ($value instanceof stdClass && $this->doHasArgumentReferencingPromise((array)$value)) {
                 return true;
             }
         }
