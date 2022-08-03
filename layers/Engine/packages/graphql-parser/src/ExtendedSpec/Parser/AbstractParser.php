@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
@@ -76,6 +77,18 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $this->parsedFieldBlockStack = [];
         $this->parsingDirectiveArgumentList = false;
         $this->parsedDefinedDynamicVariableNames = [];
+    }
+
+    /**
+     * Override to express the additional type of Exception
+     * that can be thrown.
+     *
+     * @throws InvalidRequestException
+     * @throws SyntaxErrorException
+     */
+    public function parse(string $source): Document
+    {
+        return parent::parse($source);
     }
 
     protected function parseOperation(string $type): OperationInterface
