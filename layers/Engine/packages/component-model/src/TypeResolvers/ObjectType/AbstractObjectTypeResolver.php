@@ -432,11 +432,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldData = null;
             try {
                 $fieldData = $fieldDataAccessor->getFieldArgs();
-            } catch (AbstractValueResolutionPromiseException $deferredValuePromiseException) {
+            } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $deferredValuePromiseException->getFeedbackItemResolution(),
-                        $deferredValuePromiseException->getAstNode(),
+                        $valueResolutionPromiseException->getFeedbackItemResolution(),
+                        $valueResolutionPromiseException->getAstNode(),
                     )
                 );
                 return null;
@@ -794,11 +794,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldArgs = null;
         try {
             $fieldArgs = $fieldDataAccessor->getFieldArgs();
-        } catch (AbstractValueResolutionPromiseException $deferredValuePromiseException) {
+        } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $deferredValuePromiseException->getFeedbackItemResolution(),
-                    $deferredValuePromiseException->getAstNode(),
+                    $valueResolutionPromiseException->getFeedbackItemResolution(),
+                    $valueResolutionPromiseException->getAstNode(),
                 )
             );
             return;
@@ -852,11 +852,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $fieldArgs
                     )
                 );
-            } catch (AbstractValueResolutionPromiseException $deferredValuePromiseException) {
+            } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $deferredValuePromiseException->getFeedbackItemResolution(),
-                        $deferredValuePromiseException->getAstNode(),
+                        $valueResolutionPromiseException->getFeedbackItemResolution(),
+                        $valueResolutionPromiseException->getAstNode(),
                     )
                 );
                 return;
@@ -1609,11 +1609,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldDataAccessorForMutation = null;
             try {
                 $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
-            } catch (AbstractValueResolutionPromiseException $deferredValuePromiseException) {
+            } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $deferredValuePromiseException->getFeedbackItemResolution(),
-                        $deferredValuePromiseException->getAstNode(),
+                        $valueResolutionPromiseException->getFeedbackItemResolution(),
+                        $valueResolutionPromiseException->getAstNode(),
                     )
                 );
                 return;
