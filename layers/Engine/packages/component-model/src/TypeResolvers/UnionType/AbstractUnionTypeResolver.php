@@ -460,9 +460,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             return null;
         }
 
-        // Delegate to that typeResolver to obtain the value
-        // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each resolvedObject, indicate that it must be done in resolveValue
-        $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
         return $targetObjectTypeResolver->resolveValue(
             $object,
             $fieldOrFieldDataAccessor,
