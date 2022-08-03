@@ -18,6 +18,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Module;
@@ -38,6 +39,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -415,8 +417,21 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
+            $fieldArgs = null;
+            try {
+                $fieldArgs = $fieldDataAccessor->getFieldArgs();
+            } catch (DeferredValuePromiseExceptionInterface $deferredValuePromiseException) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $deferredValuePromiseException->getFeedbackItemResolution(),
+                        $deferredValuePromiseException->getAstNode(),
+                    )
+                );
+                return null;
+            }
+
             $this->validateFieldData(
-                $fieldDataAccessor->getFieldArgs(),
+                $fieldArgs,
                 $field,
                 false, // Mutation validation will be performed always in validateFieldDataForObject
                 $objectTypeFieldResolutionFeedbackStore,
@@ -742,6 +757,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         object $object,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $fieldArgs = null;
+        try {
+            $fieldArgs = $fieldDataAccessor->getFieldArgs();
+        } catch (DeferredValuePromiseExceptionInterface $deferredValuePromiseException) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $deferredValuePromiseException->getFeedbackItemResolution(),
+                    $deferredValuePromiseException->getAstNode(),
+                )
+            );
+            return;
+        }
+
         /**
          * Perform validation through checkpoints
          */
@@ -750,7 +778,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $this,
                 $object,
                 $fieldDataAccessor->getFieldName(),
-                $fieldDataAccessor->getFieldArgs(),
+                $fieldArgs,
             )
         ) {
             $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
@@ -1678,7 +1706,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $fieldDataAccessorForMutation = new InputObjectSubpropertyFieldDataAccessor(
                         $fieldDataAccessor->getField(),
                         $inputObjectSubpropertyName,
-                        $fieldDataAccessor->getFieldArgs(),
+                        $fieldDataAccessor->getUnresolvedFieldArgs(),
                     );
                 }
             }
