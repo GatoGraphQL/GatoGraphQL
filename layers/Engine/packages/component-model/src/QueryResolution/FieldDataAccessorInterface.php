@@ -12,10 +12,6 @@ interface FieldDataAccessorInterface
     public function getField(): FieldInterface;
     public function getFieldName(): string;
     /**
-     * @return string[]
-     */
-    public function getProperties(): array;
-    /**
      * @return array<string,mixed>
      * @throws DeferredValuePromiseExceptionInterface
      */
@@ -24,6 +20,11 @@ interface FieldDataAccessorInterface
      * @return array<string,mixed>
      */
     public function getUnresolvedFieldArgs(): array;
+    /**
+     * @return string[]
+     * @throws DeferredValuePromiseExceptionInterface
+     */
+    public function getProperties(): array;
     /**
      * @throws DeferredValuePromiseExceptionInterface
      */

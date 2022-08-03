@@ -128,6 +128,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return string[]
+     * @throws DeferredValuePromiseExceptionInterface
      */
     public function getProperties(): array
     {
