@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
-use PoP\GraphQLParser\Exception\Parser\InvalidRuntimeVariableReferenceException;
+use PoP\GraphQLParser\Exception\Parser\DeferredValuePromiseExceptionInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
@@ -29,7 +29,7 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
 
     /**
      * @return array<string,mixed>
-     * @throws InvalidRuntimeVariableReferenceException
+     * @throws DeferredValuePromiseExceptionInterface
      */
     protected function getKeyValuesSource(): array
     {

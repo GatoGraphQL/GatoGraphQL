@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
-use PoP\GraphQLParser\Exception\Parser\InvalidRuntimeVariableReferenceException;
+use PoP\GraphQLParser\Exception\Parser\DeferredValuePromiseExceptionInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface FieldDataAccessorInterface
@@ -17,7 +17,7 @@ interface FieldDataAccessorInterface
     public function getProperties(): array;
     /**
      * @return array<string,mixed>
-     * @throws InvalidRuntimeVariableReferenceException When accessing non-declared Dynamic Variables
+     * @throws DeferredValuePromiseExceptionInterface When accessing non-declared Dynamic Variables
      */
     public function getKeyValues(): array;
     public function hasValue(string $propertyName): bool;
