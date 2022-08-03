@@ -1,0 +1,59 @@
+{
+  "errors": [
+    {
+      "message": "Argument 'authorEmail' does not expect an array, but array '[\"leo@saronga.com\"]' was provided",
+      "locations": [
+        {
+          "line": 3,
+          "column": 23
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}",
+          "(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]})",
+          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "Post",
+        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
+        "code": "PoP\\ComponentModel\\e8"
+      }
+    },
+    {
+      "message": "Argument 'authorEmail' does not expect an array, but array '[\"leo@saronga.com\"]' was provided",
+      "locations": [
+        {
+          "line": 3,
+          "column": 23
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}",
+          "(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]})",
+          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "Page",
+        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
+        "code": "PoP\\ComponentModel\\e8"
+      }
+    }
+  ],
+  "data": {
+    "customPosts": [
+      {
+        "addComment": null
+      },
+      {
+        "addComment": null
+      },
+      {
+        "addComment": null
+      }
+    ]
+  }
+}
