@@ -1416,11 +1416,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Perform validations
          */
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->validateInvariableOnObjectResolutionFieldData(
             $fieldData,
             $field,
             $objectTypeFieldResolutionFeedbackStore,
         );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
         $this->validateFieldData(
             $fieldData,
             $field,
