@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Exception\Parser;
 
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\RuntimeVariableReferenceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
@@ -12,21 +12,21 @@ final class InvalidDynamicContextException extends AbstractParserException imple
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
-        private readonly DynamicVariableReference $dynamicVariableReference,
+        private readonly RuntimeVariableReferenceInterface $runtimeVariableReference,
     ) {
         parent::__construct(
             $feedbackItemResolution,
-            $dynamicVariableReference->getLocation(),
+            $runtimeVariableReference->getLocation(),
         );
     }
 
     public function getAstNode(): AstInterface
     {
-        return $this->dynamicVariableReference;
+        return $this->runtimeVariableReference;
     }
 
-    public function getDynamicVariableReference(): DynamicVariableReference
+    public function getRuntimeVariableReference(): RuntimeVariableReferenceInterface
     {
-        return $this->dynamicVariableReference;
+        return $this->runtimeVariableReference;
     }
 }
