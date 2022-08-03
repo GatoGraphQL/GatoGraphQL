@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Exception;
 
-interface DeferredValuePromiseExceptionInterface
+interface DeferredValuePromiseExceptionInterface extends QueryExceptionInterface
 {
 }

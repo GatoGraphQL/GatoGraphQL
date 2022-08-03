@@ -9,7 +9,7 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\RuntimeVariableRefer
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-final class InvalidRuntimeVariableReferenceException extends AbstractLocationableException implements QueryExceptionInterface, DeferredValuePromiseExceptionInterface
+final class InvalidRuntimeVariableReferenceException extends AbstractLocationableException implements DeferredValuePromiseExceptionInterface
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
