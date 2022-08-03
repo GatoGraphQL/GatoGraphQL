@@ -92,12 +92,13 @@ class Parser extends Tokenizer implements ParserInterface
         );
     }
 
-    private function init(string $source): void
+    protected function init(string $source): void
     {
         $this->initTokenizer($source);
 
         $this->operations = [];
         $this->fragments = [];
+        $this->variables = [];
     }
 
     protected function parseOperation(string $type): OperationInterface
