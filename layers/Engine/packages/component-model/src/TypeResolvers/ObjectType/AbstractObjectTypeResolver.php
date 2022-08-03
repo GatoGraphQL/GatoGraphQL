@@ -420,11 +420,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * 1. Resolved Field Value Reference: it is resolved at the object level
          * 2. Dynamic Variable Reference: it is resolved at the Engine iteration level
          *
-         * Then #2 could be optimized, executing the casting/validation below
-         * only once for all fields/objects in the current Engine iteration,
-         * instead of once per object.
-         *
-         * But for simplicity, it's done here.
+         * Then #2 is optimized, executing the casting/validation below
+         * only once for all fields/objects in the current Engine iteration
+         * (instead of once per object). Because the fieldArgs for all objects
+         * will be the same, the result is cached after the 1st object, and
+         * re-used thereafter.
          */
         $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
