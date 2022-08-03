@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Exception;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\RuntimeVariableReferenceInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-final class InvalidRuntimeVariableReferenceException extends AbstractDeferredValuePromiseException
+final class RuntimeVariableReferenceException extends AbstractDeferredValuePromiseException
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
