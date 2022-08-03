@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
+use PoP\GraphQLParser\Exception\Parser\InvalidRuntimeVariableReferenceException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
@@ -28,6 +29,7 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
 
     /**
      * @return array<string,mixed>
+     * @throws InvalidRuntimeVariableReferenceException
      */
     protected function getKeyValuesSource(): array
     {
@@ -36,6 +38,7 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
 
     /**
      * @throws ShouldNotHappenException If the argument value under the provided inputName is not an InputObject
+     * @throws InvalidRuntimeVariableReferenceException
      */
     protected function getInputObjectValue(): stdClass
     {
