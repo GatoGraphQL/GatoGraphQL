@@ -94,6 +94,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface>
      */
     protected SplObjectStorage $fieldDataAccessorForMutationCache;
+    /**
+     * @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface>
+     */
+    protected SplObjectStorage $fieldDataAccessorForObjectCorrespondingToEngineIterationCache;
 
     /**
      * @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>
@@ -161,6 +165,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $this->fieldDataCache = new SplObjectStorage();
         $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
         $this->fieldDataAccessorForMutationCache = new SplObjectStorage();
+        $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache = new SplObjectStorage();
         parent::__construct();
     }
 
@@ -764,6 +769,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return $fieldDataAccessor;
         }
 
+        $hasArgumentReferencingResolvedOnEngineIterationPromise = $field->hasArgumentReferencingResolvedOnEngineIterationPromise();
+        if ($hasArgumentReferencingResolvedOnEngineIterationPromise && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($fieldDataAccessor)) {
+            return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor];
+        }
+
         $fieldData = null;
         try {
             $fieldData = $fieldDataAccessor->getFieldArgs();
@@ -804,10 +814,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Re-recreate the data, containing the casted arguments
          */
-        return $this->createFieldDataAccessor(
+        $fieldDataAccessorForObject = $this->createFieldDataAccessor(
             $field,
             $fieldData,
         );
+
+        if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor] = $fieldDataAccessorForObject;
+        }
+
+        return $fieldDataAccessorForObject;
     }
 
     /**
