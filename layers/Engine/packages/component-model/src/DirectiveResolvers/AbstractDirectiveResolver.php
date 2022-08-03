@@ -1173,6 +1173,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $messages,
                     $engineIterationFeedbackStore,
                 );
+            } catch (QueryExceptionInterface $queryException) {
+                $feedbackItemResolution = $queryException->getFeedbackItemResolution();
+                $astNode = $queryException->getAstNode();
             } catch (AbstractClientException $e) {
                 $feedbackItemResolution = new FeedbackItemResolution(
                     GenericFeedbackItemProvider::class,
@@ -1181,11 +1184,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         $e->getMessage(),
                     ]
                 );
-                if ($e instanceof QueryExceptionInterface) {
-                    /** @var QueryExceptionInterface */
-                    $queryExceptionInterface = $e;
-                    $astNode = $queryExceptionInterface->getAstNode();
-                }
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
