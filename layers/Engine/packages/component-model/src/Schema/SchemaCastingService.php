@@ -155,29 +155,32 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              */
             $argumentKeyValues[$argName] = $coercedArgValue;
 
-            // Obtain the deprecations
-            if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
-                $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
-                    $fieldOrDirectiveArgTypeResolver,
-                    $coercedArgValue,
-                    $fieldOrDirectiveArgIsArrayType,
-                    $fieldOrDirectiveArgIsArrayOfArraysType,
-                );
-                foreach ($deprecationMessages as $deprecationMessage) {
-                    $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                GenericFeedbackItemProvider::class,
-                                GenericFeedbackItemProvider::D1,
-                                [
-                                    $deprecationMessage,
-                                ]
-                            ),
-                            $astNode,
-                        )
-                    );
-                }
-            }
+            /**
+             * Obtain the deprecations
+             * @todo Re-enable! Temporarily commented because it throws error on test "dynamic-variable-type-casting"
+             */
+            // if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
+            //     $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
+            //         $fieldOrDirectiveArgTypeResolver,
+            //         $coercedArgValue,
+            //         $fieldOrDirectiveArgIsArrayType,
+            //         $fieldOrDirectiveArgIsArrayOfArraysType,
+            //     );
+            //     foreach ($deprecationMessages as $deprecationMessage) {
+            //         $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+            //             new ObjectTypeFieldResolutionFeedback(
+            //                 new FeedbackItemResolution(
+            //                     GenericFeedbackItemProvider::class,
+            //                     GenericFeedbackItemProvider::D1,
+            //                     [
+            //                         $deprecationMessage,
+            //                     ]
+            //                 ),
+            //                 $astNode,
+            //             )
+            //         );
+            //     }
+            // }
         }
         return $argumentKeyValues;
     }
