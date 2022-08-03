@@ -45,16 +45,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      */
     public function getProperties(): array
     {
-        return array_keys($this->getKeyValuesSource());
-    }
-
-    /**
-     * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface
-     */
-    protected function getKeyValuesSource(): array
-    {
-        return $this->getResolvedFieldArgs();
+        return array_keys($this->getResolvedFieldArgs());
     }
 
     /**
@@ -133,12 +124,12 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      */
     public function getKeyValues(): array
     {
-        return $this->getKeyValuesSource();
+        return $this->getResolvedFieldArgs();
     }
 
     public function hasValue(string $propertyName): bool
     {
-        return array_key_exists($propertyName, $this->getKeyValuesSource());
+        return array_key_exists($propertyName, $this->getResolvedFieldArgs());
     }
 
     /**
@@ -146,6 +137,6 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      */
     public function getValue(string $propertyName): mixed
     {
-        return $this->getKeyValuesSource()[$propertyName] ?? null;
+        return $this->getResolvedFieldArgs()[$propertyName] ?? null;
     }
 }

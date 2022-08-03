@@ -31,9 +31,9 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
      * @return array<string,mixed>
      * @throws DeferredValuePromiseExceptionInterface
      */
-    protected function getKeyValuesSource(): array
+    protected function getResolvedFieldArgs(): array
     {
-        return (array) $this->getInputObjectValue(parent::getKeyValuesSource());
+        return (array) $this->getInputObjectValue(parent::getResolvedFieldArgs());
     }
 
     /**
