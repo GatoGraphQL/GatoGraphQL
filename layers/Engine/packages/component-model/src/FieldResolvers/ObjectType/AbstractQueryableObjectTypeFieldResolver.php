@@ -13,6 +13,7 @@ use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\QueryableInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
 
 abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {
@@ -104,6 +105,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      *       under the expected input name
      *
      * @return array<string, mixed>
+     * @throws DeferredValuePromiseExceptionInterface
      */
     protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, FieldDataAccessorInterface $fieldDataAccessor): array
     {
