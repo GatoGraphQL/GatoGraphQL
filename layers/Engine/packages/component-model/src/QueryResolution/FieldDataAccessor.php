@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\ComponentModel\App;
-use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
-use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
+use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ValueResolutionPromiseInterface;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -15,7 +15,7 @@ use stdClass;
 class FieldDataAccessor implements FieldDataAccessorInterface
 {
     /**
-     * A ObjectResolvedFieldValueReference will return a DeferredValuePromiseInterface,
+     * A ObjectResolvedFieldValueReference will return a ValueResolutionPromiseInterface,
      * which must be resolved to the actual value after its corresponding
      * Field was resolved.
      *
@@ -42,7 +42,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     public function getFieldArgs(): array
     {
@@ -51,7 +51,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return array<string,mixed>
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     protected function getResolvedFieldArgs(): array
     {
@@ -62,10 +62,10 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * Resolve all the DeferredValuePromiseInterface to their resolved values.
+     * Resolve all the ValueResolutionPromiseInterface to their resolved values.
      *
      * @return array<string,mixed>
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     private function doGetResolvedFieldArgs(array $fieldArgs): array
     {
@@ -77,10 +77,10 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
         $resolvedFieldArgs = [];
         foreach ($fieldArgs as $key => $value) {
-            if ($value instanceof DeferredValuePromiseInterface) {
-                /** @var DeferredValuePromiseInterface */
-                $deferredValuePromise = $value;
-                $resolvedFieldArgs[$key] = $deferredValuePromise->resolveValue();
+            if ($value instanceof ValueResolutionPromiseInterface) {
+                /** @var ValueResolutionPromiseInterface */
+                $valueResolutionPromise = $value;
+                $resolvedFieldArgs[$key] = $valueResolutionPromise->resolveValue();
                 continue;
             }
 
@@ -121,7 +121,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     /**
      * @return string[]
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     public function getProperties(): array
     {
@@ -129,7 +129,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     public function hasValue(string $propertyName): bool
     {
@@ -137,7 +137,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     public function getValue(string $propertyName): mixed
     {

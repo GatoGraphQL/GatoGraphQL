@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\ExtendedSpec\Execution\DeferredValuePromiseInterface;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ResolvableOnEngineIterationValueResolutionPromiseInterface;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ResolvableOnObjectValueResolutionPromiseInterface;
 use stdClass;
 
 trait WithArgumentsTrait
@@ -17,7 +18,9 @@ trait WithArgumentsTrait
 
     /** @var array<string,mixed>|null */
     protected ?array $argumentKeyValues = null;
-    protected ?bool $hasAnyArgumentReferencingValuePromise = null;
+    protected ?bool $hasArgumentReferencingPromise = null;
+    protected ?bool $hasArgumentReferencingResolvedOnEngineIterationPromise = null;
+    protected ?bool $hasArgumentReferencingResolvedOnObjectPromise = null;
 
     public function hasArguments(): bool
     {
@@ -79,24 +82,57 @@ trait WithArgumentsTrait
         return $this->argumentKeyValues;
     }
 
-    public function hasAnyArgumentReferencingValuePromise(): bool
+    public function hasArgumentReferencingPromise(): bool
     {
-        if ($this->hasAnyArgumentReferencingValuePromise === null) {
-            $this->hasAnyArgumentReferencingValuePromise = $this->hasArgumentReferencingValuePromise($this->getArgumentKeyValues());
+        if ($this->hasArgumentReferencingPromise === null) {
+            $this->hasArgumentReferencingPromise = $this->hasArgumentReferencingResolvedOnEngineIterationPromise()
+                || $this->hasArgumentReferencingResolvedOnObjectPromise();
         }
-        return $this->hasAnyArgumentReferencingValuePromise;
+        return $this->hasArgumentReferencingPromise;
     }
 
-    protected function hasArgumentReferencingValuePromise(array $values): mixed
+    public function hasArgumentReferencingResolvedOnEngineIterationPromise(): bool
+    {
+        if ($this->hasArgumentReferencingResolvedOnEngineIterationPromise === null) {
+            $this->hasArgumentReferencingResolvedOnEngineIterationPromise = $this->doHasArgumentReferencingResolvedOnEngineIterationPromise($this->getArgumentKeyValues());
+        }
+        return $this->hasArgumentReferencingResolvedOnEngineIterationPromise;
+    }
+
+    protected function doHasArgumentReferencingResolvedOnEngineIterationPromise(array $values): mixed
     {
         foreach ($values as $value) {
-            if ($value instanceof DeferredValuePromiseInterface) {
+            if ($value instanceof ResolvableOnEngineIterationValueResolutionPromiseInterface) {
                 return true;
             }
-            if (is_array($value) && $this->hasArgumentReferencingValuePromise($value)) {
+            if (is_array($value) && $this->doHasArgumentReferencingResolvedOnEngineIterationPromise($value)) {
                 return true;
             }
-            if ($value instanceof stdClass && $this->hasArgumentReferencingValuePromise((array)$value)) {
+            if ($value instanceof stdClass && $this->doHasArgumentReferencingResolvedOnEngineIterationPromise((array)$value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasArgumentReferencingResolvedOnObjectPromise(): bool
+    {
+        if ($this->hasArgumentReferencingResolvedOnObjectPromise === null) {
+            $this->hasArgumentReferencingResolvedOnObjectPromise = $this->doHasArgumentReferencingResolvedOnObjectPromise($this->getArgumentKeyValues());
+        }
+        return $this->hasArgumentReferencingResolvedOnObjectPromise;
+    }
+
+    protected function doHasArgumentReferencingResolvedOnObjectPromise(array $values): mixed
+    {
+        foreach ($values as $value) {
+            if ($value instanceof ResolvableOnObjectValueResolutionPromiseInterface) {
+                return true;
+            }
+            if (is_array($value) && $this->doHasArgumentReferencingResolvedOnObjectPromise($value)) {
+                return true;
+            }
+            if ($value instanceof stdClass && $this->doHasArgumentReferencingResolvedOnObjectPromise((array)$value)) {
                 return true;
             }
         }

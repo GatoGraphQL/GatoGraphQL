@@ -38,7 +38,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
-use PoP\GraphQLParser\Exception\AbstractDeferredValuePromiseException;
+use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -94,6 +94,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface>
      */
     protected SplObjectStorage $fieldDataAccessorForMutationCache;
+    /**
+     * @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface>
+     */
+    protected SplObjectStorage $fieldDataAccessorForObjectCorrespondingToEngineIterationCache;
 
     /**
      * @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>
@@ -161,6 +165,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $this->fieldDataCache = new SplObjectStorage();
         $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
         $this->fieldDataAccessorForMutationCache = new SplObjectStorage();
+        $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache = new SplObjectStorage();
         parent::__construct();
     }
 
@@ -415,64 +420,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         /**
-         * Among Promises, we have:
-         *
-         * 1. Resolved Field Value Reference: it is resolved at the object level
-         * 2. Dynamic Variable Reference: it is resolved at the Engine iteration level
-         *
-         * Then #2 could be optimized, executing the casting/validation below
-         * only once for all fields/objects in the current Engine iteration,
-         * instead of once per object.
-         *
-         * But for simplicity, it's done here.
+         * Resolve promises, or customize the fieldArgs for the object
          */
-        $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
-        if ($hasAnyArgumentReferencingValuePromise || $validateSchemaOnObject) {
-            $fieldData = null;
-            try {
-                $fieldData = $fieldDataAccessor->getFieldArgs();
-            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $deferredValuePromiseException->getFeedbackItemResolution(),
-                        $deferredValuePromiseException->getAstNode(),
-                    )
-                );
-                return null;
-            }
-
-            /**
-             * Cast the Arguments, return if any of them produced an error
-             */
-            $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
-            $fieldData = $this->getSchemaCastingService()->castArguments(
-                $fieldData,
-                $fieldArgsSchemaDefinition,
-                $field,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                return null;
-            }
-
-            $this->validateVariableOnObjectResolutionFieldData(
-                $fieldData,
-                $field,
-                false, // Mutation validation will be performed always in validateFieldDataForObject
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                return null;
-            }
-
-            /**
-             * Re-recreate the data, containing the casted arguments
-             */
-            $fieldDataAccessor = $this->createFieldDataAccessor(
-                $field,
-                $fieldData,
-            );
+        $fieldDataAccessor = $this->maybeGetFieldDataAccessorForObject(
+            $fieldDataAccessor,
+            $validateSchemaOnObject,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($fieldDataAccessor === null) {
+            return null;
         }
 
         /**
@@ -783,6 +740,103 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
+     * Either if the fieldArgs references a Promise (eg: a value from `@export`),
+     * or if the fieldArgs are customized to the object (eg: a nested mutation),
+     * then produce the corresponding customized fieldDataAccessor.
+     *
+     * ------------------------------------------------------------------------
+     *
+     * Among Promises, we have:
+     *
+     * 1. Resolved Field Value Reference:
+     *    It must be resolved at the Object level, so its resoluton here
+     *    is suitable.
+     *
+     * 2. Dynamic Variable Reference:
+     *    It can be resolved at the Engine iteration level, but it's easier
+     *    to resolve it here. To optimize it (and avoid executing the same
+     *    validation/casting for different objects, when the results are
+     *    always the same), the result is cached after the 1st object,
+     *    and re-used thereafter.
+     */
+    protected function maybeGetFieldDataAccessorForObject(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        bool $validateSchemaOnObject,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?FieldDataAccessorInterface {
+        $field = $fieldDataAccessor->getField();
+        $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
+        if (!($hasArgumentReferencingPromise || $validateSchemaOnObject)) {
+            return $fieldDataAccessor;
+        }
+
+        $hasArgumentReferencingResolvedOnEngineIterationPromise = $field->hasArgumentReferencingResolvedOnEngineIterationPromise();
+        if ($hasArgumentReferencingResolvedOnEngineIterationPromise && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($field)) {
+            return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field];
+        }
+
+        $fieldData = null;
+        try {
+            $fieldData = $fieldDataAccessor->getFieldArgs();
+        } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $valueResolutionPromiseException->getFeedbackItemResolution(),
+                    $valueResolutionPromiseException->getAstNode(),
+                )
+            );
+            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
+            }
+            return null;
+        }
+
+        /**
+         * Cast the Arguments, return if any of them produced an error
+         */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        $fieldData = $this->getSchemaCastingService()->castArguments(
+            $fieldData,
+            $fieldArgsSchemaDefinition,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
+            }
+            return null;
+        }
+
+        $this->validateVariableOnObjectResolutionFieldData(
+            $fieldData,
+            $field,
+            false, // Mutation validation will be performed always in validateFieldDataForObject
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
+            }
+            return null;
+        }
+
+        /**
+         * Re-recreate the data, containing the casted arguments
+         */
+        $fieldDataAccessorForObject = $this->createFieldDataAccessor(
+            $field,
+            $fieldData,
+        );
+
+        if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = $fieldDataAccessorForObject;
+        }
+
+        return $fieldDataAccessorForObject;
+    }
+
+    /**
      * Validate the field data for the object
      */
     protected function validateFieldDataForObject(
@@ -794,11 +848,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldArgs = null;
         try {
             $fieldArgs = $fieldDataAccessor->getFieldArgs();
-        } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+        } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $deferredValuePromiseException->getFeedbackItemResolution(),
-                    $deferredValuePromiseException->getAstNode(),
+                    $valueResolutionPromiseException->getFeedbackItemResolution(),
+                    $valueResolutionPromiseException->getAstNode(),
                 )
             );
             return;
@@ -852,11 +906,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $fieldArgs
                     )
                 );
-            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+            } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $deferredValuePromiseException->getFeedbackItemResolution(),
-                        $deferredValuePromiseException->getAstNode(),
+                        $valueResolutionPromiseException->getFeedbackItemResolution(),
+                        $valueResolutionPromiseException->getAstNode(),
                     )
                 );
                 return;
@@ -1404,7 +1458,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $fieldData = $field->getArgumentKeyValues();
-        $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
+        $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
 
         /**
          * Check that the field has been defined in the schema
@@ -1480,7 +1534,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * It will be done later, after promises are resolved
          * to an actual value when resolving the object.
          */
-        if (!$hasAnyArgumentReferencingValuePromise) {
+        if (!$hasArgumentReferencingPromise) {
             $this->validateVariableOnObjectResolutionFieldData(
                 $fieldData,
                 $field,
@@ -1609,11 +1663,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldDataAccessorForMutation = null;
             try {
                 $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation($fieldDataAccessor);
-            } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
+            } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $deferredValuePromiseException->getFeedbackItemResolution(),
-                        $deferredValuePromiseException->getAstNode(),
+                        $valueResolutionPromiseException->getFeedbackItemResolution(),
+                        $valueResolutionPromiseException->getAstNode(),
                     )
                 );
                 return;
@@ -1821,7 +1875,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * directly (eg: "title", "content" and "status"), and these may be
      * contained under a subproperty (eg: "input") from the original fieldData.
      *
-     * @throws AbstractDeferredValuePromiseException
+     * @throws AbstractValueResolutionPromiseException
      */
     public function getFieldDataAccessorForMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
