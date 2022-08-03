@@ -95,7 +95,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected SplObjectStorage $fieldDataAccessorForMutationCache;
     /**
-     * @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface>
+     * @var SplObjectStorage<FieldInterface,?FieldDataAccessorInterface>
      */
     protected SplObjectStorage $fieldDataAccessorForObjectCorrespondingToEngineIterationCache;
 
