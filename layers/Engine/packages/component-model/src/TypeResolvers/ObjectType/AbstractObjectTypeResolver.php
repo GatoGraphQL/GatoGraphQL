@@ -748,15 +748,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * Among Promises, we have:
      *
-     * 1. Resolved Field Value Reference: it is resolved at the object level
-     * 2. Dynamic Variable Reference: it is resolved at the Engine iteration level
-     *
-     * #1 Must be resolved now.
-     *
-     * #2 could be resolved on @resolveValueAndMerge, just once for all objects
-     * for a certain field, but for simplicity it is resolved here. Because
-     * the fieldArgs for all objects will be the same, the result is cached
-     * after the 1st object, and re-used thereafter.
+     * 1. Resolved Field Value Reference:
+     *    It must be resolved at the Object level, so its resoluton here
+     *    is suitable.
+     * 
+     * 2. Dynamic Variable Reference:
+     *    It can be resolved at the Engine iteration level, but it's easier
+     *    to resolve it here. To optimize it (and avoid executing the same
+     *    validation/casting for different objects, when the results are
+     *    always the same), the result is cached after the 1st object,
+     *    and re-used thereafter.
      */
     protected function maybeGetFieldDataAccessorForObject(
         FieldDataAccessorInterface $fieldDataAccessor,
