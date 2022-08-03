@@ -1430,7 +1430,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * Validate the field data
+     * Validate the field data.
+     *
+     * There are 2 different opportunities when this method can be executed:
+     *
+     * 1. On the schema: When the fieldArgs contain all the resolved data
+     * 2. On the object: Either when:
+     *   1. The fieldArgs contain Promises, which will be resolved by the time ->resolveValue is executed on the object
+     *   2. When a field is dynamically created (eg: `@applyFunction`)
      *
      * @param array<string,mixed> $fieldData
      */
