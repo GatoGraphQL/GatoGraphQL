@@ -41,11 +41,12 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * @return string[]
+     * @return array<string,mixed>
+     * @throws DeferredValuePromiseExceptionInterface
      */
-    public function getProperties(): array
+    public function getFieldArgs(): array
     {
-        return array_keys($this->getResolvedFieldArgs());
+        return $this->getResolvedFieldArgs();
     }
 
     /**
@@ -119,12 +120,11 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     }
 
     /**
-     * @return array<string,mixed>
-     * @throws DeferredValuePromiseExceptionInterface
+     * @return string[]
      */
-    public function getFieldArgs(): array
+    public function getProperties(): array
     {
-        return $this->getResolvedFieldArgs();
+        return array_keys($this->getResolvedFieldArgs());
     }
 
     public function hasValue(string $propertyName): bool
