@@ -1496,10 +1496,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Validations:
          *
-         * - no mandatory arg is missing
+         * - no mandatory arg is missing or is null
          */
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $this->validateNonMissingMandatoryFieldArguments(
+        $this->validateNonMissingOrNullMandatoryFieldArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field,
@@ -1638,7 +1638,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
      */
-    private function validateNonMissingMandatoryFieldArguments(
+    private function validateNonMissingOrNullMandatoryFieldArguments(
         array $fieldData,
         array $fieldArgsSchemaDefinition,
         FieldInterface $field,
