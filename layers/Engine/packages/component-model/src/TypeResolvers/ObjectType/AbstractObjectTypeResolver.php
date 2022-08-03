@@ -95,7 +95,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected SplObjectStorage $fieldDataAccessorForMutationCache;
     /**
-     * @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface>
+     * @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface>
      */
     protected SplObjectStorage $fieldDataAccessorForObjectCorrespondingToEngineIterationCache;
 
@@ -771,8 +771,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         $hasArgumentReferencingResolvedOnEngineIterationPromise = $field->hasArgumentReferencingResolvedOnEngineIterationPromise();
-        if ($hasArgumentReferencingResolvedOnEngineIterationPromise && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($fieldDataAccessor)) {
-            return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor];
+        if ($hasArgumentReferencingResolvedOnEngineIterationPromise && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($field)) {
+            return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field];
         }
 
         $fieldData = null;
@@ -786,7 +786,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 )
             );
             if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor] = null;
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             }
             return null;
         }
@@ -803,7 +803,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor] = null;
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             }
             return null;
         }
@@ -816,7 +816,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor] = null;
+                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             }
             return null;
         }
@@ -830,7 +830,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         );
 
         if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
-            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$fieldDataAccessor] = $fieldDataAccessorForObject;
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = $fieldDataAccessorForObject;
         }
 
         return $fieldDataAccessorForObject;
