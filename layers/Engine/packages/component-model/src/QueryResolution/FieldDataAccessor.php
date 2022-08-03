@@ -141,6 +141,9 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         return array_key_exists($propertyName, $this->getKeyValuesSource());
     }
 
+    /**
+     * @throws DeferredValuePromiseExceptionInterface
+     */
     public function getValue(string $propertyName): mixed
     {
         return $this->getKeyValuesSource()[$propertyName] ?? null;
