@@ -417,9 +417,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $hasAnyArgumentReferencingValuePromise = $field->hasAnyArgumentReferencingValuePromise();
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($hasAnyArgumentReferencingValuePromise || $validateSchemaOnObject) {
-            $fieldArgs = null;
+            $fieldData = null;
             try {
-                $fieldArgs = $fieldDataAccessor->getFieldArgs();
+                $fieldData = $fieldDataAccessor->getFieldArgs();
             } catch (AbstractDeferredValuePromiseException $deferredValuePromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -430,8 +430,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return null;
             }
 
+            /**
+             * Cast the Arguments, return if any of them produced an error
+             */
+            $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+            $fieldData = $this->getSchemaCastingService()->castArguments(
+                $fieldData,
+                $fieldArgsSchemaDefinition,
+                $field,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
+
             $this->validateVariableOnObjectResolutionFieldData(
-                $fieldArgs,
+                $fieldData,
                 $field,
                 false, // Mutation validation will be performed always in validateFieldDataForObject
                 $objectTypeFieldResolutionFeedbackStore,
@@ -439,6 +453,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
             }
+
+            /**
+             * Re-recreate the data, containing the casted arguments
+             */
+            $fieldDataAccessor = $this->createFieldDataAccessor(
+                $field,
+                $fieldData,
+            );
         }
 
         /**
