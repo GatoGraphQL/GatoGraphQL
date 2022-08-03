@@ -134,6 +134,9 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         return array_keys($this->getResolvedFieldArgs());
     }
 
+    /**
+     * @throws DeferredValuePromiseExceptionInterface
+     */
     public function hasValue(string $propertyName): bool
     {
         return array_key_exists($propertyName, $this->getResolvedFieldArgs());

@@ -24,6 +24,9 @@ interface FieldDataAccessorInterface
      * @return array<string,mixed>
      */
     public function getUnresolvedFieldArgs(): array;
+    /**
+     * @throws DeferredValuePromiseExceptionInterface
+     */
     public function hasValue(string $propertyName): bool;
     /**
      * @throws DeferredValuePromiseExceptionInterface
