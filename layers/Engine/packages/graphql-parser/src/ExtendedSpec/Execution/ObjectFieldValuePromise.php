@@ -10,7 +10,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
 
-class ObjectFieldValuePromise implements ValueResolutionPromiseInterface
+class ObjectFieldValuePromise implements ResolvableOnObjectValueResolutionPromiseInterface
 {
     use StandaloneServiceTrait;
 
