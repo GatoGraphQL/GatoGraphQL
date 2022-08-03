@@ -1036,15 +1036,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     $fieldDataAccessor->getField(),
                     $object,
                 );
-                $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation(
-                    $objectTypeResolver->createFieldDataAccessor(
-                        $fieldDataAccessor->getField(),
-                        $fieldArgs
-                    )
+                $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
+                    $fieldDataAccessor->getField(),
+                    $fieldArgs
                 );
-            } else {
-                $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
             }
+            $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
             return $mutationResolver->executeMutation($fieldDataAccessorForMutation);
         } catch (Exception $e) {
             /** @var ModuleConfiguration */
