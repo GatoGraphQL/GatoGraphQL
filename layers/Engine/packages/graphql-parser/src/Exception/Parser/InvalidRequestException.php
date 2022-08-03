@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Exception\Parser;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class InvalidRequestException extends AbstractParserException
+final class InvalidRequestException extends AbstractLocationableException implements QueryExceptionInterface
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,

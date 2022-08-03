@@ -6,7 +6,7 @@ namespace PoPAPI\RESTAPI\DataStructureFormatters;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineInterface;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\QueryExceptionInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
@@ -53,7 +53,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 null,
             );
             $executableDocument->validateAndInitialize();
-        } catch (SyntaxErrorException | InvalidRequestException $e) {
+        } catch (SyntaxErrorException | QueryExceptionInterface $e) {
             return [];
         }
         return $this->getFieldsFromExecutableDocument($executableDocument);

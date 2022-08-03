@@ -13,7 +13,7 @@ use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\QueryExceptionInterface;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Configuration\EngineRequest;
@@ -106,12 +106,12 @@ class AppStateProvider extends AbstractAppStateProvider
 
             try {
                 $executableDocument->validateAndInitialize();
-            } catch (InvalidRequestException $invalidRequestException) {
+            } catch (QueryExceptionInterface $queryException) {
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(
                     new QueryFeedback(
-                        $invalidRequestException->getFeedbackItemResolution(),
-                        $invalidRequestException->getAstNode(),
+                        $queryException->getFeedbackItemResolution(),
+                        $queryException->getAstNode(),
                     )
                 );
             }

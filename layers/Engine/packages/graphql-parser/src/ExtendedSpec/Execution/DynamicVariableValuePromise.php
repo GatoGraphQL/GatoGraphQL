@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\Root\Services\StandaloneServiceTrait;
-use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRuntimeVariableReferenceException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\Root\App;
@@ -21,7 +21,7 @@ class DynamicVariableValuePromise implements DeferredValuePromiseInterface
     }
 
     /**
-     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
+     * @throws InvalidRuntimeVariableReferenceException When accessing non-declared Dynamic Variables
      */
     public function resolveValue(): mixed
     {
@@ -29,7 +29,7 @@ class DynamicVariableValuePromise implements DeferredValuePromiseInterface
         $variableName = $this->dynamicVariableReference->getName();
         if (!array_key_exists($variableName, $dynamicVariables)) {
             // Variable is nowhere defined => Error
-            throw new InvalidDynamicContextException(
+            throw new InvalidRuntimeVariableReferenceException(
                 new FeedbackItemResolution(
                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                     GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
