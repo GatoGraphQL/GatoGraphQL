@@ -122,7 +122,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      * @return array<string,mixed>
      * @throws DeferredValuePromiseExceptionInterface
      */
-    public function getKeyValues(): array
+    public function getFieldArgs(): array
     {
         return $this->getResolvedFieldArgs();
     }

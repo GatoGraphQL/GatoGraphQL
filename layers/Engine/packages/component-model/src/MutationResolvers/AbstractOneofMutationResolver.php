@@ -217,7 +217,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         return new InputObjectSubpropertyFieldDataAccessor(
             $inputObjectFieldArgumentFieldDataAccessor->getField(),
             $oneOfPropertyName,
-            $inputObjectFieldArgumentFieldDataAccessor->getKeyValues()
+            $inputObjectFieldArgumentFieldDataAccessor->getFieldArgs()
         );
     }
 }

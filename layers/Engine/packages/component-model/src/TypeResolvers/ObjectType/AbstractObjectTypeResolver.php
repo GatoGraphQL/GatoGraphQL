@@ -416,7 +416,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
             $this->validateFieldData(
-                $fieldDataAccessor->getKeyValues(),
+                $fieldDataAccessor->getFieldArgs(),
                 $field,
                 false, // Mutation validation will be performed always in validateFieldDataForObject
                 $objectTypeFieldResolutionFeedbackStore,
@@ -750,7 +750,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $this,
                 $object,
                 $fieldDataAccessor->getFieldName(),
-                $fieldDataAccessor->getKeyValues(),
+                $fieldDataAccessor->getFieldArgs(),
             )
         ) {
             $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
@@ -1678,7 +1678,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $fieldDataAccessorForMutation = new InputObjectSubpropertyFieldDataAccessor(
                         $fieldDataAccessor->getField(),
                         $inputObjectSubpropertyName,
-                        $fieldDataAccessor->getKeyValues(),
+                        $fieldDataAccessor->getFieldArgs(),
                     );
                 }
             }

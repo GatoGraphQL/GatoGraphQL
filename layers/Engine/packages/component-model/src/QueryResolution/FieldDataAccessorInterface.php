@@ -19,7 +19,7 @@ interface FieldDataAccessorInterface
      * @return array<string,mixed>
      * @throws DeferredValuePromiseExceptionInterface
      */
-    public function getKeyValues(): array;
+    public function getFieldArgs(): array;
     public function hasValue(string $propertyName): bool;
     /**
      * @throws DeferredValuePromiseExceptionInterface
