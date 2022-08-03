@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Exception\Parser;
 
+use PoP\GraphQLParser\Exception\DeferredValuePromiseExceptionInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\RuntimeVariableReferenceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-final class InvalidRuntimeVariableReferenceException extends AbstractLocationableException implements QueryExceptionInterface
+final class InvalidRuntimeVariableReferenceException extends AbstractLocationableException implements QueryExceptionInterface, DeferredValuePromiseExceptionInterface
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
