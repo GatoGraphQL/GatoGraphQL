@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\ExtendedSpec\Execution\ResolvableOnEngineIterationValueResolutionPromiseInterface;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ResolvableOnObjectValueResolutionPromiseInterface;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ValueResolutionPromiseInterface;
 use stdClass;
 
@@ -101,7 +103,7 @@ trait WithArgumentsTrait
     protected function doHasArgumentReferencingResolvedOnEngineIterationPromise(array $values): mixed
     {
         foreach ($values as $value) {
-            if ($value instanceof ValueResolutionPromiseInterface) {
+            if ($value instanceof ResolvableOnEngineIterationValueResolutionPromiseInterface) {
                 return true;
             }
             if (is_array($value) && $this->doHasArgumentReferencingResolvedOnEngineIterationPromise($value)) {
@@ -125,7 +127,7 @@ trait WithArgumentsTrait
     protected function doHasArgumentReferencingResolvedOnObjectPromise(array $values): mixed
     {
         foreach ($values as $value) {
-            if ($value instanceof ValueResolutionPromiseInterface) {
+            if ($value instanceof ResolvableOnObjectValueResolutionPromiseInterface) {
                 return true;
             }
             if (is_array($value) && $this->doHasArgumentReferencingResolvedOnObjectPromise($value)) {
