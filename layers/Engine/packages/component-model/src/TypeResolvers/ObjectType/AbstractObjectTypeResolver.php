@@ -1445,6 +1445,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * which will not be different when evaluated on
      * the schema or the object.
      *
+     * Hence, this function needs be called only once
+     * at the beginning, and not when the fieldArgs
+     * are resolved for the object (eg: because they
+     * contain Promises).
+     *
      * @param array<string,mixed> $fieldData
      */
     protected function validateInvariableOnObjectResolutionFieldData(
