@@ -1558,7 +1558,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): void {
         /** @var array */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
-        
+
         /**
          * Validations:
          *

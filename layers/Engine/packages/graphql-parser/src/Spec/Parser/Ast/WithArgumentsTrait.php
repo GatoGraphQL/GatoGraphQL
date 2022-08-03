@@ -84,7 +84,7 @@ trait WithArgumentsTrait
         if ($this->hasAnyArgumentReferencingValuePromise === null) {
             $this->hasAnyArgumentReferencingValuePromise = $this->hasArgumentReferencingValuePromise($this->getArgumentKeyValues());
         }
-        return $this->hasAnyArgumentReferencingValuePromise;        
+        return $this->hasAnyArgumentReferencingValuePromise;
     }
 
     protected function hasArgumentReferencingValuePromise(array $values): mixed
