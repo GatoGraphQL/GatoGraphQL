@@ -45,19 +45,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function enableEmbeddableFields(): bool
-    {
-        $envVariable = Environment::ENABLE_EMBEDDABLE_FIELDS;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function skipExposingGlobalFieldsInFullSchema(): bool
     {
         $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA;
