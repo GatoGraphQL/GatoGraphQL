@@ -119,13 +119,14 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     ): ?array;
     /**
      * @param array<string,mixed> $fieldDataForObject
+     * @return array<string,mixed>
      */
     public function prepareFieldDataForObject(
-        array &$fieldDataForObject,
+        array $fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
-    ): void;
+    ): array;
     /**
      * This method is executed AFTER the casting of the fieldArgs
      * has taken place! Then, it can further add elements to the

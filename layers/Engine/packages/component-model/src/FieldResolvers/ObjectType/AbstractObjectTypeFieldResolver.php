@@ -1102,13 +1102,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * @param array<string,mixed> $fieldDataForObject
+     * @return array<string,mixed>
      */
     public function prepareFieldDataForObject(
-        array &$fieldDataForObject,
+        array $fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
-    ): void {
+    ): array {
+        return $fieldDataForObject;
     }
 
     /**
@@ -1129,6 +1131,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $field,
         object $object,
     ): array {
+        return $fieldDataForMutationForObject;
     }
 
     public function getFieldMutationResolver(
