@@ -36,7 +36,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     {
         return $this->leafOutputTypeSerializationService ??= $this->instanceManager->getInstance(LeafOutputTypeSerializationServiceInterface::class);
     }
-    
+
     public function getDirectiveName(): string
     {
         return 'resolveValueAndMerge';

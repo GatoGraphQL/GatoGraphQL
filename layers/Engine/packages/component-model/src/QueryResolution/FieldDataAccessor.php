@@ -71,9 +71,11 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!($moduleConfiguration->enableDynamicVariables()
+        if (
+            !($moduleConfiguration->enableDynamicVariables()
             || $moduleConfiguration->enableObjectResolvedFieldValueReferences()
-        )) {
+            )
+        ) {
             return $fieldArgs;
         }
 

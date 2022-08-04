@@ -25,5 +25,5 @@ interface LeafOutputTypeSerializationServiceInterface
         array $idObjects,
         Directive $directive,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array;    
+    ): array;
 }

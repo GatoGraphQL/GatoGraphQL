@@ -31,7 +31,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
     {
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
-    
+
     /**
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $idFieldValues
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
