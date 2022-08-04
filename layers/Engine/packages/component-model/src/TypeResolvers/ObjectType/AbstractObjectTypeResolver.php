@@ -336,36 +336,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = [],
     ): mixed {
-        $engineState = App::getEngineState();
-        if ($fieldOrFieldDataAccessor instanceof FieldDataAccessorInterface) {
-            /** @var FieldDataAccessorInterface */
-            $fieldDataAccessor = $fieldOrFieldDataAccessor;
-            $field = $fieldDataAccessor->getField();
-        } else {
-            /** @var FieldInterface */
-            $field = $fieldOrFieldDataAccessor;
-        }
-        if (!$engineState->hasObjectTypeResolvedValue($this, $object, $field)) {
-            $value = $this->doResolveValue(
-                $object,
-                $fieldOrFieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-                $options,
-            );
-            $engineState->setObjectTypeResolvedValue($this, $object, $field, $value);
-        }
-        return $engineState->getObjectTypeResolvedValue($this, $object, $field);
-    }
-
-    /**
-     * @param array<string,mixed> $options
-     */
-    final protected function doResolveValue(
-        object $object,
-        FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = [],
-    ): mixed {
         $fieldDataAccessor = null;
         $isFieldDataAccessor = $fieldOrFieldDataAccessor instanceof FieldDataAccessorInterface;
         if ($isFieldDataAccessor) {
