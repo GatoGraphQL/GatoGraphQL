@@ -29,6 +29,9 @@ services:
     PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface:
         class: \PoP\ComponentModel\ObjectSerialization\ObjectSerializationManager
 
+    PoP\ComponentModel\TypeSerialization\LeafOutputTypeSerializationServiceInterface:
+        class: \PoP\ComponentModel\TypeSerialization\LeafOutputTypeSerializationService
+
     PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface:
         class: \PoP\ComponentModel\DirectivePipeline\DirectivePipelineService
 
