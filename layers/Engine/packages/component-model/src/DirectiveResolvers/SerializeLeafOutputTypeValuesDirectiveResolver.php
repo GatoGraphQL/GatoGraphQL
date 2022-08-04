@@ -76,6 +76,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
             $resolvedIDFieldValues,
             $idFieldSet,
             $idObjects,
+            $this->directive,
             $engineIterationFeedbackStore,
         );
         foreach ($serializedIDFieldValues as $id => $serializedFieldValues) {

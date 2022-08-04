@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeSerialization;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
@@ -22,6 +23,7 @@ interface LeafOutputTypeSerializationServiceInterface
         array $idFieldValues,
         array $idFieldSet,
         array $idObjects,
+        Directive $directive,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;    
 }

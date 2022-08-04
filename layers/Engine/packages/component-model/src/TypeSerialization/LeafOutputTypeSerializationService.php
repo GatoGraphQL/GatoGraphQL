@@ -12,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\LeafOutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
@@ -41,6 +42,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
         array $idFieldValues,
         array $idFieldSet,
         array $idObjects,
+        Directive $directive,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         if (!$idObjects) {
@@ -84,7 +86,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
-                    $this->directive,
+                    $directive,
                     [$id => new EngineIterationFieldSet([$field])]
                 );
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -106,7 +108,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
-                    $this->directive,
+                    $directive,
                     [$id => new EngineIterationFieldSet([$field])]
                 );
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
