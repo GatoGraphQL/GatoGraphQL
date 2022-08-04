@@ -17,6 +17,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\ComponentModel\TypeSerialization\LeafOutputTypeSerializationServiceInterface;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -25,6 +26,17 @@ use SplObjectStorage;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
+    private ?LeafOutputTypeSerializationServiceInterface $leafOutputTypeSerializationService = null;
+
+    final public function setLeafOutputTypeSerializationService(LeafOutputTypeSerializationServiceInterface $leafOutputTypeSerializationService): void
+    {
+        $this->leafOutputTypeSerializationService = $leafOutputTypeSerializationService;
+    }
+    final protected function getLeafOutputTypeSerializationService(): LeafOutputTypeSerializationServiceInterface
+    {
+        return $this->leafOutputTypeSerializationService ??= $this->instanceManager->getInstance(LeafOutputTypeSerializationServiceInterface::class);
+    }
+    
     public function getDirectiveName(): string
     {
         return 'resolveValueAndMerge';
@@ -217,7 +229,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
             return;
         }
-        
+
         /**
          * @var SplObjectStorage<FieldInterface,mixed>
          */
@@ -228,11 +240,18 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * Set the resolved value (null or otherwise) to the AppState
-     * to resolve the FieldValuePromises
+     * to resolve the FieldValuePromises.
+     *
+     * The value must be serialized,
+     * so that Object types are converted to String to be used as inputs.
      */
     protected function setAppStateForFieldValuePromises(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string|int $id,
+        object $object,
         FieldInterface $field,
         mixed $value,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         /** @var GraphQLParserModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
@@ -240,11 +259,39 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             return;
         }
 
+        if ($value === null) {
+            return;
+        }
+
+        /** @var SplObjectStorage<FieldInterface,mixed> */
+        $resolvedIDFieldValues = new SplObjectStorage();
+        $resolvedIDFieldValues[$field] = $value;
+
+        /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> */
+        $resolvedIDFieldValues = array(
+            $id => $resolvedIDFieldValues,
+        );
+        $serializedIDFieldValues = $this->getLeafOutputTypeSerializationService()->serializeLeafOutputTypeIDFieldValues(
+            $relationalTypeResolver,
+            $resolvedIDFieldValues,
+            [$id => new EngineIterationFieldSet([$field])],
+            [$id => $object],
+            $this->directive,
+            $engineIterationFeedbackStore,
+        );
+
+        /**
+         * If the value was not serialized, it will not be included in the response
+         */
+        if (!isset($serializedIDFieldValues[$id]) || !$serializedIDFieldValues[$id]->contains($field)) {
+            return;
+        }
+
         /**
          * @var SplObjectStorage<FieldInterface,mixed>
          */
         $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
-        $objectResolvedFieldValues[$field] = $value;
+        $objectResolvedFieldValues[$field] = $serializedIDFieldValues[$id][$field];
 
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
@@ -289,7 +336,14 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         if ($fieldData === null) {
             // Set the response for the failing field as null
             $resolvedIDFieldValues[$id][$field] = null;
-            $this->setAppStateForFieldValuePromises($field, null);
+            $this->setAppStateForFieldValuePromises(
+                $relationalTypeResolver,
+                $id,
+                $object,
+                $field,
+                null,
+                $engineIterationFeedbackStore,
+            );
             return;
         }
         $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
@@ -314,12 +368,26 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // Set the response for the failing field as null
             $resolvedIDFieldValues[$id][$field] = null;
-            $this->setAppStateForFieldValuePromises($field, null);
+            $this->setAppStateForFieldValuePromises(
+                $relationalTypeResolver,
+                $id,
+                $object,
+                $field,
+                null,
+                $engineIterationFeedbackStore,
+            );
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
         $resolvedIDFieldValues[$id][$field] = $value;
-        $this->setAppStateForFieldValuePromises($field, $value);
+        $this->setAppStateForFieldValuePromises(
+            $relationalTypeResolver,
+            $id,
+            $object,
+            $field,
+            $value,
+            $engineIterationFeedbackStore,
+        );
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
