@@ -1029,16 +1029,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         try {
             if ($this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
-                $fieldArgs = $fieldDataAccessor->getFieldArgs();
-                $this->prepareFieldDataForMutationForObject(
-                    $fieldArgs,
+                $fieldArgsForMutationForObject = $this->prepareFieldDataForMutationForObject(
+                    $fieldDataAccessor->getFieldArgs(),
                     $objectTypeResolver,
                     $fieldDataAccessor->getField(),
                     $object,
                 );
                 $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
                     $fieldDataAccessor->getField(),
-                    $fieldArgs
+                    $fieldArgsForMutationForObject
                 );
             }
             $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
@@ -1103,13 +1102,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * @param array<string,mixed> $fieldDataForObject
+     * @return array<string,mixed>
      */
     public function prepareFieldDataForObject(
-        array &$fieldDataForObject,
+        array $fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
-    ): void {
+    ): array {
+        return $fieldDataForObject;
     }
 
     /**
@@ -1122,13 +1123,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * via an input to the mutation.
      *
      * @param array<string,mixed> $fieldDataForMutationForObject
+     * @return array<string,mixed>
      */
     public function prepareFieldDataForMutationForObject(
-        array &$fieldDataForMutationForObject,
+        array $fieldDataForMutationForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
-    ): void {
+    ): array {
+        return $fieldDataForMutationForObject;
     }
 
     public function getFieldMutationResolver(

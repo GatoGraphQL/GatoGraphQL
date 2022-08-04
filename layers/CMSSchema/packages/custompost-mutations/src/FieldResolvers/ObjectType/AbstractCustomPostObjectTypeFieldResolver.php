@@ -75,14 +75,15 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 
     /**
      * @param array<string,mixed> $fieldDataForMutationForObject
+     * @return array<string,mixed>
      */
     public function prepareFieldDataForMutationForObject(
-        array &$fieldDataForMutationForObject,
+        array $fieldDataForMutationForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
-    ): void {
-        parent::prepareFieldDataForMutationForObject(
+    ): array {
+        $fieldDataForMutationForObject = parent::prepareFieldDataForMutationForObject(
             $fieldDataForMutationForObject,
             $objectTypeResolver,
             $field,
@@ -94,5 +95,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 $fieldDataForMutationForObject[MutationInputProperties::INPUT]->{MutationInputProperties::ID} = $objectTypeResolver->getID($post);
                 break;
         }
+        return $fieldDataForMutationForObject;
     }
 }

@@ -894,7 +894,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Validate on the object
             $fieldDataAccessorForMutation = null;
             try {
-                $objectTypeFieldResolver->prepareFieldDataForMutationForObject(
+                $fieldArgsForMutationForObject = $objectTypeFieldResolver->prepareFieldDataForMutationForObject(
                     $fieldArgs,
                     $this,
                     $fieldDataAccessor->getField(),
@@ -903,7 +903,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation(
                     $this->createFieldDataAccessor(
                         $fieldDataAccessor->getField(),
-                        $fieldArgs
+                        $fieldArgsForMutationForObject
                     )
                 );
             } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
@@ -1411,7 +1411,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $object = $idObjects[$id];
             // Clone array
             $fieldDataForObject = array_merge([], $fieldData);
-            $executableObjectTypeFieldResolver->prepareFieldDataForObject(
+            $fieldDataForObject = $executableObjectTypeFieldResolver->prepareFieldDataForObject(
                 $fieldDataForObject,
                 $this,
                 $field,
