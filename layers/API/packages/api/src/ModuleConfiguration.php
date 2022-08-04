@@ -32,19 +32,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function executeQueryBatchInStrictOrder(): bool
-    {
-        $envVariable = Environment::EXECUTE_QUERY_BATCH_IN_STRICT_ORDER;
-        $defaultValue = true;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function skipExposingGlobalFieldsInFullSchema(): bool
     {
         $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA;
