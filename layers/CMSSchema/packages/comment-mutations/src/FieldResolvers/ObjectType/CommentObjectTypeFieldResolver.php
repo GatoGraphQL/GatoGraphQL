@@ -110,14 +110,15 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
 
     /**
      * @param array<string,mixed> $fieldDataForMutationForObject
+     * @return array<string,mixed>
      */
     public function prepareFieldDataForMutationForObject(
-        array &$fieldDataForMutationForObject,
+        array $fieldDataForMutationForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
-    ): void {
-        parent::prepareFieldDataForMutationForObject(
+    ): array {
+        $fieldDataForMutationForObject = parent::prepareFieldDataForMutationForObject(
             $fieldDataForMutationForObject,
             $objectTypeResolver,
             $field,
@@ -130,6 +131,7 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
                 $fieldDataForMutationForObject[MutationInputProperties::INPUT]->{MutationInputProperties::PARENT_COMMENT_ID} = $objectTypeResolver->getID($comment);
                 break;
         }
+        return $fieldDataForMutationForObject;
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
