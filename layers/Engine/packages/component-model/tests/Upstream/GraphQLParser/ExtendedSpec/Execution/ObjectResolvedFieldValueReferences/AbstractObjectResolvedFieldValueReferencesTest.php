@@ -44,7 +44,6 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
     protected static function getModuleClassConfiguration(): array
     {
         $moduleClassConfiguration = parent::getModuleClassConfiguration();
-        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_DYNAMIC_VARIABLES] = true;
         $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES] = static::enabled();
         return $moduleClassConfiguration;
     }
