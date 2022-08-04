@@ -17,6 +17,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -210,6 +212,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      */
     protected function resetAppStateForFieldValuePromises(): void
     {
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
+            return;
+        }
+        
         /**
          * @var SplObjectStorage<FieldInterface,mixed>
          */
@@ -226,6 +234,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldInterface $field,
         mixed $value,
     ): void {
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
+            return;
+        }
+
         /**
          * @var SplObjectStorage<FieldInterface,mixed>
          */
