@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\ObjectSerialization;
+namespace PoP\ComponentModel\Facades\TypeSerialization;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeSerialization\LeafOutputTypeSerializationServiceInterface;
