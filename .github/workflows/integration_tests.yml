@@ -88,6 +88,7 @@ jobs:
             -   name: Destroy InstaWP instance
                 uses: instawp/wordpress-testing-automation@main
                 id: destroy-instawp
+                if: ${{ always() }}
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
