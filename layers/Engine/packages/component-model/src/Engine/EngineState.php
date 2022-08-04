@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class EngineState
 {
@@ -57,11 +58,5 @@ class EngineState
          */
         public array $relationalTypeOutputKeyIDFieldSets = [],
     ) {
-    }
-
-    protected function getDataHash(array $data): string
-    {
-        return json_encode($data);
-        // return (string)hash('crc32', json_encode($data));
     }
 }
