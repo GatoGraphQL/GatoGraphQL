@@ -235,27 +235,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $field->getName());
     }
 
-    final public function collectFieldValidationWarnings(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
-        if ($executableObjectTypeFieldResolver === null) {
-            return;
-        }
-
-        if ($maybeWarningFeedbackItemResolutions = $executableObjectTypeFieldResolver->resolveFieldValidationWarnings($this, $fieldDataAccessor)) {
-            foreach ($maybeWarningFeedbackItemResolutions as $warningFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addWarning(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $warningFeedbackItemResolution,
-                        $fieldDataAccessor->getField(),
-                    )
-                );
-            }
-        }
-    }
-
     final public function collectFieldDeprecations(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
