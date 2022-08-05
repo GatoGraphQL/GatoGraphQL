@@ -280,7 +280,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function getFieldTypeModifiers(
         FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?int {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
@@ -292,7 +291,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function getFieldMutationResolver(
         FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
