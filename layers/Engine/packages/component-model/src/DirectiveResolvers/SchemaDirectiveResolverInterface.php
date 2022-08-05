@@ -41,10 +41,6 @@ interface SchemaDirectiveResolverInterface
      */
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array;
     /**
-     * Raise warnings concerning the directive
-     */
-    public function getDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution;
-    /**
      * Indicate if the directive has been deprecated, why, when, and/or how it must be replaced
      */
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
