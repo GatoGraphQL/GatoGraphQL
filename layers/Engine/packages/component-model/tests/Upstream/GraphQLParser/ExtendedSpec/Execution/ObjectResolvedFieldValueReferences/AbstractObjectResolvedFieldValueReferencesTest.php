@@ -70,7 +70,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract(
-                    object: $_userList,
+                    object: $__userList,
                     path: "lang"
                 )
             }
@@ -144,7 +144,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
         $query = '
             {
                 userListLang: extract(
-                    object: $_userList,
+                    object: $__userList,
                     path: "lang"
                 )
 
@@ -213,13 +213,13 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
         $query = '
             {
                 userListLang: extract(
-                    object: $_userList,
+                    object: $__userList,
                     path: "lang"
                 )
 
                 userList: getJSON(
                     url: "https://someurl.com/rest/users",
-                    source: $_userListLang
+                    source: $__userListLang
                 )
             }
         ';
@@ -289,7 +289,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract(
-                    object: $_getJSON,
+                    object: $__getJSON,
                     path: "lang"
                 )
             }
@@ -349,7 +349,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract @default(
-                    value: $_userList,
+                    value: $__userList,
                 )
             }
         ';
@@ -411,7 +411,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract(
-                    object: $_nonExistingField,
+                    object: $__nonExistingField,
                     path: "lang"
                 )
             }
@@ -470,7 +470,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract @default(
-                    value: $_nonExistingField,
+                    value: $__nonExistingField,
                 )
             }
         ';
@@ -532,7 +532,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract(
-                    object: $_getJSON,
+                    object: $__getJSON,
                     path: "lang"
                 )
             }
@@ -589,7 +589,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     ...RootData
 
                     userListLang: extract(
-                        object: $_userList,
+                        object: $__userList,
                         path: "lang"
                     )
                 }
@@ -666,7 +666,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     }
 
                     userListLang: extract(
-                        object: $_userList,
+                        object: $__userList,
                         path: "lang"
                     )
                 }
@@ -743,7 +743,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             
                 self {
                     userListLang: extract(
-                        object: $_userList,
+                        object: $__userList,
                         path: "lang"
                     )
                 }
