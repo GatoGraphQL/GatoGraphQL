@@ -164,7 +164,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function hasDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface;
 
-    public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution;
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     /**
      * Name for the directive arg to indicate which additional fields
