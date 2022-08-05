@@ -23,8 +23,10 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $emails = $fieldDataAccessor->getValue('emails');
         // Remove the invalid emails
         $emails = array_diff($emails, $this->getInvalidEmails($emails));

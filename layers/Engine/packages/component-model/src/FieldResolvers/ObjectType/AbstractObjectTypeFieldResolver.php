@@ -1041,7 +1041,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 );
             }
             $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
-            return $mutationResolver->executeMutation($fieldDataAccessorForMutation);
+            return $mutationResolver->executeMutation(
+                $fieldDataAccessorForMutation,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         } catch (Exception $e) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

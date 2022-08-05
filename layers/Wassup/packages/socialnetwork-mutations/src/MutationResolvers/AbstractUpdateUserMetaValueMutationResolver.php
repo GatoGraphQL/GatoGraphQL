@@ -50,8 +50,10 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $target_id = $this->update($fieldDataAccessor);
         $this->additionals($target_id, $fieldDataAccessor);
 

@@ -190,8 +190,10 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $comment_data = $this->getCommentData($fieldDataAccessor);
         $comment_id = $this->insertComment($comment_data);
 

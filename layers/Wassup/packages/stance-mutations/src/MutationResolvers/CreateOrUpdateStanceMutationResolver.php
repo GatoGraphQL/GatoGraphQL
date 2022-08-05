@@ -14,8 +14,10 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         if ($this->isUpdate($fieldDataAccessor)) {
             return $this->update($fieldDataAccessor);
         }

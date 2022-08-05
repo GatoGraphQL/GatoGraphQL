@@ -30,8 +30,10 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $user_id = $fieldDataAccessor->getValue('user_id');
 
         $previous_communities = gdUreGetCommunities($user_id);
