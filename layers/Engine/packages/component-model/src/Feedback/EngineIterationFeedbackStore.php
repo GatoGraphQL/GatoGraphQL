@@ -27,4 +27,10 @@ class EngineIterationFeedbackStore
         return $this->schemaFeedbackStore->getErrors() !== []
             || $this->objectFeedbackStore->getErrors() !== [];
     }
+
+    public function getErrorCount(): int
+    {
+        return count($this->schemaFeedbackStore->getErrors())
+            + count($this->objectFeedbackStore->getErrors());
+    }
 }
