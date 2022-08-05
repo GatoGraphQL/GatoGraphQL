@@ -883,36 +883,44 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function resolveFieldValidationWarnings(
+    protected function maybeAddSemanticVersionConstraintsWarning(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor
-    ): array {
-        $warningFeedbackItemResolutions = [];
-        if (Environment::enableSemanticVersionConstraints()) {
-            /**
-             * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
-             */
-            if ($versionConstraint = $fieldDataAccessor->getValue(SchemaDefinition::VERSION_CONSTRAINT)) {
-                /**
-                 * If this fieldResolver doesn't have versioning, then it accepts everything
-                 */
-                if (!$this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
-                    $warningFeedbackItemResolutions[] = new FeedbackItemResolution(
-                        WarningFeedbackItemProvider::class,
-                        WarningFeedbackItemProvider::W2,
-                        [
-                            $fieldDataAccessor->getFieldName(),
-                            $this->getFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName()) ?? '',
-                            $versionConstraint
-                        ]
-                    );
-                }
-            }
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!Environment::enableSemanticVersionConstraints()) {
+            return;
         }
-        return $warningFeedbackItemResolutions;
+
+        /**
+         * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
+         */
+        $versionConstraint = $fieldDataAccessor->getValue(SchemaDefinition::VERSION_CONSTRAINT);
+        if (!$versionConstraint) {
+            return;
+        }
+
+        /**
+         * If this fieldResolver doesn't have versioning, then it accepts everything
+         */
+        if ($this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
+            return;
+        }
+
+        $objectTypeFieldResolutionFeedbackStore->addWarning(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    WarningFeedbackItemProvider::class,
+                    WarningFeedbackItemProvider::W2,
+                    [
+                        $fieldDataAccessor->getFieldName(),
+                        $this->getFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName()) ?? '',
+                        $versionConstraint
+                    ]
+                ),
+                $fieldDataAccessor->getField()
+            )
+        );
     }
 
     /**
@@ -993,6 +1001,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        $this->maybeAddSemanticVersionConstraintsWarning(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         if ($mutationResolver !== null) {
