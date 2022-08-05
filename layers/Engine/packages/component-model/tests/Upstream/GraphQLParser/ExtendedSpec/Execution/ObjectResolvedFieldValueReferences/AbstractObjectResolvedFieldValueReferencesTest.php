@@ -70,7 +70,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract(
-                    object: $_userList,
+                    object: $__userList,
                     path: "lang"
                 )
             }
@@ -93,8 +93,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(3, 27)
         );
         $variableReference = static::enabled()
-            ? new ObjectResolvedFieldValueReference('_userList', $field, new Location(8, 29))
-            : new VariableReference('_userList', null, new Location(8, 29));
+            ? new ObjectResolvedFieldValueReference('__userList', $field, new Location(8, 29))
+            : new VariableReference('__userList', null, new Location(8, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -144,7 +144,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
         $query = '
             {
                 userListLang: extract(
-                    object: $_userList,
+                    object: $__userList,
                     path: "lang"
                 )
 
@@ -170,7 +170,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(8, 27)
         );
-        $variableReference = new VariableReference('_userList', null, new Location(4, 29));
+        $variableReference = new VariableReference('__userList', null, new Location(4, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -213,13 +213,13 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
         $query = '
             {
                 userListLang: extract(
-                    object: $_userList,
+                    object: $__userList,
                     path: "lang"
                 )
 
                 userList: getJSON(
                     url: "https://someurl.com/rest/users",
-                    source: $_userListLang
+                    source: $__userListLang
                 )
             }
         ';
@@ -245,11 +245,11 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(8, 27)
         );
-        $variableReference = new VariableReference('_userList', null, new Location(4, 29));
+        $variableReference = new VariableReference('__userList', null, new Location(4, 29));
         $variableReference->setContext($context);
         $dynamicVariableReference2 = static::enabled()
-            ? new ObjectResolvedFieldValueReference('_userListLang', $field, new Location(10, 29))
-            : new VariableReference('_userListLang', null, new Location(10, 29));
+            ? new ObjectResolvedFieldValueReference('__userListLang', $field, new Location(10, 29))
+            : new VariableReference('__userListLang', null, new Location(10, 29));
         if (!static::enabled()) {
             $dynamicVariableReference2->setContext($context);
         }
@@ -289,7 +289,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract(
-                    object: $_getJSON,
+                    object: $__getJSON,
                     path: "lang"
                 )
             }
@@ -312,8 +312,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(3, 17)
         );
         $variableReference = static::enabled()
-            ? new ObjectResolvedFieldValueReference('_getJSON', $field, new Location(8, 29))
-            : new VariableReference('_getJSON', null, new Location(8, 29));
+            ? new ObjectResolvedFieldValueReference('__getJSON', $field, new Location(8, 29))
+            : new VariableReference('__getJSON', null, new Location(8, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -349,7 +349,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract @default(
-                    value: $_userList,
+                    value: $__userList,
                 )
             }
         ';
@@ -370,7 +370,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $variableReference = new VariableReference('_userList', null, new Location(8, 28));
+        $variableReference = new VariableReference('__userList', null, new Location(8, 28));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -411,7 +411,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract(
-                    object: $_nonExistingField,
+                    object: $__nonExistingField,
                     path: "lang"
                 )
             }
@@ -433,7 +433,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $variableReference = new VariableReference('_nonExistingField', null, new Location(8, 29));
+        $variableReference = new VariableReference('__nonExistingField', null, new Location(8, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -470,7 +470,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract @default(
-                    value: $_nonExistingField,
+                    value: $__nonExistingField,
                 )
             }
         ';
@@ -491,7 +491,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $variableReference = new VariableReference('_nonExistingField', null, new Location(8, 28));
+        $variableReference = new VariableReference('__nonExistingField', null, new Location(8, 28));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -532,7 +532,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 )
             
                 userListLang: extract(
-                    object: $_getJSON,
+                    object: $__getJSON,
                     path: "lang"
                 )
             }
@@ -554,7 +554,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $variableReference = new VariableReference('_getJSON', null, new Location(8, 29));
+        $variableReference = new VariableReference('__getJSON', null, new Location(8, 29));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -589,7 +589,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     ...RootData
 
                     userListLang: extract(
-                        object: $_userList,
+                        object: $__userList,
                         path: "lang"
                     )
                 }
@@ -618,7 +618,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(14, 27)
         );
-        $variableReference = new VariableReference('_userList', null, new Location(7, 33));
+        $variableReference = new VariableReference('__userList', null, new Location(7, 33));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -666,7 +666,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                     }
 
                     userListLang: extract(
-                        object: $_userList,
+                        object: $__userList,
                         path: "lang"
                     )
                 }
@@ -689,7 +689,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(5, 35)
         );
-        $variableReference = new VariableReference('_userList', null, new Location(11, 33));
+        $variableReference = new VariableReference('__userList', null, new Location(11, 33));
         $queryOperation = new QueryOperation(
             '',
             [],
@@ -743,7 +743,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             
                 self {
                     userListLang: extract(
-                        object: $_userList,
+                        object: $__userList,
                         path: "lang"
                     )
                 }
@@ -766,7 +766,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             [],
             new Location(3, 27)
         );
-        $variableReference = new VariableReference('_userList', null, new Location(9, 33));
+        $variableReference = new VariableReference('__userList', null, new Location(9, 33));
         $queryOperation = new QueryOperation(
             '',
             [],
