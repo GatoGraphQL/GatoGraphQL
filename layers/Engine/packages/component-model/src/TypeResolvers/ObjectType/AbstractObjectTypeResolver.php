@@ -235,16 +235,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $field->getName());
     }
 
-    final public function collectFieldDeprecations(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
-        if ($executableObjectTypeFieldResolver === null) {
-            return;
-        }
-    }
-
     final public function getFieldTypeResolver(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
