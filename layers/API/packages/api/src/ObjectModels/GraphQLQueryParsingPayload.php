@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\ObjectModels\GraphQLQueryParsingPayload;
+namespace PoPAPI\API\ObjectModels;
 
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;

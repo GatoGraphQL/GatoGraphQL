@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoPAPI\ObjectModels\GraphQLQueryParsingPayload\GraphQLQueryParsingPayload;
+use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
 
 class GraphQLParserHelpers
 {
