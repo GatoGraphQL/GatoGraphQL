@@ -145,7 +145,10 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     ): mixed {
         [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
         /** @var MutationResolverInterface $inputFieldMutationResolver */
-        return $inputFieldMutationResolver->executeMutation($fieldDataAccessor);
+        return $inputFieldMutationResolver->executeMutation(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     /**

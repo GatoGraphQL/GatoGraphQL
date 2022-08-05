@@ -97,7 +97,10 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $errorMessage = null;
         $resultID = null;
         try {
-            $resultID = $mutationResolver->executeMutation($fieldDataAccessorForMutation);
+            $resultID = $mutationResolver->executeMutation(
+                $fieldDataAccessorForMutation,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         } catch (AbstractClientException $e) {
             $errorMessage = $e->getMessage();
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
@@ -112,6 +115,21 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
                 : $this->__('Resolving the mutation produced an exception, please contact the admin', 'component-model');
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         }
+
+        // @todo Make DRY! This code was copy/pasted from just above
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            // @todo Migrate from string to FeedbackItemProvider
+            $mutationResponse[$errorTypeKey] = array_map(
+                fn (ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback) => $objectTypeFieldResolutionFeedback->getFeedbackItemResolution()->getMessage(),
+                $objectTypeFieldResolutionFeedbackStore->getErrors()
+            );
+            if ($this->skipDataloadIfError()) {
+                // Bring no results
+                $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
+            }
+            return $mutationResponse;
+        }
+
         if ($errorMessage !== null) {
             if ($this->skipDataloadIfError()) {
                 // Bring no results
