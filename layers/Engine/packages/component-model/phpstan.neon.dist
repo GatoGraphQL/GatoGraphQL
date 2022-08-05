@@ -13,3 +13,7 @@ parameters:
 		- 
 			message: '#Default value of the parameter \#2 \$conditionalFields \(SplObjectStorage\<object, mixed\>\) of method PoP\\ComponentModel\\Engine\\EngineIterationFieldSet::__construct\(\) is incompatible with type SplObjectStorage\<PoP\\GraphQLParser\\Spec\\Parser\\Ast\\FieldInterface, array\<PoP\\GraphQLParser\\Spec\\Parser\\Ast\\FieldInterface\>\>\.#'
 			path: src/Engine/EngineIterationFieldSet.php
+		# Some bug in PHPStan
+		- 
+			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
+			path: src/MutationResolverBridges/AbstractComponentMutationResolverBridge.php                                                               
