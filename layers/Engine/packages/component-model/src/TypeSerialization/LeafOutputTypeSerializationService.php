@@ -104,16 +104,12 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
                     continue;
                 }
 
-                /** @var int */
-                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
-                $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $idFieldValues
                 $fieldValues[$field] = $this->executeLeafOutputTypeValueSerialization(
                     $value,
                     $fieldLeafOutputTypeResolver,
-                    $fieldLeafOutputTypeIsArrayOfArrays,
-                    $fieldLeafOutputTypeIsArray,
+                    $targetObjectTypeResolver,
+                    $field,
                 );
             }
             $serializedIDFieldValues[$id] = $fieldValues;
@@ -128,9 +124,14 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
     private function executeLeafOutputTypeValueSerialization(
         mixed $value,
         LeafOutputTypeResolverInterface $fieldLeafOutputTypeResolver,
-        bool $fieldLeafOutputTypeIsArrayOfArrays,
-        bool $fieldLeafOutputTypeIsArray,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
     ): string|int|float|bool|array {
+        /** @var int */
+        $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
+        $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+        
         /**
          * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
