@@ -44,12 +44,12 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         // Parse the GraphQL query
-        $variableValues = App::getState('variables');
+        $variables = App::getState('variables');
 
         try {
             $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
-                $variableValues,
+                $variables,
                 null,
             );
             $executableDocument->validateAndInitialize();
