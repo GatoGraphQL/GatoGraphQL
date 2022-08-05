@@ -105,16 +105,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
                 }
 
                 /** @var int */
-                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field, $separateObjectTypeFieldResolutionFeedbackStore);
-                $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-                    $separateObjectTypeFieldResolutionFeedbackStore,
-                    $targetObjectTypeResolver,
-                    $directive,
-                    [$id => new EngineIterationFieldSet([$field])]
-                );
-                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                    continue;
-                }
+                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $idFieldValues

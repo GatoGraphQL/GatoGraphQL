@@ -34,11 +34,9 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     ): ?ConcreteTypeResolverInterface;
     public function getFieldTypeModifiers(
         FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?int;
     public function getFieldMutationResolver(
         FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface;
     public function isFieldAMutation(FieldInterface|string $fieldOrFieldName): ?bool;
     /**
