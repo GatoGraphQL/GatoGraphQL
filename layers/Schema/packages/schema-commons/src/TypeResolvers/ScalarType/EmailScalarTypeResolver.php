@@ -42,10 +42,8 @@ class EmailScalarTypeResolver extends AbstractScalarTypeResolver
             return null;
         }
 
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $this->validateFilterVar($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore, \FILTER_VALIDATE_EMAIL);
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        $this->validateFilterVar($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore, \FILTER_VALIDATE_EMAIL);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
 
