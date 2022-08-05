@@ -894,7 +894,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
-    
+
     protected function maybeAddSemanticVersionConstraintsWarningFeedback(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
