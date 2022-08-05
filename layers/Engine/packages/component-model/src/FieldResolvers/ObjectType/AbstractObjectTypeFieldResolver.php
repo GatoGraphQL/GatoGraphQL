@@ -888,14 +888,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->maybeAddSemanticVersionConstraintsWarning(
+        $this->maybeAddSemanticVersionConstraintsWarningFeedback(
             $objectTypeResolver,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
     
-    protected function maybeAddSemanticVersionConstraintsWarning(
+    protected function maybeAddSemanticVersionConstraintsWarningFeedback(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
