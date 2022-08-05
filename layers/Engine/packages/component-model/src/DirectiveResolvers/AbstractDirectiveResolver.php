@@ -286,15 +286,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /**
          * Perform validations
          */
-        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+        $errorCount = $engineIterationFeedbackStore->getErrorCount();
         $this->validateDirectiveData(
             $directiveData,
             $relationalTypeResolver,
             $fields,
-            $separateEngineIterationFeedbackStore,
+            $engineIterationFeedbackStore,
         );
-        $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-        if ($separateEngineIterationFeedbackStore->hasErrors()) {
+        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 
@@ -322,23 +321,22 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
          */
-        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+        $errorCount = $engineIterationFeedbackStore->getErrorCount();
         $this->validateNonMissingMandatoryDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
-            $separateEngineIterationFeedbackStore,
+            $engineIterationFeedbackStore,
         );
         $this->validateOnlyExistingDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
-            $separateEngineIterationFeedbackStore,
+            $engineIterationFeedbackStore,
         );
-        $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-        if ($separateEngineIterationFeedbackStore->hasErrors()) {
+        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
 
