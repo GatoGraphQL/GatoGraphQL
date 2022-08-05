@@ -7,11 +7,11 @@ namespace PoP\GraphQLParser\Spec\Parser;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\StandaloneServiceTrait;
 
 class Tokenizer
 {
-    use BasicServiceTrait;
+    use StandaloneServiceTrait;
 
     protected string $source;
     protected int $pos = 0;
