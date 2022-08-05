@@ -111,7 +111,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
      */
-    private function serializeLeafOutputTypeValue(
+    public function serializeLeafOutputTypeValue(
         mixed $value,
         LeafOutputTypeResolverInterface $fieldLeafOutputTypeResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
