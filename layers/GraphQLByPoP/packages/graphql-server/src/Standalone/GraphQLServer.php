@@ -141,11 +141,12 @@ class GraphQLServer implements GraphQLServerInterface
         $executableDocument = null;
         $documentASTNodeAncestors = null;
         try {
-            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
+            $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variables,
                 $operationName
             );
+            $executableDocument = $graphQLQueryParsingPayload->executableDocument;
         } catch (SyntaxErrorException $syntaxErrorException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(

@@ -84,11 +84,12 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $executableDocument = null;
         try {
-            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
+            $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variableValues,
                 $operationName
             );
+            $executableDocument = $graphQLQueryParsingPayload->executableDocument;
         } catch (SyntaxErrorException $syntaxErrorException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(

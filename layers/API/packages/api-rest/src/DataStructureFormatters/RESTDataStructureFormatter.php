@@ -47,11 +47,12 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $variables = App::getState('variables');
 
         try {
-            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
+            $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variables,
                 null,
             );
+            $executableDocument = $graphQLQueryParsingPayload->executableDocument;
             $executableDocument->validateAndInitialize();
         } catch (SyntaxErrorException | AbstractQueryException $e) {
             return [];
