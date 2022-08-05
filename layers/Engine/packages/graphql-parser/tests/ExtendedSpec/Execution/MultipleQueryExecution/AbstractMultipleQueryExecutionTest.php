@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution\MultipleQueryExecution;
 
+use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -20,6 +21,8 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
 {
+    private ?ParserInterface $parser = null;
+
     /**
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
@@ -34,7 +37,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
 
     protected function getParser(): ParserInterface
     {
-        return $this->getService(ParserInterface::class);
+        return $this->parser ??= new Parser();
     }
 
     public function testMultipleQueryExecution(): void

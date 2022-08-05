@@ -53,13 +53,13 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      *
      * @var array<FieldInterface[]>
      */
-    protected array $parsedFieldBlockStack = [];
+    protected array $parsedFieldBlockStack;
 
     /**
      * ObjectResolvedFieldValueReferences are not supported
      * within Directive Arguments.
      */
-    protected bool $parsingDirectiveArgumentList = false;
+    protected bool $parsingDirectiveArgumentList;
 
     /**
      * Use this variable to keep track of which
@@ -68,11 +68,11 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      *
      * @var string[]
      */
-    protected array $parsedDefinedDynamicVariableNames = [];
+    protected array $parsedDefinedDynamicVariableNames;
 
-    protected function init(string $source): void
+    protected function resetState(): void
     {
-        parent::init($source);
+        parent::resetState();
 
         $this->parsedFieldBlockStack = [];
         $this->parsingDirectiveArgumentList = false;

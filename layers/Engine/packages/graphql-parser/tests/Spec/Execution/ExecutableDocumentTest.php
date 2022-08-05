@@ -13,6 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Parser;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
 use PoP\Root\Exception\ShouldNotHappenException;
@@ -20,9 +21,11 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class ExecutableDocumentTest extends AbstractTestCase
 {
+    private ?ParserInterface $parser = null;
+
     protected function getParser(): ParserInterface
     {
-        return $this->getService(ParserInterface::class);
+        return $this->parser ??= new Parser();
     }
 
     protected function createExecutableDocument(

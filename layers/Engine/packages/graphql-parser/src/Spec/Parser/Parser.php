@@ -33,11 +33,11 @@ use stdClass;
 class Parser extends Tokenizer implements ParserInterface
 {
     /** @var OperationInterface[] */
-    protected array $operations = [];
+    protected array $operations;
     /** @var Fragment[] */
-    protected array $fragments = [];
+    protected array $fragments;
     /** @var Variable[] */
-    protected array $variables = [];
+    protected array $variables;
 
     /**
      * @throws SyntaxErrorException
@@ -95,7 +95,11 @@ class Parser extends Tokenizer implements ParserInterface
     protected function init(string $source): void
     {
         $this->initTokenizer($source);
+        $this->resetState();
+    }
 
+    protected function resetState(): void
+    {
         $this->operations = [];
         $this->fragments = [];
         $this->variables = [];
