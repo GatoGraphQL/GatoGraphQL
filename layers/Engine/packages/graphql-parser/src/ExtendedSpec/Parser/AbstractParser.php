@@ -655,7 +655,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     public function getObjectResolvedFieldValueReferencedFields(): array
     {
-        return $this->objectResolvedFieldValueReferencedFields;
+        return array_values(array_unique($this->objectResolvedFieldValueReferencedFields));
     }
 
     public function createDocument(
