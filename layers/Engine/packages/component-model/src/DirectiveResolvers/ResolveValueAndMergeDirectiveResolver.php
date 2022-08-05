@@ -259,6 +259,16 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             return;
         }
 
+        /**
+         * Optimization: Check if the field was referenced in the query,
+         * otherwise can skip
+         */
+        /** @var FieldInterface[] */
+        $documentObjectResolvedFieldValueReferencedFields = App::getState('document-object-resolved-field-value-referenced-fields');
+        if (!in_array($field, $documentObjectResolvedFieldValueReferencedFields)) {
+            return;
+        }
+
         if ($value === null) {
             return;
         }
