@@ -70,9 +70,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     protected array $parsedDefinedDynamicVariableNames = [];
 
-    protected function init(string $source): void
+    protected function resetState(): void
     {
-        parent::init($source);
+        parent::resetState();
 
         $this->parsedFieldBlockStack = [];
         $this->parsingDirectiveArgumentList = false;

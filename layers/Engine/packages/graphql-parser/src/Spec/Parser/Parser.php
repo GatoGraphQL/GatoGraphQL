@@ -95,7 +95,11 @@ class Parser extends Tokenizer implements ParserInterface
     protected function init(string $source): void
     {
         $this->initTokenizer($source);
+        $this->resetState();
+    }
 
+    protected function resetState(): void
+    {
         $this->operations = [];
         $this->fragments = [];
         $this->variables = [];
