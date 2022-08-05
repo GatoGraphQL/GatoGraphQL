@@ -883,6 +883,18 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
+    protected function addValueResolutionFeedback(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $this->maybeAddSemanticVersionConstraintsWarning(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+    
     protected function maybeAddSemanticVersionConstraintsWarning(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -1001,7 +1013,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $this->maybeAddSemanticVersionConstraintsWarning(
+        $this->addValueResolutionFeedback(
             $objectTypeResolver,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
