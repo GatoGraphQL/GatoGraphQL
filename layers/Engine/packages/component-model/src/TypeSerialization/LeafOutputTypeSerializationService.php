@@ -82,6 +82,11 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
             /** @var SplObjectStorage<FieldInterface,mixed> */
             $fieldValues = $serializedIDFieldValues[$id] ?? new SplObjectStorage();
             foreach ($fieldSet->fields as $field) {
+                $value = $idFieldValues[$id][$field] ?? null;
+                if ($value === null) {
+                    continue;
+                }
+
                 $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $objectTypeFieldResolutionFeedbackStore);
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
@@ -93,16 +98,13 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     continue;
                 }
+
                 if (!($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
                     continue;
                 }
 
                 /** @var LeafOutputTypeResolverInterface */
                 $fieldLeafOutputTypeResolver = $fieldTypeResolver;
-                $value = $idFieldValues[$id][$field] ?? null;
-                if ($value === null) {
-                    continue;
-                }
 
                 // Serialize the scalar/enum value stored in $idFieldValues
                 $fieldValues[$field] = $this->executeLeafOutputTypeValueSerialization(
