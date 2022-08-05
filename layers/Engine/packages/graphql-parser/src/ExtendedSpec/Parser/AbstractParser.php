@@ -512,12 +512,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return null;
         }
 
-        if (
-            !str_starts_with(
-                $name,
-                QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
-            )
-        ) {
+        if (!$this->isObjectResolvedFieldValueReferenceName($name)) {
             return null;
         }
 
@@ -527,6 +522,17 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          */
         $fieldNameOrAlias = $this->extractObjectResolvedFieldName($name);
         return $this->findFieldWithNameWithinCurrentSiblingFields($fieldNameOrAlias);
+    }
+
+    /**
+     * Actual name of the field (without the leading "__")
+     */
+    protected function isObjectResolvedFieldValueReferenceName(string $name): bool
+    {
+        return \str_starts_with(
+            $name,
+            QuerySyntax::OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX
+        );
     }
 
     /**
