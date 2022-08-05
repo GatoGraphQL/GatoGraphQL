@@ -94,7 +94,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
              *   ```
              *   {
              *     id
-             *     echo(value: [$_id])
+             *     echo(value: [$__id])
              *   }
              *   ```
              */
@@ -109,7 +109,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
              *   ```
              *   {
              *     id
-             *     echo(value: {id: $_id})
+             *     echo(value: {id: $__id})
              *   }
              *   ```
              */
