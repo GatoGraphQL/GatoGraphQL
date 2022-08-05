@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ObjectResolvedFieldValueReferences;
 
+use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
@@ -38,6 +39,8 @@ use PoP\Root\AbstractTestCase;
  */
 abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTestCase
 {
+    private ?ParserInterface $parser = null;
+
     /**
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
@@ -52,7 +55,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
 
     protected function getParser(): ParserInterface
     {
-        return $this->getService(ParserInterface::class);
+        return $this->parser ??= new Parser();
     }
 
     /**

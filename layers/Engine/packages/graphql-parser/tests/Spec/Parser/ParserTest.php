@@ -33,9 +33,11 @@ use stdClass;
 
 class ParserTest extends AbstractTestCase
 {
+    private ?ParserInterface $parser = null;
+
     protected function getParser(): ParserInterface
     {
-        return $this->getService(ParserInterface::class);
+        return $this->parser ??= new Parser();
     }
 
     public function testEmptyParser()
