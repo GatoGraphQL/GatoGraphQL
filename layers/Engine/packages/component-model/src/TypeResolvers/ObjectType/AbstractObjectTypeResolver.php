@@ -1427,15 +1427,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Cast the Arguments, return if any of them produced an error
          */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
         $fieldData = $this->getSchemaCastingService()->castArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field,
-            $separateObjectTypeFieldResolutionFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 
@@ -1455,14 +1454,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Perform validations
          */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->validateInvariableOnObjectResolutionFieldData(
             $fieldData,
             $field,
-            $separateObjectTypeFieldResolutionFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 
@@ -1555,15 +1552,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          *
          * - no mandatory arg is missing or is null
          */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
         $this->validateNonMissingOrNullMandatoryFieldArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field,
-            $separateObjectTypeFieldResolutionFeedbackStore
+            $objectTypeFieldResolutionFeedbackStore
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
 
