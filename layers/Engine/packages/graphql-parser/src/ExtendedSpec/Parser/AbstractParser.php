@@ -486,7 +486,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         ?Variable $variable,
         Location $location,
     ): VariableReference {
-        $resolvedFieldValueReferenceField = $this->findResolvedFieldValueReferenceField($name);
+        $resolvedFieldValueReferenceField = $this->findObjectResolvedFieldValueReferenceField($name);
         if ($resolvedFieldValueReferenceField !== null) {
             $this->objectResolvedFieldValueReferencedFields[] = $resolvedFieldValueReferenceField;
             return $this->createObjectResolvedFieldValueReference($name, $resolvedFieldValueReferenceField, $location);
@@ -509,7 +509,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * in the same query block, then it's a reference to the value
      * of the resolved field on the same object
      */
-    protected function findResolvedFieldValueReferenceField(
+    protected function findObjectResolvedFieldValueReferenceField(
         string $name,
     ): ?FieldInterface {
         /** @var ModuleConfiguration */
