@@ -237,7 +237,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function getFieldTypeResolver(
         FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?ConcreteTypeResolverInterface {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
