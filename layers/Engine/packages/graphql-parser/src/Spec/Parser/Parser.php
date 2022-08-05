@@ -33,11 +33,11 @@ use stdClass;
 class Parser extends Tokenizer implements ParserInterface
 {
     /** @var OperationInterface[] */
-    protected array $operations = [];
+    protected array $operations;
     /** @var Fragment[] */
-    protected array $fragments = [];
+    protected array $fragments;
     /** @var Variable[] */
-    protected array $variables = [];
+    protected array $variables;
 
     /**
      * @throws SyntaxErrorException
