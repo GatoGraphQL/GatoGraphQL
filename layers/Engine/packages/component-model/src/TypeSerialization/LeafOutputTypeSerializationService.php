@@ -120,6 +120,55 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
     }
 
     /**
+     * @todo Continue working here!
+     *
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $idFieldValues
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @return array<string|int,SplObjectStorage<FieldInterface,mixed>>
+     */
+    // public function serializeLeafOutputTypeFieldValue(
+    //     RelationalTypeResolverInterface $relationalTypeResolver,
+    //     array $idFieldValues,
+    //     array $idFieldSet,
+    //     array $idObjects,
+    //     ObjectTypeResolverInterface $objectTypeResolver,
+    //     FieldInterface $field,
+    //     Directive $directive,
+    //     EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    // ): mixed {
+    //     if ($value === null) {
+    //         return null;
+    //     }
+
+    //     $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+    //     $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $objectTypeFieldResolutionFeedbackStore);
+    //     $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+    //         $objectTypeFieldResolutionFeedbackStore,
+    //         $objectTypeResolver,
+    //         $directive,
+    //         [$id => new EngineIterationFieldSet([$field])]
+    //     );
+    //     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+    //         continue;
+    //     }
+
+    //     if (!($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
+    //         continue;
+    //     }
+
+    //     /** @var LeafOutputTypeResolverInterface */
+    //     $fieldLeafOutputTypeResolver = $fieldTypeResolver;
+
+    //     // Serialize the scalar/enum value stored in $idFieldValues
+    //     return $this->executeLeafOutputTypeValueSerialization(
+    //         $value,
+    //         $fieldLeafOutputTypeResolver,
+    //         $objectTypeResolver,
+    //         $field,
+    //     );
+    // }
+
+    /**
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
      */
