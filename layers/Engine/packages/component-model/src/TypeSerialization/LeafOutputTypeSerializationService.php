@@ -108,37 +108,6 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
     }
 
     /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $idFieldValues
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return array<string|int,SplObjectStorage<FieldInterface,mixed>>
-     */
-    public function serializeLeafOutputTypeFieldValue(
-        mixed $value,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): mixed {
-        if ($value === null) {
-            return null;
-        }
-
-        $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
-        if ($fieldTypeResolver === null || !($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
-            continue;
-        }
-
-        /** @var LeafOutputTypeResolverInterface */
-        $fieldLeafOutputTypeResolver = $fieldTypeResolver;
-
-        // Serialize the scalar/enum value stored in $idFieldValues
-        return $this->executeLeafOutputTypeValueSerialization(
-            $value,
-            $fieldLeafOutputTypeResolver,
-            $objectTypeResolver,
-            $field,
-        );
-    }
-
-    /**
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
      */
