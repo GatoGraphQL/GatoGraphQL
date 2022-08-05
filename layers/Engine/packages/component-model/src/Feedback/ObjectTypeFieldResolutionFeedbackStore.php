@@ -48,6 +48,11 @@ class ObjectTypeFieldResolutionFeedbackStore
         );
     }
 
+    public function getErrorCount(): int
+    {
+        return count($this->getErrors());
+    }
+
     /**
      * @return ObjectTypeFieldResolutionFeedbackInterface[]
      */
