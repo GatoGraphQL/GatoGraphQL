@@ -313,7 +313,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
 
             // Validate that the expected array/non-array input is provided
-            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
@@ -323,39 +323,34 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsArrayOfArraysType,
                 $inputFieldIsNonNullArrayOfArraysItemsType,
                 $astNode,
-                $separateObjectTypeFieldResolutionFeedbackStore,
+                $objectTypeFieldResolutionFeedbackStore,
             );
-            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
                 continue;
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
-            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
                 $astNode,
-                $separateObjectTypeFieldResolutionFeedbackStore,
+                $objectTypeFieldResolutionFeedbackStore,
             );
-            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
                 continue;
             }
 
             // Custom validations for the field
-            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->validateCoercedInputFieldValue(
                 $inputFieldTypeResolver,
                 $inputFieldName,
                 $coercedInputFieldValue,
                 $astNode,
-                $separateObjectTypeFieldResolutionFeedbackStore,
+                $objectTypeFieldResolutionFeedbackStore,
             );
-            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
                 continue;
             }
 

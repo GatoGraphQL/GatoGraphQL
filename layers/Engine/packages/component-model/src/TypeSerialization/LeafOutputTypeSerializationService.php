@@ -82,15 +82,15 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
             /** @var SplObjectStorage<FieldInterface,mixed> */
             $fieldValues = $serializedIDFieldValues[$id] ?? new SplObjectStorage();
             foreach ($fieldSet->fields as $field) {
-                $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $objectTypeFieldResolutionFeedbackStore);
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-                    $separateObjectTypeFieldResolutionFeedbackStore,
+                    $objectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
                     $directive,
                     [$id => new EngineIterationFieldSet([$field])]
                 );
-                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     continue;
                 }
                 if (!($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {

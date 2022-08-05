@@ -28,10 +28,9 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $this->validateIsNotStdClass($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore);
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrors();
+        $this->validateIsNotStdClass($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
 

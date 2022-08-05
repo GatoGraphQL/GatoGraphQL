@@ -115,7 +115,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             }
 
             // Validate that the expected array/non-array input is provided
-            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -125,24 +125,21 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
                 $astNode,
-                $separateObjectTypeFieldResolutionFeedbackStore,
+                $objectTypeFieldResolutionFeedbackStore,
             );
-            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
                 continue;
             }
 
-            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $astNode,
-                $separateObjectTypeFieldResolutionFeedbackStore,
+                $objectTypeFieldResolutionFeedbackStore,
             );
-            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
                 continue;
             }
 

@@ -110,14 +110,13 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         foreach ($nestedDirectives as $nestedDirective) {
             $nestedDirectiveFields[$nestedDirective] = $fields;
         }
-        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+        $errorCount = $engineIterationFeedbackStore->getErrorCount();
         $nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
             $nestedDirectives,
             $nestedDirectiveFields,
-            $separateEngineIterationFeedbackStore,
+            $engineIterationFeedbackStore,
         );
-        $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-        if ($separateEngineIterationFeedbackStore->hasErrors()) {
+        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 
@@ -125,7 +124,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
          * Validate that the directive pipeline was created successfully
          */
         if ($nestedDirectivePipelineData->count() === 0) {
-            $separateEngineIterationFeedbackStore->schemaFeedbackStore->addError(
+            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,

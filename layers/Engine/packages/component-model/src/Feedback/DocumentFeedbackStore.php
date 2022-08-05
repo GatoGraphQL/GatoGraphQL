@@ -19,6 +19,11 @@ class DocumentFeedbackStore
     /** @var DocumentFeedbackInterface[] */
     private array $logs = [];
 
+    public function getErrorCount(): int
+    {
+        return count($this->getErrors());
+    }
+
     /**
      * @return DocumentFeedbackInterface[]
      */

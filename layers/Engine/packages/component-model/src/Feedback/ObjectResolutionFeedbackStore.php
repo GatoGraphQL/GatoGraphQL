@@ -111,6 +111,11 @@ class ObjectResolutionFeedbackStore
         }
     }
 
+    public function getErrorCount(): int
+    {
+        return count($this->getErrors());
+    }
+
     /**
      * @return ObjectResolutionFeedbackInterface[]
      */

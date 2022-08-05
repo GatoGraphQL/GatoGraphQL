@@ -103,6 +103,11 @@ class SchemaFeedbackStore
         }
     }
 
+    public function getErrorCount(): int
+    {
+        return count($this->getErrors());
+    }
+
     /**
      * @return SchemaFeedbackInterface[]
      */

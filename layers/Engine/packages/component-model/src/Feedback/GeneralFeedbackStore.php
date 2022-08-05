@@ -19,6 +19,11 @@ class GeneralFeedbackStore
     /** @var GeneralFeedbackInterface[] */
     private array $logs = [];
 
+    public function getErrorCount(): int
+    {
+        return count($this->getErrors());
+    }
+
     /**
      * @return GeneralFeedbackInterface[]
      */

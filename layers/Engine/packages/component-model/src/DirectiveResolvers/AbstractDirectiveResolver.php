@@ -267,34 +267,33 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /**
          * Cast the Arguments, return if any of them produced an error
          */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $directiveData = $this->getSchemaCastingService()->castArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
             $this->directive,
-            $separateObjectTypeFieldResolutionFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
         );
         $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-            $separateObjectTypeFieldResolutionFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
             $relationalTypeResolver,
             $fields,
         );
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
         /**
          * Perform validations
          */
-        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+        $errorCount = $engineIterationFeedbackStore->getErrorCount();
         $this->validateDirectiveData(
             $directiveData,
             $relationalTypeResolver,
             $fields,
-            $separateEngineIterationFeedbackStore,
+            $engineIterationFeedbackStore,
         );
-        $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-        if ($separateEngineIterationFeedbackStore->hasErrors()) {
+        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 
@@ -322,23 +321,22 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
          */
-        $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+        $errorCount = $engineIterationFeedbackStore->getErrorCount();
         $this->validateNonMissingMandatoryDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
-            $separateEngineIterationFeedbackStore,
+            $engineIterationFeedbackStore,
         );
         $this->validateOnlyExistingDirectiveArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
-            $separateEngineIterationFeedbackStore,
+            $engineIterationFeedbackStore,
         );
-        $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-        if ($separateEngineIterationFeedbackStore->hasErrors()) {
+        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
 
