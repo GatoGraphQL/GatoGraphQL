@@ -140,6 +140,7 @@ class GraphQLServer implements GraphQLServerInterface
         // Convert the GraphQL query to AST
         $executableDocument = null;
         $documentASTNodeAncestors = null;
+        $documentObjectResolvedFieldValueReferencedFields = [];
         try {
             $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
@@ -147,6 +148,7 @@ class GraphQLServer implements GraphQLServerInterface
                 $operationName
             );
             $executableDocument = $graphQLQueryParsingPayload->executableDocument;
+            $documentObjectResolvedFieldValueReferencedFields = $graphQLQueryParsingPayload->objectResolvedFieldValueReferencedFields;
         } catch (SyntaxErrorException $syntaxErrorException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(
@@ -162,6 +164,8 @@ class GraphQLServer implements GraphQLServerInterface
                 )
             );
         }
+
+        $appStateManager->override('document-object-resolved-field-value-referenced-fields', $documentObjectResolvedFieldValueReferencedFields);
 
         if ($executableDocument !== null) {
             /**
