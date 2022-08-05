@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
@@ -34,6 +36,11 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        $this->maybeAddWarnings(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         $user_id = $fieldDataAccessor->getValue('user_id');
 
         $previous_communities = gdUreGetCommunities($user_id);
@@ -96,11 +103,10 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         }
     }
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
+    protected function maybeAddWarnings(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $warnings = [];
         $user_id = $fieldDataAccessor->getValue('user_id');
         $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
@@ -137,6 +143,19 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
             );
         }
 
-        return $warnings;
+        foreach ($warnings as $warning) {
+            $objectTypeFieldResolutionFeedbackStore->addWarning(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        GenericFeedbackItemProvider::class,
+                        GenericFeedbackItemProvider::W1,
+                        [
+                            $warning
+                        ]
+                    ),
+                    $fieldDataAccessor->getField()
+                )
+            );
+        }
     }
 }
