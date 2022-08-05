@@ -1034,27 +1034,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
-    /**
-     * Add warnings, logs, suggestions, etc
-     *
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @param array<string|int,object> $idObjects
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     */
-    protected function addDirectiveResolutionFeedback(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idFieldSet,
-        array $idObjects,
-        array $resolvedIDFieldValues,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): void {
-        $this->maybeAddSemanticVersionConstraintsWarningFeedback(
-            $relationalTypeResolver,
-            $idFieldSet,
-            $engineIterationFeedbackStore,
-        );
-    }
-
     protected function maybeAddSemanticVersionConstraintsWarningFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
@@ -1184,14 +1163,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
         if (!$this->needsSomeIDFieldToExecute() || $this->hasSomeIDField($idFieldSet)) {
-            /**
-             * Add warnings, logs, suggestions, etc
-             */
-            $this->addDirectiveResolutionFeedback(
+            $this->maybeAddSemanticVersionConstraintsWarningFeedback(
                 $relationalTypeResolver,
                 $idFieldSet,
-                $idObjects,
-                $resolvedIDFieldValues,
                 $engineIterationFeedbackStore,
             );
 
