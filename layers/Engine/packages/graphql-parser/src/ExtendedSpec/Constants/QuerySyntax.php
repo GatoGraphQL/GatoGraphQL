@@ -6,5 +6,5 @@ namespace PoP\GraphQLParser\ExtendedSpec\Constants;
 
 class QuerySyntax
 {
-    const OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX = '_';
+    const OBJECT_RESOLVED_FIELD_VALUE_REFERENCE_PREFIX = '__';
 }
