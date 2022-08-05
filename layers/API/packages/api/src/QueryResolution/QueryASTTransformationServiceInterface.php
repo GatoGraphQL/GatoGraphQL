@@ -22,20 +22,20 @@ interface QueryASTTransformationServiceInterface
      *
      *     query One {
      *       user(by: {id: 1}) {
-     *         name @export(as: "_name")
+     *         name @export(as: "name")
      *       }
      *     }
      *
      *     query Two {
-     *       firstEcho: echo(value: $_name) @upperCase @export(as: "_ucName")
+     *       firstEcho: echo(value: $name) @upperCase @export(as: "ucName")
      *     }
      *
      *     query Three {
-     *       secondEcho: echo(value: $_ucName)
+     *       secondEcho: echo(value: $ucName)
      *     }
      *
      * `firstEcho` is normally resolved on the first iteration for `Root`,
-     * that is before `name @export(as: "_name")` is resolved on the
+     * that is before `name @export(as: "name")` is resolved on the
      * second iteration on `User`.
      *
      * For that reason, the fields are wrapped in `self`, and the query
@@ -43,14 +43,14 @@ interface QueryASTTransformationServiceInterface
      *
      *     query One {
      *       user(by: {id: 1}) {
-     *         name @export(as: "_name")
+     *         name @export(as: "name")
      *       }
      *     }
      *
      *     query Two {
      *       self {
      *         self {
-     *           firstEcho: echo(value: $_name) @upperCase @export(as: "_ucName")
+     *           firstEcho: echo(value: $name) @upperCase @export(as: "ucName")
      *         }
      *       }
      *     }
@@ -59,14 +59,14 @@ interface QueryASTTransformationServiceInterface
      *       self {
      *         self {
      *           self {
-     *             secondEcho: echo(value: $_ucName)
+     *             secondEcho: echo(value: $ucName)
      *           }
      *         }
      *       }
      *     }
      *
      * Now, `firstEcho` is resolved on the third iteration (second on `Root`),
-     * which is after `name @export(as: "_name")`.
+     * which is after `name @export(as: "name")`.
      *
      * --------------------------------------------------------------------
      *
