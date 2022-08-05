@@ -343,7 +343,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         // If user is logged in => It's Update
         // Otherwise => It's Create
         if (App::getState('is-user-logged-in')) {
-            return $this->update($fieldDataAccessor);
+            return $this->update(
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore
+            );
         }
 
         return $this->create($fieldDataAccessor);
@@ -378,8 +381,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the updated entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
-    {
+    protected function update(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int {
         // Do the Post update
         $user_id = $this->updateuser($fieldDataAccessor);
 

@@ -68,8 +68,10 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
-    {
+    protected function update(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int {
         $user_id = App::getState('current-user-id');
         $target_id = $fieldDataAccessor->getValue('target_id');
 
@@ -85,9 +87,12 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
         if (in_array($target_id, $opposite)) {
-            $this->getDownvoteCustomPostMutationResolver()->executeMutation($fieldDataAccessor);
+            $this->getDownvoteCustomPostMutationResolver()->executeMutation(
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         }
 
-        return parent::update($fieldDataAccessor);
+        return parent::update($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -60,8 +60,10 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
-    {
+    protected function update(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int {
         $user_id = App::getState('current-user-id');
         $target_id = $fieldDataAccessor->getValue('target_id');
 
@@ -74,6 +76,6 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
         $count = $count ? $count : 0;
         \PoPCMSSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBERSCOUNT, ($count - 1), true);
 
-        return parent::update($fieldDataAccessor);
+        return parent::update($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

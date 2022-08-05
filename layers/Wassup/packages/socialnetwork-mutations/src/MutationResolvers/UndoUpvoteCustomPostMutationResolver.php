@@ -57,8 +57,10 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
-    {
+    protected function update(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int {
         $user_id = App::getState('current-user-id');
         $target_id = $fieldDataAccessor->getValue('target_id');
 
@@ -71,14 +73,19 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
         $count = $count ? $count : 0;
         \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, \GD_METAKEY_POST_UPVOTECOUNT, ($count - 1), true);
 
-        return parent::update($fieldDataAccessor);
+        return parent::update($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
      * Function to be called by the opposite function (Up-vote/Down-vote)
      */
-    public function undo(FieldDataAccessorInterface $fieldDataAccessor)
-    {
-        return $this->update($fieldDataAccessor);
+    public function undo(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int {
+        return $this->update(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore
+        );
     }
 }

@@ -19,7 +19,10 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         if ($this->isUpdate($fieldDataAccessor)) {
-            return $this->update($fieldDataAccessor);
+            return $this->update(
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore
+            );
         }
         return $this->create($fieldDataAccessor);
     }
