@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -40,10 +39,6 @@ interface SchemaDirectiveResolverInterface
      * Expressions set by the directive
      */
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array;
-    /**
-     * Raise warnings concerning the directive
-     */
-    public function getDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution;
     /**
      * Indicate if the directive has been deprecated, why, when, and/or how it must be replaced
      */

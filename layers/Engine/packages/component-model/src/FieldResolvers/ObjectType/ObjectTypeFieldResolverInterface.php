@@ -13,7 +13,6 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, ObjectTypeFieldSchemaDefinitionResolverInterface
 {
@@ -87,13 +86,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ?MutationResolverInterface;
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function resolveFieldValidationWarnings(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor
-    ): array;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     public function validateFieldDataForObject(
         ObjectTypeResolverInterface $objectTypeResolver,

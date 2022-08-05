@@ -10,7 +10,6 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Exception\GenericClientException;
@@ -23,8 +22,15 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $this->maybeAddWarnings(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         $emails = $fieldDataAccessor->getValue('emails');
         // Remove the invalid emails
         $emails = array_diff($emails, $this->getInvalidEmails($emails));
@@ -101,11 +107,10 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         );
     }
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
+    protected function maybeAddWarnings(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $warnings = [];
 
         $emails = $fieldDataAccessor->getValue('emails');
@@ -121,7 +126,20 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
             );
         }
 
-        return $warnings;
+        foreach ($warnings as $warning) {
+            $objectTypeFieldResolutionFeedbackStore->addWarning(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        GenericFeedbackItemProvider::class,
+                        GenericFeedbackItemProvider::W1,
+                        [
+                            $warning
+                        ]
+                    ),
+                    $fieldDataAccessor->getField()
+                )
+            );
+        }
     }
 
     abstract protected function getEmailContent(FieldDataAccessorInterface $fieldDataAccessor);

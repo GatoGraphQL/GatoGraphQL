@@ -66,8 +66,10 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $hist_ids = $this->setStatus($fieldDataAccessor);
         $this->additionals($fieldDataAccessor->getValue('histid'), $fieldDataAccessor);
 

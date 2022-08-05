@@ -21,8 +21,10 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
         $postCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);

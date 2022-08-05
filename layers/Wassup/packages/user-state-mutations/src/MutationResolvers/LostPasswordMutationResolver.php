@@ -143,8 +143,10 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         $user_login = $fieldDataAccessor->getValue(MutationInputProperties::USER_LOGIN);
 

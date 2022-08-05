@@ -29,6 +29,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -1024,15 +1025,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return [];
     }
 
-    public function getDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveWarning($relationalTypeResolver);
-        }
-        return null;
-    }
-
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
@@ -1042,30 +1034,47 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
-    public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
-    {
-        if (Environment::enableSemanticVersionConstraints()) {
-            /**
-             * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
-             */
-            if ($versionConstraint = $this->directiveArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null) {
-                /**
-                 * If this fieldResolver doesn't have versioning, then it accepts everything
-                 */
-                if (!$this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)) {
-                    return new FeedbackItemResolution(
-                        WarningFeedbackItemProvider::class,
-                        WarningFeedbackItemProvider::W3,
-                        [
-                            $this->getDirectiveName(),
-                            $this->getDirectiveVersion($relationalTypeResolver) ?? '',
-                            $versionConstraint,
-                        ]
-                    );
-                }
-            }
+    protected function maybeAddSemanticVersionConstraintsWarningFeedback(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idFieldSet,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void {
+        if (!Environment::enableSemanticVersionConstraints()) {
+            return;
         }
-        return $this->getDirectiveWarning($relationalTypeResolver);
+
+        /**
+         * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
+         */
+        $versionConstraint = $this->directiveArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null;
+        if (!$versionConstraint) {
+            return;
+        }
+
+        /**
+         * If this fieldResolver doesn't have versioning, then it accepts everything
+         */
+        if ($this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)) {
+            return;
+        }
+
+        $fields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
+        $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
+            new SchemaFeedback(
+                new FeedbackItemResolution(
+                    WarningFeedbackItemProvider::class,
+                    WarningFeedbackItemProvider::W3,
+                    [
+                        $this->getDirectiveName(),
+                        $this->getDirectiveVersion($relationalTypeResolver) ?? '',
+                        $versionConstraint,
+                    ]
+                ),
+                $this->directive,
+                $relationalTypeResolver,
+                $fields
+            )
+        );
     }
 
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -1154,6 +1163,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
         if (!$this->needsSomeIDFieldToExecute() || $this->hasSomeIDField($idFieldSet)) {
+            $this->maybeAddSemanticVersionConstraintsWarningFeedback(
+                $relationalTypeResolver,
+                $idFieldSet,
+                $engineIterationFeedbackStore,
+            );
+
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
             $feedbackItemResolution = null;

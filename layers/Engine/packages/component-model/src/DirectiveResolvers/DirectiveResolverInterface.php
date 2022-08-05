@@ -12,7 +12,6 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaDirectiveResolverInterface
@@ -129,6 +128,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string|int,object> $idObjects
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
@@ -164,7 +164,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function hasDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface;
 
-    public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution;
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     /**
      * Name for the directive arg to indicate which additional fields

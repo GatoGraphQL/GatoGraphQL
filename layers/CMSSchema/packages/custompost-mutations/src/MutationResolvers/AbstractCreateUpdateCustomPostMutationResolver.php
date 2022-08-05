@@ -376,8 +376,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
-    {
+    protected function update(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int {
         $post_data = $this->getUpdateCustomPostData($fieldDataAccessor);
         $customPostID = $post_data['id'];
 

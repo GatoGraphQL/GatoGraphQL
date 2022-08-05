@@ -147,8 +147,10 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $newsletter_data = $this->getNewsletterData($fieldDataAccessor);
         $result = $this->doExecute($newsletter_data);
 

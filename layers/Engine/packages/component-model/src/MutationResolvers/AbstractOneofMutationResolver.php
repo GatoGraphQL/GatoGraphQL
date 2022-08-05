@@ -139,11 +139,16 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @throws AbstractException In case of error
      */
-    final public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    final public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
         /** @var MutationResolverInterface $inputFieldMutationResolver */
-        return $inputFieldMutationResolver->executeMutation($fieldDataAccessor);
+        return $inputFieldMutationResolver->executeMutation(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     /**
@@ -172,23 +177,6 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
                     $fieldDataAccessor->getField(),
                 )
             );
-        }
-    }
-
-    /**
-     * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
-     * @return FeedbackItemResolution[]
-     * @throws AbstractValueResolutionPromiseException
-     */
-    final public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        try {
-            [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
-            /** @var MutationResolverInterface $inputFieldMutationResolver */
-            return $inputFieldMutationResolver->validateWarnings($fieldDataAccessor);
-        } catch (QueryResolutionException $e) {
-            // Do nothing since the Error will already return the problem
-            return [];
         }
     }
 

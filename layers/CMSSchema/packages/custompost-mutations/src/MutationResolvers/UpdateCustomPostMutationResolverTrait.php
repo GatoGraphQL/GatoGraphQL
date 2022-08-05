@@ -16,8 +16,12 @@ trait UpdateCustomPostMutationResolverTrait
      */
     public function executeMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return $this->update($fieldDataAccessor);
+        return $this->update(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     /**
@@ -26,6 +30,7 @@ trait UpdateCustomPostMutationResolverTrait
      */
     abstract protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int;
 
     public function validateErrors(

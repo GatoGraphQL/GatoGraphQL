@@ -883,45 +883,56 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function resolveFieldValidationWarnings(
+    protected function addValueResolutionFeedback(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor
-    ): array {
-        $warningFeedbackItemResolutions = [];
-        if (Environment::enableSemanticVersionConstraints()) {
-            /**
-             * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
-             */
-            if ($versionConstraint = $fieldDataAccessor->getValue(SchemaDefinition::VERSION_CONSTRAINT)) {
-                /**
-                 * If this fieldResolver doesn't have versioning, then it accepts everything
-                 */
-                if (!$this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
-                    $warningFeedbackItemResolutions[] = new FeedbackItemResolution(
-                        WarningFeedbackItemProvider::class,
-                        WarningFeedbackItemProvider::W2,
-                        [
-                            $fieldDataAccessor->getFieldName(),
-                            $this->getFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName()) ?? '',
-                            $versionConstraint
-                        ]
-                    );
-                }
-            }
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $this->maybeAddSemanticVersionConstraintsWarningFeedback(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function maybeAddSemanticVersionConstraintsWarningFeedback(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!Environment::enableSemanticVersionConstraints()) {
+            return;
         }
-        // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
-        if ($mutationResolver !== null) {
-            $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
-            $warningFeedbackItemResolutions = array_merge(
-                $warningFeedbackItemResolutions,
-                $mutationResolver->validateWarnings($fieldDataAccessorForMutation)
-            );
+
+        /**
+         * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
+         */
+        $versionConstraint = $fieldDataAccessor->getValue(SchemaDefinition::VERSION_CONSTRAINT);
+        if (!$versionConstraint) {
+            return;
         }
-        return $warningFeedbackItemResolutions;
+
+        /**
+         * If this fieldResolver doesn't have versioning, then it accepts everything
+         */
+        if ($this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
+            return;
+        }
+
+        $objectTypeFieldResolutionFeedbackStore->addWarning(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    WarningFeedbackItemProvider::class,
+                    WarningFeedbackItemProvider::W2,
+                    [
+                        $fieldDataAccessor->getFieldName(),
+                        $this->getFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName()) ?? '',
+                        $versionConstraint
+                    ]
+                ),
+                $fieldDataAccessor->getField()
+            )
+        );
     }
 
     /**
@@ -1002,6 +1013,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        $this->addValueResolutionFeedback(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         if ($mutationResolver !== null) {
@@ -1041,7 +1058,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 );
             }
             $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
-            return $mutationResolver->executeMutation($fieldDataAccessorForMutation);
+            return $mutationResolver->executeMutation(
+                $fieldDataAccessorForMutation,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         } catch (Exception $e) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

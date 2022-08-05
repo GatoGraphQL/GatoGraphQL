@@ -91,8 +91,10 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         // If the user is already logged in, then return the error
         $username_or_email = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
         $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);

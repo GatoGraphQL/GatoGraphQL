@@ -110,8 +110,10 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $code = $fieldDataAccessor->getValue(MutationInputProperties::CODE);
         $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
 

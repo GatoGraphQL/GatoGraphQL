@@ -21,8 +21,10 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
         $postTags = $fieldDataAccessor->getValue(MutationInputProperties::TAGS);
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);

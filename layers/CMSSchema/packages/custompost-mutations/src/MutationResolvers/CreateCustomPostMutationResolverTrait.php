@@ -16,6 +16,7 @@ trait CreateCustomPostMutationResolverTrait
      */
     public function executeMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         return $this->create($fieldDataAccessor);
     }

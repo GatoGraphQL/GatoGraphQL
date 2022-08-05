@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 /**
@@ -159,17 +158,6 @@ trait AliasSchemaDirectiveResolverTrait
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->getDirectiveExpressions(
-            $relationalTypeResolver
-        );
-    }
-
-    /**
-     * Proxy pattern: execute same function on the aliased DirectiveResolver
-     */
-    public function getDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
-    {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveWarning(
             $relationalTypeResolver
         );
     }

@@ -20,14 +20,6 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
 {
     public function getFieldSchemaDefinition(FieldInterface $field): ?array;
     public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool;
-    public function collectFieldValidationWarnings(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void;
-    public function collectFieldDeprecations(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void;
     public function getFieldTypeResolver(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

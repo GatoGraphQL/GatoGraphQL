@@ -41,8 +41,10 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string|int
-    {
+    protected function update(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int {
         $target_id = $fieldDataAccessor->getValue('target_id');
         return $target_id;
     }
@@ -50,9 +52,14 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
-    {
-        $target_id = $this->update($fieldDataAccessor);
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $target_id = $this->update(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore
+        );
         $this->additionals($target_id, $fieldDataAccessor);
 
         return $target_id;

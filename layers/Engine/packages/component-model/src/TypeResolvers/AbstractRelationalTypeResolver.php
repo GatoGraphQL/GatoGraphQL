@@ -371,19 +371,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directive = $directiveResolver->getDirective();
             $directiveName = $directive->getName();
 
-            // Check for warnings
-            if ($warningFeedbackItemResolution = $directiveResolver->resolveDirectiveWarning($this)) {
-                $fields = $directiveFields[$directive];
-                $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
-                    new SchemaFeedback(
-                        $warningFeedbackItemResolution,
-                        $directive,
-                        $this,
-                        $fields,
-                    )
-                );
-            }
-
             // Check for deprecations
             if ($deprecationMessage = $directiveResolver->getDirectiveDeprecationMessage($this)) {
                 $fields = $directiveFields[$directive];
