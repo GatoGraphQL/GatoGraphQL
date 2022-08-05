@@ -15,6 +15,7 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class Parser extends AbstractParser
 {
@@ -28,7 +29,7 @@ class Parser extends AbstractParser
     }
     final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
     {
-        return $this->metaDirectiveRegistry ??= $this->instanceManager->getInstance(MetaDirectiveRegistryInterface::class);
+        return $this->metaDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(MetaDirectiveRegistryInterface::class);
     }
     final public function setDynamicVariableDefinerDirectiveRegistry(DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry): void
     {
@@ -36,7 +37,7 @@ class Parser extends AbstractParser
     }
     final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
     {
-        return $this->dynamicVariableDefinerDirectiveRegistry ??= $this->instanceManager->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
+        return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
     }
     final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {
@@ -44,7 +45,7 @@ class Parser extends AbstractParser
     }
     final protected function getDirectiveRegistry(): DirectiveRegistryInterface
     {
-        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
+        return $this->directiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DirectiveRegistryInterface::class);
     }
 
     protected function isMetaDirective(string $directiveName): bool
