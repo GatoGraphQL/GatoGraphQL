@@ -274,12 +274,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
 
         /** @var SplObjectStorage<FieldInterface,mixed> */
-        $resolvedIDFieldValues = new SplObjectStorage();
-        $resolvedIDFieldValues[$field] = $value;
+        $resolvedFieldValues = new SplObjectStorage();
+        $resolvedFieldValues[$field] = $value;
 
         /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> */
         $resolvedIDFieldValues = array(
-            $id => $resolvedIDFieldValues,
+            $id => $resolvedFieldValues,
         );
         $serializedIDFieldValues = $this->getLeafOutputTypeSerializationService()->serializeLeafOutputTypeIDFieldValues(
             $relationalTypeResolver,
