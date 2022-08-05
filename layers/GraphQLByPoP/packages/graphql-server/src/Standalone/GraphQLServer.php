@@ -139,6 +139,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Convert the GraphQL query to AST
         $executableDocument = null;
+        $documentASTNodeAncestors = null;
         try {
             $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
@@ -166,7 +167,7 @@ class GraphQLServer implements GraphQLServerInterface
              * Calculate now, as it's useful also if the validation
              * of the ExecutableDocument has errors.
              */
-            $appStateManager->override('document-ast-node-ancestors', $executableDocument->getDocument()->getASTNodeAncestors());
+            $documentASTNodeAncestors = $executableDocument->getDocument()->getASTNodeAncestors();
 
             try {
                 $executableDocument->validateAndInitialize();
@@ -180,8 +181,8 @@ class GraphQLServer implements GraphQLServerInterface
                 );
             }
         }
-
         $appStateManager->override('executable-document-ast', $executableDocument);
+        $appStateManager->override('document-ast-node-ancestors', $documentASTNodeAncestors);
 
         /**
          * Set the operation type and, based on it, if mutations are supported.
