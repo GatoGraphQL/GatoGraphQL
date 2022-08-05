@@ -35,7 +35,8 @@ class GraphQLParserHelpers
             new Context($operationName, $variableValues)
         );
         return new GraphQLQueryParsingPayload(
-            $executableDocument
+            $executableDocument,
+            $parser->getObjectResolvedFieldValueReferencedFields(),
         );
     }
 }

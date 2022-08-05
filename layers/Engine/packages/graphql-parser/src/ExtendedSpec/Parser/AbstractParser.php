@@ -70,6 +70,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     protected array $parsedDefinedDynamicVariableNames;
 
+    /**
+     * List of all the Fields in the query which are
+     * referenced via an ObjectResolvedFieldValueReference.
+     *
+     * @var FieldInterface[]
+     */
+    protected array $objectResolvedFieldValueReferencedFields;
+
     protected function resetState(): void
     {
         parent::resetState();
@@ -77,6 +85,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $this->parsedFieldBlockStack = [];
         $this->parsingDirectiveArgumentList = false;
         $this->parsedDefinedDynamicVariableNames = [];
+        $this->objectResolvedFieldValueReferencedFields = [];
     }
 
     /**
@@ -479,6 +488,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     ): VariableReference {
         $resolvedFieldValueReferenceField = $this->findResolvedFieldValueReferenceField($name);
         if ($resolvedFieldValueReferenceField !== null) {
+            $this->objectResolvedFieldValueReferencedFields[] = $resolvedFieldValueReferenceField;
             return $this->createObjectResolvedFieldValueReference($name, $resolvedFieldValueReferenceField, $location);
         }
 
@@ -624,6 +634,28 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $field,
             $location,
         );
+    }
+
+    /**
+     * This function must be invoked after running `->parse()`.
+     *
+     * It produces the list of all the Fields in the query
+     * which are referenced via an ObjectResolvedFieldValueReference.
+     *
+     * Eg: field `id` in:
+     *
+     *   ```
+     *   {
+     *     id
+     *     echo(value: $__id)
+     *   }
+     *   ```
+     *
+     * @return FieldInterface[]
+     */
+    public function getObjectResolvedFieldValueReferencedFields(): array
+    {
+        return $this->objectResolvedFieldValueReferencedFields;
     }
 
     public function createDocument(
