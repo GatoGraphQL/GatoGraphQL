@@ -267,19 +267,19 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /**
          * Cast the Arguments, return if any of them produced an error
          */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $directiveData = $this->getSchemaCastingService()->castArguments(
             $directiveData,
             $directiveArgsSchemaDefinition,
             $this->directive,
-            $separateObjectTypeFieldResolutionFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
         );
         $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-            $separateObjectTypeFieldResolutionFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
             $relationalTypeResolver,
             $fields,
         );
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
