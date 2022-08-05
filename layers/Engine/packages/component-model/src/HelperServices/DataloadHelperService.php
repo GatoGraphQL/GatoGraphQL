@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\HelperServices;
 
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -71,11 +70,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         $objectTypeResolver = $relationalTypeResolver;
 
         // If this field doesn't have a typeResolver, show a schema error
-        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $objectTypeFieldResolutionFeedbackStore);
-        if ($schemaFeedbackStore !== null) {
-            $schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, [$field]);
-        }
+        $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
         if (
             $subcomponentFieldNodeTypeResolver === null
             || !($subcomponentFieldNodeTypeResolver instanceof RelationalTypeResolverInterface)
