@@ -13,6 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -115,16 +116,22 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = static::enabled() ? [
+            $field,
+        ] : [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     protected function executeAssertion(
         string $query,
         Context $context,
-        QueryOperation $queryOperation
+        QueryOperation $queryOperation,
+        /** @var FieldInterface[] */
+        array $expectedObjectResolvedFieldValueReferencedFields,
     ): void {
+        $parser = $this->getParser();
         $executableDocument = new ExecutableDocument(
-            $this->getParser()->parse($query),
+            $parser->parse($query),
             $context,
         );
         $this->assertEquals(
@@ -132,6 +139,10 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
                 $queryOperation,
             ],
             $executableDocument->getDocument()->getOperations()
+        );
+        $this->assertEquals(
+            $expectedObjectResolvedFieldValueReferencedFields,
+            $parser->getObjectResolvedFieldValueReferencedFields()
         );
     }
 
@@ -191,7 +202,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     /**
@@ -273,7 +285,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
     */
 
@@ -334,7 +347,10 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = static::enabled() ? [
+            $field,
+        ] : [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     /**
@@ -396,7 +412,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     /**
@@ -454,7 +471,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     /**
@@ -517,7 +535,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     /**
@@ -575,7 +594,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     /**
@@ -648,7 +668,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 19)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     /**
@@ -726,7 +747,8 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 19)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
     /**
@@ -796,6 +818,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
             new Location(2, 13)
         );
 
-        $this->executeAssertion($query, $context, $queryOperation);
+        $expectedObjectResolvedFieldValueReferencedFields = [];
+        $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 }

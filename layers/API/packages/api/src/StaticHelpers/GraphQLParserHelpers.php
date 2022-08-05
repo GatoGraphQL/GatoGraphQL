@@ -10,6 +10,7 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
+use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
 
 class GraphQLParserHelpers
 {
@@ -26,12 +27,16 @@ class GraphQLParserHelpers
         string $query,
         array $variableValues,
         ?string $operationName,
-    ): ExecutableDocument {
+    ): GraphQLQueryParsingPayload {
         $parser = static::createParser();
         $document = $parser->parse($query);
-        return new ExecutableDocument(
+        $executableDocument = new ExecutableDocument(
             $document,
             new Context($operationName, $variableValues)
+        );
+        return new GraphQLQueryParsingPayload(
+            $executableDocument,
+            $parser->getObjectResolvedFieldValueReferencedFields(),
         );
     }
 }

@@ -28,6 +28,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         $state['executable-document-ast'] = null;
         $state['document-ast-node-ancestors'] = null;
+        $state['document-object-resolved-field-value-referenced-fields'] = [];
         $state['does-api-query-have-errors'] = null;
 
         // Passing the query via URL param?
@@ -84,11 +85,13 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $executableDocument = null;
         try {
-            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
+            $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variableValues,
                 $operationName
             );
+            $executableDocument = $graphQLQueryParsingPayload->executableDocument;
+            $state['document-object-resolved-field-value-referenced-fields'] = $graphQLQueryParsingPayload->objectResolvedFieldValueReferencedFields;
         } catch (SyntaxErrorException $syntaxErrorException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(

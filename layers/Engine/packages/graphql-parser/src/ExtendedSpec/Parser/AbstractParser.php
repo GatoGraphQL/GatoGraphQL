@@ -70,6 +70,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     protected array $parsedDefinedDynamicVariableNames;
 
+    /**
+     * List of all the Fields in the query which are
+     * referenced via an ObjectResolvedFieldValueReference.
+     *
+     * @var FieldInterface[]
+     */
+    protected array $objectResolvedFieldValueReferencedFields;
+
     protected function resetState(): void
     {
         parent::resetState();
@@ -77,6 +85,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $this->parsedFieldBlockStack = [];
         $this->parsingDirectiveArgumentList = false;
         $this->parsedDefinedDynamicVariableNames = [];
+        $this->objectResolvedFieldValueReferencedFields = [];
     }
 
     /**
@@ -477,8 +486,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         ?Variable $variable,
         Location $location,
     ): VariableReference {
-        $resolvedFieldValueReferenceField = $this->findResolvedFieldValueReferenceField($name);
+        $resolvedFieldValueReferenceField = $this->findObjectResolvedFieldValueReferenceField($name);
         if ($resolvedFieldValueReferenceField !== null) {
+            $this->objectResolvedFieldValueReferencedFields[] = $resolvedFieldValueReferenceField;
             return $this->createObjectResolvedFieldValueReference($name, $resolvedFieldValueReferenceField, $location);
         }
 
@@ -499,7 +509,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * in the same query block, then it's a reference to the value
      * of the resolved field on the same object
      */
-    protected function findResolvedFieldValueReferenceField(
+    protected function findObjectResolvedFieldValueReferenceField(
         string $name,
     ): ?FieldInterface {
         /** @var ModuleConfiguration */
@@ -624,6 +634,28 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $field,
             $location,
         );
+    }
+
+    /**
+     * This function must be invoked after running `->parse()`.
+     *
+     * It produces the list of all the Fields in the query
+     * which are referenced via an ObjectResolvedFieldValueReference.
+     *
+     * Eg: field `id` in:
+     *
+     *   ```
+     *   {
+     *     id
+     *     echo(value: $__id)
+     *   }
+     *   ```
+     *
+     * @return FieldInterface[]
+     */
+    public function getObjectResolvedFieldValueReferencedFields(): array
+    {
+        return array_values(array_unique($this->objectResolvedFieldValueReferencedFields));
     }
 
     public function createDocument(
