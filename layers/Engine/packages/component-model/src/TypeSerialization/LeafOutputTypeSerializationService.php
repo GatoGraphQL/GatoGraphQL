@@ -109,7 +109,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $idFieldValues
-                $fieldValues[$field] = $this->serializeLeafOutputTypeValue(
+                $fieldValues[$field] = $this->executeLeafOutputTypeValueSerialization(
                     $value,
                     $fieldLeafOutputTypeResolver,
                     $fieldLeafOutputTypeIsArrayOfArrays,
@@ -125,7 +125,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
      */
-    private function serializeLeafOutputTypeValue(
+    private function executeLeafOutputTypeValueSerialization(
         mixed $value,
         LeafOutputTypeResolverInterface $fieldLeafOutputTypeResolver,
         bool $fieldLeafOutputTypeIsArrayOfArrays,
