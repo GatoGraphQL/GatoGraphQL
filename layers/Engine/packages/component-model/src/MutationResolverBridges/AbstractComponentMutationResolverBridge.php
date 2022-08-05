@@ -93,18 +93,6 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             }
             return $mutationResponse;
         }
-        if ($warnings = $mutationResolver->validateWarnings($fieldDataAccessorForMutation)) {
-            $warningTypeKeys = [
-                ErrorTypes::DESCRIPTIONS => ResponseConstants::WARNINGSTRINGS,
-                ErrorTypes::CODES => ResponseConstants::WARNINGCODES,
-            ];
-            $warningTypeKey = $warningTypeKeys[$errorType];
-            // @todo Migrate from string to FeedbackItemProvider
-            $mutationResponse[$warningTypeKey] = array_map(
-                fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
-                $warnings
-            );
-        }
 
         $errorMessage = null;
         $resultID = null;

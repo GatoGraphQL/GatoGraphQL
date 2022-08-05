@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\MutationResolvers;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface MutationResolverInterface
 {
@@ -22,9 +21,5 @@ interface MutationResolverInterface
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array;
     public function getErrorType(): int;
 }

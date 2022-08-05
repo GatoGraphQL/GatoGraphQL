@@ -178,23 +178,6 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
-     * @return FeedbackItemResolution[]
-     * @throws AbstractValueResolutionPromiseException
-     */
-    final public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        try {
-            [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
-            /** @var MutationResolverInterface $inputFieldMutationResolver */
-            return $inputFieldMutationResolver->validateWarnings($fieldDataAccessor);
-        } catch (QueryResolutionException $e) {
-            // Do nothing since the Error will already return the problem
-            return [];
-        }
-    }
-
-    /**
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      * @throws AbstractValueResolutionPromiseException

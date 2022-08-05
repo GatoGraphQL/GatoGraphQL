@@ -912,15 +912,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 }
             }
         }
-        // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
-        if ($mutationResolver !== null) {
-            $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
-            $warningFeedbackItemResolutions = array_merge(
-                $warningFeedbackItemResolutions,
-                $mutationResolver->validateWarnings($fieldDataAccessorForMutation)
-            );
-        }
         return $warningFeedbackItemResolutions;
     }
 
