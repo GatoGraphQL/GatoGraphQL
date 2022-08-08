@@ -61,7 +61,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * As this ComponentProcessor splits them into groups
      * (for leaf/relational/conditional leaf/relational leaf),
      * they must be reinstated into their original order.
-     * 
+     *
      * This is accomplished by sorting the fields considering
      * their Location (Line x Column) in the query.
      */
