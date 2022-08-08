@@ -87,7 +87,33 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
                 }
 
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field);
-                if ($fieldTypeResolver === null || !($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
+                if ($fieldTypeResolver === null) {
+                    continue;
+                }
+
+                /**
+                 * If it is not a leaf node, then it is a relational node.
+                 * Then the values are the IDs of the elements to load.
+                 * 
+                 * Retrieve them directly, as they don't need
+                 * to be serialized, and they can be still useful.
+                 *
+                 * Eg, the Resolved Field Value Reference in this query:
+                 *
+                 *   ```
+                 *   {
+                 *       self {
+                 *           id
+                 *       }
+                 *       nonLeaf: echo(value: $__self)
+                 *   }
+                 *   ```
+                 *
+                 * ...must still retrieve the value for `self`, which is
+                 * a relational node.
+                 */
+                if (!($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
+                    $fieldValues[$field] = $value;
                     continue;
                 }
 
