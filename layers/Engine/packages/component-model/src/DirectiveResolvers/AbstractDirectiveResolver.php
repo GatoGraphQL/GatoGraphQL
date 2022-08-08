@@ -766,15 +766,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
-    public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->enableOrderedSchemaDirectiveArgs($relationalTypeResolver);
-        }
-        return true;
-    }
-
     /**
      * @return array<string,InputTypeResolverInterface>
      */
