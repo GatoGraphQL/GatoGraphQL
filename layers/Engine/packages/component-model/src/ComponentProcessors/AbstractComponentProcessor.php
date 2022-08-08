@@ -934,14 +934,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         ) {
             /**
              * The fields in the GraphQL query must be resolved in the same
-             * order they appear in the query, so that "Resolved Field Value
-             * References" are always resolved correctly.
+             * order they appear in the query, so that:
              *
-             * However, `COMPONENT_LAYOUT_RELATIONALFIELDS` splits them
-             * into groups (for leaf/relational/conditional leaf/relational leaf).
+             * - Entries under "errors" are shown in the same order as their fields
+             * - "Resolved Field Value References" are always resolved correctly.
              *
-             * To reinstate the original order, the fields are ordered considering
-             * their Location in the query.
+             * As `COMPONENT_LAYOUT_RELATIONALFIELDS` splits them
+             * into groups (for leaf/relational/conditional leaf/relational leaf),
+             * they must be reinstated into their original order.
+             * 
+             * This is accomplished by sorting the fields considering
+             * their Location (Line x Column) in the query.
              */
             usort(
                 $componentFieldNodes,
