@@ -25,4 +25,23 @@ abstract class AbstractComponentFieldNode implements ComponentFieldNodeInterface
     {
         return $this->field;
     }
+
+    public function sortAgainst(ComponentFieldNodeInterface $againstComponentFieldNode): int
+    {
+        $location = $this->getField()->getLocation();
+        $againstLocation = $againstComponentFieldNode->getField()->getLocation();
+        if ($location->getLine() > $againstLocation->getLine()) {
+            return 1;
+        }
+        if ($location->getLine() < $againstLocation->getLine()) {
+            return -1;
+        }
+        if ($location->getColumn() > $againstLocation->getColumn()) {
+            return 1;
+        }
+        if ($location->getColumn() < $againstLocation->getColumn()) {
+            return -1;
+        }
+        return 0;
+    }
 }

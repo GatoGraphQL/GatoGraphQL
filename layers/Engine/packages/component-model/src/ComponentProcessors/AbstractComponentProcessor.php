@@ -934,24 +934,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         ) {
             usort(
                 $componentFieldNodes,
-                function (ComponentFieldNodeInterface $a, ComponentFieldNodeInterface $b): int
-                {
-                    $aLocation = $a->getField()->getLocation();
-                    $bLocation = $b->getField()->getLocation();
-                    if ($aLocation->getLine() > $bLocation->getLine()) {
-                        return 1;
-                    }
-                    if ($aLocation->getLine() < $bLocation->getLine()) {
-                        return -1;
-                    }
-                    if ($aLocation->getColumn() > $bLocation->getColumn()) {
-                        return 1;
-                    }
-                    if ($aLocation->getColumn() < $bLocation->getColumn()) {
-                        return -1;
-                    }
-                    return 0;
-                }
+                fn (ComponentFieldNodeInterface $a, ComponentFieldNodeInterface $b) => $a->sortAgainst($b)
             );
             $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = $componentFieldNodes;
         }
