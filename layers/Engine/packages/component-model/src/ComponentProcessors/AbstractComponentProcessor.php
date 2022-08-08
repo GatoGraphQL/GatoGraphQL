@@ -932,6 +932,27 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $this->getConditionalRelationalComponentFieldNodes($component),
             )
         ) {
+            usort(
+                $componentFieldNodes,
+                function (ComponentFieldNodeInterface $a, ComponentFieldNodeInterface $b): int
+                {
+                    $aLocation = $a->getField()->getLocation();
+                    $bLocation = $b->getField()->getLocation();
+                    if ($aLocation->getLine() > $bLocation->getLine()) {
+                        return 1;
+                    }
+                    if ($aLocation->getLine() < $bLocation->getLine()) {
+                        return -1;
+                    }
+                    if ($aLocation->getColumn() > $bLocation->getColumn()) {
+                        return 1;
+                    }
+                    if ($aLocation->getColumn() < $bLocation->getColumn()) {
+                        return -1;
+                    }
+                    return 0;
+                }
+            );
             $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = $componentFieldNodes;
         }
 
