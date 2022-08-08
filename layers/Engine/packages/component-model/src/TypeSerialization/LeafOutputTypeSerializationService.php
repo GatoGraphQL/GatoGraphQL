@@ -121,7 +121,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
         $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
         $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
         $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-        
+
         /**
          * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
