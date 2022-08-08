@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
-interface LeafOutputTypeSerializationServiceInterface
+interface TypeSerializationServiceInterface
 {
     /**
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $idFieldValues
