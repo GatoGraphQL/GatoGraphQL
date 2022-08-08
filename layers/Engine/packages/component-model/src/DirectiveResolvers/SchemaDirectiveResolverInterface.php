@@ -14,10 +14,6 @@ interface SchemaDirectiveResolverInterface
      */
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     /**
-     * Indicates if the directive argument names can be omitted from the query, deducing them from the order in which they were defined in the schema
-     */
-    public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool;
-    /**
      * Define Schema Directive Arguments
      *
      * @return array<string, InputTypeResolverInterface>

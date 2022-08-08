@@ -49,17 +49,6 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function enableOrderedSchemaDirectiveArgs(RelationalTypeResolverInterface $relationalTypeResolver): bool
-    {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->enableOrderedSchemaDirectiveArgs(
-            $relationalTypeResolver
-        );
-    }
-
-    /**
-     * Proxy pattern: execute same function on the aliased DirectiveResolver
-     */
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
