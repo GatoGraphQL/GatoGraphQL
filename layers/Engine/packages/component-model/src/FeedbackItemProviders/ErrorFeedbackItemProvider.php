@@ -33,8 +33,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E21 = 'e21';
     public final const E22 = 'e22';
     public final const E23 = 'e23';
-    public final const E24 = 'e24';
-    public final const E25 = 'e25';
     public final const E26 = 'e26';
     public final const E27 = 'e27';
     public final const E28 = 'e28';
@@ -71,8 +69,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E21,
             self::E22,
             self::E23,
-            self::E24,
-            self::E25,
             self::E26,
             self::E27,
             self::E28,
@@ -113,8 +109,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E21 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
             self::E22 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
             self::E23 => $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
-            self::E24 => $this->__('Argument \'%1$s\' in %2$s \'%3$s\' cannot be empty or null', 'component-model'),
-            self::E25 => $this->__('Arguments \'%1$s\' in %2$s \'%3$s\' cannot be empty or null', 'component-model'),
             self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
             self::E27 => $this->__('On field \'%1$s\' of type \'%2$s\', there is no argument with name \'%3$s\'', 'component-model'),
             self::E28 => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'component-model'),
