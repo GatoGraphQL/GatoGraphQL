@@ -17,7 +17,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoP\ComponentModel\TypeSerialization\LeafOutputTypeSerializationServiceInterface;
+use PoP\ComponentModel\TypeSerialization\TypeSerializationServiceInterface;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -26,15 +26,15 @@ use SplObjectStorage;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    private ?LeafOutputTypeSerializationServiceInterface $leafOutputTypeSerializationService = null;
+    private ?TypeSerializationServiceInterface $leafTypeSerializationService = null;
 
-    final public function setLeafOutputTypeSerializationService(LeafOutputTypeSerializationServiceInterface $leafOutputTypeSerializationService): void
+    final public function setTypeSerializationService(TypeSerializationServiceInterface $leafTypeSerializationService): void
     {
-        $this->leafOutputTypeSerializationService = $leafOutputTypeSerializationService;
+        $this->leafTypeSerializationService = $leafTypeSerializationService;
     }
-    final protected function getLeafOutputTypeSerializationService(): LeafOutputTypeSerializationServiceInterface
+    final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
-        return $this->leafOutputTypeSerializationService ??= $this->instanceManager->getInstance(LeafOutputTypeSerializationServiceInterface::class);
+        return $this->leafTypeSerializationService ??= $this->instanceManager->getInstance(TypeSerializationServiceInterface::class);
     }
 
     public function getDirectiveName(): string
@@ -281,7 +281,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $resolvedIDFieldValues = array(
             $id => $resolvedFieldValues,
         );
-        $serializedIDFieldValues = $this->getLeafOutputTypeSerializationService()->serializeLeafOutputTypeIDFieldValues(
+        $serializedIDFieldValues = $this->getTypeSerializationService()->serializeOutputTypeIDFieldValues(
             $relationalTypeResolver,
             $resolvedIDFieldValues,
             [$id => new EngineIterationFieldSet([$field])],

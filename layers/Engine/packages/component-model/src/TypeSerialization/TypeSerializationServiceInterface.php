@@ -13,14 +13,14 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
-interface LeafOutputTypeSerializationServiceInterface
+interface TypeSerializationServiceInterface
 {
     /**
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $idFieldValues
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string|int,SplObjectStorage<FieldInterface,mixed>>
      */
-    public function serializeLeafOutputTypeIDFieldValues(
+    public function serializeOutputTypeIDFieldValues(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldValues,
         array $idFieldSet,

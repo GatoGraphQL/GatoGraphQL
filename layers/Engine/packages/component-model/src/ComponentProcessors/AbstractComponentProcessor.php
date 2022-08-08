@@ -923,15 +923,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
          * Calculate the data-fields from merging them with the
          * subcomponent components' keys, which are data-fields too.
          */
-        if (
-            /** @var ComponentFieldNodeInterface[] */
-            $componentFieldNodes = array_merge(
-                $this->getLeafComponentFieldNodes($component, $props),
-                $this->getRelationalComponentFieldNodes($component),
-                $this->getConditionalLeafComponentFieldNodes($component),
-                $this->getConditionalRelationalComponentFieldNodes($component),
-            )
-        ) {
+        if ($componentFieldNodes = $this->getComponentFieldNodes($component, $props)) {
             $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = $componentFieldNodes;
         }
 
@@ -942,6 +934,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->flattenRelationalDBObjectDataProperties(__FUNCTION__, $ret, $component, $props);
 
         return $ret;
+    }
+
+    /**
+     * @return ComponentFieldNodeInterface[]
+     */
+    protected function getComponentFieldNodes(Component $component, array &$props): array
+    {
+        return array_merge(
+            $this->getLeafComponentFieldNodes($component, $props),
+            $this->getRelationalComponentFieldNodes($component),
+            $this->getConditionalLeafComponentFieldNodes($component),
+            $this->getConditionalRelationalComponentFieldNodes($component),
+        );
     }
 
     /**
