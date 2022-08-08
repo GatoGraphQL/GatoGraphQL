@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\QueryResolution;
 
+use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -241,7 +242,8 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
             ];
         }
 
-        $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($operations, []);
+        $document = new Document($operations);
+        $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($document, $operations, []);
 
         /**
          * Doing `assertEquals` on SplObjectStorage doesn't work!

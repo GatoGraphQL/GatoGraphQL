@@ -7,6 +7,7 @@ namespace PoPAPI\API\QueryResolution;
 use PoP\ComponentModel\App;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -27,9 +28,18 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      * the same instance must be retrieved in every case.
      * Then, cache and reuse every created field
      *
-     * @var array<string,array<string,RelationalField>>
+     * @var SplObjectStorage<Document,array<string,RelationalField>>
      */
-    private array $fieldInstanceContainer = [];
+    private SplObjectStorage $fieldInstanceContainer;
+
+    public function __construct()
+    {
+        /**
+         * @var SplObjectStorage<Document,array<string,RelationalField>>
+         */
+        $fieldInstanceContainer = new SplObjectStorage();
+        $this->fieldInstanceContainer = $fieldInstanceContainer;
+    }
 
     /**
      * @param OperationInterface[] $operations
@@ -37,6 +47,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
     public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+        Document $document,
         array $operations,
         array $fragments,
     ): SplObjectStorage {
@@ -65,26 +76,6 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             }
             return $operationFieldOrFragmentBonds;
         }
-
-        /**
-         * The cache must be stored per query, or otherwise
-         * executing multiple PHPUnit tests may access the
-         * same cached objects and produce errors.
-         */
-        $reconstructedDocument = implode(
-            PHP_EOL,
-            array_merge(
-                array_map(
-                    fn (OperationInterface $operation) => $operation->asQueryString(),
-                    $operations
-                ),
-                array_map(
-                    fn (Fragment $fragment) => $fragment->asQueryString(),
-                    $fragments
-                )
-            )
-        );
-        $documentHash = hash('md5', $reconstructedDocument);
 
         /**
          * Wrap subsequent queries "field and fragment bonds" under
@@ -183,8 +174,16 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     $operationOrder,
                     $accumulatedMaximumFieldDepth - $level
                 );
-                if (!isset($this->fieldInstanceContainer[$documentHash][$alias])) {
-                    $this->fieldInstanceContainer[$documentHash][$alias] = new RelationalField(
+                /**
+                 * The cache must be stored per Document, or otherwise
+                 * executing multiple PHPUnit tests may access the
+                 * same cached objects and produce errors.
+                 *
+                 * @var array<string,RelationalField>
+                 */
+                $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
+                if (!isset($documentFieldInstanceContainer[$alias])) {
+                    $documentFieldInstanceContainer[$alias] = new RelationalField(
                         'self',
                         $alias,
                         [],
@@ -194,8 +193,9 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     );
                 }
                 $fieldOrFragmentBonds = [
-                    $this->fieldInstanceContainer[$documentHash][$alias],
+                    $documentFieldInstanceContainer[$alias],
                 ];
+                $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
             }
             $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
 
