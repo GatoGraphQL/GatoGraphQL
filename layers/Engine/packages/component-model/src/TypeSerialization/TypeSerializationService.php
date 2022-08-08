@@ -94,7 +94,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
                 /**
                  * If it is not a leaf node, then it is a relational node.
                  * Then the values are the IDs of the elements to load.
-                 * 
+                 *
                  * Retrieve them directly, as they don't need
                  * to be serialized, and they can be still useful.
                  *
