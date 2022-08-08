@@ -1,25 +1,6 @@
 {
   "errors": [
     {
-      "message": "You must be logged in to access field 'hi: echo(value: \"Hi there\")' for type 'QueryRoot'",
-      "locations": [
-        {
-          "line": 7,
-          "column": 7
-        }
-      ],
-      "extensions": {
-        "type": "QueryRoot",
-        "field": "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
-        "id": "root",
-        "path": [
-          "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
-          "query { ... }"
-        ],
-        "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
-      }
-    },
-    {
       "message": "You must be logged in to access field 'self' for type 'QueryRoot'",
       "locations": [
         {
@@ -28,13 +9,32 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "self @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) { ... }",
-        "id": "root",
         "path": [
           "self @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) { ... }",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "self @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) { ... }",
+        "id": "root",
+        "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+      }
+    },
+    {
+      "message": "You must be logged in to access field 'hi: echo(value: \"Hi there\")' for type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 7,
+          "column": 7
+        }
+      ],
+      "extensions": {
+        "path": [
+          "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
+        "id": "root",
         "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
       }
     }
