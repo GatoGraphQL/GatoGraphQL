@@ -923,33 +923,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
          * Calculate the data-fields from merging them with the
          * subcomponent components' keys, which are data-fields too.
          */
-        if (
-            /** @var ComponentFieldNodeInterface[] */
-            $componentFieldNodes = array_merge(
-                $this->getLeafComponentFieldNodes($component, $props),
-                $this->getRelationalComponentFieldNodes($component),
-                $this->getConditionalLeafComponentFieldNodes($component),
-                $this->getConditionalRelationalComponentFieldNodes($component),
-            )
-        ) {
-            /**
-             * The fields in the GraphQL query must be resolved in the same
-             * order they appear in the query, so that:
-             *
-             * - Entries under "errors" are shown in the same order as their fields
-             * - "Resolved Field Value References" are always resolved correctly.
-             *
-             * As `COMPONENT_LAYOUT_RELATIONALFIELDS` splits them
-             * into groups (for leaf/relational/conditional leaf/relational leaf),
-             * they must be reinstated into their original order.
-             * 
-             * This is accomplished by sorting the fields considering
-             * their Location (Line x Column) in the query.
-             */
-            usort(
-                $componentFieldNodes,
-                fn (ComponentFieldNodeInterface $a, ComponentFieldNodeInterface $b) => $a->sortAgainst($b)
-            );
+        if ($componentFieldNodes = $this->getComponentFieldNodes($component, $props)) {
             $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = $componentFieldNodes;
         }
 
@@ -960,6 +934,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->flattenRelationalDBObjectDataProperties(__FUNCTION__, $ret, $component, $props);
 
         return $ret;
+    }
+
+    /**
+     * @return ComponentFieldNodeInterface[]
+     */
+    protected function getComponentFieldNodes(Component $component, array &$props): array
+    {
+        return array_merge(
+            $this->getLeafComponentFieldNodes($component, $props),
+            $this->getRelationalComponentFieldNodes($component),
+            $this->getConditionalLeafComponentFieldNodes($component),
+            $this->getConditionalRelationalComponentFieldNodes($component),
+        );
     }
 
     /**

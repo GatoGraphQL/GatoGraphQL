@@ -8,6 +8,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractQueryDataComponentProcessor;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
@@ -48,6 +49,33 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     final protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {
         return $this->queryASTTransformationService ??= $this->instanceManager->getInstance(QueryASTTransformationServiceInterface::class);
+    }
+
+    /**
+     * The fields in the GraphQL query must be resolved in the same
+     * order they appear in the query, so that:
+     *
+     * - Entries under "errors" are shown in the same order as their fields
+     * - "Resolved Field Value References" are always resolved correctly.
+     *
+     * As this ComponentProcessor splits them into groups
+     * (for leaf/relational/conditional leaf/relational leaf),
+     * they must be reinstated into their original order.
+     * 
+     * This is accomplished by sorting the fields considering
+     * their Location (Line x Column) in the query.
+     */
+    /**
+     * @return ComponentFieldNodeInterface[]
+     */
+    protected function getComponentFieldNodes(Component $component, array &$props): array
+    {
+        $componentFieldNodes = parent::getComponentFieldNodes($component, $props);
+        usort(
+            $componentFieldNodes,
+            fn (ComponentFieldNodeInterface $a, ComponentFieldNodeInterface $b) => $a->sortAgainst($b)
+        );
+        return $componentFieldNodes;
     }
 
     /**
