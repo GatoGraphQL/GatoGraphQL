@@ -37,7 +37,7 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string|int,SplObjectStorage<FieldInterface,mixed>>
      */
-    public function serializeLeafOutputTypeIDFieldValues(
+    public function serializeOutputTypeIDFieldValues(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldValues,
         array $idFieldSet,

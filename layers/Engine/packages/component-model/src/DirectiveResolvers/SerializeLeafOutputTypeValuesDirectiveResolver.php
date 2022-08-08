@@ -71,7 +71,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $serializedIDFieldValues = $this->getLeafOutputTypeSerializationService()->serializeLeafOutputTypeIDFieldValues(
+        $serializedIDFieldValues = $this->getLeafOutputTypeSerializationService()->serializeOutputTypeIDFieldValues(
             $relationalTypeResolver,
             $resolvedIDFieldValues,
             $idFieldSet,

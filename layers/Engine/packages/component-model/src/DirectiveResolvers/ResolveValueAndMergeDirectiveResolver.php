@@ -281,7 +281,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $resolvedIDFieldValues = array(
             $id => $resolvedFieldValues,
         );
-        $serializedIDFieldValues = $this->getLeafOutputTypeSerializationService()->serializeLeafOutputTypeIDFieldValues(
+        $serializedIDFieldValues = $this->getLeafOutputTypeSerializationService()->serializeOutputTypeIDFieldValues(
             $relationalTypeResolver,
             $resolvedIDFieldValues,
             [$id => new EngineIterationFieldSet([$field])],
