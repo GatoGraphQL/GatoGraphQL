@@ -17,15 +17,15 @@ use SplObjectStorage;
 
 final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    private ?TypeSerializationServiceInterface $leafTypeSerializationService = null;
+    private ?TypeSerializationServiceInterface $typeSerializationService = null;
 
-    final public function setTypeSerializationService(TypeSerializationServiceInterface $leafTypeSerializationService): void
+    final public function setTypeSerializationService(TypeSerializationServiceInterface $typeSerializationService): void
     {
-        $this->leafTypeSerializationService = $leafTypeSerializationService;
+        $this->typeSerializationService = $typeSerializationService;
     }
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
-        return $this->leafTypeSerializationService ??= $this->instanceManager->getInstance(TypeSerializationServiceInterface::class);
+        return $this->typeSerializationService ??= $this->instanceManager->getInstance(TypeSerializationServiceInterface::class);
     }
 
     public function getDirectiveName(): string
