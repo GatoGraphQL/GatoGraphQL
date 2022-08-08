@@ -81,6 +81,11 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
             /** @var SplObjectStorage<FieldInterface,mixed> */
             $fieldValues = $serializedIDFieldValues[$id] ?? new SplObjectStorage();
             foreach ($fieldSet->fields as $field) {
+                $value = $idFieldValues[$id][$field] ?? null;
+                if ($value === null) {
+                    continue;
+                }
+
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field);
                 if ($fieldTypeResolver === null || !($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
                     continue;
@@ -88,21 +93,13 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
 
                 /** @var LeafOutputTypeResolverInterface */
                 $fieldLeafOutputTypeResolver = $fieldTypeResolver;
-                $value = $idFieldValues[$id][$field] ?? null;
-                if ($value === null) {
-                    continue;
-                }
 
-                /** @var int */
-                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
-                $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-                $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $idFieldValues
                 $fieldValues[$field] = $this->serializeLeafOutputTypeValue(
                     $value,
                     $fieldLeafOutputTypeResolver,
-                    $fieldLeafOutputTypeIsArrayOfArrays,
-                    $fieldLeafOutputTypeIsArray,
+                    $targetObjectTypeResolver,
+                    $field,
                 );
             }
             $serializedIDFieldValues[$id] = $fieldValues;
@@ -114,12 +111,17 @@ class LeafOutputTypeSerializationService implements LeafOutputTypeSerializationS
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
      */
-    private function serializeLeafOutputTypeValue(
+    public function serializeLeafOutputTypeValue(
         mixed $value,
         LeafOutputTypeResolverInterface $fieldLeafOutputTypeResolver,
-        bool $fieldLeafOutputTypeIsArrayOfArrays,
-        bool $fieldLeafOutputTypeIsArray,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
     ): string|int|float|bool|array {
+        /** @var int */
+        $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
+        $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+
         /**
          * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,

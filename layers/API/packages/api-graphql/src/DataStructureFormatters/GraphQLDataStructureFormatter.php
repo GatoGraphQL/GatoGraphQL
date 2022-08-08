@@ -171,7 +171,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function getDocumentEntryExtensions(array $item): array
     {
         $extensions = [];
-        if ($path = $item[Tokens::PATH]) {
+        if ($path = $item[Tokens::PATH] ?? null) {
             $extensions['path'] = $path;
         }
         return $extensions;
@@ -218,7 +218,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
         $extensions = [];
-        if ($path = $item[Tokens::PATH]) {
+        if ($path = $item[Tokens::PATH] ?? null) {
             $extensions['path'] = $path;
         }
         $extensions['type'] = $typeOutputKey;
