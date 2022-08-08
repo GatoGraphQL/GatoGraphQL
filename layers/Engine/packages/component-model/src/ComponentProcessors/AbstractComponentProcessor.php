@@ -932,6 +932,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $this->getConditionalRelationalComponentFieldNodes($component),
             )
         ) {
+            /**
+             * The fields in the GraphQL query must be resolved in the same
+             * order they appear in the query, so that "Resolved Field Value
+             * References" are always resolved correctly.
+             *
+             * However, `COMPONENT_LAYOUT_RELATIONALFIELDS` splits them
+             * into groups (for leaf/relational/conditional leaf/relational leaf).
+             *
+             * To reinstate the original order, the fields are ordered considering
+             * their Location in the query.
+             */
             usort(
                 $componentFieldNodes,
                 fn (ComponentFieldNodeInterface $a, ComponentFieldNodeInterface $b) => $a->sortAgainst($b)
