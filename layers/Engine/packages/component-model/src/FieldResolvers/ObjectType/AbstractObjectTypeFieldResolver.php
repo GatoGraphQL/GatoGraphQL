@@ -998,7 +998,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * The mutation can be validated either on the schema (`false`)
-     * on on the object (`true`)
+     * or on the object (`true`)
      */
     public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,
