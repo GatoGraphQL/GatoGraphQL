@@ -179,7 +179,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                  * executing multiple PHPUnit tests may access the
                  * same cached objects and produce errors.
                  *
-                 * @var SplObjectStorage<Document,array<string,RelationalField>>
+                 * @var array<string,RelationalField>
                  */
                 $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
                 if (!isset($documentFieldInstanceContainer[$alias])) {
