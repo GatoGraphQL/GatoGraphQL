@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\QueryResolution;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -156,6 +157,7 @@ interface QueryASTTransformationServiceInterface
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
     public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+        Document $document,
         array $operations,
         array $fragments,
     ): SplObjectStorage;

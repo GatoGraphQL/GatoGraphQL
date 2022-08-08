@@ -180,6 +180,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          * to work), then wrap them on a "self" field.
          */
         $operationFieldOrFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+            $executableDocument->getDocument(),
             $requestedOperations,
             $fragments,
         );

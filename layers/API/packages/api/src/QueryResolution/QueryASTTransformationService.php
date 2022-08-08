@@ -7,6 +7,7 @@ namespace PoPAPI\API\QueryResolution;
 use PoP\ComponentModel\App;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -37,6 +38,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
     public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+        Document $document,
         array $operations,
         array $fragments,
     ): SplObjectStorage {
