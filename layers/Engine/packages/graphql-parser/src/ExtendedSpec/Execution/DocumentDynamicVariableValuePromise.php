@@ -27,8 +27,8 @@ class DocumentDynamicVariableValuePromise implements ValueResolutionPromiseInter
     {
         /** @var array<string,mixed> */
         $documentDynamicVariables = App::getState('document-dynamic-variables');
-        $variableName = $this->documentDynamicVariableReference->getName();
-        if (!array_key_exists($variableName, $documentDynamicVariables)) {
+        $dynamicVariableName = $this->documentDynamicVariableReference->getName();
+        if (!array_key_exists($dynamicVariableName, $documentDynamicVariables)) {
             // Variable is nowhere defined => Error
             throw new RuntimeVariableReferenceException(
                 new FeedbackItemResolution(
@@ -41,7 +41,7 @@ class DocumentDynamicVariableValuePromise implements ValueResolutionPromiseInter
                 $this->documentDynamicVariableReference
             );
         }
-        return $documentDynamicVariables[$variableName];
+        return $documentDynamicVariables[$dynamicVariableName];
     }
 
     /**
