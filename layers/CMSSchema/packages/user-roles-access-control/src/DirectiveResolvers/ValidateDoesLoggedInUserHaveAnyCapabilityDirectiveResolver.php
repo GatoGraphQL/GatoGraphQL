@@ -53,7 +53,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
             return true;
         }
 
-        $directiveArgs = $this->directiveArgs;
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
         $capabilities = $directiveArgs['capabilities'];
         $userID = App::getState('current-user-id');
         $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($userID);
@@ -71,7 +71,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $directiveArgs = $this->directiveArgs;
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
         $capabilities = $directiveArgs['capabilities'];
         $isValidatingDirective = $this->isValidatingDirective();
         $code = (count($capabilities) === 1)
