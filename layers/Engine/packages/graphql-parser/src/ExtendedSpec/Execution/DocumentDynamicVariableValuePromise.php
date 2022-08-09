@@ -16,7 +16,7 @@ class DocumentDynamicVariableValuePromise implements ValueResolutionPromiseInter
     use StandaloneServiceTrait;
 
     public function __construct(
-        public readonly DocumentDynamicVariableReference $dynamicVariableReference,
+        public readonly DocumentDynamicVariableReference $documentDynamicVariableReference,
     ) {
     }
 
@@ -26,7 +26,7 @@ class DocumentDynamicVariableValuePromise implements ValueResolutionPromiseInter
     public function resolveValue(): mixed
     {
         $documentDynamicVariables = App::getState('document-dynamic-variables');
-        $variableName = $this->dynamicVariableReference->getName();
+        $variableName = $this->documentDynamicVariableReference->getName();
         if (!array_key_exists($variableName, $documentDynamicVariables)) {
             // Variable is nowhere defined => Error
             throw new RuntimeVariableReferenceException(
@@ -34,10 +34,10 @@ class DocumentDynamicVariableValuePromise implements ValueResolutionPromiseInter
                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                     GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
                     [
-                        $this->dynamicVariableReference->getName(),
+                        $this->documentDynamicVariableReference->getName(),
                     ]
                 ),
-                $this->dynamicVariableReference
+                $this->documentDynamicVariableReference
             );
         }
         return $documentDynamicVariables[$variableName];
