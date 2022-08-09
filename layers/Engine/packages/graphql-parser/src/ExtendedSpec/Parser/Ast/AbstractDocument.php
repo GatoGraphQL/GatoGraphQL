@@ -279,7 +279,7 @@ abstract class AbstractDocument extends UpstreamDocument
             /**
              * Get the Argument under which the Dynamic Variable is defined
              */
-            $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgumentName($directive);
+            $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgument($directive);
             if ($exportUnderVariableNameArgument === null) {
                 continue;
             }
@@ -292,7 +292,7 @@ abstract class AbstractDocument extends UpstreamDocument
     }
 
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
-    abstract protected function getExportUnderVariableNameArgumentName(Directive $directive): ?Argument;
+    abstract protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument;
 
     /**
      * Validate that all Resolved Field Value References

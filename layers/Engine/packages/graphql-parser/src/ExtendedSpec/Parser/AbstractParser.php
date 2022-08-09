@@ -261,7 +261,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          *
          * @see layers/Engine/packages/graphql-parser/src/ExtendedSpec/Parser/Ast/Document.php
          */
-        $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgumentName($directive);
+        $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgument($directive);
         if ($exportUnderVariableNameArgument === null) {
             return;
         }
@@ -878,6 +878,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     }
 
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
-    abstract protected function getExportUnderVariableNameArgumentName(Directive $directive): ?Argument;
+    abstract protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument;
     abstract protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string;
 }
