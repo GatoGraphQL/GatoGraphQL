@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\FunctionAPIFactory;
 use PoP\Multisite\ObjectModels\Site;
@@ -16,9 +17,8 @@ trait SiteObjectTypeFieldResolverTrait
      */
     public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
         object $object,
-        string $fieldName,
-        array $fieldArgs
     ): bool {
         $cmsengineapi = FunctionAPIFactory::getInstance();
         /** @var Site */
@@ -28,6 +28,6 @@ trait SiteObjectTypeFieldResolverTrait
         if ($site->getHost() != $cmsengineapi->getHost()) {
             return false;
         }
-        return parent::resolveCanProcessObject($objectTypeResolver, $object, $fieldName, $fieldArgs);
+        return parent::resolveCanProcessObject($objectTypeResolver, $fieldDataAccessor, $object);
     }
 }
