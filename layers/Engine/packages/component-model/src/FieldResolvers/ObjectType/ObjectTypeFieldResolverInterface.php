@@ -87,7 +87,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         string $fieldName
     ): ?MutationResolverInterface;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
-    public function validateFieldDataForObject(
+    public function validateFieldArgsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -100,21 +100,21 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * Apply customizations to the field data
      *
-     * @param array<string,mixed> $fieldData
+     * @param array<string,mixed> $fieldArgs
      * @return array<string,mixed>|null null in case of validation error
      */
-    public function prepareFieldData(
-        array $fieldData,
+    public function prepareFieldArgs(
+        array $fieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array;
     /**
-     * @param array<string,mixed> $fieldDataForObject
+     * @param array<string,mixed> $fieldArgsForObject
      * @return array<string,mixed>
      */
-    public function prepareFieldDataForObject(
-        array $fieldDataForObject,
+    public function prepareFieldArgsForObject(
+        array $fieldArgsForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
@@ -128,11 +128,11 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * "id" value that comes from the object, and is not provided
      * via an input to the mutation.
      *
-     * @param array<string,mixed> $fieldDataForMutationForObject
+     * @param array<string,mixed> $fieldArgsForMutationForObject
      * @return array<string,mixed>
      */
-    public function prepareFieldDataForMutationForObject(
-        array $fieldDataForMutationForObject,
+    public function prepareFieldArgsForMutationForObject(
+        array $fieldArgsForMutationForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
@@ -152,7 +152,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * If the field has a single argument, which is of type InputObject,
      * then retrieve the value for its input fields.
      */
-    public function getFieldDataInputObjectSubpropertyName(
+    public function getFieldArgsInputObjectSubpropertyName(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): ?string;

@@ -58,20 +58,20 @@ trait ObjectTypeOrDirectiveResolverTrait
     }
 
     /**
-     * @param array<string,mixed> $fieldOrDirectiveData
+     * @param array<string,mixed> $fieldOrDirectiveArgs
      * @param array<string,mixed> $argumentNameDefaultValues
      * @return array<string,mixed>
      */
     final protected function addDefaultFieldOrDirectiveArguments(
-        array $fieldOrDirectiveData,
+        array $fieldOrDirectiveArgs,
         array $argumentNameDefaultValues,
     ): array {
         foreach ($argumentNameDefaultValues as $argName => $argDefaultValue) {
-            if (array_key_exists($argName, $fieldOrDirectiveData)) {
+            if (array_key_exists($argName, $fieldOrDirectiveArgs)) {
                 continue;
             }
-            $fieldOrDirectiveData[$argName] = $argDefaultValue;
+            $fieldOrDirectiveArgs[$argName] = $argDefaultValue;
         }
-        return $fieldOrDirectiveData;
+        return $fieldOrDirectiveArgs;
     }
 }
