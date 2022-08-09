@@ -31,12 +31,12 @@ use PoP\Root\AbstractTestCase;
  *   - Reference appearing before resolution
  *  *
  *   Then:
- *     AST entity `DynamicVariableReference` must be replaced with
+ *     AST entity `DocumentDynamicVariableReference` must be replaced with
  *     AST entity `ObjectResolvedFieldValueReference`
  *
  * When disabled:
  *
- *   AST entity `DynamicVariableReference` remains as is
+ *   AST entity `DocumentDynamicVariableReference` remains as is
  */
 abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTestCase
 {

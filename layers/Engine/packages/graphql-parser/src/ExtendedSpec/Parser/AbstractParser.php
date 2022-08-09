@@ -8,7 +8,7 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DocumentDynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
@@ -492,8 +492,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return $this->createObjectResolvedFieldValueReference($name, $resolvedFieldValueReferenceField, $location);
         }
 
-        if ($this->isDynamicVariableReference($name, $variable)) {
-            return $this->createDynamicVariableReference($name, $location);
+        if ($this->isDocumentDynamicVariableReference($name, $variable)) {
+            return $this->createDocumentDynamicVariableReference($name, $location);
         }
 
         return parent::createVariableReference(
@@ -556,7 +556,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         );
     }
 
-    protected function isDynamicVariableReference(
+    protected function isDocumentDynamicVariableReference(
         string $variableName,
         ?Variable $variable,
     ): bool {
@@ -593,11 +593,11 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         return null;
     }
 
-    protected function createDynamicVariableReference(
+    protected function createDocumentDynamicVariableReference(
         string $name,
         Location $location,
     ): VariableReference {
-        return new DynamicVariableReference($name, $location);
+        return new DocumentDynamicVariableReference($name, $location);
     }
 
     /**

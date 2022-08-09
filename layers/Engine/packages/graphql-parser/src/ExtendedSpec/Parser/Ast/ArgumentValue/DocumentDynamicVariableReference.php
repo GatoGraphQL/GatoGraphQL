@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\ExtendedSpec\Execution\DocumentDynamicVariableValuePromise;
 
-class DynamicVariableReference extends AbstractRuntimeVariableReference
+class DocumentDynamicVariableReference extends AbstractRuntimeVariableReference
 {
     public function getValue(): mixed
     {

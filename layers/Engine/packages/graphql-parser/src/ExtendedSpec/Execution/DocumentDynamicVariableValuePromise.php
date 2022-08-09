@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\Root\Services\StandaloneServiceTrait;
 use PoP\GraphQLParser\Exception\RuntimeVariableReferenceException;
-use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DocumentDynamicVariableReference;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -16,7 +16,7 @@ class DocumentDynamicVariableValuePromise implements ValueResolutionPromiseInter
     use StandaloneServiceTrait;
 
     public function __construct(
-        public readonly DynamicVariableReference $dynamicVariableReference,
+        public readonly DocumentDynamicVariableReference $dynamicVariableReference,
     ) {
     }
 
