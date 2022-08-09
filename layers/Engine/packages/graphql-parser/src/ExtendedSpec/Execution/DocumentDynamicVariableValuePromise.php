@@ -25,6 +25,7 @@ class DocumentDynamicVariableValuePromise implements ValueResolutionPromiseInter
      */
     public function resolveValue(): mixed
     {
+        /** @var array<string,mixed> */
         $documentDynamicVariables = App::getState('document-dynamic-variables');
         $variableName = $this->documentDynamicVariableReference->getName();
         if (!array_key_exists($variableName, $documentDynamicVariables)) {

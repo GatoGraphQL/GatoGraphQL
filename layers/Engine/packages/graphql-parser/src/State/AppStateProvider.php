@@ -13,7 +13,10 @@ class AppStateProvider extends AbstractAppStateProvider
         /**
          * Dynamic variables are those generated on runtime
          * when resolving the GraphQL query, eg: via @export
+         *
+         * @var array<string,mixed>
          */
-        $state['document-dynamic-variables'] = [];
+        $documentDynamicVariables = [];
+        $state['document-dynamic-variables'] = $documentDynamicVariables;
     }
 }
