@@ -314,11 +314,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Validate the directive data
      *
-     * @param array<string,mixed> $directiveData
+     * @param array<string,mixed> $directiveArgs
      * @param FieldInterface[] $fields
      */
     protected function validateDirectiveData(
-        array $directiveData,
+        array $directiveArgs,
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -334,14 +334,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          */
         $errorCount = $engineIterationFeedbackStore->getErrorCount();
         $this->validateNonMissingMandatoryDirectiveArguments(
-            $directiveData,
+            $directiveArgs,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
         );
         $this->validateOnlyExistingDirectiveArguments(
-            $directiveData,
+            $directiveArgs,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
@@ -357,7 +357,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * - constraints of the arguments
          */
         $this->validateDirectiveArgumentConstraints(
-            $directiveData,
+            $directiveArgs,
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
