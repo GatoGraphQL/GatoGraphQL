@@ -1,11 +1,10 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Comments\ConditionalOnModule\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
@@ -98,7 +97,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             // Specific fields to be used by the subcomponents, based on a combination of Object Type + Action
             // Needed to, for instance, load the comment immediately, already from the notification
             case 'commentObject':
@@ -106,7 +105,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                 switch ($notification->action) {
                     case AAL_POP_ACTION_COMMENT_ADDED:
                         // comment-object-id is the object-id
-                        return $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new Field('objectID', $fieldArgs), $objectTypeFieldResolutionFeedbackStore);
+                        return $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new LeafField('objectID', null, $fieldDataAccessor->getField()->getArguments(), [], LocationHelper::getNonSpecificLocation()), $objectTypeFieldResolutionFeedbackStore);
                 }
                 return null;
 
