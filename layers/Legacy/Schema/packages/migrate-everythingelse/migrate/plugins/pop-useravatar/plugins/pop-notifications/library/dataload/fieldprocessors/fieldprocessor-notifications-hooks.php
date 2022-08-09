@@ -47,7 +47,6 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
 
     /**
      * @todo This function has been removed, adapt it to whatever needs be done!
-     * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,

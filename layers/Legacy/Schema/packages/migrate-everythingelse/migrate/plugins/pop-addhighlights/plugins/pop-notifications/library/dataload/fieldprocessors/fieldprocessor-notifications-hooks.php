@@ -49,7 +49,6 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ext
 
     /**
      * @todo This function has been removed, adapt it to whatever needs be done!
-     * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,

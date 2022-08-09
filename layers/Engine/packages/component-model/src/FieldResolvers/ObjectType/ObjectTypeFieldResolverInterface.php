@@ -165,13 +165,11 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     /**
-     * @param array<string,mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
     public function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
         object $object,
-        string $fieldName,
-        array $fieldArgs
     ): array;
 }

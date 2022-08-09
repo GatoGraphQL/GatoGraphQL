@@ -47,7 +47,6 @@ class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications
 
     /**
      * @todo This function has been removed, adapt it to whatever needs be done!
-     * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,

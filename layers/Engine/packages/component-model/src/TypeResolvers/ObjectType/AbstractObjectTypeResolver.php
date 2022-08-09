@@ -800,9 +800,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if (
             $checkpoints = $objectTypeFieldResolver->getValidationCheckpoints(
                 $this,
+                $fieldDataAccessor,
                 $object,
-                $fieldDataAccessor->getFieldName(),
-                $fieldArgs,
             )
         ) {
             $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);

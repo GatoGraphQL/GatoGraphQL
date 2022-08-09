@@ -52,7 +52,6 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFie
 
     /**
      * @todo This function has been removed, adapt it to whatever needs be done!
-     * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,

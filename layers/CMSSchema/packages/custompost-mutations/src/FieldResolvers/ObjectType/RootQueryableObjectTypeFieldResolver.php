@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -23,12 +24,11 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationI
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPCMSSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
 
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
@@ -37,6 +37,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?RootMyCustomPostsFilterInputObjectTypeResolver $rootMyCustomPostsFilterInputObjectTypeResolver = null;
     private ?CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver = null;
     private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -85,6 +86,14 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
     {
         return $this->customPostSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
+    }
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -224,5 +233,22 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * @return CheckpointInterface[]
+     */
+    public function getValidationCheckpoints(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        object $object,
+    ): array {
+        $validationCheckpoints = parent::getValidationCheckpoints(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $object,
+        );
+        $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
+        return $validationCheckpoints;
     }
 }

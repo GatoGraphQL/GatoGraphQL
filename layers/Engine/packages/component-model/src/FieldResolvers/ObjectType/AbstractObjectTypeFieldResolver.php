@@ -936,14 +936,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * @param array<string,mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
     public function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
         object $object,
-        string $fieldName,
-        array $fieldArgs
     ): array {
         return [];
     }

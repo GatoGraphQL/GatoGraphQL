@@ -5,6 +5,8 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
@@ -75,7 +77,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $post = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
 
             case 'titleEdit':
                 if (gdCurrentUserCanEdit($objectTypeResolver->getID($post))) {
@@ -102,7 +104,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
                 return $cmseditpostsapi->getDeletePostLink($objectTypeResolver->getID($post));
 
             case 'coauthors':
-                $authors = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new Field('authors', $fieldArgs), $objectTypeFieldResolutionFeedbackStore);
+                $authors = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new LeafField('authors', null, $fieldDataAccessor->getField()->getArguments(), [], LocationHelper::getNonSpecificLocation()), $objectTypeFieldResolutionFeedbackStore);
 
                 // This function only makes sense when the user is logged in
                 if (\PoP\Root\App::getState('is-user-logged-in')) {

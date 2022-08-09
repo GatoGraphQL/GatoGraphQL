@@ -506,16 +506,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     protected function collectDirectiveValidationDeprecations(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations(
-            $relationalTypeResolver,
-            $directiveName,
-            $directiveArgs
-        );
+        $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations($relationalTypeResolver);
         foreach ($deprecationFeedbackItemResolutions as $deprecationFeedbackItemResolution) {
             $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
                 new SchemaFeedback(
@@ -1020,7 +1014,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveDirectiveValidationDeprecations(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
+    public function resolveDirectiveValidationDeprecations(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [];
     }

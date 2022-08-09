@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Root\App;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootMyCommentsFilterInputObjectTypeResolver;
 use PoPCMSSchema\Comments\ComponentProcessors\SingleCommentFilterInputContainerComponentProcessor;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -21,14 +22,13 @@ use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentByInputObjectType
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPCMSSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    use UserStateObjectTypeFieldResolverTrait;
     use WithLimitFieldArgResolverTrait;
 
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
@@ -38,6 +38,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?RootMyCommentsFilterInputObjectTypeResolver $rootMyCommentsFilterInputObjectTypeResolver = null;
     private ?RootCommentPaginationInputObjectTypeResolver $rootCommentPaginationInputObjectTypeResolver = null;
     private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -94,6 +95,14 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     final protected function getCommentSortInputObjectTypeResolver(): CommentSortInputObjectTypeResolver
     {
         return $this->commentSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
+    }
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -216,5 +225,22 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * @return CheckpointInterface[]
+     */
+    public function getValidationCheckpoints(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        object $object,
+    ): array {
+        $validationCheckpoints = parent::getValidationCheckpoints(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $object,
+        );
+        $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
+        return $validationCheckpoints;
     }
 }
