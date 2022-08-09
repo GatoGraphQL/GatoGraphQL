@@ -214,26 +214,26 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $directiveData = $this->getDirectiveData(
+        $directiveArgs = $this->getDirectiveData(
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
         );
-        $this->setHasValidationErrors($directiveData === null);
-        if ($directiveData === null) {
+        $this->setHasValidationErrors($directiveArgs === null);
+        if ($directiveArgs === null) {
             return;
         }
-        $this->directiveDataAccessor = $this->createDirectiveDataAccessor($directiveData);
+        $this->directiveDataAccessor = $this->createDirectiveDataAccessor($directiveArgs);
     }
 
     /**
-     * @param array<string,mixed> $directiveData
+     * @param array<string,mixed> $directiveArgs
      */
     public function createDirectiveDataAccessor(
-        array $directiveData,
+        array $directiveArgs,
     ): DirectiveDataAccessorInterface {
         return new DirectiveDataAccessor(
-            $directiveData,
+            $directiveArgs,
         );
     }
 
@@ -263,15 +263,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?array {
-        $directiveData = $this->directive->getArgumentKeyValues();
+        $directiveArgs = $this->directive->getArgumentKeyValues();
         $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
 
         /**
          * Add the default Argument values
          */
         $directiveArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($directiveArgsSchemaDefinition);
-        $directiveData = $this->addDefaultFieldOrDirectiveArguments(
-            $directiveData,
+        $directiveArgs = $this->addDefaultFieldOrDirectiveArguments(
+            $directiveArgs,
             $directiveArgumentNameDefaultValues,
         );
 
@@ -279,8 +279,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * Cast the Arguments, return if any of them produced an error
          */
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $directiveData = $this->getSchemaCastingService()->castArguments(
-            $directiveData,
+        $directiveArgs = $this->getSchemaCastingService()->castArguments(
+            $directiveArgs,
             $directiveArgsSchemaDefinition,
             $this->directive,
             $objectTypeFieldResolutionFeedbackStore,
@@ -299,7 +299,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          */
         $errorCount = $engineIterationFeedbackStore->getErrorCount();
         $this->validateDirectiveData(
-            $directiveData,
+            $directiveArgs,
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
@@ -308,7 +308,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return null;
         }
 
-        return $directiveData;
+        return $directiveArgs;
     }
 
     /**
@@ -378,7 +378,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * @param FieldInterface[] $fields
      */
     private function validateNonMissingMandatoryDirectiveArguments(
-        array $directiveData,
+        array $directiveArgs,
         array $directiveArgsSchemaDefinition,
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
@@ -387,7 +387,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $mandatoryDirectiveArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($directiveArgsSchemaDefinition);
         $missingMandatoryDirectiveArgNames = array_values(array_filter(
             $mandatoryDirectiveArgNames,
-            fn (string $directiveArgName) => ($directiveData[$directiveArgName] ?? null) === null
+            fn (string $directiveArgName) => ($directiveArgs[$directiveArgName] ?? null) === null
         ));
         foreach ($missingMandatoryDirectiveArgNames as $missingMandatoryDirectiveArgName) {
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
@@ -418,14 +418,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * @param FieldInterface[] $fields
      */
     private function validateOnlyExistingDirectiveArguments(
-        array $directiveData,
+        array $directiveArgs,
         array $directiveArgsSchemaDefinition,
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $nonExistingArgNames = array_values(array_diff(
-            array_keys($directiveData),
+            array_keys($directiveArgs),
             array_keys($directiveArgsSchemaDefinition)
         ));
         foreach ($nonExistingArgNames as $nonExistingArgName) {
@@ -453,14 +453,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * @param FieldInterface[] $fields
      */
     private function validateDirectiveArgumentConstraints(
-        array $directiveData,
+        array $directiveArgs,
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $directiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
-        foreach ($directiveData as $argName => $argValue) {
+        foreach ($directiveArgs as $argName => $argValue) {
             $directiveArgTypeResolver = $directiveArgNameTypeResolvers[$argName];
             $astNode = $this->directive->getArgument($argName) ?? $this->directive;
             /**
