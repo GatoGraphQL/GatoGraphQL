@@ -53,7 +53,8 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
             return true;
         }
 
-        $roles = $this->directiveArgs['roles'];
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
+        $roles = $directiveArgs['roles'];
         $userID = App::getState('current-user-id');
         $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($userID);
         return !empty(array_intersect($roles, $userRoles));
@@ -70,7 +71,8 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $roles = $this->directiveArgs['roles'];
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
+        $roles = $directiveArgs['roles'];
         $isValidatingDirective = $this->isValidatingDirective();
         $code = (count($roles) === 1)
             ? ($isValidatingDirective ? FeedbackItemProvider::E5 : FeedbackItemProvider::E6)

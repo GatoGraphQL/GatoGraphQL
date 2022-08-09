@@ -154,7 +154,8 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     {
         // Set the max age from this field into the service which will calculate the max age for the request, based on all fields
         // If it was provided as a directiveArg, use that value. Otherwise, use the one from the class
-        $maxAge = $this->directiveArgs['maxAge'] ?? $this->getMaxAge();
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
+        $maxAge = $directiveArgs['maxAge'] ?? $this->getMaxAge();
         if (!is_null($maxAge)) {
             $this->getCacheControlEngine()->addMaxAge($maxAge);
         }

@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\QueryResolution;
 
 use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-class FieldDataAccessor implements FieldDataAccessorInterface
+class DirectiveDataAccessor implements DirectiveDataAccessorInterface
 {
     use FieldOrDirectiveDataAccessorTrait;
 
@@ -18,44 +17,33 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      *
      * @var array<string,mixed>
      */
-    protected ?array $resolvedFieldArgs = null;
+    protected ?array $resolvedDirectiveArgs = null;
 
     public function __construct(
-        protected FieldInterface $field,
         /** @var array<string,mixed> */
-        protected array $unresolvedFieldArgs,
+        protected array $unresolvedDirectiveArgs,
     ) {
     }
 
-    public function getField(): FieldInterface
+    /**
+     * @return array<string,mixed>
+     * @throws AbstractValueResolutionPromiseException
+     */
+    public function getDirectiveArgs(): array
     {
-        return $this->field;
-    }
-
-    final public function getFieldName(): string
-    {
-        return $this->field->getName();
+        return $this->getResolvedDirectiveArgs();
     }
 
     /**
      * @return array<string,mixed>
      * @throws AbstractValueResolutionPromiseException
      */
-    public function getFieldArgs(): array
+    protected function getResolvedDirectiveArgs(): array
     {
-        return $this->getResolvedFieldArgs();
-    }
-
-    /**
-     * @return array<string,mixed>
-     * @throws AbstractValueResolutionPromiseException
-     */
-    protected function getResolvedFieldArgs(): array
-    {
-        if ($this->resolvedFieldArgs === null) {
-            $this->resolvedFieldArgs = $this->doGetResolvedFieldOrDirectiveArgs($this->unresolvedFieldArgs);
+        if ($this->resolvedDirectiveArgs === null) {
+            $this->resolvedDirectiveArgs = $this->doGetResolvedFieldOrDirectiveArgs($this->unresolvedDirectiveArgs);
         }
-        return $this->resolvedFieldArgs;
+        return $this->resolvedDirectiveArgs;
     }
 
     /**
@@ -64,6 +52,6 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      */
     protected function getResolvedFieldOrDirectiveArgs(): array
     {
-        return $this->getResolvedFieldArgs();
+        return $this->getResolvedDirectiveArgs();
     }
 }

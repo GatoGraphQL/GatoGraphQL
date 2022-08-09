@@ -20,6 +20,8 @@ use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\DirectiveDataAccessor;
+use PoP\ComponentModel\QueryResolution\DirectiveDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -80,10 +82,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * To be set only if there were no validation errors.
-     *
-     * @var array<string,mixed>
      */
-    protected array $directiveArgs;
+    protected DirectiveDataAccessorInterface $directiveDataAccessor;
     protected bool $hasValidationErrors;
 
     /**
@@ -223,7 +223,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($directiveData === null) {
             return;
         }
-        $this->directiveArgs = $directiveData;
+        $this->directiveDataAccessor = $this->createDirectiveDataAccessor($directiveData);
+    }
+
+    /**
+     * @param array<string,mixed> $directiveData
+     */
+    public function createDirectiveDataAccessor(
+        array $directiveData,
+    ): DirectiveDataAccessorInterface {
+        return new DirectiveDataAccessor(
+            $directiveData,
+        );
     }
 
     /**
@@ -303,11 +314,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Validate the directive data
      *
-     * @param array<string,mixed> $directiveData
+     * @param array<string,mixed> $directiveArgs
      * @param FieldInterface[] $fields
      */
     protected function validateDirectiveData(
-        array $directiveData,
+        array $directiveArgs,
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -323,14 +334,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          */
         $errorCount = $engineIterationFeedbackStore->getErrorCount();
         $this->validateNonMissingMandatoryDirectiveArguments(
-            $directiveData,
+            $directiveArgs,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
         );
         $this->validateOnlyExistingDirectiveArguments(
-            $directiveData,
+            $directiveArgs,
             $directiveArgsSchemaDefinition,
             $relationalTypeResolver,
             $fields,
@@ -346,7 +357,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * - constraints of the arguments
          */
         $this->validateDirectiveArgumentConstraints(
-            $directiveData,
+            $directiveArgs,
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
@@ -618,7 +629,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function getObjectDirectiveArgs(array $expressions): array
     {
         return array_merge(
-            $this->directiveArgs,
+            $this->directiveDataAccessor->getDirectiveArgs(),
             $expressions
         );
     }
@@ -1035,7 +1046,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /**
          * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
          */
-        $versionConstraint = $this->directiveArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null;
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
+        $versionConstraint = $directiveArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null;
         if (!$versionConstraint) {
             return;
         }
