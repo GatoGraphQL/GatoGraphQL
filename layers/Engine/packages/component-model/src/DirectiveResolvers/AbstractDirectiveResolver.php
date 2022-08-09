@@ -298,7 +298,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * Perform validations
          */
         $errorCount = $engineIterationFeedbackStore->getErrorCount();
-        $this->validateDirectiveData(
+        $this->validateDirectiveArgs(
             $directiveArgs,
             $relationalTypeResolver,
             $fields,
@@ -317,7 +317,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * @param array<string,mixed> $directiveArgs
      * @param FieldInterface[] $fields
      */
-    protected function validateDirectiveData(
+    protected function validateDirectiveArgs(
         array $directiveArgs,
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
