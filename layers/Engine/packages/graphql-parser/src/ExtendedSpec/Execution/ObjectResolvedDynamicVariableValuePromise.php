@@ -52,7 +52,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
         $dynamicVariableName = $this->objectResolvedDynamicVariableReference->getName();
-        if (!array_key_exists($engineIterationCurrentObjectID, $objectResolvedDynamicVariables)
+        if (!isset($engineIterationCurrentObjectID, $objectResolvedDynamicVariables)
             || !$objectResolvedDynamicVariables[$engineIterationCurrentObjectID]->contains($engineIterationCurrentField)
             || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$engineIterationCurrentField])
         ) {
