@@ -17,16 +17,16 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     /**
      * If not provided, set the properties from the logged-in user
      *
-     * @param array<string,mixed> $fieldData
+     * @param array<string,mixed> $fieldArgs
      * @return array<string,mixed>
      */
     protected function prepareAddCommentFieldData(
-        array $fieldData,
+        array $fieldArgs,
     ): array {
         // Just in case, make sure the InputObject has been set
-        $inputValue = $fieldData[MutationInputProperties::INPUT] ?? null;
+        $inputValue = $fieldArgs[MutationInputProperties::INPUT] ?? null;
         if ($inputValue === null) {
-            return $fieldData;
+            return $fieldArgs;
         }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -34,7 +34,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
             $moduleConfiguration->mustUserBeLoggedInToAddComment()
             || !App::getState('is-user-logged-in')
         ) {
-            return $fieldData;
+            return $fieldArgs;
         }
         $userID = App::getState('current-user-id');
         if (!property_exists($inputValue, MutationInputProperties::AUTHOR_NAME)) {
@@ -46,7 +46,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         if (!property_exists($inputValue, MutationInputProperties::AUTHOR_URL)) {
             $inputValue->{MutationInputProperties::AUTHOR_URL} = $this->getUserTypeAPI()->getUserWebsiteURL($userID);
         }
-        $fieldData[MutationInputProperties::INPUT] = $inputValue;
-        return $fieldData;
+        $fieldArgs[MutationInputProperties::INPUT] = $inputValue;
+        return $fieldArgs;
     }
 }

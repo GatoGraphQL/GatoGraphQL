@@ -338,12 +338,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
         // 1. Resolve the value against the TypeResolver
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $fieldData = $fieldDataAccessProvider->getFieldData(
+        $fieldArgs = $fieldDataAccessProvider->getFieldData(
             $field,
             $objectTypeResolver,
             $object,
         );
-        if ($fieldData === null) {
+        if ($fieldArgs === null) {
             // Set the response for the failing field as null
             $resolvedIDFieldValues[$id][$field] = null;
             $this->setAppStateForFieldValuePromises(
@@ -358,7 +358,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
         $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
             $field,
-            $fieldData,
+            $fieldArgs,
         );
         $value = $relationalTypeResolver->resolveValue(
             $object,

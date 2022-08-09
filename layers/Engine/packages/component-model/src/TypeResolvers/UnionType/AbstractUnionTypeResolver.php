@@ -522,7 +522,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $objectTypeResolverObjectFieldData = new SplObjectStorage();
 
         /**
-         * Obtain the fieldData from each of the ObjectTypeResolvers,
+         * Obtain the fieldArgs from each of the ObjectTypeResolvers,
          * for their corresponding objects
          */
         /** @var ObjectTypeResolverInterface $targetObjectTypeResolver */

@@ -52,11 +52,11 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      */
     public function getExecutableObjectTypeFieldResolverForField(FieldInterface|string $fieldOrFieldName): ?ObjectTypeFieldResolverInterface;
     /**
-     * @param array<string,mixed> $fieldData
+     * @param array<string,mixed> $fieldArgs
      */
     public function createFieldDataAccessor(
         FieldInterface $field,
-        array $fieldData,
+        array $fieldArgs,
     ): FieldDataAccessorInterface;
     /**
      * Handle case:
@@ -94,7 +94,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     /**
      * The mutation resolver might expect to receive the data properties
      * directly (eg: "title", "content" and "status"), and these may be
-     * contained under a subproperty (eg: "input") from the original fieldData.
+     * contained under a subproperty (eg: "input") from the original fieldArgs.
      */
     public function getFieldDataAccessorForMutation(
         FieldDataAccessorInterface $fieldDataAccessor,

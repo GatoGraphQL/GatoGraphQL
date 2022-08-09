@@ -115,8 +115,8 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
             }
         }
         /** @var array<string,mixed> */
-        $fieldData = $objectFieldData[$object];
-        return $fieldData;
+        $fieldArgs = $objectFieldData[$object];
+        return $fieldArgs;
     }
 
     /**
