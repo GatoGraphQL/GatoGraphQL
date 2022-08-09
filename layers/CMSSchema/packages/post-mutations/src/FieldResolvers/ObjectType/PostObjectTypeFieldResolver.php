@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
