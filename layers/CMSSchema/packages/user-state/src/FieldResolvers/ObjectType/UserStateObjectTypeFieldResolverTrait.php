@@ -7,7 +7,6 @@ namespace PoPCMSSchema\UserState\FieldResolvers\ObjectType;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Root\Translation\TranslationAPIInterface;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 trait UserStateObjectTypeFieldResolverTrait
@@ -22,8 +21,6 @@ trait UserStateObjectTypeFieldResolverTrait
     {
         return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
-
-    abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     /**
      * @param array<string, mixed> $fieldArgs
