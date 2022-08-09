@@ -82,10 +82,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * To be set only if there were no validation errors.
-     *
-     * @var array<string,mixed>
      */
-    protected array $directiveArgs;
+    protected DirectiveDataAccessorInterface $directiveDataAccessor;
     protected bool $hasValidationErrors;
 
     /**
@@ -225,7 +223,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($directiveData === null) {
             return;
         }
-        $this->directiveArgs = $directiveData;
+        $this->directiveDataAccessor = $this->createDirectiveDataAccessor($directiveData);
     }
 
     /**
@@ -631,7 +629,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function getObjectDirectiveArgs(array $expressions): array
     {
         return array_merge(
-            $this->directiveArgs,
+            $this->directiveDataAccessor->getDirectiveArgs(),
             $expressions
         );
     }
