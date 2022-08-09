@@ -214,7 +214,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $directiveArgs = $this->getDirectiveData(
+        $directiveArgs = $this->getDirectiveArgs(
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
@@ -258,7 +258,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * @param FieldInterface[] $fields
      * @return array<string,mixed>|null Null if there was an error validating the directive
      */
-    protected function getDirectiveData(
+    protected function getDirectiveArgs(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
