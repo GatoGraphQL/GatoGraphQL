@@ -58,7 +58,7 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E7 => $this->__('Dynamic variable \'%1$s\' cannot share the same name with a (static) variable', 'graphql-parser'),
             self::E8 => $this->__('The reference to the Resolved Field Value \'%1$s\' cannot share the same name with the variable \'%1$s\'', 'graphql-parser'),
             self::E9 => $this->__('Dynamic variable \'%1$s\' cannot share the same name with the reference to the Resolved Field Value \'%2$s\'', 'graphql-parser'),
-            self::E10 => $this->__('No value has been exported for dynamic variable \'%s\' for object with ID \'%s\'', 'graphql-server'),
+            self::E10 => $this->__('No value has been exported for dynamic variable \'%s\' for field \'%s\' and object with ID \'%s\'', 'graphql-server'),
             self::E_5_8_3 => $this->__('No value has been exported for dynamic variable \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };

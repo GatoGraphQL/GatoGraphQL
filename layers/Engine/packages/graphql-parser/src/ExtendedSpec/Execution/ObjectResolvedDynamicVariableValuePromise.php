@@ -7,10 +7,12 @@ namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 use PoP\GraphQLParser\Exception\RuntimeVariableReferenceException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedDynamicVariableReference;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
+use SplObjectStorage;
 
 class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromiseInterface
 {
@@ -27,31 +29,32 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
     public function resolveValue(): mixed
     {
         /**
-         * Retrieve which is the current object ID for which
-         * to retrieve the dynamic variable for.
+         * Retrieve which is the current object ID and Field
+         * for which to retrieve the dynamic variable for.
          *
-         * If not provided, it's a development error.
+         * If any of them is not provided, it's a development error.
          */
-        if (!App::hasState('engine-iteration-current-object-id')) {
+        if (!App::hasState('engine-iteration-current-object-id')
+            || !App::hasState('engine-iteration-current-field')) {
             throw new ShouldNotHappenException(
-                sprintf(
-                    $this->__(
-                        'AppState \'%s\' has not been set, so the Promise cannot be resolved'
-                    ),
-                    'engine-iteration-current-object-id'
+                $this->__(
+                    'The Engine Iteration\'s current objectID/Field have not been set, so the Promise cannot be resolved'
                 )
             );
         }
         /** @var string|int */
         $engineIterationCurrentObjectID = App::getState('engine-iteration-current-object-id');
+        /** @var FieldInterface */
+        $engineIterationCurrentField = App::getState('engine-iteration-current-field');
 
         /**
-         * @var array<string|int,array<string,mixed>> Array of [objectID => [dynamicVariableName => value]]
+         * @var array<string|int,SplObjectStorage<FieldInterface,array<string,mixed>>> Array of [objectID => SplObjectStorage<Field, [dynamicVariableName => value]>]
          */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
         $dynamicVariableName = $this->objectResolvedDynamicVariableReference->getName();
         if (!array_key_exists($engineIterationCurrentObjectID, $objectResolvedDynamicVariables)
-            || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
+            || !$objectResolvedDynamicVariables[$engineIterationCurrentObjectID]->contains($engineIterationCurrentField)
+            || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$engineIterationCurrentField])
         ) {
             // Variable is nowhere defined => Error
             throw new RuntimeVariableReferenceException(
@@ -60,6 +63,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
                     GraphQLExtendedSpecErrorFeedbackItemProvider::E10,
                     [
                         $this->objectResolvedDynamicVariableReference->getName(),
+                        $engineIterationCurrentField->asFieldOutputQueryString(),
                         $engineIterationCurrentObjectID,
                     ]
                 ),
@@ -67,7 +71,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
             );
         }
         
-        return $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$dynamicVariableName];
+        return $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$engineIterationCurrentField][$dynamicVariableName];
     }
 
     /**
