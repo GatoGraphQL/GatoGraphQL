@@ -96,7 +96,6 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
     public function getValidationCheckpoints(

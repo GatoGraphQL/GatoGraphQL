@@ -227,7 +227,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
     public function getValidationCheckpoints(

@@ -23,7 +23,6 @@ abstract class AbstractUserStateObjectTypeFieldResolver extends AbstractObjectTy
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
     public function getValidationCheckpoints(
