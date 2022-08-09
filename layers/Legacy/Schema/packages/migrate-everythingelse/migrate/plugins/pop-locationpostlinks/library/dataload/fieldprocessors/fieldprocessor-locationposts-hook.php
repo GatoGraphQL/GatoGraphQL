@@ -53,7 +53,6 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Post
 
     /**
      * @todo This function has been removed, adapt it to whatever needs be done!
-     * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
