@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
@@ -39,13 +40,13 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
     }
 
     /**
+     * @todo This function has been removed, adapt it to whatever needs be done!
      * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcessObject(
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
         object $object,
-        string $fieldName,
-        array $fieldArgs = []
     ): bool {
         // Only if the user is a subscriber
         $user = $object;
