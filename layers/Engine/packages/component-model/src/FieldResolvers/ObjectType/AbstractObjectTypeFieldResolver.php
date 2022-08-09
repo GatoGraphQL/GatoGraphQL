@@ -941,9 +941,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
         object $object,
-        string $fieldName,
-        array $fieldArgs
     ): array {
         return [];
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
@@ -30,15 +31,13 @@ trait UserStateObjectTypeFieldResolverTrait
      */
     public function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
         object $object,
-        string $fieldName,
-        array $fieldArgs
     ): array {
         $validationCheckpoints = parent::getValidationCheckpoints(
             $objectTypeResolver,
+            $fieldDataAccessor,
             $object,
-            $fieldName,
-            $fieldArgs,
         );
         $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
         return $validationCheckpoints;
