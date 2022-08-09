@@ -342,7 +342,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * receive a Field.
          */
         if (!$isFieldDataAccessor) {
-            $fieldArgs = $this->getFieldData(
+            $fieldArgs = $this->getFieldArgs(
                 $field,
                 $objectTypeFieldResolutionFeedbackStore
             );
@@ -1243,7 +1243,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $objectFieldData = $objectTypeResolverObjectFieldData[$this] ?? new SplObjectStorage();
 
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $fieldArgs = $this->getFieldData(
+        $fieldArgs = $this->getFieldArgs(
             $field,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -1328,7 +1328,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $objectFieldDataCache = $objectTypeResolverObjectFieldDataCache[$this] ?? new SplObjectStorage();
 
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $fieldArgs = $this->getFieldData(
+        $fieldArgs = $this->getFieldArgs(
             $field,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -1369,7 +1369,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @return array<string,mixed>|null
      */
-    protected function getFieldData(
+    protected function getFieldArgs(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {

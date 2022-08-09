@@ -338,7 +338,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
         // 1. Resolve the value against the TypeResolver
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $fieldArgs = $fieldDataAccessProvider->getFieldData(
+        $fieldArgs = $fieldDataAccessProvider->getFieldArgs(
             $field,
             $objectTypeResolver,
             $object,

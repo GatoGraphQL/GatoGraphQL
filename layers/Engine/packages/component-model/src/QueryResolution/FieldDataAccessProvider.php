@@ -67,7 +67,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
      * @return array<string,mixed>|null null if casting the fieldArgs produced an error
      * @throws ShouldNotHappenException
      */
-    public function getFieldData(
+    public function getFieldArgs(
         FieldInterface $field,
         ?ObjectTypeResolverInterface $objectTypeResolver = null,
         ?object $object = null,
