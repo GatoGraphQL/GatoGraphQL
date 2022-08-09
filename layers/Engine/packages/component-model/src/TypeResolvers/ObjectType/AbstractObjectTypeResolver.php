@@ -829,7 +829,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Validate on the object
             $fieldDataAccessorForMutation = null;
             try {
-                $fieldArgsForMutationForObject = $objectTypeFieldResolver->prepareFieldDataForMutationForObject(
+                $fieldArgsForMutationForObject = $objectTypeFieldResolver->prepareFieldArgsForMutationForObject(
                     $fieldArgs,
                     $this,
                     $fieldDataAccessor->getField(),
@@ -1345,16 +1345,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         foreach ($remainingObjectIDs as $id) {
             $object = $idObjects[$id];
             // Clone array
-            $fieldDataForObject = array_merge([], $fieldArgs);
-            $fieldDataForObject = $executableObjectTypeFieldResolver->prepareFieldDataForObject(
-                $fieldDataForObject,
+            $fieldArgsForObject = array_merge([], $fieldArgs);
+            $fieldArgsForObject = $executableObjectTypeFieldResolver->prepareFieldArgsForObject(
+                $fieldArgsForObject,
                 $this,
                 $field,
                 $object,
             );
-            $objectFieldData[$object] = $fieldDataForObject;
+            $objectFieldData[$object] = $fieldArgsForObject;
             // Store in the cache
-            $objectFieldDataCache[$object] = $fieldDataForObject;
+            $objectFieldDataCache[$object] = $fieldArgsForObject;
         }
         $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
         // Store in the cache
@@ -1439,7 +1439,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Allow to inject additional arguments
          */
-        $fieldArgs = $objectTypeFieldResolver->prepareFieldData(
+        $fieldArgs = $objectTypeFieldResolver->prepareFieldArgs(
             $fieldArgs,
             $this,
             $field,

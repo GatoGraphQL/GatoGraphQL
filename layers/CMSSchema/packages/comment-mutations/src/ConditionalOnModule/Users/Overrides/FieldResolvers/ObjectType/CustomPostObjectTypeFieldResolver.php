@@ -39,7 +39,7 @@ class CustomPostObjectTypeFieldResolver extends UpstreamCustomPostObjectTypeFiel
      * @param array<string,mixed> $fieldArgs
      * @return array<string,mixed>|null null in case of validation error
      */
-    public function prepareFieldData(
+    public function prepareFieldArgs(
         array $fieldArgs,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
