@@ -371,7 +371,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Custom validations by the field resolver
          */
-        $this->validateFieldDataForObject(
+        $this->validateFieldArgsForObject(
             $fieldDataAccessor,
             $objectTypeFieldResolver,
             $object,
@@ -747,7 +747,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $this->validateVariableOnObjectResolutionFieldData(
             $fieldArgs,
             $field,
-            false, // Mutation validation will be performed always in validateFieldDataForObject
+            false, // Mutation validation will be performed always in validateFieldArgsForObject
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -775,7 +775,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * Validate the field data for the object
      */
-    protected function validateFieldDataForObject(
+    protected function validateFieldArgsForObject(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         object $object,
@@ -819,7 +819,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Custom validations by the field resolver
          */
-        $objectTypeFieldResolver->validateFieldDataForObject($this, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolver->validateFieldArgsForObject($this, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         /**
          * If a MutationResolver is declared, let it validate the schema

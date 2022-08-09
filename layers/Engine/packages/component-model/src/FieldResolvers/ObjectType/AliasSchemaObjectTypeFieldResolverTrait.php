@@ -150,14 +150,14 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function validateFieldDataForObject(
+    public function validateFieldArgsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        $aliasedObjectTypeFieldResolver->validateFieldDataForObject(
+        $aliasedObjectTypeFieldResolver->validateFieldArgsForObject(
             $objectTypeResolver,
             $object,
             $this->getAliasedFieldDataAccessor($objectTypeResolver, $fieldDataAccessor),

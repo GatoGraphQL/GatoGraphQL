@@ -946,7 +946,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return [];
     }
 
-    public function validateFieldDataForObject(
+    public function validateFieldArgsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,

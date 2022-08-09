@@ -87,7 +87,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         string $fieldName
     ): ?MutationResolverInterface;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
-    public function validateFieldDataForObject(
+    public function validateFieldArgsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
