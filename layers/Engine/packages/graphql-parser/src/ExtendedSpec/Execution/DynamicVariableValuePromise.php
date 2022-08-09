@@ -11,7 +11,7 @@ use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItem
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class DynamicVariableValuePromise implements ResolvableOnEngineIterationValueResolutionPromiseInterface
+class DynamicVariableValuePromise implements ValueResolutionPromiseInterface
 {
     use StandaloneServiceTrait;
 
@@ -41,5 +41,15 @@ class DynamicVariableValuePromise implements ResolvableOnEngineIterationValueRes
             );
         }
         return $dynamicVariables[$variableName];
+    }
+
+    /**
+     * The field/directiveArgs containing the promise must be resolved:
+     *
+     * Only once during the Engine Iteration for all involved fields/objects
+     */
+    public function mustResolveOnObject(): bool
+    {
+        return false;
     }
 }
