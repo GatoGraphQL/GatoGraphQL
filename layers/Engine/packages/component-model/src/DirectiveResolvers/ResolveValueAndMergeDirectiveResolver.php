@@ -235,7 +235,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
          */
         $objectResolvedFieldValues = new SplObjectStorage();
         $appStateManager = App::getAppStateManager();
-        $appStateManager->override('engine-iteration-resolved-object-field-values', $objectResolvedFieldValues);
+        $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
     }
 
     /**
@@ -300,11 +300,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         /**
          * @var SplObjectStorage<FieldInterface,mixed>
          */
-        $objectResolvedFieldValues = App::getState('engine-iteration-resolved-object-field-values');
+        $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
         $objectResolvedFieldValues[$field] = $serializedIDFieldValues[$id][$field];
 
         $appStateManager = App::getAppStateManager();
-        $appStateManager->override('engine-iteration-resolved-object-field-values', $objectResolvedFieldValues);
+        $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
     }
 
     /**
