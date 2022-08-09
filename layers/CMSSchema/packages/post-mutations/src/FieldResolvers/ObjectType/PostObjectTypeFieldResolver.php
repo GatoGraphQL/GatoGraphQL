@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\PostUpdateFilterInputObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPCMSSchema\UserState\FieldResolvers\ObjectType\UserStateObjectTypeFieldResolverTrait;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
-    use UserStateObjectTypeFieldResolverTrait;
-
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
     private ?PostUpdateFilterInputObjectTypeResolver $postUpdateFilterInputObjectTypeResolver = null;
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -44,6 +44,14 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     final protected function getPostUpdateFilterInputObjectTypeResolver(): PostUpdateFilterInputObjectTypeResolver
     {
         return $this->postUpdateFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostUpdateFilterInputObjectTypeResolver::class);
+    }
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
 
     public function getObjectTypeResolverClassesToAttachTo(): array
@@ -85,5 +93,23 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
             'update' => $this->getPostObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    /**
+     * @param array<string, mixed> $fieldArgs
+     * @return CheckpointInterface[]
+     */
+    public function getValidationCheckpoints(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        object $object,
+    ): array {
+        $validationCheckpoints = parent::getValidationCheckpoints(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $object,
+        );
+        $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
+        return $validationCheckpoints;
     }
 }
