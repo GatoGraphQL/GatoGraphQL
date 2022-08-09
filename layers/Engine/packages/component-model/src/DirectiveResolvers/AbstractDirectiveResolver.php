@@ -20,6 +20,8 @@ use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\DirectiveDataAccessor;
+use PoP\ComponentModel\QueryResolution\DirectiveDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -224,6 +226,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return;
         }
         $this->directiveArgs = $directiveData;
+    }
+
+    /**
+     * @param array<string,mixed> $directiveData
+     */
+    public function createDirectiveDataAccessor(
+        array $directiveData,
+    ): DirectiveDataAccessorInterface {
+        return new DirectiveDataAccessor(
+            $directiveData,
+        );
     }
 
     /**
