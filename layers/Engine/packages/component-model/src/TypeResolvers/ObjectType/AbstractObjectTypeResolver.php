@@ -89,7 +89,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var SplObjectStorage<FieldInterface,array<string,mixed>|null>
      */
-    protected SplObjectStorage $fieldDataCache;
+    protected SplObjectStorage $fieldArgsCache;
     /**
      * @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface>
      */
@@ -162,7 +162,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     public function __construct()
     {
-        $this->fieldDataCache = new SplObjectStorage();
+        $this->fieldArgsCache = new SplObjectStorage();
         $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
         $this->fieldDataAccessorForMutationCache = new SplObjectStorage();
         $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache = new SplObjectStorage();
@@ -1373,13 +1373,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        if (!$this->fieldDataCache->contains($field)) {
-            $this->fieldDataCache[$field] = $this->doGetFieldData(
+        if (!$this->fieldArgsCache->contains($field)) {
+            $this->fieldArgsCache[$field] = $this->doGetFieldData(
                 $field,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
-        return $this->fieldDataCache[$field];
+        return $this->fieldArgsCache[$field];
     }
 
     /**
