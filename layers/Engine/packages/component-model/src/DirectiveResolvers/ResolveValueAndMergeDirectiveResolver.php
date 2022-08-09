@@ -238,6 +238,11 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
          */
         $objectResolvedDynamicVariables = [];
         $appStateManager->override('object-resolved-dynamic-variables', $objectResolvedDynamicVariables);
+
+        /**
+         * The current object ID for which to retrieve the dynamic variable for.
+         */
+        $appStateManager->override('engine-iteration-current-object-id', null);
     }
 
     /**
