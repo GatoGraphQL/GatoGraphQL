@@ -706,8 +706,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return $fieldDataAccessor;
         }
 
-        $hasArgumentReferencingResolvedOnEngineIterationPromise = $field->hasArgumentReferencingResolvedOnEngineIterationPromise();
-        if ($hasArgumentReferencingResolvedOnEngineIterationPromise && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($field)) {
+        /**
+         * If no Promise needs to be resolved on the object, then
+         * we can use the same response for all objects.
+         */
+        if ($hasArgumentReferencingPromise
+            && !$field->hasArgumentReferencingResolvedOnObjectPromise()
+            && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($field)
+        ) {
             return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field];
         }
 
@@ -721,7 +727,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $valueResolutionPromiseException->getAstNode(),
                 )
             );
-            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+            if ($hasArgumentReferencingPromise) {
                 $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             }
             return null;
@@ -738,7 +744,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+            if ($hasArgumentReferencingPromise) {
                 $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             }
             return null;
@@ -751,7 +757,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+            if ($hasArgumentReferencingPromise) {
                 $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             }
             return null;
@@ -765,7 +771,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgs,
         );
 
-        if ($hasArgumentReferencingResolvedOnEngineIterationPromise) {
+        if ($hasArgumentReferencingPromise) {
             $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = $fieldDataAccessorForObject;
         }
 
