@@ -83,7 +83,7 @@ trait FieldOrDirectiveDataAccessorTrait
     {
         return array_keys($this->getResolvedFieldOrDirectiveArgs());
     }
-    
+
     /**
      * @return array<string,mixed>
      * @throws AbstractValueResolutionPromiseException
