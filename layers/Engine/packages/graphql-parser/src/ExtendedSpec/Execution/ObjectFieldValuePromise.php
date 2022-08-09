@@ -22,7 +22,7 @@ class ObjectFieldValuePromise implements ResolvableOnObjectValueResolutionPromis
     public function resolveValue(): mixed
     {
         /** @var SplObjectStorage<FieldInterface,mixed> */
-        $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
+        $objectResolvedFieldValues = App::getState('engine-iteration-resolved-object-field-values');
         if (!$objectResolvedFieldValues->contains($this->field)) {
             throw new ShouldNotHappenException(
                 sprintf(
