@@ -84,10 +84,25 @@ trait WithArgumentsTrait
     public function hasArgumentReferencingPromise(): bool
     {
         if ($this->hasArgumentReferencingPromise === null) {
-            $this->hasArgumentReferencingPromise = $this->hasArgumentReferencingResolvedOnEngineIterationPromise()
-                || $this->hasArgumentReferencingResolvedOnObjectPromise();
+            $this->hasArgumentReferencingPromise = $this->doHasArgumentReferencingPromise($this->getArgumentKeyValues());
         }
         return $this->hasArgumentReferencingPromise;
+    }
+
+    protected function doHasArgumentReferencingPromise(array $values): mixed
+    {
+        foreach ($values as $value) {
+            if ($value instanceof ValueResolutionPromiseInterface) {
+                return true;
+            }
+            if (is_array($value) && $this->doHasArgumentReferencingPromise($value)) {
+                return true;
+            }
+            if ($value instanceof stdClass && $this->doHasArgumentReferencingPromise((array)$value)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function hasArgumentReferencingResolvedOnEngineIterationPromise(): bool
