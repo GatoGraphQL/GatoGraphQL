@@ -20,7 +20,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
      * @param array<string,mixed> $fieldArgs
      * @return array<string,mixed>
      */
-    protected function prepareAddCommentFieldData(
+    protected function prepareAddCommentFieldArgs(
         array $fieldArgs,
     ): array {
         // Just in case, make sure the InputObject has been set

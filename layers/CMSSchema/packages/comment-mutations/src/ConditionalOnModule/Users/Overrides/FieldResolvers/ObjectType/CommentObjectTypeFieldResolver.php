@@ -45,6 +45,6 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        return $this->prepareAddCommentFieldData($fieldArgs);
+        return $this->prepareAddCommentFieldArgs($fieldArgs);
     }
 }
