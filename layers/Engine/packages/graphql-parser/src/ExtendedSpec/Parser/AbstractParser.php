@@ -9,6 +9,7 @@ use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DocumentDynamicVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedDynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedFieldValueReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
@@ -513,6 +514,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return $this->createObjectResolvedFieldValueReference($name, $resolvedFieldValueReferenceField, $location);
         }
 
+        if ($this->isObjectResolvedDynamicVariableReference($name, $variable)) {
+            return $this->createObjectResolvedDynamicVariableReference($name, $location);
+        }
+
         if ($this->isDocumentDynamicVariableReference($name, $variable)) {
             return $this->createDocumentDynamicVariableReference($name, $location);
         }
@@ -619,6 +624,32 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         Location $location,
     ): VariableReference {
         return new DocumentDynamicVariableReference($name, $location);
+    }
+
+    protected function isObjectResolvedDynamicVariableReference(
+        string $variableName,
+        ?Variable $variable,
+    ): bool {
+        /**
+         * If there's a variable with that name, then it has priority
+         */
+        if ($variable !== null) {
+            return false;
+        }
+
+        /**
+         * Check that any previous "DynamicVariableDefiner" Directive
+         * has defined the same dynamic variable name.
+         * Eg: `@export(as: "someVariableName")`
+         */
+        return in_array($variableName, $this->parsedDefinedObjectResolvedDynamicVariableNames);
+    }
+
+    protected function createObjectResolvedDynamicVariableReference(
+        string $name,
+        Location $location,
+    ): VariableReference {
+        return new ObjectResolvedDynamicVariableReference($name, $location);
     }
 
     /**
