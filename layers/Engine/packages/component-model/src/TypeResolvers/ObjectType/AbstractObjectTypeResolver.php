@@ -293,14 +293,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * If executed within a FieldResolver we will (most likely)
      * receive a Field, and we can assume there's no need to
      * normalize the values, they will be coded/provided as required.
-     *
-     * @param array<string,mixed> $options
      */
     final public function resolveValue(
         object $object,
         FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = [],
     ): mixed {
         $fieldDataAccessor = null;
         $isFieldDataAccessor = $fieldOrFieldDataAccessor instanceof FieldDataAccessorInterface;
@@ -358,11 +355,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Resolve promises, or customize the fieldArgs for the object
          */
-        $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         $fieldDataAccessor = $this->maybeGetFieldDataAccessorForObject(
             $fieldDataAccessor,
             $this->getID($object),
-            $validateSchemaOnObject,
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($fieldDataAccessor === null) {
@@ -699,12 +694,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected function maybeGetFieldDataAccessorForObject(
         FieldDataAccessorInterface $fieldDataAccessor,
         string|int $id,
-        bool $validateSchemaOnObject,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?FieldDataAccessorInterface {
         $field = $fieldDataAccessor->getField();
-        $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
-        if (!($hasArgumentReferencingPromise || $validateSchemaOnObject)) {
+        if (!$field->hasArgumentReferencingPromise()) {
             return $fieldDataAccessor;
         }
 
@@ -713,8 +706,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * we can use the same response for all objects.
          */
         if (
-            $hasArgumentReferencingPromise
-            && !$field->hasArgumentReferencingResolvedOnObjectPromise()
+            !$field->hasArgumentReferencingResolvedOnObjectPromise()
             && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($field)
         ) {
             return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field];
@@ -743,9 +735,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $appStateManager->override('engine-iteration-current-field', null);
 
         if ($fieldArgs === null) {
-            if ($hasArgumentReferencingPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
-            }
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             return null;
         }
 
@@ -760,9 +750,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            if ($hasArgumentReferencingPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
-            }
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             return null;
         }
 
@@ -773,9 +761,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            if ($hasArgumentReferencingPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
-            }
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             return null;
         }
 
@@ -787,10 +773,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgs,
         );
 
-        if ($hasArgumentReferencingPromise) {
-            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = $fieldDataAccessorForObject;
-        }
-
+        $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = $fieldDataAccessorForObject;
         return $fieldDataAccessorForObject;
     }
 
@@ -1415,7 +1398,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $fieldArgs = $field->getArgumentKeyValues();
-        $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
 
         /**
          * Check that the field has been defined in the schema
@@ -1488,7 +1470,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * It will be done later, after promises are resolved
          * to an actual value when resolving the object.
          */
-        if (!$hasArgumentReferencingPromise) {
+        if (!$field->hasArgumentReferencingPromise()) {
             $this->validateVariableOnObjectResolutionFieldData(
                 $fieldArgs,
                 $field,
