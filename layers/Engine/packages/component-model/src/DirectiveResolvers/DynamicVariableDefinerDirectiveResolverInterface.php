@@ -24,4 +24,13 @@ interface DynamicVariableDefinerDirectiveResolverInterface extends DirectiveReso
      * Eg: @export(as: "variableName")
      */
     public function getExportUnderVariableNameArgumentName(): string;
+
+    /**
+     * If `true`, the dynamic variable's scope is the object
+     * being currently resolved.
+     *
+     * If `false`, the exported value is available for all
+     * subsequent AST elements in the document.
+     */
+    public function mustResolveDynamicVariableOnObject(): bool;
 }

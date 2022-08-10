@@ -64,11 +64,22 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     /**
      * Use this variable to keep track of which
      * DynamicVariableDefinerDirectives (such as `@export`)
-     * have been already parsed in the query.
+     * have been already parsed in the query, and
+     * have the scope of "document"
      *
      * @var string[]
      */
-    protected array $parsedDefinedDynamicVariableNames;
+    protected array $parsedDefinedDocumentDynamicVariableNames;
+
+    /**
+     * Use this variable to keep track of which
+     * DynamicVariableDefinerDirectives (such as `@export`)
+     * have been already parsed in the query, and
+     * have the scope of "resolved in object"
+     *
+     * @var string[]
+     */
+    protected array $parsedDefinedObjectResolvedDynamicVariableNames;
 
     /**
      * List of all the Fields in the query which are
@@ -84,7 +95,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         $this->parsedFieldBlockStack = [];
         $this->parsingDirectiveArgumentList = false;
-        $this->parsedDefinedDynamicVariableNames = [];
+        $this->parsedDefinedDocumentDynamicVariableNames = [];
+        $this->parsedDefinedObjectResolvedDynamicVariableNames = [];
         $this->objectResolvedFieldValueReferencedFields = [];
     }
 
@@ -266,7 +278,16 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return;
         }
         $exportUnderVariableName = (string)$exportUnderVariableNameArgument->getValue();
-        $this->parsedDefinedDynamicVariableNames[] = $exportUnderVariableName;
+
+        /**
+         * The DirectiveResolver will indicate if the dynamic variable's scope
+         * is the "document" or "resolved in the object"
+         */
+        if ($this->mustResolveDynamicVariableOnObject($directive)) {
+            $this->parsedDefinedObjectResolvedDynamicVariableNames[] = $exportUnderVariableName;
+        } else {
+            $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
+        }
     }
 
     /**
@@ -572,7 +593,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * has defined the same dynamic variable name.
          * Eg: `@export(as: "someVariableName")`
          */
-        return in_array($variableName, $this->parsedDefinedDynamicVariableNames);
+        return in_array($variableName, $this->parsedDefinedDocumentDynamicVariableNames);
     }
 
     protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
@@ -880,4 +901,5 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
     abstract protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument;
     abstract protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string;
+    abstract protected function mustResolveDynamicVariableOnObject(Directive $directive): bool;
 }
