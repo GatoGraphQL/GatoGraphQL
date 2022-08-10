@@ -361,6 +361,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         $fieldDataAccessor = $this->maybeGetFieldDataAccessorForObject(
             $fieldDataAccessor,
+            $this->getID($object),
             $validateSchemaOnObject,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -697,6 +698,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected function maybeGetFieldDataAccessorForObject(
         FieldDataAccessorInterface $fieldDataAccessor,
+        string|int $id,
         bool $validateSchemaOnObject,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?FieldDataAccessorInterface {
@@ -717,6 +719,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field];
         }
 
+        /**
+         * The current object ID/Field for which to retrieve the dynamic variable for.
+         */
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->override('engine-iteration-current-object-id', $id);
+        $appStateManager->override('engine-iteration-current-field', $field);
+
         $fieldArgs = null;
         try {
             $fieldArgs = $fieldDataAccessor->getFieldArgs();
@@ -727,6 +736,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $valueResolutionPromiseException->getAstNode(),
                 )
             );
+        }
+
+        $appStateManager->override('engine-iteration-current-object-id', null);
+        $appStateManager->override('engine-iteration-current-field', null);
+        
+        if ($fieldArgs === null) {
             if ($hasArgumentReferencingPromise) {
                 $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             }
