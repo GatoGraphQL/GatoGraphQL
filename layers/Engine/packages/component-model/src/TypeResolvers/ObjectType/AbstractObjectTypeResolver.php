@@ -358,11 +358,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Resolve promises, or customize the fieldArgs for the object
          */
-        $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         $fieldDataAccessor = $this->maybeGetFieldDataAccessorForObject(
             $fieldDataAccessor,
             $this->getID($object),
-            $validateSchemaOnObject,
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($fieldDataAccessor === null) {
@@ -699,12 +697,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected function maybeGetFieldDataAccessorForObject(
         FieldDataAccessorInterface $fieldDataAccessor,
         string|int $id,
-        bool $validateSchemaOnObject,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?FieldDataAccessorInterface {
         $field = $fieldDataAccessor->getField();
         $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
-        if (!($hasArgumentReferencingPromise || $validateSchemaOnObject)) {
+        if (!($hasArgumentReferencingPromise)) {
             return $fieldDataAccessor;
         }
 
