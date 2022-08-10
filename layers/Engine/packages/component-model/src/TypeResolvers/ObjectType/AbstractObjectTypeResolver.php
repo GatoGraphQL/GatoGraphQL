@@ -697,8 +697,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?FieldDataAccessorInterface {
         $field = $fieldDataAccessor->getField();
-        $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
-        if (!($hasArgumentReferencingPromise)) {
+        if (!$field->hasArgumentReferencingPromise()) {
             return $fieldDataAccessor;
         }
 
@@ -707,8 +706,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * we can use the same response for all objects.
          */
         if (
-            $hasArgumentReferencingPromise
-            && !$field->hasArgumentReferencingResolvedOnObjectPromise()
+            !$field->hasArgumentReferencingResolvedOnObjectPromise()
             && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($field)
         ) {
             return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field];
@@ -737,9 +735,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $appStateManager->override('engine-iteration-current-field', null);
 
         if ($fieldArgs === null) {
-            if ($hasArgumentReferencingPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
-            }
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             return null;
         }
 
@@ -754,9 +750,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            if ($hasArgumentReferencingPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
-            }
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             return null;
         }
 
@@ -767,9 +761,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            if ($hasArgumentReferencingPromise) {
-                $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
-            }
+            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
             return null;
         }
 
@@ -781,10 +773,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgs,
         );
 
-        if ($hasArgumentReferencingPromise) {
-            $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = $fieldDataAccessorForObject;
-        }
-
+        $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = $fieldDataAccessorForObject;
         return $fieldDataAccessorForObject;
     }
 
@@ -1409,8 +1398,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $fieldArgs = $field->getArgumentKeyValues();
-        $hasArgumentReferencingPromise = $field->hasArgumentReferencingPromise();
-
+        
         /**
          * Check that the field has been defined in the schema
          */
@@ -1482,7 +1470,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * It will be done later, after promises are resolved
          * to an actual value when resolving the object.
          */
-        if (!$hasArgumentReferencingPromise) {
+        if (!$field->hasArgumentReferencingPromise()) {
             $this->validateVariableOnObjectResolutionFieldData(
                 $fieldArgs,
                 $field,
