@@ -175,14 +175,26 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $directives,
             $location
         );
-        $this->addFieldToCurrentlyParsedFieldBlock($relationalField);
+        $this->createdField($relationalField);
         return $relationalField;
     }
 
-    protected function addFieldToCurrentlyParsedFieldBlock(
+    protected function createdField(
         FieldInterface $field,
     ): void {
+        /**
+         * Add the Field to the currently-parsed block of Fields
+         */
         $this->parsedFieldBlockStack[0][] = $field;
+
+        /**
+         * Once the Field has been parsed, also reset
+         * the exportedVariableNames for "ObjectResolved"
+         * dynamic variables (eg: `@passOnwards`)
+         * which make sense within those Directives
+         * applied to that Field only
+         */
+        $this->parsedDefinedObjectResolvedDynamicVariableNames = [];
     }
 
     /**
@@ -203,7 +215,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $directives,
             $location,
         );
-        $this->addFieldToCurrentlyParsedFieldBlock($leafField);
+        $this->createdField($leafField);
         return $leafField;
     }
 
