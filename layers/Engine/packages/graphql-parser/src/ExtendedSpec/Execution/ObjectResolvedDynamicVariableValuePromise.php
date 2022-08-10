@@ -60,30 +60,6 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
             || !$objectResolvedDynamicVariables[$engineIterationCurrentObjectID]->contains($engineIterationCurrentField)
             || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$engineIterationCurrentField])
         ) {
-            /**
-             * If not available for the object (eg: because it was exported
-             * on a Field from a previous query when doing Multiple Query
-             * Execution), then check if the exported value lives on the document.
-             *
-             * This enables users to use `@export` (instead of `@aggregateExport`)
-             * also across queries:
-             *
-             *   ```
-             *   query One {
-             *       id @export(as: "id")
-             *   }
-             *
-             *   query Two {
-             *       mirror: echo(value: $id)
-             *   }
-             *   ```
-             */
-            /** @var array<string,mixed> */
-            $documentDynamicVariables = App::getState('document-dynamic-variables');
-            if (array_key_exists($dynamicVariableName, $documentDynamicVariables)) {
-                return $documentDynamicVariables[$dynamicVariableName];
-            }
-
             // Variable is nowhere defined => Error
             throw new RuntimeVariableReferenceException(
                 new FeedbackItemResolution(
