@@ -64,7 +64,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * Use this variable to keep track of which
-     * DynamicVariableDefinerDirectives (such as `@export`)
+     * DynamicVariableDefinerDirectives (such as `@aggregateExport`)
      * have been already parsed in the query, and
      * have the scope of "document"
      *
@@ -614,7 +614,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * Check that any previous "DynamicVariableDefiner" Directive
          * has defined the same dynamic variable name.
-         * Eg: `@export(as: "someVariableName")`
+         * Eg: `@aggregateExport(as: "someVariableName")`
          */
         return in_array($variableName, $this->parsedDefinedDocumentDynamicVariableNames);
     }
