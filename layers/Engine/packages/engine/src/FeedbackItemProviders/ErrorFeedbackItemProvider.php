@@ -32,7 +32,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E2 => $this->__('Field(s) \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'engine'),
+            self::E2 => $this->__('Field \'%s\' hadn\'t been set for object with ID \'%s\', so it can\'t be transformed', 'engine'),
             self::E4 => $this->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'engine'),
             self::E5 => $this->__('No composed directives were provided to \'%s\'', 'engine'),
             self::E6 => $this->__('There is no property \'%s\' in the application state', 'engine'),
