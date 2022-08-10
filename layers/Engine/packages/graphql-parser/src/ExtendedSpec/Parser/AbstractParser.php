@@ -577,6 +577,24 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         );
     }
 
+    protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
+    {
+        if ($this->parsedFieldBlockStack === []) {
+            return null;
+        }
+
+        $currentlyParsedBlockFields = $this->parsedFieldBlockStack[0];
+        foreach ($currentlyParsedBlockFields as $field) {
+            if (
+                ($field->getAlias() !== null && $field->getAlias() === $referencedFieldNameOrAlias)
+                || ($field->getAlias() === null && $field->getName() === $referencedFieldNameOrAlias)
+            ) {
+                return $field;
+            }
+        }
+        return null;
+    }
+
     protected function isDocumentDynamicVariableReference(
         string $variableName,
         ?Variable $variable,
@@ -594,24 +612,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * Eg: `@export(as: "someVariableName")`
          */
         return in_array($variableName, $this->parsedDefinedDocumentDynamicVariableNames);
-    }
-
-    protected function findFieldWithNameWithinCurrentSiblingFields(string $referencedFieldNameOrAlias): ?FieldInterface
-    {
-        if ($this->parsedFieldBlockStack === []) {
-            return null;
-        }
-
-        $currentlyParsedBlockFields = $this->parsedFieldBlockStack[0];
-        foreach ($currentlyParsedBlockFields as $field) {
-            if (
-                ($field->getAlias() !== null && $field->getAlias() === $referencedFieldNameOrAlias)
-                || ($field->getAlias() === null && $field->getName() === $referencedFieldNameOrAlias)
-            ) {
-                return $field;
-            }
-        }
-        return null;
     }
 
     protected function createDocumentDynamicVariableReference(
