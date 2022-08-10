@@ -293,14 +293,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * If executed within a FieldResolver we will (most likely)
      * receive a Field, and we can assume there's no need to
      * normalize the values, they will be coded/provided as required.
-     *
-     * @param array<string,mixed> $options
      */
     final public function resolveValue(
         object $object,
         FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = [],
     ): mixed {
         $fieldDataAccessor = null;
         $isFieldDataAccessor = $fieldOrFieldDataAccessor instanceof FieldDataAccessorInterface;

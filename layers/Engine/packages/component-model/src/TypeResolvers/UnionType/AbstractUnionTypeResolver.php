@@ -430,14 +430,10 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         );
     }
 
-    /**
-     * @param array<string,mixed> $options
-     */
     public function resolveValue(
         object $object,
         FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = [],
     ): mixed {
         // Check that a typeResolver from this Union can process this object, or return an arror
         $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
@@ -464,7 +460,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             $object,
             $fieldOrFieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
-            $options,
         );
     }
 
