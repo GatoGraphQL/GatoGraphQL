@@ -622,7 +622,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function createDocumentDynamicVariableReference(
         string $name,
         Location $location,
-    ): VariableReference {
+    ): DocumentDynamicVariableReference {
         return new DocumentDynamicVariableReference($name, $location);
     }
 
@@ -648,7 +648,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function createObjectResolvedDynamicVariableReference(
         string $name,
         Location $location,
-    ): VariableReference {
+    ): ObjectResolvedDynamicVariableReference {
         return new ObjectResolvedDynamicVariableReference($name, $location);
     }
 
