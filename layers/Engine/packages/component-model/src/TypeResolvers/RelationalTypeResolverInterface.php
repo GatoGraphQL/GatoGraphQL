@@ -51,7 +51,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
-    
+
     public function resolveValue(
         object $object,
         FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,

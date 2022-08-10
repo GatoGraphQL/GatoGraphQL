@@ -1398,7 +1398,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $fieldArgs = $field->getArgumentKeyValues();
-        
+
         /**
          * Check that the field has been defined in the schema
          */
