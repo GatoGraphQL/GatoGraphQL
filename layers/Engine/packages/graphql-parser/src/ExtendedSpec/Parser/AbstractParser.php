@@ -64,7 +64,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * Use this variable to keep track of which
-     * DynamicVariableDefinerDirectives (such as `@aggregateExport`)
+     * DynamicVariableDefinerDirectives (such as `@export`)
      * have been already parsed in the query, and
      * have the scope of "document"
      *
@@ -74,13 +74,13 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * Use this variable to keep track of which
-     * DynamicVariableDefinerDirectives (such as `@export`)
+     * DynamicVariableDefinerDirectives (such as `@passOnwards`)
      * have been already parsed in the query, and
      * have the scope of "resolved in object"
      *
      * @var string[]
      */
-    protected array $parsedDefinedObjectResolvedDynamicVariableNames;
+    protected array $parsedFieldDefinedObjectResolvedDynamicVariableNames;
 
     /**
      * List of all the Fields in the query which are
@@ -97,7 +97,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $this->parsedFieldBlockStack = [];
         $this->parsingDirectiveArgumentList = false;
         $this->parsedDefinedDocumentDynamicVariableNames = [];
-        $this->parsedDefinedObjectResolvedDynamicVariableNames = [];
+        $this->parsedFieldDefinedObjectResolvedDynamicVariableNames = [];
         $this->objectResolvedFieldValueReferencedFields = [];
     }
 
@@ -175,14 +175,26 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $directives,
             $location
         );
-        $this->addFieldToCurrentlyParsedFieldBlock($relationalField);
+        $this->createdField($relationalField);
         return $relationalField;
     }
 
-    protected function addFieldToCurrentlyParsedFieldBlock(
+    protected function createdField(
         FieldInterface $field,
     ): void {
+        /**
+         * Add the Field to the currently-parsed block of Fields
+         */
         $this->parsedFieldBlockStack[0][] = $field;
+
+        /**
+         * Once the Field has been parsed, also reset
+         * the exportedVariableNames for "ObjectResolved"
+         * dynamic variables (eg: `@passOnwards`)
+         * which make sense within those Directives
+         * applied to that Field only
+         */
+        $this->parsedFieldDefinedObjectResolvedDynamicVariableNames = [];
     }
 
     /**
@@ -203,7 +215,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $directives,
             $location,
         );
-        $this->addFieldToCurrentlyParsedFieldBlock($leafField);
+        $this->createdField($leafField);
         return $leafField;
     }
 
@@ -289,7 +301,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return;
         }
         if ($mustResolveDynamicVariableOnObject) {
-            $this->parsedDefinedObjectResolvedDynamicVariableNames[] = $exportUnderVariableName;
+            $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[] = $exportUnderVariableName;
             return;
         }
         $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
@@ -618,7 +630,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * Check that any previous "DynamicVariableDefiner" Directive
          * has defined the same dynamic variable name.
-         * Eg: `@aggregateExport(as: "someVariableName")`
+         * Eg: `@export(as: "someVariableName")`
          */
         return in_array($variableName, $this->parsedDefinedDocumentDynamicVariableNames);
     }
@@ -646,7 +658,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * has defined the same dynamic variable name.
          * Eg: `@export(as: "someVariableName")`
          */
-        return in_array($variableName, $this->parsedDefinedObjectResolvedDynamicVariableNames);
+        return in_array($variableName, $this->parsedFieldDefinedObjectResolvedDynamicVariableNames);
     }
 
     protected function createObjectResolvedDynamicVariableReference(
