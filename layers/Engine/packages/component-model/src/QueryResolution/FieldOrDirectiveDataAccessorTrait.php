@@ -23,6 +23,16 @@ trait FieldOrDirectiveDataAccessorTrait
     protected ?array $resolvedFieldOrDirectiveArgs = null;
 
     /**
+     * When the Args contain a "Resolved on Object" Promise,
+     * then caching the results will not work across objects,
+     * and the cache must then be explicitly cleared.
+     */
+    protected function resetResolvedFieldOrDirectiveArgs(): void
+    {
+        $this->resolvedFieldOrDirectiveArgs = null;
+    }
+
+    /**
      * @return array<string,mixed>
      * @throws AbstractValueResolutionPromiseException
      */

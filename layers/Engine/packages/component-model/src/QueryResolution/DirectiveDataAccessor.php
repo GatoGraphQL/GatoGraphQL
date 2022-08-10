@@ -32,4 +32,14 @@ class DirectiveDataAccessor implements DirectiveDataAccessorInterface
     {
         return $this->unresolvedDirectiveArgs;
     }
+
+    /**
+     * When the Args contain a "Resolved on Object" Promise,
+     * then caching the results will not work across objects,
+     * and the cache must then be explicitly cleared.
+     */
+    public function resetDirectiveArgs(): void
+    {
+        $this->resetResolvedFieldOrDirectiveArgs();
+    }
 }

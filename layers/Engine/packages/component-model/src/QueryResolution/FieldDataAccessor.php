@@ -44,4 +44,14 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     {
         return $this->unresolvedFieldArgs;
     }
+
+    /**
+     * When the Args contain a "Resolved on Object" Promise,
+     * then caching the results will not work across objects,
+     * and the cache must then be explicitly cleared.
+     */
+    public function resetFieldArgs(): void
+    {
+        $this->resetResolvedFieldOrDirectiveArgs();
+    }
 }
