@@ -33,19 +33,20 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          * for which to retrieve the dynamic variable for.
          *
          * If any of them is not provided, it's a development error.
+         *
+         * @var string|int|null
          */
-        if (!App::hasState('engine-iteration-current-object-id')
-            || !App::hasState('engine-iteration-current-field')) {
+        $engineIterationCurrentObjectID = App::getState('engine-iteration-current-object-id');
+        /** @var FieldInterface|null */
+        $engineIterationCurrentField = App::getState('engine-iteration-current-field');
+        if ($engineIterationCurrentObjectID === null
+            || $engineIterationCurrentField === null) {
             throw new ShouldNotHappenException(
                 $this->__(
                     'The Engine Iteration\'s current objectID/Field have not been set, so the Promise cannot be resolved'
                 )
             );
         }
-        /** @var string|int */
-        $engineIterationCurrentObjectID = App::getState('engine-iteration-current-object-id');
-        /** @var FieldInterface */
-        $engineIterationCurrentField = App::getState('engine-iteration-current-field');
 
         /**
          * @var array<string|int,SplObjectStorage<FieldInterface,array<string,mixed>>> Array of [objectID => SplObjectStorage<Field, [dynamicVariableName => value]>]
