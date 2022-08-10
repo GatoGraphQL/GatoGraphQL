@@ -284,11 +284,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * The DirectiveResolver will indicate if the dynamic variable's scope
          * is the "document" or "resolved in the object"
          */
-        if ($this->mustResolveDynamicVariableOnObject($directive)) {
-            $this->parsedDefinedObjectResolvedDynamicVariableNames[] = $exportUnderVariableName;
-        } else {
-            $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
+        $mustResolveDynamicVariableOnObject = $this->mustResolveDynamicVariableOnObject($directive);
+        if ($mustResolveDynamicVariableOnObject === null) {
+            return;
         }
+        if ($mustResolveDynamicVariableOnObject) {
+            $this->parsedDefinedObjectResolvedDynamicVariableNames[] = $exportUnderVariableName;
+            return;
+        }
+        $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
     }
 
     /**
@@ -932,5 +936,5 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
     abstract protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument;
     abstract protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string;
-    abstract protected function mustResolveDynamicVariableOnObject(Directive $directive): bool;
+    abstract protected function mustResolveDynamicVariableOnObject(Directive $directive): ?bool;
 }
