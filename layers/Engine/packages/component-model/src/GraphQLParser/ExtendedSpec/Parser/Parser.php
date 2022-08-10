@@ -127,4 +127,13 @@ class Parser extends AbstractParser
         }
         return $directiveResolver->getAffectAdditionalFieldsUnderPosArgumentName();
     }
+
+    protected function mustResolveDynamicVariableOnObject(Directive $directive): ?bool
+    {
+        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive);
+        if ($dynamicVariableDefinerDirectiveResolver === null) {
+            return null;
+        }
+        return $dynamicVariableDefinerDirectiveResolver->mustResolveDynamicVariableOnObject();
+    }
 }

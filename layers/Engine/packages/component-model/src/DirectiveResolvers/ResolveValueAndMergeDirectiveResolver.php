@@ -18,8 +18,6 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\TypeSerialization\TypeSerializationServiceInterface;
-use PoP\GraphQLParser\Module as GraphQLParserModule;
-use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -224,18 +222,28 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      */
     protected function resetAppStateForFieldValuePromises(): void
     {
-        /** @var GraphQLParserModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
-        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
-            return;
-        }
-
         /**
          * @var SplObjectStorage<FieldInterface,mixed>
          */
         $objectResolvedFieldValues = new SplObjectStorage();
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
+
+        /**
+         * Object-resolved dynamic variables are those generated on runtime
+         * when resolving the GraphQL query (eg: via @export),
+         * with a value targetted for a specific object
+         *
+         * @var array<string|int,SplObjectStorage<FieldInterface,array<string,mixed>>> Array of [objectID => SplObjectStorage<Field, [dynamicVariableName => value]>]
+         */
+        $objectResolvedDynamicVariables = [];
+        $appStateManager->override('object-resolved-dynamic-variables', $objectResolvedDynamicVariables);
+
+        /**
+         * The current objectID and Field for which to retrieve the dynamic variable for.
+         */
+        $appStateManager->override('engine-iteration-current-object-id', null);
+        $appStateManager->override('engine-iteration-current-field', null);
     }
 
     /**
@@ -253,12 +261,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         mixed $value,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        /** @var GraphQLParserModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
-        if (!$moduleConfiguration->enableObjectResolvedFieldValueReferences()) {
-            return;
-        }
-
         /**
          * Optimization: Check if the field was referenced in the query,
          * otherwise can skip

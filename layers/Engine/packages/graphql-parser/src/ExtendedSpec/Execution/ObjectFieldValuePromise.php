@@ -10,7 +10,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
 
-class ObjectFieldValuePromise implements ResolvableOnObjectValueResolutionPromiseInterface
+class ObjectFieldValuePromise implements ValueResolutionPromiseInterface
 {
     use StandaloneServiceTrait;
 
@@ -33,5 +33,15 @@ class ObjectFieldValuePromise implements ResolvableOnObjectValueResolutionPromis
         }
 
         return $objectResolvedFieldValues[$this->field];
+    }
+
+    /**
+     * The field/directiveArgs containing the promise must be resolved:
+     *
+     * Object by object
+     */
+    public function mustResolveOnObject(): bool
+    {
+        return true;
     }
 }
