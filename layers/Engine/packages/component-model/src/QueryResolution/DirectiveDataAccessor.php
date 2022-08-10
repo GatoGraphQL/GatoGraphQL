@@ -10,15 +10,6 @@ class DirectiveDataAccessor implements DirectiveDataAccessorInterface
 {
     use FieldOrDirectiveDataAccessorTrait;
 
-    /**
-     * A ObjectResolvedFieldValueReference will return a ValueResolutionPromiseInterface,
-     * which must be resolved to the actual value after its corresponding
-     * Field was resolved.
-     *
-     * @var array<string,mixed>
-     */
-    protected ?array $resolvedDirectiveArgs = null;
-
     public function __construct(
         /** @var array<string,mixed> */
         protected array $unresolvedDirectiveArgs,
@@ -31,27 +22,14 @@ class DirectiveDataAccessor implements DirectiveDataAccessorInterface
      */
     public function getDirectiveArgs(): array
     {
-        return $this->getResolvedDirectiveArgs();
+        return $this->getResolvedFieldOrDirectiveArgs();
     }
 
     /**
      * @return array<string,mixed>
-     * @throws AbstractValueResolutionPromiseException
      */
-    protected function getResolvedDirectiveArgs(): array
+    protected function getUnresolvedFieldOrDirectiveArgs(): array
     {
-        if ($this->resolvedDirectiveArgs === null) {
-            $this->resolvedDirectiveArgs = $this->doGetResolvedFieldOrDirectiveArgs($this->unresolvedDirectiveArgs);
-        }
-        return $this->resolvedDirectiveArgs;
-    }
-
-    /**
-     * @return array<string,mixed>
-     * @throws AbstractValueResolutionPromiseException
-     */
-    protected function getResolvedFieldOrDirectiveArgs(): array
-    {
-        return $this->getResolvedDirectiveArgs();
+        return $this->unresolvedDirectiveArgs;
     }
 }

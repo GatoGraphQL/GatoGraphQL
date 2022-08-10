@@ -14,6 +14,32 @@ use stdClass;
 trait FieldOrDirectiveDataAccessorTrait
 {
     /**
+     * A ObjectResolvedFieldValueReference will return a ValueResolutionPromiseInterface,
+     * which must be resolved to the actual value after its corresponding
+     * Field was resolved.
+     *
+     * @var array<string,mixed>
+     */
+    protected ?array $resolvedFieldOrDirectiveArgs = null;
+
+    /**
+     * @return array<string,mixed>
+     * @throws AbstractValueResolutionPromiseException
+     */
+    protected function getResolvedFieldOrDirectiveArgs(): array
+    {
+        if ($this->resolvedFieldOrDirectiveArgs === null) {
+            $this->resolvedFieldOrDirectiveArgs = $this->doGetResolvedFieldOrDirectiveArgs($this->getUnresolvedFieldOrDirectiveArgs());
+        }
+        return $this->resolvedFieldOrDirectiveArgs;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    abstract protected function getUnresolvedFieldOrDirectiveArgs(): array;
+
+    /**
      * Resolve all the ValueResolutionPromiseInterface to their resolved values.
      *
      * @return array<string,mixed>
@@ -83,12 +109,6 @@ trait FieldOrDirectiveDataAccessorTrait
     {
         return array_keys($this->getResolvedFieldOrDirectiveArgs());
     }
-
-    /**
-     * @return array<string,mixed>
-     * @throws AbstractValueResolutionPromiseException
-     */
-    abstract protected function getResolvedFieldOrDirectiveArgs(): array;
 
     /**
      * @throws AbstractValueResolutionPromiseException

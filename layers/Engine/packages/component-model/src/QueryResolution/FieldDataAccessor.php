@@ -11,15 +11,6 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 {
     use FieldOrDirectiveDataAccessorTrait;
 
-    /**
-     * A ObjectResolvedFieldValueReference will return a ValueResolutionPromiseInterface,
-     * which must be resolved to the actual value after its corresponding
-     * Field was resolved.
-     *
-     * @var array<string,mixed>
-     */
-    protected ?array $resolvedFieldArgs = null;
-
     public function __construct(
         protected FieldInterface $field,
         /** @var array<string,mixed> */
@@ -43,27 +34,14 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      */
     public function getFieldArgs(): array
     {
-        return $this->getResolvedFieldArgs();
+        return $this->getResolvedFieldOrDirectiveArgs();
     }
 
     /**
      * @return array<string,mixed>
-     * @throws AbstractValueResolutionPromiseException
      */
-    protected function getResolvedFieldArgs(): array
+    protected function getUnresolvedFieldOrDirectiveArgs(): array
     {
-        if ($this->resolvedFieldArgs === null) {
-            $this->resolvedFieldArgs = $this->doGetResolvedFieldOrDirectiveArgs($this->unresolvedFieldArgs);
-        }
-        return $this->resolvedFieldArgs;
-    }
-
-    /**
-     * @return array<string,mixed>
-     * @throws AbstractValueResolutionPromiseException
-     */
-    protected function getResolvedFieldOrDirectiveArgs(): array
-    {
-        return $this->getResolvedFieldArgs();
+        return $this->unresolvedFieldArgs;
     }
 }
