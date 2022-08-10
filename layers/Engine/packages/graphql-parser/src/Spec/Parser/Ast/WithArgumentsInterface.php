@@ -28,7 +28,7 @@ interface WithArgumentsInterface extends AstInterface
      * Indicate if any of the Arguments contains a Promise
      */
     public function hasArgumentReferencingPromise(): bool;
-    
+
     /**
      * Indicate if any of the Promises must be resolved on the Object
      */

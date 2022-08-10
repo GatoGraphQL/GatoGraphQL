@@ -712,7 +712,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * If no Promise needs to be resolved on the object, then
          * we can use the same response for all objects.
          */
-        if ($hasArgumentReferencingPromise
+        if (
+            $hasArgumentReferencingPromise
             && !$field->hasArgumentReferencingResolvedOnObjectPromise()
             && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($field)
         ) {
@@ -740,7 +741,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $appStateManager->override('engine-iteration-current-object-id', null);
         $appStateManager->override('engine-iteration-current-field', null);
-        
+
         if ($fieldArgs === null) {
             if ($hasArgumentReferencingPromise) {
                 $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;

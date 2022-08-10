@@ -39,8 +39,10 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
         $engineIterationCurrentObjectID = App::getState('engine-iteration-current-object-id');
         /** @var FieldInterface|null */
         $engineIterationCurrentField = App::getState('engine-iteration-current-field');
-        if ($engineIterationCurrentObjectID === null
-            || $engineIterationCurrentField === null) {
+        if (
+            $engineIterationCurrentObjectID === null
+            || $engineIterationCurrentField === null
+        ) {
             throw new ShouldNotHappenException(
                 $this->__(
                     'The Engine Iteration\'s current objectID/Field have not been set, so the Promise cannot be resolved'
@@ -53,7 +55,8 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
         $dynamicVariableName = $this->objectResolvedDynamicVariableReference->getName();
-        if (!isset($objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
+        if (
+            !isset($objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
             || !$objectResolvedDynamicVariables[$engineIterationCurrentObjectID]->contains($engineIterationCurrentField)
             || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$engineIterationCurrentField])
         ) {
@@ -95,7 +98,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
                 $this->objectResolvedDynamicVariableReference
             );
         }
-        
+
         return $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$engineIterationCurrentField][$dynamicVariableName];
     }
 

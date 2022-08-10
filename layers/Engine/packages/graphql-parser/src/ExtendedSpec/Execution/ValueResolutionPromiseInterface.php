@@ -12,7 +12,7 @@ interface ValueResolutionPromiseInterface
      * @throws AbstractValueResolutionPromiseException
      */
     public function resolveValue(): mixed;
-    
+
     /**
      * Indicate if the promise must be resolved on the object
      * being iterated upon during the field resolution or not.
