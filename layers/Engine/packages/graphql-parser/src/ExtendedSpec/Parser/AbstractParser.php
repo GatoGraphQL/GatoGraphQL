@@ -78,7 +78,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * have been already parsed in the query, and
      * have the scope of "resolved in object"
      *
-     * @var string[]
+     * @var array<string[]>
      */
     protected array $parsedFieldDefinedObjectResolvedDynamicVariableNames;
 
@@ -116,6 +116,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function parseOperation(string $type): OperationInterface
     {
         $this->parsedFieldBlockStack = [];
+        $this->parsedFieldDefinedObjectResolvedDynamicVariableNames = [];
 
         return parent::parseOperation($type);
     }
@@ -126,6 +127,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function beforeParsingFieldsOrFragmentBonds(): void
     {
         array_unshift($this->parsedFieldBlockStack, []);
+        
+        array_unshift($this->parsedFieldDefinedObjectResolvedDynamicVariableNames, []);
     }
 
     /**
@@ -142,7 +145,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * which make sense within those Directives
          * applied to that Field only
          */
-        $this->parsedFieldDefinedObjectResolvedDynamicVariableNames = [];
+        array_shift($this->parsedFieldDefinedObjectResolvedDynamicVariableNames);
     }
 
     /**
@@ -301,7 +304,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return;
         }
         if ($mustResolveDynamicVariableOnObject) {
-            $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[] = $exportUnderVariableName;
+            $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0][] = $exportUnderVariableName;
             return;
         }
         $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
@@ -658,7 +661,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * has defined the same dynamic variable name.
          * Eg: `@export(as: "someVariableName")`
          */
-        return in_array($variableName, $this->parsedFieldDefinedObjectResolvedDynamicVariableNames);
+        $currentlyParsedFieldDefinedObjectResolvedDynamicVariableNames = $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0];
+        return in_array($variableName, $currentlyParsedFieldDefinedObjectResolvedDynamicVariableNames);
     }
 
     protected function createObjectResolvedDynamicVariableReference(
