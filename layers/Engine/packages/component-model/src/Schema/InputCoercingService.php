@@ -47,6 +47,13 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
     ): mixed {
+        /**
+         * If it is a Promise then don't convert it, since its underlying
+         * value may actually be an array, but we don't know it yet.
+         */
+        if ($inputValue instanceof ValueResolutionPromiseInterface) {
+            return $inputValue;
+        }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (
