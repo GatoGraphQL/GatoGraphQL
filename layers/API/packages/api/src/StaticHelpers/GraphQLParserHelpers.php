@@ -6,7 +6,7 @@ namespace PoPAPI\API\StaticHelpers;
 
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -21,7 +21,7 @@ class GraphQLParserHelpers
 
     /**
      * @throws SyntaxErrorException
-     * @throws InvalidRequestException
+     * @throws ASTNodeParserException
      */
     public static function parseGraphQLQuery(
         string $query,
