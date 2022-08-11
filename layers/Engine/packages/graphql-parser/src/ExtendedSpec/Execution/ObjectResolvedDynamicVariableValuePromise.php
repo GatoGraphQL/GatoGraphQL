@@ -7,12 +7,10 @@ namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 use PoP\GraphQLParser\Exception\RuntimeVariableReferenceException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedDynamicVariableReference;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
-use SplObjectStorage;
 
 class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromiseInterface
 {
@@ -37,28 +35,22 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          * @var string|int|null
          */
         $engineIterationCurrentObjectID = App::getState('engine-iteration-current-object-id');
-        /** @var FieldInterface|null */
-        $engineIterationCurrentField = App::getState('engine-iteration-current-field');
-        if (
-            $engineIterationCurrentObjectID === null
-            || $engineIterationCurrentField === null
-        ) {
+        if ($engineIterationCurrentObjectID === null) {
             throw new ShouldNotHappenException(
                 $this->__(
-                    'The Engine Iteration\'s current objectID/Field have not been set, so the Promise cannot be resolved'
+                    'The Engine Iteration\'s currently resolved objectID has not been set, so the Promise cannot be resolved'
                 )
             );
         }
 
         /**
-         * @var array<string|int,SplObjectStorage<FieldInterface,array<string,mixed>>> Array of [objectID => SplObjectStorage<Field, [dynamicVariableName => value]>]
+         * @var array<string|int,array<string,mixed>> Array of [objectID => [dynamicVariableName => value]]
          */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
         $dynamicVariableName = $this->objectResolvedDynamicVariableReference->getName();
         if (
             !isset($objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
-            || !$objectResolvedDynamicVariables[$engineIterationCurrentObjectID]->contains($engineIterationCurrentField)
-            || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$engineIterationCurrentField])
+            || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
         ) {
             // Variable is nowhere defined => Error
             throw new RuntimeVariableReferenceException(
@@ -67,7 +59,6 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
                     GraphQLExtendedSpecErrorFeedbackItemProvider::E10,
                     [
                         $this->objectResolvedDynamicVariableReference->getName(),
-                        $engineIterationCurrentField->asFieldOutputQueryString(),
                         $engineIterationCurrentObjectID,
                     ]
                 ),
@@ -75,7 +66,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
             );
         }
 
-        return $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$engineIterationCurrentField][$dynamicVariableName];
+        return $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$dynamicVariableName];
     }
 
     /**
