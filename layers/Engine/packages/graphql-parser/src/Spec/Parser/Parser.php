@@ -144,12 +144,16 @@ class Parser extends Tokenizer implements ParserInterface
 
         $fieldsOrFragmentBonds = [];
 
+        $this->beforeParsingFieldsOrFragmentBonds();
+
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
 
             $fieldOrFragmentBond = $this->parseBodyItem($type);
             $fieldsOrFragmentBonds[] = $fieldOrFragmentBond;
         }
+
+        $this->afterParsingFieldsOrFragmentBonds();
 
         $this->expect(Token::TYPE_RBRACE);
 
@@ -713,7 +717,11 @@ class Parser extends Tokenizer implements ParserInterface
 
         $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
 
+        $this->beforeParsingFieldsOrFragmentBonds();
+
         $fieldsOrFragmentBonds = $this->parseBody(Token::TYPE_QUERY);
+
+        $this->afterParsingFieldsOrFragmentBonds();
 
         return $this->createFragment($nameToken->getData(), $model->getData(), $directives, $fieldsOrFragmentBonds, $this->getTokenLocation($nameToken));
     }
