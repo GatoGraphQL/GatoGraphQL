@@ -134,6 +134,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function afterParsingFieldsOrFragmentBonds(): void
     {
         array_shift($this->parsedFieldBlockStack);
+
+        /**
+         * Once the Field has been parsed, also reset
+         * the exportedVariableNames for "ObjectResolved"
+         * dynamic variables (eg: `@passOnwards`)
+         * which make sense within those Directives
+         * applied to that Field only
+         */
+        $this->parsedFieldDefinedObjectResolvedDynamicVariableNames = [];
     }
 
     /**
@@ -186,15 +195,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * Add the Field to the currently-parsed block of Fields
          */
         $this->parsedFieldBlockStack[0][] = $field;
-
-        /**
-         * Once the Field has been parsed, also reset
-         * the exportedVariableNames for "ObjectResolved"
-         * dynamic variables (eg: `@passOnwards`)
-         * which make sense within those Directives
-         * applied to that Field only
-         */
-        $this->parsedFieldDefinedObjectResolvedDynamicVariableNames = [];
     }
 
     /**
