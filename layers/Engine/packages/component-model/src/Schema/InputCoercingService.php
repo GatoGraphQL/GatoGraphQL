@@ -88,6 +88,13 @@ class InputCoercingService implements InputCoercingServiceInterface
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        /**
+         * If it is a Promise then don't convert it, since its underlying
+         * value may actually be an array, but we don't know it yet.
+         */
+        if ($inputValue instanceof ValueResolutionPromiseInterface) {
+            return;
+        }
         if (
             !$inputIsArrayType
             && is_array($inputValue)
