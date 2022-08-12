@@ -50,7 +50,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
         }
 
         /** @var SplObjectStorage<FieldInterface,array<string|int,array<string,mixed>>> SplObjectStorage<Field, [objectID => [dynamicVariableName => value]]> */
-        $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');        
+        $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
         $dynamicVariableName = $this->objectResolvedDynamicVariableReference->getName();
 
         /**
@@ -58,7 +58,8 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          * (This allows @forEach to export the iterated upon values.)
          */
         $currentField = App::getState('object-resolved-dynamic-variables-current-field');
-        if ($currentField !== null
+        if (
+            $currentField !== null
             && $objectResolvedDynamicVariables->contains($currentField)
             && isset($objectResolvedDynamicVariables[$currentField][$currentObjectID])
             && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$currentField][$currentObjectID])
@@ -72,7 +73,8 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          * this is stored under the "wildcard field"
          */
         $wildcardField = ASTNodesFactory::getWildcardField();
-        if ($objectResolvedDynamicVariables->contains($wildcardField)
+        if (
+            $objectResolvedDynamicVariables->contains($wildcardField)
             && isset($objectResolvedDynamicVariables[$wildcardField][$currentObjectID])
             && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$wildcardField][$currentObjectID])
         ) {
