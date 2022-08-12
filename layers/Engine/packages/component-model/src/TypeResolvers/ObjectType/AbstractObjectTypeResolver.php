@@ -717,6 +717,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          */
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('engine-iteration-current-object-id', $id);
+        $appStateManager->override('engine-iteration-current-object-field', $field);
 
         $fieldArgs = null;
         try {
@@ -731,6 +732,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         $appStateManager->override('engine-iteration-current-object-id', null);
+        $appStateManager->override('engine-iteration-current-object-field', null);
 
         if ($fieldArgs === null) {
             $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
