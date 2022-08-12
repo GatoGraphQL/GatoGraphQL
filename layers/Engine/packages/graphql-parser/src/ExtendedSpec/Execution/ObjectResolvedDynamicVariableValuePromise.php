@@ -48,6 +48,18 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
         $dynamicVariableName = $this->objectResolvedDynamicVariableReference->getName();
+        
+        /**
+         * First check if the value has been set for the specific field.
+         * (This allows @forEach to export the iterated upon values.)
+         *
+         * If the value was not set for the combination of objectID + Field,
+         * only then check for the objectID alone.
+         */
+        $engineIterationCurrentObjectField = App::getState('engine-iteration-current-object-field');
+        if ($engineIterationCurrentObjectField !== null) {
+        }
+
         if (
             !isset($objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
             || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
