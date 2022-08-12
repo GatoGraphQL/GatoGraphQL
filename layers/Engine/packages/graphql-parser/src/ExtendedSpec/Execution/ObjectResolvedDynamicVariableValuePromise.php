@@ -56,33 +56,41 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
         /**
          * First check if the value has been set for the specific field.
          * (This allows @forEach to export the iterated upon values.)
-         *
-         * If the value was not set for the combination of objectID + Field,
-         * only then check for the objectID alone.
          */
         $currentField = App::getState('object-resolved-dynamic-variables-current-field');
-        if ($currentField !== null) {
-        }
-
-        if (
-            !isset($objectResolvedDynamicVariables[$currentObjectID])
-            || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$currentObjectID])
+        if ($currentField !== null
+            && $objectResolvedDynamicVariables->contains($currentField)
+            && isset($objectResolvedDynamicVariables[$currentField][$currentObjectID])
+            && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$currentField][$currentObjectID])
         ) {
-            // Variable is nowhere defined => Error
-            throw new RuntimeVariableReferenceException(
-                new FeedbackItemResolution(
-                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                    GraphQLExtendedSpecErrorFeedbackItemProvider::E10,
-                    [
-                        $this->objectResolvedDynamicVariableReference->getName(),
-                        $currentObjectID,
-                    ]
-                ),
-                $this->objectResolvedDynamicVariableReference
-            );
+            return $objectResolvedDynamicVariables[$currentField][$currentObjectID][$dynamicVariableName];
         }
 
-        return $objectResolvedDynamicVariables[$currentObjectID][$dynamicVariableName];
+        /**
+         * If the value was not set for the combination of objectID + Field,
+         * only then check for the objectID alone. To simplify the structure,
+         * this is stored under the "wildcard field"
+         */
+        $wildcardField = ASTNodesFactory::getWildcardField();
+        if ($objectResolvedDynamicVariables->contains($wildcardField)
+            && isset($objectResolvedDynamicVariables[$wildcardField][$currentObjectID])
+            && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$wildcardField][$currentObjectID])
+        ) {
+            return $objectResolvedDynamicVariables[$wildcardField][$currentObjectID][$dynamicVariableName];
+        }
+
+        // Variable is nowhere defined => Error
+        throw new RuntimeVariableReferenceException(
+            new FeedbackItemResolution(
+                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                GraphQLExtendedSpecErrorFeedbackItemProvider::E10,
+                [
+                    $this->objectResolvedDynamicVariableReference->getName(),
+                    $currentObjectID,
+                ]
+            ),
+            $this->objectResolvedDynamicVariableReference
+        );
     }
 
     /**
