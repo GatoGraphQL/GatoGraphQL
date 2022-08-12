@@ -234,15 +234,16 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
          * when resolving the GraphQL query (eg: via @export),
          * with a value targetted for a specific object
          *
-         * @var array<string|int,array<string,mixed>> Array of [objectID => [dynamicVariableName => value]]
+         * @var SplObjectStorage<FieldInterface,array<string|int,array<string,mixed>>> SplObjectStorage<Field, [objectID => [dynamicVariableName => value]]>
          */
-        $objectResolvedDynamicVariables = [];
+        $objectResolvedDynamicVariables = new SplObjectStorage();
         $appStateManager->override('object-resolved-dynamic-variables', $objectResolvedDynamicVariables);
 
         /**
-         * The current objectID for which to retrieve the dynamic variable for.
+         * The current objectID/field for which to retrieve the dynamic variable for.
          */
-        $appStateManager->override('engine-iteration-current-object-id', null);
+        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', null);
+        $appStateManager->override('object-resolved-dynamic-variables-current-field', null);
     }
 
     /**

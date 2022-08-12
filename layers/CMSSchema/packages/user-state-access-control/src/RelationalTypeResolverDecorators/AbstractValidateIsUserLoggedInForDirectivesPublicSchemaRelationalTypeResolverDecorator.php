@@ -8,7 +8,7 @@ use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelat
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
 
 abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
@@ -49,7 +49,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
             $this->validateIsUserLoggedInDirective = new Directive(
                 $this->getValidateIsUserLoggedInForDirectivesDirectiveResolver()->getDirectiveName(),
                 [],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             );
         }
         return $this->validateIsUserLoggedInDirective;

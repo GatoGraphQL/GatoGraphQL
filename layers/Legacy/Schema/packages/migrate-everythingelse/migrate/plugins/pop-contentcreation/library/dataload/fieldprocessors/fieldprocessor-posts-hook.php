@@ -6,7 +6,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
@@ -104,7 +104,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
                 return $cmseditpostsapi->getDeletePostLink($objectTypeResolver->getID($post));
 
             case 'coauthors':
-                $authors = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new LeafField('authors', null, $fieldDataAccessor->getField()->getArguments(), [], LocationHelper::getNonSpecificLocation()), $objectTypeFieldResolutionFeedbackStore);
+                $authors = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new LeafField('authors', null, $fieldDataAccessor->getField()->getArguments(), [], ASTNodesFactory::getNonSpecificLocation()), $objectTypeFieldResolutionFeedbackStore);
 
                 // This function only makes sense when the user is logged in
                 if (\PoP\Root\App::getState('is-user-logged-in')) {

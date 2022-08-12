@@ -2,7 +2,7 @@
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Processor_CommentViewComponentButtonsBase
 {
@@ -41,7 +41,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
                             null,
                             [],
                             [],
-                            LocationHelper::getNonSpecificLocation()
+                            ASTNodesFactory::getNonSpecificLocation()
                         ),
                         [
                             [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],

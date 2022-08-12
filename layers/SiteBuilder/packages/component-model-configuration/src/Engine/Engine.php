@@ -21,7 +21,7 @@ use PoP\Engine\Engine\Engine as UpstreamEngine;
 use PoP\Engine\Exception\ContractNotSatisfiedException;
 use PoP\Engine\FunctionAPIFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -219,7 +219,7 @@ class Engine extends UpstreamEngine implements EngineInterface
                     null,
                     [],
                     [],
-                    LocationHelper::getNonSpecificLocation()
+                    ASTNodesFactory::getNonSpecificLocation()
                 )
             ),
         ];

@@ -16,7 +16,7 @@ use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\ConfigurationComponentModel\HelperServices\TypeResolverHelperServiceInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -83,7 +83,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
                     null,
                     [],
                     [],
-                    LocationHelper::getNonSpecificLocation(),
+                    ASTNodesFactory::getNonSpecificLocation(),
                 );
                 $ret[$idField] = $typeOutputKey;
             }

@@ -4,7 +4,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Comments\ConditionalOnModule\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
@@ -105,7 +105,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                 switch ($notification->action) {
                     case AAL_POP_ACTION_COMMENT_ADDED:
                         // comment-object-id is the object-id
-                        return $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new LeafField('objectID', null, $fieldDataAccessor->getField()->getArguments(), [], LocationHelper::getNonSpecificLocation()), $objectTypeFieldResolutionFeedbackStore);
+                        return $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new LeafField('objectID', null, $fieldDataAccessor->getField()->getArguments(), [], ASTNodesFactory::getNonSpecificLocation()), $objectTypeFieldResolutionFeedbackStore);
                 }
                 return null;
 

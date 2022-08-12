@@ -8,7 +8,7 @@ use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class CacheControlHelper
@@ -31,12 +31,12 @@ class CacheControlHelper
                         'maxAge',
                         new Literal(
                             0,
-                            LocationHelper::getNonSpecificLocation()
+                            ASTNodesFactory::getNonSpecificLocation()
                         ),
-                        LocationHelper::getNonSpecificLocation()
+                        ASTNodesFactory::getNonSpecificLocation()
                     ),
                 ],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             );
         }
         return self::$noCacheDirective;

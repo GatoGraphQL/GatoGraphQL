@@ -42,7 +42,7 @@ use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -716,7 +716,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * The current object ID/Field for which to retrieve the dynamic variable for.
          */
         $appStateManager = App::getAppStateManager();
-        $appStateManager->override('engine-iteration-current-object-id', $id);
+        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
+        $appStateManager->override('object-resolved-dynamic-variables-current-field', $field);
 
         $fieldArgs = null;
         try {
@@ -730,7 +731,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
 
-        $appStateManager->override('engine-iteration-current-object-id', null);
+        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', null);
+        $appStateManager->override('object-resolved-dynamic-variables-current-field', null);
 
         if ($fieldArgs === null) {
             $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;
@@ -1109,7 +1111,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 null,
                 [],
                 [],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             );
         }
 

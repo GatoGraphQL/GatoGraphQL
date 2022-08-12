@@ -37,7 +37,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             //                 $expressionName,
             //             ]
             //         ),
-            //         LocationHelper::getNonSpecificLocation(),
+            //         ASTNodesFactory::getNonSpecificLocation(),
             //         $relationalTypeResolver,
             //     )
             // );

@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait
 {
@@ -45,12 +45,12 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
                         'roles',
                         new InputList(
                             $roles,
-                            LocationHelper::getNonSpecificLocation()
+                            ASTNodesFactory::getNonSpecificLocation()
                         ),
-                        LocationHelper::getNonSpecificLocation()
+                        ASTNodesFactory::getNonSpecificLocation()
                     ),
                 ],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             );
         }
         return $this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey];

@@ -45,7 +45,7 @@ use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -169,7 +169,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->directive = new Directive(
             $this->getDirectiveName(),
             [],
-            LocationHelper::getNonSpecificLocation()
+            ASTNodesFactory::getNonSpecificLocation()
         );
     }
 
@@ -692,12 +692,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function addExpressionForObject(int|string $id, string $key, mixed $value, array &$messages): void
     {
         $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] = $value;
-    }
-
-    protected function addExpressionForObjectAndField(int|string $id, FieldInterface $field, string $key, mixed $value, array &$messages): void
-    {
-        $this->addExpressionForObject($id, $key, $value, $messages);
-        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()][$key] = $value;
     }
 
     protected function getExpressionForObject(int|string $id, string $key, array $messages): mixed

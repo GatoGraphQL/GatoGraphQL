@@ -7,7 +7,7 @@ namespace PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait
 {
@@ -31,7 +31,7 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
             $this->validateUserStateDirective = new Directive(
                 $this->getValidateUserStateDirectiveResolver()->getDirectiveName(),
                 [],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             );
         }
         return $this->validateUserStateDirective;

@@ -262,7 +262,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             // If the value is an array of arrays, then cast each subelement to the item type
             return array_map(
                 // If it contains a null value, return it as is
-                fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? $arrayArgValueElem : array_map(
+                fn (array|ValueResolutionPromiseInterface|null $arrayArgValueElem) => ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayArgValueElem : array_map(
                     fn (mixed $arrayOfArraysArgValueElem) => ($arrayOfArraysArgValueElem === null || $arrayOfArraysArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayOfArraysArgValueElem : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
                     $arrayArgValueElem
                 ),

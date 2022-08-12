@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
                     null,
                     [],
                     [],
-                    LocationHelper::getNonSpecificLocation()
+                    ASTNodesFactory::getNonSpecificLocation()
                 ),
                 [
                     [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::COMPONENT_MAP_SCRIPT_MARKERS],

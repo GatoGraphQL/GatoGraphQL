@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -82,7 +82,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                     null,
                     [],
                     [],
-                    LocationHelper::getNonSpecificLocation()
+                    ASTNodesFactory::getNonSpecificLocation()
                 ),
                 $components
             );
@@ -170,7 +170,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 null,
                 [],
                 [],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             ),
             [
                 [PoP_Module_Processor_NotificationSubcomponentLayouts::class, PoP_Module_Processor_NotificationSubcomponentLayouts::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT],

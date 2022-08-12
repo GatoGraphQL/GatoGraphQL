@@ -16,7 +16,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\AbstractTestCase;
 use SplObjectStorage;
 
@@ -192,11 +192,11 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
                                 $relationalField2,
                             ],
                             [],
-                            LocationHelper::getNonSpecificLocation()
+                            ASTNodesFactory::getNonSpecificLocation()
                         ),
                     ],
                     [],
-                    LocationHelper::getNonSpecificLocation()
+                    ASTNodesFactory::getNonSpecificLocation()
                 )
             ];
             $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
@@ -225,19 +225,19 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
                                                 $relationalField3,
                                             ],
                                             [],
-                                            LocationHelper::getNonSpecificLocation()
+                                            ASTNodesFactory::getNonSpecificLocation()
                                         ),
                                     ],
                                     [],
-                                    LocationHelper::getNonSpecificLocation()
+                                    ASTNodesFactory::getNonSpecificLocation()
                                 ),
                             ],
                             [],
-                            LocationHelper::getNonSpecificLocation()
+                            ASTNodesFactory::getNonSpecificLocation()
                         ),
                     ],
                     [],
-                    LocationHelper::getNonSpecificLocation()
+                    ASTNodesFactory::getNonSpecificLocation()
                 )
             ];
         }
