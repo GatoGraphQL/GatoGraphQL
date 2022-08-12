@@ -6,13 +6,14 @@ namespace PoP\GraphQLParser\ASTNodes;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
+/**
+ * For the AST nodes provided by this Factory (acting
+ * as a Singleton model), provide a single instance,
+ * so that comparing the object by reference when storing
+ * it on SplObjectStorage objects works well
+ */
 class ASTNodesFactory
 {
-    /**
-     * Use a single instance throghout the app, so that
-     * comparing the Location object by reference (as to
-     * decide to not print it) works well
-     */
     public static ?Location $nonSpecificLocation = null;
 
     /**
