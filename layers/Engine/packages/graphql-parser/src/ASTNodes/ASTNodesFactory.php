@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ASTNodes;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 /**
@@ -15,6 +17,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class ASTNodesFactory
 {
     public static ?Location $nonSpecificLocation = null;
+    public static ?FieldInterface $wildcardField = null;
 
     /**
      * Use a non-existing location to indicate that the
@@ -35,5 +38,29 @@ class ASTNodesFactory
             self::$nonSpecificLocation = new Location(-1, -1);
         }
         return self::$nonSpecificLocation;
+    }
+
+    /**
+     * Use the "wildcard" Leaf to represent all fields
+     * for the Object Resolved Dynamic Variable, i.e.
+     * a dynamic variable set for the objectID only, and
+     * not for the Field.
+     *
+     * As dynamic variables can also be set for objectID + Field,
+     * this object allows to simplify the data structure where to
+     * store both cases.
+     */
+    public static function getWildcardField(): FieldInterface
+    {
+        if (self::$wildcardField === null) {
+            self::$wildcardField = new LeafField(
+                'wildcardField',
+                null,
+                [],
+                [],
+                static::getNonSpecificLocation(),
+            );
+        }
+        return self::$wildcardField;
     }
 }
