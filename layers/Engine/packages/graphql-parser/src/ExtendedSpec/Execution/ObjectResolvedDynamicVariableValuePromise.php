@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Exception\RuntimeVariableReferenceException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedDynamicVariableReference;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
+use SplObjectStorage;
 
 class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromiseInterface
 {
@@ -46,10 +49,8 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
             );
         }
 
-        /**
-         * @var array<string|int,array<string,mixed>> Array of [objectID => [dynamicVariableName => value]]
-         */
-        $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
+        /** @var SplObjectStorage<FieldInterface,array<string|int,array<string,mixed>>> SplObjectStorage<Field, [objectID => [dynamicVariableName => value]]> */
+        $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');        
         $dynamicVariableName = $this->objectResolvedDynamicVariableReference->getName();
 
         /**
