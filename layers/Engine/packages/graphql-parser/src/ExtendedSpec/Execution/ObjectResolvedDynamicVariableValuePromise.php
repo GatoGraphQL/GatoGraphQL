@@ -34,11 +34,14 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          *
          * @var string|int|null
          */
-        $engineIterationCurrentObjectID = App::getState('engine-iteration-current-object-id');
-        if ($engineIterationCurrentObjectID === null) {
+        $currentObjectID = App::getState('object-resolved-dynamic-variables-current-object-id');
+        if ($currentObjectID === null) {
             throw new ShouldNotHappenException(
-                $this->__(
-                    'The Engine Iteration\'s currently resolved objectID has not been set, so the Promise cannot be resolved'
+                sprintf(
+                    $this->__(
+                        'As the current objectID has not been set on the Application State, the Promise concerning the \'Object Resolved Dynamic Variable "%s"\' cannot be resolved'
+                    ),
+                    $this->objectResolvedDynamicVariableReference->getName()
                 )
             );
         }
@@ -48,7 +51,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
         $dynamicVariableName = $this->objectResolvedDynamicVariableReference->getName();
-        
+
         /**
          * First check if the value has been set for the specific field.
          * (This allows @forEach to export the iterated upon values.)
@@ -56,13 +59,13 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          * If the value was not set for the combination of objectID + Field,
          * only then check for the objectID alone.
          */
-        $engineIterationCurrentObjectField = App::getState('engine-iteration-current-object-field');
-        if ($engineIterationCurrentObjectField !== null) {
+        $currentField = App::getState('object-resolved-dynamic-variables-current-field');
+        if ($currentField !== null) {
         }
 
         if (
-            !isset($objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
-            || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$engineIterationCurrentObjectID])
+            !isset($objectResolvedDynamicVariables[$currentObjectID])
+            || !array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$currentObjectID])
         ) {
             // Variable is nowhere defined => Error
             throw new RuntimeVariableReferenceException(
@@ -71,14 +74,14 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
                     GraphQLExtendedSpecErrorFeedbackItemProvider::E10,
                     [
                         $this->objectResolvedDynamicVariableReference->getName(),
-                        $engineIterationCurrentObjectID,
+                        $currentObjectID,
                     ]
                 ),
                 $this->objectResolvedDynamicVariableReference
             );
         }
 
-        return $objectResolvedDynamicVariables[$engineIterationCurrentObjectID][$dynamicVariableName];
+        return $objectResolvedDynamicVariables[$currentObjectID][$dynamicVariableName];
     }
 
     /**
