@@ -58,7 +58,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
@@ -2288,7 +2288,7 @@ class Engine implements EngineInterface
         $astNode = $objectOrSchemaFeedback->getAstNode();
         $locations = [];
         $location = $objectOrSchemaFeedback->getLocation();
-        if ($location !== LocationHelper::getNonSpecificLocation()) {
+        if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
             $locations[] = $location->toArray();
         }
         $extensions = $this->getFeedbackEntryExtensions(
@@ -2312,7 +2312,7 @@ class Engine implements EngineInterface
      */
     private function getASTNodePath(AstInterface $astNode): array
     {
-        if ($astNode->getLocation() === LocationHelper::getNonSpecificLocation()) {
+        if ($astNode->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
             return [];
         }
         $astNodePath = [];
@@ -2354,7 +2354,7 @@ class Engine implements EngineInterface
         FieldInterface $field,
     ): array {
         $key = Tokens::FIELD;
-        if ($field->getLocation() === LocationHelper::getNonSpecificLocation()) {
+        if ($field->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
             $key = Tokens::DYNAMIC_FIELD;
         }
         return array_merge(
@@ -2393,7 +2393,7 @@ class Engine implements EngineInterface
         foreach ($documentFeedbackEntries as $documentFeedbackEntry) {
             $locations = [];
             $location = $documentFeedbackEntry->getLocation();
-            if ($location !== LocationHelper::getNonSpecificLocation()) {
+            if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
                 $locations[] = $location->toArray();
             }
             $entry = [

@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ConfigurationComponentModel\Facades\HelperServices\TypeResolverHelperServiceFacade;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
@@ -53,7 +53,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
                         null,
                         [],
                         [],
-                        LocationHelper::getNonSpecificLocation()
+                        ASTNodesFactory::getNonSpecificLocation()
                     ),
                     [
                         $authors_component,

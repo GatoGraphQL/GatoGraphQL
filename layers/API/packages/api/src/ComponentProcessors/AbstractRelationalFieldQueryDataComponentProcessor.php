@@ -23,7 +23,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface;
 
 abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
@@ -215,7 +215,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $location->getLine(),
             $location->getColumn()
         );
-        if ($location === LocationHelper::getNonSpecificLocation()) {
+        if ($location === ASTNodesFactory::getNonSpecificLocation()) {
             return sprintf(
                 '%s #%s',
                 $fieldUniqueID,
@@ -491,13 +491,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                             'typesOrInterfaces',
                             new InputList(
                                 $fragmentModels,
-                                LocationHelper::getNonSpecificLocation()
+                                ASTNodesFactory::getNonSpecificLocation()
                             ),
-                            LocationHelper::getNonSpecificLocation()
+                            ASTNodesFactory::getNonSpecificLocation()
                         ),
                     ],
                     [],
-                    LocationHelper::getNonSpecificLocation()
+                    ASTNodesFactory::getNonSpecificLocation()
                 );
             }
             $leafField = $this->fieldInstanceContainer[$query][$alias];

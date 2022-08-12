@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\StaticHelpers;
+namespace PoP\GraphQLParser\ASTNodes;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class LocationHelper
+class ASTNodesFactory
 {
     /**
      * Use a single instance throghout the app, so that

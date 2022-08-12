@@ -4,7 +4,7 @@ namespace PoP\ExampleModules;
 use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 class ComponentProcessor_Layouts extends AbstractComponentProcessor
 {
@@ -72,7 +72,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
                         null,
                         [],
                         [],
-                        LocationHelper::getNonSpecificLocation()
+                        ASTNodesFactory::getNonSpecificLocation()
                     ),
                     [
                         self::COMPONENT_EXAMPLE_AUTHORPROPERTIES,

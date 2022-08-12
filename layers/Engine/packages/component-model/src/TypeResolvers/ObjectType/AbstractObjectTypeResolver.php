@@ -42,7 +42,7 @@ use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -1111,7 +1111,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 null,
                 [],
                 [],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             );
         }
 

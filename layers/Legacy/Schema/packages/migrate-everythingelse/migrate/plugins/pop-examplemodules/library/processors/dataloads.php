@@ -5,7 +5,7 @@ use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
@@ -134,7 +134,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
                         null,
                         [],
                         [],
-                        LocationHelper::getNonSpecificLocation()
+                        ASTNodesFactory::getNonSpecificLocation()
                     ),
                     [
                         [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
@@ -146,7 +146,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
                         null,
                         [],
                         [],
-                        LocationHelper::getNonSpecificLocation()
+                        ASTNodesFactory::getNonSpecificLocation()
                     ),
                     [
                         [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_COMMENT],

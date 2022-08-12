@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\Engine\Route\RouteUtils;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP_Module_Processor_ViewComponentButtonsBase
@@ -73,7 +73,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
                             null,
                             [],
                             [],
-                            LocationHelper::getNonSpecificLocation()
+                            ASTNodesFactory::getNonSpecificLocation()
                         ),
                         $components
                     ),

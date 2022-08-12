@@ -17,7 +17,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -162,7 +162,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             null,
             [],
             [],
-            LocationHelper::getNonSpecificLocation()
+            ASTNodesFactory::getNonSpecificLocation()
         );
         /**
          * Inject the data straight as normalized value (no need to add defaults

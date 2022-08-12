@@ -31,7 +31,7 @@ interface FieldInterface extends AstInterface, LocatableInterface, WithDirective
      *
      * This is important to enable the SiteBuilder to process the same
      * field added by different components all together. Created on runtime,
-     * these will all have location `LocationHelper::getNonSpecificLocation()`
+     * these will all have location `ASTNodesFactory::getNonSpecificLocation()`
      * => (1x1), hence even if the Location objects are different, they will
      * be treated as the same one, and all their IDs can be processed together.
      */

@@ -6,7 +6,7 @@ namespace PoPSitesWassup\Wassup\MutationResolverBridges;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP_Newsletter_Module_Processor_TextFormInputs;

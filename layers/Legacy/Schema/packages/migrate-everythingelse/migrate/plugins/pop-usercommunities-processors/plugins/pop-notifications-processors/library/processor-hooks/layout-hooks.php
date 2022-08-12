@@ -2,7 +2,7 @@
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 class GD_URE_AAL_CustomMultipleLayoutHooks
 {
@@ -31,7 +31,7 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
                 null,
                 [],
                 [],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             ),
             [
                 [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
@@ -53,7 +53,7 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
                 null,
                 [],
                 [],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             ),
             [
                 [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]

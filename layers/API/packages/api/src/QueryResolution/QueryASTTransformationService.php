@@ -16,7 +16,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use SplObjectStorage;
 
 use function max;
@@ -189,7 +189,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                         [],
                         $fieldOrFragmentBonds,
                         [],
-                        LocationHelper::getNonSpecificLocation()
+                        ASTNodesFactory::getNonSpecificLocation()
                     );
                 }
                 $fieldOrFragmentBonds = [

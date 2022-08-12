@@ -29,7 +29,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Module as RootModule;
@@ -733,7 +733,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 null,
                 [],
                 [],
-                LocationHelper::getNonSpecificLocation(),
+                ASTNodesFactory::getNonSpecificLocation(),
             );
             /** @var FieldInterface[] */
             $selfPathFields = array_merge($pathFields, [$field]);

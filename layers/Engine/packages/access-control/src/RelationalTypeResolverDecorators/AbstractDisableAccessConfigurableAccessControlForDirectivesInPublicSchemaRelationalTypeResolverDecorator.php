@@ -6,7 +6,7 @@ namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\DirectiveResolvers\DisableAccessForDirectivesDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
@@ -39,7 +39,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
             $this->disableAccessDirective = new Directive(
                 $this->getDisableAccessForDirectivesDirectiveResolver()->getDirectiveName(),
                 [],
-                LocationHelper::getNonSpecificLocation()
+                ASTNodesFactory::getNonSpecificLocation()
             );
         }
         return $this->disableAccessDirective;

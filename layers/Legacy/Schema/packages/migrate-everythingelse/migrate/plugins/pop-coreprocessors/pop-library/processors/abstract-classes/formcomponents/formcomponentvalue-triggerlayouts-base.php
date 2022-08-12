@@ -5,7 +5,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends PoPEngine_QueryDataComponentProcessorBase implements FormComponentComponentProcessorInterface
 {
@@ -168,7 +168,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
                         null,
                         [],
                         [],
-                        LocationHelper::getNonSpecificLocation()
+                        ASTNodesFactory::getNonSpecificLocation()
                     ),
                     [
                         $this->getTriggerSubcomponent($component),
