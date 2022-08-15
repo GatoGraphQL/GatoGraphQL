@@ -27,8 +27,8 @@ class DirectivePipelineDecorator
      */
     public function resolveDirectivePipeline(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$pipelineIDFieldSet,
-        array &$pipelineFieldDataAccessProviders,
+        array $pipelineIDFieldSet,
+        array $pipelineFieldDataAccessProviders,
         array $pipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
