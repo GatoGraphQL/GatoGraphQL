@@ -14,7 +14,6 @@ class GraphQLAPIArrowFnMixedTypeChainedRuleContainerConfigurationService extends
     {
         return [
             $this->pluginDir . '/vendor/getpop/component-model/src/Resolvers/FieldOrDirectiveResolverTrait.php',
-            $this->pluginDir . '/vendor/getpop/component-model/src/Schema/FieldQueryInterpreter.php',
             $this->pluginDir . '/vendor/getpop/component-model/src/TypeResolvers/AbstractRelationalTypeResolver.php',
             $this->pluginDir . '/vendor/getpop/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php',
         ];

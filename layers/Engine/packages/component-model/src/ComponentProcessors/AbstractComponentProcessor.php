@@ -25,7 +25,6 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponen
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -51,7 +50,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     protected const COMPONENTELEMENT_CONDITIONALONDATAFIELDSUBCOMPONENTS = 'conditional-on-data-field-subcomponents';
     protected const COMPONENTELEMENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS = 'conditional-on-data-field-relational-subcomponents';
 
-    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ComponentPathHelpersInterface $componentPathHelpers = null;
     private ?ComponentFilterManagerInterface $componentFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
@@ -61,14 +59,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     private ?ComponentPaths $componentPaths = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
 
-    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
-    {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
-    {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    }
     final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
         $this->componentPathHelpers = $componentPathHelpers;

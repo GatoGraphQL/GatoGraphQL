@@ -17,7 +17,6 @@ class Module extends AbstractModule
     {
         return [
             \PoP\Definitions\Module::class,
-            \PoP\FieldQuery\Module::class,
             \PoP\GraphQLParser\Module::class,
             \PoP\LooseContracts\Module::class,
             \PoP\ComponentRouting\Module::class,
@@ -34,7 +33,6 @@ class Module extends AbstractModule
         array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        $this->initServices(dirname(__DIR__), '/Overrides');
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 

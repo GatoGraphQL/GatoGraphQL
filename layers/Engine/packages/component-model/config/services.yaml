@@ -129,9 +129,6 @@ services:
     PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface:
         class: \PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistry
 
-    PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
-        class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
-
     PoP\ComponentModel\Schema\InputCoercingServiceInterface:
         class: \PoP\ComponentModel\Schema\InputCoercingService
 

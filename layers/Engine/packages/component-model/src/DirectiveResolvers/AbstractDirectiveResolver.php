@@ -27,7 +27,6 @@ use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDir
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -63,9 +62,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
     use ObjectTypeOrDirectiveResolverTrait;
 
-    private const MESSAGE_EXPRESSIONS_FOR_OBJECT = 'expressionsForObject';
-    private const MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD = 'expressionsForObjectAndField';
-
     protected Directive $directive;
     /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedDirectiveArgNameTypeResolversCache = [];
@@ -91,7 +87,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected array $schemaDefinitionForDirectiveCache = [];
 
-    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
@@ -99,14 +94,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
 
-    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
-    {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
-    {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    }
     final public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
     {
         $this->semverHelperService = $semverHelperService;
@@ -615,96 +602,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Combine the directiveArgs with the object's expressions
-     *
-     * @param array<string,mixed> $expressions
-     * @return array<string,mixed>
-     */
-    protected function getObjectDirectiveArgs(array $expressions): array
-    {
-        return array_merge(
-            $this->directiveDataAccessor->getDirectiveArgs(),
-            $expressions
-        );
-    }
-
-    /**
-     * @return mixed[]
-     */
-    protected function getExpressionsForObject(int|string $id, array $messages): array
-    {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id] ?? [];
-    }
-
-    /**
-     * This function is needed to use in combination with @forEach
-     * and inner nested directives. @forEach works by
-     * setting all entries in the array under distinct fields
-     * (["userPostData.0", "userPostData.1", "userPostData.2", etc]).
-     *
-     * Then, directives can target the value of an expression
-     * to their nested directives, without fear of that value being overriden.
-     *
-     * Eg: in this query, the 1st @applyFunction is exporting the value
-     * of `userLang` as an expression, to be read by the 2nd @applyFunction.
-     * They can communicate passing data across,
-     * because with `getExpressionsForObjectAndField`
-     * they operate on the same expressions set by both ID and field:
-     *
-     * ```graphql
-     *   userPostData: getSelfProp(self: "%{self}%", property: "userData")
-     *     @forEach(affectDirectivesUnderPos: [1, 2])
-     *       @applyFunction(
-     *         name: "extract",
-     *         arguments: {
-     *           object: "%{value}%",
-     *           path: "lang",
-     *         },
-     *         target: "userLang",
-     *         targetType: EXPRESSION
-     *       )
-     *       @applyFunction(
-     *         name: "sprintf",
-     *         arguments: {
-     *           string: "postContent-%s",
-     *           values: ["%{userLang}%"]
-     *         },
-     *         target: "userPostContentKey",
-     *         targetType: EXPRESSION
-     *       )
-     * ```
-     *
-     * If using `getExpressionsForObject` instead, each element in the array
-     * traversed by @forEach would override the value of `userLang`, and so
-     * only the value of the last item in the array will be made available as
-     * `userLang` to ALL entries in the next @applyFunction.
-     *
-     * @return mixed[]
-     */
-    protected function getExpressionsForObjectAndField(int|string $id, FieldInterface $field, array $messages): array
-    {
-        return array_merge(
-            $this->getExpressionsForObject($id, $messages),
-            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()] ?? []
-        );
-    }
-
-    protected function addExpressionForObject(int|string $id, string $key, mixed $value, array &$messages): void
-    {
-        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] = $value;
-    }
-
-    protected function getExpressionForObject(int|string $id, string $key, array $messages): mixed
-    {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] ?? null;
-    }
-
-    protected function getExpressionForObjectAndField(int|string $id, FieldInterface $field, string $key, array $messages): mixed
-    {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()][$key] ?? $this->getExpressionForObject($id, $key, $messages);
-    }
-
-    /**
      * By default, place the directive after the ResolveAndMerge directive,
      * so the property will be in $resolvedIDFieldValues by then
      */
@@ -1066,15 +963,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         );
     }
 
-    public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveExpressions($relationalTypeResolver);
-        }
-        return [];
-    }
-
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
@@ -1432,9 +1320,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
         if ($description = $this->getDirectiveDescription($relationalTypeResolver)) {
             $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
-        }
-        if ($expressions = $this->getDirectiveExpressions($relationalTypeResolver)) {
-            $schemaDefinition[SchemaDefinition::DIRECTIVE_EXPRESSIONS] = $expressions;
         }
         if ($deprecationMessage = $this->getDirectiveDeprecationMessage($relationalTypeResolver)) {
             $schemaDefinition[SchemaDefinition::DEPRECATED] = true;

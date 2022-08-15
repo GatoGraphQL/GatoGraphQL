@@ -13,11 +13,11 @@ The PoP schema is a superset of the GraphQL schema, and it involves the same ele
 - custom scalars
 - directives
 
-In addition, data entities may support extra features. For instance: 
+In addition, data entities may support extra features. For instance:
 
 - [Fields are composable](../API#composable-fields) and can be added to every type, enabling to produces [global fields](../API#operators-and-helpers)
 - [Directives are composable](../API#composable-directives), so they can modify the behavior of another directive
-- [Directives can accept "expressions"](../API#directive-expressions), which are dynamic variables created on runtime, during the query resolution
+<!-- - [Directives can accept "expressions"](../API#directive-expressions), which are dynamic variables created on runtime, during the query resolution -->
 
 ## CMS-agnosticism
 

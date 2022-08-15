@@ -9,7 +9,6 @@ use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\FieldQuery\QuerySyntax;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
 use PoPAPI\API\Schema\QueryInputs;
 
@@ -37,7 +36,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
                 if ($key_datafields = $key_data[DataProperties::DIRECT_COMPONENT_FIELD_NODES]) {
                     // Make sure the fields are not repeated, and no empty values
                     $apiFields[] = $key . implode(
-                        QuerySyntax::SYMBOL_FIELDPROPERTIES_SEPARATOR,
+                        '|', // QuerySyntax::SYMBOL_FIELDPROPERTIES_SEPARATOR, <= @todo This class was removed! Replace string with a new const
                         array_map(
                             fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField()->asFieldOutputQueryString(),
                             array_values(array_unique(array_filter($key_datafields)))
@@ -49,7 +48,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
                 if ($key_data[DataProperties::SUBCOMPONENTS] ?? null) {
                     foreach ($key_data[DataProperties::SUBCOMPONENTS] as $subcomponent_key => &$subcomponent_data) {
                         // Add the previous key, generating a path
-                        $heap[$key . $subcomponent_key . QuerySyntax::SYMBOL_RELATIONALFIELDS_NEXTLEVEL][] = &$subcomponent_data;
+                        $heap[$key . $subcomponent_key . '.' /*QuerySyntax::SYMBOL_RELATIONALFIELDS_NEXTLEVEL <= @todo This class was removed! Replace string with a new const*/][] = &$subcomponent_data;
                     }
                 }
             }
@@ -62,7 +61,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
                         GeneralUtils::addQueryArgs(
                             [
                                 QueryInputs::QUERY => implode(
-                                    QuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR,
+                                    ',', // QuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR, <= @todo This class was removed! Replace string with a new const
                                     $apiFields
                                 ),
                             ],

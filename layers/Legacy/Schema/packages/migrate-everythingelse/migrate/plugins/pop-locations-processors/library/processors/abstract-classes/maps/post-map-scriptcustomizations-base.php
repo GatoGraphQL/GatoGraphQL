@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ConfigurationComponentModel\Facades\HelperServices\TypeResolverHelperServiceFacade;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;

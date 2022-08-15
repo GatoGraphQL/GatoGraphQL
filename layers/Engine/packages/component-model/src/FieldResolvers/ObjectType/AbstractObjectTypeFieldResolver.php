@@ -27,7 +27,6 @@ use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -92,7 +91,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /** @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface> */
     protected SplObjectStorage $fieldFieldDataAccessorCache;
 
-    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
@@ -100,14 +98,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?VersioningServiceInterface $versioningService = null;
 
-    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
-    {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
-    {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
         $this->nameResolver = $nameResolver;

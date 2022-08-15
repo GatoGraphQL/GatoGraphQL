@@ -15,7 +15,6 @@ use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -69,18 +68,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private SplObjectStorage $objectTypeResolverObjectFieldDataCache;
 
-    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
 
-    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
-    {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
-    {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    }
     final public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
     {
         $this->dataloadingEngine = $dataloadingEngine;
@@ -146,7 +136,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *   2. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
      *
      * Additionally to these 2, we can add other mandatory directives, such as:
-     *   - setSelfAsExpression
+     *   - setSelfInAppState
      *   - cacheControl
      *
      * Because it may be more convenient to add the directive or the class,

@@ -17,7 +17,6 @@
         "getpop/engine": "<0.8.9",
         "getpop/engine-wp-bootloader": "<0.8.9",
         "getpop/query-parsing": "<0.8.9",
-        "getpop/field-query": "<0.8.9",
         "getpop/cache-control": "<0.8.9",
         "pop-api/api-rest": "<0.8.9",
         "pop-api/api-graphql": "<0.8.9",

@@ -1,6 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-
 class GD_URE_AAL_Module_Processor_QuicklinkButtonGroupWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
     public final const COMPONENT_UREAAL_QUICKLINKBUTTONGROUPWRAPPER_EDITUSERMEMBERSHIP = 'ure-aal-quicklinkbuttongroupwrapper-editusermembership';

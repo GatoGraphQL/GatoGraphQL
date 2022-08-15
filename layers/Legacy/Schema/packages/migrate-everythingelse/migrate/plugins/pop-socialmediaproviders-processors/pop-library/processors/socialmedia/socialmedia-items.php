@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialMediaItemsBase

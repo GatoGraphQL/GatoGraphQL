@@ -149,7 +149,7 @@ Will be added soon...
 
 Will be added soon...
 
-## Examples
+<!-- ## Examples
 
 ### Application extending from the API
 
@@ -167,7 +167,7 @@ The native API can be extended by adding the other layers (configuration, view) 
 
 ---
 ---
----
+--- -->
 
 ## PHP versions
 
