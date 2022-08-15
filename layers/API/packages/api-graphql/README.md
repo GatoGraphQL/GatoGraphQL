@@ -157,11 +157,11 @@ This is how it looks in its namespaced version:
 
 ### Field/directive-based versioning
 
-Fields and directives can be independently versioned, and the version to use can be specified in the query through the field/directive argument `versionConstraint`. 
+Fields and directives can be independently versioned, and the version to use can be specified in the query through the field/directive argument `versionConstraint`.
 
 To select the version for the field/directive, we use the same [semver version constraints employed by Composer](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints).
 
-In [this query](https://newapi.getpop.org/graphiql/?query=query%20%7B%0A%20%20olderVersion%3AuserServiceURLs(versionConstraint%3A%220.1.0%22)%0A%20%20newerVersion%3AuserServiceURLs(versionConstraint%3A%220.2.0%22)%0A%7D), field `userServiceURLs` has 2 versions, `0.1.0` and `0.2.0`:
+<!-- In [this query](https://newapi.getpop.org/graphiql/?query=query%20%7B%0A%20%20olderVersion%3AuserServiceURLs(versionConstraint%3A%220.1.0%22)%0A%20%20newerVersion%3AuserServiceURLs(versionConstraint%3A%220.2.0%22)%0A%7D), field `userServiceURLs` has 2 versions, `0.1.0` and `0.2.0`:
 
 ![Querying a field using by version](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/versioning-field-directives-1.jpg)
 
@@ -175,7 +175,7 @@ Let's use constraints with `^` and `>` to select the version. In [this query](ht
 
 Adding the `versionConstraint` parameter in the <a href='https://newapi.getpop.org/graphiql/?versionConstraint=^0.1&query=query {%0A%20 userServiceURLs%0A}'>GraphQL endpoint itself</a> will implicitly define that version constraint in all fields, and any field can still override this default value with its own `versionConstraint`, as in <a href='https://newapi.getpop.org/graphiql/?versionConstraint=^0.1&query=query {%0A%20 %23This will produce version 0.1.0%0A%20 implicitVersion%3A userServiceURLs%0A%20 %23This will produce version 0.2.0%0A%20 explicitVersion%3A userServiceURLs(versionConstraint%3A"^0.2")%0A}'>this query</a>:
 
-![Overriding a default version constraint](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/versioning-field-directives-4.jpg)
+![Overriding a default version constraint](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/versioning-field-directives-4.jpg) -->
 
 ## PHP versions
 
