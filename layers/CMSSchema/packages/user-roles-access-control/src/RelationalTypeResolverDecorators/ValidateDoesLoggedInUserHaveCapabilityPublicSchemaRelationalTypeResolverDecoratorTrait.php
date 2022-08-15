@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -15,8 +14,6 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
 {
     /** @var array<string,Directive> */
     protected array $validateDoesLoggedInUserHaveAnyCapabilityDirectives = [];
-
-    abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
 
     /**
      * By default, only the admin can see the roles from the users

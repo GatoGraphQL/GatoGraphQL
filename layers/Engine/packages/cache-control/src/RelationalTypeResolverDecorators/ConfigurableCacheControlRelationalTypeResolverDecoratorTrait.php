@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\CacheControl\RelationalTypeResolverDecorators;
 
 use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -18,7 +17,6 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
      */
     protected array $cacheControlDirectives = [];
 
-    abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
     abstract protected function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver;
 
     /**

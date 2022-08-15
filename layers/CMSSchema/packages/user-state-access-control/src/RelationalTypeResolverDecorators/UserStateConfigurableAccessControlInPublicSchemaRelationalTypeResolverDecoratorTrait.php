@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
 trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDecoratorTrait
 {
     protected ?Directive $validateUserStateDirective = null;
-
-    abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
 
     /**
      * @return Directive[]

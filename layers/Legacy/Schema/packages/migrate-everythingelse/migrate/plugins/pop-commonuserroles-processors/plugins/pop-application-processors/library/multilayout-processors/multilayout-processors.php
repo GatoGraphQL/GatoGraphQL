@@ -1,6 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-
 class PoP_CommonUserRoles_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
     public function addLayoutComponents(&$layouts, $handle, $format = '')

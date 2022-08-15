@@ -1,6 +1,5 @@
 <?php
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPCMSSchema\Events\Constants\Scopes;
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;

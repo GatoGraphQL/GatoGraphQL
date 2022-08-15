@@ -1,6 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-
 class PoP_AvatarFoundationManager
 {
     public $sizes;

@@ -27,7 +27,6 @@ use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDir
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -88,7 +87,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected array $schemaDefinitionForDirectiveCache = [];
 
-    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
@@ -96,14 +94,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
 
-    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
-    {
-        $this->fieldQueryInterpreter = $fieldQueryInterpreter;
-    }
-    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
-    {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
-    }
     final public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
     {
         $this->semverHelperService = $semverHelperService;

@@ -1,9 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    # Override the service from FieldQuery
-    PoP\FieldQuery\FieldQueryInterpreterInterface:
-        class: \PoP\ComponentModel\Schema\FieldQueryInterpreter
