@@ -91,9 +91,9 @@ Initialize the component:
 ]);
 ```
 
-Append `/api/rest/` to the URL to fetch the pre-defined fields, and optionally add a `query` URL parameter to retrieve specific data fields using [this syntax](https://github.com/getpop/field-query).
+Append `/api/rest/` to the URL to fetch the pre-defined fields.
 
-Examples:
+<!-- Examples:
 
 _**Single post, default fields**_:<br/>
 [{single-post-url}/api/rest/](https://nextapi.getpop.org/2013/01/11/markup-html-tags-and-formatting/api/rest/)
@@ -105,7 +105,7 @@ _**Collection of posts, default fields**_:<br/>
 [{post-list-url}/api/rest/](https://nextapi.getpop.org/posts/api/rest/)
 
 _**Collection of posts, custom fields**_:<br/>
-[{post-list-url}/api/rest/?query=id|title|author.id|name](https://nextapi.getpop.org/posts/api/rest/?query=id|title|author.id|name)
+[{post-list-url}/api/rest/?query=id|title|author.id|name](https://nextapi.getpop.org/posts/api/rest/?query=id|title|author.id|name) -->
 
 <!-- ## More information
 
