@@ -973,15 +973,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         );
     }
 
-    public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
-        if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveExpressions($relationalTypeResolver);
-        }
-        return [];
-    }
-
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
@@ -1339,9 +1330,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
         if ($description = $this->getDirectiveDescription($relationalTypeResolver)) {
             $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
-        }
-        if ($expressions = $this->getDirectiveExpressions($relationalTypeResolver)) {
-            $schemaDefinition[SchemaDefinition::DIRECTIVE_EXPRESSIONS] = $expressions;
         }
         if ($deprecationMessage = $this->getDirectiveDeprecationMessage($relationalTypeResolver)) {
             $schemaDefinition[SchemaDefinition::DEPRECATED] = true;

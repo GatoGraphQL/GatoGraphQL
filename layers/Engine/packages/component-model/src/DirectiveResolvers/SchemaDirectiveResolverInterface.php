@@ -32,10 +32,6 @@ interface SchemaDirectiveResolverInterface
     public function getConsolidatedDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed;
     public function getConsolidatedDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?int;
     /**
-     * Expressions set by the directive
-     */
-    public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array;
-    /**
      * Indicate if the directive has been deprecated, why, when, and/or how it must be replaced
      */
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
