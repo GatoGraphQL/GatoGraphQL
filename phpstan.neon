@@ -88,7 +88,6 @@ includes:
     - layers/CMSSchema/packages/posts-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/queriedobject/phpstan.neon.dist
     - layers/CMSSchema/packages/queriedobject-wp/phpstan.neon.dist
-    - layers/Engine/packages/query-parsing/phpstan.neon.dist
     - layers/Engine/packages/root/phpstan.neon.dist
     - layers/Engine/packages/root-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/schema-commons/phpstan.neon.dist
