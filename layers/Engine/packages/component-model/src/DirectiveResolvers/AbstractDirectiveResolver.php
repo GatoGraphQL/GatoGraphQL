@@ -63,9 +63,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
     use ObjectTypeOrDirectiveResolverTrait;
 
-    private const MESSAGE_EXPRESSIONS_FOR_OBJECT = 'expressionsForObject';
-    private const MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD = 'expressionsForObjectAndField';
-
     protected Directive $directive;
     /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedDirectiveArgNameTypeResolversCache = [];
