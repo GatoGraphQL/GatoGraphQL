@@ -1189,7 +1189,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 );
             }
         }
-        
+
         /**
          * Remove the fields from the directive pipeline
          */
