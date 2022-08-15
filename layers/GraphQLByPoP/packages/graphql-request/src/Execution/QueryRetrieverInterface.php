@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\Execution;
 
+use GraphQLByPoP\GraphQLRequest\ObjectModels\GraphQLQueryPayload;
+
 interface QueryRetrieverInterface
 {
-    /**
-     * @return array<?string> 3 items: [query, variables, operationName]
-     */
-    public function extractRequestedGraphQLQueryPayload(): array;
+    public function extractRequestedGraphQLQueryPayload(): GraphQLQueryPayload;
 }
