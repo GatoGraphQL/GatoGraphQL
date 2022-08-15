@@ -137,7 +137,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 continue;
             }
 
-            $expressions = $this->getExpressionsForObject($id, $messages);
             $this->resolveValuesForObject(
                 $relationalTypeResolver,
                 $id,
@@ -146,7 +145,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
-                $expressions,
                 $engineIterationFeedbackStore,
             );
 
@@ -193,7 +191,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
-        array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         /**
@@ -211,7 +208,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
-                $expressions,
                 $engineIterationFeedbackStore,
             );
         }
@@ -321,7 +317,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
-        array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
