@@ -137,11 +137,11 @@ Please refer to package [API](https://github.com/PoP-PoPAPI/api), on which the G
 
 ## Features
 
-## Everything from the API layer, adapted to GraphQL
+<!-- ## Everything from the API layer, adapted to GraphQL
 
 The [API](https://github.com/leoloso/PoP/tree/master/layers/API/) layer provides plenty of features, based on the [field-query](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/field-query) syntax.
 
-This package adapts all those features to GraphQL.
+This package adapts all those features to GraphQL. -->
 
 ### Automatic namespacing of types
 
