@@ -163,7 +163,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
              *   }
              *   ```
              */
-            for ($level = 0; $level < $accumulatedMaximumFieldDepth; $level++) {
+            for ($level = $accumulatedMaximumFieldDepth; $level > 0; $level--) {
                 /**
                  * Use an alias to both help visualize which is the field (optional),
                  * and get its cached instance (mandatory!)
@@ -172,7 +172,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     '_%s_op%s_level%s_',
                     'dynamicSelf',
                     $operationOrder,
-                    $accumulatedMaximumFieldDepth - $level
+                    $level
                 );
                 /**
                  * The cache must be stored per Document, or otherwise
