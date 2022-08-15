@@ -1127,11 +1127,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     );
             }
             if ($feedbackItemResolution !== null) {
-                $fields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
                 $this->processFailure(
                     $relationalTypeResolver,
                     $feedbackItemResolution,
-                    $fields,
+                    null,
                     $idFieldSet,
                     $pipelineIDFieldSet,
                     $astNode ?? $this->directive,
@@ -1163,29 +1162,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<FieldInterface>|null $failedFields Either which fields failed, or `null` to signify _all_ of them
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FeedbackItemResolution $feedbackItemResolution,
-        array $failedFields,
+        ?array $failedFields,
         array $idFieldSet,
         array &$succeedingPipelineIDFieldSet,
         AstInterface $astNode,
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $allFieldsFailed = empty($failedFields);
-        if ($allFieldsFailed) {
+        if ($failedFields === null) {
             // Remove all fields
             $idFieldSetToRemove = $idFieldSet;
-            // Calculate which fields are being removed, to add to the error
-            foreach ($idFieldSet as $id => $fieldSet) {
-                $failedFields = array_merge(
-                    $failedFields,
-                    $fieldSet->fields
-                );
-            }
-            $failedFields = array_values(array_unique($failedFields));
         } else {
             $idFieldSetToRemove = [];
             // Calculate which fields to remove
@@ -1198,7 +1189,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 );
             }
         }
-        // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
+        
+        /**
+         * Remove the fields from the directive pipeline
+         */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->setFieldAsNullIfDirectiveFailed()) {
