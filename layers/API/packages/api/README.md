@@ -115,15 +115,15 @@ Initialize the component:
 ]);
 ```
 
-> **Note:**<br/>To enable GraphQL and/or REST endpoints, the corresponding package must be installed: [GraphQL package](https://github.com/PoP-PoPAPI/api-graphql), [REST package](https://github.com/PoP-PoPAPI/api-rest) 
+> **Note:**<br/>To enable GraphQL and/or REST endpoints, the corresponding package must be installed: [GraphQL package](https://github.com/PoP-PoPAPI/api-graphql), [REST package](https://github.com/PoP-PoPAPI/api-rest)
 
-1. Transform any URL into an API endpoint by adding:
+<!-- 1. Transform any URL into an API endpoint by adding:
 
     `.../api/` (PoP native format)<br/>
     `.../api/graphql/` (GraphQL)<br/>
     `.../api/rest/` (REST)
 
-2. Add your query under URL parameter `query`, following [this syntax](https://github.com/getpop/field-query)
+2. Add your query under URL parameter `query`, following [this syntax](https://github.com/getpop/field-query) -->
 
 <!-- ## Features
 
@@ -479,10 +479,9 @@ Hence, PoP can query resources in a REST fashion, and specify schema-based queri
 - - >
 -->
 
-It is influenced by GraphQL as an interface (for instance, it has types, fields and directives), but it has important differences:
+<!-- It is influenced by GraphQL as an interface (for instance, it has types, fields and directives), but it has important differences:
 
-- It uses the [field query](../Engine/packages/field-query) syntax (an superset and variation of the GraphQL syntax), which is URL-based
-- The fields with data can be defined in the [component model](../Engine/packages/component-model). This allows a component to define what data it needs, and the engine will resolve and provide this data already on the back-end (thus avoiding the round-trip from the client-side communicating with the API).
+- The fields with data can be defined in the [component model](../Engine/packages/component-model). This allows a component to define what data it needs, and the engine will resolve and provide this data already on the back-end (thus avoiding the round-trip from the client-side communicating with the API). -->
 <!-- 
 ## Features
 
