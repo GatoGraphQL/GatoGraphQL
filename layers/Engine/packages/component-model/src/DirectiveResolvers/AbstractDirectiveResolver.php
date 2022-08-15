@@ -615,20 +615,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Combine the directiveArgs with the object's expressions
-     *
-     * @param array<string,mixed> $expressions
-     * @return array<string,mixed>
-     */
-    protected function getObjectDirectiveArgs(array $expressions): array
-    {
-        return array_merge(
-            $this->directiveDataAccessor->getDirectiveArgs(),
-            $expressions
-        );
-    }
-
-    /**
      * By default, place the directive after the ResolveAndMerge directive,
      * so the property will be in $resolvedIDFieldValues by then
      */
