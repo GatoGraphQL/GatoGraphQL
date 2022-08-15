@@ -136,7 +136,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *   2. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
      *
      * Additionally to these 2, we can add other mandatory directives, such as:
-     *   - setSelfAsExpression
+     *   - setSelfInAppState
      *   - cacheControl
      *
      * Because it may be more convenient to add the directive or the class,
