@@ -164,7 +164,6 @@
         "php": "^8.1",
         "composer/semver": "^3.2",
         "getpop/definitions": "^0.9",
-        "getpop/field-query": "^0.9",
         "getpop/graphql-parser": "^0.9",
         "getpop/loosecontracts": "^0.9",
         "getpop/componentrouting": "^0.9",
