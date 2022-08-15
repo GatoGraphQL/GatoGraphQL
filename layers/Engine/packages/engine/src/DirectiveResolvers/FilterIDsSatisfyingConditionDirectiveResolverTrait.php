@@ -14,6 +14,8 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
     use RemoveIDFieldSetDirectiveResolverTrait;
 
     /**
+     * Check the condition field. If it is satisfied, then skip those fields.
+     *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string|int>
      */
@@ -24,13 +26,10 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
-        // Check the condition field. If it is satisfied, then skip those fields
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
         $idsSatisfyingCondition = [];
         foreach (array_keys($idFieldSet) as $id) {
-            // Validate directive args for the object
-            $expressions = $this->getExpressionsForObject($id, $messages);
-            $objectDirectiveArgs = $this->getObjectDirectiveArgs($expressions);
-            if ($objectDirectiveArgs['if'] ?? null) {
+            if ($directiveArgs['if'] ?? null) {
                 $idsSatisfyingCondition[] = $id;
             }
         }
