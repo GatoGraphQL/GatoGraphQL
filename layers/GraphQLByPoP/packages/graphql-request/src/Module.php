@@ -14,7 +14,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \GraphQLByPoP\GraphQLQuery\Module::class,
+            \PoPAPI\GraphQLAPI\Module::class,
         ];
     }
 
