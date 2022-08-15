@@ -17,7 +17,6 @@ class Module extends AbstractModule
     {
         return [
             \PoP\Definitions\Module::class,
-            \PoP\FieldQuery\Module::class,
             \PoP\GraphQLParser\Module::class,
             \PoP\LooseContracts\Module::class,
             \PoP\ComponentRouting\Module::class,
