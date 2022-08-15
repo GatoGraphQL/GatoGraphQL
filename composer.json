@@ -404,7 +404,6 @@
         "getpop/loosecontracts": "^0.9",
         "getpop/mandatory-directives-by-configuration": "^0.9",
         "getpop/multisite": "self.version",
-        "getpop/query-parsing": "^0.9",
         "getpop/resourceloader": "self.version",
         "getpop/resources": "self.version",
         "getpop/root": "^0.9",
