@@ -63,7 +63,11 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
-        return $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
+        $graphQLQueryPayload = $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
+        return [
+            $graphQLQueryPayload->query,
+            $graphQLQueryPayload->variables,
+        ];
     }
 
     public function doURLParamsOverrideGraphQLVariables(?WP_Post $customPost): bool

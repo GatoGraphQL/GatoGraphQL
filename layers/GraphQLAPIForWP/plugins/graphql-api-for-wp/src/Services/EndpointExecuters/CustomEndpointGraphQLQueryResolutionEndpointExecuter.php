@@ -42,6 +42,10 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
-        return $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
+        $graphQLQueryPayload = $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
+        return [
+            $graphQLQueryPayload->query,
+            $graphQLQueryPayload->variables,
+        ];
     }
 }
