@@ -1,3 +1,4 @@
 query {
   id @skip(if: false, unless: true)
+  multiple: id @skip(if: false, unless: true, orOtherwise: false)
 }

@@ -9,19 +9,60 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "id @skip(if: false, unless: true)",
         "path": [
           "(unless: true)",
           "@skip(if: false, unless: true)",
           "id @skip(if: false, unless: true)",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "id @skip(if: false, unless: true)",
+        "code": "PoP\\ComponentModel\\e28"
+      }
+    },
+    {
+      "message": "On directive 'skip', there is no argument with name 'unless'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 33
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(unless: true)",
+          "@skip(if: false, unless: true, orOtherwise: false)",
+          "multiple: id @skip(if: false, unless: true, orOtherwise: false)",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "multiple: id @skip(if: false, unless: true, orOtherwise: false)",
+        "code": "PoP\\ComponentModel\\e28"
+      }
+    },
+    {
+      "message": "On directive 'skip', there is no argument with name 'orOtherwise'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 47
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(orOtherwise: false)",
+          "@skip(if: false, unless: true, orOtherwise: false)",
+          "multiple: id @skip(if: false, unless: true, orOtherwise: false)",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "multiple: id @skip(if: false, unless: true, orOtherwise: false)",
         "code": "PoP\\ComponentModel\\e28"
       }
     }
   ],
   "data": {
-    "id": null
+    "id": null,
+    "multiple": null
   }
 }
