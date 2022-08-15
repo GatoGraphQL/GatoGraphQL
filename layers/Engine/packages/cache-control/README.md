@@ -39,7 +39,7 @@ It adds a mandatory directive `<cacheControl>` to all fields, which has a max-ag
 
 The response will send a `Cache-Control` header with the lowest max-age from all the requested fields, or `no-store` if any field has max-age: 0.
 
-## Examples
+<!-- ## Examples
 
 > **Note:**<br/>Click on the following links below, and inspect the response headers using Chrome or Firefox's developer tools' Network tab.
 
@@ -104,7 +104,7 @@ b. Override the default `maxAge` configuration for a field, by adding argument `
     title<cacheControl(maxAge:0)>
 ```
 
-[<a href="https://newapi.getpop.org/api/graphql/?query=echo(Hello+world!)|posts.title<cacheControl(maxAge:0)>">View query results</a>]
+[<a href="https://newapi.getpop.org/api/graphql/?query=echo(Hello+world!)|posts.title<cacheControl(maxAge:0)>">View query results</a>] -->
 
 ## PHP versions
 
