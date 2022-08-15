@@ -1127,11 +1127,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     );
             }
             if ($feedbackItemResolution !== null) {
-                $fields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
                 $this->processFailure(
                     $relationalTypeResolver,
                     $feedbackItemResolution,
-                    $fields,
+                    null,
                     $idFieldSet,
                     $pipelineIDFieldSet,
                     $astNode ?? $this->directive,
