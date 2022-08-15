@@ -147,13 +147,13 @@ This package adapts all those features to GraphQL. -->
 
 Namespaces ([proposed to be added to the GraphQL spec](https://github.com/graphql/graphql-spec/issues/163)) help manage the complexity of the schema. This can avoid different types having the same name, which can happen when embedding components from a 3rd party.
 
-This is how the normal schema looks like [in the GraphQL Voyager](https://newapi.getpop.org/graphql-interactive/):
+This is how the normal schema looks like in the GraphQL Voyager:
 
-![Interactive schema](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/normal-interactive-schema.png)
+![Interactive schema](https://raw.githubusercontent.com/leoloso/PoP/97b3b048d7c68da4f10ab1dcb31c0215cc6cc526/layers/API/packages/api-graphql/assets/images/normal-interactive-schema.png)
 
-This is how it looks in [its namespaced version](https://newapi.getpop.org/graphql-interactive/?use_namespace=1):
+This is how it looks in its namespaced version:
 
-![Namespaced interactive schema](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/namespaced-interactive-schema.png)
+![Namespaced interactive schema](https://raw.githubusercontent.com/leoloso/PoP/97b3b048d7c68da4f10ab1dcb31c0215cc6cc526/layers/API/packages/api-graphql/assets/images/namespaced-interactive-schema.png)
 
 ### Field/directive-based versioning
 
