@@ -628,67 +628,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         );
     }
 
-    /**
-     * @return mixed[]
-     */
-    protected function getExpressionsForObject(int|string $id, array $messages): array
-    {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id] ?? [];
-    }
-
-    /**
-     * This function is needed to use in combination with @forEach
-     * and inner nested directives. @forEach works by
-     * setting all entries in the array under distinct fields
-     * (["userPostData.0", "userPostData.1", "userPostData.2", etc]).
-     *
-     * Then, directives can target the value of an expression
-     * to their nested directives, without fear of that value being overriden.
-     *
-     * Eg: in this query, the 1st @applyFunction is exporting the value
-     * of `userLang` as an expression, to be read by the 2nd @applyFunction.
-     * They can communicate passing data across,
-     * because with `getExpressionsForObjectAndField`
-     * they operate on the same expressions set by both ID and field:
-     *
-     * ```graphql
-     *   userPostData: getSelfProp(self: "%{self}%", property: "userData")
-     *     @forEach(affectDirectivesUnderPos: [1, 2])
-     *       @applyFunction(
-     *         name: "extract",
-     *         arguments: {
-     *           object: "%{value}%",
-     *           path: "lang",
-     *         },
-     *         target: "userLang",
-     *         targetType: EXPRESSION
-     *       )
-     *       @applyFunction(
-     *         name: "sprintf",
-     *         arguments: {
-     *           string: "postContent-%s",
-     *           values: ["%{userLang}%"]
-     *         },
-     *         target: "userPostContentKey",
-     *         targetType: EXPRESSION
-     *       )
-     * ```
-     *
-     * If using `getExpressionsForObject` instead, each element in the array
-     * traversed by @forEach would override the value of `userLang`, and so
-     * only the value of the last item in the array will be made available as
-     * `userLang` to ALL entries in the next @applyFunction.
-     *
-     * @return mixed[]
-     */
-    protected function getExpressionsForObjectAndField(int|string $id, FieldInterface $field, array $messages): array
-    {
-        return array_merge(
-            $this->getExpressionsForObject($id, $messages),
-            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()] ?? []
-        );
-    }
-
     protected function addExpressionForObject(int|string $id, string $key, mixed $value, array &$messages): void
     {
         $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] = $value;
