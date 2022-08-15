@@ -628,21 +628,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         );
     }
 
-    protected function addExpressionForObject(int|string $id, string $key, mixed $value, array &$messages): void
-    {
-        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] = $value;
-    }
-
-    protected function getExpressionForObject(int|string $id, string $key, array $messages): mixed
-    {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] ?? null;
-    }
-
-    protected function getExpressionForObjectAndField(int|string $id, FieldInterface $field, string $key, array $messages): mixed
-    {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()][$key] ?? $this->getExpressionForObject($id, $key, $messages);
-    }
-
     /**
      * By default, place the directive after the ResolveAndMerge directive,
      * so the property will be in $resolvedIDFieldValues by then
