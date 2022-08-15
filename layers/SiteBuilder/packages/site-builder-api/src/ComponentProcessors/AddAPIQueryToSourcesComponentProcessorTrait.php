@@ -9,7 +9,6 @@ use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\FieldQuery\QuerySyntax;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
 use PoPAPI\API\Schema\QueryInputs;
 
