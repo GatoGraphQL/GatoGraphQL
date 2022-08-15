@@ -45,8 +45,6 @@ services:
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/vendor/getpop/mandatory-directives-by-configuration
         - >-
           ../../layers/Engine/packages/componentrouting:/app/vendor/getpop/componentrouting
-        - >-
-          ../../layers/Engine/packages/query-parsing:/app/vendor/getpop/query-parsing
         - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
         - >-
           ../../layers/Engine/packages/root-wp:/app/vendor/getpop/root-wp
@@ -54,8 +52,6 @@ services:
           ../../layers/GraphQLByPoP/clients/graphiql:/app/wordpress/graphiql
         - >-
           ../../layers/GraphQLByPoP/clients/graphql-voyager:/app/wordpress/graphql-interactive
-        - >-
-          ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/graphql-by-pop/graphql-query
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-request:/app/vendor/graphql-by-pop/graphql-request
         - >-

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLQuery\Schema;
+namespace GraphQLByPoP\GraphQLServer\Constants;
 
 class OperationTypes
 {

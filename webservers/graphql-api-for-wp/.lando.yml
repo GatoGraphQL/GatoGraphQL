@@ -59,8 +59,6 @@ services:
         - >-
           ../../layers/Engine/packages/componentrouting:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/componentrouting
         - >-
-          ../../layers/Engine/packages/query-parsing:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/query-parsing
-        - >-
           ../../layers/Engine/packages/root:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/root
         - >-
           ../../layers/Engine/packages/root-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/root-wp
@@ -74,8 +72,6 @@ services:
           ../../layers/GraphQLByPoP/packages/graphql-clients-for-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-clients-for-wp
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-endpoint-for-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-endpoint-for-wp
-        - >-
-          ../../layers/GraphQLByPoP/packages/graphql-query:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-query
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-request:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-request
         - >-

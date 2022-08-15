@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors;
 
-use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
+use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
 use GraphQLByPoP\GraphQLServer\ComponentProcessors\RootRelationalFieldDataloadComponentProcessor;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
