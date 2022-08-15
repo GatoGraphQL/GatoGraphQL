@@ -16,7 +16,6 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/definitions": "${workspaceFolder}/layers/Engine/packages/definitions",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/engine-wp": "${workspaceFolder}/layers/Engine/packages/engine-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/engine": "${workspaceFolder}/layers/Engine/packages/engine",
-              "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/field-query": "${workspaceFolder}/layers/Engine/packages/field-query",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/graphql-parser": "${workspaceFolder}/layers/Engine/packages/graphql-parser",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/guzzle-helpers": "${workspaceFolder}/layers/Engine/packages/guzzle-helpers",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/loosecontracts": "${workspaceFolder}/layers/Engine/packages/loosecontracts",

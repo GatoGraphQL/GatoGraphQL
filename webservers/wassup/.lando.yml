@@ -55,8 +55,6 @@ services:
           ../../layers/SiteBuilder/packages/definitions-emoji:/app/vendor/getpop/definitions-emoji
         - '../../layers/Engine/packages/engine:/app/vendor/getpop/engine'
         - '../../layers/Engine/packages/engine-wp:/app/vendor/getpop/engine-wp'
-        - >-
-          ../../layers/Engine/packages/field-query:/app/vendor/getpop/field-query
         - '../../layers/Engine/packages/filestore:/app/vendor/getpop/filestore'
         - >-
           ../../layers/Engine/packages/guzzle-helpers:/app/vendor/getpop/guzzle-helpers
