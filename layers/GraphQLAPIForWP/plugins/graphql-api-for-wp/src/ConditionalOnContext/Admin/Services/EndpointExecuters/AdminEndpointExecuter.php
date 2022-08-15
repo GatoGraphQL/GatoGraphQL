@@ -56,7 +56,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     /**
      * Provide the query to execute and its variables
      *
-     * @return mixed[] Array of 2 elements: [query, variables]
+     * @return array{0: ?string, 1: ?array<string,mixed>} Array of 2 elements: [query, variables]
      */
     public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
     {
