@@ -422,7 +422,6 @@
         "graphql-by-pop/graphiql": "self.version",
         "graphql-by-pop/graphql-clients-for-wp": "self.version",
         "graphql-by-pop/graphql-endpoint-for-wp": "self.version",
-        "graphql-by-pop/graphql-query": "self.version",
         "graphql-by-pop/graphql-request": "self.version",
         "graphql-by-pop/graphql-server": "self.version",
         "graphql-by-pop/graphql-voyager": "self.version",

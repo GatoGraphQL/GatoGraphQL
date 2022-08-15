@@ -55,8 +55,6 @@ services:
         - >-
           ../../layers/GraphQLByPoP/clients/graphql-voyager:/app/wordpress/graphql-interactive
         - >-
-          ../../layers/GraphQLByPoP/packages/graphql-query:/app/vendor/graphql-by-pop/graphql-query
-        - >-
           ../../layers/GraphQLByPoP/packages/graphql-request:/app/vendor/graphql-by-pop/graphql-request
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-server:/app/vendor/graphql-by-pop/graphql-server
