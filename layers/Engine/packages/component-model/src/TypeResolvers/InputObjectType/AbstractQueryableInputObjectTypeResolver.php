@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\Root\App;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\QueryableInputObjectTypeResolverInterface;
+use PoP\Root\App;
 use stdClass;
 
 abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements QueryableInputObjectTypeResolverInterface
@@ -79,6 +80,11 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
         $isQueryableInputObjectTypeResolver = $inputFieldTypeResolver instanceof QueryableInputObjectTypeResolverInterface;
+        $queryableInputObjectTypeResolver = null;
+        if ($isQueryableInputObjectTypeResolver) {
+            /** @var QueryableInputObjectTypeResolverInterface */
+            $queryableInputObjectTypeResolver = $inputFieldTypeResolver;
+        }
 
         /**
          * Check if to copy the value directly to the filtering query args
@@ -89,7 +95,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
              */
             if ($isQueryableInputObjectTypeResolver) {
                 $query[$queryArgName] = [];
-                $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query[$queryArgName], $inputFieldValue);
+                $queryableInputObjectTypeResolver->integrateInputValueToFilteringQueryArgs($query[$queryArgName], $inputFieldValue);
                 return;
             }
             /**
@@ -103,7 +109,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
          * If the input field is an InputObject, recursively apply this function
          */
         if ($isQueryableInputObjectTypeResolver) {
-            $inputFieldTypeResolver->integrateInputValueToFilteringQueryArgs($query, $inputFieldValue);
+            $queryableInputObjectTypeResolver->integrateInputValueToFilteringQueryArgs($query, $inputFieldValue);
         }
     }
     protected function getFilteringQueryArgNameToCopyInputFieldValue(string $inputFieldName): ?string
