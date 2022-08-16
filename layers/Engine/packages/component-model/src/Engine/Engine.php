@@ -37,11 +37,9 @@ use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
-use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -2435,34 +2433,11 @@ class Engine implements EngineInterface
              * nested fields requested on leaf fields:
              *
              *   `{ id { id } }`
+             *
+             * The corresponding error is already added in
+             * AbstractObjectTypeResolver->resolveValue
              */
             if ($subcomponentTypeResolver === null) {
-                /**
-                 * Show a schema error. But skip if there are no ObjectTypeFieldResolvers,
-                 * since then the error will have been added already.
-                 *
-                 * Otherwise, there will appear 2 error messages:
-                 *
-                 *   1. No ObjectTypeFieldResolver
-                 *   2. No FieldDefaultTypeDataLoader
-                 */
-                if ($targetObjectTypeResolver->hasObjectTypeFieldResolversForField($field)) {
-                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                        new SchemaFeedback(
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E1,
-                                [
-                                    $field->getOutputKey(),
-                                    $targetObjectTypeResolver->getMaybeNamespacedTypeName(),
-                                ]
-                            ),
-                            $field,
-                            $targetObjectTypeResolver,
-                            [$field],
-                        )
-                    );
-                }
                 continue;
             }
             $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();
