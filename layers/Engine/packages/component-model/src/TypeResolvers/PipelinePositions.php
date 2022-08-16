@@ -18,8 +18,8 @@ namespace PoP\ComponentModel\TypeResolvers;
  * There are 6 positions:
  *
  *   1. At the very beginning
- *   2. Before the PrepareField directive
- *   3. Between the PrepareField and Resolve directives
+ *   2. Before the Validate directive
+ *   3. Between the Validate and Resolve directives
  *   4. Between the Resolve and Serialize directives
  *   5. After the Serialize directive
  *   6. At the very end
@@ -31,6 +31,8 @@ namespace PoP\ComponentModel\TypeResolvers;
 class PipelinePositions
 {
     public final const BEGINNING = 'beginning';
+    public final const BEFORE_VALIDATE = 'before-validate';
+    public final const AFTER_VALIDATE = 'after-validate';
     public final const BEFORE_RESOLVE = 'before-resolve';
     public final const AFTER_RESOLVE = 'after-resolve';
     public final const BEFORE_SERIALIZE = 'before-serialize';

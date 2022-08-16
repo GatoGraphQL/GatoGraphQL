@@ -184,14 +184,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          * All directives are placed somewhere in the pipeline.
          *
          *   1. At the very beginning
-         *   2. Before the PrepareField directive
-         *   3. Between the PrepareField and Resolve directives
+         *   2. Before the Validate directive
+         *   3. Between the Validate and Resolve directives
          *   4. Between the Resolve and Serialize directives
          *   5. After the Serialize directive
          *   6. At the very end
          */
         $directiveResolversByPosition = $fieldDirectivesByPosition = $directiveFieldsByPosition = [
             PipelinePositions::BEGINNING => [],
+            PipelinePositions::BEFORE_VALIDATE => [],
+            PipelinePositions::AFTER_VALIDATE => [],
             PipelinePositions::BEFORE_RESOLVE => [],
             PipelinePositions::AFTER_RESOLVE => [],
             PipelinePositions::BEFORE_SERIALIZE => [],
