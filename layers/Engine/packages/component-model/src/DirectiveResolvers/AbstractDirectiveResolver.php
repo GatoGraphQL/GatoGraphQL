@@ -372,9 +372,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $mandatoryDirectiveArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($directiveArgsSchemaDefinition);
+        $mandatoryButNullableDirectiveArgNames = $this->getFieldOrDirectiveMandatoryButNullableArgumentNames($directiveArgsSchemaDefinition);
         $missingMandatoryDirectiveArgNames = array_values(array_filter(
             $mandatoryDirectiveArgNames,
-            fn (string $directiveArgName) => ($directiveArgs[$directiveArgName] ?? null) === null
+            fn (string $directiveArgName) => !array_key_exists($directiveArgName, $directiveArgs)
+                || ($directiveArgs[$directiveArgName] === null && !in_array($directiveArgName, $mandatoryButNullableDirectiveArgNames))
         ));
         foreach ($missingMandatoryDirectiveArgNames as $missingMandatoryDirectiveArgName) {
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(

@@ -1700,9 +1700,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $mandatoryFieldArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($fieldArgsSchemaDefinition);
+        $mandatoryButNullableFieldArgNames = $this->getFieldOrDirectiveMandatoryButNullableArgumentNames($fieldArgsSchemaDefinition);
         $missingMandatoryFieldArgNames = array_values(array_filter(
             $mandatoryFieldArgNames,
-            fn (string $fieldArgName) => ($fieldArgs[$fieldArgName] ?? null) === null
+            fn (string $fieldArgName) => !array_key_exists($fieldArgName, $fieldArgs)
+                || ($fieldArgs[$fieldArgName] === null && !in_array($fieldArgName, $mandatoryButNullableFieldArgNames))
         ));
         foreach ($missingMandatoryFieldArgNames as $missingMandatoryFieldArgName) {
             $objectTypeFieldResolutionFeedbackStore->addError(
