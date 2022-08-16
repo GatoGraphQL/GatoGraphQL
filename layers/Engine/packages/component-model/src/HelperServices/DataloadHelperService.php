@@ -54,6 +54,14 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
 
-        return $objectTypeResolver->getFieldTypeResolver($field);
+        // Check if this field doesn't have a typeResolver
+        $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
+        if (
+            $subcomponentFieldNodeTypeResolver === null
+            || !($subcomponentFieldNodeTypeResolver instanceof RelationalTypeResolverInterface)
+        ) {
+            return null;
+        }
+        return $subcomponentFieldNodeTypeResolver;
     }
 }
