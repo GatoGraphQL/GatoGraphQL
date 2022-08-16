@@ -14,7 +14,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
     public final const E3 = 'e3';
     public final const E4 = 'e4';
     public final const E5 = 'e5';
-    public final const E5a = 'e5a';
+    public final const E5A = 'e5a';
     public final const E6 = 'e6';
     public final const E7 = 'e7';
     public final const E8 = 'e8';
@@ -40,7 +40,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E3,
             self::E4,
             self::E5,
-            self::E5a,
+            self::E5A,
             self::E6,
             self::E7,
             self::E8,
@@ -65,7 +65,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E3 => $this->__('Type \'%s\' must be provided as a string', 'component-model'),
             self::E4 => $this->__('There is no input field \'%s\' in input object \'%s\''),
             self::E5 => $this->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
-            self::E5a => $this->__('Input field \'%s\' in input object \'%s\' cannot be null'),
+            self::E5A => $this->__('Input field \'%s\' in input object \'%s\' cannot be null'),
             self::E6 => $this->__('The oneof input object \'%s\' must receive exactly 1 input, but \'%s\' inputs were provided (\'%s\')', 'component-model'),
             self::E7 => $this->__('No input value was provided to the oneof input object \'%s\'', 'component-model'),
             self::E8 => $this->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'component-model'),

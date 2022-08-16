@@ -1180,7 +1180,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $messages,
             $engineIterationFeedbackStore,
         );
-    }/**
+    }
+
+    /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
