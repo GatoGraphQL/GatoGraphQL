@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Field 'roleNames' is not a connection",
+            "message": "Field 'roleNames' from type 'User' is not a connection",
             "locations": [
                 {
                     "line": 3,
@@ -20,7 +20,7 @@
             }
         },
         {
-            "message": "Field 'title' is not a connection",
+            "message": "Field 'title' from type 'Post' is not a connection",
             "locations": [
                 {
                     "line": 8,
@@ -39,7 +39,7 @@
             }
         },
         {
-            "message": "Field 'title' is not a connection",
+            "message": "Field 'title' from type 'Post' is not a connection",
             "locations": [
                 {
                     "line": 13,
@@ -58,7 +58,7 @@
             }
         },
         {
-            "message": "Field 'title' is not a connection",
+            "message": "Field 'title' from type 'Page' is not a connection",
             "locations": [
                 {
                     "line": 13,

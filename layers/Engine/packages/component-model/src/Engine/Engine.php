@@ -2454,6 +2454,7 @@ class Engine implements EngineInterface
                                 ErrorFeedbackItemProvider::E1,
                                 [
                                     $field->getOutputKey(),
+                                    $targetObjectTypeResolver->getMaybeNamespacedTypeName(),
                                 ]
                             ),
                             $field,

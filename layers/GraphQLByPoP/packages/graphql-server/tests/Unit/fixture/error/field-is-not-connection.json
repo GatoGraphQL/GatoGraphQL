@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Field 'id' is not a connection",
+            "message": "Field 'id' from type 'QueryRoot' is not a connection",
             "locations": [
                 {
                     "line": 2,
