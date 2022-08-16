@@ -67,13 +67,9 @@ trait ObjectTypeOrDirectiveResolverTrait
     {
         $mandatoryButNullableFieldOrDirectiveArgumentNames = [];
         foreach ($fieldOrDirectiveArgsSchemaDefinition as $fieldOrDirectiveSchemaDefinitionArg) {
-            if (!($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false)) {
-                continue;
+            if ($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::MANDATORY_BUT_NULLABLE] ?? false) {
+                $mandatoryButNullableFieldOrDirectiveArgumentNames[] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME];
             }
-            if (($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NON_NULLABLE] ?? null) !== false) {
-                continue;
-            }
-            $mandatoryButNullableFieldOrDirectiveArgumentNames[] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME];
         }
         return $mandatoryButNullableFieldOrDirectiveArgumentNames;
     }

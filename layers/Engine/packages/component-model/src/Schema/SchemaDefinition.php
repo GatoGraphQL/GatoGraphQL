@@ -20,6 +20,7 @@ class SchemaDefinition
     public final const VERSION = 'version';
     public final const VERSION_CONSTRAINT = 'versionConstraint';
     public final const MANDATORY = 'mandatory';
+    public final const MANDATORY_BUT_NULLABLE = 'mandatoryButNullable';
     public final const ITEMS = 'items';
     public final const DEPRECATED = 'deprecated';
     public final const DEPRECATION_MESSAGE = 'deprecationMessage';

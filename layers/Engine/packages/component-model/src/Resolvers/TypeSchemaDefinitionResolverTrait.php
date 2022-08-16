@@ -91,7 +91,7 @@ trait TypeSchemaDefinitionResolverTrait
          */
         if ($typeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) {
             $schemaDefinition[SchemaDefinition::MANDATORY] = true;
-            $schemaDefinition[SchemaDefinition::NON_NULLABLE] = false;
+            $schemaDefinition[SchemaDefinition::MANDATORY_BUT_NULLABLE] = true;
         }
 
         // The values below are valid both for field, and field/directive args
