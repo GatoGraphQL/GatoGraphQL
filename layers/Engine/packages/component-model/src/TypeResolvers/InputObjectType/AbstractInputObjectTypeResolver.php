@@ -248,7 +248,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             ) {
                 $inputObjectTypeResolver = $inputFieldTypeResolver;
                 $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
-                $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+                $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY
+                    || ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
                 if (!$inputFieldTypeModifiersIsMandatory && !$inputObjectTypeResolver->hasMandatoryInputFields()) {
                     $inputValue->$inputFieldName = new stdClass();
                 }
@@ -367,7 +368,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
-            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY
+                || ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
@@ -401,7 +403,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) {
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
-            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY
+                || ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
             if ($inputFieldTypeModifiersIsMandatory) {
                 return true;
             }
