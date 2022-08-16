@@ -1,0 +1,36 @@
+{
+    "errors": [
+        {
+            "message": "Field 'roleNames' is not a connection",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "roleNames { ... }",
+                    "users(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "User",
+                "field": "roleNames { ... }",
+                "code": "PoP\\ComponentModel\\e1"
+            }
+        }
+    ],
+    "data": {
+        "users": [
+            {
+                "roleNames": null
+            },
+            {
+                "roleNames": null
+            },
+            {
+                "roleNames": null
+            }
+        ]
+    }
+}
