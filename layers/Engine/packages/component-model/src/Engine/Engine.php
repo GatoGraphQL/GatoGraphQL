@@ -2443,13 +2443,11 @@ class Engine implements EngineInterface
             $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
                 $relationalTypeResolver,
                 $field,
-                null
             );
             if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
                 $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
                     $targetObjectTypeResolver,
                     $field,
-                    null
                 );
             }
             if ($subcomponentTypeResolver === null) {
