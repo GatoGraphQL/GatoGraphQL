@@ -1,5 +1,7 @@
 mutation {
-  addCommentToCustomPost(input: {}) {
+  addCommentToCustomPost(input: {
+    comment: null
+  }) {
     id
   }
 }
