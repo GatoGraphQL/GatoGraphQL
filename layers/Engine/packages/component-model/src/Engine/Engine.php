@@ -2434,8 +2434,7 @@ class Engine implements EngineInterface
              *
              *   `{ id { id } }`
              *
-             * The corresponding error is already added in
-             * AbstractObjectTypeResolver->resolveValue
+             * The corresponding error is already added in @validate
              */
             if ($subcomponentTypeResolver === null) {
                 continue;

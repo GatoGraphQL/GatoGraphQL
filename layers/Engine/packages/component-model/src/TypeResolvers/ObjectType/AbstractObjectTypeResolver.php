@@ -37,14 +37,12 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -311,65 +309,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             /** @var FieldInterface */
             $field = $fieldOrFieldDataAccessor;
         }
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        if ($objectTypeFieldResolver === null) {
-            /**
-             * Return an error to indicate that no fieldResolver processes this field,
-             * which is different than returning a null value.
-             * Needed for compatibility with CustomPostUnionTypeResolver
-             * (so that data-fields aimed for another post_type are not retrieved)
-             */
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        FieldResolutionErrorFeedbackItemProvider::class,
-                        FieldResolutionErrorFeedbackItemProvider::E1a,
-                        [
-                            $field->getName(),
-                            $this->getMaybeNamespacedTypeName(),
-                            $this->getID($object),
-                        ]
-                    ),
-                    $field,
-                )
-            );
-            return null;
-        }
 
         /**
-         * Validate that a RelationalField in the AST is not actually
-         * a leaf field in the resolver.
+         * Already validated it exists in @validate
          *
-         * Eg: field "id" is built as RelationalField in the AST, but it is
-         * not a connection:
-         *
-         *   ```
-         *   {
-         *     id {
-         *       __typename
-         *     }
-         *   }
-         *   ```
+         * @var ObjectTypeFieldResolverInterface
          */
-        if ($field instanceof RelationalField
-            && !($objectTypeFieldResolver->getFieldTypeResolver($this, $field->getName()) instanceof RelationalTypeResolverInterface)
-        ) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E1a,
-                        [
-                            $field->getOutputKey(),
-                            $this->getMaybeNamespacedTypeName(),
-                            $this->getID($object),
-                        ]
-                    ),
-                    $field,
-                )
-            );
-            return null;
-        }
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
 
         /**
          * If executed within a FieldResolver we will (most likely)
