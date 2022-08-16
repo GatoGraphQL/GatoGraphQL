@@ -362,6 +362,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         [
                             $field->getOutputKey(),
                             $this->getMaybeNamespacedTypeName(),
+                            $this->getID($object),
                         ]
                     ),
                     $field,
