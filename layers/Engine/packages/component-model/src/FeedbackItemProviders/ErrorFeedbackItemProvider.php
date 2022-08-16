@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public final const E1 = 'e1';
+    public final const E1a = 'e1a';
     public final const E3 = 'e3';
     public final const E3A = 'e3a';
     public final const E4 = 'e4';
@@ -47,6 +48,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
+            self::E1a,
             self::E3,
             self::E3A,
             self::E4,
@@ -87,7 +89,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
              * @see https://spec.graphql.org/October2021/#sec-Leaf-Field-Selections
              * in GraphQLSpecErrorFeedbackItemProvider.php
              */
-            self::E1 => $this->__('Field \'%s\' from type \'%s\' and object with ID \'%s\' is not a connection', 'component-model'),
+            self::E1 => $this->__('Field \'%s\' from type \'%s\' is not a connection', 'component-model'),
+            self::E1a => $this->__('Field \'%s\' from type \'%s\' and object with ID \'%s\' is not a connection', 'component-model'),
             self::E3 => $this->__('Resolving field \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E3A => $this->__('Resolving field \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E4 => $this->__('Resolving field \'%s\' triggered an exception, please contact the admin', 'component-model'),

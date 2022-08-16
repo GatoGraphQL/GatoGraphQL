@@ -323,7 +323,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         FieldResolutionErrorFeedbackItemProvider::class,
-                        FieldResolutionErrorFeedbackItemProvider::E1,
+                        FieldResolutionErrorFeedbackItemProvider::E1a,
                         [
                             $field->getName(),
                             $this->getMaybeNamespacedTypeName(),
@@ -358,7 +358,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E1,
+                        ErrorFeedbackItemProvider::E1a,
                         [
                             $field->getOutputKey(),
                             $this->getMaybeNamespacedTypeName(),
