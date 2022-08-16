@@ -365,12 +365,15 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
          * Check that all mandatory properties have been provided
          */
         foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputFieldTypeResolver) {
-            if (isset($inputValue->$inputFieldName)) {
+            if (property_exists($inputValue, $inputFieldName)) {
                 continue;
             }
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
-            // !isset and property_exists => it is null
-            if (property_exists($inputValue, $inputFieldName)) {
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+            if (!$inputFieldTypeModifiersIsMandatory) {
+                continue;
+            }
+            if ($inputValue->$inputFieldName === null) {
                 $inputFieldTypeModifiersIsMandatoryButNullable = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
                 if ($inputFieldTypeModifiersIsMandatoryButNullable) {
                     continue;
@@ -388,10 +391,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                         $astNode,
                     ),
                 );
-                continue;
-            }
-            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
-            if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
             $objectTypeFieldResolutionFeedbackStore->addError(
