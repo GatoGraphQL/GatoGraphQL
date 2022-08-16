@@ -206,9 +206,10 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['empty' => 'value'],
             ['extract' => 'object'],
             ['extract' => 'path'],
-            ['echo' => 'value'],
             ['sprintf' => 'string']
                 => SchemaTypeModifiers::MANDATORY,
+            ['echo' => 'value']
+                => SchemaTypeModifiers::MANDATORY_BUT_NULLABLE,
             ['and' => 'values'],
             ['or' => 'values'],
             ['sprintf' => 'values']
