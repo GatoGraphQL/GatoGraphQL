@@ -145,7 +145,7 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
     ): void {
         $objectTypeFieldResolver = $objectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
         if ($objectTypeFieldResolver === null) {
-            $this->processFailure(
+            $this->processSchemaFailure(
                 $objectTypeResolver,
                 new FeedbackItemResolution(
                     FieldResolutionErrorFeedbackItemProvider::class,
@@ -183,7 +183,7 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
         if ($field instanceof RelationalField
             && !($objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $field->getName()) instanceof RelationalTypeResolverInterface)
         ) {
-            $this->processFailure(
+            $this->processSchemaFailure(
                 $objectTypeResolver,
                 new FeedbackItemResolution(
                     ErrorFeedbackItemProvider::class,
