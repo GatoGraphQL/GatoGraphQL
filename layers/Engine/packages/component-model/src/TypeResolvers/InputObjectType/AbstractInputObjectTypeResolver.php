@@ -81,6 +81,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string, InputTypeResolverInterface>
      */
     final public function getConsolidatedInputFieldNameTypeResolvers(): array
     {
@@ -248,7 +250,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             ) {
                 $inputObjectTypeResolver = $inputFieldTypeResolver;
                 $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
-                $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+                $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY
+                    || ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
                 if (!$inputFieldTypeModifiersIsMandatory && !$inputObjectTypeResolver->hasMandatoryInputFields()) {
                     $inputValue->$inputFieldName = new stdClass();
                 }
@@ -362,11 +365,31 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
          * Check that all mandatory properties have been provided
          */
         foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputFieldTypeResolver) {
-            // Providing a `null` value to a mandatory input is still valid
-            if (property_exists($inputValue, $inputFieldName)) {
+            if (isset($inputValue->$inputFieldName)) {
                 continue;
             }
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            // !isset and property_exists => it is null
+            if (property_exists($inputValue, $inputFieldName)) {
+                $inputFieldTypeModifiersIsMandatoryButNullable = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
+                if ($inputFieldTypeModifiersIsMandatoryButNullable) {
+                    continue;
+                }
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            InputValueCoercionErrorFeedbackItemProvider::class,
+                            InputValueCoercionErrorFeedbackItemProvider::E5a,
+                            [
+                                $inputFieldName,
+                                $this->getMaybeNamespacedTypeName(),
+                            ]
+                        ),
+                        $astNode,
+                    ),
+                );
+                continue;
+            }
             $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
@@ -401,7 +424,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) {
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
-            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY
+                || ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
             if ($inputFieldTypeModifiersIsMandatory) {
                 return true;
             }

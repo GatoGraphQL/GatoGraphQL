@@ -374,14 +374,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $mandatoryDirectiveArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($directiveArgsSchemaDefinition);
         $missingMandatoryDirectiveArgNames = array_values(array_filter(
             $mandatoryDirectiveArgNames,
-            fn (string $directiveArgName) => ($directiveArgs[$directiveArgName] ?? null) === null
+            fn (string $directiveArgName) => !array_key_exists($directiveArgName, $directiveArgs)
         ));
         foreach ($missingMandatoryDirectiveArgNames as $missingMandatoryDirectiveArgName) {
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E30,
+                        ErrorFeedbackItemProvider::E31,
                         [
                             $missingMandatoryDirectiveArgName,
                             $this->directive->getName(),
@@ -389,6 +389,31 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     ),
                     $this->directive->getArgument($missingMandatoryDirectiveArgName)?->getValueAST()
                         ?? $this->directive->getArgument($missingMandatoryDirectiveArgName)
+                        ?? $this->directive,
+                    $relationalTypeResolver,
+                    $fields,
+                )
+            );
+        }
+
+        $mandatoryButNullableDirectiveArgNames = $this->getFieldOrDirectiveMandatoryButNullableArgumentNames($directiveArgsSchemaDefinition);
+        $nullNonNullableDirectiveArgNames = array_values(array_filter(
+            $mandatoryDirectiveArgNames,
+            fn (string $directiveArgName) => array_key_exists($directiveArgName, $directiveArgs) && $directiveArgs[$directiveArgName] === null && !in_array($directiveArgName, $mandatoryButNullableDirectiveArgNames)
+        ));
+        foreach ($nullNonNullableDirectiveArgNames as $nullNonNullableDirectiveArgName) {
+            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                new SchemaFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E32,
+                        [
+                            $nullNonNullableDirectiveArgName,
+                            $this->directive->getName(),
+                        ]
+                    ),
+                    $this->directive->getArgument($nullNonNullableDirectiveArgName)?->getValueAST()
+                        ?? $this->directive->getArgument($nullNonNullableDirectiveArgName)
                         ?? $this->directive,
                     $relationalTypeResolver,
                     $fields,

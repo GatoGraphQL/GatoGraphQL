@@ -63,7 +63,7 @@ trait CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait
         );
         foreach (array_keys($dangerouslyNonSpecificScalarTypeFieldOrDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgName) {
             $consolidatedFieldOrDirectiveArgTypeModifiers = $consolidatedFieldOrDirectiveArgsTypeModifiers[$fieldOrDirectiveArgName];
-            if ($consolidatedFieldOrDirectiveArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
+            if ($consolidatedFieldOrDirectiveArgTypeModifiers & (SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::MANDATORY_BUT_NULLABLE)) {
                 return true;
             }
         }

@@ -37,6 +37,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E28 = 'e28';
     public final const E29 = 'e29';
     public final const E30 = 'e30';
+    public final const E31 = 'e31';
+    public final const E32 = 'e32';
 
     /**
      * @return string[]
@@ -72,6 +74,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E28,
             self::E29,
             self::E30,
+            self::E31,
+            self::E32,
         ];
     }
 
@@ -109,8 +113,10 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
             self::E27 => $this->__('On field \'%1$s\' of type \'%2$s\', there is no argument with name \'%3$s\'', 'component-model'),
             self::E28 => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'component-model'),
-            self::E29 => $this->__('Argument \'%1$s\' in field \'%2$s\' of type \'%3$s\' cannot be empty or null', 'component-model'),
-            self::E30 => $this->__('Argument \'%1$s\' in directive \'%2$s\' cannot be empty or null', 'component-model'),
+            self::E29 => $this->__('Mandatory argument \'%1$s\' in field \'%2$s\' of type \'%3$s\' has not been provided', 'component-model'),
+            self::E30 => $this->__('Argument \'%1$s\' in field \'%2$s\' of type \'%3$s\' cannot be null', 'component-model'),
+            self::E31 => $this->__('Mandatory argument \'%1$s\' in directive \'%2$s\' has not been provided', 'component-model'),
+            self::E32 => $this->__('Argument \'%1$s\' in directive \'%2$s\' cannot be null', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }

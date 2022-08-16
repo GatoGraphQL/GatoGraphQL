@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'interface' in field 'implements' of type 'Post' cannot be empty or null",
+      "message": "Mandatory argument 'interface' in field 'implements' of type 'Post' has not been provided",
       "locations": [
         {
           "line": 3,
@@ -20,7 +20,7 @@
       }
     },
     {
-      "message": "Argument 'type' in field 'isObjectType' of type 'Post' cannot be empty or null",
+      "message": "Mandatory argument 'type' in field 'isObjectType' of type 'Post' has not been provided",
       "locations": [
         {
           "line": 6,
@@ -39,7 +39,7 @@
       }
     },
     {
-      "message": "Argument 'type' in field 'isObjectType' of type 'Page' cannot be empty or null",
+      "message": "Mandatory argument 'type' in field 'isObjectType' of type 'Page' has not been provided",
       "locations": [
         {
           "line": 6,

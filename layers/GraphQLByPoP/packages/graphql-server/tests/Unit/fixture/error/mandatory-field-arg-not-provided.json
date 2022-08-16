@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'interface' in field 'implements' of type 'QueryRoot' cannot be empty or null",
+      "message": "Mandatory argument 'interface' in field 'implements' of type 'QueryRoot' has not been provided",
       "locations": [
         {
           "line": 2,

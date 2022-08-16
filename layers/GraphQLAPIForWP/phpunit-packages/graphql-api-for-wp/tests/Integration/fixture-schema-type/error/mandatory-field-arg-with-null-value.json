@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Argument 'size' in field 'avatar' of type 'User' cannot be empty or null",
+            "message": "Argument 'size' in field 'avatar' of type 'User' cannot be null",
             "locations": [
                 {
                     "line": 8,
@@ -18,7 +18,7 @@
                 ],
                 "type": "User",
                 "field": "avatar(size: null) { ... }",
-                "code": "PoP\\ComponentModel\\e29"
+                "code": "PoP\\ComponentModel\\e30"
             }
         }
     ],

@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Argument 'format' in field 'dateStr' of type 'Post' cannot be empty or null",
+            "message": "Argument 'format' in field 'dateStr' of type 'Post' cannot be null",
             "locations": [
                 {
                     "line": 9,
@@ -18,7 +18,7 @@
                 ],
                 "type": "Post",
                 "field": "dateStr(format: $missingFormat)",
-                "code": "PoP\\ComponentModel\\e29"
+                "code": "PoP\\ComponentModel\\e30"
             }
         }
     ],

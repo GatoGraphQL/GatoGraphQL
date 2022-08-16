@@ -48,7 +48,7 @@ trait TypeSchemaDefinitionResolverTrait
         array &$schemaDefinition,
         int $typeModifiers,
     ): void {
-        // This value is valid for the field or directive arg
+        // This value is valid for the field or directive arg.
         if ($typeModifiers & SchemaTypeModifiers::MANDATORY) {
             $schemaDefinition[SchemaDefinition::MANDATORY] = true;
         }
@@ -56,6 +56,42 @@ trait TypeSchemaDefinitionResolverTrait
         // This value is valid for the field return value
         if ($typeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
             $schemaDefinition[SchemaDefinition::NON_NULLABLE] = true;
+        }
+
+        /**
+         * This value is valid for the field or directive arg.
+         *
+         * The GraphQL spec does not differentiate between "mandatory"
+         * and "non-nullable", and the `!` symbol is used for both:
+         *
+         *   > Following are examples of input coercion for an input object type
+         *   > with a String field a and a required (non-null) Int! field b:
+         *   >
+         *   > ```
+         *   > input ExampleInputObject {
+         *   >   a: String
+         *   >   b: Int!
+         *   > }
+         *   > ```
+         *
+         * @see https://spec.graphql.org/draft/#sel-FAHhBVJBABJ6qd
+         *
+         * However, there are situations where an input could be both
+         * mandatory and also nullable:
+         *
+         *   ```
+         *   {
+         *     echo(value: null)
+         *   }
+         *   ```
+         *
+         * To specify such a case, we use the non-fully-spec-compliant
+         * flag `MANDATORY_BUT_NULLABLE`. If it doesn't have it,
+         * a mandatory input is also non-nullable (as per the spec).         *
+         */
+        if ($typeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) {
+            $schemaDefinition[SchemaDefinition::MANDATORY] = true;
+            $schemaDefinition[SchemaDefinition::MANDATORY_BUT_NULLABLE] = true;
         }
 
         // The values below are valid both for field, and field/directive args

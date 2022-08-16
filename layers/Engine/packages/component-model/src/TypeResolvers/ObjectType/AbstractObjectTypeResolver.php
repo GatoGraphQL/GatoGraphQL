@@ -1702,7 +1702,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $mandatoryFieldArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($fieldArgsSchemaDefinition);
         $missingMandatoryFieldArgNames = array_values(array_filter(
             $mandatoryFieldArgNames,
-            fn (string $fieldArgName) => ($fieldArgs[$fieldArgName] ?? null) === null
+            fn (string $fieldArgName) => !array_key_exists($fieldArgName, $fieldArgs)
         ));
         foreach ($missingMandatoryFieldArgNames as $missingMandatoryFieldArgName) {
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1718,6 +1718,30 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ),
                     $field->getArgument($missingMandatoryFieldArgName)?->getValueAST()
                         ?? $field->getArgument($missingMandatoryFieldArgName)
+                        ?? $field,
+                )
+            );
+        }
+
+        $mandatoryButNullableFieldArgNames = $this->getFieldOrDirectiveMandatoryButNullableArgumentNames($fieldArgsSchemaDefinition);
+        $nullNonNullableFieldArgNames = array_values(array_filter(
+            $mandatoryFieldArgNames,
+            fn (string $fieldArgName) => array_key_exists($fieldArgName, $fieldArgs) && $fieldArgs[$fieldArgName] === null && !in_array($fieldArgName, $mandatoryButNullableFieldArgNames)
+        ));
+        foreach ($nullNonNullableFieldArgNames as $nullNonNullableFieldArgName) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E30,
+                        [
+                            $nullNonNullableFieldArgName,
+                            $field->getName(),
+                            $this->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    $field->getArgument($nullNonNullableFieldArgName)?->getValueAST()
+                        ?? $field->getArgument($nullNonNullableFieldArgName)
                         ?? $field,
                 )
             );
