@@ -83,7 +83,7 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             /** @var UnionTypeResolverInterface */
             $unionTypeResolver = $relationalTypeResolver;
-            /** @var SplObjectStorage<ObjectTypeResolverInterface,FieldInterface> */
+            /** @var SplObjectStorage<ObjectTypeResolverInterface,FieldInterface[]> */
             $processedObjectTypeResolverFields = new SplObjectStorage();
             foreach ($idFieldSet as $id => $fieldSet) {
                 $object = $idObjects[$id] ?? null;
@@ -179,7 +179,8 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
          *   }
          *   ```
          */
-        if ($field instanceof RelationalField
+        if (
+            $field instanceof RelationalField
             && !($objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $field->getName()) instanceof RelationalTypeResolverInterface)
         ) {
             $this->processSchemaFailure(
