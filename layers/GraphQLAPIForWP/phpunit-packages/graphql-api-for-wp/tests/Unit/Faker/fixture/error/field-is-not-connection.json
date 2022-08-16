@@ -18,6 +18,63 @@
                 "field": "roleNames { ... }",
                 "code": "PoP\\ComponentModel\\e1"
             }
+        },
+        {
+            "message": "Field 'title' is not a connection",
+            "locations": [
+                {
+                    "line": 8,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "title { ... }",
+                    "posts(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Post",
+                "field": "title { ... }",
+                "code": "PoP\\ComponentModel\\e1"
+            }
+        },
+        {
+            "message": "Field 'title' is not a connection",
+            "locations": [
+                {
+                    "line": 13,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "title { ... }",
+                    "customPosts(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Post",
+                "field": "title { ... }",
+                "code": "PoP\\ComponentModel\\e1"
+            }
+        },
+        {
+            "message": "Field 'title' is not a connection",
+            "locations": [
+                {
+                    "line": 13,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "title { ... }",
+                    "customPosts(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Page",
+                "field": "title { ... }",
+                "code": "PoP\\ComponentModel\\e1"
+            }
         }
     ],
     "data": {
@@ -30,6 +87,28 @@
             },
             {
                 "roleNames": null
+            }
+        ],
+        "posts": [
+            {
+                "title": null
+            },
+            {
+                "title": null
+            },
+            {
+                "title": null
+            }
+        ],
+        "customPosts": [
+            {
+                "title": null
+            },
+            {
+                "title": null
+            },
+            {
+                "title": null
             }
         ]
     }
