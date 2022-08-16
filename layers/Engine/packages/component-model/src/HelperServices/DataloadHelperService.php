@@ -59,35 +59,38 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
 
-        // If this field doesn't have a typeResolver, show a schema error
+        // Check if this field doesn't have a typeResolver
         $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
         if (
             $subcomponentFieldNodeTypeResolver === null
             || !($subcomponentFieldNodeTypeResolver instanceof RelationalTypeResolverInterface)
         ) {
-            // But if there are no ObjectTypeFieldResolvers, then skip adding an error here, since that error will have been added already
-            // Otherwise, there will appear 2 error messages:
-            // 1. No ObjectTypeFieldResolver
-            // 2. No FieldDefaultTypeDataLoader
-            if ($objectTypeResolver->hasObjectTypeFieldResolversForField($field)) {
-                if ($schemaFeedbackStore !== null) {
-                    // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-                    $subcomponent_data_field_outputkey = $field->getOutputKey();
-                    $schemaFeedbackStore->addError(
-                        new SchemaFeedback(
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E1,
-                                [
-                                    $subcomponent_data_field_outputkey,
-                                ]
-                            ),
-                            $field,
-                            $objectTypeResolver,
-                            [$field],
-                        )
-                    );
-                }
+            /**
+             * Show a schema error. But skip if there are no ObjectTypeFieldResolvers,
+             * since then the error will have been added already.
+             *
+             * Otherwise, there will appear 2 error messages:
+             *
+             *   1. No ObjectTypeFieldResolver
+             *   2. No FieldDefaultTypeDataLoader
+             */
+            if ($schemaFeedbackStore !== null
+                && $objectTypeResolver->hasObjectTypeFieldResolversForField($field)
+            ) {
+                $schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E1,
+                            [
+                                $field->getOutputKey(),
+                            ]
+                        ),
+                        $field,
+                        $objectTypeResolver,
+                        [$field],
+                    )
+                );
             }
             return null;
         }
