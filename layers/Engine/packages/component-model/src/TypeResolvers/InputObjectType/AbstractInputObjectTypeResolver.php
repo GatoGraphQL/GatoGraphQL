@@ -363,13 +363,20 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
          * Check that all mandatory properties have been provided
          */
         foreach ($inputFieldNameTypeResolvers as $inputFieldName => $inputFieldTypeResolver) {
-            // Providing a `null` value to a mandatory input is still valid
+            /**
+             * Providing a `null` value to a mandatory input may still be valid
+             * (depending on `MANDATORY_BUT_NULLABLE`)
+             */
             if (property_exists($inputValue, $inputFieldName)) {
                 continue;
             }
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiersIsMandatoryButNullable = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
+            if ($inputFieldTypeModifiersIsMandatoryButNullable && $inputFieldName[$inputValue] === null) {
+                continue;
+            }
             $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY
-                || ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
+                || $inputFieldTypeModifiersIsMandatoryButNullable;
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
