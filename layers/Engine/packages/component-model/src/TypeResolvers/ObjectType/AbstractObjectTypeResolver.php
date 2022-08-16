@@ -15,7 +15,6 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -1162,21 +1161,25 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              */
             if (!$this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
                 $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
-                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                    new SchemaFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E16,
-                            [
-                                $field->getName(),
-                                $this->getMaybeNamespacedTypeName()
-                            ]
-                        ),
-                        $field,
-                        $this,
-                        [$field],
-                    )
-                );
+                /**
+                 * This validation is also taking place in @validate,
+                 * so no need to add here.
+                 */
+                // $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                //     new SchemaFeedback(
+                //         new FeedbackItemResolution(
+                //             ErrorFeedbackItemProvider::class,
+                //             ErrorFeedbackItemProvider::E16,
+                //             [
+                //                 $field->getName(),
+                //                 $this->getMaybeNamespacedTypeName()
+                //             ]
+                //         ),
+                //         $field,
+                //         $this,
+                //         [$field],
+                //     )
+                // );
             }
             return null;
         }
