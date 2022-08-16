@@ -158,7 +158,7 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
                 [$field],
                 $idFieldSet,
                 $succeedingPipelineIDFieldSet,
-                $this->directive,
+                $field,
                 $resolvedIDFieldValues,
                 $engineIterationFeedbackStore,
             );
@@ -196,7 +196,7 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
                 [$field],
                 $idFieldSet,
                 $succeedingPipelineIDFieldSet,
-                $this->directive,
+                $field,
                 $resolvedIDFieldValues,
                 $engineIterationFeedbackStore,
             );
