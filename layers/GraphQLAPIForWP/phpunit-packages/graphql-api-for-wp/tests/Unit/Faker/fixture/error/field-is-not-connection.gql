@@ -1,0 +1,7 @@
+{
+  users(pagination: { limit:3 }) {
+    roleNames {
+      id
+    }
+  }
+}
