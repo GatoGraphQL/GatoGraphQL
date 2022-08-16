@@ -201,13 +201,13 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             ['if' => 'condition'],
             ['if' => 'then'],
             ['not' => 'value'],
-            ['equals' => 'value1'],
-            ['equals' => 'value2'],
-            ['empty' => 'value'],
             ['extract' => 'object'],
             ['extract' => 'path'],
             ['sprintf' => 'string']
                 => SchemaTypeModifiers::MANDATORY,
+            ['empty' => 'value'],
+            ['equals' => 'value1'],
+            ['equals' => 'value2'],
             ['echo' => 'value']
                 => SchemaTypeModifiers::MANDATORY_BUT_NULLABLE,
             ['and' => 'values'],
