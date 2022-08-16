@@ -1726,7 +1726,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $mandatoryButNullableFieldArgNames = $this->getFieldOrDirectiveMandatoryButNullableArgumentNames($fieldArgsSchemaDefinition);
         $nullNonNullableFieldArgNames = array_values(array_filter(
             $mandatoryFieldArgNames,
-            fn (string $fieldArgName) => isset($fieldArgs[$fieldArgName]) && $fieldArgs[$fieldArgName] === null && !in_array($fieldArgName, $mandatoryButNullableFieldArgNames)
+            fn (string $fieldArgName) => array_key_exists($fieldArgName, $fieldArgs) && $fieldArgs[$fieldArgName] === null && !in_array($fieldArgName, $mandatoryButNullableFieldArgNames)
         ));
         foreach ($nullNonNullableFieldArgNames as $nullNonNullableFieldArgName) {
             $objectTypeFieldResolutionFeedbackStore->addError(
