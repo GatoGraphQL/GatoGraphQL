@@ -552,20 +552,6 @@ class Engine implements EngineInterface
             FeedbackCategories::LOG => [],
         ];
 
-        /**
-         * Transfer all schema errors from parsing the GraphQL query
-         * to create the initial Component Model hierarchy.
-         *
-         * Eg: requesting a nested field from a leaf field:
-         *
-         *   `{ id { id } }`
-         */
-        $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
-        $this->transferSchemaFeedback(
-            $schemaFeedbackStore,
-            $schemaFeedbackEntries,
-        );
-
         // Comment Leo 20/01/2018: we must first initialize all the settings, and only later add the data.
         // That is because calculating the data may need the values from the settings. Eg: for the resourceLoader,
         // calculating $loadingframe_resources needs to know all the Handlebars templates from the sitemapping as to generate file "resources.js",
