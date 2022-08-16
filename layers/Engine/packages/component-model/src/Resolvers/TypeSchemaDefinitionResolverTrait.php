@@ -48,17 +48,21 @@ trait TypeSchemaDefinitionResolverTrait
         array &$schemaDefinition,
         int $typeModifiers,
     ): void {
+        // This value is valid for the field or directive arg.
+        if ($typeModifiers & SchemaTypeModifiers::MANDATORY) {
+            $schemaDefinition[SchemaDefinition::MANDATORY] = true;
+        }
+
+        // This value is valid for the field return value
+        if ($typeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
+            $schemaDefinition[SchemaDefinition::NON_NULLABLE] = true;
+        }
+
         /**
          * This value is valid for the field or directive arg.
          *
-         * By default, a mandatory input is also non-nullable.
-         * To allow for `null` it must also have the
-         * `MANDATORY_BUT_NULLABLE` flag.
-         *
-         * In the latter case, there is no need to set the `NON_NULLABLE`
-         * value as `true` in the schema definition, as the GraphQL spec
-         * does not differentiate between "mandatory" and "non-nullable",
-         * and the `!` symbol is used for both:
+         * The GraphQL spec does not differentiate between "mandatory"
+         * and "non-nullable", and the `!` symbol is used for both:
          *
          *   > Following are examples of input coercion for an input object type
          *   > with a String field a and a required (non-null) Int! field b:
@@ -71,14 +75,23 @@ trait TypeSchemaDefinitionResolverTrait
          *   > ```
          *
          * @see https://spec.graphql.org/draft/#sel-FAHhBVJBABJ6qd
+         *
+         * However, there are situations where an input could be both
+         * mandatory and also nullable:
+         *
+         *   ```
+         *   {
+         *     echo(value: null)
+         *   }
+         *   ```
+         *
+         * To specify such a case, we use the non-fully-spec-compliant
+         * flag `MANDATORY_BUT_NULLABLE`. If it doesn't have it,
+         * a mandatory input is also non-nullable (as per the spec).         *
          */
-        if ($typeModifiers & (SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::MANDATORY_BUT_NULLABLE)) {
+        if ($typeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) {
             $schemaDefinition[SchemaDefinition::MANDATORY] = true;
-        }
-
-        // This value is valid for the field return value
-        if ($typeModifiers & SchemaTypeModifiers::NON_NULLABLE) {
-            $schemaDefinition[SchemaDefinition::NON_NULLABLE] = true;
+            $schemaDefinition[SchemaDefinition::NON_NULLABLE] = false;
         }
 
         // The values below are valid both for field, and field/directive args
