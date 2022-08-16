@@ -2430,21 +2430,38 @@ class Engine implements EngineInterface
                     $field,
                 );
             }
+            /**
+             * If the typeResolver does not exist, it's because of
+             * nested fields requested on leaf fields:
+             *
+             *   `{ id { id } }`
+             */
             if ($subcomponentTypeResolver === null) {
-                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                    new SchemaFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E1,
-                            [
-                                $field->getOutputKey(),
-                            ]
-                        ),
-                        $field,
-                        $targetObjectTypeResolver,
-                        [$field],
-                    )
-                );
+                /**
+                 * Show a schema error. But skip if there are no ObjectTypeFieldResolvers,
+                 * since then the error will have been added already.
+                 *
+                 * Otherwise, there will appear 2 error messages:
+                 *
+                 *   1. No ObjectTypeFieldResolver
+                 *   2. No FieldDefaultTypeDataLoader
+                 */
+                if ($targetObjectTypeResolver->hasObjectTypeFieldResolversForField($field)) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E1,
+                                [
+                                    $field->getOutputKey(),
+                                ]
+                            ),
+                            $field,
+                            $targetObjectTypeResolver,
+                            [$field],
+                        )
+                    );
+                }
                 continue;
             }
             $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();
