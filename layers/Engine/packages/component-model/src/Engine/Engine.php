@@ -37,9 +37,11 @@ use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -55,9 +57,9 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
@@ -1762,17 +1764,6 @@ class Engine implements EngineInterface
                 }
             }
 
-            /**
-             * Transfer the feedback entries from the FeedbackStore
-             * to temporary variables for processing.
-             */
-            $this->transferFeedback(
-                $idObjects,
-                $engineIterationFeedbackStore,
-                $objectFeedbackEntries,
-                $schemaFeedbackEntries,
-            );
-
             // Important: query like this: obtain keys first instead of iterating directly on array,
             // because it will keep adding elements
             $typeResolver_dbdata = $engineState->dbdata[$relationalTypeOutputKey];
@@ -1825,14 +1816,25 @@ class Engine implements EngineInterface
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
                             $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $targetObjectIDItems);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $targetObjectIDItems, $engineIterationFeedbackStore);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $idObjects);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $idObjects, $engineIterationFeedbackStore);
                     }
                 }
             }
+
+            /**
+             * Transfer the feedback entries from the FeedbackStore
+             * to temporary variables for processing.
+             */
+            $this->transferFeedback(
+                $idObjects,
+                $engineIterationFeedbackStore,
+                $objectFeedbackEntries,
+                $schemaFeedbackEntries,
+            );
             // }
 
             /**
@@ -2411,6 +2413,7 @@ class Engine implements EngineInterface
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
+     * @param array<string|int,object> $idObjects
      */
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -2423,23 +2426,47 @@ class Engine implements EngineInterface
         array &$unionTypeOutputKeyIDs,
         array &$combinedUnionTypeOutputKeyIDs,
         array $idObjects,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $engineState = App::getEngineState();
         $targetTypeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();
         foreach ($subcomponents_data_properties as $componentFieldNode) {
             /** @var ComponentFieldNodeInterface $componentFieldNode */
             $subcomponent_data_properties = $subcomponents_data_properties[$componentFieldNode];
+            $field = $componentFieldNode->getField();
             /** @var array<string,mixed> $subcomponent_data_properties */
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionTypeOutputKeyIDs"
             // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionTypeOutputKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $componentFieldNode->getField(), null);
+            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                $relationalTypeResolver,
+                $field,
+                null
+            );
             if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
-                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($targetObjectTypeResolver, $componentFieldNode->getField(), null);
+                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                    $targetObjectTypeResolver,
+                    $field,
+                    null
+                );
             }
             if ($subcomponentTypeResolver === null) {
+                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E1,
+                            [
+                                $field->getOutputKey(),
+                            ]
+                        ),
+                        $field,
+                        $targetObjectTypeResolver,
+                        [$field],
+                    )
+                );
                 continue;
             }
             $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();

@@ -77,20 +77,20 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             if ($schemaFeedbackStore !== null
                 && $objectTypeResolver->hasObjectTypeFieldResolversForField($field)
             ) {
-                $schemaFeedbackStore->addError(
-                    new SchemaFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E1,
-                            [
-                                $field->getOutputKey(),
-                            ]
-                        ),
-                        $field,
-                        $objectTypeResolver,
-                        [$field],
-                    )
-                );
+                // $schemaFeedbackStore->addError(
+                //     new SchemaFeedback(
+                //         new FeedbackItemResolution(
+                //             ErrorFeedbackItemProvider::class,
+                //             ErrorFeedbackItemProvider::E1,
+                //             [
+                //                 $field->getOutputKey(),
+                //             ]
+                //         ),
+                //         $field,
+                //         $objectTypeResolver,
+                //         [$field],
+                //     )
+                // );
             }
             return null;
         }
