@@ -48,8 +48,31 @@ trait TypeSchemaDefinitionResolverTrait
         array &$schemaDefinition,
         int $typeModifiers,
     ): void {
-        // This value is valid for the field or directive arg
-        if ($typeModifiers & SchemaTypeModifiers::MANDATORY) {
+        /**
+         * This value is valid for the field or directive arg.
+         *
+         * By default, a mandatory input is also non-nullable.
+         * To allow for `null` it must also have the
+         * `MANDATORY_BUT_NULLABLE` flag.
+         *
+         * In the latter case, there is no need to set the `NON_NULLABLE`
+         * value as `true` in the schema definition, as the GraphQL spec
+         * does not differentiate between "mandatory" and "non-nullable",
+         * and the `!` symbol is used for both:
+         *
+         *   > Following are examples of input coercion for an input object type
+         *   > with a String field a and a required (non-null) Int! field b:
+         *   >
+         *   > ```
+         *   > input ExampleInputObject {
+         *   >   a: String
+         *   >   b: Int!
+         *   > }
+         *   > ```
+         *
+         * @see https://spec.graphql.org/draft/#sel-FAHhBVJBABJ6qd
+         */
+        if ($typeModifiers & (SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::MANDATORY_BUT_NULLABLE)) {
             $schemaDefinition[SchemaDefinition::MANDATORY] = true;
         }
 
