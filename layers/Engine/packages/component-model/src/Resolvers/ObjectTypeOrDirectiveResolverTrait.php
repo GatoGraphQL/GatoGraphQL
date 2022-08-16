@@ -48,13 +48,32 @@ trait ObjectTypeOrDirectiveResolverTrait
      */
     private function getFieldOrDirectiveMandatoryArgumentNames(array $fieldOrDirectiveArgsSchemaDefinition): array
     {
-        $mandatoryFieldArgumentNames = [];
+        $mandatoryFieldOrDirectiveArgumentNames = [];
         foreach ($fieldOrDirectiveArgsSchemaDefinition as $fieldOrDirectiveSchemaDefinitionArg) {
             if ($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false) {
-                $mandatoryFieldArgumentNames[] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME];
+                $mandatoryFieldOrDirectiveArgumentNames[] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME];
             }
         }
-        return $mandatoryFieldArgumentNames;
+        return $mandatoryFieldOrDirectiveArgumentNames;
+    }
+
+    /**
+     * Get the mandatory argument names for the field
+     *
+     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
+     * @return string[]
+     */
+    private function getFieldOrDirectiveMandatoryButNullableArgumentNames(array $fieldOrDirectiveArgsSchemaDefinition): array
+    {
+        $mandatoryButNullableFieldOrDirectiveArgumentNames = [];
+        foreach ($fieldOrDirectiveArgsSchemaDefinition as $fieldOrDirectiveSchemaDefinitionArg) {
+            if (($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false)
+                && !($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NON_NULLABLE] ?? true)
+            ) {
+                $mandatoryButNullableFieldOrDirectiveArgumentNames[] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME];
+            }
+        }
+        return $mandatoryButNullableFieldOrDirectiveArgumentNames;
     }
 
     /**
