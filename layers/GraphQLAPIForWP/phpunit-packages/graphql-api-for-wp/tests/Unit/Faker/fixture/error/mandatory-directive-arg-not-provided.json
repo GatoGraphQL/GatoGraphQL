@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'if' in directive 'skip' cannot be empty or null",
+      "message": "Mandatory argument 'if' in directive 'skip' has not been provided",
       "locations": [
         {
           "line": 3,
@@ -17,11 +17,11 @@
         ],
         "type": "Post",
         "field": "id @skip",
-        "code": "PoP\\ComponentModel\\e30"
+        "code": "PoP\\ComponentModel\\e31"
       }
     },
     {
-      "message": "Argument 'if' in directive 'include' cannot be empty or null",
+      "message": "Mandatory argument 'if' in directive 'include' has not been provided",
       "locations": [
         {
           "line": 6,
@@ -37,7 +37,7 @@
         ],
         "type": "CustomPostUnion",
         "field": "id @include",
-        "code": "PoP\\ComponentModel\\e30"
+        "code": "PoP\\ComponentModel\\e31"
       }
     }
   ],

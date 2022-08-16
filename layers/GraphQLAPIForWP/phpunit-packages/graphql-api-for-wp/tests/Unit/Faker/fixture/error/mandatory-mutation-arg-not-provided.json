@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'input' in field 'addCommentToCustomPost' of type 'MutationRoot' cannot be empty or null",
+      "message": "Mandatory argument 'input' in field 'addCommentToCustomPost' of type 'MutationRoot' has not been provided",
       "locations": [
         {
           "line": 2,
