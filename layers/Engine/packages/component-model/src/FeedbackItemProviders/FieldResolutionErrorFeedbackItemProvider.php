@@ -9,7 +9,6 @@ use PoP\Root\Feedback\FeedbackCategories;
 
 class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public final const E1 = '1';
     public final const E2 = '2';
     public final const E3 = '3';
     public final const E4 = '4';
@@ -25,7 +24,6 @@ class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvi
     public function getCodes(): array
     {
         return [
-            self::E1,
             self::E2,
             self::E3,
             self::E4,
@@ -40,7 +38,6 @@ class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvi
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
             self::E2 => $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'component-model'),
             self::E3 => $this->__('Non-nullable field \'%s\' cannot return null', 'component-model'),
             self::E4 => $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'component-model'),

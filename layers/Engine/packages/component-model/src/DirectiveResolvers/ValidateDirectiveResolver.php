@@ -9,7 +9,6 @@ use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -148,8 +147,8 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
             $this->processSchemaFailure(
                 $objectTypeResolver,
                 new FeedbackItemResolution(
-                    FieldResolutionErrorFeedbackItemProvider::class,
-                    FieldResolutionErrorFeedbackItemProvider::E1,
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E16,
                     [
                         $field->getName(),
                         $objectTypeResolver->getMaybeNamespacedTypeName(),
