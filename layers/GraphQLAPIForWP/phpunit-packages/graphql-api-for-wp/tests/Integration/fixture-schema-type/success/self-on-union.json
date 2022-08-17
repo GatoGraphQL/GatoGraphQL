@@ -1,0 +1,30 @@
+{
+    "data": {
+        "customPosts": [
+            {
+                "id": 1,
+                "__typename": "Post",
+                "self": {
+                    "id": 1,
+                    "__typename": "Post"
+                }
+            },
+            {
+                "id": 2,
+                "__typename": "Page",
+                "self": {
+                    "id": 2,
+                    "__typename": "Page"
+                }
+            },
+            {
+                "id": 28,
+                "__typename": "Post",
+                "self": {
+                    "id": 28,
+                    "__typename": "Post"
+                }
+            }
+        ]
+    }
+}

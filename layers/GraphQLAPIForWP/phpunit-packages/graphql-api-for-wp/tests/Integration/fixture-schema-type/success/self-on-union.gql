@@ -1,0 +1,10 @@
+query {
+    customPosts(pagination: { limit: 3 }) {
+        id
+        __typename
+        self {
+            id
+            __typename
+        }
+    }
+}
