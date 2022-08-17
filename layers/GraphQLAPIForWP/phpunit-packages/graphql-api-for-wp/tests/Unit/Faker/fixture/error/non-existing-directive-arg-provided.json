@@ -18,7 +18,7 @@
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "gql@5.4.1.b",
+        "code": "gql@5.4.1[b]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     },
@@ -40,7 +40,7 @@
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "gql@5.4.1.b",
+        "code": "gql@5.4.1[b]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     }

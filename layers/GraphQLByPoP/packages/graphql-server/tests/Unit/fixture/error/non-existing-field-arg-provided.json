@@ -16,7 +16,7 @@
           "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
           "query { ... }"
         ],
-        "code": "gql@5.4.1.a",
+        "code": "gql@5.4.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     },
@@ -36,7 +36,7 @@
           "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
-        "code": "gql@5.4.1.a",
+        "code": "gql@5.4.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     },
@@ -56,7 +56,7 @@
           "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
-        "code": "gql@5.4.1.a",
+        "code": "gql@5.4.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     }

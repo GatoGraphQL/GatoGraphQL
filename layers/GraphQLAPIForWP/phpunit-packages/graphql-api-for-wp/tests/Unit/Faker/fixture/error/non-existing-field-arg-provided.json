@@ -17,7 +17,7 @@
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "gql@5.4.1.a",
+        "code": "gql@5.4.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     },
@@ -38,7 +38,7 @@
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "gql@5.4.1.a",
+        "code": "gql@5.4.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     },
@@ -59,7 +59,7 @@
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "gql@5.4.1.a",
+        "code": "gql@5.4.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     }

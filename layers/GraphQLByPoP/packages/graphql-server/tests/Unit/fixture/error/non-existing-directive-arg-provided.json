@@ -17,7 +17,7 @@
         ],
         "type": "QueryRoot",
         "field": "id @skip(if: false, unless: true)",
-        "code": "gql@5.4.1.b",
+        "code": "gql@5.4.1[b]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     },
@@ -38,7 +38,7 @@
         ],
         "type": "QueryRoot",
         "field": "multiple: id @skip(if: false, unless: true, orOtherwise: false)",
-        "code": "gql@5.4.1.b",
+        "code": "gql@5.4.1[b]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     },
@@ -59,7 +59,7 @@
         ],
         "type": "QueryRoot",
         "field": "multiple: id @skip(if: false, unless: true, orOtherwise: false)",
-        "code": "gql@5.4.1.b",
+        "code": "gql@5.4.1[b]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     }
