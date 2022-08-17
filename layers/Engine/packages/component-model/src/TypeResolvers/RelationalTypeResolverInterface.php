@@ -92,7 +92,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      *
      * @see FieldDataAccessProvider
      *
-     * @param FieldInterface,array<string|int> $ids
+     * @param array<string|int> $ids
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
