@@ -49,7 +49,7 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E2,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_2,
                         [
                             $inputValue,
                             $this->getMaybeNamespacedTypeName(),

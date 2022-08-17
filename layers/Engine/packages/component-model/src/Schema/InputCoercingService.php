@@ -103,7 +103,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E8,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_8,
                         [
                             $inputName,
                             json_encode($inputValue),
@@ -125,7 +125,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E9,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_9,
                         [
                             $inputName,
                             $inputValueAsString,
@@ -148,7 +148,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E10,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_10,
                         [
                             $inputName,
                         ]
@@ -170,7 +170,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E11,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_11,
                         [
                             $inputName,
                             json_encode($inputValue),
@@ -194,7 +194,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E12,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_12,
                         [
                             $inputName,
                             json_encode($inputValue),
@@ -220,7 +220,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E13,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_13,
                         [
                             $inputName,
                         ]

@@ -98,7 +98,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E14,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_14,
                         [
                             $inputValue,
                             $this->getMaybeNamespacedTypeName(),
@@ -128,7 +128,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E18,
+                    InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_18,
                     [
                         $inputValueAsString,
                         $this->getMaybeNamespacedTypeName(),

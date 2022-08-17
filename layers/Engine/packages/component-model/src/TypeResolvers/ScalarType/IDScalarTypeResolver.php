@@ -62,7 +62,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E17,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_17,
                         [
                             $this->getMaybeNamespacedTypeName(),
                         ]

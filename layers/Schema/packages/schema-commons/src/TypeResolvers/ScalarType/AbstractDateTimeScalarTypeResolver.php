@@ -58,7 +58,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E1,
+                    InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_1,
                     [
                         $this->getMaybeNamespacedTypeName(),
                         $this->getDateTimeFormat(),

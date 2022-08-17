@@ -48,7 +48,7 @@ trait OneofInputObjectTypeResolverTrait
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E6,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_6,
                         [
                             $this->getMaybeNamespacedTypeName(),
                             $inputValueSize,
@@ -68,7 +68,7 @@ trait OneofInputObjectTypeResolverTrait
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E7,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_7,
                         [
                             $this->getMaybeNamespacedTypeName(),
                         ]

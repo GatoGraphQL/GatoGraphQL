@@ -72,7 +72,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E1,
+                    InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_1,
                     [
                         $this->getMaybeNamespacedTypeName(),
                     ]
@@ -97,7 +97,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E2,
+                    InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_2,
                     [
                         $inputValue,
                         $this->getMaybeNamespacedTypeName(),
@@ -120,7 +120,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E3,
+                    InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_3,
                     [
                         $this->getMaybeNamespacedTypeName(),
                     ]
@@ -139,7 +139,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E16,
+                    InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_16,
                     [
                         $inputValue,
                         $this->getMaybeNamespacedTypeName(),

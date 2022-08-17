@@ -194,7 +194,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E15,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_15,
                         [
                             $this->getMaybeNamespacedTypeName(),
                             $inputValue
@@ -266,7 +266,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             InputValueCoercionErrorFeedbackItemProvider::class,
-                            InputValueCoercionErrorFeedbackItemProvider::E4,
+                            InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_4,
                             [
                                 $inputFieldName,
                                 $this->getMaybeNamespacedTypeName(),
@@ -379,7 +379,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             InputValueCoercionErrorFeedbackItemProvider::class,
-                            InputValueCoercionErrorFeedbackItemProvider::E5A,
+                            InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_5A,
                             [
                                 $inputFieldName,
                                 $this->getMaybeNamespacedTypeName(),
@@ -397,7 +397,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E5,
+                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_5,
                         [
                             $inputFieldName,
                             $this->getMaybeNamespacedTypeName(),
