@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Response\OutputServiceInterface;
@@ -102,8 +102,8 @@ class InputCoercingService implements InputCoercingServiceInterface
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_8,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_8,
                         [
                             $inputName,
                             json_encode($inputValue),
@@ -124,8 +124,8 @@ class InputCoercingService implements InputCoercingServiceInterface
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_9,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_9,
                         [
                             $inputName,
                             $inputValueAsString,
@@ -147,8 +147,8 @@ class InputCoercingService implements InputCoercingServiceInterface
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_10,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_10,
                         [
                             $inputName,
                         ]
@@ -169,8 +169,8 @@ class InputCoercingService implements InputCoercingServiceInterface
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_11,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_11,
                         [
                             $inputName,
                             json_encode($inputValue),
@@ -193,8 +193,8 @@ class InputCoercingService implements InputCoercingServiceInterface
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_12,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_12,
                         [
                             $inputName,
                             json_encode($inputValue),
@@ -219,8 +219,8 @@ class InputCoercingService implements InputCoercingServiceInterface
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_13,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_13,
                         [
                             $inputName,
                         ]

@@ -134,7 +134,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_5_2_3_2 => 'TODO: satisfy',
             self::E_5_5_2_3_3 => 'TODO: satisfy',
             self::E_5_5_2_3_4 => 'TODO: satisfy',
-            // self::E_5_6_1 => // 'satisfied in detail in InputValueCoercionErrorFeedbackItemProvider'
+            // self::E_5_6_1 => // 'satisfied in detail in InputValueCoercionGraphQLSpecErrorFeedbackItemProvider'
             self::E_5_6_2 => $this->__('Input object has duplicate key \'%s\'', 'graphql-server'),
             self::E_5_6_3 => 'TODO: satisfy',
             self::E_5_6_4 => 'TODO: satisfy',

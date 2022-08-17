@@ -11,7 +11,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use stdClass;
 
 /**
@@ -57,8 +57,8 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
-                    InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_1,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_1,
                     [
                         $this->getMaybeNamespacedTypeName(),
                         $this->getDateTimeFormat(),

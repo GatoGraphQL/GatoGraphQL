@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
@@ -193,8 +193,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_15,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_15,
                         [
                             $this->getMaybeNamespacedTypeName(),
                             $inputValue
@@ -265,8 +265,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
-                            InputValueCoercionErrorFeedbackItemProvider::class,
-                            InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_4,
+                            InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                            InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_4,
                             [
                                 $inputFieldName,
                                 $this->getMaybeNamespacedTypeName(),
@@ -378,8 +378,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
-                            InputValueCoercionErrorFeedbackItemProvider::class,
-                            InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_5A,
+                            InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                            InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_5A,
                             [
                                 $inputFieldName,
                                 $this->getMaybeNamespacedTypeName(),
@@ -396,8 +396,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_5,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_5,
                         [
                             $inputFieldName,
                             $this->getMaybeNamespacedTypeName(),

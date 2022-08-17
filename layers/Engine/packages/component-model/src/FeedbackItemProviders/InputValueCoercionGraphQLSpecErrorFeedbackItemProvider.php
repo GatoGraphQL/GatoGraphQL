@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FeedbackItemProviders;
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 
-class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
+class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public final const E_5_6_1_1 = '5.6.1[1]';
     public final const E_5_6_1_2 = '5.6.1[2]';

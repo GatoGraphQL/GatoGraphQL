@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
@@ -61,8 +61,8 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E_5_6_1_17,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_17,
                         [
                             $this->getMaybeNamespacedTypeName(),
                         ]
