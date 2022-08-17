@@ -8,7 +8,6 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
@@ -17,6 +16,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\TypeSerialization\TypeSerializationServiceInterface;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -175,8 +175,8 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
             $this->processSchemaFailure(
                 $objectTypeResolver,
                 new FeedbackItemResolution(
-                    ErrorFeedbackItemProvider::class,
-                    ErrorFeedbackItemProvider::E1,
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_3_3,
                     [
                         $field->getOutputKey(),
                         $objectTypeResolver->getMaybeNamespacedTypeName(),

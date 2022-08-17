@@ -16,7 +16,7 @@
                 ],
                 "type": "User",
                 "field": "roleNames { ... }",
-                "code": "PoP\\ComponentModel\\e1"
+                "code": "gql-5.3.3"
             }
         },
         {
@@ -35,7 +35,7 @@
                 ],
                 "type": "Post",
                 "field": "title { ... }",
-                "code": "PoP\\ComponentModel\\e1"
+                "code": "gql-5.3.3"
             }
         },
         {
@@ -54,7 +54,7 @@
                 ],
                 "type": "Post",
                 "field": "title { ... }",
-                "code": "PoP\\ComponentModel\\e1"
+                "code": "gql-5.3.3"
             }
         },
         {
@@ -73,7 +73,7 @@
                 ],
                 "type": "Page",
                 "field": "title { ... }",
-                "code": "PoP\\ComponentModel\\e1"
+                "code": "gql-5.3.3"
             }
         }
     ],

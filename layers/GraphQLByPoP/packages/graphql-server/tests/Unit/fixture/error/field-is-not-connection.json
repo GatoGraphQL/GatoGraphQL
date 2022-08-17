@@ -15,7 +15,7 @@
                     "id { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e1"
+                "code": "gql-5.3.3"
             }
         }
     ],
