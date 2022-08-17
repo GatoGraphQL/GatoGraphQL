@@ -1362,7 +1362,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         if (!$this->fieldArgsCache->contains($field)) {
-            $this->fieldArgsCache[$field] = $this->doGetFieldData(
+            $this->fieldArgsCache[$field] = $this->doGetFieldArgs(
                 $field,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -1376,7 +1376,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @return array<string,mixed>|null null if there was a validation error
      */
-    protected function doGetFieldData(
+    protected function doGetFieldArgs(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
