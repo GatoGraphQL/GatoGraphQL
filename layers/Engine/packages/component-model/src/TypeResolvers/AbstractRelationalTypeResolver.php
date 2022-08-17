@@ -403,8 +403,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                             new SchemaFeedback(
                                 new FeedbackItemResolution(
-                                    ErrorFeedbackItemProvider::class,
-                                    ErrorFeedbackItemProvider::E23,
+                                    GraphQLSpecErrorFeedbackItemProvider::class,
+                                    GraphQLSpecErrorFeedbackItemProvider::E_5_7_3,
                                     [
                                         $directive->getName(),
                                         implode(
