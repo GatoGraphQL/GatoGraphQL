@@ -1694,8 +1694,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E29,
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_4_2_1_A,
                         [
                             $missingMandatoryFieldArgName,
                             $field->getName(),
@@ -1718,8 +1718,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E30,
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_4_2_1_B,
                         [
                             $nullNonNullableFieldArgName,
                             $field->getName(),

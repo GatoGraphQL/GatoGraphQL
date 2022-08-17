@@ -383,8 +383,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E31,
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_4_2_1_C,
                         [
                             $missingMandatoryDirectiveArgName,
                             $this->directive->getName(),
@@ -408,8 +408,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E32,
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_4_2_1_D,
                         [
                             $nullNonNullableDirectiveArgName,
                             $this->directive->getName(),
