@@ -16,13 +16,13 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E_5_3_1 = '5.3.1';
     public final const E_5_3_2 = '5.3.2';
     public final const E_5_3_3 = '5.3.3';
-    public final const E_5_4_1_A = '5.4.1 [#a]';
-    public final const E_5_4_1_B = '5.4.1 [#b]';
+    public final const E_5_4_1_A = '5.4.1[a]';
+    public final const E_5_4_1_B = '5.4.1[b]';
     public final const E_5_4_2 = '5.4.2';
-    public final const E_5_4_2_1_A = '5.4.2.1 [#a]';
-    public final const E_5_4_2_1_B = '5.4.2.1 [#b]';
-    public final const E_5_4_2_1_C = '5.4.2.1 [#c]';
-    public final const E_5_4_2_1_D = '5.4.2.1 [#d]';
+    public final const E_5_4_2_1_A = '5.4.2.1[a]';
+    public final const E_5_4_2_1_B = '5.4.2.1[b]';
+    public final const E_5_4_2_1_C = '5.4.2.1[c]';
+    public final const E_5_4_2_1_D = '5.4.2.1[d]';
     public final const E_5_5_1_1 = '5.5.1.1';
     public final const E_5_5_1_2 = '5.5.1.2';
     public final const E_5_5_1_3 = '5.5.1.3';
@@ -46,10 +46,10 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E_5_8_3 = '5.8.3';
     public final const E_5_8_4 = '5.8.4';
     public final const E_5_8_5 = '5.8.5';
-    public final const E_6_1_A = '6.1 [#a]';
-    public final const E_6_1_B = '6.1 [#b]';
-    public final const E_6_1_C = '6.1 [#c]';
-    public final const E_6_1_D = '6.1 [#d]';
+    public final const E_6_1_A = '6.1[a]';
+    public final const E_6_1_B = '6.1[b]';
+    public final const E_6_1_C = '6.1[c]';
+    public final const E_6_1_D = '6.1[d]';
 
     protected function getNamespace(): string
     {
