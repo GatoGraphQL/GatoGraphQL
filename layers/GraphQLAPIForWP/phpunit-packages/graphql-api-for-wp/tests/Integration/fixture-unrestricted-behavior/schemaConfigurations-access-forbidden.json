@@ -15,7 +15,7 @@
           "schemaConfigurations { ... }",
           "query GetSchemaConfigurations { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e16"
+        "code": "PoP/ComponentModel@e16"
       }
     }
   ],

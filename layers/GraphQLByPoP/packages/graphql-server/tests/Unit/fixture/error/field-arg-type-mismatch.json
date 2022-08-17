@@ -18,7 +18,7 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e11"
+                "code": "PoP/ComponentModel@e11"
             }
         },
         {
@@ -39,7 +39,7 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e18"
+                "code": "PoP/ComponentModel@e18"
             }
         },
         {
@@ -60,7 +60,7 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e10"
+                "code": "PoP/ComponentModel@e10"
             }
         },
         {
@@ -82,7 +82,7 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -104,7 +104,7 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e8"
+                "code": "PoP/ComponentModel@e8"
             }
         },
         {
@@ -126,7 +126,7 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e1"
+                "code": "PoP/ComponentModel@e1"
             }
         }
     ],

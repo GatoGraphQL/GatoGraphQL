@@ -52,11 +52,6 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
         return 'gql';
     }
 
-    protected function getNamespaceSeparator(): string
-    {
-        return '-';
-    }
-
     /**
      * @return string[]
      */

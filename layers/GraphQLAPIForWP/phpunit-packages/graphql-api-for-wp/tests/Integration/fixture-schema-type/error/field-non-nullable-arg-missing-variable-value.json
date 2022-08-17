@@ -18,7 +18,7 @@
                 ],
                 "type": "Post",
                 "field": "dateStr(format: $missingFormat)",
-                "code": "PoP\\ComponentModel\\e30"
+                "code": "PoP/ComponentModel@e30"
             }
         }
     ],

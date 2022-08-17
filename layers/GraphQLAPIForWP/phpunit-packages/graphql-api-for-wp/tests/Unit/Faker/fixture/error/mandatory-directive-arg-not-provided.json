@@ -17,7 +17,7 @@
         ],
         "type": "Post",
         "field": "id @skip",
-        "code": "PoP\\ComponentModel\\e31"
+        "code": "PoP/ComponentModel@e31"
       }
     },
     {
@@ -37,7 +37,7 @@
         ],
         "type": "CustomPostUnion",
         "field": "id @include",
-        "code": "PoP\\ComponentModel\\e31"
+        "code": "PoP/ComponentModel@e31"
       }
     }
   ],

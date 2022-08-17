@@ -17,7 +17,7 @@
         "type": "Post",
         "field": "update(input: {title: \"Hello world! 33333\"}) { ... }",
         "id": 1,
-        "code": "PoPCMSSchema\\CustomPostMutations\\e8"
+        "code": "PoPCMSSchema/CustomPostMutations@e8"
       }
     }
   ],

@@ -16,7 +16,7 @@
         ],
         "type": "QueryRoot",
         "field": "id @skip",
-        "code": "PoP\\ComponentModel\\e31"
+        "code": "PoP/ComponentModel@e31"
       }
     }
   ],

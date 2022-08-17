@@ -15,7 +15,7 @@
           "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724}) { ... }",
           "mutation { ... }"
         ],
-        "code": "PoPCMSSchema\\CommentMutations\\e1"
+        "code": "PoPCMSSchema/CommentMutations@e1"
       }
     }
   ],

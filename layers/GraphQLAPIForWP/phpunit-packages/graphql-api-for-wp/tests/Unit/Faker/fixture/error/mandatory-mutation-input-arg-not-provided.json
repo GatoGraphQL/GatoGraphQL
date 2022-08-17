@@ -17,7 +17,7 @@
         ],
         "type": "MutationRoot",
         "field": "addCommentToCustomPost(input: {comment: null}) { ... }",
-        "code": "PoP\\ComponentModel\\e5a"
+        "code": "PoP/ComponentModel@e5a"
       }
     },
     {
@@ -37,7 +37,7 @@
         ],
         "type": "MutationRoot",
         "field": "addCommentToCustomPost(input: {comment: null}) { ... }",
-        "code": "PoP\\ComponentModel\\e5"
+        "code": "PoP/ComponentModel@e5"
       }
     }
   ],

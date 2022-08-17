@@ -16,7 +16,7 @@
         ],
         "type": "Post",
         "field": "implements",
-        "code": "PoP\\ComponentModel\\e29"
+        "code": "PoP/ComponentModel@e29"
       }
     },
     {
@@ -35,7 +35,7 @@
         ],
         "type": "Post",
         "field": "isObjectType",
-        "code": "PoP\\ComponentModel\\e29"
+        "code": "PoP/ComponentModel@e29"
       }
     },
     {
@@ -54,7 +54,7 @@
         ],
         "type": "Page",
         "field": "isObjectType",
-        "code": "PoP\\ComponentModel\\e29"
+        "code": "PoP/ComponentModel@e29"
       }
     }
   ],

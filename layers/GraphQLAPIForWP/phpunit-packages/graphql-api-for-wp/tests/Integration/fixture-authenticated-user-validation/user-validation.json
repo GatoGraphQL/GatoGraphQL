@@ -14,7 +14,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -31,7 +31,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -48,7 +48,7 @@
                     "comments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\")),skip(if:)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -65,7 +65,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -82,7 +82,7 @@
                     "comments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\")),skip(if:)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -99,7 +99,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -116,7 +116,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -133,7 +133,7 @@
                     "comments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\")),skip(if:)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -150,7 +150,7 @@
                     "websiteURL",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -167,7 +167,7 @@
                     "self",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -184,7 +184,7 @@
                     "firstName",
                     "validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
                 ],
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+                "code": "PoPCMSSchema/UserRolesAccessControl@e6"
             }
         },
         {
@@ -201,7 +201,7 @@
                     "lastName",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -218,7 +218,7 @@
                     "name",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -235,7 +235,7 @@
                     "nicename<skip(if:)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -253,7 +253,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "resolveValueAndMerge"
                 ],
-                "code": "PoP\\ComponentModel\\1"
+                "code": "PoP/ComponentModel@1"
             }
         },
         {
@@ -271,7 +271,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "resolveValueAndMerge"
                 ],
-                "code": "PoP\\ComponentModel\\1"
+                "code": "PoP/ComponentModel@1"
             }
         },
         {
@@ -289,7 +289,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "resolveValueAndMerge"
                 ],
-                "code": "PoP\\ComponentModel\\1"
+                "code": "PoP/ComponentModel@1"
             }
         }
     ],

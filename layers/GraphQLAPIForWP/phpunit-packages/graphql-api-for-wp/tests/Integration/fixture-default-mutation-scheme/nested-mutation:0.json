@@ -15,7 +15,7 @@
           "post(by: {id: 13}) { ... }",
           "mutation { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e16"
+        "code": "PoP/ComponentModel@e16"
       }
     }
   ],

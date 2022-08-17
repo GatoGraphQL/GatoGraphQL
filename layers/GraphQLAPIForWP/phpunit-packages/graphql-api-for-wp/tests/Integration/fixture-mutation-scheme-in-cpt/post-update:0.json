@@ -15,7 +15,7 @@
         ],
         "type": "MutationRoot",
         "field": "post(by: {id: 28}) { ... }",
-        "code": "PoP\\ComponentModel\\e16"
+        "code": "PoP/ComponentModel@e16"
       }
     }
   ],

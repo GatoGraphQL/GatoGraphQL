@@ -16,7 +16,7 @@
                 "type": "QueryRoot",
                 "field": "customPosts(pagination: {limit: 3}) { ... }",
                 "id": "root",
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+                "code": "PoPCMSSchema/UserRolesAccessControl@e6"
             }
         }
     ],

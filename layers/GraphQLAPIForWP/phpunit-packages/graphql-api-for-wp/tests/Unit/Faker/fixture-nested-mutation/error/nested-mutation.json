@@ -16,7 +16,7 @@
           "customPost(by: {id: 1724}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\1"
+        "code": "PoP/ComponentModel@1"
       }
     }
   ],

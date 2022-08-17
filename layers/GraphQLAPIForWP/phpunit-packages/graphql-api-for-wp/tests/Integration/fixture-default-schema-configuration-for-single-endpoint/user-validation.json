@@ -15,7 +15,7 @@
                     "title",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -33,7 +33,7 @@
                     "title",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -52,7 +52,7 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -71,7 +71,7 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -90,7 +90,7 @@
                     "customPosts(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+                "code": "PoPCMSSchema/UserRolesAccessControl@e6"
             }
         },
         {
@@ -113,7 +113,7 @@
                     "customPostType",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -136,7 +136,7 @@
                     "comments @skip(if: false) { ... }",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -155,7 +155,7 @@
                     "customPostType",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -174,7 +174,7 @@
                     "comments @skip(if: false) { ... }",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -198,7 +198,7 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+                "code": "PoPCMSSchema/UserRolesAccessControl@e6"
             }
         },
         {
@@ -222,7 +222,7 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -246,7 +246,7 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -270,7 +270,7 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         }
     ],

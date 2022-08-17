@@ -15,7 +15,7 @@
         ],
         "type": "MutationRoot",
         "field": "loginUser { ... }",
-        "code": "PoP\\ComponentModel\\e29"
+        "code": "PoP/ComponentModel@e29"
       }
     }
   ],
