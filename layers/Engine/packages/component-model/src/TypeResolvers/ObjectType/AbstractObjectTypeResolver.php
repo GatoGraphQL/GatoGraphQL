@@ -305,23 +305,36 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             /** @var FieldDataAccessorInterface */
             $fieldDataAccessor = $fieldOrFieldDataAccessor;
             $field = $fieldDataAccessor->getField();
+
+            /**
+             * Already validated it exists in @validate
+             *
+             * @var ObjectTypeFieldResolverInterface
+             */
+            $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         } else {
-            /** @var FieldInterface */
+            /**
+             * If executed within a FieldResolver we will (most certainly)
+             * receive a Field and not a FieldDataAccessor
+             *
+             * @var FieldInterface
+             */
             $field = $fieldOrFieldDataAccessor;
-        }
 
-        /**
-         * Already validated it exists in @validate
-         *
-         * @var ObjectTypeFieldResolverInterface
-         */
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+            /**
+             * Validate the field exists
+             */
+            $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+            if ($objectTypeFieldResolver === null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution($field),
+                        $field,
+                    )
+                );
+                return null;
+            }
 
-        /**
-         * If executed within a FieldResolver we will (most likely)
-         * receive a Field.
-         */
-        if (!$isFieldDataAccessor) {
             $fieldArgs = $this->getFieldArgs(
                 $field,
                 $objectTypeFieldResolutionFeedbackStore
@@ -329,6 +342,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($fieldArgs === null) {
                 return null;
             }
+
             $fieldDataAccessor = $this->createFieldDataAccessor(
                 $field,
                 $fieldArgs
@@ -1625,7 +1639,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Provide a different error message if a particular version was requested,
      * or if not.
      */
-    private function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
+    public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
         FieldInterface $field,
     ): FeedbackItemResolution {
         $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
