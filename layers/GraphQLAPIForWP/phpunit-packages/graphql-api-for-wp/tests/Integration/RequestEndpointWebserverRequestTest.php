@@ -176,7 +176,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                     {
                         "message": "The document is empty",
                         "extensions": {
-                            "code": "gql-6.1.c",
+                            "code": "gql@6.1.c",
                             "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Executing-Requests"
                         }
                     }
