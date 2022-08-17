@@ -16,7 +16,8 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E_5_3_1 = '5.3.1';
     public final const E_5_3_2 = '5.3.2';
     public final const E_5_3_3 = '5.3.3';
-    public final const E_5_4_1 = '5.4.1';
+    public final const E_5_4_1_A = '5.4.1.a';
+    public final const E_5_4_1_B = '5.4.1.b';
     public final const E_5_4_2 = '5.4.2';
     public final const E_5_4_2_1 = '5.4.2.1';
     public final const E_5_5_1_1 = '5.5.1.1';
@@ -65,7 +66,8 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_3_1,
             self::E_5_3_2,
             self::E_5_3_3,
-            self::E_5_4_1,
+            self::E_5_4_1_A,
+            self::E_5_4_1_B,
             self::E_5_4_2,
             self::E_5_4_2_1,
             self::E_5_5_1_1,
@@ -107,8 +109,9 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             // self::E_5_2_3_1 => 'subscriptions_not_yet_supported',
             self::E_5_3_1 => 'TODO: satisfy',
             self::E_5_3_2 => 'TODO: satisfy',
-            self::E_5_3_3 => $this->__('Field \'%s\' from type \'%s\' is not a connection', 'component-model'),
-            self::E_5_4_1 => 'TODO: satisfy',
+            self::E_5_3_3 => $this->__('Field \'%s\' from type \'%s\' is not a connection', 'graphql-server'),
+            self::E_5_4_1_A => $this->__('On field \'%1$s\' of type \'%2$s\', there is no argument with name \'%3$s\'', 'graphql-server'),
+            self::E_5_4_1_B => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'graphql-server'),
             self::E_5_4_2 => $this->__('Argument \'%s\' is duplicated', 'graphql-server'),
             self::E_5_4_2_1 => 'TODO: satisfy',
             self::E_5_5_1_1 => $this->__('Fragment name \'%s\' is duplicated', 'graphql-server'),
@@ -157,7 +160,8 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_3_1 => 'https://spec.graphql.org/draft/#sec-Field-Selections', // 'TODO: satisfy',
             self::E_5_3_2 => 'https://spec.graphql.org/draft/#sec-Field-Selection-Merging', // 'TODO: satisfy',
             self::E_5_3_3 => 'https://spec.graphql.org/draft/#sec-Leaf-Field-Selections',
-            self::E_5_4_1 => 'https://spec.graphql.org/draft/#sec-Argument-Names', // 'TODO: satisfy',
+            self::E_5_4_1_A,
+            self::E_5_4_1_B => 'https://spec.graphql.org/draft/#sec-Argument-Names',
             self::E_5_4_2 => 'https://spec.graphql.org/draft/#sec-Argument-Uniqueness',
             self::E_5_4_2_1 => 'https://spec.graphql.org/draft/#sec-Required-Arguments', // 'TODO: satisfy',
             self::E_5_5_1_1 => 'https://spec.graphql.org/draft/#sec-Fragment-Name-Uniqueness',
