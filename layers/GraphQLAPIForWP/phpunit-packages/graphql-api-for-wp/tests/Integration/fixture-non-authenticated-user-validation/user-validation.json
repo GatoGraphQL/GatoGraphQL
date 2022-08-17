@@ -14,7 +14,7 @@
                     "date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -31,7 +31,7 @@
                     "url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -48,7 +48,7 @@
                     "hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -82,7 +82,7 @@
                     "date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -99,7 +99,7 @@
                     "url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -116,7 +116,7 @@
                     "hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -150,7 +150,7 @@
                     "date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -167,7 +167,7 @@
                     "url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -184,7 +184,7 @@
                     "hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -303,7 +303,7 @@
                     "firstName",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -320,7 +320,7 @@
                     "displayName",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -337,7 +337,7 @@
                     "registeredDateStr(format: \"Y-m-d\")",
                     "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+                "code": "PoPCMSSchema/UserStateAccessControl@e2"
             }
         },
         {
@@ -389,7 +389,7 @@
                     "myPosts(pagination: { limit: 3 })",
                     "resolveValueAndMerge"
                 ],
-                "code": "PoPCMSSchema\\UserState\\1"
+                "code": "PoPCMSSchema/UserState@1"
             }
         },
         {
@@ -407,7 +407,7 @@
                     "me",
                     "resolveValueAndMerge"
                 ],
-                "code": "PoPCMSSchema\\UserState\\1"
+                "code": "PoPCMSSchema/UserState@1"
             }
         }
     ],

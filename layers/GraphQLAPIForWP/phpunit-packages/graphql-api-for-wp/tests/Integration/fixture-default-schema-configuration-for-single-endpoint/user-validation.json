@@ -90,7 +90,7 @@
                     "customPosts(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+                "code": "PoPCMSSchema/UserRolesAccessControl@e6"
             }
         },
         {
@@ -136,7 +136,7 @@
                     "comments @skip(if: false) { ... }",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -174,7 +174,7 @@
                     "comments @skip(if: false) { ... }",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -198,7 +198,7 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+                "code": "PoPCMSSchema/UserRolesAccessControl@e6"
             }
         },
         {
@@ -270,7 +270,7 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         }
     ],

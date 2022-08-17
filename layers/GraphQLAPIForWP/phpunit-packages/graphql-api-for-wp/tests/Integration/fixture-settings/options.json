@@ -16,7 +16,7 @@
           "adminEmail: optionValue(name: \"admin_email\")",
           "query { ... }"
         ],
-        "code": "PoPCMSSchema\\Settings\\e1"
+        "code": "PoPCMSSchema/Settings@e1"
       }
     }
   ],

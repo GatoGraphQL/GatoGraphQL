@@ -16,7 +16,7 @@
                     "myPosts(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserState\\1"
+                "code": "PoPCMSSchema/UserState@1"
             }
         },
         {
@@ -35,7 +35,7 @@
                     "me { ... }",
                     "query { ... }"
                 ],
-                "code": "PoPCMSSchema\\UserState\\1"
+                "code": "PoPCMSSchema/UserState@1"
             }
         }
     ],

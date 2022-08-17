@@ -17,7 +17,7 @@
           "user(by: {id: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoPCMSSchema\\Meta\\e1"
+        "code": "PoPCMSSchema/Meta@e1"
       }
     },
     {
@@ -37,7 +37,7 @@
           "user(by: {id: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoPCMSSchema\\Meta\\e1"
+        "code": "PoPCMSSchema/Meta@e1"
       }
     }
   ],

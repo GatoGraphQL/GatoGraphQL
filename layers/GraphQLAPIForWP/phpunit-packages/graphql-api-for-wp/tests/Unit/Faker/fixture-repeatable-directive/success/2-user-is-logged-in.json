@@ -16,7 +16,7 @@
           "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
           "query { ... }"
         ],
-        "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+        "code": "PoPCMSSchema/UserRolesAccessControl@e6"
       }
     }
   ],

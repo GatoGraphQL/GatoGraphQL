@@ -16,7 +16,7 @@
         "type": "QueryRoot",
         "field": "self @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) { ... }",
         "id": "root",
-        "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+        "code": "PoPCMSSchema/UserStateAccessControl@e2"
       }
     },
     {
@@ -35,7 +35,7 @@
         "type": "QueryRoot",
         "field": "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
         "id": "root",
-        "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+        "code": "PoPCMSSchema/UserStateAccessControl@e2"
       }
     }
   ],

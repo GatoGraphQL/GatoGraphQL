@@ -22,7 +22,7 @@
           "customPosts(filter: {ids: [1724, 358, 733, 735, 555]}) { ... }",
           "query { ... }"
         ],
-        "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+        "code": "PoPCMSSchema/UserStateAccessControl@e2"
       }
     },
     {
@@ -46,7 +46,7 @@
           "customPosts(filter: {ids: [1724, 358, 733, 735, 555]}) { ... }",
           "query { ... }"
         ],
-        "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+        "code": "PoPCMSSchema/UserStateAccessControl@e2"
       }
     }
   ],

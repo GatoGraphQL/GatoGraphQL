@@ -48,7 +48,7 @@
                     "comments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\")),skip(if:)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -82,7 +82,7 @@
                     "comments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\")),skip(if:)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -133,7 +133,7 @@
                     "comments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\")),skip(if:)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
@@ -184,7 +184,7 @@
                     "firstName",
                     "validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
                 ],
-                "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+                "code": "PoPCMSSchema/UserRolesAccessControl@e6"
             }
         },
         {
@@ -235,7 +235,7 @@
                     "nicename<skip(if:)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema/UserStateAccessControl@e3"
             }
         },
         {
