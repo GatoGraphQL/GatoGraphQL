@@ -44,4 +44,27 @@ class MethodHelpers
         }
         return array_values(array_unique($fields));
     }
+
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param FieldInterface[] $fields
+     * @return FieldInterface[]
+     */
+    public static function filterFieldsInIDFieldSet(
+        array $idFieldSet,
+        array $fields
+    ): array {
+        $restrictedIDFieldSet = [];
+        foreach ($idFieldSet as $id => $fieldSet) {
+            $matchingFields = array_intersect(
+                $fields,
+                $fieldSet->fields
+            );
+            if ($matchingFields === []) {
+                continue;
+            }
+            $restrictedIDFieldSet[$id] = $matchingFields;
+        }
+        return $restrictedIDFieldSet;
+    }
 }
