@@ -37,7 +37,8 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     // public final const E_5_6_1 = '5.6.1';
     public final const E_5_6_2 = '5.6.2';
     public final const E_5_6_3 = '5.6.3';
-    public final const E_5_6_4 = '5.6.4';
+    public final const E_5_6_4_A = '5.6.4[a]';
+    public final const E_5_6_4_B = '5.6.4[b]';
     public final const E_5_7_1 = '5.7.1';
     public final const E_5_7_2 = '5.7.2';
     public final const E_5_7_3 = '5.7.3';
@@ -90,7 +91,8 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             // self::E_5_6_1,
             self::E_5_6_2,
             self::E_5_6_3,
-            self::E_5_6_4,
+            self::E_5_6_4_A,
+            self::E_5_6_4_B,
             self::E_5_7_1,
             self::E_5_7_2,
             self::E_5_7_3,
@@ -137,7 +139,8 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             // self::E_5_6_1 => // 'satisfied in detail in InputValueCoercionGraphQLSpecErrorFeedbackItemProvider'
             self::E_5_6_2 => $this->__('There is no input field \'%s\' in input object \'%s\'', 'graphql-server'),
             self::E_5_6_3 => $this->__('Input object has duplicate key \'%s\'', 'graphql-server'),
-            self::E_5_6_4 => 'TODO: satisfy',
+            self::E_5_6_4_A => $this->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided', 'graphql-server'),
+            self::E_5_6_4_B => $this->__('Input field \'%s\' in input object \'%s\' cannot be null', 'graphql-server'),
             self::E_5_7_1 => 'TODO: satisfy',
             self::E_5_7_2 => 'TODO: satisfy',
             self::E_5_7_3 => 'TODO: satisfy',
@@ -190,7 +193,8 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             // self::E_5_6_1 => 'https://spec.graphql.org/draft/#sec-Values-of-Correct-Type',
             self::E_5_6_2 => 'https://spec.graphql.org/draft/#sec-Input-Object-Field-Names',
             self::E_5_6_3 => 'https://spec.graphql.org/draft/#sec-Input-Object-Field-Uniqueness',
-            self::E_5_6_4 => 'https://spec.graphql.org/draft/#sec-Input-Object-Required-Fields', // 'TODO: satisfy',
+            self::E_5_6_4_A,
+            self::E_5_6_4_B => 'https://spec.graphql.org/draft/#sec-Input-Object-Required-Fields',
             self::E_5_7_1 => 'https://spec.graphql.org/draft/#sec-Directives-Are-Defined', // 'TODO: satisfy',
             self::E_5_7_2 => 'https://spec.graphql.org/draft/#sec-Directives-Are-In-Valid-Locations', // 'TODO: satisfy',
             self::E_5_7_3 => 'https://spec.graphql.org/draft/#sec-Directives-Are-Unique-Per-Location', // 'TODO: satisfy',
