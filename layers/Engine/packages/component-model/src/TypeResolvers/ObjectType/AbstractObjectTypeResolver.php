@@ -1624,8 +1624,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * Provide a different error message if a particular version was requested,
      * or if not.
-     *
-     * @param array<string,mixed> $fieldArgs
      */
     private function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
         FieldInterface $field,
