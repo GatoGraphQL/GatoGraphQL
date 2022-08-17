@@ -1183,7 +1183,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSetToRemove
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      * @param array<FieldInterface>|null $failedFields Either which fields failed, or `null` to signify _all_ of them
@@ -1191,8 +1191,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function processObjectFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FeedbackItemResolution $feedbackItemResolution,
-        ?array $failedFields,
-        array $idFieldSet,
+        array $idFieldSetToRemove,
         array &$succeedingPipelineIDFieldSet,
         AstInterface $astNode,
         array &$resolvedIDFieldValues,
@@ -1201,8 +1200,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->processFailure(
             $relationalTypeResolver,
             $feedbackItemResolution,
-            $failedFields,
-            $idFieldSet,
+            $idFieldSetToRemove,
             $succeedingPipelineIDFieldSet,
             $astNode,
             $resolvedIDFieldValues,
@@ -1214,7 +1212,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Depending on environment configuration, either show a warning,
      * or show an error and remove the fields from the directive pipeline for further execution
      *
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSetToRemove
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      * @param array<FieldInterface>|null $failedFields Either which fields failed, or `null` to signify _all_ of them
@@ -1222,30 +1220,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FeedbackItemResolution $feedbackItemResolution,
-        ?array $failedFields,
-        array $idFieldSet,
+        array $idFieldSetToRemove,
         array &$succeedingPipelineIDFieldSet,
         AstInterface $astNode,
         array &$resolvedIDFieldValues,
         ObjectResolutionFeedbackStore|SchemaFeedbackStore $schemaOrObjectResolutionFeedbackStore,
     ): void {
-        if ($failedFields === null) {
-            // Remove all fields
-            $idFieldSetToRemove = $idFieldSet;
-            $failedFields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
-        } else {
-            $idFieldSetToRemove = [];
-            // Calculate which fields to remove
-            foreach ($idFieldSet as $id => $fieldSet) {
-                $idFieldSetToRemove[$id] = new EngineIterationFieldSet(
-                    array_intersect(
-                        $fieldSet->fields,
-                        $failedFields
-                    )
-                );
-            }
-        }
-
         /**
          * Remove the fields from the directive pipeline
          */
@@ -1270,7 +1250,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $feedbackItemResolution,
                     $astNode,
                     $relationalTypeResolver,
-                    $failedFields
+                    MethodHelpers::getFieldsFromIDFieldSet($idFieldSetToRemove)
                 )
             );
             return;
@@ -1290,7 +1270,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSetToRemove
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      * @param array<FieldInterface>|null $failedFields Either which fields failed, or `null` to signify _all_ of them
@@ -1298,8 +1278,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function processSchemaFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FeedbackItemResolution $feedbackItemResolution,
-        ?array $failedFields,
-        array $idFieldSet,
+        array $idFieldSetToRemove,
         array &$succeedingPipelineIDFieldSet,
         AstInterface $astNode,
         array &$resolvedIDFieldValues,
@@ -1308,8 +1287,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->processFailure(
             $relationalTypeResolver,
             $feedbackItemResolution,
-            $failedFields,
-            $idFieldSet,
+            $idFieldSetToRemove,
             $succeedingPipelineIDFieldSet,
             $astNode,
             $resolvedIDFieldValues,
