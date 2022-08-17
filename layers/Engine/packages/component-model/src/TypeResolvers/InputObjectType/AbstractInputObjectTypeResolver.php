@@ -17,6 +17,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -265,8 +266,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
-                            InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
-                            InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_4,
+                            GraphQLSpecErrorFeedbackItemProvider::class,
+                            GraphQLSpecErrorFeedbackItemProvider::E_5_6_2,
                             [
                                 $inputFieldName,
                                 $this->getMaybeNamespacedTypeName(),
