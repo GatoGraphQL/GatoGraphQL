@@ -32,8 +32,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E22 = 'e22';
     public final const E23 = 'e23';
     public final const E26 = 'e26';
-    public final const E27 = 'e27';
-    public final const E28 = 'e28';
     public final const E29 = 'e29';
     public final const E30 = 'e30';
     public final const E31 = 'e31';
@@ -68,8 +66,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E22,
             self::E23,
             self::E26,
-            self::E27,
-            self::E28,
             self::E29,
             self::E30,
             self::E31,
@@ -103,8 +99,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E22 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
             self::E23 => $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'component-model'),
             self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
-            self::E27 => $this->__('On field \'%1$s\' of type \'%2$s\', there is no argument with name \'%3$s\'', 'component-model'),
-            self::E28 => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'component-model'),
             self::E29 => $this->__('Mandatory argument \'%1$s\' in field \'%2$s\' of type \'%3$s\' has not been provided', 'component-model'),
             self::E30 => $this->__('Argument \'%1$s\' in field \'%2$s\' of type \'%3$s\' cannot be null', 'component-model'),
             self::E31 => $this->__('Mandatory argument \'%1$s\' in directive \'%2$s\' has not been provided', 'component-model'),
