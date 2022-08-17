@@ -162,6 +162,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow to use unsafe default settings
 - Schema Configuration for the Single Endpoint
 - Exposed the `__schema` field in the ACLs, allowing us to disable introspection
+- Display `"causes"` for errors in response ([#893](https://github.com/graphql/graphql-spec/issues/893))
 - Sort fields and connections together, alphabetically
 - In the ACLs and CCLs, display fields for the `Root` type only, and automatically replicate the configuration for the `QueryRoot`+`MutationRoot` types
 - The entities from the WordPress data model are not namespaced anymore ([#990](https://github.com/leoloso/PoP/pull/990))
