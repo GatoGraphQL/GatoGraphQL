@@ -19,7 +19,7 @@ abstract class AbstractFeedbackItemProvider implements FeedbackItemProviderInter
 
     protected function getNamespace(): string
     {
-        return ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return \get_called_class();
     }
 
     protected function getNamespaceSeparator(): string
