@@ -311,9 +311,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              *
              * @var ObjectTypeFieldResolverInterface
              */
-            $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);            
+            $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         } else {
-            /** @var FieldInterface */
+            /**
+             * If executed within a FieldResolver we will (most certainly)
+             * receive a Field and not a FieldDataAccessor
+             *
+             * @var FieldInterface
+             */
             $field = $fieldOrFieldDataAccessor;
 
             /**
@@ -329,13 +334,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
                 return null;
             }
-        }
 
-        /**
-         * If executed within a FieldResolver we will (most likely)
-         * receive a Field.
-         */
-        if (!$isFieldDataAccessor) {
             $fieldArgs = $this->getFieldArgs(
                 $field,
                 $objectTypeFieldResolutionFeedbackStore
@@ -343,6 +342,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($fieldArgs === null) {
                 return null;
             }
+
             $fieldDataAccessor = $this->createFieldDataAccessor(
                 $field,
                 $fieldArgs
