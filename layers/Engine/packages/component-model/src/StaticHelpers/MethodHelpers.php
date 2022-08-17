@@ -48,7 +48,7 @@ class MethodHelpers
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param FieldInterface[] $fields
-     * @return FieldInterface[]
+     * @return array<string|int,EngineIterationFieldSet>
      */
     public static function filterFieldsInIDFieldSet(
         array $idFieldSet,
