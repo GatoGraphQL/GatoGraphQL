@@ -369,9 +369,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             if (property_exists($inputValue, $inputFieldName) && $inputValue->$inputFieldName === null) {
                 $inputFieldTypeModifiersIsMandatoryButNullable = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
-                if ($inputFieldTypeModifiersIsMandatoryButNullable) {
+                if (!$inputFieldTypeModifiersIsMandatory || $inputFieldTypeModifiersIsMandatoryButNullable) {
                     continue;
                 }
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -389,7 +390,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 );
                 continue;
             }
-            $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY;
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
