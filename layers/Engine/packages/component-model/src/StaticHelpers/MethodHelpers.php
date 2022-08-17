@@ -63,7 +63,7 @@ class MethodHelpers
             if ($matchingFields === []) {
                 continue;
             }
-            $restrictedIDFieldSet[$id] = $matchingFields;
+            $restrictedIDFieldSet[$id] = new EngineIterationFieldSet($matchingFields);
         }
         return $restrictedIDFieldSet;
     }
