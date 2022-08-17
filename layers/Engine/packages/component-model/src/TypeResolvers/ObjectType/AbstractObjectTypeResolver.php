@@ -321,7 +321,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              */
             $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
             if ($objectTypeFieldResolver === null) {
-                $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution($field),
