@@ -1210,7 +1210,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($fields as $field) {
             $objectTypeResolverObjectFieldData = $this->getObjectTypeResolverObjectFieldData(
                 $field,
-                $fieldIDs,
+                $fieldIDs[$field],
                 $idObjects,
                 $engineIterationFeedbackStore,
             );
@@ -1234,18 +1234,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @see FieldDataAccessProvider
      *
-     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int> $ids
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
     public function getObjectTypeResolverObjectFieldData(
         FieldInterface $field,
-        SplObjectStorage $fieldIDs,
+        array $ids,
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
-        /** @var array<string|int> */
-        $ids = $fieldIDs[$field];
         $cacheKey = implode('|', $ids);
         if (
             $this->objectTypeResolverObjectFieldDataCache->contains($field)

@@ -92,13 +92,13 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      *
      * @see FieldDataAccessProvider
      *
-     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param FieldInterface,array<string|int> $ids
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
     public function getObjectTypeResolverObjectFieldData(
         FieldInterface $field,
-        SplObjectStorage $fieldIDs,
+        array $ids,
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage;
