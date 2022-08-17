@@ -1148,13 +1148,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @see FieldDataAccessProvider
      *
-     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int> $ids
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
     protected function doGetObjectTypeResolverObjectFieldData(
         FieldInterface $field,
-        SplObjectStorage $fieldIDs,
+        array $ids,
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
@@ -1181,7 +1181,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
             return $this->getIndependentObjectTypeResolverObjectFieldData(
                 $field,
-                $fieldIDs[$field],
+                $ids,
                 $idObjects,
                 $engineIterationFeedbackStore,
             );
