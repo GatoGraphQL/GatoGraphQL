@@ -22,7 +22,7 @@ abstract class AbstractFeedbackItemProvider implements FeedbackItemProviderInter
         return str_replace(
             '\\',
             '/',
-            \get_called_class()
+            ClassHelpers::getClassPSR4Namespace(\get_called_class())
         );
     }
 
