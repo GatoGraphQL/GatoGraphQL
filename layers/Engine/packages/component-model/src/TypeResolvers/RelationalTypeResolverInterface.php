@@ -86,17 +86,20 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
      * within the default values and coerces them according to the schema.
      *
+     * Attempt to get the value from the cache first, as the same field, with the same
+     * set of IDs, will be called multiple times for the several directives processing
+     * them (@resolveValueAndMerge, @serialize, etc)
+     *
      * @see FieldDataAccessProvider
      *
-     * @param FieldInterface[] $fields
      * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
      * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
-    public function getFieldObjectTypeResolverObjectFieldData(
-        array $fields,
+    public function getObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): SplObjectStorage;
+    ): ?SplObjectStorage;
 }

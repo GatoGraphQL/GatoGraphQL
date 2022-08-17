@@ -1198,7 +1198,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
      */
-    public function getFieldObjectTypeResolverObjectFieldData(
+    protected function getFieldObjectTypeResolverObjectFieldData(
         array $fields,
         SplObjectStorage $fieldIDs,
         array $idObjects,
@@ -1238,7 +1238,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
-    protected function getObjectTypeResolverObjectFieldData(
+    public function getObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
