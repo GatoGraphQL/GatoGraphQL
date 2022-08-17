@@ -13,4 +13,5 @@ class Tokens
     public const FIELD = 'field';
     public const DYNAMIC_FIELD = 'dynamicField';
     public const IDS = 'ids';
+    public const CAUSES = 'causes';
 }

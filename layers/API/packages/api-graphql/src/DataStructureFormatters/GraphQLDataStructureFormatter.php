@@ -204,6 +204,14 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($locations = $item[Tokens::LOCATIONS]) {
             $entry['locations'] = $locations;
         }
+        /**
+         * Add the causes of the error, if any.
+         *
+         * @see https://github.com/graphql/graphql-spec/issues/893
+         */
+        if ($causes = $item[Tokens::CAUSES] ?? []) {
+            $entry['causes'] = $causes;
+        }
         if (
             $extensions = array_merge(
                 $this->getSchemaEntryExtensions($typeOutputKey, $item),
@@ -253,6 +261,14 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         ];
         if ($locations = $item[Tokens::LOCATIONS]) {
             $entry['locations'] = $locations;
+        }
+        /**
+         * Add the causes of the error, if any.
+         *
+         * @see https://github.com/graphql/graphql-spec/issues/893
+         */
+        if ($causes = $item[Tokens::CAUSES] ?? []) {
+            $entry['causes'] = $causes;
         }
         if (
             $extensions = array_merge(

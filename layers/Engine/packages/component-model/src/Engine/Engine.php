@@ -2264,12 +2264,51 @@ class Engine implements EngineInterface
         $extensions = $this->getFeedbackEntryExtensions(
             $objectOrSchemaFeedback,
         );
-        return [
-            Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
+        $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
+        $entry = [
+            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
             Tokens::PATH => $this->getASTNodePath($astNode),
             Tokens::LOCATIONS => $locations,
             Tokens::EXTENSIONS => $extensions,
         ];
+        /**
+         * Add the causes of the error, if any.
+         *
+         * @see https://github.com/graphql/graphql-spec/issues/893
+         */
+        $this->addObjectOrSchemaFeedbackCausesToCommonEntry(
+            $entry,
+            $feedbackItemResolution,
+        );
+        return $entry;
+    }
+
+    /**
+     * @param array<string,mixed> $entry
+     *
+     * @see https://github.com/graphql/graphql-spec/issues/893
+     */
+    private function addObjectOrSchemaFeedbackCausesToCommonEntry(
+        array &$entry,
+        FeedbackItemResolution $feedbackItemResolution,
+    ): void {
+        if ($feedbackItemResolution->getCauses() === []) {
+            return;
+        }
+        $entry[Tokens::CAUSES] = [];
+        foreach ($feedbackItemResolution->getCauses() as $causeFeedbackItemResolution) {
+            $causeSubentry = [
+                Tokens::MESSAGE => $causeFeedbackItemResolution->getMessage(),
+            ];
+            /**
+             * The cause may itself have its own underlying causes
+             */
+            $this->addObjectOrSchemaFeedbackCausesToCommonEntry(
+                $causeSubentry,
+                $causeFeedbackItemResolution,
+            );
+            $entry[Tokens::CAUSES][] = $causeSubentry;
+        }
     }
 
     /**
