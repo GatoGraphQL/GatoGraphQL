@@ -16,7 +16,7 @@
                 ],
                 "type": "User",
                 "field": "roleNames { ... }",
-                "code": "gql-5.3.3",
+                "code": "gql@5.3.3",
                 "specifiedBy": "https://spec.graphql.org/draft/#sec-Leaf-Field-Selections"
             }
         },
@@ -36,7 +36,7 @@
                 ],
                 "type": "Post",
                 "field": "title { ... }",
-                "code": "gql-5.3.3",
+                "code": "gql@5.3.3",
                 "specifiedBy": "https://spec.graphql.org/draft/#sec-Leaf-Field-Selections"
             }
         },
@@ -56,7 +56,7 @@
                 ],
                 "type": "Post",
                 "field": "title { ... }",
-                "code": "gql-5.3.3",
+                "code": "gql@5.3.3",
                 "specifiedBy": "https://spec.graphql.org/draft/#sec-Leaf-Field-Selections"
             }
         },
@@ -76,7 +76,7 @@
                 ],
                 "type": "Page",
                 "field": "title { ... }",
-                "code": "gql-5.3.3",
+                "code": "gql@5.3.3",
                 "specifiedBy": "https://spec.graphql.org/draft/#sec-Leaf-Field-Selections"
             }
         }
