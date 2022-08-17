@@ -2264,8 +2264,9 @@ class Engine implements EngineInterface
         $extensions = $this->getFeedbackEntryExtensions(
             $objectOrSchemaFeedback,
         );
+        $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
         return [
-            Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
+            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
             Tokens::PATH => $this->getASTNodePath($astNode),
             Tokens::LOCATIONS => $locations,
             Tokens::EXTENSIONS => $extensions,
