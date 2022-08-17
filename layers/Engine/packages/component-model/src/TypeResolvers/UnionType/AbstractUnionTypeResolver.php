@@ -480,13 +480,13 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      *
      * @see FieldDataAccessProvider
      *
-     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int> $ids
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
     protected function doGetObjectTypeResolverObjectFieldData(
         FieldInterface $field,
-        SplObjectStorage $fieldIDs,
+        array $ids,
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
@@ -497,8 +497,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          */
         $objectTypeResolverObjectIDs = new SplObjectStorage();
 
-        /** @var array<string|int> */
-        $ids = $fieldIDs[$field];
         foreach ($ids as $id) {
             $object = $idObjects[$id];
             $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
