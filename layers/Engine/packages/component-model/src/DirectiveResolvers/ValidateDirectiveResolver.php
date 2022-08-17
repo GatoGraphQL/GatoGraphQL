@@ -142,27 +142,15 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        /**
+         * It has already been validated that the field exists
+         * when parsing the Field Data
+         *
+         * @see layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php:doGetObjectTypeResolverObjectFieldData
+         *
+         * @var ObjectTypeFieldResolverInterface
+         */
         $objectTypeFieldResolver = $objectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
-        if ($objectTypeFieldResolver === null) {
-            $this->processSchemaFailure(
-                $objectTypeResolver,
-                new FeedbackItemResolution(
-                    ErrorFeedbackItemProvider::class,
-                    ErrorFeedbackItemProvider::E16,
-                    [
-                        $field->getName(),
-                        $objectTypeResolver->getMaybeNamespacedTypeName(),
-                    ]
-                ),
-                [$field],
-                $idFieldSet,
-                $succeedingPipelineIDFieldSet,
-                $field,
-                $resolvedIDFieldValues,
-                $engineIterationFeedbackStore,
-            );
-            return;
-        }
 
         /**
          * Validate that a RelationalField in the AST is not actually
