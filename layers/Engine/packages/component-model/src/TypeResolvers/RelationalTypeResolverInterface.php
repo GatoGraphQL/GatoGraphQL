@@ -11,7 +11,6 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
@@ -82,24 +81,4 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @return array<string, DirectiveResolverInterface>
      */
     public function getSchemaDirectiveResolvers(bool $global): array;
-    /**
-     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
-     * within the default values and coerces them according to the schema.
-     *
-     * Attempt to get the value from the cache first, as the same field, with the same
-     * set of IDs, will be called multiple times for the several directives processing
-     * them (@resolveValueAndMerge, @serialize, etc)
-     *
-     * @see FieldDataAccessProvider
-     *
-     * @param array<string|int> $ids
-     * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
-     */
-    public function getObjectTypeResolverObjectFieldData(
-        FieldInterface $field,
-        array $ids,
-        array $idObjects,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): ?SplObjectStorage;
 }
