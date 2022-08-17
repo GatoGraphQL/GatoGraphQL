@@ -14,7 +14,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -31,7 +31,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -65,7 +65,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -99,7 +99,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -116,7 +116,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -150,7 +150,7 @@
                     "websiteURL",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -167,7 +167,7 @@
                     "self",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -201,7 +201,7 @@
                     "lastName",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -218,7 +218,7 @@
                     "name",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -253,7 +253,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "resolveValueAndMerge"
                 ],
-                "code": "PoP\\ComponentModel\\1"
+                "code": "PoP/ComponentModel@1"
             }
         },
         {
@@ -271,7 +271,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "resolveValueAndMerge"
                 ],
-                "code": "PoP\\ComponentModel\\1"
+                "code": "PoP/ComponentModel@1"
             }
         },
         {
@@ -289,7 +289,7 @@
                     "title<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "resolveValueAndMerge"
                 ],
-                "code": "PoP\\ComponentModel\\1"
+                "code": "PoP/ComponentModel@1"
             }
         }
     ],

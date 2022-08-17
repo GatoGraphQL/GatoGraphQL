@@ -16,7 +16,7 @@
           "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e27"
+        "code": "PoP/ComponentModel@e27"
       }
     },
     {
@@ -35,7 +35,7 @@
           "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e27"
+        "code": "PoP/ComponentModel@e27"
       }
     },
     {
@@ -54,7 +54,7 @@
           "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e27"
+        "code": "PoP/ComponentModel@e27"
       }
     }
   ],

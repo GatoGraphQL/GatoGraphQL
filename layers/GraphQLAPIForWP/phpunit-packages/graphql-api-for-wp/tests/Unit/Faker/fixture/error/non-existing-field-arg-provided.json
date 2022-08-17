@@ -17,7 +17,7 @@
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e27"
+        "code": "PoP/ComponentModel@e27"
       }
     },
     {
@@ -37,7 +37,7 @@
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e27"
+        "code": "PoP/ComponentModel@e27"
       }
     },
     {
@@ -57,7 +57,7 @@
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e27"
+        "code": "PoP/ComponentModel@e27"
       }
     }
   ],

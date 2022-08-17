@@ -17,7 +17,7 @@
           "user(by: {id: 1, username: \"themedemos\"}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e6"
+        "code": "PoP/ComponentModel@e6"
       }
     }
   ],

@@ -17,7 +17,7 @@
           "loginUser(by: {}) { ... }",
           "mutation { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e7"
+        "code": "PoP/ComponentModel@e7"
       }
     }
   ],

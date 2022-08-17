@@ -15,7 +15,7 @@
                 ],
                 "type": "QueryRoot",
                 "field": "nonExisting",
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         }
     ],

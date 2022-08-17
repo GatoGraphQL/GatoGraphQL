@@ -18,7 +18,7 @@
                     "user(by: {id: 1}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -39,7 +39,7 @@
                     "user(by: {id: 1}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -60,7 +60,7 @@
                     "user(by: {id: 1}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         }
     ],

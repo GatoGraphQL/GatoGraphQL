@@ -17,7 +17,7 @@
           "user(by: {id: 1}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\AccessControl\\e2"
+        "code": "PoP/AccessControl@e2"
       }
     }
   ],

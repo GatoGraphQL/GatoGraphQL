@@ -16,7 +16,7 @@
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\1"
+        "code": "PoP/ComponentModel@1"
       }
     },
     {
@@ -35,7 +35,7 @@
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\1"
+        "code": "PoP/ComponentModel@1"
       }
     }
   ],

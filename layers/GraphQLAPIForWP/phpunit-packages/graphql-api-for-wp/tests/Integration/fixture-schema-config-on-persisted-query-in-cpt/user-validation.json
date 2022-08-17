@@ -16,7 +16,7 @@
                 ],
                 "type": "Post",
                 "field": "title",
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         }
     ],

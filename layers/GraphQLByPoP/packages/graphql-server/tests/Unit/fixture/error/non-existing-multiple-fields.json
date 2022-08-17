@@ -15,7 +15,7 @@
           "firstNonExisting",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e16"
+        "code": "PoP/ComponentModel@e16"
       }
     },
     {
@@ -33,7 +33,7 @@
           "secondNonExisting",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e16"
+        "code": "PoP/ComponentModel@e16"
       }
     }
   ],

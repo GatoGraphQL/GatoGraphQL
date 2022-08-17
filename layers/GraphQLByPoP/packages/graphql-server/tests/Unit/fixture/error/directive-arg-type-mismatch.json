@@ -18,7 +18,7 @@
                     "withFloat: id @skip(if: 1.1)",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -39,7 +39,7 @@
                     "withArray: id @skip(if: [true])",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e8"
+                "code": "PoP/ComponentModel@e8"
             }
         },
         {
@@ -60,7 +60,7 @@
                     "withInputObject: id @skip(if: {condition: false})",
                     "query { ... }"
                 ],
-                "code": "PoP\\ComponentModel\\e1"
+                "code": "PoP/ComponentModel@e1"
             }
         }
     ],

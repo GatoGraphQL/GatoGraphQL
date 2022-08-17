@@ -16,7 +16,7 @@
           "self @serializeLeafOutputTypeValues { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e23"
+        "code": "PoP/ComponentModel@e23"
       }
     }
   ],

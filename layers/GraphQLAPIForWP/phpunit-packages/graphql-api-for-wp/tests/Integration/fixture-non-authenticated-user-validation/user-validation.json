@@ -65,7 +65,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -133,7 +133,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -201,7 +201,7 @@
                     "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -218,7 +218,7 @@
                     "avatar",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -235,7 +235,7 @@
                     "description",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -252,7 +252,7 @@
                     "registeredDate",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -269,7 +269,7 @@
                     "websiteURL",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -286,7 +286,7 @@
                     "self",
                     "validate"
                 ],
-                "code": "PoP\\ComponentModel\\e16"
+                "code": "PoP/ComponentModel@e16"
             }
         },
         {
@@ -354,7 +354,7 @@
                     "lastName",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {
@@ -371,7 +371,7 @@
                     "name",
                     "disableAccess"
                 ],
-                "code": "PoP\\AccessControl\\e2"
+                "code": "PoP/AccessControl@e2"
             }
         },
         {

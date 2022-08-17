@@ -16,7 +16,7 @@
           "id @nonExisting",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e20"
+        "code": "PoP/ComponentModel@e20"
       }
     }
   ],

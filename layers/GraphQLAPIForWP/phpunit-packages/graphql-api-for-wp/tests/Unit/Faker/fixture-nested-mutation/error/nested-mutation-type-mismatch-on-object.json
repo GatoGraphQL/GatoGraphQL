@@ -18,7 +18,7 @@
         ],
         "type": "Post",
         "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
-        "code": "PoP\\ComponentModel\\e8"
+        "code": "PoP/ComponentModel@e8"
       }
     },
     {
@@ -39,7 +39,7 @@
         ],
         "type": "Page",
         "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
-        "code": "PoP\\ComponentModel\\e8"
+        "code": "PoP/ComponentModel@e8"
       }
     }
   ],

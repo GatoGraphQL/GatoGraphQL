@@ -15,7 +15,7 @@
           "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e16"
+        "code": "PoP/ComponentModel@e16"
       }
     }
   ],

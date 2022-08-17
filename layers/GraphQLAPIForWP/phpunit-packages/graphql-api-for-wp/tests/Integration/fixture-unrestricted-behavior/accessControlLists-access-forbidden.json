@@ -15,7 +15,7 @@
           "accessControlLists { ... }",
           "query GetAccessControlLists { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e16"
+        "code": "PoP/ComponentModel@e16"
       }
     }
   ],

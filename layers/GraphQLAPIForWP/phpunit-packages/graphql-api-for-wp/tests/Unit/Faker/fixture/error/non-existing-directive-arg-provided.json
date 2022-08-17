@@ -18,7 +18,7 @@
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e28"
+        "code": "PoP/ComponentModel@e28"
       }
     },
     {
@@ -39,7 +39,7 @@
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP\\ComponentModel\\e28"
+        "code": "PoP/ComponentModel@e28"
       }
     }
   ],
