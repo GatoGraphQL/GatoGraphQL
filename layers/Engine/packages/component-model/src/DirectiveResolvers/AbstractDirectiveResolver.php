@@ -1157,7 +1157,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $this->processObjectFailure(
                     $relationalTypeResolver,
                     $feedbackItemResolution,
-                    null,
                     $idFieldSet,
                     $pipelineIDFieldSet,
                     $astNode ?? $this->directive,

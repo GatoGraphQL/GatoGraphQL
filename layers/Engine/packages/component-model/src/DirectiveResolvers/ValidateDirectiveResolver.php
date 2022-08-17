@@ -182,8 +182,7 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
                         $objectTypeResolver->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                [$field],
-                $idFieldSet,
+                MethodHelpers::filterFieldsInIDFieldSet($idFieldSet, [$field]),
                 $succeedingPipelineIDFieldSet,
                 $field,
                 $resolvedIDFieldValues,
