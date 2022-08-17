@@ -1076,12 +1076,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     }
                 }
             }
-            foreach ($errorIDFields as $id => $fields) {
-                $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
-                foreach ($fields as $field) {
-                    $resolvedIDFieldValues[$id][$field] = null;
-                }
-            }
 
             // From the fields, reconstitute the $idFieldSet for each directive,
             // and build the array to pass to the pipeline, for each directive (stage)
@@ -1109,17 +1103,41 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             foreach ($directivePipelineData as $directiveResolver) {
                 /** @var FieldInterface[] */
                 $directiveFields = $directivePipelineData[$directiveResolver];
-                $directive = $directiveResolver->getDirective();
+
                 // Only process the direct fields
                 $directiveDirectFieldsToProcess = array_intersect(
                     $directiveFields,
                     $directiveDirectFields
                 );
+
+                $directiveResolvers[] = $directiveResolver;
+
+                /**
+                 * Generate the Field Data, and for those Fields that produced
+                 * some error (which are the ones not present in the SplObjectStorage),
+                 * remove them already from the pipeline.
+                 */
+                $fieldObjectTypeResolverObjectFieldData = $this->getFieldObjectTypeResolverObjectFieldData(
+                    $directiveDirectFieldsToProcess,
+                    $directiveFieldIDs[$directive],
+                    $idObjects,
+                    $engineIterationFeedbackStore,
+                );
+                $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
+
                 // From the fields, reconstitute the $idFieldSet for each directive, and build the array to pass to the pipeline, for each directive (stage)
+                $directive = $directiveResolver->getDirective();
                 /** @var array<string|int,EngineIterationFieldSet> */
                 $idFieldSet = [];
                 foreach ($directiveDirectFieldsToProcess as $field) {
                     $ids = $directiveFieldIDs[$directive][$field];
+                    // Skip fields that already produced some error
+                    if (!$fieldObjectTypeResolverObjectFieldData->contains($field)) {
+                        foreach ($ids as $id) {
+                            $errorIDFields[$id][] = $field;
+                        }
+                        continue;
+                    }
                     foreach ($ids as $id) {
                         // If the $id/$field had an error, skip
                         if (isset($errorIDFields[$id]) && in_array($field, $errorIDFields[$id])) {
@@ -1136,14 +1154,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     }
                 }
                 $pipelineIDFieldSet[] = $idFieldSet;
-                $directiveResolvers[] = $directiveResolver;
-                $fieldObjectTypeResolverObjectFieldData = $this->getFieldObjectTypeResolverObjectFieldData(
-                    $directiveDirectFieldsToProcess,
-                    $directiveFieldIDs[$directive],
-                    $idObjects,
-                    $engineIterationFeedbackStore,
-                );
-                $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
+            }
+
+            /**
+             * All ID/Fields with error, set them in null in the response
+             */
+            foreach ($errorIDFields as $id => $fields) {
+                $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
+                foreach ($fields as $field) {
+                    $resolvedIDFieldValues[$id][$field] = null;
+                }
             }
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
