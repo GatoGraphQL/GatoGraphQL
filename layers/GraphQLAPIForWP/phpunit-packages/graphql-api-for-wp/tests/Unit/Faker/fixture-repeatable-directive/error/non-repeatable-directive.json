@@ -9,14 +9,15 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "self @serializeLeafOutputTypeValues { ... }",
         "path": [
           "@serializeLeafOutputTypeValues",
           "self @serializeLeafOutputTypeValues { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@e23"
+        "type": "QueryRoot",
+        "field": "self @serializeLeafOutputTypeValues { ... }",
+        "code": "gql@5.7.3",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Directives-Are-Unique-Per-Location"
       }
     }
   ],

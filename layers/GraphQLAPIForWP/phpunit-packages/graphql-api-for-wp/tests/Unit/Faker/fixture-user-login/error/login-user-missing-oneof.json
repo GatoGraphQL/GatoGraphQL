@@ -9,15 +9,16 @@
         }
       ],
       "extensions": {
-        "type": "MutationRoot",
-        "field": "loginUser(by: {}) { ... }",
         "path": [
           "{}",
           "(by: {})",
           "loginUser(by: {}) { ... }",
           "mutation { ... }"
         ],
-        "code": "PoP/ComponentModel@e7"
+        "type": "MutationRoot",
+        "field": "loginUser(by: {}) { ... }",
+        "code": "gql@5.6.1[7]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
     }
   ],

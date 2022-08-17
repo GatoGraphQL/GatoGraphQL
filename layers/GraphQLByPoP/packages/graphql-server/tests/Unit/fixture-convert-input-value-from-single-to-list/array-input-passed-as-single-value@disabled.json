@@ -9,8 +9,6 @@
                 }
             ],
             "extensions": {
-                "type": "__Schema",
-                "field": "directives(ofKinds: \"query\") { ... }",
                 "path": [
                     "\"query\"",
                     "(ofKinds: \"query\")",
@@ -18,7 +16,10 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e9"
+                "type": "__Schema",
+                "field": "directives(ofKinds: \"query\") { ... }",
+                "code": "gql@5.6.1[9]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         }
     ],
