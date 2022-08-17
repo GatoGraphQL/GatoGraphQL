@@ -305,17 +305,32 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             /** @var FieldDataAccessorInterface */
             $fieldDataAccessor = $fieldOrFieldDataAccessor;
             $field = $fieldDataAccessor->getField();
+
+            /**
+             * Already validated it exists in @validate
+             *
+             * @var ObjectTypeFieldResolverInterface
+             */
+            $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);            
         } else {
             /** @var FieldInterface */
             $field = $fieldOrFieldDataAccessor;
-        }
 
-        /**
-         * Already validated it exists in @validate
-         *
-         * @var ObjectTypeFieldResolverInterface
-         */
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+            /**
+             * Validate the field exists
+             */
+            $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+            if ($objectTypeFieldResolver === null) {
+                $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution($field),
+                        $field,
+                    )
+                );
+                return null;
+            }
+        }
 
         /**
          * If executed within a FieldResolver we will (most likely)
