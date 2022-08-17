@@ -1959,7 +1959,7 @@ class Engine implements EngineInterface
     ): void {
         $this->transferObjectFeedback(
             $idObjects,
-            $engineIterationFeedbackStore->objectFeedbackStore,
+            $engineIterationFeedbackStore->objectResolutionFeedbackStore,
             $objectFeedbackEntries,
         );
         $this->transferSchemaFeedback(
@@ -1970,12 +1970,12 @@ class Engine implements EngineInterface
 
     private function transferObjectFeedback(
         array $idObjects,
-        ObjectResolutionFeedbackStore $objectFeedbackStore,
+        ObjectResolutionFeedbackStore $objectResolutionFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectErrors = new SplObjectStorage();
-        foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
+        foreach ($objectResolutionFeedbackStore->getErrors() as $objectFeedbackError) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackError,
                 $iterationObjectErrors,
@@ -1988,7 +1988,7 @@ class Engine implements EngineInterface
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectWarnings = new SplObjectStorage();
-        foreach ($objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
+        foreach ($objectResolutionFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackWarning,
                 $iterationObjectWarnings,
@@ -2001,7 +2001,7 @@ class Engine implements EngineInterface
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectDeprecations = new SplObjectStorage();
-        foreach ($objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
+        foreach ($objectResolutionFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackDeprecation,
                 $iterationObjectDeprecations,
@@ -2014,7 +2014,7 @@ class Engine implements EngineInterface
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectNotices = new SplObjectStorage();
-        foreach ($objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
+        foreach ($objectResolutionFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackNotice,
                 $iterationObjectNotices,
@@ -2027,7 +2027,7 @@ class Engine implements EngineInterface
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectSuggestions = new SplObjectStorage();
-        foreach ($objectFeedbackStore->getSuggestions() as $objectFeedbackSuggestion) {
+        foreach ($objectResolutionFeedbackStore->getSuggestions() as $objectFeedbackSuggestion) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackSuggestion,
                 $iterationObjectSuggestions,
@@ -2040,7 +2040,7 @@ class Engine implements EngineInterface
 
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectLogs = new SplObjectStorage();
-        foreach ($objectFeedbackStore->getLogs() as $objectFeedbackLog) {
+        foreach ($objectResolutionFeedbackStore->getLogs() as $objectFeedbackLog) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackLog,
                 $iterationObjectLogs,

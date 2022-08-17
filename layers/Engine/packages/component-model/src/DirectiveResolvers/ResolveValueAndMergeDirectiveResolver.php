@@ -117,7 +117,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                $engineIterationFeedbackStore->objectResolutionFeedbackStore->addError(
                     new ObjectResolutionFeedback(
                         new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
@@ -365,7 +365,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
 
         // 2. Transfer the feedback
-        $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+        $engineIterationFeedbackStore->objectResolutionFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $relationalTypeResolver,
             $this->directive,

@@ -1107,7 +1107,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->addLog(
+                    $engineIterationFeedbackStore->objectResolutionFeedbackStore->addLog(
                         new ObjectResolutionFeedback(
                             new FeedbackItemResolution(
                                 ErrorFeedbackItemProvider::class,
@@ -1206,7 +1206,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $succeedingPipelineIDFieldSet,
             $astNode,
             $resolvedIDFieldValues,
-            $engineIterationFeedbackStore->objectFeedbackStore,
+            $engineIterationFeedbackStore->objectResolutionFeedbackStore,
         );
     }
 

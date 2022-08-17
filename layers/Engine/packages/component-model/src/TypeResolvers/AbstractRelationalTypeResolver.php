@@ -1042,8 +1042,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then skip processing that field altogether
             /** @var array<string|int,FieldInterface[]> */
             $errorIDFields = [];
-            if ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() !== []) {
-                foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
+            if ($separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors() !== []) {
+                foreach ($separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors() as $objectResolutionFeedback) {
                     foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
                         $errorIDFields[$id] = array_merge(
                             $errorIDFields[$id] ?? [],

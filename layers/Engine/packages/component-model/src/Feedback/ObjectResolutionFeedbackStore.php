@@ -24,31 +24,31 @@ class ObjectResolutionFeedbackStore
     private array $logs = [];
 
     public function incorporate(
-        ObjectResolutionFeedbackStore $objectFeedbackStore,
+        ObjectResolutionFeedbackStore $objectResolutionFeedbackStore,
     ): void {
         $this->errors = array_merge(
             $this->errors,
-            $objectFeedbackStore->getErrors()
+            $objectResolutionFeedbackStore->getErrors()
         );
         $this->warnings = array_merge(
             $this->warnings,
-            $objectFeedbackStore->getWarnings()
+            $objectResolutionFeedbackStore->getWarnings()
         );
         $this->deprecations = array_merge(
             $this->deprecations,
-            $objectFeedbackStore->getDeprecations()
+            $objectResolutionFeedbackStore->getDeprecations()
         );
         $this->notices = array_merge(
             $this->notices,
-            $objectFeedbackStore->getNotices()
+            $objectResolutionFeedbackStore->getNotices()
         );
         $this->suggestions = array_merge(
             $this->suggestions,
-            $objectFeedbackStore->getSuggestions()
+            $objectResolutionFeedbackStore->getSuggestions()
         );
         $this->logs = array_merge(
             $this->logs,
-            $objectFeedbackStore->getLogs()
+            $objectResolutionFeedbackStore->getLogs()
         );
     }
 

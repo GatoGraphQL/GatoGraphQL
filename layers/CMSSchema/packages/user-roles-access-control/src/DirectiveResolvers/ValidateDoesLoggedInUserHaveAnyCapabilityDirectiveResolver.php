@@ -83,7 +83,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         foreach ($fieldIDs as $field) {
             /** @var array<string|int> */
             $ids = $fieldIDs[$field];
-            $engineIterationFeedbackStore->objectFeedbackStore->addError(
+            $engineIterationFeedbackStore->objectResolutionFeedbackStore->addError(
                 new ObjectResolutionFeedback(
                     new FeedbackItemResolution(
                         FeedbackItemProvider::class,
