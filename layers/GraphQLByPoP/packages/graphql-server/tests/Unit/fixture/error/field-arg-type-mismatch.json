@@ -9,8 +9,6 @@
                 }
             ],
             "extensions": {
-                "type": "__Schema",
-                "field": "passingArrayOfArrays: directives(ofKinds: [[\"query\"]]) { ... }",
                 "path": [
                     "[[\"query\"]]",
                     "(ofKinds: [[\"query\"]])",
@@ -18,7 +16,10 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e11"
+                "type": "__Schema",
+                "field": "passingArrayOfArrays: directives(ofKinds: [[\"query\"]]) { ... }",
+                "code": "gql@5.6.1[11]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -30,8 +31,6 @@
                 }
             ],
             "extensions": {
-                "type": "__Schema",
-                "field": "passingArrayOfInputObject: directives(ofKinds: [{ofKinds: \"query\"}]) { ... }",
                 "path": [
                     "[{ofKinds: \"query\"}]",
                     "(ofKinds: [{ofKinds: \"query\"}])",
@@ -39,7 +38,10 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e18"
+                "type": "__Schema",
+                "field": "passingArrayOfInputObject: directives(ofKinds: [{ofKinds: \"query\"}]) { ... }",
+                "code": "gql@5.6.1[18]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -51,8 +53,6 @@
                 }
             ],
             "extensions": {
-                "type": "__Schema",
-                "field": "passingArrayOfArrays: directives(ofKinds: [\"query\", null]) { ... }",
                 "path": [
                     "[\"query\", null]",
                     "(ofKinds: [\"query\", null])",
@@ -60,7 +60,10 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e10"
+                "type": "__Schema",
+                "field": "passingArrayOfArrays: directives(ofKinds: [\"query\", null]) { ... }",
+                "code": "gql@5.6.1[10]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -72,8 +75,6 @@
                 }
             ],
             "extensions": {
-                "type": "__Type",
-                "field": "passingFloat: name(namespaced: 1.2)",
                 "path": [
                     "1.2",
                     "(namespaced: 1.2)",
@@ -82,7 +83,10 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "type": "__Type",
+                "field": "passingFloat: name(namespaced: 1.2)",
+                "code": "gql@5.6.1[16]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -94,8 +98,6 @@
                 }
             ],
             "extensions": {
-                "type": "__Type",
-                "field": "passingArray: name(namespaced: [false])",
                 "path": [
                     "[false]",
                     "(namespaced: [false])",
@@ -104,7 +106,10 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e8"
+                "type": "__Type",
+                "field": "passingArray: name(namespaced: [false])",
+                "code": "gql@5.6.1[8]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -116,8 +121,6 @@
                 }
             ],
             "extensions": {
-                "type": "__Type",
-                "field": "passingInputObject: name(namespaced: {namespaced: true})",
                 "path": [
                     "{namespaced: true}",
                     "(namespaced: {namespaced: true})",
@@ -126,7 +129,10 @@
                     "__schema { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e1"
+                "type": "__Type",
+                "field": "passingInputObject: name(namespaced: {namespaced: true})",
+                "code": "gql@5.6.1[1]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         }
     ],

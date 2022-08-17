@@ -9,14 +9,15 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "id @nonExisting",
         "path": [
           "@nonExisting",
           "id @nonExisting",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@e20"
+        "type": "QueryRoot",
+        "field": "id @nonExisting",
+        "code": "gql@5.7.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Directives-Are-Defined"
       }
     }
   ],

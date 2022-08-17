@@ -18,7 +18,8 @@
                 ],
                 "type": "User",
                 "field": "avatar(size: null) { ... }",
-                "code": "PoP/ComponentModel@e30"
+                "code": "gql@5.4.2.1[b]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
             }
         }
     ],

@@ -9,15 +9,16 @@
                 }
             ],
             "extensions": {
-                "type": "QueryRoot",
-                "field": "passingArray: post(by: {slug: [\"block-category-common\"]}) { ... }",
                 "path": [
                     "{slug: [\"block-category-common\"]}",
                     "(by: {slug: [\"block-category-common\"]})",
                     "passingArray: post(by: {slug: [\"block-category-common\"]}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e8"
+                "type": "QueryRoot",
+                "field": "passingArray: post(by: {slug: [\"block-category-common\"]}) { ... }",
+                "code": "gql@5.6.1[8]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -29,15 +30,16 @@
                 }
             ],
             "extensions": {
-                "type": "QueryRoot",
-                "field": "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}}) { ... }",
                 "path": [
                     "{slug: {slug: \"block-category-common\"}}",
                     "(by: {slug: {slug: \"block-category-common\"}})",
                     "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e1"
+                "type": "QueryRoot",
+                "field": "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}}) { ... }",
+                "code": "gql@5.6.1[1]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -49,15 +51,16 @@
                 }
             ],
             "extensions": {
-                "type": "QueryRoot",
-                "field": "passingNonDate: posts(filter: {dateQuery: {after: 1}}) { ... }",
                 "path": [
                     "{dateQuery: {after: 1}}",
                     "(filter: {dateQuery: {after: 1}})",
                     "passingNonDate: posts(filter: {dateQuery: {after: 1}}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e3"
+                "type": "QueryRoot",
+                "field": "passingNonDate: posts(filter: {dateQuery: {after: 1}}) { ... }",
+                "code": "gql@5.6.1[3]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         }
     ],

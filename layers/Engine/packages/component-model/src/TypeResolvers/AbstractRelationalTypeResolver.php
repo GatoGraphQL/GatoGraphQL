@@ -17,10 +17,11 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -261,8 +262,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                     new SchemaFeedback(
                         new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E20,
+                            GraphQLSpecErrorFeedbackItemProvider::class,
+                            GraphQLSpecErrorFeedbackItemProvider::E_5_7_1,
                             [
                                 $directive->getName(),
                             ]
@@ -402,8 +403,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                             new SchemaFeedback(
                                 new FeedbackItemResolution(
-                                    ErrorFeedbackItemProvider::class,
-                                    ErrorFeedbackItemProvider::E23,
+                                    GraphQLSpecErrorFeedbackItemProvider::class,
+                                    GraphQLSpecErrorFeedbackItemProvider::E_5_7_3,
                                     [
                                         $directive->getName(),
                                         implode(

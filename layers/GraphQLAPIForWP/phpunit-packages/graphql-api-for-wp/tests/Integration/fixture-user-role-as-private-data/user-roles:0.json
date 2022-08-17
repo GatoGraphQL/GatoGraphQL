@@ -53,7 +53,8 @@
         ],
         "type": "QueryRoot",
         "field": "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]}) { ... }",
-        "code": "PoP/ComponentModel@e4"
+        "code": "gql@5.6.2",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Input-Object-Field-Names"
       }
     },
     {
@@ -73,7 +74,8 @@
         ],
         "type": "QueryRoot",
         "field": "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]}) { ... }",
-        "code": "PoP/ComponentModel@e4"
+        "code": "gql@5.6.2",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Input-Object-Field-Names"
       }
     },
     {

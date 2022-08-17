@@ -9,15 +9,16 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "user(by: {}) { ... }",
         "path": [
           "{}",
           "(by: {})",
           "user(by: {}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@e7"
+        "type": "QueryRoot",
+        "field": "user(by: {}) { ... }",
+        "code": "gql@5.6.1[7]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
     }
   ],

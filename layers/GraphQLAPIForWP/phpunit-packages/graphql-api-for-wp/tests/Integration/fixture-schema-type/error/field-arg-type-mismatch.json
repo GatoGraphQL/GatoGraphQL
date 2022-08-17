@@ -9,8 +9,6 @@
                 }
             ],
             "extensions": {
-                "type": "User",
-                "field": "passingString: avatar(size: \"Sixty\") { ... }",
                 "path": [
                     "\"Sixty\"",
                     "(size: \"Sixty\")",
@@ -18,7 +16,10 @@
                     "user(by: {id: 1}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "type": "User",
+                "field": "passingString: avatar(size: \"Sixty\") { ... }",
+                "code": "gql@5.6.1[16]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -30,8 +31,6 @@
                 }
             ],
             "extensions": {
-                "type": "User",
-                "field": "passingFloat: avatar(size: 24.5) { ... }",
                 "path": [
                     "24.5",
                     "(size: 24.5)",
@@ -39,7 +38,10 @@
                     "user(by: {id: 1}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "type": "User",
+                "field": "passingFloat: avatar(size: 24.5) { ... }",
+                "code": "gql@5.6.1[16]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
@@ -51,8 +53,6 @@
                 }
             ],
             "extensions": {
-                "type": "User",
-                "field": "passingBool: avatar(size: false) { ... }",
                 "path": [
                     "false",
                     "(size: false)",
@@ -60,7 +60,10 @@
                     "user(by: {id: 1}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "type": "User",
+                "field": "passingBool: avatar(size: false) { ... }",
+                "code": "gql@5.6.1[16]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         }
     ],

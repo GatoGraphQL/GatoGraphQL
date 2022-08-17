@@ -42,6 +42,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -382,8 +383,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E31,
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_4_2_1_C,
                         [
                             $missingMandatoryDirectiveArgName,
                             $this->directive->getName(),
@@ -407,8 +408,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E32,
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_4_2_1_D,
                         [
                             $nullNonNullableDirectiveArgName,
                             $this->directive->getName(),
@@ -446,8 +447,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
                     new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E28,
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_4_1_B,
                         [
                             $this->directive->getName(),
                             $nonExistingArgName,

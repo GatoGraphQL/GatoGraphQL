@@ -18,7 +18,8 @@
         ],
         "type": "Post",
         "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
-        "code": "PoP/ComponentModel@e8"
+        "code": "gql@5.6.1[8]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
     },
     {
@@ -39,7 +40,8 @@
         ],
         "type": "Page",
         "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
-        "code": "PoP/ComponentModel@e8"
+        "code": "gql@5.6.1[8]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
     }
   ],

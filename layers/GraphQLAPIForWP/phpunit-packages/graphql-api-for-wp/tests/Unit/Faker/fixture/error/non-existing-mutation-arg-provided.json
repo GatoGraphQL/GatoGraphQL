@@ -16,7 +16,8 @@
           "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, nonExistingArg: \"Doesnt Matter\") { ... }",
           "mutation { ... }"
         ],
-        "code": "PoP/ComponentModel@e27"
+        "code": "gql@5.4.1[a]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
       }
     }
   ],

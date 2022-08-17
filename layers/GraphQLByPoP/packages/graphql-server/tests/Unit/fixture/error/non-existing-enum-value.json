@@ -9,8 +9,6 @@
         }
       ],
       "extensions": {
-        "type": "__Schema",
-        "field": "directives(ofKinds: [NON_EXISTING]) { ... }",
         "path": [
           "[NON_EXISTING]",
           "(ofKinds: [NON_EXISTING])",
@@ -18,7 +16,10 @@
           "__schema { ... }",
           "query GetDirectives { ... }"
         ],
-        "code": "PoP/ComponentModel@e14"
+        "type": "__Schema",
+        "field": "directives(ofKinds: [NON_EXISTING]) { ... }",
+        "code": "gql@5.6.1[14]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
     }
   ],

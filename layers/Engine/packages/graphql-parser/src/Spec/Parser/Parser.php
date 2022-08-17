@@ -679,7 +679,7 @@ class Parser extends Tokenizer implements ParserInterface
                 throw new SyntaxErrorException(
                     new FeedbackItemResolution(
                         GraphQLSpecErrorFeedbackItemProvider::class,
-                        GraphQLSpecErrorFeedbackItemProvider::E_5_6_2,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_6_3,
                         [
                             $key,
                         ]

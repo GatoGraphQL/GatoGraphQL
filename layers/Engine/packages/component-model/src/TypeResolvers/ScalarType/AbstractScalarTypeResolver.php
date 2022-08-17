@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -71,8 +71,8 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
-                    InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E1,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_1,
                     [
                         $this->getMaybeNamespacedTypeName(),
                     ]
@@ -96,8 +96,8 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
-                    InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E2,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_2,
                     [
                         $inputValue,
                         $this->getMaybeNamespacedTypeName(),
@@ -119,8 +119,8 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
-                    InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E3,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_3,
                     [
                         $this->getMaybeNamespacedTypeName(),
                     ]
@@ -138,8 +138,8 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
-                    InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E16,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_16,
                     [
                         $inputValue,
                         $this->getMaybeNamespacedTypeName(),

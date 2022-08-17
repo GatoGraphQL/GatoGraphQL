@@ -15,7 +15,8 @@
         ],
         "type": "QueryRoot",
         "field": "implements",
-        "code": "PoP/ComponentModel@e29"
+        "code": "gql@5.4.2.1[a]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
       }
     }
   ],

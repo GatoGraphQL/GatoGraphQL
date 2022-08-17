@@ -17,7 +17,8 @@
         ],
         "type": "MutationRoot",
         "field": "addCommentToCustomPost(input: {comment: null}) { ... }",
-        "code": "PoP/ComponentModel@e5a"
+        "code": "gql@5.6.4[b]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
       }
     },
     {
@@ -37,7 +38,8 @@
         ],
         "type": "MutationRoot",
         "field": "addCommentToCustomPost(input: {comment: null}) { ... }",
-        "code": "PoP/ComponentModel@e5"
+        "code": "gql@5.6.4[a]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
       }
     }
   ],

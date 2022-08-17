@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Translation\TranslationAPIInterface;
@@ -47,8 +47,8 @@ trait OneofInputObjectTypeResolverTrait
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E6,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_6,
                         [
                             $this->getMaybeNamespacedTypeName(),
                             $inputValueSize,
@@ -67,8 +67,8 @@ trait OneofInputObjectTypeResolverTrait
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E7,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_7,
                         [
                             $this->getMaybeNamespacedTypeName(),
                         ]
