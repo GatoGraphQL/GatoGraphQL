@@ -1103,6 +1103,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             foreach ($directivePipelineData as $directiveResolver) {
                 /** @var FieldInterface[] */
                 $directiveFields = $directivePipelineData[$directiveResolver];
+                $directive = $directiveResolver->getDirective();
 
                 // Only process the direct fields
                 $directiveDirectFieldsToProcess = array_intersect(
@@ -1125,9 +1126,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 );
                 $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
 
-                // From the fields, reconstitute the $idFieldSet for each directive, and build the array to pass to the pipeline, for each directive (stage)
-                $directive = $directiveResolver->getDirective();
-                /** @var array<string|int,EngineIterationFieldSet> */
+                /**
+                 * From the fields, reconstitute the $idFieldSet for each directive,
+                 * and build the array to pass to the pipeline, for each directive (stage)
+                 *
+                 * @var array<string|int,EngineIterationFieldSet>
+                 */
                 $idFieldSet = [];
                 foreach ($directiveDirectFieldsToProcess as $field) {
                     $ids = $directiveFieldIDs[$directive][$field];
