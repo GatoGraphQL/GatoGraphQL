@@ -1232,6 +1232,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($failedFields === null) {
             // Remove all fields
             $idFieldSetToRemove = $idFieldSet;
+            $failedFields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
         } else {
             $idFieldSetToRemove = [];
             // Calculate which fields to remove
