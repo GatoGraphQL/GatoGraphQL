@@ -724,6 +724,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         /**
          * Cast the Arguments, return if any of them produced an error
+         *
+         * @var array<string,mixed>
          */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         $fieldArgs = $this->getSchemaCastingService()->castArguments(
@@ -842,6 +844,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
     }
 
+    /**
+     * @return array<string,mixed>|null
+     */
     final protected function getFieldArgumentsSchemaDefinition(FieldInterface $field): ?array
     {
         $fieldSchemaDefinition = $this->getFieldSchemaDefinition($field);
@@ -1164,14 +1169,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
                 $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                     new SchemaFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E16,
-                            [
-                                $field->getName(),
-                                $this->getMaybeNamespacedTypeName()
-                            ]
-                        ),
+                        $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution($field),
                         $field,
                         $this,
                         [$field],
@@ -1383,22 +1381,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldArgs = $field->getArgumentKeyValues();
 
         /**
-         * Check that the field has been defined in the schema
+         * It has already been validated that the field exists
+         * when parsing the Field Data in doGetObjectTypeResolverObjectFieldData
+         *
+         * @var ObjectTypeFieldResolverInterface
          */
-        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        if ($fieldArgsSchemaDefinition === null || $objectTypeFieldResolver === null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution(
-                        $fieldArgs,
-                        $field,
-                    ),
-                    $field,
-                )
-            );
-            return null;
-        }
+        /** @var array<string,mixed> */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
 
         /**
          * Add the default Argument values
@@ -1485,7 +1475,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        /** @var array */
+        /** @var array<string,mixed> */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         /** @var ObjectTypeFieldResolverInterface */
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
@@ -1529,7 +1519,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         bool $validateMutation,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        /** @var array */
+        /** @var array<string,mixed> */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
 
         /**
@@ -1638,12 +1628,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @param array<string,mixed> $fieldArgs
      */
     private function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
-        array $fieldArgs,
         FieldInterface $field,
     ): FeedbackItemResolution {
         $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
-            && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null);
+            && $field->hasArgument(SchemaDefinition::VERSION_CONSTRAINT);
         if ($useSemanticVersionConstraints) {
+            $versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT);
             return new FeedbackItemResolution(
                 ErrorFeedbackItemProvider::class,
                 ErrorFeedbackItemProvider::E26,
