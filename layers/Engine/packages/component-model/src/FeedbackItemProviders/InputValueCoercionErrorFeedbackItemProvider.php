@@ -87,4 +87,9 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
     {
         return FeedbackCategories::ERROR;
     }
+
+    public function getSpecifiedByURL(string $code): ?string
+    {
+        return 'https://spec.graphql.org/draft/#sec-Values-of-Correct-Type';
+    }
 }

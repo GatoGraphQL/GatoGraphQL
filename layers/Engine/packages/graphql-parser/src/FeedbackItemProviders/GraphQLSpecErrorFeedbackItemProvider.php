@@ -34,7 +34,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E_5_5_2_3_2 = '5.5.2.3.2';
     public final const E_5_5_2_3_3 = '5.5.2.3.3';
     public final const E_5_5_2_3_4 = '5.5.2.3.4';
-    public final const E_5_6_1 = '5.6.1';
+    // public final const E_5_6_1 = '5.6.1';
     public final const E_5_6_2 = '5.6.2';
     public final const E_5_6_3 = '5.6.3';
     public final const E_5_6_4 = '5.6.4';
@@ -87,7 +87,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_5_2_3_2,
             self::E_5_5_2_3_3,
             self::E_5_5_2_3_4,
-            self::E_5_6_1,
+            // self::E_5_6_1,
             self::E_5_6_2,
             self::E_5_6_3,
             self::E_5_6_4,
@@ -134,7 +134,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_5_2_3_2 => 'TODO: satisfy',
             self::E_5_5_2_3_3 => 'TODO: satisfy',
             self::E_5_5_2_3_4 => 'TODO: satisfy',
-            self::E_5_6_1 => 'TODO: satisfy',
+            // self::E_5_6_1 => // 'satisfied in detail in InputValueCoercionErrorFeedbackItemProvider'
             self::E_5_6_2 => $this->__('Input object has duplicate key \'%s\'', 'graphql-server'),
             self::E_5_6_3 => 'TODO: satisfy',
             self::E_5_6_4 => 'TODO: satisfy',
@@ -187,7 +187,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_5_2_3_2 => 'https://spec.graphql.org/draft/#sec-Abstract-Spreads-in-Object-Scope', // 'TODO: satisfy',
             self::E_5_5_2_3_3 => 'https://spec.graphql.org/draft/#sec-Object-Spreads-In-Abstract-Scope', // 'TODO: satisfy',
             self::E_5_5_2_3_4 => 'https://spec.graphql.org/draft/#sec-Abstract-Spreads-in-Abstract-Scope', // 'TODO: satisfy',
-            self::E_5_6_1 => 'https://spec.graphql.org/draft/#sec-Values-of-Correct-Type', // 'TODO: satisfy',
+            // self::E_5_6_1 => 'https://spec.graphql.org/draft/#sec-Values-of-Correct-Type',
             self::E_5_6_2 => 'https://spec.graphql.org/draft/#sec-Input-Object-Field-Names',
             self::E_5_6_3 => 'https://spec.graphql.org/draft/#sec-Input-Object-Field-Uniqueness', // 'TODO: satisfy',
             self::E_5_6_4 => 'https://spec.graphql.org/draft/#sec-Input-Object-Required-Fields', // 'TODO: satisfy',
