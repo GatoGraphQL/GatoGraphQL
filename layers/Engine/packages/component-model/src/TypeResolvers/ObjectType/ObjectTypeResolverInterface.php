@@ -13,6 +13,7 @@ use PoP\ComponentModel\TypeResolvers\OutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, OutputTypeResolverInterface
@@ -99,4 +100,11 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     public function getFieldDataAccessorForMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): FieldDataAccessorInterface;
+    /**
+     * Provide a different error message if a particular version was requested,
+     * or if not.
+     */
+    public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
+        FieldInterface $field,
+    ): FeedbackItemResolution;
 }

@@ -1640,7 +1640,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Provide a different error message if a particular version was requested,
      * or if not.
      */
-    private function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
+    public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
         FieldInterface $field,
     ): FeedbackItemResolution {
         $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
