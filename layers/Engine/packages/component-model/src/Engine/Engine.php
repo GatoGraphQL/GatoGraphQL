@@ -2265,12 +2265,13 @@ class Engine implements EngineInterface
             $objectOrSchemaFeedback,
         );
         $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
-        return [
+        $entry = [
             Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
             Tokens::PATH => $this->getASTNodePath($astNode),
             Tokens::LOCATIONS => $locations,
             Tokens::EXTENSIONS => $extensions,
         ];
+        return $entry;
     }
 
     /**
