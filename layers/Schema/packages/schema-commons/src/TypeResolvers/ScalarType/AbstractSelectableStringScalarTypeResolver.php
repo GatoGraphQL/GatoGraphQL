@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
+use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use stdClass;
 
 /**
@@ -48,8 +48,8 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
-                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_2,
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E2,
                         [
                             $inputValue,
                             $this->getMaybeNamespacedTypeName(),
