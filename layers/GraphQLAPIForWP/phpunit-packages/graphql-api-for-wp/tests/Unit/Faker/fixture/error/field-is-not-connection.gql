@@ -1,0 +1,17 @@
+{
+  users(pagination: { limit:3 }) {
+    roleNames {
+      id
+    }
+  }
+  posts(pagination: { limit:3 }) {
+    title {
+      id
+    }
+  }
+  customPosts(pagination: { limit:3 }) {
+    title {
+      id
+    }
+  }
+}

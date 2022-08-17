@@ -13,8 +13,10 @@ use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
+use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
@@ -38,13 +40,13 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -598,7 +600,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * 3. Through param `versionConstraint`: applies to all fields and directives in the query
              */
             $versionConstraint =
-                $directive->getArgument(SchemaDefinition::VERSION_CONSTRAINT)?->getValue()
+                $directive->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)
                 ?? $this->getVersioningService()->getVersionConstraintsForDirective($this->getDirectiveName())
                 ?? App::getState('version-constraint');
             /**
@@ -1152,7 +1154,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     );
             }
             if ($feedbackItemResolution !== null) {
-                $this->processFailure(
+                $this->processObjectFailure(
                     $relationalTypeResolver,
                     $feedbackItemResolution,
                     null,
@@ -1181,15 +1183,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Depending on environment configuration, either show a warning,
-     * or show an error and remove the fields from the directive pipeline for further execution
-     *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      * @param array<FieldInterface>|null $failedFields Either which fields failed, or `null` to signify _all_ of them
      */
-    protected function processFailure(
+    protected function processObjectFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FeedbackItemResolution $feedbackItemResolution,
         ?array $failedFields,
@@ -1199,9 +1198,41 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        $this->processFailure(
+            $relationalTypeResolver,
+            $feedbackItemResolution,
+            $failedFields,
+            $idFieldSet,
+            $succeedingPipelineIDFieldSet,
+            $astNode,
+            $resolvedIDFieldValues,
+            $engineIterationFeedbackStore->objectFeedbackStore,
+        );
+    }
+
+    /**
+     * Depending on environment configuration, either show a warning,
+     * or show an error and remove the fields from the directive pipeline for further execution
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<FieldInterface>|null $failedFields Either which fields failed, or `null` to signify _all_ of them
+     */
+    private function processFailure(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        FeedbackItemResolution $feedbackItemResolution,
+        ?array $failedFields,
+        array $idFieldSet,
+        array &$succeedingPipelineIDFieldSet,
+        AstInterface $astNode,
+        array &$resolvedIDFieldValues,
+        ObjectResolutionFeedbackStore|SchemaFeedbackStore $schemaOrObjectResolutionFeedbackStore,
+    ): void {
         if ($failedFields === null) {
             // Remove all fields
             $idFieldSetToRemove = $idFieldSet;
+            $failedFields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
         } else {
             $idFieldSetToRemove = [];
             // Calculate which fields to remove
@@ -1231,7 +1262,23 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             );
         }
 
-        $engineIterationFeedbackStore->objectFeedbackStore->addError(
+        if ($schemaOrObjectResolutionFeedbackStore instanceof SchemaFeedbackStore) {
+            /** @var SchemaFeedbackStore */
+            $schemaFeedbackStore = $schemaOrObjectResolutionFeedbackStore;
+            $schemaFeedbackStore->addError(
+                new SchemaFeedback(
+                    $feedbackItemResolution,
+                    $astNode,
+                    $relationalTypeResolver,
+                    $failedFields
+                )
+            );
+            return;
+        }
+
+        /** @var ObjectResolutionFeedbackStore */
+        $objectResolutionFeedbackStore = $schemaOrObjectResolutionFeedbackStore;
+        $objectResolutionFeedbackStore->addError(
             new ObjectResolutionFeedback(
                 $feedbackItemResolution,
                 $astNode,
@@ -1239,6 +1286,34 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $this->directive,
                 $idFieldSetToRemove
             )
+        );
+    }
+
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<FieldInterface>|null $failedFields Either which fields failed, or `null` to signify _all_ of them
+     */
+    protected function processSchemaFailure(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        FeedbackItemResolution $feedbackItemResolution,
+        ?array $failedFields,
+        array $idFieldSet,
+        array &$succeedingPipelineIDFieldSet,
+        AstInterface $astNode,
+        array &$resolvedIDFieldValues,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void {
+        $this->processFailure(
+            $relationalTypeResolver,
+            $feedbackItemResolution,
+            $failedFields,
+            $idFieldSet,
+            $succeedingPipelineIDFieldSet,
+            $astNode,
+            $resolvedIDFieldValues,
+            $engineIterationFeedbackStore->schemaFeedbackStore,
         );
     }
 

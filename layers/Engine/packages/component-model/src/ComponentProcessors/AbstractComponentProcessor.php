@@ -258,7 +258,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function initModelProps(Component $component, array &$props): void
     {
-        $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
         // Set property "succeeding-typeResolver" on every component, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             $this->setProp($component, $props, 'succeeding-typeResolver', $relationalTypeResolver);
@@ -278,7 +277,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
                     $relationalTypeResolver,
                     $relationalComponentFieldNode->getField(),
-                    $schemaFeedbackStore,
                 );
                 if (!$subcomponent_typeResolver) {
                     continue;
@@ -300,7 +298,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
                         $relationalTypeResolver,
                         $relationalComponentFieldNode->getField(),
-                        $schemaFeedbackStore,
                     );
                     if (!$subcomponentTypeResolver) {
                         continue;
@@ -747,7 +744,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
                     $relationalTypeResolver,
                     $relationalComponentFieldNode->getField(),
-                    null,
                 );
                 if ($typeResolver === null) {
                     continue;
@@ -772,7 +768,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
                         $relationalTypeResolver,
                         $relationalComponentFieldNode->getField(),
-                        null,
                     );
                     if ($typeResolver === null) {
                         /**

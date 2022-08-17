@@ -378,7 +378,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             InputValueCoercionErrorFeedbackItemProvider::class,
-                            InputValueCoercionErrorFeedbackItemProvider::E5a,
+                            InputValueCoercionErrorFeedbackItemProvider::E5A,
                             [
                                 $inputFieldName,
                                 $this->getMaybeNamespacedTypeName(),

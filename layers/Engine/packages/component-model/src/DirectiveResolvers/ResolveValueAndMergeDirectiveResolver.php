@@ -81,6 +81,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         if ($idObjects === []) {
             return;
         }
+
         $this->resolveValueForObjects(
             $relationalTypeResolver,
             $idObjects,

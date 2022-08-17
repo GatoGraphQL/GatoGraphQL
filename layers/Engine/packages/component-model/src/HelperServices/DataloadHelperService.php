@@ -5,14 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\HelperServices;
 
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
-use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
@@ -34,19 +30,10 @@ class DataloadHelperService implements DataloadHelperServiceInterface
      * Accept RelationalTypeResolverInterface as param, instead of the more natural
      * ObjectTypeResolverInterface, to make it easy within the application to check
      * for this result without checking in advance what's the typeResolver.
-     *
-     * If the FeedbackStore is provided, report errors in the GraphQL query,
-     * such as nested fields requested on leaf fields:
-     *
-     *   `{ id { id } }`
-     *
-     * This is optional as this method is called in multiple places,
-     * but the error needs to be added only once.
      */
     public function getTypeResolverFromSubcomponentField(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
-        ?SchemaFeedbackStore $schemaFeedbackStore,
     ): ?RelationalTypeResolverInterface {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
@@ -65,33 +52,6 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             $subcomponentFieldNodeTypeResolver === null
             || !($subcomponentFieldNodeTypeResolver instanceof RelationalTypeResolverInterface)
         ) {
-            /**
-             * Show a schema error. But skip if there are no ObjectTypeFieldResolvers,
-             * since then the error will have been added already.
-             *
-             * Otherwise, there will appear 2 error messages:
-             *
-             *   1. No ObjectTypeFieldResolver
-             *   2. No FieldDefaultTypeDataLoader
-             */
-            if ($schemaFeedbackStore !== null
-                && $objectTypeResolver->hasObjectTypeFieldResolversForField($field)
-            ) {
-                $schemaFeedbackStore->addError(
-                    new SchemaFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E1,
-                            [
-                                $field->getOutputKey(),
-                            ]
-                        ),
-                        $field,
-                        $objectTypeResolver,
-                        [$field],
-                    )
-                );
-            }
             return null;
         }
         return $subcomponentFieldNodeTypeResolver;

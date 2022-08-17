@@ -27,6 +27,7 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
                 \PoPCMSSchema\PostCategoriesWP\Module::class,
                 \PoPCMSSchema\PostTagsWP\Module::class,
                 \PoPWPSchema\Users\Module::class,
+                \PoPCMSSchema\UserRolesWP\Module::class,
                 \PoPWPSchema\Posts\Module::class,
                 \PoPWPSchema\Pages\Module::class,
                 \PoPWPSchema\Comments\Module::class,
@@ -49,6 +50,9 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
                 \PoPCMSSchema\CommentMutations\Module::class => [
                     \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                 ],
+                \PoPCMSSchema\UserRoles\Module::class => [
+                    \PoPCMSSchema\UserRoles\Environment::TREAT_USER_ROLE_AS_ADMIN_DATA => false,
+                ]
             ]
         ];
     }
