@@ -18,7 +18,8 @@
         ],
         "type": "QueryRoot",
         "field": "id @skip(if: null)",
-        "code": "PoP/ComponentModel@e32"
+        "code": "gql@5.4.2.1[d]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
       }
     }
   ],
