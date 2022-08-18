@@ -164,7 +164,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string|int>|string|integer $objectIDorIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    protected function addData(array $sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
+    private function addData(array $sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
         // The results can be a single ID or value, or an array of IDs
         if (is_array($objectIDorIDs)) {
@@ -188,7 +188,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    protected function addObjectData(array $sourceRet, ?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
+    private function addObjectData(array $sourceRet, ?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
         if (!$fields) {
             return;
