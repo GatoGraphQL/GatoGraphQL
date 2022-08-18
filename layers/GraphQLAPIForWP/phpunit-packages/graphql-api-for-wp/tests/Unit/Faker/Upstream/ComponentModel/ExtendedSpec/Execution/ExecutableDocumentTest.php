@@ -327,15 +327,10 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @dataProvider getVariableIsNotInputTypeQueries
      */
-    public function testVariableIsNotInputType(string $query)
+    public function testVariableIsNotInputType(string $query, string $variableType)
     {
-        $variableTypes = [
-            'object' => 'Post',
-            'union' => 'CustomPostUnion',
-            'interface' => 'IsCustomPost',
-        ];
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_2, ['someVar', $variableTypes[$this->dataName()]]))->getMessage());
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_2, ['someVar', $variableType]))->getMessage());
         $document = $this->getParser()->parse($query);
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
@@ -352,6 +347,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                     echo(value: \$someVar)
                 }
                 GRAPHQL,
+                'Post',
             ],
             'union' => [
                 <<<GRAPHQL
@@ -359,6 +355,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                     echo(value: \$someVar)
                 }
                 GRAPHQL,
+                'CustomPostUnion',
             ],
             'interface' => [
                 <<<GRAPHQL
@@ -366,6 +363,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                     echo(value: \$someVar)
                 }
                 GRAPHQL,
+                'IsCustomPost',
             ],
         ];
     }
