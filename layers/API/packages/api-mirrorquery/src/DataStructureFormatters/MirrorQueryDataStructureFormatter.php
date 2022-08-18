@@ -150,12 +150,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($datasetComponentData as $componentName => $componentData) {
             $typeOutputKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
             $objectIDorIDs = $componentData['objectIDs'];
-            $this->addData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
+            $this->addData($data, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
         }
         return $ret;
     }
 
     /**
+     * @param array<string,mixed> $sourceRet
      * @param array<string,mixed>|null $ret
      * @param FieldInterface[] $fields
      * @param array<string,array<string|int,array<string,mixed>>> $databases
@@ -163,7 +164,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string|int>|string|integer $objectIDorIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    protected function addData(?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
+    protected function addData(array $sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
         // The results can be a single ID or value, or an array of IDs
         if (is_array($objectIDorIDs)) {
@@ -171,22 +172,23 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 // Add a new array for this DB object, where to return all its properties
                 $ret[] = [];
                 $resolvedObjectRet = &$ret[count($ret) - 1];
-                $this->addObjectData($resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+                $this->addObjectData($sourceRet, $resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
             }
             return;
         }
         $objectID = $objectIDorIDs;
-        $this->addObjectData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+        $this->addObjectData($sourceRet, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
     }
 
     /**
+     * @param array<string,mixed> $sourceRet
      * @param array<string,mixed>|null $resolvedObjectRet
      * @param FieldInterface[] $fields
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    protected function addObjectData(?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
+    protected function addObjectData(array $sourceRet, ?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
         if (!$fields) {
             return;
@@ -294,7 +296,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $relationalField->getFieldsOrFragmentBonds(),
                 $fragments
             );
-            $this->addData($resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
+            $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
     }
 }
