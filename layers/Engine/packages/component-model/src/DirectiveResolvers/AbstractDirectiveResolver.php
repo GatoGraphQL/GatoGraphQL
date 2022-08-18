@@ -26,7 +26,7 @@ use PoP\ComponentModel\QueryResolution\DirectiveDataAccessor;
 use PoP\ComponentModel\QueryResolution\DirectiveDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
@@ -59,7 +59,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDFieldSetDirectiveResolverTrait;
-    use FieldOrDirectiveResolverTrait;
+    use FieldOrDirectiveSchemaDefinitionResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use BasicServiceTrait;
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;

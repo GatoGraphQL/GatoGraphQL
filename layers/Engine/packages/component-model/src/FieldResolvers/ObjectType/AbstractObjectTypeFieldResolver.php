@@ -23,7 +23,6 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
@@ -50,13 +49,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
-    // Avoid trait collisions for PHP 7.1
-    use FieldOrDirectiveResolverTrait, FieldOrDirectiveSchemaDefinitionResolverTrait {
-        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldOrDirectiveArgTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
-        FieldOrDirectiveSchemaDefinitionResolverTrait::getTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
-        FieldOrDirectiveSchemaDefinitionResolverTrait::processSchemaDefinitionTypeModifiers insteadof FieldOrDirectiveResolverTrait;
-        FieldOrDirectiveSchemaDefinitionResolverTrait::getFieldTypeSchemaDefinition insteadof FieldOrDirectiveResolverTrait;
-    }
+    use FieldOrDirectiveSchemaDefinitionResolverTrait;
 
     /**
      * @var array<string,array>
