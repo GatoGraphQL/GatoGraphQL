@@ -284,4 +284,89 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
             ],
         ];
     }
+
+    /**
+     * @dataProvider getVariableIsInputTypeQueries
+     */
+    public function testVariableIsInputType(string $query)
+    {
+        $document = $this->getParser()->parse($query);
+        $context = new Context();
+        $executableDocument = $this->createExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertTrue(true);
+    }
+
+    public function getVariableIsInputTypeQueries(): array
+    {
+        return [
+            'scalar' => [
+                <<<GRAPHQL
+                query (\$someVar: String) {
+                    echo(value: \$someVar)
+                }
+                GRAPHQL,
+            ],
+            'enum' => [
+                <<<GRAPHQL
+                query (\$someVar: CustomPostStatusEnum) {
+                    echo(value: \$someVar)
+                }
+                GRAPHQL,
+            ],
+            'inputObject' => [
+                <<<GRAPHQL
+                query (\$someVar: RootUpdateCustomPostFilterInput) {
+                    echo(value: \$someVar)
+                }
+                GRAPHQL,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider getVariableIsNotInputTypeQueries
+     */
+    public function testVariableIsNotInputType(string $query)
+    {
+        $variableTypes = [
+            'object' => 'Post',
+            'union' => 'CustomPostUnion',
+            'interface' => 'IsCustomPost',
+        ];
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_2, ['someVar', $variableTypes[$this->dataName()]]))->getMessage());
+        $document = $this->getParser()->parse($query);
+        $context = new Context();
+        $executableDocument = $this->createExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertTrue(true);
+    }
+
+    public function getVariableIsNotInputTypeQueries(): array
+    {
+        return [
+            'object' => [
+                <<<GRAPHQL
+                query (\$someVar: Post) {
+                    echo(value: \$someVar)
+                }
+                GRAPHQL,
+            ],
+            'union' => [
+                <<<GRAPHQL
+                query (\$someVar: CustomPostUnion) {
+                    echo(value: \$someVar)
+                }
+                GRAPHQL,
+            ],
+            'interface' => [
+                <<<GRAPHQL
+                query (\$someVar: IsCustomPost) {
+                    echo(value: \$someVar)
+                }
+                GRAPHQL,
+            ],
+        ];
+    }
 }
