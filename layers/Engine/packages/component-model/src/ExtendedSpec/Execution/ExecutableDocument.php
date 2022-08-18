@@ -22,6 +22,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
@@ -69,6 +70,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     {
         parent::validate();
         $this->assertFragmentSpreadTypesExistInSchema();
+        $this->assertVariablesAreInputTypes();
     }
 
     /**
@@ -88,7 +90,6 @@ class ExecutableDocument extends UpstreamExecutableDocument
 
     /**
      * @throws InvalidRequestException
-     * @see https://spec.graphql.org/draft/#sec-Fragment-Spread-Type-Existence
      */
     protected function assertFragmentSpreadTypeExistsInSchema(
         string $fragmentSpreadType,
@@ -96,7 +97,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     ): void {
         foreach ($this->compositeUnionTypeResolvers as $typeResolver) {
             if (
-                $this->isTypeResolverForFragmentSpreadType(
+                $this->isTypeResolverForType(
                     $fragmentSpreadType,
                     $typeResolver
                 )
@@ -112,7 +113,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
          */
         foreach ($this->nonCompositeUnionTypeResolvers as $typeResolver) {
             if (
-                $this->isTypeResolverForFragmentSpreadType(
+                $this->isTypeResolverForType(
                     $fragmentSpreadType,
                     $typeResolver
                 )
@@ -143,14 +144,13 @@ class ExecutableDocument extends UpstreamExecutableDocument
 
     /**
      * @throws InvalidRequestException
-     * @see https://spec.graphql.org/draft/#sec-Fragment-Spread-Type-Existence
      */
-    protected function isTypeResolverForFragmentSpreadType(
-        string $fragmentSpreadType,
+    protected function isTypeResolverForType(
+        string $typeName,
         TypeResolverInterface $typeResolver
     ): bool {
-        return $typeResolver->getTypeName() === $fragmentSpreadType
-            || $typeResolver->getNamespacedTypeName() === $fragmentSpreadType;
+        return $typeResolver->getTypeName() === $typeName
+            || $typeResolver->getNamespacedTypeName() === $typeName;
     }
 
     /**
@@ -184,5 +184,41 @@ class ExecutableDocument extends UpstreamExecutableDocument
                 continue;
             }
         }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     * @see https://spec.graphql.org/draft/#sec-Variables-Are-Input-Types
+     */
+    protected function assertVariablesAreInputTypes(): void
+    {
+        foreach ($this->document->getOperations() as $operation) {
+            foreach ($operation->getVariables() as $variable) {
+                $this->assertVariableIsInputType($variable);
+            }
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertVariableIsInputType(Variable $variable): void {
+        foreach ($this->compositeUnionTypeResolvers as $typeResolver) {
+            if (!$this->isTypeResolverForType($variable->getTypeName(), $typeResolver)) {
+                continue;
+            }
+        }
+
+        throw new InvalidRequestException(
+            new FeedbackItemResolution(
+                GraphQLSpecErrorFeedbackItemProvider::class,
+                GraphQLSpecErrorFeedbackItemProvider::E_5_8_2,
+                [
+                    $variable->getName(),
+                    $variable->getTypeName(),
+                ]
+            ),
+            $variable
+        );
     }
 }
