@@ -40,6 +40,9 @@ class CategoryPostFieldDataloadComponentProcessor extends AbstractRelationalFiel
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
@@ -67,6 +70,9 @@ class CategoryPostFieldDataloadComponentProcessor extends AbstractRelationalFiel
         return parent::getQueryInputOutputHandler($component);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getMutableonrequestDataloadQueryArgs(Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);

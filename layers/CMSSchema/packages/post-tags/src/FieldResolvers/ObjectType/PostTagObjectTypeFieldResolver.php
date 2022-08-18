@@ -42,6 +42,9 @@ class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
         return $this->getPostTagObjectTypeResolver();
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

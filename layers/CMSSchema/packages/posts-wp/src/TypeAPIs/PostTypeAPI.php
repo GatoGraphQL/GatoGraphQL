@@ -23,9 +23,9 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     /**
      * Add an extra hook just to modify posts
      *
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
@@ -39,7 +39,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     /**
      * Query args that must always be in the query
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryRequiredArgs(): array
     {
@@ -90,6 +90,9 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
         return $moduleConfiguration->getPostListMaxLimit();
     }
 
+    /**
+     * @return array<string|int>|object[]
+     */
     public function getPosts(array $query, array $options = []): array
     {
         return $this->getCustomPosts($query, $options);

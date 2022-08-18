@@ -26,6 +26,9 @@ class DateQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
         return 'DateQueryInput';
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
@@ -48,7 +51,7 @@ class DateQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
      *
      * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
      *
-     * @param array<string, mixed> $query
+     * @param array<string,mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void

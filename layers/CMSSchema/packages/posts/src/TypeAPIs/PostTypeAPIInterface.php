@@ -26,6 +26,8 @@ interface PostTypeAPIInterface extends CustomPostTypeAPIInterface
     /**
      * Get the list of posts.
      * If param "status" in $query is not passed, it defaults to "publish"
+     *
+     * @return array<string|int>|object[]
      */
     public function getPosts(array $query, array $options = []): array;
     /**

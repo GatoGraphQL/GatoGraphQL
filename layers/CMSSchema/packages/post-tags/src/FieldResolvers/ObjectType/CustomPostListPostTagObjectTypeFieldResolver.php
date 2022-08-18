@@ -50,6 +50,9 @@ class CustomPostListPostTagObjectTypeFieldResolver extends AbstractCustomPostLis
         return false;
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

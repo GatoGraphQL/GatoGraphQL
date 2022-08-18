@@ -119,6 +119,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         return get_tags($query);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function convertTagsQuery(array $query, array $options = []): array
     {
         $query = $this->convertTaxonomiesQuery($query, $options);
