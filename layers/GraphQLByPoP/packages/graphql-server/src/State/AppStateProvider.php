@@ -53,7 +53,6 @@ class AppStateProvider extends AbstractAppStateProvider
          * @var ModuleConfiguration
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $state['nested-mutations-enabled'] = $moduleConfiguration->enableNestedMutations();
         $state['graphql-introspection-enabled'] = $moduleConfiguration->enableGraphQLIntrospection() ?? true;
 
         if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
