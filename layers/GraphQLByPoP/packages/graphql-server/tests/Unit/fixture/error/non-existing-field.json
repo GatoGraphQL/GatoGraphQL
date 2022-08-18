@@ -9,13 +9,14 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "nonExisting",
         "path": [
           "nonExisting",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@e16"
+        "type": "QueryRoot",
+        "field": "nonExisting",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     }
   ],

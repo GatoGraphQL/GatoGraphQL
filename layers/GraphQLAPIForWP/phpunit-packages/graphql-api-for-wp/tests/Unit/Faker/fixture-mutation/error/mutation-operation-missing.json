@@ -15,7 +15,8 @@
           "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@e16"
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     }
   ],

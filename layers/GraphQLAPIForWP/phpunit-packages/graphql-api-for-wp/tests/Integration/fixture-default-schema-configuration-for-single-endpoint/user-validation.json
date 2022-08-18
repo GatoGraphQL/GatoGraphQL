@@ -15,7 +15,8 @@
                     "title",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {
@@ -33,7 +34,8 @@
                     "title",
                     "fragment IsCustomPostData on IsCustomPost { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {
@@ -52,7 +54,8 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {
@@ -71,7 +74,8 @@
                     "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {

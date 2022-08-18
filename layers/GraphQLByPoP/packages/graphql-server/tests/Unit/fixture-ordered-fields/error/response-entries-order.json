@@ -15,7 +15,8 @@
                 ],
                 "type": "QueryRoot",
                 "field": "nonExisting",
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         }
     ],

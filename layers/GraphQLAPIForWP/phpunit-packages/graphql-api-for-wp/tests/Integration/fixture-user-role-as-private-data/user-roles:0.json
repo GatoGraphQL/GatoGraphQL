@@ -15,7 +15,8 @@
         ],
         "type": "QueryRoot",
         "field": "roles { ... }",
-        "code": "PoP/ComponentModel@e16"
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     },
     {
@@ -33,7 +34,8 @@
         ],
         "type": "QueryRoot",
         "field": "roleNames",
-        "code": "PoP/ComponentModel@e16"
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     },
     {
@@ -94,7 +96,8 @@
         ],
         "type": "User",
         "field": "roles { ... }",
-        "code": "PoP/ComponentModel@e16"
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     },
     {
@@ -113,7 +116,8 @@
         ],
         "type": "User",
         "field": "roleNames",
-        "code": "PoP/ComponentModel@e16"
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     },
     {
@@ -132,7 +136,8 @@
         ],
         "type": "User",
         "field": "hasRole(role: \"administrator\")",
-        "code": "PoP/ComponentModel@e16"
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     },
     {
@@ -151,7 +156,8 @@
         ],
         "type": "User",
         "field": "hasAnyRole(roles: [\"administrator\"])",
-        "code": "PoP/ComponentModel@e16"
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     }
   ],
