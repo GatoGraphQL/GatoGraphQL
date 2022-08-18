@@ -220,6 +220,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
+        $validateFieldSelectionMerging = $this->validateFieldSelectionMerging();
+
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
         foreach ($fields as $field) {
@@ -239,7 +241,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                  *
                  * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
                  */
-                if (array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)) {
+                if ($validateFieldSelectionMerging
+                    && array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)
+                ) {
                     /**
                      * It's an error =>  set response to null
                      */
@@ -327,6 +331,11 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             );
             $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
+    }
+
+    protected function validateFieldSelectionMerging(): bool
+    {
+        return false;
     }
 
     protected function getObjectEntry(string $typeOutputKey, array $item): array
