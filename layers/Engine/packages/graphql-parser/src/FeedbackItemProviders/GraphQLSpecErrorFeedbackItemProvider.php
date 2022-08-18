@@ -146,7 +146,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_7_2 => 'TODO: satisfy',
             self::E_5_7_3 => $this->__('Directive \'%s\' can be executed only once for field(s) \'%s\'', 'graphql-parser'),
             self::E_5_8_1 => $this->__('Variable name \'%s\' is duplicated', 'graphql-server'),
-            self::E_5_8_2 => $this->__('Variable \'%s\' must be of Input Type, type \'%s\' is not allowed (object, union and interface types are not allowed)', 'graphql-server'),
+            self::E_5_8_2 => $this->__('Variable \'%s\' must be of Input type, but type \'%s\' is not (UNION, INTERFACE, or OBJECT types are not allowed)', 'graphql-server'),
             self::E_5_8_3 => $this->__('Variable \'%s\' has not been defined in the operation', 'graphql-server'),
             self::E_5_8_4 => $this->__('Variable \'%s\' is not used', 'graphql-server'),
             self::E_5_8_5 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
