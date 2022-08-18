@@ -117,7 +117,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             // self::E_5_2_3_1 => 'subscriptions_not_yet_supported',
             self::E_5_3_1 => 'TODO: satisfy',
             // @see https://github.com/leoloso/PoP/issues/1783
-            self::E_5_3_2 => 'its_difficult_to_implement_so_not_yet_done',
+            self::E_5_3_2 => 'its_difficult_to_implement_so_not_yet_done', // 'TODO: satisfy',
             self::E_5_3_3 => $this->__('Field \'%s\' from type \'%s\' is not a connection', 'graphql-server'),
             self::E_5_4_1_A => $this->__('On field \'%1$s\' of type \'%2$s\', there is no argument with name \'%3$s\'', 'graphql-server'),
             self::E_5_4_1_B => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'graphql-server'),
@@ -171,7 +171,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_2_2_1 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',
             // self::E_5_2_3_1 => 'https://spec.graphql.org/draft/#sec-Single-root-field',
             self::E_5_3_1 => 'https://spec.graphql.org/draft/#sec-Field-Selections', // 'TODO: satisfy',
-            self::E_5_3_2 => 'https://spec.graphql.org/draft/#sec-Field-Selection-Merging',
+            self::E_5_3_2 => 'https://spec.graphql.org/draft/#sec-Field-Selection-Merging', // 'TODO: satisfy',
             self::E_5_3_3 => 'https://spec.graphql.org/draft/#sec-Leaf-Field-Selections',
             self::E_5_4_1_A,
             self::E_5_4_1_B => 'https://spec.graphql.org/draft/#sec-Argument-Names',
