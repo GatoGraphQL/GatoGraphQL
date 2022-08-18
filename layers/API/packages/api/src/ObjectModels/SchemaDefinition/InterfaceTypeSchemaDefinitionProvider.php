@@ -22,6 +22,9 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefin
         return TypeKinds::INTERFACE;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

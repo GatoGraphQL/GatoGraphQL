@@ -42,7 +42,7 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getNamedTypeExtensions(): array
     {

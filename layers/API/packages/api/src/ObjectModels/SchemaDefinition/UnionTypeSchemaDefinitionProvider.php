@@ -25,6 +25,9 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
         return TypeKinds::UNION;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

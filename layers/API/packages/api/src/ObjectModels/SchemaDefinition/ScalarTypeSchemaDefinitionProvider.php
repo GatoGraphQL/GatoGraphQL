@@ -21,6 +21,9 @@ class ScalarTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
         return TypeKinds::SCALAR;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

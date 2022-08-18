@@ -19,6 +19,9 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return string[]
+     */
     public function getModelInstanceElementsFromAppState(array $elements): array
     {
         // Allow WP API to set the "routing-state" first

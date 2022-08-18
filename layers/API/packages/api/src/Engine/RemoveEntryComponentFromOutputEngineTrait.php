@@ -12,6 +12,9 @@ use PoP\ComponentModel\Constants\DataOutputModes;
 
 trait RemoveEntryComponentFromOutputEngineTrait
 {
+    /**
+     * @return array<string,mixed>
+     */
     protected function getEncodedDataObject(array $data): array
     {
         $data = parent::getEncodedDataObject($data);
@@ -40,6 +43,9 @@ trait RemoveEntryComponentFromOutputEngineTrait
         return $data;
     }
 
+    /**
+     * @return mixed[]
+     */
     protected function removeEntryComponentFromOutput(array $results): array
     {
         list($has_extra_routes) = $this->listExtraRouteVars();

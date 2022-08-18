@@ -25,6 +25,9 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

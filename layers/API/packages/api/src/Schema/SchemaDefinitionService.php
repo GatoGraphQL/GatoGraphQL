@@ -83,6 +83,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function &getFullSchemaDefinition(): array
     {
         $schemaDefinition = null;
@@ -181,7 +184,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getSchemaExtensions(): array
     {

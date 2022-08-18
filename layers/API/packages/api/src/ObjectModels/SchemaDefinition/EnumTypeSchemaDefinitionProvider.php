@@ -21,6 +21,9 @@ class EnumTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinition
         return TypeKinds::ENUM;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

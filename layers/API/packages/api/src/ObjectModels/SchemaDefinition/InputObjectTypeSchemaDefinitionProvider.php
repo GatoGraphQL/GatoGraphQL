@@ -22,6 +22,9 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDef
         return TypeKinds::INPUT_OBJECT;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

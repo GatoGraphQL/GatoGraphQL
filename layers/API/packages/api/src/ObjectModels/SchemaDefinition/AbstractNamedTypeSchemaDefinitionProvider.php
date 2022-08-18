@@ -8,6 +8,9 @@ use PoPAPI\API\Schema\SchemaDefinition;
 
 abstract class AbstractNamedTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();
@@ -16,7 +19,7 @@ abstract class AbstractNamedTypeSchemaDefinitionProvider extends AbstractTypeSch
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getNamedTypeExtensions(): array
     {

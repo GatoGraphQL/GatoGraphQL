@@ -18,6 +18,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return 'graphql';
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getFormattedData(array $data): array
     {
         $ret = [];
@@ -120,6 +123,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
+    /**
+     * @return array<int,mixed[]>
+     */
     protected function reformatGeneralEntries(array $entries): array
     {
         $ret = [];
@@ -129,6 +135,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getGeneralEntry(array $item): array
     {
         $entry = [
@@ -140,6 +149,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
+    /**
+     * @return array<int,mixed[]>
+     */
     protected function reformatDocumentEntries(array $entries): array
     {
         $ret = [];
@@ -149,6 +161,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getDocumentEntry(array $item): array
     {
         $entry = [
@@ -168,6 +183,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
+    /**
+     * @return mixed[]
+     */
     protected function getDocumentEntryExtensions(array $item): array
     {
         $extensions = [];
@@ -179,6 +197,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @param array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> $entries
+     * @return array<int,mixed[]>
      */
     protected function reformatSchemaEntries(array $entries): array
     {
@@ -238,6 +257,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $extensions;
     }
 
+    /**
+     * @return array<int,mixed[]>
+     */
     protected function reformatObjectEntries(array $entries): array
     {
         $ret = [];
@@ -284,6 +306,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     /**
      * The entry is similar to Schema, plus the
      * addition of the object ID/IDs
+     *
+     * @return array<string,mixed>
      */
     protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
     {

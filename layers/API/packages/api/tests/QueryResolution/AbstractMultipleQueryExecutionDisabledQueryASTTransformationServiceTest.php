@@ -23,7 +23,7 @@ use SplObjectStorage;
 abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServiceTest extends AbstractTestCase
 {
     /**
-     * @return array<string, mixed> [key]: Module class, [value]: Configuration
+     * @return array<string,mixed> [key]: Module class, [value]: Configuration
      */
     protected static function getModuleClassConfiguration(): array
     {

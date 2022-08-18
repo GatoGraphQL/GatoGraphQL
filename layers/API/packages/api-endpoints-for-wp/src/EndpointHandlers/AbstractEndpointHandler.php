@@ -99,6 +99,7 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
 
     /**
      * Add the endpoint query vars
+     * @return mixed[]
      */
     public function addQueryVar(array $query_vars): array
     {

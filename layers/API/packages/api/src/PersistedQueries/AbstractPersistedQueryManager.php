@@ -9,19 +9,25 @@ use PoPAPI\API\Schema\SchemaDefinition;
 abstract class AbstractPersistedQueryManager implements PersistedQueryManagerInterface
 {
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     protected array $persistedQueries = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array<string,string>>
      */
     protected array $persistedQueriesForSchema = [];
 
+    /**
+     * @return array<string,array<string,string>>
+     */
     public function getPersistedQueriesForSchema(): array
     {
         return $this->persistedQueriesForSchema;
     }
 
+    /**
+     * @return array<string,string>
+     */
     public function getPersistedQueries(): array
     {
         return $this->persistedQueries;
