@@ -66,6 +66,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     abstract protected function getCategoryTaxonomyName(): string;
 
+    /**
+     * @return object[]
+     */
     public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
@@ -112,12 +115,18 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         // An error happened
         return -1;
     }
+    /**
+     * @return object[]
+     */
     public function getCategories(array $query, array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
         return get_categories($query);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function convertCategoriesQuery(array $query, array $options = []): array
     {
         $query = $this->convertTaxonomiesQuery($query, $options);

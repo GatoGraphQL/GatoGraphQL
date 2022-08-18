@@ -55,6 +55,9 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         /** @var ModuleConfiguration */

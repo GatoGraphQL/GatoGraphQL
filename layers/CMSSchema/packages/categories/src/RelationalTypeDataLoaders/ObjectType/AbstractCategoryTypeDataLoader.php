@@ -34,6 +34,9 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryabl
         return 'DESC';
     }
 
+    /**
+     * @return mixed[]
+     */
     public function executeQuery($query, array $options = []): array
     {
         $categoryTypeAPI = $this->getCategoryTypeAPI();

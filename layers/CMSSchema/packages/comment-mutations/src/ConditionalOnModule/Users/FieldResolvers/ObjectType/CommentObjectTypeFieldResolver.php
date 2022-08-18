@@ -58,6 +58,9 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         return $moduleConfiguration->mustUserBeLoggedInToAddComment();
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
