@@ -19,7 +19,7 @@ abstract class AbstractRESTHookSet extends AbstractHookSet
 
     abstract protected function getHookName(): string;
 
-    public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
+    public function hookGraphQLQueryToResolveRESTEndpoint(string $restEndpointGraphQLQuery): string
     {
         // Find the position of the last `}` and append the new fields before it
         $pos = strrpos($restEndpointGraphQLQuery, '}');
