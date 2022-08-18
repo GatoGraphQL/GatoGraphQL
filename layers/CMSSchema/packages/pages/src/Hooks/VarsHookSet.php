@@ -20,6 +20,9 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return string[]
+     */
     public function getModelInstanceElementsFromAppState(array $elements): array
     {
         switch (App::getState('nature')) {

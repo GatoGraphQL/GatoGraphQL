@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -33,12 +34,18 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
             WithMetaInterfaceTypeResolver::class,
         ];
     }
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToImplement(): array
     {
         return [
@@ -64,6 +71,9 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
         return match ($fieldName) {

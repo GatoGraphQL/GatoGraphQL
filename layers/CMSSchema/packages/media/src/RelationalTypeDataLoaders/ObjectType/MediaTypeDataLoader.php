@@ -33,6 +33,9 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         ];
     }
 
+    /**
+     * @return mixed[]
+     */
     public function executeQuery($query, array $options = []): array
     {
         return $this->getMediaTypeAPI()->getMediaItems($query, $options);

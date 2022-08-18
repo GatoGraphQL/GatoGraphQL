@@ -79,9 +79,9 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     }
 
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
@@ -97,7 +97,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryDefaults(): array
     {
@@ -110,7 +110,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     /**
      * Query args that must always be in the query
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryRequiredArgs(): array
     {
@@ -133,6 +133,9 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $moduleConfiguration->getMediaListMaxLimit();
     }
 
+    /**
+     * @return object[]
+     */
     public function getMediaItems(array $query, array $options = []): array
     {
         return $this->getCustomPosts($query, $options);

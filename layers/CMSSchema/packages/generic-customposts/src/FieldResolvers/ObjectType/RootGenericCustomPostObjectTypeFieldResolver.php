@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\GenericCustomPosts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -104,6 +105,9 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
 
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -111,6 +115,9 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -163,6 +170,9 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
@@ -191,6 +201,9 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);

@@ -30,6 +30,9 @@ class MenuByInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
         return $this->__('Oneof input to specify the property and data to fetch a menu', 'menus');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

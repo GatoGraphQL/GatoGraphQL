@@ -41,6 +41,9 @@ class MediaItemByInputObjectTypeResolver extends AbstractOneofQueryableInputObje
         return $this->__('Oneof input to specify the property and data to fetch a media item', 'media');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

@@ -9,6 +9,9 @@ use PoPCMSSchema\Pages\ObjectTypeResolverPickers\AbstractPageObjectTypeResolverP
 
 class PageCustomPostObjectTypeResolverPicker extends AbstractPageObjectTypeResolverPicker
 {
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface>>
+     */
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
