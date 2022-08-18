@@ -70,6 +70,9 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
         return false;
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
@@ -78,6 +81,9 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminInputFieldNames(): array
     {
         $adminInputFieldNames = parent::getAdminInputFieldNames();

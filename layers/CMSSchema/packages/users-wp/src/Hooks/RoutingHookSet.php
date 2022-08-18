@@ -20,6 +20,9 @@ class RoutingHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return string[]
+     */
     public function registerRoutes(array $routes): array
     {
         /** @var ModuleConfiguration */

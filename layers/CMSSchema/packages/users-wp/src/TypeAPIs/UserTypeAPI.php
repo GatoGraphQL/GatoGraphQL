@@ -93,6 +93,9 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
         return $ret;
     }
+    /**
+     * @return array<string|int>|object[]
+     */
     public function getUsers(array $query = [], array $options = []): array
     {
         // Convert the parameters
@@ -129,7 +132,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
      * 3. Execute query
      * 4. Remove hook
      *
-     * @param mixed[] $query
+     * @param array<string,mixed> $query
      *
      * @see https://developer.wordpress.org/reference/classes/wp_user_query/#search-parameters
      */
@@ -148,6 +151,9 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return false;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function convertUsersQuery(array $query, array $options = []): array
     {
         if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {

@@ -84,6 +84,9 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
         return $this->__('Oneof input to specify the property and data to fetch a user', 'users');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
@@ -93,6 +96,9 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminInputFieldNames(): array
     {
         $adminInputFieldNames = parent::getAdminInputFieldNames();

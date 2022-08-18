@@ -104,7 +104,8 @@ abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends Abstra
     ): bool;
 
     /**
-     * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @param array<string,InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @return array<string,InputTypeResolverInterface>|mixed[]
      */
     public function getInputFieldNameTypeResolvers(
         array $inputFieldNameTypeResolvers,

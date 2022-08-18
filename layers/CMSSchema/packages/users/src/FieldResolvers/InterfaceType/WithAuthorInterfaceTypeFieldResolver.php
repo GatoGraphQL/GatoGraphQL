@@ -23,6 +23,9 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -30,6 +33,9 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToImplement(): array
     {
         return [

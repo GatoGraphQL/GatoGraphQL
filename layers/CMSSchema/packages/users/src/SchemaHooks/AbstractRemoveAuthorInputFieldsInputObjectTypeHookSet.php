@@ -56,7 +56,8 @@ abstract class AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet extends Abs
     /**
      * Remove the fields added by the SchemaHookSet
      *
-     * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @param array<string,InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(
         array $inputFieldNameTypeResolvers,
