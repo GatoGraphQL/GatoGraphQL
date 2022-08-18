@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
-use PoP\Root\App;
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use PoP\Engine\Cache\CacheUtils;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class SchemaCacheHookSet extends AbstractHookSet
@@ -23,7 +25,9 @@ class SchemaCacheHookSet extends AbstractHookSet
         if ($graphQLOperationType = App::getState('graphql-operation-type')) {
             $elements['graphql-operation-type'] = $graphQLOperationType;
         }
-        $elements['nested-mutations-enabled'] = App::getState('nested-mutations-enabled');
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $elements['nested-mutations-enabled'] = $moduleConfiguration->enableNestedMutations();
         return $elements;
     }
 }

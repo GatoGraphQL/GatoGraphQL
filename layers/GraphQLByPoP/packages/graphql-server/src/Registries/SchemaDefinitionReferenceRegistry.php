@@ -141,9 +141,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     protected function prepareSchemaDefinitionForGraphQL(): void
     {
-        $enableNestedMutations = App::getState('nested-mutations-enabled');
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $enableNestedMutations = $moduleConfiguration->enableNestedMutations();
         $exposeSchemaIntrospectionFieldInSchema = $moduleConfiguration->exposeSchemaIntrospectionFieldInSchema();
         $exposeGlobalFieldsInGraphQLSchema = $moduleConfiguration->exposeGlobalFieldsInGraphQLSchema();
 

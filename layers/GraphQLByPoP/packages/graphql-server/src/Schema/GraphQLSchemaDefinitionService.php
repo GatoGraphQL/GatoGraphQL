@@ -45,7 +45,9 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
      */
     public function getSchemaQueryRootObjectTypeResolver(): ObjectTypeResolverInterface
     {
-        if (App::getState('nested-mutations-enabled')) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableNestedMutations()) {
             return $this->getSchemaRootObjectTypeResolver();
         }
 
@@ -63,7 +65,9 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
         if (!$moduleConfiguration->enableMutations()) {
             return null;
         }
-        if (App::getState('nested-mutations-enabled')) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableNestedMutations()) {
             return $this->getSchemaRootObjectTypeResolver();
         }
 

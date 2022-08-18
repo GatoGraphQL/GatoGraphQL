@@ -26,7 +26,7 @@ use PoP\ComponentModel\QueryResolution\DirectiveDataAccessor;
 use PoP\ComponentModel\QueryResolution\DirectiveDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
-use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
@@ -59,7 +59,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDFieldSetDirectiveResolverTrait;
-    use FieldOrDirectiveResolverTrait;
+    use FieldOrDirectiveSchemaDefinitionResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use BasicServiceTrait;
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
@@ -519,24 +519,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? [];
     }
 
-    protected function collectDirectiveValidationDeprecations(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        array $fields,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): void {
-        $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations($relationalTypeResolver);
-        foreach ($deprecationFeedbackItemResolutions as $deprecationFeedbackItemResolution) {
-            $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
-                new SchemaFeedback(
-                    $deprecationFeedbackItemResolution,
-                    $this->directive,
-                    $relationalTypeResolver,
-                    $fields,
-                )
-            );
-        }
-    }
-
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
@@ -928,14 +910,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $directiveArgName,
         );
         return $this->consolidatedDirectiveArgExtensionsCache[$cacheKey];
-    }
-
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function resolveDirectiveValidationDeprecations(RelationalTypeResolverInterface $relationalTypeResolver): array
-    {
-        return [];
     }
 
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string

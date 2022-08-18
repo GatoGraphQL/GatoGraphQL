@@ -27,7 +27,7 @@ class DeprecationFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::D1 => $this->__('Field \'%s\' is deprecated: %s', 'component-model'),
-            self::D1 => $this->__('Directive \'%s\' is deprecated: %s', 'component-model'),
+            self::D2 => $this->__('Directive \'%s\' is deprecated: %s', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
