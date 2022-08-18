@@ -292,18 +292,18 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType
     ): array {
-        if ($inputValue === null) {
+        if ($inputValue === null || $inputValue instanceof ValueResolutionPromiseInterface) {
             return [];
         }
         $inputValueDeprecations = [];
         if ($inputIsArrayOfArraysType) {
             // Execute against an array of arrays of values
             foreach ($inputValue as $arrayArgValueElem) {
-                if ($arrayArgValueElem === null) {
+                if ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) {
                     continue;
                 }
                 foreach ($arrayArgValueElem as $arrayOfArraysArgValueElem) {
-                    if ($arrayOfArraysArgValueElem === null) {
+                    if ($arrayOfArraysArgValueElem === null || $arrayOfArraysArgValueElem instanceof ValueResolutionPromiseInterface) {
                         continue;
                     }
                     $inputValueDeprecations = array_merge(
@@ -315,7 +315,7 @@ class InputCoercingService implements InputCoercingServiceInterface
         } elseif ($inputIsArrayType) {
             // Execute against an array of values
             foreach ($inputValue as $arrayArgValueElem) {
-                if ($arrayArgValueElem === null) {
+                if ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) {
                     continue;
                 }
                 $inputValueDeprecations = array_merge(
