@@ -52,7 +52,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     /**
      * If the "status" is not passed, then it's always "publish"
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryDefaults(): array
     {
@@ -66,7 +66,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     /**
      * Query args that must always be in the query
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryRequiredArgs(): array
     {
@@ -74,8 +74,8 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
 
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      * @return object[]
      */
     public function getCustomPosts(array $query, array $options = []): array
@@ -109,9 +109,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $moduleConfiguration->getCustomPostListMaxLimit();
     }
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {

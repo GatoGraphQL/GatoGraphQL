@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -49,6 +50,9 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         return $this->rootCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCustomPostsFilterInputObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -56,6 +60,9 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return array_merge(
@@ -87,6 +94,9 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         return $this->getRootCustomPostsFilterInputObjectTypeResolver();
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
@@ -101,6 +111,9 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         };
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);

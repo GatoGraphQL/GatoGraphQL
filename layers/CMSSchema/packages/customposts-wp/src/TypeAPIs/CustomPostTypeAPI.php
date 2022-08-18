@@ -11,9 +11,9 @@ class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {

@@ -51,6 +51,9 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     }
 
 
+    /**
+     * @return object[]
+     */
     public function getUpstreamObjects(array $ids): array
     {
         $query = $this->getQueryToRetrieveObjectsForIDs($ids);

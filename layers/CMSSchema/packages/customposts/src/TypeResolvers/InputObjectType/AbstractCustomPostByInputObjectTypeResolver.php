@@ -64,6 +64,9 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
         return $this->__('a custom post', 'customposts');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
