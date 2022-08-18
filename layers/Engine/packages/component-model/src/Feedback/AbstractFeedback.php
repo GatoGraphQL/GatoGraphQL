@@ -10,7 +10,7 @@ abstract class AbstractFeedback implements FeedbackInterface
 {
     public function __construct(
         protected FeedbackItemResolution $feedbackItemResolution,
-        /** @var array<string, mixed> */
+        /** @var array<string,mixed> */
         protected array $extensions = [],
     ) {
     }
@@ -21,7 +21,7 @@ abstract class AbstractFeedback implements FeedbackInterface
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getExtensions(): array
     {

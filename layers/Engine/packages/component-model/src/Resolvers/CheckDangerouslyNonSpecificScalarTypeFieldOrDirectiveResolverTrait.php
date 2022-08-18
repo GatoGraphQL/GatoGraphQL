@@ -23,8 +23,8 @@ trait CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait
      * 1. its type is `DangerouslyNonSpecificScalar`
      * 2. it has any mandatory argument of type `DangerouslyNonSpecificScalar`
      *
-     * @param array<string, InputTypeResolverInterface> $consolidatedFieldArgNameTypeResolvers
-     * @param array<string, int> $consolidatedFieldArgsTypeModifiers
+     * @param array<string,InputTypeResolverInterface> $consolidatedFieldArgNameTypeResolvers
+     * @param array<string,int> $consolidatedFieldArgsTypeModifiers
      */
     protected function isDangerouslyNonSpecificScalarTypeFieldType(
         TypeResolverInterface $fieldTypeResolver,
@@ -50,8 +50,8 @@ trait CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait
     }
 
     /**
-     * @param array<string, InputTypeResolverInterface> $consolidatedFieldOrDirectiveArgNameTypeResolvers
-     * @param array<string, int> $consolidatedFieldOrDirectiveArgsTypeModifiers
+     * @param array<string,InputTypeResolverInterface> $consolidatedFieldOrDirectiveArgNameTypeResolvers
+     * @param array<string,int> $consolidatedFieldOrDirectiveArgsTypeModifiers
      */
     protected function hasMandatoryDangerouslyNonSpecificScalarTypeInputType(
         array $consolidatedFieldOrDirectiveArgNameTypeResolvers,

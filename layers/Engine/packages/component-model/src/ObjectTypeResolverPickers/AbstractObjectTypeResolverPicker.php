@@ -24,6 +24,9 @@ abstract class AbstractObjectTypeResolverPicker implements ObjectTypeResolverPic
         return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     final public function getClassesToAttachTo(): array
     {
         return $this->getUnionTypeResolverClassesToAttachTo();

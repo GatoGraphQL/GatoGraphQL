@@ -22,6 +22,9 @@ class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -29,6 +32,9 @@ class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToImplement(): array
     {
         return [

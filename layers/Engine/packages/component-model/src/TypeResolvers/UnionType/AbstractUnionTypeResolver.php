@@ -44,6 +44,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 
+    /**
+     * @return InterfaceTypeResolverInterface[]
+     */
     public function getUnionTypeInterfaceTypeResolvers(): array
     {
         return [];
@@ -286,6 +289,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return $this->objectTypeResolverPickers;
     }
 
+    /**
+     * @return ObjectTypeResolverPickerInterface[]
+     */
     protected function calculateTypeResolverPickers()
     {
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field

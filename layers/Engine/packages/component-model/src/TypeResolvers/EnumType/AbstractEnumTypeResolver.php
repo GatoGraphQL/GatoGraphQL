@@ -27,11 +27,11 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected array $consolidatedEnumValueDescriptionCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedEnumValueDeprecationMessageCache = [];
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedEnumValueExtensionsCache = [];
     /** @var array<string,array<string,mixed>>|null */
     protected ?array $schemaDefinitionForEnumCache = null;
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaDefinitionForEnumValueCache = [];
 
     private ?OutputServiceInterface $outputService = null;

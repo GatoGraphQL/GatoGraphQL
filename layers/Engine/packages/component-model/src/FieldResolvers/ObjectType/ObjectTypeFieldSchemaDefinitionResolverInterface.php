@@ -21,7 +21,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     /**
      * Define Schema Field Arguments
      *
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array;
     /**
@@ -34,7 +34,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     /**
      * Invoke Schema Field Arguments
      *
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getConsolidatedFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array;
     /**

@@ -14,7 +14,7 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface, In
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
      *
-     * @return string[]
+     * @return array<class-string<InterfaceTypeResolverInterface>>
      */
     public function getInterfaceTypeResolverClassesToAttachTo(): array;
     /**
@@ -32,7 +32,7 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface, In
     public function getPartiallyImplementedInterfaceTypeResolvers(): array;
     public function skipExposingFieldInSchema(string $fieldName): bool;
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getFieldSchemaDefinition(string $fieldName): array;
 }

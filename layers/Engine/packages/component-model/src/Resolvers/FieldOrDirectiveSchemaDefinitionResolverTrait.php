@@ -11,6 +11,9 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
 {
     use TypeSchemaDefinitionResolverTrait;
 
+    /**
+     * @return array<string,mixed>
+     */
     final public function getFieldOrDirectiveArgTypeSchemaDefinition(
         string $argName,
         InputTypeResolverInterface $argInputTypeResolver,
@@ -27,6 +30,9 @@ trait FieldOrDirectiveSchemaDefinitionResolverTrait
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     final public function getFieldTypeSchemaDefinition(
         string $fieldName,
         ConcreteTypeResolverInterface $fieldTypeResolver,

@@ -194,6 +194,8 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
+     *
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -207,6 +209,8 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
+     *
+     * @return string[]
      */
     public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -262,6 +266,8 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
+     *
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getConsolidatedFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -275,6 +281,8 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
+     * 
+     * @return string[]
      */
     public function getConsolidatedAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {

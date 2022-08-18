@@ -27,6 +27,9 @@ abstract class AbstractArrayValuesToQueryFilterInput extends AbstractFilterInput
      */
     abstract protected function getValueToQueryArgKeys(): array;
 
+    /**
+     * @return mixed[]
+     */
     protected function getValue(array $value): array
     {
         return $value;

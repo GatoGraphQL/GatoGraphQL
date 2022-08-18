@@ -10,6 +10,9 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait TypeSchemaDefinitionResolverTrait
 {
+    /**
+     * @return array<string,mixed>
+     */
     final public function getTypeSchemaDefinition(
         string $name,
         TypeResolverInterface $typeResolver,

@@ -27,6 +27,9 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
         return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     final public function getClassesToAttachTo(): array
     {
         return $this->getRelationalTypeResolverClassesToAttachTo();

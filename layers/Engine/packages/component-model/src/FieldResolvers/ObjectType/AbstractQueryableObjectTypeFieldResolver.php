@@ -104,7 +104,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      *     - Execute `filterDataloadQueryArgs` on the FilterInput to place the value
      *       under the expected input name
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      * @throws AbstractValueResolutionPromiseException
      */
     protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, FieldDataAccessorInterface $fieldDataAccessor): array

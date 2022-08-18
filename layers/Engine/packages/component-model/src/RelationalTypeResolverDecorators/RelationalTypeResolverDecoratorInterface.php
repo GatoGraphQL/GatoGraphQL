@@ -21,7 +21,7 @@ interface RelationalTypeResolverDecoratorInterface extends AttachableExtensionIn
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
      *
-     * @return string[]
+     * @return array<class-string<RelationalTypeResolverInterface>>
      */
     public function getRelationalTypeResolverClassesToAttachTo(): array;
     /**

@@ -26,7 +26,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     protected ?array $fieldNamesToImplement = null;
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     private array $fieldNamesResolvedByInterfaceTypeFieldResolver = [];
     /**

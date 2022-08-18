@@ -13,12 +13,12 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 abstract class AbstractDocumentFeedback extends AbstractFeedback implements DocumentFeedbackInterface
 {
     /**
-     * @param array<string, mixed> $extensions
+     * @param array<string,mixed> $extensions
      */
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
         protected Location $location,
-        /** @var array<string, mixed> */
+        /** @var array<string,mixed> */
         array $extensions = [],
     ) {
         parent::__construct(

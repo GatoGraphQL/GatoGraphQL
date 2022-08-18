@@ -33,6 +33,9 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         return ReflectionProperty::IS_PUBLIC;
     }
 
+    /**
+     * @return string[]
+     */
     protected function getReflectionFieldNames(): array
     {
         if (is_null($this->reflectionFieldNames)) {
@@ -76,6 +79,9 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         return implode($this->__('. '), $docCommentDescLines);
     }
 
+    /**
+     * @return string[]
+     */
     public function getTypePropertyDocComments(): array
     {
         if (is_null($this->reflectionDocComments)) {
@@ -95,16 +101,25 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         return $this->reflectionDocComments;
     }
 
+    /**
+     * @return string[]
+     */
     public function getPropertiesToExclude(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getPropertiesToInclude(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         // If explicitly stating what properties to include, then already use those

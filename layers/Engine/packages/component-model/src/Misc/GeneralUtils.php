@@ -21,6 +21,9 @@ class GeneralUtils
     }
 
     // Taken from https://gist.github.com/SeanCannon/6585889
+    /**
+     * @return mixed[]
+     */
     public static function arrayFlatten(mixed $items, $deep = false)
     {
         if (!is_array($items)) {

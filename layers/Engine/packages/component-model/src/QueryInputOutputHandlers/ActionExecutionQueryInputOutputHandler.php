@@ -8,6 +8,9 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class ActionExecutionQueryInputOutputHandler extends AbstractQueryInputOutputHandler
 {
+    /**
+     * @return array<string,mixed>
+     */
     public function getQueryResult(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
         $ret = parent::getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);

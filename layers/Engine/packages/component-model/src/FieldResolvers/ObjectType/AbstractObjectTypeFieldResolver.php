@@ -140,6 +140,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     final public function getClassesToAttachTo(): array
     {
         return $this->getObjectTypeResolverClassesToAttachTo();

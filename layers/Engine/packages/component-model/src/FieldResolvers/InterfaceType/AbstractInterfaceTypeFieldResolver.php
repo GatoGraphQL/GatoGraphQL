@@ -34,15 +34,15 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 
-    /** @var array<string, array> */
+    /** @var array<string,array> */
     protected array $schemaDefinitionForFieldCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedFieldExtensionsCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldDeprecationMessageCache = [];
-    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
     /** @var array<string, string[]> */
     protected array $consolidatedAdminFieldArgNamesCache = [];
@@ -50,13 +50,13 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected array $consolidatedFieldArgDescriptionCache = [];
     /** @var array<string, string|null> */
     protected array $consolidatedFieldArgDeprecationMessageCache = [];
-    /** @var array<string, mixed> */
+    /** @var array<string,mixed> */
     protected array $consolidatedFieldArgDefaultValueCache = [];
     /** @var array<string, int> */
     protected array $consolidatedFieldArgTypeModifiersCache = [];
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedFieldArgExtensionsCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaFieldArgsCache = [];
 
     /**
@@ -138,7 +138,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * The interfaces the fieldResolver implements
      *
-     * @return InterfaceTypeFieldResolverInterface[]
+     * @return array<\PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface>
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
@@ -244,7 +244,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
@@ -490,7 +490,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      * Watch out: The same extensions must be present for both
      * the ObjectType and the InterfaceType!
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getFieldExtensionsSchemaDefinition(string $fieldName): array
     {

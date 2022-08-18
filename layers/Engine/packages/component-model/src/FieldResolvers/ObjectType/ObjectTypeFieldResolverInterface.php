@@ -21,7 +21,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
      *
-     * @return string[]
+     * @return array<class-string<ObjectTypeResolverInterface>>
      */
     public function getObjectTypeResolverClassesToAttachTo(): array;
     /**
@@ -36,7 +36,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     public function skipExposingFieldArgInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): bool;
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array;
     public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;

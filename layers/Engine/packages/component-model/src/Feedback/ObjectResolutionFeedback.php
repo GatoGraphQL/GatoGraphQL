@@ -21,7 +21,7 @@ class ObjectResolutionFeedback extends AbstractQueryFeedback implements ObjectRe
     /**
      * @param Directive $directive At what stage from the Directive pipeline does the error happen
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @param array<string, mixed> $extensions
+     * @param array<string,mixed> $extensions
      */
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
