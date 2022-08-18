@@ -35,6 +35,7 @@ class MaybeDisableFieldsIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHookSet 
 
     /**
      * Configuration entries
+     * @return array<mixed[]>
      */
     protected function getConfigurationEntries(): array
     {

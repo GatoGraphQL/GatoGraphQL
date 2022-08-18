@@ -16,11 +16,17 @@ class Environment
         return getenv('USER_MUST_BE_LOGGED_IN_TO_ACCESS_ROLES_FIELDS') !== false ? strtolower(getenv('USER_MUST_BE_LOGGED_IN_TO_ACCESS_ROLES_FIELDS')) === "true" : false;
     }
 
+    /**
+     * @return string[]
+     */
     public static function anyRoleLoggedInUserMustHaveToAccessRolesFields(): array
     {
         return getenv('ANY_ROLE_LOGGED_IN_USER_MUST_HAVE_TO_ACCESS_ROLES_FIELDS') !== false ? json_decode(getenv('ANY_ROLE_LOGGED_IN_USER_MUST_HAVE_TO_ACCESS_ROLES_FIELDS')) : [];
     }
 
+    /**
+     * @return string[]
+     */
     public static function anyCapabilityLoggedInUserMustHaveToAccessRolesFields(): array
     {
         return getenv('ANY_CAPABILITY_LOGGED_IN_USER_MUST_HAVE_TO_ACCESS_ROLES_FIELDS') !== false ? json_decode(getenv('ANY_CAPABILITY_LOGGED_IN_USER_MUST_HAVE_TO_ACCESS_ROLES_FIELDS')) : [];

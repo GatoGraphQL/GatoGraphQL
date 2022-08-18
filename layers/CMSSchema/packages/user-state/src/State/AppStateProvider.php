@@ -28,7 +28,7 @@ class AppStateProvider extends AbstractAppStateProvider
     /**
      * Add the user's (non)logged-in state
      *
-     * @param array<string, mixed> $state
+     * @param array<string,mixed> $state
      */
     public function setUserStateVars(array &$state): void
     {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\AbstractOneofMutationResolver;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
 class LoginUserOneofMutationResolver extends AbstractOneofMutationResolver
 {
@@ -19,6 +20,9 @@ class LoginUserOneofMutationResolver extends AbstractOneofMutationResolver
         return $this->loginUserByCredentialsMutationResolver ??= $this->instanceManager->getInstance(LoginUserByCredentialsMutationResolver::class);
     }
 
+    /**
+     * @return array<string,MutationResolverInterface>
+     */
     protected function getInputFieldNameMutationResolvers(): array
     {
         return [

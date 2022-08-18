@@ -11,6 +11,9 @@ abstract class AbstractNoCacheConfigurableAccessControlForFieldsInPrivateSchemaR
 {
     use NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait;
 
+    /**
+     * @return array<mixed[]>
+     */
     protected function getConfigurationEntries(): array
     {
         return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::STATE);

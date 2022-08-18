@@ -20,6 +20,8 @@ abstract class AbstractUserStateConfigurableAccessControlForDirectivesInPrivateS
 
     /**
      * Configuration entries
+     *
+     * @return array<mixed[]>
      */
     protected function getConfigurationEntries(): array
     {

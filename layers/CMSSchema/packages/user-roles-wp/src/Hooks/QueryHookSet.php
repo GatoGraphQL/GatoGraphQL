@@ -20,6 +20,9 @@ class QueryHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function convertUsersQuery(array $query, array $options): array
     {
         if (isset($query['user-roles'])) {

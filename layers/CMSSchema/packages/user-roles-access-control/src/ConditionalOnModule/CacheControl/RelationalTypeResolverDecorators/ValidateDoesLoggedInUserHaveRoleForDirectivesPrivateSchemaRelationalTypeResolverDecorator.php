@@ -8,6 +8,9 @@ use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
 class ValidateDoesLoggedInUserHaveRoleForDirectivesPrivateSchemaRelationalTypeResolverDecorator extends AbstractValidateDoesLoggedInUserHaveItemForDirectivesPrivateSchemaRelationalTypeResolverDecorator
 {
+    /**
+     * @return array<mixed[]>
+     */
     protected function getConfigurationEntries(): array
     {
         return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::ROLES);

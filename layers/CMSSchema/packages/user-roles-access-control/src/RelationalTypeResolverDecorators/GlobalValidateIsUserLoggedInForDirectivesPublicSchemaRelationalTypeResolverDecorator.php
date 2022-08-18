@@ -32,6 +32,9 @@ class GlobalValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolve
         return $this->validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface>>
+     */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return [

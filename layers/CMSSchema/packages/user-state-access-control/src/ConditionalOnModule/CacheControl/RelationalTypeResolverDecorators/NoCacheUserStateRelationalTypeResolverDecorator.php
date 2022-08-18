@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl\ConditionalOnModule\CacheControl\RelationalTypeResolverDecorators;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\CacheControl\Helpers\CacheControlHelper;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\AbstractRelationalTypeResolverDecorator;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -53,6 +54,9 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
         return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface>>
+     */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -62,6 +66,7 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
 
     /**
      * If validating if the user is logged-in, then we can't cache the response
+     * @return array<string,Directive[]>
      */
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {

@@ -29,6 +29,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
 
     /**
      * Verify that the user is logged in before checking the roles/capabilities
+     * @return array<string,Directive[]>
      */
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -90,6 +91,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
     }
     /**
      * Provide the fields that need the "validateIsUserLoggedIn" directive
+     * @return mixed[]
      */
     protected function getFieldNames(): array
     {

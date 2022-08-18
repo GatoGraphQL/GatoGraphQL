@@ -24,6 +24,9 @@ class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
         return 'LoginUserByInput';
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

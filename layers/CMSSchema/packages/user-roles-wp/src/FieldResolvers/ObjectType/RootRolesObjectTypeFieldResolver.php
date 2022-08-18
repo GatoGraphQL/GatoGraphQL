@@ -42,6 +42,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -49,6 +52,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -56,6 +62,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();

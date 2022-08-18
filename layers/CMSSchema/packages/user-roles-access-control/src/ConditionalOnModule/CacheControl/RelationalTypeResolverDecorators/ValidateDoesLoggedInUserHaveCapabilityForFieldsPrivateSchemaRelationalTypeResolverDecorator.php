@@ -8,6 +8,9 @@ use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
 class ValidateDoesLoggedInUserHaveCapabilityForFieldsPrivateSchemaRelationalTypeResolverDecorator extends AbstractValidateDoesLoggedInUserHaveItemForFieldsPrivateSchemaRelationalTypeResolverDecorator
 {
+    /**
+     * @return array<mixed[]>
+     */
     protected function getConfigurationEntries(): array
     {
         return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::CAPABILITIES);

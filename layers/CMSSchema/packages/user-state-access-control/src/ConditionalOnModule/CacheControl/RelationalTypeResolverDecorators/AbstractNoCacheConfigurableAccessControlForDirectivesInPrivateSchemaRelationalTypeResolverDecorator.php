@@ -11,6 +11,9 @@ abstract class AbstractNoCacheConfigurableAccessControlForDirectivesInPrivateSch
 {
     use NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait;
 
+    /**
+     * @return array<mixed[]>
+     */
     protected function getConfigurationEntries(): array
     {
         return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::STATE);
