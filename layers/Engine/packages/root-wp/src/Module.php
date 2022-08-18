@@ -11,7 +11,7 @@ use PoP\Root\Environment;
 class Module extends AbstractModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -23,7 +23,7 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

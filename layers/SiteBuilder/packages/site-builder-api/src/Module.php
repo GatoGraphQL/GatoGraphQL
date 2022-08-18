@@ -10,7 +10,7 @@ use PoP\Root\Module\AbstractModule;
 class Module extends AbstractModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {

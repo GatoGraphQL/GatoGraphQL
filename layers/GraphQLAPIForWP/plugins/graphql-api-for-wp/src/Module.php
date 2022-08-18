@@ -17,7 +17,7 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 class Module extends AbstractPluginModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -86,7 +86,7 @@ class Module extends AbstractPluginModule
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
