@@ -12,6 +12,9 @@ class FormInput
     public readonly mixed $selected;
     public readonly array $params;
 
+    /**
+     * @param array<string,mixed> $params
+     */
     public function __construct(string $name, mixed $selected = null, array $params = [])
     {
         $this->name = $name;
