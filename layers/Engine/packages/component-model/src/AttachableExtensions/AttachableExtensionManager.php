@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\AttachableExtensions;
 class AttachableExtensionManager implements AttachableExtensionManagerInterface
 {
     /**
-     * @var array<string, array<string, AttachableExtensionInterface[]>>
+     * @var array<string,array<string,AttachableExtensionInterface[]>>
      */
     protected array $attachableExtensions = [];
 

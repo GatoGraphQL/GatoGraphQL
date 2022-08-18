@@ -18,6 +18,7 @@ class DirectivePipelineUtils
      * @param array<FieldDataAccessProviderInterface> $pipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @return array<string,mixed>
      */
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -45,6 +46,9 @@ class DirectivePipelineUtils
         ];
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function extractArgumentsFromPayload(array $payload): array
     {
         return [

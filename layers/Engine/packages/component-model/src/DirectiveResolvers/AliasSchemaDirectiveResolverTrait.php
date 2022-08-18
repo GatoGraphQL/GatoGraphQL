@@ -48,6 +48,8 @@ trait AliasSchemaDirectiveResolverTrait
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
+     *
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -95,6 +97,7 @@ trait AliasSchemaDirectiveResolverTrait
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
+     * @return mixed[]
      */
     public function getConsolidatedDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -164,6 +167,7 @@ trait AliasSchemaDirectiveResolverTrait
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
+     * @return mixed[]
      */
     public function getFieldNamesToApplyTo(): array
     {

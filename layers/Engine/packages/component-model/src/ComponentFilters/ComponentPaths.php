@@ -30,7 +30,7 @@ class ComponentPaths extends AbstractComponentFilter
      */
     protected array $propagation_unsettled_paths = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $backlog_unsettled_paths = [];
 
@@ -86,7 +86,7 @@ class ComponentPaths extends AbstractComponentFilter
 
     /**
      * @param Component[] $subcomponents
-     * @return Component[]
+     * @return Component[]|mixed[]
      */
     public function removeExcludedSubcomponents(Component $component, array $subcomponents): array
     {

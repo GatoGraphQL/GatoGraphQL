@@ -8,6 +8,9 @@ class RootComponentProcessors extends AbstractComponentProcessor
 {
     public final const COMPONENT_EMPTY = 'empty';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

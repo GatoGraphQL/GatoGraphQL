@@ -199,6 +199,9 @@ class Engine implements EngineInterface
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getOutputData(): array
     {
         $engineState = App::getEngineState();
@@ -294,6 +297,9 @@ class Engine implements EngineInterface
         return hash('md5', $commoncode);
     }
 
+    /**
+     * @return string[]
+     */
     public function getExtraRoutes(): array
     {
         $engineState = App::getEngineState();
@@ -323,6 +329,9 @@ class Engine implements EngineInterface
         return $engineState->extra_routes;
     }
 
+    /**
+     * @return array{0: bool, 1: ?string, 2: ?string}
+     */
     public function listExtraRouteVars(): array
     {
         $model_instance_id = $current_uri = null;
@@ -452,7 +461,11 @@ class Engine implements EngineInterface
         $engineState->outputData = $this->getEncodedDataObject($engineState->data);
     }
 
-    // Allow PoPWebPlatform_Engine to override this function
+    /**
+     * Allow PoPWebPlatform_Engine to override this function
+     *
+     * @return array<string,mixed>
+     */
     protected function getEncodedDataObject(array $data): array
     {
         // Comment Leo 14/09/2018: Re-enable here:
@@ -462,6 +475,9 @@ class Engine implements EngineInterface
         return $data;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getModelPropsComponentTree(Component $component): array
     {
         /** @var ModuleConfiguration */
@@ -491,6 +507,9 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
+    /**
+     * @return array<string,mixed>
+     */
     public function addRequestPropsComponentTree(Component $component, array $props): array
     {
         $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
@@ -656,6 +675,9 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array
     {
         $ret = [];
@@ -703,6 +725,9 @@ class Engine implements EngineInterface
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getRequestMeta(): array
     {
         /** @var ModuleInfo */
@@ -743,6 +768,9 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSessionMeta(): array
     {
         return App::applyFilters(
@@ -758,6 +786,9 @@ class Engine implements EngineInterface
     {
         return true;
     }
+    /**
+     * @return array<string,mixed>
+     */
     public function getSiteMeta(): array
     {
         $meta = [];
@@ -946,6 +977,9 @@ class Engine implements EngineInterface
         $this->doAddDatasetToDatabase($database, $typeOutputKey, $dataItems);
     }
 
+    /**
+     * @return mixed[]
+     */
     protected function getInterreferencedComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
@@ -1105,6 +1139,9 @@ class Engine implements EngineInterface
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
+    /**
+     * @return array<string,mixed[]>
+     */
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
@@ -1561,7 +1598,7 @@ class Engine implements EngineInterface
      * Place all entries under dbName "primary"
      *
      * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
-     * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
+     * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<mixed,array<int|string,SplObjectStorage<FieldInterface,mixed>>>
      */
     protected function getEntriesUnderPrimaryDBName(
         array|SplObjectStorage $entries,
@@ -1635,6 +1672,9 @@ class Engine implements EngineInterface
         return $dbname_entries;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function generateDatabases(
         array &$schemaFeedbackEntries,
         array &$objectFeedbackEntries,

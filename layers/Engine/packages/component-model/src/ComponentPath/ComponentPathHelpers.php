@@ -59,6 +59,9 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
         );
     }
 
+    /**
+     * @return array<Component|null>
+     */
     public function recastComponentPath(string $componentPath_as_string): array
     {
         return array_map(

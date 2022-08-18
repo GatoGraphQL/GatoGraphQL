@@ -177,6 +177,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->directive;
     }
 
+    /**
+     * @return string[]
+     */
     final public function getClassesToAttachTo(): array
     {
         return $this->getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo();

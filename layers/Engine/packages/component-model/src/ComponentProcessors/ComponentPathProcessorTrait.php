@@ -24,7 +24,10 @@ trait ComponentPathProcessorTrait
         return $this->getComponentProcessorManager()->getComponentProcessor($component);
     }
 
-    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs)
+    /**
+     * @return array<int|string,mixed>
+     */
+    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         $ret = [];
         $key = $this->getComponentHelpers()->getComponentOutputName($component);

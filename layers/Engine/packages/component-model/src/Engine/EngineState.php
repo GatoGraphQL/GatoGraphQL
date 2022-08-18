@@ -31,15 +31,15 @@ class EngineState
          */
         public array $nocache_fields = [],
         /**
-         * @var array<string, mixed>
+         * @var array<string,mixed>
          */
         public ?array $componentdata = null,
         /**
-         * @var array<string, array>
+         * @var array<string,array>
          */
         public array $dbdata = [],
         /**
-         * @var array<string, array>
+         * @var array<string,array>
          */
         public array $backgroundload_urls = [],
         /**
@@ -48,7 +48,7 @@ class EngineState
         public ?array $extra_routes = null,
         public ?bool $cachedsettings = null,
         /**
-         * @var array<string, mixed>
+         * @var array<string,mixed>
          */
         public array $outputData = [],
         public ?Component $entryComponent = null,

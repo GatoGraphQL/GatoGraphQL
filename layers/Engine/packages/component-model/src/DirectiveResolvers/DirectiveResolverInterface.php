@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -22,7 +23,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
      *
-     * @return string[]
+     * @return array<class-string<InterfaceTypeResolverInterface|RelationalTypeResolverInterface>>
      */
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array;
     public function getDirectiveName(): string;

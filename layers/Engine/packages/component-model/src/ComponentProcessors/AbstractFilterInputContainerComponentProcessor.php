@@ -45,6 +45,9 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
         ];
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldFilterInputNameTypeResolvers(Component $component): array
     {
         $filterQueryArgsComponents = $this->getDataloadQueryArgsFilteringComponents($component);
