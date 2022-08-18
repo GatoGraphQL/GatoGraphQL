@@ -369,7 +369,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     new SchemaFeedback(
                         new FeedbackItemResolution(
                             DeprecationFeedbackItemProvider::class,
-                            DeprecationFeedbackItemProvider::D1,
+                            DeprecationFeedbackItemProvider::D2,
                             [
                                 $directiveName,
                                 $deprecationMessage,
