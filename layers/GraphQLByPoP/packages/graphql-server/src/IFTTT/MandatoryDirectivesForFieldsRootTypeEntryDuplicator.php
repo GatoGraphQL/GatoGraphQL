@@ -75,6 +75,9 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         );
     }
 
+    /**
+     * @return array<mixed[]>
+     */
     protected function getAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes): array
     {
         // Get the entries assigned to Root
@@ -118,6 +121,9 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
     /**
      * Filter the entries set to Root
+     *
+     * @param array<mixed[]> $fieldEntries
+     * @return array<mixed[]>
      */
     protected function filterRootEntriesForFields(array $fieldEntries): array
     {
