@@ -33,7 +33,7 @@ interface CustomPostTypeAPIInterface
      *
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
-     * @return object[]
+     * @return array<string|int>|object[]
      */
     public function getCustomPosts(array $query, array $options = []): array;
     /**

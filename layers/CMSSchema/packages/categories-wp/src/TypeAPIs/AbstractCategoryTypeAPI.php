@@ -67,7 +67,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     abstract protected function getCategoryTaxonomyName(): string;
 
     /**
-     * @return object[]
+     * @return array<string|int>|object[]
      */
     public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array
     {
@@ -116,7 +116,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return -1;
     }
     /**
-     * @return object[]
+     * @return array<string|int>|object[]
      */
     public function getCategories(array $query, array $options = []): array
     {

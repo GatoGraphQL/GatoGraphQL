@@ -39,7 +39,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     }
 
     /**
-     * @return object[]
+     * @return array<string|int>|object[]
      */
     public function getComments(array $query, array $options = []): array
     {

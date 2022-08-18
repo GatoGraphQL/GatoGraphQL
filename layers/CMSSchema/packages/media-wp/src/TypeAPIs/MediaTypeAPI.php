@@ -134,7 +134,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     }
 
     /**
-     * @return object[]
+     * @return array<string|int>|object[]
      */
     public function getMediaItems(array $query, array $options = []): array
     {

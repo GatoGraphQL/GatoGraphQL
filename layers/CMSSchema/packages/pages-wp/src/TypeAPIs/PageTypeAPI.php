@@ -25,9 +25,9 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
@@ -45,7 +45,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     /**
      * Query args that must always be in the query
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryRequiredArgs(): array
     {
@@ -58,9 +58,9 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     }
 
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     protected function convertPagesQuery(array $query, array $options = []): array
     {
@@ -144,6 +144,9 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
         return $moduleConfiguration->getPageListMaxLimit();
     }
 
+    /**
+     * @return array<string|int>|object[]
+     */
     public function getPages(array $query, array $options = []): array
     {
         /**

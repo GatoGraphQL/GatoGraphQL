@@ -29,7 +29,7 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      * Get the list of pages.
      * If param "status" in $query is not passed, it defaults to "publish"
      *
-     * @return object[]
+     * @return array<string|int>|object[]
      */
     public function getPages(array $query, array $options = []): array;
     /**
