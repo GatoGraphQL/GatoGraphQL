@@ -202,7 +202,8 @@ class ExecutableDocument extends UpstreamExecutableDocument
     /**
      * @throws InvalidRequestException
      */
-    protected function assertVariableIsInputType(Variable $variable): void {
+    protected function assertVariableIsInputType(Variable $variable): void
+    {
         foreach ($this->compositeUnionTypeResolvers as $typeResolver) {
             if ($this->isTypeResolverForType($variable->getTypeName(), $typeResolver)) {
                 throw new InvalidRequestException(
