@@ -204,21 +204,19 @@ class ExecutableDocument extends UpstreamExecutableDocument
      */
     protected function assertVariableIsInputType(Variable $variable): void {
         foreach ($this->compositeUnionTypeResolvers as $typeResolver) {
-            if (!$this->isTypeResolverForType($variable->getTypeName(), $typeResolver)) {
-                continue;
+            if ($this->isTypeResolverForType($variable->getTypeName(), $typeResolver)) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_8_2,
+                        [
+                            $variable->getName(),
+                            $variable->getTypeName(),
+                        ]
+                    ),
+                    $variable
+                );
             }
         }
-
-        throw new InvalidRequestException(
-            new FeedbackItemResolution(
-                GraphQLSpecErrorFeedbackItemProvider::class,
-                GraphQLSpecErrorFeedbackItemProvider::E_5_8_2,
-                [
-                    $variable->getName(),
-                    $variable->getTypeName(),
-                ]
-            ),
-            $variable
-        );
     }
 }
