@@ -22,7 +22,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $ret = [];
 
-        // Add feedback
+        /**
+         * Calculate the data first (even if printed later)
+         * as it can also add errors.
+         */
+        $resultData = parent::getFormattedData($data);
+        $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
+
+        /**
+         * Print the feedback at the top
+         */
         $errors = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
@@ -33,9 +42,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $ret['errors'] = $errors;
         }
 
-        $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
-
-        if ($resultData = parent::getFormattedData($data)) {
+        if ($resultData) {
             $ret['data'] = $resultData;
         }
 
