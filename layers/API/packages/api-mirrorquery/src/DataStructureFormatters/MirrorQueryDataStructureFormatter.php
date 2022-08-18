@@ -6,9 +6,13 @@ namespace PoPAPI\APIMirrorQuery\DataStructureFormatters;
 
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\FieldOutputKeys;
+use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
+use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -228,6 +232,31 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 if (!$resolvedObject->contains($leafField)) {
                     continue;
                 }
+                /**
+                 * Validate Field Selection Merging: 2 different fields
+                 * cannot have the same name/alias on the same block in
+                 * the response.
+                 *
+                 * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
+                 */
+                if (array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)) {
+                    /**
+                     * It's an error =>  set response to null
+                     */
+                    $resolvedObjectRet[$leafField->getOutputKey()] = null;
+                    $locations = [];
+                    $location = $leafField->getLocation();
+                    if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
+                        $locations[] = $location->toArray();
+                    }
+                    $item = [
+                        Tokens::MESSAGE => 'songa',
+                        Tokens::LOCATIONS => $locations,
+                        Tokens::IDS => [$objectID],
+                    ];
+                    $sourceRet[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] = $this->getObjectEntry($typeOutputKey, $item);
+                    continue;
+                }
                 $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
                 continue;
             }
@@ -298,5 +327,66 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             );
             $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
+    }
+
+    protected function getObjectEntry(string $typeOutputKey, array $item): array
+    {
+        $entry = [
+            'message' => $item[Tokens::MESSAGE],
+        ];
+        if ($locations = $item[Tokens::LOCATIONS]) {
+            $entry['locations'] = $locations;
+        }
+        /**
+         * Add the causes of the error, if any.
+         *
+         * @see https://github.com/graphql/graphql-spec/issues/893
+         */
+        if ($causes = $item[Tokens::CAUSES] ?? []) {
+            $entry['causes'] = $causes;
+        }
+        if (
+            $extensions = array_merge(
+                $this->getObjectEntryExtensions($typeOutputKey, $item),
+                $item[Tokens::EXTENSIONS] ?? []
+            )
+        ) {
+            $entry['extensions'] = $extensions;
+        }
+        return $entry;
+    }
+
+    /**
+     * The entry is similar to Schema, plus the
+     * addition of the object ID/IDs
+     */
+    protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
+    {
+        $extensions = $this->getSchemaEntryExtensions($typeOutputKey, $item);
+
+        /** @var array<string|int> */
+        $ids = $item[Tokens::IDS];
+        if (count($ids) === 1) {
+            $extensions['id'] = $ids[0];
+        } else {
+            $extensions['ids'] = $ids;
+        }
+
+        return $extensions;
+    }
+
+    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
+    {
+        $extensions = [];
+        if ($path = $item[Tokens::PATH] ?? null) {
+            $extensions['path'] = $path;
+        }
+        $extensions['type'] = $typeOutputKey;
+        if ($field = $item[Tokens::FIELD] ?? null) {
+            $extensions['field'] = $field;
+        } elseif ($dynamicField = $item[Tokens::DYNAMIC_FIELD] ?? null) {
+            $extensions['dynamicField'] = $dynamicField;
+        }
+        return $extensions;
     }
 }

@@ -230,21 +230,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
-    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
-    {
-        $extensions = [];
-        if ($path = $item[Tokens::PATH] ?? null) {
-            $extensions['path'] = $path;
-        }
-        $extensions['type'] = $typeOutputKey;
-        if ($field = $item[Tokens::FIELD] ?? null) {
-            $extensions['field'] = $field;
-        } elseif ($dynamicField = $item[Tokens::DYNAMIC_FIELD] ?? null) {
-            $extensions['dynamicField'] = $dynamicField;
-        }
-        return $extensions;
-    }
-
     protected function reformatObjectEntries(array $entries): array
     {
         $ret = [];
@@ -259,51 +244,5 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             }
         }
         return $ret;
-    }
-
-    protected function getObjectEntry(string $typeOutputKey, array $item): array
-    {
-        $entry = [
-            'message' => $item[Tokens::MESSAGE],
-        ];
-        if ($locations = $item[Tokens::LOCATIONS]) {
-            $entry['locations'] = $locations;
-        }
-        /**
-         * Add the causes of the error, if any.
-         *
-         * @see https://github.com/graphql/graphql-spec/issues/893
-         */
-        if ($causes = $item[Tokens::CAUSES] ?? []) {
-            $entry['causes'] = $causes;
-        }
-        if (
-            $extensions = array_merge(
-                $this->getObjectEntryExtensions($typeOutputKey, $item),
-                $item[Tokens::EXTENSIONS] ?? []
-            )
-        ) {
-            $entry['extensions'] = $extensions;
-        }
-        return $entry;
-    }
-
-    /**
-     * The entry is similar to Schema, plus the
-     * addition of the object ID/IDs
-     */
-    protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
-    {
-        $extensions = $this->getSchemaEntryExtensions($typeOutputKey, $item);
-
-        /** @var array<string|int> */
-        $ids = $item[Tokens::IDS];
-        if (count($ids) === 1) {
-            $extensions['id'] = $ids[0];
-        } else {
-            $extensions['ids'] = $ids;
-        }
-
-        return $extensions;
     }
 }
