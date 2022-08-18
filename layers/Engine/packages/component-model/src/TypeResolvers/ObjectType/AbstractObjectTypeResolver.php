@@ -1658,8 +1658,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
         return new FeedbackItemResolution(
-            ErrorFeedbackItemProvider::class,
-            ErrorFeedbackItemProvider::E16,
+            GraphQLSpecErrorFeedbackItemProvider::class,
+            GraphQLSpecErrorFeedbackItemProvider::E_5_3_1,
             [
                 $field->getName(),
                 $this->getMaybeNamespacedTypeName(),

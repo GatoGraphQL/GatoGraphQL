@@ -25,7 +25,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E12 = 'e12';
     public final const E13 = 'e13';
     public final const E15 = 'e15';
-    public final const E16 = 'e16';
     public final const E17 = 'e17';
     public final const E21 = 'e21';
     public final const E22 = 'e22';
@@ -53,7 +52,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E12,
             self::E13,
             self::E15,
-            self::E16,
             self::E17,
             self::E21,
             self::E22,
@@ -80,7 +78,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E13 => $this->__('Object with ID \'%s\' does not exist or cannot be retrieved', 'component-model'),
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
-            self::E16 => $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
             self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E21 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),
             self::E22 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field \'%s\'', 'component-model'),
