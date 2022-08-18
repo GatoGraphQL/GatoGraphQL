@@ -41,6 +41,9 @@ class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObject
         return $this->__('Oneof input to specify the property and data to fetch a comment', 'comments');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

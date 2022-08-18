@@ -56,7 +56,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

@@ -38,6 +38,9 @@ abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver ex
         return $this->__('Input to set categories on a custom post', 'comment-mutations');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -16,6 +18,9 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 {
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -23,6 +28,9 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -49,6 +57,9 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {

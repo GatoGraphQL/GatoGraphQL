@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -85,6 +86,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -92,6 +96,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         ];
     }
 
+    /**
+     * @return array<\PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface>
+     */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
@@ -186,6 +193,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
         return match ($fieldName) {

@@ -32,6 +32,9 @@ class RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver extends
         return $this->__('Input to remove the featured image from a custom post', 'custompostmedia-mutations');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

@@ -47,6 +47,9 @@ abstract class AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver extends 
         return $this->__('Input to set tags on a custom post', 'comment-mutations');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(

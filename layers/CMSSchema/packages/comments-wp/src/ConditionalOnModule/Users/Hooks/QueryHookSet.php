@@ -26,6 +26,9 @@ class QueryHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function convertCommentQuery(array $query, array $options): array
     {
         if (isset($query['userID'])) {

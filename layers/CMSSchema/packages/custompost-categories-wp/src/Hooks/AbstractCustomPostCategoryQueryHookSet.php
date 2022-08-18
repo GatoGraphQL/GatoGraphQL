@@ -20,6 +20,9 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function convertCustomPostsQuery($query, array $options): array
     {
         if (isset($query['categories'])) {

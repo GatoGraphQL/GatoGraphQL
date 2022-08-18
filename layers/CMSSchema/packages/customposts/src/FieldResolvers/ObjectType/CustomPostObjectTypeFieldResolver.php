@@ -8,6 +8,9 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTy
 
 class CustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [

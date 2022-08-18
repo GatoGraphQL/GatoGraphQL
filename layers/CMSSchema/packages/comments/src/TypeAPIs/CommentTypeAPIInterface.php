@@ -14,6 +14,9 @@ interface CommentTypeAPIInterface
      */
     public function isInstanceOfCommentType(object $object): bool;
 
+    /**
+     * @return object[]
+     */
     public function getComments(array $query, array $options = []): array;
     public function getCommentCount(array $query, array $options = []): int;
     public function getComment(string|int $comment_id): ?object;

@@ -20,6 +20,9 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function convertCustomPostsQuery($query, array $options): array
     {
         if (isset($query['tag-ids'])) {

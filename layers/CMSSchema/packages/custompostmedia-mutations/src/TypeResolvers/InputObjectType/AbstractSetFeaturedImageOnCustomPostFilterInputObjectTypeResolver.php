@@ -27,6 +27,9 @@ abstract class AbstractSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver
         return $this->__('Input to set the featured image on a custom post', 'custompostmedia-mutations');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(

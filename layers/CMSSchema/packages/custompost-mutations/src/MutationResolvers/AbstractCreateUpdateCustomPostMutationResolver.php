@@ -331,6 +331,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = array(
@@ -341,6 +344,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $post_data;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = [
@@ -352,7 +358,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
 
     /**
-     * @param array<string, mixed> $post_data
+     * @param array<string,mixed> $post_data
      * @return string|int the ID of the updated custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
@@ -365,6 +371,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     {
     }
 
+    /**
+     * @return array<string,string>|null[]
+     */
     protected function getUpdateCustomPostDataLog(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [
@@ -404,7 +413,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
 
     /**
-     * @param array<string, mixed> $post_data
+     * @param array<string,mixed> $post_data
      * @return string|int the ID of the created custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */

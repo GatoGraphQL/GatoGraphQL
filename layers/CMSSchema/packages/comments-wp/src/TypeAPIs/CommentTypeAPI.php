@@ -38,12 +38,18 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         return $object instanceof WP_Comment;
     }
 
+    /**
+     * @return object[]
+     */
     public function getComments(array $query, array $options = []): array
     {
         $query = $this->convertCommentsQuery($query, $options);
         return (array) get_comments($query);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function convertCommentsQuery(array $query, array $options): array
     {
         if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {

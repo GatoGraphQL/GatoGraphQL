@@ -43,6 +43,9 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -50,6 +53,9 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToImplement(): array
     {
         return [

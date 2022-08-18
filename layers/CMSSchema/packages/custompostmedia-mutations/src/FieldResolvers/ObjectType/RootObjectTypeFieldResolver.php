@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -68,6 +69,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->rootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -75,6 +79,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
@@ -97,6 +104,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
