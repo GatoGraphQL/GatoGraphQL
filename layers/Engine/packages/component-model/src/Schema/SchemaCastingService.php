@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
+use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
 class SchemaCastingService implements SchemaCastingServiceInterface
@@ -150,30 +154,29 @@ class SchemaCastingService implements SchemaCastingServiceInterface
 
             /**
              * Obtain the deprecations
-             * @todo Re-enable! Temporarily commented because it throws error on test "dynamic-variable-type-casting"
              */
-            // if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
-            //     $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
-            //         $fieldOrDirectiveArgTypeResolver,
-            //         $coercedArgValue,
-            //         $fieldOrDirectiveArgIsArrayType,
-            //         $fieldOrDirectiveArgIsArrayOfArraysType,
-            //     );
-            //     foreach ($deprecationMessages as $deprecationMessage) {
-            //         $objectTypeFieldResolutionFeedbackStore->addDeprecation(
-            //             new ObjectTypeFieldResolutionFeedback(
-            //                 new FeedbackItemResolution(
-            //                     GenericFeedbackItemProvider::class,
-            //                     GenericFeedbackItemProvider::D1,
-            //                     [
-            //                         $deprecationMessage,
-            //                     ]
-            //                 ),
-            //                 $astNode,
-            //             )
-            //         );
-            //     }
-            // }
+            if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
+                $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
+                    $fieldOrDirectiveArgTypeResolver,
+                    $coercedArgValue,
+                    $fieldOrDirectiveArgIsArrayType,
+                    $fieldOrDirectiveArgIsArrayOfArraysType,
+                );
+                foreach ($deprecationMessages as $deprecationMessage) {
+                    $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::D1,
+                                [
+                                    $deprecationMessage,
+                                ]
+                            ),
+                            $astNode,
+                        )
+                    );
+                }
+            }
         }
         return $argumentKeyValues;
     }
