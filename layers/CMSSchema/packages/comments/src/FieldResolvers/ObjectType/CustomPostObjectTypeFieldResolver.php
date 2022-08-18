@@ -37,6 +37,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return $this->commentableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CommentableInterfaceTypeFieldResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -44,6 +47,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         ];
     }
 
+    /**
+     * @return array<\PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface>
+     */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [

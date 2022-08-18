@@ -31,6 +31,7 @@ class EnumTypeHookSet extends AbstractHookSet
 
     /**
      * @param string[] $enumValues
+     * @return string[]
      */
     public function getEnumValues(
         array $enumValues,
