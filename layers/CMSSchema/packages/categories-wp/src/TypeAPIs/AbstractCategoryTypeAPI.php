@@ -66,14 +66,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     abstract protected function getCategoryTaxonomyName(): string;
 
-    public function getCategory($category_id)
-    {
-        return get_category($category_id, $this->getCategoryTaxonomyName());
-    }
-    public function getCategoryByName($category_name)
-    {
-        return get_term_by('name', $category_name, $this->getCategoryTaxonomyName());
-    }
     public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
