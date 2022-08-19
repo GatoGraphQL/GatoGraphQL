@@ -26,7 +26,7 @@ class RequestValidatorTest extends AbstractTestCase
     /**
      * @dataProvider invalidRequestProvider
      */
-    public function testInvalidRequests(ExecutableDocument $executableDocument)
+    public function testInvalidRequests(ExecutableDocument $executableDocument): void
     {
         $this->expectException(InvalidRequestException::class);
         $exceptionMessages = [
