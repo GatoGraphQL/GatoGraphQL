@@ -536,6 +536,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @return array<string|int,object>
      */
     public function fillObjects(
         array $idFieldSet,
@@ -1318,6 +1319,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $this;
     }
 
+    /**
+     * @return array<string,DirectiveResolverInterface[]>
+     */
     protected function calculateFieldDirectiveNameResolvers(): array
     {
         $directiveNameResolvers = [];
