@@ -83,7 +83,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string, module: string, option: string, callback: Closure():mixed, condition: string}>
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string, module: string, option: string, ?callback: Closure(), ?condition: string}>
      */
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
@@ -507,7 +507,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int,array{"class": class-string<ModuleInterface>, envVariable: string, callback: Closure():bool}>
+     * @return array<int,array{"class": class-string<ModuleInterface>, envVariable: string, callback: Closure()}>
      */
     protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
@@ -657,7 +657,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     }
 
     /**
-     * @return array<int,array{module: string, class: class-string<\GraphQLByPoP\GraphQLEndpointForWP\Module>|class-string<\GraphQLByPoP\GraphQLClientsForWP\Module>, envVariable: string, callback?: Closure():bool}>
+     * @return array<int,array{module: string, class: class-string<\GraphQLByPoP\GraphQLEndpointForWP\Module>|class-string<\GraphQLByPoP\GraphQLClientsForWP\Module>, envVariable: string, callback?: Closure()}>
      */
     protected function getModuleToModuleClassConfigurationMapping(): array
     {
