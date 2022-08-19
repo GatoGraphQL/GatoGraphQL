@@ -74,7 +74,7 @@ trait HasFieldsTypeTrait
             $this->fields :
             array_filter(
                 $this->fields,
-                function (Field $field) {
+                function (Field $field): bool {
                     return !$field->isDeprecated();
                 }
             );
@@ -85,7 +85,7 @@ trait HasFieldsTypeTrait
     public function getFieldIDs(bool $includeDeprecated = false): array
     {
         return array_map(
-            function (Field $field) {
+            function (Field $field): string {
                 return $field->getID();
             },
             $this->getFields($includeDeprecated)

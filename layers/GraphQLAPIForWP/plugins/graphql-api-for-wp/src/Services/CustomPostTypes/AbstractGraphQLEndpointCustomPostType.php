@@ -46,10 +46,9 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      * Get actions to add for this CPT
      * "View" action must be attached ?view=source, and the view link is called "Execute"
      *
-     * @param WP_Post $post
      * @return array<string,string>
      */
-    protected function getCustomPostTypeTableActions($post): array
+    protected function getCustomPostTypeTableActions(WP_Post $post): array
     {
         $actions = parent::getCustomPostTypeTableActions($post);
         $post_type_object = \get_post_type_object($post->post_type);

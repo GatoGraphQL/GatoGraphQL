@@ -51,7 +51,7 @@ class EnumType extends AbstractNamedType
             $this->enumValues :
             array_filter(
                 $this->enumValues,
-                function (EnumValue $enumValue) {
+                function (EnumValue $enumValue): bool {
                     return !$enumValue->isDeprecated();
                 }
             );
@@ -62,7 +62,7 @@ class EnumType extends AbstractNamedType
     public function getEnumValueIDs(bool $includeDeprecated = false): array
     {
         return array_map(
-            function (EnumValue $enumValue) {
+            function (EnumValue $enumValue): string {
                 return $enumValue->getID();
             },
             $this->getEnumValues($includeDeprecated)

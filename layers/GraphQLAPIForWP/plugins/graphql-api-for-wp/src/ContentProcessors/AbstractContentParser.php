@@ -383,7 +383,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         // Identify videos from Vimeo
         return (string)preg_replace_callback(
             '/<p>(.*?)<a href="https:\/\/(vimeo.com)\/(.*?)">(.*?)<\/a>\.?<\/p>/',
-            function ($matches) {
+            function (array $matches): string {
                 // $videoURL = sprintf('https://%s/%s', $matches[2], $matches[3]);
                 $playerURL = sprintf('https://player.vimeo.com/video/%s', $matches[3]);
                 $videoHTML = sprintf(
@@ -459,7 +459,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         );
         return (string)preg_replace_callback(
             $regex,
-            function ($matches) use ($pathURL, $attr) {
+            function (array $matches) use ($pathURL, $attr): string {
                 // If the element has an absolute route, then no need
                 if ($this->isAbsoluteURL($matches[1]) || $this->isMailto($matches[1])) {
                     return $matches[0];

@@ -30,7 +30,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     use BasicServiceTrait;
 
     /**
-     * @var array<string,mixed>
+     * @var array<string,mixed>|null
      */
     protected ?array $fullSchemaDefinitionForGraphQL = null;
     /**
@@ -100,6 +100,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      *
      *   Public schema: can cache
      *   Private schema: cannot cache
+     *
      * @return array<string,mixed>
      */
     private function &doGetGraphQLSchemaDefinition(): array

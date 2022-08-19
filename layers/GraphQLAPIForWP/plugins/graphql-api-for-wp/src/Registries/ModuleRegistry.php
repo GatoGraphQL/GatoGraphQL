@@ -153,7 +153,7 @@ class ModuleRegistry implements ModuleRegistryInterface
                 continue;
             }
             $dependedModuleListEnabled = array_map(
-                function ($dependedModule) {
+                function (string $dependedModule): bool {
                     // Check if it has the "inverse" token at the beginning,
                     // then it depends on the module being disabled, not enabled
                     if (substr($dependedModule, 0, strlen(ModuleRegistryTokens::INVERSE_DEPENDENCY)) == ModuleRegistryTokens::INVERSE_DEPENDENCY) {

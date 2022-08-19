@@ -134,7 +134,7 @@ class Schema
     public function getTypeIDs(): array
     {
         return array_map(
-            function (NamedTypeInterface $type) {
+            function (NamedTypeInterface $type): string {
                 return $type->getID();
             },
             $this->types
@@ -146,7 +146,7 @@ class Schema
     public function getDirectiveIDs(): array
     {
         return array_map(
-            function (Directive $directive) {
+            function (Directive $directive): string {
                 return $directive->getID();
             },
             $this->directives

@@ -137,7 +137,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                             if (
                                 $entriesForFields = GeneralUtils::arrayFlatten(
                                     array_map(
-                                        function ($selectedField) use ($value, $schemaMode) {
+                                        function (string $selectedField) use ($value, $schemaMode): array {
                                             return $this->getIndividualControlEntriesFromField(
                                                 $selectedField,
                                                 $value,
@@ -158,7 +158,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                             if (
                                 $entriesForDirectives = GeneralUtils::arrayFlatten(array_filter(
                                     array_map(
-                                        function ($selectedDirective) use ($value, $schemaMode) {
+                                        function (string $selectedDirective) use ($value, $schemaMode): ?array {
                                             return $this->getIndividualControlEntriesFromDirective(
                                                 $selectedDirective,
                                                 $value,

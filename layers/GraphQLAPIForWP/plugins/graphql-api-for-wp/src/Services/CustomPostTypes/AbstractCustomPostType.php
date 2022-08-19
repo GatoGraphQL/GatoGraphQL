@@ -309,10 +309,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @see https://developer.wordpress.org/reference/hooks/post_row_actions/
      * @param array<string,string> $actions
-     * @param WP_Post $post
      * @return array<string,string>
      */
-    public function maybeAddCustomPostTypeTableActions(array $actions, $post): array
+    public function maybeAddCustomPostTypeTableActions(array $actions, WP_Post $post): array
     {
         if ($post->post_type === $this->getCustomPostType()) {
             $actions = \array_merge(
@@ -326,10 +325,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Get actions to add for this CPT
      *
-     * @param WP_Post $post
      * @return array<string,string>
      */
-    protected function getCustomPostTypeTableActions($post): array
+    protected function getCustomPostTypeTableActions(WP_Post $post): array
     {
         return [];
     }

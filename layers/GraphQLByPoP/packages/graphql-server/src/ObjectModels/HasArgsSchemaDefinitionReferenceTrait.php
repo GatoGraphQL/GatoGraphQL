@@ -49,7 +49,7 @@ trait HasArgsSchemaDefinitionReferenceTrait
     public function getArgIDs(): array
     {
         return array_map(
-            function (InputValue $inputValue) {
+            function (InputValue $inputValue): string {
                 return $inputValue->getID();
             },
             $this->getArgs()

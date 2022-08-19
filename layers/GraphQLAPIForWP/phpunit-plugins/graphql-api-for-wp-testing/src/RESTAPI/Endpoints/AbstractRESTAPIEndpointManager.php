@@ -15,7 +15,7 @@ abstract class AbstractRESTAPIEndpointManager
         $this->initialize();
     }
 
-    public function initialize()
+    public function initialize(): void
     {
         if (!class_exists('WP_REST_Server')) {
             return;
