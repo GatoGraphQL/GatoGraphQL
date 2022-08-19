@@ -16,6 +16,10 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
 
     protected DirectiveExtensions $directiveExtensions;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param array<string,mixed> $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);

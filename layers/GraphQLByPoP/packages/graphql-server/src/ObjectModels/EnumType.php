@@ -13,12 +13,20 @@ class EnumType extends AbstractNamedType
      */
     protected array $enumValues;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param array<string,mixed> $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initEnumValues($fullSchemaDefinition, $schemaDefinitionPath);
     }
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param array<string,mixed> $schemaDefinitionPath
+     */
     protected function initEnumValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->enumValues = [];

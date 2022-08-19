@@ -17,6 +17,10 @@ trait HasFieldsTypeTrait
      */
     protected array $fields;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param array<string,mixed> $schemaDefinitionPath
+     */
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->fields = [];
@@ -50,6 +54,10 @@ trait HasFieldsTypeTrait
             });
         }
     }
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param array<string, mixed> $fieldSchemaDefinitionPath
+     */
     protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
@@ -57,6 +65,10 @@ trait HasFieldsTypeTrait
             SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
     }
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param array<string, mixed> $fieldSchemaDefinitionPath
+     */
     protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(

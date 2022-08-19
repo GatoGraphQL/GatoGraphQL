@@ -12,6 +12,10 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
 
     protected InputValueExtensions $inputValueExtensions;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param array<string,mixed> $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);

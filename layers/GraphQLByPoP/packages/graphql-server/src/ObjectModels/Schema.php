@@ -26,6 +26,9 @@ class Schema
     protected array $directives;
     protected SchemaExtensions $schemaExtensions;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     */
     public function __construct(
         array &$fullSchemaDefinition,
         protected string $id
@@ -62,6 +65,9 @@ class Schema
         ];
         $this->schemaExtensions = new SchemaExtensions($fullSchemaDefinition, $schemaExtensionsSchemaDefinitionPath);
     }
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     */
     protected function getTypeInstance(array &$fullSchemaDefinition, string $typeKind, string $typeName): NamedTypeInterface
     {
         $typeSchemaDefinitionPath = [
@@ -85,6 +91,9 @@ class Schema
         };
     }
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     */
     protected function getDirectiveInstance(array &$fullSchemaDefinition, string $directiveName): Directive
     {
         $directiveSchemaDefinitionPath = [
