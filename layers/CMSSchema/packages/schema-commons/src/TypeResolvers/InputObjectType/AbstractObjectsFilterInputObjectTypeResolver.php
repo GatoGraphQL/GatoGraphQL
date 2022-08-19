@@ -42,6 +42,9 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
         return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

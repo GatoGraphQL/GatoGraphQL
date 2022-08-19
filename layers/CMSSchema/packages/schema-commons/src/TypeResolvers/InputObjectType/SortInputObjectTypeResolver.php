@@ -62,6 +62,9 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
         return $this->__('Input to sort custom posts', 'customposts');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

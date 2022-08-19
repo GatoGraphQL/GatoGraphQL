@@ -47,6 +47,9 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
         return $this->__('Input to update a custom post', 'custompost-mutations');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(

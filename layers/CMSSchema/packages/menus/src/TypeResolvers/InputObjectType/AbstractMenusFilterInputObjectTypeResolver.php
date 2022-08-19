@@ -42,6 +42,9 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
         return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(

@@ -51,6 +51,9 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         return 'PaginationInput';
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

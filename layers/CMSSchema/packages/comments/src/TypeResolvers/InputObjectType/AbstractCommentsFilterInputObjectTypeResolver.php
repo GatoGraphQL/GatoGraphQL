@@ -189,6 +189,9 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     abstract protected function addParentInputFields(): bool;
     abstract protected function addCustomPostInputFields(): bool;
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(

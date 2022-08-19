@@ -64,6 +64,9 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
         return $this->__('a taxonomy', 'customposts');
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

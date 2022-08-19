@@ -52,6 +52,9 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
         return $this->seachFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
     }
 
+    /**
+     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
