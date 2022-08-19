@@ -34,7 +34,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     }
 
     /**
-     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
+     * @return array<string,mixed>|null Data inside the block is saved as key (string) => value
      */
     protected function getSchemaConfigBlockDataItem(int $schemaConfigurationID): ?array
     {

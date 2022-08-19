@@ -17,7 +17,7 @@ interface GraphQLEndpointCustomPostTypeInterface extends CustomPostTypeInterface
     public function isEndpointEnabled(WP_Post|int $postOrID): bool;
 
     /**
-     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
+     * @return array<string,mixed>|null Data inside the block is saved as key (string) => value
      */
     public function getOptionsBlockDataItem(WP_Post|int $postOrID): ?array;
 }

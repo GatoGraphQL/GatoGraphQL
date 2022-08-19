@@ -77,7 +77,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     /**
      * Pass localized data to the block
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getLocalizedData(): array
     {
@@ -90,7 +90,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     }
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     public function renderBlock(array $attributes, string $content): string
     {

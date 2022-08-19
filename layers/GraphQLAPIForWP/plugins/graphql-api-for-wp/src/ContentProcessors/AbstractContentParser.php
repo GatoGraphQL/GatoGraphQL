@@ -176,7 +176,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      * - Add classes to HTML elements
      * - Append video embeds
      *
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     protected function processHTMLContent(string $htmlContent, string $pathURL, array $options = []): string
     {

@@ -162,7 +162,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Add Module classes to be initialized
      *
-     * @return string[] List of `Module` class to initialize
+     * @return array<class-string<\PoP\Root\Module\ModuleInterface>> List of `Module` class to initialize
      */
     public function getModuleClassesToInitialize(): array
     {
@@ -205,7 +205,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Module class, [value]: Configuration
+     * @return array<string,mixed> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {

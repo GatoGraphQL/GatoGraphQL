@@ -11,7 +11,7 @@ trait MarkdownContentRetrieverTrait
     abstract protected function getMarkdownContentParser(): MarkdownContentParserInterface;
 
     /**
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     public function getMarkdownContent(
         string $markdownFilename,

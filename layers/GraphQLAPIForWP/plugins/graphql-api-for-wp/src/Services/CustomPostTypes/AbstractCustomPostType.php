@@ -262,8 +262,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
 
     /**
-     * @param array<string, string> $columns
-     * @return array<string, string>
+     * @param array<string,string> $columns
+     * @return array<string,string>
      */
     public function setTableColumns(array $columns): array
     {
@@ -308,9 +308,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * Add extra actions to the Custom Post Type list
      *
      * @see https://developer.wordpress.org/reference/hooks/post_row_actions/
-     * @param array<string, string> $actions
+     * @param array<string,string> $actions
      * @param WP_Post $post
-     * @return array<string, string>
+     * @return array<string,string>
      */
     public function maybeAddCustomPostTypeTableActions(array $actions, $post): array
     {
@@ -327,7 +327,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * Get actions to add for this CPT
      *
      * @param WP_Post $post
-     * @return array<string, string>
+     * @return array<string,string>
      */
     protected function getCustomPostTypeTableActions($post): array
     {
@@ -472,7 +472,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Arguments for registering the post type
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getCustomPostTypeArgs(): array
     {
@@ -540,7 +540,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param string $name_uc Singular name uppercase
      * @param string $names_uc Plural name uppercase
      * @param string $names_lc Plural name lowercase
-     * @return array<string, string>
+     * @return array<string,string>
      */
     protected function getCustomPostTypeLabels(string $name_uc, string $names_uc, string $names_lc): array
     {

@@ -8,7 +8,7 @@ class PersistedQueryEndpointGraphiQLBlockAttributes
 {
     public function __construct(
         protected string $query,
-        /** @var array<string, mixed> */
+        /** @var array<string,mixed> */
         protected array $variables,
     ) {
     }
@@ -18,7 +18,7 @@ class PersistedQueryEndpointGraphiQLBlockAttributes
         return $this->query;
     }
 
-    /** @return array<string, mixed> */
+    /** @return array<string,mixed> */
     public function getVariables(): array
     {
         return $this->variables;

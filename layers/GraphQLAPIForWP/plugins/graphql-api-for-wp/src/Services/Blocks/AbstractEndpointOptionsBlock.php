@@ -19,7 +19,7 @@ abstract class AbstractEndpointOptionsBlock extends AbstractBlock
     }
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     public function renderBlock(array $attributes, string $content): string
     {
@@ -41,7 +41,7 @@ abstract class AbstractEndpointOptionsBlock extends AbstractBlock
     }
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     protected function getBlockContent(array $attributes, string $content): string
     {

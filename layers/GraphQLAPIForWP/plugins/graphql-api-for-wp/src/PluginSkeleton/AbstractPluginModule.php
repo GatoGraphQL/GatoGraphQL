@@ -51,7 +51,7 @@ abstract class AbstractPluginModule extends AbstractModule implements PluginModu
      * It uses Convention over Configuration: if the requested files exist,
      * load them.
      *
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

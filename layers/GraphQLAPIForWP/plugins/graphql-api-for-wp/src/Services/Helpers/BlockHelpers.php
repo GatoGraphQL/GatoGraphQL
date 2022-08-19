@@ -19,7 +19,7 @@ class BlockHelpers
     /**
      * Extract the blocks from the post
      *
-     * @return array<string, mixed> The block stores its data as property => value
+     * @return array<string,mixed> The block stores its data as property => value
      */
     public function getBlocksFromCustomPost(
         WP_Post|int $configurationPostOrID
@@ -74,7 +74,7 @@ class BlockHelpers
      * Read the single block of a certain type, contained in the post.
      * If there are more than 1, or none, return null
      *
-     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
+     * @return array<string,mixed>|null Data inside the block is saved as key (string) => value
      */
     public function getSingleBlockOfTypeFromCustomPost(
         WP_Post|int $configurationPostOrID,

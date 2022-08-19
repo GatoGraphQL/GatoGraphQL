@@ -68,7 +68,7 @@ class AccessControlBlock extends AbstractControlBlock
     /**
      * Pass localized data to the block
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getLocalizedData(): array
     {
@@ -85,7 +85,7 @@ class AccessControlBlock extends AbstractControlBlock
     /**
      * Return the nested blocks' content
      *
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     protected function getBlockContent(array $attributes, string $content): string
     {

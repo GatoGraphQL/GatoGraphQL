@@ -507,7 +507,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int, array{class: class-string<\PoPCMSSchema\CommentMutations\Module>, envVariable: string, callback: Closure():bool}>
+     * @return array<int, array{class: class-string<\PoP\Root\Module\ModuleInterface>, envVariable: string, callback: Closure():bool}>
      */
     protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
@@ -574,7 +574,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Module class, [value]: Configuration
+     * @return array<string,array> [key]: Module class, [value]: Configuration
      */
     protected function getPredefinedModuleClassConfiguration(): array
     {

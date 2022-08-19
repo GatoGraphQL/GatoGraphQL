@@ -14,7 +14,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     /**
      * Cache the values in memory
      *
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $options = [];
 
@@ -233,7 +233,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     /**
      * Store the options in the DB
      *
-     * @param array<string, mixed> $itemValues
+     * @param array<string,mixed> $itemValues
      */
     protected function storeItems(string $optionName, array $itemValues): void
     {

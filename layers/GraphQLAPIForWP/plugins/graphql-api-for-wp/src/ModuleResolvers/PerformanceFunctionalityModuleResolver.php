@@ -50,7 +50,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     }
 
     /**
-     * @return array<array> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
+     * @return array<string[]> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
      */
     public function getDependedModuleLists(string $module): array
     {

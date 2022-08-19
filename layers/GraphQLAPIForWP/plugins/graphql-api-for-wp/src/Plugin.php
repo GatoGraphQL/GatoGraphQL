@@ -136,7 +136,7 @@ class Plugin extends AbstractMainPlugin
     /**
      * Add Module classes to be initialized
      *
-     * @return string[] List of `Module` class to initialize
+     * @return array<class-string<\PoP\Root\Module\ModuleInterface>> List of `Module` class to initialize
      */
     public function getModuleClassesToInitialize(): array
     {

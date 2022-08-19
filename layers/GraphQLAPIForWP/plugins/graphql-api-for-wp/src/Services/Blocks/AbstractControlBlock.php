@@ -54,7 +54,7 @@ abstract class AbstractControlBlock extends AbstractBlock
     }
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     public function renderBlock(array $attributes, string $content): string
     {
@@ -175,7 +175,7 @@ EOT;
         return \__('Configuration:', 'graphql-api');
     }
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     abstract protected function getBlockContent(array $attributes, string $content): string;
 }
