@@ -80,17 +80,6 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     }
 
     /**
-     * Limit of how many custom posts can be retrieved in the query.
-     * Override this value for specific custom post types
-     */
-    protected function getCustomPostListMaxLimit(): int
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getPostListMaxLimit();
-    }
-
-    /**
      * @return array<string|int>|object[]
      */
     public function getPosts(array $query, array $options = []): array

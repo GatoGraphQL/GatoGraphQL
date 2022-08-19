@@ -134,17 +134,6 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     }
 
     /**
-     * Limit of how many custom posts can be retrieved in the query.
-     * Override this value for specific custom post types
-     */
-    protected function getCustomPostListMaxLimit(): int
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getPageListMaxLimit();
-    }
-
-    /**
      * @return array<string|int>|object[]
      */
     public function getPages(array $query, array $options = []): array

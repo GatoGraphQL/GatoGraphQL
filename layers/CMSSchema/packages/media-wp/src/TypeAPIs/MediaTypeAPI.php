@@ -123,17 +123,6 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     }
 
     /**
-     * Limit of how many custom posts can be retrieved in the query.
-     * Override this value for specific custom post types
-     */
-    protected function getCustomPostListMaxLimit(): int
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getMediaListMaxLimit();
-    }
-
-    /**
      * @return array<string|int>|object[]
      */
     public function getMediaItems(array $query, array $options = []): array

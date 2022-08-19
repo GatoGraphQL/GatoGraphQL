@@ -99,16 +99,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return count($posts);
     }
     /**
-     * Limit of how many custom posts can be retrieved in the query.
-     * Override this value for specific custom post types
-     */
-    protected function getCustomPostListMaxLimit(): int
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getCustomPostListMaxLimit();
-    }
-    /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      * @return array<string,mixed>
