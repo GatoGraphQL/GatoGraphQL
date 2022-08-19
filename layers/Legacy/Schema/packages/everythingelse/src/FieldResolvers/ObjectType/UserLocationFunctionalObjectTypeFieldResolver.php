@@ -20,7 +20,7 @@ class UserLocationFunctionalObjectTypeFieldResolver extends AbstractLocationFunc
         ];
     }
 
-    protected function getDbobjectIdField()
+    protected function getDbobjectIdField(): string
     {
         return InputNames::USER_ID;
     }

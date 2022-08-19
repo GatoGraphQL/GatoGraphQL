@@ -20,7 +20,7 @@ class CustomPostLocationFunctionalObjectTypeFieldResolver extends AbstractLocati
         ];
     }
 
-    protected function getDbobjectIdField()
+    protected function getDbobjectIdField(): string
     {
         return InputNames::POST_ID;
     }
