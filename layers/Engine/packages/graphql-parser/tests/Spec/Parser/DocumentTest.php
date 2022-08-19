@@ -18,7 +18,7 @@ class DocumentTest extends AbstractTestCase
         return $this->parser ??= new Parser();
     }
 
-    public function testValidationWorks()
+    public function testValidationWorks(): void
     {
         $parser = $this->getParser();
 
@@ -62,7 +62,7 @@ class DocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testMissingFragmentReferencedByFragment()
+    public function testMissingFragmentReferencedByFragment(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_2_1, ['F1']))->getMessage());
@@ -145,7 +145,7 @@ class DocumentTest extends AbstractTestCase
         ];
     }
 
-    public function testReferencedFragmentNotExisting()
+    public function testReferencedFragmentNotExisting(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_2_1, ['F0']))->getMessage());
@@ -184,7 +184,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testFragmentMissing()
+    public function testFragmentMissing(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_2_1, ['F2']))->getMessage());
@@ -200,7 +200,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testVariableNotUsed()
+    public function testVariableNotUsed(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_4, ['notUsedVar']))->getMessage());
@@ -215,7 +215,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testVariableMissing()
+    public function testVariableMissing(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, ['missingVar']))->getMessage());
@@ -230,7 +230,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testVariableMissingInDirective()
+    public function testVariableMissingInDirective(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, ['missingVar']))->getMessage());
@@ -246,7 +246,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testVariableMissingInInputObject()
+    public function testVariableMissingInInputObject(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, ['search']))->getMessage());
@@ -262,7 +262,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testVariableMissingInInputList()
+    public function testVariableMissingInInputList(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, ['id']))->getMessage());
@@ -278,7 +278,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testVariableInFragment()
+    public function testVariableInFragment(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('
@@ -298,7 +298,7 @@ class DocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testVariableMissingInFragment()
+    public function testVariableMissingInFragment(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, ['missingVar']))->getMessage());
@@ -319,7 +319,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testEmptyQuery()
+    public function testEmptyQuery(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_C))->getMessage());
@@ -328,7 +328,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testNoOperationsDefined()
+    public function testNoOperationsDefined(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_D))->getMessage());
@@ -342,7 +342,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testUniqueOperationName()
+    public function testUniqueOperationName(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_2_1_1, ['SomeQuery']))->getMessage());
@@ -363,7 +363,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testUniqueOperationNameAcrossOps()
+    public function testUniqueOperationNameAcrossOps(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_2_1_1, ['SomeQuery']))->getMessage());
@@ -384,7 +384,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testUniqueVariableName()
+    public function testUniqueVariableName(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_1, ['someVar']))->getMessage());
@@ -400,7 +400,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    public function testNonEmptyOperationName()
+    public function testNonEmptyOperationName(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_2_2_1))->getMessage());

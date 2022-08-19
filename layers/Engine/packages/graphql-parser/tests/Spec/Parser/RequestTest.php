@@ -14,7 +14,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 
 class RequestTest extends TestCase
 {
-    public function testMethods()
+    public function testMethods(): void
     {
         $fragment1     = new Fragment('fragmentName1', 'test', [], [], new Location(1, 1));
         $fragment2     = new Fragment('fragmentName2', 'test', [], [], new Location(1, 1));

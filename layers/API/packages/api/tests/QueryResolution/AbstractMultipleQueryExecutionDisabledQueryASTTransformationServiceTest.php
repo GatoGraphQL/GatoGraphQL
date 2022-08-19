@@ -39,7 +39,7 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
         return $this->getService(QueryASTTransformationServiceInterface::class);
     }
 
-    public function testPrepareOperationFieldAndFragmentBondsForMultipleQueryExecution()
+    public function testPrepareOperationFieldAndFragmentBondsForMultipleQueryExecution(): void
     {
         /**
          * This is the AST for this GraphQL query:

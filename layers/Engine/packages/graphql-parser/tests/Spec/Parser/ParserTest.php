@@ -40,7 +40,7 @@ class ParserTest extends AbstractTestCase
         return $this->parser ??= new Parser();
     }
 
-    public function testEmptyParser()
+    public function testEmptyParser(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('');
@@ -48,7 +48,7 @@ class ParserTest extends AbstractTestCase
         $this->assertEquals(new Document([], []), $document);
     }
 
-    public function testInvalidSelection()
+    public function testInvalidSelection(): void
     {
         $this->expectException(SyntaxErrorException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, [Token::tokenName(Token::TYPE_RBRACE)]))->getMessage());
@@ -65,7 +65,7 @@ class ParserTest extends AbstractTestCase
         ');
     }
 
-    public function testComments()
+    public function testComments(): void
     {
         $query = <<<GRAPHQL
 # asdasd "asdasdasd"
@@ -123,7 +123,7 @@ GRAPHQL;
     }
 
 
-    public function testEscapedStrings()
+    public function testEscapedStrings(): void
     {
         $this->assertEquals(
             [
@@ -177,7 +177,7 @@ GRAPHQL;
         ];
     }
 
-    public function testCommas()
+    public function testCommas(): void
     {
         $parser = $this->getParser();
         $document   = $parser->parse('{ foo,       ,,  , bar  }');
@@ -204,7 +204,7 @@ GRAPHQL;
         );
     }
 
-    public function testQueryWithNoFields()
+    public function testQueryWithNoFields(): void
     {
         $parser = $this->getParser();
         $document   = $parser->parse('{ name }');
@@ -230,7 +230,7 @@ GRAPHQL;
         );
     }
 
-    public function testQueryWithFields()
+    public function testQueryWithFields(): void
     {
         $parser = $this->getParser();
         $document   = $parser->parse('{ post, user { name } }');
@@ -259,7 +259,7 @@ GRAPHQL;
         );
     }
 
-    public function testFragmentWithFields()
+    public function testFragmentWithFields(): void
     {
         $parser = $this->getParser();
         $document   = $parser->parse('
@@ -289,7 +289,7 @@ GRAPHQL;
         );
     }
 
-    public function testInspectionQuery()
+    public function testInspectionQuery(): void
     {
         $parser = $this->getParser();
 
@@ -466,7 +466,7 @@ GRAPHQL;
         ), $document);
     }
 
-    public function testInlineFragment()
+    public function testInlineFragment(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('
@@ -1550,7 +1550,7 @@ GRAPHQL;
         return $astNodeAncestors;
     }
 
-    public function testVariableDefaultValue()
+    public function testVariableDefaultValue(): void
     {
         // Test with non-null default value
         $parser          = $this->getParser();
@@ -1592,7 +1592,7 @@ GRAPHQL;
         );
     }
 
-    public function testInputObjectVariableValue()
+    public function testInputObjectVariableValue(): void
     {
         // Test with default value
         $parser          = $this->getParser();
@@ -1639,7 +1639,7 @@ GRAPHQL;
         );
     }
 
-    public function testInputListVariableValue()
+    public function testInputListVariableValue(): void
     {
         // Test with default value
         $parser          = $this->getParser();
@@ -1691,7 +1691,7 @@ GRAPHQL;
         );
     }
 
-    public function testNoDuplicateKeysInInputObjectInVariable()
+    public function testNoDuplicateKeysInInputObjectInVariable(): void
     {
         $this->expectException(SyntaxErrorException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_6_3, ['name']))->getMessage());
@@ -1706,7 +1706,7 @@ GRAPHQL;
         ');
     }
 
-    public function testNoDuplicateKeysInInputObjectInArgument()
+    public function testNoDuplicateKeysInInputObjectInArgument(): void
     {
         $this->expectException(SyntaxErrorException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_6_3, ['name']))->getMessage());
@@ -1721,7 +1721,7 @@ GRAPHQL;
         ');
     }
 
-    public function testVariableStartingWithNumber()
+    public function testVariableStartingWithNumber(): void
     {
         $this->expectException(SyntaxErrorException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, ['NUMBER']))->getMessage());
@@ -1736,7 +1736,7 @@ GRAPHQL;
         ');
     }
 
-    public function testVariableReferenceStartingWithNumber()
+    public function testVariableReferenceStartingWithNumber(): void
     {
         $this->expectException(SyntaxErrorException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, ['NUMBER']))->getMessage());

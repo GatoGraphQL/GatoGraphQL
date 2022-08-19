@@ -20,7 +20,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 
 class AstTest extends AbstractTestCase
 {
-    public function testArgument()
+    public function testArgument(): void
     {
         $argument = new Argument('test', new Literal('test', new Location(1, 1)), new Location(1, 1));
 
@@ -28,7 +28,7 @@ class AstTest extends AbstractTestCase
         $this->assertEquals($argument->getName(), 'test');
     }
 
-    public function testField()
+    public function testField(): void
     {
         $field = new LeafField('field', null, [
             new Argument('argument', new Literal('argument value', new Location(1, 1)), new Location(1, 1))
@@ -40,7 +40,7 @@ class AstTest extends AbstractTestCase
         // $this->assertEquals(['argument' => 'argument value'], $field->getKeyValueArguments());
     }
 
-    public function testFragment()
+    public function testFragment(): void
     {
         $fields = [
             new LeafField('field', null, [], [], new Location(1, 1))
@@ -53,13 +53,13 @@ class AstTest extends AbstractTestCase
         $this->assertEquals($fields, $fragment->getFieldsOrFragmentBonds());
     }
 
-    public function testFragmentReference()
+    public function testFragmentReference(): void
     {
         $reference = new FragmentReference('shipInfo', new Location(1, 1));
         $this->assertEquals('shipInfo', $reference->getName());
     }
 
-    public function testInlineFragment()
+    public function testInlineFragment(): void
     {
         $fields = [
             new LeafField('id', null, [], [], new Location(1, 1))
@@ -71,7 +71,7 @@ class AstTest extends AbstractTestCase
         $this->assertEquals($fields, $reference->getFieldsOrFragmentBonds());
     }
 
-    public function testQuery()
+    public function testQuery(): void
     {
         $arguments = [
             new Argument('limit', new Literal('10', new Location(1, 1)), new Location(1, 1))
@@ -91,7 +91,7 @@ class AstTest extends AbstractTestCase
         $this->assertTrue($query->hasArguments());
     }
 
-    public function testArgumentValues()
+    public function testArgumentValues(): void
     {
         $list = new InputList(['a', 'b'], new Location(1, 1));
         $this->assertEquals(['a', 'b'], $list->getValue());
@@ -103,7 +103,7 @@ class AstTest extends AbstractTestCase
         $this->assertEquals('text', $literal->getValue());
     }
 
-    public function testVariable()
+    public function testVariable(): void
     {
         $variable = new Variable('id', 'int', false, false, true, new Location(1, 1));
 
@@ -116,7 +116,7 @@ class AstTest extends AbstractTestCase
         $this->assertEquals('text', $variable->getValue());
     }
 
-    public function testVariableLogicException()
+    public function testVariableLogicException(): void
     {
         $this->expectException(ShouldNotHappenException::class);
         $this->expectExceptionMessage(sprintf(
