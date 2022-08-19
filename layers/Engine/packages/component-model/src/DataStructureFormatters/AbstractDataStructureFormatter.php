@@ -12,6 +12,7 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data
      */
     public function getFormattedData(array $data): array
     {

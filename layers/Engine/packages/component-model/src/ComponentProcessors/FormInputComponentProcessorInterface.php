@@ -9,6 +9,9 @@ use PoP\ComponentModel\Component\Component;
 interface FormInputComponentProcessorInterface
 {
     public function getValue(Component $component, ?array $source = null): mixed;
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getDefaultValue(Component $component, array &$props): mixed;
     public function getName(Component $component): string;
     public function getInputName(Component $component): string;

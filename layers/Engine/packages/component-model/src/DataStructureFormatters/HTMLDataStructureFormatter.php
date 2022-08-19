@@ -18,6 +18,9 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
         return 'text/html';
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     public function getOutputContent(array &$data): string
     {
         return sprintf(

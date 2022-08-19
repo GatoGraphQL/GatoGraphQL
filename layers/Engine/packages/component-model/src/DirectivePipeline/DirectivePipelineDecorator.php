@@ -24,6 +24,10 @@ class DirectivePipelineDecorator
      * @param array<FieldDataAccessProviderInterface> $pipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<string, mixed> $pipelineDirectiveResolvers
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string,mixed> $messages
      */
     public function resolveDirectivePipeline(
         RelationalTypeResolverInterface $relationalTypeResolver,

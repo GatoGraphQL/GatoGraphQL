@@ -22,6 +22,7 @@ trait QueryDataComponentProcessorTrait
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     protected function getImmutableDataloadQueryArgs(Component $component, array &$props): array
     {
@@ -29,6 +30,7 @@ trait QueryDataComponentProcessorTrait
     }
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     protected function getMutableonrequestDataloadQueryArgs(Component $component, array &$props): array
     {
@@ -44,6 +46,7 @@ trait QueryDataComponentProcessorTrait
     // }
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
@@ -57,6 +60,7 @@ trait QueryDataComponentProcessorTrait
 
     /**
      * @return Component[]
+     * @param array<string,mixed> $props
      */
     public function getQueryArgsFilteringComponents(Component $component, array &$props): array
     {
@@ -68,6 +72,7 @@ trait QueryDataComponentProcessorTrait
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getMutableonmodelHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
@@ -88,6 +93,7 @@ trait QueryDataComponentProcessorTrait
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
@@ -100,6 +106,7 @@ trait QueryDataComponentProcessorTrait
 
     /**
      * @return string|int|array<string|int>|null
+     * @param array<string,mixed> $props
      */
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
     {
@@ -150,6 +157,9 @@ trait QueryDataComponentProcessorTrait
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
      */
     public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
