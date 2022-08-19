@@ -9,6 +9,7 @@ use PoP\Engine\Exception\RuntimeOperationException;
 interface ArrayTraversionHelperServiceInterface
 {
     /**
+     * @return mixed[]
      * @throws RuntimeOperationException If the path cannot be reached under the array, or if its value is not an array
      */
     public function &getPointerToArrayItemUnderPath(array &$data, string $path): array;
