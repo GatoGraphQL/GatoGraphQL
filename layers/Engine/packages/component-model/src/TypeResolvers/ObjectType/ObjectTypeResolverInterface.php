@@ -18,6 +18,9 @@ use SplObjectStorage;
 
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, OutputTypeResolverInterface
 {
+    /**
+     * @return array<string,mixed>
+     */
     public function getFieldSchemaDefinition(FieldInterface $field): ?array;
     public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool;
     public function getFieldTypeResolver(

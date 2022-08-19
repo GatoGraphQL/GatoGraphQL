@@ -32,6 +32,8 @@ interface TypeSerializationServiceInterface
     /**
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
+     *
+     * @return string|int|float|bool|mixed[]
      */
     public function serializeLeafOutputTypeValue(
         mixed $value,
