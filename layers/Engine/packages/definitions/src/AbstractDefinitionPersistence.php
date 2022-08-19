@@ -57,7 +57,7 @@ abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInt
 
     public function getDefinitionResolver(string $group): ?DefinitionResolverInterface
     {
-        return $this->definition_resolvers[$group];
+        return $this->definition_resolvers[$group] ?? null;
     }
 
     public function getSavedDefinition(string $name, string $group): ?string
