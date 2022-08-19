@@ -758,13 +758,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     /**
      * Set the instance with the implementation
      * from ComponentModel
-     * @param array<string, mixed> $operations
-     * @param array<string, mixed> $fragments
+     *
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
      */
     abstract protected function createDocumentInstance(
-        /** @var OperationInterface[] */
         array $operations,
-        /** @var Fragment[] */
         array $fragments,
     ): AbstractDocument;
 

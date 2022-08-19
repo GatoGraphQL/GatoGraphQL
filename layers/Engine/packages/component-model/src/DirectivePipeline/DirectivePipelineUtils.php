@@ -19,7 +19,7 @@ class DirectivePipelineUtils
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      * @return array<string,mixed>
-     * @param array<string, mixed> $pipelineDirectiveResolvers
+     * @param array<\PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface> $pipelineDirectiveResolvers
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
