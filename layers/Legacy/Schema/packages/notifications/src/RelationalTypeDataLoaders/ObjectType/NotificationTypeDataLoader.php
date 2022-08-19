@@ -94,6 +94,9 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $ret;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function executeQuery($query, array $options = []): array
     {
         return PoP_Notifications_API::getNotifications($query);

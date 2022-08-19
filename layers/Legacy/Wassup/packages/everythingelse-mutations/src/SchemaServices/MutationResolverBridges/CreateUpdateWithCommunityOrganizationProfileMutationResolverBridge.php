@@ -29,6 +29,9 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
         return $this->getCreateUpdateWithCommunityOrganizationProfileMutationResolver();
     }
 
+    /**
+     * @return mixed[]
+     */
     private function getFormInputs()
     {
         return array_merge(

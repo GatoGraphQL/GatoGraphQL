@@ -114,6 +114,9 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->updateUser($user_data);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getChangepasswordData(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $user_data = array(

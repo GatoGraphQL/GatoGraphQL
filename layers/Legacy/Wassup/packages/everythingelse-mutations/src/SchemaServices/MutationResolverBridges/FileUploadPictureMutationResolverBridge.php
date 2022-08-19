@@ -43,7 +43,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
         $mutationData['user_id'] = App::getState('current-user-id');
     }
     /**
-     * @return array<string, mixed>|null
+     * @return array<string,mixed>|null
      */
     public function executeMutation(array &$data_properties): ?array
     {

@@ -28,6 +28,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
         $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
@@ -94,6 +97,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         $ret[DataloadingConstants::EXTERNALLOAD] = $this->queriesExternalDomain($component, $props);
     }
 
+    /**
+     * @return string[]
+     */
     public function getDataloadMultidomainQuerySources(Component $component, array &$props): array
     {
         $sources = $this->getDataloadMultidomainSources($component, $props);
@@ -105,6 +111,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $this->addAPIQueryToSources($sources, $component, $props);
     }
 
+    /**
+     * @return string[]
+     */
     public function getDataloadMultidomainSources(Component $component, array &$props): array
     {
         if ($sources = $this->getProp($component, $props, 'dataload-multidomain-sources')) {

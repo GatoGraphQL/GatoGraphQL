@@ -7,12 +7,16 @@ namespace EverythingElse\PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use WP_Taxonomy;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
+    /**
+     * @return string[]|WP_Taxonomy[]
+     */
     public function getCustomPostTypeTaxonomies($post_type)
     {
         return get_object_taxonomies($post_type);

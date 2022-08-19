@@ -9,6 +9,9 @@ use PoPSchema\Highlights\ObjectTypeResolverPickers\AbstractHighlightObjectTypeRe
 
 class HighlightCustomPostObjectTypeResolverPicker extends AbstractHighlightObjectTypeResolverPicker
 {
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface>>
+     */
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [

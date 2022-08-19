@@ -53,6 +53,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->stanceObjectTypeResolver ??= $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
