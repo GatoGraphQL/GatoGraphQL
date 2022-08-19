@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\FilterDataComponentProcessorInterface;
@@ -41,7 +42,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
     }
 
     /**
-     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     * @return array<string, InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -56,7 +57,7 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     * @return array<class-string<ObjectTypeResolverInterface>>
      */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -84,7 +85,7 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
     }
 
     /**
-     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     * @return array<string, InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {

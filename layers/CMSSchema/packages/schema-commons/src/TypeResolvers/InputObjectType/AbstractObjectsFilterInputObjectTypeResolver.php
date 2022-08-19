@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
@@ -43,7 +44,7 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
     }
 
     /**
-     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     * @return array<string, InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -52,7 +53,7 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     }
 
     /**
-     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     * @return array<string, InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

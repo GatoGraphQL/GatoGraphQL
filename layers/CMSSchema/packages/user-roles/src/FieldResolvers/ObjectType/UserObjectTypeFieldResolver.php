@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Root\App;
@@ -50,7 +51,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     * @return array<class-string<ObjectTypeResolverInterface>>
      */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -142,7 +143,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     * @return array<string, InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
