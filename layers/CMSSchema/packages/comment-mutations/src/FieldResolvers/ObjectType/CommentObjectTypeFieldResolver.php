@@ -55,6 +55,9 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
         return $this->commentReplyFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentReplyFilterInputObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
