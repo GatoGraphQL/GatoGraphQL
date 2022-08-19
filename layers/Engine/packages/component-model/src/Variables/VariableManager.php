@@ -18,7 +18,7 @@ class VariableManager implements VariableManagerInterface
     private ?array $variablesFromRequestCache = null;
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getVariablesFromRequest(): array
     {
@@ -29,7 +29,7 @@ class VariableManager implements VariableManagerInterface
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function doGetVariablesFromRequest(): array
     {

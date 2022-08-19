@@ -15,6 +15,9 @@ namespace PoP\Root\Container\Loader;
  */
 trait ServiceYamlFileLoaderTrait
 {
+    /**
+     * @return mixed[]
+     */
     protected function customizeYamlFileDefinition(array $content): array
     {
         if ($content['services']['_defaults']['autoconfigure'] ?? null) {

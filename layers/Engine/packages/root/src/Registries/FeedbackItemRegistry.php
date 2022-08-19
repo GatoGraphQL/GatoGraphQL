@@ -25,6 +25,9 @@ class FeedbackItemRegistry implements FeedbackItemRegistryInterface
         }
     }
 
+    /**
+     * @return array<string,array<string,string>>
+     */
     public function getFeedbackItemEntries(): array
     {
         return $this->feedbackItemEntries;

@@ -24,7 +24,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
     private ?ParserInterface $parser = null;
 
     /**
-     * @return array<string, mixed> [key]: Module class, [value]: Configuration
+     * @return array<string,mixed> [key]: Module class, [value]: Configuration
      */
     protected static function getModuleClassConfiguration(): array
     {

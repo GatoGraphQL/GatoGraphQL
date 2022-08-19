@@ -22,6 +22,8 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
      *
      * Additional properties (such as the params)
      * must be provided via code.
+     *
+     * @return array<string,array<string|array<string,mixed>>>
      */
     final protected function provideEndpointEntries(): array
     {

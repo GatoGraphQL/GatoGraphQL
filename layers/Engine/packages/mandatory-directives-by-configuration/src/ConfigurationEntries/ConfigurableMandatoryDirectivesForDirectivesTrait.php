@@ -13,11 +13,15 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
 
     /**
      * Configuration entries
+     *
+     * @return array<mixed[]>
      */
     abstract protected function getConfigurationEntries(): array;
 
     /**
      * Configuration entries
+     *
+     * @return array<mixed[]>
      */
     final protected function getEntries(): array
     {
@@ -66,6 +70,8 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
 
     /**
      * Filter all the entries from the list which apply to the passed typeResolver and fieldName
+     *
+     * @return array<mixed[]>
      */
     final protected function getMatchingEntries(array $entryList, ?string $value): array
     {

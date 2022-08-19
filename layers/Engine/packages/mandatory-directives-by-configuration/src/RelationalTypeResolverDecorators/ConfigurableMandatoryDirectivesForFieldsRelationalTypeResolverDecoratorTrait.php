@@ -13,6 +13,9 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
 {
     use ConfigurableMandatoryDirectivesForFieldsTrait;
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface>>
+     */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
         return array_map(

@@ -12,6 +12,9 @@ class CacheUtils
 {
     public final const HOOK_SCHEMA_CACHE_KEY_ELEMENTS = __CLASS__ . ':schema-cache-key-elements';
 
+    /**
+     * @return array<string,mixed>
+     */
     public static function getSchemaCacheKeyElements(): array
     {
         /** @var EngineModuleConfiguration */

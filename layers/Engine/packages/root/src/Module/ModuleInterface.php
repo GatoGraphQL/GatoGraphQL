@@ -12,9 +12,9 @@ interface ModuleInterface
     /**
      * Initialize the module
      *
-     * @param array<string, mixed> $configuration
+     * @param array<string,mixed> $configuration
      * @param boolean $skipSchema Indicate if to skip initializing the schema
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
      */
     public function initialize(
         array $configuration,
@@ -108,7 +108,7 @@ interface ModuleInterface
      * Enable each module to set default configuration for
      * itself and its depended modules
      *
-     * @param array<string, mixed> $moduleClassConfiguration
+     * @param array<string,mixed> $moduleClassConfiguration
      */
     public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration

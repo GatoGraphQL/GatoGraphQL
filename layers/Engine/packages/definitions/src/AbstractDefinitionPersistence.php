@@ -7,15 +7,15 @@ namespace PoP\Definitions;
 abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInterface
 {
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $definitions = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $names = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $resolverData = [];
     protected bool $addedDefinition = false;
@@ -88,7 +88,7 @@ abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInt
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getDatabase(): array
     {
@@ -122,11 +122,11 @@ abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInt
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     abstract protected function getPersistedData(): array;
     /**
-     * @param array<string, mixed> $data
+     * @param array<string,mixed> $data
      */
     abstract protected function persist(array $data): void;
 }

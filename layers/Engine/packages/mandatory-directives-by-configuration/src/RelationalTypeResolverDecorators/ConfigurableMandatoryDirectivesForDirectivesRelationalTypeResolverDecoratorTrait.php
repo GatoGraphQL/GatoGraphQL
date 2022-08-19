@@ -21,6 +21,9 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
      */
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
+    /**
+     * @return array<string,Directive[]>
+     */
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $mandatoryDirectivesForDirectives = [];

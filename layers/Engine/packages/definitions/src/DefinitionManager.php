@@ -9,15 +9,15 @@ use PoP\Definitions\Configuration\Request;
 class DefinitionManager implements DefinitionManagerInterface
 {
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $names = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $name_definitions = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $definition_names = [];
     /**
