@@ -815,6 +815,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return DataSources::MUTABLEONREQUEST;
     }
 
+    /**
+     * @return string|int|array<string|int>|null
+     */
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
     {
         return [];

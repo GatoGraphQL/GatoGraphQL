@@ -97,6 +97,9 @@ interface ComponentProcessorInterface
      */
     public function getDatasetOutputKeys(Component $component, array &$props): array;
     public function getDatasource(Component $component, array &$props): string;
+    /**
+     * @return string|int|array<string|int>|null
+     */
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null;
     public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface;
     public function getComponentMutationResolverBridge(Component $component): ?ComponentMutationResolverBridgeInterface;

@@ -37,6 +37,9 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         );
     }
 
+    /**
+     * @return string|int|array<string|int>|null
+     */
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
     {
         switch ($component->name) {
