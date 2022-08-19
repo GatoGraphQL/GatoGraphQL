@@ -10,6 +10,9 @@ use PoP\ConfigurationComponentModel\ComponentProcessors\ComponentProcessorInterf
 interface ComponentProcessorInterface extends UpstreamComponentProcessorInterface
 {
     public function getDataloadMultidomainSources(Component $component, array &$props): array;
+    /**
+     * @return string[]
+     */
     public function getDataloadMultidomainQuerySources(Component $component, array &$props): array;
     public function queriesExternalDomain(Component $component, array &$props): bool;
     public function isMultidomain(Component $component, array &$props): bool;

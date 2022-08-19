@@ -12,13 +12,37 @@ use SplObjectStorage;
 interface ComponentProcessorInterface extends UpstreamComponentProcessorInterface
 {
     public function getImmutableSettingsComponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableSettings(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableConfiguration(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelSettingsComponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelSettings(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelConfiguration(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestSettingsComponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestSettings(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestConfiguration(Component $component, array &$props): array;
     public function getRelevantRoute(Component $component, array &$props): ?string;
     public function getRelevantRouteCheckpointTarget(Component $component, array &$props): string;
