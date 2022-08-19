@@ -65,6 +65,9 @@ trait HasFieldsTypeTrait
         );
     }
 
+    /**
+     * @return Field[]
+     */
     public function getFields(bool $includeDeprecated = false): array
     {
         return $includeDeprecated ?
@@ -76,6 +79,9 @@ trait HasFieldsTypeTrait
                 }
             );
     }
+    /**
+     * @return string[]
+     */
     public function getFieldIDs(bool $includeDeprecated = false): array
     {
         return array_map(

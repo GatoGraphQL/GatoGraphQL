@@ -9,6 +9,9 @@ use PoP\Root\App;
 trait ObjectIDsFromURLParamComponentProcessorTrait
 {
     abstract protected function getObjectIDsParamName(Component $component, array &$props, &$data_properties);
+    /**
+     * @return array<string|int>
+     */
     protected function getObjectIDsFromURLParam(Component $component, array &$props, &$data_properties)
     {
         // When editing a post in the webplatform, set param "pid"

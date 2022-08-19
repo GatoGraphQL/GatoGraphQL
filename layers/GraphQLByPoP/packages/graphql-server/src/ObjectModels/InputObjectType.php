@@ -43,10 +43,16 @@ class InputObjectType extends AbstractNamedType
     {
         return TypeKinds::INPUT_OBJECT;
     }
+    /**
+     * @return InputValue[]
+     */
     public function getInputFields(): array
     {
         return $this->inputValues;
     }
+    /**
+     * @return string[]
+     */
     public function getInputFieldIDs(): array
     {
         return array_map(

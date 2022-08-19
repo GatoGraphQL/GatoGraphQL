@@ -30,7 +30,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     use BasicServiceTrait;
 
     /**
-     * @var array<string, mixed>
+     * @var array<string,mixed>
      */
     protected ?array $fullSchemaDefinitionForGraphQL = null;
     /**
@@ -81,6 +81,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function &getFullSchemaDefinitionForGraphQL(): array
     {
         if ($this->fullSchemaDefinitionForGraphQL === null) {
@@ -97,6 +100,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      *
      *   Public schema: can cache
      *   Private schema: cannot cache
+     * @return array<string,mixed>
      */
     private function &doGetGraphQLSchemaDefinition(): array
     {

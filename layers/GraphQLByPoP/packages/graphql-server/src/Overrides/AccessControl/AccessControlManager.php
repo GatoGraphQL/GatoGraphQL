@@ -13,7 +13,7 @@ class AccessControlManager extends UpstreamAccessControlManager
     use BasicServiceTrait;
 
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $overriddenFieldEntries = [];
 

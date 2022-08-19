@@ -33,6 +33,9 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getFormattedData(array $data): array
     {
         // If we are requesting only the databases, then return these as a list of items

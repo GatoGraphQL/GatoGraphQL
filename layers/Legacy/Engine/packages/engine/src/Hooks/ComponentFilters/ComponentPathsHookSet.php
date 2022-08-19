@@ -31,6 +31,9 @@ class ComponentPathsHookSet extends AbstractHookSet
         );
     }
     
+    /**
+     * @return mixed[]
+     */
     public function maybeAddElement(array $elements): array
     {
         if (App::getState('componentFilter') === $this->componentPaths->getName()) {

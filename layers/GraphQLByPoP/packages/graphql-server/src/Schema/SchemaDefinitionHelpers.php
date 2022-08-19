@@ -18,6 +18,9 @@ class SchemaDefinitionHelpers
             $schemaDefinitionPath
         );
     }
+    /**
+     * @return mixed[]
+     */
     public static function &advancePointerToPath(array &$schemaDefinition, array $schemaDefinitionPath): array
     {
         $schemaDefinitionPointer = &$schemaDefinition;

@@ -17,6 +17,9 @@ trait FormMultipleInputComponentProcessorTrait
         return [];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getInputOptions(Component $component): array
     {
         $options = parent::getInputOptions($component);
