@@ -108,6 +108,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToImplement(): array
     {
         return [

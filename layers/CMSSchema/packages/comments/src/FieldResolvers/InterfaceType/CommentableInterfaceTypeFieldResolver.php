@@ -88,6 +88,9 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToImplement(): array
     {
         return [
