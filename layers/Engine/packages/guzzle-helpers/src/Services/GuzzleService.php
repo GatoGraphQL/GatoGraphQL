@@ -166,7 +166,7 @@ class GuzzleService implements GuzzleServiceInterface
 
         // You can access each result using the key provided to the unwrap function.
         return array_map(
-            function ($result) {
+            function (array $result): array {
                 return self::validateAndDecodeJSONResponse($result['value']);
             },
             $results

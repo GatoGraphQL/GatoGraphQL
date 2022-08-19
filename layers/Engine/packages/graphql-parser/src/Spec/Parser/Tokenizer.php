@@ -392,7 +392,7 @@ class Tokenizer
     /**
      * @throws SyntaxErrorException
      */
-    protected function createUnexpectedTokenTypeException($tokenType)
+    protected function createUnexpectedTokenTypeException(string $tokenType)
     {
         return new SyntaxErrorException(
             new FeedbackItemResolution(

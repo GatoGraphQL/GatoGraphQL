@@ -173,7 +173,7 @@ class Parser extends Tokenizer implements ParserInterface
         /** @var array<FieldInterface|FragmentBondInterface> */
         array $fieldsOrFragmentBonds,
         Location $location,
-    ) {
+    ): QueryOperation {
         return new QueryOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
     }
 
@@ -186,7 +186,7 @@ class Parser extends Tokenizer implements ParserInterface
         /** @var array<FieldInterface|FragmentBondInterface> */
         array $fieldsOrFragmentBonds,
         Location $location,
-    ) {
+    ): MutationOperation {
         return new MutationOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
     }
 

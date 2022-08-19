@@ -241,12 +241,12 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'not':
                 return !$fieldDataAccessor->getValue('value');
             case 'and':
-                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value) {
+                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value): bool {
                     $accumulated = $accumulated && $value;
                     return $accumulated;
                 }, true);
             case 'or':
-                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value) {
+                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value): bool {
                     $accumulated = $accumulated || $value;
                     return $accumulated;
                 }, false);
