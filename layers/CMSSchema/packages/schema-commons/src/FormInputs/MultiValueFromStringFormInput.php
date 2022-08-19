@@ -11,6 +11,9 @@ class MultiValueFromStringFormInput extends FormInput
 {
     private string $separator;
 
+    /**
+     * @param array<string,mixed> $params
+     */
     public function __construct(string $name, mixed $selected = null, array $params = [])
     {
         parent::__construct($name, $selected, $params);

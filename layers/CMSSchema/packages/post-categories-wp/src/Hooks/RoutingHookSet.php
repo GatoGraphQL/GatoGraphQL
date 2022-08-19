@@ -22,6 +22,7 @@ class RoutingHookSet extends AbstractHookSet
 
     /**
      * @return string[]
+     * @param string[] $routes
      */
     public function registerRoutes(array $routes): array
     {

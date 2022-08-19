@@ -72,6 +72,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     protected function getMutableonrequestDataloadQueryArgs(Component $component, array &$props): array
     {
