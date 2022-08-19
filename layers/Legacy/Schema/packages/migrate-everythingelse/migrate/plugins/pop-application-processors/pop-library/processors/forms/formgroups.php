@@ -6,6 +6,9 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
     public final const COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT = 'forminputgroup-volunteersneeded';
     public final const COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT = 'filterinputgroup-volunteersneededmulti';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

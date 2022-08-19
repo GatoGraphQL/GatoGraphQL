@@ -5,6 +5,9 @@ class GD_Custom_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBa
 {
     public final const COMPONENT_TABLE_MYLOCATIONPOSTS = 'table-mylocationposts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -8,6 +8,9 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
     public final const COMPONENT_TABPANEL_SINGLEUPVOTEDBY = 'tabpanel-singleupvotedby';
     public final const COMPONENT_TABPANEL_SINGLEDOWNVOTEDBY = 'tabpanel-singledownvotedby';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

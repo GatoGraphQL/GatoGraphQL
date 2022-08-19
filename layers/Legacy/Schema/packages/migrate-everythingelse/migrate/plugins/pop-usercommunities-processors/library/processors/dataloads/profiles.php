@@ -16,6 +16,9 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
     public final const COMPONENT_DATALOAD_INVITENEWMEMBERS = 'dataload-invitemembers';
     public final const COMPONENT_DATALOAD_EDITMEMBERSHIP = 'dataload-editmembership';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

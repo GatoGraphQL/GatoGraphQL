@@ -6,6 +6,9 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
 {
     public final const COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK = 'custombuttoncontrol-addeventlink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

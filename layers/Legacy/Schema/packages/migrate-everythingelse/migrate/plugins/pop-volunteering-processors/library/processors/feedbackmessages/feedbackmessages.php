@@ -4,6 +4,9 @@ class PoP_Volunteering_Module_Processor_FeedbackMessages extends PoP_Module_Proc
 {
     public final const COMPONENT_FEEDBACKMESSAGE_VOLUNTEER = 'feedbackmessage-volunteer';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

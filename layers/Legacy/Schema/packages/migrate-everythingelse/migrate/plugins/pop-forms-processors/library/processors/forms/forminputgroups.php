@@ -16,6 +16,9 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
     public final const COMPONENT_FORMINPUTGROUP_SENDERNAME = 'ure-forminputgroup-sendername';
     public final const COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE = 'ure-forminputgroup-additionalmessage';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

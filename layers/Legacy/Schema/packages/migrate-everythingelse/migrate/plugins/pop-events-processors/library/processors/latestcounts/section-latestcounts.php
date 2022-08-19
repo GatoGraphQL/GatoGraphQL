@@ -12,6 +12,9 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
     public final const COMPONENT_LATESTCOUNT_AUTHOR_PASTEVENTS = 'latestcount-author-pastevents';
     public final const COMPONENT_LATESTCOUNT_TAG_PASTEVENTS = 'latestcount-tag-pastevents';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

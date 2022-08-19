@@ -9,6 +9,9 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
     public final const COMPONENT_CODE_404 = 'code-404';
     public final const COMPONENT_CODE_EMPTYSIDEINFO = 'code-emptysideinfo';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

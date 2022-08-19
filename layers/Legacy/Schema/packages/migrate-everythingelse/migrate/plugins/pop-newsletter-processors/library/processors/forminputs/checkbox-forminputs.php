@@ -5,6 +5,9 @@ class GenericForms_Module_Processor_CheckboxFormInputs extends PoP_Module_Proces
 {
     public final const COMPONENT_FORMINPUT_CUP_NEWSLETTER = 'gf-cup-newsletter';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

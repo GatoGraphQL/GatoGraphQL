@@ -7,6 +7,9 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
     public final const COMPONENT_TABLE_MYHIGHLIGHTS = 'table-myhighlights';
     public final const COMPONENT_TABLE_MYPOSTS = 'table-myposts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

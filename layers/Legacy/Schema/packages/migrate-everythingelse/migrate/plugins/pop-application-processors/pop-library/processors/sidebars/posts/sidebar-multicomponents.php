@@ -9,6 +9,9 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
     public final const COMPONENT_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT = 'sidebarmulticomponent-highlightright';
     public final const COMPONENT_SIDEBARMULTICOMPONENT_POST = 'sidebarmulticomponent-post';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

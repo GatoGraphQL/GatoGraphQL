@@ -7,6 +7,9 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
     public final const COMPONENT_CALENDAR_EVENTS_ADDONS = 'calendar-events-addons';
     public final const COMPONENT_CALENDAR_EVENTS_MAIN = 'calendar-events-main';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

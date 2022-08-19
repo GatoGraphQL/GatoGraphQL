@@ -4,6 +4,9 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
 {
     public final const COMPONENT_FORMINNER_POST = 'forminner-post';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD
 {
     public final const COMPONENT_BLOCK_WHOWEARE_SCROLLMAP = 'block-whoweare-scrollmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

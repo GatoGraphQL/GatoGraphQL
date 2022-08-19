@@ -6,6 +6,9 @@ class PoP_Module_Processor_CommentsFeedbackMessageLayouts extends PoP_Module_Pro
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_COMMENTS = 'layout-feedbackmessage-comments';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_ADDCOMMENT = 'layout-feedbackmessage-addcomment';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

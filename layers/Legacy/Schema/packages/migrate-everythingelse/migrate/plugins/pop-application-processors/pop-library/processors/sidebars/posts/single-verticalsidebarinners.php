@@ -5,6 +5,9 @@ class Wassup_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modu
     public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_HIGHLIGHT = 'vertical-sidebarinner-single-highlight';
     public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_POST = 'vertical-sidebarinner-single-post';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

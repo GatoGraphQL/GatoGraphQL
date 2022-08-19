@@ -4,6 +4,9 @@ class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues exte
 {
     public final const COMPONENT_FORMCOMPONENT_CARD_USER = 'forminput-user-card';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -6,6 +6,9 @@ class GD_EM_Module_Processor_CalendarInners extends PoP_Module_Processor_Calenda
     public final const COMPONENT_CALENDARINNER_EVENTS_ADDONS = 'calendarinner-events-addons';
     public final const COMPONENT_CALENDARINNER_EVENTS_MAIN = 'calendarinner-events-main';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

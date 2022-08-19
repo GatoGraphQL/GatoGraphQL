@@ -5,6 +5,9 @@ class PoP_Module_Processor_TagViewComponentHeaders extends PoP_Module_Processor_
     public final const COMPONENT_VIEWCOMPONENT_HEADER_TAG = 'viewcomponent-header-tag';
     public final const COMPONENT_VIEWCOMPONENT_HEADER_TAG_URL = 'viewcomponent-header-tag-url';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

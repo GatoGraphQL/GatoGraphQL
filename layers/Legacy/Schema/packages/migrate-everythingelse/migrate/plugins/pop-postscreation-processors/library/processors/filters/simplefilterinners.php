@@ -4,6 +4,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
 {
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLINKS = 'simplefilterinputcontainer-mylinks';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

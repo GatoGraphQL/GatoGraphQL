@@ -34,6 +34,9 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
     public final const COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLL_LIST = 'block-singleupvotedby-scroll-list';
     public final const COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_LIST = 'block-singledownvotedby-scroll-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

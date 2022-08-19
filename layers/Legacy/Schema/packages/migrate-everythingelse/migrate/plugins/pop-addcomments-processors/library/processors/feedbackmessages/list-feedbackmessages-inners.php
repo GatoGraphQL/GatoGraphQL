@@ -4,6 +4,9 @@ class PoP_Module_Processor_ListCommentsFeedbackMessageInners extends PoP_Module_
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_COMMENTS = 'feedbackmessageinner-comments';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

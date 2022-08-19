@@ -19,6 +19,9 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public final const COMPONENT_SCROLLINNER_EVENTS_LIST = 'scrollinner-events-list';
     public final const COMPONENT_SCROLLINNER_PASTEVENTS_LIST = 'scrollinner-pastevents-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

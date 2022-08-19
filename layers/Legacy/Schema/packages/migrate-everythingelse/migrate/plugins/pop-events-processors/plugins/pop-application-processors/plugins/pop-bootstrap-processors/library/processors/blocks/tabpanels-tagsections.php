@@ -6,6 +6,9 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
     public final const COMPONENT_BLOCK_TABPANEL_TAGPASTEVENTS = 'block-tabpanel-tagpastevents';
     public final const COMPONENT_BLOCK_TABPANEL_TAGEVENTSCALENDAR = 'block-tabpanel-tageventscalendar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

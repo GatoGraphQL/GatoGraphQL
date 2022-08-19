@@ -13,6 +13,9 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
     public final const COMPONENT_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL = 'scrollinner-locationposts-thumbnail';
     public final const COMPONENT_SCROLLINNER_LOCATIONPOSTS_LIST = 'scrollinner-locationposts-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

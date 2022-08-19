@@ -4,6 +4,9 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks extends PoP_Mod
 {
     public final const COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'block-tabpanel-authorcommunitymembers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

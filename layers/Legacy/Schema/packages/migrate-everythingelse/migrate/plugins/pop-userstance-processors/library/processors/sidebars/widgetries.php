@@ -8,6 +8,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
     public final const COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW = 'widget-stances-appendtoscript-fullview';
     public final const COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS = 'widget-stances-appendtoscript-details';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

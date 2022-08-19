@@ -6,6 +6,9 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
 {
     public final const COMPONENT_ANCHORCONTROL_SHAREBYEMAIL = 'anchorcontrol-sharebyemail';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

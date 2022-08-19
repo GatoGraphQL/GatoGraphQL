@@ -4,6 +4,9 @@ class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Process
 {
     public final const COMPONENT_CALENDAR_EVENTSMAP = 'calendar-eventsmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

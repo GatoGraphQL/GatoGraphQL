@@ -11,6 +11,9 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     public final const COMPONENT_WIDGET_REFERENCES_LINE = 'widget-references-line';
     public final const COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE = 'widget-highlightedpost-line';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

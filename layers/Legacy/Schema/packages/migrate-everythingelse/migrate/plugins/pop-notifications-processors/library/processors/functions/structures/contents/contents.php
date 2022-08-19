@@ -5,6 +5,9 @@ class GD_AAL_Module_Processor_FunctionsContents extends PoP_Module_Processor_Con
     public final const COMPONENT_CONTENT_MARKNOTIFICATIONASREAD = 'content-marknotificationasread';
     public final const COMPONENT_CONTENT_MARKNOTIFICATIONASUNREAD = 'content-marknotificationasunread';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

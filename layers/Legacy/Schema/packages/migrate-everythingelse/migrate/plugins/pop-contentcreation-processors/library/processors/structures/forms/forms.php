@@ -5,6 +5,9 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
 {
     public final const COMPONENT_FORM_FLAG = 'form-flag';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

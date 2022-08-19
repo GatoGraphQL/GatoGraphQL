@@ -5,6 +5,9 @@ class Wassup_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
     public final const COMPONENT_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT = 'quicklinkbuttongroup-addonspostedit';
     public final const COMPONENT_QUICKLINKBUTTONGROUP_ADDONSORMAINPOSTEDIT = 'quicklinkbuttongroup-addonsormainpostedit';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

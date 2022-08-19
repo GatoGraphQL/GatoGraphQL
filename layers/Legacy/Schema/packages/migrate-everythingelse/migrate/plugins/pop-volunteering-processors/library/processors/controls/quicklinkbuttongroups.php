@@ -4,6 +4,9 @@ class PoP_Volunteering_Module_Processor_QuicklinkButtonGroups extends PoP_Module
 {
     public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTVOLUNTEER = 'quicklinkbuttongroup-postvolunteer';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

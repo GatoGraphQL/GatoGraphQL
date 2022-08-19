@@ -9,6 +9,9 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads ext
     public final const COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP = 'dataload-communities-scrollmap';
     public final const COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'dataload-authormembers-scrollmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

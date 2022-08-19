@@ -4,6 +4,9 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageInners extends PoP_Modul
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUSER = 'feedbackmessageinner-contactuser';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

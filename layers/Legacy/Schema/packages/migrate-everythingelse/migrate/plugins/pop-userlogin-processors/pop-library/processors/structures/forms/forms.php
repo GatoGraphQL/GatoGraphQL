@@ -11,6 +11,9 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
     public final const COMPONENT_FORM_LOGOUT = 'form-logout';
     public final const COMPONENT_FORM_USER_CHANGEPASSWORD = 'form-user-changepwd';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

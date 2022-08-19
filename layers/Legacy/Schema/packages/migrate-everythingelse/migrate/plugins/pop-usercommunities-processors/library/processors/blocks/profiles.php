@@ -7,6 +7,9 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
     public final const COMPONENT_BLOCK_INVITENEWMEMBERS = 'block-invitemembers';
     public final const COMPONENT_BLOCK_EDITMEMBERSHIP = 'block-editmembership';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

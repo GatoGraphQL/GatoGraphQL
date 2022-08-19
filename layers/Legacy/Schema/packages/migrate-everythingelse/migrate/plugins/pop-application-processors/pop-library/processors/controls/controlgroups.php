@@ -29,6 +29,9 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
     public final const COMPONENT_CONTROLGROUP_EDITPOST = 'controlgroup-editpost';
     public final const COMPONENT_CONTROLGROUP_USERPOSTINTERACTION = 'controlgroup-userpostinteraction';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

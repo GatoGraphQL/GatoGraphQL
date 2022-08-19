@@ -6,6 +6,9 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
     public final const COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE = 'block-profileorganization-create';
     public final const COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE = 'block-profileindividual-create';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

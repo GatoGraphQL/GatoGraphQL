@@ -5,6 +5,9 @@ class PoP_Newsletter_Module_Processor_GFForms extends PoP_Module_Processor_Forms
     public final const COMPONENT_FORM_NEWSLETTER = 'form-newsletter';
     public final const COMPONENT_FORM_NEWSLETTERUNSUBSCRIPTION = 'form-newsletterunsubscription';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
     public final const COMPONENT_LAYOUTAUTHOR_CONTENT = 'layoutauthor-content';
     public final const COMPONENT_LAYOUTAUTHOR_LIMITEDCONTENT = 'layoutauthor-limitedcontent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_Maps extends GD_EM_Module_Processor_MapsBase
     public final const COMPONENT_EM_MAP_POST = 'em-map-post';
     public final const COMPONENT_EM_MAP_USER = 'em-map-user';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

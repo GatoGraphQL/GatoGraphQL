@@ -4,6 +4,9 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
 {
     public final const COMPONENT_FORMINNER_HIGHLIGHT = 'forminner-highlight';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

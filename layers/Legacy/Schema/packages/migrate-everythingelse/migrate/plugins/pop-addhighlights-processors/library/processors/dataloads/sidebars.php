@@ -8,6 +8,9 @@ class PoP_AddHighlights_Module_Processor_CustomSidebarDataloads extends PoP_Modu
 
     public final const COMPONENT_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR = 'dataload-single-highlight-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

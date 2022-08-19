@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
     public final const COMPONENT_BLOCK_EVENT_UPDATE = 'block-event-update';
     public final const COMPONENT_BLOCK_EVENT_CREATE = 'block-event-create';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

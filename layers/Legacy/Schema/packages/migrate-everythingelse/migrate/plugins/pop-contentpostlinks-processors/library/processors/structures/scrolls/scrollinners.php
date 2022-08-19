@@ -11,6 +11,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrollInners extends PoP_Modul
     public final const COMPONENT_SCROLLINNER_LINKS_THUMBNAIL = 'scrollinner-links-thumbnail';
     public final const COMPONENT_SCROLLINNER_LINKS_LIST = 'scrollinner-links-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_ContentCreation_Module_Processor_FormGroups extends PoP_Module_Process
 {
     public final const COMPONENT_FORMINPUTGROUP_WHYFLAG = 'gf-forminputgroup-field-whyflag';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

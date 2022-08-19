@@ -4,6 +4,9 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
 {
     public final const COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL = 'carouselcontrolbuttongroup-carousel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -6,6 +6,9 @@ class PoP_Module_Processor_MapScripts extends PoP_Module_Processor_MapScriptsBas
     public final const COMPONENT_MAP_SCRIPT_POST = 'em-map-script-post';
     public final const COMPONENT_MAP_SCRIPT_USER = 'em-map-script-user';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

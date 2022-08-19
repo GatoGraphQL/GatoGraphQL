@@ -8,6 +8,9 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
     public final const COMPONENT_DATALOAD_NEWSLETTER = 'dataload-newsletter';
     public final const COMPONENT_DATALOAD_NEWSLETTERUNSUBSCRIPTION = 'dataload-newsletterunsubscription';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -10,6 +10,9 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     public final const COMPONENT_DATALOAD_TAG_SIDEBAR = 'dataload-tag-sidebar';
     public final const COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR = 'dataload-single-post-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

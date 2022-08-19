@@ -5,6 +5,9 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
     public final const COMPONENT_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS = 'ure-layoutwrapper-profileindividual-details';
     public final const COMPONENT_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS = 'ure-layoutwrapper-profileorganization-details';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

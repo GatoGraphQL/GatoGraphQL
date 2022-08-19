@@ -6,6 +6,9 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public final const COMPONENT_EM_BUTTON_GOOGLECALENDAR = 'em-button-googlecalendar';
     public final const COMPONENT_EM_BUTTON_ICAL = 'em-button-ical';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

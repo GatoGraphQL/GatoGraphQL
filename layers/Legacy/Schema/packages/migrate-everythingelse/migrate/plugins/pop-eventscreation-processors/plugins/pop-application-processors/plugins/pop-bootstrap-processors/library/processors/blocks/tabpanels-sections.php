@@ -5,6 +5,9 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
     public final const COMPONENT_BLOCK_TABPANEL_MYEVENTS = 'block-myevents-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYPASTEVENTS = 'block-mypastevents-tabpanel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

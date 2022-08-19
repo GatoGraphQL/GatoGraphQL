@@ -4,6 +4,9 @@ class PoP_Module_Processor_LocationContentInners extends PoP_Module_Processor_Co
 {
     public final const COMPONENT_TRIGGERTYPEAHEADSELECTINNER_LOCATION = 'triggertypeaheadselectinner-location';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

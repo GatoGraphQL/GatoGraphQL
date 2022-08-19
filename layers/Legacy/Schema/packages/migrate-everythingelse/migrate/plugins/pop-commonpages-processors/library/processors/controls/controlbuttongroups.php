@@ -5,6 +5,9 @@ class GD_CommonPages_Module_Processor_CustomControlButtonGroups extends PoP_Modu
     public final const COMPONENT_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ = 'customcontrolbuttongroup-addcontentfaq';
     public final const COMPONENT_CUSTOMCONTROLBUTTONGROUP_ACCOUNTFAQ = 'customcontrolbuttongroup-accountfaq';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

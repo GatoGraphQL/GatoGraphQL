@@ -12,6 +12,9 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     public final const COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE = 'forminput-locationpostcode';
     public final const COMPONENT_FORMINPUT_EM_LOCATIONREGION = 'forminput-locationregion';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
     public final const COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS = 'block-stances-byorganizations-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS = 'block-stances-byindividuals-tabpanel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_Tables extends PoP_Module_Pr
 {
     public final const COMPONENT_TABLE_MYLINKS = 'table-mylinks';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

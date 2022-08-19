@@ -4,6 +4,9 @@ class PoP_Module_Processor_StaticTypeaheadComponentLayouts extends PoP_Module_Pr
 {
     public final const COMPONENT_LAYOUTSTATIC_TYPEAHEAD_COMPONENT = 'layoutstatic-typeahead-component';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

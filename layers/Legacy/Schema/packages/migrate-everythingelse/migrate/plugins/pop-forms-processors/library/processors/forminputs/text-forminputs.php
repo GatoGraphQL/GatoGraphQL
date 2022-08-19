@@ -10,6 +10,9 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
     public final const COMPONENT_FORMINPUT_SENDERNAME = 'forminput-sendername';
     public final const COMPONENT_FORMINPUT_BROWSERURL = 'forminput-browserurl';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

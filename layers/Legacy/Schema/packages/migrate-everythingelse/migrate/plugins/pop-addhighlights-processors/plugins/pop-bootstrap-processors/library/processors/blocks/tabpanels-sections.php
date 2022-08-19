@@ -5,6 +5,9 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
     public final const COMPONENT_BLOCK_TABPANEL_HIGHLIGHTS = 'block-tabpanel-highlights';
     public final const COMPONENT_BLOCK_TABPANEL_MYHIGHLIGHTS = 'block-tabpanel-myhighlights';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
 {
     public final const COMPONENT_FILTERINPUTCONTAINER_MYEVENTS = 'filterinputcontainer-myevents';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

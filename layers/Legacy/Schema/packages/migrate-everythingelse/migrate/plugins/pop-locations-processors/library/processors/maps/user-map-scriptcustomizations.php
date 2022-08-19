@@ -4,6 +4,9 @@ class PoP_Module_Processor_UserMapScriptCustomizations extends PoP_Module_Proces
 {
     public final const COMPONENT_MAP_SCRIPTCUSTOMIZATION_USER = 'em-map-scriptcustomization-user';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
 {
     public final const COMPONENT_FORMINPUTGROUP_CAPTCHA = 'forminputgroup-captcha';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

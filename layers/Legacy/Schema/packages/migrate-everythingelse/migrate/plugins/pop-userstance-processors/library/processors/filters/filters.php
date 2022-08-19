@@ -12,6 +12,9 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
     public final const COMPONENT_FILTER_TAGSTANCES = 'filter-tagstances';
     public final const COMPONENT_FILTER_TAGSTANCES_STANCE = 'filter-tagstances-stance';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

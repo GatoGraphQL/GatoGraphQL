@@ -6,6 +6,9 @@ class PoP_LocationPostLinksCreation_Module_Processor_AnchorControls extends PoP_
 {
     public final const COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK = 'custombuttoncontrol-addlocationpostlink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

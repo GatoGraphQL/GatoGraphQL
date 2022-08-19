@@ -4,6 +4,9 @@ class PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents extends Po
 {
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES = 'formcomponent-selectabletypeaheadalert-references';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

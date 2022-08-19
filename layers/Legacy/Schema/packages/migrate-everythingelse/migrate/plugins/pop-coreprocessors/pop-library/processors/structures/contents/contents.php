@@ -8,6 +8,9 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
     public final const COMPONENT_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'content-subjugatedpostconclusionsidebar-horizontal';
     public final const COMPONENT_CONTENT_LATESTCOUNTS = 'content-latestcounts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

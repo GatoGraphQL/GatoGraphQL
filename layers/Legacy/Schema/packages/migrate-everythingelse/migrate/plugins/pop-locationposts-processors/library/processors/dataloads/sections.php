@@ -24,6 +24,9 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
     public final const COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST = 'dataload-authorlocationposts-scroll-list';
     public final const COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST = 'dataload-taglocationposts-scroll-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

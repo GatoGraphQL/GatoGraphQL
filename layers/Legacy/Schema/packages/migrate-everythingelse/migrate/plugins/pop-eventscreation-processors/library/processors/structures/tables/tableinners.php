@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
     public final const COMPONENT_TABLEINNER_MYEVENTS = 'tableinner-myevents';
     public final const COMPONENT_TABLEINNER_MYPASTEVENTS = 'tableinner-mypastevents';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

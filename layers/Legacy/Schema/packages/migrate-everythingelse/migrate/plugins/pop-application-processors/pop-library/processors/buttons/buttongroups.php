@@ -15,6 +15,9 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
     public final const COMPONENT_BUTTONGROUP_TAGS = 'buttongroup-tags';
     public final const COMPONENT_BUTTONGROUP_AUTHORTAGS = 'buttongroup-authortags';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

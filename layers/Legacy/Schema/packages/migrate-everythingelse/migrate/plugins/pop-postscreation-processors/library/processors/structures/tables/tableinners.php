@@ -4,6 +4,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_TableInners extends PoP_Modu
 {
     public final const COMPONENT_TABLEINNER_MYLINKS = 'tableinner-mylinks';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

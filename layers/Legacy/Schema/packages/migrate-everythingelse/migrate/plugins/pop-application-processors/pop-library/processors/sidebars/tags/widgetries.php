@@ -6,6 +6,9 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
 {
     public final const COMPONENT_WIDGETCOMPACT_TAGINFO = 'widgetcompact-taginfo';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

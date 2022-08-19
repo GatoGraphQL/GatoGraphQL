@@ -12,6 +12,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     public final const COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD = 'dataload-marknotificationasread';
     public final const COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD = 'dataload-marknotificationasunread';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

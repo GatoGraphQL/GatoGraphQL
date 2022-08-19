@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Pro
     public final const COMPONENT_VERTICALSIDEBAR_SINGLE_EVENT = 'vertical-sidebar-single-event';
     public final const COMPONENT_VERTICALSIDEBAR_SINGLE_PASTEVENT = 'vertical-sidebar-single-pastevent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

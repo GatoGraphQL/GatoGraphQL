@@ -8,6 +8,9 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
     public final const COMPONENT_LAYOUT_CONTENT_COMMENT = 'layout-content-comment';
     public final const COMPONENT_LAYOUT_CONTENT_PAGE = 'layout-content-page';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

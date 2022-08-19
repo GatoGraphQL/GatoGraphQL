@@ -5,6 +5,9 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
     public final const COMPONENT_BLOCK_TABPANEL_COMMUNITIES = 'block-communities-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYMEMBERS = 'block-mymembers-tabpanel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class UserStance_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Proce
     public final const COMPONENT_QUICKLINKGROUP_STANCEEDIT = 'quicklinkgroup-stanceedit';
     public final const COMPONENT_QUICKLINKGROUP_STANCECONTENT = 'quicklinkgroup-stancecontent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

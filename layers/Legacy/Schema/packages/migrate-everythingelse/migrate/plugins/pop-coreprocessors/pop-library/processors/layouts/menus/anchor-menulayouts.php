@@ -4,6 +4,9 @@ class PoP_Module_Processor_AnchorMenuLayouts extends PoP_Module_Processor_Anchor
 {
     public final const COMPONENT_LAYOUT_MENU_BUTTON = 'layout-menu-button';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

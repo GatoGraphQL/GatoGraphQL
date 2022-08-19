@@ -9,6 +9,9 @@ class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Proc
     public final const COMPONENT_DELEGATORFILTER_EVENTS = 'delegatorfilter-events';
     public final const COMPONENT_DELEGATORFILTER_EVENTSCALENDAR = 'delegatorfilter-eventscalendar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

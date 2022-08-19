@@ -5,6 +5,9 @@ class GD_EM_Custom_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
 {
     public final const COMPONENT_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE = 'multicomponent-form-event-rightside';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

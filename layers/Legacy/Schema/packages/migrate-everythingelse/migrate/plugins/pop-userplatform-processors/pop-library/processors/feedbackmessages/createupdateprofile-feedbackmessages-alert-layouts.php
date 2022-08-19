@@ -5,6 +5,9 @@ class PoP_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Module
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATEPROFILE = 'layout-feedbackmessagealert-createprofile';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEPROFILE = 'layout-feedbackmessagealert-updateprofile';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -9,6 +9,9 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
 {
     public final const COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS = 'carouselcontrols-members';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

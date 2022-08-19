@@ -4,6 +4,9 @@ class PoP_Module_Processor_MaxHeightLayoutMultipleComponents extends PoP_Module_
 {
     public final const COMPONENT_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT = 'multicomponent-simpleview-postcontent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

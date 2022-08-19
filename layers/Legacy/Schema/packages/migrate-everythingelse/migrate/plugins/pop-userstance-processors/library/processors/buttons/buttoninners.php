@@ -10,6 +10,9 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
     public final const COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL = 'buttoninner-poststance-neutral';
     public final const COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST = 'buttoninner-poststance-against';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

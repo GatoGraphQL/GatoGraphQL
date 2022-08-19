@@ -8,6 +8,9 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
 {
     public final const COMPONENT_PAGESECTION_ADDONS = 'pagesection-addons';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

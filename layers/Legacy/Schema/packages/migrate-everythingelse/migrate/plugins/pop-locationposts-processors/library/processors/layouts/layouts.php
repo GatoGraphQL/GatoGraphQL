@@ -4,6 +4,9 @@ class GD_Custom_EM_Module_Processor_Layouts extends PoP_Module_Processor_Categor
 {
     public final const COMPONENT_LAYOUT_LOCATIONPOST_CATEGORIES = 'layout-locationpost-categories';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

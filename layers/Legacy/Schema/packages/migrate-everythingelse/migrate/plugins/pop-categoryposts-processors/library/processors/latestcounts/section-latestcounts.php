@@ -63,6 +63,9 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
     public final const COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS18 = 'latestcount-tag-categoryposts18';
     public final const COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19 = 'latestcount-tag-categoryposts19';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

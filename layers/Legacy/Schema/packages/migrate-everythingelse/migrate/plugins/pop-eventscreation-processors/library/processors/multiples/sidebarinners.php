@@ -5,6 +5,9 @@ class PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners extends PoP
     public final const COMPONENT_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR = 'multiple-sectioninner-myevents-sidebar';
     public final const COMPONENT_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR = 'multiple-sectioninner-mypastevents-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Module
     public final const COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW = 'layout-previewpost-simpleview';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW = 'layout-previewpost-multiplesimpleview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

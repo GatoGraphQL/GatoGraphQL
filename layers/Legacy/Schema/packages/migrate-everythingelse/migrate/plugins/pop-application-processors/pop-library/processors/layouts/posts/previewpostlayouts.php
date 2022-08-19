@@ -22,6 +22,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED = 'layout-previewpost-post-related';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT = 'layout-previewpost-post-edit';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

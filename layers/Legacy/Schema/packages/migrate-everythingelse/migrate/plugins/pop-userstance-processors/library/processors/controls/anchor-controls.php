@@ -16,6 +16,9 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public final const COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT = 'buttoncontrol-stance-neutral-count';
     public final const COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT = 'buttoncontrol-stance-against-count';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

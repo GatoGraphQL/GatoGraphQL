@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_C
     public final const COMPONENT_CONTROLGROUP_MYMEMBERS = 'controlgroup-mymembers';
     public final const COMPONENT_CONTROLGROUP_MYBLOCKMEMBERS = 'controlgroup-myblockmembers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

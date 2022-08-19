@@ -6,6 +6,9 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public final const COMPONENT_BUTTON_ADDONSPOSTEDIT = 'button-addonspostedit';
     public final const COMPONENT_BUTTON_ADDONSORMAINPOSTEDIT = 'button-addonsormainpostedit';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

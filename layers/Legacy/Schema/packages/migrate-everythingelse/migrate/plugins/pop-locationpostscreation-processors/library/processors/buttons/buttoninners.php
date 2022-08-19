@@ -4,6 +4,9 @@ class PoP_LocationPostsCreation_Module_Processor_ButtonInners extends PoP_Module
 {
     public final const COMPONENT_BUTTONINNER_LOCATIONPOST_CREATE = 'buttoninner-locationpost-create';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

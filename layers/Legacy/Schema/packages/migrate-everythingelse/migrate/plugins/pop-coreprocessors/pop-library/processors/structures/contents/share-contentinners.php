@@ -7,6 +7,9 @@ class PoP_Module_Processor_ShareContentInners extends PoP_Module_Processor_Conte
     public final const COMPONENT_CONTENTINNER_API = 'contentinner-api';
     public final const COMPONENT_CONTENTINNER_COPYSEARCHURL = 'contentinner-copysearchurl';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

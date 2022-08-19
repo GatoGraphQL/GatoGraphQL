@@ -4,6 +4,9 @@ class PoPCore_Module_Processor_MultipleContentInners extends PoP_Module_Processo
 {
     public final const COMPONENT_CONTENTINNER_LATESTCOUNTS = 'contentinner-latestcounts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

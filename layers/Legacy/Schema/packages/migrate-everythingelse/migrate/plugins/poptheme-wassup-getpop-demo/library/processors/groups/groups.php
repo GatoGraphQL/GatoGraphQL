@@ -4,6 +4,9 @@ class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
 {
     public final const COMPONENT_GETPOPDEMO_GROUP_HOMETOP = 'group-getpopdemo-hometop';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

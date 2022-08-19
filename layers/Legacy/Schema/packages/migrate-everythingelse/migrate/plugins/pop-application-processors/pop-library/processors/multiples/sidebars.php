@@ -24,6 +24,9 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
     public final const COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR = 'multiple-single-post-recommendedbysidebar';
     public final const COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR = 'multiple-homesection-content-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

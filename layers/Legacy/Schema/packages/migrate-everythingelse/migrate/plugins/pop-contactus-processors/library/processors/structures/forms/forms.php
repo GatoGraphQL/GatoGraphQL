@@ -5,6 +5,9 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
 {
     public final const COMPONENT_FORM_CONTACTUS = 'form-contactus';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

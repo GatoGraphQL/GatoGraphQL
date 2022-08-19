@@ -6,6 +6,9 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
 {
     public final const COMPONENT_DATALOAD_CONTACTUS = 'dataload-contactus';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

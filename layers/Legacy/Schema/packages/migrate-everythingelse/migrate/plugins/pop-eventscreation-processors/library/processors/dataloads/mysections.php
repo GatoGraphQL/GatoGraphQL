@@ -13,6 +13,9 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
     public final const COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myevents-scroll-fullviewpreview';
     public final const COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-mypastevents-scroll-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

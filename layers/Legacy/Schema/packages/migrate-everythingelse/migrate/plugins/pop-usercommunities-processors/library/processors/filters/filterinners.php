@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
     public final const COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS = 'filterinputcontainer-mymembers';
     public final const COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES = 'filterinputcontainer-communities';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

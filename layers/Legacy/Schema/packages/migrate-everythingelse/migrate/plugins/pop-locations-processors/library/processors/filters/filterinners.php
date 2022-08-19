@@ -4,6 +4,9 @@ class PoP_Locations_Module_Processor_CustomFilterInners extends PoP_Module_Proce
 {
     public final const COMPONENT_FILTERINPUTCONTAINER_LOCATIONS = 'filterinputcontainer-locations';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

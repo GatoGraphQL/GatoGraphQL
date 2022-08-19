@@ -4,6 +4,9 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
 {
     public final const COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR = 'multiple-single-locationpost-postauthorssidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -9,6 +9,9 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
     public final const COMPONENT_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-myevents-scroll-fullviewpreview';
     public final const COMPONENT_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-mypastevents-scroll-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

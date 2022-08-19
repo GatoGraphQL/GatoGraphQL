@@ -6,6 +6,9 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
     public final const COMPONENT_FEEDBACKMESSAGE_CREATECONTENT = 'feedbackmessage-createcontent';
     public final const COMPONENT_FEEDBACKMESSAGE_UPDATECONTENT = 'feedbackmessage-updatecontent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_Module_Processor_LocationContents extends PoP_Module_Processor_Content
 {
     public final const COMPONENT_TRIGGERTYPEAHEADSELECT_LOCATION = 'triggertypeaheadselect-location';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

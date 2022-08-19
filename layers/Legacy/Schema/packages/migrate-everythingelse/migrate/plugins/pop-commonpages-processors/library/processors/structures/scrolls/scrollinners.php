@@ -7,6 +7,9 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
     public final const COMPONENT_SCROLLINNER_WHOWEARE_LIST = 'scrollinner-whoweare-list';
     public final const COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW = 'scrollinner-whoweare-fullview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

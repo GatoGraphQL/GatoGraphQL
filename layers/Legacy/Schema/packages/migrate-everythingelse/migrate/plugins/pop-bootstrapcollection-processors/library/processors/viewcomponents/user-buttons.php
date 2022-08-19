@@ -9,6 +9,9 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA = 'viewcomponent-userbutton-api-socialmedia';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN = 'viewcomponent-userbutton-api-previewdropdown';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

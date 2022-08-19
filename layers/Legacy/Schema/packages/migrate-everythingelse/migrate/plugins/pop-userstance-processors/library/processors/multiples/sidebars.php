@@ -13,6 +13,9 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public final const COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR = 'multiple-author-stances-stance-sidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR = 'multiple-single-stance-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

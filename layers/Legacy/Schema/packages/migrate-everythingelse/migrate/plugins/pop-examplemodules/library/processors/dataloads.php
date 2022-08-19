@@ -26,6 +26,9 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     public final const COMPONENT_EXAMPLE_PAGE = 'example-page';
     public final const COMPONENT_EXAMPLE_HOMESTATICPAGE = 'example-homestaticpage';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

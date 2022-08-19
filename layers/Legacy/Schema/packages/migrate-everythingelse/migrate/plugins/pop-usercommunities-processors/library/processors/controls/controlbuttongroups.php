@@ -4,6 +4,9 @@ class GD_URE_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_C
 {
     public final const COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE = 'ure-controlbuttongroup-contentsource';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

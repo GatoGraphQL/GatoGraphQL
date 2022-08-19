@@ -8,6 +8,9 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
     public final const COMPONENT_CONTENT_PAGECONTENT = 'content-pagecontent';
     public final const COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT = 'content-pagecontent-prettyprint';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

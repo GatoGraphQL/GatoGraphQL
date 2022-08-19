@@ -4,6 +4,9 @@ class PoP_Module_Processor_MapAddMarkers extends PoP_Module_Processor_MapAddMark
 {
     public final const COMPONENT_MAP_ADDMARKER = 'em-map-addmarker';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

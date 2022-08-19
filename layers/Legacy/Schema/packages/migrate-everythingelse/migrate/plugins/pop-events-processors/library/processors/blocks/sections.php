@@ -48,6 +48,9 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
     public final const COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL = 'block-authorevents-carousel';
     public final const COMPONENT_BLOCK_TAGEVENTS_CAROUSEL = 'block-tagevents-carousel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -6,6 +6,9 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
     public final const COMPONENT_FILTER_AUTHORHIGHLIGHTS = 'filter-authorhighlights';
     public final const COMPONENT_FILTER_MYHIGHLIGHTS = 'filter-myhighlights';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

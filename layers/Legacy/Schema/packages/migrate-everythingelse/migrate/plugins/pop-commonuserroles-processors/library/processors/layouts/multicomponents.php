@@ -4,6 +4,9 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
 {
     public final const COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS = 'multicomponent-organizationdetails';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

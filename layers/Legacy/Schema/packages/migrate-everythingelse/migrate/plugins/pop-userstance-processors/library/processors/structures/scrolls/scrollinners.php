@@ -13,6 +13,9 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public final const COMPONENT_SCROLLINNER_AUTHORSTANCES_LIST = 'scrollinner-authorstances-list';
     public final const COMPONENT_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scrollinner-singlerelatedstancecontent-fullview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

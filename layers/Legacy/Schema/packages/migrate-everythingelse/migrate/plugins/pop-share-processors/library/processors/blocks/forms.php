@@ -4,6 +4,9 @@ class PoP_Share_Module_Processor_Blocks extends PoP_Module_Processor_FormBlocksB
 {
     public final const COMPONENT_BLOCK_SHAREBYEMAIL = 'block-sharebyemail';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

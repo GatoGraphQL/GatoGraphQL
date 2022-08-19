@@ -4,6 +4,9 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
 {
     public final const COMPONENT_BLOCK_FLAG = 'block-flag';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -9,6 +9,9 @@ class PoP_Events_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
     public final const COMPONENT_FILTER_EVENTS = 'filter-events';
     public final const COMPONENT_FILTER_EVENTSCALENDAR = 'filter-eventscalendar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

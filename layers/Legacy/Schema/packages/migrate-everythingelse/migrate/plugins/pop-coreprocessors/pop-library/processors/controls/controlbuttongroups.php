@@ -15,6 +15,9 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
     public final const COMPONENT_CONTROLBUTTONGROUP_ADDCOMMENT = 'controlbuttongroup-addcomment';
     public final const COMPONENT_CONTROLBUTTONGROUP_ALLTAGSLINK = 'controlbuttongroup-alltagslink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_Module_Processor_IndentMenus extends PoP_Module_Processor_IndentMenusB
 {
     public final const COMPONENT_INDENTMENU = 'indentmenu';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processo
 {
     public final const COMPONENT_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO = 'em-widgetcompact-automatedemails-eventinfo';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

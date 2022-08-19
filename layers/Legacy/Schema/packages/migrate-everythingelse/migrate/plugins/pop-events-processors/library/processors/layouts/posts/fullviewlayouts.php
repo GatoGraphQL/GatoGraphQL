@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
     public final const COMPONENT_LAYOUT_FULLVIEW_EVENT = 'layout-fullview-event';
     public final const COMPONENT_LAYOUT_FULLVIEW_PASTEVENT = 'layout-fullview-pastevent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

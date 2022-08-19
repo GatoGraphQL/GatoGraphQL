@@ -5,6 +5,9 @@ class PoP_LocationPosts_Module_Processor_CustomScrollMaps extends PoP_Module_Pro
     public final const COMPONENT_SCROLL_LOCATIONPOSTS_MAP = 'scroll-locationposts-map';
     public final const COMPONENT_SCROLL_LOCATIONPOSTS_HORIZONTALMAP = 'scroll-locationposts-horizontalmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
