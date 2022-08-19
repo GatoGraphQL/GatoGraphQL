@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPosts\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
@@ -31,6 +32,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
+    /**
+     * @return array<\PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface>
+     */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
@@ -38,6 +42,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToImplement(): array
     {
         return array_merge(
@@ -76,6 +83,9 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
             default => parent::getFieldDescription($fieldName),
         };
     }
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
         return match ($fieldName) {

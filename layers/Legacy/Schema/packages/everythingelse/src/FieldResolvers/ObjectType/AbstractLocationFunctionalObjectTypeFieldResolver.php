@@ -33,6 +33,9 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         return null;
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

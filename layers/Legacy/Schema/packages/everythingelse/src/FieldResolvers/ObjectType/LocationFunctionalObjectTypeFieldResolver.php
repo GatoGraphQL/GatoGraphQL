@@ -29,6 +29,9 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -36,6 +39,9 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
