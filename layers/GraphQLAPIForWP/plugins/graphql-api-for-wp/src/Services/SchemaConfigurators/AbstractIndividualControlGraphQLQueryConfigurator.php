@@ -11,7 +11,7 @@ abstract class AbstractIndividualControlGraphQLQueryConfigurator extends Abstrac
      * adding an individual schema mode for access control.
      * It returns a single array (or null)
      *
-     * @return array<array> The list of entries, where an entry is an array
+     * @return array<mixed[]> The list of entries, where an entry is an array
      */
     protected function getIndividualControlEntriesFromField(string $selectedField, mixed $value, ?string $schemaMode): array
     {

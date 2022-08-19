@@ -162,7 +162,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     /**
      * Array with the inputs to show as settings for the module
      *
-    * @return array<array> List of settings for the module, each entry is an array with property => value
+    * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
      */
     public function getSettings(string $module): array
     {

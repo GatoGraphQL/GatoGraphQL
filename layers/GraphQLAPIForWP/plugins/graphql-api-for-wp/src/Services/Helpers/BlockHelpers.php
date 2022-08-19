@@ -54,7 +54,7 @@ class BlockHelpers
     /**
      * Read the configuration post, and extract the configuration, contained through the specified block
      *
-     * @return array<array> A list of block data, each as an array
+     * @return array<array<string,mixed>> A list of block data, each as an array
      */
     public function getBlocksOfTypeFromCustomPost(
         WP_Post|int $configurationPostOrID,

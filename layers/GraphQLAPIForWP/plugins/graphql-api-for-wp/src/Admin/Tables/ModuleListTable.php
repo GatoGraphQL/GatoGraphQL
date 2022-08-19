@@ -40,7 +40,7 @@ class ModuleListTable extends AbstractItemListTable
     /**
      * Return all the items to display on the table
      *
-     * @return array<array> Each item is an array of prop => value
+     * @return array<array<string,mixed>> Each item is an array of prop => value
      */
     public function getAllItems(): array
     {

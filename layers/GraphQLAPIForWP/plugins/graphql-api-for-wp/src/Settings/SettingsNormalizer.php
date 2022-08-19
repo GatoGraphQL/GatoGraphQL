@@ -127,7 +127,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
     /**
      * Return all the modules with settings
      *
-     * @return array<array> Each item is an array of prop => value
+     * @return array<array<string,mixed>> Each item is an array of prop => value
      */
     public function getAllSettingsItems(): array
     {
