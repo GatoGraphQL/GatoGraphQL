@@ -78,6 +78,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
     /**
      * @return array<mixed[]>
+     * @param array<mixed[]> $fieldEntries
      */
     protected function getAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes): array
     {

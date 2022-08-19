@@ -53,8 +53,10 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     /** @var array<string,int> Count block position, to generate the blockID */
     protected array $blockNameCounter = [];
 
+    /**
+     * @param string[] $pluginNamespaces
+     */
     public function __construct(
-        /** @var string[] */
         protected array $pluginNamespaces,
     ) {
     }

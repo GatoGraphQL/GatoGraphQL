@@ -22,6 +22,7 @@ class SchemaCacheHookSet extends AbstractHookSet
 
     /**
      * @return array<string,mixed>
+     * @param string[] $elements
      */
     public function getSchemaCacheKeyElements(array $elements): array
     {

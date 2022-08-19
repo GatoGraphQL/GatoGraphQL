@@ -24,6 +24,7 @@ interface MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
      *                                This is needed when calling this function before the Schema has been configured, i.e. before finding FieldResolvers for each Type
      *
      * @return array<mixed[]> The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
+     * @param array<mixed[]> $fieldEntries
      */
     public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes = false): array;
 }

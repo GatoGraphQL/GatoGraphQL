@@ -6,9 +6,11 @@ namespace GraphQLAPI\GraphQLAPI\AppObjects\BlockAttributes;
 
 class PersistedQueryEndpointGraphiQLBlockAttributes
 {
+    /**
+     * @param array<string,mixed> $variables
+     */
     public function __construct(
         protected string $query,
-        /** @var array<string,mixed> */
         protected array $variables,
     ) {
     }

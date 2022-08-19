@@ -77,6 +77,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      *
      * @param string $relativePathDir Dir relative to the /docs/${lang}/ folder
      * @throws ContentNotExistsException When the file is not found
+     * @param array<string,mixed> $options
      */
     public function getContent(
         string $filename,

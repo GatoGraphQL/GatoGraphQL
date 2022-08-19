@@ -22,6 +22,7 @@ class VarsHookSet extends AbstractHookSet
 
     /**
      * @return string[]
+     * @param string[] $elements
      */
     public function getModelInstanceElementsFromAppState(array $elements): array
     {
