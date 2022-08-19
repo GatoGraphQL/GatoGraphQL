@@ -28,6 +28,9 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
         return $name . ($this->isMultiple($component) ? '[]' : '');
     }
 
+    /**
+     * @return class-string<FormInput>
+     */
     public function getInputClass(Component $component): string
     {
         if ($this->isMultiple($component)) {
