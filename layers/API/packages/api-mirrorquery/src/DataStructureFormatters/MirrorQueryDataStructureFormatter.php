@@ -131,6 +131,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         return null;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getFormattedData(array $data): array
     {
         $fields = $this->getFields();

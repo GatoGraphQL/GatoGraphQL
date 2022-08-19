@@ -29,6 +29,9 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
         return $this->accessedDirectiveResolverClassRelationalTypeResolvers;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = [
