@@ -10,6 +10,8 @@ use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use WP_Error;
 use WP_Taxonomy;
 
+use function wp_set_post_terms;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -63,9 +65,9 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return [];
     }
 
-    public function setPostTerms($post_id, $tags, $taxonomy, $append = false): array|WP_Error|bool
+    public function setPostTerms($post_id, $tags, $taxonomy, $append = false): void
     {
-        return wp_set_post_terms($post_id, $tags, $taxonomy, $append);
+        wp_set_post_terms($post_id, $tags, $taxonomy, $append);
     }
 
     public function getTermLink($term_id): string|WP_Error
