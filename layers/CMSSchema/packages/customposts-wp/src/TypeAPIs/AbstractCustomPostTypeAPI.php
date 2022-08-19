@@ -219,6 +219,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $orderBy
         );
     }
+    /**
+     * @return string[]
+     */
     public function getCustomPostTypes(array $query = array()): array
     {
         // Convert the parameters

@@ -45,6 +45,9 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
         ];
     }
 
+    /**
+     * @return mixed[]
+     */
     public function executeQuery($query, array $options = []): array
     {
         return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
