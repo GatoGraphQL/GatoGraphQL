@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\CacheControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
@@ -137,7 +138,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<\PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface> $succeedingPipelineDirectiveResolvers
+     * @param array<DirectiveResolverInterface> $succeedingPipelineDirectiveResolvers
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
