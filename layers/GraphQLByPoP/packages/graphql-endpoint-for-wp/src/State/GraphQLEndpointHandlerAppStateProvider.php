@@ -36,6 +36,9 @@ class GraphQLEndpointHandlerAppStateProvider extends AbstractAPIEndpointHandlerA
         return $this->getGraphQLEndpointHandler();
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         parent::initialize($state);

@@ -8,6 +8,9 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         /**
