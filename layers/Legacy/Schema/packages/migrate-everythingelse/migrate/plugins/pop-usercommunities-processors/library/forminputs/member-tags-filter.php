@@ -3,6 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_FormInput_FilterMemberTags extends GD_URE_FormInput_MemberTags
 {
+    /**
+     * @return mixed[]
+     */
     public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);

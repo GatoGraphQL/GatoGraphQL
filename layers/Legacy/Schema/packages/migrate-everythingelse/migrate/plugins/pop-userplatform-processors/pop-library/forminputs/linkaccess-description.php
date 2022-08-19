@@ -4,6 +4,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_FormInput_LinkAccessDescription extends SelectFormInput
 {
+    /**
+     * @return mixed[]
+     */
     public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);

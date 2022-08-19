@@ -3,6 +3,9 @@ use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
 class GD_FormInput_MultiStance extends MultipleSelectFormInput
 {
+    /**
+     * @return mixed[]
+     */
     public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);

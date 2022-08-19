@@ -5,6 +5,9 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class GD_FormInput_EM_LocationCountries extends SelectFormInput
 {
+    /**
+     * @return mixed[]
+     */
     public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);

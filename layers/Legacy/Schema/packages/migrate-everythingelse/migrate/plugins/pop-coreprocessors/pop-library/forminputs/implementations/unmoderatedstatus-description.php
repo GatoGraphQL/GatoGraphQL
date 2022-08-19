@@ -5,6 +5,9 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class GD_FormInput_UnmoderatedStatusDescription extends SelectFormInput
 {
+    /**
+     * @return mixed[]
+     */
     public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);

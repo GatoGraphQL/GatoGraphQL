@@ -4,6 +4,9 @@ use PoPCMSSchema\SchemaCommons\FormInputs\OrderFormInput;
 
 class GD_FormInput_OrderUser extends OrderFormInput
 {
+    /**
+     * @return mixed[]
+     */
     public function getAllValues($label = null): array
     {
         $values = parent::getAllValues($label);

@@ -10,6 +10,8 @@ class SelectFormInput extends FormInput
 {
     /**
      * Function to override
+     *
+     * @return mixed[]
      */
     public function getAllValues($label = null): array
     {
