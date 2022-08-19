@@ -227,6 +227,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         return $moduleClassConfiguration;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getModuleToModuleClassConfigurationMapping(): array
     {
         return [];

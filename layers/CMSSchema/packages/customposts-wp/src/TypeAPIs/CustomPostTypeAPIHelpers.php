@@ -12,7 +12,7 @@ use WP_Post;
 class CustomPostTypeAPIHelpers
 {
     /**
-     * @return array{0: ?WP_Post, 1: ?string|int}
+     * @return array{0: ?WP_Post, 1: null|string|int}
      */
     public static function getCustomPostObjectAndID(string|int|object $customPostObjectOrID): array
     {

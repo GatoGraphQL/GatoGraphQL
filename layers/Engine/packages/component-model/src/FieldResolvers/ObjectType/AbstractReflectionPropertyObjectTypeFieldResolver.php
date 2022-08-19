@@ -19,6 +19,9 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
 
     abstract protected function getTypeClass(): string;
 
+    /**
+     * @return ReflectionClass<mixed>
+     */
     protected function getReflectionInstance(): ReflectionClass
     {
         if (is_null($this->reflectionInstance)) {

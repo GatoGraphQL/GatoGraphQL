@@ -27,7 +27,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     /**
-     * @return array{0: ?WP_Term, 1: ?string|int}
+     * @return array{0: ?WP_Term, 1: null|string|int}
      */
     protected function getTermObjectAndID(string|int|object $termObjectOrID): array
     {
