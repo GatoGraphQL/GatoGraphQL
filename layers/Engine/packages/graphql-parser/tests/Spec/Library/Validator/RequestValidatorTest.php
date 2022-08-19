@@ -41,6 +41,9 @@ class RequestValidatorTest extends AbstractTestCase
         $executableDocument->validateAndInitialize();
     }
 
+    /**
+     * @return mixed[]
+     */
     public function invalidRequestProvider(): array
     {
         $context = new Context(null, [

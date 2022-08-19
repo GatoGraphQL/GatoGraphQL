@@ -162,6 +162,9 @@ GRAPHQL;
         $parser->parse($query);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function wrongQueriesProvider(): array
     {
         return [
@@ -535,6 +538,9 @@ GRAPHQL;
         );
     }
 
+    /**
+     * @return mixed[]
+     */
     public function mutationProvider(): array
     {
         $variable = new Variable('variable', 'Int', false, false, false, new Location(1, 8));
@@ -662,6 +668,9 @@ GRAPHQL;
         );
     }
 
+    /**
+     * @return mixed[]
+     */
     public function queryProvider(): array
     {
         $filter = new stdClass();
@@ -1023,6 +1032,9 @@ GRAPHQL;
         );
     }
 
+    /**
+     * @return mixed[]
+     */
     public function queryWithDirectiveProvider(): array
     {
         $formatVariable = new Variable('format', 'String', true, false, false, new Location(1, 24));
@@ -1309,6 +1321,9 @@ GRAPHQL;
         );
     }
 
+    /**
+     * @return mixed[]
+     */
     public function astNodeAncestorProvider(): array
     {
         $astNodeAncestors = [];

@@ -93,6 +93,9 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
+    /**
+     * @return mixed[]
+     */
     public function cyclicalFragmentQueryProvider(): array
     {
         return [
@@ -433,6 +436,9 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
+    /**
+     * @return mixed[]
+     */
     public function duplicateArgumentQueryProvider(): array
     {
         return [

@@ -47,6 +47,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getExistingTypeOrInterfaceQueries(): array
     {
         return [
@@ -159,6 +162,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getNonExistingTypeOrInterfaceQueries(): array
     {
         return [
@@ -245,6 +251,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getNonCompositeTypeQueries(): array
     {
         return [
@@ -297,6 +306,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getVariableIsInputTypeQueries(): array
     {
         return [
@@ -338,6 +350,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getVariableIsNotInputTypeQueries(): array
     {
         return [
