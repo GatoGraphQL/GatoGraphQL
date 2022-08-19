@@ -33,6 +33,9 @@ class ScalarTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
         return $schemaDefinition;
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addScalarSchemaDefinition(array &$schemaDefinition): void
     {
         if ($specifiedByURL = $this->scalarTypeResolver->getSpecifiedByURL()) {

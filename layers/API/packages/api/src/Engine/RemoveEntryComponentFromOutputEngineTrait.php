@@ -14,6 +14,7 @@ trait RemoveEntryComponentFromOutputEngineTrait
 {
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data
      */
     protected function getEncodedDataObject(array $data): array
     {
@@ -45,6 +46,7 @@ trait RemoveEntryComponentFromOutputEngineTrait
 
     /**
      * @return mixed[]
+     * @param mixed[] $results
      */
     protected function removeEntryComponentFromOutput(array $results): array
     {

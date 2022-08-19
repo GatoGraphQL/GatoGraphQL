@@ -15,6 +15,7 @@ class SchemaDefinitionHelpers
 {
     /**
      * Replace the typeResolver with the typeName (maybe namespaced) and kind
+     * @param array<string,mixed> $schemaDefinition
      */
     public static function replaceTypeResolverWithTypeProperties(array &$schemaDefinition): void
     {

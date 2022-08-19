@@ -37,6 +37,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
 
     /**
      * @return string|int|array<string|int>|null
+     * @param array<string,mixed> $props
      */
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
     {

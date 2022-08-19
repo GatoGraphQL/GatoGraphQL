@@ -36,6 +36,7 @@ class EnumTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinition
     /**
      * Add the enum values in the schema: arrays of enum name,
      * description, deprecated and deprecation description
+     * @param array<string,mixed> $schemaDefinition
      */
     final protected function addEnumSchemaDefinition(array &$schemaDefinition): void
     {

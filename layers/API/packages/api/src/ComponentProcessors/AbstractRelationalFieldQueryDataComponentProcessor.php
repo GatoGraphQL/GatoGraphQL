@@ -67,6 +67,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      */
     /**
      * @return ComponentFieldNodeInterface[]
+     * @param array<string,mixed> $props
      */
     protected function getComponentFieldNodes(Component $component, array &$props): array
     {
@@ -80,6 +81,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
 
     /**
      * @return FieldFragmentModelsTuple[]
+     * @param array<string,mixed> $componentAtts
      */
     protected function getFieldFragmentModelsTuples(array $componentAtts): array
     {
@@ -227,6 +229,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
 
     /**
      * @return LeafComponentFieldNode[]
+     * @param array<string,mixed> $props
      */
     public function getLeafComponentFieldNodes(Component $component, array &$props): array
     {
@@ -261,6 +264,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
 
     /**
      * Flag used to process the conditional field from the component or not
+     * @param array<string,mixed> $componentAtts
      */
     public function ignoreConditionalFields(array $componentAtts): bool
     {
@@ -269,6 +273,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
 
     /**
      * @return FieldFragmentModelsTuple[]
+     * @param array<string,mixed> $componentAtts
      */
     protected function getLeafFieldFragmentModelsTuples(array $componentAtts): array
     {
@@ -353,6 +358,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
 
     /**
      * @return FieldFragmentModelsTuple[]
+     * @param array<string,mixed> $componentAtts
      */
     protected function getRelationalFieldFragmentModelsTuples(array $componentAtts): array
     {

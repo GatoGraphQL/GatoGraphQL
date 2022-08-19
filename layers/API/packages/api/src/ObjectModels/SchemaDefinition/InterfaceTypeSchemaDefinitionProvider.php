@@ -43,6 +43,7 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefin
      *
      * For instance, QueryRoot with nested mutations enabled must be skipped,
      * yet it would be retrieved if reading the types from the typeRegistry
+     * @param array<string,mixed> $schemaDefinition
      */
     final protected function addPossibleTypeSchemaDefinitions(array &$schemaDefinition): void
     {
@@ -50,6 +51,9 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefin
         $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES] = [];
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addFieldSchemaDefinitions(array &$schemaDefinition): void
     {
         $schemaDefinition[SchemaDefinition::FIELDS] = [];
@@ -77,6 +81,9 @@ class InterfaceTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefin
         }
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
         $implementedInterfaceTypeResolvers = $this->interfaceTypeResolver->getPartiallyImplementedInterfaceTypeResolvers();

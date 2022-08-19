@@ -34,6 +34,9 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDef
         return $schemaDefinition;
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addInputFieldSchemaDefinitions(array &$schemaDefinition): void
     {
         $schemaDefinition[SchemaDefinition::INPUT_FIELDS] = [];
