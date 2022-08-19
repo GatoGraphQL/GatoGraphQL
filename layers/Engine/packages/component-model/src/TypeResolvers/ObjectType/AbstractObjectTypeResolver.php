@@ -944,6 +944,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->fieldNamesResolvedByObjectTypeFieldResolver[$objectTypeFieldResolverClass];
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: FieldResolver
+     */
     final protected function getAllObjectTypeFieldResolversByField(): array
     {
         if ($this->allObjectTypeFieldResolversByFieldCache === null) {
@@ -952,6 +955,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->allObjectTypeFieldResolversByFieldCache;
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: FieldResolver
+     */
     private function calculateAllObjectTypeFieldResolvers(): array
     {
         $schemaObjectTypeFieldResolvers = [];
