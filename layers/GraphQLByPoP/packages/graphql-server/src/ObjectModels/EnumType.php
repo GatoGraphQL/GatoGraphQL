@@ -42,6 +42,9 @@ class EnumType extends AbstractNamedType
     {
         return TypeKinds::ENUM;
     }
+    /**
+     * @return EnumValue[]
+     */
     public function getEnumValues(bool $includeDeprecated = false): array
     {
         return $includeDeprecated ?
@@ -53,6 +56,9 @@ class EnumType extends AbstractNamedType
                 }
             );
     }
+    /**
+     * @return string[]
+     */
     public function getEnumValueIDs(bool $includeDeprecated = false): array
     {
         return array_map(

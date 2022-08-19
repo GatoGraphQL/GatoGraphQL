@@ -10,14 +10,14 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
 {
     protected string $id;
     /**
-     * @var array<string, mixed>
+     * @var array<string,mixed>
      */
     protected array $schemaDefinition;
 
     /**
      * Build a new Schema Definition Reference Object
      */
-    public function __construct(/** @var array<string, mixed> */
+    public function __construct(/** @var array<string,mixed> */
         protected array &$fullSchemaDefinition,
         /** @var string[] */
         protected array $schemaDefinitionPath,

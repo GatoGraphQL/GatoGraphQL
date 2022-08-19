@@ -20,6 +20,9 @@ class SchemaCacheHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaCacheKeyElements(array $elements): array
     {
         if ($graphQLOperationType = App::getState('graphql-operation-type')) {

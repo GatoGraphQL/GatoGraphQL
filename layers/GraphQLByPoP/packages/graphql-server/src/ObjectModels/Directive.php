@@ -41,6 +41,9 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
     }
 
+    /**
+     * @return string[]
+     */
     public function getLocations(): array
     {
         $directives = [];
