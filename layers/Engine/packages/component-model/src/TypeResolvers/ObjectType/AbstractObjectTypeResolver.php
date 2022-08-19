@@ -1702,6 +1702,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *   Eg: `{ setTagsOnPost(tags: []) }`
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
+     * @param array<string,mixed> $fieldArgs
      */
     private function validateNonMissingOrNullMandatoryFieldArguments(
         array $fieldArgs,
@@ -1763,6 +1764,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * does not exist in the field.
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
+     * @param array<string,mixed> $fieldArgs
      */
     private function validateOnlyExistingFieldArguments(
         array $fieldArgs,
@@ -1794,6 +1796,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     /**
      * Validate the constraints for the field arguments
+     * @param array<string,mixed> $fieldArgs
      */
     private function validateFieldArgumentConstraints(
         array $fieldArgs,

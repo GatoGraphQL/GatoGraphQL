@@ -118,6 +118,9 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
         return $endpointResponse[ResponseKeys::BLOCK_ATTRS];
     }
 
+    /**
+     * @param mixed[] $value
+     */
     protected function executeRESTEndpointToUpdateCPTBlockAttributes(
         string $dataName,
         array $value,

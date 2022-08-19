@@ -85,10 +85,12 @@ class Parser extends AbstractParser
         return $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
     }
 
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     */
     protected function createDocumentInstance(
-        /** @var OperationInterface[] */
         array $operations,
-        /** @var Fragment[] */
         array $fragments,
     ): AbstractDocument {
         return new Document(

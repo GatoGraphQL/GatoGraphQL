@@ -16,6 +16,8 @@ abstract class AbstractQueryInputOutputHandler implements QueryInputOutputHandle
     }
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
      */
     public function getQueryState(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
@@ -23,6 +25,8 @@ abstract class AbstractQueryInputOutputHandler implements QueryInputOutputHandle
     }
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
      */
     public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
@@ -30,6 +34,8 @@ abstract class AbstractQueryInputOutputHandler implements QueryInputOutputHandle
     }
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
      */
     public function getQueryResult(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {

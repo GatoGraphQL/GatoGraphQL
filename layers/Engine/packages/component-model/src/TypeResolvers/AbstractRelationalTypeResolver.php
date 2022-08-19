@@ -537,6 +537,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      * @return array<string|int,object>
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string,mixed> $messages
      */
     public function fillObjects(
         array $idFieldSet,
@@ -966,6 +968,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string|int,object> $idObjects
+     * @param array<string,mixed> $messages
      */
     protected function processFillingObjectsFromIDs(
         array $unionTypeOutputKeyIDs,

@@ -54,6 +54,7 @@ trait FieldOrDirectiveDataAccessorTrait
      *
      * @return array<string,mixed>
      * @throws AbstractValueResolutionPromiseException
+     * @param array<string,mixed> $fieldOrDirectiveArgs
      */
     private function doGetResolvedFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array
     {
