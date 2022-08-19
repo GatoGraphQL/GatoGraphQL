@@ -6,7 +6,7 @@ namespace PoPSitesWassup\UserStateMutations\MutationResolverUtils;
 
 class MutationResolverUtils
 {
-    public static function getLostPasswordCode($key, $user_login)
+    public static function getLostPasswordCode($key, $user_login): string
     {
         return $key . '|' . rawurlencode($user_login);
     }
@@ -14,7 +14,7 @@ class MutationResolverUtils
     /**
      * @return array<string,string>
      */
-    public static function decodeLostPasswordCode($code)
+    public static function decodeLostPasswordCode($code): array
     {
         list($key, $user_login) = explode('|', stripslashes($code)/*wp_unslash($code)*/, 2);
         $user_login = rawurldecode($user_login);
