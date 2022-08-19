@@ -208,6 +208,9 @@ class Engine implements EngineInterface
         return $engineState->outputData;
     }
 
+    /**
+     * @param string[] $targets
+     */
     public function addBackgroundUrl(string $url, array $targets): void
     {
         $engineState = App::getEngineState();
@@ -465,6 +468,7 @@ class Engine implements EngineInterface
      * Allow PoPWebPlatform_Engine to override this function
      *
      * @return array<string,mixed>
+     * @param array<string,mixed> $data
      */
     protected function getEncodedDataObject(array $data): array
     {
@@ -509,6 +513,7 @@ class Engine implements EngineInterface
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function addRequestPropsComponentTree(Component $component, array $props): array
     {
@@ -677,6 +682,7 @@ class Engine implements EngineInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array
     {
@@ -919,6 +925,7 @@ class Engine implements EngineInterface
     /**
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataItems
+     * @param array<string|int,object> $idObjects
      */
     private function addDatasetToDatabase(
         array &$database,
@@ -979,6 +986,7 @@ class Engine implements EngineInterface
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     protected function getInterreferencedComponentFullPaths(Component $component, array &$props): array
     {
@@ -987,6 +995,11 @@ class Engine implements EngineInterface
         return $paths;
     }
 
+    /**
+     * @param array<string,mixed> $paths
+     * @param Component[] $component_path
+     * @param array<string,mixed> $props
+     */
     private function addInterreferencedComponentFullPaths(
         array &$paths,
         array $component_path,
@@ -1032,6 +1045,7 @@ class Engine implements EngineInterface
 
     /**
      * @return array<Component[]>
+     * @param array<string,mixed> $props
      */
     protected function getDataloadingComponentFullPaths(Component $component, array &$props): array
     {
@@ -1043,6 +1057,7 @@ class Engine implements EngineInterface
     /**
      * @param array<Component[]> $paths
      * @param Component[] $component_path
+     * @param array<string,mixed> $props
      */
     private function addDataloadingComponentFullPaths(
         array &$paths,
@@ -1085,6 +1100,10 @@ class Engine implements EngineInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
+    /**
+     * @param mixed[] $array
+     * @param Component[] $component_path
+     */
     protected function assignValueForComponent(
         array &$array,
         array $component_path,
@@ -1132,6 +1151,9 @@ class Engine implements EngineInterface
         return null;
     }
 
+    /**
+     * @param Component[] $component_path
+     */
     protected function getComponentPathKey(array $component_path, Component $component): string
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
@@ -1141,6 +1163,8 @@ class Engine implements EngineInterface
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
     /**
      * @return array<string,mixed[]>
+     * @param array<string,mixed> $root_model_props
+     * @param array<string,mixed> $root_props
      */
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
@@ -1674,6 +1698,8 @@ class Engine implements EngineInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
      */
     protected function generateDatabases(
         array &$schemaFeedbackEntries,
@@ -1872,6 +1898,9 @@ class Engine implements EngineInterface
     /**
      * Add the feedback (errors, warnings, deprecations, notices, etc)
      * into the output.
+     * @param array<string,mixed> $data
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
      */
     protected function combineAndAddFeedbackEntries(
         array &$data,
@@ -1991,6 +2020,11 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     */
     private function transferFeedback(
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -2008,6 +2042,10 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     */
     private function transferObjectFeedback(
         array $idObjects,
         ObjectResolutionFeedbackStore $objectResolutionFeedbackStore,
@@ -2188,6 +2226,9 @@ class Engine implements EngineInterface
         $iterationObjectFeedbackEntries[$relationalTypeResolver] = $objectFeedbackEntries;
     }
 
+    /**
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     */
     private function transferSchemaFeedback(
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
@@ -2471,6 +2512,8 @@ class Engine implements EngineInterface
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
      * @param array<string|int,object> $idObjects
+     * @param array<string|int> $typeResolverIDs
+     * @param array<string,array<string|int,FieldInterface>> $already_loaded_id_fields
      */
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -2695,6 +2738,7 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>> $entries
+     * @param array<string,mixed> $ret
      */
     protected function maybeCombineAndAddObjectOrSchemaEntries(array &$ret, string $name, array $entries): void
     {
@@ -2739,6 +2783,11 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param Component[] $component_path
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     */
     protected function processAndAddComponentData(
         array $component_path,
         Component $component,
@@ -2777,6 +2826,9 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string,array<string,array<string,mixed>>> $dbdata
+     */
     private function initializeTypeResolverEntry(
         array &$dbdata,
         string $relationalTypeOutputKey,
@@ -2791,6 +2843,10 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string,array<string,array<string,mixed>>> $dbdata
+     * @param array<string,mixed> $data_properties
+     */
     private function integrateSubcomponentDataProperties(
         array &$dbdata,
         array $data_properties,
