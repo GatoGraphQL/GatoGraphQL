@@ -19,17 +19,17 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
 
     /**
      * Keep a map of all namespaced type names to their resolver classes
-     * @var array<string,array>|null
+     * @var array<string,string>|null
      */
     protected ?array $namespacedObjectTypeNameResolverClasses = null;
     /**
      * Keep a map of all namespaced field interface names to their resolver classes
-     * @var array<string,array>|null
+     * @var array<string,string>|null
      */
     protected ?array $namespacedInterfaceTypeNameResolverClasses = null;
     /**
      * Keep a map of all directives names to their resolver classes
-     * @var array<string,array>|null
+     * @var array<string,string[]>|null
      */
     protected ?array $directiveNameClasses = null;
 
@@ -65,7 +65,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     /**
      * Lazy load and return the `$namespacedObjectTypeNameResolverClasses` array
      *
-     * @return array<string,array>
+     * @return array<string,string>
      */
     protected function getNamespacedObjectTypeNameClasses(): array
     {
@@ -78,7 +78,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     /**
      * Lazy load and return the `$namespacedInterfaceTypeNameResolverClasses` array
      *
-     * @return array<string,array>
+     * @return array<string,string>
      */
     protected function getNamespacedInterfaceTypeNameClasses(): array
     {
@@ -119,7 +119,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     /**
      * Lazy load and return the `$directiveNameClasses` array
      *
-     * @return array<string,array>
+     * @return array<string,string[]>
      */
     protected function getDirectiveNameClasses(): array
     {

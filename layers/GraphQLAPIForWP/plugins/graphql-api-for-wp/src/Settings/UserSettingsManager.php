@@ -14,7 +14,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     /**
      * Cache the values in memory
      *
-     * @var array<string,array>
+     * @var array<string,array<string,mixed>>
      */
     protected array $options = [];
 
