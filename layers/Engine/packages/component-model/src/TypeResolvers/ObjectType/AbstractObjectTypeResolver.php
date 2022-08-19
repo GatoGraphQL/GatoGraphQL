@@ -890,6 +890,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $objectTypeFieldResolvers;
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: FieldResolver
+     */
     final public function getObjectTypeFieldResolversByField(bool $global): array
     {
         $cacheKey = $global ? 'global' : 'non-global';
@@ -899,6 +902,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->objectTypeFieldResolversByFieldCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: FieldResolver
+     */
     private function doGetObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
