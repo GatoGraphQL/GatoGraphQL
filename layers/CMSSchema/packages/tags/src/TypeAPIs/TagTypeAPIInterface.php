@@ -19,6 +19,9 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function getTagID(object $tag): string|int;
     public function getTag(string|int $tagID): object;
     public function getTagByName(string $tagName): object;
+    /**
+     * @return array<string|int>|object[]
+     */
     public function getTags(array $query, array $options = []): array;
     public function getTagCount(array $query = [], array $options = []): int;
     public function getTagURL(string|int|object $tagObjectOrID): string;

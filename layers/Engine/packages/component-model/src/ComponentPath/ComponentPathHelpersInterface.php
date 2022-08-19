@@ -13,6 +13,9 @@ interface ComponentPathHelpersInterface
      * @param Component[] $componentPath
      */
     public function stringifyComponentPath(array $componentPath): string;
+    /**
+     * @return mixed[]
+     */
     public function recastComponentPath(string $componentPath_as_string): array;
     /**
      * @return array<string[]>

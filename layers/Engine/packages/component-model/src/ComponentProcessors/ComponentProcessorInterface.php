@@ -81,8 +81,17 @@ interface ComponentProcessorInterface
      * @param Component[]|Component $component_or_componentPath
      */
     public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableDatasetsettings(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getDatasetOutputKeys(Component $component, array &$props): array;
     public function getDatasource(Component $component, array &$props): string;
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null;
@@ -105,40 +114,106 @@ interface ComponentProcessorInterface
      * @return ConditionalRelationalComponentFieldNode[]
      */
     public function getConditionalRelationalComponentFieldNodes(Component $component): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getDatasetComponentTreeSectionFlattenedDataProperties(Component $component, array &$props): array;
     /**
      * @return Component[]
      */
     public function getDatasetcomponentTreeSectionFlattenedComponents(Component $component): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonmodelHeaddatasetcomponentDataProperties(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    /**
+     * @return array<string,mixed>|null
+     */
     public function getDataFeedbackInterreferencedComponentPath(Component $component, array &$props): ?array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getBackgroundurlsMergeddatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getBackgroundurls(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array;
     /**
      * @return CheckpointInterface[]
      */
     public function getDataAccessCheckpoints(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getActionExecutionCheckpoints(Component $component, array &$props): array;
     public function shouldExecuteMutation(Component $component, array &$props): bool;
     /**
      * @return Component[]
      */
     public function getComponentsToPropagateDataProperties(Component $component): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelSupplementaryDBObjectDataComponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelSupplementaryDBObjectData(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestSupplementaryDBObjectDataComponentTree(Component $component, array &$props): array;
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestSupplementaryDbobjectdata(Component $component, array &$props): array;
     public function doesComponentLoadData(Component $component): bool;
     public function startDataloadingSection(Component $component): bool;
