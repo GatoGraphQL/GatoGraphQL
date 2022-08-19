@@ -17,6 +17,7 @@ trait ServiceYamlFileLoaderTrait
 {
     /**
      * @return mixed[]
+     * @param array<string,mixed> $content
      */
     protected function customizeYamlFileDefinition(array $content): array
     {

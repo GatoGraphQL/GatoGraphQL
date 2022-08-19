@@ -10,6 +10,8 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
 {
     /**
      * @dataProvider provideEndpointEntries
+     * @param array<string,mixed> $params
+     * @param array<string,mixed> $variables
      */
     public function testEndpoints(
         string $expectedContentType,

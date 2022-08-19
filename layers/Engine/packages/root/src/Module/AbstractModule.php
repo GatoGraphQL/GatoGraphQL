@@ -167,6 +167,7 @@ abstract class AbstractModule implements ModuleInterface
 
     /**
      * Define runtime constants
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function defineRuntimeConstants(
         bool $skipSchema,
