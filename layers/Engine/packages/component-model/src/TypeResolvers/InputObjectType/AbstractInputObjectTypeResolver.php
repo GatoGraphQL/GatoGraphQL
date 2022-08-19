@@ -27,7 +27,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 {
     use TypeSchemaDefinitionResolverTrait;
 
-    /** @var array<string,array> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaDefinitionForInputFieldCache = [];
     /** @var array<string,InputTypeResolverInterface>|null */
     private ?array $consolidatedInputFieldNameTypeResolversCache = null;

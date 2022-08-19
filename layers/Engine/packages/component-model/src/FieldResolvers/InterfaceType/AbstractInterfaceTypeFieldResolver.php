@@ -34,7 +34,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 
-    /** @var array<string,array> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaDefinitionForFieldCache = [];
     /** @var array<string,string|null> */
     protected array $consolidatedFieldDescriptionCache = [];

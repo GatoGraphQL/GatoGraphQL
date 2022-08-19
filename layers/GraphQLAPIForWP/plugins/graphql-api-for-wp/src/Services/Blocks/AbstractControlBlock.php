@@ -74,11 +74,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                  * */
                 $groupFieldsUnderTypeForPrint = $moduleConfiguration->groupFieldsUnderTypeForPrint();
                 if ($groupFieldsUnderTypeForPrint) {
-                    /**
-                     * Cast object so PHPStan doesn't throw error
-                     * @var array<string,array>
-                     */
-                    $typeFieldsForPrint = $typeFieldsForPrint;
+                    /** @var array<string,string[]> $typeFieldsForPrint */
                     $fieldTypeContent = '';
                     foreach ($typeFieldsForPrint as $typeName => $fields) {
                         $fieldTypeContent .= sprintf(

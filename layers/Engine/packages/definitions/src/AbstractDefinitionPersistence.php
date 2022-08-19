@@ -7,15 +7,15 @@ namespace PoP\Definitions;
 abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInterface
 {
     /**
-     * @var array<string,array>
+     * @var array<string,array<string,string>>
      */
     protected array $definitions = [];
     /**
-     * @var array<string,array>
+     * @var array<string,array<string,string>>
      */
     protected array $names = [];
     /**
-     * @var array<string,array>
+     * @var array<string,mixed[]>
      */
     protected array $resolverData = [];
     protected bool $addedDefinition = false;

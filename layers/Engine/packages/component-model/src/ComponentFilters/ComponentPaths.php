@@ -30,7 +30,7 @@ class ComponentPaths extends AbstractComponentFilter
      */
     protected array $propagation_unsettled_paths = [];
     /**
-     * @var array<string,array>
+     * @var array<string,string[]>
      */
     protected array $backlog_unsettled_paths = [];
 

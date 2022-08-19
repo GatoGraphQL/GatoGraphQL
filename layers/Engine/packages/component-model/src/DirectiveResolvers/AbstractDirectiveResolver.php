@@ -86,7 +86,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected bool $hasValidationErrors;
 
     /**
-     * @var array<string,array>
+     * @var array<string,array<string,mixed>>
      */
     protected array $schemaDefinitionForDirectiveCache = [];
 

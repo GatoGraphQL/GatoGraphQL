@@ -182,7 +182,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Provide the configuration for all components required in the plugin
      *
-     * @return array<string,array> [key]: Module class, [value]: Configuration
+     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {
@@ -195,7 +195,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string,array> [key]: Module class, [value]: Configuration
+     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected function getPredefinedModuleClassConfiguration(): array
     {
@@ -205,7 +205,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add configuration values if modules are enabled or disabled
      *
-     * @return array<string,array> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     * @return array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
     protected function getBasedOnModuleEnabledStateModuleClassConfiguration(): array
     {

@@ -35,11 +35,11 @@ class EngineState
          */
         public ?array $componentdata = null,
         /**
-         * @var array<string,array>
+         * @var array<string,array<string,mixed>>
          */
         public array $dbdata = [],
         /**
-         * @var array<string,array>
+         * @var array<string,string[]>
          */
         public array $backgroundload_urls = [],
         /**

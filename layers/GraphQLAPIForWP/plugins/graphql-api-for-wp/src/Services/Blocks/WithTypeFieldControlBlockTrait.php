@@ -19,7 +19,7 @@ trait WithTypeFieldControlBlockTrait
      * to the one suitable for printing on the page, to show the user: "typeName/fieldName"
      *
      * @param string[] $typeFields
-     * @return string[]|array<string,array>
+     * @return string[]|array<string,string[]>
      */
     public function getTypeFieldsForPrint(array $typeFields): array
     {

@@ -80,7 +80,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected ?array $implementedInterfaceTypeResolversCache = null;
     /**
-     * @var array<string,array>
+     * @var array<string,string[]>
      */
     private array $fieldNamesResolvedByObjectTypeFieldResolver = [];
     /**
