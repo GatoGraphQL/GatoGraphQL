@@ -57,6 +57,9 @@ class ComponentPaths extends AbstractComponentFilter
         return 'componentPaths';
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
         if (is_null($this->paths)) {
@@ -126,6 +129,7 @@ class ComponentPaths extends AbstractComponentFilter
 
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
+     * @param array<string,mixed> $props
      */
     public function prepareForPropagation(Component $component, array &$props): void
     {
@@ -150,6 +154,9 @@ class ComponentPaths extends AbstractComponentFilter
             $this->propagation_unsettled_paths = $matching_unsettled_paths;
         }
     }
+    /**
+     * @param array<string,mixed> $props
+     */
     public function restoreFromPropagation(Component $component, array &$props): void
     {
         if (is_null($this->paths)) {

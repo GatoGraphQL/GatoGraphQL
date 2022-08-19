@@ -23,6 +23,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
      *
      * @param InterfaceTypeResolverInterface[] $interfaceTypeResolvers
      * @return array<mixed[]>
+     * @param array<mixed[]> $entryList
      */
     final protected function getMatchingEntries(
         array $entryList,

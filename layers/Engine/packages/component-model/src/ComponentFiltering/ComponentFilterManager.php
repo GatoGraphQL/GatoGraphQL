@@ -124,6 +124,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         $this->neverExclude = $neverExclude;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
         if (!$this->initialized) {
@@ -165,6 +168,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
 
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
+     * @param array<string,mixed> $props
      */
     public function prepareForPropagation(Component $component, array &$props): void
     {
@@ -192,6 +196,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         // Add the component to the path
         $this->getComponentPathManager()->prepareForPropagation($component, $props);
     }
+    /**
+     * @param array<string,mixed> $props
+     */
     public function restoreFromPropagation(Component $component, array &$props): void
     {
         if (!$this->initialized) {

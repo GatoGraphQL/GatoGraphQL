@@ -6,6 +6,9 @@ namespace PoP\ComponentModel\Component;
 
 final class Component
 {
+    /**
+     * @param array<string,mixed> $atts
+     */
     public function __construct(
         public readonly string $processorClass,
         public readonly string $name,
