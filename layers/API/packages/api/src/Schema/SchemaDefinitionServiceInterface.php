@@ -8,6 +8,9 @@ use PoP\Engine\Schema\SchemaDefinitionServiceInterface as UpstreamSchemaDefiniti
 
 interface SchemaDefinitionServiceInterface extends UpstreamSchemaDefinitionServiceInterface
 {
+    /**
+     * @return mixed[]
+     */
     public function &getFullSchemaDefinition(): array;
     public function sortFullSchemaAlphabetically(array &$schemaDefinition): void;
 }
