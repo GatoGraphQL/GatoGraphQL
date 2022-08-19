@@ -518,6 +518,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
     /**
      * Get the "schema" properties as for the inputFieldName
+     *
+     * @return array<string,mixed>
      */
     final public function getInputFieldSchemaDefinition(string $inputFieldName): array
     {
@@ -544,6 +546,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->schemaDefinitionForInputFieldCache[$inputFieldName];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getInputFieldExtensionsSchemaDefinition(string $inputFieldName): array
     {
         return [
@@ -554,6 +559,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final public function getConsolidatedInputFieldExtensionsSchemaDefinition(string $inputFieldName): array
     {

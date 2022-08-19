@@ -104,6 +104,13 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         return $this->interfaceTypeFieldResolvers;
     }
 
+    /**
+     * Produce an array of all the interface's fieldNames and, for each,
+     * the first ObjectTypeFieldResolver that resolves it, as according
+     * to its priority
+     *
+     * @return array<string,InterfaceTypeFieldResolverInterface>
+     */
     final public function getExecutableInterfaceTypeFieldResolversByField(): array
     {
         if ($this->excutableInterfaceTypeFieldResolversByField === null) {
@@ -112,6 +119,9 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         return $this->excutableInterfaceTypeFieldResolversByField;
     }
 
+    /**
+     * @return array<string,InterfaceTypeFieldResolverInterface>
+     */
     private function doGetExecutableInterfaceTypeFieldResolversByField(): array
     {
         $interfaceTypeFieldResolvers = [];
