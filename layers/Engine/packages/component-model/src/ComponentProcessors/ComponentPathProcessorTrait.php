@@ -26,6 +26,9 @@ trait ComponentPathProcessorTrait
 
     /**
      * @return array<int|string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
      */
     protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -68,6 +71,9 @@ trait ComponentPathProcessorTrait
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
      */
     protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -104,6 +110,8 @@ trait ComponentPathProcessorTrait
      * @param string $propagate_fn Function name
      * @param boolean $use_component_output_name_as_key For response structures (eg: configuration, feedback, etc) must be `true`, for internal structures (eg: $props, $data_properties) no need
      * @return mixed[]
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $options
      */
     protected function executeOnSelfAndPropagateToComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, bool $use_component_output_name_as_key = true, array $options = array()): array
     {
@@ -146,6 +154,7 @@ trait ComponentPathProcessorTrait
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, $recursive = true): array
     {

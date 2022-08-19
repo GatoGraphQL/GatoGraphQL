@@ -144,11 +144,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // {
     //     return null;
     // }
-
     //-------------------------------------------------
     // New PUBLIC Functions: Atts
     //-------------------------------------------------
-
+    /**
+     * @param array<string,mixed> $props
+     */
     public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, Component $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the component to its string representation to access it in the array
@@ -221,6 +222,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
+    /**
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $wildcard_props_to_propagate
+     * @param array<string,mixed> $targetted_props_to_propagate
+     */
     public function initModelPropsComponentTree(Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
         $this->executeInitPropsComponentTree($this->initModelProps(...), $this->getModelPropsForDescendantComponents(...), $this->getModelPropsForDescendantDatasetComponents(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
@@ -228,6 +234,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getModelPropsForDescendantComponents(Component $component, array &$props): array
     {
@@ -250,12 +257,16 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getModelPropsForDescendantDatasetComponents(Component $component, array &$props): array
     {
         return [];
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function initModelProps(Component $component, array &$props): void
     {
         // Set property "succeeding-typeResolver" on every component, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
@@ -320,6 +331,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
+    /**
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $wildcard_props_to_propagate
+     * @param array<string,mixed> $targetted_props_to_propagate
+     */
     public function initRequestPropsComponentTree(Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
         $this->executeInitPropsComponentTree($this->initRequestProps(...), $this->getRequestPropsForDescendantComponents(...), $this->getRequestPropsForDescendantDatasetComponents(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
@@ -327,6 +343,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getRequestPropsForDescendantComponents(Component $component, array &$props): array
     {
@@ -335,12 +352,16 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getRequestPropsForDescendantDatasetComponents(Component $component, array &$props): array
     {
         return [];
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function initRequestProps(Component $component, array &$props): void
     {
         /**
@@ -357,7 +378,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // PRIVATE Functions: Atts
     //-------------------------------------------------
-
+    /**
+     * @param array<string,mixed> $props
+     */
     private function getPathHeadComponent(array &$props): string
     {
         // From the root of the $props we obtain the current component
@@ -379,6 +402,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
      */
     private function isDescendantComponent(array|Component $component_or_componentPath, array &$props): bool
     {
@@ -400,6 +424,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      * @return string[]
+     * @param array<string,mixed> $props
      */
     protected function getComponentPath(array|Component $component_or_componentPath, array &$props): array
     {
@@ -434,6 +459,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
+     * @param array<string,mixed> $options
      */
     protected function addPropGroupField(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array(), array $options = array()): void
     {
@@ -537,6 +565,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $props = $current_props;
         }
     }
+    /**
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
+     */
     protected function getPropGroupField(string $group, Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
         $group = $this->getPropGroup($group, $component, $props, $starting_from_componentPath);
@@ -544,6 +576,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     protected function getPropGroup(string $group, Component $component, array &$props, array $starting_from_componentPath = array()): array
     {
@@ -562,6 +596,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     protected function addGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
@@ -569,6 +605,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     public function setProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
@@ -576,6 +614,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
@@ -583,6 +623,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     public function appendProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
@@ -590,6 +632,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
@@ -597,21 +641,33 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     public function mergeProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->mergeGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
+    /**
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
+     */
     public function getGroupProp(string $group, Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
         return $this->getPropGroupField($group, $component, $props, $property, $starting_from_componentPath);
     }
+    /**
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
+     */
     public function getProp(Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
         return $this->getGroupProp(Props::ATTRIBUTES, $component, $props, $property, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
@@ -619,6 +675,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
@@ -626,6 +684,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @param array<string,mixed> $props
+     * @param Component[] $starting_from_componentPath
      */
     public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
@@ -635,9 +695,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
-
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array
     {
@@ -649,6 +709,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getImmutableDatasetsettings(Component $component, array &$props): array
     {
@@ -663,6 +724,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @param FieldInterface[] $pathFields
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $ret
      */
     public function addToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
@@ -717,6 +780,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @param FieldInterface[] $pathFields
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $ret
      */
     protected function addFieldsToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
@@ -800,6 +865,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getDatasetOutputKeys(Component $component, array &$props): array
     {
@@ -811,7 +877,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // New PUBLIC Functions: Static + Stateful Data
     //-------------------------------------------------
-
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getDatasource(Component $component, array &$props): string
     {
         // Each component can only return one piece of data, and it must be indicated if it static or mutableonrequest
@@ -821,6 +889,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return string|int|array<string|int>|null
+     * @param array<string,mixed> $props
      */
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
     {
@@ -847,6 +916,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return null;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     */
     public function prepareDataPropertiesAfterMutationExecution(Component $component, array &$props, array &$data_properties): void
     {
         // Do nothing
@@ -854,6 +927,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return LeafComponentFieldNode[]
+     * @param array<string,mixed> $props
      */
     public function getLeafComponentFieldNodes(Component $component, array &$props): array
     {
@@ -887,9 +961,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // New PUBLIC Functions: Data Properties
     //-------------------------------------------------
-
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getImmutableDataPropertiesDatasetcomponentTree(Component $component, array &$props): array
     {
@@ -900,6 +974,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array
     {
@@ -924,6 +999,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getDatasetComponentTreeSectionFlattenedDataProperties(Component $component, array &$props): array
     {
@@ -948,6 +1024,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return ComponentFieldNodeInterface[]
+     * @param array<string,mixed> $props
      */
     protected function getComponentFieldNodes(Component $component, array &$props): array
     {
@@ -1005,7 +1082,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //     if ($subcomponents = $this->getComponentsToPropagateDataProperties($component)) {
     //         foreach ($subcomponents as $subcomponent) {
     //             $subcomponent_processor = $this->getComponentProcessorManager()->getComponentProcessor($subcomponent);
-
     //             // Propagate only if the subcomponent doesn't have a typeResolver. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
     //             if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
     //                 if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subcomponent)) {
@@ -1018,9 +1094,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //         }
     //     }
     // }
-
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
@@ -1059,6 +1135,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonmodelDataPropertiesDatasetcomponentTree(Component $component, array &$props): array
     {
@@ -1067,6 +1144,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array
     {
@@ -1085,6 +1163,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonmodelHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
@@ -1113,6 +1192,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestDataPropertiesDatasetcomponentTree(Component $component, array &$props): array
     {
@@ -1121,6 +1201,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array
     {
@@ -1146,6 +1227,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
@@ -1175,9 +1257,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
-
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
      */
     public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1186,6 +1270,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
      */
     public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1200,6 +1287,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
      */
     public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1208,6 +1298,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @var mixed[]|null
+     * @param array<string,mixed> $props
      */
     public function getDataFeedbackInterreferencedComponentPath(Component $component, array &$props): ?array
     {
@@ -1217,9 +1308,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // Background URLs
     //-------------------------------------------------
-
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
      */
     public function getBackgroundurlsMergeddatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1228,6 +1321,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return string[]
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
      */
     public function getBackgroundurls(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1237,9 +1333,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // Dataset Meta
     //-------------------------------------------------
-
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
      */
     public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
@@ -1249,9 +1347,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // Others
     //-------------------------------------------------
-
     /**
      * @return CheckpointInterface[]
+     * @param array<string,mixed> $props
      */
     public function getDataAccessCheckpoints(Component $component, array &$props): array
     {
@@ -1260,12 +1358,16 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return CheckpointInterface[]
+     * @param array<string,mixed> $props
      */
     public function getActionExecutionCheckpoints(Component $component, array &$props): array
     {
         return [];
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function shouldExecuteMutation(Component $component, array &$props): bool
     {
         // By default, execute only if the component is targeted for execution and doing POST
@@ -1286,6 +1388,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
+    /**
+     * @param array<string,mixed> $ret
+     * @param array<string,mixed> $props
+     */
     protected function flattenDatasetcomponentTreeDataProperties(string $propagate_fn, array &$ret, Component $component, array &$props): void
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
@@ -1425,6 +1531,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
+    /**
+     * @param array<string,mixed> $ret
+     * @param array<string,mixed> $props
+     */
     protected function flattenRelationalDBObjectDataProperties(string $propagate_fn, array &$ret, Component $component, array &$props): void
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
@@ -1531,9 +1641,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // New PUBLIC Functions: Static Data
     //-------------------------------------------------
-
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getModelSupplementaryDBObjectDataComponentTree(Component $component, array &$props): array
     {
@@ -1542,6 +1652,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getModelSupplementaryDBObjectData(Component $component, array &$props): array
     {
@@ -1551,9 +1662,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     // New PUBLIC Functions: Stateful Data
     //-------------------------------------------------
-
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestSupplementaryDBObjectDataComponentTree(Component $component, array &$props): array
     {
@@ -1562,6 +1673,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestSupplementaryDbobjectdata(Component $component, array &$props): array
     {
@@ -1570,6 +1682,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @return Component[]
+     * @param string[] $elements
      */
     private function getSubcomponentsByGroup(Component $component, array $elements = array()): array
     {

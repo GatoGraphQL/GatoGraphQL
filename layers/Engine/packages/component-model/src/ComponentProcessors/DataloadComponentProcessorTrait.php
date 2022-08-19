@@ -46,6 +46,9 @@ trait DataloadComponentProcessorTrait
         return null;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function metaInitProps(Component $component, array &$props): void
     {
         /**
@@ -59,6 +62,9 @@ trait DataloadComponentProcessorTrait
         );
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function initModelProps(Component $component, array &$props): void
     {
         $this->metaInitProps($component, $props);
