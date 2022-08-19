@@ -35,11 +35,17 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
+    /**
+     * @return mixed[]
+     */
     public function getImmutableSettingsComponentTree(Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getImmutableSettings', __FUNCTION__, $component, $props);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableSettings(Component $component, array &$props): array
     {
         $ret = array();
@@ -114,6 +120,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getImmutableConfiguration(Component $component, array &$props): array
     {
         return array();
@@ -122,12 +131,17 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     // New PUBLIC Functions: Model Stateful Settings
     //-------------------------------------------------
-
+    /**
+     * @return mixed[]
+     */
     public function getMutableonmodelSettingsComponentTree(Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelSettings', __FUNCTION__, $component, $props);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getMutableonmodelSettings(Component $component, array &$props): array
     {
         $ret = array();
@@ -139,6 +153,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getMutableonmodelConfiguration(Component $component, array &$props): array
     {
         return array();
@@ -147,12 +164,17 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     // New PUBLIC Functions: Stateful Settings
     //-------------------------------------------------
-
+    /**
+     * @return mixed[]
+     */
     public function getMutableonrequestSettingsComponentTree(Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestSettings', __FUNCTION__, $component, $props);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getMutableonrequestSettings(Component $component, array &$props): array
     {
         $ret = array();
@@ -164,6 +186,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getMutableonrequestConfiguration(Component $component, array &$props): array
     {
         return array();
@@ -210,6 +235,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return parent::getDataAccessCheckpoints($component, $props);
     }
 
+    /**
+     * @return CheckpointInterface[]
+     */
     public function getActionExecutionCheckpoints(Component $component, array &$props): array
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
@@ -221,6 +249,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return parent::getActionExecutionCheckpoints($component, $props);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
@@ -232,6 +263,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
         $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);

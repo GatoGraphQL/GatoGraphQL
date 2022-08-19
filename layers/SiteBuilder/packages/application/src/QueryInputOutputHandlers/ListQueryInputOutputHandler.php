@@ -42,6 +42,9 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:limit'));
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getQueryState(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
         $ret = parent::getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
@@ -69,6 +72,9 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);

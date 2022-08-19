@@ -36,6 +36,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->site ??= $this->instanceManager->getInstance(Site::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -43,6 +46,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

@@ -11,11 +11,11 @@ trait ItemProcessorManagerTrait
     abstract protected function getInstanceManager(): InstanceManagerInterface;
 
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     private array $processors = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     private array $overridingClasses = [];
 

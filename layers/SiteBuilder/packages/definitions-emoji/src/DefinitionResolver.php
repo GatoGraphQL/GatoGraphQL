@@ -1840,7 +1840,7 @@ class DefinitionResolver implements DefinitionResolverInterface
     /**
      * Allow Persistent Definitions to set a different value
      *
-     * @param array<string, mixed> $persisted_data
+     * @param array<string,mixed> $persisted_data
      */
     public function setPersistedData(array $persisted_data): void
     {
@@ -1850,7 +1850,7 @@ class DefinitionResolver implements DefinitionResolverInterface
         }
     }
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getDataToPersist(): array
     {

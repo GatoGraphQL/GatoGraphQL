@@ -17,6 +17,9 @@ class FileDefinitionPersistence extends AbstractDefinitionPersistence
         parent::__construct();
     }
 
+    /**
+     * @return mixed[]
+     */
     protected function getPersistedData(): array
     {
         return (array)$this->fileStore->get($this->file);

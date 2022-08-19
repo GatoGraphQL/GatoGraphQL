@@ -166,6 +166,9 @@ class Engine extends UpstreamEngine implements EngineInterface
         parent::generateDataAndPrepareResponse();
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSiteMeta(): array
     {
         $meta = parent::getSiteMeta();
@@ -188,6 +191,9 @@ class Engine extends UpstreamEngine implements EngineInterface
         return RequestUtils::fetchingSite();
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getRequestMeta(): array
     {
         $meta = parent::getRequestMeta();

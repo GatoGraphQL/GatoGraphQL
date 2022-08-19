@@ -14,6 +14,9 @@ use PoPAPI\API\Schema\QueryInputs;
 
 trait AddAPIQueryToSourcesComponentProcessorTrait
 {
+    /**
+     * @return string[]
+     */
     public function addAPIQueryToSources(array $sources, Component $component, array &$props): array
     {
         if (!$sources) {
