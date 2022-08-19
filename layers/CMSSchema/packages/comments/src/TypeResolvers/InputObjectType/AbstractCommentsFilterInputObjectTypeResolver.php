@@ -167,6 +167,9 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
         return $this->parentIDsFilterInput ??= $this->instanceManager->getInstance(ParentIDsFilterInput::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminInputFieldNames(): array
     {
         $adminInputFieldNames = parent::getAdminInputFieldNames();

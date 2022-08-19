@@ -62,6 +62,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminInputFieldNames(): array
     {
         return [];
