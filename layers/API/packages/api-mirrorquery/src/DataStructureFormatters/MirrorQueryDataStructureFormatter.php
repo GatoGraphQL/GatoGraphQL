@@ -133,6 +133,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data
      */
     public function getFormattedData(array $data): array
     {

@@ -193,6 +193,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         ];
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     public function sortFullSchemaAlphabetically(array &$schemaDefinition): void
     {
         // Sort types
@@ -248,6 +251,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
     }
 
+    /**
+     * @param array<TypeResolverInterface|DirectiveResolverInterface> $accessedTypeAndDirectiveResolvers
+     */
     private function addAccessedTypeAndDirectiveResolvers(
         array $accessedTypeAndDirectiveResolvers,
     ): void {
@@ -260,6 +266,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     private function addTypeSchemaDefinition(
         TypeResolverInterface $typeResolver,
         array &$schemaDefinition,
@@ -302,6 +311,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
     /**
      * Move the definition for the global fields, connections and directives
+     * @param array<string,mixed> $schemaDefinition
+     * @param array<string,mixed> $rootTypeSchemaDefinition
      */
     private function maybeMoveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
     {
@@ -323,6 +334,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         return $moduleConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     private function addDirectiveSchemaDefinition(
         DirectiveResolverInterface $directiveResolver,
         array &$schemaDefinition,

@@ -12,5 +12,8 @@ interface SchemaDefinitionServiceInterface extends UpstreamSchemaDefinitionServi
      * @return mixed[]
      */
     public function &getFullSchemaDefinition(): array;
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     public function sortFullSchemaAlphabetically(array &$schemaDefinition): void;
 }

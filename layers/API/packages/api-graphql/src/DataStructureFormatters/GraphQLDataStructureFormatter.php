@@ -20,6 +20,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data
      */
     public function getFormattedData(array $data): array
     {
@@ -54,6 +55,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
      * > and hence there are no additional restrictions on its contents.
      *
      * @see http://spec.graphql.org/June2018/#sec-Response-Format
+     * @param array<string,mixed> $ret
+     * @param array<string,mixed> $data
      */
     protected function maybeAddTopLevelExtensionsEntryToResponse(array &$ret, array $data): void
     {
@@ -125,6 +128,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<int,mixed[]>
+     * @param array<array<string,mixed>> $entries
      */
     protected function reformatGeneralEntries(array $entries): array
     {
@@ -137,6 +141,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $item
      */
     protected function getGeneralEntry(array $item): array
     {
@@ -151,6 +156,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<int,mixed[]>
+     * @param array<array<string,mixed>> $entries
      */
     protected function reformatDocumentEntries(array $entries): array
     {
@@ -163,6 +169,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $item
      */
     protected function getDocumentEntry(array $item): array
     {
@@ -185,6 +192,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $item
      */
     protected function getDocumentEntryExtensions(array $item): array
     {
@@ -217,6 +225,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $item
      */
     protected function getSchemaEntry(string $typeOutputKey, array $item): array
     {
@@ -247,6 +256,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $item
      */
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
@@ -265,6 +275,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<int,mixed[]>
+     * @param array<array<string,mixed>> $entries
      */
     protected function reformatObjectEntries(array $entries): array
     {
@@ -284,6 +295,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $item
      */
     protected function getObjectEntry(string $typeOutputKey, array $item): array
     {
@@ -317,6 +329,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
      * addition of the object ID/IDs
      *
      * @return array<string,mixed>
+     * @param array<string,mixed> $item
      */
     protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
     {

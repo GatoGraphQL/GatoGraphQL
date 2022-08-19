@@ -8,9 +8,11 @@ class Context
 {
     private readonly string $operationName;
 
+    /**
+     * @param array<string,mixed> $variableValues
+     */
     public function __construct(
         ?string $operationName = null,
-        /** @var array<string,mixed> */
         private readonly array $variableValues = [],
     ) {
         $this->operationName = $operationName !== null ? trim($operationName) : '';

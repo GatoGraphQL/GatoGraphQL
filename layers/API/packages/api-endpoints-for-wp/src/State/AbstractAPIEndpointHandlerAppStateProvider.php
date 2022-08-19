@@ -18,11 +18,17 @@ abstract class AbstractAPIEndpointHandlerAppStateProvider extends AbstractAppSta
         return $this->getEndpointHandler()->isEndpointRequested();
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         $state['scheme'] = APISchemes::API;
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function consolidate(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {
