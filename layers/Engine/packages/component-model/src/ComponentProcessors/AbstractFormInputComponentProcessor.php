@@ -89,6 +89,9 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
         return null;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getInputOptions(Component $component): array
     {
         return [];

@@ -194,7 +194,7 @@ interface ComponentProcessorInterface
      */
     public function getDataAccessCheckpoints(Component $component, array &$props): array;
     /**
-     * @return array<string,mixed>
+     * @return CheckpointInterface[]
      */
     public function getActionExecutionCheckpoints(Component $component, array &$props): array;
     public function shouldExecuteMutation(Component $component, array &$props): bool;

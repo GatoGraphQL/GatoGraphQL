@@ -632,6 +632,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array
     {
         $options = array(
@@ -640,6 +643,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->executeOnSelfAndPropagateToComponents('getImmutableDatasetsettings', __FUNCTION__, $component, $props, true, $options);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableDatasetsettings(Component $component, array &$props): array
     {
         $ret = array();
@@ -788,6 +794,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDatasetOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
@@ -872,6 +881,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Properties
     //-------------------------------------------------
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableDataPropertiesDatasetcomponentTree(Component $component, array &$props): array
     {
         // The data-properties start on a dataloading component, and finish on the next dataloding component down the line
@@ -879,6 +891,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->executeOnSelfAndPropagateToComponents('getImmutableDataPropertiesDatasetcomponentTreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array
     {
         $ret = array();
@@ -900,6 +915,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDatasetComponentTreeSectionFlattenedDataProperties(Component $component, array &$props): array
     {
         $ret = array();
@@ -1173,6 +1191,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         return [];
@@ -1190,11 +1211,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Background URLs
     //-------------------------------------------------
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getBackgroundurlsMergeddatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         return $this->executeOnSelfAndMergeWithDatasetComponents('getBackgroundurls', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
     }
 
+    /**
+     * @return string[]
+     */
     public function getBackgroundurls(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         return [];
@@ -1204,6 +1231,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Dataset Meta
     //-------------------------------------------------
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
         return [];
@@ -1221,6 +1251,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return [];
     }
 
+    /**
+     * @return CheckpointInterface[]
+     */
     public function getActionExecutionCheckpoints(Component $component, array &$props): array
     {
         return [];
@@ -1492,11 +1525,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Static Data
     //-------------------------------------------------
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelSupplementaryDBObjectDataComponentTree(Component $component, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithComponents('getModelSupplementaryDBObjectData', __FUNCTION__, $component, $props);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelSupplementaryDBObjectData(Component $component, array &$props): array
     {
         return [];
@@ -1506,11 +1545,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Stateful Data
     //-------------------------------------------------
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestSupplementaryDBObjectDataComponentTree(Component $component, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithComponents('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $component, $props);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getMutableonrequestSupplementaryDbobjectdata(Component $component, array &$props): array
     {
         return [];

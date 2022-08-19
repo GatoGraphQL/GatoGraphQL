@@ -74,6 +74,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();
