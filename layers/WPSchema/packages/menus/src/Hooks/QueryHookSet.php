@@ -20,6 +20,9 @@ class QueryHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function convertMenuQuery(array $query, array $options): array
     {
         if (isset($query['locations'])) {

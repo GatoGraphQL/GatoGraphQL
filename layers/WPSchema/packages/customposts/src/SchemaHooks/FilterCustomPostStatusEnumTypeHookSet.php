@@ -37,6 +37,7 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
 
     /**
      * @param string[] $enumValues
+     * @return string[]
      */
     public function getEnumValues(
         array $enumValues,
@@ -57,6 +58,7 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
 
     /**
      * @param string[] $adminEnumValues
+     * @return string[]|mixed[]
      */
     public function getAdminEnumValues(
         array $adminEnumValues,

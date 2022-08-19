@@ -39,7 +39,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
     }
 
     /**
-     * @return array<string, mixed>|null
+     * @return array<string,mixed>|null
      */
     public function executeMutation(array &$data_properties): ?array
     {

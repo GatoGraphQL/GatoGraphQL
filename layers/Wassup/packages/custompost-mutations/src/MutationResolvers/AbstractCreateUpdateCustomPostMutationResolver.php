@@ -292,6 +292,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = parent::getUpdateCustomPostData($fieldDataAccessor);
@@ -309,6 +312,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return GD_CreateUpdate_Utils::moderate();
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = parent::getCreateCustomPostData($fieldDataAccessor);
@@ -335,6 +341,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getUpdateCustomPostDataLog(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $log = parent::getUpdateCustomPostDataLog($customPostID, $fieldDataAccessor);

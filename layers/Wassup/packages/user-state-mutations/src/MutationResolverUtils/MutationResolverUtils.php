@@ -11,6 +11,9 @@ class MutationResolverUtils
         return $key . '|' . rawurlencode($user_login);
     }
 
+    /**
+     * @return array<string,string>
+     */
     public static function decodeLostPasswordCode($code)
     {
         list($key, $user_login) = explode('|', stripslashes($code)/*wp_unslash($code)*/, 2);

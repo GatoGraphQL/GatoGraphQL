@@ -83,8 +83,8 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     }
 
     /**
-     * @param array<string, mixed> $data_properties
-     * @return array<string, mixed>
+     * @param array<string,mixed> $data_properties
+     * @return array<string,mixed>
      */
     public function executeMutation(array &$data_properties): ?array
     {

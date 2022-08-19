@@ -32,7 +32,8 @@ class ComponentPathsHookSet extends AbstractHookSet
     }
     
     /**
-     * @return mixed[]
+     * @param string[] $elements
+     * @return string[]
      */
     public function maybeAddElement(array $elements): array
     {

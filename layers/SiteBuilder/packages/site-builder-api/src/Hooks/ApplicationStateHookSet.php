@@ -18,6 +18,10 @@ class ApplicationStateHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @param string[] $elements
+     * @return string[]
+     */
     public function maybeAddElement(array $elements): array
     {
         if ($stratum = App::getState('stratum')) {

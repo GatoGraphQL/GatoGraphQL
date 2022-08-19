@@ -16,7 +16,7 @@ use PoP\Root\Exception\GenericClientException;
 abstract class AbstractFormComponentMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     /**
-     * @return array<string, mixed>|null
+     * @return array<string,mixed>|null
      */
     public function executeMutation(array &$data_properties): ?array
     {
