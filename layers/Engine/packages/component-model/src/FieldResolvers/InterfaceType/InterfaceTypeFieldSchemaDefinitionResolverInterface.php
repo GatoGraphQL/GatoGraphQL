@@ -12,6 +12,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array;
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface;
     public function getFieldDescription(string $fieldName): ?string;

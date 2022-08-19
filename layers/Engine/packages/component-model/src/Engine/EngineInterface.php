@@ -13,6 +13,9 @@ use SplObjectStorage;
 
 interface EngineInterface
 {
+    /**
+     * @return array<string,mixed>
+     */
     public function getOutputData(): array;
     public function addBackgroundUrl(string $url, array $targets): void;
     public function getEntryComponent(): Component;

@@ -6,6 +6,9 @@ namespace PoPAPI\API\PersistedQueries;
 
 interface PersistedFragmentManagerInterface
 {
+    /**
+     * @return string[]
+     */
     public function getPersistedFragments(): array;
     /**
      * @return string[]

@@ -11,6 +11,9 @@ use SplObjectStorage;
 
 interface ComponentProcessorInterface extends UpstreamComponentProcessorInterface
 {
+    /**
+     * @return array<string,mixed>
+     */
     public function getImmutableSettingsComponentTree(Component $component, array &$props): array;
     /**
      * @return array<string,mixed>

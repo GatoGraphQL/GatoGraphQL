@@ -17,6 +17,9 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface ComponentProcessorInterface
 {
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array;
     /**
      * @return Component[]
