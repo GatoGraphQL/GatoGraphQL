@@ -79,6 +79,8 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractAfterAppBoo
     }
     /**
      * Field names to remove
+     *
+     * @return string[];
      */
     abstract protected function getFieldNames(): array;
     /**

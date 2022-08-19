@@ -35,6 +35,10 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
         );
     }
 
+    /**
+     * @param string|string[]|null $content
+     * @return string|string[]|null
+     */
     protected function replacePlaceholdersWithCurrentExecutionData(string|array|null $content): string|array|null
     {
         /**
