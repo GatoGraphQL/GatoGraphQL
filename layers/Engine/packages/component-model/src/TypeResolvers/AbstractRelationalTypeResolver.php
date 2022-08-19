@@ -1291,6 +1291,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage;
 
+    /**
+     * @return array<string,DirectiveResolverInterface>
+     */
     public function getSchemaDirectiveResolvers(bool $global): array
     {
         $directiveResolverInstances = [];

@@ -6,7 +6,8 @@ namespace EverythingElse\PoPCMSSchema\CategoriesWP\TypeAPIs;
 
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
-use WP_Error;
+
+use function wp_set_post_terms;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -34,8 +35,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return substr($category_path, strlen($termlink));
     }
 
-    public function setPostCategories($post_id, array $categories, bool $append = false): array|WP_Error|bool
+    public function setPostCategories($post_id, array $categories, bool $append = false): void
     {
-        return wp_set_post_terms($post_id, $categories, $this->getCategoryTaxonomyName(), $append);
+        wp_set_post_terms($post_id, $categories, $this->getCategoryTaxonomyName(), $append);
     }
 }

@@ -34,11 +34,17 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
         $this->id = $schemaDefinitionReferenceRegistry->registerSchemaDefinitionReferenceObject($this);
     }
 
+    /**
+     * @var array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         return $this->schemaDefinition;
     }
 
+    /**
+     * @var string[]
+     */
     public function getSchemaDefinitionPath(): array
     {
         return $this->schemaDefinitionPath;
