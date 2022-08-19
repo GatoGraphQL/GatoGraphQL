@@ -32,10 +32,10 @@ use SplObjectStorage;
  */
 trait AliasSchemaObjectTypeFieldResolverTrait
 {
-    /** @var SplObjectStorage<FieldInterface,FieldInterface> */
+    /** @var SplObjectStorage<FieldInterface,FieldInterface>|null */
     protected ?SplObjectStorage $aliasedFieldCache = null;
 
-    /** @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface> */
+    /** @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface>|null */
     protected ?SplObjectStorage $aliasedFieldDataAccessorCache = null;
 
     /**

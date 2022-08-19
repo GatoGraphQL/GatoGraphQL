@@ -41,7 +41,7 @@ trait ComponentPathProcessorTrait
         }
 
         // Stop iterating when the subcomponent starts a new cycle of loading data
-        $subcomponents = array_filter($this->getAllSubcomponents($component), function ($subcomponent) {
+        $subcomponents = array_filter($this->getAllSubcomponents($component), function ($subcomponent): bool {
             return !$this->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent);
         });
         $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
@@ -78,7 +78,7 @@ trait ComponentPathProcessorTrait
         }
 
         // Stop iterating when the subcomponent starts a new cycle of loading data
-        $subcomponents = array_filter($this->getAllSubcomponents($component), function ($subcomponent) {
+        $subcomponents = array_filter($this->getAllSubcomponents($component), function ($subcomponent): bool {
             return !$this->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent);
         });
         $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);

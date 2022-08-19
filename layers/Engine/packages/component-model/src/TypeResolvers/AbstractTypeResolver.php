@@ -15,7 +15,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     use BasicServiceTrait;
 
     /**
-     * @var array<string,array>
+     * @var array<string,mixed[]>|null
      */
     protected ?array $schemaDefinition = null;
 

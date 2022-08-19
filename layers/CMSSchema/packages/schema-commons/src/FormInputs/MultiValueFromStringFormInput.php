@@ -9,7 +9,7 @@ use PoP\ComponentModel\Tokens\Param;
 
 class MultiValueFromStringFormInput extends FormInput
 {
-    private $separator;
+    private string $separator;
 
     public function __construct(string $name, mixed $selected = null, array $params = [])
     {

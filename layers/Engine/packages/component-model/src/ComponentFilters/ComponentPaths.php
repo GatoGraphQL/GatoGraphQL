@@ -22,7 +22,7 @@ class ComponentPaths extends AbstractComponentFilter
     }
 
     /**
-     * @var array[]
+     * @var mixed[][]|null
      */
     protected ?array $paths = null;
     /**

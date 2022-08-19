@@ -56,6 +56,8 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     /**
      * Return an array of directiveName as keys, and, for each directiveName,
      * an array of directives (including directive arguments) to be applied before
+     *
+     * @return array<string,Directive[]>
      */
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {

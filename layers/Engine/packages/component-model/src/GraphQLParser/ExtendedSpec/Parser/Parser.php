@@ -74,9 +74,12 @@ class Parser extends AbstractParser
         return null;
     }
 
+    /**
+     * @return int[]|null
+     */
     protected function getAffectDirectivesUnderPosArgumentDefaultValue(
         Directive $directive,
-    ): mixed {
+    ): ?array {
         /** @var MetaDirectiveResolverInterface */
         $metaDirectiveResolver = $this->getMetaDirectiveResolver($directive->getName());
         return $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();

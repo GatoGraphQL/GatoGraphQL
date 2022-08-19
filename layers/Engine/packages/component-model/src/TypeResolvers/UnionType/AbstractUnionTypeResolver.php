@@ -29,7 +29,7 @@ use SplObjectStorage;
 abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {
     /**
-     * @var ObjectTypeResolverPickerInterface[]
+     * @var ObjectTypeResolverPickerInterface[]|null
      */
     protected ?array $objectTypeResolverPickers = null;
 
@@ -292,7 +292,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     /**
      * @return ObjectTypeResolverPickerInterface[]
      */
-    protected function calculateTypeResolverPickers()
+    protected function calculateTypeResolverPickers(): array
     {
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         $class = get_called_class();

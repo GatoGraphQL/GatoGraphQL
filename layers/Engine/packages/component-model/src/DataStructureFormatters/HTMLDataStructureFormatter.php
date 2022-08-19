@@ -62,7 +62,7 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
     /**
      * @see https://stackoverflow.com/a/36760478
      */
-    protected function arrayToHtmlTableRecursive($arr)
+    protected function arrayToHtmlTableRecursive($arr): string
     {
         $str = "<table><tbody>";
         foreach ($arr as $key => $val) {

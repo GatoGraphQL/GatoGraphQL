@@ -668,7 +668,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // Only components which do not load data
                 $subcomponent_components = array_filter(
                     $relationalComponentFieldNode->getNestedComponents(),
-                    function ($subcomponent) {
+                    function ($subcomponent): bool {
                         return !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent);
                     }
                 );

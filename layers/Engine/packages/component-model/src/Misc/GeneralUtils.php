@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Misc;
 class GeneralUtils
 {
     // Taken from http://stackoverflow.com/questions/4356289/php-random-string-generator
-    public static function generateRandomString($length = 6, $addtime = true, $characters = 'abcdefghijklmnopqrstuvwxyz')
+    public static function generateRandomString($length = 6, $addtime = true, $characters = 'abcdefghijklmnopqrstuvwxyz'): string
     {
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
@@ -24,13 +24,13 @@ class GeneralUtils
     /**
      * @return mixed[]
      */
-    public static function arrayFlatten(mixed $items, $deep = false)
+    public static function arrayFlatten(mixed $items, $deep = false): array
     {
         if (!is_array($items)) {
             return [$items];
         }
 
-        return array_reduce($items, function ($carry, $item) use ($deep) {
+        return array_reduce($items, function ($carry, $item) use ($deep): array {
             return array_merge($carry, $deep ? self::arrayFlatten($item) : (is_array($item) ? $item : [$item]));
         }, []);
     }
@@ -85,7 +85,7 @@ class GeneralUtils
         // Remove the indicated keys
         $params = array_filter(
             $params,
-            function ($param) use ($keys) {
+            function ($param) use ($keys): bool {
                 return in_array($param, $keys);
             },
             ARRAY_FILTER_USE_KEY
