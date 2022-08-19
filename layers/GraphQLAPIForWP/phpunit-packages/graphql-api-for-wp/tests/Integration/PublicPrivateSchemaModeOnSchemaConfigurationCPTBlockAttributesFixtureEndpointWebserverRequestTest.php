@@ -27,6 +27,9 @@ class PublicPrivateSchemaModeOnSchemaConfigurationCPTBlockAttributesFixtureEndpo
         return __DIR__ . '/fixture-public-private-schema-mode-in-cpt';
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [

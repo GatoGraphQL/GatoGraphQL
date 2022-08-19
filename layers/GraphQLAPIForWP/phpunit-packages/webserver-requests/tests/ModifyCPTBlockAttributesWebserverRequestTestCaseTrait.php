@@ -63,7 +63,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
     }
 
     /**
-     * @return array<mixed>
+     * @return array<string,mixed>
      */
     abstract protected function getCPTBlockAttributesNewValue(): array;
 
@@ -94,6 +94,9 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
         );
     }
 
+    /**
+     * @return mixed[]
+     */
     protected function executeRESTEndpointToGetCPTBlockAttributes(
         string $dataName,
     ): array {
