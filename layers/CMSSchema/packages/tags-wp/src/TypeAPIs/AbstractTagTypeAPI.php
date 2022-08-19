@@ -69,6 +69,10 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         return get_term_by('name', $tagName, $this->getTagTaxonomyName());
     }
+    
+    /**
+     * @return array<string,int>|object[]
+     */
     public function getCustomPostTags(string|int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
@@ -113,6 +117,10 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         // An error happened
         return -1;
     }
+    
+    /**
+     * @return array<string,int>|object[]
+     */
     public function getTags(array $query, array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);

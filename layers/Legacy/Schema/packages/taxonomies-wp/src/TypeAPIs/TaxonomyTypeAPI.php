@@ -29,7 +29,11 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         $taxonomy_object = get_taxonomy($taxonomy);
         return $taxonomy_object->hierarchical;
     }
-    public function getTaxonomyTerms(string $taxonomy, array $options = []): array|string|WP_Error
+    
+    /**
+     * @return array<string,int>|object[]
+     */
+    public function getTaxonomyTerms(string $taxonomy, array $options = []): array
     {
         $query = [
             'taxonomy' => $taxonomy,
