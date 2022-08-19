@@ -1178,6 +1178,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return [];
     }
 
+    /**
+     * @var mixed[]|null
+     */
     public function getDataFeedbackInterreferencedComponentPath(Component $component, array &$props): ?array
     {
         return null;

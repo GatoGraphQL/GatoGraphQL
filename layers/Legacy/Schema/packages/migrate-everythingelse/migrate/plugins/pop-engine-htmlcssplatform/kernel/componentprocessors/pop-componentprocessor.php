@@ -88,6 +88,9 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         return $ret;
     }
 
+    /**
+     * @return mixed[]|null
+     */
     public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return null;

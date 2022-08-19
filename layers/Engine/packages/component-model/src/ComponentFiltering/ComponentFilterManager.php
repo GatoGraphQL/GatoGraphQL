@@ -30,7 +30,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
      */
     protected ?string $not_excluded_ancestor_component = null;
     /**
-     * @var array<array>|null
+     * @var array<mixed[]>|null
      */
     protected ?array $not_excluded_component_sets = null;
     /**
@@ -110,6 +110,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         return null;
     }
 
+    /**
+     * @return array<mixed[]>|null
+     */
     public function getNotExcludedComponentSets(): ?array
     {
         // It shall be used for requestmeta.rendercomponents, to know from which components the client must start rendering

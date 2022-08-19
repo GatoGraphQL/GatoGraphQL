@@ -17,6 +17,9 @@ abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_
         return $ret;
     }
 
+    /**
+     * @return mixed[]|null
+     */
     public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_BUTTON];

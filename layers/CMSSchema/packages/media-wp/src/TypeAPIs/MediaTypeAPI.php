@@ -65,6 +65,9 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $sizes;
     }
 
+    /**
+     * @return array{src: string, width: ?int, height: ?int}
+     */
     public function getImageProperties(string|int $image_id, ?string $size = null): ?array
     {
         $img = wp_get_attachment_image_src($image_id, $size);
