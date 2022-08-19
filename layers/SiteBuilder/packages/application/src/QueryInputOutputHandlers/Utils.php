@@ -10,7 +10,7 @@ use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 
 class Utils
 {
-    public static function stopFetching($objectIDOrIDs, array $data_properties)
+    public static function stopFetching(string|int|array $objectIDOrIDs, array $data_properties): bool
     {
         // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
         if ($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) {

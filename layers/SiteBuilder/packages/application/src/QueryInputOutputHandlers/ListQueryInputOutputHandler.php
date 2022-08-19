@@ -37,7 +37,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
 
-    protected function getLimit()
+    protected function getLimit(): int
     {
         return $this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:limit'));
     }

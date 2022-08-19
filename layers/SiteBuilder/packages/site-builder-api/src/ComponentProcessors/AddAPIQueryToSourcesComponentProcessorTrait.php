@@ -59,7 +59,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
 
         if ($apiFields) {
             return array_map(
-                function ($source) use ($apiFields) {
+                function (string $source) use ($apiFields): string {
                     return
                         GeneralUtils::addQueryArgs(
                             [

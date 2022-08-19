@@ -31,7 +31,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
-    protected function supportsTitle()
+    protected function supportsTitle(): bool
     {
         // Not all post types support a title
         return true;
@@ -46,12 +46,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         );
     }
 
-    protected function isFeaturedImageMandatory()
+    protected function isFeaturedImageMandatory(): bool
     {
         return false;
     }
 
-    protected function validateCategories(FieldDataAccessorInterface $fieldDataAccessor)
+    protected function validateCategories(FieldDataAccessorInterface $fieldDataAccessor): ?int
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::CATEGORIES)) {
             if (is_array($fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES))) {
