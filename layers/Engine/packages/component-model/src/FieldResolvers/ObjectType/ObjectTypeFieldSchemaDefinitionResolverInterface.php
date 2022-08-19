@@ -13,6 +13,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 interface ObjectTypeFieldSchemaDefinitionResolverInterface
 {
     public function getFieldNamesToResolve(): array;
+    /**
+     * @return string[]
+     */
     public function getAdminFieldNames(): array;
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface;
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;

@@ -153,6 +153,9 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     public function skipExposingDirectiveArgInSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): bool;
+    /**
+     * @return array<string,mixed>
+     */
     public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array;
     /**
      * Define if to use the version to decide if to process the directive or not

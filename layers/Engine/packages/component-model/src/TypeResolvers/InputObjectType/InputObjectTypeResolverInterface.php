@@ -51,6 +51,9 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
      * be exposed to the user
      */
     public function skipExposingInputFieldInSchema(string $inputFieldName): bool;
+    /**
+     * @return array<string,mixed>
+     */
     public function getInputFieldSchemaDefinition(string $inputFieldName): array;
     /**
      * Validate constraints on the input's value
