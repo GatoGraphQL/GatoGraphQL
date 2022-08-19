@@ -77,6 +77,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     }
 
     // Update Post Validation
+    /**
+     * @param string[] $errors
+     */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::validateContent($errors, $fieldDataAccessor);
@@ -283,6 +286,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $categories;
     }
 
+    /**
+     * @param array<string,mixed> $post_data
+     */
     protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);

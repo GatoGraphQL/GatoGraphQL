@@ -8,6 +8,9 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
 
 class ProcessorItemUtils
 {
+    /**
+     * @param array<int,mixed> $item
+     */
     public static function getItemFullName(array $item): string
     {
         // Expand the item's properties:
@@ -47,6 +50,9 @@ class ProcessorItemUtils
             // Otherwise, the parts are already the item
             $parts;
     }
+    /**
+     * @param array<int,mixed> $item
+     */
     public static function getItemOutputName(array $item, string $definitionGroup): string
     {
         return DefinitionManagerFacade::getInstance()->getDefinition(self::getItemFullName($item), $definitionGroup);

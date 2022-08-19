@@ -25,6 +25,9 @@ class FileDefinitionPersistence extends AbstractDefinitionPersistence
         return (array)$this->fileStore->get($this->file);
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     protected function persist(array $data): void
     {
         $this->fileStore->save($this->file, $data);

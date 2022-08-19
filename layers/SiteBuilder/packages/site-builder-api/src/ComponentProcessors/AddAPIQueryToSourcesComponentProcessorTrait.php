@@ -16,6 +16,8 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
 {
     /**
      * @return string[]
+     * @param string[] $sources
+     * @param array<string,mixed> $props
      */
     public function addAPIQueryToSources(array $sources, Component $component, array &$props): array
     {
