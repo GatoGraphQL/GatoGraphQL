@@ -17,6 +17,9 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         return GD_ROLE_PROFILE;
     }
 
+    /**
+     * @param string[] $errors
+     */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::validateContent($errors, $fieldDataAccessor);

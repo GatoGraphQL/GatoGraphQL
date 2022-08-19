@@ -74,6 +74,9 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         $this->getCommonuserrolesFormData($mutationData);
         $this->getUsercommunitiesFormData($mutationData);
     }
+    /**
+     * @param array<string,mixed> $mutationData
+     */
     protected function getCommonuserrolesFormData(array &$mutationData): void
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();

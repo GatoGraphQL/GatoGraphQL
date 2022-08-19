@@ -37,6 +37,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getImmutableSettingsComponentTree(Component $component, array &$props): array
     {
@@ -45,6 +46,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getImmutableSettings(Component $component, array &$props): array
     {
@@ -72,6 +74,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
      * @return SplObjectStorage<FieldInterface,string> Key: field output key, Value: self object or relational type output key
      *
      * @todo Finish/adapt this function, fix the types for PHPStan
+     * @param array<string,mixed> $props
      */
     public function getFieldToTypeOutputKeys(Component $component, array &$props): SplObjectStorage
     {
@@ -122,6 +125,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getImmutableConfiguration(Component $component, array &$props): array
     {
@@ -133,6 +137,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getMutableonmodelSettingsComponentTree(Component $component, array &$props): array
     {
@@ -141,6 +146,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getMutableonmodelSettings(Component $component, array &$props): array
     {
@@ -155,6 +161,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getMutableonmodelConfiguration(Component $component, array &$props): array
     {
@@ -166,6 +173,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestSettingsComponentTree(Component $component, array &$props): array
     {
@@ -174,6 +182,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestSettings(Component $component, array &$props): array
     {
@@ -188,6 +197,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestConfiguration(Component $component, array &$props): array
     {
@@ -197,12 +207,17 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     // Others
     //-------------------------------------------------
-
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getRelevantRoute(Component $component, array &$props): ?string
     {
         return null;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getRelevantRouteCheckpointTarget(Component $component, array &$props): string
     {
         return DataLoading::DATA_ACCESS_CHECKPOINTS;
@@ -223,6 +238,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return CheckpointInterface[]
+     * @param array<string,mixed> $props
      */
     public function getDataAccessCheckpoints(Component $component, array &$props): array
     {
@@ -237,6 +253,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return CheckpointInterface[]
+     * @param array<string,mixed> $props
      */
     public function getActionExecutionCheckpoints(Component $component, array &$props): array
     {
@@ -251,6 +268,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
@@ -265,6 +283,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
      */
     public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
@@ -277,6 +298,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getDataloadSource(Component $component, array &$props): ?string
     {
         if (!App::isHTTPRequest()) {

@@ -78,6 +78,9 @@ class Engine extends UpstreamEngine implements EngineInterface
         );
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getComponentSettings(Component $component, $model_props, array &$props)
     {
         $ret = array();

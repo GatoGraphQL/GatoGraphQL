@@ -44,6 +44,8 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
      */
     public function getQueryState(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
@@ -74,6 +76,8 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
      */
     public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {

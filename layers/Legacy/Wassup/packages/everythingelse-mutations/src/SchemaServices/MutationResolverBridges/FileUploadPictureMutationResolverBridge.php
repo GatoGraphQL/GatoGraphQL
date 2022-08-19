@@ -44,6 +44,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
     }
     /**
      * @return array<string,mixed>|null
+     * @param array<string,mixed> $data_properties
      */
     public function executeMutation(array &$data_properties): ?array
     {

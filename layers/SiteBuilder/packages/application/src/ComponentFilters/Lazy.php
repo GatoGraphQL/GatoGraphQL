@@ -17,6 +17,7 @@ class Lazy extends AbstractComponentFilter
 
     /**
      * Exclude if it is not lazy
+     * @param array<string,mixed> $props
      */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
