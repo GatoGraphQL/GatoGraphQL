@@ -28,6 +28,9 @@ class AccessControlManager extends UpstreamAccessControlManager
         return $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator ??= $this->instanceManager->getInstance(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface::class);
     }
 
+    /**
+     * @param array<mixed[]> $fieldEntries
+     */
     public function addEntriesForFields(string $group, array $fieldEntries): void
     {
         parent::addEntriesForFields($group, $fieldEntries);

@@ -16,6 +16,9 @@ class MultipleInputFormInput extends MultipleSelectFormInput
         return $this->subnames;
     }
 
+    /**
+     * @param array<string,mixed> $params
+     */
     public function __construct(string $name, mixed $selected = null, array $params = [])
     {
         parent::__construct($name, $selected, $params);

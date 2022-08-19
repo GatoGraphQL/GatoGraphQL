@@ -35,6 +35,7 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $data
      */
     public function getFormattedData(array $data): array
     {

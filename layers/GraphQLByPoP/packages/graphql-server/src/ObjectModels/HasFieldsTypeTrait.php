@@ -56,7 +56,7 @@ trait HasFieldsTypeTrait
     }
     /**
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string, mixed> $fieldSchemaDefinitionPath
+     * @param array<string,mixed> $fieldSchemaDefinitionPath
      */
     protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
@@ -67,7 +67,7 @@ trait HasFieldsTypeTrait
     }
     /**
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string, mixed> $fieldSchemaDefinitionPath
+     * @param array<string,mixed> $fieldSchemaDefinitionPath
      */
     protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {

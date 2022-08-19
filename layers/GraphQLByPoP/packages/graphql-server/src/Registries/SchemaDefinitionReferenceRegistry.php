@@ -304,6 +304,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * When doing /?edit_schema=true, "Schema" type directives will also be added the FIELD location,
      * so that they show up in GraphiQL and can be added to a persisted query
      * When that happens, append '("Schema" type directive)' to the directive's description
+     *
+     * @param array<string,mixed> $directiveSchemaDefinitionPath
      */
     protected function maybeAddTypeToSchemaDirectiveDescription(array $directiveSchemaDefinitionPath): void
     {
@@ -324,6 +326,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     /**
      * Append the field or directive's version to its description
+     *
+     * @param array<string,mixed> $fieldOrDirectiveSchemaDefinitionPath
      */
     protected function addVersionToGraphQLSchemaFieldDescription(array $fieldOrDirectiveSchemaDefinitionPath): void
     {
@@ -341,6 +345,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     /**
      * Append the "Mutation" label to the field's description
+     *
+     * @param array<string,mixed> $fieldSchemaDefinitionPath
      */
     protected function addMutationLabelToSchemaFieldDescription(array $fieldSchemaDefinitionPath): void
     {
