@@ -166,6 +166,9 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         return [1];
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return array_merge(
