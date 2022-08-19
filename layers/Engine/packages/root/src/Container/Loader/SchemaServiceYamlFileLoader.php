@@ -26,6 +26,9 @@ class SchemaServiceYamlFileLoader extends YamlFileLoader
         parent::__construct($container, $locator);
     }
 
+    /**
+     * @return mixed[]|null
+     */
     protected function loadFile(string $file): ?array
     {
         $content = parent::loadFile($file);

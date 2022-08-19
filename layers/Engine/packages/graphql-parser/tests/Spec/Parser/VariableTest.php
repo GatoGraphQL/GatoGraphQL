@@ -77,7 +77,7 @@ class VariableTest extends AbstractTestCase
     }
 
     /**
-     * @return array Array of <mixed: value to set, mixed: expected value>
+     * @return mixed[] Array of <mixed: value to set, mixed: expected value>
      */
     public static function variableProvider()
     {

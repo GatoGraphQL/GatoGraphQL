@@ -100,11 +100,17 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
 
     abstract protected function getDifferentLoginPassword(): string;
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getDifferentWebserverPingOptions(): array
     {
         return [];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getDifferentRequestBasicOptions(): array
     {
         return [];

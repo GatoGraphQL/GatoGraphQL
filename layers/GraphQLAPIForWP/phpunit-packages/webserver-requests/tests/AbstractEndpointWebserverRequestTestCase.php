@@ -50,6 +50,9 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         }
     }
 
+    /**
+     * @return string|array<string,mixed>
+     */
     protected static function maybeAddXDebugTriggerParam(string|array $urlOrParams): string|array
     {
         if (getenv('XDEBUG_TRIGGER') === false) {
