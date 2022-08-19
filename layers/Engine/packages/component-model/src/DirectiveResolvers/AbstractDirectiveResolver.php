@@ -1388,6 +1388,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $schemaDefinition;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDirectiveExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [

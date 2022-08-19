@@ -10,6 +10,9 @@ abstract class AbstractDataStructureFormatter implements DataStructureFormatterI
 {
     use BasicServiceTrait;
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getFormattedData(array $data): array
     {
         return $data;
