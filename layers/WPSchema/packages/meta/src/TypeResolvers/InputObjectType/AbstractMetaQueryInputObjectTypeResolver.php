@@ -182,7 +182,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
     {
-        /** @var array $inputValue */
+        /** @var stdClass[] $inputValue */
         $metaQuery = [];
 
         /**

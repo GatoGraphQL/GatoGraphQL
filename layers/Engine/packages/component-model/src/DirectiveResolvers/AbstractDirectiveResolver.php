@@ -316,7 +316,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        /** @var array */
+        /** @var array<string,mixed> */
         $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
 
         /**

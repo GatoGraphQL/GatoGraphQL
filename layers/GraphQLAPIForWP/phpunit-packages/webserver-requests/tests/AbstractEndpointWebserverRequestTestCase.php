@@ -59,7 +59,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             'XDEBUG_TRIGGER' => getenv('XDEBUG_TRIGGER'),
         ];
         if (is_array($urlOrParams)) {
-            /** @var array */
+            /** @var string[] */
             $params = $urlOrParams;
             return array_merge(
                 $params,

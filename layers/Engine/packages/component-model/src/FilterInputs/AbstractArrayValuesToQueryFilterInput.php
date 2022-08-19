@@ -8,7 +8,7 @@ abstract class AbstractArrayValuesToQueryFilterInput extends AbstractFilterInput
 {
     final public function filterDataloadQueryArgs(array &$query, mixed $value): void
     {
-        /** @var array $value */
+        /** @var mixed[] $value */
         $value = $this->getValue($value);
         $avoidSettingArrayValueIfEmpty = $this->avoidSettingArrayValueIfEmpty();
         foreach ($this->getValueToQueryArgKeys() as $valueKey => $queryKey) {

@@ -418,7 +418,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             return $ret;
         }
 
-        /** @var array */
+        /** @var mixed[] */
         $componentPath = $component_or_componentPath;
 
         // We're passing the path to find the component to which to add the att
