@@ -16,7 +16,7 @@ trait GlobalDirectiveResolverTrait
     }
 
     /**
-     * @return class-string<InterfaceTypeResolverInterface|RelationalTypeResolverInterface>
+     * @return array<class-string<InterfaceTypeResolverInterface|RelationalTypeResolverInterface>>
      */
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array
     {

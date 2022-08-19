@@ -516,6 +516,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->getFieldOrDirectiveArgumentNameDefaultValues($directiveArgsSchemaDefinition);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     final protected function getDirectiveArgumentsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
@@ -525,6 +528,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
+     *
+     * @return string[]
      */
     public function getFieldNamesToApplyTo(): array
     {
@@ -886,6 +891,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->schemaDirectiveArgsCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
     {
         // @todo Implement "admin" directive args, if needed
@@ -897,6 +905,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final protected function getConsolidatedDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
     {
@@ -1342,6 +1352,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return false;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     final public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // First check if the value was cached

@@ -54,6 +54,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
+     *
+     * @return string[]
      */
     public function getFieldNamesToApplyTo(): array;
     /**

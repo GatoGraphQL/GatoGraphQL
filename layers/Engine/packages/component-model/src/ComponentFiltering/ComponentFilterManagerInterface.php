@@ -12,6 +12,9 @@ interface ComponentFilterManagerInterface
     public function addComponentFilter(ComponentFilterInterface $componentFilter): void;
     public function getSelectedComponentFilterName(): ?string;
     public function setSelectedComponentFilterName(string $selectedComponentFilterName): void;
+    /**
+     * @return array<mixed[]>|null
+     */
     public function getNotExcludedComponentSets(): ?array;
     public function setNeverExclude(bool $neverExclude): void;
     public function excludeSubcomponent(Component $component, array &$props): bool;

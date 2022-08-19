@@ -399,6 +399,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @param Component[]|Component $component_or_componentPath
+     * @return string[]
      */
     protected function getComponentPath(array|Component $component_or_componentPath, array &$props): array
     {
