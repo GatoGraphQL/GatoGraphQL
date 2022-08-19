@@ -14,7 +14,7 @@ use Symplify\PackageBuilder\Parameter\ParameterProvider;
 final class AdditionalIntegrationTestPluginsCommand extends AbstractSymplifyCommand
 {
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     private array $additionalIntegrationTestPlugins = [];
 

@@ -7,7 +7,7 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 class DataToAppendAndRemoveDataSource
 {
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getDataToAppend(): array
     {
@@ -46,7 +46,7 @@ class DataToAppendAndRemoveDataSource
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getDataToRemove(): array
     {
