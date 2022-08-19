@@ -18,6 +18,9 @@ interface MediaTypeAPIInterface
     public function getImageSrc(string|int $image_id, ?string $size = null): ?string;
     public function getImageSrcSet(string|int $image_id, ?string $size = null): ?string;
     public function getImageSizes(string|int $image_id, ?string $size = null): ?string;
+    /**
+     * @return array{src: string, width: ?int, height: ?int}
+     */
     public function getImageProperties(string|int $image_id, ?string $size = null): ?array;
     /**
      * @return array<string|int>|object[]

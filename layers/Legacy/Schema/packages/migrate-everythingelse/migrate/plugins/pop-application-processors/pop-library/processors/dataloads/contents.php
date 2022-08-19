@@ -128,7 +128,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
             case self::COMPONENT_DATALOAD_TAG_CONTENT:
             case self::COMPONENT_DATALOAD_AUTHOR_CONTENT:
             case self::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

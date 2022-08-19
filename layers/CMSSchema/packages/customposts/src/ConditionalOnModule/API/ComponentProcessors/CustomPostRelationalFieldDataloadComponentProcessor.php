@@ -72,7 +72,7 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

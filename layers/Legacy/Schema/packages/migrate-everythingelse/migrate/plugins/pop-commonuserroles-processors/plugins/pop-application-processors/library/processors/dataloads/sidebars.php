@@ -60,7 +60,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

@@ -70,7 +70,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
             case self::COMPONENT_EXAMPLE_PAGE:
             case self::COMPONENT_EXAMPLE_TAGDESCRIPTION:
             case self::COMPONENT_EXAMPLE_AUTHORDESCRIPTION:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
             case self::COMPONENT_EXAMPLE_HOMESTATICPAGE:
                 $pageTypeAPI = PageTypeAPIFacade::getInstance();
                 return $pageTypeAPI->getHomeStaticPageID();

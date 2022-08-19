@@ -282,6 +282,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getObjectEntry(string $typeOutputKey, array $item): array
     {
         $entry = [

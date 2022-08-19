@@ -41,7 +41,7 @@ class PoP_AddHighlights_Module_Processor_CustomSidebarDataloads extends PoP_Modu
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

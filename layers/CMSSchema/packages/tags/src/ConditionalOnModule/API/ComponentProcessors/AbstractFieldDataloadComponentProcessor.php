@@ -60,7 +60,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

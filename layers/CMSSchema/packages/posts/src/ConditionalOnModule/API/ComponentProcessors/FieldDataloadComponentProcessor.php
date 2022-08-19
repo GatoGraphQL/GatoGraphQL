@@ -64,7 +64,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
