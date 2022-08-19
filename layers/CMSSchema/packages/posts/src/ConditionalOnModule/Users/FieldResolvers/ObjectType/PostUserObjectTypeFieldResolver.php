@@ -12,7 +12,7 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 class PostUserObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolver
 {
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     * @return array<class-string<ObjectTypeResolverInterface>>
      */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

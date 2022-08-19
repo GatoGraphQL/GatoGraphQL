@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -14,7 +15,7 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
     use ConfigurableMandatoryDirectivesForFieldsTrait;
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface>>
+     * @return array<class-string<RelationalTypeResolverInterface>>
      */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {

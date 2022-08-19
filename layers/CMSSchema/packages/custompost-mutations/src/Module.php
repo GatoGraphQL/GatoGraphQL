@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations;
 
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\Users\Module as UsersModule;
 
@@ -15,7 +16,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -29,7 +30,7 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

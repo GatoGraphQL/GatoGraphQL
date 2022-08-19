@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Root\App;
@@ -70,7 +71,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     * @return array<class-string<ObjectTypeResolverInterface>>
      */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
@@ -80,7 +81,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * @return array<\PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface>
+     * @return array<InterfaceTypeFieldResolverInterface>
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {

@@ -55,7 +55,7 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface>>
+     * @return array<class-string<RelationalTypeResolverInterface>>
      */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {

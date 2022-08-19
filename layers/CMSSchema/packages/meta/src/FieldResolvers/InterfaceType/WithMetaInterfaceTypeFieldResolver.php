@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -35,7 +36,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     * @return array<class-string<InterfaceTypeResolverInterface>>
      */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

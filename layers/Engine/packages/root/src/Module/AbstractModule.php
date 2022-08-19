@@ -40,7 +40,7 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @param array<string,mixed> $configuration
      * @param boolean $skipSchema Indicate if to skip initializing the schema
-     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     final public function initialize(
         array $configuration,
@@ -157,7 +157,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Initialize services
      *
-     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

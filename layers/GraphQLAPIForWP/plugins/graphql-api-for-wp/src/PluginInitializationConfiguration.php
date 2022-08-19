@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use PoP\Root\Module\ModuleInterface;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -83,7 +84,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int, array{class: class-string<\PoP\Root\Module\ModuleInterface>, envVariable: string, module: string, option: string, callback: callable, condition: string}>
+     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string, module: string, option: string, callback: callable, condition: string}>
      */
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
@@ -507,7 +508,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int, array{class: class-string<\PoP\Root\Module\ModuleInterface>, envVariable: string, callback: Closure():bool}>
+     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string, callback: Closure():bool}>
      */
     protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
@@ -527,7 +528,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * All the environment variables to override
-     * @return array<int, array{class: class-string<\PoP\Root\Module\ModuleInterface>, envVariable: string}>
+     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string}>
      */
     protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {

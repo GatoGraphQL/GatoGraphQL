@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\NumericScalarTypeResolver;
@@ -38,7 +39,7 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
     }
 
     /**
-     * @return array<string,\PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface>
+     * @return array<string, InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

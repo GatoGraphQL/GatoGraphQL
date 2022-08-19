@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\NodeInterfaceTypeResolver;
@@ -23,7 +24,7 @@ class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     * @return array<class-string<InterfaceTypeResolverInterface>>
      */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

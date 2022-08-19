@@ -19,7 +19,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     * @return array<class-string<ObjectTypeResolverInterface>>
      */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

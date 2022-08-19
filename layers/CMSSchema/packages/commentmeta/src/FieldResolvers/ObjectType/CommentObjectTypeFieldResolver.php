@@ -26,7 +26,7 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     * @return array<class-string<ObjectTypeResolverInterface>>
      */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {

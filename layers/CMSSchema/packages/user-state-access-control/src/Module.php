@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl;
 
+use PoP\Root\Module\ModuleInterface;
 use PoP\CacheControl\Module as CacheControlModule;
 use PoP\Root\Module\AbstractModule;
 
 class Module extends AbstractModule
 {
     /**
-     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -21,7 +22,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedConditionalModuleClasses(): array
     {
@@ -33,7 +34,7 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

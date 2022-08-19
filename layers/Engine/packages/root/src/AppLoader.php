@@ -115,7 +115,7 @@ class AppLoader implements AppLoaderInterface
     /**
      * Add schema Module classes to skip initializing
      *
-     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses List of `Module` class which must not initialize their Schema services
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses List of `Module` class which must not initialize their Schema services
      */
     public function addSchemaModuleClassesToSkip(
         array $skipSchemaModuleClasses

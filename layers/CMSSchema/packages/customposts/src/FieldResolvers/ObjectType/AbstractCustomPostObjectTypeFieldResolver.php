@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use DateTime;
@@ -63,7 +64,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
 
     /**
-     * @return array<\PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface>
+     * @return array<InterfaceTypeFieldResolverInterface>
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {

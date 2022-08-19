@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -78,7 +79,7 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     * @return array<class-string<InterfaceTypeResolverInterface>>
      */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -33,7 +34,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     }
 
     /**
-     * @return array<\PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface>
+     * @return array<InterfaceTypeFieldResolverInterface>
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -44,7 +45,7 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     }
 
     /**
-     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface>>
+     * @return array<class-string<InterfaceTypeResolverInterface>>
      */
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {

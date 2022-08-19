@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users;
 
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
 use PoPAPI\RESTAPI\Module as RESTAPIModule;
@@ -18,7 +19,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -28,7 +29,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedConditionalModuleClasses(): array
     {
@@ -42,7 +43,7 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

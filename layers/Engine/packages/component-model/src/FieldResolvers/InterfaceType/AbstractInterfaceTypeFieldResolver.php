@@ -138,7 +138,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * The interfaces the fieldResolver implements
      *
-     * @return array<\PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface>
+     * @return array<InterfaceTypeFieldResolverInterface>
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
