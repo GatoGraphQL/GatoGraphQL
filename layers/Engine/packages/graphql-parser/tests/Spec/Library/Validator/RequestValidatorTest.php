@@ -24,7 +24,7 @@ use PoP\Root\AbstractTestCase;
 class RequestValidatorTest extends AbstractTestCase
 {
     /**
-     * @dataProvider invalidRequestProvider
+     * @dataProvider invalidRequestProvider: array
      */
     public function testInvalidRequests(ExecutableDocument $executableDocument): void
     {
@@ -41,7 +41,7 @@ class RequestValidatorTest extends AbstractTestCase
         $executableDocument->validateAndInitialize();
     }
 
-    public function invalidRequestProvider()
+    public function invalidRequestProvider(): array
     {
         $context = new Context(null, [
             'test' => 'ponga',

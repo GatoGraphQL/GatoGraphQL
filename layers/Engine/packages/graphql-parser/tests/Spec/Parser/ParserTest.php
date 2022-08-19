@@ -114,7 +114,7 @@ GRAPHQL;
         );
     }
 
-    private function tokenizeStringContents($graphQLString)
+    private function tokenizeStringContents(string $graphQLString): Token
     {
         $parser = new TokenizerTestingParser();
         $parser->initTokenizerForTesting('"' . $graphQLString . '"');
@@ -162,7 +162,7 @@ GRAPHQL;
         $parser->parse($query);
     }
 
-    public function wrongQueriesProvider()
+    public function wrongQueriesProvider(): array
     {
         return [
             ['{ test (a: "asd", b: <basd>) { id }'],
@@ -535,7 +535,7 @@ GRAPHQL;
         );
     }
 
-    public function mutationProvider()
+    public function mutationProvider(): array
     {
         $variable = new Variable('variable', 'Int', false, false, false, new Location(1, 8));
         return [
@@ -662,7 +662,7 @@ GRAPHQL;
         );
     }
 
-    public function queryProvider()
+    public function queryProvider(): array
     {
         $filter = new stdClass();
         $filter->title = new Literal('unrequested', new Location(1, 26));
@@ -1023,7 +1023,7 @@ GRAPHQL;
         );
     }
 
-    public function queryWithDirectiveProvider()
+    public function queryWithDirectiveProvider(): array
     {
         $formatVariable = new Variable('format', 'String', true, false, false, new Location(1, 24));
         $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));

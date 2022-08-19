@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleInfo;
-use PoP\ComponentModel\Constants\Props;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
+use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleInfo;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 trait ComponentPathProcessorTrait
 {
@@ -19,7 +19,7 @@ trait ComponentPathProcessorTrait
     abstract protected function getComponentFilterManager(): ComponentFilterManagerInterface;
     abstract protected function getComponentHelpers(): ComponentHelpersInterface;
 
-    protected function getComponentProcessor(Component $component)
+    protected function getComponentProcessor(Component $component): ComponentProcessorInterface
     {
         return $this->getComponentProcessorManager()->getComponentProcessor($component);
     }
@@ -66,7 +66,10 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs)
+    /**
+     * @return mixed[]
+     */
+    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
@@ -141,7 +144,10 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, $recursive = true)
+    /**
+     * @return mixed[]
+     */
+    protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, $recursive = true): array
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 

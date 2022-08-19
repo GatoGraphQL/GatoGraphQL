@@ -21,9 +21,9 @@ class SelectFormInput extends FormInput
     }
 
 
-    public function getSelectedValue()
+    public function getSelectedValue(): mixed
     {
-        if (is_null($this->selected)) {
+        if ($this->selected === null) {
             return null;
         }
 

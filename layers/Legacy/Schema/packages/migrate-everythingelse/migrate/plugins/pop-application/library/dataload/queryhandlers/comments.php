@@ -7,7 +7,10 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutputHandler
 {
-    public function prepareQueryArgs(&$query_args)
+    /**
+     * @param array<string,mixed> $query_args
+     */
+    public function prepareQueryArgs(array &$query_args): void
     {
         parent::prepareQueryArgs($query_args);
 

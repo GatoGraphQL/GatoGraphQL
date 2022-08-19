@@ -46,7 +46,7 @@ trait DataloadComponentProcessorTrait
         return null;
     }
 
-    public function metaInitProps(Component $component, array &$props)
+    public function metaInitProps(Component $component, array &$props): void
     {
         /**
          * Allow to add more stuff

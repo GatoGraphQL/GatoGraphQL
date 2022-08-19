@@ -8,7 +8,10 @@ use PoP\ComponentModel\Constants\PaginationParams;
 
 class ListQueryInputOutputHandler extends AbstractQueryInputOutputHandler
 {
-    public function prepareQueryArgs(&$query_args): void
+    /**
+     * @param array<string,mixed> $query_args
+     */
+    public function prepareQueryArgs(array &$query_args): void
     {
         parent::prepareQueryArgs($query_args);
 

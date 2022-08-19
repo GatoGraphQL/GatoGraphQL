@@ -8,7 +8,10 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractQueryInputOutputHandler implements QueryInputOutputHandlerInterface
 {
-    public function prepareQueryArgs(&$query_args): void
+    /**
+     * @param array<string,mixed> $query_args
+     */
+    public function prepareQueryArgs(array &$query_args): void
     {
     }
     /**
