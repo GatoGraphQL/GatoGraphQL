@@ -35,7 +35,7 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
     }
 
     /**
-     * @var array<string,mixed>
+     * @return array<string,mixed>
      */
     public function getSchemaDefinition(): array
     {

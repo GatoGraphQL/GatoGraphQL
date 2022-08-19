@@ -37,6 +37,8 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
      * with the "operationName" as part of the file name:
      *
      *   - GraphQL response for operationName: "${fileName}:${operationName}.json"
+     *
+     * @return mixed[]
      */
     public function fixtureGraphQLServerExecutionProvider(): array
     {

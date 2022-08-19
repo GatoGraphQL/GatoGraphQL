@@ -508,6 +508,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final protected function getConsolidatedFieldExtensionsSchemaDefinition(string $fieldName): array
     {
