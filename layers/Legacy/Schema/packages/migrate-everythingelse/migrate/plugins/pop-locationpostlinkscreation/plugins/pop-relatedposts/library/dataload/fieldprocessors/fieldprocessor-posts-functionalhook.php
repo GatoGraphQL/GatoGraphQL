@@ -15,6 +15,9 @@ class PoP_LocationPostLinksCreation_DataLoad_ObjectTypeFieldResolver_FunctionalP
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

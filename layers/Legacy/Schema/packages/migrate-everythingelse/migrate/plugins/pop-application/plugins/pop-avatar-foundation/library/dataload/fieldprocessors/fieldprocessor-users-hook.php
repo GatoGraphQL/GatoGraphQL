@@ -25,6 +25,9 @@ class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends 
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

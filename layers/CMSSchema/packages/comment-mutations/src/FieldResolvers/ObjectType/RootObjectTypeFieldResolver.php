@@ -65,6 +65,9 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */

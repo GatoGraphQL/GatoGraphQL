@@ -41,6 +41,9 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
         return null;
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

@@ -16,6 +16,9 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

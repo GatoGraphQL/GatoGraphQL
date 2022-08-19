@@ -15,6 +15,9 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

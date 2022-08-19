@@ -22,6 +22,9 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

@@ -22,6 +22,9 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

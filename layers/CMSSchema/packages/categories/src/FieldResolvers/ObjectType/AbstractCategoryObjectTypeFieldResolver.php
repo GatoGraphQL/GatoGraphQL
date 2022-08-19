@@ -57,6 +57,9 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

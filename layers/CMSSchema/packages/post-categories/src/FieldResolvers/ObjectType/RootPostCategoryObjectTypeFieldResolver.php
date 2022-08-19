@@ -112,6 +112,9 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

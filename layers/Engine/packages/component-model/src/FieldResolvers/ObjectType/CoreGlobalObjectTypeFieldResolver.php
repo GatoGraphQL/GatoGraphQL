@@ -51,6 +51,9 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

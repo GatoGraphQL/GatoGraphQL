@@ -90,6 +90,9 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

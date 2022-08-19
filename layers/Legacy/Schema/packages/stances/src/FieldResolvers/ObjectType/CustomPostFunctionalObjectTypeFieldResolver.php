@@ -88,6 +88,9 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

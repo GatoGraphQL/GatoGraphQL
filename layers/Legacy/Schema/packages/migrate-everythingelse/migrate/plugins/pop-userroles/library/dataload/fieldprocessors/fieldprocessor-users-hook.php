@@ -40,6 +40,9 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

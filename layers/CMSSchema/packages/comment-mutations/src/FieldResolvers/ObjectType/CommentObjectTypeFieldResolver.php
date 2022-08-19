@@ -62,6 +62,9 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

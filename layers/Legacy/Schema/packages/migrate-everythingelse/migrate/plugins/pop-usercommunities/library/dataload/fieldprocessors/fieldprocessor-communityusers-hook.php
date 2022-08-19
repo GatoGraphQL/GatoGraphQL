@@ -16,6 +16,9 @@ class ObjectTypeFieldResolver_CommunityUsers extends AbstractObjectTypeFieldReso
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

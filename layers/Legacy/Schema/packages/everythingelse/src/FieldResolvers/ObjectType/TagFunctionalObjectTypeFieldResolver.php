@@ -38,6 +38,9 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

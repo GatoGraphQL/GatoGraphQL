@@ -17,6 +17,9 @@ class PoP_SocialNetwork_DataLoad_ObjectTypeFieldResolver_Notifications extends A
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

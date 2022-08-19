@@ -74,6 +74,9 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

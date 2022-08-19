@@ -16,6 +16,9 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

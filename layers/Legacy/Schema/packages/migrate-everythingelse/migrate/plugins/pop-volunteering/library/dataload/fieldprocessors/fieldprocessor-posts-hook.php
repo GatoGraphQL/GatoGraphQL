@@ -14,6 +14,9 @@ class PoP_Volunteering_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

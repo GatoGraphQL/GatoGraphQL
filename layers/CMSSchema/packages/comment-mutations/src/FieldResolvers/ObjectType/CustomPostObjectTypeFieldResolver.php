@@ -53,6 +53,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

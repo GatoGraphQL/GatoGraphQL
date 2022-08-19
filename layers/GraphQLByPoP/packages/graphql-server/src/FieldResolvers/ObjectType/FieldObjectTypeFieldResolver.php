@@ -77,6 +77,9 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

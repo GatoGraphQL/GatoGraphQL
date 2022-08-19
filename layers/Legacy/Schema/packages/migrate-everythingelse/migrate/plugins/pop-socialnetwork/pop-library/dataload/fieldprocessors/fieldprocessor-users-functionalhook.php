@@ -15,6 +15,9 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends 
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

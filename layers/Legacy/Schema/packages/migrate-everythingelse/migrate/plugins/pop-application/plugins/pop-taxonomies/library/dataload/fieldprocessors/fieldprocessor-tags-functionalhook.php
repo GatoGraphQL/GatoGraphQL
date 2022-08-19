@@ -13,6 +13,9 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObje
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

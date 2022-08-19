@@ -61,6 +61,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         return $this->arrayTraversionHelperService ??= $this->instanceManager->getInstance(ArrayTraversionHelperServiceInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

@@ -185,6 +185,9 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

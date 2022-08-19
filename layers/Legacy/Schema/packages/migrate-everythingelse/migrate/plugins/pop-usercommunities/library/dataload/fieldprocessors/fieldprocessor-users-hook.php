@@ -17,6 +17,9 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

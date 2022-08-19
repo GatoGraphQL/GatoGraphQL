@@ -15,6 +15,9 @@ class GD_ContentPostLinksCreation_DataLoad_ObjectTypeFieldResolver_FunctionalPos
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

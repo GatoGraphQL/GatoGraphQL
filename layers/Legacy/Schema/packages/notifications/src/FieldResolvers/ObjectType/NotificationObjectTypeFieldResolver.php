@@ -113,6 +113,9 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

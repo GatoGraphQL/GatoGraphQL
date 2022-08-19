@@ -15,6 +15,9 @@ class GD_EM_DataLoad_ObjectTypeFieldResolver_Events extends AbstractObjectTypeFi
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

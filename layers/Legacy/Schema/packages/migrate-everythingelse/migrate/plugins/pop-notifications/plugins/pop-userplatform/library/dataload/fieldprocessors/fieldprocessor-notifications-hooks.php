@@ -15,6 +15,9 @@ class PoP_Notifications_UserPlatform_DataLoad_ObjectTypeFieldResolver_Notificati
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

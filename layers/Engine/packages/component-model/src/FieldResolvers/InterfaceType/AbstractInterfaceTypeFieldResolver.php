@@ -130,6 +130,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return $this->getInterfaceTypeResolverClassesToAttachTo();
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return $this->getFieldNamesToImplement();

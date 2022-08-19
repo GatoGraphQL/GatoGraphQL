@@ -17,6 +17,9 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

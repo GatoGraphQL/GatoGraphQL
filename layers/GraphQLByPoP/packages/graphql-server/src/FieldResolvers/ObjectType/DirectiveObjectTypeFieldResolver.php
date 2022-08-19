@@ -77,6 +77,9 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

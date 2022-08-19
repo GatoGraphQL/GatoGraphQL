@@ -16,6 +16,9 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Post
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

@@ -15,6 +15,9 @@ class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

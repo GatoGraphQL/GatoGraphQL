@@ -58,6 +58,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

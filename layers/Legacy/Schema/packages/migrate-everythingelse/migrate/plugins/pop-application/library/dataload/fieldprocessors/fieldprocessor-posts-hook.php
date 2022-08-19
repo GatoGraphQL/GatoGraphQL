@@ -57,6 +57,9 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         return $img;
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
