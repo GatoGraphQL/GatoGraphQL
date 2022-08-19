@@ -23,7 +23,7 @@ class PoP_CDN_Thumbprint_Tag extends PoP_CDN_ThumbprintBase
         );
     }
 
-    public function executeQuery($query, array $options = []): array
+    public function executeQuery(array $query, array $options = []): array
     {
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;

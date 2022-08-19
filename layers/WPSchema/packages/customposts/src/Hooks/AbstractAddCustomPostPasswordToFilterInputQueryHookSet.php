@@ -26,7 +26,7 @@ abstract class AbstractAddCustomPostPasswordToFilterInputQueryHookSet extends Ab
      *
      * @see https://developer.wordpress.org/reference/classes/wp_query/#password-parameters
      */
-    public function convertCustomPostsQuery($query, array $options): array
+    public function convertCustomPostsQuery(array $query, array $options): array
     {
         // `null` is an accepted value
         if (array_key_exists('has-password', $query)) {

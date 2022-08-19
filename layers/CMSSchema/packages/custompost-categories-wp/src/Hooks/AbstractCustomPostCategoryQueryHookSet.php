@@ -23,7 +23,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
     /**
      * @return array<string,mixed>
      */
-    public function convertCustomPostsQuery($query, array $options): array
+    public function convertCustomPostsQuery(array $query, array $options): array
     {
         if (isset($query['categories'])) {
             // Watch out! In WordPress it is a string (either category id or comma-separated category ids), but in PoP it is an array of category ids!

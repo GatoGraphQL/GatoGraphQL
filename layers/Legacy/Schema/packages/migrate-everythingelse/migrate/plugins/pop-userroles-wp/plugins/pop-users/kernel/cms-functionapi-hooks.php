@@ -13,7 +13,7 @@ class FunctionAPIHooks {
 		);
 	}
 
-	public function convertUsersQuery($query, array $options)
+	public function convertUsersQuery(array $query, array $options)
     {
         if (isset($query['role'])) {
             // Same param name, so do nothing

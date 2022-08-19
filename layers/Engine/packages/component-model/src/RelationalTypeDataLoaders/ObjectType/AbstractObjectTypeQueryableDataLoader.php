@@ -27,7 +27,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
     /**
      * @return mixed[]
      */
-    abstract public function executeQuery($query, array $options = []): array;
+    abstract public function executeQuery(array $query, array $options = []): array;
 
     /**
      * @param array<string,mixed> $query

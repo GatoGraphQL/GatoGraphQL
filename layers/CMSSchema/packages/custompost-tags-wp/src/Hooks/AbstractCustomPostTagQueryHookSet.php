@@ -23,7 +23,7 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
     /**
      * @return array<string,mixed>
      */
-    public function convertCustomPostsQuery($query, array $options): array
+    public function convertCustomPostsQuery(array $query, array $options): array
     {
         if (isset($query['tag-ids'])) {
             $query['tag__in'] = $query['tag-ids'];

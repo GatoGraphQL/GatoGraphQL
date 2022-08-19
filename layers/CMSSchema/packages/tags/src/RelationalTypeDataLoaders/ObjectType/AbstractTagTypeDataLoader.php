@@ -37,7 +37,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableData
     /**
      * @return mixed[]
      */
-    public function executeQuery($query, array $options = []): array
+    public function executeQuery(array $query, array $options = []): array
     {
         $tagTypeAPI = $this->getTagTypeAPI();
         return $tagTypeAPI->getTags($query, $options);

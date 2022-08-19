@@ -140,7 +140,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     /**
      * @return array<string,mixed>
      */
-    protected function convertMediaQuery($query, array $options = []): array
+    protected function convertMediaQuery(array $query, array $options = []): array
     {
         if (isset($query['mime-types'])) {
             // Transform from array to string
