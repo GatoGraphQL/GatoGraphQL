@@ -269,6 +269,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     /**
      * @return ObjectTypeResolverInterface[]
+     * @param ObjectTypeResolverPickerInterface[] $objectTypeResolverPickers
      */
     protected function getObjectTypeResolversFromPickers(array $objectTypeResolverPickers): array
     {

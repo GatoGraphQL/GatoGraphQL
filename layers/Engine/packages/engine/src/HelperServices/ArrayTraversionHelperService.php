@@ -27,6 +27,7 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
     /**
      * @throws RuntimeOperationException If the path cannot be reached under the array, or if its value is not an array
      * @return mixed[]
+     * @param array<string,mixed> $data
      */
     public function &getPointerToArrayItemUnderPath(array &$data, string $path): array
     {
@@ -41,6 +42,7 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
 
     /**
      * @throws RuntimeOperationException If the path cannot be reached under the array
+     * @param array<string,mixed> $data
      */
     public function &getPointerToElementItemUnderPath(array &$data, string $path): mixed
     {
@@ -75,6 +77,7 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
 
     /**
      * @throws RuntimeOperationException
+     * @param array<string,mixed> $data
      */
     protected function throwNoArrayItemUnderPathException(array $data, string $path): void
     {
@@ -103,6 +106,7 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
 
     /**
      * @throws RuntimeOperationException If the path cannot be reached under the array
+     * @param array<string,mixed> $data
      */
     public function setValueToArrayItemUnderPath(array &$data, string $path, mixed $value): void
     {

@@ -80,10 +80,12 @@ class Parser extends Tokenizer implements ParserInterface
         );
     }
 
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     */
     public function createDocument(
-        /** @var OperationInterface[] */
         array $operations,
-        /** @var Fragment[] */
         array $fragments,
     ): Document {
         return new Document(
@@ -164,26 +166,30 @@ class Parser extends Tokenizer implements ParserInterface
         return $this->createQueryOperation($operationName, $variables, $directives, $fieldsOrFragmentBonds, $operationLocation);
     }
 
+    /**
+     * @param Variable[] $variables
+     * @param Directive[] $directives
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     */
     public function createQueryOperation(
         string $name,
-        /** @var Variable[] */
         array $variables,
-        /** @var Directive[] $directives */
         array $directives,
-        /** @var array<FieldInterface|FragmentBondInterface> */
         array $fieldsOrFragmentBonds,
         Location $location,
     ): QueryOperation {
         return new QueryOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
     }
 
+    /**
+     * @param Variable[] $variables
+     * @param Directive[] $directives
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     */
     public function createMutationOperation(
         string $name,
-        /** @var Variable[] */
         array $variables,
-        /** @var Directive[] $directives */
         array $directives,
-        /** @var array<FieldInterface|FragmentBondInterface> */
         array $fieldsOrFragmentBonds,
         Location $location,
     ): MutationOperation {

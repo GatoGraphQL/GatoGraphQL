@@ -733,10 +733,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         return array_values(array_unique($this->objectResolvedFieldValueReferencedFields));
     }
 
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     */
     public function createDocument(
-        /** @var OperationInterface[] */
         array $operations,
-        /** @var Fragment[] */
         array $fragments,
     ): Document {
         $document = $this->createDocumentInstance(
@@ -756,6 +758,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     /**
      * Set the instance with the implementation
      * from ComponentModel
+     * @param array<string, mixed> $operations
+     * @param array<string, mixed> $fragments
      */
     abstract protected function createDocumentInstance(
         /** @var OperationInterface[] */

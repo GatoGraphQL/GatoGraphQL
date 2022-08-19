@@ -29,10 +29,12 @@ class Document implements DocumentInterface
      */
     protected ?SplObjectStorage $astNodeAncestors = null;
 
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     */
     public function __construct(
-        /** @var OperationInterface[] */
         protected readonly array $operations,
-        /** @var Fragment[] */
         protected array $fragments = [],
     ) {
     }
