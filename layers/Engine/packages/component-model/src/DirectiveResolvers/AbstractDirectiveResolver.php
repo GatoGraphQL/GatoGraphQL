@@ -369,6 +369,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string,mixed> $directiveArgsSchemaDefinition
      * @param FieldInterface[] $fields
+     * @param array<string,mixed> $directiveArgs
      */
     private function validateNonMissingMandatoryDirectiveArguments(
         array $directiveArgs,
@@ -434,6 +435,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string,mixed> $directiveArgsSchemaDefinition
      * @param FieldInterface[] $fields
+     * @param array<string,mixed> $directiveArgs
      */
     private function validateOnlyExistingDirectiveArguments(
         array $directiveArgs,
@@ -469,6 +471,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Validate the constraints for the directive arguments
      *
      * @param FieldInterface[] $fields
+     * @param array<string,mixed> $directiveArgs
      */
     private function validateDirectiveArgumentConstraints(
         array $directiveArgs,
@@ -936,6 +939,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     */
     protected function maybeAddSemanticVersionConstraintsWarningFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
