@@ -542,6 +542,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $group = $this->getPropGroup($group, $component, $props, $starting_from_componentPath);
         return $group[$property] ?? null;
     }
+    /**
+     * @return mixed[]
+     */
     protected function getPropGroup(string $group, Component $component, array &$props, array $starting_from_componentPath = array()): array
     {
         if (!$props) {

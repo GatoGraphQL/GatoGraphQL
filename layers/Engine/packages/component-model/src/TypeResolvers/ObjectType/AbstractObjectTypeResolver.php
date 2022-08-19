@@ -871,6 +871,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
     }
 
+    /**
+     * The "executable" FieldResolver is the first one in the list
+     * for each field, as according to their priority.
+     *
+     * @return array<string,ObjectTypeFieldResolverInterface> Key: fieldName, Value: FieldResolver
+     */
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $cacheKey = $global ? 'global' : 'non-global';
@@ -880,6 +886,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->executableObjectTypeFieldResolversByFieldCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface> Key: fieldName, Value: FieldResolver
+     */
     private function doGetExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
@@ -1107,6 +1116,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return !empty($this->getObjectTypeFieldResolversForFieldOrFieldName($field));
     }
 
+    /**
+     * @return ObjectTypeFieldResolverInterface[]
+     */
     protected function calculateObjectTypeFieldResolversForFieldOrFieldName(FieldInterface|string $fieldOrFieldName): array
     {
         if ($fieldOrFieldName instanceof FieldInterface) {

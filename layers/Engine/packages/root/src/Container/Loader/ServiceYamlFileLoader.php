@@ -18,6 +18,9 @@ class ServiceYamlFileLoader extends YamlFileLoader
 {
     use ServiceYamlFileLoaderTrait;
 
+    /**
+     * @return mixed[]
+     */
     protected function loadFile(string $file): ?array
     {
         $content = parent::loadFile($file);

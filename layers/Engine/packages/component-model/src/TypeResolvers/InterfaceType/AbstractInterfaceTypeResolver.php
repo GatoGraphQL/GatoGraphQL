@@ -48,6 +48,9 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         return $this->fieldNamesToImplement;
     }
 
+    /**
+     * @return string[]
+     */
     private function calculateFieldNamesToImplement(): array
     {
         $fieldNamesToImplement = [];

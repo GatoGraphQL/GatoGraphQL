@@ -864,6 +864,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final public function getDirectiveArgsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -1365,6 +1367,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->schemaDefinitionForDirectiveCache[$key];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     private function doGetDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $directiveName = $this->getDirectiveName();
