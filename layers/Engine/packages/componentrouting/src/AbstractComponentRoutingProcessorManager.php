@@ -11,7 +11,7 @@ use PoP\Root\App;
 abstract class AbstractComponentRoutingProcessorManager implements ComponentRoutingProcessorManagerInterface
 {
     /**
-     * @var array<string, ComponentRoutingProcessorInterface[]>
+     * @var array<string,ComponentRoutingProcessorInterface[]>
      */
     protected array $processors = [];
 

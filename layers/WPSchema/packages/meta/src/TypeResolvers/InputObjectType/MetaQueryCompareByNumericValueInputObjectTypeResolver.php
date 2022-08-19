@@ -39,7 +39,7 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

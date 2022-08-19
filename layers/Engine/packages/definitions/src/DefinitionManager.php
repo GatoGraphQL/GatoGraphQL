@@ -21,7 +21,7 @@ class DefinitionManager implements DefinitionManagerInterface
      */
     protected array $definition_names = [];
     /**
-     * @var array<string, DefinitionResolverInterface>
+     * @var array<string,DefinitionResolverInterface>
      */
     protected array $definition_resolvers = [];
     private ?DefinitionPersistenceInterface $definition_persistence = null;
@@ -32,7 +32,7 @@ class DefinitionManager implements DefinitionManagerInterface
     }
 
     /**
-     * @return array<string, DefinitionResolverInterface>
+     * @return array<string,DefinitionResolverInterface>
      */
     public function getDefinitionResolvers(): array
     {

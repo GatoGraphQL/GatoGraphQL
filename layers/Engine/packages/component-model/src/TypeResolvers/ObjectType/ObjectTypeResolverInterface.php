@@ -38,14 +38,14 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      * The "executable" FieldResolver is the first one in the list
      * for each field, as according to their priority.
      *
-     * @return array<string, ObjectTypeFieldResolverInterface> Key: fieldName, Value: FieldResolver
+     * @return array<string,ObjectTypeFieldResolverInterface> Key: fieldName, Value: FieldResolver
      */
     public function getExecutableObjectTypeFieldResolversByField(bool $global): array;
     /**
      * The list of all the FieldResolvers that resolve each field, for
      * every fieldName
      *
-     * @return array<string, ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: List of FieldResolvers
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: List of FieldResolvers
      */
     public function getObjectTypeFieldResolversByField(bool $global): array;
     /**

@@ -14,11 +14,11 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     use ExcludeFieldNamesFromSchemaTypeResolverTrait;
 
     /**
-     * @var array<string, InterfaceTypeFieldResolverInterface[]>|null
+     * @var array<string,InterfaceTypeFieldResolverInterface[]>|null
      */
     protected ?array $interfaceTypeFieldResolversByField = null;
     /**
-     * @var array<string, InterfaceTypeFieldResolverInterface>|null
+     * @var array<string,InterfaceTypeFieldResolverInterface>|null
      */
     protected ?array $excutableInterfaceTypeFieldResolversByField = null;
     /**
@@ -126,7 +126,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the ObjectTypeFieldResolverInterfaces
      *
-     * @return array<string, InterfaceTypeFieldResolverInterface[]>
+     * @return array<string,InterfaceTypeFieldResolverInterface[]>
      */
     final public function getInterfaceTypeFieldResolversByField(): array
     {
@@ -140,7 +140,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the ObjectTypeFieldResolverInterfaces
      *
-     * @return array<string, InterfaceTypeFieldResolverInterface[]>
+     * @return array<string,InterfaceTypeFieldResolverInterface[]>
      */
     protected function calculateAllInterfaceTypeFieldResolversByField(): array
     {

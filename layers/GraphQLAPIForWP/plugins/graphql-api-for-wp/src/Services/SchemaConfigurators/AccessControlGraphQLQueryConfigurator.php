@@ -54,7 +54,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
 
     /**
-     * @var array<string, bool>|null
+     * @var array<string,bool>|null
      */
     protected ?array $aclRuleBlockNameEnabled = null;
 
@@ -66,7 +66,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     /**
      * Obtain the modules enabling/disabling each ACL rule block, through a hook
      *
-     * @return array<string, bool>
+     * @return array<string,bool>
      */
     protected function getACLRuleBlockNameEnabled(): array
     {

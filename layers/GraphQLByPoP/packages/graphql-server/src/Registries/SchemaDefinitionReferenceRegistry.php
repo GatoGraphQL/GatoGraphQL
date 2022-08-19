@@ -34,7 +34,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     protected ?array $fullSchemaDefinitionForGraphQL = null;
     /**
-     * @var array<string, SchemaDefinitionReferenceObjectInterface>
+     * @var array<string,SchemaDefinitionReferenceObjectInterface>
      */
     protected array $fullSchemaDefinitionReferenceDictionary = [];
 

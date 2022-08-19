@@ -21,7 +21,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     protected ?string $selected_filter_name = null;
     private ?ComponentFilterInterface $selected_filter = null;
     /**
-     * @var array<string, ComponentFilterInterface>
+     * @var array<string,ComponentFilterInterface>
      */
     protected array $componentfilters = [];
     protected bool $initialized = false;

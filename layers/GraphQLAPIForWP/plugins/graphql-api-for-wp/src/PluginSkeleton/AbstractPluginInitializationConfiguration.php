@@ -81,7 +81,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
     /**
      * All the environment variables to override
-     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string}>
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string}>
      */
     protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
@@ -138,7 +138,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Define the values for certain environment constants from the plugin settings
      *
-     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string, module: string, option: string, callback: callable, condition: string}>
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string, module: string, option: string, callback: callable, condition: string}>
      */
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
@@ -172,7 +172,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string, callback: Closure():bool}>
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string, callback: Closure():bool}>
      */
     protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {

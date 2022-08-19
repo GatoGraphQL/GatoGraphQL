@@ -44,9 +44,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private array $processedTypeAndDirectiveResolverClasses = [];
     /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
     private array $pendingTypeOrDirectiveResolvers = [];
-    /** @var array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
+    /** @var array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
     private array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
-    /** @var array<string, ObjectTypeResolverInterface[]> Key: InterfaceType name, Value: List of ObjectType resolvers implementing the interface */
+    /** @var array<string,ObjectTypeResolverInterface[]> Key: InterfaceType name, Value: List of ObjectType resolvers implementing the interface */
     private array $accessedInterfaceTypeNameObjectTypeResolvers = [];
 
     private ?PersistentCacheInterface $persistentCache = null;

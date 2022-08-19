@@ -28,12 +28,12 @@ class ModuleRegistry implements ModuleRegistryInterface
     protected array $moduleResolvers = [];
 
     /**
-     * @var array<string, ModuleResolverInterface>
+     * @var array<string,ModuleResolverInterface>
      */
     protected array $modulesResolversByModuleAndPriority = [];
 
     /**
-     * @var array<string, ModuleResolverInterface>
+     * @var array<string,ModuleResolverInterface>
      */
     protected array $moduleResolversByModule = [];
 
@@ -46,7 +46,7 @@ class ModuleRegistry implements ModuleRegistryInterface
     }
     /**
      * Order the moduleResolvers by priority
-     * @return array<string, ModuleResolverInterface>
+     * @return array<string,ModuleResolverInterface>
      */
     protected function getModuleResolversByModuleAndPriority(): array
     {

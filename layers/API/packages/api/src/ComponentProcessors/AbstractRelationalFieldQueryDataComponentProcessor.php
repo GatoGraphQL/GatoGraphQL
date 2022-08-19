@@ -404,9 +404,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         /**
          * First collect all fields for each combination of fragment models
          */
-        /** @var array<string, string[]> */
+        /** @var array<string,string[]> */
         $fragmentModelListNameItems = [];
-        /** @var array<string, FieldInterface[]> */
+        /** @var array<string,FieldInterface[]> */
         $fragmentModelListNameFields = [];
         foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $field = $fieldFragmentModelsTuple->getField();

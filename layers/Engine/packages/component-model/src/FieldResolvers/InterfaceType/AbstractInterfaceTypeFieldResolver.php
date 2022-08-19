@@ -36,23 +36,23 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /** @var array<string,array> */
     protected array $schemaDefinitionForFieldCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
     /** @var array<string,array<string,mixed>> */
     protected array $consolidatedFieldExtensionsCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldDeprecationMessageCache = [];
     /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
-    /** @var array<string, string[]> */
+    /** @var array<string,string[]> */
     protected array $consolidatedAdminFieldArgNamesCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDeprecationMessageCache = [];
     /** @var array<string,mixed> */
     protected array $consolidatedFieldArgDefaultValueCache = [];
-    /** @var array<string, int> */
+    /** @var array<string,int> */
     protected array $consolidatedFieldArgTypeModifiersCache = [];
     /** @var array<string,array<string,mixed>> */
     protected array $consolidatedFieldArgExtensionsCache = [];

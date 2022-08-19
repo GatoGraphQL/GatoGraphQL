@@ -183,7 +183,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     }
 
     /**
-     * @param array<string, bool> $moduleIDValues
+     * @param array<string,bool> $moduleIDValues
      */
     public function setModulesEnabled(array $moduleIDValues): void
     {

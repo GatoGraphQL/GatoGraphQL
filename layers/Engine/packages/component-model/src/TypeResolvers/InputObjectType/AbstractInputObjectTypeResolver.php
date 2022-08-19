@@ -31,11 +31,11 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     protected array $schemaDefinitionForInputFieldCache = [];
     /** @var array<string,InputTypeResolverInterface>|null */
     private ?array $consolidatedInputFieldNameTypeResolversCache = null;
-    /** @var array<string, ?string> */
+    /** @var array<string,?string> */
     private array $consolidatedInputFieldDescriptionCache = [];
     /** @var array<string,mixed> */
     private array $consolidatedInputFieldDefaultValueCache = [];
-    /** @var array<string, int> */
+    /** @var array<string,int> */
     private array $consolidatedInputFieldTypeModifiersCache = [];
     /** @var array<string,array<string,mixed>> */
     private array $consolidatedInputFieldExtensionsCache = [];

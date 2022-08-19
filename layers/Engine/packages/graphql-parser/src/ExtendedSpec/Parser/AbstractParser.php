@@ -322,7 +322,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * For each directive, indicate which meta-directive is composing it
          * by indicating their relative position (as a negative int)
-         * @var array<int, int>
+         * @var array<int,int>
          */
         $composingMetaDirectiveRelativePosition = [];
         $directiveCount = count($directives);

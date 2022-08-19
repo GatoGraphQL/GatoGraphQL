@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolverInterfa
 class ModuleTypeRegistry implements ModuleTypeRegistryInterface
 {
     /**
-     * @var array<string, ModuleTypeResolverInterface>
+     * @var array<string,ModuleTypeResolverInterface>
      */
     protected array $moduleTypeResolvers = [];
 

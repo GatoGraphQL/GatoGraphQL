@@ -12,7 +12,7 @@ class BlockHelpers
     /**
      * After parsing a post, cache its blocks
      *
-     * @var array<int, array>
+     * @var array<int,array>
      */
     protected array $blockCache = [];
 

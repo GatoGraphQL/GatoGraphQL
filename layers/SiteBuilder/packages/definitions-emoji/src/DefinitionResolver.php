@@ -9,7 +9,7 @@ use PoP\Definitions\DefinitionResolverInterface;
 class DefinitionResolver implements DefinitionResolverInterface
 {
     /**
-     * @var array<string, int>
+     * @var array<string,int>
      */
     private array $definition_counters = [];
     /**

@@ -43,7 +43,7 @@ class MediaItemByInputObjectTypeResolver extends AbstractOneofQueryableInputObje
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

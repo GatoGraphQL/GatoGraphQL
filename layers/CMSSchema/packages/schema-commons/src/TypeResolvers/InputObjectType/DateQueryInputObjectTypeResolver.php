@@ -28,7 +28,7 @@ class DateQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

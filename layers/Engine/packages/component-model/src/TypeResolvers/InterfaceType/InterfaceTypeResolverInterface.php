@@ -20,7 +20,7 @@ interface InterfaceTypeResolverInterface extends OutputTypeResolverInterface
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the ObjectTypeFieldResolvers
      *
-     * @return array<string, InterfaceTypeFieldResolverInterface[]>
+     * @return array<string,InterfaceTypeFieldResolverInterface[]>
      */
     public function getInterfaceTypeFieldResolversByField(): array;
     /**
@@ -28,7 +28,7 @@ interface InterfaceTypeResolverInterface extends OutputTypeResolverInterface
      * the first ObjectTypeFieldResolver that resolves it, as according
      * to its priority
      *
-     * @return array<string, InterfaceTypeFieldResolverInterface>
+     * @return array<string,InterfaceTypeFieldResolverInterface>
      */
     public function getExecutableInterfaceTypeFieldResolversByField(): array;
     /**

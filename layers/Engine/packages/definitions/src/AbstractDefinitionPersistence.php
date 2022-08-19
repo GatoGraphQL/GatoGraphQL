@@ -20,7 +20,7 @@ abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInt
     protected array $resolverData = [];
     protected bool $addedDefinition = false;
     /**
-     * @var array<string, DefinitionResolverInterface>
+     * @var array<string,DefinitionResolverInterface>
      */
     protected array $definition_resolvers = [];
 
@@ -42,7 +42,7 @@ abstract class AbstractDefinitionPersistence implements DefinitionPersistenceInt
     }
 
     /**
-     * @return array<string, DefinitionResolverInterface>
+     * @return array<string,DefinitionResolverInterface>
      */
     public function getDefinitionResolvers(): array
     {

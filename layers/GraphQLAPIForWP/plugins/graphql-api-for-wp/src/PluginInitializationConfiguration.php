@@ -84,7 +84,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string, module: string, option: string, callback: callable, condition: string}>
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string, module: string, option: string, callback: callable, condition: string}>
      */
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
@@ -508,7 +508,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string, callback: Closure():bool}>
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string, callback: Closure():bool}>
      */
     protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
@@ -528,7 +528,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * All the environment variables to override
-     * @return array<int, array{class: class-string<ModuleInterface>, envVariable: string}>
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string}>
      */
     protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
@@ -658,7 +658,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     }
 
     /**
-     * @return array<int, array{module: string, class: class-string<\GraphQLByPoP\GraphQLEndpointForWP\Module>|class-string<\GraphQLByPoP\GraphQLClientsForWP\Module>, envVariable: string, callback?: Closure():bool}>
+     * @return array<int,array{module: string, class: class-string<\GraphQLByPoP\GraphQLEndpointForWP\Module>|class-string<\GraphQLByPoP\GraphQLClientsForWP\Module>, envVariable: string, callback?: Closure():bool}>
      */
     protected function getModuleToModuleClassConfigurationMapping(): array
     {
