@@ -11,6 +11,9 @@ use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
  */
 class SchemaNoCacheCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToApplyTo(): array
     {
         return [

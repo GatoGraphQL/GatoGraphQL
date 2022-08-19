@@ -47,6 +47,9 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->enumValueExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(EnumValueExtensionsObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<\PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
