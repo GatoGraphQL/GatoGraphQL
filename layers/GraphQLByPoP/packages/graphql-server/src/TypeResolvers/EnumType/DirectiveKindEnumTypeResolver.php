@@ -55,6 +55,8 @@ class DirectiveKindEnumTypeResolver extends AbstractIntrospectionEnumTypeResolve
 
     /**
      * Convert back from lowercase to UPPERCASE
+     *
+     * @return string|int|float|bool|mixed[]
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
     {

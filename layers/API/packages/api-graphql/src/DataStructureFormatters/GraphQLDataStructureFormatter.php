@@ -215,6 +215,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getSchemaEntry(string $typeOutputKey, array $item): array
     {
         $entry = [
@@ -242,6 +245,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
         $extensions = [];

@@ -14,5 +14,8 @@ abstract class AbstractQueryExecutionGraphQLServerTestCase extends AbstractGraph
         $this->assertGraphQLQueryExecution($query, $expectedResponse, $variables, $operationName);
     }
 
+    /**
+     * @return mixed[]
+     */
     abstract public function graphQLServerExecutionProvider(): array;
 }
