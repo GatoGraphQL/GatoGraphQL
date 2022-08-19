@@ -209,6 +209,9 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
+    /**
+     * @param array<int,array<string,mixed>> $entries
+     */
     protected function findEntryPosition(string|int $menuItemID, array $entries): int
     {
         $entriesCount = count($entries);

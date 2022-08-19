@@ -306,6 +306,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected function additionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
+    /**
+     * @param array<string,mixed> $log
+     */
     protected function updateAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
     }
@@ -317,7 +320,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     // {
     //     $post_data['custompost-type'] = $this->getCustomPostType();
     // }
-
+    /**
+     * @param array<string,mixed> $post_data
+     */
     protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)) {

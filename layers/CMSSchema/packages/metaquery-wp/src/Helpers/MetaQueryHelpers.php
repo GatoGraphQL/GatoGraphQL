@@ -8,6 +8,7 @@ class MetaQueryHelpers
 {
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $query
      */
     public static function convertMetaQuery(array $query): array
     {

@@ -72,6 +72,7 @@ class CategoryPostFieldDataloadComponentProcessor extends AbstractRelationalFiel
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     protected function getMutableonrequestDataloadQueryArgs(Component $component, array &$props): array
     {

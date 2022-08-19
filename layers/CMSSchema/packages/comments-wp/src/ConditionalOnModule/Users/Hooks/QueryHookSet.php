@@ -28,6 +28,8 @@ class QueryHookSet extends AbstractHookSet
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function convertCommentQuery(array $query, array $options): array
     {

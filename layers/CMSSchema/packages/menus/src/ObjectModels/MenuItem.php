@@ -9,6 +9,9 @@ namespace PoPCMSSchema\Menus\ObjectModels;
  */
 class MenuItem
 {
+    /**
+     * @param string[] $classes
+     */
     public function __construct(
         public readonly string|int $id,
         public readonly string|int $objectID,
@@ -17,7 +20,6 @@ class MenuItem
         public readonly string $title,
         public readonly string $url,
         public readonly string $description,
-        /** @var string[] */
         public readonly array $classes,
         public readonly string $target,
         public readonly string $linkRelationship,

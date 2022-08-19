@@ -184,6 +184,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     /**
      * @throws CommentCRUDMutationException In case of error
+     * @param array<string,mixed> $comment_data
      */
     protected function insertComment(array $comment_data): string|int
     {
