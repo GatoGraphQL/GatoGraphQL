@@ -464,6 +464,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /**
      * Get the "schema" properties as for the fieldName
+     *
+     * @return array<string,mixed>
      */
     final protected function doGetFieldSchemaDefinition(string $fieldName): array
     {
@@ -566,6 +568,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final public function getFieldArgsSchemaDefinition(string $fieldName): array
     {
@@ -610,6 +614,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return $this->schemaFieldArgsCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getFieldArgExtensionsSchemaDefinition(string $fieldName, string $fieldArgName): array
     {
         $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
@@ -621,6 +628,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final protected function getConsolidatedFieldArgExtensionsSchemaDefinition(string $fieldName, string $fieldArgName): array
     {
