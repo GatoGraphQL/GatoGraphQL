@@ -68,6 +68,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array
     {
@@ -75,6 +77,10 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
         return wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCustomPostCategoryCount(string|int $customPostID, array $query = [], array $options = []): int
     {
         // There is no direct way to calculate the total
@@ -92,6 +98,10 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         $categories = wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
         return count($categories);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCategoryCount(array $query = [], array $options = []): int
     {
         $query = $this->convertCategoriesQuery($query, $options);
@@ -117,6 +127,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     }
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getCategories(array $query, array $options = []): array
     {
@@ -126,6 +138,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function convertCategoriesQuery(array $query, array $options = []): array
     {

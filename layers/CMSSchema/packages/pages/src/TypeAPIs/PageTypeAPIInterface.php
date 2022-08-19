@@ -30,11 +30,15 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      * If param "status" in $query is not passed, it defaults to "publish"
      *
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getPages(array $query, array $options = []): array;
     /**
      * Get the number of pages.
      * If param "status" in $query is not passed, it defaults to "publish"
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getPageCount(array $query = [], array $options = []): int;
     /**

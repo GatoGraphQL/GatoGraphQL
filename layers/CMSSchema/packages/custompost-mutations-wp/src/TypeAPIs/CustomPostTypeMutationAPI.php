@@ -16,6 +16,9 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
     use BasicServiceTrait;
 
+    /**
+     * @param array<string,mixed> $query
+     */
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
     {
         // Convert the parameters

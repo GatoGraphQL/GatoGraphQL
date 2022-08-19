@@ -21,6 +21,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 
     abstract protected function getTagBaseOption(): string;
 
+    /**
+     * @param string[] $tags
+     */
     public function setPostTags(string|int $customPostID, array $tags, bool $append = false): void
     {
         \wp_set_post_terms($customPostID, $tags, $this->getTagTaxonomyName(), $append);

@@ -127,11 +127,17 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
 
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getMediaItems(array $query, array $options = []): array
     {
         return $this->getCustomPosts($query, $options);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getMediaItemCount(array $query = [], array $options = []): int
     {
         return $this->getCustomPostCount($query, $options);
@@ -139,6 +145,8 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     protected function convertMediaQuery(array $query, array $options = []): array
     {

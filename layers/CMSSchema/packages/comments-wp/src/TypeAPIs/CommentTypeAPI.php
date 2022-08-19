@@ -40,6 +40,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getComments(array $query, array $options = []): array
     {
@@ -49,6 +51,8 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     protected function convertCommentsQuery(array $query, array $options): array
     {
@@ -150,6 +154,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         return $query;
     }
 
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCommentCount(array $query, array $options = []): int
     {
         $query = $this->convertCommentsQuery($query, $options);

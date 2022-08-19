@@ -87,6 +87,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     /**
      * @param array<string,mixed> $options
      * @return array<string|int|object>
+     * @param array<string,mixed> $query
      */
     public function getMenus(array $query, array $options = []): array
     {
@@ -121,6 +122,8 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function convertMenusQuery(array $query, array $options = []): array
     {

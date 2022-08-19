@@ -38,10 +38,13 @@ interface CustomPostTypeAPIInterface
     public function getCustomPosts(array $query, array $options = []): array;
     /**
      * If param "status" in $query is not passed, it defaults to "publish"
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getCustomPostCount(array $query = [], array $options = []): int;
     /**
      * @return string[]
+     * @param array<string,mixed> $query
      */
     public function getCustomPostTypes(array $query = array()): array;
 }

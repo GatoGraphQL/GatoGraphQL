@@ -19,6 +19,7 @@ interface TypeSerializationServiceInterface
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $idFieldValues
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string|int,SplObjectStorage<FieldInterface,mixed>>
+     * @param array<string|int,object> $idObjects
      */
     public function serializeOutputTypeIDFieldValues(
         RelationalTypeResolverInterface $relationalTypeResolver,

@@ -67,6 +67,8 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function convertTaxonomiesQuery(array $query, array $options = []): array
     {

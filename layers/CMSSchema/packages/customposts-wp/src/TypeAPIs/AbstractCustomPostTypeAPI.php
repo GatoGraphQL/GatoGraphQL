@@ -84,6 +84,10 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return get_posts($query);
     }
 
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCustomPostCount(array $query = [], array $options = []): int
     {
         // Convert parameters
@@ -211,6 +215,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
     /**
      * @return string[]
+     * @param array<string,mixed> $query
      */
     public function getCustomPostTypes(array $query = array()): array
     {

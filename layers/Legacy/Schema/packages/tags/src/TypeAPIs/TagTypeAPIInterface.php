@@ -12,5 +12,8 @@ use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
 {
     public function getTagBase(): string;
+    /**
+     * @param string[] $tags
+     */
     public function setPostTags(string|int $customPostID, array $tags, bool $append = false): void;
 }

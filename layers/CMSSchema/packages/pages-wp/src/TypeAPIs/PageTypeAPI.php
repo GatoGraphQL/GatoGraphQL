@@ -135,6 +135,8 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
 
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getPages(array $query, array $options = []): array
     {
@@ -163,6 +165,10 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
         }
         return $this->getCustomPosts($query, $options);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getPageCount(array $query = [], array $options = []): int
     {
         return $this->getCustomPostCount($query, $options);

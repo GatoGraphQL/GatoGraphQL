@@ -19,13 +19,25 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function getCategoryID(object $cat): string|int;
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getCategories(array $query, array $options = []): array;
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCategoryCount(array $query, array $options = []): int;
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array;
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCustomPostCategoryCount(string|int $customPostID, array $query, array $options = []): int;
     public function getCategorySlug(string|int|object $catObjectOrID): string;
     public function getCategoryName(string|int|object $catObjectOrID): string;

@@ -32,6 +32,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     
     /**
      * @return array<string,int>|object[]
+     * @param array<string,mixed> $options
      */
     public function getTaxonomyTerms(string $taxonomy, array $options = []): array
     {

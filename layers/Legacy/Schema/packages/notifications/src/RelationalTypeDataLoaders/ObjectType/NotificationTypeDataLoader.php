@@ -96,6 +96,8 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     /**
      * @return mixed[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function executeQuery(array $query, array $options = []): array
     {

@@ -57,6 +57,10 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return $this->getUserBy('login', $login);
     }
 
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getUserCount(array $query = [], array $options = []): int
     {
         // Convert the parameters
@@ -95,6 +99,8 @@ class UserTypeAPI extends AbstractUserTypeAPI
     }
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getUsers(array $query = [], array $options = []): array
     {
@@ -153,6 +159,8 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     protected function convertUsersQuery(array $query, array $options = []): array
     {

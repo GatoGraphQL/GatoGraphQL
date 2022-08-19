@@ -81,11 +81,17 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
 
     /**
      * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getPosts(array $query, array $options = []): array
     {
         return $this->getCustomPosts($query, $options);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getPostCount(array $query = [], array $options = []): int
     {
         return $this->getCustomPostCount($query, $options);
