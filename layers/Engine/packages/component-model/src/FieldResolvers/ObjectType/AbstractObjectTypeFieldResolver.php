@@ -851,6 +851,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $this->consolidatedFieldExtensionsCache[$cacheKey];
     }
 
+    /**
+     * @return class-string<InterfaceSchemaDefinitionResolverAdapter>
+     */
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
     {
         return InterfaceSchemaDefinitionResolverAdapter::class;
