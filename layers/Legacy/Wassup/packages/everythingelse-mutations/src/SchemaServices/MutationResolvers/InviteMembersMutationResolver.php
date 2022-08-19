@@ -24,7 +24,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
     
-    protected function getEmailContent(FieldDataAccessorInterface $fieldDataAccessor)
+    protected function getEmailContent(FieldDataAccessorInterface $fieldDataAccessor): string
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         // The user must be always logged in, so we will have the user_id
@@ -79,7 +79,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         return $content;
     }
 
-    protected function getEmailSubject(FieldDataAccessorInterface $fieldDataAccessor)
+    protected function getEmailSubject(FieldDataAccessorInterface $fieldDataAccessor): string
     {
         // The user must be always logged in, so we will have the user_id
         $user_id = $fieldDataAccessor->getValue('user_id');

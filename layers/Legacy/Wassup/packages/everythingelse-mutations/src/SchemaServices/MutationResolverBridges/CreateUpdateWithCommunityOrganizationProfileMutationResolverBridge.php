@@ -32,7 +32,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     /**
      * @return mixed[]
      */
-    private function getFormInputs()
+    private function getFormInputs(): array
     {
         return array_merge(
             $this->getCommonuserrolesFormInputs(),
