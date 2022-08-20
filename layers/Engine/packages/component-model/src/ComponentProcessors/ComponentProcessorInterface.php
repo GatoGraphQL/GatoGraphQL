@@ -288,7 +288,7 @@ interface ComponentProcessorInterface
      * @param string|int|array<string|int> $objectIDOrIDs
      * @param array<string,mixed>|null $executed
      */
-    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array;
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs): array;
     /**
      * @return CheckpointInterface[]
      * @param array<string,mixed> $props

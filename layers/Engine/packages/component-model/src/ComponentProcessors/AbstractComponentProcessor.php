@@ -179,7 +179,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Before initiating the current level, set the children attributes on the array, so that doing ->setProp, ->appendProp, etc, keeps working
         $component_props[$componentFullName][Props::DESCENDANT_ATTRIBUTES] = array_merge(
             $component_props[$componentFullName][Props::DESCENDANT_ATTRIBUTES] ?? array(),
-            $targetted_props_to_propagate ?? array()
+            $targetted_props_to_propagate
         );
 
         // Initiate the current level.
@@ -1303,7 +1303,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
 
     /**
-     * @var mixed[]|null
+     * @return mixed[]|null
      * @param array<string,mixed> $props
      */
     public function getDataFeedbackInterreferencedComponentPath(Component $component, array &$props): ?array
@@ -1348,7 +1348,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
      * @param string|int|array<string|int> $objectIDOrIDs
      * @param array<string,mixed>|null $executed
      */
-    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs): array
     {
         return [];
     }

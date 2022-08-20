@@ -30,6 +30,8 @@ class MultiValueFromStringFormInput extends FormInput
         if ($value === null) {
             return $value;
         }
-        return array_map(trim(...), explode((string)$this->separator, $value));
+        /** @var string */
+        $separator = $this->separator;
+        return array_map(trim(...), explode($separator, $value));
     }
 }
