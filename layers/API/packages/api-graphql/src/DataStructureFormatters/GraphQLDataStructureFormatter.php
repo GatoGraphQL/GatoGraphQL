@@ -275,7 +275,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @return array<int,mixed[]>
-     * @param array<array<string,SplObjectStorage<FieldInterface,mixed[]>>> $entries
+     * @param array<string,SplObjectStorage<FieldInterface,mixed[]>> $entries
      */
     protected function reformatObjectEntries(array $entries): array
     {
