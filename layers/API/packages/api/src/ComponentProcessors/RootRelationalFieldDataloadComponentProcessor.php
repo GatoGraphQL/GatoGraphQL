@@ -38,8 +38,9 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
     /**
      * @return string|int|array<string|int>|null
      * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
      */
-    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
+    public function getObjectIDOrIDs(Component $component, array &$props, array &$data_properties): string|int|array|null
     {
         if (App::getState('does-api-query-have-errors')) {
             return null;
