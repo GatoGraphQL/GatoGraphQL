@@ -16,15 +16,15 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
     /**
      * @var ReflectionClass
      */
-    protected ReflectionClass $reflectionInstance;
+    protected ?ReflectionClass $reflectionInstance = null;
     /**
-     * @var string[]
+     * @var string[]|null
      */
-    protected array $reflectionFieldNames;
+    protected ?array $reflectionFieldNames = null;
     /**
-     * @var array<string,string>
+     * @var array<string,string>|null
      */
-    protected array $reflectionDocComments;
+    protected ?array $reflectionDocComments = null;
 
     abstract protected function getTypeClass(): string;
 
