@@ -26,7 +26,7 @@ class DirectiveRegistry implements DirectiveRegistryInterface
         return $this->directiveResolvers;
     }
 
-    public function getDirectiveResolver($directiveName): ?DirectiveResolverInterface
+    public function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
     {
         return $this->directiveResolvers[$directiveName] ?? null;
     }
