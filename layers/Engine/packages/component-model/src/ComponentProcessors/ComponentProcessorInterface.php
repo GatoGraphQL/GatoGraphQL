@@ -31,8 +31,10 @@ interface ComponentProcessorInterface
     public function getAllSubcomponents(Component $component): array;
     /**
      * @param array<string,mixed> $props
+     * @param array<string,mixed> $wildcard_props_to_propagate
+     * @param array<string,mixed> $targetted_props_to_propagate
      */
-    public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, Component $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
+    public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
     /**
      * @param array<string,mixed> $props
      * @param array<string,mixed> $wildcard_props_to_propagate

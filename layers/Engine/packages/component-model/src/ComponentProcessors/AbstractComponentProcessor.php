@@ -149,8 +149,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
     /**
      * @param array<string,mixed> $props
+     * @param array<string,mixed> $wildcard_props_to_propagate
+     * @param array<string,mixed> $targetted_props_to_propagate
      */
-    public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, Component $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
+    public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
         // Convert the component to its string representation to access it in the array
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
