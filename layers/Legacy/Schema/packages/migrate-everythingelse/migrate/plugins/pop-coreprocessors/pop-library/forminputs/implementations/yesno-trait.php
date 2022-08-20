@@ -10,7 +10,7 @@ trait GD_FormInput_YesNoTrait
     /**
      * @return mixed[]
      */
-    public function getAllValues($label = null): array
+    public function getAllValues(string $label = null): array
     {
         $values = parent::getAllValues($label);
 

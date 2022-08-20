@@ -7,7 +7,7 @@ class GD_URE_FormInput_MultiAuthorRole extends MultipleSelectFormInput
     /**
      * @return mixed[]
      */
-    public function getAllValues($label = null): array
+    public function getAllValues(string $label = null): array
     {
         $values = parent::getAllValues($label);
 

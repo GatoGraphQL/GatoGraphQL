@@ -7,7 +7,7 @@ class GD_FormInput_LinkAccessDescription extends SelectFormInput
     /**
      * @return mixed[]
      */
-    public function getAllValues($label = null): array
+    public function getAllValues(string $label = null): array
     {
         $values = parent::getAllValues($label);
 

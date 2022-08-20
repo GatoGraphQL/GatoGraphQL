@@ -6,7 +6,7 @@ class GD_URE_FormInput_FilterMemberPrivileges extends GD_URE_FormInput_MemberPri
     /**
      * @return mixed[]
      */
-    public function getAllValues($label = null): array
+    public function getAllValues(string $label = null): array
     {
         $values = parent::getAllValues($label);
         

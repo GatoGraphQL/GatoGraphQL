@@ -13,7 +13,7 @@ class SelectFormInput extends FormInput
      *
      * @return mixed[]
      */
-    public function getAllValues($label = null): array
+    public function getAllValues(string $label = null): array
     {
         if ($label) {
             return array('' => $label);

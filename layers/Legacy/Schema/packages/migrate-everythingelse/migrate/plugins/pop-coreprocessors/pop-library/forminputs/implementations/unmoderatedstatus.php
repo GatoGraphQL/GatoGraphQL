@@ -8,7 +8,7 @@ class GD_FormInput_UnmoderatedStatus extends MultipleSelectFormInput
     /**
      * @return mixed[]
      */
-    public function getAllValues($label = null): array
+    public function getAllValues(string $label = null): array
     {
         $values = parent::getAllValues($label);
 
