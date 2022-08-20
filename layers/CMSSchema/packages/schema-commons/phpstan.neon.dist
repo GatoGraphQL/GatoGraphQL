@@ -4,5 +4,6 @@ parameters:
 		- src
 		- tests
 	ignoreErrors:
-		- message: '#Parameter #1 \$separator of function explode expects non-empty-string, string given\.#'
-		- path: src/FormInputs/MultiValueFromStringFormInput.php
+		-
+			message: '#Parameter \#1 \$separator of function explode expects non-empty-string, string given\.#'
+			path: src/FormInputs/MultiValueFromStringFormInput.php

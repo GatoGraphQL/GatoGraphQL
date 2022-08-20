@@ -2321,6 +2321,7 @@ class Engine implements EngineInterface
         SplObjectStorage $iterationSchemaFeedbackEntries
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackCommonEntry($schemaFeedback);
+        /** @var SplObjectStorage<FieldInterface,mixed> */
         $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         foreach ($schemaFeedback->getFields() as $field) {
             $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$field] ?? [];
