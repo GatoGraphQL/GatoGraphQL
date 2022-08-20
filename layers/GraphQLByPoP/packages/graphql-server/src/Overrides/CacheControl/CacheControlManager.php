@@ -12,6 +12,9 @@ class CacheControlManager extends UpstreamCacheControlManager
 {
     use BasicServiceTrait;
 
+    /**
+     * @var array<mixed[]>|null
+     */
     protected ?array $overriddenFieldEntries = null;
 
     private ?MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator = null;

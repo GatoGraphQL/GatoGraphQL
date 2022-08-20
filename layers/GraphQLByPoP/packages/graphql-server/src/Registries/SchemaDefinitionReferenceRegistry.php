@@ -327,7 +327,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     /**
      * Append the field or directive's version to its description
      *
-     * @param array<string,mixed> $fieldOrDirectiveSchemaDefinitionPath
+     * @param string[] $fieldOrDirectiveSchemaDefinitionPath
      */
     protected function addVersionToGraphQLSchemaFieldDescription(array $fieldOrDirectiveSchemaDefinitionPath): void
     {
