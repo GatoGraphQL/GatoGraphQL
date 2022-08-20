@@ -517,7 +517,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param Directive[] $nestedDirectives
      */
     protected function createMetaDirective(
-        $name,
+        string $name,
         array $arguments,
         array $nestedDirectives,
         Location $location,
