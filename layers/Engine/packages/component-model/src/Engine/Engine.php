@@ -2517,7 +2517,7 @@ class Engine implements EngineInterface
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
      * @param array<string|int,object> $idObjects
      * @param array<string|int> $typeResolverIDs
-     * @param array<string,array<string|int,FieldInterface>> $already_loaded_id_fields
+     * @param array<string,array<string|int,FieldInterface[]>> $already_loaded_id_fields
      * @param SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> $subcomponents_data_properties
      */
     protected function processSubcomponentData(
@@ -2587,6 +2587,7 @@ class Engine implements EngineInterface
             if ($subcomponent_direct_fields || $subcomponent_conditional_fields_storage->count() > 0) {
                 $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
+                /** @var array<string|int,FieldInterface[]> */
                 $subcomponent_already_loaded_id_fields = [];
                 if ($already_loaded_id_fields && ($already_loaded_id_fields[$subcomponentTypeOutputKey] ?? null)) {
                     $subcomponent_already_loaded_id_fields = $already_loaded_id_fields[$subcomponentTypeOutputKey];
