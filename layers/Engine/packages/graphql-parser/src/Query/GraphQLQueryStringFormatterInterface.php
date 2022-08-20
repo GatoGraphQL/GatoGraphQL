@@ -8,6 +8,9 @@ use stdClass;
 
 interface GraphQLQueryStringFormatterInterface
 {
+    /**
+     * @param null|integer|float|boolean|string|mixed[]|stdClass $elem
+     */
     public function getElementAsQueryString(null|int|float|bool|string|array|stdClass $elem): string;
     /**
      * @param mixed[] $list
