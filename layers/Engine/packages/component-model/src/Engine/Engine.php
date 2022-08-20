@@ -682,9 +682,10 @@ class Engine implements EngineInterface
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $model_props
      * @param array<string,mixed> $props
      */
-    public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array
+    public function getComponentDatasetSettings(Component $component, array $model_props, array &$props): array
     {
         $ret = [];
         /** @var ModuleConfiguration */

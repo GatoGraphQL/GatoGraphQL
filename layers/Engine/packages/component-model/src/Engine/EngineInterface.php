@@ -18,7 +18,7 @@ interface EngineInterface
      */
     public function getOutputData(): array;
     /**
-     * @param array<string,string[]> $targets
+     * @param string[] $targets
      */
     public function addBackgroundUrl(string $url, array $targets): void;
     public function getEntryComponent(): Component;
@@ -45,9 +45,10 @@ interface EngineInterface
     public function addRequestPropsComponentTree(Component $component, array $props): array;
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $model_props
      * @param array<string,mixed> $props
      */
-    public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array;
+    public function getComponentDatasetSettings(Component $component, array $model_props, array &$props): array;
     /**
      * @return array<string,mixed>
      */
