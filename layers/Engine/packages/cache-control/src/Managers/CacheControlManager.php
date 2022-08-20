@@ -11,7 +11,7 @@ class CacheControlManager implements CacheControlManagerInterface
      */
     protected array $fieldEntries = [];
     /**
-     * @var array[]
+     * @var array<mixed[]>
      */
     protected array $directiveEntries = [];
 

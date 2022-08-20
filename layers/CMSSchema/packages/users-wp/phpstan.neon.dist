@@ -2,3 +2,8 @@ parameters:
 	level: 8
 	paths:
 		- src
+	ignoreErrors:
+		- 
+			message: '#Method PoPCMSSchema\\UsersWP\\TypeAPIs\\UserTypeAPI::get_search_sql\(\) has parameter \$cols with no value type specified in iterable type array\.#'
+			path: src/TypeAPIs/UserTypeAPI.php
+
