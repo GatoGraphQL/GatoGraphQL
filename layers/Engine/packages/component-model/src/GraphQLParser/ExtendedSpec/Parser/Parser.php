@@ -15,6 +15,8 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class Parser extends AbstractParser

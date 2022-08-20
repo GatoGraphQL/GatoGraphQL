@@ -10,6 +10,9 @@ class FormInput
 {
     public readonly string $name;
     public readonly mixed $selected;
+    /**
+     * @var array<string,mixed> $params
+     */
     public readonly array $params;
 
     /**
