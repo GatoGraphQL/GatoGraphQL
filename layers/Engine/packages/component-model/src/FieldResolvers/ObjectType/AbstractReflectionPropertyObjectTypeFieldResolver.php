@@ -13,9 +13,18 @@ use ReflectionProperty;
 
 abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected $reflectionInstance;
-    protected $reflectionFieldNames;
-    protected $reflectionDocComments;
+    /**
+     * @var ReflectionClass<mixed>
+     */
+    protected ReflectionClass $reflectionInstance;
+    /**
+     * @var string[]
+     */
+    protected array $reflectionFieldNames;
+    /**
+     * @var array<string,string>
+     */
+    protected array $reflectionDocComments;
 
     abstract protected function getTypeClass(): string;
 
@@ -24,7 +33,7 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
      */
     protected function getReflectionInstance(): ReflectionClass
     {
-        if (is_null($this->reflectionInstance)) {
+        if ($this->reflectionInstance ===  null) {
             $this->reflectionInstance = new ReflectionClass($this->getTypeClass());
         }
         return $this->reflectionInstance;
@@ -41,13 +50,11 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
      */
     protected function getReflectionFieldNames(): array
     {
-        if (is_null($this->reflectionFieldNames)) {
+        if ($this->reflectionFieldNames === null) {
             $reflectionInstance = $this->getReflectionInstance();
             $reflectionProperties = $reflectionInstance->getProperties($this->getReflectionPropertyFilters());
             $this->reflectionFieldNames = array_map(
-                function ($property) {
-                    return $property->getName();
-                },
+                fn (ReflectionProperty $property) =>  $property->getName(),
                 $reflectionProperties
             );
         }
@@ -87,7 +94,7 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
      */
     public function getTypePropertyDocComments(): array
     {
-        if (is_null($this->reflectionDocComments)) {
+        if ($this->reflectionDocComments === null) {
             $reflectionInstance = $this->getReflectionInstance();
             $this->reflectionDocComments = [];
             foreach ($reflectionInstance->getProperties() as $property) {
