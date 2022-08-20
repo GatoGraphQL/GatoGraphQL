@@ -53,7 +53,7 @@ abstract class AbstractConfigurableAccessControlForFieldsInPrivateSchemaHookSet 
         return false;
     }
 
-    protected function removeFieldNameBasedOnMatchingEntryValue($entryValue = null): bool
+    protected function removeFieldNameBasedOnMatchingEntryValue(mixed $entryValue = null): bool
     {
         return true;
     }
