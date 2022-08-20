@@ -2787,6 +2787,8 @@ class Engine implements EngineInterface
      * @param Component[] $component_path
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
      */
     protected function processAndAddComponentData(
         array $component_path,
@@ -2794,9 +2796,9 @@ class Engine implements EngineInterface
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,
-        $mutation_checkpoint_validation,
-        $executed,
-        $objectIDs
+        ?FeedbackItemResolution $mutation_checkpoint_validation,
+        ?array $executed,
+        array $objectIDs
     ): void {
         $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $engineState = App::getEngineState();

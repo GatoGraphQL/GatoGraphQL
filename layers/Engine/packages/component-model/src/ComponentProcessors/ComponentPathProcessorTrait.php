@@ -29,6 +29,7 @@ trait ComponentPathProcessorTrait
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
      */
     protected function executeOnSelfAndPropagateToDatasetComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -74,6 +75,7 @@ trait ComponentPathProcessorTrait
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
      */
     protected function executeOnSelfAndMergeWithDatasetComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {

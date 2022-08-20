@@ -1265,6 +1265,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
      */
     public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1276,6 +1277,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
      */
     public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1293,6 +1295,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
      */
     public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1316,6 +1319,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
      */
     public function getBackgroundurlsMergeddatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1327,6 +1331,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
      */
     public function getBackgroundurls(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
@@ -1341,6 +1346,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param string|int|array<string|int> $objectIDOrIDs
+     * @param array<string,mixed>|null $executed
      */
     public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
