@@ -131,6 +131,7 @@ class GeneralUtils
     }
 
     /**
+     * @param iterable<mixed> $iterable
      * @return mixed[]
      */
     public static function iterableToArray(iterable $iterable): array
