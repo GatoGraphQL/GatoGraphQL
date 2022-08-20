@@ -1158,7 +1158,7 @@ class Engine implements EngineInterface
     protected function getComponentPathKey(array $component_path, Component $component): string
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
-        return $componentFullName . '-' . implode('.', $component_path);
+        return $componentFullName . '-' . implode('.', array_map(fn (Component $component) => $component->__toString(), $component_path));
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
