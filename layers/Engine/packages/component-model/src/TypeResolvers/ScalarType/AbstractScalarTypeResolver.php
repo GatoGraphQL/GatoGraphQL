@@ -85,6 +85,9 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         );
     }
 
+    /**
+     * @param array<string,mixed>|int $options
+     */
     final protected function validateFilterVar(
         mixed $inputValue,
         AstInterface $astNode,
