@@ -8,6 +8,8 @@ abstract class AbstractQueryExecutionGraphQLServerTestCase extends AbstractGraph
 {
     /**
      * @dataProvider graphQLServerExecutionProvider
+     * @param mixed[] $expectedResponse
+     * @param array<string,mixed> $variables
      */
     public function testGraphQLServerExecution(string $query, array $expectedResponse, array $variables = [], ?string $operationName = null): void
     {
