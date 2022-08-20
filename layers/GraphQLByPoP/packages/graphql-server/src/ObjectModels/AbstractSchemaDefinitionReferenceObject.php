@@ -17,7 +17,7 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
     /**
      * Build a new Schema Definition Reference Object
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string,mixed> $schemaDefinitionPath
+     * @param string[] $schemaDefinitionPath
      */
     public function __construct(/** @var array<string,mixed> */
         protected array &$fullSchemaDefinition,

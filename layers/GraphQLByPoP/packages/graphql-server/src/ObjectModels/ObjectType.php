@@ -11,7 +11,7 @@ class ObjectType extends AbstractNamedType implements HasFieldsTypeInterface, Ha
 
     /**
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string,mixed> $schemaDefinitionPath
+     * @param string[] $schemaDefinitionPath
      */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {

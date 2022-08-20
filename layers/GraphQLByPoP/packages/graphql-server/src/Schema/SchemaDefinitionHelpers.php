@@ -12,7 +12,7 @@ class SchemaDefinitionHelpers
     public final const PATH_SEPARATOR = '.';
 
     /**
-     * @param array<string,mixed> $schemaDefinitionPath
+     * @param string[] $schemaDefinitionPath
      */
     public static function getSchemaDefinitionReferenceObjectID(array $schemaDefinitionPath): string
     {
@@ -24,7 +24,7 @@ class SchemaDefinitionHelpers
     /**
      * @return mixed[]
      * @param array<string,mixed> $schemaDefinition
-     * @param array<string,mixed> $schemaDefinitionPath
+     * @param string[] $schemaDefinitionPath
      */
     public static function &advancePointerToPath(array &$schemaDefinition, array $schemaDefinitionPath): array
     {

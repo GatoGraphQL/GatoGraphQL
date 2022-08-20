@@ -19,7 +19,7 @@ trait HasFieldsTypeTrait
 
     /**
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string,mixed> $schemaDefinitionPath
+     * @param string[] $schemaDefinitionPath
      */
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {

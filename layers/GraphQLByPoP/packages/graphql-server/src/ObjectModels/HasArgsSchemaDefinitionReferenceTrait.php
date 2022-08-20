@@ -15,7 +15,7 @@ trait HasArgsSchemaDefinitionReferenceTrait
 
     /**
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string,mixed> $schemaDefinitionPath
+     * @param string[] $schemaDefinitionPath
      */
     protected function initArgs(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {

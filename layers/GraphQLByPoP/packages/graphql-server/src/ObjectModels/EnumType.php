@@ -15,7 +15,7 @@ class EnumType extends AbstractNamedType
 
     /**
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string,mixed> $schemaDefinitionPath
+     * @param string[] $schemaDefinitionPath
      */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
@@ -25,7 +25,7 @@ class EnumType extends AbstractNamedType
     }
     /**
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string,mixed> $schemaDefinitionPath
+     * @param string[] $schemaDefinitionPath
      */
     protected function initEnumValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
