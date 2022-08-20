@@ -30,7 +30,7 @@ trait ComponentPathProcessorTrait
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
      */
-    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    protected function executeOnSelfAndPropagateToDatasetComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         $ret = [];
         $key = $this->getComponentHelpers()->getComponentOutputName($component);
@@ -75,7 +75,7 @@ trait ComponentPathProcessorTrait
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
      */
-    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    protected function executeOnSelfAndMergeWithDatasetComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
@@ -156,7 +156,7 @@ trait ComponentPathProcessorTrait
      * @return mixed[]
      * @param array<string,mixed> $props
      */
-    protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, $recursive = true): array
+    protected function executeOnSelfAndMergeWithComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, $recursive = true): array
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
