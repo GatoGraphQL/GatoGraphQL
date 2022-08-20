@@ -173,7 +173,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Define the values for certain environment constants from the plugin settings
      *
-     * @return array<int,array{class:class-string<ModuleInterface>,envVariable:string,?callback:callable}>
+     * @return array<mixed[]>
      */
     protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
