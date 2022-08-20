@@ -26,7 +26,7 @@ class ComponentPaths extends AbstractComponentFilter
      */
     protected ?array $paths = null;
     /**
-     * @var array[]
+     * @var mixed[][]
      */
     protected array $propagation_unsettled_paths = [];
     /**
