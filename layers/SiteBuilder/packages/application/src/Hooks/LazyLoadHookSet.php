@@ -80,7 +80,7 @@ class LazyLoadHookSet extends AbstractHookSet
      * @param array<string,mixed> $helperCalculations_in_array
      * @param array<string,mixed>|null $executed
      */
-    public function calculateDataloadingComponentData(Component $component, array $component_props_in_array, array $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs, array $helperCalculations_in_array): void
+    public function calculateDataloadingComponentData(Component $component, array $component_props_in_array, array $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs, array $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 
