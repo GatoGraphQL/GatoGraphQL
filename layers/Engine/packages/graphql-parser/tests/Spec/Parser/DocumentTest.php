@@ -427,7 +427,7 @@ class DocumentTest extends AbstractTestCase
     /**
      * @dataProvider duplicateArgumentQueryProvider
      */
-    public function testDuplicateArgument($query): void
+    public function testDuplicateArgument(string $query): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_4_2, ['format']))->getMessage());

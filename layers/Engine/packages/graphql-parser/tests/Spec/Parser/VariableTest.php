@@ -15,7 +15,7 @@ class VariableTest extends AbstractTestCase
      *
      * @dataProvider variableProvider
      */
-    public function testGetValue($actual, $expected): void
+    public function testGetValue(mixed $actual, mixed $expected): void
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setContext(new Context(null, ['foo' => $actual]));

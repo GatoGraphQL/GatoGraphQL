@@ -53,6 +53,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     }
 
     /**
+     * @param string|array<string,mixed> $urlOrParams
      * @return string|array<string,mixed>
      */
     protected static function maybeAddXDebugTriggerParam(string|array $urlOrParams): string|array

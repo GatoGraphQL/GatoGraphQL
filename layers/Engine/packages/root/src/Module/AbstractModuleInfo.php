@@ -6,6 +6,9 @@ namespace PoP\Root\Module;
 
 abstract class AbstractModuleInfo implements ModuleInfoInterface
 {
+    /**
+     * @var array<string,mixed>
+     */
     protected array $values = [];
 
     final public function __construct(

@@ -11,7 +11,13 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
 {
     protected static ?string $differentUsername = null;
     protected static ?string $differentPassword = null;
+    /**
+     * @var array<string,mixed>
+     */
     protected static array $differentWebserverPingOptions = [];
+    /**
+     * @var array<string,mixed>
+     */
     protected static array $differentRequestBasicOptions = [];
     protected ?int $differentExpectedResponseStatusCode = null;
 
