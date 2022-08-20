@@ -83,7 +83,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
-     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string, module: string, option: string, ?callback: Closure(), ?condition: string}>
+     *
+     * @return array<int,array{class:class-string<ModuleInterface>,envVariable:string,module:string,option:string,?callback:Closure(),?condition:string}>
      */
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
