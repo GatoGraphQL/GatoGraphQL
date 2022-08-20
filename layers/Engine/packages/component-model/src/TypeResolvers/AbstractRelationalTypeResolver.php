@@ -596,8 +596,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Indicate that this ID must be removed from the results
             $unresolvedObjectIDs[] = $unresolvedObjectID;
         }
-        // Remove all the IDs that failed from the elements to process, so it doesn't show a "Corrupted Data" error
-        // Because these are IDs (eg: 223) and $idFieldSet contains qualified or typed IDs (eg: post/223), we must convert them first
+        /**
+         * Remove all the IDs that failed from the elements to process,
+         * so it doesn't show a "Corrupted Data" error.
+         *
+         * Because these are IDs (eg: 223) and $idFieldSet contains qualified
+         * or typed IDs (eg: post/223), we must convert them first.
+         */
         if ($unresolvedObjectIDs) {
             if ($this->qualifyDBObjectIDsToRemoveFromErrors()) {
                 $unresolvedObjectIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedObjectIDs);
