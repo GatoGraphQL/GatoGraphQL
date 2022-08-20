@@ -3,3 +3,8 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+		- 
+			message: '#Property (.*) type has no value type specified in iterable type array\.#'
+			path: src/Parsers/WXR_Parser_Regex.php   
+			count: 5
