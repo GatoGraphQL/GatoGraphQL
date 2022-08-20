@@ -2540,11 +2540,24 @@ class Engine implements EngineInterface
             /** @var array<string,mixed> */
             $subcomponent_data_properties = $subcomponents_data_properties[$componentFieldNode];
             $field = $componentFieldNode->getField();
-            // Retrieve the subcomponent typeResolver from the current typeResolver
-            // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
-            // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionTypeOutputKeyIDs"
-            // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionTypeOutputKeyIDs".
-            // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
+            /**
+             * Retrieve the subcomponent typeResolver from the current typeResolver.
+             *
+             * Watch out! When dealing with the UnionDataLoader, we attempt to get
+             * the subcomponentType for that field twice: first from the UnionTypeResolver
+             * and, if it doesn't handle it, only then from the TargetTypeResolver.
+             * 
+             * This is for the very specific use of the "self" field:
+             * When referencing "self" from a UnionTypeResolver, we don't know what type
+             * it's going to be the result, hence we need to add the type
+             * to entry "unionTypeOutputKeyIDs".
+             *
+             * However, for the targetObjectTypeResolver, "self" is processed by itself,
+             * not by a UnionTypeResolver, hence it would never add the type under
+             * entry "unionTypeOutputKeyIDs".
+             *
+             * The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
+             */
             $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
                 $relationalTypeResolver,
                 $field,
