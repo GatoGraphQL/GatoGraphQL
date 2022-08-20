@@ -14,7 +14,7 @@ use ReflectionProperty;
 abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     /**
-     * @var ReflectionClass<mixed>
+     * @var ReflectionClass
      */
     protected ReflectionClass $reflectionInstance;
     /**
@@ -29,7 +29,7 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
     abstract protected function getTypeClass(): string;
 
     /**
-     * @return ReflectionClass<mixed>
+     * @return ReflectionClass
      */
     protected function getReflectionInstance(): ReflectionClass
     {
