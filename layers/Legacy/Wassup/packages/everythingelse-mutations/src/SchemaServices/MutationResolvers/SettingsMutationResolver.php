@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -14,7 +13,7 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 class SettingsMutationResolver extends AbstractMutationResolver
 {
     /**
-     * @var array<array>
+     * @var array<array<string,mixed>>
      */
     public array $fieldoperators = [];
 
