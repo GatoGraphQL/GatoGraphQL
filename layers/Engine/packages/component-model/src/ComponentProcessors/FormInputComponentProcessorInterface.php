@@ -8,6 +8,9 @@ use PoP\ComponentModel\Component\Component;
 
 interface FormInputComponentProcessorInterface
 {
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function getValue(Component $component, ?array $source = null): mixed;
     /**
      * @param array<string,mixed> $props
@@ -16,5 +19,8 @@ interface FormInputComponentProcessorInterface
     public function getName(Component $component): string;
     public function getInputName(Component $component): string;
     public function isMultiple(Component $component): bool;
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function isInputSetInSource(Component $component, ?array $source = null): mixed;
 }

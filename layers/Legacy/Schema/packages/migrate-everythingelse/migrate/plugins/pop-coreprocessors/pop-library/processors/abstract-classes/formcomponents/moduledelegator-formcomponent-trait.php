@@ -7,6 +7,9 @@ trait FormComponentModuleDelegatorTrait
     {
         return null;
     }
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function getValue(\PoP\ComponentModel\Component\Component $component, ?array $source = null): mixed
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();

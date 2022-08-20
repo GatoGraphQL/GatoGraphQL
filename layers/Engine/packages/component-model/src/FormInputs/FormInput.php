@@ -30,6 +30,9 @@ class FormInput
         return false;
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     protected function getValueFromSource(?array $source = null): mixed
     {
         $value = $this->getValueFromSourceOrRequest($this->getName(), $source);
@@ -51,6 +54,9 @@ class FormInput
         return $value;
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     protected function getValueFromSourceOrRequest(string $name, ?array $source = null): mixed
     {
         // If not set, it will be NULL
@@ -67,7 +73,10 @@ class FormInput
     }
 
     /**
-     * $_POST/$_GET has priority (for when editing post / user data, after submitting form this will override original post / user metadata values)
+     * $_POST/$_GET has priority (for when editing post / user data, after
+     * submitting form this will override original post / user metadata values)
+     *
+     * @param array<string,mixed>|null $source
      */
     public function getValue(?array $source = null): mixed
     {
@@ -86,6 +95,8 @@ class FormInput
     /**
      * It checks if the key with the input's name has been set.
      * Setting `key=null` counts as `true`
+     *
+     * @param array<string,mixed>|null $source
      */
     public function isInputSetInSource(?array $source = null): bool
     {

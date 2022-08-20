@@ -62,11 +62,17 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
         return $this->getComponentHelpers()->getComponentOutputName($component);
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function getValue(Component $component, ?array $source = null): mixed
     {
         return $this->getInput($component)->getValue($source);
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function isInputSetInSource(Component $component, ?array $source = null): mixed
     {
         return $this->getInput($component)->isInputSetInSource($source);

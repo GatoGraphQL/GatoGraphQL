@@ -25,6 +25,9 @@ class MultipleInputFormInput extends MultipleSelectFormInput
         $this->subnames = $params['subnames'] ? $params['subnames'] : array();
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     protected function getValueFromSource(?array $source = null): mixed
     {
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();
@@ -45,6 +48,9 @@ class MultipleInputFormInput extends MultipleSelectFormInput
         return null;
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function isInputSetInSource(?array $source = null): bool
     {
         $formInputHelperService = FormInputHelperServiceFacade::getInstance();

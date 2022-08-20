@@ -20,13 +20,16 @@ class MultiValueFromStringFormInput extends FormInput
         $this->separator = $params['separator'] ?? Param::VALUE_SEPARATOR;
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function getValue(?array $source = null): mixed
     {
         $value = parent::getValue($source);
         // Only if it is not null process it
-        if (!is_null($value)) {
-            return array_map(trim(...), explode($this->separator, $value));
+        if ($value === null) {
+            return $value;
         }
-        return $value;
+        return array_map(trim(...), explode($this->separator, $value));
     }
 }
