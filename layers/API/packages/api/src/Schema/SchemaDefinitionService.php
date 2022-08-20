@@ -40,6 +40,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      * Starting from the Root TypeResolver, iterate and get the
      * SchemaDefinition for all TypeResolvers and DirectiveResolvers
      * accessed in the schema
+     *
+     * @var array<class-string<TypeResolverInterface|DirectiveResolverInterface>>
      */
     private array $processedTypeAndDirectiveResolverClasses = [];
     /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
