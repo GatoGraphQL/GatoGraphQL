@@ -2313,6 +2313,9 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationSchemaFeedbackEntries
+     */
     private function transferSchemaFeedbackEntries(
         SchemaFeedbackInterface $schemaFeedback,
         SplObjectStorage $iterationSchemaFeedbackEntries
@@ -2515,6 +2518,7 @@ class Engine implements EngineInterface
      * @param array<string|int,object> $idObjects
      * @param array<string|int> $typeResolverIDs
      * @param array<string,array<string|int,FieldInterface>> $already_loaded_id_fields
+     * @param SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> $subcomponents_data_properties
      */
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -2531,11 +2535,11 @@ class Engine implements EngineInterface
     ): void {
         $engineState = App::getEngineState();
         $targetTypeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();
+        /** @var ComponentFieldNodeInterface $componentFieldNode */
         foreach ($subcomponents_data_properties as $componentFieldNode) {
-            /** @var ComponentFieldNodeInterface $componentFieldNode */
+            /** @var array<string,mixed> */
             $subcomponent_data_properties = $subcomponents_data_properties[$componentFieldNode];
             $field = $componentFieldNode->getField();
-            /** @var array<string,mixed> $subcomponent_data_properties */
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionTypeOutputKeyIDs"
