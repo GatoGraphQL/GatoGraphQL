@@ -156,7 +156,7 @@ trait ComponentPathProcessorTrait
      * @return mixed[]
      * @param array<string,mixed> $props
      */
-    protected function executeOnSelfAndMergeWithComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, $recursive = true): array
+    protected function executeOnSelfAndMergeWithComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, bool $recursive = true): array
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
