@@ -38,7 +38,7 @@ class SchemaDefinitionHelpers
     /**
      * @return Field[]
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string,mixed> $fieldSchemaDefinitionPath
+     * @param string[] $fieldSchemaDefinitionPath
      */
     public static function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
@@ -61,7 +61,7 @@ class SchemaDefinitionHelpers
     /**
      * @return Field[]
      * @param array<string,mixed> $fullSchemaDefinition
-     * @param array<string,mixed> $fieldSchemaDefinitionPath
+     * @param string[] $fieldSchemaDefinitionPath
      */
     public static function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {

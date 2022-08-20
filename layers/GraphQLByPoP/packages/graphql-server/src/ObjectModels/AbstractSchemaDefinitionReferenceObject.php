@@ -45,7 +45,7 @@ abstract class AbstractSchemaDefinitionReferenceObject implements SchemaDefiniti
     }
 
     /**
-     * @var string[]
+     * @return string[]
      */
     public function getSchemaDefinitionPath(): array
     {

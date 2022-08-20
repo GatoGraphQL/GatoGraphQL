@@ -346,7 +346,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     /**
      * Append the "Mutation" label to the field's description
      *
-     * @param array<string,mixed> $fieldSchemaDefinitionPath
+     * @param string[] $fieldSchemaDefinitionPath
      */
     protected function addMutationLabelToSchemaFieldDescription(array $fieldSchemaDefinitionPath): void
     {
