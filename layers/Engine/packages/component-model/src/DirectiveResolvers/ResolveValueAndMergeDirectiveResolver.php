@@ -146,8 +146,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                         [$id => $fieldSet]
                     )
                 );
-                // This is currently pointing to NULL and returning this entry in the database. Remove it
-                // (this will also avoid errors in the Engine, which expects this result to be an array and can't be null)
+                /**
+                 * This is currently pointing to NULL and returning this entry
+                 * in the database. Remove it.
+                 *
+                 * (This will also avoid errors in the Engine, which expects
+                 * this result to be an array and can't be null)
+                 */
                 unset($resolvedIDFieldValues[$id]);
                 continue;
             }
