@@ -305,7 +305,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * so that they show up in GraphiQL and can be added to a persisted query
      * When that happens, append '("Schema" type directive)' to the directive's description
      *
-     * @param array<string,mixed> $directiveSchemaDefinitionPath
+     * @param string[] $directiveSchemaDefinitionPath
      */
     protected function maybeAddTypeToSchemaDirectiveDescription(array $directiveSchemaDefinitionPath): void
     {
