@@ -229,7 +229,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array<mixed[]>
      */
     protected function getModuleToModuleClassConfigurationMapping(): array
     {

@@ -659,7 +659,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     }
 
     /**
-     * @return array<int,array{module: string, class: class-string<\GraphQLByPoP\GraphQLEndpointForWP\Module>|class-string<\GraphQLByPoP\GraphQLClientsForWP\Module>, envVariable: string, callback?: callable}>
+     * @return array<mixed[]>
      */
     protected function getModuleToModuleClassConfigurationMapping(): array
     {
