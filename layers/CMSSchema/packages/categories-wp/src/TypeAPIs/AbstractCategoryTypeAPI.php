@@ -15,8 +15,6 @@ use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
 
-use function get_category;
-use function get_term_by;
 use function wp_get_post_terms;
 use function get_categories;
 use function get_term_link;
@@ -179,7 +177,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
     // {
     //     $return_type = $options[QueryOptions::RETURN_TYPE] ?? null;
-    //     if ($return_type == ReturnTypes::IDS) {
+    //     if ($return_type === ReturnTypes::IDS) {
     //         return array_map(
     //             function ($category) {
     //                 return $category->term_id;
@@ -206,7 +204,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // {
     //     $query = [];
     //     if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-    //         if ($return_type == ReturnTypes::IDS) {
+    //         if ($return_type === ReturnTypes::IDS) {
     //             $query['fields'] = 'ids';
     //         } elseif ($return_type == ReturnTypes::SLUGS) {
     //             $query['fields'] = 'slugs';

@@ -8,8 +8,6 @@ use PoP\Root\App;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPCMSSchema\Pages\Module;
-use PoPCMSSchema\Pages\ModuleConfiguration;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;

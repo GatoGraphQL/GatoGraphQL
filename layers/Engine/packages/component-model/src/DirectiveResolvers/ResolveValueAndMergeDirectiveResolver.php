@@ -9,9 +9,7 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -19,7 +17,6 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\TypeSerialization\TypeSerializationServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
@@ -120,43 +117,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
             $object = $idObjects[$id];
-            /**
-             * It could be that the object is NULL.
-             * 
-             * For instance: a post has a location stored a meta value,
-             * and the corresponding location object was deleted,
-             * so the ID is pointing to a non-existing object.
-             * 
-             * In that case, simply return a dbError, and set the result
-             * as an empty array.
-             */
-            if ($object === null) {
-                $engineIterationFeedbackStore->objectResolutionFeedbackStore->addError(
-                    new ObjectResolutionFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E13,
-                            [
-                                $id,
-                            ]
-                        ),
-                        $this->directive,
-                        $relationalTypeResolver,
-                        $this->directive,
-                        [$id => $fieldSet]
-                    )
-                );
-                /**
-                 * This is currently pointing to NULL and returning this entry
-                 * in the database. Remove it.
-                 *
-                 * (This will also avoid errors in the Engine, which expects
-                 * this result to be an array and can't be null)
-                 */
-                unset($resolvedIDFieldValues[$id]);
-                continue;
-            }
-
             $this->resolveValuesForObject(
                 $relationalTypeResolver,
                 $id,

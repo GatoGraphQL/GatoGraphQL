@@ -6,8 +6,6 @@ namespace PoPCMSSchema\PostsWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPCMSSchema\Posts\Module;
-use PoPCMSSchema\Posts\ModuleConfiguration;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use WP_Post;
 

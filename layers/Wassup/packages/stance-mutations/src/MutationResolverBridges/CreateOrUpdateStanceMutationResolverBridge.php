@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP_Module_Processor_TextareaFormInputs;
 use PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues;

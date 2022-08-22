@@ -2547,7 +2547,7 @@ class Engine implements EngineInterface
              * Watch out! When dealing with the UnionDataLoader, we attempt to get
              * the subcomponentType for that field twice: first from the UnionTypeResolver
              * and, if it doesn't handle it, only then from the TargetTypeResolver.
-             * 
+             *
              * This is for the very specific use of the "self" field:
              * When referencing "self" from a UnionTypeResolver, we don't know what type
              * it's going to be the result, hence we need to add the type

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostsWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoPCMSSchema\CustomPosts\Module;
-use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;

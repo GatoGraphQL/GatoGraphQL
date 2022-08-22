@@ -40,7 +40,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             'taxonomy' => $taxonomy,
         ];
         $return_type = $options[QueryOptions::RETURN_TYPE] ?? null;
-        if ($return_type == ReturnTypes::IDS) {
+        if ($return_type === ReturnTypes::IDS) {
             $query['fields'] = 'ids';
         }
         return get_terms($query);
@@ -49,7 +49,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     {
         if ($terms = get_the_terms($post_id, $taxonomy)) {
             if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-                if ($return_type == ReturnTypes::IDS) {
+                if ($return_type === ReturnTypes::IDS) {
                     return array_map(
                         function (WP_Taxonomy $term_object): int {
                             return $term_object->term_id;

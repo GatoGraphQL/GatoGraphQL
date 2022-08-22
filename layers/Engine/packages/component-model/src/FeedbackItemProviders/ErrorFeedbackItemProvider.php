@@ -23,7 +23,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E11 = 'e11';
     public final const E11A = 'e11a';
     public final const E12 = 'e12';
-    public final const E13 = 'e13';
     public final const E15 = 'e15';
     public final const E17 = 'e17';
     public final const E21 = 'e21';
@@ -50,7 +49,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E11,
             self::E11A,
             self::E12,
-            self::E13,
             self::E15,
             self::E17,
             self::E21,
@@ -71,12 +69,11 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E6A => $this->__('Resolving mutation \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E7 => $this->__('Resolving mutation \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E8 => $this->__('No TypeResolver resolves object \'%s\'', 'component-model'),
-            self::E9 => $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'component-model'),
-            self::E10 => $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'component-model'),
+            self::E9 => $this->__('Data for object of type \'%s\' and ID \'%s\' cannot be loaded (possibly the DataLoader produced a wrong ID, or the data is corrupted)', 'component-model'),
+            self::E10 => $this->__('In union type \'%s\', data for object with ID \'%s\' cannot be loaded (possibly the DataLoader produced a wrong ID, or the data is corrupted, or no TypeResolver in the Union can handle the type of this object)', 'component-model'),
             self::E11 => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E11A => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
-            self::E13 => $this->__('Object with ID \'%s\' does not exist or cannot be retrieved', 'component-model'),
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E21 => $this->__('No DirectiveResolver processes directive with name \'%s\' and arguments \'%s\' in field(s) \'%s\'', 'component-model'),

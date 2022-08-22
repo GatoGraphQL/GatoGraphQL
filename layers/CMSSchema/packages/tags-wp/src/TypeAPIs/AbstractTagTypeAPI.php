@@ -69,7 +69,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         return get_term_by('name', $tagName, $this->getTagTaxonomyName());
     }
-    
+
     /**
      * @return array<string,int>|object[]
      * @param array<string,mixed> $query
@@ -127,7 +127,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         // An error happened
         return -1;
     }
-    
+
     /**
      * @return array<string,int>|object[]
      * @param array<string,mixed> $query

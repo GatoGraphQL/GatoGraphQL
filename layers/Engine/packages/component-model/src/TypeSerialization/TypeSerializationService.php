@@ -65,17 +65,6 @@ class TypeSerializationService implements TypeSerializationServiceInterface
         foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
             $object = $idObjects[$id];
-            /**
-             * It could be that the object is NULL. In that case,
-             * simply return a dbError, and set the result as an empty array.
-             *
-             * For instance: a post has a location stored a meta value,
-             * and the corresponding location object was deleted,
-             * so the ID is pointing to a non-existing object.
-             */
-            if ($object === null) {
-                continue;
-            }
             if ($isUnionTypeResolver) {
                 $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
             }
