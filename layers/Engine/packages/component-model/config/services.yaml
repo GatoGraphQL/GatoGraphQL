@@ -38,6 +38,9 @@ services:
     PoP\ComponentModel\Engine\DataloadingEngineInterface:
         class: \PoP\ComponentModel\Engine\DataloadingEngine
 
+    PoP\ComponentModel\Feedback\FeedbackEntryServiceInterface:
+        class: \PoP\ComponentModel\Feedback\FeedbackEntryService
+
     PoP\ComponentModel\Cache\PersistentCacheInterface:
         class: \PoP\ComponentModel\Cache\Cache
         arguments:
