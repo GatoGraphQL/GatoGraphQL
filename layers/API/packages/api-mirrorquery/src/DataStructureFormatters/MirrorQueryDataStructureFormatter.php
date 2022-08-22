@@ -224,8 +224,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
-        $validateFieldSelectionMerging = $this->validateFieldSelectionMerging();
-
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
         foreach ($fields as $field) {
@@ -331,11 +329,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         string|int $objectID,
     ): void {
         $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
-    }
-
-    protected function validateFieldSelectionMerging(): bool
-    {
-        return false;
     }
 
     protected function getObjectEntry(string $typeOutputKey, array $item): array

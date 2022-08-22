@@ -367,9 +367,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          *
          * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
          */
-        if ($validateFieldSelectionMerging
-            && array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)
-        ) {
+        if (array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)) {
             /**
              * It's an error =>  set response to null
              */
