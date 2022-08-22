@@ -15,8 +15,6 @@ use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
 
-use function get_category;
-use function get_term_by;
 use function wp_get_post_terms;
 use function get_categories;
 use function get_term_link;

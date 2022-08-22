@@ -6,8 +6,6 @@ namespace PoPCMSSchema\MediaWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPCMSSchema\Media\Module;
-use PoPCMSSchema\Media\ModuleConfiguration;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use WP_Post;
 

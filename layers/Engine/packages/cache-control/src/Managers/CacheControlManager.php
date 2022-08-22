@@ -22,7 +22,7 @@ class CacheControlManager implements CacheControlManagerInterface
     {
         return $this->fieldEntries ?? [];
     }
-    
+
     /**
      * @return array<mixed[]>
      */

@@ -6,7 +6,6 @@ namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
 use GD_CreateUpdate_Utils;
 use GD_Custom_Module_Processor_SelectFormInputs;
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationResolverBridge;
 use PoP\EditPosts\HelperAPIFactory;
