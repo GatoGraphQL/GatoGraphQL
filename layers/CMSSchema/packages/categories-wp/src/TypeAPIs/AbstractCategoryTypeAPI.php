@@ -179,7 +179,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
     // {
     //     $return_type = $options[QueryOptions::RETURN_TYPE] ?? null;
-    //     if ($return_type == ReturnTypes::IDS) {
+    //     if ($return_type === ReturnTypes::IDS) {
     //         return array_map(
     //             function ($category) {
     //                 return $category->term_id;
@@ -206,7 +206,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // {
     //     $query = [];
     //     if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-    //         if ($return_type == ReturnTypes::IDS) {
+    //         if ($return_type === ReturnTypes::IDS) {
     //             $query['fields'] = 'ids';
     //         } elseif ($return_type == ReturnTypes::SLUGS) {
     //             $query['fields'] = 'slugs';
