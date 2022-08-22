@@ -23,7 +23,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
-class FeedbackEntryService implements FeedbackEntryServiceInterface
+class FeedbackEntryManager implements FeedbackEntryManagerInterface
 {
     use BasicServiceTrait;
     

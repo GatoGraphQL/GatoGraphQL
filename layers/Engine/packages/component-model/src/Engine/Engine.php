@@ -31,7 +31,7 @@ use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
-use PoP\ComponentModel\Feedback\FeedbackEntryServiceInterface;
+use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -85,7 +85,7 @@ class Engine implements EngineInterface
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
-    private ?FeedbackEntryServiceInterface $feedbackEntryService = null;
+    private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -188,13 +188,13 @@ class Engine implements EngineInterface
     {
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
-    final public function setFeedbackEntryService(FeedbackEntryServiceInterface $feedbackEntryService): void
+    final public function setFeedbackEntryManager(FeedbackEntryManagerInterface $feedbackEntryService): void
     {
         $this->feedbackEntryService = $feedbackEntryService;
     }
-    final protected function getFeedbackEntryService(): FeedbackEntryServiceInterface
+    final protected function getFeedbackEntryManager(): FeedbackEntryManagerInterface
     {
-        return $this->feedbackEntryService ??= $this->instanceManager->getInstance(FeedbackEntryServiceInterface::class);
+        return $this->feedbackEntryService ??= $this->instanceManager->getInstance(FeedbackEntryManagerInterface::class);
     }
 
     /**
@@ -598,7 +598,7 @@ class Engine implements EngineInterface
          * Add the feedback into the output:
          * errors, warnings, deprecations, notices, logs and suggestions.
          */
-        $data = $this->getFeedbackEntryService()->combineAndAddFeedbackEntries(
+        $data = $this->getFeedbackEntryManager()->combineAndAddFeedbackEntries(
             $data,
             $schemaFeedbackEntries,
             $objectFeedbackEntries,
@@ -1878,7 +1878,7 @@ class Engine implements EngineInterface
              * Transfer the feedback entries from the FeedbackStore
              * to temporary variables for processing.
              */
-            $this->getFeedbackEntryService()->transferFeedback(
+            $this->getFeedbackEntryManager()->transferFeedback(
                 $idObjects,
                 $engineIterationFeedbackStore,
                 $objectFeedbackEntries,
