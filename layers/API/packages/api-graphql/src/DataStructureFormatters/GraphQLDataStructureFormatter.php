@@ -349,13 +349,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
 
     /**
-     * @param FieldInterface[] $fields
+     * @param FieldInterface[] $previouslyResolvedFieldsForObject
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed>|null $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function resolveObjectData(
-        array $fields,
+        array $previouslyResolvedFieldsForObject,
         LeafField $leafField,
         string $typeOutputKey,
         array $sourceRet,
@@ -377,11 +377,11 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
              * To find out, search for the previous fields with the same
              * outputKey but different query string (hence they are different)
              */
-            $sameOutputKeyFields = array_filter(
-                $fields,
+            $differentFieldsWithSameOutputKeyForObject = array_filter(
+                $previouslyResolvedFieldsForObject,
                 fn (FieldInterface $field) => $field->getOutputKey() === $leafField->getOutputKey() && $field->asQueryString() === $leafField->asQueryString()
             );
-            $isError = $sameOutputKeyFields !== [];
+            $isError = $differentFieldsWithSameOutputKeyForObject !== [];
         }
         if ($isError) {
             /**
@@ -405,7 +405,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             return;
         }
         parent::resolveObjectData(
-            $fields,
+            $previouslyResolvedFieldsForObject,
             $leafField,
             $typeOutputKey,
             $sourceRet,

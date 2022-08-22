@@ -223,6 +223,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
+        /** @var FieldInterface[] */
+        $previouslyResolvedFieldsForObject = [];
         foreach ($fields as $field) {
             if ($field instanceof LeafField) {
                 /** @var LeafField */
@@ -237,7 +239,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     continue;
                 }
                 $this->resolveObjectData(
-                    $fields,
+                    $previouslyResolvedFieldsForObject,
                     $leafField,
                     $typeOutputKey,
                     $sourceRet,
@@ -245,6 +247,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     $resolvedObject,
                     $objectID,
                 );
+                $previouslyResolvedFieldsForObject[] = $leafField;
                 continue;
             }
 
