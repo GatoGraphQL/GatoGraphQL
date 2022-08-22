@@ -217,30 +217,8 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
     /**
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
      */
-    public function transferFeedback(
-        array $idObjects,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$objectFeedbackEntries,
-        array &$schemaFeedbackEntries,
-    ): void {
-        $this->transferObjectFeedback(
-            $idObjects,
-            $engineIterationFeedbackStore->objectResolutionFeedbackStore,
-            $objectFeedbackEntries,
-        );
-        $this->transferSchemaFeedback(
-            $engineIterationFeedbackStore->schemaFeedbackStore,
-            $schemaFeedbackEntries,
-        );
-    }
-
-    /**
-     * @param array<string|int,object> $idObjects
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
-     */
-    private function transferObjectFeedback(
+    public function transferObjectFeedback(
         array $idObjects,
         ObjectResolutionFeedbackStore $objectResolutionFeedbackStore,
         array &$objectFeedbackEntries,
@@ -423,7 +401,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
     /**
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
      */
-    private function transferSchemaFeedback(
+    public function transferSchemaFeedback(
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
     ): void {

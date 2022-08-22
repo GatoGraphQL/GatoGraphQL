@@ -1878,7 +1878,7 @@ class Engine implements EngineInterface
              * Transfer the feedback entries from the FeedbackStore
              * to temporary variables for processing.
              */
-            $this->getFeedbackEntryManager()->transferFeedback(
+            $this->transferFeedback(
                 $idObjects,
                 $engineIterationFeedbackStore,
                 $objectFeedbackEntries,
@@ -1892,6 +1892,28 @@ class Engine implements EngineInterface
         $this->maybeCombineAndAddDatabaseEntries($ret, 'databases', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionTypeOutputKeyIDs', $unionTypeOutputKeyIDs);
         return $ret;
+    }
+
+    /**
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     */
+    private function transferFeedback(
+        array $idObjects,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$objectFeedbackEntries,
+        array &$schemaFeedbackEntries,
+    ): void {
+        $this->getFeedbackEntryManager()->transferObjectFeedback(
+            $idObjects,
+            $engineIterationFeedbackStore->objectResolutionFeedbackStore,
+            $objectFeedbackEntries,
+        );
+        $this->getFeedbackEntryManager()->transferSchemaFeedback(
+            $engineIterationFeedbackStore->schemaFeedbackStore,
+            $schemaFeedbackEntries,
+        );
     }
 
     /**
