@@ -388,9 +388,11 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             return;
         }
         parent::resolveObjectData(
+            $fields,
             $leafField,
             $sourceRet,
             $resolvedObjectRet,
+            $resolvedObject,
             $objectID,
         );
     }
