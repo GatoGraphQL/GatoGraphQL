@@ -232,11 +232,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $leafField = $field;
                 /**
                  * If the key doesn't exist, then do nothing.
+                 * That means that this field does not apply
+                 * to the current object (eg: it's on a Fragment
+                 * to be applied on a different model)
                  */
                 if (!$resolvedObject->contains($leafField)) {
                     continue;
                 }
                 $this->resolveObjectData(
+                    $fields,
                     $leafField,
                     $sourceRet,
                     $resolvedObjectRet,
@@ -317,11 +321,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     /**
      * Allow GraphQL to override, to provide custom validations.
      *
+     * @param FieldInterface[] $fields
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed>|null $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function resolveObjectData(
+        array $fields,
         LeafField $leafField,
         array $sourceRet,
         ?array &$resolvedObjectRet,

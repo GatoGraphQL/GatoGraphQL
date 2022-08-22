@@ -349,11 +349,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
 
     /**
+     * @param FieldInterface[] $fields
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed>|null $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function resolveObjectData(
+        array $fields,
         LeafField $leafField,
         array $sourceRet,
         ?array &$resolvedObjectRet,
