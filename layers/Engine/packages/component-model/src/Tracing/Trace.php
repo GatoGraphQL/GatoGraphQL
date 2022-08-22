@@ -10,6 +10,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class Trace implements TraceInterface
 {
+    /**
+     * @param array<string,mixed> $data
+     */
     public function __construct(
         protected string|int $id,
         /** @var array<string,mixed> */

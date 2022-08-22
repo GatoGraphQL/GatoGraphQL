@@ -6,6 +6,9 @@ class PoP_Module_Processor_CustomTagLayoutSidebarInners extends PoP_Module_Proce
     public final const COMPONENT_LAYOUT_TAGSIDEBARINNER_HORIZONTAL = 'layout-tagsidebarinner-horizontal';
     public final const COMPONENT_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL = 'layout-tagsidebarinner-compacthorizontal';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

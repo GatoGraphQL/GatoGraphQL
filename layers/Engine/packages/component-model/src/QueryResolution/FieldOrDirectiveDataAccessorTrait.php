@@ -18,7 +18,7 @@ trait FieldOrDirectiveDataAccessorTrait
      * which must be resolved to the actual value after its corresponding
      * Field was resolved.
      *
-     * @var array<string,mixed>
+     * @var array<string,mixed>|null
      */
     protected ?array $resolvedFieldOrDirectiveArgs = null;
 
@@ -54,6 +54,7 @@ trait FieldOrDirectiveDataAccessorTrait
      *
      * @return array<string,mixed>
      * @throws AbstractValueResolutionPromiseException
+     * @param array<string,mixed> $fieldOrDirectiveArgs
      */
     private function doGetResolvedFieldOrDirectiveArgs(array $fieldOrDirectiveArgs): array
     {

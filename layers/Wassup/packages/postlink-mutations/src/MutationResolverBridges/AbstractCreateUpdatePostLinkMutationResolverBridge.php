@@ -20,7 +20,10 @@ abstract class AbstractCreateUpdatePostLinkMutationResolverBridge extends Abstra
         }
     }
 
-    protected function getEditorInput()
+    /**
+     * @return mixed[]
+     */
+    protected function getEditorInput(): array
     {
         return [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK];
     }

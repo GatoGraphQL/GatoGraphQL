@@ -6,6 +6,9 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
     public final const COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV = 'calendarbuttoncontrol-calendarprev';
     public final const COMPONENT_CALENDARBUTTONCONTROL_CALENDARNEXT = 'calendarbuttoncontrol-calendarnext';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

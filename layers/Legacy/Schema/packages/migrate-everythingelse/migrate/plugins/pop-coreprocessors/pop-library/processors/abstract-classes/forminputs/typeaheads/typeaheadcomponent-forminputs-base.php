@@ -56,6 +56,9 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         return $resources;
     }
 
+    /**
+     * @return mixed[]|null
+     */
     public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return $this->getComponentTemplateResource($component);

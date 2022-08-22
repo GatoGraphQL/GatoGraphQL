@@ -82,7 +82,7 @@ abstract class AbstractTestCase extends TestCase
     /**
      * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Module class, [value]: Configuration
+     * @return array<string,mixed> [key]: Module class, [value]: Configuration
      */
     protected static function getModuleClassConfiguration(): array
     {

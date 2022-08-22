@@ -5,6 +5,9 @@ class PoP_Module_Processor_HighlightReferencesFramesLayouts extends PoP_Module_P
     public final const COMPONENT_LAYOUT_HIGHLIGHTS_APPENDTOSCRIPT = 'layout-highlights-appendtoscript';
     public final const COMPONENT_LAYOUT_HIGHLIGHTSEMPTY_APPENDTOSCRIPT = 'layout-highlightsempty-appendtoscript';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

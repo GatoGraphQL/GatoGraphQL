@@ -1,5 +1,5 @@
 parameters:
-    level: 5
+    level: 6
 
 includes:
     - layers/Engine/packages/access-control/phpstan.neon.dist
@@ -24,6 +24,7 @@ includes:
     - layers/WPSchema/packages/comments/phpstan.neon.dist
     - layers/CMSSchema/packages/comments-wp/phpstan.neon.dist
     - layers/Engine/packages/component-model/phpstan.neon.dist
+    - layers/Engine/packages/componentrouting/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-categories-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-category-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-mutations/phpstan.neon.dist
@@ -68,7 +69,6 @@ includes:
     - layers/CMSSchema/packages/meta/phpstan.neon.dist
     - layers/WPSchema/packages/meta/phpstan.neon.dist
     - layers/CMSSchema/packages/metaquery-wp/phpstan.neon.dist
-    - layers/Engine/packages/componentrouting/phpstan.neon.dist
     - layers/CMSSchema/packages/pages/phpstan.neon.dist
     - layers/WPSchema/packages/pages/phpstan.neon.dist
     - layers/CMSSchema/packages/pages-wp/phpstan.neon.dist

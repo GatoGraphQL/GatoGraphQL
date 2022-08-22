@@ -10,6 +10,9 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES_STANCE = 'simplefilterinnet-authorstances-stance';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_GENERALSTANCE = 'simplefilterinnet-stances-generalstance';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

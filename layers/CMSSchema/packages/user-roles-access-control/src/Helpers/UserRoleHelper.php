@@ -19,6 +19,9 @@ class UserRoleHelper
         return in_array($roleName, $userRoles);
     }
 
+    /**
+     * @param string[] $roleNames
+     */
     public static function doesCurrentUserHaveAnyRole(array $roleNames): bool
     {
         // Check if the user has the required role
@@ -39,6 +42,9 @@ class UserRoleHelper
         return in_array($capability, $userCapabilities);
     }
 
+    /**
+     * @param string[] $capabilities
+     */
     public static function doesCurrentUserHaveAnyCapability(array $capabilities): bool
     {
         // Check if the user has the required role

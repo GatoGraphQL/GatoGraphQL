@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use PoP\Root\Module\ModuleInterface;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
@@ -136,7 +137,7 @@ class Plugin extends AbstractMainPlugin
     /**
      * Add Module classes to be initialized
      *
-     * @return string[] List of `Module` class to initialize
+     * @return array<class-string<ModuleInterface>> List of `Module` class to initialize
      */
     public function getModuleClassesToInitialize(): array
     {

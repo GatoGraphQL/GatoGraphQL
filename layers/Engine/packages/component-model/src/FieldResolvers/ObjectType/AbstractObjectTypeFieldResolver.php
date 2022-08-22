@@ -51,9 +51,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
 
-    /**
-     * @var array<string,array>
-     */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaDefinitionForFieldCache = [];
     /** @var array<string,string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
@@ -140,11 +138,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     final public function getClassesToAttachTo(): array
     {
         return $this->getObjectTypeResolverClassesToAttachTo();
     }
 
+    /**
+     * @return array<InterfaceTypeFieldResolverInterface>
+     */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [];
@@ -503,6 +507,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final public function getFieldArgsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -530,6 +536,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $this->schemaFieldArgsCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getFieldArgExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): array
     {
         $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($objectTypeResolver, $fieldName);
@@ -541,6 +550,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final protected function getConsolidatedFieldArgExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): array
     {
@@ -749,6 +760,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Get the "schema" properties as for the fieldName
+     *
+     * @return array<string,mixed>
      */
     final public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -762,6 +775,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Get the "schema" properties as for the fieldName
+     *
+     * @return array<string,mixed>
      */
     final protected function doGetFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -814,6 +829,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final protected function getConsolidatedFieldExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -832,6 +849,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $this->consolidatedFieldExtensionsCache[$cacheKey];
     }
 
+    /**
+     * @return class-string<InterfaceSchemaDefinitionResolverAdapter>
+     */
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
     {
         return InterfaceSchemaDefinitionResolverAdapter::class;

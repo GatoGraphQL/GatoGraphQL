@@ -4,6 +4,9 @@ class PoP_Module_Processor_TagInfoLayouts extends PoP_Module_Processor_TagInfoLa
 {
     public final const COMPONENT_LAYOUT_TAGINFO = 'layout-taginfo';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -9,6 +9,10 @@ class ObjectType extends AbstractNamedType implements HasFieldsTypeInterface, Ha
     use HasFieldsTypeTrait;
     use HasInterfacesTypeTrait;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);

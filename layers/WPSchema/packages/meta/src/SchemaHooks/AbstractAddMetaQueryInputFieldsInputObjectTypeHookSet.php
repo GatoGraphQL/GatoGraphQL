@@ -37,7 +37,8 @@ abstract class AbstractAddMetaQueryInputFieldsInputObjectTypeHookSet extends Abs
     }
 
     /**
-     * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @param array<string,InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(
         array $inputFieldNameTypeResolvers,

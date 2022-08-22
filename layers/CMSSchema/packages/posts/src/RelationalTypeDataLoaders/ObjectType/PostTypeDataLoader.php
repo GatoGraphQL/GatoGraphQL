@@ -20,7 +20,12 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 
-    public function executeQuery($query, array $options = []): array
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function executeQuery(array $query, array $options = []): array
     {
         return $this->getPostTypeAPI()->getPosts($query, $options);
     }

@@ -41,9 +41,9 @@ class QueryHookSet extends AbstractHookSet
     /**
      * Remove querying private CPTs
      *
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     public function convertCustomPostsQuery(array $query, array $options): array
     {

@@ -4,6 +4,9 @@ class PoP_Events_Module_Processor_EmailFormGroups extends PoP_Module_Processor_N
 {
     public final const COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS = 'forminputgroup-emaildigests-weeklyupcomingevents';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

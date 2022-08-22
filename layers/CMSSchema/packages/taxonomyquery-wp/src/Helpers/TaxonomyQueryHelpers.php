@@ -6,6 +6,10 @@ namespace PoPCMSSchema\TaxonomyQueryWP\Helpers;
 
 class TaxonomyQueryHelpers
 {
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     */
     public static function convertTaxonomyQuery(array $query): array
     {
         if (isset($query['tax-query'])) {

@@ -17,6 +17,9 @@ class UserStance_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends 
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

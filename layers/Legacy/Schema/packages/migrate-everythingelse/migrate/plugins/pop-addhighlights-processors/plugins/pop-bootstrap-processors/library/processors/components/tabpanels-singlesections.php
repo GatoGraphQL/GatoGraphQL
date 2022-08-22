@@ -4,6 +4,9 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelComponents extends
 {
     public final const COMPONENT_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT = 'tabpanel-singlerelatedhighlightcontent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents exte
 {
     public final const COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE = 'multicomponent-form-locationpostlink-rightside';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_AddHighlights_Processor_HiddenInputFormInputs extends PoP_Module_Proce
 {
     public final const COMPONENT_FORMINPUT_HIDDENINPUT_HIGHLIGHTEDPOST = 'forminput-hiddeninput-highlightedpost';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

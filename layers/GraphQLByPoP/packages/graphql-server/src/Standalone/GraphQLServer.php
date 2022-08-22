@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
-use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
+use GraphQLByPoP\GraphQLServer\Module;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
@@ -18,6 +18,7 @@ use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\HttpFoundation\Response;
+use PoP\Root\Module\ModuleInterface;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
@@ -25,10 +26,13 @@ use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLServer implements GraphQLServerInterface
 {
+    /**
+     * @var array<class-string<ModuleInterface>>
+     */
     private readonly array $moduleClasses;
 
     /**
-     * @param string[] $moduleClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
+     * @param array<class-string<ModuleInterface>> $moduleClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
      * @param array<string,mixed> $moduleClassConfiguration Predefined configuration for the components
      */
     public function __construct(

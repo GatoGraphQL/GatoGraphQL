@@ -6,6 +6,9 @@ class GD_EM_Module_Processor_DateTimeLayouts extends GD_EM_Module_Processor_Date
     public final const COMPONENT_EM_LAYOUT_DATETIMEHORIZONTAL = 'em-layout-datetimehorizontal';
     public final const COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS = 'em-layout-datetimedownloadlinks';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

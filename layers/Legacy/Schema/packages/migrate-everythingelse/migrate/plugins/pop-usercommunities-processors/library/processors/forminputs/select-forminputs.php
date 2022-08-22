@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_SelectFormInputs extends PoP_Module_Processor_Sele
 {
     public final const COMPONENT_URE_FORMINPUT_MEMBERSTATUS = 'ure-forminput-memberstatus';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

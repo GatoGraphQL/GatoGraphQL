@@ -9,6 +9,9 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public final const COMPONENT_BUTTON_POSTCOMMENTS = 'postbutton-comments';
     public final const COMPONENT_BUTTON_POSTCOMMENTS_LABEL = 'postbutton-comments-label';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

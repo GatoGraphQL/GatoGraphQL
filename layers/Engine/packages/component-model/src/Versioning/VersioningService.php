@@ -15,7 +15,13 @@ class VersioningService implements VersioningServiceInterface
 {
     use BasicServiceTrait;
 
+    /**
+     * @var array<string,array<string,string>>|null
+     */
     private ?array $versionConstraintsForFields = null;
+    /**
+     * @var array<string,string>|null
+     */
     private ?array $versionConstraintsForDirectives = null;
 
     /**

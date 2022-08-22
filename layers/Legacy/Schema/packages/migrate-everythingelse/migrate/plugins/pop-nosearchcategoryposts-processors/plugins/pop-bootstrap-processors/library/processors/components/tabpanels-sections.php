@@ -23,6 +23,9 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
     public final const COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS18 = 'tabpanel-nosearchcategoryposts18';
     public final const COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS19 = 'tabpanel-nosearchcategoryposts19';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

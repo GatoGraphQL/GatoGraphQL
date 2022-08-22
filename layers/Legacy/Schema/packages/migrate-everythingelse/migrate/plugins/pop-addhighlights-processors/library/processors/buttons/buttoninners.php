@@ -6,6 +6,9 @@ class PoP_AddHighlights_Module_Processor_ButtonInners extends PoP_Module_Process
     public final const COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE = 'buttoninner-highlight-create';
     public final const COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN = 'buttoninner-highlight-createbtn';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

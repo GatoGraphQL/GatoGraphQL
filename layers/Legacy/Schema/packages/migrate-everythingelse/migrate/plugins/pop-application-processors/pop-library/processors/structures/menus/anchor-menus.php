@@ -4,6 +4,9 @@ class PoP_Module_Processor_AnchorMenus extends PoP_Module_Processor_AnchorMenusB
 {
     public final const COMPONENT_ANCHORMENU = 'anchormenu';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

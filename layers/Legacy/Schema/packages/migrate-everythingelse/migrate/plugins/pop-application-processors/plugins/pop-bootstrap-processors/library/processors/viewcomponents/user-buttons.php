@@ -7,6 +7,9 @@ class PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons exten
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-userbutton-sharebyemail-socialmedia';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-userbutton-sharebyemail-previewdropdown';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

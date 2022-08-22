@@ -26,6 +26,9 @@ class AccessControlListsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWe
         return __DIR__ . '/fixture-acls-in-cpt';
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [

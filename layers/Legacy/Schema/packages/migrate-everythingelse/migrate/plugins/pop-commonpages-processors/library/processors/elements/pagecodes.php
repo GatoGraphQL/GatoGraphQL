@@ -5,6 +5,9 @@ class GD_CommonPages_Module_Processor_PageCodes extends PoP_Module_Processor_HTM
     public final const COMPONENT_PAGECODE_ADDCONTENTFAQ = 'pagecode-addcontentfaq';
     public final const COMPONENT_PAGECODE_ACCOUNTFAQ = 'pagecode-accountfaq';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -6,6 +6,9 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
 {
     public final const COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY = 'filterinput-filterbycommunity';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

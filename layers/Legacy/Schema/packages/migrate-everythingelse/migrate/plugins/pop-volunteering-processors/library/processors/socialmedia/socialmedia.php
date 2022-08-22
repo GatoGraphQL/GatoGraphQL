@@ -5,6 +5,9 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
     public final const COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER = 'post-socialmedia-simpleview-volunteer';
     public final const COMPONENT_POSTSOCIALMEDIA_VOLUNTEER = 'post-socialmedia-volunteer';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -8,6 +8,9 @@ class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Proc
     public final const COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST = 'controlgroup-blocktagmappostlist';
     public final const COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST = 'controlgroup-blockmapuserlist';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -31,7 +31,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
      * @param string $names_uc Plural name uppercase
      * @param string $name_lc Singulare name lowercase
      * @param string $names_lc Plural name lowercase
-     * @return array<string, string>
+     * @return array<string,string>
      */
     protected function getTaxonomyLabels(string $name_uc, string $names_uc, string $name_lc, string $names_lc): array
     {

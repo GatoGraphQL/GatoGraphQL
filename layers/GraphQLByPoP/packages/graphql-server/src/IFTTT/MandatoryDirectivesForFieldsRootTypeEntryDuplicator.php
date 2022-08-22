@@ -51,10 +51,11 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
      * The duplicated entry is duplicated as is, just changing what class it applies to.
      * Then it can be an entry for anything: Access Control, Cache Control, or any other.
      *
+     * @param array<mixed[]> $fieldEntries
      * @param boolean $forceBothTypes Define if to always add it to both QueryRoot and MutationRoot, without checking if the field belongs to one or the other
      *                                This is needed when calling this function before the Schema has been configured, i.e. before finding FieldResolvers for each Type
      *
-     * @return array The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
+     * @return array<mixed[]> The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
      */
     public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes = false): array
     {
@@ -75,6 +76,10 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         );
     }
 
+    /**
+     * @return array<mixed[]>
+     * @param array<mixed[]> $fieldEntries
+     */
     protected function getAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes): array
     {
         // Get the entries assigned to Root
@@ -118,6 +123,9 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
     /**
      * Filter the entries set to Root
+     *
+     * @param array<mixed[]> $fieldEntries
+     * @return array<mixed[]>
      */
     protected function filterRootEntriesForFields(array $fieldEntries): array
     {

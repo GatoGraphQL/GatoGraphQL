@@ -4,6 +4,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
 {
     public final const COMPONENT_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR = 'multiple-section-mycontentpostlinks-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

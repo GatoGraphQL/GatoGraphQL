@@ -4,6 +4,9 @@ class PoP_Module_Processor_TriggerLocationTypeaheadScriptLayouts extends PoP_Mod
 {
     public final const COMPONENT_EM_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION = 'em-script-triggertypeaheadselect-location';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

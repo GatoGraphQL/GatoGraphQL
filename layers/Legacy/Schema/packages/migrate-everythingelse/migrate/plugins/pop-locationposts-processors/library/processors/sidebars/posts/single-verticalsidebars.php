@@ -4,6 +4,9 @@ class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_
 {
     public final const COMPONENT_VERTICALSIDEBAR_SINGLE_LOCATIONPOST = 'vertical-sidebar-single-locationpost';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

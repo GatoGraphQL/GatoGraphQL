@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
@@ -50,6 +51,9 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -111,6 +115,9 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
@@ -205,7 +212,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 // If the provided interface contains the namespace separator, then compare by qualifiedInterface
                 $useNamespaced = str_contains($interface, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);
                 $implementedInterfaceNames = array_map(
-                    function (InterfaceTypeResolverInterface $interfaceTypeResolver) use ($useNamespaced) {
+                    function (InterfaceTypeResolverInterface $interfaceTypeResolver) use ($useNamespaced): string {
                         if ($useNamespaced) {
                             return $interfaceTypeResolver->getNamespacedTypeName();
                         }
@@ -230,7 +237,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                     $implementedInterfaceNames = array_merge(
                         $implementedInterfaceNames,
                         array_map(
-                            function (InterfaceTypeResolverInterface $interfaceTypeResolver) {
+                            function (InterfaceTypeResolverInterface $interfaceTypeResolver): string {
                                 return $interfaceTypeResolver->getTypeName();
                             },
                             $implementedInterfaceTypeResolvers

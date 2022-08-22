@@ -10,7 +10,7 @@ use PoP\Root\App;
 class DataStructureManager implements DataStructureManagerInterface
 {
     /**
-     * @var array<string, DataStructureFormatterInterface>
+     * @var array<string,DataStructureFormatterInterface>
      */
     public array $formatters = [];
 

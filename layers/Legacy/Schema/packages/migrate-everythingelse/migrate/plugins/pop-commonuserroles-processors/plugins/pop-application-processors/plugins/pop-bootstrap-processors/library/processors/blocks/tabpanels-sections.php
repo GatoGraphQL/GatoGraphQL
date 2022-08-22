@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor
     public final const COMPONENT_BLOCK_TABPANEL_ORGANIZATIONS = 'block-organizations-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_INDIVIDUALS = 'block-individuals-tabpanel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

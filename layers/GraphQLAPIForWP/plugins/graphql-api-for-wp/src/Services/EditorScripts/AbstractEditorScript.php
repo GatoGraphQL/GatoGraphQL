@@ -42,7 +42,7 @@ abstract class AbstractEditorScript extends AbstractScript
     /**
      * Pass localized data to the block
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getLocalizedData(): array
     {

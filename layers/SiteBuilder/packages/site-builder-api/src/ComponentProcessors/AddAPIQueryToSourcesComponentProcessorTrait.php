@@ -14,6 +14,11 @@ use PoPAPI\API\Schema\QueryInputs;
 
 trait AddAPIQueryToSourcesComponentProcessorTrait
 {
+    /**
+     * @return string[]
+     * @param string[] $sources
+     * @param array<string,mixed> $props
+     */
     public function addAPIQueryToSources(array $sources, Component $component, array &$props): array
     {
         if (!$sources) {
@@ -56,7 +61,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
 
         if ($apiFields) {
             return array_map(
-                function ($source) use ($apiFields) {
+                function (string $source) use ($apiFields): string {
                     return
                         GeneralUtils::addQueryArgs(
                             [

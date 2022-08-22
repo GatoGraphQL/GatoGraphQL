@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 
 class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
@@ -24,6 +25,9 @@ class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
         return 'LoginUserByInput';
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [

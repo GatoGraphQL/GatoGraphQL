@@ -3,3 +3,12 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+		- 
+			message: '#Property PoPBackbone\\WPDataParser\\Parsers\\WXR_Parser_Regex::\$([a-zA-Z_]*) type has no value type specified in iterable type array\.#'
+			path: src/Parsers/WXR_Parser_Regex.php
+			count: 5
+		- 
+			message: '#Property PoPBackbone\\WPDataParser\\Parsers\\WXR_Parser_XML::\$([a-zA-Z_]*) type has no value type specified in iterable type array\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+			count: 8

@@ -6,6 +6,9 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
     public final const COMPONENT_LATESTCOUNT_AUTHOR_POSTS = 'latestcount-author-posts';
     public final const COMPONENT_LATESTCOUNT_TAG_POSTS = 'latestcount-tag-posts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

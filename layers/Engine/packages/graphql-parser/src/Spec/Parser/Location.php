@@ -24,7 +24,7 @@ class Location
 
 
     /**
-     * @return array<string, int>
+     * @return array<string,int>
      */
     public function toArray(): array
     {

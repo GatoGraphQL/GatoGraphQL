@@ -4,6 +4,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
 {
     public final const COMPONENT_FILTERINPUTCONTAINER_MYLINKS = 'filterinputcontainer-mylinks';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

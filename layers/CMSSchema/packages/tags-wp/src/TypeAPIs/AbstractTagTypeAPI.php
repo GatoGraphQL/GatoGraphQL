@@ -69,11 +69,21 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         return get_term_by('name', $tagName, $this->getTagTaxonomyName());
     }
+    
+    /**
+     * @return array<string,int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCustomPostTags(string|int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
         return wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCustomPostTagCount(string|int $customPostID, array $query = [], array $options = []): int
     {
         // There is no direct way to calculate the total
@@ -91,6 +101,10 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         $tags = wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
         return count($tags);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getTagCount(array $query = [], array $options = []): int
     {
         $query = $this->convertTagsQuery($query, $options);
@@ -113,12 +127,23 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         // An error happened
         return -1;
     }
+    
+    /**
+     * @return array<string,int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getTags(array $query, array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
         return get_tags($query);
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function convertTagsQuery(array $query, array $options = []): array
     {
         $query = $this->convertTaxonomiesQuery($query, $options);

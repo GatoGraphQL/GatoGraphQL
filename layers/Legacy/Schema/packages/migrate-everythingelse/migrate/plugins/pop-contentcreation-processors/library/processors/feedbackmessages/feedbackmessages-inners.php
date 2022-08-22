@@ -9,6 +9,9 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
     public final const COMPONENT_FEEDBACKMESSAGEINNER_CREATECONTENT = 'feedbackmessageinner-createcontent';
     public final const COMPONENT_FEEDBACKMESSAGEINNER_UPDATECONTENT = 'feedbackmessageinner-updatecontent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

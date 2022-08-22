@@ -14,21 +14,21 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * Have the extensions organized by their class
      *
-     * @var array<string, ExtensionInterface>
+     * @var array<string,ExtensionInterface>
      */
     private array $extensionClassInstances = [];
 
     /**
      * Have the extensions organized by their baseName
      *
-     * @var array<string, ExtensionInterface>
+     * @var array<string,ExtensionInterface>
      */
     private array $extensionBaseNameInstances = [];
 
     /**
      * Extensions, organized under their name.
      *
-     * @return array<string, ExtensionInterface>
+     * @return array<string,ExtensionInterface>
      */
     public function getExtensions(): array
     {

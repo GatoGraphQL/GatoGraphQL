@@ -5,6 +5,9 @@ class PoP_Module_Processor_LocationViewComponentButtonInners extends PoP_Module_
 {
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS = 'viewcomponent-buttoninner-locations';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

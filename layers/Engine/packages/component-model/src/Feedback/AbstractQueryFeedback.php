@@ -15,12 +15,12 @@ abstract class AbstractQueryFeedback extends AbstractDocumentFeedback implements
 {
     /**
      * @param AstInterface $astNode AST node where the error happens (eg: a Field, a Directive, an Argument, etc)
-     * @param array<string, mixed> $extensions
+     * @param array<string,mixed> $extensions
      */
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
         protected AstInterface $astNode,
-        /** @var array<string, mixed> */
+        /** @var array<string,mixed> */
         array $extensions = [],
     ) {
         parent::__construct(

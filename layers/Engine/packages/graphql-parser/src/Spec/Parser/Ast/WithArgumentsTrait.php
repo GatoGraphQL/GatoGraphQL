@@ -88,6 +88,9 @@ trait WithArgumentsTrait
         return $this->hasArgumentReferencingPromise;
     }
 
+    /**
+     * @param array<string,mixed> $values
+     */
     protected function doHasArgumentReferencingPromise(array $values): mixed
     {
         foreach ($values as $value) {
@@ -112,6 +115,9 @@ trait WithArgumentsTrait
         return $this->hasArgumentReferencingResolvedOnObjectPromise;
     }
 
+    /**
+     * @param array<string,mixed> $values
+     */
     protected function doHasArgumentReferencingResolvedOnObjectPromise(array $values): mixed
     {
         foreach ($values as $value) {

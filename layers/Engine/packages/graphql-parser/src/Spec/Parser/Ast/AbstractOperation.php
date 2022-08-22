@@ -11,13 +11,15 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
+    /**
+     * @param Variable[] $variables
+     * @param Directive[] $directives
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     */
     public function __construct(
         protected readonly string $name,
-        /** @var Variable[] */
         protected readonly array $variables,
-        /** @var Directive[] $directives */
         array $directives,
-        /** @var array<FieldInterface|FragmentBondInterface> */
         array $fieldsOrFragmentBonds,
         Location $location,
     ) {

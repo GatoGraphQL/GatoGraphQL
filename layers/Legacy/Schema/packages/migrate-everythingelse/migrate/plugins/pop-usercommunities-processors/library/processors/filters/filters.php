@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_CustomFilters extends PoP_Module_Processor_Filters
     public final const COMPONENT_FILTER_MYMEMBERS = 'filter-mymembers';
     public final const COMPONENT_FILTER_COMMUNITIES = 'filter-communities';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

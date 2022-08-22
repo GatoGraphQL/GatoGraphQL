@@ -18,6 +18,9 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
     // Update Post Validation
+    /**
+     * @param string[] $errors
+     */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         if ($fieldDataAccessor->getValue('stancetarget')) {
@@ -72,6 +75,9 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         return $category_error_msgs;
     }
 
+    /**
+     * @param string[] $errors
+     */
     protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::validateCreateContent($errors, $fieldDataAccessor);
@@ -158,6 +164,9 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $fieldDataAccessor);
     }
 
+    /**
+     * @param array<string,mixed> $log
+     */
     protected function updateAdditionals(string|int $post_id, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
         parent::updateAdditionals($post_id, $fieldDataAccessor, $log);

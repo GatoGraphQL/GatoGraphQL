@@ -9,6 +9,9 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     public final const COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR = 'dataload-single-stance-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
@@ -49,7 +52,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

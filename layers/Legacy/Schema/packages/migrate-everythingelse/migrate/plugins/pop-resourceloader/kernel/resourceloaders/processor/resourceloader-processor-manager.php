@@ -11,7 +11,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 	}
 
     /**
-     * @var array<string, object>
+     * @var array<string,object>
      */
     private array $itemFullNameProcessorInstances = [];
 

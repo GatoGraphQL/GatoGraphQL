@@ -49,7 +49,12 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return 'UserTypeDataLoader:query';
     }
 
-    public function executeQuery($query, array $options = []): array
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function executeQuery(array $query, array $options = []): array
     {
         return $this->getUserTypeAPI()->getUsers($query, $options);
     }

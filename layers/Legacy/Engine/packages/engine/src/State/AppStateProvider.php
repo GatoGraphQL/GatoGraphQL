@@ -74,6 +74,9 @@ class AppStateProvider extends AbstractAppStateProvider
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function augment(array &$state): void
     {
         if ($state['componentFilter'] === null) {

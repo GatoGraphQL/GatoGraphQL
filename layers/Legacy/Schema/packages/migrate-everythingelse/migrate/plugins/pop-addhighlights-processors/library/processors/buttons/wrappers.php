@@ -6,6 +6,9 @@ class Wassup_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
 {
     public final const COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW = 'buttonwrapper-highlightview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

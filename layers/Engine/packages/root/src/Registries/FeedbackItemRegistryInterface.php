@@ -16,7 +16,7 @@ interface FeedbackItemRegistryInterface
     public function getFeedbackItemEntries(): array;
 
     /**
-     * @return array|null Array of ['category' => ..., 'messagePlaceholder' => ..., 'specifiedByURL' => ...], or null if no entry exists for that code
+     * @return mixed[]|null Array of ['category' => ..., 'messagePlaceholder' => ..., 'specifiedByURL' => ...], or null if no entry exists for that code
      */
     public function getFeedbackItemEntry(string $namespacedCode): ?array;
 }

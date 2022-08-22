@@ -17,6 +17,7 @@ class Page extends AbstractComponentFilter
 
     /**
      * Exclude until reaching the pageSection
+     * @param array<string,mixed> $props
      */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {

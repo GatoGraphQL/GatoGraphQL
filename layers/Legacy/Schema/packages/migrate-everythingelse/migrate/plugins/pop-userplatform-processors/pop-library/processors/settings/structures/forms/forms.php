@@ -4,6 +4,9 @@ class PoP_Module_Processor_SettingsForms extends PoP_Module_Processor_FormsBase
 {
     public final const COMPONENT_FORM_SETTINGS = 'form-settings';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

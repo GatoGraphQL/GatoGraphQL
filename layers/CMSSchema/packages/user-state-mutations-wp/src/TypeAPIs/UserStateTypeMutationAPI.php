@@ -22,6 +22,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 
     /**
      * @throws UserStateMutationException In case of error
+     * @param array<string,mixed> $credentials
      */
     public function login(array $credentials): object
     {

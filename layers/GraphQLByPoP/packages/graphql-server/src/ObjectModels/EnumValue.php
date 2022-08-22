@@ -10,6 +10,10 @@ class EnumValue extends AbstractSchemaDefinitionReferenceObject
 {
     protected EnumValueExtensions $enumValueExtensions;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);

@@ -38,12 +38,22 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         return $object instanceof WP_Comment;
     }
 
+    /**
+     * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getComments(array $query, array $options = []): array
     {
         $query = $this->convertCommentsQuery($query, $options);
         return (array) get_comments($query);
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     protected function convertCommentsQuery(array $query, array $options): array
     {
         if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
@@ -144,6 +154,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         return $query;
     }
 
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCommentCount(array $query, array $options = []): int
     {
         $query = $this->convertCommentsQuery($query, $options);

@@ -4,6 +4,9 @@ class PoP_Module_Processor_CommentsFormInners extends PoP_Module_Processor_FormI
 {
     public final const COMPONENT_FORMINNER_ADDCOMMENT = 'forminner-addcomment';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

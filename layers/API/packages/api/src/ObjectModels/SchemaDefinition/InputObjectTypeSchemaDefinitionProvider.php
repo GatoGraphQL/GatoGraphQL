@@ -22,6 +22,9 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDef
         return TypeKinds::INPUT_OBJECT;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();
@@ -31,6 +34,9 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDef
         return $schemaDefinition;
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addInputFieldSchemaDefinitions(array &$schemaDefinition): void
     {
         $schemaDefinition[SchemaDefinition::INPUT_FIELDS] = [];

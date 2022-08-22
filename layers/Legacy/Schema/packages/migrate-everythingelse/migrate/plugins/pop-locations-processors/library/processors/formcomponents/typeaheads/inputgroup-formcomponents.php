@@ -4,6 +4,9 @@ class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Process
 {
     public final const COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION = 'formcomponent-inputgroup-typeaheadaddlocation';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

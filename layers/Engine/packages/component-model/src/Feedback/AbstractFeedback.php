@@ -8,9 +8,11 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractFeedback implements FeedbackInterface
 {
+    /**
+     * @param array<string,mixed> $extensions
+     */
     public function __construct(
         protected FeedbackItemResolution $feedbackItemResolution,
-        /** @var array<string, mixed> */
         protected array $extensions = [],
     ) {
     }
@@ -21,7 +23,7 @@ abstract class AbstractFeedback implements FeedbackInterface
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getExtensions(): array
     {

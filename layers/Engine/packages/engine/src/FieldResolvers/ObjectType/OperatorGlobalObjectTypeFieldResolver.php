@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use ArgumentCountError;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -60,6 +61,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         return $this->arrayTraversionHelperService ??= $this->instanceManager->getInstance(ArrayTraversionHelperServiceInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -130,6 +134,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
@@ -237,12 +244,12 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'not':
                 return !$fieldDataAccessor->getValue('value');
             case 'and':
-                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value) {
+                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value): bool {
                     $accumulated = $accumulated && $value;
                     return $accumulated;
                 }, true);
             case 'or':
-                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value) {
+                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value): bool {
                     $accumulated = $accumulated || $value;
                     return $accumulated;
                 }, false);

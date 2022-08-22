@@ -21,7 +21,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
 {
     /**
      * @param FieldInterface[] $fields All the affected fields (eg: those to be resolved as `null` in case of error)
-     * @param array<string, mixed> $extensions
+     * @param array<string,mixed> $extensions
      */
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,

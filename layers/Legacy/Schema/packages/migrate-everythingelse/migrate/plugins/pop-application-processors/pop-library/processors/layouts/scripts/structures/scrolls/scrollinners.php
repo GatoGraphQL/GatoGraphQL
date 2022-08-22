@@ -7,6 +7,9 @@ class PoPApplicationProcessors_Module_Processor_CommentScrollInners extends PoP_
     public final const COMPONENT_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW = 'layout-referencedbyscroll-inner-fullview';
     public final const COMPONENT_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE = 'layout-referencedbyscroll-inner-appendable';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

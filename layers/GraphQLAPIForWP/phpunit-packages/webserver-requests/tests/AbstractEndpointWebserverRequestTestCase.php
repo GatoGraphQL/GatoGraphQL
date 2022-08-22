@@ -10,6 +10,8 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
 {
     /**
      * @dataProvider provideEndpointEntries
+     * @param array<string,mixed> $params
+     * @param array<string,mixed> $variables
      */
     public function testEndpoints(
         string $expectedContentType,
@@ -50,6 +52,10 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         }
     }
 
+    /**
+     * @param string|array<string,mixed> $urlOrParams
+     * @return string|array<string,mixed>
+     */
     protected static function maybeAddXDebugTriggerParam(string|array $urlOrParams): string|array
     {
         if (getenv('XDEBUG_TRIGGER') === false) {
@@ -59,7 +65,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             'XDEBUG_TRIGGER' => getenv('XDEBUG_TRIGGER'),
         ];
         if (is_array($urlOrParams)) {
-            /** @var array */
+            /** @var string[] */
             $params = $urlOrParams;
             return array_merge(
                 $params,

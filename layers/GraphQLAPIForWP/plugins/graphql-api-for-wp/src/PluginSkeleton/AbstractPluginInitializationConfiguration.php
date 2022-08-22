@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use PoP\Root\Module\ModuleInterface;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
@@ -80,6 +81,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
     /**
      * All the environment variables to override
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string}>
      */
     protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
@@ -135,6 +137,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
     /**
      * Define the values for certain environment constants from the plugin settings
+     *
+     * @return array<array<string,mixed>>
      */
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
@@ -168,6 +172,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
     /**
      * Define the values for certain environment constants from the plugin settings
+     *
+     * @return array<mixed[]>
      */
     protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
@@ -177,7 +183,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Provide the configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Module class, [value]: Configuration
+     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {
@@ -190,7 +196,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Module class, [value]: Configuration
+     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected function getPredefinedModuleClassConfiguration(): array
     {
@@ -200,7 +206,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add configuration values if modules are enabled or disabled
      *
-     * @return array<string, array> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     * @return array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
     protected function getBasedOnModuleEnabledStateModuleClassConfiguration(): array
     {
@@ -222,6 +228,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         return $moduleClassConfiguration;
     }
 
+    /**
+     * @return array<mixed[]>
+     */
     protected function getModuleToModuleClassConfigurationMapping(): array
     {
         return [];

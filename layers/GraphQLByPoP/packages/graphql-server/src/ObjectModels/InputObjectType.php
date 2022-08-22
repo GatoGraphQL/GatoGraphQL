@@ -13,12 +13,20 @@ class InputObjectType extends AbstractNamedType
      */
     protected array $inputValues;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
         $this->initInputValues($fullSchemaDefinition, $schemaDefinitionPath);
     }
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     protected function initInputValues(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->inputValues = [];
@@ -43,14 +51,20 @@ class InputObjectType extends AbstractNamedType
     {
         return TypeKinds::INPUT_OBJECT;
     }
+    /**
+     * @return InputValue[]
+     */
     public function getInputFields(): array
     {
         return $this->inputValues;
     }
+    /**
+     * @return string[]
+     */
     public function getInputFieldIDs(): array
     {
         return array_map(
-            function (InputValue $inputValue) {
+            function (InputValue $inputValue): string {
                 return $inputValue->getID();
             },
             $this->getInputFields()

@@ -16,6 +16,9 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
     use BasicServiceTrait;
 
+    /**
+     * @param array<string,mixed> $query
+     */
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
     {
         // Convert the parameters
@@ -41,7 +44,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         }
     }
     /**
-     * @param array<string, mixed> $data
+     * @param array<string,mixed> $data
      * @return string|int the ID of the created custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
@@ -63,7 +66,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<string,mixed> $data
      * @return string|int the ID of the updated custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */

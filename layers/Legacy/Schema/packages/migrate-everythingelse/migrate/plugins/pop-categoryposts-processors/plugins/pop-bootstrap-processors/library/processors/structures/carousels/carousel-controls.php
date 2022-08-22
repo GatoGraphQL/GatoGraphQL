@@ -68,6 +68,9 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
     public final const COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 = 'carouselcontrols-tagcategoryposts18';
     public final const COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 = 'carouselcontrols-tagcategoryposts19';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

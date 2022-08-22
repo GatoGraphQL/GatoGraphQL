@@ -52,8 +52,8 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
 
     /**
-     * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
-     * @return array<string, InputTypeResolverInterface>
+     * @param array<string,InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @return array<string,InputTypeResolverInterface>
      */
     public function maybeAddInputFieldNameTypeResolvers(
         array $inputFieldNameTypeResolvers,

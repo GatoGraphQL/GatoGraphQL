@@ -17,6 +17,9 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
     public final const COMPONENT_MULTIPLE_MENU_BODY_MYSECTIONS = 'multiple-menu-body-mysections';
     public final const COMPONENT_MULTIPLE_MENU_BODY_ABOUT = 'multiple-menu-body-about';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

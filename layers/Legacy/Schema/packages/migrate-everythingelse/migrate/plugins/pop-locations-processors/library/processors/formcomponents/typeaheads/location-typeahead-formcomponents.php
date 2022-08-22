@@ -6,6 +6,9 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS = 'formcomponent-selectabletypeahead-locations';
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION = 'formcomponent-selectabletypeahead-location';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

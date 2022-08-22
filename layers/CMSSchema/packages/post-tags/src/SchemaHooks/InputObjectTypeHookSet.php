@@ -86,7 +86,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     /**
-     * @param array<string, InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @param array<string,InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(
         array $inputFieldNameTypeResolvers,

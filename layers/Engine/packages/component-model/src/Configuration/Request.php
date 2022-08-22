@@ -32,6 +32,8 @@ class Request
 
     /**
      * Indicates the version constraints for specific fields in the schema
+     *
+     * @return string[]|null
      */
     public static function getVersionConstraintsForFields(): ?array
     {
@@ -40,6 +42,8 @@ class Request
 
     /**
      * Indicates the version constraints for specific directives in the schema
+     *
+     * @return string[]|null
      */
     public static function getVersionConstraintsForDirectives(): ?array
     {

@@ -6,6 +6,9 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
     public final const COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW = 'block-mycontent-scroll-simpleviewpreview';
     public final const COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW = 'block-mycontent-scroll-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

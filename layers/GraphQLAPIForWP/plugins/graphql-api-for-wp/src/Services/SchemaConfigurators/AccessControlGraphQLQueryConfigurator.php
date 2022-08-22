@@ -54,7 +54,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
 
     /**
-     * @var array<string, bool>|null
+     * @var array<string,bool>|null
      */
     protected ?array $aclRuleBlockNameEnabled = null;
 
@@ -66,7 +66,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     /**
      * Obtain the modules enabling/disabling each ACL rule block, through a hook
      *
-     * @return array<string, bool>
+     * @return array<string,bool>
      */
     protected function getACLRuleBlockNameEnabled(): array
     {
@@ -137,7 +137,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                             if (
                                 $entriesForFields = GeneralUtils::arrayFlatten(
                                     array_map(
-                                        function ($selectedField) use ($value, $schemaMode) {
+                                        function (string $selectedField) use ($value, $schemaMode): array {
                                             return $this->getIndividualControlEntriesFromField(
                                                 $selectedField,
                                                 $value,
@@ -158,7 +158,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
                             if (
                                 $entriesForDirectives = GeneralUtils::arrayFlatten(array_filter(
                                     array_map(
-                                        function ($selectedDirective) use ($value, $schemaMode) {
+                                        function (string $selectedDirective) use ($value, $schemaMode): ?array {
                                             return $this->getIndividualControlEntriesFromDirective(
                                                 $selectedDirective,
                                                 $value,

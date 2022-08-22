@@ -13,12 +13,12 @@ use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpd
 
 abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends AbstractCreateUpdateCustomPostMutationResolverBridge
 {
-    protected function supportsTitle()
+    protected function supportsTitle(): bool
     {
         return false;
     }
 
-    protected function moderate()
+    protected function moderate(): bool
     {
         return false;
     }
@@ -28,7 +28,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
      * Lost during the migration!
      * @todo: Restore calling this function
      */
-    protected function getSuccessTitle($referenced = null)
+    protected function getSuccessTitle($referenced = null): string
     {
         if ($referenced) {
             return sprintf(
@@ -58,7 +58,10 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         return parent::getSuccessString($result_id);
     }
 
-    protected function getEditorInput()
+    /**
+     * @return mixed[]
+     */
+    protected function getEditorInput(): array
     {
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
     }

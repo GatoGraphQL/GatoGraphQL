@@ -15,6 +15,9 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
     public final const COMPONENT_SINGLELAYOUT_FULLVIEW_HIGHLIGHT = 'singlelayout-fullview-highlight';
     public final const COMPONENT_SINGLELAYOUT_FULLVIEW_POST = 'singlelayout-fullview-post';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

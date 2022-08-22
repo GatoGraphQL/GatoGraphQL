@@ -6,6 +6,7 @@ namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorator
 
 use PoP\ComponentModel\RelationalTypeResolverDecorators\AbstractRelationalTypeResolverDecorator;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 abstract class AbstractMandatoryDirectivesForDirectivesRelationalTypeResolverDecorator extends AbstractRelationalTypeResolverDecorator
 {
@@ -13,6 +14,7 @@ abstract class AbstractMandatoryDirectivesForDirectivesRelationalTypeResolverDec
 
     /**
      * By default, it is valid everywhere
+     * @return array<class-string<RelationalTypeResolverInterface>>
      */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {

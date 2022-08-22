@@ -18,6 +18,9 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'simplefilterinputcontainer-mycategoryposts';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT = 'simplefilterinputcontainer-tagcontent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

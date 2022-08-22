@@ -63,6 +63,9 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
     public final const COMPONENT_BLOCK_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'block-mynosearchcategoryposts18-scroll-fullviewpreview';
     public final const COMPONENT_BLOCK_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'block-mynosearchcategoryposts19-scroll-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

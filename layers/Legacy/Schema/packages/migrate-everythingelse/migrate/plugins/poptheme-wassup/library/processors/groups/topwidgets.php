@@ -15,6 +15,9 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
     public final const COMPONENT_GROUP_AUTHOR_WIDGETAREA = 'group-author-widgetarea';
     public final const COMPONENT_GROUP_TAG_WIDGETAREA = 'group-tag-widgetarea';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

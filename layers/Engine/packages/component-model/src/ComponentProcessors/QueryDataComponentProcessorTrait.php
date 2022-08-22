@@ -20,10 +20,18 @@ trait QueryDataComponentProcessorTrait
 
     abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     */
     protected function getImmutableDataloadQueryArgs(Component $component, array &$props): array
     {
         return array();
     }
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     */
     protected function getMutableonrequestDataloadQueryArgs(Component $component, array &$props): array
     {
         return array();
@@ -36,7 +44,10 @@ trait QueryDataComponentProcessorTrait
     // {
     //     return null;
     // }
-
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     */
     public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
@@ -49,6 +60,7 @@ trait QueryDataComponentProcessorTrait
 
     /**
      * @return Component[]
+     * @param array<string,mixed> $props
      */
     public function getQueryArgsFilteringComponents(Component $component, array &$props): array
     {
@@ -58,6 +70,10 @@ trait QueryDataComponentProcessorTrait
         ];
     }
 
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $props
+     */
     public function getMutableonmodelHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getMutableonmodelHeaddatasetcomponentDataProperties($component, $props);
@@ -75,6 +91,10 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     */
     public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
@@ -84,7 +104,12 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
+    /**
+     * @return string|int|array<string|int>|null
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     */
+    public function getObjectIDOrIDs(Component $component, array &$props, array &$data_properties): string|int|array|null
     {
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
@@ -131,7 +156,14 @@ trait QueryDataComponentProcessorTrait
         return $typeDataLoader->findIDs($data_properties);
     }
 
-    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
+     * @param array<string,mixed>|null $executed
+     */
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs): array
     {
         $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 

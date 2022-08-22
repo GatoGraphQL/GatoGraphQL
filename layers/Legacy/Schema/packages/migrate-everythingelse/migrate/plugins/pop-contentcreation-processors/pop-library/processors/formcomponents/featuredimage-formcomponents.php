@@ -5,6 +5,9 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
 {
     public final const COMPONENT_FORMCOMPONENT_FEATUREDIMAGE = 'formcomponent-featuredimage';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_LocationPosts_Module_Processor_SectionTabPanelComponents extends PoP_M
 {
     public final const COMPONENT_TABPANEL_LOCATIONPOSTS = 'tabpanel-locationposts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

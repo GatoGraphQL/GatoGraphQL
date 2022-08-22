@@ -40,6 +40,10 @@ class HeadComponentHookSet extends AbstractHookSet
         );
     }
     
+    /**
+     * @param string[] $elements
+     * @return string[]
+     */
     public function maybeAddElement(array $elements): array
     {
         if (App::getState('componentFilter') === $this->headComponent->getName()) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectivePipeline;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use League\Pipeline\PipelineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -24,6 +25,10 @@ class DirectivePipelineDecorator
      * @param array<FieldDataAccessProviderInterface> $pipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<DirectiveResolverInterface> $pipelineDirectiveResolvers
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string,mixed> $messages
      */
     public function resolveDirectivePipeline(
         RelationalTypeResolverInterface $relationalTypeResolver,

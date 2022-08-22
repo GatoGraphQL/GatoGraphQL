@@ -8,6 +8,9 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
     public final const COMPONENT_CONTENT_API = 'content-api';
     public final const COMPONENT_CONTENT_COPYSEARCHURL = 'content-copysearchurl';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

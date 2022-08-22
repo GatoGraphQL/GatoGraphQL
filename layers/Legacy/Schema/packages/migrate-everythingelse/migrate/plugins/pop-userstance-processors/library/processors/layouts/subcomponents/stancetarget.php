@@ -7,6 +7,9 @@ class PoP_Module_Processor_StanceTargetSubcomponentLayouts extends PoP_Module_Pr
     public final const COMPONENT_LAYOUT_STANCETARGET_AUTHORPOSTTITLE = 'layout-stancetarget-authorposttitle';
     public final const COMPONENT_LAYOUT_STANCETARGET_ADDONS = 'layout-stancetarget-addons';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

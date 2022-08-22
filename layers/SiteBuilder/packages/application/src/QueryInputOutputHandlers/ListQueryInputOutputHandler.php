@@ -37,12 +37,18 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
 
-    protected function getLimit()
+    protected function getLimit(): int
     {
         return $this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:limit'));
     }
 
-    public function getQueryState(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
+     * @param array<string,mixed>|null $executed
+     */
+    public function getQueryState(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs): array
     {
         $ret = parent::getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 
@@ -69,7 +75,13 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $ret;
     }
 
-    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
+     * @param array<string,mixed>|null $executed
+     */
+    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 

@@ -20,6 +20,9 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
     public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST = 'block-authorlocationposts-scroll-list';
     public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST = 'block-taglocationposts-scroll-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

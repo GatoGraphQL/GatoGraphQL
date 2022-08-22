@@ -28,6 +28,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
 
     /**
      * Verify that the user is logged in before checking the roles/capabilities
+     * @return array<string,Directive[]>
      */
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {

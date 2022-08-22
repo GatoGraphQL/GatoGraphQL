@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\ObjectSerialization;
 class ObjectSerializationManager implements ObjectSerializationManagerInterface
 {
     /**
-     * @var array<string, ObjectSerializerInterface>
+     * @var array<string,ObjectSerializerInterface>
      */
     public array $objectSerializers = [];
 

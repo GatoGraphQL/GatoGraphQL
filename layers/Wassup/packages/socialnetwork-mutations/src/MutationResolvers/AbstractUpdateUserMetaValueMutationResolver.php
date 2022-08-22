@@ -33,7 +33,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         }
     }
 
-    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(string|int $target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction('gd_updateusermetavalue', $target_id, $fieldDataAccessor);
     }

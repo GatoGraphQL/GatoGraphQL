@@ -5,6 +5,9 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts exten
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE = 'layout-feedbackmessage-useravatar-update';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

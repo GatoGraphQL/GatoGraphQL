@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 interface SchemaDefinitionProviderInterface
 {
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getSchemaDefinition(): array;
     /**

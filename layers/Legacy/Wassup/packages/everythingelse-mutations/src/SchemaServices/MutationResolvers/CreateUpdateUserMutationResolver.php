@@ -352,15 +352,15 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $this->create($fieldDataAccessor);
     }
 
-    protected function additionals($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(string|int $user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction('gd_createupdate_user:additionals', $user_id, $fieldDataAccessor);
     }
-    protected function additionalsUpdate($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionalsUpdate(string|int $user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction('gd_createupdate_user:additionalsUpdate', $user_id, $fieldDataAccessor);
     }
-    protected function additionalsCreate($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionalsCreate(string|int $user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $fieldDataAccessor);
     }

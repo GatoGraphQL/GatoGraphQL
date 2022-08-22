@@ -8,6 +8,9 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     public final const COMPONENT_DATALOAD_POST_UPDATE = 'dataload-post-update';
     public final const COMPONENT_DATALOAD_POST_CREATE = 'dataload-post-create';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts exte
 {
     public final const COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE = 'layout-previewpost-simpleview-featureimage';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

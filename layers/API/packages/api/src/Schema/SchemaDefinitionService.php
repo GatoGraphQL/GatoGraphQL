@@ -40,13 +40,15 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      * Starting from the Root TypeResolver, iterate and get the
      * SchemaDefinition for all TypeResolvers and DirectiveResolvers
      * accessed in the schema
+     *
+     * @var array<class-string<TypeResolverInterface|DirectiveResolverInterface>>
      */
     private array $processedTypeAndDirectiveResolverClasses = [];
     /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
     private array $pendingTypeOrDirectiveResolvers = [];
-    /** @var array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
+    /** @var array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
     private array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
-    /** @var array<string, ObjectTypeResolverInterface[]> Key: InterfaceType name, Value: List of ObjectType resolvers implementing the interface */
+    /** @var array<string,ObjectTypeResolverInterface[]> Key: InterfaceType name, Value: List of ObjectType resolvers implementing the interface */
     private array $accessedInterfaceTypeNameObjectTypeResolvers = [];
 
     private ?PersistentCacheInterface $persistentCache = null;
@@ -83,6 +85,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function &getFullSchemaDefinition(): array
     {
         $schemaDefinition = null;
@@ -181,7 +186,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getSchemaExtensions(): array
     {
@@ -190,6 +195,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         ];
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     public function sortFullSchemaAlphabetically(array &$schemaDefinition): void
     {
         // Sort types
@@ -245,6 +253,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
     }
 
+    /**
+     * @param array<TypeResolverInterface|DirectiveResolverInterface> $accessedTypeAndDirectiveResolvers
+     */
     private function addAccessedTypeAndDirectiveResolvers(
         array $accessedTypeAndDirectiveResolvers,
     ): void {
@@ -257,6 +268,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     private function addTypeSchemaDefinition(
         TypeResolverInterface $typeResolver,
         array &$schemaDefinition,
@@ -299,6 +313,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
 
     /**
      * Move the definition for the global fields, connections and directives
+     * @param array<string,mixed> $schemaDefinition
+     * @param array<string,mixed> $rootTypeSchemaDefinition
      */
     private function maybeMoveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
     {
@@ -320,6 +336,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         return $moduleConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     private function addDirectiveSchemaDefinition(
         DirectiveResolverInterface $directiveResolver,
         array &$schemaDefinition,

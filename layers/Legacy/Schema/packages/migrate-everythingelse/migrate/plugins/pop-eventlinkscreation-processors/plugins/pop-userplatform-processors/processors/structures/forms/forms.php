@@ -4,6 +4,9 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostForms extends PoP_
 {
     public final const COMPONENT_FORM_EVENTLINK = 'form-eventlink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

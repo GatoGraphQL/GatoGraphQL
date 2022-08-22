@@ -5,6 +5,9 @@ class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Proce
 {
     public final const COMPONENT_LAYOUT_MENU_MULTITARGETINDENT = 'layout-menu-multitargetindent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

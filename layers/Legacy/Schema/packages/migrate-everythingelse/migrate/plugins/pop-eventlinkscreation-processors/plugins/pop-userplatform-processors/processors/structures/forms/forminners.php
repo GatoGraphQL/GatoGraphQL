@@ -4,6 +4,9 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
 {
     public final const COMPONENT_FORMINNER_EVENTLINK = 'forminner-eventlink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

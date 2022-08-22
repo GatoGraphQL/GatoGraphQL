@@ -15,6 +15,9 @@ class HeadComponent extends AbstractComponentFilter
         return 'headComponent';
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
         return App::getState('headComponent') !== $component;

@@ -4,6 +4,9 @@ class PoP_SocialNetwork_Module_Processor_Blocks extends PoP_Module_Processor_For
 {
     public final const COMPONENT_BLOCK_CONTACTUSER = 'block-contactuser';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

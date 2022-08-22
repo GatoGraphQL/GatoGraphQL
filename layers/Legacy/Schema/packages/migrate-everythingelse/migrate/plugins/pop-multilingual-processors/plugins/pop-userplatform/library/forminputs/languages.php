@@ -3,7 +3,10 @@ use PoP\Engine\FormInputs\SelectFormInput;
 
 class GD_QT_FormInput_Languages extends SelectFormInput
 {
-    public function getAllValues($label = null): array
+    /**
+     * @return mixed[]
+     */
+    public function getAllValues(string $label = null): array
     {
         $values = parent::getAllValues($label);
 

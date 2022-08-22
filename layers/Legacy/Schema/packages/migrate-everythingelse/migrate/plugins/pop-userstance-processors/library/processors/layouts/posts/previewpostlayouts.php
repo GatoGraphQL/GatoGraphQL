@@ -10,6 +10,9 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
     public final const COMPONENT_LAYOUT_PREVIEWPOST_STANCE_THUMBNAIL = 'layout-previewpost-stance-thumbnail';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_STANCE_EDIT = 'layout-previewpost-stance-edit';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

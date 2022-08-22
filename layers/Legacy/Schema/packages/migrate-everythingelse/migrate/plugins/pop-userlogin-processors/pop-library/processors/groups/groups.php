@@ -4,6 +4,9 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
 {
     public final const COMPONENT_GROUP_LOGIN = 'group-login';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

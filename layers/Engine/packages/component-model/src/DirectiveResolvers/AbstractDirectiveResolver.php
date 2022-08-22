@@ -86,7 +86,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected bool $hasValidationErrors;
 
     /**
-     * @var array<string,array>
+     * @var array<string,array<string,mixed>>
      */
     protected array $schemaDefinitionForDirectiveCache = [];
 
@@ -177,6 +177,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->directive;
     }
 
+    /**
+     * @return string[]
+     */
     final public function getClassesToAttachTo(): array
     {
         return $this->getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo();
@@ -313,7 +316,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        /** @var array */
+        /** @var array<string,mixed> */
         $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
 
         /**
@@ -366,6 +369,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string,mixed> $directiveArgsSchemaDefinition
      * @param FieldInterface[] $fields
+     * @param array<string,mixed> $directiveArgs
      */
     private function validateNonMissingMandatoryDirectiveArguments(
         array $directiveArgs,
@@ -431,6 +435,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string,mixed> $directiveArgsSchemaDefinition
      * @param FieldInterface[] $fields
+     * @param array<string,mixed> $directiveArgs
      */
     private function validateOnlyExistingDirectiveArguments(
         array $directiveArgs,
@@ -466,6 +471,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Validate the constraints for the directive arguments
      *
      * @param FieldInterface[] $fields
+     * @param array<string,mixed> $directiveArgs
      */
     private function validateDirectiveArgumentConstraints(
         array $directiveArgs,
@@ -513,6 +519,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->getFieldOrDirectiveArgumentNameDefaultValues($directiveArgsSchemaDefinition);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     final protected function getDirectiveArgumentsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
@@ -522,6 +531,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
+     *
+     * @return string[]
      */
     public function getFieldNamesToApplyTo(): array
     {
@@ -856,6 +867,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final public function getDirectiveArgsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -883,6 +896,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->schemaDirectiveArgsCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
     {
         // @todo Implement "admin" directive args, if needed
@@ -894,6 +910,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Consolidation of the schema directive arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final protected function getConsolidatedDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
     {
@@ -921,6 +939,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     */
     protected function maybeAddSemanticVersionConstraintsWarningFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
@@ -1339,6 +1360,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return false;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     final public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         // First check if the value was cached
@@ -1349,6 +1373,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $this->schemaDefinitionForDirectiveCache[$key];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     private function doGetDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         $directiveName = $this->getDirectiveName();
@@ -1385,6 +1412,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $schemaDefinition;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getDirectiveExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [

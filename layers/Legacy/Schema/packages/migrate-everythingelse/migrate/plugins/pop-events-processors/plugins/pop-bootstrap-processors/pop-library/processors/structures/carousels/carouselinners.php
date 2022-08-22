@@ -6,6 +6,9 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
     public final const COMPONENT_CAROUSELINNER_AUTHOREVENTS = 'carouselinner-authorevents';
     public final const COMPONENT_CAROUSELINNER_TAGEVENTS = 'carouselinner-tagevents';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

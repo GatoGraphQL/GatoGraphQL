@@ -29,7 +29,10 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
         return $this->getCreateUpdateWithCommunityOrganizationProfileMutationResolver();
     }
 
-    private function getFormInputs()
+    /**
+     * @return mixed[]
+     */
+    private function getFormInputs(): array
     {
         return array_merge(
             $this->getCommonuserrolesFormInputs(),

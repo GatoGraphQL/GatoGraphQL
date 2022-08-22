@@ -4,6 +4,9 @@ class PoP_Share_Module_Processor_FeedbackMessageInners extends PoP_Module_Proces
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_SHAREBYEMAIL = 'feedbackmessageinner-sharebyemail';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

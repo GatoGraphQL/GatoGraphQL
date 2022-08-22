@@ -4,6 +4,9 @@ class PoP_UserCommunities_Module_Processor_TableInners extends PoP_Module_Proces
 {
     public final const COMPONENT_TABLEINNER_MYMEMBERS = 'tableinner-mymembers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

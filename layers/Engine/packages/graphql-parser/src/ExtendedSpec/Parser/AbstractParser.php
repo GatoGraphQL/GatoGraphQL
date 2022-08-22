@@ -322,7 +322,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * For each directive, indicate which meta-directive is composing it
          * by indicating their relative position (as a negative int)
-         * @var array<int, int>
+         * @var array<int,int>
          */
         $composingMetaDirectiveRelativePosition = [];
         $directiveCount = count($directives);
@@ -426,9 +426,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         Directive $directive,
     ): ?Argument;
 
+    /**
+     * @return int[]|null
+     */
     abstract protected function getAffectDirectivesUnderPosArgumentDefaultValue(
         Directive $directive,
-    ): mixed;
+    ): ?array;
 
     /**
      * @return int[]
@@ -514,7 +517,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param Directive[] $nestedDirectives
      */
     protected function createMetaDirective(
-        $name,
+        string $name,
         array $arguments,
         array $nestedDirectives,
         Location $location,
@@ -730,10 +733,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         return array_values(array_unique($this->objectResolvedFieldValueReferencedFields));
     }
 
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     */
     public function createDocument(
-        /** @var OperationInterface[] */
         array $operations,
-        /** @var Fragment[] */
         array $fragments,
     ): Document {
         $document = $this->createDocumentInstance(
@@ -753,11 +758,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     /**
      * Set the instance with the implementation
      * from ComponentModel
+     *
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
      */
     abstract protected function createDocumentInstance(
-        /** @var OperationInterface[] */
         array $operations,
-        /** @var Fragment[] */
         array $fragments,
     ): AbstractDocument;
 

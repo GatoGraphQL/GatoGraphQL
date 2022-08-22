@@ -6,6 +6,9 @@ namespace PoP\ComponentModel\Component;
 
 final class Component
 {
+    /**
+     * @param array<string,mixed> $atts
+     */
     public function __construct(
         public readonly string $processorClass,
         public readonly string $name,
@@ -13,13 +16,13 @@ final class Component
     ) {
     }
 
-    // public function __toString(): string
-    // {
-    //     return sprintf(
-    //         '[%s, %s%s]',
-    //         $this->processorClass,
-    //         $this->name,
-    //         $this->atts !== [] ? ', ' . json_encode($this->atts) : ''
-    //     );
-    // }
+    public function asString(): string
+    {
+        return sprintf(
+            '[%s, %s%s]',
+            $this->processorClass,
+            $this->name,
+            $this->atts !== [] ? ', ' . json_encode($this->atts) : ''
+        );
+    }
 }

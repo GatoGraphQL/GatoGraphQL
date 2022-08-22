@@ -9,6 +9,9 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     public final const COMPONENT_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR = 'filterinputcontainer-authoreventscalendar';
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR = 'filterinputcontainer-tageventscalendar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

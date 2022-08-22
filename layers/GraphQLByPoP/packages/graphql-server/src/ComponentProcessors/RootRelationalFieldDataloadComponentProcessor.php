@@ -28,6 +28,9 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
@@ -36,7 +39,12 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         );
     }
 
-    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string|int|array|null
+    /**
+     * @return string|int|array<string|int>|null
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     */
+    public function getObjectIDOrIDs(Component $component, array &$props, array &$data_properties): string|int|array|null
     {
         if (App::getState('does-api-query-have-errors')) {
             return null;

@@ -10,6 +10,9 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
     public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL = 'dataload-singlerelatedcontent-scroll-thumbnail';
     public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST = 'dataload-singlerelatedcontent-scroll-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

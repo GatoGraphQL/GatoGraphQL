@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processo
     public final const COMPONENT_DELEGATORFILTER_INDIVIDUALS = 'delegatorfilter-individuals';
     public final const COMPONENT_DELEGATORFILTER_ORGANIZATIONS = 'delegatorfilter-organizations';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

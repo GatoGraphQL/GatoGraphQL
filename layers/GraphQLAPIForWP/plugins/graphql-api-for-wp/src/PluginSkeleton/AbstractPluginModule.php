@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
 
 abstract class AbstractPluginModule extends AbstractModule implements PluginModuleInterface
@@ -51,7 +52,7 @@ abstract class AbstractPluginModule extends AbstractModule implements PluginModu
      * It uses Convention over Configuration: if the requested files exist,
      * load them.
      *
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

@@ -12,6 +12,9 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
 {
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
 
+    /**
+     * @param array<string,mixed> $mutationData
+     */
     protected function getUsercommunitiesFormData(array &$mutationData): void
     {
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();

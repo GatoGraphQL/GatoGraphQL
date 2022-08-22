@@ -7,6 +7,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
     public final const COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION = 'userstance-layoutwrapper-userpostinteraction';
     public final const COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION = 'userstance-layoutwrapper-userfullviewinteraction';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

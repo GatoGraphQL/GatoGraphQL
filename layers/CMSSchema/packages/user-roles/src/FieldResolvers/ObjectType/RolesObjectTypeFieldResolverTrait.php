@@ -17,6 +17,9 @@ trait RolesObjectTypeFieldResolverTrait
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
     abstract protected function getStringScalarTypeResolver(): StringScalarTypeResolver;
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
@@ -25,6 +28,9 @@ trait RolesObjectTypeFieldResolverTrait
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();

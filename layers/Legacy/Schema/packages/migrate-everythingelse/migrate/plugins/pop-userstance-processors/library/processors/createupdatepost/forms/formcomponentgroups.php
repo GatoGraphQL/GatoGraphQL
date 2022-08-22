@@ -6,6 +6,9 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
 {
     public final const COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET = 'formcomponentgroup-card-stancetarget';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

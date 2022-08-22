@@ -13,15 +13,27 @@ use ReflectionProperty;
 
 abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    protected $reflectionInstance;
-    protected $reflectionFieldNames;
-    protected $reflectionDocComments;
+    /**
+     * @var ReflectionClass
+     */
+    protected ?ReflectionClass $reflectionInstance = null;
+    /**
+     * @var string[]|null
+     */
+    protected ?array $reflectionFieldNames = null;
+    /**
+     * @var array<string,string>|null
+     */
+    protected ?array $reflectionDocComments = null;
 
     abstract protected function getTypeClass(): string;
 
+    /**
+     * @return ReflectionClass
+     */
     protected function getReflectionInstance(): ReflectionClass
     {
-        if (is_null($this->reflectionInstance)) {
+        if ($this->reflectionInstance ===  null) {
             $this->reflectionInstance = new ReflectionClass($this->getTypeClass());
         }
         return $this->reflectionInstance;
@@ -33,15 +45,16 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         return ReflectionProperty::IS_PUBLIC;
     }
 
+    /**
+     * @return string[]
+     */
     protected function getReflectionFieldNames(): array
     {
-        if (is_null($this->reflectionFieldNames)) {
+        if ($this->reflectionFieldNames === null) {
             $reflectionInstance = $this->getReflectionInstance();
             $reflectionProperties = $reflectionInstance->getProperties($this->getReflectionPropertyFilters());
             $this->reflectionFieldNames = array_map(
-                function ($property) {
-                    return $property->getName();
-                },
+                fn (ReflectionProperty $property) =>  $property->getName(),
                 $reflectionProperties
             );
         }
@@ -76,9 +89,12 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         return implode($this->__('. '), $docCommentDescLines);
     }
 
+    /**
+     * @return string[]
+     */
     public function getTypePropertyDocComments(): array
     {
-        if (is_null($this->reflectionDocComments)) {
+        if ($this->reflectionDocComments === null) {
             $reflectionInstance = $this->getReflectionInstance();
             $this->reflectionDocComments = [];
             foreach ($reflectionInstance->getProperties() as $property) {
@@ -95,16 +111,25 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         return $this->reflectionDocComments;
     }
 
+    /**
+     * @return string[]
+     */
     public function getPropertiesToExclude(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getPropertiesToInclude(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         // If explicitly stating what properties to include, then already use those

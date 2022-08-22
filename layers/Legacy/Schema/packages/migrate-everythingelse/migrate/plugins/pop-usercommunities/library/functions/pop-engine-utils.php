@@ -20,7 +20,7 @@ class PoP_URE_Engine_Hooks
     }
     /**
      * @todo Migrate to AppStateProvider
-     * @param array<array> $vars_in_array
+     * @param array<mixed[]> $vars_in_array
      */
     public function addVars(array $vars_in_array): void
     {
@@ -44,7 +44,7 @@ class PoP_URE_Engine_Hooks
 
     /**
      * @todo Migrate to AppStateProvider
-     * @param array<array> $vars_in_array
+     * @param array<mixed[]> $vars_in_array
      */
     public function augmentVarsProperties(array $vars_in_array): void
     {

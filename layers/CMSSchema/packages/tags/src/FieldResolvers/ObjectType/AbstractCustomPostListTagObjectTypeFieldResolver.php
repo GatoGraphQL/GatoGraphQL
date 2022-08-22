@@ -23,7 +23,7 @@ abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends Abstract
     abstract protected function getQueryProperty(): string;
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,

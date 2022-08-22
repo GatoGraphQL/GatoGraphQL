@@ -381,18 +381,12 @@ class Tokenizer
         return $prev;
     }
 
-    /**
-     * @throws SyntaxErrorException
-     */
-    protected function createUnexpectedException(Token $token)
+    protected function createUnexpectedException(Token $token): SyntaxErrorException
     {
         return $this->createUnexpectedTokenTypeException($token->getType());
     }
 
-    /**
-     * @throws SyntaxErrorException
-     */
-    protected function createUnexpectedTokenTypeException($tokenType)
+    protected function createUnexpectedTokenTypeException(string $tokenType): SyntaxErrorException
     {
         return new SyntaxErrorException(
             new FeedbackItemResolution(

@@ -11,6 +11,9 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
     public final const COMPONENT_TAGSOCIALMEDIA = 'tag-socialmedia';
     public final const COMPONENT_TAGSOCIALMEDIA_COUNTER = 'tag-socialmedia-counter';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

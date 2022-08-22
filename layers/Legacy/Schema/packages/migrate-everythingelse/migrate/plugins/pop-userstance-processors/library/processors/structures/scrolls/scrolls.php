@@ -13,6 +13,9 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public final const COMPONENT_SCROLL_AUTHORSTANCES_LIST = 'scroll-authorstances-list';
     public final const COMPONENT_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scroll-singlerelatedstancecontent-fullview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

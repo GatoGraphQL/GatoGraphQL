@@ -7,6 +7,9 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public final const COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW = 'scroll-organizations-fullview';
     public final const COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW = 'scroll-individuals-fullview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

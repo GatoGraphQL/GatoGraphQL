@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Container;
 class ObjectDictionary implements ObjectDictionaryInterface
 {
     /**
-     * @var array<string, array<string|int,mixed>>
+     * @var array<string,array<string|int,mixed>>
      */
     protected array $dictionary = [];
 

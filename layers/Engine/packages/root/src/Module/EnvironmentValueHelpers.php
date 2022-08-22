@@ -34,6 +34,7 @@ class EnvironmentValueHelpers
      * Convert the environment value from a comma separated string to array
      *
      * @param string $value environment value
+     * @return string[]
      */
     public static function commaSeparatedStringToArray(string $value): array
     {

@@ -11,6 +11,9 @@ class PoP_Module_Processor_MenuContentInners extends PoP_Module_Processor_Conten
     public final const COMPONENT_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE = 'contentinner-menu-dropdownbutton-side';
     public final const COMPONENT_CONTENTINNER_MENU_MULTITARGETINDENT = 'contentinner-menu-multitargetindent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

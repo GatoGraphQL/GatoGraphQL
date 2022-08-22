@@ -8,6 +8,9 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
     public final const COMPONENT_CONTENTINNER_USERPOSTINTERACTION = 'contentinner-userpostinteraction';
     public final const COMPONENT_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION = 'contentinner-userhighlightpostinteraction';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Form
 {
     public final const COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponentgroup-selectabletypeahead-profiles';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

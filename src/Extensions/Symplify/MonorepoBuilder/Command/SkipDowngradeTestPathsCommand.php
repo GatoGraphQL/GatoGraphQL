@@ -14,7 +14,7 @@ use Symplify\PackageBuilder\Parameter\ParameterProvider;
 final class SkipDowngradeTestPathsCommand extends AbstractSymplifyCommand
 {
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     private array $skipDowngradeTestFiles = [];
 

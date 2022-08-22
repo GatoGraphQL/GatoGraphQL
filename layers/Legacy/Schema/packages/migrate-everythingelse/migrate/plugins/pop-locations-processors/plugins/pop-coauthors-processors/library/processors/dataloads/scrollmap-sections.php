@@ -7,6 +7,9 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
 {
     public final const COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP = 'dataload-singleauthors-scrollmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

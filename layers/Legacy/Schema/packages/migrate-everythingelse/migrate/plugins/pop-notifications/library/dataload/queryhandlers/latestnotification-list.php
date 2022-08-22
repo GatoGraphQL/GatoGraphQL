@@ -26,7 +26,10 @@ class GD_DataLoad_QueryInputOutputHandler_LatestNotificationList extends GD_Data
         return '>';
     }
 
-    public function prepareQueryArgs(&$query_args)
+    /**
+     * @param array<string,mixed> $query_args
+     */
+    public function prepareQueryArgs(array &$query_args): void
     {
         parent::prepareQueryArgs($query_args);
 

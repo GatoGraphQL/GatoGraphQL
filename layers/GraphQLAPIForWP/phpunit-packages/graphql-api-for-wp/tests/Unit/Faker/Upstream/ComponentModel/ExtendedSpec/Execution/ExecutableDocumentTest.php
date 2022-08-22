@@ -38,7 +38,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @dataProvider getExistingTypeOrInterfaceQueries
      */
-    public function testExistingTypeFragmentSpread(string $query)
+    public function testExistingTypeFragmentSpread(string $query): void
     {
         $document = $this->getParser()->parse($query);
         $context = new Context();
@@ -47,6 +47,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getExistingTypeOrInterfaceQueries(): array
     {
         return [
@@ -148,7 +151,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @dataProvider getNonExistingTypeOrInterfaceQueries
      */
-    public function testNonExistingTypeFragmentSpread(string $query)
+    public function testNonExistingTypeFragmentSpread(string $query): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_2, ['ThisTypeDoesNotExist']))->getMessage());
@@ -159,6 +162,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getNonExistingTypeOrInterfaceQueries(): array
     {
         return [
@@ -230,7 +236,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @dataProvider getNonCompositeTypeQueries
      */
-    public function testNonCompositeTypeFragmentSpread(string $query)
+    public function testNonCompositeTypeFragmentSpread(string $query): void
     {
         $types = [
             'scalar' => 'String',
@@ -245,6 +251,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getNonCompositeTypeQueries(): array
     {
         return [
@@ -288,7 +297,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @dataProvider getVariableIsInputTypeQueries
      */
-    public function testVariableIsInputType(string $query)
+    public function testVariableIsInputType(string $query): void
     {
         $document = $this->getParser()->parse($query);
         $context = new Context();
@@ -297,6 +306,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getVariableIsInputTypeQueries(): array
     {
         return [
@@ -327,7 +339,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @dataProvider getVariableIsNotInputTypeQueries
      */
-    public function testVariableIsNotInputType(string $query, string $variableType)
+    public function testVariableIsNotInputType(string $query, string $variableType): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_2, ['someVar', $variableType]))->getMessage());
@@ -338,6 +350,9 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $this->assertTrue(true);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getVariableIsNotInputTypeQueries(): array
     {
         return [

@@ -34,7 +34,7 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
-    protected function additionals($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(string|int $user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction('gd_useravatar_update:additionals', $user_id, $fieldDataAccessor);
     }

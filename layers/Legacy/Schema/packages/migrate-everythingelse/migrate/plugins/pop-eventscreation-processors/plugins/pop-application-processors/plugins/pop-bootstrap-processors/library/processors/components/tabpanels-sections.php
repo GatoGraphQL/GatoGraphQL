@@ -5,6 +5,9 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
     public final const COMPONENT_TABPANEL_MYEVENTS = 'tabpanel-myevents';
     public final const COMPONENT_TABPANEL_MYPASTEVENTS = 'tabpanel-mypastevents';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

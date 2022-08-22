@@ -97,6 +97,9 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
         return $pluginInputSetting[ResponseKeys::VALUE];
     }
 
+    /**
+     * @return mixed[]
+     */
     protected function executeRESTEndpointToGetPluginSettings(
         string $dataName,
     ): array {

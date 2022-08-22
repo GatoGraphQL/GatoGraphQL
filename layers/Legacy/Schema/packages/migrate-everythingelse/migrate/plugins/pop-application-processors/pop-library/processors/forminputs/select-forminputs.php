@@ -5,6 +5,9 @@ class GD_Custom_Module_Processor_SelectFormInputs extends PoP_Module_Processor_B
 {
     public final const COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT = 'forminput-custom-volunteersneeded';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

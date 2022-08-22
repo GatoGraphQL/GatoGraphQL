@@ -4,6 +4,9 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents exte
 {
     public final const COMPONENT_TABPANEL_AUTHORLINKS = 'tabpanel-authorlinks';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

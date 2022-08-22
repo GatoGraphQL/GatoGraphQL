@@ -15,6 +15,7 @@ trait XMLDataStructureFormatterTrait
 
     /**
      * Iterate the array and print all the entries as a properties file
+     * @param array<string,mixed> $data
      */
     public function getOutputContent(array &$data): string
     {
@@ -27,6 +28,7 @@ trait XMLDataStructureFormatterTrait
     /**
      * Fill an xml element with the contents from the array
      * Taken from https://stackoverflow.com/a/5965940
+     * @param array<string,mixed> $data
      */
     protected function arrayToXML(array $data, SimpleXMLElement &$xml_data): void
     {

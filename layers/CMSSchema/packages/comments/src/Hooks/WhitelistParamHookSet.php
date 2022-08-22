@@ -19,6 +19,10 @@ class WhitelistParamHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return string[]
+     * @param string[] $params
+     */
     public function getWhitelistedParams(array $params): array
     {
         // Used for the Comments to know what post to fetch comments from when filtering

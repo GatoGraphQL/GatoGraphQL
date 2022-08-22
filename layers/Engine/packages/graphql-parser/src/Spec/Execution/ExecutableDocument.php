@@ -16,6 +16,9 @@ class ExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
 
+    /**
+     * @var OperationInterface[]|null
+     */
     private ?array $requestedOperations = null;
 
     public function __construct(

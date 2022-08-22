@@ -15,7 +15,7 @@ use Symplify\PackageBuilder\Parameter\ParameterProvider;
 final class EnvVarCommand extends AbstractSymplifyCommand
 {
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     private array $environmentVariables = [];
 

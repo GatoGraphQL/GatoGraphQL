@@ -23,6 +23,9 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
         return false;
@@ -37,10 +40,16 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
         return $subcomponents;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function prepareForPropagation(Component $component, array &$props): void
     {
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function restoreFromPropagation(Component $component, array &$props): void
     {
     }

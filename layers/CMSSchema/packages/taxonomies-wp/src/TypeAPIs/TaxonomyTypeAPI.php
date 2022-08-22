@@ -26,6 +26,9 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
+    /**
+     * @return array{0: ?WP_Term, 1: null|string|int}
+     */
     protected function getTermObjectAndID(string|int|object $termObjectOrID): array
     {
         if (is_object($termObjectOrID)) {
@@ -62,6 +65,11 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $termObject->taxonomy;
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function convertTaxonomiesQuery(array $query, array $options = []): array
     {
         if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {

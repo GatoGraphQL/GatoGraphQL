@@ -10,6 +10,9 @@ class DirectiveDataAccessor implements DirectiveDataAccessorInterface
 {
     use FieldOrDirectiveDataAccessorTrait;
 
+    /**
+     * @param array<string,mixed> $unresolvedDirectiveArgs
+     */
     public function __construct(
         /** @var array<string,mixed> */
         protected array $unresolvedDirectiveArgs,

@@ -69,6 +69,9 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest exten
 
     abstract protected function getClientURL(): string;
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [

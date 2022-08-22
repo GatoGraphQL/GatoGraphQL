@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider implements TypeSchemaDefinitionProviderInterface
 {
     /**
-     * @var array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
+     * @var array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
      */
     protected array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
 
@@ -22,13 +22,16 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
     }
 
     /**
-     * @return array<string, RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
+     * @return array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
      */
     final public function getAccessedDirectiveResolverClassRelationalTypeResolvers(): array
     {
         return $this->accessedDirectiveResolverClassRelationalTypeResolvers;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = [
@@ -42,7 +45,7 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getNamedTypeExtensions(): array
     {

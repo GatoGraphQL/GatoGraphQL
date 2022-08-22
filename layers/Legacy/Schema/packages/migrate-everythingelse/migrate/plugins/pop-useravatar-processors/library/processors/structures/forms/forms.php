@@ -4,6 +4,9 @@ class PoP_UserAvatarProcessors_Module_Processor_UserForms extends PoP_Module_Pro
 {
     public final const COMPONENT_FORM_USERAVATAR_UPDATE = 'form-useravatar-update';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

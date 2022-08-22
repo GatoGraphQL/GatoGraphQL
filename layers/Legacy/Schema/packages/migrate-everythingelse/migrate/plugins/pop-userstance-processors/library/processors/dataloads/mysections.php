@@ -7,6 +7,9 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
     public final const COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT = 'dataload-mystances-table-edit';
     public final const COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW = 'dataload-mystances-scroll-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

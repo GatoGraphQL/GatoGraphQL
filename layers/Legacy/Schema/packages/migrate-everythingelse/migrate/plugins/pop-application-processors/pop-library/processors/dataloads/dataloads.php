@@ -6,6 +6,9 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
 {
     public final const COMPONENT_DATALOAD_INITIALIZEDOMAIN = 'dataload-initializedomain';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -36,6 +36,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $idFieldValues
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string|int,SplObjectStorage<FieldInterface,mixed>>
+     * @param array<string|int,object> $idObjects
      */
     public function serializeOutputTypeIDFieldValues(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -136,6 +137,8 @@ class TypeSerializationService implements TypeSerializationServiceInterface
     /**
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
+     *
+     * @return string|int|float|bool|mixed[]
      */
     public function serializeLeafOutputTypeValue(
         mixed $value,

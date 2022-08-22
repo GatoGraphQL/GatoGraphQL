@@ -7,6 +7,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
     public final const COMPONENT_WIDGET_LINK_CATEGORIES = 'widget-link-categories';
     public final const COMPONENT_WIDGETCOMPACT_LINKINFO = 'widgetcompact-link-info';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

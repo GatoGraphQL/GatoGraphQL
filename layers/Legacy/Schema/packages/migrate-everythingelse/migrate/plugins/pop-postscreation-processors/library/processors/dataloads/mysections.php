@@ -8,6 +8,9 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
     public final const COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-myposts-scroll-simpleviewpreview';
     public final const COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myposts-scroll-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

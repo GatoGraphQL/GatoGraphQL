@@ -5,6 +5,9 @@ class PoP_Module_Processor_PublishedLayouts extends PoP_Module_Processor_PostSta
     public final const COMPONENT_LAYOUT_PUBLISHED = 'layout-published';
     public final const COMPONENT_LAYOUT_WIDGETPUBLISHED = 'layout-widgetpublished';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

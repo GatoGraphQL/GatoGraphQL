@@ -10,6 +10,9 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
     public final const COMPONENT_FORMINNER_LOGOUT = 'forminner-logout';
     public final const COMPONENT_FORMINNER_USER_CHANGEPASSWORD = 'forminner-user-changepwd';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

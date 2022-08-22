@@ -8,6 +8,9 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageInners extends PoP_Module
     public final const COMPONENT_FEEDBACKMESSAGEINNER_LOGOUT = 'feedbackmessageinner-logout';
     public final const COMPONENT_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD = 'feedbackmessageinner-user-changepassword';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

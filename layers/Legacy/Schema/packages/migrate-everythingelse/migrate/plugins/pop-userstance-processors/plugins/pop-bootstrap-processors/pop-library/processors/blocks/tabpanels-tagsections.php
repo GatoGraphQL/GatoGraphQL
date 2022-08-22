@@ -7,6 +7,9 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
     public final const COMPONENT_BLOCK_TABPANEL_TAGSTANCES_NEUTRAL = 'block-tabpanel-tagstances-neutral';
     public final const COMPONENT_BLOCK_TABPANEL_TAGSTANCES_AGAINST = 'block-tabpanel-tagstances-against';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

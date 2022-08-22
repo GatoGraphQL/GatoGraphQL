@@ -60,8 +60,8 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
     /**
      * Register the category when in the corresponding CPT
      *
-     * @param array<array> $categories List of categories, each item is an array with props "slug" and "title"
-     * @return array<array> List of categories, each item is an array with props "slug" and "title"
+     * @param array<array<string,mixed>> $categories List of categories, each item is an array with props "slug" and "title"
+     * @return array<array<string,mixed>> List of categories, each item is an array with props "slug" and "title"
      */
     public function getBlockCategoriesViaBlockEditorContext(array $categories, WP_Block_Editor_Context $blockEditorContext): array
     {
@@ -77,8 +77,8 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
     /**
      * Register the category when in the corresponding CPT
      *
-     * @param array<array> $categories List of categories, each item is an array with props "slug" and "title"
-     * @return array<array> List of categories, each item is an array with props "slug" and "title"
+     * @param array<array<string,mixed>> $categories List of categories, each item is an array with props "slug" and "title"
+     * @return array<array<string,mixed>> List of categories, each item is an array with props "slug" and "title"
      */
     public function getBlockCategories(array $categories, WP_Post $post): array
     {

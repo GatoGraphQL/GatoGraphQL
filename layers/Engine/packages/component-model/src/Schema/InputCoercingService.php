@@ -258,7 +258,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             return $inputValue;
         }
         if ($inputIsArrayOfArraysType) {
-            /** @var array $inputValue */
+            /** @var array<mixed[]> $inputValue */
             // If the value is an array of arrays, then cast each subelement to the item type
             return array_map(
                 // If it contains a null value, return it as is
@@ -270,7 +270,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             );
         }
         if ($inputIsArrayType) {
-            /** @var array $inputValue */
+            /** @var mixed[] $inputValue */
             // If the value is an array, then cast each element to the item type
             return array_map(
                 fn (mixed $arrayArgValueElem) => ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayArgValueElem : $inputTypeResolver->coerceValue($arrayArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),

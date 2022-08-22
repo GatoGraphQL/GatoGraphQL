@@ -31,6 +31,7 @@ class ComponentPathManager implements ComponentPathManagerInterface
 
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
+     * @param array<string,mixed> $props
      */
     public function prepareForPropagation(Component $component, array &$props): void
     {
@@ -39,6 +40,9 @@ class ComponentPathManager implements ComponentPathManagerInterface
         // We add $component instead of the first element from $this->propagation_unsettled_paths, so that calculating $this->propagation_current_path works also when not doing ?componentPaths=...
         $this->propagation_current_path[] = $component;
     }
+    /**
+     * @param array<string,mixed> $props
+     */
     public function restoreFromPropagation(Component $component, array &$props): void
     {
         // Remove the component to the path

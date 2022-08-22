@@ -7,6 +7,9 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
     public final const COMPONENT_URE_FORMINPUT_CUP_CONTACTNUMBER = 'forminput-ure-cup-contactnumber';
     public final const COMPONENT_URE_FORMINPUT_CUP_LASTNAME = 'forminput-ure-cup-lastName';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

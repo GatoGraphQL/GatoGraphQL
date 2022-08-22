@@ -23,7 +23,8 @@ interface MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
      * @param boolean $forceBothTypes Define if to always add it to both QueryRoot and MutationRoot, without checking if the field belongs to one or the other
      *                                This is needed when calling this function before the Schema has been configured, i.e. before finding FieldResolvers for each Type
      *
-     * @return array The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
+     * @return array<mixed[]> The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
+     * @param array<mixed[]> $fieldEntries
      */
     public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes = false): array;
 }

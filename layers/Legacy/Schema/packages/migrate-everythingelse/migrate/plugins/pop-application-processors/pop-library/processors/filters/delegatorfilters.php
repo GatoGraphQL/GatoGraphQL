@@ -21,6 +21,9 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
     public final const COMPONENT_DELEGATORFILTER_TAGS = 'delegatorfilter-tags';
     public final const COMPONENT_DELEGATORFILTER_USERS = 'delegatorfilter-users';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -23,6 +23,9 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
     public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS18_SIMPLEVIEW = 'scrollinner-categoryposts18-simpleview';
     public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS19_SIMPLEVIEW = 'scrollinner-categoryposts19-simpleview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

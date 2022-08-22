@@ -4,6 +4,9 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks extends PoP_Mo
 {
     public final const COMPONENT_BLOCK_TABPANEL_LINKS = 'block-links-tabpanel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

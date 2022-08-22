@@ -8,6 +8,9 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
     public final const COMPONENT_DATALOAD_LOCATIONPOST_UPDATE = 'dataload-locationpost-update';
     public final const COMPONENT_DATALOAD_LOCATIONPOST_CREATE = 'dataload-locationpost-create';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

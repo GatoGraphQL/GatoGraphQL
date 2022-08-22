@@ -14,6 +14,9 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         /** @var RootModuleConfiguration */
@@ -38,6 +41,7 @@ class AppStateProvider extends AbstractAppStateProvider
      * Override values for the API mode!
      * Whenever doing ?scheme=api, the specific configuration below
      * must be set in the vars
+     * @param array<string,mixed> $state
      */
     public function consolidate(array &$state): void
     {

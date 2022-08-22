@@ -7,6 +7,9 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
     public final const COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTUSER = 'forminput-hiddeninput-user';
     public final const COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT = 'forminput-hiddeninput-comment';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

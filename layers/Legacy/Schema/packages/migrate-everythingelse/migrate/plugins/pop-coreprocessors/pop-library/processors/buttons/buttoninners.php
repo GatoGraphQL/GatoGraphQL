@@ -9,6 +9,9 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
     public final const COMPONENT_BUTTONINNER_POSTCOMMENTS = 'buttoninner-comments';
     public final const COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL = 'buttoninner-comments-label';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -6,9 +6,12 @@ namespace PoP\ComponentModel\FilterInputs;
 
 abstract class AbstractArrayValuesToQueryFilterInput extends AbstractFilterInput
 {
+    /**
+     * @param array<string,mixed> $query
+     */
     final public function filterDataloadQueryArgs(array &$query, mixed $value): void
     {
-        /** @var array $value */
+        /** @var mixed[] $value */
         $value = $this->getValue($value);
         $avoidSettingArrayValueIfEmpty = $this->avoidSettingArrayValueIfEmpty();
         foreach ($this->getValueToQueryArgKeys() as $valueKey => $queryKey) {
@@ -27,6 +30,10 @@ abstract class AbstractArrayValuesToQueryFilterInput extends AbstractFilterInput
      */
     abstract protected function getValueToQueryArgKeys(): array;
 
+    /**
+     * @return mixed[]
+     * @param mixed[] $value
+     */
     protected function getValue(array $value): array
     {
         return $value;

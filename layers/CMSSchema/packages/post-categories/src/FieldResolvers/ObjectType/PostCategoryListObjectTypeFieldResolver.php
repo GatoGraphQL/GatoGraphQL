@@ -11,6 +11,9 @@ use PoPCMSSchema\Posts\FieldResolvers\ObjectType\AbstractPostObjectTypeFieldReso
 
 class PostCategoryListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolver
 {
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -28,7 +31,7 @@ class PostCategoryListObjectTypeFieldResolver extends AbstractPostObjectTypeFiel
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,

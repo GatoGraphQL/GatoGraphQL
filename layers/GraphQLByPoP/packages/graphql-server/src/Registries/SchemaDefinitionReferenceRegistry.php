@@ -30,11 +30,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     use BasicServiceTrait;
 
     /**
-     * @var array<string, mixed>
+     * @var array<string,mixed>|null
      */
     protected ?array $fullSchemaDefinitionForGraphQL = null;
     /**
-     * @var array<string, SchemaDefinitionReferenceObjectInterface>
+     * @var array<string,SchemaDefinitionReferenceObjectInterface>
      */
     protected array $fullSchemaDefinitionReferenceDictionary = [];
 
@@ -81,6 +81,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function &getFullSchemaDefinitionForGraphQL(): array
     {
         if ($this->fullSchemaDefinitionForGraphQL === null) {
@@ -97,6 +100,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      *
      *   Public schema: can cache
      *   Private schema: cannot cache
+     *
+     * @return array<string,mixed>
      */
     private function &doGetGraphQLSchemaDefinition(): array
     {
@@ -299,6 +304,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * When doing /?edit_schema=true, "Schema" type directives will also be added the FIELD location,
      * so that they show up in GraphiQL and can be added to a persisted query
      * When that happens, append '("Schema" type directive)' to the directive's description
+     *
+     * @param string[] $directiveSchemaDefinitionPath
      */
     protected function maybeAddTypeToSchemaDirectiveDescription(array $directiveSchemaDefinitionPath): void
     {
@@ -319,6 +326,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     /**
      * Append the field or directive's version to its description
+     *
+     * @param string[] $fieldOrDirectiveSchemaDefinitionPath
      */
     protected function addVersionToGraphQLSchemaFieldDescription(array $fieldOrDirectiveSchemaDefinitionPath): void
     {
@@ -336,6 +345,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
     /**
      * Append the "Mutation" label to the field's description
+     *
+     * @param string[] $fieldSchemaDefinitionPath
      */
     protected function addMutationLabelToSchemaFieldDescription(array $fieldSchemaDefinitionPath): void
     {

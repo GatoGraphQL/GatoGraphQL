@@ -10,6 +10,9 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait TypeSchemaDefinitionResolverTrait
 {
+    /**
+     * @return array<string,mixed>
+     */
     final public function getTypeSchemaDefinition(
         string $name,
         TypeResolverInterface $typeResolver,
@@ -43,6 +46,7 @@ trait TypeSchemaDefinitionResolverTrait
      * Use bitwise operators to extract the applied modifiers
      *
      * @see https://www.php.net/manual/en/language.operators.bitwise.php#91291
+     * @param array<string,mixed> $schemaDefinition
      */
     private function processSchemaDefinitionTypeModifiers(
         array &$schemaDefinition,

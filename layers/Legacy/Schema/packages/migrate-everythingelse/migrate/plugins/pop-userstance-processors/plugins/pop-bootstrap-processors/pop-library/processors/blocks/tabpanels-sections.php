@@ -14,6 +14,9 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
     public final const COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE = 'block-stances-neutral-article-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYSTANCES = 'block-mystances-tabpanel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

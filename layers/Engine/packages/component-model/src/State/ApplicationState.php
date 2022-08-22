@@ -7,12 +7,12 @@ namespace PoP\ComponentModel\State;
 class ApplicationState
 {
     /**
-     * @var array<string, mixed>
+     * @var array<string,mixed>
      */
     public static array $vars = [];
 
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public static function getVars(): array
     {

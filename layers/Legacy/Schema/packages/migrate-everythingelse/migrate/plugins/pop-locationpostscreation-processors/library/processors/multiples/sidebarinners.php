@@ -4,6 +4,9 @@ class PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners exte
 {
     public final const COMPONENT_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-mylocationposts-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

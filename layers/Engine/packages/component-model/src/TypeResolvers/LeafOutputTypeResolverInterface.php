@@ -29,7 +29,7 @@ interface LeafOutputTypeResolverInterface extends OutputTypeResolverInterface
      *
      * `array` is supported as an output type, as to support `JSONObject`.
      *
-     * @return string|int|float|bool|array formatted representation of the custom scalar
+     * @return string|int|float|bool|mixed[] formatted representation of the custom scalar
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array;
 }

@@ -140,6 +140,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         App::doAction('gd_addcomment', $comment_id, $fieldDataAccessor);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCommentData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $comment_data = [
@@ -181,6 +184,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     /**
      * @throws CommentCRUDMutationException In case of error
+     * @param array<string,mixed> $comment_data
      */
     protected function insertComment(array $comment_data): string|int
     {

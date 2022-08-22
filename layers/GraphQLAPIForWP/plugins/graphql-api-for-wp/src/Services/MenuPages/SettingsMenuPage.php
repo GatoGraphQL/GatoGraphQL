@@ -290,7 +290,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     /**
      * Display a checkbox field.
      *
-     * @param array<string, mixed> $itemSetting
+     * @param array<string,mixed> $itemSetting
      */
     protected function printCheckboxField(string $module, array $itemSetting): void
     {
@@ -308,7 +308,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     /**
      * Display a label
      *
-     * @param array<string, mixed> $itemSetting
+     * @param array<string,mixed> $itemSetting
      */
     protected function printLabelField(string $module, array $itemSetting): void
     {
@@ -322,7 +322,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     /**
      * Display an input field.
      *
-     * @param array<string, mixed> $itemSetting
+     * @param array<string,mixed> $itemSetting
      */
     protected function printInputField(string $module, array $itemSetting): void
     {
@@ -346,7 +346,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     /**
      * Display a select field.
      *
-     * @param array<string, mixed> $itemSetting
+     * @param array<string,mixed> $itemSetting
      */
     protected function printSelectField(string $module, array $itemSetting): void
     {
@@ -379,7 +379,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     /**
      * Display a textarea field.
      *
-     * @param array<string, mixed> $itemSetting
+     * @param array<string,mixed> $itemSetting
      */
     protected function printTextareaField(string $module, array $itemSetting): void
     {

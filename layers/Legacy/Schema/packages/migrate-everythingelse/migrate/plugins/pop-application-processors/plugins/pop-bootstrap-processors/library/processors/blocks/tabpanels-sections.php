@@ -10,6 +10,9 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
     public final const COMPONENT_BLOCK_TABPANEL_MYCONTENT = 'block-mycontent-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYPOSTS = 'block-myposts-tabpanel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

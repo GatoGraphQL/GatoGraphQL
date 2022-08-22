@@ -4,6 +4,9 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections extends G
 {
     public final const COMPONENT_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP = 'scrollmap-singleauthors-scrollmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -7,7 +7,7 @@ namespace PoP\Definitions;
 interface DefinitionManagerInterface
 {
     /**
-     * @return array<string, DefinitionResolverInterface>
+     * @return array<string,DefinitionResolverInterface>
      */
     public function getDefinitionResolvers(): array;
     public function getDefinitionResolver(string $group): ?DefinitionResolverInterface;

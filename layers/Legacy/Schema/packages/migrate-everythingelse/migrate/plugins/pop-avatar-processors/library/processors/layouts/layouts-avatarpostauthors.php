@@ -8,6 +8,9 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
     public final const COMPONENT_LAYOUTPOST_AUTHORAVATAR82 = 'layoutpost-authoravatar82';
     public final const COMPONENT_LAYOUTPOST_AUTHORAVATAR120 = 'layoutpost-authoravatar120';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

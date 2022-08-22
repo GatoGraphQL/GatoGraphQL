@@ -23,6 +23,9 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
     public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 = 'block-tabpanel-tagnosearchcategoryposts18';
     public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 = 'block-tabpanel-tagnosearchcategoryposts19';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

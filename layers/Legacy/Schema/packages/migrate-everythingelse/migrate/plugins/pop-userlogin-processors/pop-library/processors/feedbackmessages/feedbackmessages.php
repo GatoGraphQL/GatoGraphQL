@@ -8,6 +8,9 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessages extends PoP_Module_Proc
     public final const COMPONENT_FEEDBACKMESSAGE_LOGOUT = 'feedbackmessage-logout';
     public final const COMPONENT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'feedbackmessage-user-changepassword';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

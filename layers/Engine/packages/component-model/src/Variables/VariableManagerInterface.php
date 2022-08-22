@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Variables;
 interface VariableManagerInterface
 {
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getVariablesFromRequest(): array;
 }

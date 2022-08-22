@@ -4,6 +4,9 @@ class PoP_Volunteering_Module_Processor_GFFormInners extends PoP_Module_Processo
 {
     public final const COMPONENT_FORMINNER_VOLUNTEER = 'forminner-volunteer';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

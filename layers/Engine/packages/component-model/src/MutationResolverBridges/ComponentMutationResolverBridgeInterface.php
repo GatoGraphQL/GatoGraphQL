@@ -9,7 +9,8 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 interface ComponentMutationResolverBridgeInterface
 {
     /**
-     * @return array<string, mixed>|null
+     * @return array<string,mixed>|null
+     * @param array<string,mixed> $data_properties
      */
     public function executeMutation(array &$data_properties): ?array;
     public function getMutationResolver(): MutationResolverInterface;

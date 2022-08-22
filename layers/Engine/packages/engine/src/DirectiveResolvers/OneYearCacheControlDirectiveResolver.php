@@ -8,6 +8,9 @@ use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 
 class OneYearCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToApplyTo(): array
     {
         return [

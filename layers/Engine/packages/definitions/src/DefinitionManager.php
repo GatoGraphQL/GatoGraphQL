@@ -9,19 +9,19 @@ use PoP\Definitions\Configuration\Request;
 class DefinitionManager implements DefinitionManagerInterface
 {
     /**
-     * @var array<string, array>
+     * @var array<string,array<string,string>>
      */
     protected array $names = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array<string,string>>
      */
     protected array $name_definitions = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array<string,string>>
      */
     protected array $definition_names = [];
     /**
-     * @var array<string, DefinitionResolverInterface>
+     * @var array<string,DefinitionResolverInterface>
      */
     protected array $definition_resolvers = [];
     private ?DefinitionPersistenceInterface $definition_persistence = null;
@@ -32,7 +32,7 @@ class DefinitionManager implements DefinitionManagerInterface
     }
 
     /**
-     * @return array<string, DefinitionResolverInterface>
+     * @return array<string,DefinitionResolverInterface>
      */
     public function getDefinitionResolvers(): array
     {

@@ -10,6 +10,9 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
 {
     use BasicServiceTrait;
 
+    /**
+     * @return string[]
+     */
     public function getAdminFieldNames(): array
     {
         return [];

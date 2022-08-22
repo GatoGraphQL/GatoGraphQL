@@ -12,14 +12,16 @@ class FeedbackItemResolution
 {
     use StandaloneServiceTrait;
 
+    /**
+     * @param array<string|int|float|bool> $messageParams
+     * @param FeedbackItemResolution[] $causes
+     */
     public function __construct(
         protected string $feedbackProviderServiceClass,
         protected string $code,
         /** @var array<string|int|float|bool> */
         protected array $messageParams = [],
         /**
-         * @var FeedbackItemResolution[]
-         *
          * @see https://github.com/graphql/graphql-spec/issues/893
          */
         protected array $causes = [],

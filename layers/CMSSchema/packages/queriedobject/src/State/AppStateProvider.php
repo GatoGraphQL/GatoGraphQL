@@ -23,6 +23,9 @@ class AppStateProvider extends AbstractAppStateProvider
         return $this->cmsRoutingStateService ??= $this->instanceManager->getInstance(CMSRoutingStateServiceInterface::class);
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         /** @var RootModuleConfiguration */

@@ -12,13 +12,14 @@ abstract class AbstractUserStateConfigurableAccessControlForFieldsInPrivateSchem
 {
     /**
      * Configuration entries
+     * @return array<mixed[]>
      */
     protected function getConfigurationEntries(): array
     {
         return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::STATE);
     }
 
-    protected function removeFieldNameBasedOnMatchingEntryValue($entryValue = null): bool
+    protected function removeFieldNameBasedOnMatchingEntryValue(mixed $entryValue = null): bool
     {
         // Obtain the user state: logged in or not
         $isUserLoggedIn = App::getState('is-user-logged-in');

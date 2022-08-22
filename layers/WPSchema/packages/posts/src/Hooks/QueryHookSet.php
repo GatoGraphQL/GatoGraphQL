@@ -22,7 +22,12 @@ class QueryHookSet extends AbstractHookSet
         );
     }
 
-    public function convertCustomPostsQuery($query, array $options): array
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function convertCustomPostsQuery(array $query, array $options): array
     {
         if (isset($query['is-sticky'])) {
             $stickyPosts = \get_option('sticky_posts', []);

@@ -5,6 +5,9 @@ class PoP_Events_Module_Processor_UserProfileCheckboxFormInputs extends PoP_User
 {
     public final const COMPONENT_FORMINPUT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS = 'forminput-emaildigests-weeklyupcomingevents';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

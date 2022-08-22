@@ -9,6 +9,9 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
     public final const COMPONENT_TABPANEL_AUTHORSUBSCRIBEDTOTAGS = 'tabpanel-authorsubscribedtotags';
     public final const COMPONENT_TABPANEL_AUTHORRECOMMENDEDPOSTS = 'tabpanel-authorrecommendedposts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

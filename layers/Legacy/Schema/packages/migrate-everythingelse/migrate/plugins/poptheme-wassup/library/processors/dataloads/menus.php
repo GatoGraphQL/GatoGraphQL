@@ -17,6 +17,9 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
     public final const COMPONENT_DATALOAD_MENU_BODY_MYSECTIONS = 'dataload-menu-body-mysections';
     public final const COMPONENT_DATALOAD_MENU_BODY_ABOUT = 'dataload-menu-body-about';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

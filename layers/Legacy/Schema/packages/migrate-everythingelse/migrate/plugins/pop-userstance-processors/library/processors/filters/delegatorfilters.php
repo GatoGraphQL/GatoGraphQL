@@ -12,6 +12,9 @@ class PoPVP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor
     public final const COMPONENT_DELEGATORFILTER_TAGSTANCES = 'delegatorfilter-tagstances';
     public final const COMPONENT_DELEGATORFILTER_TAGSTANCES_STANCE = 'delegatorfilter-tagstances-stance';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

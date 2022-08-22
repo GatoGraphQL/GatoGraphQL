@@ -6,6 +6,9 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT = 'viewcomponent-postbutton-addcomment';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG = 'viewcomponent-postbutton-addcomment-big';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

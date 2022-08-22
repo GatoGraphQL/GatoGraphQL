@@ -5,6 +5,9 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
     public final const COMPONENT_BLOCK_COMMENTS_SCROLL = 'block-comments-scroll';
     public final const COMPONENT_BLOCK_ADDCOMMENT = 'block-addcomment';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

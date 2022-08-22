@@ -9,6 +9,9 @@ use stdClass;
 
 class GraphQLQueryStringFormatter implements GraphQLQueryStringFormatterInterface
 {
+    /**
+     * @param null|integer|float|boolean|string|mixed[]|stdClass $elem
+     */
     public function getElementAsQueryString(null|int|float|bool|string|array|stdClass $elem): string
     {
         if (is_array($elem)) {

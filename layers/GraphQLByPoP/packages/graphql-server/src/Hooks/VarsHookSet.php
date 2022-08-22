@@ -20,6 +20,10 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return string[]
+     * @param string[] $elements
+     */
     public function getModelInstanceElementsFromAppState(array $elements): array
     {
         $elements[] = $this->__('edit schema:', 'graphql-server') . App::getState('edit-schema');

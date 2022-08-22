@@ -19,20 +19,21 @@ use stdClass;
 
 abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
 {
-    /** @var array<string, MutationResolverInterface>|null */
+    /** @var array<string,MutationResolverInterface>|null */
     private ?array $consolidatedInputFieldNameMutationResolversCache = null;
 
     /**
      * The MutationResolvers contained in the OneofMutationResolver,
      * organized by inputFieldName
      *
-     * @return array<string, MutationResolverInterface> Array of inputFieldName => MutationResolver
+     * @return array<string,MutationResolverInterface> Array of inputFieldName => MutationResolver
      */
     abstract protected function getInputFieldNameMutationResolvers(): array;
 
     /**
      * Consolidation of the mutation resolver for each input field. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     * @return array<string,MutationResolverInterface>
      */
     final public function getConsolidatedInputFieldNameMutationResolvers(): array
     {

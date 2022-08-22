@@ -16,6 +16,9 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

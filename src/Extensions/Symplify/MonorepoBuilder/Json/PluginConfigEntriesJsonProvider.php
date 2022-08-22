@@ -11,7 +11,7 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class PluginConfigEntriesJsonProvider
 {
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     private array $pluginConfigEntries = [];
 

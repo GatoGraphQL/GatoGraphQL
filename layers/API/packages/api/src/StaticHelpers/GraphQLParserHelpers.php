@@ -22,6 +22,7 @@ class GraphQLParserHelpers
     /**
      * @throws SyntaxErrorException
      * @throws ASTNodeParserException
+     * @param array<string,mixed> $variableValues
      */
     public static function parseGraphQLQuery(
         string $query,

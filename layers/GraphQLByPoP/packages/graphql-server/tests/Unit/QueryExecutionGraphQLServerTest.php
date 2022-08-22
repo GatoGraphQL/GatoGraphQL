@@ -8,6 +8,9 @@ use PoP\Engine\ObjectModels\Root;
 
 class QueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQLServerTestCase
 {
+    /**
+     * @return mixed[]
+     */
     public function graphQLServerExecutionProvider(): array
     {
         return [

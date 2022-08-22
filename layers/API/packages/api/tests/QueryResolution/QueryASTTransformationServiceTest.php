@@ -29,7 +29,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   {}
      *   ```
      */
-    public function testEmptyOperationMaximumFieldDepth()
+    public function testEmptyOperationMaximumFieldDepth(): void
     {
         $operation = new QueryOperation(
             '',
@@ -55,7 +55,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   }
      *   ```
      */
-    public function testOperationWithLeafFieldMaximumFieldDepth()
+    public function testOperationWithLeafFieldMaximumFieldDepth(): void
     {
         $leafField = new LeafField('id', null, [], [], new Location(3, 17));
         $operation = new QueryOperation(
@@ -91,7 +91,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   }
      *   ```
      */
-    public function testOperationWithRelationalFieldMaximumFieldDepth()
+    public function testOperationWithRelationalFieldMaximumFieldDepth(): void
     {
         $leafField2 = new LeafField('name', null, [], [], new Location(6, 23));
         $relationalField2 = new RelationalField(
@@ -167,7 +167,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   }
      *   ```
      */
-    public function testOperationWithFragmentMaximumFieldDepth()
+    public function testOperationWithFragmentMaximumFieldDepth(): void
     {
         $leafField = new LeafField('id', null, [], [], new Location(3, 17));
         $fragmentReference = new FragmentReference('RootData', new Location(4, 17));
@@ -220,7 +220,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   }
      *   ```
      */
-    public function testOperationWithNestedFragmentMaximumFieldDepth()
+    public function testOperationWithNestedFragmentMaximumFieldDepth(): void
     {
         $leafField = new LeafField('id', null, [], [], new Location(3, 17));
         $fragmentReference2 = new FragmentReference('RootData', new Location(6, 19));
@@ -279,7 +279,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
      *   }
      *   ```
      */
-    public function testOperationWithNestedInlineFragmentMaximumFieldDepth()
+    public function testOperationWithNestedInlineFragmentMaximumFieldDepth(): void
     {
         $leafField1 = new LeafField('id', null, [], [], new Location(3, 17));
         $leafField2 = new LeafField('id', null, [], [], new Location(6, 21));

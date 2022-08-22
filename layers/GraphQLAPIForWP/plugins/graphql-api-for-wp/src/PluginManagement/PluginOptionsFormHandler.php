@@ -19,14 +19,14 @@ class PluginOptionsFormHandler
     /**
      * Cache the options after normalizing them
      *
-     * @var array<string, mixed>|null
+     * @var array<string,mixed>|null
      */
     protected ?array $normalizedOptionValuesCache = null;
 
     /**
      * Get the values from the form submitted to options.php, and normalize them
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getNormalizedOptionValues(): array
     {

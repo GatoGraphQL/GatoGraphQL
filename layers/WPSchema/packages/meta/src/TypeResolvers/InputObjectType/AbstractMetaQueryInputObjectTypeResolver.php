@@ -76,6 +76,9 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
         return $this->__('Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/', 'meta');
     }
 
+    /**
+     * @return array<string, InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
@@ -174,12 +177,12 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
      *
      * @see https://developer.wordpress.org/reference/classes/wp_meta_query/
      *
-     * @param array<string, mixed> $query
+     * @param array<string,mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
     {
-        /** @var array $inputValue */
+        /** @var stdClass[] $inputValue */
         $metaQuery = [];
 
         /**

@@ -14,6 +14,9 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     public final const COMPONENT_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
     public final const COMPONENT_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

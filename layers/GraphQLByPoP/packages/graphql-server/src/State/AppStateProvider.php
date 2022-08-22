@@ -30,6 +30,9 @@ class AppStateProvider extends AbstractAppStateProvider
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         /** @var RootModuleConfiguration */
@@ -43,6 +46,9 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['graphql-operation-type'] = null;
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function execute(array &$state): void
     {
         /**

@@ -6,6 +6,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
     public final const COMPONENT_AUTHORLAYOUT_FULLVIEW_LINK = 'authorlayout-fullview-link';
     public final const COMPONENT_SINGLELAYOUT_FULLVIEW_LINK = 'singlelayout-fullview-link';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

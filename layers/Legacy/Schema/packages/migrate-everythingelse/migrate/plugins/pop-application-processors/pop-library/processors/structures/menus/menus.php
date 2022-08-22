@@ -6,6 +6,9 @@ class PoP_Module_Processor_Menus extends PoP_Module_Processor_ContentsBase
     public final const COMPONENT_DROPDOWNBUTTONMENU_SIDE = 'dropdownbuttonmenu-side';
     public final const COMPONENT_MULTITARGETINDENTMENU = 'multitargetindentmenu';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

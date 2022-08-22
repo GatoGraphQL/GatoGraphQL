@@ -4,6 +4,9 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners ex
 {
     public final const COMPONENT_SCROLLINNER_WHOWEARE_MAP = 'scrollinner-whoweare-map';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI;
 
+use PoP\Root\Module\ModuleInterface;
 use PoPAPI\API\Environment;
 use PoP\Root\Module\AbstractModule;
 
 class Module extends AbstractModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {

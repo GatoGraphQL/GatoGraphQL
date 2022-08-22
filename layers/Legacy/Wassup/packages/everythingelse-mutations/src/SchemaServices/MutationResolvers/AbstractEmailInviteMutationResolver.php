@@ -97,6 +97,9 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         }
     }
 
+    /**
+     * @param string[] $emails
+     */
     protected function getInvalidEmails(array $emails): array
     {
         return array_filter(

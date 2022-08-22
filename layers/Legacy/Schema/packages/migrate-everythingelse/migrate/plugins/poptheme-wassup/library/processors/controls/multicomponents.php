@@ -4,6 +4,9 @@ class PoP_Module_Processor_ControlMulticomponents extends PoP_Module_Processor_M
 {
     public final const COMPONENT_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS = 'multicomponent-anchorcontrol-toggletabs';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

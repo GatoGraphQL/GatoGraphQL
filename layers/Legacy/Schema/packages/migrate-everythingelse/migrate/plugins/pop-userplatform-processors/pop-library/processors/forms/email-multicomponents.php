@@ -6,6 +6,9 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
     public final const COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL = 'multicomponent-emailnotifications-general';
     public final const COMPONENT_MULTICOMPONENT_EMAILDIGESTS = 'multicomponent-emaildigests';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

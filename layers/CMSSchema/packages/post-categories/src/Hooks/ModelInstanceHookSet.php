@@ -43,6 +43,10 @@ class ModelInstanceHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return string[]
+     * @param string[] $elements
+     */
     public function getModelInstanceElementsFromAppState(array $elements): array
     {
         $nature = App::getState('nature');

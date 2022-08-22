@@ -10,7 +10,7 @@ interface FeedbackInterface
 {
     public function getFeedbackItemResolution(): FeedbackItemResolution;
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getExtensions(): array;
 }

@@ -9,6 +9,9 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS = 'em-viewcomponent-button-postsidebarlocations';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS = 'em-viewcomponent-button-usersidebarlocations';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

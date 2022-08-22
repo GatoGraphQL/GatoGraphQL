@@ -13,6 +13,7 @@ trait PropertyDataStructureFormatterTrait
 
     /**
      * Iterate the array and print all the entries as a properties file
+     * @param array<string,mixed> $data
      */
     public function getOutputContent(array &$data): string
     {
@@ -23,8 +24,10 @@ trait PropertyDataStructureFormatterTrait
 
     /**
      * Iterate all the way down the data entries until it's not an array anymore, and then print the entry in a `property=value` format
+     * @param string[] $outputLines
+     * @param string|array<string|int,mixed> $data
      */
-    protected function iterativelyAddOutputLines(array &$outputLines, array|string &$data, string $property): void
+    protected function iterativelyAddOutputLines(array &$outputLines, string|array &$data, string $property): void
     {
         if (!is_array($data)) {
             $outputLines[] = $this->getDataEntry($property, (string) $data);

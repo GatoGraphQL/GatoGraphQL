@@ -5,6 +5,9 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
     public final const COMPONENT_LAYOUT_MENU_SEGMENTEDBUTTON = 'layout-menu-segmentedbutton';
     public final const COMPONENT_LAYOUT_MENU_NAVIGATORSEGMENTEDBUTTON = 'layout-menu-navigatorsegmentedbutton';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

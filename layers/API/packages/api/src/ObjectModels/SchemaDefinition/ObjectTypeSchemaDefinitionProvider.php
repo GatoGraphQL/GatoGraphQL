@@ -41,6 +41,9 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
         return TypeKinds::OBJECT;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();
@@ -52,6 +55,9 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
         return $schemaDefinition;
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         // Add the directives (non-global)
@@ -71,6 +77,9 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
         }
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addFieldSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
@@ -119,6 +128,9 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
         }
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
         $this->implementedInterfaceTypeResolvers = $this->objectTypeResolver->getImplementedInterfaceTypeResolvers();

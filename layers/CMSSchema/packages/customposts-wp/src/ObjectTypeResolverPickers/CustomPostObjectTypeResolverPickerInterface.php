@@ -11,7 +11,8 @@ interface CustomPostObjectTypeResolverPickerInterface extends UpstreamCustomPost
     /**
      * Maybe cast the object of type `WP_Post` returned by function `get_posts`, to a different object type
      *
-     * @param array $customPosts An array with "key" the ID, "value" the object
+     * @param array<int|string,object> $customPosts An array with "key" the ID, "value" the object
+     * @return array<int|string,object>
      */
     public function maybeCastCustomPosts(array $customPosts): array;
 }

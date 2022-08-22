@@ -80,7 +80,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected ?array $implementedInterfaceTypeResolversCache = null;
     /**
-     * @var array<string,array>
+     * @var array<string,string[]>
      */
     private array $fieldNamesResolvedByObjectTypeFieldResolver = [];
     /**
@@ -871,6 +871,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
     }
 
+    /**
+     * The "executable" FieldResolver is the first one in the list
+     * for each field, as according to their priority.
+     *
+     * @return array<string,ObjectTypeFieldResolverInterface> Key: fieldName, Value: FieldResolver
+     */
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $cacheKey = $global ? 'global' : 'non-global';
@@ -880,6 +886,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->executableObjectTypeFieldResolversByFieldCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface> Key: fieldName, Value: FieldResolver
+     */
     private function doGetExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
@@ -890,6 +899,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $objectTypeFieldResolvers;
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: FieldResolver
+     */
     final public function getObjectTypeFieldResolversByField(bool $global): array
     {
         $cacheKey = $global ? 'global' : 'non-global';
@@ -899,6 +911,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->objectTypeFieldResolversByFieldCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: FieldResolver
+     */
     private function doGetObjectTypeFieldResolversByField(bool $global): array
     {
         $objectTypeFieldResolvers = [];
@@ -938,6 +953,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->fieldNamesResolvedByObjectTypeFieldResolver[$objectTypeFieldResolverClass];
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: FieldResolver
+     */
     final protected function getAllObjectTypeFieldResolversByField(): array
     {
         if ($this->allObjectTypeFieldResolversByFieldCache === null) {
@@ -946,6 +964,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->allObjectTypeFieldResolversByFieldCache;
     }
 
+    /**
+     * @return array<string,ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: FieldResolver
+     */
     private function calculateAllObjectTypeFieldResolvers(): array
     {
         $schemaObjectTypeFieldResolvers = [];
@@ -1095,6 +1116,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return !empty($this->getObjectTypeFieldResolversForFieldOrFieldName($field));
     }
 
+    /**
+     * @return ObjectTypeFieldResolverInterface[]
+     */
     protected function calculateObjectTypeFieldResolversForFieldOrFieldName(FieldInterface|string $fieldOrFieldName): array
     {
         if ($fieldOrFieldName instanceof FieldInterface) {
@@ -1678,6 +1702,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *   Eg: `{ setTagsOnPost(tags: []) }`
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
+     * @param array<string,mixed> $fieldArgs
      */
     private function validateNonMissingOrNullMandatoryFieldArguments(
         array $fieldArgs,
@@ -1739,6 +1764,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * does not exist in the field.
      *
      * @param array<string,mixed> $fieldArgsSchemaDefinition
+     * @param array<string,mixed> $fieldArgs
      */
     private function validateOnlyExistingFieldArguments(
         array $fieldArgs,
@@ -1770,6 +1796,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     /**
      * Validate the constraints for the field arguments
+     * @param array<string,mixed> $fieldArgs
      */
     private function validateFieldArgumentConstraints(
         array $fieldArgs,

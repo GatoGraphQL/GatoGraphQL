@@ -17,7 +17,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
     abstract protected function getBlockTitle(): string;
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     public function renderBlock(array $attributes, string $content): string
     {

@@ -14,6 +14,9 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
     public final const COMPONENT_FRAME_TOPSIMPLE = 'frame-topsimple';
     public final const COMPONENT_FRAME_TOPEMBED = 'frame-topembed';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
@@ -25,6 +28,9 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         );
     }
 
+    /**
+     * @return mixed[]|null
+     */
     public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         switch ($component->name) {

@@ -14,6 +14,9 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
 {
     use StandaloneServiceTrait;
 
+    /**
+     * @param array<string,mixed> $unresolvedFieldArgs
+     */
     public function __construct(
         FieldInterface $field,
         protected string $inputObjectSubpropertyName,

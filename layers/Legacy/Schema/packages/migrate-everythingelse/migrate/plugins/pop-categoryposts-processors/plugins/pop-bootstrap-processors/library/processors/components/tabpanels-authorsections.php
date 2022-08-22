@@ -23,6 +23,9 @@ class CPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
     public final const COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS18 = 'tabpanel-authorcategoryposts18';
     public final const COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS19 = 'tabpanel-authorcategoryposts19';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

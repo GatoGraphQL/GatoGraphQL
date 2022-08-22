@@ -6,6 +6,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomAnchorControls extends
 {
     public final const COMPONENT_ANCHORCONTROL_ADDPOSTLINK = 'buttoncontrol-addpostlink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

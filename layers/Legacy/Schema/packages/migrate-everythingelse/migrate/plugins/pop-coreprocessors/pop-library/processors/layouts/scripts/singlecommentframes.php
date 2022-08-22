@@ -5,6 +5,9 @@ class PoP_Module_Processor_SingleCommentFramesLayouts extends PoP_Module_Process
     public final const COMPONENT_LAYOUT_COMMENTFRAME_LIST = 'layout-commentframe-list';
     public final const COMPONENT_LAYOUT_COMMENTFRAME_ADD = 'layout-commentframe-add';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

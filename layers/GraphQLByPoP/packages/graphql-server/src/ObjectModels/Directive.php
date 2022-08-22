@@ -16,6 +16,10 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
 
     protected DirectiveExtensions $directiveExtensions;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
@@ -41,6 +45,9 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         return $this->schemaDefinition[SchemaDefinition::DESCRIPTION] ?? null;
     }
 
+    /**
+     * @return string[]
+     */
     public function getLocations(): array
     {
         $directives = [];

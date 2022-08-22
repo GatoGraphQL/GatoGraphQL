@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleInfo;
-use PoP\ComponentModel\Constants\Props;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
+use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleInfo;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 trait ComponentPathProcessorTrait
 {
@@ -19,12 +19,19 @@ trait ComponentPathProcessorTrait
     abstract protected function getComponentFilterManager(): ComponentFilterManagerInterface;
     abstract protected function getComponentHelpers(): ComponentHelpersInterface;
 
-    protected function getComponentProcessor(Component $component)
+    protected function getComponentProcessor(Component $component): ComponentProcessorInterface
     {
         return $this->getComponentProcessorManager()->getComponentProcessor($component);
     }
 
-    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs)
+    /**
+     * @return array<int|string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
+     */
+    protected function executeOnSelfAndPropagateToDatasetComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         $ret = [];
         $key = $this->getComponentHelpers()->getComponentOutputName($component);
@@ -38,7 +45,7 @@ trait ComponentPathProcessorTrait
         }
 
         // Stop iterating when the subcomponent starts a new cycle of loading data
-        $subcomponents = array_filter($this->getAllSubcomponents($component), function ($subcomponent) {
+        $subcomponents = array_filter($this->getAllSubcomponents($component), function ($subcomponent): bool {
             return !$this->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent);
         });
         $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
@@ -63,7 +70,14 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs)
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
+     */
+    protected function executeOnSelfAndMergeWithDatasetComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
@@ -75,7 +89,7 @@ trait ComponentPathProcessorTrait
         }
 
         // Stop iterating when the subcomponent starts a new cycle of loading data
-        $subcomponents = array_filter($this->getAllSubcomponents($component), function ($subcomponent) {
+        $subcomponents = array_filter($this->getAllSubcomponents($component), function ($subcomponent): bool {
             return !$this->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent);
         });
         $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
@@ -98,6 +112,8 @@ trait ComponentPathProcessorTrait
      * @param string $propagate_fn Function name
      * @param boolean $use_component_output_name_as_key For response structures (eg: configuration, feedback, etc) must be `true`, for internal structures (eg: $props, $data_properties) no need
      * @return mixed[]
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $options
      */
     protected function executeOnSelfAndPropagateToComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, bool $use_component_output_name_as_key = true, array $options = array()): array
     {
@@ -138,7 +154,11 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, $recursive = true)
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $props
+     */
+    protected function executeOnSelfAndMergeWithComponents(string $eval_self_fn, string $propagate_fn, Component $component, array &$props, bool $recursive = true): array
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 

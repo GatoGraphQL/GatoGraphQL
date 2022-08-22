@@ -4,6 +4,9 @@ class GD_URE_Module_Processor_MembersLayoutMultipleComponents extends PoP_Module
 {
     public final const COMPONENT_URE_MULTICOMPONENT_COMMUNITYMEMBERS = 'ure-multicomponent-communitymembers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

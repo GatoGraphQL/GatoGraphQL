@@ -4,6 +4,9 @@ class PoP_Module_Processor_CommentFormGroups extends PoP_Module_Processor_FormCo
 {
     public final const COMPONENT_FORMINPUTGROUP_COMMENTEDITOR = 'forminputgroupcommenteditor';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

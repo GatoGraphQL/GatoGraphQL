@@ -52,6 +52,10 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         return [];
     }
 
+    /**
+     * @param mixed[] $expectedResponse
+     * @param array<string,mixed> $variables
+     */
     protected function assertGraphQLQueryExecution(
         string|ExecutableDocument $queryOrExecutableDocument,
         array $expectedResponse,

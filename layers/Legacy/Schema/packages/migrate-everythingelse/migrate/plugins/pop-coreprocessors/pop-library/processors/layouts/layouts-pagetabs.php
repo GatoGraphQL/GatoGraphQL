@@ -19,6 +19,9 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     public final const COMPONENT_LAYOUT_PAGETABS_AUTHOR = 'layout-pagetabs-author';
     public final const COMPONENT_LAYOUT_PAGETABS_404 = 'layout-pagetabs-404';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

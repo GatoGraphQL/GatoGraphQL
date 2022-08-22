@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup;
 
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
 
 class Module extends AbstractModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -96,8 +97,8 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<string,mixed> $configuration
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

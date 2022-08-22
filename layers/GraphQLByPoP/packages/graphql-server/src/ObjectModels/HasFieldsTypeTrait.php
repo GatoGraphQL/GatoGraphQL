@@ -17,6 +17,10 @@ trait HasFieldsTypeTrait
      */
     protected array $fields;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->fields = [];
@@ -50,6 +54,10 @@ trait HasFieldsTypeTrait
             });
         }
     }
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $fieldSchemaDefinitionPath
+     */
     protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
@@ -57,6 +65,10 @@ trait HasFieldsTypeTrait
             SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
         );
     }
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $fieldSchemaDefinitionPath
+     */
     protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
     {
         $this->fields = array_merge(
@@ -65,21 +77,27 @@ trait HasFieldsTypeTrait
         );
     }
 
+    /**
+     * @return Field[]
+     */
     public function getFields(bool $includeDeprecated = false): array
     {
         return $includeDeprecated ?
             $this->fields :
             array_filter(
                 $this->fields,
-                function (Field $field) {
+                function (Field $field): bool {
                     return !$field->isDeprecated();
                 }
             );
     }
+    /**
+     * @return string[]
+     */
     public function getFieldIDs(bool $includeDeprecated = false): array
     {
         return array_map(
-            function (Field $field) {
+            function (Field $field): string {
                 return $field->getID();
             },
             $this->getFields($includeDeprecated)

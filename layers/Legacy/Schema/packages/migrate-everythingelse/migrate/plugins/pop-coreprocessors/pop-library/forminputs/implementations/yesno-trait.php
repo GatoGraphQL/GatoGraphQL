@@ -7,7 +7,10 @@ trait GD_FormInput_YesNoTrait
 {
     use BooleanFormInputTrait;
 
-    public function getAllValues($label = null): array
+    /**
+     * @return mixed[]
+     */
+    public function getAllValues(string $label = null): array
     {
         $values = parent::getAllValues($label);
 

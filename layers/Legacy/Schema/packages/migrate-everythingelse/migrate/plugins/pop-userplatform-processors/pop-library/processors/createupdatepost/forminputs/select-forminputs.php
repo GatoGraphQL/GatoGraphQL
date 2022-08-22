@@ -6,6 +6,9 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
     public final const COMPONENT_FORMINPUT_CUP_STATUS = 'forminput-cup-status';
     public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS = 'forminput-linkaccess';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -11,6 +11,8 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHook
 {
     /**
      * Configuration entries
+     *
+     * @return array<mixed[]>
      */
     protected function getConfigurationEntries(): array
     {
@@ -20,7 +22,7 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHook
     /**
      * Indicate if the user has the item, to be implemented
      *
-     * @param mixed[] $capabilities
+     * @param string[] $capabilities
      */
     protected function doesCurrentUserHaveAnyItem(array $capabilities): bool
     {

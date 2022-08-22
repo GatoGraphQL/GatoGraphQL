@@ -19,6 +19,9 @@ abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCrea
         return $ret;
     }
 
+    /**
+     * @param string[] $errors
+     */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::validateContent($errors, $fieldDataAccessor);

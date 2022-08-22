@@ -12,6 +12,9 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     public final const COMPONENT_DATALOAD_MYPREFERENCES = 'dataload-mypreferences';
     public final const COMPONENT_DATALOAD_INVITENEWUSERS = 'dataload-inviteusers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

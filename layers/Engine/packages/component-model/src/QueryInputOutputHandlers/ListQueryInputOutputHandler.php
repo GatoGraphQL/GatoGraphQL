@@ -8,7 +8,10 @@ use PoP\ComponentModel\Constants\PaginationParams;
 
 class ListQueryInputOutputHandler extends AbstractQueryInputOutputHandler
 {
-    public function prepareQueryArgs(&$query_args): void
+    /**
+     * @param array<string,mixed> $query_args
+     */
+    public function prepareQueryArgs(array &$query_args): void
     {
         parent::prepareQueryArgs($query_args);
 
@@ -26,7 +29,7 @@ class ListQueryInputOutputHandler extends AbstractQueryInputOutputHandler
         $query_args[PaginationParams::PAGE_NUMBER] = isset($query_args[PaginationParams::PAGE_NUMBER]) ? intval($query_args[PaginationParams::PAGE_NUMBER]) : 1;
     }
 
-    protected function getLimit()
+    protected function getLimit(): int
     {
         // By default: no limit
         return -1;

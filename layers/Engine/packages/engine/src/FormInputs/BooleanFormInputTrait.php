@@ -8,6 +8,9 @@ use PoP\Engine\Constants\FormInputConstants;
 
 trait BooleanFormInputTrait
 {
+    /**
+     * @param array<string,mixed>|null $source
+     */
     protected function getValueFromSource(?array $source = null): mixed
     {
         // If it is not set, then return NULL, so that doing #formcomponentValue ignores value and proceeds to resolvedObject[resolvedObjectField]
@@ -37,5 +40,8 @@ trait BooleanFormInputTrait
         return ($value === FormInputConstants::BOOLSTRING_TRUE);
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     abstract protected function getValueFromSourceOrRequest(string $name, ?array $source = null): mixed;
 }

@@ -5,6 +5,9 @@ class PoP_UserCommunities_Module_Processor_CustomDelegatorFilters extends PoP_Mo
     public final const COMPONENT_DELEGATORFILTER_MYMEMBERS = 'delegatorfilter-mymembers';
     public final const COMPONENT_DELEGATORFILTER_COMMUNITIES = 'delegatorfilter-communities';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class GD_CommonPages_Module_Processor_CustomBlocks extends PoP_Module_Processor_
     public final const COMPONENT_BLOCK_ADDCONTENTFAQ = 'block-addcontentfaq';
     public final const COMPONENT_BLOCK_ACCOUNTFAQ = 'block-accountfaq';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

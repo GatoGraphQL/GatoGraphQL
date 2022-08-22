@@ -6,6 +6,9 @@ class PoP_Module_Processor_TableInners extends PoP_Module_Processor_TableInnersB
     public final const COMPONENT_TABLEINNER_MYHIGHLIGHTS = 'tableinner-myhighlights';
     public final const COMPONENT_TABLEINNER_MYPOSTS = 'tableinner-myposts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

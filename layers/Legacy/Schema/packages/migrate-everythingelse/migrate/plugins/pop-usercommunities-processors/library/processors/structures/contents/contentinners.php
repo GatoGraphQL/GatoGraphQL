@@ -4,6 +4,9 @@ class GD_URE_Module_Processor_CustomContentInners extends PoP_Module_Processor_C
 {
     public final const COMPONENT_URE_CONTENTINNER_MEMBER = 'ure-contentinner-member';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

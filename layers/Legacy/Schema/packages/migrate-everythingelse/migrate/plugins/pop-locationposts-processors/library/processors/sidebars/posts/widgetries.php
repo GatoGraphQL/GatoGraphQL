@@ -6,6 +6,9 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
     public final const COMPONENT_WIDGET_LOCATIONPOST_CATEGORIES = 'widget-locationpost-categories';
     public final const COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO = 'widgetcompact-locationpost-info';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

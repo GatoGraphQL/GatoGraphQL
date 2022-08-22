@@ -31,7 +31,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
-    protected function supportsTitle()
+    protected function supportsTitle(): bool
     {
         // Not all post types support a title
         return true;
@@ -46,12 +46,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         );
     }
 
-    protected function isFeaturedImageMandatory()
+    protected function isFeaturedImageMandatory(): bool
     {
         return false;
     }
 
-    protected function validateCategories(FieldDataAccessorInterface $fieldDataAccessor)
+    protected function validateCategories(FieldDataAccessorInterface $fieldDataAccessor): ?int
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::CATEGORIES)) {
             if (is_array($fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES))) {
@@ -77,6 +77,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     }
 
     // Update Post Validation
+    /**
+     * @param string[] $errors
+     */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::validateContent($errors, $fieldDataAccessor);
@@ -283,6 +286,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $categories;
     }
 
+    /**
+     * @param array<string,mixed> $post_data
+     */
     protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);
@@ -292,6 +298,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = parent::getUpdateCustomPostData($fieldDataAccessor);
@@ -309,6 +318,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return GD_CreateUpdate_Utils::moderate();
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = parent::getCreateCustomPostData($fieldDataAccessor);
@@ -335,6 +347,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getUpdateCustomPostDataLog(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $log = parent::getUpdateCustomPostDataLog($customPostID, $fieldDataAccessor);

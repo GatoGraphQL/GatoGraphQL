@@ -5,6 +5,9 @@ class GD_SP_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Prel
 {
     public final const COMPONENT_BUTTON_LOCATIONPOSTLINK_CREATE = 'postbutton-locationpostlink-create';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

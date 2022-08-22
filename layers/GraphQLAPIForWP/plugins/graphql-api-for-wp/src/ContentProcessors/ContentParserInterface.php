@@ -22,7 +22,7 @@ interface ContentParserInterface
      * Parse the file's Markdown into HTML Content
      *
      * @param string $relativePathDir Dir relative to the docs/en/ folder
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     public function getContent(
         string $filename,

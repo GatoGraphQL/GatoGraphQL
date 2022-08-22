@@ -5,6 +5,9 @@ class PoP_Module_Processor_CommentsLayouts extends PoP_Module_Processor_CommentL
     public final const COMPONENT_LAYOUT_COMMENT_LIST = 'layout-comment-list';
     public final const COMPONENT_LAYOUT_COMMENT_ADD = 'layout-comment-add';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

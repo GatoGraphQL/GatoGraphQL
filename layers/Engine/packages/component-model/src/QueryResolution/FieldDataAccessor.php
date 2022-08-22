@@ -11,6 +11,9 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 {
     use FieldOrDirectiveDataAccessorTrait;
 
+    /**
+     * @param array<string,mixed> $unresolvedFieldArgs
+     */
     public function __construct(
         protected FieldInterface $field,
         /** @var array<string,mixed> */

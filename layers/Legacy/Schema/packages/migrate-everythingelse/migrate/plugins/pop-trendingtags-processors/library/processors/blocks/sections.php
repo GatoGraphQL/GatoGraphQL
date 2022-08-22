@@ -5,6 +5,9 @@ class PoP_TrendingTags_Module_Processor_SectionBlocks extends PoP_Module_Process
     public final const COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_DETAILS = 'block-trendingtags-scroll-details';
     public final const COMPONENT_BLOCK_TRENDINGTAGS_SCROLL_LIST = 'block-trendingtags-scroll-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

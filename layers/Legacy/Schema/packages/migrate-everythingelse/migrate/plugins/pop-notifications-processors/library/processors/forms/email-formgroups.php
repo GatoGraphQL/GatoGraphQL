@@ -4,6 +4,9 @@ class PoP_Notifications_Module_Processor_EmailFormGroups extends PoP_Module_Proc
 {
     public final const COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS = 'forminputgroup-emaildigests-dailynotifications';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

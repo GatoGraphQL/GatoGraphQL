@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
     public final const COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS = 'layout-previewuser-mapdetails';
     public final const COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS = 'layout-previewuser-horizontalmapdetails';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
 {
     public final const COMPONENT_CONTENT_COMMENTSINGLE = 'content-commentsingle';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

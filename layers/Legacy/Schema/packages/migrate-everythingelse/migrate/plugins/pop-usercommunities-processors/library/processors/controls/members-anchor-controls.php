@@ -8,6 +8,9 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     public final const COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS = 'anchorcontrol-invitenewmembers';
     public final const COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG = 'anchorcontrol-invitenewmembers-big';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

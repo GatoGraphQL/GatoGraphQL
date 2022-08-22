@@ -7,6 +7,9 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public final const COMPONENT_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR = 'multiple-single-highlight-sidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR = 'multiple-single-post-highlightssidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

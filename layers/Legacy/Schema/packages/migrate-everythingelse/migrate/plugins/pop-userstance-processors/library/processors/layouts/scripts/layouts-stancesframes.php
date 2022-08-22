@@ -5,6 +5,9 @@ class PoP_Module_Processor_StanceReferencesFramesLayouts extends PoP_Module_Proc
     public final const COMPONENT_LAYOUT_STANCES_APPENDTOSCRIPT = 'layout-stances-appendtoscript';
     public final const COMPONENT_LAYOUT_STANCESEMPTY_APPENDTOSCRIPT = 'layout-stancesempty-appendtoscript';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

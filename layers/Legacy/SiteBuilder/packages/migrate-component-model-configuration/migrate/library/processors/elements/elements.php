@@ -5,6 +5,9 @@ class PoP_ConfigurationComponentModel_Module_Processor_Elements extends Abstract
 {
     public final const COMPONENT_EMPTY = 'empty';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
 {
     public final const COMPONENT_TABPANEL_MYLINKS = 'tabpanel-mylinks';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

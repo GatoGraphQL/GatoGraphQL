@@ -5,6 +5,9 @@ class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Mod
 {
     public final const COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER = 'forminputgroup-cup-newsletter';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_MapInners extends GD_EM_Module_Processor_MapInnersB
     public final const COMPONENT_EM_MAPINNER_POST = 'em-mapinner-post';
     public final const COMPONENT_EM_MAPINNER_USER = 'em-mapinner-user';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

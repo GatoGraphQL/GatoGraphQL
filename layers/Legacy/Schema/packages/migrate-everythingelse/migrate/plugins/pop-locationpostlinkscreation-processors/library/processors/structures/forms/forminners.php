@@ -4,6 +4,9 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
 {
     public final const COMPONENT_FORMINNER_LOCATIONPOSTLINK = 'forminner-locationpostlink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

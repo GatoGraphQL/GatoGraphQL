@@ -5,6 +5,9 @@ class Wassup_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Append
     public final const COMPONENT_SCRIPT_HIGHLIGHTS = 'script-highlights';
     public final const COMPONENT_SCRIPT_HIGHLIGHTSEMPTY = 'script-highlightsempty';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

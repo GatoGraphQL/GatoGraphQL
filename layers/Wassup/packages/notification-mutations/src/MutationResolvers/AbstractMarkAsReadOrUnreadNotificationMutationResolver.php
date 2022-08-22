@@ -50,7 +50,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         }
     }
 
-    protected function additionals($histid, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(string|int $histid, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $fieldDataAccessor);
     }

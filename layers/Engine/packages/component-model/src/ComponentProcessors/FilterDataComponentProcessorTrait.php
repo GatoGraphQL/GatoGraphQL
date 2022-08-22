@@ -15,7 +15,11 @@ trait FilterDataComponentProcessorTrait
      */
     protected array $activeDataloadQueryArgsFilteringComponents = [];
 
-    public function filterHeadcomponentDataloadQueryArgs(Component $component, array &$query, array $source = null): void
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed>|null $source
+     */
+    public function filterHeadcomponentDataloadQueryArgs(Component $component, array &$query, ?array $source = null): void
     {
         if ($activeDataloadQueryArgsFilteringComponents = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
             foreach ($activeDataloadQueryArgsFilteringComponents as $subcomponent) {
@@ -31,8 +35,9 @@ trait FilterDataComponentProcessorTrait
 
     /**
      * @return Component[]
+     * @param array<string,mixed>|null $source
      */
-    public function getActiveDataloadQueryArgsFilteringComponents(Component $component, array $source = null): array
+    public function getActiveDataloadQueryArgsFilteringComponents(Component $component, ?array $source = null): array
     {
         // Search for cached result
         $cacheKey = json_encode($source ?? []);

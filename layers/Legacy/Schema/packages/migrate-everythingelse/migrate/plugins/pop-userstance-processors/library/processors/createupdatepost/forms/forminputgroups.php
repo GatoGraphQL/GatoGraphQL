@@ -8,6 +8,9 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
     public final const COMPONENT_FORMINPUTGROUP_BUTTONGROUP_STANCE = 'forminputgroup-buttongroup-stance';
     public final const COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE = 'filterinputgroup-buttongroup-stance';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

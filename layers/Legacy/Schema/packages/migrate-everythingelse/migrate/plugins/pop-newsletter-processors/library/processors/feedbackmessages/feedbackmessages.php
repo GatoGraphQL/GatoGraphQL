@@ -5,6 +5,9 @@ class PoP_Newsletter_Module_Processor_FeedbackMessages extends PoP_Module_Proces
     public final const COMPONENT_FEEDBACKMESSAGE_NEWSLETTER = 'feedbackmessage-newsletter';
     public final const COMPONENT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION = 'feedbackmessage-newsletterunsubscription';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

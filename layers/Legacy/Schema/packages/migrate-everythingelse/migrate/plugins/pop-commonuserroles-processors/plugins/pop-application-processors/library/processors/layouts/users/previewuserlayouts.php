@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
     public final const COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS = 'layout-previewuser-organization-details';
     public final const COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS = 'layout-previewuser-individual-details';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

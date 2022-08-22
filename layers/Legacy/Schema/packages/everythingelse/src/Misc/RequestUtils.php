@@ -11,7 +11,7 @@ class RequestUtils
 {
     public static array $errors = [];
 
-    public static function getDomainId($domain)
+    public static function getDomainId(string $domain): string
     {
         // The domain ID is simply removing the scheme, and replacing all dots with '-'
         // It is needed to assign an extra class to the event
@@ -34,7 +34,7 @@ class RequestUtils
         );
     }
 
-    public static function addRoute($url, $route)
+    public static function addRoute(string $url, string $route): string
     {
         return GeneralUtils::addQueryArgs([Params::ROUTE => $route], $url);
     }
@@ -51,7 +51,7 @@ class RequestUtils
         return App::getState('loading-site') ?? false;
     }
 
-    public static function isRoute($route_or_routes)
+    public static function isRoute(string|array $route_or_routes): bool
     {
         $route = App::getState('route');
         if (is_array($route_or_routes)) {

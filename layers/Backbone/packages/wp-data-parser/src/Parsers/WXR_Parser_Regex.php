@@ -144,7 +144,7 @@ class WXR_Parser_Regex
     }
 
     /**
-     * @return array<string, array<array<string, string>>|string>
+     * @return array<string,array<array<string,string>>|string>
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     private function process_category(string $c): array

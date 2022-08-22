@@ -47,6 +47,9 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->inputValueExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueExtensionsObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -54,6 +57,9 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [
