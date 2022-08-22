@@ -32,6 +32,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
+use PoP\ComponentModel\Feedback\FeedbackEntryServiceInterface;
 use PoP\ComponentModel\Feedback\FeedbackInterface;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
@@ -96,6 +97,7 @@ class Engine implements EngineInterface
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
+    private ?FeedbackEntryServiceInterface $feedbackEntryService = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -197,6 +199,14 @@ class Engine implements EngineInterface
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+    }
+    final public function setFeedbackEntryService(FeedbackEntryServiceInterface $feedbackEntryService): void
+    {
+        $this->feedbackEntryService = $feedbackEntryService;
+    }
+    final protected function getFeedbackEntryService(): FeedbackEntryServiceInterface
+    {
+        return $this->feedbackEntryService ??= $this->instanceManager->getInstance(FeedbackEntryServiceInterface::class);
     }
 
     /**
