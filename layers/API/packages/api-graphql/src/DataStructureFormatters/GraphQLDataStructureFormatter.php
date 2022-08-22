@@ -371,7 +371,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          */
         $isError = false;
         if (array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)) {
-            
+            /**
+             * Check that the original field is indeed different to this one.
+             * To find out, search for the previous fields with the same
+             * outputKey but different query string (hence they are different)
+             */
+            $sameOutputKeyFields = array_filter(
+                $fields,
+                fn (FieldInterface $field) => $field->getOutputKey() === $leafField->getOutputKey() && $field->asQueryString() === $leafField->asQueryString()
+            );
+            $isError = $sameOutputKeyFields !== [];
         }
         if ($isError) {
             /**
