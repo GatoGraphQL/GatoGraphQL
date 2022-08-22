@@ -239,6 +239,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $this->resolveObjectData(
                     $fields,
                     $leafField,
+                    $typeOutputKey,
                     $sourceRet,
                     $resolvedObjectRet,
                     $resolvedObject,
@@ -326,6 +327,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     protected function resolveObjectData(
         array $fields,
         LeafField $leafField,
+        string $typeOutputKey,
         array $sourceRet,
         ?array &$resolvedObjectRet,
         SplObjectStorage $resolvedObject,

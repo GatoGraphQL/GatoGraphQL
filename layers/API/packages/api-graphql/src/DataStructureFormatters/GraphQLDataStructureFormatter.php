@@ -357,6 +357,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function resolveObjectData(
         array $fields,
         LeafField $leafField,
+        string $typeOutputKey,
         array $sourceRet,
         ?array &$resolvedObjectRet,
         SplObjectStorage $resolvedObject,
@@ -406,6 +407,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         parent::resolveObjectData(
             $fields,
             $leafField,
+            $typeOutputKey,
             $sourceRet,
             $resolvedObjectRet,
             $resolvedObject,
