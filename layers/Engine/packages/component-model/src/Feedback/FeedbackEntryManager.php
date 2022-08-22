@@ -517,12 +517,14 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
             $objectOrSchemaFeedback->getAstNode(),
             $objectOrSchemaFeedback->getLocation(),
             $objectOrSchemaFeedback->getExtensions(),
-            $objectOrSchemaFeedback->getFeedbackItemResolution()
+            $objectOrSchemaFeedback->getFeedbackItemResolution(),
+            []
         );
     }
 
     /**
      * @param array<string,mixed> $extensions
+     * @param array<string|int> $ids
      * @return array<string,mixed>
      */
     public function formatObjectOrSchemaFeedbackCommonEntry(
@@ -530,6 +532,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         Location $location,
         array $extensions,
         FeedbackItemResolution $feedbackItemResolution,
+        array $ids,
     ): array {
         $locations = [];
         if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
@@ -542,6 +545,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         $entry = [
             Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
             Tokens::PATH => $this->getASTNodePath($astNode),
+            Tokens::IDS => $ids,
             Tokens::LOCATIONS => $locations,
             Tokens::EXTENSIONS => $extensions,
         ];

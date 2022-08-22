@@ -29,6 +29,7 @@ interface FeedbackEntryManagerInterface
 
     /**
      * @param array<string,mixed> $extensions
+     * @param array<string|int> $ids
      * @return array<string,mixed>
      */
     public function formatObjectOrSchemaFeedbackCommonEntry(
@@ -36,6 +37,7 @@ interface FeedbackEntryManagerInterface
         Location $location,
         array $extensions,
         FeedbackItemResolution $feedbackItemResolution,
+        array $ids,
     ): array;
     
     /**

@@ -458,9 +458,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                         $leafField->getOutputKey()
                     ]
                 ),
+                [$objectID],
             );
-            $item[Tokens::IDS] = [$objectID];
-            
+
             /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
             $typeFeedbackEntries = $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] ?? new SplObjectStorage();
             /** @var array<string,mixed> */
