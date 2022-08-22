@@ -401,7 +401,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 Tokens::LOCATIONS => $locations,
                 Tokens::IDS => [$objectID],
             ];
-            $sourceRet[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] = $this->getObjectEntry($typeOutputKey, $item);
+            $sourceRet[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][] = $this->getObjectEntry($typeOutputKey, $item);
             return;
         }
         parent::resolveObjectData(
