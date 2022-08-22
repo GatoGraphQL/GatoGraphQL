@@ -432,6 +432,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             ErrorFeedbackItemProvider::class,
             ErrorFeedbackItemProvider::E10,
             [
+                $this->getMaybeNamespacedTypeName(),
                 $objectID
             ]
         );

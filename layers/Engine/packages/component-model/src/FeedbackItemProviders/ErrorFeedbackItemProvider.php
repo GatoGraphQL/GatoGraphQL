@@ -72,7 +72,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7 => $this->__('Resolving mutation \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E8 => $this->__('No TypeResolver resolves object \'%s\'', 'component-model'),
             self::E9 => $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'component-model'),
-            self::E10 => $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'component-model'),
+            self::E10 => $this->__('The Union DataLoader of type \'%s\' can\'t load data for object with ID \'%s\' (maybe there is no target TypeResolver for it)', 'component-model'),
             self::E11 => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'', 'component-model'),
             self::E11A => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
