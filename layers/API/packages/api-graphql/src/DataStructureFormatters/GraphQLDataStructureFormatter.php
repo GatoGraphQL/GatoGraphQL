@@ -7,7 +7,9 @@ namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use SplObjectStorage;
 
@@ -344,5 +346,52 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         return $extensions;
+    }
+
+    /**
+     * @param array<string,mixed> $sourceRet
+     * @param array<string,mixed>|null $resolvedObjectRet
+     * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
+     */
+    protected function resolveObjectData(
+        LeafField $leafField,
+        array $sourceRet,
+        ?array &$resolvedObjectRet,
+        SplObjectStorage $resolvedObject,
+        string|int $objectID,
+    ): void {
+        /**
+         * Validate Field Selection Merging: 2 different fields
+         * cannot have the same name/alias on the same block in
+         * the response.
+         *
+         * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
+         */
+        if ($validateFieldSelectionMerging
+            && array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)
+        ) {
+            /**
+             * It's an error =>  set response to null
+             */
+            $resolvedObjectRet[$leafField->getOutputKey()] = null;
+            $locations = [];
+            $location = $leafField->getLocation();
+            if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
+                $locations[] = $location->toArray();
+            }
+            $item = [
+                Tokens::MESSAGE => 'songa',
+                Tokens::LOCATIONS => $locations,
+                Tokens::IDS => [$objectID],
+            ];
+            $sourceRet[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] = $this->getObjectEntry($typeOutputKey, $item);
+            return;
+        }
+        parent::resolveObjectData(
+            $leafField,
+            $sourceRet,
+            $resolvedObjectRet,
+            $objectID,
+        );
     }
 }

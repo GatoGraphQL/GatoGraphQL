@@ -238,34 +238,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 if (!$resolvedObject->contains($leafField)) {
                     continue;
                 }
-                /**
-                 * Validate Field Selection Merging: 2 different fields
-                 * cannot have the same name/alias on the same block in
-                 * the response.
-                 *
-                 * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
-                 */
-                if ($validateFieldSelectionMerging
-                    && array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)
-                ) {
-                    /**
-                     * It's an error =>  set response to null
-                     */
-                    $resolvedObjectRet[$leafField->getOutputKey()] = null;
-                    $locations = [];
-                    $location = $leafField->getLocation();
-                    if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
-                        $locations[] = $location->toArray();
-                    }
-                    $item = [
-                        Tokens::MESSAGE => 'songa',
-                        Tokens::LOCATIONS => $locations,
-                        Tokens::IDS => [$objectID],
-                    ];
-                    $sourceRet[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] = $this->getObjectEntry($typeOutputKey, $item);
-                    continue;
-                }
-                $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
+                $this->resolveObjectData(
+                    $leafField,
+                    $sourceRet,
+                    $resolvedObjectRet,
+                    $resolvedObject,
+                    $objectID,
+                );
                 continue;
             }
 
@@ -335,6 +314,23 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             );
             $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
+    }
+
+    /**
+     * Allow GraphQL to override, to provide custom validations.
+     *
+     * @param array<string,mixed> $sourceRet
+     * @param array<string,mixed>|null $resolvedObjectRet
+     * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
+     */
+    protected function resolveObjectData(
+        LeafField $leafField,
+        array $sourceRet,
+        ?array &$resolvedObjectRet,
+        SplObjectStorage $resolvedObject,
+        string|int $objectID,
+    ): void {
+        $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
     }
 
     protected function validateFieldSelectionMerging(): bool
