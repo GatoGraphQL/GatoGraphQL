@@ -11,6 +11,15 @@
     title: title
   }
 
+  pages(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    dateStr(format: "d/m", gmt: true)
+    dateStr(gmt: true, format: "d/m")
+  }
+
   customPosts(
     pagination: {
       limit: 2

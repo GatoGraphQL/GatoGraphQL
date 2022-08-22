@@ -10,6 +10,14 @@
                 "title": "Post Format: Standard"
             }
         ],
+        "pages": [
+            {
+                "dateStr": "26\/07"
+            },
+            {
+                "dateStr": "04\/09"
+            }
+        ],
         "customPosts": [
             {
                 "__typename": "Post",
