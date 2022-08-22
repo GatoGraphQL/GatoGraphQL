@@ -193,7 +193,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    private function addObjectData(array $sourceRet, ?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
+    private function addObjectData(array &$sourceRet, ?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
         if (!$fields) {
             return;
@@ -331,7 +331,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         array $fields,
         LeafField $leafField,
         string $typeOutputKey,
-        array $sourceRet,
+        array &$sourceRet,
         ?array &$resolvedObjectRet,
         SplObjectStorage $resolvedObject,
         string|int $objectID,
