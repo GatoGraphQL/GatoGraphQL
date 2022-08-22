@@ -317,6 +317,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $extensions;
     }
 
+    /**
+     * @param array<string,SplObjectStorage<FieldInterface,array<array<string,mixed>>>> $entries
+     * @return array<int,mixed[]>
+     */
     protected function reformatObjectEntries(array $entries): array
     {
         $ret = [];
@@ -436,7 +440,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 Tokens::LOCATIONS => $locations,
                 Tokens::IDS => [$objectID],
             ];
-            $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][] = $this->getObjectEntry($typeOutputKey, $item);
+            /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
+            $typeFeedbackEntries = $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] ?? new SplObjectStorage();
+            /** @var array<string,mixed> */
+            $fieldTypeFeedbackEntries = $typeFeedbackEntries[$leafField] ?? [];
+            $fieldTypeFeedbackEntries[] = $item;
+            $typeFeedbackEntries[$leafField] = $fieldTypeFeedbackEntries;
+            $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] = $typeFeedbackEntries;
             return;
         }
         parent::resolveObjectData(
