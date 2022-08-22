@@ -19,6 +19,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
@@ -512,16 +513,32 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
     private function getObjectOrSchemaFeedbackCommonEntry(
         ObjectResolutionFeedbackInterface | SchemaFeedbackInterface $objectOrSchemaFeedback,
     ): array {
-        $astNode = $objectOrSchemaFeedback->getAstNode();
+        return $this->formatObjectOrSchemaFeedbackCommonEntry(
+            $objectOrSchemaFeedback->getAstNode(),
+            $objectOrSchemaFeedback->getLocation(),
+            $objectOrSchemaFeedback->getExtensions(),
+            $objectOrSchemaFeedback->getFeedbackItemResolution()
+        );
+    }
+
+    /**
+     * @param array<string,mixed> $extensions
+     * @return array<string,mixed>
+     */
+    public function formatObjectOrSchemaFeedbackCommonEntry(
+        AstInterface $astNode,
+        Location $location,
+        array $extensions,
+        FeedbackItemResolution $feedbackItemResolution,
+    ): array {
         $locations = [];
-        $location = $objectOrSchemaFeedback->getLocation();
         if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
             $locations[] = $location->toArray();
         }
-        $extensions = $this->getFeedbackEntryExtensions(
-            $objectOrSchemaFeedback,
+        $extensions = $this->addFeedbackEntryExtensions(
+            $extensions,
+            $feedbackItemResolution
         );
-        $feedbackItemResolution = $objectOrSchemaFeedback->getFeedbackItemResolution();
         $entry = [
             Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
             Tokens::PATH => $this->getASTNodePath($astNode),
@@ -598,8 +615,20 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
     private function getFeedbackEntryExtensions(
         FeedbackInterface $feedback,
     ): array {
-        $feedbackItemResolution = $feedback->getFeedbackItemResolution();
-        $extensions = $feedback->getExtensions();
+        return $this->addFeedbackEntryExtensions(
+            $feedback->getExtensions(),
+            $feedback->getFeedbackItemResolution()
+        );
+    }
+
+    /**
+     * @param array<string,mixed> $extensions
+     * @return array<string,mixed>
+     */
+    private function addFeedbackEntryExtensions(
+        array $extensions,
+        FeedbackItemResolution $feedbackItemResolution
+    ): array {
         $extensions['code'] = $feedbackItemResolution->getNamespacedCode();
         $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
         if ($specifiedByURL !== null) {

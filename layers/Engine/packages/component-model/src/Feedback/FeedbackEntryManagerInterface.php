@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 interface FeedbackEntryManagerInterface
@@ -23,8 +26,18 @@ interface FeedbackEntryManagerInterface
         array $schemaFeedbackEntries,
         array $objectFeedbackEntries,
     ): array;
-    
 
+    /**
+     * @param array<string,mixed> $extensions
+     * @return array<string,mixed>
+     */
+    public function formatObjectOrSchemaFeedbackCommonEntry(
+        AstInterface $astNode,
+        Location $location,
+        array $extensions,
+        FeedbackItemResolution $feedbackItemResolution,
+    ): array;
+    
     /**
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries

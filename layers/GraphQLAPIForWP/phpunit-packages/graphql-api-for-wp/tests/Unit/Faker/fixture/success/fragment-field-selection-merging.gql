@@ -1,0 +1,30 @@
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ...CustomPostData
+    ...UserData
+  }
+}
+
+fragment CustomPostData on CustomPostUnion {
+  customPostType
+  ...CustomPostNodeData
+}
+
+fragment CustomPostNodeData on IsCustomPost {
+  date
+  ...PostData
+}
+
+fragment PostData on Post {
+  id
+  title
+}
+
+fragment UserData on User {
+  name
+}

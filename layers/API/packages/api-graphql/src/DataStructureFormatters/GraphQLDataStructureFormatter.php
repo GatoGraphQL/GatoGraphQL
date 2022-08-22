@@ -6,6 +6,7 @@ namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
+use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -18,6 +19,17 @@ use SplObjectStorage;
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     private const ADDITIONAL_FEEDBACK = 'additionalFeedback';
+    
+    private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
+    
+    final public function setFeedbackEntryManager(FeedbackEntryManagerInterface $feedbackEntryService): void
+    {
+        $this->feedbackEntryService = $feedbackEntryService;
+    }
+    final protected function getFeedbackEntryManager(): FeedbackEntryManagerInterface
+    {
+        return $this->feedbackEntryService ??= $this->instanceManager->getInstance(FeedbackEntryManagerInterface::class);
+    }
 
     public function getName(): string
     {
@@ -429,28 +441,26 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
              * Set response to null
              */
             $resolvedObjectRet[$leafField->getOutputKey()] = null;
+
             /**
              * Add an entry on the "errors" section
              */
-            $locations = [];
-            $location = $leafField->getLocation();
-            if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
-                $locations[] = $location->toArray();
-            }
-            $feedbackItemResolution = new FeedbackItemResolution(
-                GraphQLSpecErrorFeedbackItemProvider::class,
-                GraphQLSpecErrorFeedbackItemProvider::E_5_3_2,
-                [
-                    $leafField->asFieldOutputQueryString(),
-                    $objectID,
-                    $leafField->getOutputKey()
-                ]
+            $item = $this->getFeedbackEntryManager()->formatObjectOrSchemaFeedbackCommonEntry(
+                $leafField,
+                $leafField->getLocation(),
+                [],
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_3_2,
+                    [
+                        $leafField->asFieldOutputQueryString(),
+                        $objectID,
+                        $leafField->getOutputKey()
+                    ]
+                ),
             );
-            $item = [
-                Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
-                Tokens::LOCATIONS => $locations,
-                Tokens::IDS => [$objectID],
-            ];
+            $item[Tokens::IDS] = [$objectID];
+            
             /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
             $typeFeedbackEntries = $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] ?? new SplObjectStorage();
             /** @var array<string,mixed> */
