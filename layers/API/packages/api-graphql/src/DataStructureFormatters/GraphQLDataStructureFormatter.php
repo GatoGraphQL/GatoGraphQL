@@ -15,6 +15,8 @@ use SplObjectStorage;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
+    private const ADDITIONAL_FEEDBACK = 'additionalFeedback';
+
     public function getName(): string
     {
         return 'graphql';
@@ -33,6 +35,39 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          * as it can also add errors.
          */
         $resultData = parent::getFormattedData($data);
+        
+        /**
+         * If the formatting produced additional feedback entries,
+         * transfer them to the $data object.
+         */
+        if (isset($resultData[self::ADDITIONAL_FEEDBACK])) {
+            foreach ($resultData[self::ADDITIONAL_FEEDBACK][Response::GENERAL_FEEDBACK] ?? [] as $category => $feedbackEntries) {
+                $data[Response::GENERAL_FEEDBACK][$category] = array_merge(
+                    $data[Response::GENERAL_FEEDBACK][$category] ?? [],
+                    $feedbackEntries
+                );
+            }
+            foreach ($resultData[self::ADDITIONAL_FEEDBACK][Response::DOCUMENT_FEEDBACK] ?? [] as $category => $feedbackEntries) {
+                $data[Response::DOCUMENT_FEEDBACK][$category] = array_merge(
+                    $data[Response::DOCUMENT_FEEDBACK][$category] ?? [],
+                    $feedbackEntries
+                );
+            }
+            foreach ($resultData[self::ADDITIONAL_FEEDBACK][Response::SCHEMA_FEEDBACK] ?? [] as $category => $feedbackEntries) {
+                $data[Response::SCHEMA_FEEDBACK][$category] = array_merge(
+                    $data[Response::SCHEMA_FEEDBACK][$category] ?? [],
+                    $feedbackEntries
+                );
+            }
+            foreach ($resultData[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK] ?? [] as $category => $feedbackEntries) {
+                $data[Response::OBJECT_FEEDBACK][$category] = array_merge(
+                    $data[Response::OBJECT_FEEDBACK][$category] ?? [],
+                    $feedbackEntries
+                );
+            }
+            unset($resultData[self::ADDITIONAL_FEEDBACK]);
+        }
+
         $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
 
         /**
@@ -401,7 +436,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 Tokens::LOCATIONS => $locations,
                 Tokens::IDS => [$objectID],
             ];
-            $sourceRet[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][] = $this->getObjectEntry($typeOutputKey, $item);
+            $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][] = $this->getObjectEntry($typeOutputKey, $item);
             return;
         }
         parent::resolveObjectData(
