@@ -1,1 +1,30 @@
-{}
+{
+    "data": {
+        "posts": [
+            {
+                "id": 1724,
+                "title": "Keyboard navigation"
+            },
+            {
+                "id": 358,
+                "title": "Post Format: Standard"
+            }
+        ],
+        "customPosts": [
+            {
+                "__typename": "Post",
+                "customPostType": "post",
+                "date": "2018-10-20T20:03:48+00:00",
+                "id": 1724,
+                "excerpt": "Keyboard navigation"
+            },
+            {
+                "__typename": "Page",
+                "customPostType": "page",
+                "date": "2010-07-25T19:40:01+00:00",
+                "id": 2,
+                "excerpt": ""
+            }
+        ]
+    }
+}

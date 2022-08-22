@@ -1,12 +1,22 @@
 {
+  posts(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    id
+    title
+    title
+    title()
+  }
+
   customPosts(
     pagination: {
-      limit: 3
+      limit: 2
     }
   ) {
     __typename
     ...CustomPostData
-    ...UserData
   }
 }
 
@@ -18,13 +28,15 @@ fragment CustomPostData on CustomPostUnion {
 fragment CustomPostNodeData on IsCustomPost {
   date
   ...PostData
+  ...PageData
 }
 
 fragment PostData on Post {
   id
-  title
+  excerpt: title
 }
 
-fragment UserData on User {
-  name
+fragment PageData on Page {
+  id
+  excerpt
 }
