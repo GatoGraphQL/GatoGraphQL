@@ -169,7 +169,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string|int>|string|integer $objectIDorIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    private function addData(array $sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
+    private function addData(array &$sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
         // The results can be a single ID or value, or an array of IDs
         if (is_array($objectIDorIDs)) {
