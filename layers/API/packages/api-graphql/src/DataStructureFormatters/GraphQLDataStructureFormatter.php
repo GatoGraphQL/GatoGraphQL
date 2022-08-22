@@ -422,20 +422,22 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          *
          * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
          */
-        $isError = false;
+        $sameOutputKeyField = null;
         if (array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)) {
             /**
              * Check that the original field is indeed different to this one.
              * To find out, search for the previous fields with the same
              * outputKey but different query string (hence they are different)
              */
-            $differentFieldsWithSameOutputKeyForObject = array_filter(
+            $differentFieldsWithSameOutputKeyForObject = array_values(array_filter(
                 $previouslyResolvedFieldsForObject,
                 fn (FieldInterface $field) => $field->getOutputKey() === $leafField->getOutputKey() && !$leafField->equalsTo($field)
-            );
-            $isError = $differentFieldsWithSameOutputKeyForObject !== [];
+            ));
+            if ($differentFieldsWithSameOutputKeyForObject !== []) {
+                $sameOutputKeyField = $differentFieldsWithSameOutputKeyForObject[0];
+            }
         }
-        if ($isError) {
+        if ($sameOutputKeyField !== null) {
             /**
              * Set response to null
              */
@@ -454,6 +456,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                     [
                         $leafField->asFieldOutputQueryString(),
                         $objectID,
+                        $sameOutputKeyField->asFieldOutputQueryString(),
                         $leafField->getOutputKey()
                     ]
                 ),

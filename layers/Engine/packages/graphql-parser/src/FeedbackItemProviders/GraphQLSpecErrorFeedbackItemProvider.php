@@ -116,7 +116,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_2_2_1 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'graphql-server'),
             // self::E_5_2_3_1 => 'subscriptions_not_yet_supported',
             self::E_5_3_1 => $this->__('There is no field \'%s\' on type \'%s\'', 'graphql-parser'),
-            self::E_5_3_2 => $this->__('The response for field \'%s\' on object with ID \'%s\' is ambiguous, as a different field also prints its response under key \'%s\'', 'graphql-parser'),
+            self::E_5_3_2 => $this->__('The response for field \'%s\' on object with ID \'%s\' is ambiguous, as the previous field \'%s\' must also be printed under key \'%s\'', 'graphql-parser'),
             self::E_5_3_3 => $this->__('Field \'%s\' from type \'%s\' is not a connection', 'graphql-server'),
             self::E_5_4_1_A => $this->__('On field \'%1$s\' of type \'%2$s\', there is no argument with name \'%3$s\'', 'graphql-server'),
             self::E_5_4_1_B => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'graphql-server'),
