@@ -22,12 +22,12 @@ interface UserTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getUsers(array $query = [], array $options = []): array;
+    public function getUsers(array $query, array $options = []): array;
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getUserCount(array $query = [], array $options = []): int;
+    public function getUserCount(array $query, array $options = []): int;
     public function getUserDisplayName(string|int|object $userObjectOrID): ?string;
     public function getUserEmail(string|int|object $userObjectOrID): ?string;
     public function getUserFirstname(string|int|object $userObjectOrID): ?string;

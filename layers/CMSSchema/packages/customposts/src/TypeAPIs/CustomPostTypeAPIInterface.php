@@ -41,7 +41,7 @@ interface CustomPostTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostCount(array $query = [], array $options = []): int;
+    public function getCustomPostCount(array $query, array $options = []): int;
     /**
      * @return string[]
      * @param array<string,mixed> $query

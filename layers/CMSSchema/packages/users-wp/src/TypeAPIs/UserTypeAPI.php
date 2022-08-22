@@ -61,7 +61,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getUserCount(array $query = [], array $options = []): int
+    public function getUserCount(array $query, array $options = []): int
     {
         // Convert the parameters
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
@@ -102,7 +102,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getUsers(array $query = [], array $options = []): array
+    public function getUsers(array $query, array $options = []): array
     {
         // Convert the parameters
         $query = $this->convertUsersQuery($query, $options);

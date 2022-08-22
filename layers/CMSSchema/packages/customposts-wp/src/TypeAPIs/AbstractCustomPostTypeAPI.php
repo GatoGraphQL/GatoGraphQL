@@ -88,7 +88,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostCount(array $query = [], array $options = []): int
+    public function getCustomPostCount(array $query, array $options = []): int
     {
         // Convert parameters
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;

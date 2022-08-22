@@ -40,7 +40,7 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getPageCount(array $query = [], array $options = []): int;
+    public function getPageCount(array $query, array $options = []): int;
     /**
      * Page custom post type
      */
