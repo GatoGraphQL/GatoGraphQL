@@ -369,11 +369,18 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          *
          * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
          */
+        $isError = false;
         if (array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)) {
+            
+        }
+        if ($isError) {
             /**
-             * It's an error =>  set response to null
+             * Set response to null
              */
             $resolvedObjectRet[$leafField->getOutputKey()] = null;
+            /**
+             * Add an entry on the "errors" section
+             */
             $locations = [];
             $location = $leafField->getLocation();
             if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
