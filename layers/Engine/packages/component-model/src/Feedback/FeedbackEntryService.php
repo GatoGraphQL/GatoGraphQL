@@ -10,6 +10,8 @@ use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -217,7 +219,7 @@ class FeedbackEntryService implements FeedbackEntryServiceInterface
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
      */
-    private function transferFeedback(
+    public function transferFeedback(
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectFeedbackEntries,

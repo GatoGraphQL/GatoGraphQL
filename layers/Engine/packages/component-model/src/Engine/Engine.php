@@ -1878,7 +1878,7 @@ class Engine implements EngineInterface
              * Transfer the feedback entries from the FeedbackStore
              * to temporary variables for processing.
              */
-            $this->transferFeedback(
+            $this->getFeedbackEntryService()->transferFeedback(
                 $idObjects,
                 $engineIterationFeedbackStore,
                 $objectFeedbackEntries,

@@ -23,4 +23,15 @@ interface FeedbackEntryServiceInterface
         array $schemaFeedbackEntries,
         array $objectFeedbackEntries,
     ): array;
+    /**
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     */
+    public function transferFeedback(
+        array $idObjects,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        array &$objectFeedbackEntries,
+        array &$schemaFeedbackEntries,
+    ): void;
 }
