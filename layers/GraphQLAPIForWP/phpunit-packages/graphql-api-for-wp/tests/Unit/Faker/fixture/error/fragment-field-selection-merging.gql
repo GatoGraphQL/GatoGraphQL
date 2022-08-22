@@ -1,12 +1,23 @@
 {
+  posts(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    id
+    title
+    title: excerpt
+    dateStr
+    dateStr(format: "d/m")
+  }
+
   customPosts(
     pagination: {
-      limit: 3
+      limit: 2
     }
   ) {
     __typename
     ...CustomPostData
-    ...UserData
   }
 }
 
@@ -23,8 +34,5 @@ fragment CustomPostNodeData on IsCustomPost {
 fragment PostData on Post {
   id
   date: title
-}
-
-fragment UserData on User {
-  name
+  __typename: excerpt
 }

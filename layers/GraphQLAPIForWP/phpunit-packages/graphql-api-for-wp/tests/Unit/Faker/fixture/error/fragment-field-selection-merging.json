@@ -1,1 +1,149 @@
-{}
+{
+  "errors": [
+    {
+      "message": "The response for field 'title: excerpt' on object with ID '1724' is ambiguous, as a different field also prints its response under key 'title'",
+      "locations": [
+        {
+          "line": 9,
+          "column": 12
+        }
+      ],
+      "extensions": {
+        "path": [
+          "title: excerpt",
+          "posts(pagination: {limit: 2}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "id": "1724",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field 'title: excerpt' on object with ID '358' is ambiguous, as a different field also prints its response under key 'title'",
+      "locations": [
+        {
+          "line": 9,
+          "column": 12
+        }
+      ],
+      "extensions": {
+        "path": [
+          "title: excerpt",
+          "posts(pagination: {limit: 2}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "id": "358",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field 'dateStr(format: \"d\/m\")' on object with ID '1724' is ambiguous, as a different field also prints its response under key 'dateStr'",
+      "locations": [
+        {
+          "line": 11,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "path": [
+          "dateStr(format: \"d\/m\")",
+          "posts(pagination: {limit: 2}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "id": "1724",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field 'dateStr(format: \"d\/m\")' on object with ID '358' is ambiguous, as a different field also prints its response under key 'dateStr'",
+      "locations": [
+        {
+          "line": 11,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "path": [
+          "dateStr(format: \"d\/m\")",
+          "posts(pagination: {limit: 2}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "id": "358",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field 'date: title' on object with ID '1724' is ambiguous, as a different field also prints its response under key 'date'",
+      "locations": [
+        {
+          "line": 36,
+          "column": 9
+        }
+      ],
+      "extensions": {
+        "path": [
+          "date: title",
+          "fragment PostData on Post { ... }"
+        ],
+        "type": "Post",
+        "id": "1724",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field '__typename: excerpt' on object with ID '1724' is ambiguous, as a different field also prints its response under key '__typename'",
+      "locations": [
+        {
+          "line": 37,
+          "column": 15
+        }
+      ],
+      "extensions": {
+        "path": [
+          "__typename: excerpt",
+          "fragment PostData on Post { ... }"
+        ],
+        "type": "Post",
+        "id": "1724",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    }
+  ],
+  "data": {
+    "posts": [
+      {
+        "id": 1724,
+        "title": null,
+        "dateStr": null
+      },
+      {
+        "id": 358,
+        "title": null,
+        "dateStr": null
+      }
+    ],
+    "customPosts": [
+      {
+        "__typename": null,
+        "customPostType": "post",
+        "date": null,
+        "id": 1724
+      },
+      {
+        "__typename": "Page",
+        "customPostType": "page",
+        "date": "2010-07-25T19:40:01+00:00"
+      }
+    ]
+  }
+}
