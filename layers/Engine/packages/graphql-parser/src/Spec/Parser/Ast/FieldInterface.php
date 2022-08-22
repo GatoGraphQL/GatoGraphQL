@@ -52,5 +52,5 @@ interface FieldInterface extends AstInterface, LocatableInterface, WithDirective
      *
      * Watch out: `{ title: title }` is equivalent to `{ title }`
      */
-    public function isEquivalentTo(FieldInterface $field): bool;
+    public function equalsTo(FieldInterface $field): bool;
 }

@@ -164,7 +164,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
      *
      * Watch out: `{ title: title }` is equivalent to `{ title }`
      */
-    public function isEquivalentTo(FieldInterface $field): bool
+    public function equalsTo(FieldInterface $field): bool
     {
         $thisQueryString = $this->asQueryString();
         $againstQueryString = $field->asQueryString();

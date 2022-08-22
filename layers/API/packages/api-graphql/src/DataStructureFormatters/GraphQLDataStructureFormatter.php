@@ -431,7 +431,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
              */
             $differentFieldsWithSameOutputKeyForObject = array_filter(
                 $previouslyResolvedFieldsForObject,
-                fn (FieldInterface $field) => $field->getOutputKey() === $leafField->getOutputKey() && !$leafField->isEquivalentTo($field)
+                fn (FieldInterface $field) => $field->getOutputKey() === $leafField->getOutputKey() && !$leafField->equalsTo($field)
             );
             $isError = $differentFieldsWithSameOutputKeyForObject !== [];
         }
