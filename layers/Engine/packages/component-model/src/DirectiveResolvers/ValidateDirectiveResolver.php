@@ -91,10 +91,7 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
             /** @var SplObjectStorage<ObjectTypeResolverInterface,FieldInterface[]> */
             $processedObjectTypeResolverFields = new SplObjectStorage();
             foreach ($idFieldSet as $id => $fieldSet) {
-                $object = $idObjects[$id] ?? null;
-                if ($object === null) {
-                    continue;
-                }
+                $object = $idObjects[$id];
                 $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
                 if ($targetObjectTypeResolver === null) {
                     continue;
