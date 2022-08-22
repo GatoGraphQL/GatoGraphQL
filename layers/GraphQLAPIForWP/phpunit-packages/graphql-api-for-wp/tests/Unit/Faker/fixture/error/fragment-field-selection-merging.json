@@ -12,7 +12,7 @@
         "path": [
           "title: excerpt",
           "posts(pagination: {limit: 2}) { ... }",
-          "query { ... }"
+          "query ($format: String = \"d\/m\") { ... }"
         ],
         "type": "Post",
         "id": "1724",
@@ -32,7 +32,7 @@
         "path": [
           "title: excerpt",
           "posts(pagination: {limit: 2}) { ... }",
-          "query { ... }"
+          "query ($format: String = \"d\/m\") { ... }"
         ],
         "type": "Post",
         "id": "358",
@@ -52,7 +52,7 @@
         "path": [
           "dateStr(format: \"d\/m\")",
           "posts(pagination: {limit: 2}) { ... }",
-          "query { ... }"
+          "query ($format: String = \"d\/m\") { ... }"
         ],
         "type": "Post",
         "id": "1724",
@@ -72,7 +72,7 @@
         "path": [
           "dateStr(format: \"d\/m\")",
           "posts(pagination: {limit: 2}) { ... }",
-          "query { ... }"
+          "query ($format: String = \"d\/m\") { ... }"
         ],
         "type": "Post",
         "id": "358",
@@ -84,7 +84,7 @@
       "message": "The response for field 'date: title' on object with ID '1724' is ambiguous, as a different field also prints its response under key 'date'",
       "locations": [
         {
-          "line": 36,
+          "line": 45,
           "column": 9
         }
       ],
@@ -103,7 +103,7 @@
       "message": "The response for field '__typename: excerpt' on object with ID '1724' is ambiguous, as a different field also prints its response under key '__typename'",
       "locations": [
         {
-          "line": 37,
+          "line": 46,
           "column": 15
         }
       ],
@@ -114,6 +114,46 @@
         ],
         "type": "Post",
         "id": "1724",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field 'dateStr(format: $format)' on object with ID '2' is ambiguous, as a different field also prints its response under key 'dateStr'",
+      "locations": [
+        {
+          "line": 20,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "path": [
+          "dateStr(format: $format)",
+          "pages(pagination: {limit: 2}) { ... }",
+          "query ($format: String = \"d\/m\") { ... }"
+        ],
+        "type": "Page",
+        "id": "2",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field 'dateStr(format: $format)' on object with ID '146' is ambiguous, as a different field also prints its response under key 'dateStr'",
+      "locations": [
+        {
+          "line": 20,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "path": [
+          "dateStr(format: $format)",
+          "pages(pagination: {limit: 2}) { ... }",
+          "query ($format: String = \"d\/m\") { ... }"
+        ],
+        "type": "Page",
+        "id": "146",
         "code": "gql@5.3.2",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
       }
@@ -129,6 +169,14 @@
       {
         "id": 358,
         "title": null,
+        "dateStr": null
+      }
+    ],
+    "pages": [
+      {
+        "dateStr": null
+      },
+      {
         "dateStr": null
       }
     ],

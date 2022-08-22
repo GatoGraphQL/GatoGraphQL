@@ -1,4 +1,4 @@
-{
+query ($format: String = "d/m") {
   posts(
     pagination: {
       limit: 2
@@ -9,6 +9,15 @@
     title: excerpt
     dateStr
     dateStr(format: "d/m")
+  }
+
+  pages(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    dateStr(format: "d/m")
+    dateStr(format: $format)
   }
 
   customPosts(
