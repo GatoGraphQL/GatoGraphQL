@@ -157,4 +157,38 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
             $strFieldArguments,
         );
     }
+
+    /**
+     * Indicate if a field equals another one based on its properties,
+     * not on its object hash ID.
+     *
+     * Watch out: `{ title: title }` is equivalent to `{ title }`
+     */
+    public function isEquivalentTo(FieldInterface $field): bool
+    {
+        $thisQueryString = $this->asQueryString();
+        $againstQueryString = $field->asQueryString();
+
+        /**
+         * If the alias is the same as the name then remove it,
+         * as to have `{ title: title }` equivalent to `{ title }`
+         */
+        if ($this->getName() === $this->getAlias()) {
+            $thisQueryString = substr(
+                $thisQueryString, 
+                strlen(
+                    sprintf('%s: ', $this->getAlias())
+                )
+            );
+        }
+        if ($field->getName() === $field->getAlias()) {
+            $againstQueryString = substr(
+                $againstQueryString, 
+                strlen(
+                    sprintf('%s: ', $field->getAlias())
+                )
+            );
+        }
+        return $thisQueryString === $againstQueryString;
+    }
 }

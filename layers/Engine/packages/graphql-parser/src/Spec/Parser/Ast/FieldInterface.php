@@ -45,4 +45,12 @@ interface FieldInterface extends AstInterface, LocatableInterface, WithDirective
      * @see https://spec.graphql.org/draft/#sec-Field-Alias
      */
     public function getOutputKey(): string;
+
+    /**
+     * Indicate if a field equals another one based on its properties,
+     * not on its object hash ID.
+     *
+     * Watch out: `{ title: title }` is equivalent to `{ title }`
+     */
+    public function isEquivalentTo(FieldInterface $field): bool;
 }
