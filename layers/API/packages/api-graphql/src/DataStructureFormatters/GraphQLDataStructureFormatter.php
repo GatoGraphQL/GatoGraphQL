@@ -8,8 +8,10 @@ use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use SplObjectStorage;
 
@@ -435,8 +437,17 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
                 $locations[] = $location->toArray();
             }
+            $feedbackItemResolution = new FeedbackItemResolution(
+                GraphQLSpecErrorFeedbackItemProvider::class,
+                GraphQLSpecErrorFeedbackItemProvider::E_5_3_2,
+                [
+                    $leafField->asFieldOutputQueryString(),
+                    $objectID,
+                    $leafField->getOutputKey()
+                ]
+            );
             $item = [
-                Tokens::MESSAGE => 'songa',
+                Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
                 Tokens::LOCATIONS => $locations,
                 Tokens::IDS => [$objectID],
             ];
