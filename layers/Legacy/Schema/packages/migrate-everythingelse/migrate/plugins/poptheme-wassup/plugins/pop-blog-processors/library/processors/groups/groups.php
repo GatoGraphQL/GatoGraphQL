@@ -9,6 +9,9 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
     public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL = 'group-tagcontent-scroll-thumbnail';
     public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST = 'group-tagcontent-scroll-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

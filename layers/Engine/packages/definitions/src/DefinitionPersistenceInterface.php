@@ -7,7 +7,7 @@ namespace PoP\Definitions;
 interface DefinitionPersistenceInterface
 {
     /**
-     * @return array<string, DefinitionResolverInterface>
+     * @return array<string,DefinitionResolverInterface>
      */
     public function getDefinitionResolvers(): array;
     public function storeDefinitionsPersistently(): void;

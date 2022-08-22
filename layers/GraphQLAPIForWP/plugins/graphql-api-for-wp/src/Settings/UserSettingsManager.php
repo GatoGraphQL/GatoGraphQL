@@ -14,7 +14,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     /**
      * Cache the values in memory
      *
-     * @var array<string, array>
+     * @var array<string,array<string,mixed>>
      */
     protected array $options = [];
 
@@ -183,7 +183,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     }
 
     /**
-     * @param array<string, bool> $moduleIDValues
+     * @param array<string,bool> $moduleIDValues
      */
     public function setModulesEnabled(array $moduleIDValues): void
     {
@@ -233,7 +233,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     /**
      * Store the options in the DB
      *
-     * @param array<string, mixed> $itemValues
+     * @param array<string,mixed> $itemValues
      */
     protected function storeItems(string $optionName, array $itemValues): void
     {

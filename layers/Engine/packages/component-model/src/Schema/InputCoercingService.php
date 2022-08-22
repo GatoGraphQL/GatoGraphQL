@@ -258,7 +258,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             return $inputValue;
         }
         if ($inputIsArrayOfArraysType) {
-            /** @var array $inputValue */
+            /** @var array<mixed[]> $inputValue */
             // If the value is an array of arrays, then cast each subelement to the item type
             return array_map(
                 // If it contains a null value, return it as is
@@ -270,7 +270,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             );
         }
         if ($inputIsArrayType) {
-            /** @var array $inputValue */
+            /** @var mixed[] $inputValue */
             // If the value is an array, then cast each element to the item type
             return array_map(
                 fn (mixed $arrayArgValueElem) => ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayArgValueElem : $inputTypeResolver->coerceValue($arrayArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
@@ -292,18 +292,18 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType
     ): array {
-        if ($inputValue === null) {
+        if ($inputValue === null || $inputValue instanceof ValueResolutionPromiseInterface) {
             return [];
         }
         $inputValueDeprecations = [];
         if ($inputIsArrayOfArraysType) {
             // Execute against an array of arrays of values
             foreach ($inputValue as $arrayArgValueElem) {
-                if ($arrayArgValueElem === null) {
+                if ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) {
                     continue;
                 }
                 foreach ($arrayArgValueElem as $arrayOfArraysArgValueElem) {
-                    if ($arrayOfArraysArgValueElem === null) {
+                    if ($arrayOfArraysArgValueElem === null || $arrayOfArraysArgValueElem instanceof ValueResolutionPromiseInterface) {
                         continue;
                     }
                     $inputValueDeprecations = array_merge(
@@ -315,7 +315,7 @@ class InputCoercingService implements InputCoercingServiceInterface
         } elseif ($inputIsArrayType) {
             // Execute against an array of values
             foreach ($inputValue as $arrayArgValueElem) {
-                if ($arrayArgValueElem === null) {
+                if ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) {
                     continue;
                 }
                 $inputValueDeprecations = array_merge(

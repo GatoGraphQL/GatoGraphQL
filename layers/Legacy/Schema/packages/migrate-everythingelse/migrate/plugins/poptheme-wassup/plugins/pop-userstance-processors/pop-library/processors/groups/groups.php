@@ -11,6 +11,9 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
     public final const COMPONENT_USERSTANCE_GROUP_AUTHOR_WIDGETAREA = 'group-userstance-author-widgetarea';
     public final const COMPONENT_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES = 'group-userstance-author-stanceslides';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_Module_Processor_CommentUserMentionsLayouts extends PoP_Module_Process
 {
     public final const COMPONENT_LAYOUT_COMMENTUSERMENTIONS = 'layout-commentusermentions';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

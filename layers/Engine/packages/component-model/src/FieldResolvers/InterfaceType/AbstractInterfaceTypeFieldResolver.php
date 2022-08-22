@@ -34,29 +34,29 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 
-    /** @var array<string, array> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaDefinitionForFieldCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedFieldExtensionsCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldDeprecationMessageCache = [];
-    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
-    /** @var array<string, string[]> */
+    /** @var array<string,string[]> */
     protected array $consolidatedAdminFieldArgNamesCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDeprecationMessageCache = [];
-    /** @var array<string, mixed> */
+    /** @var array<string,mixed> */
     protected array $consolidatedFieldArgDefaultValueCache = [];
-    /** @var array<string, int> */
+    /** @var array<string,int> */
     protected array $consolidatedFieldArgTypeModifiersCache = [];
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedFieldArgExtensionsCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaFieldArgsCache = [];
 
     /**
@@ -130,6 +130,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return $this->getInterfaceTypeResolverClassesToAttachTo();
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return $this->getFieldNamesToImplement();
@@ -138,7 +141,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * The interfaces the fieldResolver implements
      *
-     * @return InterfaceTypeFieldResolverInterface[]
+     * @return array<InterfaceTypeFieldResolverInterface>
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
@@ -244,7 +247,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
@@ -461,6 +464,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
     /**
      * Get the "schema" properties as for the fieldName
+     *
+     * @return array<string,mixed>
      */
     final protected function doGetFieldSchemaDefinition(string $fieldName): array
     {
@@ -490,7 +495,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      * Watch out: The same extensions must be present for both
      * the ObjectType and the InterfaceType!
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getFieldExtensionsSchemaDefinition(string $fieldName): array
     {
@@ -503,6 +508,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final protected function getConsolidatedFieldExtensionsSchemaDefinition(string $fieldName): array
     {
@@ -563,6 +570,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final public function getFieldArgsSchemaDefinition(string $fieldName): array
     {
@@ -607,6 +616,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return $this->schemaFieldArgsCache[$cacheKey];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getFieldArgExtensionsSchemaDefinition(string $fieldName, string $fieldArgName): array
     {
         $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
@@ -618,6 +630,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final protected function getConsolidatedFieldArgExtensionsSchemaDefinition(string $fieldName, string $fieldArgName): array
     {

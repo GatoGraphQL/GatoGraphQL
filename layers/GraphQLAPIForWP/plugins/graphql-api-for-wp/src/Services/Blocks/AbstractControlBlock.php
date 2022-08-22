@@ -54,7 +54,7 @@ abstract class AbstractControlBlock extends AbstractBlock
     }
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     public function renderBlock(array $attributes, string $content): string
     {
@@ -74,11 +74,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                  * */
                 $groupFieldsUnderTypeForPrint = $moduleConfiguration->groupFieldsUnderTypeForPrint();
                 if ($groupFieldsUnderTypeForPrint) {
-                    /**
-                     * Cast object so PHPStan doesn't throw error
-                     * @var array<string,array>
-                     */
-                    $typeFieldsForPrint = $typeFieldsForPrint;
+                    /** @var array<string,string[]> $typeFieldsForPrint */
                     $fieldTypeContent = '';
                     foreach ($typeFieldsForPrint as $typeName => $fields) {
                         $fieldTypeContent .= sprintf(
@@ -175,7 +171,7 @@ EOT;
         return \__('Configuration:', 'graphql-api');
     }
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     abstract protected function getBlockContent(array $attributes, string $content): string;
 }

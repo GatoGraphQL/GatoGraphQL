@@ -4,6 +4,9 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
 {
     public final const COMPONENT_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'tabpanel-authorcommunitymembers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

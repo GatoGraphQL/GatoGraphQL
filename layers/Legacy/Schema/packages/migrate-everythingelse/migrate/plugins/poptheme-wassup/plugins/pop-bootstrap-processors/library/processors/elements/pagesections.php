@@ -30,6 +30,9 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

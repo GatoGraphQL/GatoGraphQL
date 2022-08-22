@@ -23,15 +23,15 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected ?array $consolidatedEnumValuesCache = null;
     /** @var string[]|null */
     protected ?array $consolidatedAdminEnumValuesCache = null;
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedEnumValueDescriptionCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedEnumValueDeprecationMessageCache = [];
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedEnumValueExtensionsCache = [];
     /** @var array<string,array<string,mixed>>|null */
     protected ?array $schemaDefinitionForEnumCache = null;
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaDefinitionForEnumValueCache = [];
 
     private ?OutputServiceInterface $outputService = null;
@@ -141,6 +141,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
     /**
      * Return as is
+     *
+     * @return string|int|float|bool|mixed[]
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
     {
@@ -247,6 +249,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
     /**
      * Get the "schema" properties as for the enum
+     *
+     * @return array<string,mixed>
      */
     final public function getEnumSchemaDefinition(): array
     {
@@ -266,6 +270,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
     /**
      * Get the "schema" properties as for the enumValue
+     *
+     * @return array<string,mixed>
      */
     final public function getEnumValueSchemaDefinition(string $enumValue): array
     {
@@ -291,6 +297,9 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         return $this->schemaDefinitionForEnumValueCache[$enumValue];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getEnumValueExtensionsSchemaDefinition(string $enumValue): array
     {
         return [
@@ -301,6 +310,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     /**
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return array<string,mixed>
      */
     final public function getConsolidatedEnumValueExtensionsSchemaDefinition(string $enumValue): array
     {

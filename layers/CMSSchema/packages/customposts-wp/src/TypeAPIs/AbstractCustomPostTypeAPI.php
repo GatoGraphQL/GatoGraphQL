@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostsWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoPCMSSchema\CustomPosts\Module;
-use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
@@ -52,7 +50,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     /**
      * If the "status" is not passed, then it's always "publish"
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryDefaults(): array
     {
@@ -66,7 +64,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     /**
      * Query args that must always be in the query
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryRequiredArgs(): array
     {
@@ -74,9 +72,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
 
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string|int>|object[]
      */
     public function getCustomPosts(array $query, array $options = []): array
     {
@@ -84,7 +82,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return get_posts($query);
     }
 
-    public function getCustomPostCount(array $query = [], array $options = []): int
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function getCustomPostCount(array $query, array $options = []): int
     {
         // Convert parameters
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
@@ -99,19 +101,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return count($posts);
     }
     /**
-     * Limit of how many custom posts can be retrieved in the query.
-     * Override this value for specific custom post types
-     */
-    protected function getCustomPostListMaxLimit(): int
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getCustomPostListMaxLimit();
-    }
-    /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
@@ -219,6 +211,10 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $orderBy
         );
     }
+    /**
+     * @return string[]
+     * @param array<string,mixed> $query
+     */
     public function getCustomPostTypes(array $query = array()): array
     {
         // Convert the parameters

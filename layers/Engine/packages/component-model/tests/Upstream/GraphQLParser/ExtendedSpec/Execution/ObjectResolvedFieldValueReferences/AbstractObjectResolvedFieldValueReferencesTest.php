@@ -43,7 +43,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
     private ?ParserInterface $parser = null;
 
     /**
-     * @return array<string, mixed> [key]: Module class, [value]: Configuration
+     * @return array<string,mixed> [key]: Module class, [value]: Configuration
      */
     protected static function getModuleClassConfiguration(): array
     {
@@ -122,11 +122,13 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
         $this->executeAssertion($query, $context, $queryOperation, $expectedObjectResolvedFieldValueReferencedFields);
     }
 
+    /**
+     * @param FieldInterface[] $expectedObjectResolvedFieldValueReferencedFields
+     */
     protected function executeAssertion(
         string $query,
         Context $context,
         QueryOperation $queryOperation,
-        /** @var FieldInterface[] */
         array $expectedObjectResolvedFieldValueReferencedFields,
     ): void {
         $parser = $this->getParser();

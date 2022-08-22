@@ -13,6 +13,10 @@ trait HasArgsSchemaDefinitionReferenceTrait
      */
     protected array $args;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     protected function initArgs(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
         $this->args = [];
@@ -49,7 +53,7 @@ trait HasArgsSchemaDefinitionReferenceTrait
     public function getArgIDs(): array
     {
         return array_map(
-            function (InputValue $inputValue) {
+            function (InputValue $inputValue): string {
                 return $inputValue->getID();
             },
             $this->getArgs()

@@ -60,6 +60,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->unionCustomPostTypesFilterInput ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInput::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

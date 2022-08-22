@@ -7,6 +7,9 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
     public final const COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST = 'formcomponentgroup-card-commentpost';
     public final const COMPONENT_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT = 'formcomponentgroup-card-parentcomment';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

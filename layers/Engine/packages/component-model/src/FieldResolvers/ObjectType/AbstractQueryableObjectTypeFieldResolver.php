@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\FilterDataComponentProcessorInterface;
@@ -40,6 +41,9 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return null;
     }
 
+    /**
+     * @return array<string, InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
@@ -104,7 +108,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      *     - Execute `filterDataloadQueryArgs` on the FilterInput to place the value
      *       under the expected input name
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      * @throws AbstractValueResolutionPromiseException
      */
     protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, FieldDataAccessorInterface $fieldDataAccessor): array

@@ -12,6 +12,9 @@ class GD_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     public final const COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS = 'multiple-sidebarinner-section-authorpastevents';
     public final const COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR = 'multiple-sidebarinner-section-authoreventscalendar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

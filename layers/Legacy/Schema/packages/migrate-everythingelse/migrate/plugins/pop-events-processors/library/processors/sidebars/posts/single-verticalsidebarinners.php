@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modul
     public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT = 'vertical-sidebarinner-single-event';
     public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_PASTEVENT = 'vertical-sidebarinner-single-pastevent';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

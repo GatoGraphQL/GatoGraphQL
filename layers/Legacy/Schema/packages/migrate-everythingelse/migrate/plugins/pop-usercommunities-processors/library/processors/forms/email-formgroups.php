@@ -4,6 +4,9 @@ class PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups extends PoP
 {
     public final const COMPONENT_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY = 'ure-forminputgroup-emailnotifications-network-joinscommunity';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

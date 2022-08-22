@@ -77,6 +77,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      *
      * @param string $relativePathDir Dir relative to the /docs/${lang}/ folder
      * @throws ContentNotExistsException When the file is not found
+     * @param array<string,mixed> $options
      */
     public function getContent(
         string $filename,
@@ -176,7 +177,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      * - Add classes to HTML elements
      * - Append video embeds
      *
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     protected function processHTMLContent(string $htmlContent, string $pathURL, array $options = []): string
     {
@@ -383,7 +384,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         // Identify videos from Vimeo
         return (string)preg_replace_callback(
             '/<p>(.*?)<a href="https:\/\/(vimeo.com)\/(.*?)">(.*?)<\/a>\.?<\/p>/',
-            function ($matches) {
+            function (array $matches): string {
                 // $videoURL = sprintf('https://%s/%s', $matches[2], $matches[3]);
                 $playerURL = sprintf('https://player.vimeo.com/video/%s', $matches[3]);
                 $videoHTML = sprintf(
@@ -459,7 +460,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         );
         return (string)preg_replace_callback(
             $regex,
-            function ($matches) use ($pathURL, $attr) {
+            function (array $matches) use ($pathURL, $attr): string {
                 // If the element has an absolute route, then no need
                 if ($this->isAbsoluteURL($matches[1]) || $this->isMailto($matches[1])) {
                     return $matches[0];

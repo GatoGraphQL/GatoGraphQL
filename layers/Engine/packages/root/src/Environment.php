@@ -48,7 +48,7 @@ class Environment
     /**
      * By default, use the SERVER_NAME + application version
      */
-    public static function getCacheContainerConfigurationNamespace(): ?string
+    public static function getCacheContainerConfigurationNamespace(): string
     {
         if (getenv(self::CONTAINER_CONFIGURATION_CACHE_NAMESPACE) !== false) {
             return getenv(self::CONTAINER_CONFIGURATION_CACHE_NAMESPACE);

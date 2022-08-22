@@ -10,6 +10,8 @@ interface SchemaDefinitionReferenceRegistryInterface
 {
     /**
      * It returns the full schema, expanded with all data required to satisfy GraphQL's introspection fields (starting from "__schema")
+     *
+     * @return array<string,mixed>
      */
     public function &getFullSchemaDefinitionForGraphQL(): array;
     public function registerSchemaDefinitionReferenceObject(

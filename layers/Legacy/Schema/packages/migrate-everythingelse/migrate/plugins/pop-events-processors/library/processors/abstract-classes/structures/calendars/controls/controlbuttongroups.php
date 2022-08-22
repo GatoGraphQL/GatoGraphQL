@@ -4,6 +4,9 @@ class PoP_Module_Processor_CalendarControlButtonGroups extends PoP_Module_Proces
 {
     public final const COMPONENT_CALENDARCONTROLBUTTONGROUP_CALENDAR = 'calendarcontrolbuttongroup-calendar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

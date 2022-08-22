@@ -6,6 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 abstract class AbstractPluginInfo implements PluginInfoInterface
 {
+    /**
+     * @var array<string,mixed>
+     */
     protected array $values = [];
 
     final public function __construct(

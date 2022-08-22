@@ -9,19 +9,25 @@ use PoPAPI\API\Schema\SchemaDefinition;
 class PersistedFragmentManager implements PersistedFragmentManagerInterface
 {
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     protected array $persistedFragments = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array<string,string>>
      */
     protected array $persistedFragmentsForSchema = [];
 
+    /**
+     * @return array<string,string>
+     */
     public function getPersistedFragments(): array
     {
         return $this->persistedFragments;
     }
 
+    /**
+     * @return array<string,array<string,string>>
+     */
     public function getPersistedFragmentsForSchema(): array
     {
         return $this->persistedFragmentsForSchema;

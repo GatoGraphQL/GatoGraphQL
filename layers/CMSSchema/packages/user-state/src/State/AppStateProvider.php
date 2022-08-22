@@ -20,6 +20,9 @@ class AppStateProvider extends AbstractAppStateProvider
         return $this->userStateTypeAPI ??= $this->instanceManager->getInstance(UserStateTypeAPIInterface::class);
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         $this->setUserStateVars($state);
@@ -28,7 +31,7 @@ class AppStateProvider extends AbstractAppStateProvider
     /**
      * Add the user's (non)logged-in state
      *
-     * @param array<string, mixed> $state
+     * @param array<string,mixed> $state
      */
     public function setUserStateVars(array &$state): void
     {

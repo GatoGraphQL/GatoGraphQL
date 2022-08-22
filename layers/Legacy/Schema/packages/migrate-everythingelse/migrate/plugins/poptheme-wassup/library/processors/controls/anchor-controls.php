@@ -11,6 +11,9 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     public final const COMPONENT_ANCHORCONTROL_TOGGLETABS = 'anchorcontrol-toggletabs';
     public final const COMPONENT_ANCHORCONTROL_TOGGLETABSXS = 'anchorcontrol-toggletabsxs';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

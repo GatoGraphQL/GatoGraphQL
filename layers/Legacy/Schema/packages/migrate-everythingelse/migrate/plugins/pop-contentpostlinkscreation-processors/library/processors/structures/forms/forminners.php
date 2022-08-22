@@ -4,6 +4,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
 {
     public final const COMPONENT_FORMINNER_CONTENTPOSTLINK = 'forminner-contentpostlink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

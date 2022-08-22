@@ -4,6 +4,9 @@ class GD_EM_Module_Processor_CreateLocationFormInners extends PoP_Module_Process
 {
     public final const COMPONENT_FORMINNER_CREATELOCATION = 'em-forminner-createlocation';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

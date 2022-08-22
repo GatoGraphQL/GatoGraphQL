@@ -30,6 +30,8 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
 
     /**
      * Apply to all fields
+     *
+     * @return string[]
      */
     protected function getFieldNames(): array
     {

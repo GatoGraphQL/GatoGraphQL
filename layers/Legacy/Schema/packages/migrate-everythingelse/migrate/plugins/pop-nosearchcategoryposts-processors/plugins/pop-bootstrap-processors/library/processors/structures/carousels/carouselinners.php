@@ -43,6 +43,9 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
     public final const COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT = 'carouselinner-nosearchcategoryposts18-content';
     public final const COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT = 'carouselinner-nosearchcategoryposts19-content';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

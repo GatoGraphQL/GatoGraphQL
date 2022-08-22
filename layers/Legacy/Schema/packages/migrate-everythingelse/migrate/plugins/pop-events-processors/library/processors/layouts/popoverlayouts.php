@@ -4,6 +4,9 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
 {
     public final const COMPONENT_LAYOUT_POPOVER_EVENT = 'layout-popover-event';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

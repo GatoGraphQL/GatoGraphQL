@@ -10,6 +10,9 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
 
     public final const COMPONENT_DATALOAD_VOLUNTEER = 'dataload-volunteer';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

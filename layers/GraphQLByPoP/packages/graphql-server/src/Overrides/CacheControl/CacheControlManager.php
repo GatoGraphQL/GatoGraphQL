@@ -12,6 +12,9 @@ class CacheControlManager extends UpstreamCacheControlManager
 {
     use BasicServiceTrait;
 
+    /**
+     * @var array<mixed[]>|null
+     */
     protected ?array $overriddenFieldEntries = null;
 
     private ?MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator = null;
@@ -25,6 +28,9 @@ class CacheControlManager extends UpstreamCacheControlManager
         return $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator ??= $this->instanceManager->getInstance(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface::class);
     }
 
+    /**
+     * @param array<mixed[]> $fieldEntries
+     */
     public function addEntriesForFields(array $fieldEntries): void
     {
         parent::addEntriesForFields($fieldEntries);
@@ -42,6 +48,8 @@ class CacheControlManager extends UpstreamCacheControlManager
      * the container is compiled and we can access the RootObjectTypeResolver
      * instance. In contrast, `addEntriesForFields` can be called
      * within a CompilerPass, so the instances would not yet be available.
+     *
+     * @return array<mixed[]>
      */
     public function getEntriesForFields(): array
     {

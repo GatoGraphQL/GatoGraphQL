@@ -20,7 +20,7 @@ abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends Abs
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    protected function getRequestKey()
+    protected function getRequestKey(): string
     {
         return InputNames::USER_ID;
     }

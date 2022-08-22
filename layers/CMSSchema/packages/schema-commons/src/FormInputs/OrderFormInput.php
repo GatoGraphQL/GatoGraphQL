@@ -10,6 +10,9 @@ class OrderFormInput extends SelectFormInput
 {
     public final const SEPARATOR = '|';
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function getValue(?array $source = null): mixed
     {
         if ($value = parent::getValue($source)) {

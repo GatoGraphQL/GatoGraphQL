@@ -32,7 +32,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     }
 
     /**
-     * @return array<array> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
+     * @return array<string[]> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
      */
     public function getDependedModuleLists(string $module): array
     {
@@ -98,7 +98,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
      * Array with key as the name of the setting, and value as its definition:
      * type (input, checkbox, select), enum values (if it is a select)
      *
-     * @return array<array> List of settings for the module, each entry is an array with property => value
+     * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
      */
     public function getSettings(string $module): array
     {

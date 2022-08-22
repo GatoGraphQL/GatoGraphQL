@@ -5,6 +5,9 @@ class GD_Custom_Module_Processor_WidgetMessages extends PoP_Module_Processor_Wid
 {
     public final const COMPONENT_MESSAGE_NOCATEGORIES = 'message-nocategories';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

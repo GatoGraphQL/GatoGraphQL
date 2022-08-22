@@ -61,7 +61,8 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
 
     /**
-     * @return array<string, mixed>|null
+     * @return array<string,mixed>|null
+     * @param array<string,mixed> $data_properties
      */
     public function executeMutation(array &$data_properties): ?array
     {
@@ -174,6 +175,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $fieldDataAccessorForMutation;
     }
 
+    /**
+     * @param array<string,mixed> $data_properties
+     */
     protected function modifyDataProperties(array &$data_properties, string|int $resultID): void
     {
     }

@@ -18,6 +18,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
      * Call a hook to allow removing fields from the schema
      *
      * @return string[]
+     * @param string[] $fieldNames
      */
     protected function maybeExcludeFieldNamesFromSchema(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,

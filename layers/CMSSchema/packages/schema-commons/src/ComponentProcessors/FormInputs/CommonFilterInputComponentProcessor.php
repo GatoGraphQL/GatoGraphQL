@@ -206,6 +206,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

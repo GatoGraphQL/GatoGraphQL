@@ -107,7 +107,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
      * @param string $name_uc Singular name uppercase
      * @param string $names_uc Plural name uppercase
      * @param string $names_lc Plural name lowercase
-     * @return array<string, string>
+     * @return array<string,string>
      */
     protected function getCustomPostTypeLabels(string $name_uc, string $names_uc, string $names_lc): array
     {

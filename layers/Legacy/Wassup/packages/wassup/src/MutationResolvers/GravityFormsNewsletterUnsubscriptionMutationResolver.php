@@ -12,6 +12,9 @@ use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptio
 
 class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUnsubscriptionMutationResolver
 {
+    /**
+     * @param array<string,mixed> $newsletter_data
+     */
     protected function validateData(array $newsletter_data, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): void
     {
         parent::validateData($newsletter_data, $objectTypeFieldResolutionFeedbackStore);
@@ -55,6 +58,9 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
         return $ret;
     }
 
+    /**
+     * @param array<string,mixed> $newsletter_data
+     */
     protected function doExecute(array $newsletter_data)
     {
         return GFAPI::delete_entry($newsletter_data['entry-id']);

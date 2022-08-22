@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Stores;
 class MutationResolutionStore implements MutationResolutionStoreInterface
 {
     /**
-     * @var array<string, mixed>
+     * @var array<string,mixed>
      */
     private array $results = [];
 

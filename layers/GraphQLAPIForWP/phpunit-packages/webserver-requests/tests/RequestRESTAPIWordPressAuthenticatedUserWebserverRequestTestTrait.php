@@ -24,6 +24,9 @@ trait RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait
         return true;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     abstract protected static function getRequestBasicOptions(): array;
 
     /**
@@ -33,6 +36,7 @@ trait RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait
      * - Add support for XDebug to the REST API call
      *
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
+     * @return array<string,mixed>
      */
     protected function getRESTEndpointRequestOptions(): array
     {

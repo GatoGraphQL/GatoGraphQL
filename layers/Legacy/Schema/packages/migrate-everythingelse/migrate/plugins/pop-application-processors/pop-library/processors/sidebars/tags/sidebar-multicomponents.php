@@ -5,6 +5,9 @@ class GD_Custom_Module_Processor_TagMultipleSidebarComponents extends PoP_Module
     public final const COMPONENT_SIDEBARMULTICOMPONENT_TAGLEFT = 'sidebarmulticomponent-tagleft';
     public final const COMPONENT_SIDEBARMULTICOMPONENT_TAGRIGHT = 'sidebarmulticomponent-tagright';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

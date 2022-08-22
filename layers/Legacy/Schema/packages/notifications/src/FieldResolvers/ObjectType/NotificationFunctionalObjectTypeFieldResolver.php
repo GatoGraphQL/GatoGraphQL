@@ -28,6 +28,9 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -35,6 +38,9 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

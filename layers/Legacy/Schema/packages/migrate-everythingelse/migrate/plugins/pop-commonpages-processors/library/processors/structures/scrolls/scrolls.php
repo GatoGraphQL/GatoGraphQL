@@ -7,6 +7,9 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
     public final const COMPONENT_SCROLL_WHOWEARE_LIST = 'scroll-whoweare-list';
     public final const COMPONENT_SCROLL_WHOWEARE_FULLVIEW = 'scroll-whoweare-fullview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

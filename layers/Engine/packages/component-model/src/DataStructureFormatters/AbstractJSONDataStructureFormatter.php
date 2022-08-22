@@ -11,6 +11,9 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
         return 'application/json';
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     public function getOutputContent(array &$data): string
     {
         return json_encode($data, $this->getJsonEncodeType() ?? 0);

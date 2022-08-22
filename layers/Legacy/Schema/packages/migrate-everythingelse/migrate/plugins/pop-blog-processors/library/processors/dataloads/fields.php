@@ -19,6 +19,9 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     public final const COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST = 'blog-dataload-relationalfields-tagcontentlist';
     public final const COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST = 'blog-dataload-relationalfields-singleauthorlist';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

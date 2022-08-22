@@ -25,6 +25,9 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -32,6 +35,9 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

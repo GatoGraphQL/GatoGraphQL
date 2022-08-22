@@ -4,6 +4,9 @@ class GD_URE_Module_Processor_MembersLayouts extends GD_URE_Module_Processor_Mem
 {
     public final const COMPONENT_URE_LAYOUT_COMMUNITYMEMBERS = 'ure-layout-communitymembers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

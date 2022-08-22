@@ -99,7 +99,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
     }
 
     /**
-     * return array<string,mixed>
+     * @return array<string,mixed>
      */
     protected static function getSeedDataOptions(): array
     {

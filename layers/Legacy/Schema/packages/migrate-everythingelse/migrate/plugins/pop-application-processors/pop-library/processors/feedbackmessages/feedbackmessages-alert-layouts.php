@@ -5,6 +5,9 @@ class PoP_Module_Processor_DomainFeedbackMessageAlertLayouts extends PoP_Module_
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_ITEMLIST = 'layout-feedbackmessagealert-itemlist';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY = 'layout-feedbackmessagealert-empty';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

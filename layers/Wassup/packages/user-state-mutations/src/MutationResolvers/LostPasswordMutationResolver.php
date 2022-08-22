@@ -39,7 +39,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    public function retrievePasswordMessage($key, $user_login, $user_id)
+    public function retrievePasswordMessage($key, $user_login, $user_id): string
     {
         $code = MutationResolverUtils::getLostPasswordCode($key, $user_login);
         $cmsapplicationapi = FunctionAPIFactory::getInstance();

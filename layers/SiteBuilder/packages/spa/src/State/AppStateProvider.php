@@ -14,6 +14,9 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         /** @var RootModuleConfiguration */
@@ -25,6 +28,9 @@ class AppStateProvider extends AbstractAppStateProvider
         }
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function consolidate(array &$state): void
     {
         $state['fetching-site'] = $state['componentFilter'] === null;

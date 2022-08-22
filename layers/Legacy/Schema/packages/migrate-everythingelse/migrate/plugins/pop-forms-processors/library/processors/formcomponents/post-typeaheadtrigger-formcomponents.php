@@ -4,6 +4,9 @@ class PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents extends 
 {
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES = 'formcomponent-selectabletypeaheadtrigger-references';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

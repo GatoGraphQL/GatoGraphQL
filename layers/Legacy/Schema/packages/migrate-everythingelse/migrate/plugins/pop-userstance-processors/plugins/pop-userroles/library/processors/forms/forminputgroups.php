@@ -5,6 +5,9 @@ class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Process
 {
     public final const COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT = 'filterinputgroup-authorrole-multiselect';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

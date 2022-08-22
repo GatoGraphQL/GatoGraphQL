@@ -12,14 +12,14 @@ class BlockHelpers
     /**
      * After parsing a post, cache its blocks
      *
-     * @var array<int, array>
+     * @var array<int,array<string,mixed>>
      */
     protected array $blockCache = [];
 
     /**
      * Extract the blocks from the post
      *
-     * @return array<string, mixed> The block stores its data as property => value
+     * @return array<string,mixed> The block stores its data as property => value
      */
     public function getBlocksFromCustomPost(
         WP_Post|int $configurationPostOrID
@@ -54,7 +54,7 @@ class BlockHelpers
     /**
      * Read the configuration post, and extract the configuration, contained through the specified block
      *
-     * @return array<array> A list of block data, each as an array
+     * @return array<array<string,mixed>> A list of block data, each as an array
      */
     public function getBlocksOfTypeFromCustomPost(
         WP_Post|int $configurationPostOrID,
@@ -74,7 +74,7 @@ class BlockHelpers
      * Read the single block of a certain type, contained in the post.
      * If there are more than 1, or none, return null
      *
-     * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
+     * @return array<string,mixed>|null Data inside the block is saved as key (string) => value
      */
     public function getSingleBlockOfTypeFromCustomPost(
         WP_Post|int $configurationPostOrID,

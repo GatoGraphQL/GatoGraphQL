@@ -11,7 +11,7 @@ class PackageOrganizationDataSource
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string,string>
      */
     public function getPackagePathOrganizations(): array
     {

@@ -4,6 +4,9 @@ class PoP_Module_Processor_InputGroupFormComponents extends PoP_Module_Processor
 {
     public final const COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADSEARCH = 'formcomponent-inputgroup-typeaheadsearch';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -9,8 +9,10 @@ use PoP\Root\Helpers\ClassHelpers;
 
 abstract class AbstractModuleConfiguration implements ModuleConfigurationInterface
 {
+    /**
+     * @param array<string,mixed> $configuration
+     */
     final public function __construct(
-        /** @var array<string,mixed> */
         protected array $configuration
     ) {
     }

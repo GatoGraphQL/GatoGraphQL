@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -22,7 +23,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * The list can contain both concrete and abstract classes (in which case all classes
      * extending from them will be selected)
      *
-     * @return string[]
+     * @return array<class-string<InterfaceTypeResolverInterface|RelationalTypeResolverInterface>>
      */
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array;
     public function getDirectiveName(): string;
@@ -53,6 +54,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
+     *
+     * @return string[]
      */
     public function getFieldNamesToApplyTo(): array;
     /**
@@ -132,6 +135,9 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<\PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface> $succeedingPipelineDirectiveResolvers
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string,mixed> $messages
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -152,6 +158,9 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     public function skipExposingDirectiveArgInSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): bool;
+    /**
+     * @return array<string,mixed>
+     */
     public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array;
     /**
      * Define if to use the version to decide if to process the directive or not

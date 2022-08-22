@@ -25,11 +25,17 @@ class FeedbackItemRegistry implements FeedbackItemRegistryInterface
         }
     }
 
+    /**
+     * @return array<string,array<string,string>>
+     */
     public function getFeedbackItemEntries(): array
     {
         return $this->feedbackItemEntries;
     }
 
+    /**
+     * @return array<string,string>|null
+     */
     public function getFeedbackItemEntry(string $namespacedCode): ?array
     {
         return $this->feedbackItemEntries[$namespacedCode] ?? null;

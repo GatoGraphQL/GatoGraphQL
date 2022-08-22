@@ -49,6 +49,9 @@ class AppStateProvider extends AbstractAppStateProvider
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
@@ -95,6 +98,7 @@ class AppStateProvider extends AbstractAppStateProvider
      * Call ModuleConfiguration only after hooks from
      * SchemaConfigurationExecuter have been initialized.
      * That's why these are called on `execute` and not `initialize`.
+     * @param array<string,mixed> $state
      */
     public function execute(array &$state): void
     {

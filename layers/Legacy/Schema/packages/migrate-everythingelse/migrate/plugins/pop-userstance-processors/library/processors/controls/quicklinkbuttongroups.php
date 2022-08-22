@@ -6,6 +6,9 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
     public final const COMPONENT_QUICKLINKBUTTONGROUP_STANCEVIEW = 'quicklinkbuttongroup-stanceview';
     public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE = 'quicklinkbuttongroup-poststance';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -14,11 +14,11 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     use ExcludeFieldNamesFromSchemaTypeResolverTrait;
 
     /**
-     * @var array<string, InterfaceTypeFieldResolverInterface[]>|null
+     * @var array<string,InterfaceTypeFieldResolverInterface[]>|null
      */
     protected ?array $interfaceTypeFieldResolversByField = null;
     /**
-     * @var array<string, InterfaceTypeFieldResolverInterface>|null
+     * @var array<string,InterfaceTypeFieldResolverInterface>|null
      */
     protected ?array $excutableInterfaceTypeFieldResolversByField = null;
     /**
@@ -26,7 +26,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     protected ?array $fieldNamesToImplement = null;
     /**
-     * @var array<string, array>
+     * @var array<string,string[]>
      */
     private array $fieldNamesResolvedByInterfaceTypeFieldResolver = [];
     /**
@@ -48,6 +48,9 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         return $this->fieldNamesToImplement;
     }
 
+    /**
+     * @return string[]
+     */
     private function calculateFieldNamesToImplement(): array
     {
         $fieldNamesToImplement = [];
@@ -104,6 +107,13 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         return $this->interfaceTypeFieldResolvers;
     }
 
+    /**
+     * Produce an array of all the interface's fieldNames and, for each,
+     * the first ObjectTypeFieldResolver that resolves it, as according
+     * to its priority
+     *
+     * @return array<string,InterfaceTypeFieldResolverInterface>
+     */
     final public function getExecutableInterfaceTypeFieldResolversByField(): array
     {
         if ($this->excutableInterfaceTypeFieldResolversByField === null) {
@@ -112,6 +122,9 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         return $this->excutableInterfaceTypeFieldResolversByField;
     }
 
+    /**
+     * @return array<string,InterfaceTypeFieldResolverInterface>
+     */
     private function doGetExecutableInterfaceTypeFieldResolversByField(): array
     {
         $interfaceTypeFieldResolvers = [];
@@ -126,7 +139,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the ObjectTypeFieldResolverInterfaces
      *
-     * @return array<string, InterfaceTypeFieldResolverInterface[]>
+     * @return array<string,InterfaceTypeFieldResolverInterface[]>
      */
     final public function getInterfaceTypeFieldResolversByField(): array
     {
@@ -140,7 +153,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      * Produce an array of all the interface's fieldNames and, for each,
      * a list of all the ObjectTypeFieldResolverInterfaces
      *
-     * @return array<string, InterfaceTypeFieldResolverInterface[]>
+     * @return array<string,InterfaceTypeFieldResolverInterface[]>
      */
     protected function calculateAllInterfaceTypeFieldResolversByField(): array
     {

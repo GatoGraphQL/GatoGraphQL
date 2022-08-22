@@ -5,6 +5,9 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
     public final const COMPONENT_BLOCK_LOCATIONSMAP = 'block-locationsmap';
     public final const COMPONENT_BLOCK_STATICLOCATIONSMAP = 'block-staticlocationsmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

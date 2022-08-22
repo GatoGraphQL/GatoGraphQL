@@ -17,6 +17,8 @@ trait FixtureTestCaseTrait
 
     /**
      * @return SplFileInfo[]
+     * @param string[] $fileNames
+     * @param string[] $notFileNames
      */
     protected function findFilesInDirectory(string $directory, array $fileNames, array $notFileNames = []): array
     {

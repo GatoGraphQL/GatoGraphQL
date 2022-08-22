@@ -7,6 +7,9 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
     public final const COMPONENT_BUTTONGROUP_AUTHORSTANCES = 'buttongroup-authorstances';
     public final const COMPONENT_BUTTONGROUP_TAGSTANCES = 'buttongroup-tagstances';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -17,7 +17,7 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
         );
     }
 
-    public function executeQuery($query, array $options = []): array
+    public function executeQuery(array $query, array $options = []): array
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;

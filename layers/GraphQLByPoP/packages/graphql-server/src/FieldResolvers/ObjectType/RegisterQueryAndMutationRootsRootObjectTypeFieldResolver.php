@@ -42,6 +42,9 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -53,14 +56,20 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
      * Register the fields for the Standard GraphQL server only,
      * and when nested mutations are disabled, and when not additionally
      * appending the QueryRoot and Mutation Root to the schema
+     *
+     * @return string[]
      */
     public function getFieldNamesToResolve(): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (App::getState('nested-mutations-enabled') && !$moduleConfiguration->addConnectionFromRootToQueryRootAndMutationRoot()) {
+        if (
+            $moduleConfiguration->enableNestedMutations()
+            && !$moduleConfiguration->addConnectionFromRootToQueryRootAndMutationRoot()
+        ) {
             return [];
         }
+
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         return array_merge(

@@ -19,6 +19,9 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public final const COMPONENT_SCROLL_EVENTS_LIST = 'scroll-events-list';
     public final const COMPONENT_SCROLL_PASTEVENTS_LIST = 'scroll-pastevents-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

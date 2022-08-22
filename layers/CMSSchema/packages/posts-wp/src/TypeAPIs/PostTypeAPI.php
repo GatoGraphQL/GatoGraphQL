@@ -6,8 +6,6 @@ namespace PoPCMSSchema\PostsWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPCMSSchema\Posts\Module;
-use PoPCMSSchema\Posts\ModuleConfiguration;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use WP_Post;
 
@@ -23,9 +21,9 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     /**
      * Add an extra hook just to modify posts
      *
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
-     * @return array<string, mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
@@ -39,7 +37,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     /**
      * Query args that must always be in the query
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getCustomPostQueryRequiredArgs(): array
     {
@@ -80,21 +78,19 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     }
 
     /**
-     * Limit of how many custom posts can be retrieved in the query.
-     * Override this value for specific custom post types
+     * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
-    protected function getCustomPostListMaxLimit(): int
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getPostListMaxLimit();
-    }
-
     public function getPosts(array $query, array $options = []): array
     {
         return $this->getCustomPosts($query, $options);
     }
-    public function getPostCount(array $query = [], array $options = []): int
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function getPostCount(array $query, array $options = []): int
     {
         return $this->getCustomPostCount($query, $options);
     }

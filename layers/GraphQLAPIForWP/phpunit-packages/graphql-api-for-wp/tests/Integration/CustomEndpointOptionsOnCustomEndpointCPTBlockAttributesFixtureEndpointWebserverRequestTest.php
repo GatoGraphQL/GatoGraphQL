@@ -20,6 +20,9 @@ class CustomEndpointOptionsOnCustomEndpointCPTBlockAttributesFixtureEndpointWebs
         return __DIR__ . '/fixture-custom-endpoint-options-on-custom-endpoint-in-cpt';
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [

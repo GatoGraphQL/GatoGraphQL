@@ -6,12 +6,12 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 class TokenizerTestingParser extends Parser
 {
-    public function initTokenizerForTesting($source)
+    public function initTokenizerForTesting(string $source): void
     {
         $this->initTokenizer($source);
     }
 
-    public function getTokenForTesting()
+    public function getTokenForTesting(): Token
     {
         return $this->lookAhead;
     }

@@ -7,6 +7,9 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
     public final const COMPONENT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT = 'checkpointmessage-loggedincanedit';
     public final const COMPONENT_CHECKPOINTMESSAGE_LOGGEDINISADMIN = 'checkpointmessage-loggedinisadmin';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

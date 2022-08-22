@@ -26,7 +26,7 @@ class DynamicVariableDefinerDirectiveRegistry implements DynamicVariableDefinerD
         return $this->dynamicVariableDefinerDirectiveResolvers;
     }
 
-    public function getDynamicVariableDefinerDirectiveResolver($directiveName): ?DynamicVariableDefinerDirectiveResolverInterface
+    public function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface
     {
         return $this->dynamicVariableDefinerDirectiveResolvers[$directiveName] ?? null;
     }

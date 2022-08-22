@@ -7,6 +7,9 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
     public final const COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS = 'layout-postcommentscroll-inner';
     public final const COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE = 'layout-postcommentscroll-inner-appendable';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_Module_Processor_DomainStyleCodes extends PoP_Module_Processor_StyleCo
 {
     public final const COMPONENT_CODE_DOMAINSTYLES = 'code-domainstyles';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

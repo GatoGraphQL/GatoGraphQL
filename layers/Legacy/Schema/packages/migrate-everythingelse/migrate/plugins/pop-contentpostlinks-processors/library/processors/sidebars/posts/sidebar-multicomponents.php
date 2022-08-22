@@ -4,6 +4,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostMultipleSidebarComponents 
 {
     public final const COMPONENT_SIDEBARMULTICOMPONENT_LINK = 'sidebarmulticomponent-link';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

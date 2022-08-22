@@ -4,6 +4,9 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends
 {
     public final const COMPONENT_TABPANEL_AUTHORHIGHLIGHTS = 'tabpanel-authorhighlights';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

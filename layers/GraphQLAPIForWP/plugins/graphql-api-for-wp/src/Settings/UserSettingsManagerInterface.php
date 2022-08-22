@@ -45,7 +45,7 @@ interface UserSettingsManagerInterface
     public function isModuleEnabled(string $moduleID): bool;
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void;
     /**
-     * @param array<string, bool> $moduleIDValues
+     * @param array<string,bool> $moduleIDValues
      */
     public function setModulesEnabled(array $moduleIDValues): void;
 }

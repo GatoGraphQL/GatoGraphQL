@@ -13,7 +13,7 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class PackageEntriesJsonProvider
 {
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     private array $packageOrganizations = [];
 

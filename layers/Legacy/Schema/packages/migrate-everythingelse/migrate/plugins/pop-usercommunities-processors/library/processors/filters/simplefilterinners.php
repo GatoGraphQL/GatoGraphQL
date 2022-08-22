@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS = 'simplefilterinputcontainer-mymembers';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES = 'simplefilterinputcontainer-communities';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

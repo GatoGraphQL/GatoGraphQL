@@ -369,7 +369,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     new SchemaFeedback(
                         new FeedbackItemResolution(
                             DeprecationFeedbackItemProvider::class,
-                            DeprecationFeedbackItemProvider::D1,
+                            DeprecationFeedbackItemProvider::D2,
                             [
                                 $directiveName,
                                 $deprecationMessage,
@@ -536,6 +536,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @return array<string|int,object>
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string,mixed> $messages
      */
     public function fillObjects(
         array $idFieldSet,
@@ -593,8 +596,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Indicate that this ID must be removed from the results
             $unresolvedObjectIDs[] = $unresolvedObjectID;
         }
-        // Remove all the IDs that failed from the elements to process, so it doesn't show a "Corrupted Data" error
-        // Because these are IDs (eg: 223) and $idFieldSet contains qualified or typed IDs (eg: post/223), we must convert them first
+        /**
+         * Remove all the IDs that failed from the elements to process,
+         * so it doesn't show a "Corrupted Data" error.
+         *
+         * Because these are IDs (eg: 223) and $idFieldSet contains qualified
+         * or typed IDs (eg: post/223), we must convert them first.
+         */
         if ($unresolvedObjectIDs) {
             if ($this->qualifyDBObjectIDsToRemoveFromErrors()) {
                 $unresolvedObjectIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedObjectIDs);
@@ -965,6 +973,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string|int,object> $idObjects
+     * @param array<string,mixed> $messages
      */
     protected function processFillingObjectsFromIDs(
         array $unionTypeOutputKeyIDs,
@@ -1291,6 +1302,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage;
 
+    /**
+     * @return array<string,DirectiveResolverInterface>
+     */
     public function getSchemaDirectiveResolvers(bool $global): array
     {
         $directiveResolverInstances = [];
@@ -1315,6 +1329,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $this;
     }
 
+    /**
+     * @return array<string,DirectiveResolverInterface[]>
+     */
     protected function calculateFieldDirectiveNameResolvers(): array
     {
         $directiveNameResolvers = [];

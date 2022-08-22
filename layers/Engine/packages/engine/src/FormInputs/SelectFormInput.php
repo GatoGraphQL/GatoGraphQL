@@ -10,8 +10,10 @@ class SelectFormInput extends FormInput
 {
     /**
      * Function to override
+     *
+     * @return mixed[]
      */
-    public function getAllValues($label = null): array
+    public function getAllValues(string $label = null): array
     {
         if ($label) {
             return array('' => $label);
@@ -21,9 +23,9 @@ class SelectFormInput extends FormInput
     }
 
 
-    public function getSelectedValue()
+    public function getSelectedValue(): mixed
     {
-        if (is_null($this->selected)) {
+        if ($this->selected === null) {
             return null;
         }
 

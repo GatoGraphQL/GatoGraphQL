@@ -14,7 +14,7 @@ class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfi
         parent::additionalsCreate($user_id, $fieldDataAccessor);
         $this->usercommunitiesAdditionalsCreate($user_id, $fieldDataAccessor);
     }
-    protected function usercommunitiesAdditionalsCreate($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function usercommunitiesAdditionalsCreate(string|int $user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $fieldDataAccessor);
     }

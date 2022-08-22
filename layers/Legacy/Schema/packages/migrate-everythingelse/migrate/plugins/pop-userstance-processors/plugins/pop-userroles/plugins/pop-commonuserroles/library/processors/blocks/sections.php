@@ -13,6 +13,9 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
     public final const COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL = 'block-stances-byorganizations-carousel';
     public final const COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL = 'block-stances-byindividuals-carousel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

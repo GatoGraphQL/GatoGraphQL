@@ -13,6 +13,9 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
     public final const COMPONENT_FORMINPUT_CUU_FIRSTNAME = 'forminput-cuu-firstName';
     public final const COMPONENT_FORMINPUT_CUU_USERWEBSITEURL = 'forminput-cuu-userwebsiteurl';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

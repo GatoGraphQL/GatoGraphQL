@@ -5,6 +5,9 @@ class Wassup_URE_AAL_Module_Processor_MemberStatusLayouts extends GD_URE_Module_
 {
     public final const COMPONENT_UREAAL_LAYOUTUSER_MEMBERSTATUS = 'ure-aal-layoutuser-memberstatus-nodesc';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

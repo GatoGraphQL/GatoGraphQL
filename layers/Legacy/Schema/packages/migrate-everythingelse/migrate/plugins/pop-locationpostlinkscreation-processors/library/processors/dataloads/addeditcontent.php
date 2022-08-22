@@ -8,6 +8,9 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads e
     public final const COMPONENT_DATALOAD_LOCATIONPOSTLINK_UPDATE = 'dataload-locationpostlink-update';
     public final const COMPONENT_DATALOAD_LOCATIONPOSTLINK_CREATE = 'dataload-locationpostlink-create';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

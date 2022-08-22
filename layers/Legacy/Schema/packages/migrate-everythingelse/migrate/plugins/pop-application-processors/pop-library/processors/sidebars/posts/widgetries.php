@@ -9,6 +9,9 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public final const COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO = 'widgetcompact-highlight-info';
     public final const COMPONENT_WIDGETCOMPACT_POSTINFO = 'widgetcompact-post-info';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

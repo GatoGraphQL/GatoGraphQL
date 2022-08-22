@@ -36,6 +36,9 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

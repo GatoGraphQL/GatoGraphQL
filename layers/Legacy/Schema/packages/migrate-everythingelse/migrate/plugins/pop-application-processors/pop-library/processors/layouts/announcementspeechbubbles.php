@@ -4,6 +4,9 @@ class PoP_Module_Processor_AnnouncementSpeechBubbles extends PoP_Module_Processo
 {
     public final const COMPONENT_ANNOUNCEMENTSPEECHBUBBLE_STICKY = 'announcementspeechbubble-sticky';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

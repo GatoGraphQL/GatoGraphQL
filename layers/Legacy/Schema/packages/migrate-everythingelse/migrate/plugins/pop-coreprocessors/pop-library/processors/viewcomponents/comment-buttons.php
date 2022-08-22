@@ -8,6 +8,9 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
 {
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY = 'viewcomponent-commentbutton-reply';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

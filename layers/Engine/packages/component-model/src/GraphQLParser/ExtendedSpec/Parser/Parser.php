@@ -15,6 +15,8 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class Parser extends AbstractParser
@@ -74,18 +76,23 @@ class Parser extends AbstractParser
         return null;
     }
 
+    /**
+     * @return int[]|null
+     */
     protected function getAffectDirectivesUnderPosArgumentDefaultValue(
         Directive $directive,
-    ): mixed {
+    ): ?array {
         /** @var MetaDirectiveResolverInterface */
         $metaDirectiveResolver = $this->getMetaDirectiveResolver($directive->getName());
         return $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
     }
 
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     */
     protected function createDocumentInstance(
-        /** @var OperationInterface[] */
         array $operations,
-        /** @var Fragment[] */
         array $fragments,
     ): AbstractDocument {
         return new Document(

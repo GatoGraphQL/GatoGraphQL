@@ -10,6 +10,9 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
     public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_SIMPLEVIEW = 'layout-automatedemails-multiplepost-simpleview';
     public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_FULLVIEW = 'layout-automatedemails-multiplepost-fullview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

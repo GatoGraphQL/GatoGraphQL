@@ -15,6 +15,9 @@ use PoPAPI\API\Schema\SchemaDefinition;
  */
 class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionProvider
 {
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();

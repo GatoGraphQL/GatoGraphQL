@@ -24,6 +24,9 @@ use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         $state['executable-document-ast'] = null;
@@ -39,6 +42,9 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['operation-name'] = EngineRequest::getOperationName($enableModifyingEngineBehaviorViaRequest);
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function consolidate(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {
@@ -69,6 +75,9 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['does-api-query-have-errors'] = false;
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function execute(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {

@@ -13,6 +13,9 @@ class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_Conten
     public final const COMPONENT_CONTENT_DOWNVOTESPOSTS = 'content-downvotesposts';
     public final const COMPONENT_CONTENT_UNDODOWNVOTESPOSTS = 'content-undodownvotesposts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

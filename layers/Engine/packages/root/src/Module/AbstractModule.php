@@ -28,7 +28,7 @@ abstract class AbstractModule implements ModuleInterface
      * Enable each module to set default configuration for
      * itself and its depended components
      *
-     * @param array<string, mixed> $moduleClassConfiguration
+     * @param array<string,mixed> $moduleClassConfiguration
      */
     public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration
@@ -38,9 +38,9 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Initialize the module
      *
-     * @param array<string, mixed> $configuration
+     * @param array<string,mixed> $configuration
      * @param boolean $skipSchema Indicate if to skip initializing the schema
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     final public function initialize(
         array $configuration,
@@ -157,7 +157,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
@@ -167,6 +167,7 @@ abstract class AbstractModule implements ModuleInterface
 
     /**
      * Define runtime constants
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function defineRuntimeConstants(
         bool $skipSchema,

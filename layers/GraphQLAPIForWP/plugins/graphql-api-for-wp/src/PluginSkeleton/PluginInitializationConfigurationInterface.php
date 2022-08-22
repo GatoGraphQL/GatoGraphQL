@@ -14,7 +14,7 @@ interface PluginInitializationConfigurationInterface
     /**
      * Provide the configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Module class, [value]: Configuration
+     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array;
 

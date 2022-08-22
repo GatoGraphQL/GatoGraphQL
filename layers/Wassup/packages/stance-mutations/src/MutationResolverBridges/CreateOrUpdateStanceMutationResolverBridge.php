@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP_Module_Processor_TextareaFormInputs;
 use PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues;
@@ -30,7 +29,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         return $this->getCreateOrUpdateStanceMutationResolver();
     }
 
-    protected function supportsTitle()
+    protected function supportsTitle(): bool
     {
         return false;
     }
@@ -52,12 +51,15 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         return $this->getUpdateCustomPostID() !== null;
     }
 
-    protected function getEditorInput()
+    /**
+     * @return mixed[]
+     */
+    protected function getEditorInput(): array
     {
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    protected function getCategoriesComponent(): ?Component
+    protected function getCategoriesComponent(): ?array
     {
         if ($this->showCategories()) {
             return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE];
@@ -66,12 +68,12 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         return parent::getCategoriesComponent();
     }
 
-    protected function showCategories()
+    protected function showCategories(): bool
     {
         return true;
     }
 
-    protected function moderate()
+    protected function moderate(): bool
     {
         return false;
     }

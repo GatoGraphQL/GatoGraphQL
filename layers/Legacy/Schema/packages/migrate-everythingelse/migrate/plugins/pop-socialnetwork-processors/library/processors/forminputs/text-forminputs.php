@@ -5,6 +5,9 @@ class PoP_SocialNetwork_Module_Processor_TextFormInputs extends PoP_Module_Proce
 {
     public final const COMPONENT_FORMINPUT_MESSAGESUBJECT = 'gf-field-messagesubject';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

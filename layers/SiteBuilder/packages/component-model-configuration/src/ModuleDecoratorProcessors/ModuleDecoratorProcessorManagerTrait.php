@@ -7,11 +7,11 @@ namespace PoP\ConfigurationComponentModel\ModuleDecoratorProcessors;
 trait ModuleDecoratorProcessorManagerTrait
 {
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     public array $settings = [];
     /**
-     * @var array<string, mixed>
+     * @var array<string,mixed>
      */
     public array $processorDecorators = [];
 

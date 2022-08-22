@@ -9,6 +9,9 @@ use PoP\ComponentModel\Engine\EngineInterface as UpstreamEngineInterface;
 
 interface EngineInterface extends UpstreamEngineInterface
 {
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getComponentSettings(Component $component, $model_props, array &$props);
     public function maybeRedirectAndExit(): void;
 }

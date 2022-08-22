@@ -6,6 +6,9 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
     public final const COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR = 'em-buttoninner-googlecalendar';
     public final const COMPONENT_EM_BUTTONINNER_ICAL = 'em-buttoninner-ical';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

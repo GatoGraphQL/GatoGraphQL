@@ -6,6 +6,9 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
     public final const COMPONENT_MODAL_API = 'modal-api';
     public final const COMPONENT_MODAL_COPYSEARCHURL = 'modal-copysearchurl';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

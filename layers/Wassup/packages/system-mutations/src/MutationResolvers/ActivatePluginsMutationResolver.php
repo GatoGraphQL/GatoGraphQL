@@ -34,7 +34,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     }
 
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
-    private function runActivatePlugin($plugin)
+    private function runActivatePlugin(string $plugin): bool
     {
         $current = $this->getCMSService()->getOption('active_plugins');
         // @todo Rename package!

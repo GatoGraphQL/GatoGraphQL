@@ -121,6 +121,7 @@ class AppStateManager implements AppStateManagerInterface
 
     /**
      * @throws AppStateNotExistsException If there is no state under the provided path
+     * @param string[] $path
      */
     public function getUnder(array $path): mixed
     {
@@ -151,6 +152,7 @@ class AppStateManager implements AppStateManagerInterface
 
     /**
      * @throws AppStateNotExistsException If there is no state under the provided path
+     * @param string[] $path
      */
     protected function throwAppStateNotExistsException(array $path): void
     {
@@ -170,6 +172,9 @@ class AppStateManager implements AppStateManagerInterface
         return array_key_exists($key, $this->state);
     }
 
+    /**
+     * @param string[] $path
+     */
     public function hasUnder(array $path): bool
     {
         $state = &$this->state;

@@ -9,14 +9,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class GraphQLQueryParsingPayload
 {
+    /**
+     * @param FieldInterface[] $objectResolvedFieldValueReferencedFields List of all the Fields in the query which are referenced via an ObjectResolvedFieldValueReference.
+     */
     public function __construct(
         public readonly ExecutableDocument $executableDocument,
-        /**
-         * List of all the Fields in the query which are
-         * referenced via an ObjectResolvedFieldValueReference.
-         *
-         * @var FieldInterface[]
-         * */
         public readonly array $objectResolvedFieldValueReferencedFields,
     ) {
     }

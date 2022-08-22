@@ -218,7 +218,8 @@
                     "avatar",
                     "validate"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {
@@ -235,7 +236,8 @@
                     "description",
                     "validate"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {
@@ -252,7 +254,8 @@
                     "registeredDate",
                     "validate"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {
@@ -269,7 +272,8 @@
                     "websiteURL",
                     "validate"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {
@@ -286,7 +290,8 @@
                     "self",
                     "validate"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         },
         {

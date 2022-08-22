@@ -27,6 +27,9 @@ class SchemaConfigurationOnPersistedQueryCPTBlockAttributesFixtureEndpointWebser
         return __DIR__ . '/fixture-schema-config-on-persisted-query-in-cpt';
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [

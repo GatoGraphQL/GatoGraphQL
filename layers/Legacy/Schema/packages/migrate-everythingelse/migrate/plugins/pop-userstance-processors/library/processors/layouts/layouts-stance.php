@@ -4,6 +4,9 @@ class UserStance_Module_Processor_Layouts extends UserStance_Module_Processor_St
 {
     public final const COMPONENT_LAYOUTSTANCE = 'layout-stance';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

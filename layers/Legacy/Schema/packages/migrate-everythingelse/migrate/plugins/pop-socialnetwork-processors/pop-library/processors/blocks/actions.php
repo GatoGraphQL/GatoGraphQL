@@ -13,6 +13,9 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
     public final const COMPONENT_BLOCK_DOWNVOTEPOST = 'block-downvotepost';
     public final const COMPONENT_BLOCK_UNDODOWNVOTEPOST = 'block-undodownvotepost';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps extends PoP_Mod
 {
     public final const COMPONENT_SCROLL_COMMUNITIES_MAP = 'scroll-communities-map';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

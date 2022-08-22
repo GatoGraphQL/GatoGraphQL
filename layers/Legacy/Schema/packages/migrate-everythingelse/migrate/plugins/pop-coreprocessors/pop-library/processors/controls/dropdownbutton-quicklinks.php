@@ -8,6 +8,9 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public final const COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO = 'dropdownbuttonquicklink-usercontactinfo';
     public final const COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE = 'dropdownbuttonquicklink-tagshare';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -21,7 +21,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     protected ?string $selected_filter_name = null;
     private ?ComponentFilterInterface $selected_filter = null;
     /**
-     * @var array<string, ComponentFilterInterface>
+     * @var array<string,ComponentFilterInterface>
      */
     protected array $componentfilters = [];
     protected bool $initialized = false;
@@ -30,7 +30,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
      */
     protected ?string $not_excluded_ancestor_component = null;
     /**
-     * @var array<array>|null
+     * @var array<mixed[]>|null
      */
     protected ?array $not_excluded_component_sets = null;
     /**
@@ -110,6 +110,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         return null;
     }
 
+    /**
+     * @return array<mixed[]>|null
+     */
     public function getNotExcludedComponentSets(): ?array
     {
         // It shall be used for requestmeta.rendercomponents, to know from which components the client must start rendering
@@ -121,6 +124,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         $this->neverExclude = $neverExclude;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
         if (!$this->initialized) {
@@ -162,6 +168,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
 
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
+     * @param array<string,mixed> $props
      */
     public function prepareForPropagation(Component $component, array &$props): void
     {
@@ -189,6 +196,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         // Add the component to the path
         $this->getComponentPathManager()->prepareForPropagation($component, $props);
     }
+    /**
+     * @param array<string,mixed> $props
+     */
     public function restoreFromPropagation(Component $component, array &$props): void
     {
         if (!$this->initialized) {

@@ -28,7 +28,14 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param string|int|array<string|int> $objectIDOrIDs
+     * @param array<string,mixed>|null $executed
+     */
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs): array
     {
         $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 
@@ -48,6 +55,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
 
     /**
      * @return array<string,mixed>
+     * @param array<string,mixed> $props
      */
     public function getModelPropsForDescendantDatasetComponents(Component $component, array &$props): array
     {
@@ -68,6 +76,10 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
+    /**
+     * @param array<string,mixed> $ret
+     * @param array<string,mixed> $props
+     */
     protected function addHeaddatasetcomponentDataProperties(array &$ret, Component $component, array &$props): void
     {
         parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
@@ -94,6 +106,10 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         $ret[DataloadingConstants::EXTERNALLOAD] = $this->queriesExternalDomain($component, $props);
     }
 
+    /**
+     * @return string[]
+     * @param array<string,mixed> $props
+     */
     public function getDataloadMultidomainQuerySources(Component $component, array &$props): array
     {
         $sources = $this->getDataloadMultidomainSources($component, $props);
@@ -105,6 +121,10 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $this->addAPIQueryToSources($sources, $component, $props);
     }
 
+    /**
+     * @return string[]
+     * @param array<string,mixed> $props
+     */
     public function getDataloadMultidomainSources(Component $component, array &$props): array
     {
         if ($sources = $this->getProp($component, $props, 'dataload-multidomain-sources')) {
@@ -114,6 +134,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return [];
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function queriesExternalDomain(Component $component, array &$props): bool
     {
         if ($sources = $this->getDataloadMultidomainSources($component, $props)) {
@@ -128,6 +151,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return false;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function isMultidomain(Component $component, array &$props): bool
     {
         if (!$this->queriesExternalDomain($component, $props)) {
@@ -138,11 +164,17 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return is_array($multidomain_urls) && count($multidomain_urls) >= 2;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function isLazyload(Component $component, array &$props): bool
     {
         return $this->getProp($component, $props, 'lazy-load') ?? false;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function initModelProps(Component $component, array &$props): void
     {
         // If it is a dataloading component, then set all the props related to data

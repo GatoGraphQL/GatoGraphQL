@@ -31,6 +31,9 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         return null;
     }
 
+    /**
+     * @return string|int|float|bool|mixed[]
+     */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
     {
         /**
@@ -82,6 +85,9 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         );
     }
 
+    /**
+     * @param array<string,mixed>|int $options
+     */
     final protected function validateFilterVar(
         mixed $inputValue,
         AstInterface $astNode,

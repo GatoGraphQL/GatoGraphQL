@@ -9,6 +9,9 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
     public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD = 'forminputgroup-lostpwdreset-newpassword';
     public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT = 'forminputgroup-lostpwdreset-passwordrepeat';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

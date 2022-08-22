@@ -10,6 +10,9 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     public final const COMPONENT_DATALOAD_TAG_SIDEBAR = 'dataload-tag-sidebar';
     public final const COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR = 'dataload-single-post-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
@@ -59,7 +62,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
             case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

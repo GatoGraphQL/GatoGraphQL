@@ -8,6 +8,9 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
     public final const COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL = 'forminput-newsletteremailverificationemail';
     public final const COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE = 'forminput-newsletteremailverificationcode';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class GD_Custom_EM_Module_Processor_CustomFilters extends PoP_Module_Processor_F
 {
     public final const COMPONENT_FILTER_MYLOCATIONPOSTS = 'filter-mylocationposts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

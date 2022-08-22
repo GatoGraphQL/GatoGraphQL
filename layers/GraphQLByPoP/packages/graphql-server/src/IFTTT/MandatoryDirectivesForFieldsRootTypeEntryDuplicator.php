@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\IFTTT;
 
-use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Root\App;
+use PoP\Root\Services\BasicServiceTrait;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {
@@ -49,15 +51,21 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
      * The duplicated entry is duplicated as is, just changing what class it applies to.
      * Then it can be an entry for anything: Access Control, Cache Control, or any other.
      *
+     * @param array<mixed[]> $fieldEntries
      * @param boolean $forceBothTypes Define if to always add it to both QueryRoot and MutationRoot, without checking if the field belongs to one or the other
      *                                This is needed when calling this function before the Schema has been configured, i.e. before finding FieldResolvers for each Type
      *
-     * @return array The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
+     * @return array<mixed[]> The same array $fieldEntries + appended entries for QueryRoot and MutationRoot
      */
     public function maybeAppendAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes = false): array
     {
-        // With Nested Mutations there's no need to duplicate Root entries
-        if (App::getState('nested-mutations-enabled')) {
+        /**
+         * With Nested Mutations there's no need to duplicate Root entries
+         *
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableNestedMutations()) {
             return $fieldEntries;
         }
 
@@ -68,6 +76,10 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         );
     }
 
+    /**
+     * @return array<mixed[]>
+     * @param array<mixed[]> $fieldEntries
+     */
     protected function getAdditionalRootEntriesForFields(array $fieldEntries, bool $forceBothTypes): array
     {
         // Get the entries assigned to Root
@@ -111,6 +123,9 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
     /**
      * Filter the entries set to Root
+     *
+     * @param array<mixed[]> $fieldEntries
+     * @return array<mixed[]>
      */
     protected function filterRootEntriesForFields(array $fieldEntries): array
     {

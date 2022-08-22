@@ -20,7 +20,7 @@ interface AppLoaderInterface
     /**
      * Add configuration for the Module classes
      *
-     * @param array<string, array<string, mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     * @param array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
     public function addModuleClassConfiguration(
         array $moduleClassConfiguration
@@ -43,7 +43,7 @@ interface AppLoaderInterface
     /**
      * Add schema Module classes to skip initializing
      *
-     * @param string[] $skipSchemaModuleClasses List of `Module` class which must not initialize their Schema services
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses List of `Module` class which must not initialize their Schema services
      */
     public function addSchemaModuleClassesToSkip(
         array $skipSchemaModuleClasses

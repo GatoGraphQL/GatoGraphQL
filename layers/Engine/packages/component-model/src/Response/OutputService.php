@@ -14,7 +14,7 @@ class OutputService implements OutputServiceInterface
     /**
      * Encode the array, and trim to 500 chars max
      *
-     * @param mixed[] $value
+     * @param mixed[]|stdClass $value
      */
     public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
     {

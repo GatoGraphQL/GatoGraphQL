@@ -15,6 +15,9 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
+    /**
+     * @return mixed[]|null
+     */
     public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_BUTTON];

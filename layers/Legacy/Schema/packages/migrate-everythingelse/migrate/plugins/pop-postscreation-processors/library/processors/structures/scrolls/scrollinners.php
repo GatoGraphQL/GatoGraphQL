@@ -5,6 +5,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
     public final const COMPONENT_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW = 'scrollinner-mylinks-simpleviewpreview';
     public final const COMPONENT_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW = 'scrollinner-mylinks-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

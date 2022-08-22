@@ -13,6 +13,10 @@ class Field extends AbstractSchemaDefinitionReferenceObject
 
     protected FieldExtensions $fieldExtensions;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);

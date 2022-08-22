@@ -9,13 +9,14 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "firstNonExisting",
         "path": [
           "firstNonExisting",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@e16"
+        "type": "QueryRoot",
+        "field": "firstNonExisting",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     },
     {
@@ -27,13 +28,14 @@
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "secondNonExisting",
         "path": [
           "secondNonExisting",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@e16"
+        "type": "QueryRoot",
+        "field": "secondNonExisting",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
     }
   ],

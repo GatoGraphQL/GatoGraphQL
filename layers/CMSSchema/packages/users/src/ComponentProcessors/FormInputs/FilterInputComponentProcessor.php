@@ -58,6 +58,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->emailOrEmailsFilterInput ??= $this->instanceManager->getInstance(EmailOrEmailsFilterInput::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

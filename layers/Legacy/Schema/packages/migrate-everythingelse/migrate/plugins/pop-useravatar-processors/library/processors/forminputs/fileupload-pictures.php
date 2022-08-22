@@ -5,6 +5,9 @@ class PoP_Module_Processor_FileUploadPictures extends PoP_Module_Processor_FileU
 {
     public final const COMPONENT_FILEUPLOAD_PICTURE = 'fileupload-picture';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

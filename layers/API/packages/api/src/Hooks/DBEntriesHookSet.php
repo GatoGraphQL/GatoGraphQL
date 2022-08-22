@@ -20,6 +20,10 @@ class DBEntriesHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @param array<string,string[]> $dbNameToFieldNames
+     * @return array<string,string[]>
+     */
     public function moveEntriesUnderDBName(array $dbNameToFieldNames): array
     {
         // Enable to add all fields starting with "__" (such as "__schema") as meta

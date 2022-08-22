@@ -6,11 +6,19 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use SplObjectStorage;
 
 interface DocumentInterface
 {
+/**
+     * @return OperationInterface[]
+     */
     public function getOperations(): array;
+    /**
+     * @return Fragment[]
+     */
     public function getFragments(): array;
     public function getFragment(string $name): ?Fragment;
     public function validate(): void;

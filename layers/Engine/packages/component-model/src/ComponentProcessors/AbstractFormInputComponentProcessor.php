@@ -28,6 +28,9 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
         return $name . ($this->isMultiple($component) ? '[]' : '');
     }
 
+    /**
+     * @return class-string<FormInput>
+     */
     public function getInputClass(Component $component): string
     {
         if ($this->isMultiple($component)) {
@@ -59,21 +62,33 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
         return $this->getComponentHelpers()->getComponentOutputName($component);
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function getValue(Component $component, ?array $source = null): mixed
     {
         return $this->getInput($component)->getValue($source);
     }
 
+    /**
+     * @param array<string,mixed>|null $source
+     */
     public function isInputSetInSource(Component $component, ?array $source = null): mixed
     {
         return $this->getInput($component)->isInputSetInSource($source);
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getInputDefaultValue(Component $component, array &$props): mixed
     {
         return null;
     }
 
+    /**
+     * @param array<string,mixed> $props
+     */
     public function getDefaultValue(Component $component, array &$props): mixed
     {
         $value = $this->getProp($component, $props, 'default-value');
@@ -89,6 +104,9 @@ abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComp
         return null;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getInputOptions(Component $component): array
     {
         return [];

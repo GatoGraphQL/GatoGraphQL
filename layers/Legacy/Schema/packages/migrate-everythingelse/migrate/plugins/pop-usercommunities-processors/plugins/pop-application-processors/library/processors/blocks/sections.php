@@ -12,6 +12,9 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
     public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'block-authormembers-scroll-list';
     public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'block-authormembers-carousel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

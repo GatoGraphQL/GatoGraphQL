@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\GenericCustomPosts\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
@@ -43,6 +44,9 @@ class RootGenericCustomPostsFilterInputObjectTypeResolver extends AbstractCustom
         return $this->__('Input to filter generic custom posts', 'genericcustomposts');
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(

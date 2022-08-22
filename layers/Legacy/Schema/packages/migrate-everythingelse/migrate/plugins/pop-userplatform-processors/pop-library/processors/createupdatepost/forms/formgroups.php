@@ -5,6 +5,9 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
 {
     public final const COMPONENT_FORMGROUP_EMBEDPREVIEW = 'formgroup-embedpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

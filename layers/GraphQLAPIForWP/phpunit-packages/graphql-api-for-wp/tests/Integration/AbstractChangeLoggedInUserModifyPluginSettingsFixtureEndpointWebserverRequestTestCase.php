@@ -11,7 +11,13 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
 {
     protected static ?string $differentUsername = null;
     protected static ?string $differentPassword = null;
+    /**
+     * @var array<string,mixed>
+     */
     protected static array $differentWebserverPingOptions = [];
+    /**
+     * @var array<string,mixed>
+     */
     protected static array $differentRequestBasicOptions = [];
     protected ?int $differentExpectedResponseStatusCode = null;
 
@@ -100,11 +106,17 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
 
     abstract protected function getDifferentLoginPassword(): string;
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getDifferentWebserverPingOptions(): array
     {
         return [];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getDifferentRequestBasicOptions(): array
     {
         return [];

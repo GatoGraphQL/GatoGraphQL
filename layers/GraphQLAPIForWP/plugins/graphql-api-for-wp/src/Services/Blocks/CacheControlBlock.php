@@ -73,7 +73,7 @@ class CacheControlBlock extends AbstractControlBlock
         return \__('Max-age:', 'graphql-api');
     }
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string,mixed> $attributes
      */
     protected function getBlockContent(array $attributes, string $content): string
     {

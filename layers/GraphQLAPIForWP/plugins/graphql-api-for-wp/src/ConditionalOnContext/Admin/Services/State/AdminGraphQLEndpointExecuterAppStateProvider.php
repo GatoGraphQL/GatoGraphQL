@@ -36,6 +36,9 @@ class AdminGraphQLEndpointExecuterAppStateProvider extends AbstractGraphQLEndpoi
         return $this->getAdminEndpointExecuter();
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {
@@ -44,6 +47,9 @@ class AdminGraphQLEndpointExecuterAppStateProvider extends AbstractGraphQLEndpoi
         parent::initialize($state);
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function consolidate(array &$state): void
     {
         if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {

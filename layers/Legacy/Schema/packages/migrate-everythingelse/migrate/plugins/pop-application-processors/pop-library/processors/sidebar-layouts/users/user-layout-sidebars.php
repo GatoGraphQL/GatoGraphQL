@@ -6,6 +6,9 @@ class PoP_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL = 'layout-usersidebar-horizontal';
     public final const COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL = 'layout-usersidebar-compacthorizontal';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

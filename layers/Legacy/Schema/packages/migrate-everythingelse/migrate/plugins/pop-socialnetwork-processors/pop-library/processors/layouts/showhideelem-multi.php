@@ -13,6 +13,9 @@ class PoP_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_Proc
     public final const COMPONENT_LAYOUT_DOWNVOTEPOST_STYLES = 'layout-downvoteposts-styles';
     public final const COMPONENT_LAYOUT_UNDODOWNVOTEPOST_STYLES = 'layout-undodownvoteposts-styles';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

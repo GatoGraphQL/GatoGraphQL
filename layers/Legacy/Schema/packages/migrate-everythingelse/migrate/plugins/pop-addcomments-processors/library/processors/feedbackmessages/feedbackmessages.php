@@ -5,6 +5,9 @@ class PoP_Module_Processor_CommentsFeedbackMessages extends PoP_Module_Processor
     public final const COMPONENT_FEEDBACKMESSAGE_COMMENTS = 'feedbackmessage-comments';
     public final const COMPONENT_FEEDBACKMESSAGE_ADDCOMMENT = 'feedbackmessage-addcomment';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

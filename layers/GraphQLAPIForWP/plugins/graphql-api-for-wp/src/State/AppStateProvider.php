@@ -58,6 +58,9 @@ class AppStateProvider extends AbstractAppStateProvider
         return $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {

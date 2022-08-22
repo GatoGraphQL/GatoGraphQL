@@ -6,8 +6,10 @@ namespace PoP\ComponentModel\Misc;
 
 class GeneralUtils
 {
-    // Taken from http://stackoverflow.com/questions/4356289/php-random-string-generator
-    public static function generateRandomString($length = 6, $addtime = true, $characters = 'abcdefghijklmnopqrstuvwxyz')
+    /**
+     * @see Taken from http://stackoverflow.com/questions/4356289/php-random-string-generator
+     */
+    public static function generateRandomString(int $length = 6, bool $addtime = true, string $characters = 'abcdefghijklmnopqrstuvwxyz'): string
     {
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
@@ -20,14 +22,18 @@ class GeneralUtils
         return $randomString;
     }
 
-    // Taken from https://gist.github.com/SeanCannon/6585889
-    public static function arrayFlatten(mixed $items, $deep = false)
+    /**
+     * @return mixed[]
+     *
+     * @see https://gist.github.com/SeanCannon/6585889
+     */
+    public static function arrayFlatten(mixed $items, bool $deep = false): array
     {
         if (!is_array($items)) {
             return [$items];
         }
 
-        return array_reduce($items, function ($carry, $item) use ($deep) {
+        return array_reduce($items, function ($carry, $item) use ($deep): array {
             return array_merge($carry, $deep ? self::arrayFlatten($item) : (is_array($item) ? $item : [$item]));
         }, []);
     }
@@ -35,6 +41,8 @@ class GeneralUtils
     /**
      * Add paramters "key" => "value" to the URL
      * Implementation based on that from https://stackoverflow.com/a/5809881
+     * @param array<string,string> $keyValues
+     * @see https://stackoverflow.com/a/5809881
      */
     public static function addQueryArgs(array $keyValues, string $urlOrURLPath): string
     {
@@ -65,6 +73,8 @@ class GeneralUtils
     /**
      * Add paramters "key" => "value" to the URL
      * Implementation based on that from https://stackoverflow.com/a/5809881
+     * @param string[] $keys
+     * @see https://stackoverflow.com/a/5809881
      */
     public static function removeQueryArgs(array $keys, string $urlOrURLPath): string
     {
@@ -82,7 +92,7 @@ class GeneralUtils
         // Remove the indicated keys
         $params = array_filter(
             $params,
-            function ($param) use ($keys) {
+            function ($param) use ($keys): bool {
                 return in_array($param, $keys);
             },
             ARRAY_FILTER_USE_KEY
@@ -121,6 +131,7 @@ class GeneralUtils
     }
 
     /**
+     * @param iterable<mixed> $iterable
      * @return mixed[]
      */
     public static function iterableToArray(iterable $iterable): array

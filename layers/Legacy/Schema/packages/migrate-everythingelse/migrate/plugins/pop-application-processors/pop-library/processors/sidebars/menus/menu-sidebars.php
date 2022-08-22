@@ -4,6 +4,9 @@ class PoP_Module_Processor_CustomMenuSidebars extends PoP_Module_Processor_Sideb
 {
     public final const COMPONENT_SIDEBAR_MENU_ABOUT = 'sidebar-menu-about';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

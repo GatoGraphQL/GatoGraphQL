@@ -13,7 +13,7 @@ class AccessControlManager extends UpstreamAccessControlManager
     use BasicServiceTrait;
 
     /**
-     * @var array<string, array>
+     * @var array<string,array<mixed[]>>
      */
     protected array $overriddenFieldEntries = [];
 
@@ -28,6 +28,9 @@ class AccessControlManager extends UpstreamAccessControlManager
         return $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator ??= $this->instanceManager->getInstance(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface::class);
     }
 
+    /**
+     * @param array<mixed[]> $fieldEntries
+     */
     public function addEntriesForFields(string $group, array $fieldEntries): void
     {
         parent::addEntriesForFields($group, $fieldEntries);
@@ -45,6 +48,8 @@ class AccessControlManager extends UpstreamAccessControlManager
      * the container is compiled and we can access the RootObjectTypeResolver
      * instance. In contrast, `addEntriesForFields` can be called
      * within a CompilerPass, so the instances would not yet be available.
+     *
+     * @return array<mixed[]>
      */
     public function getEntriesForFields(string $group): array
     {

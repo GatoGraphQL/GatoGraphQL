@@ -23,6 +23,9 @@ class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module
     public final const COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS18_SIMPLEVIEW = 'scrollinner-nosearchcategoryposts18-simpleview';
     public final const COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW = 'scrollinner-nosearchcategoryposts19-simpleview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

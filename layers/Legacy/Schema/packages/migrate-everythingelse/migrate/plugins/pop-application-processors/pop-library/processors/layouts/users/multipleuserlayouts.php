@@ -17,6 +17,9 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
     public final const COMPONENT_LAYOUT_MULTIPLEUSER_LIST = 'layout-multipleuser-list';
     public final const COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER = 'layout-multipleuser-fulluser';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

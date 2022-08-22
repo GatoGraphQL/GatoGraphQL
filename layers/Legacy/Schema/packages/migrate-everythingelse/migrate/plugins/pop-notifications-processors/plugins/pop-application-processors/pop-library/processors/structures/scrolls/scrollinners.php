@@ -5,6 +5,9 @@ class GD_AAL_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
     public final const COMPONENT_SCROLLINNER_NOTIFICATIONS_DETAILS = 'scrollinner-notifications-details';
     public final const COMPONENT_SCROLLINNER_NOTIFICATIONS_LIST = 'scrollinner-notifications-list';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

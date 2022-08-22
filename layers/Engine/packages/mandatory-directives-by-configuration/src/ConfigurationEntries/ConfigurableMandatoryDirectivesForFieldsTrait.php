@@ -13,11 +13,15 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
 {
     /**
      * Configuration entries
+     *
+     * @return array<mixed[]>
      */
     abstract protected function getConfigurationEntries(): array;
 
     /**
      * Field names to remove
+     *
+     * @return string[]
      */
     protected function getFieldNames(): array
     {
@@ -33,6 +37,8 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
 
     /**
      * Configuration entries
+     *
+     * @return array<mixed[]>
      */
     final protected function getEntries(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
@@ -57,6 +63,8 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      * Configuration entries
      *
      * @param InterfaceTypeResolverInterface[] $interfaceTypeResolvers
+     *
+     * @return array<mixed[]>
      */
     final protected function getEntriesByTypeAndInterfaces(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
@@ -75,6 +83,9 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
      * Filter all the entries from the list which apply to the passed typeResolver and fieldName
      *
      * @param InterfaceTypeResolverInterface[] $interfaceTypeResolvers
+     *
+     * @return array<mixed[]>
+     * @param array<mixed[]> $entryList
      */
     final protected function getMatchingEntries(
         array $entryList,

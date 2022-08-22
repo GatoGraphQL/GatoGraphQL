@@ -5,6 +5,9 @@ class GenericForms_Module_Processor_SelectFormInputs extends PoP_Module_Processo
 {
     public final const COMPONENT_FORMINPUT_TOPIC = 'gf-field-topic';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

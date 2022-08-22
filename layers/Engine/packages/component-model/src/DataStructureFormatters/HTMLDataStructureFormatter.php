@@ -18,6 +18,9 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
         return 'text/html';
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     public function getOutputContent(array &$data): string
     {
         return sprintf(
@@ -60,9 +63,10 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
     }
 
     /**
+     * @param array<string,mixed> $arr
      * @see https://stackoverflow.com/a/36760478
      */
-    protected function arrayToHtmlTableRecursive($arr)
+    protected function arrayToHtmlTableRecursive(array $arr): string
     {
         $str = "<table><tbody>";
         foreach ($arr as $key => $val) {

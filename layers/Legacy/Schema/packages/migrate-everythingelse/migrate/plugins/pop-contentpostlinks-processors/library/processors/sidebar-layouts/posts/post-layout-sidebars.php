@@ -6,6 +6,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars extends PoP
     public final const COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_LINK = 'layout-postsidebar-horizontal-link';
     public final const COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK = 'layout-postsidebarcompact-horizontal-link';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

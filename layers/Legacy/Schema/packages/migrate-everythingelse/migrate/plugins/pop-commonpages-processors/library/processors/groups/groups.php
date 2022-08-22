@@ -4,6 +4,9 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
 {
     public final const COMPONENT_GROUP_WHOWEARE = 'group-whoweare';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

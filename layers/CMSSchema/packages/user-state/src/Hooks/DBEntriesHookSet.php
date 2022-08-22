@@ -32,6 +32,10 @@ class DBEntriesHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @param array<string,string[]> $dbNameToFieldNames
+     * @return array<string,string[]>
+     */
     public function moveEntriesUnderDBName(array $dbNameToFieldNames): array
     {
         $dbNameToFieldNames['userstate'] = App::applyFilters(

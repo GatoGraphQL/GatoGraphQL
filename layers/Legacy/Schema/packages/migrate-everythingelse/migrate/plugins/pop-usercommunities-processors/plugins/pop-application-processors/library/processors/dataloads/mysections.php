@@ -9,6 +9,9 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     public final const COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT = 'dataload-mymembers-table-edit';
     public final const COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW = 'dataload-mymembers-scroll-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor_Cu
 {
     public final const COMPONENT_LAYOUT_FULLUSER = 'layout-fulluser';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

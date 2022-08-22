@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -18,6 +19,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 {
     use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
 
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -25,6 +29,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
@@ -50,6 +57,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {

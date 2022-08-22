@@ -11,16 +11,17 @@ trait ItemProcessorManagerTrait
     abstract protected function getInstanceManager(): InstanceManagerInterface;
 
     /**
-     * @var array<string, array>
+     * @var array<string,array<string,mixed>>
      */
     private array $processors = [];
     /**
-     * @var array<string, array>
+     * @var array<string,array<string,string>>
      */
     private array $overridingClasses = [];
 
     /**
      * @deprecated Use the Service Container instead
+     * @param string[] $forItemNames
      */
     public function overrideProcessorClass(string $overrideClass, string $withClass, array $forItemNames): void
     {
@@ -29,6 +30,9 @@ trait ItemProcessorManagerTrait
         }
     }
 
+    /**
+     * @param array<int,mixed> $item
+     */
     protected function hasItemBeenLoaded(array $item): bool
     {
         $itemProcessorClass = $item[0];
@@ -36,6 +40,9 @@ trait ItemProcessorManagerTrait
         return isset($this->processors[$itemProcessorClass][$itemName]);
     }
 
+    /**
+     * @param array<int,mixed> $item
+     */
     public function getItemProcessor(array $item): mixed
     {
         $itemProcessorClass = $item[0];

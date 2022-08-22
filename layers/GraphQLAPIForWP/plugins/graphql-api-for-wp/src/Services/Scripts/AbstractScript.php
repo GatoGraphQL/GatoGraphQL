@@ -100,7 +100,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     /**
      * Pass localized data to the block
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getLocalizedData(): array
     {

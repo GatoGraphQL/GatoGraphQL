@@ -27,6 +27,9 @@ class InputValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFiel
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -34,6 +37,9 @@ class InputValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFiel
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

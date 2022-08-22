@@ -5,6 +5,9 @@ class PoP_Volunteering_Module_Processor_TextFormInputs extends PoP_Module_Proces
 {
     public final const COMPONENT_FORMINPUT_PHONE = 'gf-field-phone';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldSchemaDefinitionResolverInterface;
@@ -27,6 +28,8 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
     /**
      * This function will never be called for the Adapter,
      * but must be implemented to satisfy the interface
+     *
+     * @return string[]
      */
     public function getFieldNamesToResolve(): array
     {
@@ -36,6 +39,8 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
     /**
      * This function will never be called for the Adapter,
      * but must be implemented to satisfy the interface
+     *
+     * @return string[]
      */
     public function getAdminFieldNames(): array
     {
@@ -52,11 +57,17 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getFieldDescription($fieldName);
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getFieldArgNameTypeResolvers($fieldName);
     }
 
+    /**
+     * @return string[]
+     */
     public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getAdminFieldArgNames($fieldName);
@@ -77,11 +88,17 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getFieldArgTypeModifiers($fieldName, $fieldArgName);
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getConsolidatedFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedFieldArgNameTypeResolvers($fieldName);
     }
 
+    /**
+     * @return string[]
+     */
     public function getConsolidatedAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedAdminFieldArgNames($fieldName);

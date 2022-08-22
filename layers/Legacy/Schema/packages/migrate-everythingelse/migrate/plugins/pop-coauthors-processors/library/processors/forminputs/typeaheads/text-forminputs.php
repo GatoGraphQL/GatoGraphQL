@@ -5,6 +5,9 @@ class GD_CAP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Process
 {
     public final const COMPONENT_FORMINPUT_TEXT_TYPEAHEADPOSTAUTHORS = 'forminput-text-typeaheadpostauthors';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

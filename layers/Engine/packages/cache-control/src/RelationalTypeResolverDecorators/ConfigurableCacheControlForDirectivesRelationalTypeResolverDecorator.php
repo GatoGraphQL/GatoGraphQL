@@ -32,6 +32,9 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
         return $this->cacheControlDirectiveResolver ??= $this->instanceManager->getInstance(CacheControlDirectiveResolver::class);
     }
 
+    /**
+     * @return array<mixed[]>
+     */
     protected function getConfigurationEntries(): array
     {
         return $this->getCacheControlManager()->getEntriesForDirectives();

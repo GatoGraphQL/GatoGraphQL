@@ -27,6 +27,9 @@ class SchemaExposeAdminDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
         return __DIR__ . '/fixture-schema-expose-admin-data-in-cpt';
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [

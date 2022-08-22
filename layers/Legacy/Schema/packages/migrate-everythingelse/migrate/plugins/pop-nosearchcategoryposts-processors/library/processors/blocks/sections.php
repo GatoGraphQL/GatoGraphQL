@@ -523,6 +523,9 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
     public final const COMPONENT_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_CAROUSEL_CONTENT = 'block-tagnosearchcategoryposts18-carousel-content';
     public final const COMPONENT_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT = 'block-tagnosearchcategoryposts19-carousel-content';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -12,7 +12,13 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 
 interface ObjectTypeFieldSchemaDefinitionResolverInterface
 {
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array;
+    /**
+     * @return string[]
+     */
     public function getAdminFieldNames(): array;
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface;
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
@@ -21,7 +27,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     /**
      * Define Schema Field Arguments
      *
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array;
     /**
@@ -34,7 +40,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     /**
      * Invoke Schema Field Arguments
      *
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getConsolidatedFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array;
     /**

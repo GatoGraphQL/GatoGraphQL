@@ -31,6 +31,9 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -21,7 +21,7 @@ class PoP_CDN_ThumbprintBase
     /**
      * @return mixed[]
      */
-    public function executeQuery($query, array $options = []): array
+    public function executeQuery(array $query, array $options = []): array
     {
         return array();
     }

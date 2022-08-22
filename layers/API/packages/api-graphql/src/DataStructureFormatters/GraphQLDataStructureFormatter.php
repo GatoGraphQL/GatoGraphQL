@@ -18,6 +18,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return 'graphql';
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $data
+     */
     public function getFormattedData(array $data): array
     {
         $ret = [];
@@ -58,6 +62,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
      * > and hence there are no additional restrictions on its contents.
      *
      * @see http://spec.graphql.org/June2018/#sec-Response-Format
+     * @param array<string,mixed> $ret
+     * @param array<string,mixed> $data
      */
     protected function maybeAddTopLevelExtensionsEntryToResponse(array &$ret, array $data): void
     {
@@ -127,6 +133,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
+    /**
+     * @return array<int,mixed[]>
+     * @param array<array<string,mixed>> $entries
+     */
     protected function reformatGeneralEntries(array $entries): array
     {
         $ret = [];
@@ -136,6 +146,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $item
+     */
     protected function getGeneralEntry(array $item): array
     {
         $entry = [
@@ -147,6 +161,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
+    /**
+     * @return array<int,mixed[]>
+     * @param array<array<string,mixed>> $entries
+     */
     protected function reformatDocumentEntries(array $entries): array
     {
         $ret = [];
@@ -156,6 +174,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $item
+     */
     protected function getDocumentEntry(array $item): array
     {
         $entry = [
@@ -175,6 +197,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $item
+     */
     protected function getDocumentEntryExtensions(array $item): array
     {
         $extensions = [];
@@ -186,6 +212,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
     /**
      * @param array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> $entries
+     * @return array<int,mixed[]>
      */
     protected function reformatSchemaEntries(array $entries): array
     {
@@ -203,6 +230,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $item
+     */
     protected function getSchemaEntry(string $typeOutputKey, array $item): array
     {
         $entry = [
@@ -230,6 +261,25 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $item
+     */
+    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
+    {
+        $extensions = [];
+        if ($path = $item[Tokens::PATH] ?? null) {
+            $extensions['path'] = $path;
+        }
+        $extensions['type'] = $typeOutputKey;
+        if ($field = $item[Tokens::FIELD] ?? null) {
+            $extensions['field'] = $field;
+        } elseif ($dynamicField = $item[Tokens::DYNAMIC_FIELD] ?? null) {
+            $extensions['dynamicField'] = $dynamicField;
+        }
+        return $extensions;
+    }
+
     protected function reformatObjectEntries(array $entries): array
     {
         $ret = [];
@@ -244,5 +294,55 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             }
         }
         return $ret;
+    }
+
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $item
+     */
+    protected function getObjectEntry(string $typeOutputKey, array $item): array
+    {
+        $entry = [
+            'message' => $item[Tokens::MESSAGE],
+        ];
+        if ($locations = $item[Tokens::LOCATIONS]) {
+            $entry['locations'] = $locations;
+        }
+        /**
+         * Add the causes of the error, if any.
+         *
+         * @see https://github.com/graphql/graphql-spec/issues/893
+         */
+        if ($causes = $item[Tokens::CAUSES] ?? []) {
+            $entry['causes'] = $causes;
+        }
+        if (
+            $extensions = array_merge(
+                $this->getObjectEntryExtensions($typeOutputKey, $item),
+                $item[Tokens::EXTENSIONS] ?? []
+            )
+        ) {
+            $entry['extensions'] = $extensions;
+        }
+        return $entry;
+    }
+
+    /**
+     * The entry is similar to Schema, plus the
+     * addition of the object ID/IDs
+     */
+    protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
+    {
+        $extensions = $this->getSchemaEntryExtensions($typeOutputKey, $item);
+
+        /** @var array<string|int> */
+        $ids = $item[Tokens::IDS];
+        if (count($ids) === 1) {
+            $extensions['id'] = $ids[0];
+        } else {
+            $extensions['ids'] = $ids;
+        }
+
+        return $extensions;
     }
 }

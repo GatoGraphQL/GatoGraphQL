@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElseWP;
 
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 
 class Module extends AbstractModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -20,6 +21,9 @@ class Module extends AbstractModule
         ];
     }
 
+    /**
+     * @return array<class-string<ModuleInterface>>
+     */
     public function getDependedConditionalModuleClasses(): array
     {
         return [
@@ -30,8 +34,8 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<string,mixed> $configuration
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

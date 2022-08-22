@@ -20,7 +20,7 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
     /**
      * Define input fields
      *
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array;
     /**
@@ -34,7 +34,7 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
      * Consolidation of the schema inputs. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      *
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getConsolidatedInputFieldNameTypeResolvers(): array;
     /**
@@ -51,6 +51,9 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
      * be exposed to the user
      */
     public function skipExposingInputFieldInSchema(string $inputFieldName): bool;
+    /**
+     * @return array<string,mixed>
+     */
     public function getInputFieldSchemaDefinition(string $inputFieldName): array;
     /**
      * Validate constraints on the input's value

@@ -79,6 +79,9 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     public final const COMPONENT_DATALOAD_AUTHORSTANCES_CAROUSEL = 'dataload-authorstances-carousel';
     public final const COMPONENT_DATALOAD_TAGSTANCES_CAROUSEL = 'dataload-tagstances-carousel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

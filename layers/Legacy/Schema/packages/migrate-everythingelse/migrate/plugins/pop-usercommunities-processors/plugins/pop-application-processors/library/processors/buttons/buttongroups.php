@@ -4,6 +4,9 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
 {
     public final const COMPONENT_BUTTONGROUP_MYUSERS = 'ure-buttongroup-myusers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

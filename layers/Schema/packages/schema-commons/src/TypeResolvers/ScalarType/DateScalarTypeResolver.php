@@ -19,6 +19,9 @@ class DateScalarTypeResolver extends AbstractDateTimeScalarTypeResolver
         return 'Y-m-d';
     }
 
+    /**
+     * @return string[]
+     */
     protected function getDateTimeInputFormats(): array
     {
         return array_merge(

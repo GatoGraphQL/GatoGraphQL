@@ -523,6 +523,9 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
     public final const COMPONENT_BLOCK_TAGCATEGORYPOSTS18_CAROUSEL_CONTENT = 'block-tagcategoryposts18-carousel-content';
     public final const COMPONENT_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT = 'block-tagcategoryposts19-carousel-content';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

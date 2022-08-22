@@ -7,6 +7,9 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
     public final const COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW = 'scroll-myevents-fullviewpreview';
     public final const COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW = 'scroll-mypastevents-fullviewpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

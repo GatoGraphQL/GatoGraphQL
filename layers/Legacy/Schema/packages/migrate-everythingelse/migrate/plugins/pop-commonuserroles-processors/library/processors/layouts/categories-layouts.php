@@ -6,6 +6,9 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     public final const COMPONENT_LAYOUT_ORGANIZATIONTYPES = 'layout-organizationtypes';
     public final const COMPONENT_LAYOUT_INDIVIDUALINTERESTS = 'layout-individualinterests';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

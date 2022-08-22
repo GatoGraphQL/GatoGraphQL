@@ -4,6 +4,9 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms exten
 {
     public final const COMPONENT_FORM_LOCATIONPOSTLINK = 'form-locationpostlink';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

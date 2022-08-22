@@ -3,7 +3,10 @@ use PoP\Engine\FormInputs\MultipleSelectFormInput;
 
 class GD_FormInput_Categories extends MultipleSelectFormInput
 {
-    public function getAllValues($label = null): array
+    /**
+     * @return mixed[]
+     */
+    public function getAllValues(string $label = null): array
     {
         $values = parent::getAllValues($label);
 

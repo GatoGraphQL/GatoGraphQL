@@ -4,6 +4,9 @@ class PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts extends PoP_Module_P
 {
     public final const COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW = 'layout-previewpost-locationpost-simpleview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

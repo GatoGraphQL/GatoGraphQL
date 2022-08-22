@@ -40,7 +40,7 @@ class ModuleListTable extends AbstractItemListTable
     /**
      * Return all the items to display on the table
      *
-     * @return array<array> Each item is an array of prop => value
+     * @return array<array<string,mixed>> Each item is an array of prop => value
      */
     public function getAllItems(): array
     {
@@ -88,7 +88,7 @@ class ModuleListTable extends AbstractItemListTable
     /**
      * Gets the list of views available on this table.
      *
-     * @return array<string, string>
+     * @return array<string,string>
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function get_views()
@@ -172,7 +172,7 @@ class ModuleListTable extends AbstractItemListTable
     {
         /**
          * Cast object so PHPStan doesn't throw error
-         * @var array<string, mixed>
+         * @var array<string,mixed>
          */
         $item = $item;
         switch ($column_name) {
@@ -281,7 +281,7 @@ class ModuleListTable extends AbstractItemListTable
     {
         /**
          * Cast object so PHPStan doesn't throw error
-         * @var array<string, mixed>
+         * @var array<string,mixed>
          */
         $item = $item;
         return sprintf(
@@ -294,7 +294,7 @@ class ModuleListTable extends AbstractItemListTable
     /**
      * Method for name column
      *
-     * @param array<string, string> $item an array of DB data
+     * @param array<string,string> $item an array of DB data
      *
      * @return string
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
@@ -375,7 +375,7 @@ class ModuleListTable extends AbstractItemListTable
     /**
      *  Associative array of columns
      *
-     * @return array<string, string>
+     * @return array<string,string>
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     public function get_columns()
@@ -400,7 +400,7 @@ class ModuleListTable extends AbstractItemListTable
     /**
      * Returns an associative array containing the bulk action
      *
-     * @return array<string, string>
+     * @return array<string,string>
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     public function get_bulk_actions()
@@ -412,13 +412,13 @@ class ModuleListTable extends AbstractItemListTable
     }
 
     /**
-     * Get a list of CSS classes for the WP_List_Table table tag.
-     *
-     * @since 3.1.0
-     *
-     * @return string[] Array of CSS classes for the table tag.
-     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-     */
+    * Get a list of CSS classes for the WP_List_Table table tag.
+    *
+    * @since 3.1.0
+    *
+     * @return mixed[]|string[] Array of CSS classes for the table tag.
+    phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    */
     protected function get_table_classes()
     {
         // return array_merge(
@@ -447,7 +447,7 @@ class ModuleListTable extends AbstractItemListTable
     {
         /**
          * Cast object so PHPStan doesn't throw error
-         * @var array<string, mixed>
+         * @var array<string,mixed>
          */
         $item = $item;
         return sprintf(
@@ -469,7 +469,7 @@ class ModuleListTable extends AbstractItemListTable
     {
         /**
          * Cast object so PHPStan doesn't throw error
-         * @var array<string, mixed>
+         * @var array<string,mixed>
          */
         $arrayItem = $item;
         if ($this->usePluginTableStyle()) {

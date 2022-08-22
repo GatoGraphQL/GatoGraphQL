@@ -27,6 +27,11 @@ class CustomPostQueryHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function convertCustomPostsQuery(array $query, array $options): array
     {
         if (isset($query['author-ids'])) {

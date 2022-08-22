@@ -11,6 +11,9 @@ class SchemaDefinitionHelpers
 {
     public final const PATH_SEPARATOR = '.';
 
+    /**
+     * @param string[] $schemaDefinitionPath
+     */
     public static function getSchemaDefinitionReferenceObjectID(array $schemaDefinitionPath): string
     {
         return implode(
@@ -18,6 +21,11 @@ class SchemaDefinitionHelpers
             $schemaDefinitionPath
         );
     }
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $schemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     public static function &advancePointerToPath(array &$schemaDefinition, array $schemaDefinitionPath): array
     {
         $schemaDefinitionPointer = &$schemaDefinition;
@@ -29,6 +37,8 @@ class SchemaDefinitionHelpers
 
     /**
      * @return Field[]
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $fieldSchemaDefinitionPath
      */
     public static function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {
@@ -50,6 +60,8 @@ class SchemaDefinitionHelpers
 
     /**
      * @return Field[]
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $fieldSchemaDefinitionPath
      */
     public static function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): array
     {

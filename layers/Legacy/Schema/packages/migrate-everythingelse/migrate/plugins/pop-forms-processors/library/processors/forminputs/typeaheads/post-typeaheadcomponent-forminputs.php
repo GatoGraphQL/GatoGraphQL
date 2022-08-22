@@ -8,6 +8,9 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
 {
     public final const COMPONENT_TYPEAHEAD_COMPONENT_CONTENT = 'forminput-typeaheadcomponent-content';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

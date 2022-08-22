@@ -12,9 +12,9 @@ trait ValidateUserNotLoggedInForFieldsRelationalTypeResolverDecoratorTrait
 {
     abstract protected function getValidateIsUserNotLoggedInDirectiveResolver(): ValidateIsUserNotLoggedInDirectiveResolver;
 
-    protected function removeFieldNameBasedOnMatchingEntryValue($entryValue = null): bool
+    protected function removeFieldNameBasedOnMatchingEntryValue(mixed $entryValue = null): bool
     {
-        return UserStates::OUT == $entryValue;
+        return UserStates::OUT === $entryValue;
     }
     protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface
     {

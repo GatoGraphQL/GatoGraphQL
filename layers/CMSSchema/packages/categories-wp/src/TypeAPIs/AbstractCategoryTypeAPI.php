@@ -15,8 +15,6 @@ use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
 
-use function get_category;
-use function get_term_by;
 use function wp_get_post_terms;
 use function get_categories;
 use function get_term_link;
@@ -66,20 +64,21 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     abstract protected function getCategoryTaxonomyName(): string;
 
-    public function getCategory($category_id)
-    {
-        return get_category($category_id, $this->getCategoryTaxonomyName());
-    }
-    public function getCategoryByName($category_name)
-    {
-        return get_term_by('name', $category_name, $this->getCategoryTaxonomyName());
-    }
+    /**
+     * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
 
         return wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCustomPostCategoryCount(string|int $customPostID, array $query = [], array $options = []): int
     {
         // There is no direct way to calculate the total
@@ -97,6 +96,10 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         $categories = wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
         return count($categories);
     }
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCategoryCount(array $query = [], array $options = []): int
     {
         $query = $this->convertCategoriesQuery($query, $options);
@@ -120,12 +123,22 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         // An error happened
         return -1;
     }
+    /**
+     * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function getCategories(array $query, array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
         return get_categories($query);
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
     public function convertCategoriesQuery(array $query, array $options = []): array
     {
         $query = $this->convertTaxonomiesQuery($query, $options);
@@ -156,7 +169,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $this->getCMSHelperService()->getLocalURLPath($this->getCategoryURL($catObjectOrID));
     }
 
-    public function getCategoryBase()
+    public function getCategoryBase(): string
     {
         return $this->getCMSService()->getOption($this->getCategoryBaseOption());
     }
@@ -164,7 +177,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
     // {
     //     $return_type = $options[QueryOptions::RETURN_TYPE] ?? null;
-    //     if ($return_type == ReturnTypes::IDS) {
+    //     if ($return_type === ReturnTypes::IDS) {
     //         return array_map(
     //             function ($category) {
     //                 return $category->term_id;
@@ -191,7 +204,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     // {
     //     $query = [];
     //     if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-    //         if ($return_type == ReturnTypes::IDS) {
+    //         if ($return_type === ReturnTypes::IDS) {
     //             $query['fields'] = 'ids';
     //         } elseif ($return_type == ReturnTypes::SLUGS) {
     //             $query['fields'] = 'slugs';

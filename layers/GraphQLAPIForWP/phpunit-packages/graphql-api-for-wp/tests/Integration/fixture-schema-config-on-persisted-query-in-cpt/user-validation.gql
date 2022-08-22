@@ -1,10 +1,1 @@
-{  
-  # Website: no ACLs / Power users: Default / "author" role
-  customPosts(pagination: { limit: 3 }) {
-    __typename
-    ...on IsCustomPost {
-      id
-      title
-    }
-  }
-}
+# No need to provide the query to the Persisted Query

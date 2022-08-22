@@ -10,6 +10,9 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     public final const COMPONENT_FORMINPUT_CUP_YOUTUBE = 'forminput-cup-youtube';
     public final const COMPONENT_FORMINPUT_CUP_INSTAGRAM = 'forminput-cup-instagram';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

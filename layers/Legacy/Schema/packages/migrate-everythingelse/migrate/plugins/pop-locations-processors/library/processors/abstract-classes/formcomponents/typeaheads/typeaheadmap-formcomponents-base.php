@@ -25,6 +25,9 @@ abstract class PoP_Module_Processor_TypeaheadMapFormComponentsBase extends PoPEn
         return $this->getLocationsTypeaheadSubcomponent($component);
     }
 
+    /**
+     * @return mixed[]|null
+     */
     public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_FORMCOMPONENT_TYPEAHEADMAP];

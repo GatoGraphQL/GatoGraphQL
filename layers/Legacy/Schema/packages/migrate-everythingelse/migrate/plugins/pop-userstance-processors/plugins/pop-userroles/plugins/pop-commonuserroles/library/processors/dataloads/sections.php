@@ -12,6 +12,9 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
     public final const COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL = 'dataload-stances-byorganizations-carousel';
     public final const COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL = 'dataload-stances-byindividuals-carousel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

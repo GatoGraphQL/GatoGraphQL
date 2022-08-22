@@ -4,6 +4,9 @@ class UserStance_Module_Processor_CreateUpdatePostForms extends PoP_Module_Proce
 {
     public final const COMPONENT_FORM_STANCE = 'form-stance';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

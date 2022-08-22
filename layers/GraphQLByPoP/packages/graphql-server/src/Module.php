@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
@@ -17,7 +18,7 @@ use PoP\Root\Module\AbstractModule;
 class Module extends AbstractModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -26,6 +27,9 @@ class Module extends AbstractModule
         ];
     }
 
+    /**
+     * @return array<class-string<ModuleInterface>>
+     */
     public function getDependedConditionalModuleClasses(): array
     {
         return [
@@ -37,7 +41,7 @@ class Module extends AbstractModule
     /**
      * Set the default module configuration
      *
-     * @param array<string, mixed> $moduleClassConfiguration
+     * @param array<string,mixed> $moduleClassConfiguration
      */
     public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration
@@ -70,7 +74,7 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

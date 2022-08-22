@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use PoP\Root\Module\ModuleInterface;
 use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterUserAuthorizationSchemeCompilerPass;
 use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
@@ -17,7 +18,7 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 class Module extends AbstractPluginModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {
@@ -86,7 +87,7 @@ class Module extends AbstractPluginModule
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaModuleClasses
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,

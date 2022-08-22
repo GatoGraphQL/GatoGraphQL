@@ -12,6 +12,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
     public final const COMPONENT_DATALOAD_COMMENTS_SCROLL = 'dataload-comments-scroll';
     public final const COMPONENT_DATALOAD_ADDCOMMENT = 'dataload-addcomment';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

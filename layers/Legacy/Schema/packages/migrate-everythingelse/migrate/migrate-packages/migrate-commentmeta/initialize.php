@@ -2,7 +2,7 @@
 $class = (new class() extends \PoP\Root\Module\AbstractModule
 {
     /**
-     * @return string[]
+     * @return array<class-string<\PoP\Root\Module\ModuleInterface>>
      */
     public function getDependedModuleClasses(): array
     {

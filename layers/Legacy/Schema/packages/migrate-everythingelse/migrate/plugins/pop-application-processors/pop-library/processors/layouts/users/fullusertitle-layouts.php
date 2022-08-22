@@ -4,6 +4,9 @@ class PoP_Module_Processor_CustomFullUserTitleLayouts extends PoP_Module_Process
 {
     public final const COMPONENT_LAYOUT_FULLUSERTITLE = 'singlelayout-fullusertitle';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

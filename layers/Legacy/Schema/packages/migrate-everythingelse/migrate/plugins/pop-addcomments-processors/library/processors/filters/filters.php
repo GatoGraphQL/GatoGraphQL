@@ -4,6 +4,9 @@ class PoP_Module_Processor_CommentFilters extends PoP_Module_Processor_FiltersBa
 {
     public final const COMPONENT_FILTER_COMMENTS = 'filter-comments';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

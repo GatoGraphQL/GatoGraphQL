@@ -6,6 +6,9 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
 {
     public final const COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH = 'forminput-typeaheadcomponent-staticsearch';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

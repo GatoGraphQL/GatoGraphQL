@@ -5,6 +5,9 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
 {
     public final const COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS = 'widget-form-locationpostlinkdetails';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

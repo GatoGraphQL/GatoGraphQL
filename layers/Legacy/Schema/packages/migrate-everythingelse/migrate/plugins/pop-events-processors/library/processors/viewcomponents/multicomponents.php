@@ -7,6 +7,9 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
     public final const COMPONENT_MULTICOMPONENT_LOCATIONVOLUNTEER = 'multicomponent-locationvolunteer';
     public final const COMPONENT_MULTICOMPONENT_LOCATION = 'multicomponent-location';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

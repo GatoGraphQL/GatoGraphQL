@@ -18,7 +18,7 @@ class FileRenderer implements FileRendererInterface
     public function render(AbstractAccessibleRenderableFile $file): string
     {
         // Render the content
-        $renderedFragments = array_map(function ($fragment) {
+        $renderedFragments = array_map(function ($fragment): string {
             return $this->renderFragment($fragment);
         }, $file->getFragments());
 

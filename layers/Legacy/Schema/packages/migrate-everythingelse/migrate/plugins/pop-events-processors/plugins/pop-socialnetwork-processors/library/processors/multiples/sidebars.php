@@ -5,6 +5,9 @@ class PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Mod
     public final const COMPONENT_MULTIPLE_SINGLE_EVENT_RECOMMENDEDBYSIDEBAR = 'multiple-single-event-recommendedbysidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_PASTEVENT_RECOMMENDEDBYSIDEBAR = 'multiple-single-pastevent-recommendedbysidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

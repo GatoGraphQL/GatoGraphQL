@@ -13,5 +13,8 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
 {
     public function hasCategory($catObjectOrID, $post_id);
     public function getCategoryPath($category_id);
-    public function setPostCategories($post_id, array $categories, bool $append = false);
+    /**
+     * @param mixed[] $categories
+     */
+    public function setPostCategories(string|int $post_id, array $categories, bool $append = false);
 }

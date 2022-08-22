@@ -8,6 +8,9 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
 {
     public final const COMPONENT_DATALOAD_LATESTCOUNTS = 'dataload-latestcounts';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class PoP_Module_Processor_CalendarContentLayouts extends PoP_Module_Processor_C
 {
     public final const COMPONENT_LAYOUTCALENDAR_CONTENT_POPOVER = 'em-layoutcalendar-content-popover';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

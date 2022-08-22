@@ -8,6 +8,9 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public final const COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS = 'widget-form-linkdetails';
     public final const COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS = 'widget-form-postdetails';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

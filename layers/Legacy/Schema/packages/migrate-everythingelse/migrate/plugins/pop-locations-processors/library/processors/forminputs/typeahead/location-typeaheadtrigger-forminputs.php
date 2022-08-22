@@ -5,6 +5,9 @@ class PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents extend
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_LOCATIONS = 'formcomponent-selectabletypeaheadalert-locations';
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_LOCATION = 'formcomponent-selectabletypeaheadalert-location';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

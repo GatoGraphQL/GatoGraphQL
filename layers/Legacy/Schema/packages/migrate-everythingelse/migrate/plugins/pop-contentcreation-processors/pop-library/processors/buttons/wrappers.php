@@ -6,6 +6,9 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
     public final const COMPONENT_BUTTONWRAPPER_POSTVIEW = 'buttonwrapper-postview';
     public final const COMPONENT_BUTTONWRAPPER_POSTPREVIEW = 'buttonwrapper-postpreview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -110,18 +110,23 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 
     /**
      * Function to override by Gravity Forms
+     * @return mixed[]
      */
-    protected function getNewsletterData(FieldDataAccessorInterface $fieldDataAccessor)
+    protected function getNewsletterData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return array();
     }
     /**
      * Function to override by Gravity Forms
+     * @param array<string,mixed> $newsletter_data
      */
     protected function validateData(array $newsletter_data, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): void
     {
     }
 
+    /**
+     * @param array<string,mixed> $newsletter_data
+     */
     protected function doExecute(array $newsletter_data)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();

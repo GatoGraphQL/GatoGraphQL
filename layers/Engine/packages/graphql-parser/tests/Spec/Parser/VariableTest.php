@@ -15,14 +15,14 @@ class VariableTest extends AbstractTestCase
      *
      * @dataProvider variableProvider
      */
-    public function testGetValue($actual, $expected)
+    public function testGetValue(mixed $actual, mixed $expected): void
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setContext(new Context(null, ['foo' => $actual]));
         $this->assertEquals($var->getValue(), $expected);
     }
 
-    public function testGetNullValueException()
+    public function testGetNullValueException(): void
     {
         $this->expectException(ShouldNotHappenException::class);
         $this->expectExceptionMessage(sprintf(
@@ -33,7 +33,7 @@ class VariableTest extends AbstractTestCase
         $var->getValue();
     }
 
-    public function testGetValueReturnsDefaultValueIfNoValueSet()
+    public function testGetValueReturnsDefaultValueIfNoValueSet(): void
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setDefaultValueAST(new Literal('default-value', new Location(1, 1)));
@@ -45,7 +45,7 @@ class VariableTest extends AbstractTestCase
         );
     }
 
-    public function testGetValueReturnsSetValueEvenWithDefaultValue()
+    public function testGetValueReturnsSetValueEvenWithDefaultValue(): void
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setContext(new Context(null, ['foo' => 'real-value']));
@@ -57,7 +57,7 @@ class VariableTest extends AbstractTestCase
         );
     }
 
-    public function testIndicatesDefaultValuePresent()
+    public function testIndicatesDefaultValuePresent(): void
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setDefaultValueAST(new Literal('default-value', new Location(1, 1)));
@@ -67,7 +67,7 @@ class VariableTest extends AbstractTestCase
         );
     }
 
-    public function testHasNoDefaultValue()
+    public function testHasNoDefaultValue(): void
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
 
@@ -77,7 +77,7 @@ class VariableTest extends AbstractTestCase
     }
 
     /**
-     * @return array Array of <mixed: value to set, mixed: expected value>
+     * @return mixed[] Array of <mixed: value to set, mixed: expected value>
      */
     public static function variableProvider()
     {

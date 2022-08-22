@@ -5,6 +5,9 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
 {
     public final const COMPONENT_BUTTON_EVENTLINK_CREATE = 'postbutton-eventlink-create';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -5,6 +5,9 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
     public final const COMPONENT_FORMCOMPONENT_CARD_POST = 'forminput-post-card';
     public final const COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST = 'forminput-commentpost-card';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

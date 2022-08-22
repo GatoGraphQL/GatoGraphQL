@@ -41,10 +41,14 @@ interface AppStateManagerInterface
 
     /**
      * @throws AppStateNotExistsException If there is no state under the provided path
+     * @param string[] $path
      */
     public function getUnder(array $path): mixed;
 
     public function has(string $key): bool;
 
+    /**
+     * @param string[] $path
+     */
     public function hasUnder(array $path): bool;
 }

@@ -17,59 +17,60 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
-use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
+use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
-use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
+use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\AccessControl\Module as AccessControlModule;
+use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
+use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\CacheControl\Module as CacheControlModule;
 use PoP\CacheControl\Environment as CacheControlEnvironment;
-use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\CacheControl\Module as CacheControlModule;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\Engine\Environment as EngineEnvironment;
+use PoP\Engine\Module as EngineModule;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
-use PoP\Engine\Module as EngineModule;
-use PoP\Engine\Environment as EngineEnvironment;
-use PoPCMSSchema\Categories\Module as CategoriesModule;
+use PoP\Root\Module\ModuleInterface;
 use PoPCMSSchema\Categories\Environment as CategoriesEnvironment;
-use PoPCMSSchema\CommentMeta\Module as CommentMetaModule;
+use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoPCMSSchema\CommentMeta\Environment as CommentMetaEnvironment;
-use PoPCMSSchema\Comments\Module as CommentsModule;
+use PoPCMSSchema\CommentMeta\Module as CommentMetaModule;
 use PoPCMSSchema\Comments\Environment as CommentsEnvironment;
-use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
+use PoPCMSSchema\Comments\Module as CommentsModule;
 use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
-use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
-use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsModule;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
-use PoPCMSSchema\Media\Module as MediaModule;
+use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsModule;
 use PoPCMSSchema\Media\Environment as MediaEnvironment;
-use PoPCMSSchema\Menus\Module as MenusModule;
+use PoPCMSSchema\Media\Module as MediaModule;
 use PoPCMSSchema\Menus\Environment as MenusEnvironment;
-use PoPCMSSchema\Pages\Module as PagesModule;
+use PoPCMSSchema\Menus\Module as MenusModule;
 use PoPCMSSchema\Pages\Environment as PagesEnvironment;
-use PoPCMSSchema\Posts\Module as PostsModule;
+use PoPCMSSchema\Pages\Module as PagesModule;
 use PoPCMSSchema\Posts\Environment as PostsEnvironment;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoPCMSSchema\Settings\Module as SettingsModule;
+use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Settings\Environment as SettingsEnvironment;
-use PoPCMSSchema\Tags\Module as TagsModule;
+use PoPCMSSchema\Settings\Module as SettingsModule;
 use PoPCMSSchema\Tags\Environment as TagsEnvironment;
-use PoPCMSSchema\TaxonomyMeta\Module as TaxonomyMetaModule;
+use PoPCMSSchema\Tags\Module as TagsModule;
 use PoPCMSSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
-use PoPCMSSchema\UserRoles\Module as UserRolesModule;
-use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
-use PoPCMSSchema\UserMeta\Module as UserMetaModule;
-use PoPCMSSchema\UserAvatars\Module as UserAvatarsModule;
+use PoPCMSSchema\TaxonomyMeta\Module as TaxonomyMetaModule;
 use PoPCMSSchema\UserAvatars\Environment as UserAvatarsEnvironment;
+use PoPCMSSchema\UserAvatars\Module as UserAvatarsModule;
 use PoPCMSSchema\UserMeta\Environment as UserMetaEnvironment;
-use PoPCMSSchema\Users\Module as UsersModule;
+use PoPCMSSchema\UserMeta\Module as UserMetaModule;
+use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
+use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
+use PoPCMSSchema\Users\Module as UsersModule;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -83,6 +84,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
+     *
+     * @return array<mixed[]>
      */
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
@@ -506,6 +509,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * Define the values for certain environment constants from the plugin settings
+     * @return array<int,array{"class": class-string<ModuleInterface>, envVariable: string, callback: callable}>
      */
     protected function getEnvironmentConstantsFromCallbacksMapping(): array
     {
@@ -525,6 +529,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
 
     /**
      * All the environment variables to override
+     * @return array<int,array{class: class-string<ModuleInterface>, envVariable: string}>
      */
     protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
@@ -571,7 +576,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Module class, [value]: Configuration
+     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected function getPredefinedModuleClassConfiguration(): array
     {
@@ -605,8 +610,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class] = [
             // Expose the "self" field when doing Low Level Query Editing
             GraphQLServerEnvironment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA => $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING),
-            // Do not send proactive deprecations
-            GraphQLServerEnvironment::ENABLE_PROACTIVE_FEEDBACK => false,
         ];
         $moduleClassConfiguration[\PoPAPI\API\Module::class] = [
             // Do not expose global fields
@@ -653,6 +656,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         return !$value;
     }
 
+    /**
+     * @return array<mixed[]>
+     */
     protected function getModuleToModuleClassConfigurationMapping(): array
     {
         return [

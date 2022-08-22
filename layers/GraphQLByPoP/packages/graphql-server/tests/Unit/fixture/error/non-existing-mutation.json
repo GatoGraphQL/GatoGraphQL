@@ -9,13 +9,14 @@
                 }
             ],
             "extensions": {
-                "type": "MutationRoot",
-                "field": "nonExisting",
                 "path": [
                     "nonExisting",
                     "mutation { ... }"
                 ],
-                "code": "PoP/ComponentModel@e16"
+                "type": "MutationRoot",
+                "field": "nonExisting",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         }
     ],

@@ -5,6 +5,9 @@ class GD_Custom_EM_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
 {
     public final const COMPONENT_WIDGET_FORM_LOCATIONPOSTDETAILS = 'widget-form-locationpostdetails';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

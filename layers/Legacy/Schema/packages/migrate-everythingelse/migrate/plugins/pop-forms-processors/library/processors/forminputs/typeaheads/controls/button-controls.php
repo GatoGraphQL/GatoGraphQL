@@ -4,6 +4,9 @@ class PoP_Module_Processor_TypeaheadButtonControls extends PoP_Module_Processor_
 {
     public final const COMPONENT_BUTTONCONTROL_TYPEAHEADSEARCH = 'buttoncontrol-typeaheadsearch';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

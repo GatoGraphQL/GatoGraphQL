@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
@@ -49,6 +51,10 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<DirectiveResolverInterface> $succeedingPipelineDirectiveResolvers
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string,mixed> $messages
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -72,6 +78,9 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     {
         return $this->__('Include the field value in the output only if the argument \'if\' evals to `false`', 'engine');
     }
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return array_merge(

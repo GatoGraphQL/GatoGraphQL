@@ -4,6 +4,9 @@ class PoP_Module_Processor_MapStaticImageURLParams extends PoP_Module_Processor_
 {
     public final const COMPONENT_MAP_STATICIMAGE_URLPARAM = 'em-map-staticimage-urlparam';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

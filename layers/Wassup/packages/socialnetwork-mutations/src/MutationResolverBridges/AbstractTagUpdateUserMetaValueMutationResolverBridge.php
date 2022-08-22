@@ -8,7 +8,7 @@ use PoPCMSSchema\Tags\Constants\InputNames;
 
 abstract class AbstractTagUpdateUserMetaValueMutationResolverBridge extends AbstractUpdateUserMetaValueMutationResolverBridge
 {
-    protected function getRequestKey()
+    protected function getRequestKey(): string
     {
         return InputNames::TAG_ID;
     }

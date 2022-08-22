@@ -5,6 +5,9 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
     public final const COMPONENT_WIDGETWRAPPER_POSTCOMMENTS = 'widgetwrapper-postcomments';
     public final const COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT = 'widgetwrapper-postcomments-appendtoscript';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

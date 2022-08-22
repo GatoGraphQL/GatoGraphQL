@@ -9,14 +9,14 @@ use PoP\Definitions\DefinitionResolverInterface;
 class DefinitionResolver implements DefinitionResolverInterface
 {
     /**
-     * @var array<string, int>
+     * @var array<string,int>
      */
     private array $definition_counters = [];
 
     /**
      * Allow Persistent Definitions to set a different value
      *
-     * @param array<string, mixed> $persisted_data
+     * @param array<string,mixed> $persisted_data
      */
     public function setPersistedData(array $persisted_data): void
     {
@@ -26,7 +26,7 @@ class DefinitionResolver implements DefinitionResolverInterface
         }
     }
     /**
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function getDataToPersist(): array
     {

@@ -199,12 +199,18 @@ class Engine implements EngineInterface
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getOutputData(): array
     {
         $engineState = App::getEngineState();
         return $engineState->outputData;
     }
 
+    /**
+     * @param string[] $targets
+     */
     public function addBackgroundUrl(string $url, array $targets): void
     {
         $engineState = App::getEngineState();
@@ -294,6 +300,9 @@ class Engine implements EngineInterface
         return hash('md5', $commoncode);
     }
 
+    /**
+     * @return string[]
+     */
     public function getExtraRoutes(): array
     {
         $engineState = App::getEngineState();
@@ -323,6 +332,9 @@ class Engine implements EngineInterface
         return $engineState->extra_routes;
     }
 
+    /**
+     * @return array{0: bool, 1: ?string, 2: ?string}
+     */
     public function listExtraRouteVars(): array
     {
         $model_instance_id = $current_uri = null;
@@ -452,7 +464,12 @@ class Engine implements EngineInterface
         $engineState->outputData = $this->getEncodedDataObject($engineState->data);
     }
 
-    // Allow PoPWebPlatform_Engine to override this function
+    /**
+     * Allow PoPWebPlatform_Engine to override this function
+     *
+     * @return array<string,mixed>
+     * @param array<string,mixed> $data
+     */
     protected function getEncodedDataObject(array $data): array
     {
         // Comment Leo 14/09/2018: Re-enable here:
@@ -462,6 +479,9 @@ class Engine implements EngineInterface
         return $data;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getModelPropsComponentTree(Component $component): array
     {
         /** @var ModuleConfiguration */
@@ -491,6 +511,10 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $props
+     */
     public function addRequestPropsComponentTree(Component $component, array $props): array
     {
         $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
@@ -656,7 +680,12 @@ class Engine implements EngineInterface
         }
     }
 
-    public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $model_props
+     * @param array<string,mixed> $props
+     */
+    public function getComponentDatasetSettings(Component $component, array $model_props, array &$props): array
     {
         $ret = [];
         /** @var ModuleConfiguration */
@@ -703,6 +732,9 @@ class Engine implements EngineInterface
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getRequestMeta(): array
     {
         /** @var ModuleInfo */
@@ -743,6 +775,9 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSessionMeta(): array
     {
         return App::applyFilters(
@@ -758,6 +793,9 @@ class Engine implements EngineInterface
     {
         return true;
     }
+    /**
+     * @return array<string,mixed>
+     */
     public function getSiteMeta(): array
     {
         $meta = [];
@@ -888,6 +926,7 @@ class Engine implements EngineInterface
     /**
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataItems
+     * @param array<string|int,object> $idObjects
      */
     private function addDatasetToDatabase(
         array &$database,
@@ -946,6 +985,10 @@ class Engine implements EngineInterface
         $this->doAddDatasetToDatabase($database, $typeOutputKey, $dataItems);
     }
 
+    /**
+     * @return mixed[]
+     * @param array<string,mixed> $props
+     */
     protected function getInterreferencedComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
@@ -953,6 +996,11 @@ class Engine implements EngineInterface
         return $paths;
     }
 
+    /**
+     * @param array<string,mixed> $paths
+     * @param Component[] $component_path
+     * @param array<string,mixed> $props
+     */
     private function addInterreferencedComponentFullPaths(
         array &$paths,
         array $component_path,
@@ -998,6 +1046,7 @@ class Engine implements EngineInterface
 
     /**
      * @return array<Component[]>
+     * @param array<string,mixed> $props
      */
     protected function getDataloadingComponentFullPaths(Component $component, array &$props): array
     {
@@ -1009,6 +1058,7 @@ class Engine implements EngineInterface
     /**
      * @param array<Component[]> $paths
      * @param Component[] $component_path
+     * @param array<string,mixed> $props
      */
     private function addDataloadingComponentFullPaths(
         array &$paths,
@@ -1051,6 +1101,10 @@ class Engine implements EngineInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
+    /**
+     * @param mixed[] $array
+     * @param Component[] $component_path
+     */
     protected function assignValueForComponent(
         array &$array,
         array $component_path,
@@ -1098,13 +1152,21 @@ class Engine implements EngineInterface
         return null;
     }
 
+    /**
+     * @param Component[] $component_path
+     */
     protected function getComponentPathKey(array $component_path, Component $component): string
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
-        return $componentFullName . '-' . implode('.', $component_path);
+        return $componentFullName . '-' . implode('.', array_map(fn (Component $component) => $component->asString(), $component_path));
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
+    /**
+     * @return array<string,mixed[]>
+     * @param array<string,mixed> $root_model_props
+     * @param array<string,mixed> $root_props
+     */
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
@@ -1561,7 +1623,7 @@ class Engine implements EngineInterface
      * Place all entries under dbName "primary"
      *
      * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
-     * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
+     * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<mixed,array<int|string,SplObjectStorage<FieldInterface,mixed>>>
      */
     protected function getEntriesUnderPrimaryDBName(
         array|SplObjectStorage $entries,
@@ -1635,6 +1697,11 @@ class Engine implements EngineInterface
         return $dbname_entries;
     }
 
+    /**
+     * @return array<string,mixed>
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     */
     protected function generateDatabases(
         array &$schemaFeedbackEntries,
         array &$objectFeedbackEntries,
@@ -1832,6 +1899,9 @@ class Engine implements EngineInterface
     /**
      * Add the feedback (errors, warnings, deprecations, notices, etc)
      * into the output.
+     * @param array<string,mixed> $data
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
      */
     protected function combineAndAddFeedbackEntries(
         array &$data,
@@ -1951,6 +2021,11 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     */
     private function transferFeedback(
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -1968,6 +2043,10 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @param array<string|int,object> $idObjects
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     */
     private function transferObjectFeedback(
         array $idObjects,
         ObjectResolutionFeedbackStore $objectResolutionFeedbackStore,
@@ -2148,6 +2227,9 @@ class Engine implements EngineInterface
         $iterationObjectFeedbackEntries[$relationalTypeResolver] = $objectFeedbackEntries;
     }
 
+    /**
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     */
     private function transferSchemaFeedback(
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
@@ -2231,11 +2313,15 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationSchemaFeedbackEntries
+     */
     private function transferSchemaFeedbackEntries(
         SchemaFeedbackInterface $schemaFeedback,
         SplObjectStorage $iterationSchemaFeedbackEntries
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackCommonEntry($schemaFeedback);
+        /** @var SplObjectStorage<FieldInterface,mixed> */
         $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         foreach ($schemaFeedback->getFields() as $field) {
             $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$field] ?? [];
@@ -2431,6 +2517,9 @@ class Engine implements EngineInterface
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
      * @param array<string|int,object> $idObjects
+     * @param array<string|int> $typeResolverIDs
+     * @param array<string,array<string|int,FieldInterface[]>> $already_loaded_id_fields
+     * @param SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> $subcomponents_data_properties
      */
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -2447,16 +2536,29 @@ class Engine implements EngineInterface
     ): void {
         $engineState = App::getEngineState();
         $targetTypeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();
+        /** @var ComponentFieldNodeInterface $componentFieldNode */
         foreach ($subcomponents_data_properties as $componentFieldNode) {
-            /** @var ComponentFieldNodeInterface $componentFieldNode */
+            /** @var array<string,mixed> */
             $subcomponent_data_properties = $subcomponents_data_properties[$componentFieldNode];
             $field = $componentFieldNode->getField();
-            /** @var array<string,mixed> $subcomponent_data_properties */
-            // Retrieve the subcomponent typeResolver from the current typeResolver
-            // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
-            // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionTypeOutputKeyIDs"
-            // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionTypeOutputKeyIDs".
-            // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
+            /**
+             * Retrieve the subcomponent typeResolver from the current typeResolver.
+             *
+             * Watch out! When dealing with the UnionDataLoader, we attempt to get
+             * the subcomponentType for that field twice: first from the UnionTypeResolver
+             * and, if it doesn't handle it, only then from the TargetTypeResolver.
+             *
+             * This is for the very specific use of the "self" field:
+             * When referencing "self" from a UnionTypeResolver, we don't know what type
+             * it's going to be the result, hence we need to add the type
+             * to entry "unionTypeOutputKeyIDs".
+             *
+             * However, for the targetObjectTypeResolver, "self" is processed by itself,
+             * not by a UnionTypeResolver, hence it would never add the type under
+             * entry "unionTypeOutputKeyIDs".
+             *
+             * The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
+             */
             $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
                 $relationalTypeResolver,
                 $field,
@@ -2486,6 +2588,7 @@ class Engine implements EngineInterface
             if ($subcomponent_direct_fields || $subcomponent_conditional_fields_storage->count() > 0) {
                 $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
+                /** @var array<string|int,FieldInterface[]> */
                 $subcomponent_already_loaded_id_fields = [];
                 if ($already_loaded_id_fields && ($already_loaded_id_fields[$subcomponentTypeOutputKey] ?? null)) {
                     $subcomponent_already_loaded_id_fields = $already_loaded_id_fields[$subcomponentTypeOutputKey];
@@ -2655,6 +2758,7 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>> $entries
+     * @param array<string,mixed> $ret
      */
     protected function maybeCombineAndAddObjectOrSchemaEntries(array &$ret, string $name, array $entries): void
     {
@@ -2699,15 +2803,22 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param Component[] $component_path
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $data_properties
+     * @param array<string|int> $objectIDs
+     * @param array<string,mixed>|null $executed
+     */
     protected function processAndAddComponentData(
         array $component_path,
         Component $component,
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,
-        $mutation_checkpoint_validation,
-        $executed,
-        $objectIDs
+        ?FeedbackItemResolution $mutation_checkpoint_validation,
+        ?array $executed,
+        array $objectIDs
     ): void {
         $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $engineState = App::getEngineState();
@@ -2737,6 +2848,9 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string,array<string,array<string,mixed>>> $dbdata
+     */
     private function initializeTypeResolverEntry(
         array &$dbdata,
         string $relationalTypeOutputKey,
@@ -2751,6 +2865,10 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string,array<string,array<string,mixed>>> $dbdata
+     * @param array<string,mixed> $data_properties
+     */
     private function integrateSubcomponentDataProperties(
         array &$dbdata,
         array $data_properties,

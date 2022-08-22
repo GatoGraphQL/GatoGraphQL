@@ -25,6 +25,9 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
         return TypeKinds::UNION;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = parent::getSchemaDefinition();
@@ -36,6 +39,9 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
         return $schemaDefinition;
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addPossibleTypeSchemaDefinitions(array &$schemaDefinition): void
     {
         // Iterate through the typeResolvers from all the pickers and get their schema definitions
@@ -52,6 +58,9 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
         }
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
         /** @var ModuleConfiguration */
@@ -77,6 +86,9 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
         }
     }
 
+    /**
+     * @param array<string,mixed> $schemaDefinition
+     */
     final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         // Add the directives (non-global)

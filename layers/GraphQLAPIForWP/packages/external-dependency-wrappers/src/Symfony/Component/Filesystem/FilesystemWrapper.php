@@ -27,7 +27,7 @@ class FilesystemWrapper
     /**
      * Removes files or directories.
      *
-     * @param string|iterable $files A filename, an array of files, or a \Traversable instance to remove
+     * @param string|iterable<mixed> $files A filename, an array of files, or a \Traversable instance to remove
      *
      * @throws IOException When removal fails
      */

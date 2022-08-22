@@ -39,7 +39,7 @@ class TagHelpers
         return $value;
     }
 
-    public static function getTagNameDescription($tag)
+    public static function getTagNameDescription(string $tag): string
     {
         $cmstaxonomiesresolver = PostTagTypeAPIFacade::getInstance();
         $value = $cmstaxonomiesresolver->getTagName($tag);

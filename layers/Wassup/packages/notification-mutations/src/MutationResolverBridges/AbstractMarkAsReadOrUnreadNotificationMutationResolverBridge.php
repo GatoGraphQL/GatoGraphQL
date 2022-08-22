@@ -18,7 +18,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge exte
         $mutationData['user_id'] = App::getState('current-user-id');
     }
 
-    protected function getRequestKey()
+    protected function getRequestKey(): string
     {
         return 'nid';
     }

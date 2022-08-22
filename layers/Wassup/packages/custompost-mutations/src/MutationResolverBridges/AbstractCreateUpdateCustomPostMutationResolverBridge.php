@@ -6,7 +6,6 @@ namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
 use GD_CreateUpdate_Utils;
 use GD_Custom_Module_Processor_SelectFormInputs;
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationResolverBridge;
 use PoP\EditPosts\HelperAPIFactory;
@@ -41,6 +40,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
+    /**
+     * @param array<string,mixed> $data_properties
+     */
     protected function modifyDataProperties(array &$data_properties, string|int $result_id): void
     {
         parent::modifyDataProperties($data_properties, $result_id);
@@ -131,7 +133,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         );
     }
 
-    protected function getEditorInput()
+    /**
+     * @return mixed[]
+     */
+    protected function getEditorInput(): array
     {
         return [PoP_Module_Processor_EditorFormInputs::class, PoP_Module_Processor_EditorFormInputs::COMPONENT_FORMINPUT_EDITOR];
     }
@@ -154,12 +159,12 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return array();
     }
 
-    protected function showCategories()
+    protected function showCategories(): bool
     {
         return false;
     }
 
-    protected function canInputMultipleCategories()
+    protected function canInputMultipleCategories(): bool
     {
         return false;
         // return \PoP\Root\App::applyFilters(
@@ -168,7 +173,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         // );
     }
 
-    protected function getCategoriesComponent(): ?Component
+    protected function getCategoriesComponent(): ?array
     {
         if ($this->showCategories()) {
             if ($this->canInputMultipleCategories()) {
@@ -199,22 +204,25 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         return App::applyFilters('gd-createupdate-post:execute:successstring', $success_string, $result_id, $status);
     }
 
-    protected function getFeaturedimageComponent()
+    /**
+     * @return mixed[]
+     */
+    protected function getFeaturedimageComponent(): array
     {
         return [PoP_Module_Processor_FeaturedImageFormComponents::class, PoP_Module_Processor_FeaturedImageFormComponents::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE];
     }
 
-    protected function addReferences()
+    protected function addReferences(): bool
     {
         return true;
     }
 
-    protected function volunteer()
+    protected function volunteer(): bool
     {
         return false;
     }
 
-    protected function supportsTitle()
+    protected function supportsTitle(): bool
     {
         // Not all post types support a title
         return true;

@@ -75,6 +75,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
@@ -89,6 +92,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $moduleConfiguration->addFullSchemaFieldToSchema();
     }
 
+    /**
+     * @return string[]
+     */
     public function getFieldNamesToResolve(): array
     {
         return [

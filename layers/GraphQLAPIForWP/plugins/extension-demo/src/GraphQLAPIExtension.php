@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ExtensionDemo;
 
+use PoP\Root\Module\ModuleInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtension;
 
 class GraphQLAPIExtension extends AbstractExtension
@@ -16,7 +17,7 @@ class GraphQLAPIExtension extends AbstractExtension
     /**
      * Add Module classes to be initialized
      *
-     * @return string[] List of `Module` class to initialize
+     * @return array<class-string<ModuleInterface>> List of `Module` class to initialize
      */
     public function getModuleClassesToInitialize(): array
     {

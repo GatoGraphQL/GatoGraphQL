@@ -8,6 +8,9 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
     public final const COMPONENT_BLOCK_STANCE_CREATEORUPDATE = 'block-stance-createorupdate';
     public final const COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE = 'block-singlepoststance-createorupdate';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

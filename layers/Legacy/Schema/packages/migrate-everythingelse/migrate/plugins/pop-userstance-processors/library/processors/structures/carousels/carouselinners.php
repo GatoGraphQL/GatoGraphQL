@@ -6,6 +6,9 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
     public final const COMPONENT_CAROUSELINNER_AUTHORSTANCES = 'carouselinner-authorstances';
     public final const COMPONENT_CAROUSELINNER_TAGSTANCES = 'carouselinner-tagstances';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -22,6 +22,9 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
     ) {
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getSchemaDefinition(): array
     {
         $schemaDefinition = $this->directiveResolver->getDirectiveSchemaDefinition($this->relationalTypeResolver);

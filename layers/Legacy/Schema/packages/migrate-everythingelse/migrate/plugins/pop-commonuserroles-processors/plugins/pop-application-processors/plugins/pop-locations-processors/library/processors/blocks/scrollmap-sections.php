@@ -5,6 +5,9 @@ class GD_URE_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_
     public final const COMPONENT_BLOCK_ORGANIZATIONS_SCROLLMAP = 'block-organizations-scrollmap';
     public final const COMPONENT_BLOCK_INDIVIDUALS_SCROLLMAP = 'block-individuals-scrollmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

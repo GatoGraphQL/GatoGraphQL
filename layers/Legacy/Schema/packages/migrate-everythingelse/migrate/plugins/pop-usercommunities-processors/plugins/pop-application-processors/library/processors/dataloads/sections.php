@@ -20,6 +20,9 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     public final const COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'dataload-authormembers-scroll-list';
     public final const COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'dataload-authormembers-carousel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

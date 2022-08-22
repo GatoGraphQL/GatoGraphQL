@@ -6,6 +6,9 @@ class UserStance_Module_Processor_CustomControlButtonGroups extends PoP_Module_P
     public final const COMPONENT_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE = 'controlbuttongroup-stancestats-article';
     public final const COMPONENT_CONTROLBUTTONGROUP_STANCESTATS = 'controlbuttongroup-stancestats';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -10,6 +10,9 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     public final const COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION = 'dataload-author-sidebar-organization';
     public final const COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL = 'dataload-author-sidebar-individual';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
@@ -57,7 +60,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

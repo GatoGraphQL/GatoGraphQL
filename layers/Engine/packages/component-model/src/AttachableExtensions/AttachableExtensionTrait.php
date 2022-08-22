@@ -14,6 +14,8 @@ trait AttachableExtensionTrait
 
     /**
      * It is represented through a static class, because the extensions work at class level, not object level
+     *
+     * @return string[]
      */
     abstract public function getClassesToAttachTo(): array;
 

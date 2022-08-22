@@ -4,6 +4,9 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
 {
     public final const COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS = 'layout-previewuser-editmembers';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

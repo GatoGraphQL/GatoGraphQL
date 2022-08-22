@@ -4,6 +4,9 @@ class Wassup_URE_AAL_Module_Processor_MultiMembership extends PoP_Module_Process
 {
     public final const COMPONENT_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP = 'ure-aal-multicomponent-layoutuser-membership';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

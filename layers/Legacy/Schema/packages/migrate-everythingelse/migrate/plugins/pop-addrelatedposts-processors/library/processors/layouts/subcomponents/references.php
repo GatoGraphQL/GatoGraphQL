@@ -6,6 +6,9 @@ class PoP_Module_Processor_ReferencesLayouts extends PoP_Module_Processor_Refere
     public final const COMPONENT_LAYOUT_REFERENCES_RELATED = 'layout-references-related';
     public final const COMPONENT_LAYOUT_REFERENCES_ADDONS = 'layout-references-addons';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

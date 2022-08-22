@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\SchemaCommons\Overrides\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -51,6 +52,9 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
         return $this->relationEnumTypeResolver ??= $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
@@ -94,7 +98,7 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
      *
      * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
      *
-     * @param array<string, mixed> $query
+     * @param array<string,mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void

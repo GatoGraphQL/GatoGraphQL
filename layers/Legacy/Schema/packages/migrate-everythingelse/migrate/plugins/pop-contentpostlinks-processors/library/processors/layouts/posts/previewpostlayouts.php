@@ -11,6 +11,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
     public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED = 'layout-previewpost-contentpostlink-related';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT = 'layout-previewpost-contentpostlink-edit';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

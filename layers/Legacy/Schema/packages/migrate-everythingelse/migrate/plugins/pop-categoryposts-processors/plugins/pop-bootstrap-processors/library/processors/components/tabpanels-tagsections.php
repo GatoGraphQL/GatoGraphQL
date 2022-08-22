@@ -23,6 +23,9 @@ class CPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
     public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS18 = 'tabpanel-tagcategoryposts18';
     public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS19 = 'tabpanel-tagcategoryposts19';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -35,7 +35,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         return new ExecutableDocument($document, $context);
     }
 
-    public function testGetVariableFromContext()
+    public function testGetVariableFromContext(): void
     {
         $parser = $this->getParser();
 
@@ -56,7 +56,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testGetVariableDefaultValue()
+    public function testGetVariableDefaultValue(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('
@@ -73,7 +73,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testRequestDefinedOperation()
+    public function testRequestDefinedOperation(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('
@@ -90,7 +90,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testRequestOneOfDefinedOperation()
+    public function testRequestOneOfDefinedOperation(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('
@@ -114,7 +114,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testNonUniqueOperation()
+    public function testNonUniqueOperation(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_B))->getMessage());
@@ -140,7 +140,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testNotRequiredVariableValue()
+    public function testNotRequiredVariableValue(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('
@@ -157,7 +157,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testMissingRequiredVariableValue()
+    public function testMissingRequiredVariableValue(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_5, ['format']))->getMessage());
@@ -175,7 +175,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument->validateAndInitialize();
     }
 
-    public function testNonRequiredVariableValueForDirective()
+    public function testNonRequiredVariableValueForDirective(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('
@@ -192,7 +192,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->assertTrue(true);
     }
 
-    public function testMissingRequiredVariableValueForDirective()
+    public function testMissingRequiredVariableValueForDirective(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_5, ['includeUsers']))->getMessage());
@@ -210,7 +210,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument->validateAndInitialize();
     }
 
-    public function testOperationDoesNotExist()
+    public function testOperationDoesNotExist(): void
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_A, ['AnotherOp']))->getMessage());
@@ -228,7 +228,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument->validateAndInitialize();
     }
 
-    public function testNonInitializedRequest()
+    public function testNonInitializedRequest(): void
     {
         $this->expectException(ShouldNotHappenException::class);
         $this->expectExceptionMessage(sprintf(
@@ -242,7 +242,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument->getRequestedOperations();
     }
 
-    public function testRequestedOperationsMatchOperations()
+    public function testRequestedOperationsMatchOperations(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('{ film(id: 1 filmID: 2) { title } }');
@@ -264,7 +264,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         );
     }
 
-    public function testRequestedOperation()
+    public function testRequestedOperation(): void
     {
         $parser = $this->getParser();
         $document = $parser->parse('

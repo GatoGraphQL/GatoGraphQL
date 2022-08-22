@@ -5,6 +5,9 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
 {
     public final const COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY = 'forminput-locationcountry';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

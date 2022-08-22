@@ -10,6 +10,9 @@ class GD_EM_Module_Processor_CreateLocationFormGroups extends PoP_Module_Process
     public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONREGION = 'forminputgroup-location_region';
     public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONCOUNTRY = 'forminputgroup-location_country';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

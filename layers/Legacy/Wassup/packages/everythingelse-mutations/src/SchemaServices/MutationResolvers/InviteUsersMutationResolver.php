@@ -14,7 +14,7 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 {
-    protected function getEmailContent(FieldDataAccessorInterface $fieldDataAccessor)
+    protected function getEmailContent(FieldDataAccessorInterface $fieldDataAccessor): string
     {
         $website_html = PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();

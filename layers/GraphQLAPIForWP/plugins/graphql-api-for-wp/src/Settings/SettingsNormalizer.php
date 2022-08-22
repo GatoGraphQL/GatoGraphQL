@@ -29,8 +29,8 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      * - If the input is empty, replace with the default
      * - Convert from string to int/bool
      *
-     * @param array<string, string> $values All values submitted, each under its optionName as key
-     * @return array<string, mixed> Normalized values
+     * @param array<string,string> $values All values submitted, each under its optionName as key
+     * @return array<string,mixed> Normalized values
      */
     public function normalizeSettings(array $values): array
     {
@@ -99,8 +99,8 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      * - If the input is empty, replace with the default
      * - Convert from string to int/bool
      *
-     * @param array<string, string> $values All values submitted, each under its optionName as key
-     * @return array<string, mixed> Normalized values
+     * @param array<string,string> $values All values submitted, each under its optionName as key
+     * @return array<string,mixed> Normalized values
      */
     public function normalizeModuleSettings(string $module, array $values): array
     {
@@ -127,7 +127,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
     /**
      * Return all the modules with settings
      *
-     * @return array<array> Each item is an array of prop => value
+     * @return array<array<string,mixed>> Each item is an array of prop => value
      */
     public function getAllSettingsItems(): array
     {

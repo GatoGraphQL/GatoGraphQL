@@ -10,6 +10,10 @@ abstract class AbstractNamedType extends AbstractSchemaDefinitionReferenceObject
 {
     protected NamedTypeExtensions $namedTypeExtensions;
 
+    /**
+     * @param array<string,mixed> $fullSchemaDefinition
+     * @param string[] $schemaDefinitionPath
+     */
     public function __construct(array &$fullSchemaDefinition, array $schemaDefinitionPath)
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);

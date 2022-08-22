@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
-use PoP\Root\App;
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class VarsHookSet extends AbstractHookSet
@@ -18,13 +20,19 @@ class VarsHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return string[]
+     * @param string[] $elements
+     */
     public function getModelInstanceElementsFromAppState(array $elements): array
     {
         $elements[] = $this->__('edit schema:', 'graphql-server') . App::getState('edit-schema');
         if ($graphQLOperationType = App::getState('graphql-operation-type')) {
             $elements[] = $this->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
         }
-        $elements[] = $this->__('enable nested mutations:', 'graphql-server') . App::getState('nested-mutations-enabled');
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $elements[] = $this->__('enable nested mutations:', 'graphql-server') . $moduleConfiguration->enableNestedMutations();
         $elements[] = $this->__('enable GraphQL introspection:', 'graphql-server') . App::getState('graphql-introspection-enabled');
 
         return $elements;

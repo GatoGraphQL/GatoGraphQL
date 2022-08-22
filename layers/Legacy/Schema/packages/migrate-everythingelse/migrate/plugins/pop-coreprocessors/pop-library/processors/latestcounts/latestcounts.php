@@ -9,6 +9,9 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
     public final const COMPONENT_LATESTCOUNT_AUTHOR_CONTENT = 'latestcount-author-content';
     public final const COMPONENT_LATESTCOUNT_SINGLE_CONTENT = 'latestcount-single-content';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

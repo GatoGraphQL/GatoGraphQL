@@ -9,6 +9,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class MutationResolverUtils
 {
+    /**
+     * @param string[] $errors
+     */
     public static function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         if (empty($fieldDataAccessor->getValue('content'))) {

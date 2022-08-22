@@ -15,6 +15,9 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public final const COMPONENT_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR = 'multiple-authorpastevents-sidebar';
     public final const COMPONENT_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR = 'multiple-authoreventscalendar-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

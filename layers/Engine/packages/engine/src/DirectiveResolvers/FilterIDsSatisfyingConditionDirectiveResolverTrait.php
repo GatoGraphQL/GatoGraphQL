@@ -18,6 +18,8 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string|int>
+     * @param array<string|int,object> $idObjects
+     * @param array<string,mixed> $messages
      */
     protected function getIDsSatisfyingCondition(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -38,8 +40,10 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int> $idsToRemove
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
-    protected function removeFieldSetForIDs(array $idFieldSet, array &$idsToRemove, array &$succeedingPipelineIDFieldSet)
+    protected function removeFieldSetForIDs(array $idFieldSet, array $idsToRemove, array &$succeedingPipelineIDFieldSet): void
     {
         // Calculate the $idFieldSet that must be removed from all the upcoming stages of the pipeline
         $idFieldSetToRemove = array_filter(

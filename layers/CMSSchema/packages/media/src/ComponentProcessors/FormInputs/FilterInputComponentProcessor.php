@@ -38,6 +38,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->mimeTypesFilterInput ??= $this->instanceManager->getInstance(MimeTypesFilterInput::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

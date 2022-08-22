@@ -13,7 +13,7 @@ class SchemaNamespacingService implements SchemaNamespacingServiceInterface
      */
     protected array $classOwnerAndProjectNamespaceSchemaNamespaces = [];
 
-    public function addSchemaNamespaceForClassOwnerAndProjectNamespace(string $classOwnerAndProjectNamespace, $schemaNamespace): void
+    public function addSchemaNamespaceForClassOwnerAndProjectNamespace(string $classOwnerAndProjectNamespace, string $schemaNamespace): void
     {
         $this->classOwnerAndProjectNamespaceSchemaNamespaces[$classOwnerAndProjectNamespace] = $schemaNamespace;
     }

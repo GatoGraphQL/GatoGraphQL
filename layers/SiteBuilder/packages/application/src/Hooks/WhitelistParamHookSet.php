@@ -19,6 +19,10 @@ class WhitelistParamHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * @return string[]
+     * @param string[] $params
+     */
     public function getWhitelistedParams(array $params): array
     {
         $params[] = Response::REDIRECT_TO;

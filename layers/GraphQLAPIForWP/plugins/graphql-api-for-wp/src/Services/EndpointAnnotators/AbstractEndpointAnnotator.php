@@ -26,7 +26,7 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
 
     /**
      * Add actions to the CPT list
-     * @param array<string, string> $actions
+     * @param array<string,string> $actions
      */
     public function addCustomPostTypeTableActions(array &$actions, WP_Post $post): void
     {

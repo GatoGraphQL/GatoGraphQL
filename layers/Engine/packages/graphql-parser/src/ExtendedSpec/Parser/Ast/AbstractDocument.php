@@ -448,7 +448,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 if (!(is_array($listValue) || $listValue instanceof ObjectResolvedFieldValueReference || $listValue instanceof WithValueInterface)) {
                     continue;
                 }
-                /** @var WithValueInterface|array $listValue */
+                /** @var WithValueInterface|mixed[] $listValue */
                 $objectResolvedFieldValueReferences = array_merge(
                     $objectResolvedFieldValueReferences,
                     $this->getObjectResolvedFieldValueReferencesInArgumentValue($listValue)
@@ -466,7 +466,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 $objectResolvedFieldValueReferences[] = $listValue;
                 continue;
             }
-            /** @var WithValueInterface|array $listValue */
+            /** @var WithValueInterface|mixed[] $listValue */
             $objectResolvedFieldValueReferences = array_merge(
                 $objectResolvedFieldValueReferences,
                 $this->getObjectResolvedFieldValueReferencesInArgumentValue($listValue)

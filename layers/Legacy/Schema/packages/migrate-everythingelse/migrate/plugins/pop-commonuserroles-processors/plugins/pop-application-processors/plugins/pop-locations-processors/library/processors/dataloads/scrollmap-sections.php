@@ -7,6 +7,9 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
     public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLLMAP = 'dataload-organizations-scrollmap';
     public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP = 'dataload-individuals-scrollmap';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

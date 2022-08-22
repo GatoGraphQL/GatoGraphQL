@@ -12,6 +12,9 @@ class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT = 'layout-postsidebarcompact-horizontal-highlight';
     public final const COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST = 'layout-postsidebarcompact-horizontal-post';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

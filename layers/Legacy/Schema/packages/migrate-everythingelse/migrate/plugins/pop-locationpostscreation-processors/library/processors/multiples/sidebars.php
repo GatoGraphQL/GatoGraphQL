@@ -4,6 +4,9 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
 {
     public final const COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR = 'multiple-section-mylocationposts-sidebar';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

@@ -4,6 +4,9 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
 {
     public final const COMPONENT_FORMINNER_LOCATIONPOST = 'forminner-locationpost';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

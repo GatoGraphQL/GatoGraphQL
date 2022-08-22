@@ -29,10 +29,12 @@ class Document implements DocumentInterface
      */
     protected ?SplObjectStorage $astNodeAncestors = null;
 
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     */
     public function __construct(
-        /** @var OperationInterface[] */
         protected readonly array $operations,
-        /** @var Fragment[] */
         protected array $fragments = [],
     ) {
     }
@@ -545,7 +547,7 @@ class Document implements DocumentInterface
                 if (!(is_array($listValue) || $listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
                     continue;
                 }
-                /** @var WithValueInterface|array $listValue */
+                /** @var WithValueInterface|mixed[] $listValue */
                 $variableReferences = array_merge(
                     $variableReferences,
                     $this->getVariableReferencesInArgumentValue($listValue)
@@ -563,7 +565,7 @@ class Document implements DocumentInterface
                 $variableReferences[] = $listValue;
                 continue;
             }
-            /** @var WithValueInterface|array $listValue */
+            /** @var WithValueInterface|mixed[] $listValue */
             $variableReferences = array_merge(
                 $variableReferences,
                 $this->getVariableReferencesInArgumentValue($listValue)

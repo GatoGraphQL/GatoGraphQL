@@ -17,6 +17,9 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     public final const COMPONENT_DATALOAD_SINGLEINTERACTION_CONTENT = 'dataload-singleinteraction-content';
     public final const COMPONENT_DATALOAD_PAGE_CONTENT = 'dataload-page-content';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
@@ -125,7 +128,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
             case self::COMPONENT_DATALOAD_TAG_CONTENT:
             case self::COMPONENT_DATALOAD_AUTHOR_CONTENT:
             case self::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT:
-                return $this->getQueriedDBObjectID($component, $props, $data_properties);
+                return $this->getQueriedDBObjectID();
         }
 
         return parent::getObjectIDOrIDs($component, $props, $data_properties);

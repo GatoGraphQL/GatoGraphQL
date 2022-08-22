@@ -12,6 +12,9 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
     public final const COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES = 'layout-previewuser-community-communities';
     public final const COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR = 'layout-previewuser-community-postauthor';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

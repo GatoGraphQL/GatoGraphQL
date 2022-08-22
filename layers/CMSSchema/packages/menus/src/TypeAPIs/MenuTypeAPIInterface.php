@@ -19,14 +19,14 @@ interface MenuTypeAPIInterface
     public function getMenuID(object $menu): string|int;
     public function getMenuIDFromMenuName(string $menuName): string|int|null;
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      * @return array<string|int|object>
      */
     public function getMenus(array $query, array $options = []): array;
     /**
-     * @param array<string, mixed> $query
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
      */
     public function getMenuCount(array $query, array $options = []): int;
 }

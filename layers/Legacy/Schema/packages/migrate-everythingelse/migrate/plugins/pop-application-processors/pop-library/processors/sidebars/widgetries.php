@@ -17,6 +17,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     public final const COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'widget-referencedby-appendtoscript-simpleview';
     public final const COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'widget-referencedby-appendtoscript-fullview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

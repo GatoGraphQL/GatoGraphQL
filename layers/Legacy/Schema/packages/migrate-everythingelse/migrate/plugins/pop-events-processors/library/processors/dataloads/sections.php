@@ -59,6 +59,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     public final const COMPONENT_DATALOAD_AUTHOREVENTS_CAROUSEL = 'dataload-authorevents-carousel';
     public final const COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL = 'dataload-tagevents-carousel';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

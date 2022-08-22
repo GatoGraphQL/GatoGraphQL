@@ -30,12 +30,18 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
         return $this->getGraphQLEndpointExecuter()->isServiceEnabled();
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function initialize(array &$state): void
     {
         $state['scheme'] = APISchemes::API;
         $state['datastructure'] = $this->getGraphQLDataStructureFormatter()->getName();
     }
 
+    /**
+     * @param array<string,mixed> $state
+     */
     public function consolidate(array &$state): void
     {
         /**

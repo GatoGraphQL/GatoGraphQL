@@ -7,6 +7,9 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
     public final const COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD = 'dataload-locations-typeahead';
     public final const COMPONENT_DATALOAD_LOCATIONS_SCROLL = 'dataload-locations-scroll';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

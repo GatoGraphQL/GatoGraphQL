@@ -36,7 +36,10 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
         return '<=';
     }
 
-    public function prepareQueryArgs(&$query_args)
+    /**
+     * @param array<string,mixed> $query_args
+     */
+    public function prepareQueryArgs(array &$query_args): void
     {
         parent::prepareQueryArgs($query_args);
 
@@ -44,7 +47,7 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
         $query_args['hist_time_compare'] = $this->getHistTimeCompare($query_args);
     }
 
-    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
+    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 

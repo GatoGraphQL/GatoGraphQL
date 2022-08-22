@@ -4,6 +4,9 @@ class PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayouts extends 
 {
     public final const COMPONENT_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'postbutton-stance-createorupdate-appendtoscript';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

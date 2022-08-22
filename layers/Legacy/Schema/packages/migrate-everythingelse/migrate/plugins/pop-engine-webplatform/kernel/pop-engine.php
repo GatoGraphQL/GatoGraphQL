@@ -273,7 +273,11 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         );
     }
 
-    // Allow PoPWebPlatform_Engine to override this function
+    /**
+     * Allow PoPWebPlatform_Engine to override this function
+     *
+     * @return array<string,mixed>
+     */
     protected function getEncodedDataObject(array $data): array
     {
         $data = parent::getEncodedDataObject($data);

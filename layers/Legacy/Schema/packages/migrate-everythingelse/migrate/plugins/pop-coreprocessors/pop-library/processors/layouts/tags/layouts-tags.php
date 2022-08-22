@@ -5,6 +5,9 @@ class PoP_Module_Processor_TagLayouts extends PoP_Module_Processor_TagLayoutsBas
     public final const COMPONENT_LAYOUT_TAG = 'layout-tag';
     public final const COMPONENT_LAYOUT_TAGH4 = 'layout-tagh4';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(

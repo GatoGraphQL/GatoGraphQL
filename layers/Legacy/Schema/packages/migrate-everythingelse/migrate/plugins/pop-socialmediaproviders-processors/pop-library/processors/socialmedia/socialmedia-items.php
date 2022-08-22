@@ -22,6 +22,9 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public final const COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW = 'tag-socialmediaproviders-linkedin-preview';
     public final const COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW = 'user-socialmediaproviders-linkedin-preview';
 
+    /**
+     * @return string[]
+     */
     public function getComponentNamesToProcess(): array
     {
         return array(
