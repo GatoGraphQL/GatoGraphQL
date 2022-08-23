@@ -108,6 +108,14 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(1, 1)), new Location(1, 1))], new Location(1, 1))], new Location(1, 1)),
                 new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(2, 2)), new Location(2, 2))], new Location(2, 2))], new Location(2, 2)),
             ],
+            'relational' => [
+                new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'relational-with-args' => [
+                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
         ];
     }
 
@@ -222,6 +230,10 @@ class FieldEqualsToTest extends AbstractTestCase
             'different-args-in-directives' => [
                 new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(2, 2)), new Location(2, 2))], new Location(1, 1))], new Location(1, 1)),
                 new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('anotherEnum', new Location(2, 2)), new Location(2, 2))], new Location(2, 2))], new Location(2, 2)),
+            ],
+            'relational-with-different-args' => [
+                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('anotherValue', new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
         ];
     }
