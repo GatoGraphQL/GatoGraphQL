@@ -189,6 +189,34 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [new Argument('someArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
                 new LeafField('someField', null, [new Argument('someArg', new VariableReference('anotherVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(2, 2)),
             ],
+            'args-with-different-input-list-values' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('anotherValue', new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'args-with-different-input-list-values-2' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Enum('someValue', new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'args-with-different-input-list-values-3' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new VariableReference('someVariable', null, new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new VariableReference('anotherVariable', null, new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'args-with-different-input-list-values-4' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(1, 1)), new Enum('someValue', new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'args-with-different-input-list-values-5' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(1, 1)), new Enum('someValue', new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Enum('someValue', new Location(1, 1)), new Literal('someValue', new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'args-with-different-input-list-values-6' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new InputList([new Literal('someValue', new Location(1, 1))], new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new InputList([new Literal('anotherValue', new Location(2, 2))], new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'args-with-different-input-list-values-7' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new InputList([new InputObject($inputObject3, new Location(1, 1))], new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new InputList([new InputObject($inputObject4, new Location(1, 1))], new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
             'args-with-different-input-object-values' => [
                 new LeafField('someField', null, [new Argument('someArg', new InputObject($inputObject1, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
                 new LeafField('someField', null, [new Argument('someArg', new InputObject($inputObject2, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
