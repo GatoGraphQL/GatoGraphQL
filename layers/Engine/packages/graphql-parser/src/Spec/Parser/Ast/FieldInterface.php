@@ -51,6 +51,8 @@ interface FieldInterface extends AstInterface, LocatableInterface, WithDirective
      * not on its object hash ID.
      *
      * Watch out: `{ title: title }` is equivalent to `{ title }`
+     *
+     * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
      */
     public function isEquivalentTo(FieldInterface $field): bool;
 }
