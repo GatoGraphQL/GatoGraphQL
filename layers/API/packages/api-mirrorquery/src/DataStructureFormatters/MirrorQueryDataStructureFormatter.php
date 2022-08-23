@@ -329,7 +329,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function resolveObjectData(
-        array $fields,
+        array $previouslyResolvedFieldsForObject,
         LeafField $leafField,
         string $typeOutputKey,
         array &$sourceRet,
