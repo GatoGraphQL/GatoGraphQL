@@ -56,6 +56,7 @@ class ASTEqualsToTest extends AbstractTestCase
             ],
         ];
     }
+
     /**
      * @dataProvider getDoesNotEqualToLeafFields
      */
@@ -75,6 +76,53 @@ class ASTEqualsToTest extends AbstractTestCase
             [
                 new LeafField('someField', null, [], [], new Location(1, 1)),
                 new LeafField('anotherField', null, [], [], new Location(2, 2)),
+            ],
+        ];
+    }
+
+
+    /**
+     * @dataProvider getEqualsToRelationalFields
+     */
+    public function testEqualsToRelationalFields(
+        RelationalField $relationalField1,
+        RelationalField $relationalField2
+    ): void {
+        $this->assertTrue($relationalField1->equalsTo($relationalField2));
+    }
+
+    /**
+     * @return mixed[]
+     */
+    protected function getEqualsToRelationalFields(): array
+    {
+        return [
+            [
+                new RelationalField('someField', null, [], [], [], new Location(1, 1)),
+                new RelationalField('someField', null, [], [], [], new Location(2, 2)),
+            ],
+        ];
+    }
+    
+    /**
+     * @dataProvider getDoesNotEqualToRelationalFields
+     */
+    public function testDoesNotEqualToRelationalFields(
+        RelationalField $relationalField1,
+        RelationalField $relationalField2
+    ): void {
+        $this->assertFalse($relationalField1->equalsTo($relationalField2));
+    }
+
+    /**
+     * @return mixed[]
+     */
+    protected function getDoesNotEqualToRelationalFields(): array
+    {
+        return [
+            [
+                new RelationalField('someField', null, [], [], [], new Location(1, 1)),
+                new RelationalField('anotherField', null, [], [], [], new Location(2, 2)),
             ],
         ];
     }
