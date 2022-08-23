@@ -67,8 +67,8 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [], [], new Location(2, 2)),
             ],
             'with-args' => [
-                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
-                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(1, 1))], new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(2, 2))], new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
             'unordered-args' => [
                 new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
