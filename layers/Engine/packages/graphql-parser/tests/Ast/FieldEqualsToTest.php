@@ -109,6 +109,14 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', 'anotherAlias', [], [], new Location(1, 1)),
                 new LeafField('someField', 'someField', [], [], new Location(2, 2)),
             ],
+            'args-and-no-args' => [
+                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [], [], new Location(2, 2)),
+            ],
+            'different-args' => [
+                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
         ];
     }
 
