@@ -325,7 +325,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      *
      * @param FieldInterface[] $fields
      * @param array<string,mixed> $sourceRet
-     * @param array<string,mixed>|null $resolvedObjectRet
+     * @param array<string,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function resolveObjectData(
