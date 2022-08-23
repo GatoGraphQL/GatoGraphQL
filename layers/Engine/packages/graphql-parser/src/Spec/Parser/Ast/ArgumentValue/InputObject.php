@@ -11,8 +11,6 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Exception\ShouldNotHappenException;
 use stdClass;
 
-use function get_object_vars;
-
 class InputObject extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
     /**
@@ -136,8 +134,8 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                     }
                     continue;
                 }
-                if ($thisInputObjectElemValue instanceof VariableReferenceInterface) {
-                    /** @var VariableReferenceInterface */
+                if ($thisInputObjectElemValue instanceof VariableReference) {
+                    /** @var VariableReference */
                     $variableReference = $againstInputObjectElemValue;
                     if (!$thisInputObjectElemValue->isEquivalentTo($variableReference)) {
                         return false;
