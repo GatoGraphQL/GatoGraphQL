@@ -10,7 +10,6 @@ use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use SplObjectStorage;
@@ -401,29 +400,31 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
 
     /**
+     * Override for GraphQL to provide custom validations.
+     * Return `false` if there is an error.
+     *
+     * Validate Field Selection Merging: 2 different fields
+     * cannot have the same name/alias on the same block in
+     * the response.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging     * 
+     *
      * @param FieldInterface[] $previouslyResolvedFieldsForObject
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
-     */
-    protected function resolveObjectData(
+     */        
+    protected function validateObjectData(
         array $previouslyResolvedFieldsForObject,
-        LeafField $leafField,
+        FieldInterface $field,
         string $typeOutputKey,
         array &$sourceRet,
         array &$resolvedObjectRet,
         SplObjectStorage $resolvedObject,
         string|int $objectID,
-    ): void {
-        /**
-         * Validate Field Selection Merging: 2 different fields
-         * cannot have the same name/alias on the same block in
-         * the response.
-         *
-         * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
-         */
+    ): bool {
         $sameOutputKeyField = null;
-        if (array_key_exists($leafField->getOutputKey(), $resolvedObjectRet)) {
+        if (array_key_exists($field->getOutputKey(), $resolvedObjectRet)) {
             /**
              * Check that the original field is indeed different to this one.
              * To find out, search for the previous fields with the same
@@ -431,7 +432,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
              */
             $differentFieldsWithSameOutputKeyForObject = array_values(array_filter(
                 $previouslyResolvedFieldsForObject,
-                fn (FieldInterface $field) => $field->getOutputKey() === $leafField->getOutputKey() && !$leafField->isEquivalentTo($field)
+                fn (FieldInterface $previousField) => $field->getOutputKey() === $previousField->getOutputKey() && !$field->isEquivalentTo($previousField)
             ));
             if ($differentFieldsWithSameOutputKeyForObject !== []) {
                 $sameOutputKeyField = $differentFieldsWithSameOutputKeyForObject[0];
@@ -441,23 +442,23 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             /**
              * Set response to null
              */
-            $resolvedObjectRet[$leafField->getOutputKey()] = null;
+            $resolvedObjectRet[$field->getOutputKey()] = null;
 
             /**
              * Add an entry on the "errors" section
              */
             $item = $this->getFeedbackEntryManager()->formatObjectOrSchemaFeedbackCommonEntry(
-                $leafField,
-                $leafField->getLocation(),
+                $field,
+                $field->getLocation(),
                 [],
                 new FeedbackItemResolution(
                     GraphQLSpecErrorFeedbackItemProvider::class,
                     GraphQLSpecErrorFeedbackItemProvider::E_5_3_2,
                     [
-                        $leafField->asFieldOutputQueryString(),
+                        $field->asFieldOutputQueryString(),
                         $objectID,
                         $sameOutputKeyField->asFieldOutputQueryString(),
-                        $leafField->getOutputKey()
+                        $field->getOutputKey()
                     ]
                 ),
                 [$objectID],
@@ -466,15 +467,15 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
             $typeFeedbackEntries = $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] ?? new SplObjectStorage();
             /** @var array<string,mixed> */
-            $fieldTypeFeedbackEntries = $typeFeedbackEntries[$leafField] ?? [];
+            $fieldTypeFeedbackEntries = $typeFeedbackEntries[$field] ?? [];
             $fieldTypeFeedbackEntries[] = $item;
-            $typeFeedbackEntries[$leafField] = $fieldTypeFeedbackEntries;
+            $typeFeedbackEntries[$field] = $fieldTypeFeedbackEntries;
             $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] = $typeFeedbackEntries;
-            return;
+            return false;
         }
-        parent::resolveObjectData(
+        return parent::validateObjectData(
             $previouslyResolvedFieldsForObject,
-            $leafField,
+            $field,
             $typeOutputKey,
             $sourceRet,
             $resolvedObjectRet,

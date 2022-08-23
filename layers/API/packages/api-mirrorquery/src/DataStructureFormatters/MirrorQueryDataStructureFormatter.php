@@ -239,25 +239,32 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 continue;
             }
 
+            /**
+             * Allow GraphQL to validate custom errors
+             */
+            $validObjectData = $this->validateObjectData(
+                $previouslyResolvedFieldsForObject,
+                $field,
+                $typeOutputKey,
+                $sourceRet,
+                $resolvedObjectRet,
+                $resolvedObject,
+                $objectID,
+            );
+            if (!$validObjectData) {
+                continue;
+            }
+            $previouslyResolvedFieldsForObject[] = $field;
+
             if ($field instanceof LeafField) {
                 /** @var LeafField */
                 $leafField = $field;
-                $this->resolveObjectData(
-                    $previouslyResolvedFieldsForObject,
-                    $leafField,
-                    $typeOutputKey,
-                    $sourceRet,
-                    $resolvedObjectRet,
-                    $resolvedObject,
-                    $objectID,
-                );
-                $previouslyResolvedFieldsForObject[] = $leafField;
+                $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
                 continue;
             }
 
             /** @var RelationalField */
             $relationalField = $field;
-
             $relationalFieldOutputKey = $relationalField->getOutputKey();
 
             // If it's null, directly assign the null to the result
@@ -317,23 +324,24 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     }
 
     /**
-     * Allow GraphQL to override, to provide custom validations.
+     * Allow GraphQL to override as to provide custom validations.
+     * Return `false` if there is an error.
      *
      * @param FieldInterface[] $fields
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
-    protected function resolveObjectData(
+    protected function validateObjectData(
         array $previouslyResolvedFieldsForObject,
-        LeafField $leafField,
+        FieldInterface $field,
         string $typeOutputKey,
         array &$sourceRet,
         array &$resolvedObjectRet,
         SplObjectStorage $resolvedObject,
         string|int $objectID,
-    ): void {
-        $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
+    ): bool {
+        return true;
     }
 
     protected function getObjectEntry(string $typeOutputKey, array $item): array
