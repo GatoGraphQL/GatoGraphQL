@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "The response for field 'title: excerpt' on object with ID '1724' is ambiguous, as the previous field 'title' must also be printed under key 'title'",
+      "message": "The response for field 'title: excerpt' on object with ID '1724' is ambiguous, as the previous (and non equivalent) field 'title' must also be printed under key 'title'",
       "locations": [
         {
           "line": 9,
@@ -21,7 +21,7 @@
       }
     },
     {
-      "message": "The response for field 'title: excerpt' on object with ID '358' is ambiguous, as the previous field 'title' must also be printed under key 'title'",
+      "message": "The response for field 'title: excerpt' on object with ID '358' is ambiguous, as the previous (and non equivalent) field 'title' must also be printed under key 'title'",
       "locations": [
         {
           "line": 9,
@@ -41,7 +41,7 @@
       }
     },
     {
-      "message": "The response for field 'dateStr(format: \"d\/m\")' on object with ID '1724' is ambiguous, as the previous field 'dateStr' must also be printed under key 'dateStr'",
+      "message": "The response for field 'dateStr(format: \"d\/m\")' on object with ID '1724' is ambiguous, as the previous (and non equivalent) field 'dateStr' must also be printed under key 'dateStr'",
       "locations": [
         {
           "line": 11,
@@ -61,7 +61,7 @@
       }
     },
     {
-      "message": "The response for field 'dateStr(format: \"d\/m\")' on object with ID '358' is ambiguous, as the previous field 'dateStr' must also be printed under key 'dateStr'",
+      "message": "The response for field 'dateStr(format: \"d\/m\")' on object with ID '358' is ambiguous, as the previous (and non equivalent) field 'dateStr' must also be printed under key 'dateStr'",
       "locations": [
         {
           "line": 11,
@@ -81,7 +81,7 @@
       }
     },
     {
-      "message": "The response for field 'date: title' on object with ID '1724' is ambiguous, as the previous field 'date' must also be printed under key 'date'",
+      "message": "The response for field 'date: title' on object with ID '1724' is ambiguous, as the previous (and non equivalent) field 'date' must also be printed under key 'date'",
       "locations": [
         {
           "line": 45,
@@ -100,7 +100,7 @@
       }
     },
     {
-      "message": "The response for field '__typename: excerpt' on object with ID '1724' is ambiguous, as the previous field '__typename' must also be printed under key '__typename'",
+      "message": "The response for field '__typename: excerpt' on object with ID '1724' is ambiguous, as the previous (and non equivalent) field '__typename' must also be printed under key '__typename'",
       "locations": [
         {
           "line": 46,
@@ -119,7 +119,7 @@
       }
     },
     {
-      "message": "The response for field 'dateStr(format: $format)' on object with ID '2' is ambiguous, as the previous field 'dateStr(format: \"d\/m\")' must also be printed under key 'dateStr'",
+      "message": "The response for field 'dateStr(format: $format)' on object with ID '2' is ambiguous, as the previous (and non equivalent) field 'dateStr(format: \"d\/m\")' must also be printed under key 'dateStr'",
       "locations": [
         {
           "line": 20,
@@ -139,7 +139,7 @@
       }
     },
     {
-      "message": "The response for field 'dateStr(format: $format)' on object with ID '146' is ambiguous, as the previous field 'dateStr(format: \"d\/m\")' must also be printed under key 'dateStr'",
+      "message": "The response for field 'dateStr(format: $format)' on object with ID '146' is ambiguous, as the previous (and non equivalent) field 'dateStr(format: \"d\/m\")' must also be printed under key 'dateStr'",
       "locations": [
         {
           "line": 20,

@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "The response for field 'posts(pagination: {limit: 3})' on object with ID 'root' is ambiguous, as the previous field 'posts(pagination: {limit: 2})' must also be printed under key 'posts'",
+      "message": "The response for field 'posts(pagination: {limit: 3})' on object with ID 'root' is ambiguous, as the previous (and non equivalent) field 'posts(pagination: {limit: 2})' must also be printed under key 'posts'",
       "locations": [
         {
           "line": 11,
@@ -20,7 +20,7 @@
       }
     },
     {
-      "message": "The response for field 'customPosts(pagination: {limit: 2})' on object with ID 'root' is ambiguous, as the previous field 'customPosts(pagination: {limit: 2})' must also be printed under key 'customPosts'",
+      "message": "The response for field 'customPosts(pagination: {limit: 2})' on object with ID 'root' is ambiguous, as the previous (and non equivalent) field 'customPosts(pagination: {limit: 2})' must also be printed under key 'customPosts'",
       "locations": [
         {
           "line": 29,
@@ -39,7 +39,7 @@
       }
     },
     {
-      "message": "The response for field 'somethingOrSomethingElse: id' on object with ID 'root' is ambiguous, as the previous field 'somethingOrSomethingElse: posts(pagination: {limit: 3})' must also be printed under key 'somethingOrSomethingElse'",
+      "message": "The response for field 'somethingOrSomethingElse: id' on object with ID 'root' is ambiguous, as the previous (and non equivalent) field 'somethingOrSomethingElse: posts(pagination: {limit: 3})' must also be printed under key 'somethingOrSomethingElse'",
       "locations": [
         {
           "line": 46,
