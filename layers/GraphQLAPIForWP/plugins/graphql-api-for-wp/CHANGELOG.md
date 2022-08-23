@@ -179,6 +179,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Fragment spread type existence
   - Support fragment spread on unions
   - Variables are input types
+  - Field selection merging
 - Query `extensions` in the schema introspection
   - Implemented extension `isAdminElement`
 - Performance improvement: Avoid regenerating the container when the schema is modified
