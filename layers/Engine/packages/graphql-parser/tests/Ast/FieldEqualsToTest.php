@@ -53,6 +53,18 @@ class FieldEqualsToTest extends AbstractTestCase
         $inputObject1->someKey = new VariableReference('someVariable', null, new Location(1, 1));
         $inputObject2 = new stdClass();
         $inputObject2->someKey = new VariableReference('someVariable', null, new Location(2, 2));
+        $inputObject3 = new stdClass();
+        $inputObject3->literal = new Literal('someValue', new Location(1, 1));
+        $inputObject3->enum = new Enum('someValue', new Location(1, 1));
+        $inputObject3->variableReference = new VariableReference('someVariable', null, new Location(1, 1));
+        $inputObject3->inputList = new InputList([new Literal('someValue', new Location(1, 1)), new Enum('someValue', new Location(1, 1)), new VariableReference('someVariable', null, new Location(1, 1))], new Location(1, 1));
+        $inputObject3->inputObject = new InputObject($inputObject1, new Location(1, 1));
+        $inputObject4 = new stdClass();
+        $inputObject4->literal = new Literal('someValue', new Location(2, 2));
+        $inputObject4->enum = new Enum('someValue', new Location(2, 2));
+        $inputObject4->variableReference = new VariableReference('someVariable', null, new Location(2, 2));
+        $inputObject4->inputList = new InputList([new Literal('someValue', new Location(2, 2)), new Enum('someValue', new Location(2, 2)), new VariableReference('someVariable', null, new Location(2, 2))], new Location(2, 2));
+        $inputObject4->inputObject = new InputObject($inputObject2, new Location(2, 2));
         return [
             'name' => [
                 new LeafField('someField', null, [], [], new Location(1, 1)),
@@ -89,6 +101,10 @@ class FieldEqualsToTest extends AbstractTestCase
             'with-input-list-args' => [
                 new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(1, 1)), new Enum('someValue', new Location(1, 1)), new VariableReference('someVariable', null, new Location(1, 1)), new InputList([new Literal('someValue', new Location(1, 1)), new Enum('someValue', new Location(1, 1)), new VariableReference('someVariable', null, new Location(1, 1))], new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
                 new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(2, 2)), new Enum('someValue', new Location(2, 2)), new VariableReference('someVariable', null, new Location(2, 2)), new InputList([new Literal('someValue', new Location(2, 2)), new Enum('someValue', new Location(2, 2)), new VariableReference('someVariable', null, new Location(2, 2))], new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'with-input-object-args' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputObject($inputObject3, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputObject($inputObject4, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
             'unordered-args' => [
                 new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new InputObject($inputObject1, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
