@@ -280,6 +280,10 @@ class FieldEqualsToTest extends AbstractTestCase
                 new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1)), new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(1, 1))], [], new Location(1, 1)),
                 new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new InlineFragment('SomeModel', [new LeafField('anotherLeafField', null, [], [], new Location(2, 2)), new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
+            'relational-with-inline-fragments-3' => [
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1)), new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new InlineFragment('SomeModel', [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1)), new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(1, 1))], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
         ];
     }
 
@@ -321,6 +325,14 @@ class FieldEqualsToTest extends AbstractTestCase
                 [
                     new Fragment('SomeFragment', 'SomeModel', [], [new LeafField('anotherLeafField', null, [], [], new Location(1, 1))], new Location(1, 1)),
                 ],
+            ],
+            'relational-with-inline-fragments' => [
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new InlineFragment('SomeModel', [new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'relational-with-inline-fragments-2' => [
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new InlineFragment('SomeModel', [new RelationalField('someRelationalField', null, [], [new InlineFragment('SomeModel', [new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
         ];
     }
