@@ -71,8 +71,8 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
     {
         $thisInputObjectValue = $this->getAstValue();
         $againstInputObjectValue = $inputObject->getAstValue();
-        $thisInputObjectValueKeys = get_object_vars($thisInputObjectValue);
-        $againstInputObjectValueKeys = get_object_vars($againstInputObjectValue);
+        $thisInputObjectValueKeys = array_keys((array)$thisInputObjectValue);
+        $againstInputObjectValueKeys = array_keys((array)$againstInputObjectValue);
         $thisInputObjectValueCount = count($thisInputObjectValueKeys);
         if ($thisInputObjectValueCount !== count($againstInputObjectValueKeys)) {
             return false;
