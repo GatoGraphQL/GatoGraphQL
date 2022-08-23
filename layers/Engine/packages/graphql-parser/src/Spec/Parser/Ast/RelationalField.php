@@ -74,30 +74,42 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
         
         $thisFields = $this->getAllFieldsFromFieldsOrFragmentBonds($this->getFieldsOrFragmentBonds(), $fragments);
         $againstFields = $this->getAllFieldsFromFieldsOrFragmentBonds($relationalField->getFieldsOrFragmentBonds(), $fragments);
-        $thisFieldsCount = count($thisFields);
-        if ($thisFieldsCount !== count($againstFields)) {
-            return false;
-        }
-        for ($i = 0; $i < $thisFieldsCount; $i++) {
-            $thisField = $thisFields[$i];
-            $againstField = $againstFields[$i];
-            if (get_class($thisField) !== get_class($againstField)) {
+        /**
+         * The two relational fields are equivalent if all contained
+         * fields have an equivalent on the opposite set
+         *
+         * Eg: these 2 fields are equivalent:
+         *
+         *   ```
+         *   {
+         *     posts {
+         *       id
+         *       title
+         *     }
+         *     
+         *     posts {
+         *       title
+         *       id
+         *       title:title()
+         *     }
+         *   }
+         *   ```
+         */
+        foreach ($thisFields as $thisField) {
+            $equivalentFieldsInOppositeSet = array_filter(
+                $againstFields,
+                fn (FieldInterface $oppositeField) => $this->isFieldEquivalentToField($thisField, $oppositeField, $fragments)
+            );
+            if ($equivalentFieldsInOppositeSet === []) {
                 return false;
             }
-            if ($thisField instanceof LeafField) {
-                /** @var LeafField */
-                $thisLeafField = $thisField;
-                /** @var LeafField */
-                $againstLeafField = $againstField;
-                if (!$thisLeafField->isEquivalentTo($againstLeafField)) {
-                    return false;
-                }
-            }
-            /** @var RelationalField */
-            $thisRelationalField = $thisField;
-            /** @var RelationalField */
-            $againstRelationalField = $againstField;
-            if (!$thisRelationalField->isEquivalentTo($againstRelationalField, $fragments)) {
+        }
+        foreach ($againstFields as $againstField) {
+            $equivalentFieldsInOppositeSet = array_filter(
+                $thisFields,
+                fn (FieldInterface $oppositeField) => $this->isFieldEquivalentToField($againstField, $oppositeField, $fragments)
+            );
+            if ($equivalentFieldsInOppositeSet === []) {
                 return false;
             }
         }
@@ -167,5 +179,27 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
             }
         }
         return null;
+    }
+
+    /**
+     * @param Fragment[] $fragments
+     */
+    protected function isFieldEquivalentToField(Fieldinterface $thisField, FieldInterface $oppositeField, array $fragments): bool
+    {
+        if (get_class($thisField) !== get_class($oppositeField)) {
+            return false;
+        }
+        if ($thisField instanceof LeafField) {
+            /** @var LeafField */
+            $thisLeafField = $thisField;
+            /** @var LeafField */
+            $againstLeafField = $oppositeField;
+            return $thisLeafField->isEquivalentTo($againstLeafField);
+        }
+        /** @var RelationalField */
+        $thisRelationalField = $thisField;
+        /** @var RelationalField */
+        $againstRelationalField = $oppositeField;
+        return $thisRelationalField->isEquivalentTo($againstRelationalField, $fragments);
     }
 }
