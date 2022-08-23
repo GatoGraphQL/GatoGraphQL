@@ -299,6 +299,13 @@ class FieldEqualsToTest extends AbstractTestCase
                 new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
                 new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
+            'relational-with-fragments' => [
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new FragmentReference('SomeFragment', new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
+                [
+                    new Fragment('SomeFragment', 'SomeModel', [], [new LeafField('anotherLeafField', null, [], [], new Location(1, 1))], new Location(1, 1)),
+                ],
+            ],
         ];
     }
 }
