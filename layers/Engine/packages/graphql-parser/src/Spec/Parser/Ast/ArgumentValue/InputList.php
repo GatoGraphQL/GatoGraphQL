@@ -97,7 +97,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                  */
                 if ($thisInputListElemValue instanceof InputList) {
                     /** @var InputList */
-                    $againstInputList = $againstInputListElemValue->getValueAST();
+                    $againstInputList = $againstInputListElemValue;
                     if (!$thisInputListElemValue->equalsTo($againstInputList)) {
                         return false;
                     }
@@ -105,7 +105,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 }
                 if ($thisInputListElemValue instanceof InputObject) {
                     /** @var InputObject */
-                    $inputObject = $againstInputListElemValue->getValueAST();
+                    $inputObject = $againstInputListElemValue;
                     if (!$thisInputListElemValue->equalsTo($inputObject)) {
                         return false;
                     }
@@ -113,7 +113,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 }
                 if ($thisInputListElemValue instanceof Enum) {
                     /** @var Enum */
-                    $enum = $againstInputListElemValue->getValueAST();
+                    $enum = $againstInputListElemValue;
                     if (!$thisInputListElemValue->equalsTo($enum)) {
                         return false;
                     }
@@ -121,7 +121,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 }
                 if ($thisInputListElemValue instanceof Literal) {
                     /** @var Literal */
-                    $literal = $againstInputListElemValue->getValueAST();
+                    $literal = $againstInputListElemValue;
                     if (!$thisInputListElemValue->equalsTo($literal)) {
                         return false;
                     }
@@ -129,7 +129,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 }
                 if ($thisInputListElemValue instanceof VariableReferenceInterface) {
                     /** @var VariableReferenceInterface */
-                    $variableReference = $againstInputListElemValue->getValueAST();
+                    $variableReference = $againstInputListElemValue;
                     if (!$thisInputListElemValue->equalsTo($variableReference)) {
                         return false;
                     }

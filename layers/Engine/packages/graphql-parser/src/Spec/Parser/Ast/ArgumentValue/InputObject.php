@@ -106,7 +106,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                  */
                 if ($thisInputObjectElemValue instanceof InputList) {
                     /** @var InputList */
-                    $inputList = $againstInputObjectElemValue->getValueAST();
+                    $inputList = $againstInputObjectElemValue;
                     if (!$thisInputObjectElemValue->equalsTo($inputList)) {
                         return false;
                     }
@@ -114,7 +114,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                 }
                 if ($thisInputObjectElemValue instanceof InputObject) {
                     /** @var InputObject */
-                    $againstInputObject = $againstInputObjectElemValue->getValueAST();
+                    $againstInputObject = $againstInputObjectElemValue;
                     if (!$thisInputObjectElemValue->equalsTo($againstInputObject)) {
                         return false;
                     }
@@ -122,7 +122,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                 }
                 if ($thisInputObjectElemValue instanceof Enum) {
                     /** @var Enum */
-                    $enum = $againstInputObjectElemValue->getValueAST();
+                    $enum = $againstInputObjectElemValue;
                     if (!$thisInputObjectElemValue->equalsTo($enum)) {
                         return false;
                     }
@@ -130,7 +130,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                 }
                 if ($thisInputObjectElemValue instanceof Literal) {
                     /** @var Literal */
-                    $literal = $againstInputObjectElemValue->getValueAST();
+                    $literal = $againstInputObjectElemValue;
                     if (!$thisInputObjectElemValue->equalsTo($literal)) {
                         return false;
                     }
@@ -138,7 +138,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                 }
                 if ($thisInputObjectElemValue instanceof VariableReferenceInterface) {
                     /** @var VariableReferenceInterface */
-                    $variableReference = $againstInputObjectElemValue->getValueAST();
+                    $variableReference = $againstInputObjectElemValue;
                     if (!$thisInputObjectElemValue->equalsTo($variableReference)) {
                         return false;
                     }
