@@ -41,7 +41,7 @@ class FieldEqualsToTest extends AbstractTestCase
         LeafField $leafField1,
         LeafField $leafField2
     ): void {
-        $this->assertTrue($leafField1->equalsTo($leafField2));
+        $this->assertTrue($leafField1->isEquivalentTo($leafField2));
     }
 
     /**
@@ -132,7 +132,7 @@ class FieldEqualsToTest extends AbstractTestCase
         LeafField $leafField1,
         LeafField $leafField2
     ): void {
-        $this->assertFalse($leafField1->equalsTo($leafField2));
+        $this->assertFalse($leafField1->isEquivalentTo($leafField2));
     }
 
     /**
@@ -248,7 +248,7 @@ class FieldEqualsToTest extends AbstractTestCase
         RelationalField $relationalField1,
         RelationalField $relationalField2
     ): void {
-        $this->assertTrue($relationalField1->equalsTo($relationalField2));
+        $this->assertTrue($relationalField1->isEquivalentTo($relationalField2));
     }
 
     /**
@@ -271,7 +271,7 @@ class FieldEqualsToTest extends AbstractTestCase
         RelationalField $relationalField1,
         RelationalField $relationalField2
     ): void {
-        $this->assertFalse($relationalField1->equalsTo($relationalField2));
+        $this->assertFalse($relationalField1->isEquivalentTo($relationalField2));
     }
 
     /**

@@ -165,7 +165,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
      *
      * Watch out: `{ title: title }` is equivalent to `{ title }`
      */
-    public function equalsTo(FieldInterface $field): bool
+    public function isEquivalentTo(FieldInterface $field): bool
     {
         if ($this->getName() !== $field->getName()) {
             return false;
@@ -211,7 +211,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         for ($i = 0; $i < $argumentCount; $i++) {
             $thisArgument = $thisArguments[$i];
             $againstArgument = $againstArguments[$i];
-            if (!$thisArgument->equalsTo($againstArgument)) {
+            if (!$thisArgument->isEquivalentTo($againstArgument)) {
                 return false;
             }
         }
@@ -236,7 +236,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         for ($i = 0; $i < $directiveCount; $i++) {
             $thisDirective = $thisDirectives[$i];
             $againstDirective = $againstDirectives[$i];
-            if (!$thisDirective->equalsTo($againstDirective)) {
+            if (!$thisDirective->isEquivalentTo($againstDirective)) {
                 return false;
             }
         }

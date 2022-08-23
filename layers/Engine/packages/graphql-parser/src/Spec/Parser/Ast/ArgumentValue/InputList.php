@@ -65,7 +65,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
      * Indicate if a field equals another one based on its properties,
      * not on its object hash ID.
      */
-    public function equalsTo(InputList $inputList): bool
+    public function isEquivalentTo(InputList $inputList): bool
     {
         $thisInputListValue = $this->getAstValue();
         $againstInputListValue = $inputList->getAstValue();
@@ -94,12 +94,12 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                     return false;
                 }                
                 /**
-                 * Call ->equalsTo depending on the type of object
+                 * Call ->isEquivalentTo depending on the type of object
                  */
                 if ($thisInputListElemValue instanceof InputList) {
                     /** @var InputList */
                     $againstInputList = $againstInputListElemValue;
-                    if (!$thisInputListElemValue->equalsTo($againstInputList)) {
+                    if (!$thisInputListElemValue->isEquivalentTo($againstInputList)) {
                         return false;
                     }
                     continue;
@@ -107,7 +107,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 if ($thisInputListElemValue instanceof InputObject) {
                     /** @var InputObject */
                     $inputObject = $againstInputListElemValue;
-                    if (!$thisInputListElemValue->equalsTo($inputObject)) {
+                    if (!$thisInputListElemValue->isEquivalentTo($inputObject)) {
                         return false;
                     }
                     continue;
@@ -115,7 +115,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 if ($thisInputListElemValue instanceof Enum) {
                     /** @var Enum */
                     $enum = $againstInputListElemValue;
-                    if (!$thisInputListElemValue->equalsTo($enum)) {
+                    if (!$thisInputListElemValue->isEquivalentTo($enum)) {
                         return false;
                     }
                     continue;
@@ -123,7 +123,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 if ($thisInputListElemValue instanceof Literal) {
                     /** @var Literal */
                     $literal = $againstInputListElemValue;
-                    if (!$thisInputListElemValue->equalsTo($literal)) {
+                    if (!$thisInputListElemValue->isEquivalentTo($literal)) {
                         return false;
                     }
                     continue;
@@ -131,7 +131,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 if ($thisInputListElemValue instanceof VariableReferenceInterface) {
                     /** @var VariableReferenceInterface */
                     $variableReference = $againstInputListElemValue;
-                    if (!$thisInputListElemValue->equalsTo($variableReference)) {
+                    if (!$thisInputListElemValue->isEquivalentTo($variableReference)) {
                         return false;
                     }
                     continue;

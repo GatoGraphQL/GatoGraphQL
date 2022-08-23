@@ -59,7 +59,7 @@ class Argument extends AbstractAst
      * Indicate if a field equals another one based on its properties,
      * not on its object hash ID.
      */
-    public function equalsTo(Argument $argument): bool
+    public function isEquivalentTo(Argument $argument): bool
     {
         if ($this->getName() !== $argument->getName()) {
             return false;
@@ -71,32 +71,32 @@ class Argument extends AbstractAst
         }
 
         /**
-         * Call ->equalsTo depending on the type of object
+         * Call ->isEquivalentTo depending on the type of object
          */
         if ($thisValueAST instanceof InputList) {
             /** @var InputList */
             $inputList = $argument->getValueAST();
-            return $thisValueAST->equalsTo($inputList);
+            return $thisValueAST->isEquivalentTo($inputList);
         }
         if ($thisValueAST instanceof InputObject) {
             /** @var InputObject */
             $inputObject = $argument->getValueAST();
-            return $thisValueAST->equalsTo($inputObject);
+            return $thisValueAST->isEquivalentTo($inputObject);
         }
         if ($thisValueAST instanceof Enum) {
             /** @var Enum */
             $enum = $argument->getValueAST();
-            return $thisValueAST->equalsTo($enum);
+            return $thisValueAST->isEquivalentTo($enum);
         }
         if ($thisValueAST instanceof Literal) {
             /** @var Literal */
             $literal = $argument->getValueAST();
-            return $thisValueAST->equalsTo($literal);
+            return $thisValueAST->isEquivalentTo($literal);
         }
         if ($thisValueAST instanceof VariableReference) {
             /** @var VariableReference */
             $variableReference = $argument->getValueAST();
-            return $thisValueAST->equalsTo($variableReference);
+            return $thisValueAST->isEquivalentTo($variableReference);
         }
         
         throw new ShouldNotHappenException(

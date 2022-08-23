@@ -38,7 +38,7 @@ class Enum extends AbstractAst implements ArgumentValueAstInterface
      * Indicate if a field equals another one based on its properties,
      * not on its object hash ID.
      */
-    public function equalsTo(Enum $enum): bool
+    public function isEquivalentTo(Enum $enum): bool
     {
         return $this->getValue() === $enum->getValue();
     }

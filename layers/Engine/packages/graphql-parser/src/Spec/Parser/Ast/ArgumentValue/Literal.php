@@ -38,7 +38,7 @@ class Literal extends AbstractAst implements ArgumentValueAstInterface
      * Indicate if a field equals another one based on its properties,
      * not on its object hash ID.
      */
-    public function equalsTo(Literal $literal): bool
+    public function isEquivalentTo(Literal $literal): bool
     {
         return $this->getValue() === $literal->getValue();
     }

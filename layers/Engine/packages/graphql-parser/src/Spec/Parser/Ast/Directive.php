@@ -71,7 +71,7 @@ class Directive extends AbstractAst implements WithNameInterface, WithArgumentsI
      * Indicate if a field equals another one based on its properties,
      * not on its object hash ID.
      */
-    public function equalsTo(Directive $directive): bool
+    public function isEquivalentTo(Directive $directive): bool
     {
         if ($this->getName() !== $directive->getName()) {
             return false;
@@ -105,7 +105,7 @@ class Directive extends AbstractAst implements WithNameInterface, WithArgumentsI
         for ($i = 0; $i < $argumentCount; $i++) {
             $thisArgument = $thisArguments[$i];
             $againstArgument = $againstArguments[$i];
-            if (!$thisArgument->equalsTo($againstArgument)) {
+            if (!$thisArgument->isEquivalentTo($againstArgument)) {
                 return false;
             }
         }
