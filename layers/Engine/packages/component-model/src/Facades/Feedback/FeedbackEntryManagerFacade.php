@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\HelperServices;
+namespace PoP\ComponentModel\Facades\Feedback;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
