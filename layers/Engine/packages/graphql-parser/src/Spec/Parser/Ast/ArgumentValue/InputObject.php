@@ -59,4 +59,13 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
     {
         return $this->object;
     }
+
+    /**
+     * Indicate if a field equals another one based on its properties,
+     * not on its object hash ID.
+     */
+    public function equalsTo(InputObject $inputObject): bool
+    {
+        return $this->getAstValue() === $inputObject->getAstValue();
+    }
 }

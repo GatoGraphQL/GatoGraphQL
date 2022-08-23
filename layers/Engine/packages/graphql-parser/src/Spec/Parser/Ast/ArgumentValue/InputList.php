@@ -58,4 +58,13 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
     {
         return $this->list;
     }
+
+    /**
+     * Indicate if a field equals another one based on its properties,
+     * not on its object hash ID.
+     */
+    public function equalsTo(InputList $inputList): bool
+    {
+        return $this->getAstValue() === $inputList->getAstValue();
+    }
 }

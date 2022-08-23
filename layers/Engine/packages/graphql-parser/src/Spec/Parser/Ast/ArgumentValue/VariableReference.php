@@ -72,4 +72,13 @@ class VariableReference extends AbstractAst implements VariableReferenceInterfac
 
         return $this->variable->getValue();
     }
+
+    /**
+     * Indicate if a field equals another one based on its properties,
+     * not on its object hash ID.
+     */
+    public function equalsTo(VariableReference $variableReference): bool
+    {
+        return $this->getName() === $variableReference->getName();
+    }
 }
