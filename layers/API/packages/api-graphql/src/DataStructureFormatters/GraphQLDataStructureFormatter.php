@@ -9,6 +9,7 @@ use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -386,6 +387,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     /**
      * The entry is similar to Schema, plus the
      * addition of the object ID/IDs
+     *
+     * @return array<string,mixed>
+     * @param array<string,mixed> $item
      */
     protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
     {
@@ -456,7 +460,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                         $previousLeafField = $previousField;
                         return !$leafField->isEquivalentTo($previousLeafField);
                     }
-                    
+
                     /** @var RelationalField */
                     $relationalField = $field;
                     /** @var RelationalField */
@@ -494,9 +498,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 [$objectID],
             );
 
-            /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
+            /** @var SplObjectStorage<FieldInterface,array<array<string,mixed>>> */
             $typeFeedbackEntries = $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] ?? new SplObjectStorage();
-            /** @var array<string,mixed> */
+            /** @var array<array<string,mixed>> */
             $fieldTypeFeedbackEntries = $typeFeedbackEntries[$field] ?? [];
             $fieldTypeFeedbackEntries[] = $item;
             $typeFeedbackEntries[$field] = $fieldTypeFeedbackEntries;
