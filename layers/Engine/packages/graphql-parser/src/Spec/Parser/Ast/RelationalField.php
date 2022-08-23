@@ -184,8 +184,11 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
     /**
      * @param Fragment[] $fragments
      */
-    protected function isFieldEquivalentToField(FieldInterface $thisField, FieldInterface $oppositeField, array $fragments): bool
-    {
+    protected function isFieldEquivalentToField(
+        FieldInterface $thisField,
+        FieldInterface $oppositeField,
+        array $fragments
+    ): bool {
         if (get_class($thisField) !== get_class($oppositeField)) {
             return false;
         }
