@@ -71,7 +71,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
         if (!$this->doIsEquivalentTo($relationalField)) {
             return false;
         }
-        
+
         $thisFields = $this->getAllFieldsFromFieldsOrFragmentBonds($this->getFieldsOrFragmentBonds(), $fragments);
         $againstFields = $this->getAllFieldsFromFieldsOrFragmentBonds($relationalField->getFieldsOrFragmentBonds(), $fragments);
         /**
@@ -86,7 +86,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
          *       id
          *       title
          *     }
-         *     
+         *
          *     posts {
          *       title
          *       id
@@ -116,7 +116,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
 
         return true;
     }
-    
+
     /**
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments

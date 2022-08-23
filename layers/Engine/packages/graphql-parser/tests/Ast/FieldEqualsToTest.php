@@ -71,16 +71,16 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [], [], new Location(2, 2)),
             ],
             'with-args' => [
-                new LeafField('someField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
-                new LeafField('someField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
             'with-literal-args' => [
-                new LeafField('someField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
-                new LeafField('someField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
             'with-enum-args' => [
-                new LeafField('someField', null, [new Argument('someArg',new Enum('someValue', new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
-                new LeafField('someField', null, [new Argument('someArg',new Enum('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+                new LeafField('someField', null, [new Argument('someArg', new Enum('someValue', new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new Enum('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
             'with-variable-reference-args' => [
                 new LeafField('someField', null, [new Argument('someArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
@@ -251,8 +251,8 @@ class FieldEqualsToTest extends AbstractTestCase
                 new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
             'relational-with-args' => [
-                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
-                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
+                new RelationalField('someRelationalField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [new Argument('someArg', new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
             'relational-with-equivalent-nested-leaf-fields' => [
                 new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
@@ -312,8 +312,8 @@ class FieldEqualsToTest extends AbstractTestCase
     {
         return [
             'relational-with-different-args' => [
-                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
-                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('anotherValue', new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
+                new RelationalField('someRelationalField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [new Argument('someArg', new Literal('anotherValue', new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
             'relational-with-different-leaf-fields' => [
                 new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),

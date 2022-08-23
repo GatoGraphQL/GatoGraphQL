@@ -77,22 +77,24 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
             $thisInputListElemValue = $thisInputListValue[$i];
             $againstInputListElemValue = $againstInputListValue[$i];
 
-            if (($thisInputListElemValue === null && $againstInputListElemValue !== null)
+            if (
+                ($thisInputListElemValue === null && $againstInputListElemValue !== null)
                 || ($thisInputListElemValue !== null && $againstInputListElemValue === null)
             ) {
                 return false;
             }
 
-            if ((is_object($thisInputListElemValue) && !is_object($againstInputListElemValue))
+            if (
+                (is_object($thisInputListElemValue) && !is_object($againstInputListElemValue))
                 || (!is_object($thisInputListElemValue) && is_object($againstInputListElemValue))
             ) {
                 return false;
             }
 
-            if (is_object($thisInputListElemValue) && !($thisInputListElemValue instanceof stdClass)) {      
+            if (is_object($thisInputListElemValue) && !($thisInputListElemValue instanceof stdClass)) {
                 if (get_class($thisInputListElemValue) !== get_class($againstInputListElemValue)) {
                     return false;
-                }                
+                }
                 /**
                  * Call ->isEquivalentTo depending on the type of object
                  */
@@ -136,7 +138,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                     }
                     continue;
                 }
-            
+
                 throw new ShouldNotHappenException(
                     sprintf(
                         $this->__('Cannot recognize the type of the object, of class \'%s\'', 'graphql-parser'),
@@ -144,7 +146,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                     )
                 );
             }
-            
+
             /**
              * The element is a native type (bool, string, int, or float)
              */

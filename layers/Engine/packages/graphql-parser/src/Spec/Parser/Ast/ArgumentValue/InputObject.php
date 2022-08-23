@@ -82,13 +82,15 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
             $thisInputObjectElemValue = $thisInputObjectValue->$key;
             $againstInputObjectElemValue = $againstInputObjectValue->$key;
 
-            if (($thisInputObjectElemValue === null && $againstInputObjectElemValue !== null)
+            if (
+                ($thisInputObjectElemValue === null && $againstInputObjectElemValue !== null)
                 || ($thisInputObjectElemValue !== null && $againstInputObjectElemValue === null)
             ) {
                 return false;
             }
 
-            if ((is_object($thisInputObjectElemValue) && !is_object($againstInputObjectElemValue))
+            if (
+                (is_object($thisInputObjectElemValue) && !is_object($againstInputObjectElemValue))
                 || (!is_object($thisInputObjectElemValue) && is_object($againstInputObjectElemValue))
             ) {
                 return false;
@@ -98,7 +100,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                 if (get_class($thisInputObjectElemValue) !== get_class($againstInputObjectElemValue)) {
                     return false;
                 }
-                
+
                 /**
                  * Call ->isEquivalentTo depending on the type of object
                  */
@@ -142,7 +144,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                     }
                     continue;
                 }
-                
+
                 throw new ShouldNotHappenException(
                     sprintf(
                         $this->__('Cannot recognize the type of the object, of class \'%s\'', 'graphql-parser'),
@@ -150,7 +152,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                     )
                 );
             }
-            
+
             /**
              * The element is a native type (bool, string, int, or float)
              */
@@ -158,7 +160,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                 return false;
             }
         }
-        
+
         return true;
     }
 }

@@ -98,7 +98,7 @@ class Argument extends AbstractAst
             $variableReference = $argument->getValueAST();
             return $thisValueAST->isEquivalentTo($variableReference);
         }
-        
+
         throw new ShouldNotHappenException(
             sprintf(
                 $this->__('Cannot recognize the type of the object, of class \'%s\'', 'graphql-parser'),

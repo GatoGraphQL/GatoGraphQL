@@ -39,7 +39,7 @@ interface FeedbackEntryManagerInterface
         FeedbackItemResolution $feedbackItemResolution,
         array $ids,
     ): array;
-    
+
     /**
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries

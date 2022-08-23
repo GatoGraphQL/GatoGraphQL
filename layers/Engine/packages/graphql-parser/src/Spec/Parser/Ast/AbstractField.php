@@ -177,10 +177,12 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
             /**
              * If the alias is the same as the name then can skip,
              * as to have `{ title: title }` equivalent to `{ title }`
-             */            
-            if (!(($this->getName() === $this->getAlias() && $field->getAlias() === null)
+             */
+            if (
+                !(($this->getName() === $this->getAlias() && $field->getAlias() === null)
                 || ($field->getName() === $field->getAlias() && $this->getAlias() === null)
-            )) {
+                )
+            ) {
                 return false;
             }
         }
@@ -198,14 +200,14 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         /**
          * The order of the arguments does not matter.
          * These 2 fields are equivalent:
-         * 
+         *
          *   ```
          *   {
          *     dateStr(format: "d/m", gmt: true)
          *     dateStr(gmt: true, format: "d/m")
          *   }
          *   ```
-         * 
+         *
          * So first sort them as to compare apples to apples.
          */
         usort($thisArguments, fn (Argument $argument1, Argument $argument2): int => $argument1->getName() <=> $argument2->getName());
@@ -221,7 +223,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         /**
          * The order of the directives does matter.
          * These 2 fields are not equivalent:
-         * 
+         *
          *   ```
          *   {
          *     id @upperCase @titleCase

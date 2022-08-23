@@ -90,14 +90,14 @@ class Directive extends AbstractAst implements WithNameInterface, WithArgumentsI
         /**
          * The order of the arguments does not matter.
          * These 2 fields are equivalent:
-         * 
+         *
          *   ```
          *   {
          *     id @translate(from: "en", to: "es")
          *     id @translate(to: "es", from: "en")
          *   }
          *   ```
-         * 
+         *
          * So first sort them as to compare apples to apples.
          */
         usort($thisArguments, fn (Argument $argument1, Argument $argument2): int => $argument1->getName() <=> $argument2->getName());

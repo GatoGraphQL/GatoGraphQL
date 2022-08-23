@@ -28,7 +28,7 @@ use SplObjectStorage;
 class FeedbackEntryManager implements FeedbackEntryManagerInterface
 {
     use BasicServiceTrait;
-    
+
     private ?EngineInterface $engine = null;
 
     final public function setEngine(EngineInterface $engine): void

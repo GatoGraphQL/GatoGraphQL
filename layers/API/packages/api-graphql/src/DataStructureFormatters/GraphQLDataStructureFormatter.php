@@ -21,9 +21,9 @@ use SplObjectStorage;
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     private const ADDITIONAL_FEEDBACK = 'additionalFeedback';
-    
+
     private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
-    
+
     final public function setFeedbackEntryManager(FeedbackEntryManagerInterface $feedbackEntryService): void
     {
         $this->feedbackEntryService = $feedbackEntryService;
@@ -51,7 +51,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          * as it can also add errors.
          */
         $resultData = parent::getFormattedData($data);
-        
+
         /**
          * If the formatting produced additional feedback entries,
          * transfer them to the $data object.
@@ -414,13 +414,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
      * cannot have the same name/alias on the same block in
      * the response.
      *
-     * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging     * 
+     * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging     *
      *
      * @param FieldInterface[] $previouslyResolvedFieldsForObject
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
-     */        
+     */
     protected function validateObjectData(
         array $previouslyResolvedFieldsForObject,
         FieldInterface $field,
@@ -442,8 +442,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
              */
             $differentFieldsWithSameOutputKeyForObject = array_values(array_filter(
                 $previouslyResolvedFieldsForObject,
-                function (FieldInterface $previousField) use ($field, $fragments): bool
-                {
+                function (FieldInterface $previousField) use ($field, $fragments): bool {
                     if ($field->getOutputKey() !== $previousField->getOutputKey()) {
                         return false;
                     }
