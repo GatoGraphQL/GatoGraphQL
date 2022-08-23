@@ -221,24 +221,27 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
+        $resolvedObjectRet ??= [];
+
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
         /** @var FieldInterface[] */
         $previouslyResolvedFieldsForObject = [];
         foreach ($fields as $field) {
+            /**
+             * If the key doesn't exist, then do nothing.
+             *
+             * That means that this field does not apply
+             * to the current object (eg: it's on a Fragment
+             * to be applied on a different model)
+             */
+            if (!$resolvedObject->contains($field)) {
+                continue;
+            }
+
             if ($field instanceof LeafField) {
                 /** @var LeafField */
                 $leafField = $field;
-                /**
-                 * If the key doesn't exist, then do nothing.
-                 * That means that this field does not apply
-                 * to the current object (eg: it's on a Fragment
-                 * to be applied on a different model)
-                 */
-                if (!$resolvedObject->contains($leafField)) {
-                    continue;
-                }
-                $resolvedObjectRet ??= [];
                 $this->resolveObjectData(
                     $previouslyResolvedFieldsForObject,
                     $leafField,
@@ -254,13 +257,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
             /** @var RelationalField */
             $relationalField = $field;
-
-            /**
-             * If the key doesn't exist, then do nothing.
-             */
-            if (!$resolvedObject->contains($relationalField)) {
-                continue;
-            }
 
             $relationalFieldOutputKey = $relationalField->getOutputKey();
 
