@@ -9,6 +9,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Exception\ShouldNotHappenException;
+use stdClass;
 
 class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
@@ -88,7 +89,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                 return false;
             }
 
-            if (is_object($thisInputListElemValue)) {            
+            if (is_object($thisInputListElemValue) && !($thisInputListElemValue instanceof stdClass)) {      
                 if (get_class($thisInputListElemValue) !== get_class($againstInputListElemValue)) {
                     return false;
                 }                

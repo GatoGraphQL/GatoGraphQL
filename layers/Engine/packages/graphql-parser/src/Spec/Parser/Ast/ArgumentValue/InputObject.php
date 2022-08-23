@@ -96,7 +96,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
                 return false;
             }
 
-            if (is_object($thisInputObjectElemValue)) {
+            if (is_object($thisInputObjectElemValue) && !($thisInputObjectElemValue instanceof stdClass)) {
                 if (get_class($thisInputObjectElemValue) !== get_class($againstInputObjectElemValue)) {
                     return false;
                 }
