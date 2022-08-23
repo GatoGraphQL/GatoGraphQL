@@ -1,0 +1,47 @@
+{
+  posts(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    id
+    title
+  }
+
+  posts(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    id
+    title
+    title: title()
+    id
+  }
+
+  customPosts(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    id
+    title
+  }
+
+  customPosts(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    ...CustomPostData
+  }
+}
+
+fragment CustomPostData on CustomPostUnion {
+  id
+  ...CustomPostNodeData
+}
+
+fragment CustomPostNodeData on IsCustomPost {
+  title
+}

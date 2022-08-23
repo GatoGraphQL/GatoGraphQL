@@ -1,0 +1,66 @@
+{
+  "errors": [
+    {
+      "message": "The response for field 'posts(pagination: {limit: 3})' on object with ID 'root' is ambiguous, as the previous field 'posts(pagination: {limit: 2})' must also be printed under key 'posts'",
+      "locations": [
+        {
+          "line": 11,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "posts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "id": "root",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field 'customPosts(pagination: {limit: 2})' on object with ID 'root' is ambiguous, as the previous field 'customPosts(pagination: {limit: 2})' must also be printed under key 'customPosts'",
+      "locations": [
+        {
+          "line": 29,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "customPosts(pagination: {limit: 2}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "id": "root",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    },
+    {
+      "message": "The response for field 'somethingOrSomethingElse: id' on object with ID 'root' is ambiguous, as the previous field 'somethingOrSomethingElse: posts(pagination: {limit: 3})' must also be printed under key 'somethingOrSomethingElse'",
+      "locations": [
+        {
+          "line": 46,
+          "column": 29
+        }
+      ],
+      "extensions": {
+        "path": [
+          "somethingOrSomethingElse: id",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "id": "root",
+        "code": "gql@5.3.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selection-Merging"
+      }
+    }
+  ],
+  "data": {
+    "posts": null,
+    "customPosts": null,
+    "somethingOrSomethingElse": null
+  }
+}
