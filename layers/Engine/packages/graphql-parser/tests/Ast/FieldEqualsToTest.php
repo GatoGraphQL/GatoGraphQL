@@ -11,7 +11,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -21,19 +20,19 @@ use stdClass;
 class FieldEqualsToTest extends AbstractTestCase
 {
     /**
-     * @dataProvider getFieldEqualsToFieldProviderEntries
+     * @dataProvider getLeafFieldEqualsToLeafFieldProviderEntries
      */
-    public function testFieldEqualsToField(
-        FieldInterface $field1,
-        FieldInterface $field2
+    public function testLeafFieldEqualsToLeafField(
+        LeafField $leafField1,
+        LeafField $leafField2
     ): void {
-        $this->assertTrue($field1->isEquivalentTo($field2));
+        $this->assertTrue($leafField1->isEquivalentTo($leafField2));
     }
 
     /**
      * @return mixed[]
      */
-    protected function getFieldEqualsToFieldProviderEntries(): array
+    protected function getLeafFieldEqualsToLeafFieldProviderEntries(): array
     {
         $inputObject1 = new stdClass();
         $inputObject1->someKey = new VariableReference('someVariable', null, new Location(1, 1));
@@ -108,31 +107,23 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(1, 1)), new Location(1, 1))], new Location(1, 1))], new Location(1, 1)),
                 new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(2, 2)), new Location(2, 2))], new Location(2, 2))], new Location(2, 2)),
             ],
-            'relational' => [
-                new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
-                new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
-            ],
-            'relational-with-args' => [
-                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
-                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
-            ],
         ];
     }
 
     /**
-     * @dataProvider getFieldDoesNotEqualToFieldProviderEntries
+     * @dataProvider getLeafFieldDoesNotEqualToLeafFieldProviderEntries
      */
-    public function testFieldDoesNotEqualToField(
-        FieldInterface $field1,
-        FieldInterface $field2
+    public function testLeafFieldDoesNotEqualToLeafField(
+        LeafField $leafField1,
+        LeafField $leafField2
     ): void {
-        $this->assertFalse($field1->isEquivalentTo($field2));
+        $this->assertFalse($leafField1->isEquivalentTo($leafField2));
     }
 
     /**
      * @return mixed[]
      */
-    protected function getFieldDoesNotEqualToFieldProviderEntries(): array
+    protected function getLeafFieldDoesNotEqualToLeafFieldProviderEntries(): array
     {
         $inputObject1 = new stdClass();
         $inputObject1->someLiteral = new Literal('someValue', new Location(1, 1));
@@ -231,18 +222,13 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(2, 2)), new Location(2, 2))], new Location(1, 1))], new Location(1, 1)),
                 new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('anotherEnum', new Location(2, 2)), new Location(2, 2))], new Location(2, 2))], new Location(2, 2)),
             ],
-            'relational-with-different-args' => [
-                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
-                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('anotherValue', new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
-            ],
         ];
     }
 
-
     /**
-     * @dataProvider getEqualsToRelationalFields
+     * @dataProvider getRelationalFieldEqualsToRelationalFieldProviderEntries
      */
-    public function testEqualsToRelationalFields(
+    public function testRelationalFieldEqualsToRelationalField(
         RelationalField $relationalField1,
         RelationalField $relationalField2
     ): void {
@@ -252,20 +238,24 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected function getEqualsToRelationalFields(): array
+    protected function getRelationalFieldEqualsToRelationalFieldProviderEntries(): array
     {
         return [
-            [
-                new RelationalField('someField', null, [], [], [], new Location(1, 1)),
-                new RelationalField('someField', null, [], [], [], new Location(2, 2)),
+            'relational' => [
+                new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'relational-with-args' => [
+                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
         ];
     }
-    
+
     /**
-     * @dataProvider getDoesNotEqualToRelationalFields
+     * @dataProvider getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries
      */
-    public function testDoesNotEqualToRelationalFields(
+    public function testRelationalFieldDoesNotEqualToRelationalField(
         RelationalField $relationalField1,
         RelationalField $relationalField2
     ): void {
@@ -275,12 +265,12 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected function getDoesNotEqualToRelationalFields(): array
+    protected function getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries(): array
     {
         return [
-            [
-                new RelationalField('someField', null, [], [], [], new Location(1, 1)),
-                new RelationalField('anotherField', null, [], [], [], new Location(2, 2)),
+            'relational-with-different-args' => [
+                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('anotherValue', new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
         ];
     }
