@@ -17,6 +17,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
@@ -35,19 +36,19 @@ use stdClass;
 class FieldEqualsToTest extends AbstractTestCase
 {
     /**
-     * @dataProvider getEqualsToLeafFields
+     * @dataProvider getFieldEqualsToFieldProviderEntries
      */
-    public function testEqualsToLeafFields(
-        LeafField $leafField1,
-        LeafField $leafField2
+    public function testFieldEqualsToField(
+        FieldInterface $field1,
+        FieldInterface $field2
     ): void {
-        $this->assertTrue($leafField1->isEquivalentTo($leafField2));
+        $this->assertTrue($field1->isEquivalentTo($field2));
     }
 
     /**
      * @return mixed[]
      */
-    protected function getEqualsToLeafFields(): array
+    protected function getFieldEqualsToFieldProviderEntries(): array
     {
         $inputObject1 = new stdClass();
         $inputObject1->someKey = new VariableReference('someVariable', null, new Location(1, 1));
@@ -126,19 +127,19 @@ class FieldEqualsToTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider getDoesNotEqualToLeafFields
+     * @dataProvider getFieldDoesNotEqualToFieldProviderEntries
      */
-    public function testDoesNotEqualToLeafFields(
-        LeafField $leafField1,
-        LeafField $leafField2
+    public function testFieldDoesNotEqualToField(
+        FieldInterface $field1,
+        FieldInterface $field2
     ): void {
-        $this->assertFalse($leafField1->isEquivalentTo($leafField2));
+        $this->assertFalse($field1->isEquivalentTo($field2));
     }
 
     /**
      * @return mixed[]
      */
-    protected function getDoesNotEqualToLeafFields(): array
+    protected function getFieldDoesNotEqualToFieldProviderEntries(): array
     {
         $inputObject1 = new stdClass();
         $inputObject1->someLiteral = new Literal('someValue', new Location(1, 1));
