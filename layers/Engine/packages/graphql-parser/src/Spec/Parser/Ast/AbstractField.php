@@ -171,14 +171,16 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
             return false;
         }
 
-        /**
-         * If the alias is the same as the name then can skip,
-         * as to have `{ title: title }` equivalent to `{ title }`
-         */
-        if ($this->getName() !== $this->getAlias()
-            && $this->getAlias() !== $field->getAlias()
-        ) {
-            return false;
+        if ($this->getAlias() !== $field->getAlias()) {
+            /**
+             * If the alias is the same as the name then can skip,
+             * as to have `{ title: title }` equivalent to `{ title }`
+             */            
+            if (!(($this->getName() === $this->getAlias() && $field->getAlias() === null)
+                || ($field->getName() === $field->getAlias() && $this->getAlias() === null)
+            )) {
+                return false;
+            }
         }
 
         /**
