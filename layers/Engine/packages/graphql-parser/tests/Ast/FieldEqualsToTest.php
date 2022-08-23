@@ -74,6 +74,14 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
                 new LeafField('someField', null, [new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2)), new Argument('someArg', new Literal('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
+            'with-directives' => [
+                new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(1, 1))], new Location(1, 1)),
+                new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(2, 2))], new Location(2, 2)),
+            ],
+            'with-more-directives' => [
+                new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(1, 1)), new Directive('anotherDirective', [], new Location(1, 1))], new Location(1, 1)),
+                new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(2, 2)), new Directive('anotherDirective', [], new Location(2, 2))], new Location(2, 2)),
+            ],
         ];
     }
 
@@ -128,6 +136,14 @@ class FieldEqualsToTest extends AbstractTestCase
             'args-with-different-values-2' => [
                 new LeafField('someField', null, [new Argument('someArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
                 new LeafField('someField', null, [new Argument('someArg', new VariableReference('anotherVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(2, 2)),
+            ],
+            'unordered-directives' => [
+                new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(1, 1)), new Directive('anotherDirective', [], new Location(1, 1))], new Location(1, 1)),
+                new LeafField('someField', null, [], [new Directive('anotherDirective', [], new Location(2, 2)), new Directive('someDirective', [], new Location(2, 2))], new Location(2, 2)),
+            ],
+            'different-directive-count' => [
+                new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(1, 1))], new Location(1, 1)),
+                new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(2, 2)), new Directive('someDirective', [], new Location(2, 2))], new Location(2, 2)),
             ],
         ];
     }
