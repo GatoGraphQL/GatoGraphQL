@@ -232,7 +232,7 @@ class FieldEqualsToTest extends AbstractTestCase
         RelationalField $relationalField1,
         RelationalField $relationalField2
     ): void {
-        $this->assertTrue($relationalField1->isEquivalentTo($relationalField2));
+        $this->assertTrue($relationalField1->isEquivalentTo($relationalField2, []));
     }
 
     /**
@@ -259,7 +259,7 @@ class FieldEqualsToTest extends AbstractTestCase
         RelationalField $relationalField1,
         RelationalField $relationalField2
     ): void {
-        $this->assertFalse($relationalField1->isEquivalentTo($relationalField2));
+        $this->assertFalse($relationalField1->isEquivalentTo($relationalField2, []));
     }
 
     /**

@@ -167,7 +167,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
      *
      * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
      */
-    public function isEquivalentTo(FieldInterface $field): bool
+    protected function doIsEquivalentTo(AbstractField $field): bool
     {
         if ($this->getName() !== $field->getName()) {
             return false;

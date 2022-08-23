@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use SplObjectStorage;
@@ -425,6 +428,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     ): bool {
         $sameOutputKeyField = null;
         if (array_key_exists($field->getOutputKey(), $resolvedObjectRet)) {
+            /** @var ExecutableDocument */
+            $executableDocument = App::getState('executable-document-ast');
+            $fragments = $executableDocument->getDocument()->getFragments();
             /**
              * Check that the original field is indeed different to this one.
              * To find out, search for the previous fields with the same
@@ -432,7 +438,31 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
              */
             $differentFieldsWithSameOutputKeyForObject = array_values(array_filter(
                 $previouslyResolvedFieldsForObject,
-                fn (FieldInterface $previousField) => $field->getOutputKey() === $previousField->getOutputKey() && !$field->isEquivalentTo($previousField)
+                function (FieldInterface $previousField) use ($field, $fragments): bool
+                {
+                    if ($field->getOutputKey() !== $previousField->getOutputKey()) {
+                        return false;
+                    }
+
+                    /** Either they are both LeafField or RelationalField */
+                    if (get_class($field) !== get_class($previousField)) {
+                        return true;
+                    }
+
+                    if ($field instanceof LeafField) {
+                        /** @var LeafField */
+                        $leafField = $field;
+                        /** @var LeafField */
+                        $previousLeafField = $previousField;
+                        return !$leafField->isEquivalentTo($previousLeafField);
+                    }
+                    
+                    /** @var RelationalField */
+                    $relationalField = $field;
+                    /** @var RelationalField */
+                    $previousRelationalField = $previousField;
+                    return !$relationalField->isEquivalentTo($previousRelationalField, $fragments);
+                }
             ));
             if ($differentFieldsWithSameOutputKeyForObject !== []) {
                 $sameOutputKeyField = $differentFieldsWithSameOutputKeyForObject[0];
