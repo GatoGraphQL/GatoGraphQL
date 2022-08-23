@@ -127,8 +127,8 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
                     }
                     continue;
                 }
-                if ($thisInputListElemValue instanceof VariableReference) {
-                    /** @var VariableReference */
+                if ($thisInputListElemValue instanceof VariableReferenceInterface) {
+                    /** @var VariableReferenceInterface */
                     $variableReference = $againstInputListElemValue->getValueAST();
                     if (!$thisInputListElemValue->equalsTo($variableReference)) {
                         return false;
