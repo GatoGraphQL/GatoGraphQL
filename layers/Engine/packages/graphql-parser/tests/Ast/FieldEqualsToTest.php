@@ -249,6 +249,10 @@ class FieldEqualsToTest extends AbstractTestCase
                 new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
                 new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
+            'relational-with-equivalent-nested-leaf-fields' => [
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
         ];
     }
 
@@ -271,6 +275,14 @@ class FieldEqualsToTest extends AbstractTestCase
             'relational-with-different-args' => [
                 new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
                 new RelationalField('someRelationalField', null, [new Argument('someArg',new Literal('anotherValue', new Location(2, 2)), new Location(2, 2))], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'relational-with-different-leaf-fields' => [
+                new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'relational-with-different-nested-leaf-fields' => [
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
         ];
     }
