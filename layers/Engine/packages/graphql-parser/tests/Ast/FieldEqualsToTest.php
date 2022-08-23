@@ -49,6 +49,10 @@ class FieldEqualsToTest extends AbstractTestCase
      */
     protected function getEqualsToLeafFields(): array
     {
+        $inputObject1 = new stdClass();
+        $inputObject1->someKey = new VariableReference('someVariable', null, new Location(1, 1));
+        $inputObject2 = new stdClass();
+        $inputObject2->someKey = new VariableReference('someVariable', null, new Location(2, 2));
         return [
             'name' => [
                 new LeafField('someField', null, [], [], new Location(1, 1)),
@@ -71,8 +75,8 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(2, 2))], new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
             'unordered-args' => [
-                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
-                new LeafField('someField', null, [new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2)), new Argument('someArg', new Literal('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+                new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new InputObject($inputObject1, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('anotherArg', new InputObject($inputObject2, new Location(2, 2)), new Location(2, 2)), new Argument('someArg', new Literal('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
             'with-directives' => [
                 new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(1, 1))], new Location(1, 1)),
