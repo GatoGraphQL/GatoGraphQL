@@ -71,8 +71,24 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [], [], new Location(2, 2)),
             ],
             'with-args' => [
-                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(1, 1))], new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
-                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(2, 2))], new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+                new LeafField('someField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2)), new Argument('anotherArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'with-literal-args' => [
+                new LeafField('someField', null, [new Argument('someArg',new Literal('someValue', new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg',new Literal('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'with-enum-args' => [
+                new LeafField('someField', null, [new Argument('someArg',new Enum('someValue', new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg',new Enum('someValue', new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'with-variable-reference-args' => [
+                new LeafField('someField', null, [new Argument('someArg', new VariableReference('someVariable', null, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new VariableReference('someVariable', null, new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'with-input-list-args' => [
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(1, 1)), new Enum('someValue', new Location(1, 1)), new VariableReference('someVariable', null, new Location(1, 1)), new InputList([new Literal('someValue', new Location(1, 1)), new Enum('someValue', new Location(1, 1)), new VariableReference('someVariable', null, new Location(1, 1))], new Location(1, 1))], new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
+                new LeafField('someField', null, [new Argument('someArg', new InputList([new Literal('someValue', new Location(2, 2)), new Enum('someValue', new Location(2, 2)), new VariableReference('someVariable', null, new Location(2, 2)), new InputList([new Literal('someValue', new Location(2, 2)), new Enum('someValue', new Location(2, 2)), new VariableReference('someVariable', null, new Location(2, 2))], new Location(2, 2))], new Location(2, 2)), new Location(2, 2))], [], new Location(2, 2)),
             ],
             'unordered-args' => [
                 new LeafField('someField', null, [new Argument('someArg', new Literal('someValue', new Location(1, 1)), new Location(1, 1)), new Argument('anotherArg', new InputObject($inputObject1, new Location(1, 1)), new Location(1, 1))], [], new Location(1, 1)),
