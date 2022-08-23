@@ -11,6 +11,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -227,12 +229,14 @@ class FieldEqualsToTest extends AbstractTestCase
 
     /**
      * @dataProvider getRelationalFieldEqualsToRelationalFieldProviderEntries
+     * @param Fragment[] $fragments
      */
     public function testRelationalFieldEqualsToRelationalField(
         RelationalField $relationalField1,
-        RelationalField $relationalField2
+        RelationalField $relationalField2,
+        array $fragments = []
     ): void {
-        $this->assertTrue($relationalField1->isEquivalentTo($relationalField2, []));
+        $this->assertTrue($relationalField1->isEquivalentTo($relationalField2, $fragments));
     }
 
     /**
@@ -252,6 +256,13 @@ class FieldEqualsToTest extends AbstractTestCase
             'relational-with-equivalent-nested-leaf-fields' => [
                 new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
                 new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'relational-with-fragments' => [
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new FragmentReference('SomeFragment', new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
+                [
+                    new Fragment('SomeFragment', 'SomeModel', [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], new Location(1, 1)),
+                ],
             ],
         ];
     }
@@ -279,6 +290,10 @@ class FieldEqualsToTest extends AbstractTestCase
             'relational-with-different-leaf-fields' => [
                 new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1)),
                 new RelationalField('someRelationalField', null, [], [new LeafField('anotherLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2)),
+            ],
+            'relational-with-different-relational-fields' => [
+                new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
+                new RelationalField('someRelationalField', null, [], [new RelationalField('anotherRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(2, 2))], [], new Location(2, 2))], [], new Location(2, 2)),
             ],
             'relational-with-different-nested-leaf-fields' => [
                 new RelationalField('someRelationalField', null, [], [new RelationalField('someRelationalField', null, [], [new LeafField('someLeafField', null, [], [], new Location(1, 1))], [], new Location(1, 1))], [], new Location(1, 1)),
