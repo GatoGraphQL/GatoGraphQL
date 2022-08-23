@@ -50,8 +50,20 @@ class FieldEqualsToTest extends AbstractTestCase
     protected function getEqualsToLeafFields(): array
     {
         return [
-            [
+            'name' => [
                 new LeafField('someField', null, [], [], new Location(1, 1)),
+                new LeafField('someField', null, [], [], new Location(2, 2)),
+            ],
+            'alias' => [
+                new LeafField('someField', 'someAlias', [], [], new Location(1, 1)),
+                new LeafField('someField', 'someAlias', [], [], new Location(2, 2)),
+            ],
+            'same-alias-as-name' => [
+                new LeafField('someField', null, [], [], new Location(1, 1)),
+                new LeafField('someField', 'someField', [], [], new Location(2, 2)),
+            ],
+            'same-alias-as-name-2' => [
+                new LeafField('someField', 'someField', [], [], new Location(1, 1)),
                 new LeafField('someField', null, [], [], new Location(2, 2)),
             ],
         ];
@@ -73,9 +85,21 @@ class FieldEqualsToTest extends AbstractTestCase
     protected function getDoesNotEqualToLeafFields(): array
     {
         return [
-            [
+            'name' => [
                 new LeafField('someField', null, [], [], new Location(1, 1)),
                 new LeafField('anotherField', null, [], [], new Location(2, 2)),
+            ],
+            'alias' => [
+                new LeafField('someField', 'someAlias', [], [], new Location(1, 1)),
+                new LeafField('someField', 'anotherAlias', [], [], new Location(2, 2)),
+            ],
+            'same-alias-as-name-but-different' => [
+                new LeafField('someField', 'someField', [], [], new Location(1, 1)),
+                new LeafField('someField', 'anotherAlias', [], [], new Location(2, 2)),
+            ],
+            'same-alias-as-name-but-different-2' => [
+                new LeafField('someField', 'anotherAlias', [], [], new Location(1, 1)),
+                new LeafField('someField', 'someField', [], [], new Location(2, 2)),
             ],
         ];
     }
