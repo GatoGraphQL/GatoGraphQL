@@ -35,38 +35,46 @@ use stdClass;
 class ASTEqualsToTest extends AbstractTestCase
 {
     /**
-     * @dataProvider equalsToLeafFields
+     * @dataProvider getEqualsToLeafFields
      */
     public function testEqualsToLeafFields(
         LeafField $leafField1,
         LeafField $leafField2
     ): void {
-        $this->assertTrue(
-            $leafField1->equalsTo($leafField2)
-        );
+        $this->assertTrue($leafField1->equalsTo($leafField2));
     }
 
     /**
      * @return mixed[]
      */
-    public function equalsToLeafFields(): array
+    protected function getEqualsToLeafFields(): array
     {
         return [
             [
-                new LeafField(
-                    'someField',
-                    null,
-                    [],
-                    [],
-                    new Location(1, 1)
-                ),
-                new LeafField(
-                    'someField',
-                    null,
-                    [],
-                    [],
-                    new Location(2, 2)
-                )
+                new LeafField('someField', null, [], [], new Location(1, 1)),
+                new LeafField('someField', null, [], [], new Location(2, 2)),
+            ],
+        ];
+    }
+    /**
+     * @dataProvider getDoesNotEqualToLeafFields
+     */
+    public function testDoesNotEqualToLeafFields(
+        LeafField $leafField1,
+        LeafField $leafField2
+    ): void {
+        $this->assertFalse($leafField1->equalsTo($leafField2));
+    }
+
+    /**
+     * @return mixed[]
+     */
+    protected function getDoesNotEqualToLeafFields(): array
+    {
+        return [
+            [
+                new LeafField('someField', null, [], [], new Location(1, 1)),
+                new LeafField('anotherField', null, [], [], new Location(2, 2)),
             ],
         ];
     }
