@@ -82,6 +82,10 @@ class FieldEqualsToTest extends AbstractTestCase
                 new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(1, 1)), new Directive('anotherDirective', [], new Location(1, 1))], new Location(1, 1)),
                 new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(2, 2)), new Directive('anotherDirective', [], new Location(2, 2))], new Location(2, 2)),
             ],
+            'with-directives-with-args' => [
+                new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(1, 1)), new Location(1, 1))], new Location(1, 1))], new Location(1, 1)),
+                new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(2, 2)), new Location(2, 2))], new Location(2, 2))], new Location(2, 2)),
+            ],
         ];
     }
 
@@ -144,6 +148,10 @@ class FieldEqualsToTest extends AbstractTestCase
             'different-directive-count' => [
                 new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(1, 1))], new Location(1, 1)),
                 new LeafField('someField', null, [], [new Directive('someDirective', [], new Location(2, 2)), new Directive('someDirective', [], new Location(2, 2))], new Location(2, 2)),
+            ],
+            'different-args-in-directives' => [
+                new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('someEnum', new Location(2, 2)), new Location(2, 2))], new Location(1, 1))], new Location(1, 1)),
+                new LeafField('someField', null, [], [new Directive('someDirective', [new Argument('someArg', new Enum('anotherEnum', new Location(2, 2)), new Location(2, 2))], new Location(2, 2))], new Location(2, 2)),
             ],
         ];
     }
