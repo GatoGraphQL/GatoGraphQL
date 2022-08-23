@@ -8,7 +8,6 @@ use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
-use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
@@ -327,7 +326,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * Allow GraphQL to override as to provide custom validations.
      * Return `false` if there is an error.
      *
-     * @param FieldInterface[] $fields
+     * @param FieldInterface[] $previouslyResolvedFieldsForObject
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
@@ -342,66 +341,5 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         string|int $objectID,
     ): bool {
         return true;
-    }
-
-    protected function getObjectEntry(string $typeOutputKey, array $item): array
-    {
-        $entry = [
-            'message' => $item[Tokens::MESSAGE],
-        ];
-        if ($locations = $item[Tokens::LOCATIONS]) {
-            $entry['locations'] = $locations;
-        }
-        /**
-         * Add the causes of the error, if any.
-         *
-         * @see https://github.com/graphql/graphql-spec/issues/893
-         */
-        if ($causes = $item[Tokens::CAUSES] ?? []) {
-            $entry['causes'] = $causes;
-        }
-        if (
-            $extensions = array_merge(
-                $this->getObjectEntryExtensions($typeOutputKey, $item),
-                $item[Tokens::EXTENSIONS] ?? []
-            )
-        ) {
-            $entry['extensions'] = $extensions;
-        }
-        return $entry;
-    }
-
-    /**
-     * The entry is similar to Schema, plus the
-     * addition of the object ID/IDs
-     */
-    protected function getObjectEntryExtensions(string $typeOutputKey, array $item): array
-    {
-        $extensions = $this->getSchemaEntryExtensions($typeOutputKey, $item);
-
-        /** @var array<string|int> */
-        $ids = $item[Tokens::IDS];
-        if (count($ids) === 1) {
-            $extensions['id'] = $ids[0];
-        } else {
-            $extensions['ids'] = $ids;
-        }
-
-        return $extensions;
-    }
-
-    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
-    {
-        $extensions = [];
-        if ($path = $item[Tokens::PATH] ?? null) {
-            $extensions['path'] = $path;
-        }
-        $extensions['type'] = $typeOutputKey;
-        if ($field = $item[Tokens::FIELD] ?? null) {
-            $extensions['field'] = $field;
-        } elseif ($dynamicField = $item[Tokens::DYNAMIC_FIELD] ?? null) {
-            $extensions['dynamicField'] = $dynamicField;
-        }
-        return $extensions;
     }
 }
