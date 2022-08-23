@@ -238,6 +238,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 if (!$resolvedObject->contains($leafField)) {
                     continue;
                 }
+                $resolvedObjectRet ??= [];
                 $this->resolveObjectData(
                     $previouslyResolvedFieldsForObject,
                     $leafField,
@@ -332,7 +333,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         LeafField $leafField,
         string $typeOutputKey,
         array &$sourceRet,
-        ?array &$resolvedObjectRet,
+        array &$resolvedObjectRet,
         SplObjectStorage $resolvedObject,
         string|int $objectID,
     ): void {

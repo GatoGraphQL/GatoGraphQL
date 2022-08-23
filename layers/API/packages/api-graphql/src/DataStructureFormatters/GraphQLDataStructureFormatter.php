@@ -411,7 +411,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         LeafField $leafField,
         string $typeOutputKey,
         array &$sourceRet,
-        ?array &$resolvedObjectRet,
+        array &$resolvedObjectRet,
         SplObjectStorage $resolvedObject,
         string|int $objectID,
     ): void {
