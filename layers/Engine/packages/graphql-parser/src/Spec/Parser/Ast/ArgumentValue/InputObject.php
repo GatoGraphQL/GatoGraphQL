@@ -8,7 +8,10 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Exception\ShouldNotHappenException;
 use stdClass;
+
+use function get_object_vars;
 
 class InputObject extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
@@ -66,6 +69,98 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
      */
     public function equalsTo(InputObject $inputObject): bool
     {
-        return $this->getAstValue() === $inputObject->getAstValue();
+        $thisInputObjectValue = $this->getAstValue();
+        $againstInputObjectValue = $inputObject->getAstValue();
+        $thisInputObjectValueKeys = get_object_vars($thisInputObjectValue);
+        $againstInputObjectValueKeys = get_object_vars($againstInputObjectValue);
+        $thisInputObjectValueCount = count($thisInputObjectValueKeys);
+        if ($thisInputObjectValueCount !== count($againstInputObjectValueKeys)) {
+            return false;
+        }
+        foreach ($thisInputObjectValueKeys as $key) {
+            if (!property_exists($againstInputObjectValue, $key)) {
+                return false;
+            };
+            $thisInputObjectElemValue = $thisInputObjectValue->$key;
+            $againstInputObjectElemValue = $againstInputObjectValue->$key;
+
+            if (($thisInputObjectElemValue === null && $againstInputObjectElemValue !== null)
+                || ($thisInputObjectElemValue !== null && $againstInputObjectElemValue === null)
+            ) {
+                return false;
+            }
+
+            if ((is_object($thisInputObjectElemValue) && !is_object($againstInputObjectElemValue))
+                || (!is_object($thisInputObjectElemValue) && is_object($againstInputObjectElemValue))
+            ) {
+                return false;
+            }
+
+            if (is_object($thisInputObjectElemValue)) {
+                if (get_class($thisInputObjectElemValue) !== get_class($againstInputObjectElemValue)) {
+                    return false;
+                }
+                
+                /**
+                 * Call ->equalsTo depending on the type of object
+                 */
+                if ($thisInputObjectElemValue instanceof InputList) {
+                    /** @var InputList */
+                    $inputList = $againstInputObjectElemValue->getValueAST();
+                    if (!$thisInputObjectElemValue->equalsTo($inputList)) {
+                        return false;
+                    }
+                    continue;
+                }
+                if ($thisInputObjectElemValue instanceof InputObject) {
+                    /** @var InputObject */
+                    $againstInputObject = $againstInputObjectElemValue->getValueAST();
+                    if (!$thisInputObjectElemValue->equalsTo($againstInputObject)) {
+                        return false;
+                    }
+                    continue;
+                }
+                if ($thisInputObjectElemValue instanceof Enum) {
+                    /** @var Enum */
+                    $enum = $againstInputObjectElemValue->getValueAST();
+                    if (!$thisInputObjectElemValue->equalsTo($enum)) {
+                        return false;
+                    }
+                    continue;
+                }
+                if ($thisInputObjectElemValue instanceof Literal) {
+                    /** @var Literal */
+                    $literal = $againstInputObjectElemValue->getValueAST();
+                    if (!$thisInputObjectElemValue->equalsTo($literal)) {
+                        return false;
+                    }
+                    continue;
+                }
+                if ($thisInputObjectElemValue instanceof VariableReference) {
+                    /** @var VariableReference */
+                    $variableReference = $againstInputObjectElemValue->getValueAST();
+                    if (!$thisInputObjectElemValue->equalsTo($variableReference)) {
+                        return false;
+                    }
+                    continue;
+                }
+                
+                throw new ShouldNotHappenException(
+                    sprintf(
+                        $this->__('Cannot recognize the type of the object, of class \'%s\'', 'graphql-parser'),
+                        get_class($thisInputObjectElemValue)
+                    )
+                );
+            }
+            
+            /**
+             * The element is a native type (bool, string, int, or float)
+             */
+            if ($thisInputObjectElemValue !== $againstInputObjectElemValue) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }
