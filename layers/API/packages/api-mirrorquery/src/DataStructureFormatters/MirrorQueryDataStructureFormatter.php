@@ -7,8 +7,8 @@ namespace PoPAPI\APIMirrorQuery\DataStructureFormatters;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -154,12 +154,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($datasetComponentData as $componentName => $componentData) {
             $typeOutputKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
             $objectIDorIDs = $componentData['objectIDs'];
-            $this->addData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
+            $this->addData($ret, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
         }
         return $ret;
     }
 
     /**
+     * @param array<string,mixed> $sourceRet
      * @param array<string,mixed>|null $ret
      * @param FieldInterface[] $fields
      * @param array<string,array<string|int,array<string,mixed>>> $databases
@@ -167,7 +168,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string|int>|string|integer $objectIDorIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    protected function addData(?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
+    private function addData(array &$sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
         // The results can be a single ID or value, or an array of IDs
         if (is_array($objectIDorIDs)) {
@@ -175,22 +176,23 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 // Add a new array for this DB object, where to return all its properties
                 $ret[] = [];
                 $resolvedObjectRet = &$ret[count($ret) - 1];
-                $this->addObjectData($resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+                $this->addObjectData($sourceRet, $resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
             }
             return;
         }
         $objectID = $objectIDorIDs;
-        $this->addObjectData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+        $this->addObjectData($sourceRet, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
     }
 
     /**
+     * @param array<string,mixed> $sourceRet
      * @param array<string,mixed>|null $resolvedObjectRet
      * @param FieldInterface[] $fields
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    protected function addObjectData(?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
+    private function addObjectData(array &$sourceRet, ?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
         if (!$fields) {
             return;
@@ -218,32 +220,50 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
+        $resolvedObjectRet ??= [];
+
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
+        /** @var FieldInterface[] */
+        $previouslyResolvedFieldsForObject = [];
         foreach ($fields as $field) {
+            /**
+             * If the key doesn't exist, then do nothing.
+             *
+             * That means that this field does not apply
+             * to the current object (eg: it's on a Fragment
+             * to be applied on a different model)
+             */
+            if (!$resolvedObject->contains($field)) {
+                continue;
+            }
+
+            /**
+             * Allow GraphQL to validate custom errors
+             */
+            $validObjectData = $this->validateObjectData(
+                $previouslyResolvedFieldsForObject,
+                $field,
+                $typeOutputKey,
+                $sourceRet,
+                $resolvedObjectRet,
+                $resolvedObject,
+                $objectID,
+            );
+            if (!$validObjectData) {
+                continue;
+            }
+            $previouslyResolvedFieldsForObject[] = $field;
+
             if ($field instanceof LeafField) {
                 /** @var LeafField */
                 $leafField = $field;
-                /**
-                 * If the key doesn't exist, then do nothing.
-                 */
-                if (!$resolvedObject->contains($leafField)) {
-                    continue;
-                }
                 $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
                 continue;
             }
 
             /** @var RelationalField */
             $relationalField = $field;
-
-            /**
-             * If the key doesn't exist, then do nothing.
-             */
-            if (!$resolvedObject->contains($relationalField)) {
-                continue;
-            }
-
             $relationalFieldOutputKey = $relationalField->getOutputKey();
 
             // If it's null, directly assign the null to the result
@@ -298,7 +318,28 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $relationalField->getFieldsOrFragmentBonds(),
                 $fragments
             );
-            $this->addData($resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
+            $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
+    }
+
+    /**
+     * Allow GraphQL to override as to provide custom validations.
+     * Return `false` if there is an error.
+     *
+     * @param FieldInterface[] $previouslyResolvedFieldsForObject
+     * @param array<string,mixed> $sourceRet
+     * @param array<string,mixed> $resolvedObjectRet
+     * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
+     */
+    protected function validateObjectData(
+        array $previouslyResolvedFieldsForObject,
+        FieldInterface $field,
+        string $typeOutputKey,
+        array &$sourceRet,
+        array &$resolvedObjectRet,
+        SplObjectStorage $resolvedObject,
+        string|int $objectID,
+    ): bool {
+        return true;
     }
 }

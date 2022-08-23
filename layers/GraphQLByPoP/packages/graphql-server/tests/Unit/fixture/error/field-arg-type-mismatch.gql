@@ -16,7 +16,7 @@ query {
       name
     }
     # The input does not accept NULL values
-    passingArrayOfArrays: directives(ofKinds: ["query", null]) {
+    passingArrayWithNullValues: directives(ofKinds: ["query", null]) {
       name
     }
   }

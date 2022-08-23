@@ -1,0 +1,47 @@
+query ($format: String = "d/m") {
+  posts(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    id
+    title
+    title: excerpt
+    dateStr
+    dateStr(format: "d/m")
+  }
+
+  pages(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    dateStr(format: "d/m")
+    dateStr(format: $format)
+  }
+
+  customPosts(
+    pagination: {
+      limit: 2
+    }
+  ) {
+    __typename
+    ...CustomPostData
+  }
+}
+
+fragment CustomPostData on CustomPostUnion {
+  customPostType
+  ...CustomPostNodeData
+}
+
+fragment CustomPostNodeData on IsCustomPost {
+  date
+  ...PostData
+}
+
+fragment PostData on Post {
+  id
+  date: title
+  __typename: excerpt
+}

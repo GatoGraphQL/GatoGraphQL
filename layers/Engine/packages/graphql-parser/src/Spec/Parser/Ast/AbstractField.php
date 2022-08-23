@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 abstract class AbstractField extends AbstractAst implements FieldInterface
 {
@@ -156,5 +157,94 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
             $this->getName(),
             $strFieldArguments,
         );
+    }
+
+    /**
+     * Indicate if a field equals another one based on its properties,
+     * not on its object hash ID.
+     *
+     * Watch out: `{ title: title }` is equivalent to `{ title }`
+     *
+     * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging
+     */
+    protected function doIsEquivalentTo(AbstractField $field): bool
+    {
+        if ($this->getName() !== $field->getName()) {
+            return false;
+        }
+
+        if ($this->getAlias() !== $field->getAlias()) {
+            /**
+             * If the alias is the same as the name then can skip,
+             * as to have `{ title: title }` equivalent to `{ title }`
+             */
+            if (
+                !(($this->getName() === $this->getAlias() && $field->getAlias() === null)
+                || ($field->getName() === $field->getAlias() && $this->getAlias() === null)
+                )
+            ) {
+                return false;
+            }
+        }
+
+        /**
+         * Compare arguments
+         */
+        $thisArguments = $this->getArguments();
+        $againstArguments = $field->getArguments();
+        $argumentCount = count($thisArguments);
+        if ($argumentCount !== count($againstArguments)) {
+            return false;
+        }
+
+        /**
+         * The order of the arguments does not matter.
+         * These 2 fields are equivalent:
+         *
+         *   ```
+         *   {
+         *     dateStr(format: "d/m", gmt: true)
+         *     dateStr(gmt: true, format: "d/m")
+         *   }
+         *   ```
+         *
+         * So first sort them as to compare apples to apples.
+         */
+        usort($thisArguments, fn (Argument $argument1, Argument $argument2): int => $argument1->getName() <=> $argument2->getName());
+        usort($againstArguments, fn (Argument $argument1, Argument $argument2): int => $argument1->getName() <=> $argument2->getName());
+        for ($i = 0; $i < $argumentCount; $i++) {
+            $thisArgument = $thisArguments[$i];
+            $againstArgument = $againstArguments[$i];
+            if (!$thisArgument->isEquivalentTo($againstArgument)) {
+                return false;
+            }
+        }
+
+        /**
+         * The order of the directives does matter.
+         * These 2 fields are not equivalent:
+         *
+         *   ```
+         *   {
+         *     id @upperCase @titleCase
+         *     id @titleCase @upperCase
+         *   }
+         *   ```
+         */
+        $thisDirectives = $this->getDirectives();
+        $againstDirectives = $field->getDirectives();
+        $directiveCount = count($thisDirectives);
+        if ($directiveCount !== count($againstDirectives)) {
+            return false;
+        }
+        for ($i = 0; $i < $directiveCount; $i++) {
+            $thisDirective = $thisDirectives[$i];
+            $againstDirective = $againstDirectives[$i];
+            if (!$thisDirective->isEquivalentTo($againstDirective)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

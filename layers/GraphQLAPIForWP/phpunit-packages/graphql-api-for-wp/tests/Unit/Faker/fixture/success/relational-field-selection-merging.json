@@ -1,0 +1,24 @@
+{
+    "data": {
+        "posts": [
+            {
+                "id": 1724,
+                "title": "Keyboard navigation"
+            },
+            {
+                "id": 358,
+                "title": "Post Format: Standard"
+            }
+        ],
+        "customPosts": [
+            {
+                "id": 1724,
+                "title": "Keyboard navigation"
+            },
+            {
+                "id": 2,
+                "title": "About The Tests"
+            }
+        ]
+    }
+}
