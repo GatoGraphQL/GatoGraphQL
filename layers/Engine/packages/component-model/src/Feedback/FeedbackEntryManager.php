@@ -8,6 +8,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Engine\EngineInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
 use PoP\ComponentModel\Module;
