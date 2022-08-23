@@ -32,7 +32,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 use stdClass;
 
-class ASTEqualsToTest extends AbstractTestCase
+class FieldEqualsToTest extends AbstractTestCase
 {
     /**
      * @dataProvider getEqualsToLeafFields
