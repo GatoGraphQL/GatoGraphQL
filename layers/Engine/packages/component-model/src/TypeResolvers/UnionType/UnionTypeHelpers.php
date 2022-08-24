@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 use function explode;
@@ -55,31 +52,5 @@ class UnionTypeHelpers
             $relationalTypeResolver->getTypeOutputKey() .
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR .
             (string) $id;
-    }
-
-    /**
-     * Return a class or another depending on these possibilities:
-     *
-     * - If there is more than 1 target type resolver for the Union, return the Union
-     * - (By configuration) If there is only one target, return that one directly
-     *   and not the Union (since it's more efficient)
-     * - If there are none types, return `null`. As a consequence,
-     *   the ID is returned as a field, not as a connection
-     */
-    public static function getUnionOrTargetObjectTypeResolver(UnionTypeResolverInterface $unionTypeResolver): ?UnionTypeResolverInterface
-    {
-        $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
-        if ($targetTypeResolvers) {
-            // By configuration: If there is only 1 item, return only that one
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->useSingleTypeInsteadOfUnionType()) {
-                return count($targetTypeResolvers) === 1 ?
-                    $targetTypeResolvers[0] :
-                    $unionTypeResolver;
-            }
-            return $unionTypeResolver;
-        }
-        return null;
     }
 }

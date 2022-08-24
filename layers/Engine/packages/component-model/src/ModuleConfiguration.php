@@ -87,19 +87,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function useSingleTypeInsteadOfUnionType(): bool
-    {
-        $envVariable = Environment::USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function enableAdminSchema(): bool
     {
         $envVariable = Environment::ENABLE_ADMIN_SCHEMA;
