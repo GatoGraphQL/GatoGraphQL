@@ -68,7 +68,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     }
 
     /**
-     * @return array<string,array<string>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
+     * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
     abstract protected function getPluginNameEntries(): array;
 
