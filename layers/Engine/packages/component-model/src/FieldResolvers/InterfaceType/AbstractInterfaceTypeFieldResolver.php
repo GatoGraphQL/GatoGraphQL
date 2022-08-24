@@ -173,9 +173,10 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
                 $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
                 foreach ($interfaceTypeResolverClassesToAttachTo as $interfaceTypeResolverClassToAttachTo) {
+                    $interfaceTypeResolverClassParents = class_parents($interfaceTypeResolverClass);
                     if (
                         $interfaceTypeResolverClass === $interfaceTypeResolverClassToAttachTo
-                        || in_array($interfaceTypeResolverClassToAttachTo, class_parents($interfaceTypeResolverClass))
+                        || ($interfaceTypeResolverClassParents !== false && in_array($interfaceTypeResolverClassToAttachTo, $interfaceTypeResolverClassParents))
                     ) {
                         $this->partiallyImplementedInterfaceTypeResolvers[] = $interfaceTypeResolver;
                         break;
