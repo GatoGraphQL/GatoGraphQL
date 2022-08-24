@@ -422,6 +422,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $fragmentModelListNameFields[$fragmentModelListName][] = $field;
         }
 
+        /** @var string */
         $query = App::getState('query');
 
         /**
