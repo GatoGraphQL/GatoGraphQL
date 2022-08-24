@@ -360,10 +360,12 @@ class AppLoader implements AppLoaderInterface
             }
             $moduleConfiguration = $this->moduleClassConfiguration[$moduleClass] ?? [];
             $skipSchemaForModule = $this->skipSchemaForModule($module);
+            /** @var array<class-string<ModuleInterface>> */
+            $skipSchemaModuleClasses = $this->skipSchemaModuleClasses;
             $module->initialize(
                 $moduleConfiguration,
                 $skipSchemaForModule,
-                $this->skipSchemaModuleClasses
+                $skipSchemaModuleClasses
             );
         }
 
