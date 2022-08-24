@@ -15,8 +15,13 @@ class UnionTypeHelpers
      *
      * @return array{0:string,1:string|int}
      */
-    public static function extractObjectTypeAndID(string $composedTypeOutputKeyObjectID): array
+    public static function extractObjectTypeAndID(string|int $maybeComposedTypeOutputKeyObjectID): array
     {
+        if (is_int($maybeComposedTypeOutputKeyObjectID)) {
+            return $maybeComposedTypeOutputKeyObjectID;
+        }
+        /** @var string */
+        $composedTypeOutputKeyObjectID = $maybeComposedTypeOutputKeyObjectID;
         $parts = explode(
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR,
             $composedTypeOutputKeyObjectID
@@ -32,8 +37,13 @@ class UnionTypeHelpers
     /**
      * Extracts the ID from the object ID
      */
-    public static function extractDBObjectID(string $composedDBObjectTypeAndID): string|int
+    public static function extractDBObjectID(string|int $maybeComposedDBObjectTypeAndID): string|int
     {
+        if (is_int($maybeComposedDBObjectTypeAndID)) {
+            return $maybeComposedDBObjectTypeAndID;
+        }
+        /** @var string */
+        $composedDBObjectTypeAndID = $maybeComposedDBObjectTypeAndID;
         $elements = explode(
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR,
             $composedDBObjectTypeAndID
