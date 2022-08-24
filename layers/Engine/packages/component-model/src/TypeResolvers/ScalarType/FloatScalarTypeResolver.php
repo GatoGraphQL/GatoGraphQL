@@ -38,6 +38,7 @@ class FloatScalarTypeResolver extends AbstractScalarTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string|int|float|bool $inputValue */
 
         $castInputValue = CastToType::_float($inputValue);
         if ($castInputValue === null) {

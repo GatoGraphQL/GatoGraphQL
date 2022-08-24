@@ -33,6 +33,7 @@ class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string|int|float|bool $inputValue */
         return $inputValue;
     }
 }
