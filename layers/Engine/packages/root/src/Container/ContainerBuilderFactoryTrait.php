@@ -109,6 +109,7 @@ trait ContainerBuilderFactoryTrait
             $this->instance = new ContainerBuilder();
         } else {
             require_once $this->cacheFile;
+            /** @var class-string<ContainerBuilder> */
             $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClass}";
             $this->instance = new $containerFullyQuantifiedClass();
         }
