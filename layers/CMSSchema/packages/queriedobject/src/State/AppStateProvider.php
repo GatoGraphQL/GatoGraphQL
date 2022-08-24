@@ -33,7 +33,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             $state['routing']['queried-object'] = $this->getCMSRoutingStateService()->getQueriedObject();
-            $state['routing']['queried-object-id'] = $this->getCMSRoutingStateService()->getQueriedObjectId();
+            $state['routing']['queried-object-id'] = $this->getCMSRoutingStateService()->getQueriedObjectID();
         } else {
             $state['routing']['queried-object'] = null;
             $state['routing']['queried-object-id'] = null;

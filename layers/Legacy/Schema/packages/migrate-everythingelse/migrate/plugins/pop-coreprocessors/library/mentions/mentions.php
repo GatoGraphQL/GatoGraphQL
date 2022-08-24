@@ -134,7 +134,7 @@ class PoP_Mentions
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         if ($tags = $this->getHashtagsFromContent($commentTypeAPI->getCommentContent($comment))) {
             // $append = true because the tags are added to the post from the comment
-            $postTagTypeAPI->setPostTags($commentTypeAPI->getCommentPostId($comment), $tags, true);
+            $postTagTypeAPI->setPostTags($commentTypeAPI->getCommentPostID($comment), $tags, true);
 
             // Save the tags as comment meta
             $tag_ids = $postTagTypeAPI->getTags(
@@ -149,7 +149,7 @@ class PoP_Mentions
 
         // Allow Events Manager to also add its own tags with its own taxonomy
         // This is needed so we can search using parameter 'tag' with events, using the common slug
-        \PoP\Root\App::doAction('PoP_Mentions:post_tags:add', $commentTypeAPI->getCommentPostId($comment), $tags);
+        \PoP\Root\App::doAction('PoP_Mentions:post_tags:add', $commentTypeAPI->getCommentPostID($comment), $tags);
 
         if ($user_nicenames = $this->getUserNicenamesFromContent($commentTypeAPI->getCommentContent($comment))) {
             $taggedusers_ids = array();
@@ -259,7 +259,7 @@ class PoP_Mentions
             $userObjectTypeResolver = $instanceManager->getInstance(UserObjectTypeResolver::class);
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-                '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userObjectTypeResolver->getTypeName() . '-' . $userTypeAPI->getUserID($user),
+                '#popover-' . RequestUtils::getDomainID($cmsService->getSiteURL()) . '-' . $userObjectTypeResolver->getTypeName() . '-' . $userTypeAPI->getUserID($user),
                 $userTypeAPI->getUserURL($userTypeAPI->getUserID($user)),
                 $userTypeAPI->getUserDisplayName($user)
             );

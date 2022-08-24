@@ -66,9 +66,9 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
                 'user_id' => $user_id,
                 'action' => $action,
                 'object_type' => 'Comments',
-                'object_subtype' => $customPostTypeAPI->getCustomPostType($commentTypeAPI->getCommentPostId($comment)),
+                'object_subtype' => $customPostTypeAPI->getCustomPostType($commentTypeAPI->getCommentPostID($comment)),
                 'object_id' => $comment_id,
-                'object_name' => $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment)),
+                'object_name' => $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostID($comment)),
             )
         );
     }

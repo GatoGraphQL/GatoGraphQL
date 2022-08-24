@@ -352,7 +352,7 @@ class Engine implements EngineInterface
     {
         $model_instance_id = $current_uri = null;
         if ($has_extra_routes = $this->getExtraRoutes() !== []) {
-            $model_instance_id = $this->getModelInstance()->getModelInstanceId();
+            $model_instance_id = $this->getModelInstance()->getModelInstanceID();
             $current_uri = GeneralUtils::removeDomain(
                 $this->getRequestHelperService()->getCurrentURL()
             );
@@ -756,7 +756,7 @@ class Engine implements EngineInterface
         $meta = array(
             Response::ENTRY_COMPONENT => $entryComponent->name,
             Response::UNIQUE_ID => $moduleInfo->getUniqueID(),
-            'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
+            'modelinstanceid' => $this->getModelInstance()->getModelInstanceID(),
         );
 
         if (App::isHTTPRequest()) {

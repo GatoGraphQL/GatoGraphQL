@@ -31,13 +31,13 @@ interface CommentTypeAPIInterface
 
     public function getCommentContent(object $comment): string;
     public function getCommentRawContent(object $comment): string;
-    public function getCommentPostId(object $comment): int|string;
+    public function getCommentPostID(object $comment): int|string;
     public function isCommentApproved(object $comment): bool;
     public function getCommentType(object $comment): string;
     public function getCommentStatus(object $comment): string;
     public function getCommentParent(object $comment): int|string|null;
     public function getCommentDate(object $comment, bool $gmt = false): string;
-    public function getCommentId(object $comment): string|int;
+    public function getCommentID(object $comment): string|int;
     public function getCommentAuthorName(object $comment): string;
     public function getCommentAuthorEmail(object $comment): string;
     public function getCommentAuthorURL(object $comment): string;

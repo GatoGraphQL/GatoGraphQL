@@ -39,7 +39,7 @@ class ModelInstance implements ModelInstanceInterface
         return $this->definitionManager ??= $this->instanceManager->getInstance(DefinitionManagerInterface::class);
     }
 
-    public function getModelInstanceId(): string
+    public function getModelInstanceID(): string
     {
         // The string is too long. Use a hashing function to shorten it
         return md5(implode('-', $this->getModelInstanceElements()));

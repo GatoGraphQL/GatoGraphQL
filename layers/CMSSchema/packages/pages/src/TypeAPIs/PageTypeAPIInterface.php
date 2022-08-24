@@ -46,5 +46,5 @@ interface PageTypeAPIInterface extends CustomPostTypeAPIInterface
      */
     public function getPageCustomPostType(): string;
 
-    public function getPageId(object $page): string|int;
+    public function getPageID(object $page): string|int;
 }

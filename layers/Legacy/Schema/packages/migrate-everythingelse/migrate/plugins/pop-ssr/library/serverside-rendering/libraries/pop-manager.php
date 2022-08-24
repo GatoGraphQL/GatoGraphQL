@@ -387,7 +387,7 @@ class PoP_ServerSideManager
         //$multidomain_websites = PoP_MultiDomain_Utils::getMultidomainWebsites();
         return array(
             'domain' => $domain,
-            'domain-id' => /*$multidomain_websites[$domain] ? $multidomain_websites[$domain]['id'] : */RequestUtils::getDomainId($domain),
+            'domain-id' => /*$multidomain_websites[$domain] ? $multidomain_websites[$domain]['id'] : */RequestUtils::getDomainID($domain),
             'feedback' => $this->getTopLevelFeedback($domain),
         );
     }

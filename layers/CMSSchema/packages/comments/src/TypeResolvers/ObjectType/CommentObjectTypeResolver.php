@@ -46,7 +46,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     public function getID(object $object): string|int|null
     {
         $comment = $object;
-        return $this->getCommentTypeAPI()->getCommentId($comment);
+        return $this->getCommentTypeAPI()->getCommentID($comment);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -24,7 +24,7 @@ window.pop.UserAvatarAccount = {
 	
 		var that = this;
 		var domain = args.domain, userInfo = args.userInfo;
-		var domainId = getDomainId(domain);
+		var domainId = getDomainID(domain);
 
 		var id = userInfo[pop.c.DATALOAD_USER_ID],
 			avatar = userInfo[pop.c.DATALOAD_USER_AVATAR];

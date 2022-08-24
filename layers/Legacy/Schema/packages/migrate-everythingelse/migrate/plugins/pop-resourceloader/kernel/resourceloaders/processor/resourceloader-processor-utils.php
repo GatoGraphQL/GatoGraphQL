@@ -403,7 +403,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // and be stored under its own, unique key
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if ($loadingSite) {
-                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
                 }
 
                 $path = GeneralUtils::maybeAddTrailingSlash(PathUtils::getPagePath($page_id));
@@ -434,7 +434,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if ($loadingSite) {
 
-                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
                 }
 
                 $path = $route.'/';
@@ -464,7 +464,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if ($loadingSite) {
 
-                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
                 }
 
                 // For the single nature, we must save the resources under the category path,
@@ -495,7 +495,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if ($loadingSite) {
 
-                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
                 }
 
                 self::addResourcesFromCurrentLoop($componentFilter, $resources, $key, $merge, $options);
@@ -521,7 +521,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if ($loadingSite) {
 
-                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+                    $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
                 }
 
                 self::addResourcesFromCurrentLoop($componentFilter, $resources, $key, $merge, $options);
@@ -538,7 +538,7 @@ class PoP_ResourceLoaderProcessorUtils {
             // Then, resources for author => Individual/Organization must NOT be bundled together
             if ($loadingSite) {
 
-                $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+                $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
             }
 
             // Calculate and save the resources
@@ -555,7 +555,7 @@ class PoP_ResourceLoaderProcessorUtils {
             // Then, resources for author => Individual/Organization must NOT be bundled together
             if ($loadingSite) {
 
-                $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+                $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
             }
 
             // Calculate and save the resources
@@ -691,7 +691,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Get the current model_instance_id where to store $noncritical_resources
-        $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+        $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
 
         // Generate the $props for this $vars, or re-use the already-calculated one from the current execution (for when generating bundle(group) files on runtime)
         $engine = EngineFacade::getInstance();

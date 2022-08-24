@@ -252,7 +252,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
         // Get all the author's network's users (followers + members of same communities)
         $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
-        $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($userCommentTypeAPI->getCommentUserId($comment));
+        $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($userCommentTypeAPI->getCommentUserID($comment));
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT, $networkusers)) {
@@ -264,14 +264,14 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                     $names[] = $userTypeAPI->getUserDisplayName($networkuser);
                 }
 
-                $title = $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment));
-                $url = $customPostTypeAPI->getPermalink($commentTypeAPI->getCommentPostId($comment));
-                $post_name = gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc');
-                $author_name = $userTypeAPI->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment));
+                $title = $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostID($comment));
+                $url = $customPostTypeAPI->getPermalink($commentTypeAPI->getCommentPostID($comment));
+                $post_name = gdGetPostname($commentTypeAPI->getCommentPostID($comment), 'lc');
+                $author_name = $userTypeAPI->getUserDisplayName($userCommentTypeAPI->getCommentUserID($comment));
 
                 $content = sprintf(
                     TranslationAPIFacade::getInstance()->__('<p><a href="%1$s">%2$s</a> added a comment in %3$s <a href="%4%s">%5$s</a>:</p>', 'pop-emailsender'),
-                    $userTypeAPI->getUserURL($userCommentTypeAPI->getCommentUserId($comment)),
+                    $userTypeAPI->getUserURL($userCommentTypeAPI->getCommentUserID($comment)),
                     $author_name,
                     $post_name,
                     $url,
@@ -309,7 +309,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             return;
         }
 
-        $post_id = $commentTypeAPI->getCommentPostId($comment);
+        $post_id = $commentTypeAPI->getCommentPostID($comment);
 
         // If the post has tags...
         $userTypeAPI = UserTypeAPIFacade::getInstance();
@@ -489,15 +489,15 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         // From those, remove all users who got an email in a previous email function
         if ($taggedusers_ids = array_diff($taggedusers_ids, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $title = $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment));
-            $url = $customPostTypeAPI->getPermalink($commentTypeAPI->getCommentPostId($comment));
-            $post_name = gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc');
+            $title = $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostID($comment));
+            $url = $customPostTypeAPI->getPermalink($commentTypeAPI->getCommentPostID($comment));
+            $post_name = gdGetPostname($commentTypeAPI->getCommentPostID($comment), 'lc');
 
             $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
             $content = sprintf(
                 TranslationAPIFacade::getInstance()->__('<p><a href="%1$s">%2$s</a> mentioned you in a comment from %3$s <a href="%4%s">%5$s</a>:</p>', 'pop-emailsender'),
-                $userTypeAPI->getUserURL($userCommentTypeAPI->getCommentUserId($comment)),
-                $userTypeAPI->getUserDisplayName($userCommentTypeAPI->getCommentUserId($comment)),
+                $userTypeAPI->getUserURL($userCommentTypeAPI->getCommentUserID($comment)),
+                $userTypeAPI->getUserDisplayName($userCommentTypeAPI->getCommentUserID($comment)),
                 $post_name,
                 $url,
                 $title

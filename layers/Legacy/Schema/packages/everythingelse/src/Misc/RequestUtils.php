@@ -11,7 +11,7 @@ class RequestUtils
 {
     public static array $errors = [];
 
-    public static function getDomainId(string $domain): string
+    public static function getDomainID(string $domain): string
     {
         // The domain ID is simply removing the scheme, and replacing all dots with '-'
         // It is needed to assign an extra class to the event

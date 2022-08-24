@@ -230,7 +230,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 // Do not show if the user is logged in
                 // Notice that it works for the domain from wherever this block is being fetched from!
                 $cmsService = CMSServiceFacade::getInstance();
-                $this->appendProp($component, $props, 'class', 'visible-notloggedin-'.RequestUtils::getDomainId($cmsService->getSiteURL()));
+                $this->appendProp($component, $props, 'class', 'visible-notloggedin-'.RequestUtils::getDomainID($cmsService->getSiteURL()));
 
                 // Give it some formatting
                 $this->appendProp($component, $props, 'class', 'well well-sm');

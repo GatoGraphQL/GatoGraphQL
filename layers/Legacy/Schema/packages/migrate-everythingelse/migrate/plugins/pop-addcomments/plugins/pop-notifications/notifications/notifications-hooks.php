@@ -116,7 +116,7 @@ class PoP_AddComments_Notifications_NotificationHooks
 					',
                     $wpdb->pop_notifications,
                     $wpdb->comments,
-                    $commentTypeAPI->getCommentPostId($comment)
+                    $commentTypeAPI->getCommentPostID($comment)
                 );
 
                 return array($objectids_sql, $actions);

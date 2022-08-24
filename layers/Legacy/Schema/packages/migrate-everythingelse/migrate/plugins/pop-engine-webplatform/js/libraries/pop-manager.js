@@ -4068,7 +4068,7 @@ window.pop.Manager = {
 		// Comment Leo 24/08/2017: no need for the pre-defined ID
 		return {
 			domain: domain,
-			'domain-id': getDomainId(domain),
+			'domain-id': getDomainID(domain),
 			feedback: that.getTopLevelFeedback(domain),
 		};
 	},

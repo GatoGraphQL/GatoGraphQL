@@ -216,7 +216,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         // Do not allow HTML tags
         return strip_tags($comment->comment_content);
     }
-    public function getCommentPostId(object $comment): string|int
+    public function getCommentPostID(object $comment): string|int
     {
         /** @var WP_Comment */
         $comment = $comment;
@@ -262,7 +262,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         /** @var WP_Comment $comment*/
         return $gmt ? $comment->comment_date_gmt : $comment->comment_date;
     }
-    public function getCommentId(object $comment): string|int
+    public function getCommentID(object $comment): string|int
     {
         /** @var WP_Comment */
         $comment = $comment;

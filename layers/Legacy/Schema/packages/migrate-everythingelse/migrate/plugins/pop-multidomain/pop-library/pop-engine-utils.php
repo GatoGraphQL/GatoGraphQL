@@ -27,12 +27,12 @@ class PoP_MultiDomain_Engine_Utils
     public static function addModuleInstanceComponents($components)
     {
         if ($domain = App::getState('domain')) {
-            $components[] = TranslationAPIFacade::getInstance()->__('domain:', 'pop-multidomain').RequestUtils::getDomainId($domain);
+            $components[] = TranslationAPIFacade::getInstance()->__('domain:', 'pop-multidomain').RequestUtils::getDomainID($domain);
         }
         // External domain different configuration: needed for the resourceLoader config.js file to load, cached in the list under pop-cache/resources/,
         // which is different for different domains
         if ($external_url_domain = App::getState('external-url-domain')) {
-            $components[] = TranslationAPIFacade::getInstance()->__('external url domain:', 'pop-multidomain').RequestUtils::getDomainId($external_url_domain);
+            $components[] = TranslationAPIFacade::getInstance()->__('external url domain:', 'pop-multidomain').RequestUtils::getDomainID($external_url_domain);
         }
 
         return $components;

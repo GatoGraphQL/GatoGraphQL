@@ -85,13 +85,13 @@ trait FileGeneratorManagerTrait
 
     public function getFileWithModelInstanceFilename($type, $ext = '')
     {
-        $model_instance_id = ModelInstanceFacade::getInstance()->getModelInstanceId();
+        $model_instance_id = ModelInstanceFacade::getInstance()->getModelInstanceID();
         return $this->getFile($model_instance_id, $type, $ext);
     }
 
     public function fileWithModelInstanceFilenameExists($type, $ext = '')
     {
-        $model_instance_id = ModelInstanceFacade::getInstance()->getModelInstanceId();
+        $model_instance_id = ModelInstanceFacade::getInstance()->getModelInstanceID();
         return $this->fileExists($model_instance_id, $type, $ext);
     }
 

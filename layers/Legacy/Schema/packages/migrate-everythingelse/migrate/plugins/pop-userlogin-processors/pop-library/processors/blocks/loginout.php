@@ -88,7 +88,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
                 // Notice that it works for the domain from wherever this block is being fetched from!
                 return sprintf(
                     '<p class="visible-notloggedin-%s"><em>%s</em></p>',
-                    RequestUtils::getDomainId($cmsService->getSiteURL()),
+                    RequestUtils::getDomainID($cmsService->getSiteURL()),
                     TranslationAPIFacade::getInstance()->__('You are not logged in.', 'pop-coreprocessors')
                 );
         }

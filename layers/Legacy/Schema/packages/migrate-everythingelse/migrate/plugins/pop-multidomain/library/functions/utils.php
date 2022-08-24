@@ -66,7 +66,7 @@ class PoP_MultiDomain_Utils
         // Add the ID to all domains
         foreach ($domain_properties as $domain => &$properties) {
             // Comment Leo 24/08/2017: no need for the pre-defined ID
-            // $properties['id'] = RequestUtils::getDomainId($domain);
+            // $properties['id'] = RequestUtils::getDomainID($domain);
 
             // Allow to add the language, and then change the default language on a domain by domain basis
             $properties['locale'] = \PoP\Root\App::applyFilters(

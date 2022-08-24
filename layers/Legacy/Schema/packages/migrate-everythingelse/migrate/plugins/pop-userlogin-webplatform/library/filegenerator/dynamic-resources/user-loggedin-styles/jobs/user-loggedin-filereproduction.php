@@ -36,7 +36,7 @@ class PoP_CoreProcessors_FileReproduction_UserLoggedInStyles extends PoP_Engine_
     {
         $configuration = parent::getConfiguration();
 
-        $configuration['{{$domainId}}'] = RequestUtils::getDomainId($this->getDomain());
+        $configuration['{{$domainId}}'] = RequestUtils::getDomainID($this->getDomain());
 
         return $configuration;
     }

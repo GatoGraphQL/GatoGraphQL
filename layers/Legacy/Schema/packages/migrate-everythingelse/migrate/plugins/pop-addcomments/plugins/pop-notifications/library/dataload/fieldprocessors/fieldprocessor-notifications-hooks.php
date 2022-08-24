@@ -151,8 +151,8 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                         );
                         return sprintf(
                             $messages[$notification->action],
-                            gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc'),
-                            $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment))
+                            gdGetPostname($commentTypeAPI->getCommentPostID($comment), 'lc'),
+                            $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostID($comment))
                         );
 
                     case AAL_POP_ACTION_COMMENT_ADDED:
@@ -165,7 +165,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                         if ($comment_parent_id = $commentTypeAPI->getCommentParent($comment)) {
                             $comment_parent = $commentTypeAPI->getComment($comment_parent_id);
                             $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
-                            if ($userCommentTypeAPI->getCommentUserId($comment_parent) == $user_id) {
+                            if ($userCommentTypeAPI->getCommentUserID($comment_parent) == $user_id) {
                                 $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> replied to your comment in %2$s <strong>%3$s</strong>', 'pop-notifications');
                             }
                         }
@@ -180,8 +180,8 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                         return sprintf(
                             $message,
                             $userTypeAPI->getUserDisplayName($notification->user_id),
-                            gdGetPostname($commentTypeAPI->getCommentPostId($comment), 'lc'),
-                            $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostId($comment))
+                            gdGetPostname($commentTypeAPI->getCommentPostID($comment), 'lc'),
+                            $customPostTypeAPI->getTitle($commentTypeAPI->getCommentPostID($comment))
                         );
                 }
                 return null;
