@@ -278,9 +278,12 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             if (empty($block['blockName'])) {
                 continue;
             }
-            $items[] = $this->prepare_response_for_collection(
-                $this->prepareItemForResponse($customPostID, $block)
-            );
+            $itemForResponse = $this->prepareItemForResponse($customPostID, $block);
+            if ($itemForResponse instanceof WP_Error)  {
+                $items[] = $itemForResponse;
+                continue;
+            }
+            $items[] = $this->prepare_response_for_collection($itemForResponse);
         }
         return $items;
     }
@@ -288,10 +291,13 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     /**
      * @param array<string,mixed> $block
      */
-    protected function prepareItemForResponse(int $customPostID, array $block): WP_REST_Response
+    protected function prepareItemForResponse(int $customPostID, array $block): WP_REST_Response|WP_Error
     {
         $item = $this->prepareItem($block);
         $response = rest_ensure_response($item);
+        if ($response instanceof WP_Error)  {
+            return $response;
+        }
         $response->add_links($this->prepareLinks($customPostID, $block));
         return $response;
     }

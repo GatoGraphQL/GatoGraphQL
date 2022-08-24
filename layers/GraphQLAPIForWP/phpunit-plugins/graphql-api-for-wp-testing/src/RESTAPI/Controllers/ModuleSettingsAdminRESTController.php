@@ -171,17 +171,23 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
-            $items[] = $this->prepare_response_for_collection(
-                $this->prepareItemForResponse($module)
-            );
+            $itemForResponse = $this->prepareItemForResponse($module);
+            if ($itemForResponse instanceof WP_Error)  {
+                $items[] = $itemForResponse;
+                continue;
+            }
+            $items[] = $this->prepare_response_for_collection($itemForResponse);
         }
         return rest_ensure_response($items);
     }
 
-    protected function prepareItemForResponse(string $module): WP_REST_Response
+    protected function prepareItemForResponse(string $module): WP_REST_Response|WP_Error
     {
         $item = $this->prepareItem($module);
         $response = rest_ensure_response($item);
+        if ($response instanceof WP_Error)  {
+            return $response;
+        }
         $response->add_links($this->prepareLinks($module));
         return $response;
     }
