@@ -219,7 +219,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Module` class which must not initialize their Schema services
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
     abstract protected function getSchemaModuleClassesToSkip(): array;
 
