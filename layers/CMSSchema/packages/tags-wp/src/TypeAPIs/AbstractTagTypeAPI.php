@@ -64,13 +64,21 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         }
         return $tag->name;
     }
-    public function getTag(string|int $tagID): object
+    public function getTag(string|int $tagID): ?object
     {
-        return get_tag($tagID, $this->getTagTaxonomyName());
+        $tag = get_tag($tagID, $this->getTagTaxonomyName());
+        if (!($tag instanceof WP_Term)) {
+            return null;
+        }
+        return $tag;
     }
-    public function getTagByName(string $tagName): object
+    public function getTagByName(string $tagName): ?object
     {
-        return get_term_by('name', $tagName, $this->getTagTaxonomyName());
+        $tag = get_term_by('name', $tagName, $this->getTagTaxonomyName());
+        if (!($tag instanceof WP_Term)) {
+            return null;
+        }
+        return $tag;
     }
 
     /**
