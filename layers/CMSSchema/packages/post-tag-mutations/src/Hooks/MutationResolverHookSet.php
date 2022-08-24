@@ -20,6 +20,7 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     }
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
+        /** @var PostTypeAPIInterface */
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
     final public function setPostTagTypeMutationAPI(PostTagTypeMutationAPIInterface $postTagTypeMutationAPI): void
@@ -28,6 +29,7 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     }
     final protected function getPostTagTypeMutationAPI(): PostTagTypeMutationAPIInterface
     {
+        /** @var PostTagTypeMutationAPIInterface */
         return $this->postTagTypeMutationAPI ??= $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
     }
 

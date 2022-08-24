@@ -24,6 +24,7 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
     }
     final protected function getParentIDFilterInput(): ParentIDFilterInput
     {
+        /** @var ParentIDFilterInput */
         return $this->parentIDFilterInput ??= $this->instanceManager->getInstance(ParentIDFilterInput::class);
     }
     final public function setParentIDsFilterInput(ParentIDsFilterInput $parentIDsFilterInput): void
@@ -32,6 +33,7 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
     }
     final protected function getParentIDsFilterInput(): ParentIDsFilterInput
     {
+        /** @var ParentIDsFilterInput */
         return $this->parentIDsFilterInput ??= $this->instanceManager->getInstance(ParentIDsFilterInput::class);
     }
     final public function setExcludeParentIDsFilterInput(ExcludeParentIDsFilterInput $excludeParentIDsFilterInput): void
@@ -40,6 +42,7 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
     }
     final protected function getExcludeParentIDsFilterInput(): ExcludeParentIDsFilterInput
     {
+        /** @var ExcludeParentIDsFilterInput */
         return $this->excludeParentIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeParentIDsFilterInput::class);
     }
 

@@ -65,6 +65,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
+        /** @var ComponentPathHelpersInterface */
         return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
     final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
@@ -73,6 +74,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
+        /** @var ComponentFilterManagerInterface */
         return $this->componentFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
     }
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
@@ -81,6 +83,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
+        /** @var ComponentProcessorManagerInterface */
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
@@ -89,6 +92,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getNameResolver(): NameResolverInterface
     {
+        /** @var NameResolverInterface */
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
     final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
@@ -97,6 +101,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
+        /** @var DataloadHelperServiceInterface */
         return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -105,6 +110,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
+        /** @var RequestHelperServiceInterface */
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
     final public function setComponentPaths(ComponentPaths $componentPaths): void
@@ -113,6 +119,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentPaths(): ComponentPaths
     {
+        /** @var ComponentPaths */
         return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
@@ -121,6 +128,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
+        /** @var ComponentHelpersInterface */
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 

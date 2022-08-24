@@ -25,6 +25,7 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
+        /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -33,6 +34,7 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
@@ -41,6 +43,7 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
+        /** @var IncludeFilterInput */
         return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
     }
     final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
@@ -49,6 +52,7 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     }
     final protected function getSlugFilterInput(): SlugFilterInput
     {
+        /** @var SlugFilterInput */
         return $this->slugFilterInput ??= $this->instanceManager->getInstance(SlugFilterInput::class);
     }
 

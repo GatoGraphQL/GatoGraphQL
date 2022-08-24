@@ -21,6 +21,7 @@ class HeadComponentHookSet extends AbstractHookSet
     }
     final protected function getHeadComponent(): HeadComponent
     {
+        /** @var HeadComponent */
         return $this->headComponent ??= $this->instanceManager->getInstance(HeadComponent::class);
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
@@ -29,6 +30,7 @@ class HeadComponentHookSet extends AbstractHookSet
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
+        /** @var ComponentHelpersInterface */
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 

@@ -19,6 +19,7 @@ class UserLoggedInCheckpoint extends AbstractCheckpoint
     }
     final protected function getCheckpointErrorFeedbackItemProvider(): CheckpointErrorFeedbackItemProvider
     {
+        /** @var CheckpointErrorFeedbackItemProvider */
         return $this->checkpointErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(CheckpointErrorFeedbackItemProvider::class);
     }
 

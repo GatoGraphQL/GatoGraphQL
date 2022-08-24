@@ -21,6 +21,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
     }
     final protected function getSettingsMutationResolver(): SettingsMutationResolver
     {
+        /** @var SettingsMutationResolver */
         return $this->settingsMutationResolver ??= $this->instanceManager->getInstance(SettingsMutationResolver::class);
     }
     

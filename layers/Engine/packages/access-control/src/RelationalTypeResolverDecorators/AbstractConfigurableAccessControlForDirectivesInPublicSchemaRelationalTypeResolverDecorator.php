@@ -18,6 +18,7 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelat
     }
     final protected function getAccessControlManager(): AccessControlManagerInterface
     {
+        /** @var AccessControlManagerInterface */
         return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
     }
 }

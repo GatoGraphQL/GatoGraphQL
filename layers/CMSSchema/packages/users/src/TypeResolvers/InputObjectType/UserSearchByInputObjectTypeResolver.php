@@ -29,6 +29,7 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
@@ -37,6 +38,7 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
+        /** @var EmailScalarTypeResolver */
         return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
     }
     final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
@@ -45,6 +47,7 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
+        /** @var SearchFilterInput */
         return $this->searchFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
     }
     final public function setEmailOrEmailsFilterInput(EmailOrEmailsFilterInput $emailOrEmailsFilterInput): void
@@ -53,6 +56,7 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
     }
     final protected function getEmailOrEmailsFilterInput(): EmailOrEmailsFilterInput
     {
+        /** @var EmailOrEmailsFilterInput */
         return $this->emailOrEmailsFilterInput ??= $this->instanceManager->getInstance(EmailOrEmailsFilterInput::class);
     }
 

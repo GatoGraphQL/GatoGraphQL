@@ -17,6 +17,7 @@ class GenerateThemeMutationResolverBridge extends AbstractSystemComponentMutatio
     }
     final protected function getGenerateThemeMutationResolver(): GenerateThemeMutationResolver
     {
+        /** @var GenerateThemeMutationResolver */
         return $this->generateThemeMutationResolver ??= $this->instanceManager->getInstance(GenerateThemeMutationResolver::class);
     }
 

@@ -21,6 +21,7 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
     }
     final protected function getAboutMenuPage(): AboutMenuPage
     {
+        /** @var AboutMenuPage */
         return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }
 

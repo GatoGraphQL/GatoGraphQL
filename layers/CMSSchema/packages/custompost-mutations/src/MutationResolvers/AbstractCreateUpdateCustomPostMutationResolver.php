@@ -42,6 +42,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
+        /** @var CustomPostStatusEnumTypeResolver */
         return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
     }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
@@ -50,6 +51,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     final protected function getNameResolver(): NameResolverInterface
     {
+        /** @var NameResolverInterface */
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
     final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
@@ -58,6 +60,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
+        /** @var UserRoleTypeAPIInterface */
         return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
@@ -66,6 +69,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
+        /** @var CustomPostTypeAPIInterface */
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
     final public function setCustomPostTypeMutationAPI(CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI): void
@@ -74,6 +78,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     }
     final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
     {
+        /** @var CustomPostTypeMutationAPIInterface */
         return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
     }
 

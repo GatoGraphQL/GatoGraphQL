@@ -21,6 +21,7 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
     }
     final protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
     {
+        /** @var RESTDataStructureFormatter */
         return $this->restDataStructureFormatter ??= $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
     }
 

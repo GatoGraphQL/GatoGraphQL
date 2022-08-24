@@ -22,6 +22,7 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
     }
     final protected function getMenuLocationSelectableStringTypeResolver(): MenuLocationSelectableStringTypeResolver
     {
+        /** @var MenuLocationSelectableStringTypeResolver */
         return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationSelectableStringTypeResolver::class);
     }
     final public function setLocationsFilterInput(LocationsFilterInput $locationsFilterInput): void
@@ -30,6 +31,7 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
     }
     final protected function getLocationsFilterInput(): LocationsFilterInput
     {
+        /** @var LocationsFilterInput */
         return $this->locationsFilterInput ??= $this->instanceManager->getInstance(LocationsFilterInput::class);
     }
 

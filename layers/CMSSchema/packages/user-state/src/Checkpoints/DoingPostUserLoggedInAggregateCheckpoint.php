@@ -20,6 +20,7 @@ class DoingPostUserLoggedInAggregateCheckpoint extends AbstractAggregateCheckpoi
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
+        /** @var UserLoggedInCheckpoint */
         return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
     final public function setDoingPostCheckpoint(DoingPostCheckpoint $doingPostCheckpoint): void
@@ -28,6 +29,7 @@ class DoingPostUserLoggedInAggregateCheckpoint extends AbstractAggregateCheckpoi
     }
     final protected function getDoingPostCheckpoint(): DoingPostCheckpoint
     {
+        /** @var DoingPostCheckpoint */
         return $this->doingPostCheckpoint ??= $this->instanceManager->getInstance(DoingPostCheckpoint::class);
     }
 

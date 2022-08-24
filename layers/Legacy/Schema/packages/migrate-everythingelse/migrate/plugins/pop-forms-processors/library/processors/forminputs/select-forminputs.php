@@ -25,6 +25,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setOrderFilterInput(OrderFilterInput $orderFilterInput): void
@@ -33,6 +34,7 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
     }
     final protected function getOrderFilterInput(): OrderFilterInput
     {
+        /** @var OrderFilterInput */
         return $this->orderFilterInput ??= $this->instanceManager->getInstance(OrderFilterInput::class);
     }
 

@@ -19,6 +19,7 @@ class MediaItemSortInputObjectTypeResolver extends SortInputObjectTypeResolver
     }
     final protected function getMediaItemOrderByEnumTypeResolver(): MediaItemOrderByEnumTypeResolver
     {
+        /** @var MediaItemOrderByEnumTypeResolver */
         return $this->customPostSortByEnumTypeResolver ??= $this->instanceManager->getInstance(MediaItemOrderByEnumTypeResolver::class);
     }
 

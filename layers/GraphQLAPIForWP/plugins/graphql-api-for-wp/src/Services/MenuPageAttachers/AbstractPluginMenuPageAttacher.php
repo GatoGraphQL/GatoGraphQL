@@ -20,6 +20,7 @@ abstract class AbstractPluginMenuPageAttacher extends AbstractMenuPageAttacher
     }
     final protected function getPluginMenu(): PluginMenu
     {
+        /** @var PluginMenu */
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }
 

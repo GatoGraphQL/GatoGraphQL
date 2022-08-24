@@ -16,6 +16,7 @@ class MarkdownContentParser extends AbstractContentParser implements MarkdownCon
     }
     final protected function getMarkdownConvertor(): MarkdownConvertorInterface
     {
+        /** @var MarkdownConvertorInterface */
         return $this->markdownConvertor ??= $this->instanceManager->getInstance(MarkdownConvertorInterface::class);
     }
 

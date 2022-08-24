@@ -29,6 +29,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
+        /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
     final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
@@ -37,6 +38,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
+        /** @var EmailScalarTypeResolver */
         return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
@@ -45,6 +47,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
+        /** @var URLScalarTypeResolver */
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -53,6 +56,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 

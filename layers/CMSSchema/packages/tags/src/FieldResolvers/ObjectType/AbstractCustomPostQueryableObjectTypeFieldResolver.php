@@ -37,6 +37,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
+        /** @var IntScalarTypeResolver */
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -45,6 +46,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setTagPaginationInputObjectTypeResolver(TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver): void
@@ -53,6 +55,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getTagPaginationInputObjectTypeResolver(): TagPaginationInputObjectTypeResolver
     {
+        /** @var TagPaginationInputObjectTypeResolver */
         return $this->tagPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(TagPaginationInputObjectTypeResolver::class);
     }
     final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
@@ -61,6 +64,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
     {
+        /** @var TaxonomySortInputObjectTypeResolver */
         return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
     }
     final public function setCustomPostTagsFilterInputObjectTypeResolver(CustomPostTagsFilterInputObjectTypeResolver $customPostTagsFilterInputObjectTypeResolver): void
@@ -69,6 +73,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getCustomPostTagsFilterInputObjectTypeResolver(): CustomPostTagsFilterInputObjectTypeResolver
     {
+        /** @var CustomPostTagsFilterInputObjectTypeResolver */
         return $this->customPostTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostTagsFilterInputObjectTypeResolver::class);
     }
 

@@ -21,6 +21,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     }
     final protected function getCreateUpdateWithCommunityOrganizationProfileMutationResolver(): CreateUpdateWithCommunityOrganizationProfileMutationResolver
     {
+        /** @var CreateUpdateWithCommunityOrganizationProfileMutationResolver */
         return $this->createUpdateWithCommunityOrganizationProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolver::class);
     }
     

@@ -17,6 +17,7 @@ class LoginUserOneofMutationResolver extends AbstractOneofMutationResolver
     }
     final protected function getLoginUserByCredentialsMutationResolver(): LoginUserByCredentialsMutationResolver
     {
+        /** @var LoginUserByCredentialsMutationResolver */
         return $this->loginUserByCredentialsMutationResolver ??= $this->instanceManager->getInstance(LoginUserByCredentialsMutationResolver::class);
     }
 

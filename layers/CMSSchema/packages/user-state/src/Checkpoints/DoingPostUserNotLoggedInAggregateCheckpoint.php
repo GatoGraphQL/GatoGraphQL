@@ -20,6 +20,7 @@ class DoingPostUserNotLoggedInAggregateCheckpoint extends AbstractAggregateCheck
     }
     final protected function getUserNotLoggedInCheckpoint(): UserNotLoggedInCheckpoint
     {
+        /** @var UserNotLoggedInCheckpoint */
         return $this->userNotLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserNotLoggedInCheckpoint::class);
     }
     final public function setDoingPostCheckpoint(DoingPostCheckpoint $doingPostCheckpoint): void
@@ -28,6 +29,7 @@ class DoingPostUserNotLoggedInAggregateCheckpoint extends AbstractAggregateCheck
     }
     final protected function getDoingPostCheckpoint(): DoingPostCheckpoint
     {
+        /** @var DoingPostCheckpoint */
         return $this->doingPostCheckpoint ??= $this->instanceManager->getInstance(DoingPostCheckpoint::class);
     }
 

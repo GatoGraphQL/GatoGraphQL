@@ -41,6 +41,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
+        /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
@@ -49,6 +50,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
+        /** @var UserAuthorizationInterface */
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     final public function setStringConversion(StringConversion $stringConversion): void
@@ -57,6 +59,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getStringConversion(): StringConversion
     {
+        /** @var StringConversion */
         return $this->stringConversion ??= $this->instanceManager->getInstance(StringConversion::class);
     }
     final public function setEditorHelpers(EditorHelpers $editorHelpers): void
@@ -65,6 +68,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getEditorHelpers(): EditorHelpers
     {
+        /** @var EditorHelpers */
         return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
     }
     final public function setLocaleHelper(LocaleHelper $localeHelper): void
@@ -73,6 +77,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getLocaleHelper(): LocaleHelper
     {
+        /** @var LocaleHelper */
         return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
     }
 

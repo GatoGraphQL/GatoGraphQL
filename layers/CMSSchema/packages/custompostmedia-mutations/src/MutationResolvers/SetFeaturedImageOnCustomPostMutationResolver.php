@@ -26,6 +26,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     }
     final protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
     {
+        /** @var CustomPostMediaTypeMutationAPIInterface */
         return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
     }
 

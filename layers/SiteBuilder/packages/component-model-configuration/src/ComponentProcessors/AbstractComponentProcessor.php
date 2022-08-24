@@ -29,6 +29,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     }
     final protected function getTypeResolverHelperService(): TypeResolverHelperServiceInterface
     {
+        /** @var TypeResolverHelperServiceInterface */
         return $this->typeResolverHelperService ??= $this->instanceManager->getInstance(TypeResolverHelperServiceInterface::class);
     }
 

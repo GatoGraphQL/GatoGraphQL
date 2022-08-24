@@ -22,6 +22,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
+        /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     final public function setBlockHelpers(BlockHelpers $blockHelpers): void
@@ -30,6 +31,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     }
     final protected function getBlockHelpers(): BlockHelpers
     {
+        /** @var BlockHelpers */
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 

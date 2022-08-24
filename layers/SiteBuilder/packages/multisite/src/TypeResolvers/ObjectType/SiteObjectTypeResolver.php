@@ -19,6 +19,7 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getSiteTypeDataLoader(): SiteTypeDataLoader
     {
+        /** @var SiteTypeDataLoader */
         return $this->siteTypeDataLoader ??= $this->instanceManager->getInstance(SiteTypeDataLoader::class);
     }
 

@@ -53,6 +53,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
+        /** @var ComponentPathManagerInterface */
         return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
     final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
@@ -61,6 +62,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
+        /** @var ComponentPathHelpersInterface */
         return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
 

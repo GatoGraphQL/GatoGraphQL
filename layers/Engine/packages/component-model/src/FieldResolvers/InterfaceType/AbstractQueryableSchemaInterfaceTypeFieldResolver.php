@@ -21,6 +21,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
+        /** @var ComponentProcessorManagerInterface */
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 

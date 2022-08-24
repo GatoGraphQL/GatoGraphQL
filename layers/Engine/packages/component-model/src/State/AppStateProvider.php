@@ -30,6 +30,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getVariableManager(): VariableManagerInterface
     {
+        /** @var VariableManagerInterface */
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(VariableManagerInterface::class);
     }
     final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
@@ -38,6 +39,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
+        /** @var ComponentFilterManagerInterface */
         return $this->componentFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
     }
     final public function setEngine(EngineInterface $engine): void
@@ -46,6 +48,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getEngine(): EngineInterface
     {
+        /** @var EngineInterface */
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 

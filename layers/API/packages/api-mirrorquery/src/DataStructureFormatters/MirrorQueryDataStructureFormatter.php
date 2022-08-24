@@ -26,6 +26,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     }
     final protected function getASTHelperService(): ASTHelperServiceInterface
     {
+        /** @var ASTHelperServiceInterface */
         return $this->astHelperService ??= $this->instanceManager->getInstance(ASTHelperServiceInterface::class);
     }
 

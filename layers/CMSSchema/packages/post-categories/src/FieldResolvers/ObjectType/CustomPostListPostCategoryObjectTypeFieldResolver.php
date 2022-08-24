@@ -22,6 +22,7 @@ class CustomPostListPostCategoryObjectTypeFieldResolver extends AbstractCustomPo
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
+        /** @var PostCategoryTypeAPIInterface */
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
     final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
@@ -30,6 +31,7 @@ class CustomPostListPostCategoryObjectTypeFieldResolver extends AbstractCustomPo
     }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
+        /** @var PostCategoryObjectTypeResolver */
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 

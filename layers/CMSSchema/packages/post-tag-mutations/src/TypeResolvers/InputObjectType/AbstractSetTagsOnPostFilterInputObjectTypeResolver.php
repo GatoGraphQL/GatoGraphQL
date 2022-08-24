@@ -18,6 +18,7 @@ abstract class AbstractSetTagsOnPostFilterInputObjectTypeResolver extends Abstra
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
+        /** @var PostTagObjectTypeResolver */
         return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
     }
 

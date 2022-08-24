@@ -22,6 +22,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
     }
     final protected function getAdminGraphiQLWithExplorerClient(): AdminGraphiQLWithExplorerClient
     {
+        /** @var AdminGraphiQLWithExplorerClient */
         return $this->adminGraphiQLWithExplorerClient ??= $this->instanceManager->getInstance(AdminGraphiQLWithExplorerClient::class);
     }
 

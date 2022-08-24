@@ -78,6 +78,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     final protected function getDataloadingEngine(): DataloadingEngineInterface
     {
+        /** @var DataloadingEngineInterface */
         return $this->dataloadingEngine ??= $this->instanceManager->getInstance(DataloadingEngineInterface::class);
     }
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
@@ -86,6 +87,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
+        /** @var DirectivePipelineServiceInterface */
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
     }
 

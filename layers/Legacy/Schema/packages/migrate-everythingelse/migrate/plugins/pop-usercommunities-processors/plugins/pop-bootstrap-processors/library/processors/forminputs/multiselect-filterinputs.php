@@ -27,6 +27,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     }
     final protected function getMemberPrivilegeEnumTypeResolver(): MemberPrivilegeEnumTypeResolver
     {
+        /** @var MemberPrivilegeEnumTypeResolver */
         return $this->memberPrivilegeEnumTypeResolver ??= $this->instanceManager->getInstance(MemberPrivilegeEnumTypeResolver::class);
     }
     final public function setMemberTagEnumTypeResolver(MemberTagEnumTypeResolver $memberTagEnumTypeResolver): void
@@ -35,6 +36,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     }
     final protected function getMemberTagEnumTypeResolver(): MemberTagEnumTypeResolver
     {
+        /** @var MemberTagEnumTypeResolver */
         return $this->memberTagEnumTypeResolver ??= $this->instanceManager->getInstance(MemberTagEnumTypeResolver::class);
     }
     final public function setMemberStatusEnumTypeResolver(MemberStatusEnumTypeResolver $memberStatusEnumTypeResolver): void
@@ -43,6 +45,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     }
     final protected function getMemberStatusEnumTypeResolver(): MemberStatusEnumTypeResolver
     {
+        /** @var MemberStatusEnumTypeResolver */
         return $this->memberStatusEnumTypeResolver ??= $this->instanceManager->getInstance(MemberStatusEnumTypeResolver::class);
     }
 

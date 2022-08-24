@@ -33,6 +33,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
     {
+        /** @var MenuItemRuntimeRegistryInterface */
         return $this->menuItemRuntimeRegistry ??= $this->instanceManager->getInstance(MenuItemRuntimeRegistryInterface::class);
     }
     final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
@@ -41,6 +42,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
+        /** @var JSONObjectScalarTypeResolver */
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
     final public function setMenuItemObjectTypeResolver(MenuItemObjectTypeResolver $menuItemObjectTypeResolver): void
@@ -49,6 +51,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getMenuItemObjectTypeResolver(): MenuItemObjectTypeResolver
     {
+        /** @var MenuItemObjectTypeResolver */
         return $this->menuItemObjectTypeResolver ??= $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
     }
     final public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
@@ -57,6 +60,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
+        /** @var MenuTypeAPIInterface */
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
@@ -65,6 +69,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
+        /** @var BooleanScalarTypeResolver */
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 

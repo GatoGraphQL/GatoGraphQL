@@ -13,6 +13,7 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
     }
     final protected function getDoingPostUserLoggedInAggregateCheckpoint(): DoingPostUserLoggedInAggregateCheckpoint
     {
+        /** @var DoingPostUserLoggedInAggregateCheckpoint */
         return $this->doingPostUserLoggedInAggregateCheckpoint ??= $this->instanceManager->getInstance(DoingPostUserLoggedInAggregateCheckpoint::class);
     }
     

@@ -32,6 +32,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
+        /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
     final public function setCustomPostAuthorIDsFilterInput(CustomPostAuthorIDsFilterInput $customPostAuthorIDsFilterInput): void
@@ -40,6 +41,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getCustomPostAuthorIDsFilterInput(): CustomPostAuthorIDsFilterInput
     {
+        /** @var CustomPostAuthorIDsFilterInput */
         return $this->customPostAuthorIDsFilterInput ??= $this->instanceManager->getInstance(CustomPostAuthorIDsFilterInput::class);
     }
     final public function setExcludeCustomPostAuthorIDsFilterInput(ExcludeCustomPostAuthorIDsFilterInput $excludeCustomPostAuthorIDsFilterInput): void
@@ -48,6 +50,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getExcludeCustomPostAuthorIDsFilterInput(): ExcludeCustomPostAuthorIDsFilterInput
     {
+        /** @var ExcludeCustomPostAuthorIDsFilterInput */
         return $this->excludeCustomPostAuthorIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeCustomPostAuthorIDsFilterInput::class);
     }
     final public function setAuthorIDsFilterInput(AuthorIDsFilterInput $authorIDsFilterInput): void
@@ -56,6 +59,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getAuthorIDsFilterInput(): AuthorIDsFilterInput
     {
+        /** @var AuthorIDsFilterInput */
         return $this->authorIDsFilterInput ??= $this->instanceManager->getInstance(AuthorIDsFilterInput::class);
     }
     final public function setExcludeAuthorIDsFilterInput(ExcludeAuthorIDsFilterInput $excludeAuthorIDsFilterInput): void
@@ -64,6 +68,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getExcludeAuthorIDsFilterInput(): ExcludeAuthorIDsFilterInput
     {
+        /** @var ExcludeAuthorIDsFilterInput */
         return $this->excludeAuthorIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInput::class);
     }
 

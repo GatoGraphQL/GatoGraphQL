@@ -32,6 +32,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     }
     final protected function getPostByInputObjectTypeResolver(): PostByInputObjectTypeResolver
     {
+        /** @var PostByInputObjectTypeResolver */
         return $this->postByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostByInputObjectTypeResolver::class);
     }
 

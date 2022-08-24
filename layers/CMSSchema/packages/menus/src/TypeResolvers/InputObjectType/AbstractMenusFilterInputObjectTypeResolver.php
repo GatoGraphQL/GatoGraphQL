@@ -24,6 +24,7 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setSearchFilterInput(SearchFilterInput $seachFilterInput): void
@@ -32,6 +33,7 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
+        /** @var SearchFilterInput */
         return $this->seachFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
     }
     final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
@@ -40,6 +42,7 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     }
     final protected function getSlugsFilterInput(): SlugsFilterInput
     {
+        /** @var SlugsFilterInput */
         return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
     }
 

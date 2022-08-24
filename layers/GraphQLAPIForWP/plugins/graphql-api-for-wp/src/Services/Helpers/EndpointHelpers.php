@@ -26,6 +26,7 @@ class EndpointHelpers
     }
     final protected function getPluginMenu(): PluginMenu
     {
+        /** @var PluginMenu */
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
@@ -34,6 +35,7 @@ class EndpointHelpers
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
+        /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 

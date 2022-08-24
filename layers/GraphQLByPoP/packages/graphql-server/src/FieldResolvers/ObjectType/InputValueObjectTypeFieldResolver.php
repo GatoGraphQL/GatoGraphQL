@@ -28,6 +28,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
@@ -36,6 +37,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
+        /** @var TypeObjectTypeResolver */
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
     final public function setInputValueExtensionsObjectTypeResolver(InputValueExtensionsObjectTypeResolver $inputValueExtensionsObjectTypeResolver): void
@@ -44,6 +46,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getInputValueExtensionsObjectTypeResolver(): InputValueExtensionsObjectTypeResolver
     {
+        /** @var InputValueExtensionsObjectTypeResolver */
         return $this->inputValueExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueExtensionsObjectTypeResolver::class);
     }
 

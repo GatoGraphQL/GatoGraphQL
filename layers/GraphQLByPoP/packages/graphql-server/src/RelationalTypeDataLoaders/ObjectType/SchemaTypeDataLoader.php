@@ -26,6 +26,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     final protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
+        /** @var SchemaObjectTypeResolver */
         return $this->schemaObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
     }
     final public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
@@ -34,6 +35,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
+        /** @var SchemaDefinitionReferenceRegistryInterface */
         return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
     }
     final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
@@ -42,6 +44,7 @@ class SchemaTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
+        /** @var ObjectDictionaryInterface */
         return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
     }
 

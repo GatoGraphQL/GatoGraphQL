@@ -23,6 +23,7 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
     }
     final protected function getBlockHelpers(): BlockHelpers
     {
+        /** @var BlockHelpers */
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
     final public function setPersistedQueryEndpointAPIHierarchyBlock(PersistedQueryEndpointAPIHierarchyBlock $persistedQueryEndpointAPIHierarchyBlock): void
@@ -31,6 +32,7 @@ class PersistedQueryEndpointAPIHierarchyBlockAccessor
     }
     final protected function getPersistedQueryEndpointAPIHierarchyBlock(): PersistedQueryEndpointAPIHierarchyBlock
     {
+        /** @var PersistedQueryEndpointAPIHierarchyBlock */
         return $this->persistedQueryEndpointAPIHierarchyBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
     }
 

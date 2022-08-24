@@ -45,6 +45,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
+        /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
@@ -53,6 +54,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
+        /** @var UserAuthorizationInterface */
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     final public function setCPTUtils(CPTUtils $cptUtils): void
@@ -61,6 +63,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getCPTUtils(): CPTUtils
     {
+        /** @var CPTUtils */
         return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
     }
     final public function setPluginMenu(PluginMenu $pluginMenu): void
@@ -69,6 +72,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getPluginMenu(): PluginMenu
     {
+        /** @var PluginMenu */
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
@@ -77,6 +81,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
+        /** @var EndpointHelpers */
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 

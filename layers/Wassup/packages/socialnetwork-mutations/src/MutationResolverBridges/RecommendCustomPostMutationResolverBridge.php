@@ -17,6 +17,7 @@ class RecommendCustomPostMutationResolverBridge extends AbstractCustomPostUpdate
     }
     final protected function getRecommendCustomPostMutationResolver(): RecommendCustomPostMutationResolver
     {
+        /** @var RecommendCustomPostMutationResolver */
         return $this->recommendCustomPostMutationResolver ??= $this->instanceManager->getInstance(RecommendCustomPostMutationResolver::class);
     }
 

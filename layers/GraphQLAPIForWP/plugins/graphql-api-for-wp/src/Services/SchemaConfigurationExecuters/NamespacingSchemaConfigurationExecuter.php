@@ -20,6 +20,7 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
     }
     final protected function getSchemaConfigNamespacingBlock(): SchemaConfigNamespacingBlock
     {
+        /** @var SchemaConfigNamespacingBlock */
         return $this->schemaConfigNamespacingBlock ??= $this->instanceManager->getInstance(SchemaConfigNamespacingBlock::class);
     }
 

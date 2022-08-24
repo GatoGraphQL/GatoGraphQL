@@ -18,6 +18,7 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
     }
     final protected function getSchemaDefinitionReferenceTypeDataLoader(): SchemaDefinitionReferenceTypeDataLoader
     {
+        /** @var SchemaDefinitionReferenceTypeDataLoader */
         return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
     }
 

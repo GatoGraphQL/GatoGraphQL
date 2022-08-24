@@ -31,6 +31,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     }
     final protected function getCacheControlEngine(): CacheControlEngineInterface
     {
+        /** @var CacheControlEngineInterface */
         return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
     }
 

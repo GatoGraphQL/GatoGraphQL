@@ -20,6 +20,7 @@ class AddMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractAddMetaQuery
     }
     final protected function getUserMetaQueryInputObjectTypeResolver(): UserMetaQueryInputObjectTypeResolver
     {
+        /** @var UserMetaQueryInputObjectTypeResolver */
         return $this->userMetaQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserMetaQueryInputObjectTypeResolver::class);
     }
 

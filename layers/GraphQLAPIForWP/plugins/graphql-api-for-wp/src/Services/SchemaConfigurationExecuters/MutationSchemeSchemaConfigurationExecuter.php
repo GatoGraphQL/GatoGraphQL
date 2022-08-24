@@ -24,6 +24,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
     }
     final protected function getSchemaConfigMutationSchemeBlock(): SchemaConfigMutationSchemeBlock
     {
+        /** @var SchemaConfigMutationSchemeBlock */
         return $this->schemaConfigMutationSchemeBlock ??= $this->instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
     }
 

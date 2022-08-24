@@ -32,6 +32,7 @@ final class ValidateDirectiveResolver extends AbstractGlobalDirectiveResolver im
     }
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
+        /** @var TypeSerializationServiceInterface */
         return $this->typeSerializationService ??= $this->instanceManager->getInstance(TypeSerializationServiceInterface::class);
     }
 

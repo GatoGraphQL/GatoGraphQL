@@ -25,6 +25,7 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
     }
     final protected function getCreateUpdateProfileMutationResolver(): CreateUpdateProfileMutationResolver
     {
+        /** @var CreateUpdateProfileMutationResolver */
         return $this->createUpdateProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateProfileMutationResolver::class);
     }
     

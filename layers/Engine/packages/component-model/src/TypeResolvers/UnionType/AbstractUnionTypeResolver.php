@@ -41,6 +41,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     }
     final protected function getOutputService(): OutputServiceInterface
     {
+        /** @var OutputServiceInterface */
         return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 

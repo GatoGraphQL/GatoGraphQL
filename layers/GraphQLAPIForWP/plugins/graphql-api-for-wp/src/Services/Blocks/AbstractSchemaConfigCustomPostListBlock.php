@@ -19,6 +19,7 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     }
     final protected function getBlockRenderingHelpers(): BlockRenderingHelpers
     {
+        /** @var BlockRenderingHelpers */
         return $this->blockRenderingHelpers ??= $this->instanceManager->getInstance(BlockRenderingHelpers::class);
     }
     final public function setCPTUtils(CPTUtils $cptUtils): void
@@ -27,6 +28,7 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     }
     final protected function getCPTUtils(): CPTUtils
     {
+        /** @var CPTUtils */
         return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
     }
 

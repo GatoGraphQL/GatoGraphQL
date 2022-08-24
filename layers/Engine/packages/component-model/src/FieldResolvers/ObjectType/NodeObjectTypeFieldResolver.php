@@ -23,6 +23,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver
     {
+        /** @var NodeInterfaceTypeFieldResolver */
         return $this->nodeInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(NodeInterfaceTypeFieldResolver::class);
     }
 

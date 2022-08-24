@@ -27,6 +27,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
     }
     final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
         return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
@@ -35,6 +36,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
+        /** @var UserAuthorizationInterface */
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     final public function setGraphQLQueryPostTypeHelpers(GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers): void
@@ -43,6 +45,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
     }
     final protected function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
     {
+        /** @var GraphQLQueryPostTypeHelpers */
         return $this->graphQLQueryPostTypeHelpers ??= $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
     }
     final public function setPersistedQueryEndpointAPIHierarchyBlockAccessor(PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor): void
@@ -51,6 +54,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
     }
     final protected function getPersistedQueryEndpointAPIHierarchyBlockAccessor(): PersistedQueryEndpointAPIHierarchyBlockAccessor
     {
+        /** @var PersistedQueryEndpointAPIHierarchyBlockAccessor */
         return $this->persistedQueryEndpointAPIHierarchyBlockAccessor ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlockAccessor::class);
     }
     final public function setPersistedQueryEndpointGraphiQLBlock(PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock): void
@@ -59,6 +63,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
     }
     final protected function getPersistedQueryEndpointGraphiQLBlock(): PersistedQueryEndpointGraphiQLBlock
     {
+        /** @var PersistedQueryEndpointGraphiQLBlock */
         return $this->persistedQueryEndpointGraphiQLBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
     }
 

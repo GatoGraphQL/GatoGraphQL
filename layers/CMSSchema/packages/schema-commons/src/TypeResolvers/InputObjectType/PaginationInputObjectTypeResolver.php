@@ -28,6 +28,7 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
+        /** @var IntScalarTypeResolver */
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     final public function setOffsetFilterInput(OffsetFilterInput $excludeIDsFilterInput): void
@@ -36,6 +37,7 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     }
     final protected function getOffsetFilterInput(): OffsetFilterInput
     {
+        /** @var OffsetFilterInput */
         return $this->excludeIDsFilterInput ??= $this->instanceManager->getInstance(OffsetFilterInput::class);
     }
     final public function setLimitFilterInput(LimitFilterInput $includeFilterInput): void
@@ -44,6 +46,7 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     }
     final protected function getLimitFilterInput(): LimitFilterInput
     {
+        /** @var LimitFilterInput */
         return $this->includeFilterInput ??= $this->instanceManager->getInstance(LimitFilterInput::class);
     }
 

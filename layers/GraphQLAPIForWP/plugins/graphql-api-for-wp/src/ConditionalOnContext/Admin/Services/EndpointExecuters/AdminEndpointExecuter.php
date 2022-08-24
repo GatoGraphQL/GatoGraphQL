@@ -26,6 +26,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
+        /** @var UserAuthorizationInterface */
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
@@ -34,6 +35,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     }
     final protected function getQueryRetriever(): QueryRetrieverInterface
     {
+        /** @var QueryRetrieverInterface */
         return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
@@ -42,6 +44,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
+        /** @var EndpointHelpers */
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
     final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
@@ -50,6 +53,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     }
     final protected function getTemplateHelpers(): TemplateHelpersInterface
     {
+        /** @var TemplateHelpersInterface */
         return $this->templateHelpers ??= $this->instanceManager->getInstance(TemplateHelpersInterface::class);
     }
 

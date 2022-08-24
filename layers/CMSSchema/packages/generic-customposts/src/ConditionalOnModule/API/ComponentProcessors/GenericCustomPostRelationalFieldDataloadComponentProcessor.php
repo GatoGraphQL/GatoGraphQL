@@ -31,6 +31,7 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
     }
     final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
+        /** @var GenericCustomPostObjectTypeResolver */
         return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
     }
     final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
@@ -39,6 +40,7 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
     }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
+        /** @var ListQueryInputOutputHandler */
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 

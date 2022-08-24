@@ -27,6 +27,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
+        /** @var EndpointHelpers */
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
     final public function setPersistedQueryEndpointBlockCategory(PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory): void
@@ -35,6 +36,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     }
     final protected function getPersistedQueryEndpointBlockCategory(): PersistedQueryEndpointBlockCategory
     {
+        /** @var PersistedQueryEndpointBlockCategory */
         return $this->persistedQueryEndpointBlockCategory ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
     }
 

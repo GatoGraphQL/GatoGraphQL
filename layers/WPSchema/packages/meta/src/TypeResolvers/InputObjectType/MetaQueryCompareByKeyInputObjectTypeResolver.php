@@ -20,6 +20,7 @@ class MetaQueryCompareByKeyInputObjectTypeResolver extends AbstractInputObjectTy
     }
     final protected function getMetaQueryCompareByKeyOperatorEnumTypeResolver(): MetaQueryCompareByKeyOperatorEnumTypeResolver
     {
+        /** @var MetaQueryCompareByKeyOperatorEnumTypeResolver */
         return $this->metaQueryCompareByKeyOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByKeyOperatorEnumTypeResolver::class);
     }
 

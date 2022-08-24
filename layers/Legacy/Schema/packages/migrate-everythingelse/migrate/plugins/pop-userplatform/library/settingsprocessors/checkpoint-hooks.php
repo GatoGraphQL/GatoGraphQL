@@ -13,6 +13,7 @@ class PoP_UserPlatform_SettingsProcessor_CheckpointHooks
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
+        /** @var UserLoggedInCheckpoint */
         return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
     final public function setDoingPostUserLoggedInAggregateCheckpoint(DoingPostUserLoggedInAggregateCheckpoint $doingPostUserLoggedInAggregateCheckpoint): void
@@ -21,6 +22,7 @@ class PoP_UserPlatform_SettingsProcessor_CheckpointHooks
     }
     final protected function getDoingPostUserLoggedInAggregateCheckpoint(): DoingPostUserLoggedInAggregateCheckpoint
     {
+        /** @var DoingPostUserLoggedInAggregateCheckpoint */
         return $this->doingPostUserLoggedInAggregateCheckpoint ??= $this->instanceManager->getInstance(DoingPostUserLoggedInAggregateCheckpoint::class);
     }
     

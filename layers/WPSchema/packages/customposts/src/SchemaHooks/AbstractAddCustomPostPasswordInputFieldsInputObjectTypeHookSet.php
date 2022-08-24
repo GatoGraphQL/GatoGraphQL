@@ -28,6 +28,7 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
+        /** @var BooleanScalarTypeResolver */
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -36,6 +37,7 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setHasPasswordFilterInput(HasPasswordFilterInput $hasPasswordFilterInput): void
@@ -44,6 +46,7 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
     }
     final protected function getHasPasswordFilterInput(): HasPasswordFilterInput
     {
+        /** @var HasPasswordFilterInput */
         return $this->hasPasswordFilterInput ??= $this->instanceManager->getInstance(HasPasswordFilterInput::class);
     }
     final public function setPasswordFilterInput(PasswordFilterInput $passwordFilterInput): void
@@ -52,6 +55,7 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
     }
     final protected function getPasswordFilterInput(): PasswordFilterInput
     {
+        /** @var PasswordFilterInput */
         return $this->passwordFilterInput ??= $this->instanceManager->getInstance(PasswordFilterInput::class);
     }
 

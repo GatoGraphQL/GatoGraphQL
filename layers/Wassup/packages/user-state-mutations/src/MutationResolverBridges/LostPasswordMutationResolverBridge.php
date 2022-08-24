@@ -22,6 +22,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
     }
     final protected function getLostPasswordMutationResolver(): LostPasswordMutationResolver
     {
+        /** @var LostPasswordMutationResolver */
         return $this->lostPasswordMutationResolver ??= $this->instanceManager->getInstance(LostPasswordMutationResolver::class);
     }
 

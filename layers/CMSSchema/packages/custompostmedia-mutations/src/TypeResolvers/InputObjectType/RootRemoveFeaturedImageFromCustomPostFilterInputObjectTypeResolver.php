@@ -20,6 +20,7 @@ class RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver extends
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
+        /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 

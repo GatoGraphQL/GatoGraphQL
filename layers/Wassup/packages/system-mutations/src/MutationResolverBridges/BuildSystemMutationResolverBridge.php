@@ -17,6 +17,7 @@ class BuildSystemMutationResolverBridge extends AbstractSystemComponentMutationR
     }
     final protected function getBuildSystemMutationResolver(): BuildSystemMutationResolver
     {
+        /** @var BuildSystemMutationResolver */
         return $this->buildSystemMutationResolver ??= $this->instanceManager->getInstance(BuildSystemMutationResolver::class);
     }
 

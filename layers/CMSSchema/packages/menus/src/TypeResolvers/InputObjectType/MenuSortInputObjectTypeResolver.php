@@ -19,6 +19,7 @@ class MenuSortInputObjectTypeResolver extends SortInputObjectTypeResolver
     }
     final protected function getMenuOrderByEnumTypeResolver(): MenuOrderByEnumTypeResolver
     {
+        /** @var MenuOrderByEnumTypeResolver */
         return $this->menuSortByEnumTypeResolver ??= $this->instanceManager->getInstance(MenuOrderByEnumTypeResolver::class);
     }
 

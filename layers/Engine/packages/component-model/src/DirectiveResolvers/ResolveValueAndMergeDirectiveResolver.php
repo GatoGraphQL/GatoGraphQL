@@ -29,6 +29,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
+        /** @var TypeSerializationServiceInterface */
         return $this->typeSerializationService ??= $this->instanceManager->getInstance(TypeSerializationServiceInterface::class);
     }
 

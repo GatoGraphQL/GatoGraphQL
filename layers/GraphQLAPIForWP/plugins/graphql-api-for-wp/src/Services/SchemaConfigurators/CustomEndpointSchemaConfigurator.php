@@ -18,6 +18,7 @@ class CustomEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaC
     }
     final protected function getEndpointSchemaConfigurationExecuterRegistry(): EndpointSchemaConfigurationExecuterRegistryInterface
     {
+        /** @var EndpointSchemaConfigurationExecuterRegistryInterface */
         return $this->endpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationExecuterRegistryInterface::class);
     }
 

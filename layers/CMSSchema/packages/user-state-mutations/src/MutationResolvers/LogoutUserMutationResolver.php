@@ -25,6 +25,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
     }
     final protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
     {
+        /** @var UserStateTypeMutationAPIInterface */
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 

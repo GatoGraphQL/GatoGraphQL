@@ -22,6 +22,7 @@ class VolunteerMutationResolverBridge extends AbstractFormComponentMutationResol
     }
     final protected function getVolunteerMutationResolver(): VolunteerMutationResolver
     {
+        /** @var VolunteerMutationResolver */
         return $this->volunteerMutationResolver ??= $this->instanceManager->getInstance(VolunteerMutationResolver::class);
     }
 

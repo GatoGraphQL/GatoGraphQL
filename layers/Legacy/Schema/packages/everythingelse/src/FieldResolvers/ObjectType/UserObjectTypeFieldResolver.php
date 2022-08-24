@@ -25,6 +25,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
     {
+        /** @var LocationObjectTypeResolver */
         return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
     }
 

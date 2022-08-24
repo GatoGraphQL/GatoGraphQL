@@ -18,6 +18,7 @@ class ValidateUserNotLoggedInForDirectivesPublicSchemaRelationalTypeResolverDeco
     }
     final protected function getValidateIsUserNotLoggedInForDirectivesDirectiveResolver(): ValidateIsUserNotLoggedInForDirectivesDirectiveResolver
     {
+        /** @var ValidateIsUserNotLoggedInForDirectivesDirectiveResolver */
         return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
     }
 }

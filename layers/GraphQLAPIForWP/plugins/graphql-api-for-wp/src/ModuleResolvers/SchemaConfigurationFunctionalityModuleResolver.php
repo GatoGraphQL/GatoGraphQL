@@ -36,6 +36,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     }
     final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
     {
+        /** @var GraphQLSchemaConfigurationCustomPostType */
         return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
     }
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
@@ -44,6 +45,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
+        /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
     }
 

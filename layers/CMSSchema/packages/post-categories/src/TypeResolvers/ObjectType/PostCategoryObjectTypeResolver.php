@@ -21,6 +21,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     }
     final protected function getPostCategoryTypeDataLoader(): PostCategoryTypeDataLoader
     {
+        /** @var PostCategoryTypeDataLoader */
         return $this->postCategoryTypeDataLoader ??= $this->instanceManager->getInstance(PostCategoryTypeDataLoader::class);
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
@@ -29,6 +30,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
+        /** @var PostCategoryTypeAPIInterface */
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 

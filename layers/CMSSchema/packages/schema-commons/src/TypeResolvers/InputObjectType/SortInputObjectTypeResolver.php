@@ -26,6 +26,7 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setOrderEnumTypeResolver(OrderEnumTypeResolver $orderEnumTypeResolver): void
@@ -34,6 +35,7 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
     }
     final protected function getOrderEnumTypeResolver(): OrderEnumTypeResolver
     {
+        /** @var OrderEnumTypeResolver */
         return $this->orderEnumTypeResolver ??= $this->instanceManager->getInstance(OrderEnumTypeResolver::class);
     }
     final public function setOrderByFilterInput(OrderByFilterInput $excludeIDsFilterInput): void
@@ -42,6 +44,7 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
     }
     final protected function getOrderByFilterInput(): OrderByFilterInput
     {
+        /** @var OrderByFilterInput */
         return $this->excludeIDsFilterInput ??= $this->instanceManager->getInstance(OrderByFilterInput::class);
     }
     final public function setOrderFilterInput(OrderFilterInput $includeFilterInput): void
@@ -50,6 +53,7 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
     }
     final protected function getOrderFilterInput(): OrderFilterInput
     {
+        /** @var OrderFilterInput */
         return $this->includeFilterInput ??= $this->instanceManager->getInstance(OrderFilterInput::class);
     }
 

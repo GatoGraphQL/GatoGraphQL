@@ -18,6 +18,7 @@ class ValidateUserNotLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorato
     }
     final protected function getValidateIsUserNotLoggedInDirectiveResolver(): ValidateIsUserNotLoggedInDirectiveResolver
     {
+        /** @var ValidateIsUserNotLoggedInDirectiveResolver */
         return $this->validateIsUserNotLoggedInDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInDirectiveResolver::class);
     }
 }

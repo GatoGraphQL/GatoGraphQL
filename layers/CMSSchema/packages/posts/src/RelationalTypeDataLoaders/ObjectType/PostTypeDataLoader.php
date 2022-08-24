@@ -17,6 +17,7 @@ class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
     }
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
+        /** @var PostTypeAPIInterface */
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 

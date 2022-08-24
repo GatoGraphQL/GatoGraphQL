@@ -19,6 +19,7 @@ class UserSortInputObjectTypeResolver extends SortInputObjectTypeResolver
     }
     final protected function getUserOrderByEnumTypeResolver(): UserOrderByEnumTypeResolver
     {
+        /** @var UserOrderByEnumTypeResolver */
         return $this->customPostSortByEnumTypeResolver ??= $this->instanceManager->getInstance(UserOrderByEnumTypeResolver::class);
     }
 

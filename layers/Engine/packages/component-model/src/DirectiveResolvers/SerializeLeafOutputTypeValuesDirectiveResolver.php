@@ -25,6 +25,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
     }
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
+        /** @var TypeSerializationServiceInterface */
         return $this->typeSerializationService ??= $this->instanceManager->getInstance(TypeSerializationServiceInterface::class);
     }
 

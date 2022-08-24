@@ -19,6 +19,7 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getHighlightTypeDataLoader(): HighlightTypeDataLoader
     {
+        /** @var HighlightTypeDataLoader */
         return $this->highlightTypeDataLoader ??= $this->instanceManager->getInstance(HighlightTypeDataLoader::class);
     }
     

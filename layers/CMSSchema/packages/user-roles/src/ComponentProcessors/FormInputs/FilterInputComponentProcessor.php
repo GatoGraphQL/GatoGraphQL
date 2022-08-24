@@ -29,6 +29,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setUserRolesFilterInput(UserRolesFilterInput $userRolesFilterInput): void
@@ -37,6 +38,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getUserRolesFilterInput(): UserRolesFilterInput
     {
+        /** @var UserRolesFilterInput */
         return $this->userRolesFilterInput ??= $this->instanceManager->getInstance(UserRolesFilterInput::class);
     }
     final public function setExcludeUserRolesFilterInput(ExcludeUserRolesFilterInput $excludeUserRolesFilterInput): void
@@ -45,6 +47,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getExcludeUserRolesFilterInput(): ExcludeUserRolesFilterInput
     {
+        /** @var ExcludeUserRolesFilterInput */
         return $this->excludeUserRolesFilterInput ??= $this->instanceManager->getInstance(ExcludeUserRolesFilterInput::class);
     }
 

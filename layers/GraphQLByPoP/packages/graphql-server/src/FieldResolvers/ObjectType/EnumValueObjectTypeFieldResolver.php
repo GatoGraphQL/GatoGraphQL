@@ -28,6 +28,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
+        /** @var BooleanScalarTypeResolver */
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -36,6 +37,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setEnumValueExtensionsObjectTypeResolver(EnumValueExtensionsObjectTypeResolver $enumValueExtensionsObjectTypeResolver): void
@@ -44,6 +46,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getEnumValueExtensionsObjectTypeResolver(): EnumValueExtensionsObjectTypeResolver
     {
+        /** @var EnumValueExtensionsObjectTypeResolver */
         return $this->enumValueExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(EnumValueExtensionsObjectTypeResolver::class);
     }
 
