@@ -48,13 +48,16 @@ class Schema
 
         // Initialize the directives
         $this->directives = [];
+        /** @var string $directiveName */
         foreach (array_keys($fullSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]) as $directiveName) {
             $this->directives[] = $this->getDirectiveInstance($fullSchemaDefinition, $directiveName);
         }
 
         // Initialize the types
         $this->types = [];
+        /** @var string $typeKind */
         foreach ($fullSchemaDefinition[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
+            /** @var string $typeName */
             foreach (array_keys($typeSchemaDefinitions) as $typeName) {
                 $this->types[] = $this->getTypeInstance($fullSchemaDefinition, $typeKind, $typeName);
             }
