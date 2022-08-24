@@ -236,7 +236,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
-            return get_permalink($customPostID);
+            $permalink = get_permalink($customPostID);
+            if ($permalink === false) {
+                return null;
+            }
+            return $permalink;
         }
 
         // Function get_sample_permalink comes from the file below, so it must be included
@@ -270,7 +274,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getExcerpt(string|int|object $customPostObjectOrID): ?string
     {
-        return get_the_excerpt($customPostObjectOrID);
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = (int)$customPostObjectOrID;
+        }
+        return get_the_excerpt($customPostID);
     }
     /**
      * @return mixed[]
