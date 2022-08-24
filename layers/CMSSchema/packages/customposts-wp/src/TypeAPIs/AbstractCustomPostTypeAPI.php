@@ -313,6 +313,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getContent(string|int|object $customPostObjectOrID): ?string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
@@ -322,6 +323,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getRawContent(string|int|object $customPostObjectOrID): ?string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
@@ -346,6 +348,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getPublishedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
@@ -355,6 +358,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getModifiedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
@@ -363,6 +367,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
     public function getCustomPostType(string|int|object $customPostObjectOrID): string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         return $customPost?->post_type;
     }
@@ -372,6 +377,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     public function getCustomPost(int|string $id): ?object
     {
-        return get_post($id);
+        /** @var object|null */
+        return get_post((int)$id);
     }
 }
