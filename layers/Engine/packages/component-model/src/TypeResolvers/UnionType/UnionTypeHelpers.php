@@ -16,7 +16,7 @@ class UnionTypeHelpers
     /**
      * Extracts the DB key and ID from the object ID
      *
-     * @return array{0: string, 1: string|int}
+     * @return array{0:string,1:string|int}
      */
     public static function extractObjectTypeAndID(string $composedTypeOutputKeyObjectID): array
     {
