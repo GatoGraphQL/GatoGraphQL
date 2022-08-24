@@ -278,8 +278,8 @@ class Parser extends Tokenizer implements ParserInterface
 
             if ($this->match(Token::TYPE_EQUAL)) {
                 $this->eat(Token::TYPE_EQUAL);
-                $defaultValueAst = $this->parseValue();
                 /** @var InputList|InputObject|Literal|Enum */
+                $defaultValueAst = $this->parseValue();
                 $variable->setDefaultValueAST($defaultValueAst);
             }
 
