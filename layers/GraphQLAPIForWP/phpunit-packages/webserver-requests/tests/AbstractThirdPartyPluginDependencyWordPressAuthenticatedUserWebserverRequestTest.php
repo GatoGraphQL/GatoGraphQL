@@ -75,7 +75,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
      */
-    protected function executeRESTEndpointToEnableOrDisablePlugin(string $dataName, string $status): void
+    protected function executeRESTEndpointToEnableOrDisablePlugin(string|int $dataName, string $status): void
     {
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';

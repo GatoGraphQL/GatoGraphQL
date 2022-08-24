@@ -26,7 +26,7 @@ class PostMutationPermissionsFixtureEndpointWebserverRequestTest extends Abstrac
         return ModuleSettingOptions::DEFAULT_VALUE;
     }
 
-    protected function getModuleID(string $dataName): string
+    protected function getModuleID(string|int $dataName): string
     {
         return 'graphqlapi_graphqlapi_nested-mutations';
     }

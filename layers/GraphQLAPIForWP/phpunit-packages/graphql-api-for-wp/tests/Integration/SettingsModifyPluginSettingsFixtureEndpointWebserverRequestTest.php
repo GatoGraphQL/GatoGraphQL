@@ -24,7 +24,7 @@ class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
         return ModuleSettingOptions::BEHAVIOR;
     }
 
-    protected function getModuleID(string $dataName): string
+    protected function getModuleID(string|int $dataName): string
     {
         return 'graphqlapi_graphqlapi_schema-settings';
     }

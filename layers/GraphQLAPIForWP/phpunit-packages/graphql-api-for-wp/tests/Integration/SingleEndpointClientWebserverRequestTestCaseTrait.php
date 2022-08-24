@@ -13,7 +13,7 @@ trait SingleEndpointClientWebserverRequestTestCaseTrait
      *
      * @see https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules
      */
-    protected function getSingleEndpointClientModuleID(string $dataName): string
+    protected function getSingleEndpointClientModuleID(string|int $dataName): string
     {
         return match ($dataName) {
             'single-endpoint-graphiql' => 'graphqlapi_graphqlapi_graphiql-for-single-endpoint',

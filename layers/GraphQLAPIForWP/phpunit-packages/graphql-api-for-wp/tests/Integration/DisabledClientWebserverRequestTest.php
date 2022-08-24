@@ -75,7 +75,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
     }
 
     protected function executeRESTEndpointToEnableOrDisableClient(
-        string $dataName,
+        string|int $dataName,
         bool $clientEnabled
     ): void {
         $client = static::getClient();
@@ -94,7 +94,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
         $this->assertRESTPostCallIsSuccessful($response);
     }
 
-    protected function getModuleID(string $dataName): string
+    protected function getModuleID(string|int $dataName): string
     {
         return $this->getSingleEndpointClientModuleID($dataName);
     }

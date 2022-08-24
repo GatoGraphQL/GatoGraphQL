@@ -28,7 +28,7 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
         return ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT;
     }
 
-    protected function getModuleID(string $dataName): string
+    protected function getModuleID(string|int $dataName): string
     {
         return 'graphqlapi_graphqlapi_schema-configuration';
     }

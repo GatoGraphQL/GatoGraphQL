@@ -25,7 +25,7 @@ abstract class AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCa
         parent::tearDown();
     }
 
-    protected function executePluginSettingsSetUpTearDown(string $dataName): bool
+    protected function executePluginSettingsSetUpTearDown(string|int $dataName): bool
     {
         return $this->executeSetUpTearDownUnlessIsOriginalTestCase($dataName);
     }

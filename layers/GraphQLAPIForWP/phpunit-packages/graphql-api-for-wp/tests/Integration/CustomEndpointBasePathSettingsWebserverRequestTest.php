@@ -23,7 +23,7 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
         ];
     }
 
-    protected function getModuleID(string $dataName): string
+    protected function getModuleID(string|int $dataName): string
     {
         return 'graphqlapi_graphqlapi_custom-endpoints';
     }

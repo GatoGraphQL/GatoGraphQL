@@ -30,12 +30,12 @@ class CustomEndpointOptionsOnCustomEndpointCPTBlockAttributesFixtureEndpointWebs
         ];
     }
 
-    protected function getCustomPostID(string $dataName): int
+    protected function getCustomPostID(string|int $dataName): int
     {
         return self::WEBSITE_CUSTOM_ENDPOINT_ID;
     }
 
-    protected function getBlockNamespacedID(string $dataName): string
+    protected function getBlockNamespacedID(string|int $dataName): string
     {
         return 'graphql-api/custom-endpoint-options';
     }

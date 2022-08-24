@@ -37,12 +37,12 @@ class SchemaExposeAdminDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
         ];
     }
 
-    protected function getCustomPostID(string $dataName): int
+    protected function getCustomPostID(string|int $dataName): int
     {
         return self::WEBSITE_SCHEMA_CONFIGURATION_ID;
     }
 
-    protected function getBlockNamespacedID(string $dataName): string
+    protected function getBlockNamespacedID(string|int $dataName): string
     {
         return 'graphql-api/schema-config-expose-admin-data';
     }

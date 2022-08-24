@@ -13,7 +13,7 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
         return __DIR__ . '/fixture-persisted-queries';
     }
 
-    protected function getEndpoint(string $dataName): string
+    protected function getEndpoint(string|int $dataName): string
     {
         return match ($dataName) {
             'basic',
@@ -34,7 +34,7 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
         };
     }
 
-    protected function getEntryMethod(string $dataName): string
+    protected function getEntryMethod(string|int $dataName): string
     {
         return match ($dataName) {
             'by-post' => 'POST',
@@ -45,7 +45,7 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
     /**
      * @return array<string,mixed>
      */
-    protected function getParams(string $dataName): array
+    protected function getParams(string|int $dataName): array
     {
         return match ($dataName) {
             'passing-params',

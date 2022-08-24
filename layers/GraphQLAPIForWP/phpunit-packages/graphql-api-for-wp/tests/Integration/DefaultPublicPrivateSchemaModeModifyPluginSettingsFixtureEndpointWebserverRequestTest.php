@@ -25,7 +25,7 @@ class DefaultPublicPrivateSchemaModeModifyPluginSettingsFixtureEndpointWebserver
         return SchemaConfigurationFunctionalityModuleResolver::OPTION_MODE;
     }
 
-    protected function getModuleID(string $dataName): string
+    protected function getModuleID(string|int $dataName): string
     {
         return 'graphqlapi_graphqlapi_public-private-schema';
     }
