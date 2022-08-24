@@ -9,6 +9,7 @@ use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\GraphQLParser\AST\ASTHelperServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -21,6 +22,17 @@ use SplObjectStorage;
 
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter
 {
+    private ?ASTHelperServiceInterface $astHelperService = null;
+
+    final public function setASTHelperService(ASTHelperServiceInterface $astHelperService): void
+    {
+        $this->astHelperService = $astHelperService;
+    }
+    final protected function getASTHelperService(): ASTHelperServiceInterface
+    {
+        return $this->astHelperService ??= $this->instanceManager->getInstance(ASTHelperServiceInterface::class);
+    }
+
     public function getName(): string
     {
         return 'mirrorquery';
@@ -58,77 +70,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($executableDocument->getRequestedOperations() as $operation) {
             $fields = array_merge(
                 $fields,
-                $this->getAllFieldsFromFieldsOrFragmentBonds(
+                $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
                     $operation->getFieldsOrFragmentBonds(),
                     $fragments,
                 )
             );
         }
         return $fields;
-    }
-
-    /**
-     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @param Fragment[] $fragments
-     * @return FieldInterface[]
-     */
-    protected function getAllFieldsFromFieldsOrFragmentBonds(
-        array $fieldsOrFragmentBonds,
-        array $fragments,
-    ): array {
-        /** @var FieldInterface[] */
-        $fields = [];
-        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
-            if ($fieldOrFragmentBond instanceof FragmentReference) {
-                /** @var FragmentReference */
-                $fragmentReference = $fieldOrFragmentBond;
-                $fragment = $this->getFragment($fragmentReference->getName(), $fragments);
-                if ($fragment === null) {
-                    continue;
-                }
-                $allFieldsFromFieldsOrFragmentBonds = $this->getAllFieldsFromFieldsOrFragmentBonds(
-                    $fragment->getFieldsOrFragmentBonds(),
-                    $fragments,
-                );
-                $fields = array_merge(
-                    $fields,
-                    $allFieldsFromFieldsOrFragmentBonds
-                );
-                continue;
-            }
-            if ($fieldOrFragmentBond instanceof InlineFragment) {
-                /** @var InlineFragment */
-                $inlineFragment = $fieldOrFragmentBond;
-                $allFieldsFromFieldsOrFragmentBonds = $this->getAllFieldsFromFieldsOrFragmentBonds(
-                    $inlineFragment->getFieldsOrFragmentBonds(),
-                    $fragments,
-                );
-                $fields = array_merge(
-                    $fields,
-                    $allFieldsFromFieldsOrFragmentBonds
-                );
-                continue;
-            }
-            /** @var FieldInterface */
-            $field = $fieldOrFragmentBond;
-            $fields[] = $field;
-        }
-        return $fields;
-    }
-
-    /**
-     * @param Fragment[] $fragments
-     */
-    protected function getFragment(
-        string $fragmentName,
-        array $fragments,
-    ): ?Fragment {
-        foreach ($fragments as $fragment) {
-            if ($fragment->getName() === $fragmentName) {
-                return $fragment;
-            }
-        }
-        return null;
     }
 
     /**
@@ -314,7 +262,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             /** @var ExecutableDocument */
             $executableDocument = App::getState('executable-document-ast');
             $fragments = $executableDocument->getDocument()->getFragments();
-            $relationalNestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
+            $relationalNestedFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
                 $relationalField->getFieldsOrFragmentBonds(),
                 $fragments
             );
