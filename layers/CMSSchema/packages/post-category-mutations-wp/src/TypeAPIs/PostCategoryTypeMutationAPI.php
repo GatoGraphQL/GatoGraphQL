@@ -16,6 +16,6 @@ class PostCategoryTypeMutationAPI implements PostCategoryTypeMutationAPIInterfac
      */
     public function setCategories(int|string $postID, array $categoryIDs, bool $append = false): void
     {
-        \wp_set_post_terms($postID, $categoryIDs, 'category', $append);
+        \wp_set_post_terms((int)$postID, $categoryIDs, 'category', $append);
     }
 }

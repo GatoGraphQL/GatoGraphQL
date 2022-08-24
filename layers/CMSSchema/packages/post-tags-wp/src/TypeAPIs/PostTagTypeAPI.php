@@ -6,6 +6,7 @@ namespace PoPCMSSchema\PostTagsWP\TypeAPIs;
 
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI;
+use WP_Taxonomy;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -17,7 +18,11 @@ class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterfa
      */
     public function isInstanceOfPostTagType(object $object): bool
     {
-        return $this->isInstanceOfTagType($object) && $object->name === $this->getPostTagTaxonomyName();
+        if (!$this->isInstanceOfTagType($object)) {
+            return false;
+        }
+        /** @var WP_Taxonomy $object */
+        return $object->name === $this->getPostTagTaxonomyName();
     }
 
     /**
