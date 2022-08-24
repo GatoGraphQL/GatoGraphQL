@@ -16,6 +16,7 @@ class UserRoleTypeDataLoader extends AbstractObjectTypeDataLoader
      */
     public function getObjects(array $ids): array
     {
+        /** @var string[] $ids */
         return array_map(get_role(...), $ids);
     }
 }

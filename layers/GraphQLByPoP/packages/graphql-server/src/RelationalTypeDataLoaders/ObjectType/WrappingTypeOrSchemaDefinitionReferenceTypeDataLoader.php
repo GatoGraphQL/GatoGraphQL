@@ -56,6 +56,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
      */
     public function getObjects(array $ids): array
     {
+        /** @var string[] $ids */
         return array_map(
             $this->getWrappingTypeOrSchemaDefinitionReferenceObject(...),
             $ids

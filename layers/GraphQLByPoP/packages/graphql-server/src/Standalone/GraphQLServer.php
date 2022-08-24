@@ -102,6 +102,7 @@ class GraphQLServer implements GraphQLServerInterface
 
     protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
+        /** @var GraphQLDataStructureFormatter */
         return App::getContainer()->get(GraphQLDataStructureFormatter::class);
     }
 
