@@ -35,23 +35,23 @@ class DatabaseEntryManager implements DatabaseEntryManagerInterface
         }
 
         /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
-        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
+        $dbNameEntries = $this->getEntriesUnderPrimaryDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
-        foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
+        foreach ($dbNameEntries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
             $fields = iterator_to_array($fieldValues);
             foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
                 $fields_to_move = array_filter(
                     $fields,
                     fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
                 );
-                $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
+                $dbNameEntries[$dbName][$id] ??= new SplObjectStorage();
                 foreach ($fields_to_move as $field) {
-                    $dbname_entries[$dbName][$id][$field] = $dbname_entries[self::PRIMARY_DBNAME][$id][$field];
-                    $dbname_entries[self::PRIMARY_DBNAME][$id]->detach($field);
+                    $dbNameEntries[$dbName][$id][$field] = $dbNameEntries[self::PRIMARY_DBNAME][$id][$field];
+                    $dbNameEntries[self::PRIMARY_DBNAME][$id]->detach($field);
                 }
             }
         }
-        return $dbname_entries;
+        return $dbNameEntries;
     }
 
     /**
@@ -100,7 +100,7 @@ class DatabaseEntryManager implements DatabaseEntryManagerInterface
 
         // By default place everything under "primary"
         /** @var array<string,SplObjectStorage<FieldInterface,mixed>> */
-        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
+        $dbNameEntries = $this->getEntriesUnderPrimaryDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
         $fields = iterator_to_array($entries);
         foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
@@ -110,11 +110,13 @@ class DatabaseEntryManager implements DatabaseEntryManagerInterface
                 fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
             );
             foreach ($fields_to_move as $field) {
-                $dbname_entries[$dbName] ??= new SplObjectStorage();
-                $dbname_entries[$dbName][$field] = $dbname_entries[self::PRIMARY_DBNAME][$field];
-                $dbname_entries[self::PRIMARY_DBNAME]->detach($field);
+                /** @var SplObjectStorage<FieldInterface,mixed> */
+                $dbEntries = $dbNameEntries[$dbName] ?? new SplObjectStorage();
+                $dbEntries[$field] = $dbNameEntries[self::PRIMARY_DBNAME][$field];
+                $dbNameEntries[self::PRIMARY_DBNAME]->detach($field);
+                $dbNameEntries[$dbName] = $dbEntries;
             }
         }
-        return $dbname_entries;
+        return $dbNameEntries;
     }
 }
