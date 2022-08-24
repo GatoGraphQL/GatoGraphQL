@@ -8,6 +8,10 @@ class DateFormatter implements DateFormatterInterface
 {
     public function format(string $format, string $date): string|int|false
     {
-        return date($format, strtotime($date));
+        $time = strtotime($date);
+        if ($time === false) {
+            return false;
+        }
+        return date($format, $time);
     }
 }
