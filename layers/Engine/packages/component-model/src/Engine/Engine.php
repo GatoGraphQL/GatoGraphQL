@@ -1386,7 +1386,14 @@ class Engine implements EngineInterface
                     // Store the ids under $data under key dataload_name => id
                     $directComponentFieldNodes = $data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [];
                     $conditionalComponentFieldNodesSplObjectStorage = $data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
-                    $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $relationalTypeResolver, $relationalTypeOutputKey, $typeDBObjectIDs, $directComponentFieldNodes, $conditionalComponentFieldNodesSplObjectStorage);
+                    $this->combineIDsDatafields(
+                        $engineState->relationalTypeOutputKeyIDFieldSets,
+                        $relationalTypeResolver,
+                        $relationalTypeOutputKey,
+                        $typeDBObjectIDs,
+                        $directComponentFieldNodes,
+                        $conditionalComponentFieldNodesSplObjectStorage,
+                    );
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
                     $this->initializeTypeResolverEntry($engineState->dbdata, $relationalTypeOutputKey, $component_path_key);
@@ -1414,8 +1421,14 @@ class Engine implements EngineInterface
                         $extend_conditional_data_fields = $extend_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
                         $extend_ids = $extend_data_properties[DataProperties::IDS];
                         $extend_typeResolver = $extend_data_properties[DataProperties::RESOLVER];
-
-                        $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $extend_typeResolver, $extendTypeOutputKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
+                        $this->combineIDsDatafields(
+                            $engineState->relationalTypeOutputKeyIDFieldSets,
+                            $extend_typeResolver,
+                            $extendTypeOutputKey,
+                            $extend_ids,
+                            $extend_data_fields,
+                            $extend_conditional_data_fields,
+                        );
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
                         $this->initializeTypeResolverEntry($engineState->dbdata, $extendTypeOutputKey, $component_path_key);
@@ -2024,7 +2037,14 @@ class Engine implements EngineInterface
                         // That is because we can load additional data for an object that was already loaded in a previous iteration
                         // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                         // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
-                        $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $subcomponentTypeResolver, $subcomponentTypeOutputKey, array($field_id), $id_subcomponent_direct_fields, $id_subcomponent_conditional_fields_storage);
+                        $this->combineIDsDatafields(
+                            $engineState->relationalTypeOutputKeyIDFieldSets,
+                            $subcomponentTypeResolver,
+                            $subcomponentTypeOutputKey,
+                            array($field_id),
+                            $id_subcomponent_direct_fields,
+                            $id_subcomponent_conditional_fields_storage,
+                        );
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
                     $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(
