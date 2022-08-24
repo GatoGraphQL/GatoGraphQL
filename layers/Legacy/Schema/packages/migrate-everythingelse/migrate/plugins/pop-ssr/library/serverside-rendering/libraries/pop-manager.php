@@ -1,11 +1,11 @@
 <?php
 
-use PoP\ComponentModel\Engine\Engine;
-use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
-use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
+use PoP\ComponentModel\Response\DatabaseEntryManager;
 use PoP\Root\Exception\GenericSystemException;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
@@ -57,7 +57,7 @@ class PoP_ServerSideManager
 
     public function &getPrimaryDatabase($domain)
     {
-        $primarydatabase =& $this->getDatabases($domain)[Engine::PRIMARY_DBNAME] ?? array();
+        $primarydatabase =& $this->getDatabases($domain)[DatabaseEntryManager::PRIMARY_DBNAME] ?? array();
         return $primarydatabase;
     }
 

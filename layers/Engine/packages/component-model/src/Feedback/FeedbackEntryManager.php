@@ -7,12 +7,12 @@ namespace PoP\ComponentModel\Feedback;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Response;
-use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\Response\DatabaseEntryManagerInterface;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -29,15 +29,15 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
 {
     use BasicServiceTrait;
 
-    private ?EngineInterface $engine = null;
+    private ?DatabaseEntryManagerInterface $databaseEntryManager = null;
 
-    final public function setEngine(EngineInterface $engine): void
+    final public function setDatabaseEntryManager(DatabaseEntryManagerInterface $databaseEntryManager): void
     {
-        $this->engine = $engine;
+        $this->databaseEntryManager = $databaseEntryManager;
     }
-    final protected function getEngine(): EngineInterface
+    final protected function getDatabaseEntryManager(): DatabaseEntryManagerInterface
     {
-        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
+        return $this->databaseEntryManager ??= $this->instanceManager->getInstance(DatabaseEntryManagerInterface::class);
     }
 
     /**
@@ -206,7 +206,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         foreach ($iterationEntries as $iterationRelationalTypeResolver) {
             $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
             $entries = $iterationEntries[$iterationRelationalTypeResolver];
-            $dbNameEntries = $this->getEngine()->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
+            $dbNameEntries = $this->getDatabaseEntryManager()->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
             foreach ($dbNameEntries as $dbName => $entries) {
                 /** @var SplObjectStorage<FieldInterface,mixed> */
                 $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
