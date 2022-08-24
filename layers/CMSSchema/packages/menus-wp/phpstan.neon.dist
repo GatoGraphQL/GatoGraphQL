@@ -14,9 +14,6 @@ parameters:
 			message: '#Access to an undefined property object::\$menu_item_parent\.#'
 			path: src/TypeAPIs/MenuTypeAPI.php
 		- 
-			message: '#Access to an undefined property object::\$object_id\.#'
-			path: src/TypeAPIs/MenuTypeAPI.php
-		- 
 			message: '#Access to an undefined property object::\$title\.#'
 			path: src/TypeAPIs/MenuTypeAPI.php
 		- 
