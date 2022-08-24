@@ -68,9 +68,13 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         if ($expectedResponseJSON === false) {
             $this->fail('Encoding the expected response as JSON failed');
         }
+        $responseContent = $response->getContent();
+        if ($responseContent === false) {
+            $this->fail('Obtaining the content of the response failed');
+        }
         $this->assertJsonStringEqualsJsonString(
             $expectedResponseJSON,
-            $response->getContent()
+            $responseContent
         );
     }
 
@@ -103,9 +107,13 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         }
 
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
+        $responseContent = $response->getContent();
+        if ($responseContent === false) {
+            $this->fail('Obtaining the content of the response failed');
+        }
 
         // Allow to override method
-        $this->doAssertFixtureGraphQLQueryExecution($expectedResponseFile, (string)$response->getContent());
+        $this->doAssertFixtureGraphQLQueryExecution($expectedResponseFile, $responseContent);
     }
 
     protected function doAssertFixtureGraphQLQueryExecution(string $expectedResponseFile, string $actualResponseContent): void
