@@ -2013,6 +2013,7 @@ class Engine implements EngineInterface
                                     fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
+                            /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
                             $id_subcomponent_conditional_fields_storage = new SplObjectStorage();
                             foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
                                 /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
