@@ -111,7 +111,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
         foreach ($thisFields as $thisField) {
             $equivalentFieldsInOppositeSet = array_filter(
                 $againstFields,
-                fn (FieldInterface $oppositeField) => $this->isFieldEquivalentToField($thisField, $oppositeField, $fragments)
+                fn (FieldInterface $oppositeField) => $this->getASTHelperService()->isFieldEquivalentToField($thisField, $oppositeField, $fragments)
             );
             if ($equivalentFieldsInOppositeSet === []) {
                 return false;
@@ -120,7 +120,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
         foreach ($againstFields as $againstField) {
             $equivalentFieldsInOppositeSet = array_filter(
                 $thisFields,
-                fn (FieldInterface $oppositeField) => $this->isFieldEquivalentToField($againstField, $oppositeField, $fragments)
+                fn (FieldInterface $oppositeField) => $this->getASTHelperService()->isFieldEquivalentToField($againstField, $oppositeField, $fragments)
             );
             if ($equivalentFieldsInOppositeSet === []) {
                 return false;
@@ -128,30 +128,5 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
         }
 
         return true;
-    }
-
-    /**
-     * @param Fragment[] $fragments
-     */
-    protected function isFieldEquivalentToField(
-        FieldInterface $thisField,
-        FieldInterface $oppositeField,
-        array $fragments
-    ): bool {
-        if (get_class($thisField) !== get_class($oppositeField)) {
-            return false;
-        }
-        if ($thisField instanceof LeafField) {
-            /** @var LeafField */
-            $thisLeafField = $thisField;
-            /** @var LeafField */
-            $againstLeafField = $oppositeField;
-            return $thisLeafField->isEquivalentTo($againstLeafField);
-        }
-        /** @var RelationalField */
-        $thisRelationalField = $thisField;
-        /** @var RelationalField */
-        $againstRelationalField = $oppositeField;
-        return $thisRelationalField->isEquivalentTo($againstRelationalField, $fragments);
     }
 }

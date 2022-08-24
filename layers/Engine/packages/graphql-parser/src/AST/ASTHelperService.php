@@ -9,6 +9,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
 class ASTHelperService implements ASTHelperServiceInterface
 {
@@ -74,5 +76,30 @@ class ASTHelperService implements ASTHelperServiceInterface
             }
         }
         return null;
+    }
+
+    /**
+     * @param Fragment[] $fragments
+     */
+    public function isFieldEquivalentToField(
+        FieldInterface $thisField,
+        FieldInterface $oppositeField,
+        array $fragments
+    ): bool {
+        if (get_class($thisField) !== get_class($oppositeField)) {
+            return false;
+        }
+        if ($thisField instanceof LeafField) {
+            /** @var LeafField */
+            $thisLeafField = $thisField;
+            /** @var LeafField */
+            $againstLeafField = $oppositeField;
+            return $thisLeafField->isEquivalentTo($againstLeafField);
+        }
+        /** @var RelationalField */
+        $thisRelationalField = $thisField;
+        /** @var RelationalField */
+        $againstRelationalField = $oppositeField;
+        return $thisRelationalField->isEquivalentTo($againstRelationalField, $fragments);
     }
 }

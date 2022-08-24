@@ -27,4 +27,13 @@ interface ASTHelperServiceInterface
         string $fragmentName,
         array $fragments,
     ): ?Fragment;
+
+    /**
+     * @param Fragment[] $fragments
+     */
+    public function isFieldEquivalentToField(
+        FieldInterface $thisField,
+        FieldInterface $oppositeField,
+        array $fragments
+    ): bool;
 }
