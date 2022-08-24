@@ -88,6 +88,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
                 ];
             }
         }
+        /** @var array<string,Directive[]> */
         return $mandatoryDirectivesForFields;
     }
     /**
