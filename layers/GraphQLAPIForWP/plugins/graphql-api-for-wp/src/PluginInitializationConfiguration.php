@@ -692,7 +692,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      * Provide the list of modules to check if they are enabled and,
      * if they are not, what component classes must skip initialization
      *
-     * @return array<string,string[]>
+     * @return array<string,array<class-string<ModuleInterface>>>
      */
     protected function getModuleClassesToSkipIfModuleDisabled(): array
     {

@@ -23,7 +23,7 @@ interface PluginInitializationConfigurationInterface
     /**
      * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Module` class which must not initialize their Schema services
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
     public function getSchemaModuleClassesToSkip(): array;
 }

@@ -261,7 +261,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Module` class which must not initialize their Schema services
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
     public function getSchemaModuleClassesToSkip(): array
     {
@@ -289,7 +289,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      * Provide the list of modules to check if they are enabled and,
      * if they are not, what module classes must skip initialization
      *
-     * @return array<string,string[]>
+     * @return array<string,array<class-string<ModuleInterface>>>
      */
     protected function getModuleClassesToSkipIfModuleDisabled(): array
     {
