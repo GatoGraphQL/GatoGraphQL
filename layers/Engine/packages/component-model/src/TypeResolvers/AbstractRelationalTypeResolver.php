@@ -510,8 +510,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $uniqueDirectiveResolver->setDirective(
                 $directive,
             );
-            $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ??= new SplObjectStorage();
-            $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive] = $uniqueDirectiveResolver;
+            /**
+             * @var SplObjectStorage<Directive,DirectiveResolverInterface>
+             */
+            $directivesCache = $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ?? new SplObjectStorage();            
+            $directivesCache[$directive] = $uniqueDirectiveResolver;
+            $this->directiveResolverClassDirectivesCache[$directiveResolverClass] = $directivesCache;
         }
         return $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive];
     }
@@ -607,6 +611,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          */
         if ($unresolvedObjectIDs) {
             if ($this->qualifyDBObjectIDsToRemoveFromErrors()) {
+                /** @var array<string|int> */
                 $unresolvedObjectIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedObjectIDs);
             }
             $idFieldSet = array_filter(
