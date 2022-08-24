@@ -6,6 +6,7 @@ namespace PHPUnitForGraphQLAPI\WPFakerSchema\Unit;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
+
 use function Brain\faker;
 use function Brain\fakerReset;
 use function Brain\Monkey\Functions\expect;

@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostTagsWP\Hooks;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-
 use WP_Term;
 
 abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet

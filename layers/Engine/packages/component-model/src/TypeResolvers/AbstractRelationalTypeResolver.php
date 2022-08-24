@@ -513,7 +513,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /**
              * @var SplObjectStorage<Directive,DirectiveResolverInterface>
              */
-            $directivesCache = $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ?? new SplObjectStorage();            
+            $directivesCache = $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ?? new SplObjectStorage();
             $directivesCache[$directive] = $uniqueDirectiveResolver;
             $this->directiveResolverClassDirectivesCache[$directiveResolverClass] = $directivesCache;
         }

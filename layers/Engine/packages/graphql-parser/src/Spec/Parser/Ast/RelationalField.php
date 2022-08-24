@@ -88,7 +88,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
 
         $thisFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds($this->getFieldsOrFragmentBonds(), $fragments);
         $againstFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds($relationalField->getFieldsOrFragmentBonds(), $fragments);
-        
+
         /**
          * The two relational fields are equivalent if all contained
          * fields have an equivalent on the opposite set

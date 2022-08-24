@@ -10,7 +10,7 @@ use PoP\Root\Services\BasicServiceTrait;
 class ObjectSerializationManager implements ObjectSerializationManagerInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * @var array<string,ObjectSerializerInterface>
      */

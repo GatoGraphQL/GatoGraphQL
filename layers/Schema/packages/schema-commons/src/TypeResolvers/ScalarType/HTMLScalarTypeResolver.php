@@ -42,7 +42,7 @@ class HTMLScalarTypeResolver extends AbstractScalarTypeResolver
             return null;
         }
         /** @var string|int|float|bool $inputValue */
-        
+
         return (string) $inputValue;
     }
 }

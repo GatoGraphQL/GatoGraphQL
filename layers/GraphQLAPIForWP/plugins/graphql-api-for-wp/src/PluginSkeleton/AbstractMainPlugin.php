@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use Exception;
+
 use function __;
 use function add_action;
 use function do_action;
@@ -13,8 +14,8 @@ use function get_option;
 use function is_admin;
 use function register_activation_hook;
 use function update_option;
-use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 
+use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;

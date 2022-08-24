@@ -13,7 +13,7 @@ use SplObjectStorage;
 class DatabaseEntryManager implements DatabaseEntryManagerInterface
 {
     use BasicServiceTrait;
-    
+
     public const PRIMARY_DBNAME = 'primary';
     public const HOOK_DBNAME_TO_FIELDNAMES = __CLASS__ . ':dbName-to-fieldNames';
 

@@ -6,8 +6,8 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use function file_exists;
 use function file_get_contents;
-
 use function json_decode;
+
 use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 use RuntimeException;

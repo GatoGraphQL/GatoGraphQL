@@ -107,7 +107,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
             $itemForResponse = $this->prepareItemForResponse($module);
-            if ($itemForResponse instanceof WP_Error)  {
+            if ($itemForResponse instanceof WP_Error) {
                 $items[] = $itemForResponse;
                 continue;
             }
@@ -120,7 +120,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
     {
         $item = $this->prepareItem($module);
         $response = rest_ensure_response($item);
-        if ($response instanceof WP_Error)  {
+        if ($response instanceof WP_Error) {
             return $response;
         }
         $response->add_links($this->prepareLinks($module));

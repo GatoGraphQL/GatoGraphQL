@@ -279,7 +279,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                 continue;
             }
             $itemForResponse = $this->prepareItemForResponse($customPostID, $block);
-            if ($itemForResponse instanceof WP_Error)  {
+            if ($itemForResponse instanceof WP_Error) {
                 $items[] = $itemForResponse;
                 continue;
             }
@@ -295,7 +295,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     {
         $item = $this->prepareItem($block);
         $response = rest_ensure_response($item);
-        if ($response instanceof WP_Error)  {
+        if ($response instanceof WP_Error) {
             return $response;
         }
         $response->add_links($this->prepareLinks($customPostID, $block));
