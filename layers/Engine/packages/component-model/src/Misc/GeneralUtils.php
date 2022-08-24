@@ -51,10 +51,13 @@ class GeneralUtils
         }
 
         $url_parts = parse_url($urlOrURLPath);
+        if (!is_array($url_parts)) {
+            return $urlOrURLPath;
+        }
+
+        $params = [];
         if (isset($url_parts['query'])) {
             parse_str($url_parts['query'], $params);
-        } else {
-            $params = array();
         }
 
         $params = array_merge(
@@ -63,11 +66,12 @@ class GeneralUtils
         );
 
         // Note that this will url_encode all values
-        $url_parts['query'] = http_build_query($params);
+        $query = http_build_query($params);
+
         // Check if schema/host are present, becase the URL can also be a relative path: /some-path/
         $port = isset($url_parts['port']) && $url_parts['port'] ? (($url_parts['port'] == "80") ? "" : (":" . $url_parts['port'])) : '';
         $scheme = isset($url_parts['scheme']) ? $url_parts['scheme'] . '://' : '';
-        return $scheme . ($url_parts['host'] ?? '') . $port . $url_parts['path'] . '?' . $url_parts['query'];
+        return $scheme . ($url_parts['host'] ?? '') . $port . $url_parts['path'] . '?' . $query;
     }
 
     /**
