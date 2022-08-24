@@ -1509,6 +1509,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         if ($pos === false) {
                             continue;
                         }
+                        /** @var int $pos  */
                         array_splice($subcomponents, $pos, 1);
                     }
                 }
