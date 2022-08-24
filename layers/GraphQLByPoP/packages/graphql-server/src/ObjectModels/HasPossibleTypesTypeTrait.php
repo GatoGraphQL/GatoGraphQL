@@ -16,6 +16,7 @@ trait HasPossibleTypesTypeTrait
     public function getPossibleTypeIDs(): array
     {
         $possibleTypeIDs = [];
+        /** @var string $objectTypeName */
         foreach (array_keys($this->schemaDefinition[SchemaDefinition::POSSIBLE_TYPES]) as $objectTypeName) {
             $possibleTypeIDs[] = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID([
                 SchemaDefinition::TYPES,

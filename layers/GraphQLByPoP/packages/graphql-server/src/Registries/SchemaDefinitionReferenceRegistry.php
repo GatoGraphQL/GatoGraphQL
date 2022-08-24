@@ -208,7 +208,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
              */
             $keepSelfFieldForRootType = $moduleConfiguration->exposeSelfFieldForRootTypeInGraphQLSchema();
+            /** @var string $typeKind */
             foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
+                /** @var string $typeName */
                 foreach (array_keys($typeSchemaDefinitions) as $typeName) {
                     if (!$keepSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {
                         unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind][$typeName][SchemaDefinition::FIELDS]['self']);
@@ -231,6 +233,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription)
             && $exposeGlobalFieldsInGraphQLSchema
         ) {
+            /** @var string $fieldName */
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]) as $fieldName) {
                 /** @var string[] */
                 $itemPath = [
@@ -254,6 +257,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $supportedDirectiveKinds [] = DirectiveKinds::INDEXING;
         }
         $directivesNamesToRemove = [];
+        /** @var string $directiveName */
         foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES]) as $directiveName) {
             if (!in_array($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES][$directiveName][SchemaDefinition::DIRECTIVE_KIND], $supportedDirectiveKinds)) {
                 $directivesNamesToRemove[] = $directiveName;
@@ -263,6 +267,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES][$directiveName]);
         }
         // Add the directives
+        /** @var string $directiveName */
         foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES]) as $directiveName) {
             /** @var string[] */
             $itemPath = [
@@ -276,7 +281,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
         // 2. Each type's fields and directives
         if ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription) {
+            /** @var string $typeName */
             foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT] as $typeName => $typeSchemaDefinition) {
+                /** @var string $fieldName */
                 foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
                     /** @var string[] */
                     $itemPath = [

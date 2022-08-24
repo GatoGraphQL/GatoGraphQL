@@ -204,11 +204,13 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     public function sortFullSchemaAlphabetically(array &$schemaDefinition): void
     {
         // Sort types
+        /** @var string $typeKind */
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES]) as $typeKind) {
             ksort($schemaDefinition[SchemaDefinition::TYPES][$typeKind]);
         }
 
         // Sort fields and interfaces for each ObjectType
+        /** @var string $typeName */
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT]) as $typeName) {
             if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS])) {
                 ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::OBJECT][$typeName][SchemaDefinition::FIELDS]);
@@ -224,6 +226,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
 
         // Sort fields for each InterfaceType
+        /** @var string $typeName */
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE] ?? []) as $typeName) {
             if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS])) {
                 ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::FIELDS]);
@@ -234,6 +237,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
 
         // Sort input fields for each InputObjectType
+        /** @var string $typeName */
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT] ?? []) as $typeName) {
             if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT][$typeName][SchemaDefinition::INPUT_FIELDS])) {
                 ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INPUT_OBJECT][$typeName][SchemaDefinition::INPUT_FIELDS]);
@@ -241,6 +245,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
 
         // Sort values for each EnumType
+        /** @var string $typeName */
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::ENUM] ?? []) as $typeName) {
             if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::ENUM][$typeName][SchemaDefinition::ITEMS])) {
                 ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::ENUM][$typeName][SchemaDefinition::ITEMS]);

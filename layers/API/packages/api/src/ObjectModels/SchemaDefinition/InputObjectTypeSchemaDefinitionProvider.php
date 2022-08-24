@@ -41,6 +41,7 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDef
     {
         $schemaDefinition[SchemaDefinition::INPUT_FIELDS] = [];
         $schemaInputObjectTypeFieldResolvers = $this->inputObjectTypeResolver->getConsolidatedInputFieldNameTypeResolvers();
+        /** @var string $inputFieldName */
         foreach (array_keys($schemaInputObjectTypeFieldResolvers) as $inputFieldName) {
             // Fields may not be directly visible in the schema
             if ($this->inputObjectTypeResolver->skipExposingInputFieldInSchema($inputFieldName)) {

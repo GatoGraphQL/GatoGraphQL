@@ -44,6 +44,7 @@ class SchemaDefinitionHelpers
     {
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $fields = [];
+        /** @var string $fieldName */
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
             $fields[] = new Field(
                 $fullSchemaDefinition,
@@ -68,6 +69,7 @@ class SchemaDefinitionHelpers
         $fieldSchemaDefinitionPointer = self::advancePointerToPath($fullSchemaDefinition, $fieldSchemaDefinitionPath);
         $schemaDefinitionReferenceRegistry = SchemaDefinitionReferenceRegistryFacade::getInstance();
         $fields = [];
+        /** @var string $fieldName */
         foreach (array_keys($fieldSchemaDefinitionPointer) as $fieldName) {
             $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID(array_merge(
                 $fieldSchemaDefinitionPath,
