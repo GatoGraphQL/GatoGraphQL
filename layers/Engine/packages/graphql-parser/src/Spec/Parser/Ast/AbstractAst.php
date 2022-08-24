@@ -24,6 +24,7 @@ abstract class AbstractAst implements AstInterface
     }
     final protected function getGraphQLQueryStringFormatter(): GraphQLQueryStringFormatterInterface
     {
+        /** @var GraphQLQueryStringFormatterInterface */
         return $this->graphQLQueryStringFormatter ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLQueryStringFormatterInterface::class);
     }
 

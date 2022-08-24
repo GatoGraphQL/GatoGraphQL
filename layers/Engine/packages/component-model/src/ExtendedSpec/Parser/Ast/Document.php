@@ -21,6 +21,7 @@ class Document extends AbstractDocument
     }
     final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
     {
+        /** @var DynamicVariableDefinerDirectiveRegistryInterface */
         return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
     }
 
