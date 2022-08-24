@@ -278,7 +278,9 @@ class Parser extends Tokenizer implements ParserInterface
 
             if ($this->match(Token::TYPE_EQUAL)) {
                 $this->eat(Token::TYPE_EQUAL);
-                $variable->setDefaultValueAST($this->parseValue());
+                $defaultValueAst = $this->parseValue();
+                /** @var InputList|InputObject|Literal|Enum */
+                $variable->setDefaultValueAST($defaultValueAst);
             }
 
             $this->variables[] = $variable;
@@ -476,7 +478,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @param FieldInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     protected function createInlineFragment(
@@ -734,7 +736,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @param Directive[] $directives
-     * @param FieldInterface[] $fieldsOrFragmentBonds
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      */
     protected function createFragment(
         string $name,
