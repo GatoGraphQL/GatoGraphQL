@@ -69,9 +69,11 @@ class GeneralUtils
         $query = http_build_query($params);
 
         // Check if schema/host are present, becase the URL can also be a relative path: /some-path/
-        $port = isset($url_parts['port']) && $url_parts['port'] ? (($url_parts['port'] == "80") ? "" : (":" . $url_parts['port'])) : '';
         $scheme = isset($url_parts['scheme']) ? $url_parts['scheme'] . '://' : '';
-        return $scheme . ($url_parts['host'] ?? '') . $port . $url_parts['path'] . '?' . $query;
+        $host = $url_parts['host'] ?? '';
+        $port = isset($url_parts['port']) && $url_parts['port'] ? (($url_parts['port'] == "80") ? "" : (":" . $url_parts['port'])) : '';
+        $path = $url_parts['path'] ?? '';
+        return $scheme . $host . $port . $path . '?' . $query;
     }
 
     /**
