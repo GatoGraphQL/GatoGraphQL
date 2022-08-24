@@ -2033,10 +2033,16 @@ class Engine implements EngineInterface
                             $id_subcomponent_direct_fields = $subcomponent_direct_fields;
                             $id_subcomponent_conditional_fields_storage = $subcomponent_conditional_fields_storage;
                         }
-                        // Important: do ALWAYS execute the lines below, even if $id_subcomponent_direct_fields is empty
-                        // That is because we can load additional data for an object that was already loaded in a previous iteration
-                        // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
-                        // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
+
+                        /**
+                         * Important: do ALWAYS execute the lines below, even if
+                         * $id_subcomponent_direct_fields is empty.
+                         * That is because we can load additional data for an object
+                         * that was already loaded in a previous iteration.
+                         * Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
+                         * In this case, property "title" at the end would not be fetched otherwise
+                         * (that post was already loaded at the beginning)
+                         */
                         $this->combineIDsDatafields(
                             $engineState->relationalTypeOutputKeyIDFieldSets,
                             $subcomponentTypeResolver,
