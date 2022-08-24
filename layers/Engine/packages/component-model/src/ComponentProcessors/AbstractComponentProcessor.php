@@ -510,6 +510,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsComponentTree`
         if ($this->isDescendantComponent($component_or_componentPath, $props)) {
             // It is a child component
+            /** @var Component */
             $att_component = $component_or_componentPath;
             $attComponentFullName = $this->getComponentHelpers()->getComponentFullName($att_component);
 
@@ -1269,7 +1270,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
     /**
-     * @return array<string,mixed>
+     * @return array<string|int,mixed>
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
