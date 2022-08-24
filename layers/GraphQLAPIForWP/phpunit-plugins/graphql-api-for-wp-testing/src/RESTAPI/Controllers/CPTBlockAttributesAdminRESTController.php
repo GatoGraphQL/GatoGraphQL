@@ -412,6 +412,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
      */
     protected function prepareLinks(int $customPostID, array $block): array
     {
+        /** @var string */
         $blockNamespacedName = $block['blockName'];
         $blockPosition = $this->blockNameCounter[$blockNamespacedName] ?? 0;
         $this->blockNameCounter[$blockNamespacedName] = $blockPosition + 1;
