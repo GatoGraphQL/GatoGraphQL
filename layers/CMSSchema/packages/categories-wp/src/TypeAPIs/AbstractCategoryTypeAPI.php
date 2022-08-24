@@ -59,6 +59,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function getCategoryID(object $cat): string|int
     {
+        /** @var WP_Term $cat */
         return $cat->term_id;
     }
 
@@ -75,7 +76,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     {
         $query = $this->convertCategoriesQuery($query, $options);
 
-        return wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
+        $categories =  wp_get_post_terms((int)$customPostID, $this->getCategoryTaxonomyName(), $query);
+        if ($categories instanceof WP_Error) {
+            return [];
+        }
+        /** @var array<string|int>|object[] $categories */
+        return $categories;
     }
     /**
      * @param array<string,mixed> $query
@@ -95,7 +101,11 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Resolve and count
-        $categories = wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
+        $categories = wp_get_post_terms((int)$customPostID, $this->getCategoryTaxonomyName(), $query);
+        if ($categories instanceof WP_Error) {
+            return 0;
+        }
+        /** @var string[] $categories */
         return count($categories);
     }
     /**
@@ -162,7 +172,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function getCategoryURL(string|int|object $catObjectOrID): string
     {
-        return get_term_link($catObjectOrID, $this->getCategoryTaxonomyName());
+        /** @var string|int|WP_Term $catObjectOrID */
+        $termLink = get_term_link($catObjectOrID, $this->getCategoryTaxonomyName());
+        if ($termLink instanceof WP_Error) {
+            return '';
+        }
+        return $termLink;
     }
 
     public function getCategoryURLPath(string|int|object $catObjectOrID): string
@@ -232,6 +247,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term
     {
         if (is_object($catObjectOrID)) {
+            /** @var WP_Term */
             return $catObjectOrID;
         }
         $catObject = $this->getTerm($catObjectOrID, $this->getCategoryTaxonomyName());
@@ -269,7 +285,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function getCategoryChildIDs(string|int|object $catObjectOrID): ?array
     {
         $categoryID = is_object($catObjectOrID) ? $this->getCategoryID($catObjectOrID) : $catObjectOrID;
-        $childrenIDs = get_term_children($categoryID, $this->getCategoryTaxonomyName());
+        $childrenIDs = get_term_children((int)$categoryID, $this->getCategoryTaxonomyName());
         if ($childrenIDs instanceof WP_Error) {
             return null;
         }
