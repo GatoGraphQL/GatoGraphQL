@@ -139,8 +139,12 @@ class GeneralUtils
 
     public static function getPath(string $url): string
     {
-        $parse = parse_url($url);
-        return $parse['path'];
+        $url_parts = parse_url($url);
+        if (!is_array($url_parts)) {
+            return $url;
+        }
+        $path = $url_parts['path'] ?? '';
+        return $path;
     }
 
     /**
