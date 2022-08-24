@@ -49,6 +49,3 @@ parameters:
 		- 
 			message: '#Cannot access offset .* on bool\|string\.#'
 			path: src/Parsers/WXR_Parser_XML.php
-		- 
-			message: '#Cannot access offset non-empty-string\|true on bool\|string\.#'
-			path: src/Parsers/WXR_Parser_XML.php
