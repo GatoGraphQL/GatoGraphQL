@@ -57,10 +57,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * PluginInitializationConfiguration class for the Plugin
+     *
+     * @return class-string<MainPluginInitializationConfigurationInterface>
      */
     protected function getPluginInitializationConfigurationClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(get_called_class());
+        /** @var class-string<MainPluginInitializationConfigurationInterface> */
         return $classNamespace . '\\PluginInitializationConfiguration';
     }
 
