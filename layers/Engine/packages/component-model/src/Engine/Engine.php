@@ -1604,7 +1604,7 @@ class Engine implements EngineInterface
      *
      * @return array<string,string[]> Array of key: dbName, values: field names
      */
-    public function getDBNameFieldNames(
+    protected function getDBNameFieldNames(
         RelationalTypeResolverInterface $relationalTypeResolver
     ): array {
         if ($this->dbNameFieldNames === null) {
