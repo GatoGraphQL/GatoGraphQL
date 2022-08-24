@@ -57,7 +57,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * Remove the type from the ID to resolve the objects through `getObjects` (check parent class)
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return mixed[]
+     * @return array<string|int>
      */
     protected function getIDsToQuery(array $idFieldSet): array
     {

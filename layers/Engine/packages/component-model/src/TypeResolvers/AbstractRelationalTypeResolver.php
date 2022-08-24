@@ -518,7 +518,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return mixed[]
+     * @return array<string|int>
      */
     protected function getIDsToQuery(array $idFieldSet): array
     {
