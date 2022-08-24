@@ -22,7 +22,7 @@ abstract class AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRe
         return ModuleSettingOptions::DEFAULT_VALUE;
     }
 
-    protected function getModuleID(string|int $dataName): string
+    protected function getModuleID(string $dataName): string
     {
         return 'graphqlapi_graphqlapi_schema-namespacing';
     }

@@ -22,7 +22,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest exten
      * REST endpoint to update the CPT block attribute
      * or not.
      */
-    protected function executeCPTBlockAttributesSetUpTearDown(string|int $dataName): bool
+    protected function executeCPTBlockAttributesSetUpTearDown(string $dataName): bool
     {
         if ($dataName === self::ORIGINAL_DATA_NAME) {
             return false;

@@ -23,7 +23,7 @@ class PostDefaultLimitModifyPluginSettingsFixtureEndpointWebserverRequestTest ex
         return ModuleSettingOptions::LIST_DEFAULT_LIMIT;
     }
 
-    protected function getModuleID(string|int $dataName): string
+    protected function getModuleID(string $dataName): string
     {
         return 'graphqlapi_graphqlapi_schema-posts';
     }

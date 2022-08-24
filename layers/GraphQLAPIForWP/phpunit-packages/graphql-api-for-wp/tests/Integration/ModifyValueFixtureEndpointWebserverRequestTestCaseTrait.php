@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
 {
-    protected function isOriginalTestCase(string|int $dataName): bool
+    protected function isOriginalTestCase(string $dataName): bool
     {
         return str_ends_with($dataName, ':0');
     }
@@ -16,7 +16,7 @@ trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
      * testing that the current value in the DB produces a certain
      * result
      */
-    protected function executeSetUpTearDownUnlessIsOriginalTestCase(string|int $dataName): bool
+    protected function executeSetUpTearDownUnlessIsOriginalTestCase(string $dataName): bool
     {
         return !$this->isOriginalTestCase($dataName);
     }

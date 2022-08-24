@@ -52,7 +52,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
         return $providerItems;
     }
 
-    protected function getEntryMethod(string|int $dataName): string
+    protected function getEntryMethod(string $dataName): string
     {
         return $this->getMethod();
     }
@@ -60,7 +60,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
     /**
      * @throws RuntimeException If the endpoint is not defined
      */
-    protected function getEndpoint(string|int $dataName): string
+    protected function getEndpoint(string $dataName): string
     {
         throw new RuntimeException(
             sprintf(
@@ -73,12 +73,12 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
     /**
      * @return array<string,mixed>
      */
-    protected function getParams(string|int $dataName): array
+    protected function getParams(string $dataName): array
     {
         return [];
     }
 
-    protected function getQuery(string|int $dataName): string
+    protected function getQuery(string $dataName): string
     {
         return '';
     }
@@ -86,12 +86,12 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
     /**
      * @return array<string,mixed>
      */
-    protected function getVariables(string|int $dataName): array
+    protected function getVariables(string $dataName): array
     {
         return [];
     }
 
-    protected function getOperationName(string|int $dataName): string
+    protected function getOperationName(string $dataName): string
     {
         return '';
     }

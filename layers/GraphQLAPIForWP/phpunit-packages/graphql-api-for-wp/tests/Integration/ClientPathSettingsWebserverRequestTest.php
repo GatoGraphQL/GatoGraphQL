@@ -28,7 +28,7 @@ class ClientPathSettingsWebserverRequestTest extends AbstractClientPathSettingsW
         ];
     }
 
-    protected function getModuleID(string|int $dataName): string
+    protected function getModuleID(string $dataName): string
     {
         return $this->getSingleEndpointClientModuleID($dataName);
     }

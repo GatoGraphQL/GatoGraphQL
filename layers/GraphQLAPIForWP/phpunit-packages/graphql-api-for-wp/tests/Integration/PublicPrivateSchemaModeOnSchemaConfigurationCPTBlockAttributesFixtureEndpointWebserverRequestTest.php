@@ -37,12 +37,12 @@ class PublicPrivateSchemaModeOnSchemaConfigurationCPTBlockAttributesFixtureEndpo
         ];
     }
 
-    protected function getCustomPostID(string|int $dataName): int
+    protected function getCustomPostID(string $dataName): int
     {
         return self::POWER_USERS_SCHEMA_CONFIGURATION_ID;
     }
 
-    protected function getBlockNamespacedID(string|int $dataName): string
+    protected function getBlockNamespacedID(string $dataName): string
     {
         return 'graphql-api/schema-config-schema-mode';
     }

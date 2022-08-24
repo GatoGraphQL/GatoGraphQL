@@ -22,7 +22,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
     abstract public static function assertEquals($expected, $actual, string $message = ''): void;
     abstract public static function assertNotEquals($expected, $actual, string $message = ''): void;
 
-    protected function executeCPTBlockAttributesSetUpTearDown(string|int $dataName): bool
+    protected function executeCPTBlockAttributesSetUpTearDown(string $dataName): bool
     {
         return true;
     }
@@ -32,7 +32,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
      */
     protected function modifyCPTBlockAttributesSetUp(): void
     {
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (!$this->executeCPTBlockAttributesSetUpTearDown($dataName)) {
             return;
         }
@@ -72,7 +72,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
      */
     protected function modifyCPTBlockAttributesTearDown(): void
     {
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (!$this->executeCPTBlockAttributesSetUpTearDown($dataName)) {
             return;
         }
@@ -90,7 +90,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
     protected function getCPTBlockAttributesOriginalValue(): mixed
     {
         return $this->executeRESTEndpointToGetCPTBlockAttributes(
-            $this->dataName(),
+            $this->getDataName(),
         );
     }
 
@@ -98,7 +98,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
      * @return mixed[]
      */
     protected function executeRESTEndpointToGetCPTBlockAttributes(
-        string|int $dataName,
+        string $dataName,
     ): array {
         $client = static::getClient();
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::CPT_BLOCK_ATTRIBUTES;
@@ -122,7 +122,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
      * @param mixed[] $value
      */
     protected function executeRESTEndpointToUpdateCPTBlockAttributes(
-        string|int $dataName,
+        string $dataName,
         array $value,
     ): void {
         $client = static::getClient();
@@ -149,7 +149,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
         $this->assertRESTPostCallIsSuccessful($response);
     }
 
-    abstract protected function getCustomPostID(string|int $dataName): int;
+    abstract protected function getCustomPostID(string $dataName): int;
 
-    abstract protected function getBlockNamespacedID(string|int $dataName): string;
+    abstract protected function getBlockNamespacedID(string $dataName): string;
 }

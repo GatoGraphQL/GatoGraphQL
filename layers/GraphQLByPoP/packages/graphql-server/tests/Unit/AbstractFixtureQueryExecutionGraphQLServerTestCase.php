@@ -119,7 +119,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
         return $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
     }
 
-    protected function isProviderTestDisabled(string|int $dataName): bool
+    protected function isProviderTestDisabled(string $dataName): bool
     {
         return false;
     }

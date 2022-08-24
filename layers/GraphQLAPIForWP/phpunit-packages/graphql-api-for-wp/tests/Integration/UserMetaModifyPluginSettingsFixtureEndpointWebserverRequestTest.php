@@ -23,14 +23,14 @@ class UserMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
         return ModuleSettingOptions::ENTRIES;
     }
 
-    protected function getModuleID(string|int $dataName): string
+    protected function getModuleID(string $dataName): string
     {
         return 'graphqlapi_graphqlapi_schema-user-meta';
     }
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':1')) {
             return [
                 '/.*name/',

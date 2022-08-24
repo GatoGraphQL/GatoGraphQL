@@ -18,7 +18,7 @@ abstract class AbstractTreatUserCapabilityAsPrivateDataModifyPluginSettingsFixtu
         return SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA;
     }
 
-    protected function getModuleID(string|int $dataName): string
+    protected function getModuleID(string $dataName): string
     {
         return 'graphqlapi_graphqlapi_schema-user-roles';
     }

@@ -20,7 +20,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
     abstract public static function assertEquals($expected, $actual, string $message = ''): void;
     abstract public static function assertNotEquals($expected, $actual, string $message = ''): void;
 
-    protected function executePluginSettingsSetUpTearDown(string|int $dataName): bool
+    protected function executePluginSettingsSetUpTearDown(string $dataName): bool
     {
         return true;
     }
@@ -30,7 +30,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
      */
     protected function modifyPluginSettingsSetUp(): void
     {
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (!$this->executePluginSettingsSetUpTearDown($dataName)) {
             return;
         }
@@ -67,7 +67,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
      */
     protected function modifyPluginSettingsTearDown(): void
     {
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (!$this->executePluginSettingsSetUpTearDown($dataName)) {
             return;
         }
@@ -85,7 +85,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
     protected function getPluginSettingsOriginalValue(): mixed
     {
         $pluginSettings = $this->executeRESTEndpointToGetPluginSettings(
-            $this->dataName(),
+            $this->getDataName(),
         );
         $input = $this->getSettingsKey();
         $pluginInputSettings = array_values(array_filter(
@@ -101,7 +101,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
      * @return mixed[]
      */
     protected function executeRESTEndpointToGetPluginSettings(
-        string|int $dataName,
+        string $dataName,
     ): array {
         $client = static::getClient();
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE_SETTINGS;
@@ -121,7 +121,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
     }
 
     protected function executeRESTEndpointToUpdatePluginSettings(
-        string|int $dataName,
+        string $dataName,
         mixed $value,
     ): void {
         $client = static::getClient();
@@ -149,5 +149,5 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
      *
      * @see https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules
      */
-    abstract protected function getModuleID(string|int $dataName): string;
+    abstract protected function getModuleID(string $dataName): string;
 }

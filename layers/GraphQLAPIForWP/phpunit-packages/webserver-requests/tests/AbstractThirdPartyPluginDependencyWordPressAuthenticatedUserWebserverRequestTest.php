@@ -22,7 +22,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         /**
          * Disable the plugin before executing the ":disabled" test
          */
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         }
@@ -33,7 +33,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         /**
          * Re-enable the plugin after executing the ":disabled" test
          */
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
         }
@@ -75,7 +75,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
      */
-    protected function executeRESTEndpointToEnableOrDisablePlugin(string|int $dataName, string $status): void
+    protected function executeRESTEndpointToEnableOrDisablePlugin(string $dataName, string $status): void
     {
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';

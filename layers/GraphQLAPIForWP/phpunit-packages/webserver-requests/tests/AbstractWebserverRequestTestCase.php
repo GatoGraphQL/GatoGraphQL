@@ -268,4 +268,9 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
         $this->markTestSkipped(self::$skipOrFailTestsReason);
     }
+
+    protected function getDataName(): string
+    {
+        return (string) $this->dataName();
+    }
 }
