@@ -49,7 +49,7 @@ trait PropertyDataStructureFormatterTrait
                     $key
                 );
             } else {
-                $nextLevelProperty = $key;
+                $nextLevelProperty = (string)$key;
             }
             $this->iterativelyAddOutputLines($outputLines, $value, $nextLevelProperty);
         }
