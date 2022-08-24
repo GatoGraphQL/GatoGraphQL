@@ -51,6 +51,8 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
 
     /**
      * ExtensionInitializationConfiguration class for the Plugin
+     *
+     * @return class-string<ExtensionInitializationConfigurationInterface>
      */
     protected function getExtensionInitializationConfigurationClass(): ?string
     {
@@ -59,6 +61,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         if (!class_exists($pluginInitializationConfigurationClass)) {
             return null;
         }
+        /** @var class-string<ExtensionInitializationConfigurationInterface> */
         return $pluginInitializationConfigurationClass;
     }
 
