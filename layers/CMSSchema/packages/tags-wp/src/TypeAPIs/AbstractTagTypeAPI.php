@@ -10,6 +10,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
 
@@ -57,16 +58,16 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     }
     public function getTagName(string|int|object $tagObjectOrID): string
     {
-        /** @var WP_Term */
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
         if ($tag === null) {
             return '';
         }
+        /** @var WP_Term $tag */
         return $tag->name;
     }
     public function getTag(string|int $tagID): ?object
     {
-        $tag = get_tag($tagID, $this->getTagTaxonomyName());
+        $tag = get_tag((int)$tagID, $this->getTagTaxonomyName());
         if (!($tag instanceof WP_Term)) {
             return null;
         }
@@ -89,7 +90,12 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getCustomPostTags(string|int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
-        return wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
+        $tags = wp_get_post_terms((int)$customPostID, $this->getTagTaxonomyName(), $query);
+        if ($tags instanceof WP_Error) {
+            return [];
+        }
+        /** @var object[] $tags */
+        return $tags;
     }
     /**
      * @param array<string,mixed> $query
@@ -109,7 +115,11 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         unset($query['offset']);
 
         // Resolve and count
-        $tags = wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
+        $tags = wp_get_post_terms((int)$customPostID, $this->getTagTaxonomyName(), $query);
+        if ($tags instanceof WP_Error) {
+            return 0;
+        }
+        /** @var object[] $tags */
         return count($tags);
     }
     /**
@@ -147,7 +157,12 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getTags(array $query, array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
-        return get_tags($query);
+        $tags = get_tags($query);
+        if ($tags instanceof WP_Error) {
+            return [];
+        }
+        /** @var object[] */
+        return $tags;
     }
 
     /**
@@ -170,13 +185,21 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     }
     public function getTagURL(string|int|object $tagObjectOrID): string
     {
-        return get_term_link($tagObjectOrID, $this->getTagTaxonomyName());
+        /** @var string|int|WP_Term $tagObjectOrID */
+        $url = get_term_link($tagObjectOrID, $this->getTagTaxonomyName());
+        if ($url instanceof WP_Error) {
+            return '';
+        }
+        return $url;
     }
 
     public function getTagURLPath(string|int|object $tagObjectOrID): string
     {
-        /** @var string */
-        return $this->getCMSHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
+        $localURLPath = $this->getCMSHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
+        if ($localURLPath === false) {
+            return '';
+        }
+        return $localURLPath;
     }
 
     public function getTagSlug(string|int|object $tagObjectOrID): string
@@ -185,6 +208,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         if ($tag === null) {
             return '';
         }
+        /** @var WP_Term $tag */
         return $tag->slug;
     }
     public function getTagDescription(string|int|object $tagObjectOrID): string
@@ -193,6 +217,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         if ($tag === null) {
             return '';
         }
+        /** @var WP_Term $tag */
         return $tag->description;
     }
     public function getTagItemCount(string|int|object $tagObjectOrID): int
@@ -201,10 +226,12 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         if ($tag === null) {
             return 0;
         }
+        /** @var WP_Term $tag */
         return $tag->count;
     }
     public function getTagID(object $tag): string|int
     {
+        /** @var WP_Term $tag */
         return $tag->term_id;
     }
 }
