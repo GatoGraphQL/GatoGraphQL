@@ -14,6 +14,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document as UpstreamDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -27,6 +28,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractDocument extends UpstreamDocument
 {
@@ -82,16 +84,19 @@ abstract class AbstractDocument extends UpstreamDocument
         }
     }
 
-    protected function setAncestorsUnderDirective(Directive $directive): void
+    /**
+     * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
+     */
+    protected function setAncestorsUnderDirective(SplObjectStorage $astNodeAncestors, Directive $directive): void
     {
-        parent::setAncestorsUnderDirective($directive);
+        parent::setAncestorsUnderDirective($astNodeAncestors, $directive);
 
         if ($directive instanceof MetaDirective) {
             /** @var MetaDirective */
             $metaDirective = $directive;
             foreach ($metaDirective->getNestedDirectives() as $nestedDirective) {
-                $this->astNodeAncestors[$nestedDirective] = $directive;
-                $this->setAncestorsUnderDirective($nestedDirective);
+                $astNodeAncestors[$nestedDirective] = $directive;
+                $this->setAncestorsUnderDirective($astNodeAncestors, $nestedDirective);
             }
         }
     }
