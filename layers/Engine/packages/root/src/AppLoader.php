@@ -308,6 +308,7 @@ class AppLoader implements AppLoaderInterface
                 ...$module->getSystemContainerCompilerPassClasses()
             ];
         }
+        /** @var array<class-string<CompilerPassInterface>> */
         return array_values(array_unique($compilerPassClasses));
     }
 
