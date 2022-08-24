@@ -12,3 +12,66 @@ parameters:
 			message: '#Property PoPBackbone\\WPDataParser\\Parsers\\WXR_Parser_XML::\$([a-zA-Z_]*) type has no value type specified in iterable type array\.#'
 			path: src/Parsers/WXR_Parser_XML.php
 			count: 8
+		- 
+			message: '#Parameter \#1 \$string of function rtrim expects string, string\|false given\.#'
+			path: src/Parsers/WXR_Parser_Regex.php
+		- 
+			message: '#Parameter \#1 \$callback of function call_user_func expects callable\(\): mixed, array\{\$this\(PoPBackbone\\WPDataParser\\Parsers\\WXR_Parser_Regex\), .*\} given\.#'
+			path: src/Parsers/WXR_Parser_Regex.php
+		- 
+			message: '#Parameter \#1 \$callback of function call_user_func expects callable\(\): mixed, array\{\$this\(PoPBackbone\\WPDataParser\\Parsers\\WXR_Parser_Regex\), .*\} given\.#'
+			path: src/Parsers/WXR_Parser_Regex.php
+		- 
+			message: '#Parameter \#2 \$length of function fgets expects int<0, max>\|null, int given.php#'
+			path: src/Parsers/WXR_Parser_Regex.php
+		- 
+			message: '#Parameter \#1 \$source of method DOMDocument::loadXML\(\) expects string, string\|false given\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+		- 
+			message: '#Cannot access offset 0 on array<SimpleXMLElement>\|false\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+		- 
+			message: '#Cannot access offset .* on array<string>\|false\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+		- 
+			message: '#Cannot access offset .* on array<string>\|false\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+		- 
+			message: '#Argument of an invalid type array<SimpleXMLElement>\|false supplied for foreach, only iterables are supported\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+		- 
+			message: '#Argument of an invalid type array<SimpleXMLElement>\|false supplied for foreach, only iterables are supported\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+		- 
+			message: '#Argument of an invalid type array<SimpleXMLElement>\|false supplied for foreach, only iterables are supported\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+		- 
+			message: '#Argument of an invalid type array<SimpleXMLElement>\|false supplied for foreach, only iterables are supported\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+		- 
+			message: '#Parameter \#2 \$data of function xml_parse expects string, string\|false given\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Cannot access offset .* on array\|bool\|string\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Cannot access offset .* on array\|bool\|string\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Cannot access offset .* on array\|bool\|string\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Cannot access offset .* on array\|bool\|string\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Cannot access offset .* on non-empty-array\|non-empty-string\|true\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Cannot access offset .* on bool\|string\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Cannot access offset non-empty-string\|true on array\|bool\|string\.#'
+			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Cannot access offset non-empty-string\|true on bool\|string\.#'
+			path: src/Parsers/WXR_Parser_XML.php
