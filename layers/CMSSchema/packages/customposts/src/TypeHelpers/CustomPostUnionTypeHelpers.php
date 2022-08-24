@@ -25,11 +25,14 @@ class CustomPostUnionTypeHelpers
      *
      * @return string[]
      */
-    public static function getTargetObjectTypeResolverCustomPostTypes(?UnionTypeResolverInterface $unionTypeResolver = null): array
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var CustomPostUnionTypeResolver */
-        $unionTypeResolver ??= $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+    public static function getTargetObjectTypeResolverCustomPostTypes(
+        ?UnionTypeResolverInterface $unionTypeResolver = null,
+    ): array {
+        if ($unionTypeResolver === null) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var CustomPostUnionTypeResolver */
+            $unionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+        }
         $customPostObjectTypeResolverPickers = array_values(array_filter(
             $unionTypeResolver->getObjectTypeResolverPickers(),
             fn (ObjectTypeResolverPickerInterface $objectTypeResolverPicker) => $objectTypeResolverPicker instanceof CustomPostObjectTypeResolverPickerInterface
@@ -56,9 +59,11 @@ class CustomPostUnionTypeHelpers
     public static function getCustomPostUnionOrTargetObjectTypeResolver(
         ?UnionTypeResolverInterface $unionTypeResolver = null
     ): UnionTypeResolverInterface|ObjectTypeResolverInterface|null {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var CustomPostUnionTypeResolver */
-        $unionTypeResolver ??= $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+        if ($unionTypeResolver === null) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var CustomPostUnionTypeResolver */
+            $unionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+        }
         $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
         if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
