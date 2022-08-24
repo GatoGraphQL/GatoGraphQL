@@ -15,12 +15,14 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * The initialized modules, stored under their class
      *
-     * @var array<string,ModuleInterface>
+     * @var array<class-string<ModuleInterface>,ModuleInterface>
      */
     protected array $modules = [];
 
     /**
      * Register and initialize a module
+     *
+     * @param class-string<ModuleInterface> $moduleClass
      */
     public function register(string $moduleClass): ModuleInterface
     {
