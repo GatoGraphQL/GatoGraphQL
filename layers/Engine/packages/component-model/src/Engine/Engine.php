@@ -41,6 +41,7 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo;
+use PoP\ComponentModel\Response\DatabaseEntryManagerInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -86,6 +87,7 @@ class Engine implements EngineInterface
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
     private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
+    private ?DatabaseEntryManagerInterface $databaseEntryManager = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -195,6 +197,14 @@ class Engine implements EngineInterface
     final protected function getFeedbackEntryManager(): FeedbackEntryManagerInterface
     {
         return $this->feedbackEntryService ??= $this->instanceManager->getInstance(FeedbackEntryManagerInterface::class);
+    }
+    final public function setDatabaseEntryManager(DatabaseEntryManagerInterface $databaseEntryManager): void
+    {
+        $this->databaseEntryManager = $databaseEntryManager;
+    }
+    final protected function getDatabaseEntryManager(): DatabaseEntryManagerInterface
+    {
+        return $this->databaseEntryManager ??= $this->instanceManager->getInstance(DatabaseEntryManagerInterface::class);
     }
 
     /**
