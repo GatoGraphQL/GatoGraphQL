@@ -65,11 +65,6 @@ class Engine implements EngineInterface
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
 
-    /**
-     * @var array<string,string[]>|null
-     */
-    protected ?array $dbNameFieldNames = null;
-
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;

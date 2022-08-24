@@ -18,6 +18,11 @@ class DatabaseEntryManager implements DatabaseEntryManagerInterface
     public const HOOK_DBNAME_TO_FIELDNAMES = __CLASS__ . ':dbName-to-fieldNames';
 
     /**
+     * @var array<string,string[]>|null
+     */
+    protected ?array $dbNameFieldNames = null;
+
+    /**
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
      * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
      */
