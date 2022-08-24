@@ -8,6 +8,8 @@ use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 
+use WP_Term;
+
 abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
@@ -59,7 +61,11 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
             $tag_slugs = [];
             if (isset($query['tag_id'])) {
                 foreach (explode(',', $query['tag_id']) as $tag_id) {
+                    /** @var WP_Term|null */
                     $tag = get_tag((int) $tag_id);
+                    if ($tag === null) {
+                        continue;
+                    }
                     $tag_slugs[] = $tag->slug;
                 }
             }

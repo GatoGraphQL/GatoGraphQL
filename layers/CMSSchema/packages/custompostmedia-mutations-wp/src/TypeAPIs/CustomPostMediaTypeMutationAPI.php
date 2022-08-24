@@ -13,11 +13,11 @@ class CustomPostMediaTypeMutationAPI implements CustomPostMediaTypeMutationAPIIn
 {
     public function setFeaturedImage(int|string $customPostID, string|int $mediaItemID): void
     {
-        \set_post_thumbnail($customPostID, $mediaItemID);
+        \set_post_thumbnail((int)$customPostID, (int)$mediaItemID);
     }
 
     public function removeFeaturedImage(int|string $customPostID): void
     {
-        \delete_post_thumbnail($customPostID);
+        \delete_post_thumbnail((int)$customPostID);
     }
 }

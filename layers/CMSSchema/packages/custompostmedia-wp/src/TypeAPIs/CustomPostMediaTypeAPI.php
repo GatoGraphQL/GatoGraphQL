@@ -16,12 +16,12 @@ class CustomPostMediaTypeAPI implements CustomPostMediaTypeAPIInterface
 {
     public function hasCustomPostThumbnail(string|int $post_id): bool
     {
-        return has_post_thumbnail($post_id);
+        return has_post_thumbnail((int)$post_id);
     }
 
     public function getCustomPostThumbnailID(string|int $post_id): string|int|null
     {
-        if ($id = get_post_thumbnail_id($post_id)) {
+        if ($id = get_post_thumbnail_id((int)$post_id)) {
             return (int)$id;
         }
         return null;

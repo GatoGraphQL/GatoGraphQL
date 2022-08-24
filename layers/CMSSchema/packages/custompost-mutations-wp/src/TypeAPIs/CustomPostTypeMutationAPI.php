@@ -89,6 +89,6 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 
     public function canUserEditCustomPost(string|int $userID, string|int $customPostID): bool
     {
-        return \user_can($userID, 'edit_post', $customPostID);
+        return \user_can((int)$userID, 'edit_post', $customPostID);
     }
 }
