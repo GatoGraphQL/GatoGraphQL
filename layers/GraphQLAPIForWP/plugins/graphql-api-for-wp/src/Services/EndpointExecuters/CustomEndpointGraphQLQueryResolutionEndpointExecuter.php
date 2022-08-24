@@ -36,7 +36,7 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
     /**
      * Provide the query to execute and its variables
      *
-     * @return array{0: ?string, 1: ?array<string,mixed>} Array of 2 elements: [query, variables]
+     * @return array{0:?string,1:?array<string,mixed>} Array of 2 elements: [query, variables]
      */
     public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
     {
