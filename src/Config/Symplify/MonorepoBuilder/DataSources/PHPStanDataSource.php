@@ -8,7 +8,7 @@ class PHPStanDataSource
 {
     public function getLevel(): int
     {
-        return 7;
+        return 8;
     }
 
     /**

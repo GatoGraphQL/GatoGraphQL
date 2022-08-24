@@ -1,5 +1,5 @@
 parameters:
-    level: 7
+    level: 8
 
 includes:
     - layers/Engine/packages/access-control/phpstan.neon.dist
