@@ -66,4 +66,50 @@ class Directive extends AbstractAst implements WithNameInterface, WithArgumentsI
     {
         return $this->name;
     }
+
+    /**
+     * Indicate if a field equals another one based on its properties,
+     * not on its object hash ID.
+     */
+    public function isEquivalentTo(Directive $directive): bool
+    {
+        if ($this->getName() !== $directive->getName()) {
+            return false;
+        }
+
+        /**
+         * Compare arguments
+         */
+        $thisArguments = $this->getArguments();
+        $againstArguments = $directive->getArguments();
+        $argumentCount = count($thisArguments);
+        if ($argumentCount !== count($againstArguments)) {
+            return false;
+        }
+
+        /**
+         * The order of the arguments does not matter.
+         * These 2 fields are equivalent:
+         *
+         *   ```
+         *   {
+         *     id @translate(from: "en", to: "es")
+         *     id @translate(to: "es", from: "en")
+         *   }
+         *   ```
+         *
+         * So first sort them as to compare apples to apples.
+         */
+        usort($thisArguments, fn (Argument $argument1, Argument $argument2): int => $argument1->getName() <=> $argument2->getName());
+        usort($againstArguments, fn (Argument $argument1, Argument $argument2): int => $argument1->getName() <=> $argument2->getName());
+        for ($i = 0; $i < $argumentCount; $i++) {
+            $thisArgument = $thisArguments[$i];
+            $againstArgument = $againstArguments[$i];
+            if (!$thisArgument->isEquivalentTo($againstArgument)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

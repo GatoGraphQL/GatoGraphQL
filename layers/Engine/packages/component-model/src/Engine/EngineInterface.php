@@ -6,10 +6,7 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Component\Component;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use SplObjectStorage;
 
 interface EngineInterface
 {
@@ -71,9 +68,4 @@ interface EngineInterface
      * @param array<string,mixed> $root_props
      */
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array;
-    /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
-     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
-     */
-    public function moveEntriesWithIDUnderDBName(array $entries, RelationalTypeResolverInterface $relationalTypeResolver): array;
 }

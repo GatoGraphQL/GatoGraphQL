@@ -10,6 +10,9 @@ services:
     PoP\GraphQLParser\Query\GraphQLQueryStringFormatterInterface:
         class: \PoP\GraphQLParser\Query\GraphQLQueryStringFormatter
 
+    PoP\GraphQLParser\AST\ASTHelperServiceInterface:
+        class: \PoP\GraphQLParser\AST\ASTHelperService
+
     PoP\GraphQLParser\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
 

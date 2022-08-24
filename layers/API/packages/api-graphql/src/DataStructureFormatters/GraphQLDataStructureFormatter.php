@@ -4,15 +4,35 @@ declare(strict_types=1);
 
 namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
+use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use SplObjectStorage;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
+    private const ADDITIONAL_FEEDBACK = 'additionalFeedback';
+
+    private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
+
+    final public function setFeedbackEntryManager(FeedbackEntryManagerInterface $feedbackEntryService): void
+    {
+        $this->feedbackEntryService = $feedbackEntryService;
+    }
+    final protected function getFeedbackEntryManager(): FeedbackEntryManagerInterface
+    {
+        return $this->feedbackEntryService ??= $this->instanceManager->getInstance(FeedbackEntryManagerInterface::class);
+    }
+
     public function getName(): string
     {
         return 'graphql';
@@ -26,7 +46,49 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $ret = [];
 
-        // Add feedback
+        /**
+         * Calculate the data first (even if printed later)
+         * as it can also add errors.
+         */
+        $resultData = parent::getFormattedData($data);
+
+        /**
+         * If the formatting produced additional feedback entries,
+         * transfer them to the $data object.
+         */
+        if (isset($resultData[self::ADDITIONAL_FEEDBACK])) {
+            foreach ($resultData[self::ADDITIONAL_FEEDBACK][Response::GENERAL_FEEDBACK] ?? [] as $category => $feedbackEntries) {
+                $data[Response::GENERAL_FEEDBACK][$category] = array_merge(
+                    $data[Response::GENERAL_FEEDBACK][$category] ?? [],
+                    $feedbackEntries
+                );
+            }
+            foreach ($resultData[self::ADDITIONAL_FEEDBACK][Response::DOCUMENT_FEEDBACK] ?? [] as $category => $feedbackEntries) {
+                $data[Response::DOCUMENT_FEEDBACK][$category] = array_merge(
+                    $data[Response::DOCUMENT_FEEDBACK][$category] ?? [],
+                    $feedbackEntries
+                );
+            }
+            foreach ($resultData[self::ADDITIONAL_FEEDBACK][Response::SCHEMA_FEEDBACK] ?? [] as $category => $feedbackEntries) {
+                $data[Response::SCHEMA_FEEDBACK][$category] = array_merge(
+                    $data[Response::SCHEMA_FEEDBACK][$category] ?? [],
+                    $feedbackEntries
+                );
+            }
+            foreach ($resultData[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK] ?? [] as $category => $feedbackEntries) {
+                $data[Response::OBJECT_FEEDBACK][$category] = array_merge(
+                    $data[Response::OBJECT_FEEDBACK][$category] ?? [],
+                    $feedbackEntries
+                );
+            }
+            unset($resultData[self::ADDITIONAL_FEEDBACK]);
+        }
+
+        $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
+
+        /**
+         * Print the feedback at the top
+         */
         $errors = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
@@ -37,9 +99,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $ret['errors'] = $errors;
         }
 
-        $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
-
-        if ($resultData = parent::getFormattedData($data)) {
+        if ($resultData) {
             $ret['data'] = $resultData;
         }
 
@@ -274,8 +334,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
 
     /**
+     * @param array<string,SplObjectStorage<FieldInterface,array<array<string,mixed>>>> $entries
      * @return array<int,mixed[]>
-     * @param array<string,SplObjectStorage<FieldInterface,mixed[]>> $entries
      */
     protected function reformatObjectEntries(array $entries): array
     {
@@ -344,5 +404,116 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         return $extensions;
+    }
+
+    /**
+     * Override for GraphQL to provide custom validations.
+     * Return `false` if there is an error.
+     *
+     * Validate Field Selection Merging: 2 different fields
+     * cannot have the same name/alias on the same block in
+     * the response.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging     *
+     *
+     * @param FieldInterface[] $previouslyResolvedFieldsForObject
+     * @param array<string,mixed> $sourceRet
+     * @param array<string,mixed> $resolvedObjectRet
+     * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
+     */
+    protected function validateObjectData(
+        array $previouslyResolvedFieldsForObject,
+        FieldInterface $field,
+        string $typeOutputKey,
+        array &$sourceRet,
+        array &$resolvedObjectRet,
+        SplObjectStorage $resolvedObject,
+        string|int $objectID,
+    ): bool {
+        $sameOutputKeyField = null;
+        if (array_key_exists($field->getOutputKey(), $resolvedObjectRet)) {
+            /** @var ExecutableDocument */
+            $executableDocument = App::getState('executable-document-ast');
+            $fragments = $executableDocument->getDocument()->getFragments();
+            /**
+             * Check that the original field is indeed different to this one.
+             * To find out, search for the previous fields with the same
+             * outputKey but different query string (hence they are different)
+             */
+            $differentFieldsWithSameOutputKeyForObject = array_values(array_filter(
+                $previouslyResolvedFieldsForObject,
+                function (FieldInterface $previousField) use ($field, $fragments): bool {
+                    if ($field->getOutputKey() !== $previousField->getOutputKey()) {
+                        return false;
+                    }
+
+                    /** Either they are both LeafField or RelationalField */
+                    if (get_class($field) !== get_class($previousField)) {
+                        return true;
+                    }
+
+                    if ($field instanceof LeafField) {
+                        /** @var LeafField */
+                        $leafField = $field;
+                        /** @var LeafField */
+                        $previousLeafField = $previousField;
+                        return !$leafField->isEquivalentTo($previousLeafField);
+                    }
+
+                    /** @var RelationalField */
+                    $relationalField = $field;
+                    /** @var RelationalField */
+                    $previousRelationalField = $previousField;
+                    return !$relationalField->isEquivalentTo($previousRelationalField, $fragments);
+                }
+            ));
+            if ($differentFieldsWithSameOutputKeyForObject !== []) {
+                $sameOutputKeyField = $differentFieldsWithSameOutputKeyForObject[0];
+            }
+        }
+        if ($sameOutputKeyField !== null) {
+            /**
+             * Set response to null
+             */
+            $resolvedObjectRet[$field->getOutputKey()] = null;
+
+            /**
+             * Add an entry on the "errors" section
+             */
+            $item = $this->getFeedbackEntryManager()->formatObjectOrSchemaFeedbackCommonEntry(
+                $field,
+                $field->getLocation(),
+                [],
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_3_2,
+                    [
+                        $field->asFieldOutputQueryString(),
+                        $objectID,
+                        $sameOutputKeyField->asFieldOutputQueryString(),
+                        $field->getOutputKey()
+                    ]
+                ),
+                [$objectID],
+            );
+
+            /** @var SplObjectStorage<FieldInterface,array<array<string,mixed>>> */
+            $typeFeedbackEntries = $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] ?? new SplObjectStorage();
+            /** @var array<array<string,mixed>> */
+            $fieldTypeFeedbackEntries = $typeFeedbackEntries[$field] ?? [];
+            $fieldTypeFeedbackEntries[] = $item;
+            $typeFeedbackEntries[$field] = $fieldTypeFeedbackEntries;
+            $sourceRet[self::ADDITIONAL_FEEDBACK][Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR][$typeOutputKey] = $typeFeedbackEntries;
+            return false;
+        }
+        return parent::validateObjectData(
+            $previouslyResolvedFieldsForObject,
+            $field,
+            $typeOutputKey,
+            $sourceRet,
+            $resolvedObjectRet,
+            $resolvedObject,
+            $objectID,
+        );
     }
 }

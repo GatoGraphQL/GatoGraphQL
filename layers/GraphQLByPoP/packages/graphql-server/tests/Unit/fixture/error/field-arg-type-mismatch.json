@@ -49,19 +49,19 @@
             "locations": [
                 {
                     "line": 19,
-                    "column": 47
+                    "column": 53
                 }
             ],
             "extensions": {
                 "path": [
                     "[\"query\", null]",
                     "(ofKinds: [\"query\", null])",
-                    "passingArrayOfArrays: directives(ofKinds: [\"query\", null]) { ... }",
+                    "passingArrayWithNullValues: directives(ofKinds: [\"query\", null]) { ... }",
                     "__schema { ... }",
                     "query { ... }"
                 ],
                 "type": "__Schema",
-                "field": "passingArrayOfArrays: directives(ofKinds: [\"query\", null]) { ... }",
+                "field": "passingArrayWithNullValues: directives(ofKinds: [\"query\", null]) { ... }",
                 "code": "gql@5.6.1[10]",
                 "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
@@ -279,7 +279,8 @@
                 }
             ],
             "passingArrayOfArrays": null,
-            "passingArrayOfInputObject": null
+            "passingArrayOfInputObject": null,
+            "passingArrayWithNullValues": null
         }
     }
 }

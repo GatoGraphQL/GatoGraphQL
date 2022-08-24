@@ -4,11 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\AST\ASTHelperServiceInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class RelationalField extends AbstractField implements WithFieldsOrFragmentBondsInterface
 {
     use WithFieldsOrFragmentBondsTrait;
+
+    private ?ASTHelperServiceInterface $astHelperService = null;
+
+    final public function setASTHelperService(ASTHelperServiceInterface $astHelperService): void
+    {
+        $this->astHelperService = $astHelperService;
+    }
+    final protected function getASTHelperService(): ASTHelperServiceInterface
+    {
+        return $this->astHelperService ??= InstanceManagerFacade::getInstance()->getInstance(ASTHelperServiceInterface::class);
+    }
 
     /**
      * @param Argument[] $arguments
@@ -55,5 +71,63 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
             '%s { ... }',
             parent::doAsASTNodeString(),
         );
+    }
+
+    /**
+     * Additionally validate that the contained fields
+     * are all equivalent.
+     *
+     * @param Fragment[] $fragments
+     */
+    public function isEquivalentTo(RelationalField $relationalField, array $fragments): bool
+    {
+        if (!$this->doIsEquivalentTo($relationalField)) {
+            return false;
+        }
+
+        $thisFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds($this->getFieldsOrFragmentBonds(), $fragments);
+        $againstFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds($relationalField->getFieldsOrFragmentBonds(), $fragments);
+        
+        /**
+         * The two relational fields are equivalent if all contained
+         * fields have an equivalent on the opposite set
+         *
+         * Eg: these 2 fields are equivalent:
+         *
+         *   ```
+         *   {
+         *     posts {
+         *       id
+         *       title
+         *     }
+         *
+         *     posts {
+         *       title
+         *       id
+         *       title:title()
+         *     }
+         *   }
+         *   ```
+         */
+        foreach ($thisFields as $thisField) {
+            $equivalentFieldsInOppositeSet = array_filter(
+                $againstFields,
+                fn (FieldInterface $oppositeField) => $this->getASTHelperService()->isFieldEquivalentToField($thisField, $oppositeField, $fragments)
+            );
+            if ($equivalentFieldsInOppositeSet === []) {
+                return false;
+            }
+        }
+        foreach ($againstFields as $againstField) {
+            $equivalentFieldsInOppositeSet = array_filter(
+                $thisFields,
+                fn (FieldInterface $oppositeField) => $this->getASTHelperService()->isFieldEquivalentToField($againstField, $oppositeField, $fragments)
+            );
+            if ($equivalentFieldsInOppositeSet === []) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
