@@ -32,8 +32,9 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     protected function getTermObjectAndID(string|int|object $termObjectOrID): array
     {
         if (is_object($termObjectOrID)) {
+            /** @var WP_Term */
             $termObject = $termObjectOrID;
-            $termObjectID = $termObject->ID;
+            $termObjectID = $termObject->term_id;
         } else {
             $termObjectID = $termObjectOrID;
             $termObject = $this->getTerm($termObjectID);
