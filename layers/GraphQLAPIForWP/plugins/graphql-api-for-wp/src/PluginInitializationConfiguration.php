@@ -576,7 +576,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected function getPredefinedModuleClassConfiguration(): array
     {

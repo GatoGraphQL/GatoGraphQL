@@ -51,7 +51,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
         // For each environment variable, see if it has been defined as a wp-config.php constant
         foreach ($mappings as $mapping) {
-            /** @var string */
+            /** @var class-string<ModuleInterface> */
             $class = $mapping['class'];
             /** @var string */
             $envVariable = $mapping['envVariable'];
@@ -61,7 +61,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                 continue;
             }
             $hookName = ModuleConfigurationHelpers::getHookName(
-                $class,
+                (string)$class,
                 $envVariable
             );
 
@@ -119,10 +119,10 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
-            /** @var string */
+            /** @var class-string<ModuleInterface> */
             $class = $mapping['class'];
             $hookName = ModuleConfigurationHelpers::getHookName(
-                $class,
+                (string)$class,
                 $envVariable
             );
             /** @var string */
@@ -169,10 +169,10 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
-            /** @var string */
+            /** @var class-string<ModuleInterface> */
             $class = $mapping['class'];
             $hookName = ModuleConfigurationHelpers::getHookName(
-                $class,
+                (string)$class,
                 $envVariable
             );
             /** @var callable */
@@ -197,10 +197,11 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Provide the configuration for all components required in the plugin
      *
-     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {
+        /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return array_merge_recursive(
             $this->getPredefinedModuleClassConfiguration(),
             $this->getBasedOnModuleEnabledStateModuleClassConfiguration(),
@@ -210,7 +211,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected function getPredefinedModuleClassConfiguration(): array
     {
@@ -220,7 +221,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add configuration values if modules are enabled or disabled
      *
-     * @return array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
     protected function getBasedOnModuleEnabledStateModuleClassConfiguration(): array
     {
@@ -239,7 +240,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if ($callback !== null) {
                 $value = $callback($value);
             }
-            /** @var string */
+            /** @var class-string<ModuleInterface> */
             $class = $mapping['class'];
             /** @var string */
             $envVariable = $mapping['envVariable'];

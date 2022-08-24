@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\Module\ModuleInterface;
 
 /**
  * This class is hosted within the graphql-api-for-wp plugin, and not
@@ -91,7 +92,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
     /**
      * Add configuration for the Module classes
      *
-     * @return array<string,mixed> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,mixed> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {

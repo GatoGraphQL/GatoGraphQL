@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use PoP\Root\Module\ModuleInterface;
+
 interface PluginInitializationConfigurationInterface
 {
     /**
@@ -14,7 +16,7 @@ interface PluginInitializationConfigurationInterface
     /**
      * Provide the configuration for all components required in the plugin
      *
-     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array;
 
