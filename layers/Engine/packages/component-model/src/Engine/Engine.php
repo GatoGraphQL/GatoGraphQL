@@ -41,6 +41,7 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo;
+use PoP\ComponentModel\Response\DatabaseEntryManagerInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -56,10 +57,6 @@ class Engine implements EngineInterface
 {
     use BasicServiceTrait;
 
-    public const HOOK_DBNAME_TO_FIELDNAMES = __CLASS__ . ':dbName-to-fieldNames';
-
-    public const PRIMARY_DBNAME = 'primary';
-
     public final const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public final const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
     public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
@@ -67,11 +64,6 @@ class Engine implements EngineInterface
 
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
-
-    /**
-     * @var array<string,string[]>|null
-     */
-    protected ?array $dbNameFieldNames = null;
 
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
@@ -86,6 +78,7 @@ class Engine implements EngineInterface
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
     private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
+    private ?DatabaseEntryManagerInterface $databaseEntryManager = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -195,6 +188,14 @@ class Engine implements EngineInterface
     final protected function getFeedbackEntryManager(): FeedbackEntryManagerInterface
     {
         return $this->feedbackEntryService ??= $this->instanceManager->getInstance(FeedbackEntryManagerInterface::class);
+    }
+    final public function setDatabaseEntryManager(DatabaseEntryManagerInterface $databaseEntryManager): void
+    {
+        $this->databaseEntryManager = $databaseEntryManager;
+    }
+    final protected function getDatabaseEntryManager(): DatabaseEntryManagerInterface
+    {
+        return $this->databaseEntryManager ??= $this->instanceManager->getInstance(DatabaseEntryManagerInterface::class);
     }
 
     /**
@@ -1600,102 +1601,6 @@ class Engine implements EngineInterface
     }
 
     /**
-     * Allow to inject what data fields must be placed under what dbNames
-     *
-     * @return array<string,string[]> Array of key: dbName, values: field names
-     */
-    protected function getDBNameFieldNames(
-        RelationalTypeResolverInterface $relationalTypeResolver
-    ): array {
-        if ($this->dbNameFieldNames === null) {
-            $this->dbNameFieldNames = App::applyFilters(
-                self::HOOK_DBNAME_TO_FIELDNAMES,
-                [],
-                $relationalTypeResolver
-            );
-        }
-        return $this->dbNameFieldNames;
-    }
-
-    /**
-     * Place all entries under dbName "primary"
-     *
-     * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
-     * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<mixed,array<int|string,SplObjectStorage<FieldInterface,mixed>>>
-     */
-    protected function getEntriesUnderPrimaryDBName(
-        array|SplObjectStorage $entries,
-    ): array {
-        return [
-            self::PRIMARY_DBNAME => $entries,
-        ];
-    }
-
-    /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
-     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
-     */
-    public function moveEntriesWithIDUnderDBName(
-        array $entries,
-        RelationalTypeResolverInterface $relationalTypeResolver
-    ): array {
-        if (!$entries) {
-            return [];
-        }
-
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
-        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
-        $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
-        foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
-            $fields = iterator_to_array($fieldValues);
-            foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
-                $fields_to_move = array_filter(
-                    $fields,
-                    fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
-                );
-                $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
-                foreach ($fields_to_move as $field) {
-                    $dbname_entries[$dbName][$id][$field] = $dbname_entries[self::PRIMARY_DBNAME][$id][$field];
-                    $dbname_entries[self::PRIMARY_DBNAME][$id]->detach($field);
-                }
-            }
-        }
-        return $dbname_entries;
-    }
-
-    /**
-     * @param SplObjectStorage<FieldInterface,mixed> $entries
-     * @return array<string,SplObjectStorage<FieldInterface,mixed>>
-     */
-    public function moveEntriesWithoutIDUnderDBName(
-        SplObjectStorage $entries,
-        RelationalTypeResolverInterface $relationalTypeResolver
-    ): array {
-        if ($entries->count() === 0) {
-            return [];
-        }
-
-        // By default place everything under "primary"
-        /** @var array<string,SplObjectStorage<FieldInterface,mixed>> */
-        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
-        $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
-        $fields = iterator_to_array($entries);
-        foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
-            // Move these data fields under "meta" DB name
-            $fields_to_move = array_filter(
-                $fields,
-                fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
-            );
-            foreach ($fields_to_move as $field) {
-                $dbname_entries[$dbName] ??= new SplObjectStorage();
-                $dbname_entries[$dbName][$field] = $dbname_entries[self::PRIMARY_DBNAME][$field];
-                $dbname_entries[self::PRIMARY_DBNAME]->detach($field);
-            }
-        }
-        return $dbname_entries;
-    }
-
-    /**
      * @return array<string,mixed>
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
@@ -1790,7 +1695,7 @@ class Engine implements EngineInterface
              */
             if ($iterationResolvedIDFieldValues) {
                 // If the type is union, then add the type corresponding to each object on its ID
-                $resolvedIDFieldValues = $this->moveEntriesWithIDUnderDBName($iterationResolvedIDFieldValues, $relationalTypeResolver);
+                $resolvedIDFieldValues = $this->getDatabaseEntryManager()->moveEntriesWithIDUnderDBName($iterationResolvedIDFieldValues, $relationalTypeResolver);
                 foreach ($resolvedIDFieldValues as $dbName => $entries) {
                     $databases[$dbName] ??= [];
                     $this->addDatasetToDatabase($databases[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects);
