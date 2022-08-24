@@ -12,6 +12,7 @@ class SiteObjectFacade
     public static function getInstance(): Site
     {
         $containerBuilderFactory = App::getContainer();
+        /** @var Site */
         return $containerBuilderFactory->get('site_object');
     }
 }
