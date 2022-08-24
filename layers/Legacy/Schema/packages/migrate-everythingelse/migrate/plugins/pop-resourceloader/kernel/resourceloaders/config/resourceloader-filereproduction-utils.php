@@ -61,7 +61,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
 
             $nature = \PoP\Root\App::getState('nature');
 
-            $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+            $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
 
             // Assign it under the appropriate level in the object
             switch ($nature) {

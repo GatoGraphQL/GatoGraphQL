@@ -16,7 +16,7 @@ window.pop.UserRolesAccount = {
 	
 		var that = this;
 		var domain = args.domain, userInfo = args.userInfo;
-		var domainId = getDomainId(domain);
+		var domainId = getDomainID(domain);
 
 		var roles = userInfo[pop.c.DATALOAD_USER_ROLES];
 

@@ -16,7 +16,7 @@ window.pop.UserPlatformAccount = {
 	
 		var that = this;
 		var domain = args.domain, userInfo = args.userInfo;
-		var domainId = getDomainId(domain);
+		var domainId = getDomainID(domain);
 
 		var userattributes = userInfo[pop.c.DATALOAD_USER_ATTRIBUTES];
 

@@ -332,7 +332,7 @@ class PoP_JSResourceLoaderProcessorManager {
 			if ($pop_resourceloaderprocessor_manager->isJs($resource)) {
 
 				// Get the current model_instance_id
-				$model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+				$model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
 				if ($attributes = $processor->getScripttagAttributes($resource, $model_instance_id)) {
 					// $this->scripttag_attributes[PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName($resource)] = $attributes;
 					$this->scripttag_attributes[$pop_resourceloaderprocessor_manager->getHandle($resource)] = $attributes;
@@ -374,7 +374,7 @@ class PoP_JSResourceLoaderProcessorManager {
 	function filterDefer($resources, $model_instance_id = null) {
 
 		if (!$model_instance_id) {
-	        $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+	        $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
 	    }
 
 		$defer = array();

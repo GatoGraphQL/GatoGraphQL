@@ -23,7 +23,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         }
 
         if (!$model_instance_id) {
-            $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+            $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
         }
 
         if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
@@ -283,7 +283,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         $memorymanager = TransientCacheManagerFacade::getInstance();
 
         if (!$model_instance_id) {
-            $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+            $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
         }
 
         $immediate_resources = $pop_resourceloader_generatedfilesmanager->getJsResourcesByLoadingType($model_instance_id, $subtype, POP_RESOURCELOADER_LOADINGTYPE_IMMEDIATE);

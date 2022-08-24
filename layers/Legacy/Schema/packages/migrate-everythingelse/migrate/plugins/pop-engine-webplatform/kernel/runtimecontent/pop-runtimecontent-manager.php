@@ -45,7 +45,7 @@ class PoP_Module_RuntimeContentManager
 
     public function getFileUrlByModelInstance($type, $ext = '')
     {
-        $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
+        $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceID();
         return $this->getFileUrl($model_instance_id, $type, $ext);
     }
 }

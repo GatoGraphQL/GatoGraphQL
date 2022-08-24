@@ -15,7 +15,7 @@ function removeScheme(domain) {
     var arr = domain.split("//");
     return arr.length == 1 ? arr[0] : arr[1];
 }
-function getDomainId(domain) {
+function getDomainID(domain) {
 
     // The domain ID is simply removing the scheme, and replacing all dots with '-'
     // It is needed to assign an extra class to the event

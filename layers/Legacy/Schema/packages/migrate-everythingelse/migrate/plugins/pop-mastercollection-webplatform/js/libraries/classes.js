@@ -18,7 +18,7 @@ window.pop.Classes = {
 			// Add a prefix to the domain, such as 'visible-loggedin-', etc
 			var jsSettings = pop.Manager.getJsSettings(domain, pageSection, block, target);
 			var prefix = jsSettings['prefix'] || '';
-			target.addClass(prefix+getDomainId(domain));
+			target.addClass(prefix+getDomainID(domain));
 		});
 	},
 };

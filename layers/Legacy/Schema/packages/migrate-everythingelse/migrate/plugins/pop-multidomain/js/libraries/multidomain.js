@@ -115,7 +115,7 @@ window.pop.MultiDomain = {
 		// CrossDomain? Add extra parameter to avoid CDN caching the same header "Access-Control-Allow-Origin" for all domains, which will produce errors when visiting from a 2nd domain
 		if (domain != pop.c.HOME_DOMAIN) {
 			
-			url = add_query_arg(pop.c.URLPARAM_ORIGIN, getDomainId(pop.c.HOME_DOMAIN), url);
+			url = add_query_arg(pop.c.URLPARAM_ORIGIN, getDomainID(pop.c.HOME_DOMAIN), url);
 		}
 
 		return url;

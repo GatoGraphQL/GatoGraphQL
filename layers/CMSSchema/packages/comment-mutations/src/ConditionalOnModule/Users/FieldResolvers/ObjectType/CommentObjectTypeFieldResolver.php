@@ -79,7 +79,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $comment = $object;
-        $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
+        $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserID($comment);
 
         /**
          * Check there is an author. Otherwise, let the upstream resolve it

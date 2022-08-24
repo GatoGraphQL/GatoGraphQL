@@ -179,7 +179,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         // then retrieve it from there
         if ($comment_data['parent'] && !$comment_data['customPostID']) {
             $parentComment = $this->getCommentTypeAPI()->getComment($comment_data['parent']);
-            $comment_data['customPostID'] = $this->getCommentTypeAPI()->getCommentPostId($parentComment);
+            $comment_data['customPostID'] = $this->getCommentTypeAPI()->getCommentPostID($parentComment);
         }
 
         return $comment_data;

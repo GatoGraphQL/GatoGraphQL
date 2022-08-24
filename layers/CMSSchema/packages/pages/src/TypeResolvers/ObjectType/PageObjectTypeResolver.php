@@ -46,7 +46,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     public function getID(object $object): string|int|null
     {
         $page = $object;
-        return $this->getPageTypeAPI()->getPageId($page);
+        return $this->getPageTypeAPI()->getPageID($page);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

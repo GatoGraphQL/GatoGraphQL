@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Comments\ConditionalOnModule\Users\TypeAPIs;
 
 interface CommentTypeAPIInterface
 {
-    public function getCommentUserId(object $comment): string|int|null;
+    public function getCommentUserID(object $comment): string|int|null;
 }

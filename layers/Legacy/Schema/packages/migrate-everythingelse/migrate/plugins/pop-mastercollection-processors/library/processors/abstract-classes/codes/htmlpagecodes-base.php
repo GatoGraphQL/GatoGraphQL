@@ -7,10 +7,10 @@ abstract class PoP_Module_Processor_HTMLPageCodesBase extends PoP_Module_Process
     public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        return $pageTypeAPI->getContent($this->getPageId($component));
+        return $pageTypeAPI->getContent($this->getPageID($component));
     }
 
-    public function getPageId(\PoP\ComponentModel\Component\Component $component)
+    public function getPageID(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }

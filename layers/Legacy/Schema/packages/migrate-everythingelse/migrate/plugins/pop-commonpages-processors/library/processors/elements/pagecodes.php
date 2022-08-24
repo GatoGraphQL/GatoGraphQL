@@ -16,7 +16,7 @@ class GD_CommonPages_Module_Processor_PageCodes extends PoP_Module_Processor_HTM
         );
     }
 
-    public function getPageId(\PoP\ComponentModel\Component\Component $component)
+    public function getPageID(\PoP\ComponentModel\Component\Component $component)
     {
         $page_ids = array(
             self::COMPONENT_PAGECODE_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
@@ -26,7 +26,7 @@ class GD_CommonPages_Module_Processor_PageCodes extends PoP_Module_Processor_HTM
             return $page_id;
         }
 
-        return parent::getPageId($component);
+        return parent::getPageID($component);
     }
 }
 

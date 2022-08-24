@@ -1627,7 +1627,7 @@ class ObjectTypeFieldResolver_Posts extends \PoP\Engine\AbstractObjectTypeFieldR
         $comments = $cmsapi->getComments($query);
         $value = array();
         foreach ($comments as $comment) {
-          $value[] = $cmsresolver->getCommentId($comment);
+          $value[] = $cmsresolver->getCommentID($comment);
         }
         break;
   
@@ -1961,7 +1961,7 @@ Changing the values of certain properties will alter the component hierarchy. Fo
 
 Keeping these properties in `$vars` is needed for the following reasons:
 
-_1. To calculate the `modelInstanceId`:_ the `modelInstanceId` is the unique identifier representing the particular instance of the component hierarchy. This id is calculated by function `ModelInstanceProcessor_Utils::getModelInstanceId()`, which simply calculates a hash of the values of all properties which alter the component hierarchy. Because not all properties in `$vars` alter the component hierarchy, these ones must be defined by implementing hook `"ModelInstanceProcessor:model_instance_components"`.
+_1. To calculate the `modelInstanceId`:_ the `modelInstanceId` is the unique identifier representing the particular instance of the component hierarchy. This id is calculated by function `ModelInstanceProcessor_Utils::getModelInstanceID()`, which simply calculates a hash of the values of all properties which alter the component hierarchy. Because not all properties in `$vars` alter the component hierarchy, these ones must be defined by implementing hook `"ModelInstanceProcessor:model_instance_components"`.
 
 _2. To determine the entry component_: The component hierarchy's top-most component is called the entry component. Every potential entry component must define a list of conditions, to be evaluated against `$vars`, that need be satisfied to be chosen the entry component (more on this under [PageComponentProcessors](#pagecomponentprocessor)).
 

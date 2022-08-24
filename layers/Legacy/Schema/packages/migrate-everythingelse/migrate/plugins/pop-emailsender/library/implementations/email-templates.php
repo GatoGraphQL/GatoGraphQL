@@ -126,7 +126,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     {
         $userCommentTypeAPI = UserCommentTypeAPIFacade::getInstance();
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
-        $avatar = gdGetAvatar($userCommentTypeAPI->getCommentUserId($comment), GD_AVATAR_SIZE_40);
+        $avatar = gdGetAvatar($userCommentTypeAPI->getCommentUserID($comment), GD_AVATAR_SIZE_40);
         $avatar_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%3$s"></a>',
             $comment->comment_author_url,
@@ -159,7 +159,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $post_id = $commentTypeAPI->getCommentPostId($comment);
+        $post_id = $commentTypeAPI->getCommentPostID($comment);
         $url = $customPostTypeAPI->getPermalink($post_id);
         if ($commentTypeAPI->getCommentParent($comment)) {
             $parent = $commentTypeAPI->getComment($commentTypeAPI->getCommentParent($comment));

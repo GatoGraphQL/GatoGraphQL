@@ -169,7 +169,7 @@ window.pop.UserAccount = {
 		var that = this;
 
 		var updates = {};
-		var domainId = getDomainId(domain);
+		var domainId = getDomainID(domain);
 
 		var id, name, url;
 		id = userInfo[pop.c.DATALOAD_USER_ID];
@@ -234,7 +234,7 @@ window.pop.UserAccount = {
 			}
 
 			var name, body = $(document.body);
-			var domainId = getDomainId(domain);
+			var domainId = getDomainID(domain);
 			if (that.sessions[domain].loggedin) {					
 
 				extraClasses.push('loggedin-anydomain');
@@ -334,7 +334,7 @@ window.pop.UserAccount = {
 		// Close all 'pop-feedbackmessage.checkpoint' messages (if before it said user must log in, then hide it)
 		// For that specific domain only!
 		jQuery(document).ready( function($) {
-			var domainId = getDomainId(domain);
+			var domainId = getDomainID(domain);
 			$('.alert.in.checkpoint.pop-feedbackmessage.feedbackmessage-'+domainId).removeClass('fade').alert('close');
 		});
 	},

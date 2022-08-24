@@ -73,7 +73,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $media = $object;
         return match ($fieldDataAccessor->getFieldName()) {
-            'author' => $this->getUserMediaTypeAPI()->getMediaAuthorId($media),
+            'author' => $this->getUserMediaTypeAPI()->getMediaAuthorID($media),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
