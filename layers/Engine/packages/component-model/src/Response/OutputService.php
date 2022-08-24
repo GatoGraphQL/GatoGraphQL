@@ -19,7 +19,7 @@ class OutputService implements OutputServiceInterface
     public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
     {
         return mb_strimwidth(
-            json_encode($value),
+            (string)json_encode($value),
             0,
             500,
             $this->__('...', 'graphql-parser')

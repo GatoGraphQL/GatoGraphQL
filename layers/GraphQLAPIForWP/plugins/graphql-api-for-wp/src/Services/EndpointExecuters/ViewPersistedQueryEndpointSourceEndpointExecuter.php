@@ -110,7 +110,7 @@ class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourc
                     ) = $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
                     // To render the variables in the block, they must be json_encoded
                     if ($inheritedGraphQLVariables) {
-                        $inheritedGraphQLVariables = json_encode($inheritedGraphQLVariables);
+                        $inheritedGraphQLVariables = (string)json_encode($inheritedGraphQLVariables);
                     }
                     // Render the block again, using the inherited attributes
                     $inheritedGraphQLBlockAttributes = [

@@ -283,7 +283,7 @@ class Engine implements EngineInterface
             $moduleInfo->getRand(),
             $moduleInfo->getTime(),
         );
-        $commoncode = str_replace($differentiators, '', json_encode($engineState->data));
+        $commoncode = str_replace($differentiators, '', (string)json_encode($engineState->data));
 
         /**
          * Also replace all those tags with content that, even if it's different,

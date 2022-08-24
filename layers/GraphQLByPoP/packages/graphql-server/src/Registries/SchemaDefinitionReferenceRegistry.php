@@ -123,7 +123,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 ]
             );
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
-            $cacheKey = hash('md5', json_encode($cacheKeyElements));
+            $cacheKey = hash('md5', (string)json_encode($cacheKeyElements));
 
             $persistentCache = $this->getPersistentCache();
             if ($persistentCache->hasCache($cacheKey, $cacheType)) {

@@ -11,7 +11,7 @@ class JSONFileStore extends FileStore
     public function save(AbstractFile $file, mixed $contents): void
     {
         // Encode it and save it
-        parent::save($file, json_encode($contents));
+        parent::save($file, (string)json_encode($contents));
     }
 
     public function get(AbstractFile $file): mixed

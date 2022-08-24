@@ -64,8 +64,12 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         ?string $operationName = null
     ): void {
         $response = self::getGraphQLServer()->execute($queryOrExecutableDocument, $variables, $operationName);
+        $expectedResponseJSON = json_encode($expectedResponse);
+        if ($expectedResponseJSON === false) {
+            $this->fail('Encoding the expected response as JSON failed');
+        }
         $this->assertJsonStringEqualsJsonString(
-            json_encode($expectedResponse),
+            $expectedResponseJSON,
             $response->getContent()
         );
     }

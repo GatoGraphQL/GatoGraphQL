@@ -51,7 +51,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
             $this->previousBlockAttributesValue,
             sprintf(
                 'The new value to execute the REST API call to modify the CPT block attributes is \'%s\', but this is the same as the current value, and these must be different.',
-                json_encode($newValue)
+                (string)json_encode($newValue)
             )
         );
 
@@ -140,7 +140,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
          * In that case, pass an empty string instead of an empty array,
          * then it works!
          */
-        $options['query'][Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES] = json_encode($value);
+        $options['query'][Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES] = (string)json_encode($value);
         $response = $client->post(
             $endpointURL,
             $options,

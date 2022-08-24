@@ -40,7 +40,7 @@ trait FilterDataComponentProcessorTrait
     public function getActiveDataloadQueryArgsFilteringComponents(Component $component, ?array $source = null): array
     {
         // Search for cached result
-        $cacheKey = json_encode($source ?? []);
+        $cacheKey = (string)json_encode($source ?? []);
         $this->activeDataloadQueryArgsFilteringComponents[$cacheKey] ??= [];
         if (isset($this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component->name])) {
             return $this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component->name];

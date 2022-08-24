@@ -104,7 +104,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $cacheType = CacheTypes::FULLSCHEMA_DEFINITION;
             $cacheKeyElements = CacheUtils::getSchemaCacheKeyElements();
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
-            $cacheKey = hash('md5', json_encode($cacheKeyElements));
+            $cacheKey = hash('md5', (string)json_encode($cacheKeyElements));
             if ($persistentCache->hasCache($cacheKey, $cacheType)) {
                 $schemaDefinition = $persistentCache->getCache($cacheKey, $cacheType);
             }

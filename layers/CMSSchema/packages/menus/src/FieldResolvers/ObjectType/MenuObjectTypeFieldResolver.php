@@ -159,7 +159,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     foreach ($menuItems as $menuItem) {
                         // Convert object to array
                         // @see https://stackoverflow.com/a/18576902
-                        $item_value = json_decode(json_encode($menuItem), true);
+                        $item_value = json_decode((string)json_encode($menuItem), true);
                         // Prepare array where to append the children items
                         if (!$isFlat) {
                             $item_value['children'] = [];

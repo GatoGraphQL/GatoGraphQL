@@ -53,7 +53,7 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
     public function getDefaultValue(): ?string
     {
         if ($defaultValue = $this->schemaDefinition[SchemaDefinition::DEFAULT_VALUE] ?? null) {
-            return json_encode($defaultValue);
+            return (string)json_encode($defaultValue);
         }
         return null;
     }

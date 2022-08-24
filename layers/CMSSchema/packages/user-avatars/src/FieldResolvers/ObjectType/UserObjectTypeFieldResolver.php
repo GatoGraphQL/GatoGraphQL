@@ -154,7 +154,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     'size' => $avatarSize,
                 ];
                 // Generate a hash to represent the ID of the avatar given its properties
-                $avatarID = hash('md5', json_encode($avatarIDComponents));
+                $avatarID = hash('md5', (string)json_encode($avatarIDComponents));
                 $this->getUserAvatarRuntimeRegistry()->storeUserAvatar(new UserAvatar($avatarID, $avatarSrc, $avatarSize));
                 return $avatarID;
         }
