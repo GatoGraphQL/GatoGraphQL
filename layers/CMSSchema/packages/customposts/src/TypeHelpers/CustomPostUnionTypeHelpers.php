@@ -28,6 +28,7 @@ class CustomPostUnionTypeHelpers
     public static function getTargetObjectTypeResolverCustomPostTypes(?UnionTypeResolverInterface $unionTypeResolver = null): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var CustomPostUnionTypeResolver */
         $unionTypeResolver ??= $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
         $customPostObjectTypeResolverPickers = array_values(array_filter(
             $unionTypeResolver->getObjectTypeResolverPickers(),
