@@ -232,6 +232,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             && $exposeGlobalFieldsInGraphQLSchema
         ) {
             foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_FIELDS]) as $fieldName) {
+                /** @var string[] */
                 $itemPath = [
                     SchemaDefinition::GLOBAL_FIELDS,
                     $fieldName
@@ -263,6 +264,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
         // Add the directives
         foreach (array_keys($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::GLOBAL_DIRECTIVES]) as $directiveName) {
+            /** @var string[] */
             $itemPath = [
                 SchemaDefinition::GLOBAL_DIRECTIVES,
                 $directiveName
@@ -276,6 +278,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if ($addVersionToGraphQLSchemaFieldDescription || $addMutationLabelToSchemaFieldDescription) {
             foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT] as $typeName => $typeSchemaDefinition) {
                 foreach (array_keys($typeSchemaDefinition[SchemaDefinition::FIELDS]) as $fieldName) {
+                    /** @var string[] */
                     $itemPath = [
                         SchemaDefinition::TYPES,
                         TypeKinds::OBJECT,
