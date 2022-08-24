@@ -326,6 +326,8 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
                  * If the type data resolver is union, the typeOutputKey where the value is stored
                  * is contained in the ID itself, with format typeOutputKey/ID.
                  * Remove this information, and get purely the ID
+                 *
+                 * @var string $id
                  */
                 list(
                     $objectTypeOutputKey,
