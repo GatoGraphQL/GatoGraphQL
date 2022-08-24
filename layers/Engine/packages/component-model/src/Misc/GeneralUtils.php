@@ -123,8 +123,13 @@ class GeneralUtils
 
     public static function getDomain(string $url): string
     {
-        $parse = parse_url($url);
-        return $parse['scheme'] . '://' . $parse['host'];
+        $url_parts = parse_url($url);
+        if (!is_array($url_parts)) {
+            return $url;
+        }
+        $scheme = isset($url_parts['scheme']) ? $url_parts['scheme'] . '://' : '';
+        $host = $url_parts['host'] ?? '';
+        return $scheme . $host;
     }
 
     public static function removeDomain(string $url): string
