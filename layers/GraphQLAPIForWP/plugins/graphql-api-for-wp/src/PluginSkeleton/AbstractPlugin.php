@@ -107,6 +107,7 @@ abstract class AbstractPlugin implements PluginInterface
         if (!class_exists($pluginInfoClass)) {
             return null;
         }
+        /** @var class-string<PluginInfoInterface> */
         return $pluginInfoClass;
     }
 
