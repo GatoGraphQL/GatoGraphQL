@@ -105,7 +105,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
 
         // Allow to override method
-        $this->doAssertFixtureGraphQLQueryExecution($expectedResponseFile, $response->getContent());
+        $this->doAssertFixtureGraphQLQueryExecution($expectedResponseFile, (string)$response->getContent());
     }
 
     protected function doAssertFixtureGraphQLQueryExecution(string $expectedResponseFile, string $actualResponseContent): void
