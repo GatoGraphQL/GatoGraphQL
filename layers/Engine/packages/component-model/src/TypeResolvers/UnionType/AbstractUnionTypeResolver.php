@@ -15,7 +15,6 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -32,18 +31,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * @var ObjectTypeResolverPickerInterface[]|null
      */
     protected ?array $objectTypeResolverPickers = null;
-
-    private ?OutputServiceInterface $outputService = null;
-
-    final public function setOutputService(OutputServiceInterface $outputService): void
-    {
-        $this->outputService = $outputService;
-    }
-    final protected function getOutputService(): OutputServiceInterface
-    {
-        /** @var OutputServiceInterface */
-        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
-    }
 
     /**
      * @return InterfaceTypeResolverInterface[]
@@ -454,10 +441,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E8,
-                        [
-                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($object),
-                        ]
+                        ErrorFeedbackItemProvider::E8
                     ),
                     $field,
                 )
