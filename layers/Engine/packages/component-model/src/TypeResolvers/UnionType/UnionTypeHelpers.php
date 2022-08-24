@@ -28,6 +28,7 @@ class UnionTypeHelpers
         if (count($parts) === 1) {
             return ['', $parts[0]];
         }
+        /** @var array{0:string,1:string|int} */
         return $parts;
     }
 
