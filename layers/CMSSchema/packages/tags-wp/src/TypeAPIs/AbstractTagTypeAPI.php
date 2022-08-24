@@ -11,6 +11,7 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Taxonomy;
+use WP_Term;
 
 use function get_tag;
 use function get_term_by;
@@ -56,6 +57,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     }
     public function getTagName(string|int|object $tagObjectOrID): string
     {
+        /** @var WP_Term */
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
         if ($tag === null) {
             return '';
