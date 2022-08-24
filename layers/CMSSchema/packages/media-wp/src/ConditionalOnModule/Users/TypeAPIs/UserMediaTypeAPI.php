@@ -6,6 +6,8 @@ namespace PoPCMSSchema\MediaWP\ConditionalOnModule\Users\TypeAPIs;
 
 use PoPCMSSchema\Media\ConditionalOnModule\Users\TypeAPIs\UserMediaTypeAPIInterface;
 
+use WP_Post;
+
 use function get_post;
 
 /**
@@ -18,8 +20,9 @@ class UserMediaTypeAPI implements UserMediaTypeAPIInterface
         if (is_object($mediaObjectOrID)) {
             $media = $mediaObjectOrID;
         } else {
-            $media = get_post($mediaObjectOrID);
+            $media = get_post((int)$mediaObjectOrID);
         }
+        /** @var WP_Post $media */
         return $media->post_author;
     }
 }
