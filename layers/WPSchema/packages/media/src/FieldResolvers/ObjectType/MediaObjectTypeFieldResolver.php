@@ -103,6 +103,9 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'url':
             case 'urlAbsolutePath':
                 $url = \get_permalink($mediaItem->ID);
+                if ($url === false) {
+                    return '';
+                }
                 if ($fieldDataAccessor->getFieldName() === 'url') {
                     return $url;
                 }

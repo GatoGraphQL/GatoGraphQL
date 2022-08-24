@@ -41,6 +41,7 @@ class URLAbsolutePathScalarTypeResolver extends AbstractScalarTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string $inputValue */
 
         $this->validateFilterVar('http://www.example.com' . $inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore, \FILTER_VALIDATE_URL);
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {

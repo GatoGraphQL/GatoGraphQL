@@ -16,6 +16,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use WP_Post;
 
 class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -148,6 +149,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        /** @var WP_Post */
         $post = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'blockMetadata':

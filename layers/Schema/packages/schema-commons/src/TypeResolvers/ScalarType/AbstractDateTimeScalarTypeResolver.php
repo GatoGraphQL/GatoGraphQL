@@ -40,6 +40,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string $inputValue */
 
         /**
          * Validate the input has any of the supported formats

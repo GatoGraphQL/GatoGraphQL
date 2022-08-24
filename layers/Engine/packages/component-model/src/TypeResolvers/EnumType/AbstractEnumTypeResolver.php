@@ -88,6 +88,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string $inputValue */
 
         $enumValues = $this->getConsolidatedEnumValues();
         if (!in_array($inputValue, $enumValues)) {

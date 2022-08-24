@@ -41,6 +41,7 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string $inputValue */
 
         $this->validateFilterVar($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore, \FILTER_VALIDATE_URL);
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
