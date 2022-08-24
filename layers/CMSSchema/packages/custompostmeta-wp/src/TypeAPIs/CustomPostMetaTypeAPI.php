@@ -16,7 +16,7 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
     {
         // This function does not differentiate between a stored empty value,
         // and a non-existing key! So if empty, treat it as non-existant and return null
-        $value = \get_post_meta($customPostID, $key, $single);
+        $value = \get_post_meta((int)$customPostID, $key, $single);
         if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }

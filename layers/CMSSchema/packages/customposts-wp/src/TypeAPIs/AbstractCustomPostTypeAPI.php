@@ -35,12 +35,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     public function getID(object $customPost): string|int
     {
+        /** @var WP_Post $customPost */
         return $customPost->ID;
     }
 
     public function getStatus(string|int|object $customPostObjectOrID): ?string
     {
-        $status = get_post_status($customPostObjectOrID);
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+        $status = get_post_status($customPostID);
         if ($status === false) {
             return null;
         }
@@ -226,6 +228,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $query['publicly_queryable'] = $query['publicly-queryable'];
             unset($query['publicly-queryable']);
         }
+        /** @var string[] */
         return get_post_types($query);
     }
 
@@ -274,13 +277,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getExcerpt(string|int|object $customPostObjectOrID): ?string
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = (int)$customPostObjectOrID;
-        }
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
         return get_the_excerpt($customPostID);
     }
     /**
