@@ -18,7 +18,7 @@ class UnionTypeHelpers
     public static function extractObjectTypeAndID(string|int $maybeComposedTypeOutputKeyObjectID): array
     {
         if (is_int($maybeComposedTypeOutputKeyObjectID)) {
-            return $maybeComposedTypeOutputKeyObjectID;
+            return ['', $maybeComposedTypeOutputKeyObjectID];
         }
         /** @var string */
         $composedTypeOutputKeyObjectID = $maybeComposedTypeOutputKeyObjectID;
