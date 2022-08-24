@@ -25,6 +25,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
     }
     final protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
     {
+        /** @var GraphQLSchemaDefinitionServiceInterface */
         return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 

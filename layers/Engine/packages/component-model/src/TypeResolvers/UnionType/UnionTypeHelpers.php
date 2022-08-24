@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 use function explode;
@@ -16,10 +13,15 @@ class UnionTypeHelpers
     /**
      * Extracts the DB key and ID from the object ID
      *
-     * @return array{0: string, 1: string|int}
+     * @return array{0:string,1:string|int}
      */
-    public static function extractObjectTypeAndID(string $composedTypeOutputKeyObjectID): array
+    public static function extractObjectTypeAndID(string|int $maybeComposedTypeOutputKeyObjectID): array
     {
+        if (is_int($maybeComposedTypeOutputKeyObjectID)) {
+            return ['', $maybeComposedTypeOutputKeyObjectID];
+        }
+        /** @var string */
+        $composedTypeOutputKeyObjectID = $maybeComposedTypeOutputKeyObjectID;
         $parts = explode(
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR,
             $composedTypeOutputKeyObjectID
@@ -28,21 +30,27 @@ class UnionTypeHelpers
         if (count($parts) === 1) {
             return ['', $parts[0]];
         }
+        /** @var array{0:string,1:string|int} */
         return $parts;
     }
 
     /**
      * Extracts the ID from the object ID
      */
-    public static function extractDBObjectID(string $composedDBObjectTypeAndID): string|int
+    public static function extractDBObjectID(string|int $maybeComposedDBObjectTypeAndID): string|int
     {
+        if (is_int($maybeComposedDBObjectTypeAndID)) {
+            return $maybeComposedDBObjectTypeAndID;
+        }
+        /** @var string */
+        $composedDBObjectTypeAndID = $maybeComposedDBObjectTypeAndID;
         $elements = explode(
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR,
             $composedDBObjectTypeAndID
         );
         // If the UnionTypeResolver didn't have a TypeResolver to process the passed object, the Type will not be added
         // In that case, the ID will be on the first position
-        return count($elements) == 1 ? $elements[0] : $elements[1];
+        return count($elements) === 1 ? $elements[0] : $elements[1];
     }
 
     /**
@@ -54,31 +62,5 @@ class UnionTypeHelpers
             $relationalTypeResolver->getTypeOutputKey() .
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR .
             (string) $id;
-    }
-
-    /**
-     * Return a class or another depending on these possibilities:
-     *
-     * - If there is more than 1 target type resolver for the Union, return the Union
-     * - (By configuration) If there is only one target, return that one directly
-     *   and not the Union (since it's more efficient)
-     * - If there are none types, return `null`. As a consequence,
-     *   the ID is returned as a field, not as a connection
-     */
-    public static function getUnionOrTargetObjectTypeResolver(UnionTypeResolverInterface $unionTypeResolver): ?UnionTypeResolverInterface
-    {
-        $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
-        if ($targetTypeResolvers) {
-            // By configuration: If there is only 1 item, return only that one
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->useSingleTypeInsteadOfUnionType()) {
-                return count($targetTypeResolvers) == 1 ?
-                    $targetTypeResolvers[0] :
-                    $unionTypeResolver;
-            }
-            return $unionTypeResolver;
-        }
-        return null;
     }
 }

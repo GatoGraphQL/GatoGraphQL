@@ -19,6 +19,7 @@ trait BasicServiceTrait
     }
     final protected function getTranslationAPI(): TranslationAPIInterface
     {
+        /** @var TranslationAPIInterface */
         return $this->translationAPI ??= $this->instanceManager->getInstance(TranslationAPIInterface::class);
     }
 

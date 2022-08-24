@@ -20,6 +20,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
+        /** @var GraphQLDataStructureFormatter */
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
 

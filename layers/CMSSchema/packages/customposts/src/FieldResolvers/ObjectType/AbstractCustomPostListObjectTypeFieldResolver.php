@@ -36,6 +36,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
+        /** @var IntScalarTypeResolver */
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
@@ -44,6 +45,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
+        /** @var CustomPostTypeAPIInterface */
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
     final public function setCustomPostPaginationInputObjectTypeResolver(CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver): void
@@ -52,6 +54,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     }
     final protected function getCustomPostPaginationInputObjectTypeResolver(): CustomPostPaginationInputObjectTypeResolver
     {
+        /** @var CustomPostPaginationInputObjectTypeResolver */
         return $this->customPostPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostPaginationInputObjectTypeResolver::class);
     }
     final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver): void
@@ -60,6 +63,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     }
     final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
     {
+        /** @var CustomPostSortInputObjectTypeResolver */
         return $this->customPostSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
     }
 

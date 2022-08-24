@@ -311,6 +311,8 @@ abstract class AbstractModule implements ModuleInterface
 
     /**
      * ModuleConfiguration class for the Module
+     *
+     * @return class-string<ModuleConfigurationInterface>|null
      */
     protected function getModuleConfigurationClass(): ?string
     {
@@ -319,6 +321,7 @@ abstract class AbstractModule implements ModuleInterface
         if (!class_exists($moduleConfigurationClass)) {
             return null;
         }
+        /** @var class-string<ModuleConfigurationInterface> */
         return $moduleConfigurationClass;
     }
 
@@ -333,6 +336,8 @@ abstract class AbstractModule implements ModuleInterface
 
     /**
      * ModuleInfo class for the Module
+     *
+     * @return class-string<ModuleInfoInterface>|null
      */
     protected function getModuleInfoClass(): ?string
     {
@@ -341,6 +346,7 @@ abstract class AbstractModule implements ModuleInterface
         if (!class_exists($moduleInfoClass)) {
             return null;
         }
+        /** @var class-string<ModuleInfoInterface> */
         return $moduleInfoClass;
     }
 }

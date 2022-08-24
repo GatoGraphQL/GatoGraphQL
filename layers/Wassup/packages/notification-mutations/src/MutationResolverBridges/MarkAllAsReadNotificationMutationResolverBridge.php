@@ -19,6 +19,7 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
     }
     final protected function getMarkAllAsReadNotificationMutationResolver(): MarkAllAsReadNotificationMutationResolver
     {
+        /** @var MarkAllAsReadNotificationMutationResolver */
         return $this->markAllAsReadNotificationMutationResolver ??= $this->instanceManager->getInstance(MarkAllAsReadNotificationMutationResolver::class);
     }
 

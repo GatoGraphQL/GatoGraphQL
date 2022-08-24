@@ -22,5 +22,5 @@ interface DatabaseEntryManagerInterface
     public function moveEntriesWithoutIDUnderDBName(
         SplObjectStorage $entries,
         RelationalTypeResolverInterface $relationalTypeResolver
-    ): array;    
+    ): array;
 }

@@ -20,6 +20,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForFieldsInPublicSc
     }
     final protected function getDisableAccessDirectiveResolver(): DisableAccessDirectiveResolver
     {
+        /** @var DisableAccessDirectiveResolver */
         return $this->disableAccessDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessDirectiveResolver::class);
     }
 

@@ -17,6 +17,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
     }
     final protected function getUserSearchByInputObjectTypeResolver(): UserSearchByInputObjectTypeResolver
     {
+        /** @var UserSearchByInputObjectTypeResolver */
         return $this->userSearchByInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserSearchByInputObjectTypeResolver::class);
     }
 

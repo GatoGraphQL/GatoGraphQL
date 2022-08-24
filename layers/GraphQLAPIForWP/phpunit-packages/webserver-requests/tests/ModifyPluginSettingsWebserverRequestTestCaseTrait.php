@@ -30,7 +30,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
      */
     protected function modifyPluginSettingsSetUp(): void
     {
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (!$this->executePluginSettingsSetUpTearDown($dataName)) {
             return;
         }
@@ -67,7 +67,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
      */
     protected function modifyPluginSettingsTearDown(): void
     {
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (!$this->executePluginSettingsSetUpTearDown($dataName)) {
             return;
         }
@@ -85,7 +85,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
     protected function getPluginSettingsOriginalValue(): mixed
     {
         $pluginSettings = $this->executeRESTEndpointToGetPluginSettings(
-            $this->dataName(),
+            $this->getDataName(),
         );
         $input = $this->getSettingsKey();
         $pluginInputSettings = array_values(array_filter(

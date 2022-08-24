@@ -20,6 +20,7 @@ class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolve
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setMenuLocationSelectableStringTypeResolver(MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver): void
@@ -28,6 +29,7 @@ class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolve
     }
     final protected function getMenuLocationSelectableStringTypeResolver(): MenuLocationSelectableStringTypeResolver
     {
+        /** @var MenuLocationSelectableStringTypeResolver */
         return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationSelectableStringTypeResolver::class);
     }
 

@@ -20,6 +20,7 @@ class GraphQLEndpointHandlerAppStateProvider extends AbstractAPIEndpointHandlerA
     }
     final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
+        /** @var GraphQLDataStructureFormatter */
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
     final public function setGraphQLEndpointHandler(GraphQLEndpointHandler $graphQLEndpointHandler): void
@@ -28,6 +29,7 @@ class GraphQLEndpointHandlerAppStateProvider extends AbstractAPIEndpointHandlerA
     }
     final protected function getGraphQLEndpointHandler(): GraphQLEndpointHandler
     {
+        /** @var GraphQLEndpointHandler */
         return $this->graphQLEndpointHandler ??= $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
     }
 

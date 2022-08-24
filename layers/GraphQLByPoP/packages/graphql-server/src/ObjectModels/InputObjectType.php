@@ -31,7 +31,9 @@ class InputObjectType extends AbstractNamedType
     {
         $this->inputValues = [];
         if ($inputValues = $this->schemaDefinition[SchemaDefinition::INPUT_FIELDS] ?? null) {
+            /** @var string $inputValueName */
             foreach (array_keys($inputValues) as $inputValueName) {
+                /** @var string[] */
                 $inputValueSchemaDefinitionPath = array_merge(
                     $schemaDefinitionPath,
                     [

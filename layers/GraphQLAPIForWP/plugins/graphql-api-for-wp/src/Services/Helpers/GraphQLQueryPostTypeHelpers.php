@@ -22,6 +22,7 @@ class GraphQLQueryPostTypeHelpers
     }
     final protected function getPersistedQueryEndpointGraphiQLBlockAccessor(): PersistedQueryEndpointGraphiQLBlockAccessor
     {
+        /** @var PersistedQueryEndpointGraphiQLBlockAccessor */
         return $this->persistedQueryEndpointGraphiQLBlockAccessor ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlockAccessor::class);
     }
     final public function setPersistedQueryEndpointAPIHierarchyBlockAccessor(PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor): void
@@ -30,6 +31,7 @@ class GraphQLQueryPostTypeHelpers
     }
     final protected function getPersistedQueryEndpointAPIHierarchyBlockAccessor(): PersistedQueryEndpointAPIHierarchyBlockAccessor
     {
+        /** @var PersistedQueryEndpointAPIHierarchyBlockAccessor */
         return $this->persistedQueryEndpointAPIHierarchyBlockAccessor ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlockAccessor::class);
     }
 
@@ -49,7 +51,7 @@ class GraphQLQueryPostTypeHelpers
      *
      * @param WP_Post|null $graphQLQueryPost The post to extract the attributes from
      * @param bool $inheritAttributes Indicate if to fetch attributes (query/variables) from ancestor posts
-     * @return mixed[] Array with 2 elements: [$graphQLQuery, $graphQLVariables]
+     * @return array{0:string,1:array<string,mixed>} Array of 2 elements: [query, variables]
      */
     public function getGraphQLQueryPostAttributes(?WP_Post $graphQLQueryPost, bool $inheritAttributes): array
     {

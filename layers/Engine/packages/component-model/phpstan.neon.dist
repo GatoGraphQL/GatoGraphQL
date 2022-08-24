@@ -23,3 +23,6 @@ parameters:
 		- 
 			message: '#Method PoP\\ComponentModel\\FieldResolvers\\ObjectType\\AbstractReflectionPropertyObjectTypeFieldResolver::getReflectionInstance\(\) return type with generic class ReflectionClass does not specify its types: T#'
 			path: src/FieldResolvers/ObjectType/AbstractReflectionPropertyObjectTypeFieldResolver.php
+		- 
+			message: '#Parameter \#1 \$objectOrClass of class ReflectionClass constructor expects class-string<T of object>|T of object, string given\.#'
+			path: src/FieldResolvers/ObjectType/AbstractReflectionPropertyObjectTypeFieldResolver.php

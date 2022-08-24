@@ -60,6 +60,9 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
         return str_replace(' ', '_', strtolower($this->getScreenOptionLabel())) . '_per_page';
     }
 
+    /**
+     * @return class-string<AbstractItemListTable>
+     */
     abstract protected function getTableClass(): string;
 
     public function initializeTable(): void

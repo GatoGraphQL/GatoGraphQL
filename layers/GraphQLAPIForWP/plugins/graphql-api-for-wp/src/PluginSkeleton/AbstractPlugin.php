@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use PoP\Root\Module\ModuleInterface;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginInfoInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractPlugin implements PluginInterface
 {
@@ -96,6 +97,8 @@ abstract class AbstractPlugin implements PluginInterface
 
     /**
      * PluginInfo class for the Plugin
+     *
+     * @return class-string<PluginInfoInterface>|null
      */
     protected function getPluginInfoClass(): ?string
     {
@@ -104,6 +107,7 @@ abstract class AbstractPlugin implements PluginInterface
         if (!class_exists($pluginInfoClass)) {
             return null;
         }
+        /** @var class-string<PluginInfoInterface> */
         return $pluginInfoClass;
     }
 
@@ -206,7 +210,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Add configuration for the Module classes
      *
-     * @return array<string,mixed> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,mixed> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {
@@ -216,7 +220,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Module` class which must not initialize their Schema services
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
     abstract protected function getSchemaModuleClassesToSkip(): array;
 

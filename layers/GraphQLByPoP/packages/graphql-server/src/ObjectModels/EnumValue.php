@@ -18,6 +18,7 @@ class EnumValue extends AbstractSchemaDefinitionReferenceObject
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
+        /** @var string[] */
         $enumValueExtensionsSchemaDefinitionPath = array_merge(
             $schemaDefinitionPath,
             [

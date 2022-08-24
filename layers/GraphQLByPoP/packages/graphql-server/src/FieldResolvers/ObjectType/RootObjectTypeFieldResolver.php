@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
@@ -32,6 +33,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
+        /** @var SchemaObjectTypeResolver */
         return $this->schemaObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
     }
     final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
@@ -40,6 +42,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
+        /** @var TypeObjectTypeResolver */
         return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
     }
     final public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
@@ -48,6 +51,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
     {
+        /** @var SchemaTypeDataLoader */
         return $this->schemaTypeDataLoader ??= $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -56,6 +60,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
@@ -159,6 +164,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $schemaID;
                 }
                 // Obtain the instance of the schema
+                /** @var Schema[] */
                 $schemaInstances = $this->getSchemaTypeDataLoader()->getObjects([$schemaID]);
                 $schema = $schemaInstances[0];
                 return $schema->getTypeID($fieldDataAccessor->getValue('name'));

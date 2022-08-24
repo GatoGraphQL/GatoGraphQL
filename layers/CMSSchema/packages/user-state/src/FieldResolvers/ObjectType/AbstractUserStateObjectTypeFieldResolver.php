@@ -20,6 +20,7 @@ abstract class AbstractUserStateObjectTypeFieldResolver extends AbstractObjectTy
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
+        /** @var UserLoggedInCheckpoint */
         return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
 

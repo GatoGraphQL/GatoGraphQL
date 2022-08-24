@@ -60,6 +60,7 @@ class DirectiveKindEnumTypeResolver extends AbstractIntrospectionEnumTypeResolve
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
     {
+        /** @var string $scalarValue */
         return strtoupper($scalarValue);
     }
 }

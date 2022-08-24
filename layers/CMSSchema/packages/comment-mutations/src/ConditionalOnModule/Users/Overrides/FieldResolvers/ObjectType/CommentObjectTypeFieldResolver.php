@@ -22,6 +22,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
+        /** @var UserTypeAPIInterface */
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 

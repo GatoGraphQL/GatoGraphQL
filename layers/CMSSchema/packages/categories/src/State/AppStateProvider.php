@@ -18,6 +18,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getTaxonomyTypeAPI(): TaxonomyTypeAPIInterface
     {
+        /** @var TaxonomyTypeAPIInterface */
         return $this->taxonomyTypeAPI ??= $this->instanceManager->getInstance(TaxonomyTypeAPIInterface::class);
     }
 

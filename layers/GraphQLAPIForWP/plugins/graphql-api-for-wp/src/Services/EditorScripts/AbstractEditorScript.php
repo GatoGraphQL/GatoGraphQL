@@ -28,6 +28,7 @@ abstract class AbstractEditorScript extends AbstractScript
     }
     final protected function getEditorHelpers(): EditorHelpers
     {
+        /** @var EditorHelpers */
         return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
     }
     final public function setLocaleHelper(LocaleHelper $localeHelper): void
@@ -36,6 +37,7 @@ abstract class AbstractEditorScript extends AbstractScript
     }
     final protected function getLocaleHelper(): LocaleHelper
     {
+        /** @var LocaleHelper */
         return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
     }
 

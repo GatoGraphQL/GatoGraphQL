@@ -27,6 +27,7 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     }
     final protected function getValidateIsUserLoggedInDirectiveResolver(): ValidateIsUserLoggedInDirectiveResolver
     {
+        /** @var ValidateIsUserLoggedInDirectiveResolver */
         return $this->validateIsUserLoggedInDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInDirectiveResolver::class);
     }
     final public function setValidateIsUserLoggedInForDirectivesDirectiveResolver(ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver): void
@@ -35,6 +36,7 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     }
     final protected function getValidateIsUserLoggedInForDirectivesDirectiveResolver(): ValidateIsUserLoggedInForDirectivesDirectiveResolver
     {
+        /** @var ValidateIsUserLoggedInForDirectivesDirectiveResolver */
         return $this->validateIsUserLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
     }
     final public function setValidateIsUserNotLoggedInDirectiveResolver(ValidateIsUserNotLoggedInDirectiveResolver $validateIsUserNotLoggedInDirectiveResolver): void
@@ -43,6 +45,7 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     }
     final protected function getValidateIsUserNotLoggedInDirectiveResolver(): ValidateIsUserNotLoggedInDirectiveResolver
     {
+        /** @var ValidateIsUserNotLoggedInDirectiveResolver */
         return $this->validateIsUserNotLoggedInDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInDirectiveResolver::class);
     }
     final public function setValidateIsUserNotLoggedInForDirectivesDirectiveResolver(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver): void
@@ -51,6 +54,7 @@ class NoCacheUserStateRelationalTypeResolverDecorator extends AbstractRelational
     }
     final protected function getValidateIsUserNotLoggedInForDirectivesDirectiveResolver(): ValidateIsUserNotLoggedInForDirectivesDirectiveResolver
     {
+        /** @var ValidateIsUserNotLoggedInForDirectivesDirectiveResolver */
         return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
     }
 

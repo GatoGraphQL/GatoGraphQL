@@ -24,6 +24,7 @@ class ModelInstanceHookSet extends AbstractHookSet
     }
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
+        /** @var PostTypeAPIInterface */
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
@@ -32,6 +33,7 @@ class ModelInstanceHookSet extends AbstractHookSet
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
+        /** @var PostCategoryTypeAPIInterface */
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
@@ -69,7 +71,8 @@ class ModelInstanceHookSet extends AbstractHookSet
                 $postID = App::getState(['routing', 'queried-object-id']);
                 $categories = [];
                 foreach ($this->getPostCategoryTypeAPI()->getCustomPostCategories($postID) as $cat) {
-                    $categories[] = $this->getPostCategoryTypeAPI()->getCategorySlug($cat) . $this->getPostCategoryTypeAPI()->getCategoryID($cat);
+                    $categoryID = is_object($cat) ? $this->getPostCategoryTypeAPI()->getCategoryID($cat) : $cat;
+                    $categories[] = $this->getPostCategoryTypeAPI()->getCategorySlug($cat) . $categoryID;
                 }
                 $elements[] = $this->__('categories:', 'post-categories') . implode('.', $categories);
             }

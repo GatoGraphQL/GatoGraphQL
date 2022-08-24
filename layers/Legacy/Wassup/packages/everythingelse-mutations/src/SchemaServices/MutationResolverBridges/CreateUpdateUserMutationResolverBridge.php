@@ -28,6 +28,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
     }
     final protected function getCreateUpdateUserMutationResolver(): CreateUpdateUserMutationResolver
     {
+        /** @var CreateUpdateUserMutationResolver */
         return $this->createUpdateUserMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateUserMutationResolver::class);
     }
     

@@ -22,6 +22,7 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
     }
     final protected function getCustomEndpointBlockCategory(): CustomEndpointBlockCategory
     {
+        /** @var CustomEndpointBlockCategory */
         return $this->customEndpointBlockCategory ??= $this->instanceManager->getInstance(CustomEndpointBlockCategory::class);
     }
 

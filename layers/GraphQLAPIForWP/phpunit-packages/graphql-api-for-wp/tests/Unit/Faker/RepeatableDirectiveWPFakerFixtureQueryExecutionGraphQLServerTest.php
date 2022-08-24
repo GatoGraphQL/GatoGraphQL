@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 
 use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
+use PoP\Root\Module\ModuleInterface;
 
 class RepeatableDirectiveWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
@@ -14,7 +15,7 @@ class RepeatableDirectiveWPFakerFixtureQueryExecutionGraphQLServerTest extends A
     }
 
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     protected static function getGraphQLServerModuleClasses(): array
     {

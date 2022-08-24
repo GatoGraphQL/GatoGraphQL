@@ -24,6 +24,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
+        /** @var string[] */
         $directiveExtensionsSchemaDefinitionPath = array_merge(
             $schemaDefinitionPath,
             [

@@ -32,6 +32,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
@@ -40,6 +41,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
+        /** @var BooleanScalarTypeResolver */
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
     final public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
@@ -48,6 +50,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
     {
+        /** @var InputValueObjectTypeResolver */
         return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
     }
     final public function setDirectiveLocationEnumTypeResolver(DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver): void
@@ -56,6 +59,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getDirectiveLocationEnumTypeResolver(): DirectiveLocationEnumTypeResolver
     {
+        /** @var DirectiveLocationEnumTypeResolver */
         return $this->directiveLocationEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
     }
     final public function setDirectiveExtensionsObjectTypeResolver(DirectiveExtensionsObjectTypeResolver $directiveExtensionsObjectTypeResolver): void
@@ -64,6 +68,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getDirectiveExtensionsObjectTypeResolver(): DirectiveExtensionsObjectTypeResolver
     {
+        /** @var DirectiveExtensionsObjectTypeResolver */
         return $this->directiveExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(DirectiveExtensionsObjectTypeResolver::class);
     }
 

@@ -42,6 +42,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     }
     final protected function getOutputService(): OutputServiceInterface
     {
+        /** @var OutputServiceInterface */
         return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 
@@ -87,6 +88,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string $inputValue */
 
         $enumValues = $this->getConsolidatedEnumValues();
         if (!in_array($inputValue, $enumValues)) {
@@ -146,6 +148,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
     {
+        /** @var string|int|float|bool|mixed[] */
         return $scalarValue;
     }
 
@@ -157,6 +160,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     final public function getInputValueDeprecationMessages(string|int|float|bool|stdClass $inputValue): array
     {
+        /** @var string $inputValue */
         if ($deprecationMessage = $this->getConsolidatedEnumValueDeprecationMessage($inputValue)) {
             return [
                 sprintf(

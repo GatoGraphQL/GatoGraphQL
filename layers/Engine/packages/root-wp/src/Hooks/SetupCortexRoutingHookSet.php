@@ -23,6 +23,7 @@ class SetupCortexRoutingHookSet extends AbstractHookSet
     }
     final protected function getRoutingManager(): RoutingManagerInterface
     {
+        /** @var RoutingManagerInterface */
         return $this->routingManager ??= $this->instanceManager->getInstance(RoutingManagerInterface::class);
     }
 

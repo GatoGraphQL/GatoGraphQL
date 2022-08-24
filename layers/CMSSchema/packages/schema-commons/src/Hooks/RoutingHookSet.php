@@ -23,6 +23,7 @@ class RoutingHookSet extends AbstractHookSet
     }
     final protected function getCMSService(): CMSServiceInterface
     {
+        /** @var CMSServiceInterface */
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -31,6 +32,7 @@ class RoutingHookSet extends AbstractHookSet
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
+        /** @var RequestHelperServiceInterface */
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 

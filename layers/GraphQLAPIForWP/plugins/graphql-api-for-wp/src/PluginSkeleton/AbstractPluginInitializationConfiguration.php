@@ -51,7 +51,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
         // For each environment variable, see if it has been defined as a wp-config.php constant
         foreach ($mappings as $mapping) {
+            /** @var class-string<ModuleInterface> */
             $class = $mapping['class'];
+            /** @var string */
             $envVariable = $mapping['envVariable'];
 
             // If the environment value has been defined, then do nothing, since it has priority
@@ -59,7 +61,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                 continue;
             }
             $hookName = ModuleConfigurationHelpers::getHookName(
-                $class,
+                (string)$class,
                 $envVariable
             );
 
@@ -101,7 +103,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         // For each environment variable, see if its value has been saved in the settings
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         foreach ($mappings as $mapping) {
+            /** @var string */
             $module = $mapping['module'];
+            /** @var bool */
             $condition = $mapping['condition'] ?? true;
             // Check if the hook must be executed always (condition => 'any') or with
             // stated enabled (true) or disabled (false). By default, it's enabled
@@ -110,17 +114,23 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             }
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
+            /** @var string */
             $envVariable = $mapping['envVariable'];
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
+            /** @var class-string<ModuleInterface> */
+            $class = $mapping['class'];
             $hookName = ModuleConfigurationHelpers::getHookName(
-                $mapping['class'],
+                (string)$class,
                 $envVariable
             );
+            /** @var string */
             $option = $mapping['option'];
+            /** @var string */
             $optionModule = $mapping['optionModule'] ?? $module;
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
+            /** @var callable|null */
             $callback = $mapping['callback'] ?? null;
             \add_filter(
                 $hookName,
@@ -154,14 +164,18 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         foreach ($mappings as $mapping) {
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
+            /** @var string */
             $envVariable = $mapping['envVariable'];
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
+            /** @var class-string<ModuleInterface> */
+            $class = $mapping['class'];
             $hookName = ModuleConfigurationHelpers::getHookName(
-                $mapping['class'],
+                (string)$class,
                 $envVariable
             );
+            /** @var callable */
             $callback = $mapping['callback'];
             \add_filter(
                 $hookName,
@@ -183,10 +197,11 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Provide the configuration for all components required in the plugin
      *
-     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {
+        /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return array_merge_recursive(
             $this->getPredefinedModuleClassConfiguration(),
             $this->getBasedOnModuleEnabledStateModuleClassConfiguration(),
@@ -196,7 +211,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string,array<string,mixed>> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected function getPredefinedModuleClassConfiguration(): array
     {
@@ -206,7 +221,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add configuration values if modules are enabled or disabled
      *
-     * @return array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
     protected function getBasedOnModuleEnabledStateModuleClassConfiguration(): array
     {
@@ -216,13 +231,20 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $moduleToModuleClassConfigurationMappings = $this->getModuleToModuleClassConfigurationMapping();
         foreach ($moduleToModuleClassConfigurationMappings as $mapping) {
             // Copy the state (enabled/disabled) to the module configuration
-            $value = $moduleRegistry->isModuleEnabled($mapping['module']);
+            /** @var string */
+            $module = $mapping['module'];
+            $value = $moduleRegistry->isModuleEnabled($module);
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
+            /** @var callable|null */
             $callback = $mapping['callback'] ?? null;
             if ($callback !== null) {
                 $value = $callback($value);
             }
-            $moduleClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
+            /** @var class-string<ModuleInterface> */
+            $class = $mapping['class'];
+            /** @var string */
+            $envVariable = $mapping['envVariable'];
+            $moduleClassConfiguration[$class][$envVariable] = $value;
         }
 
         return $moduleClassConfiguration;
@@ -239,7 +261,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Module` class which must not initialize their Schema services
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
     public function getSchemaModuleClassesToSkip(): array
     {
@@ -267,7 +289,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      * Provide the list of modules to check if they are enabled and,
      * if they are not, what module classes must skip initialization
      *
-     * @return array<string,string[]>
+     * @return array<string,array<class-string<ModuleInterface>>>
      */
     protected function getModuleClassesToSkipIfModuleDisabled(): array
     {

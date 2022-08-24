@@ -29,7 +29,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
          * a REST API call to disable the client, and then re-enable
          * it afterwards.
          */
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (str_starts_with($dataName, 'single-endpoint-')) {
             $this->executeRESTEndpointToEnableOrDisableClient($dataName, false);
         }
@@ -41,7 +41,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
          * Re-enable the clients for the single endpoint
          * after the "disabled" test
          */
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (str_starts_with($dataName, 'single-endpoint-')) {
             $this->executeRESTEndpointToEnableOrDisableClient($dataName, true);
         }

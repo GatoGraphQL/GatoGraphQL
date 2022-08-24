@@ -25,6 +25,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSiteObjectTypeResolver(): SiteObjectTypeResolver
     {
+        /** @var SiteObjectTypeResolver */
         return $this->siteObjectTypeResolver ??= $this->instanceManager->getInstance(SiteObjectTypeResolver::class);
     }
     final public function setSite(Site $site): void
@@ -33,6 +34,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSite(): Site
     {
+        /** @var Site */
         return $this->site ??= $this->instanceManager->getInstance(Site::class);
     }
 

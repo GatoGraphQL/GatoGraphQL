@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRolesAccessControl\Hooks;
 
-use PoP\Root\App;
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\Root\App;
 
 abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet
 {
@@ -29,7 +30,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
     /**
      * Remove directiveName "translate" if the user is not logged in
      *
-     * @return string[]
+     * @return array<class-string<DirectiveResolverInterface>>
      */
     protected function getDirectiveResolverClasses(): array
     {
@@ -53,6 +54,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
                 }
             }
         }
+        /** @var array<class-string<DirectiveResolverInterface>> */
         return $this->directiveResolverClasses;
     }
 }

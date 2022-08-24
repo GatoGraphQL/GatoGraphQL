@@ -24,6 +24,7 @@ class EnumValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
+        /** @var BooleanScalarTypeResolver */
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 

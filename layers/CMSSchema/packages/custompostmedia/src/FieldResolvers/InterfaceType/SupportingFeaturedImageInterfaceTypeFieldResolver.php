@@ -25,6 +25,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
+        /** @var BooleanScalarTypeResolver */
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
@@ -33,6 +34,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
+        /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
@@ -41,6 +43,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
+        /** @var MediaObjectTypeResolver */
         return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
 

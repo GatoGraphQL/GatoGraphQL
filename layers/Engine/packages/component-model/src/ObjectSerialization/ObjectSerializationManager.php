@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ObjectSerialization;
 
+use PoP\Root\Exception\ShouldNotHappenException;
+use PoP\Root\Services\BasicServiceTrait;
+
 class ObjectSerializationManager implements ObjectSerializationManagerInterface
 {
+    use BasicServiceTrait;
+
     /**
      * @var array<string,ObjectSerializerInterface>
      */
@@ -36,6 +41,14 @@ class ObjectSerializationManager implements ObjectSerializationManagerInterface
          * so the developer will be made aware to create the corresponding Serializer
          * for that object class
          */
+        if (!method_exists($object, '__serialize')) {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('The object of class \'%s\' does not support method \'__serialize\'', 'component-model'),
+                    get_class($object)
+                )
+            );
+        }
         return $object->__serialize();
     }
 }

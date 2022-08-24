@@ -28,6 +28,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
+        /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
     final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
@@ -36,6 +37,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
     }
     final protected function getInputCoercingService(): InputCoercingServiceInterface
     {
+        /** @var InputCoercingServiceInterface */
         return $this->inputCoercingService ??= $this->instanceManager->getInstance(InputCoercingServiceInterface::class);
     }
 

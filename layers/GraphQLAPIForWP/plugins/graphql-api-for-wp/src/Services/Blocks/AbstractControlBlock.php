@@ -27,6 +27,7 @@ abstract class AbstractControlBlock extends AbstractBlock
     }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
+        /** @var TypeRegistryInterface */
         return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
 

@@ -20,6 +20,7 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
     }
     final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
+        /** @var AllowOrDenySettingsServiceInterface */
         return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
     }
 

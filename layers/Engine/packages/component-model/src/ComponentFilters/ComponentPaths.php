@@ -18,19 +18,20 @@ class ComponentPaths extends AbstractComponentFilter
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
+        /** @var ComponentPathHelpersInterface */
         return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
 
     /**
-     * @var mixed[][]|null
+     * @var array<array<Component|null>>|null
      */
     protected ?array $paths = null;
     /**
-     * @var mixed[][]
+     * @var array<array<Component|null>>
      */
     protected array $propagation_unsettled_paths = [];
     /**
-     * @var array<string,string[]>
+     * @var array<string,array<array<Component|null>>>
      */
     protected array $backlog_unsettled_paths = [];
 
@@ -42,6 +43,7 @@ class ComponentPaths extends AbstractComponentFilter
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
+        /** @var ComponentPathManagerInterface */
         return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
 
@@ -62,7 +64,7 @@ class ComponentPaths extends AbstractComponentFilter
      */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
-        if (is_null($this->paths)) {
+        if ($this->paths === null) {
             $this->init();
         }
 
@@ -79,7 +81,7 @@ class ComponentPaths extends AbstractComponentFilter
 
         // Check if this component is the last item of any componentPath
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
-            if (count($unsettled_path) == 1 && $unsettled_path[0] == $component) {
+            if (count($unsettled_path) === 1 && $unsettled_path[0] === $component) {
                 return false;
             }
         }
@@ -93,7 +95,7 @@ class ComponentPaths extends AbstractComponentFilter
      */
     public function removeExcludedSubcomponents(Component $component, array $subcomponents): array
     {
-        if (is_null($this->paths)) {
+        if ($this->paths === null) {
             $this->init();
         }
 
@@ -110,15 +112,15 @@ class ComponentPaths extends AbstractComponentFilter
             // Validate that the current component is at the head of the path
             // This validation will work for the entry component only, since the array_intersect below will guarantee that only the path components are returned
             $unsettled_path_component = $unsettled_path[0];
-            if (count($unsettled_path) == 1) {
+            if (count($unsettled_path) === 1) {
                 // We reached the end of the unsettled path => from now on, all components must be included
-                if ($unsettled_path_component == $component) {
+                if ($unsettled_path_component === $component) {
                     return $subcomponents;
                 }
             } else {
                 // Then, check that the following element in the unsettled_path, which is the subcomponent, is on the subcomponents
                 $unsettled_path_subcomponent = $unsettled_path[1];
-                if ($unsettled_path_component == $component && in_array($unsettled_path_subcomponent, $subcomponents) && !in_array($unsettled_path_subcomponent, $matching_subcomponents)) {
+                if ($unsettled_path_component === $component && in_array($unsettled_path_subcomponent, $subcomponents) && !in_array($unsettled_path_subcomponent, $matching_subcomponents)) {
                     $matching_subcomponents[] = $unsettled_path_subcomponent;
                 }
             }
@@ -133,33 +135,37 @@ class ComponentPaths extends AbstractComponentFilter
      */
     public function prepareForPropagation(Component $component, array &$props): void
     {
-        if (is_null($this->paths)) {
+        if ($this->paths === null) {
             $this->init();
         }
-        if ($this->paths) {
-            // Save the current propagation_unsettled_paths, to restore it later on
-            $this->backlog_unsettled_paths[$this->getBacklogEntry()] = $this->propagation_unsettled_paths;
 
-            $matching_unsettled_paths = array();
-            foreach ($this->propagation_unsettled_paths as $unsettled_path) {
-                $component_unsettled_path = $unsettled_path[0];
-                if ($component_unsettled_path == $component) {
-                    array_shift($unsettled_path);
-                    // If there are still elements, then add it to the list
-                    if ($unsettled_path) {
-                        $matching_unsettled_paths[] = $unsettled_path;
-                    }
-                }
-            }
-            $this->propagation_unsettled_paths = $matching_unsettled_paths;
+        if (!$this->paths) {
+            return;
         }
+
+        // Save the current propagation_unsettled_paths, to restore it later on
+        $this->backlog_unsettled_paths[$this->getBacklogEntry()] = $this->propagation_unsettled_paths;
+
+        $matching_unsettled_paths = array();
+        foreach ($this->propagation_unsettled_paths as $unsettled_path) {
+            $component_unsettled_path = $unsettled_path[0];
+            if ($component_unsettled_path === $component) {
+                array_shift($unsettled_path);
+                // If there are still elements, then add it to the list
+                if (!$unsettled_path) {
+                    continue;
+                }
+                $matching_unsettled_paths[] = $unsettled_path;
+            }
+        }
+        $this->propagation_unsettled_paths = $matching_unsettled_paths;
     }
     /**
      * @param array<string,mixed> $props
      */
     public function restoreFromPropagation(Component $component, array &$props): void
     {
-        if (is_null($this->paths)) {
+        if ($this->paths === null) {
             $this->init();
         }
 

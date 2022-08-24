@@ -14,11 +14,11 @@ interface ComponentPathHelpersInterface
      */
     public function stringifyComponentPath(array $componentPath): string;
     /**
-     * @return mixed[]
+     * @return array<Component|null>
      */
     public function recastComponentPath(string $componentPath_as_string): array;
     /**
-     * @return array<string[]>
+     * @return array<array<Component|null>>
      */
     public function getComponentPaths(): array;
 }

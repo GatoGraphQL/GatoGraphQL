@@ -20,6 +20,7 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
     }
     final protected function getAccessControlGraphQLQueryConfigurator(): AccessControlGraphQLQueryConfigurator
     {
+        /** @var AccessControlGraphQLQueryConfigurator */
         return $this->accessControlGraphQLQueryConfigurator ??= $this->instanceManager->getInstance(AccessControlGraphQLQueryConfigurator::class);
     }
     final public function setSchemaConfigAccessControlListBlock(SchemaConfigAccessControlListBlock $schemaConfigAccessControlListBlock): void
@@ -28,6 +29,7 @@ class AccessControlSchemaConfigurationExecuter extends AbstractSchemaConfigurati
     }
     final protected function getSchemaConfigAccessControlListBlock(): SchemaConfigAccessControlListBlock
     {
+        /** @var SchemaConfigAccessControlListBlock */
         return $this->schemaConfigAccessControlListBlock ??= $this->instanceManager->getInstance(SchemaConfigAccessControlListBlock::class);
     }
 

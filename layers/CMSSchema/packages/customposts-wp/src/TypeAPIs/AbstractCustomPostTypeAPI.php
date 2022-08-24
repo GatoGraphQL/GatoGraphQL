@@ -35,12 +35,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     public function getID(object $customPost): string|int
     {
+        /** @var WP_Post $customPost */
         return $customPost->ID;
     }
 
     public function getStatus(string|int|object $customPostObjectOrID): ?string
     {
-        $status = get_post_status($customPostObjectOrID);
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+        $status = get_post_status($customPostID);
         if ($status === false) {
             return null;
         }
@@ -226,6 +228,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $query['publicly_queryable'] = $query['publicly-queryable'];
             unset($query['publicly-queryable']);
         }
+        /** @var string[] */
         return get_post_types($query);
     }
 
@@ -236,7 +239,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
-            return get_permalink($customPostID);
+            $permalink = get_permalink($customPostID);
+            if ($permalink === false) {
+                return null;
+            }
+            return $permalink;
         }
 
         // Function get_sample_permalink comes from the file below, so it must be included
@@ -270,7 +277,8 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getExcerpt(string|int|object $customPostObjectOrID): ?string
     {
-        return get_the_excerpt($customPostObjectOrID);
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+        return get_the_excerpt($customPostID);
     }
     /**
      * @return mixed[]
@@ -313,6 +321,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getContent(string|int|object $customPostObjectOrID): ?string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
@@ -322,6 +331,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getRawContent(string|int|object $customPostObjectOrID): ?string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
@@ -346,6 +356,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getPublishedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
@@ -355,6 +366,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getModifiedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
@@ -363,6 +375,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
     public function getCustomPostType(string|int|object $customPostObjectOrID): string
     {
+        /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         return $customPost?->post_type;
     }
@@ -372,6 +385,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     public function getCustomPost(int|string $id): ?object
     {
-        return get_post($id);
+        /** @var object|null */
+        return get_post((int)$id);
     }
 }

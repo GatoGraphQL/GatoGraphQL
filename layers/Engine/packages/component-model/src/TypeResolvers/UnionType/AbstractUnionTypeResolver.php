@@ -15,7 +15,6 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -33,17 +32,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      */
     protected ?array $objectTypeResolverPickers = null;
 
-    private ?OutputServiceInterface $outputService = null;
-
-    final public function setOutputService(OutputServiceInterface $outputService): void
-    {
-        $this->outputService = $outputService;
-    }
-    final protected function getOutputService(): OutputServiceInterface
-    {
-        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
-    }
-
     /**
      * @return InterfaceTypeResolverInterface[]
      */
@@ -56,7 +44,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * Remove the type from the ID to resolve the objects through `getObjects` (check parent class)
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return mixed[]
+     * @return array<string|int>
      */
     protected function getIDsToQuery(array $idFieldSet): array
     {
@@ -123,7 +111,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     /**
      * @param array<string|int> $ids
-     * @return array<string,ObjectTypeResolverInterface|null>
+     * @return array<string|int,ObjectTypeResolverInterface|null>
      */
     private function recursiveGetObjectIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
@@ -189,7 +177,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // This is mandatory, because the UnionType doesn't have fields by itself.
         // Otherwise, RelationalTypeResolverDecorators can't have their defined ACL rules
         // work when querying a union type (eg: "customPosts")
-        /** @var array<string,Directive[]> */
+        /** @var array<string,array<string,Directive[]>> */
         $targetObjectTypeResolverClassMandatoryDirectivesForFields = [];
         $targetObjectTypeResolvers = $this->getTargetObjectTypeResolvers();
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
@@ -453,10 +441,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E8,
-                        [
-                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($object),
-                        ]
+                        ErrorFeedbackItemProvider::E8
                     ),
                     $field,
                 )

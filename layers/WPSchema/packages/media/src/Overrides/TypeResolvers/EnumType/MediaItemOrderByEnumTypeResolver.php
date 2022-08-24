@@ -24,7 +24,9 @@ class MediaItemOrderByEnumTypeResolver extends UpstreamMediaItemOrderByEnumTypeR
     public function getEnumValues(): array
     {
         $additionalMediaItemEnumValues = $this->getAdditionalCustomPostEnumValues();
-        array_splice($additionalMediaItemEnumValues, array_search(CustomPostOrderBy::TYPE, $additionalMediaItemEnumValues), 1);
+        /** @var int */
+        $pos = array_search(CustomPostOrderBy::TYPE, $additionalMediaItemEnumValues);
+        array_splice($additionalMediaItemEnumValues, $pos, 1);
         return array_merge(
             parent::getEnumValues(),
             $additionalMediaItemEnumValues

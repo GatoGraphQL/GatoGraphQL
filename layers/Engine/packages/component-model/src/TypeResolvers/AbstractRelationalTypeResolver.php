@@ -78,6 +78,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     final protected function getDataloadingEngine(): DataloadingEngineInterface
     {
+        /** @var DataloadingEngineInterface */
         return $this->dataloadingEngine ??= $this->instanceManager->getInstance(DataloadingEngineInterface::class);
     }
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
@@ -86,6 +87,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
+        /** @var DirectivePipelineServiceInterface */
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
     }
 
@@ -508,15 +510,19 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $uniqueDirectiveResolver->setDirective(
                 $directive,
             );
-            $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ??= new SplObjectStorage();
-            $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive] = $uniqueDirectiveResolver;
+            /**
+             * @var SplObjectStorage<Directive,DirectiveResolverInterface>
+             */
+            $directivesCache = $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ?? new SplObjectStorage();
+            $directivesCache[$directive] = $uniqueDirectiveResolver;
+            $this->directiveResolverClassDirectivesCache[$directiveResolverClass] = $directivesCache;
         }
         return $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive];
     }
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @return mixed[]
+     * @return array<string|int>
      */
     protected function getIDsToQuery(array $idFieldSet): array
     {
@@ -605,6 +611,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          */
         if ($unresolvedObjectIDs) {
             if ($this->qualifyDBObjectIDsToRemoveFromErrors()) {
+                /** @var array<string|int> */
                 $unresolvedObjectIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedObjectIDs);
             }
             $idFieldSet = array_filter(

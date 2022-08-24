@@ -34,6 +34,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
+        /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
     }
 

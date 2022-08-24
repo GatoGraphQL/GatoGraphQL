@@ -35,6 +35,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getMenuPageHelper(): MenuPageHelper
     {
+        /** @var MenuPageHelper */
         return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
     }
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
@@ -43,6 +44,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
+        /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
@@ -51,6 +53,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
+        /** @var UserAuthorizationInterface */
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     final public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
@@ -59,6 +62,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getSettingsMenuPage(): SettingsMenuPage
     {
+        /** @var SettingsMenuPage */
         return $this->settingsMenuPage ??= $this->instanceManager->getInstance(SettingsMenuPage::class);
     }
     final public function setModuleDocumentationMenuPage(ModuleDocumentationMenuPage $moduleDocumentationMenuPage): void
@@ -67,6 +71,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getModuleDocumentationMenuPage(): ModuleDocumentationMenuPage
     {
+        /** @var ModuleDocumentationMenuPage */
         return $this->moduleDocumentationMenuPage ??= $this->instanceManager->getInstance(ModuleDocumentationMenuPage::class);
     }
     final public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
@@ -75,6 +80,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getModulesMenuPage(): ModulesMenuPage
     {
+        /** @var ModulesMenuPage */
         return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
     }
     final public function setReleaseNotesAboutMenuPage(ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage): void
@@ -83,6 +89,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getReleaseNotesAboutMenuPage(): ReleaseNotesAboutMenuPage
     {
+        /** @var ReleaseNotesAboutMenuPage */
         return $this->releaseNotesAboutMenuPage ??= $this->instanceManager->getInstance(ReleaseNotesAboutMenuPage::class);
     }
     final public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
@@ -91,6 +98,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getAboutMenuPage(): AboutMenuPage
     {
+        /** @var AboutMenuPage */
         return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }
 

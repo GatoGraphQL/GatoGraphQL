@@ -29,6 +29,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
+        /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
 

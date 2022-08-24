@@ -24,6 +24,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getMenuPageHelper(): MenuPageHelper
     {
+        /** @var MenuPageHelper */
         return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
     }
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
@@ -32,6 +33,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
+        /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
@@ -40,6 +42,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
+        /** @var UserAuthorizationInterface */
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
     final public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
@@ -48,6 +51,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getGraphiQLMenuPage(): GraphiQLMenuPage
     {
+        /** @var GraphiQLMenuPage */
         return $this->graphiQLMenuPage ??= $this->instanceManager->getInstance(GraphiQLMenuPage::class);
     }
     final public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
@@ -56,6 +60,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
     {
+        /** @var GraphQLVoyagerMenuPage */
         return $this->graphQLVoyagerMenuPage ??= $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
     }
 

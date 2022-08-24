@@ -22,7 +22,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         /**
          * Disable the plugin before executing the ":disabled" test
          */
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         }
@@ -33,7 +33,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         /**
          * Re-enable the plugin after executing the ":disabled" test
          */
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
         }
@@ -68,7 +68,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     }
 
     /**
-     * @return array<string,array<string>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
+     * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
     abstract protected function getPluginNameEntries(): array;
 

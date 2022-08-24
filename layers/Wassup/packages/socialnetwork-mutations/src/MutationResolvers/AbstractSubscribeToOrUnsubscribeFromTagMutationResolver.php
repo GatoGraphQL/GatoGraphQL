@@ -19,6 +19,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
+        /** @var PostTagTypeAPIInterface */
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 

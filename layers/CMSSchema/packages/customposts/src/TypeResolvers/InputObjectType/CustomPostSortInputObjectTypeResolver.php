@@ -19,6 +19,7 @@ class CustomPostSortInputObjectTypeResolver extends SortInputObjectTypeResolver
     }
     final protected function getCustomPostOrderByEnumTypeResolver(): CustomPostOrderByEnumTypeResolver
     {
+        /** @var CustomPostOrderByEnumTypeResolver */
         return $this->customPostSortByEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostOrderByEnumTypeResolver::class);
     }
 

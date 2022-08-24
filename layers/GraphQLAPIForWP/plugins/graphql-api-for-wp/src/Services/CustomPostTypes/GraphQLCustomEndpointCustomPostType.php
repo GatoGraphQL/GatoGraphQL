@@ -30,6 +30,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     final protected function getEndpointBlockRegistry(): EndpointBlockRegistryInterface
     {
+        /** @var EndpointBlockRegistryInterface */
         return $this->endpointBlockRegistry ??= $this->instanceManager->getInstance(EndpointBlockRegistryInterface::class);
     }
     final public function setCustomEndpointAnnotatorRegistry(CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry): void
@@ -38,6 +39,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     final protected function getCustomEndpointAnnotatorRegistry(): CustomEndpointAnnotatorRegistryInterface
     {
+        /** @var CustomEndpointAnnotatorRegistryInterface */
         return $this->customEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(CustomEndpointAnnotatorRegistryInterface::class);
     }
     final public function setCustomEndpointOptionsBlock(CustomEndpointOptionsBlock $customEndpointOptionsBlock): void
@@ -46,6 +48,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     final protected function getCustomEndpointOptionsBlock(): CustomEndpointOptionsBlock
     {
+        /** @var CustomEndpointOptionsBlock */
         return $this->customEndpointOptionsBlock ??= $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
     }
 

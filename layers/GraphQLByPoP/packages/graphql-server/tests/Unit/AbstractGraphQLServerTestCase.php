@@ -8,6 +8,8 @@ use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 use PHPUnit\Framework\TestCase;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Module\ModuleInterface;
+use RuntimeException;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
@@ -37,7 +39,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     protected static function getGraphQLServerModuleClasses(): array
     {
@@ -63,9 +65,17 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         ?string $operationName = null
     ): void {
         $response = self::getGraphQLServer()->execute($queryOrExecutableDocument, $variables, $operationName);
+        $expectedResponseJSON = json_encode($expectedResponse);
+        if ($expectedResponseJSON === false) {
+            throw new RuntimeException('Encoding the expected response as JSON failed');
+        }
+        $responseContent = $response->getContent();
+        if ($responseContent === false) {
+            throw new RuntimeException('Obtaining the content of the response failed');
+        }
         $this->assertJsonStringEqualsJsonString(
-            json_encode($expectedResponse),
-            $response->getContent()
+            $expectedResponseJSON,
+            $responseContent
         );
     }
 
@@ -98,9 +108,13 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         }
 
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
+        $responseContent = $response->getContent();
+        if ($responseContent === false) {
+            throw new RuntimeException('Obtaining the content of the response failed');
+        }
 
         // Allow to override method
-        $this->doAssertFixtureGraphQLQueryExecution($expectedResponseFile, $response->getContent());
+        $this->doAssertFixtureGraphQLQueryExecution($expectedResponseFile, $responseContent);
     }
 
     protected function doAssertFixtureGraphQLQueryExecution(string $expectedResponseFile, string $actualResponseContent): void

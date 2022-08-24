@@ -18,6 +18,7 @@ abstract class AbstractCustomPostListTaxonomyObjectTypeFieldResolver extends Abs
     }
     final protected function getTaxonomyCustomPostsFilterInputObjectTypeResolver(): TaxonomyCustomPostsFilterInputObjectTypeResolver
     {
+        /** @var TaxonomyCustomPostsFilterInputObjectTypeResolver */
         return $this->taxonomyCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomyCustomPostsFilterInputObjectTypeResolver::class);
     }
 

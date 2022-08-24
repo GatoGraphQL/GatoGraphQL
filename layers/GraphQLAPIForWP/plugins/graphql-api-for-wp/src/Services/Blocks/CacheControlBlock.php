@@ -24,6 +24,7 @@ class CacheControlBlock extends AbstractControlBlock
     }
     final protected function getCacheControlBlockCategory(): CacheControlBlockCategory
     {
+        /** @var CacheControlBlockCategory */
         return $this->cacheControlBlockCategory ??= $this->instanceManager->getInstance(CacheControlBlockCategory::class);
     }
 

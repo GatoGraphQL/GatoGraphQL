@@ -22,6 +22,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 

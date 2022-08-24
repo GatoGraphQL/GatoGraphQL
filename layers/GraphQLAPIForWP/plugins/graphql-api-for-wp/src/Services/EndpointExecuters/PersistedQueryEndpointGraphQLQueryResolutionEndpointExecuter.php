@@ -22,6 +22,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     }
     final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
         return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
     final public function setGraphQLQueryPostTypeHelpers(GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers): void
@@ -30,6 +31,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     }
     final protected function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
     {
+        /** @var GraphQLQueryPostTypeHelpers */
         return $this->graphQLQueryPostTypeHelpers ??= $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
     }
 
@@ -46,7 +48,7 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     /**
      * Provide the query to execute and its variables
      *
-     * @return array{0: ?string, 1: ?array<string,mixed>} Array of 2 elements: [query, variables]
+     * @return array{0:?string,1:?array<string,mixed>} Array of 2 elements: [query, variables]
      */
     public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
     {

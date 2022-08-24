@@ -42,6 +42,7 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string|int|float|bool $inputValue */
 
         $possibleValues = $this->getConsolidatedPossibleValues();
         if (!in_array($inputValue, $possibleValues)) {

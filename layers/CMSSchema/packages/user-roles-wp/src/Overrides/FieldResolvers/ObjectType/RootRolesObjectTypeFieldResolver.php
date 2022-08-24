@@ -19,6 +19,7 @@ class RootRolesObjectTypeFieldResolver extends UpstreamRootRolesObjectTypeFieldR
     }
     final protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver
     {
+        /** @var UserRoleObjectTypeResolver */
         return $this->userRoleObjectTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
     }
 }

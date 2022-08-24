@@ -25,6 +25,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     }
     final protected function getCMSService(): CMSServiceInterface
     {
+        /** @var CMSServiceInterface */
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 

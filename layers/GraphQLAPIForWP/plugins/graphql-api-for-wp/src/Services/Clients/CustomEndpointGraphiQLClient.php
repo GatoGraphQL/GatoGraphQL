@@ -21,6 +21,7 @@ class CustomEndpointGraphiQLClient extends GraphiQLClient
     }
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
+        /** @var GraphQLCustomEndpointCustomPostType */
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -29,6 +30,7 @@ class CustomEndpointGraphiQLClient extends GraphiQLClient
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
+        /** @var RequestHelperServiceInterface */
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 }

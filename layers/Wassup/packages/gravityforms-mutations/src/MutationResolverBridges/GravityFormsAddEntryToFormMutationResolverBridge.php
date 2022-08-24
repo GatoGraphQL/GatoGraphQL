@@ -37,6 +37,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
+        /** @var UserTypeAPIInterface */
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
     final public function setGravityFormsAddEntryToFormMutationResolver(GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver): void
@@ -45,6 +46,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     }
     final protected function getGravityFormsAddEntryToFormMutationResolver(): GravityFormsAddEntryToFormMutationResolver
     {
+        /** @var GravityFormsAddEntryToFormMutationResolver */
         return $this->gravityFormsAddEntryToFormMutationResolver ??= $this->instanceManager->getInstance(GravityFormsAddEntryToFormMutationResolver::class);
     }
 

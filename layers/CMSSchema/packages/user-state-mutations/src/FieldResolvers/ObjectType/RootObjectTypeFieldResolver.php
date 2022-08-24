@@ -30,6 +30,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
+        /** @var UserObjectTypeResolver */
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
     final public function setLoginUserOneofMutationResolver(LoginUserOneofMutationResolver $loginUserOneofMutationResolver): void
@@ -38,6 +39,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getLoginUserOneofMutationResolver(): LoginUserOneofMutationResolver
     {
+        /** @var LoginUserOneofMutationResolver */
         return $this->loginUserOneofMutationResolver ??= $this->instanceManager->getInstance(LoginUserOneofMutationResolver::class);
     }
     final public function setLogoutUserMutationResolver(LogoutUserMutationResolver $logoutUserMutationResolver): void
@@ -46,6 +48,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getLogoutUserMutationResolver(): LogoutUserMutationResolver
     {
+        /** @var LogoutUserMutationResolver */
         return $this->logoutUserMutationResolver ??= $this->instanceManager->getInstance(LogoutUserMutationResolver::class);
     }
     final public function setLoginUserByOneofInputObjectTypeResolver(LoginUserByOneofInputObjectTypeResolver $loginUserByOneofInputObjectTypeResolver): void
@@ -54,6 +57,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getLoginUserByOneofInputObjectTypeResolver(): LoginUserByOneofInputObjectTypeResolver
     {
+        /** @var LoginUserByOneofInputObjectTypeResolver */
         return $this->loginUserByOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(LoginUserByOneofInputObjectTypeResolver::class);
     }
 

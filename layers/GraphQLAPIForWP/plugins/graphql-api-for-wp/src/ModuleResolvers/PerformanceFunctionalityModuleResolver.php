@@ -36,6 +36,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
+        /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
     }
 

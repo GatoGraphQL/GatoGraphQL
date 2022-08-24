@@ -33,6 +33,7 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string|int|float|bool $inputValue */
 
         /**
          * Watch out! In Library CastToType, an empty string is not false, but it's NULL

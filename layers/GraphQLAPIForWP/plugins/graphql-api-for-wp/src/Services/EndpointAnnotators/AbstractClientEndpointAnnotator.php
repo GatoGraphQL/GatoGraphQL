@@ -22,6 +22,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
     }
     final protected function getBlockHelpers(): BlockHelpers
     {
+        /** @var BlockHelpers */
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
     final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
@@ -30,6 +31,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
     }
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
+        /** @var GraphQLCustomEndpointCustomPostType */
         return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
     }
 

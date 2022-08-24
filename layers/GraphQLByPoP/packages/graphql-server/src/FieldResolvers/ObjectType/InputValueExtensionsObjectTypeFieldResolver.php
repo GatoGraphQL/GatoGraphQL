@@ -24,6 +24,7 @@ class InputValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFiel
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
+        /** @var BooleanScalarTypeResolver */
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 

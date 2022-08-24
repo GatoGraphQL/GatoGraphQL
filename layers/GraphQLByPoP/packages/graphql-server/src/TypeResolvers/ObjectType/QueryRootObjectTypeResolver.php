@@ -22,6 +22,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     }
     final protected function getQueryRootTypeDataLoader(): QueryRootTypeDataLoader
     {
+        /** @var QueryRootTypeDataLoader */
         return $this->queryRootTypeDataLoader ??= $this->instanceManager->getInstance(QueryRootTypeDataLoader::class);
     }
 

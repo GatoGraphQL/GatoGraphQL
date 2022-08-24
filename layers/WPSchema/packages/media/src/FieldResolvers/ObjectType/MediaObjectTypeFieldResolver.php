@@ -27,6 +27,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
+        /** @var CMSHelperServiceInterface */
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
     final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
@@ -35,6 +36,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getDateFormatter(): DateFormatterInterface
     {
+        /** @var DateFormatterInterface */
         return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
     }
     final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
@@ -43,6 +45,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
+        /** @var QueryableInterfaceTypeFieldResolver */
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
 
@@ -100,6 +103,9 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'url':
             case 'urlAbsolutePath':
                 $url = \get_permalink($mediaItem->ID);
+                if ($url === false) {
+                    return '';
+                }
                 if ($fieldDataAccessor->getFieldName() === 'url') {
                     return $url;
                 }

@@ -31,6 +31,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getHeadComponent(): HeadComponent
     {
+        /** @var HeadComponent */
         return $this->headComponent ??= $this->instanceManager->getInstance(HeadComponent::class);
     }    
     final public function setComponentPaths(ComponentPaths $componentPaths): void
@@ -39,6 +40,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentPaths(): ComponentPaths
     {
+        /** @var ComponentPaths */
         return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
     }
     final public function setMainContentComponent(MainContentComponent $mainContentComponent): void
@@ -47,6 +49,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getMainContentComponent(): MainContentComponent
     {
+        /** @var MainContentComponent */
         return $this->mainContentComponent ??= $this->instanceManager->getInstance(MainContentComponent::class);
     }
     final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager): void
@@ -55,6 +58,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentRoutingProcessorManager(): ComponentRoutingProcessorManagerInterface
     {
+        /** @var ComponentRoutingProcessorManagerInterface */
         return $this->routeComponentProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
     }
     final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
@@ -63,6 +67,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
+        /** @var ComponentPathHelpersInterface */
         return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
@@ -71,6 +76,7 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
+        /** @var ComponentHelpersInterface */
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 

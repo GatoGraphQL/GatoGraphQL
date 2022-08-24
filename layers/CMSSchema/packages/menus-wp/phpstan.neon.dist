@@ -2,3 +2,38 @@ parameters:
 	level: 8
 	paths:
 		- src
+		- tests
+	ignoreErrors:
+		- 
+			message: '#Access to an undefined property object::\$ID\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$object_id\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$menu_item_parent\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$title\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$attr_title\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$url\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$description\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$classes\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$target\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$xfn\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php
+		- 
+			message: '#Access to an undefined property object::\$term_id\.#'
+			path: src/TypeAPIs/MenuTypeAPI.php

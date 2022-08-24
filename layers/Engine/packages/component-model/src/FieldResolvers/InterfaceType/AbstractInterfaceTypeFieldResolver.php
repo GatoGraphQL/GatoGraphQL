@@ -77,6 +77,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     final protected function getNameResolver(): NameResolverInterface
     {
+        /** @var NameResolverInterface */
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
     final public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
@@ -85,6 +86,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     final protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
     {
+        /** @var SchemaNamespacingServiceInterface */
         return $this->schemaNamespacingService ??= $this->instanceManager->getInstance(SchemaNamespacingServiceInterface::class);
     }
     final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
@@ -93,6 +95,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
+        /** @var TypeRegistryInterface */
         return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
     final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
@@ -101,6 +104,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
+        /** @var SchemaDefinitionServiceInterface */
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
     final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
@@ -109,6 +113,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
+        /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
@@ -117,6 +122,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
+        /** @var AttachableExtensionManagerInterface */
         return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
@@ -167,9 +173,10 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
                 $interfaceTypeResolverClass = get_class($interfaceTypeResolver);
                 foreach ($interfaceTypeResolverClassesToAttachTo as $interfaceTypeResolverClassToAttachTo) {
+                    $interfaceTypeResolverClassParents = class_parents($interfaceTypeResolverClass);
                     if (
                         $interfaceTypeResolverClass === $interfaceTypeResolverClassToAttachTo
-                        || in_array($interfaceTypeResolverClassToAttachTo, class_parents($interfaceTypeResolverClass))
+                        || ($interfaceTypeResolverClassParents !== false && in_array($interfaceTypeResolverClassToAttachTo, $interfaceTypeResolverClassParents))
                     ) {
                         $this->partiallyImplementedInterfaceTypeResolvers[] = $interfaceTypeResolver;
                         break;

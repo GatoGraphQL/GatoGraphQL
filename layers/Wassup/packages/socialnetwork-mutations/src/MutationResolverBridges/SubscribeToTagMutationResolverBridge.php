@@ -20,6 +20,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
     }
     final protected function getSubscribeToTagMutationResolver(): SubscribeToTagMutationResolver
     {
+        /** @var SubscribeToTagMutationResolver */
         return $this->subscribeToTagMutationResolver ??= $this->instanceManager->getInstance(SubscribeToTagMutationResolver::class);
     }
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
@@ -28,6 +29,7 @@ class SubscribeToTagMutationResolverBridge extends AbstractTagUpdateUserMetaValu
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
+        /** @var PostTagTypeAPIInterface */
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 

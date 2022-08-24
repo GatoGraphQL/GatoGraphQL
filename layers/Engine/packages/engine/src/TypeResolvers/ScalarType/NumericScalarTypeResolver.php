@@ -35,6 +35,8 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string|int|float|bool $inputValue */
+
         $castInputValue = CastToType::_int($inputValue);
         if ($castInputValue !== null) {
             return (int) $castInputValue;

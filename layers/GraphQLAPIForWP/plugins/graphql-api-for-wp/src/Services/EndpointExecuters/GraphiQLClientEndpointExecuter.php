@@ -22,6 +22,7 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter
     }
     final protected function getCustomEndpointGraphiQLClient(): CustomEndpointGraphiQLClient
     {
+        /** @var CustomEndpointGraphiQLClient */
         return $this->customEndpointGraphiQLClient ??= $this->instanceManager->getInstance(CustomEndpointGraphiQLClient::class);
     }
     final public function setGraphiQLClientEndpointAnnotator(GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator): void
@@ -30,6 +31,7 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter
     }
     final protected function getGraphiQLClientEndpointAnnotator(): GraphiQLClientEndpointAnnotator
     {
+        /** @var GraphiQLClientEndpointAnnotator */
         return $this->graphiQLClientEndpointAnnotator ??= $this->instanceManager->getInstance(GraphiQLClientEndpointAnnotator::class);
     }
 

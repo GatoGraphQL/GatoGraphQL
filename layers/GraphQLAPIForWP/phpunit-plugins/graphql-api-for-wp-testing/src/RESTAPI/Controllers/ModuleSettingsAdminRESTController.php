@@ -46,6 +46,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
 
     final protected function getSettingsNormalizer(): SettingsNormalizerInterface
     {
+        /** @var SettingsNormalizerInterface */
         return $this->settingsNormalizer ??= InstanceManagerFacade::getInstance()->getInstance(SettingsNormalizerInterface::class);
     }
 
@@ -170,17 +171,23 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
-            $items[] = $this->prepare_response_for_collection(
-                $this->prepareItemForResponse($module)
-            );
+            $itemForResponse = $this->prepareItemForResponse($module);
+            if ($itemForResponse instanceof WP_Error) {
+                $items[] = $itemForResponse;
+                continue;
+            }
+            $items[] = $this->prepare_response_for_collection($itemForResponse);
         }
         return rest_ensure_response($items);
     }
 
-    protected function prepareItemForResponse(string $module): WP_REST_Response
+    protected function prepareItemForResponse(string $module): WP_REST_Response|WP_Error
     {
         $item = $this->prepareItem($module);
         $response = rest_ensure_response($item);
+        if ($response instanceof WP_Error) {
+            return $response;
+        }
         $response->add_links($this->prepareLinks($module));
         return $response;
     }
@@ -219,6 +226,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
     public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $params = $request->get_params();
+        /** @var string */
         $moduleID = $params[Params::MODULE_ID];
         $module = $this->getModuleByID($moduleID);
         $item = $this->prepareItemForResponse($module);
@@ -272,8 +280,14 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
 
         try {
             $params = $request->get_params();
+            /** @var string */
             $moduleID = $params[Params::MODULE_ID];
-            $optionValues = json_decode($params[Params::JSON_ENCODED_OPTION_VALUES], true);
+            /** @var string */
+            $jsonEncodedOptionValues = $params[Params::JSON_ENCODED_OPTION_VALUES];
+            $optionValues = json_decode($jsonEncodedOptionValues, true);
+            if (!is_array($optionValues)) {
+                $optionValues = [];
+            }
             $module = $this->getModuleByID($moduleID);
 
             // Normalize the values

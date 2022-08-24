@@ -22,6 +22,7 @@ class MetaQueryCompareByArrayValueInputObjectTypeResolver extends AbstractInputO
     }
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
+        /** @var AnyBuiltInScalarScalarTypeResolver */
         return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
     }
     final public function setMetaQueryCompareByArrayValueOperatorEnumTypeResolver(MetaQueryCompareByArrayValueOperatorEnumTypeResolver $metaQueryCompareByArrayValueOperatorEnumTypeResolver): void
@@ -30,6 +31,7 @@ class MetaQueryCompareByArrayValueInputObjectTypeResolver extends AbstractInputO
     }
     final protected function getMetaQueryCompareByArrayValueOperatorEnumTypeResolver(): MetaQueryCompareByArrayValueOperatorEnumTypeResolver
     {
+        /** @var MetaQueryCompareByArrayValueOperatorEnumTypeResolver */
         return $this->metaQueryCompareByArrayValueOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByArrayValueOperatorEnumTypeResolver::class);
     }
 

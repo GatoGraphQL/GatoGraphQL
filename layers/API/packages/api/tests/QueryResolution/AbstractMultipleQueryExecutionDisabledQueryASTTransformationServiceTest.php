@@ -36,6 +36,7 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
 
     protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {
+        /** @var QueryASTTransformationServiceInterface */
         return $this->getService(QueryASTTransformationServiceInterface::class);
     }
 

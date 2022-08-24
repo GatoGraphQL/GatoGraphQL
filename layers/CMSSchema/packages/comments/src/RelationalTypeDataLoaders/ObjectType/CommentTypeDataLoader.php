@@ -21,6 +21,7 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
+        /** @var CommentTypeAPIInterface */
         return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
     }
 

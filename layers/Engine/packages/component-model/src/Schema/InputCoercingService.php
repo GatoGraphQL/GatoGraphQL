@@ -31,6 +31,7 @@ class InputCoercingService implements InputCoercingServiceInterface
     }
     final protected function getOutputService(): OutputServiceInterface
     {
+        /** @var OutputServiceInterface */
         return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
     }
 

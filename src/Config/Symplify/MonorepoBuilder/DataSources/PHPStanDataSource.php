@@ -6,9 +6,9 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
 class PHPStanDataSource
 {
-    public function getLevel(): int|string
+    public function getLevel(): int
     {
-        return 6;
+        return 7;
     }
 
     /**

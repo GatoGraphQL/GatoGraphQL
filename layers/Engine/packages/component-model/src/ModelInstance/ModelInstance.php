@@ -26,6 +26,7 @@ class ModelInstance implements ModelInstanceInterface
     }
     final protected function getApplicationInfo(): ApplicationInfoInterface
     {
+        /** @var ApplicationInfoInterface */
         return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
     final public function setDefinitionManager(DefinitionManagerInterface $definitionManager): void
@@ -34,6 +35,7 @@ class ModelInstance implements ModelInstanceInterface
     }
     final protected function getDefinitionManager(): DefinitionManagerInterface
     {
+        /** @var DefinitionManagerInterface */
         return $this->definitionManager ??= $this->instanceManager->getInstance(DefinitionManagerInterface::class);
     }
 

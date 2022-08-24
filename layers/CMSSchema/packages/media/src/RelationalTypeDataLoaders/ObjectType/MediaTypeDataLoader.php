@@ -19,6 +19,7 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
+        /** @var MediaTypeAPIInterface */
         return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
 

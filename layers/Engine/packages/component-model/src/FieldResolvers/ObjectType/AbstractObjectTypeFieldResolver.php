@@ -95,6 +95,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     final protected function getNameResolver(): NameResolverInterface
     {
+        /** @var NameResolverInterface */
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
     final public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
@@ -103,6 +104,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     final protected function getSemverHelperService(): SemverHelperServiceInterface
     {
+        /** @var SemverHelperServiceInterface */
         return $this->semverHelperService ??= $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
     }
     final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
@@ -111,6 +113,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
+        /** @var SchemaDefinitionServiceInterface */
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
@@ -119,6 +122,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
+        /** @var AttachableExtensionManagerInterface */
         return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
     final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
@@ -127,6 +131,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
+        /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
     final public function setVersioningService(VersioningServiceInterface $versioningService): void
@@ -135,6 +140,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     final protected function getVersioningService(): VersioningServiceInterface
     {
+        /** @var VersioningServiceInterface */
         return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
     }
 

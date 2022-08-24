@@ -19,6 +19,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getUserAvatarTypeDataLoader(): UserAvatarTypeDataLoader
     {
+        /** @var UserAvatarTypeDataLoader */
         return $this->userAvatarTypeDataLoader ??= $this->instanceManager->getInstance(UserAvatarTypeDataLoader::class);
     }
 

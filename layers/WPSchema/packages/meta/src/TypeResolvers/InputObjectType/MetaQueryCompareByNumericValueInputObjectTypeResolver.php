@@ -22,6 +22,7 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
     }
     final protected function getNumericScalarTypeResolver(): NumericScalarTypeResolver
     {
+        /** @var NumericScalarTypeResolver */
         return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(NumericScalarTypeResolver::class);
     }
     final public function setMetaQueryCompareByNumericValueOperatorEnumTypeResolver(MetaQueryCompareByNumericValueOperatorEnumTypeResolver $metaQueryCompareByNumericValueOperatorEnumTypeResolver): void
@@ -30,6 +31,7 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
     }
     final protected function getMetaQueryCompareByNumericValueOperatorEnumTypeResolver(): MetaQueryCompareByNumericValueOperatorEnumTypeResolver
     {
+        /** @var MetaQueryCompareByNumericValueOperatorEnumTypeResolver */
         return $this->metaQueryCompareByNumericValueOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByNumericValueOperatorEnumTypeResolver::class);
     }
 

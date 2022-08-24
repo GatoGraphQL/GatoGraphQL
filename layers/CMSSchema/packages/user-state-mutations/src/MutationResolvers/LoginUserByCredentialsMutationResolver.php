@@ -29,6 +29,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
+        /** @var UserTypeAPIInterface */
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
     final public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
@@ -37,6 +38,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     }
     final protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
     {
+        /** @var UserStateTypeMutationAPIInterface */
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 

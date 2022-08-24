@@ -101,6 +101,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
+        /** @var CommentObjectTypeResolver */
         return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
     }
     final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
@@ -109,6 +110,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
+        /** @var CustomPostUnionTypeResolver */
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
     final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
@@ -117,6 +119,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
+        /** @var GenericCustomPostObjectTypeResolver */
         return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
     }
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
@@ -125,6 +128,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
+        /** @var MediaObjectTypeResolver */
         return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
     }
     final public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
@@ -133,6 +137,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
+        /** @var PageObjectTypeResolver */
         return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
@@ -141,6 +146,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
+        /** @var PostTagObjectTypeResolver */
         return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
     }
     final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
@@ -149,6 +155,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
+        /** @var PostCategoryObjectTypeResolver */
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
     final public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
@@ -157,6 +164,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
     {
+        /** @var MenuObjectTypeResolver */
         return $this->menuObjectTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
     }
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
@@ -165,6 +173,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
+        /** @var PostObjectTypeResolver */
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     final public function setUserRoleObjectTypeResolver(UserRoleObjectTypeResolver $userRoleObjectTypeResolver): void
@@ -173,6 +182,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getUserRoleObjectTypeResolver(): UserRoleObjectTypeResolver
     {
+        /** @var UserRoleObjectTypeResolver */
         return $this->userRoleObjectTypeResolver ??= $this->instanceManager->getInstance(UserRoleObjectTypeResolver::class);
     }
     final public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver): void
@@ -181,6 +191,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getUserAvatarObjectTypeResolver(): UserAvatarObjectTypeResolver
     {
+        /** @var UserAvatarObjectTypeResolver */
         return $this->userAvatarObjectTypeResolver ??= $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
     }
     final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
@@ -189,6 +200,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
+        /** @var UserObjectTypeResolver */
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
     final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
@@ -197,6 +209,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {
+        /** @var CustomPostTypeRegistryInterface */
         return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
     }
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
@@ -205,6 +218,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
+        /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
     }
 

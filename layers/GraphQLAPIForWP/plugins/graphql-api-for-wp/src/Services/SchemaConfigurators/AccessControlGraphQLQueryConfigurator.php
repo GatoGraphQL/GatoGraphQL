@@ -26,6 +26,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
     final protected function getAccessControlBlock(): AccessControlBlock
     {
+        /** @var AccessControlBlock */
         return $this->accessControlBlock ??= $this->instanceManager->getInstance(AccessControlBlock::class);
     }
     final public function setBlockHelpers(BlockHelpers $blockHelpers): void
@@ -34,6 +35,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
     final protected function getBlockHelpers(): BlockHelpers
     {
+        /** @var BlockHelpers */
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
     final public function setAccessControlRuleBlockRegistry(AccessControlRuleBlockRegistryInterface $accessControlRuleBlockRegistry): void
@@ -42,6 +44,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
     final protected function getAccessControlRuleBlockRegistry(): AccessControlRuleBlockRegistryInterface
     {
+        /** @var AccessControlRuleBlockRegistryInterface */
         return $this->accessControlRuleBlockRegistry ??= $this->instanceManager->getInstance(AccessControlRuleBlockRegistryInterface::class);
     }
     final public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
@@ -50,6 +53,7 @@ class AccessControlGraphQLQueryConfigurator extends AbstractIndividualControlGra
     }
     final protected function getAccessControlManager(): AccessControlManagerInterface
     {
+        /** @var AccessControlManagerInterface */
         return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
     }
 

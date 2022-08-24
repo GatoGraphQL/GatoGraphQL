@@ -33,7 +33,7 @@ final class AdditionalIntegrationTestPluginsCommand extends AbstractSymplifyComm
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $additionalIntegrationTestPlugins = json_encode($this->additionalIntegrationTestPlugins);
+        $additionalIntegrationTestPlugins = (string)json_encode($this->additionalIntegrationTestPlugins);
 
         $this->symfonyStyle->writeln($additionalIntegrationTestPlugins);
 

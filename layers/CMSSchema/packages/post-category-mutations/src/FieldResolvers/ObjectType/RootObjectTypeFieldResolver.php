@@ -27,6 +27,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
+        /** @var PostObjectTypeResolver */
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     final public function setSetCategoriesOnPostMutationResolver(SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver): void
@@ -35,6 +36,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getSetCategoriesOnPostMutationResolver(): SetCategoriesOnPostMutationResolver
     {
+        /** @var SetCategoriesOnPostMutationResolver */
         return $this->setCategoriesOnPostMutationResolver ??= $this->instanceManager->getInstance(SetCategoriesOnPostMutationResolver::class);
     }
     final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
@@ -43,6 +45,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
+        /** @var PostCategoryObjectTypeResolver */
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
     final public function setRootSetCategoriesOnCustomPostFilterInputObjectTypeResolver(RootSetCategoriesOnCustomPostFilterInputObjectTypeResolver $rootSetCategoriesOnCustomPostFilterInputObjectTypeResolver): void
@@ -51,6 +54,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getRootSetCategoriesOnCustomPostFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver
     {
+        /** @var RootSetCategoriesOnCustomPostFilterInputObjectTypeResolver */
         return $this->rootSetCategoriesOnCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetCategoriesOnCustomPostFilterInputObjectTypeResolver::class);
     }
 

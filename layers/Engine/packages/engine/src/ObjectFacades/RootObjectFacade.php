@@ -12,6 +12,7 @@ class RootObjectFacade
     public static function getInstance(): Root
     {
         $containerBuilderFactory = App::getContainer();
+        /** @var Root */
         return $containerBuilderFactory->get(Root::class);
     }
 }

@@ -56,7 +56,7 @@ class RequestHelperService implements RequestHelperServiceInterface
     /**
      * Return the requested full URL
      *
-     * @param boolean $useHostRequestedByClient If true, get the host from user-provided HTTP_HOST, otherwise from the server-defined SERVER_NAME
+     * @param bool $useHostRequestedByClient If true, get the host from user-provided HTTP_HOST, otherwise from the server-defined SERVER_NAME
      */
     public function getRequestedFullURL(bool $useHostRequestedByClient = false): ?string
     {
@@ -66,7 +66,11 @@ class RequestHelperService implements RequestHelperServiceInterface
 
         $s = App::server("HTTPS") === "on" ? "s" : "";
         $sp = strtolower(App::server("SERVER_PROTOCOL"));
-        $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
+        $pos = strpos($sp, "/");
+        if ($pos === false) {
+            $pos = null;
+        }
+        $protocol = substr($sp, 0, $pos) . $s;
         /**
          * The default ports (80 for HTTP and 443 for HTTPS) must be ignored
          */

@@ -29,6 +29,7 @@ class LazyLoadHookSet extends AbstractHookSet
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
+        /** @var RequestHelperServiceInterface */
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
     final public function setLazy(Lazy $lazy): void
@@ -37,6 +38,7 @@ class LazyLoadHookSet extends AbstractHookSet
     }
     final protected function getLazy(): Lazy
     {
+        /** @var Lazy */
         return $this->lazy ??= $this->instanceManager->getInstance(Lazy::class);
     }
 

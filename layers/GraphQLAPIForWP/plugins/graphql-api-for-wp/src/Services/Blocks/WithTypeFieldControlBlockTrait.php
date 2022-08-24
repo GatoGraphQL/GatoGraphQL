@@ -28,6 +28,7 @@ trait WithTypeFieldControlBlockTrait
         $groupFieldsUnderTypeForPrint = $moduleConfiguration->groupFieldsUnderTypeForPrint();
         // For each class, obtain its namespacedTypeName
         $objectTypeResolvers = $this->getTypeRegistry()->getObjectTypeResolvers();
+        /** @var array<string,string> */
         $namespacedObjectTypeNameNames = [];
         foreach ($objectTypeResolvers as $objectTypeResolver) {
             $objectTypeResolverNamespacedName = $objectTypeResolver->getNamespacedTypeName();
@@ -35,6 +36,7 @@ trait WithTypeFieldControlBlockTrait
         }
         // For each interface, obtain its namespacedInterfaceName
         $interfaceTypeResolvers = $this->getTypeRegistry()->getInterfaceTypeResolvers();
+        /** @var array<string,string> */
         $namespacedInterfaceTypeNameNames = [];
         foreach ($interfaceTypeResolvers as $interfaceTypeResolver) {
             $interfaceTypeResolverNamespacedName = $interfaceTypeResolver->getNamespacedTypeName();
@@ -45,7 +47,9 @@ trait WithTypeFieldControlBlockTrait
             // The field is composed by the type namespaced name, and the field name, separated by "."
             // Extract these values
             $entry = explode(BlockConstants::TYPE_FIELD_SEPARATOR_FOR_DB, $selectedField);
+            /** @var string */
             $namespacedObjectTypeOrInterfaceTypeName = $entry[0];
+            /** @var string */
             $field = $entry[1];
             // It can either be a type, or an interface. If not, return the same element
             $objectTypeOrInterfaceTypeName =
@@ -62,6 +66,7 @@ trait WithTypeFieldControlBlockTrait
                 $typeFieldsForPrint[] = $objectTypeOrInterfaceTypeName . BlockConstants::TYPE_FIELD_SEPARATOR_FOR_PRINT . $field;
             }
         }
+        /** @var string[]|array<string,string[]> */
         return $typeFieldsForPrint;
     }
 }

@@ -17,6 +17,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
     }
     final protected function getSchemaConfigurationBlockCategory(): SchemaConfigurationBlockCategory
     {
+        /** @var SchemaConfigurationBlockCategory */
         return $this->schemaConfigurationBlockCategory ??= $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
     }
 

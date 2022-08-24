@@ -62,7 +62,7 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
                 str_replace(
                     $replaceFrom,
                     $replaceTo,
-                    json_encode($content)
+                    (string)json_encode($content)
                 ),
                 true
             );

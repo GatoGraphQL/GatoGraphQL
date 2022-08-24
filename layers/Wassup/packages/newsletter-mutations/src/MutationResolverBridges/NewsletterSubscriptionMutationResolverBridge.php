@@ -19,6 +19,7 @@ class NewsletterSubscriptionMutationResolverBridge extends AbstractFormComponent
     }
     final protected function getNewsletterSubscriptionMutationResolver(): NewsletterSubscriptionMutationResolver
     {
+        /** @var NewsletterSubscriptionMutationResolver */
         return $this->newsletterSubscriptionMutationResolver ??= $this->instanceManager->getInstance(NewsletterSubscriptionMutationResolver::class);
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\Admin\Tables\AbstractItemListTable;
 use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable;
 
 /**
@@ -48,6 +49,9 @@ class ModulesMenuPage extends AbstractTableMenuPage
         return self::SCREEN_OPTION_NAME;
     }
 
+    /**
+     * @return class-string<AbstractItemListTable>
+     */
     protected function getTableClass(): string
     {
         return ModuleListTable::class;

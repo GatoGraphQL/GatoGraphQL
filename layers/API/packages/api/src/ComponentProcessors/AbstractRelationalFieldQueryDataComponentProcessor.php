@@ -48,6 +48,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
     final protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {
+        /** @var QueryASTTransformationServiceInterface */
         return $this->queryASTTransformationService ??= $this->instanceManager->getInstance(QueryASTTransformationServiceInterface::class);
     }
 
@@ -421,6 +422,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $fragmentModelListNameFields[$fragmentModelListName][] = $field;
         }
 
+        /** @var string */
         $query = App::getState('query');
 
         /**

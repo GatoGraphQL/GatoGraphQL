@@ -21,6 +21,7 @@ class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService
     }
     final protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface
     {
+        /** @var EndpointExecuterRegistryInterface */
         return $this->customEndpointExecuterRegistry ??= $this->instanceManager->getInstance(EndpointExecuterRegistryInterface::class);
     }
 

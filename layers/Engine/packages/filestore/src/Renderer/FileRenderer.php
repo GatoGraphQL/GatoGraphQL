@@ -40,7 +40,7 @@ class FileRenderer implements FileRendererInterface
         }
         foreach ($fragment->getConfiguration() as $key => $replacement) {
             $value = $fragment->isJsonReplacement() ?
-                json_encode($replacement, $fragment->getJsonEncodeOptions()) :
+                (string)json_encode($replacement, $fragment->getJsonEncodeOptions()) :
                 $replacement;
             $contents = str_replace($key, $value, $contents);
         }

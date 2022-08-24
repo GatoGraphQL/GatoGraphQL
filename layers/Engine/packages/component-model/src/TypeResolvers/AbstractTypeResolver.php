@@ -29,6 +29,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     final protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
     {
+        /** @var SchemaNamespacingServiceInterface */
         return $this->schemaNamespacingService ??= $this->instanceManager->getInstance(SchemaNamespacingServiceInterface::class);
     }
     final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
@@ -37,6 +38,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
+        /** @var SchemaDefinitionServiceInterface */
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
@@ -45,6 +47,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
+        /** @var AttachableExtensionManagerInterface */
         return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
 
@@ -55,6 +58,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function getClassToNamespace(): string
     {
+        /** @var string */
         return get_called_class();
     }
 

@@ -27,6 +27,7 @@ class ValidateIsUserNotLoggedInDirectiveResolver extends AbstractValidateCheckpo
     }
     final protected function getUserNotLoggedInCheckpoint(): UserNotLoggedInCheckpoint
     {
+        /** @var UserNotLoggedInCheckpoint */
         return $this->userNotLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserNotLoggedInCheckpoint::class);
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\Module\ModuleInterface;
 
 /**
  * This class is hosted within the graphql-api-for-wp plugin, and not
@@ -50,6 +51,8 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
 
     /**
      * ExtensionInitializationConfiguration class for the Plugin
+     *
+     * @return class-string<ExtensionInitializationConfigurationInterface>
      */
     protected function getExtensionInitializationConfigurationClass(): ?string
     {
@@ -58,6 +61,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         if (!class_exists($pluginInitializationConfigurationClass)) {
             return null;
         }
+        /** @var class-string<ExtensionInitializationConfigurationInterface> */
         return $pluginInitializationConfigurationClass;
     }
 
@@ -91,7 +95,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
     /**
      * Add configuration for the Module classes
      *
-     * @return array<string,mixed> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,mixed> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {
@@ -101,7 +105,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
     /**
      * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Module` class which must not initialize their Schema services
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
     public function getSchemaModuleClassesToSkip(): array
     {

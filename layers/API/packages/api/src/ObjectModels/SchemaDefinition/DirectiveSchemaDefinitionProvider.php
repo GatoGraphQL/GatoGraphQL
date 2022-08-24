@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
-use PoP\Root\App;
-use PoPAPI\API\Schema\SchemaDefinition;
-use PoPAPI\API\Schema\SchemaDefinitionHelpers;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Root\App;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoPAPI\API\Schema\SchemaDefinition;
+use PoPAPI\API\Schema\SchemaDefinitionHelpers;
 
 class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider implements SchemaDefinitionProviderInterface
 {
@@ -39,6 +40,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
         }
 
         foreach (($schemaDefinition[SchemaDefinition::ARGS] ?? []) as $directiveArgName => &$directiveArgSchemaDefinition) {
+            /** @var TypeResolverInterface */
             $directiveArgTypeResolver = $directiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
 
             /**

@@ -18,6 +18,7 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
     }
     final protected function getEngine(): EngineInterface
     {
+        /** @var EngineInterface */
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 

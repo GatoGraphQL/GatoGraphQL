@@ -26,6 +26,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
+        /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 

@@ -310,7 +310,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             $user = $userObjectOrID;
         } else {
             $userID = $userObjectOrID;
-            $user = get_userdata($userID);
+            $user = get_userdata((int)$userID);
             if ($user === false) {
                 return null;
             }
@@ -351,6 +351,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     }
     public function getUserID(object $user): string|int
     {
+        /** @var WP_User $user */
         return $user->ID;
     }
 
@@ -361,7 +362,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
             $user = $userObjectOrID;
             $userID = $user->ID;
         } else {
-            $userID = $userObjectOrID;
+            $userID = (int)$userObjectOrID;
         }
         return get_author_posts_url($userID);
     }

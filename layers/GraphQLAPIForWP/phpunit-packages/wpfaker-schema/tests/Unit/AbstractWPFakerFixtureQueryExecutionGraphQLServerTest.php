@@ -12,6 +12,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnitForGraphQLAPI\WPFakerSchema\DataParsing\WordPressDataParser;
 use PHPUnitForGraphQLAPI\WPFakerSchema\MockFunctions\WordPressMockFunctionContainer;
 use PHPUnitForGraphQLAPI\WPFakerSchema\Seed\FakerWordPressDataSeeder;
+use PoP\Root\Module\ModuleInterface;
 
 use function Brain\faker;
 use function Brain\fakerReset;
@@ -136,7 +137,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
     }
 
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     protected static function getGraphQLServerModuleClasses(): array
     {

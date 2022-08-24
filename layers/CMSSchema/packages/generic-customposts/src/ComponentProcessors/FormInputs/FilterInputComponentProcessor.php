@@ -27,6 +27,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getGenericCustomPostEnumTypeResolver(): GenericCustomPostEnumTypeResolver
     {
+        /** @var GenericCustomPostEnumTypeResolver */
         return $this->genericCustomPostEnumTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostEnumTypeResolver::class);
     }
     final public function setGenericCustomPostTypesFilterInput(GenericCustomPostTypesFilterInput $genericCustomPostTypesFilterInput): void
@@ -35,6 +36,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getGenericCustomPostTypesFilterInput(): GenericCustomPostTypesFilterInput
     {
+        /** @var GenericCustomPostTypesFilterInput */
         return $this->genericCustomPostTypesFilterInput ??= $this->instanceManager->getInstance(GenericCustomPostTypesFilterInput::class);
     }
 

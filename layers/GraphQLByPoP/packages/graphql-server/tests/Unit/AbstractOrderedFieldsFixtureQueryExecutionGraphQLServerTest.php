@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
+use RuntimeException;
+
 abstract class AbstractOrderedFieldsFixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
     /**
@@ -11,8 +13,12 @@ abstract class AbstractOrderedFieldsFixtureQueryExecutionGraphQLServerTest exten
      */
     protected function doAssertFixtureGraphQLQueryExecution(string $expectedResponseFile, string $actualResponseContent): void
     {
+        $fileContents = file_get_contents($expectedResponseFile);
+        if ($fileContents === false) {
+            throw new RuntimeException(sprintf('Cannot read the contents of file \'%s\'', $expectedResponseFile));
+        }
         $this->assertSame(
-            json_encode(json_decode(file_get_contents($expectedResponseFile)), JSON_PRETTY_PRINT),
+            json_encode(json_decode($fileContents), JSON_PRETTY_PRINT),
             json_encode(json_decode($actualResponseContent), JSON_PRETTY_PRINT)
         );
     }

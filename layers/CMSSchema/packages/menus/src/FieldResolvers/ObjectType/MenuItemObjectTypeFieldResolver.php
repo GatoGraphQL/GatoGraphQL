@@ -33,6 +33,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
     {
+        /** @var MenuItemRuntimeRegistryInterface */
         return $this->menuItemRuntimeRegistry ??= $this->instanceManager->getInstance(MenuItemRuntimeRegistryInterface::class);
     }
     final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
@@ -41,6 +42,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
+        /** @var CMSHelperServiceInterface */
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
@@ -49,6 +51,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
+        /** @var URLScalarTypeResolver */
         return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
     }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
@@ -57,6 +60,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
+        /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -65,6 +69,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setMenuItemObjectTypeResolver(MenuItemObjectTypeResolver $menuItemObjectTypeResolver): void
@@ -73,6 +78,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getMenuItemObjectTypeResolver(): MenuItemObjectTypeResolver
     {
+        /** @var MenuItemObjectTypeResolver */
         return $this->menuItemObjectTypeResolver ??= $this->instanceManager->getInstance(MenuItemObjectTypeResolver::class);
     }
 

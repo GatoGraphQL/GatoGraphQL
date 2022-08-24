@@ -23,6 +23,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
     }
     final protected function getValidateIsUserLoggedInForDirectivesDirectiveResolver(): ValidateIsUserLoggedInForDirectivesDirectiveResolver
     {
+        /** @var ValidateIsUserLoggedInForDirectivesDirectiveResolver */
         return $this->validateIsUserLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
     }
 

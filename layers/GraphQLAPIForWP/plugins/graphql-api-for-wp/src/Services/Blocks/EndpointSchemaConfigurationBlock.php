@@ -35,6 +35,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     }
     final protected function getBlockRenderingHelpers(): BlockRenderingHelpers
     {
+        /** @var BlockRenderingHelpers */
         return $this->blockRenderingHelpers ??= $this->instanceManager->getInstance(BlockRenderingHelpers::class);
     }
     final public function setCPTUtils(CPTUtils $cptUtils): void
@@ -43,6 +44,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     }
     final protected function getCPTUtils(): CPTUtils
     {
+        /** @var CPTUtils */
         return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
     }
     final public function setEndpointBlockCategory(EndpointBlockCategory $endpointBlockCategory): void
@@ -51,6 +53,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     }
     final protected function getEndpointBlockCategory(): EndpointBlockCategory
     {
+        /** @var EndpointBlockCategory */
         return $this->endpointBlockCategory ??= $this->instanceManager->getInstance(EndpointBlockCategory::class);
     }
 

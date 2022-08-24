@@ -41,6 +41,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
 
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
+        /** @var TypeRegistryInterface */
         return $this->typeRegistry ??= InstanceManagerFacade::getInstance()->getInstance(TypeRegistryInterface::class);
     }
 

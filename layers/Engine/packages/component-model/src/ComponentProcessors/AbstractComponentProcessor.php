@@ -65,6 +65,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
+        /** @var ComponentPathHelpersInterface */
         return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
     final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
@@ -73,6 +74,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
+        /** @var ComponentFilterManagerInterface */
         return $this->componentFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
     }
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
@@ -81,6 +83,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
+        /** @var ComponentProcessorManagerInterface */
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
@@ -89,6 +92,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getNameResolver(): NameResolverInterface
     {
+        /** @var NameResolverInterface */
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
     final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
@@ -97,6 +101,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
+        /** @var DataloadHelperServiceInterface */
         return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -105,6 +110,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
+        /** @var RequestHelperServiceInterface */
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
     final public function setComponentPaths(ComponentPaths $componentPaths): void
@@ -113,6 +119,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentPaths(): ComponentPaths
     {
+        /** @var ComponentPaths */
         return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
@@ -121,6 +128,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
+        /** @var ComponentHelpersInterface */
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
@@ -502,6 +510,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsComponentTree`
         if ($this->isDescendantComponent($component_or_componentPath, $props)) {
             // It is a child component
+            /** @var Component */
             $att_component = $component_or_componentPath;
             $attComponentFullName = $this->getComponentHelpers()->getComponentFullName($att_component);
 
@@ -1261,7 +1270,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
     /**
-     * @return array<string,mixed>
+     * @return array<string|int,mixed>
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param array<string|int> $objectIDs
@@ -1430,10 +1439,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     }
                     $conditionalComponentFieldNodes[$conditionalRelationalComponentFieldNode] = $subconditionalComponentFieldNodes;
                 }
+                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
                 foreach ($conditionalComponentFieldNodes as $conditionComponentFieldNode) {
-                    /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                    /** @var Component[] */
                     $conditionalSubcomponents = $conditionalComponentFieldNodes[$conditionComponentFieldNode];
-                    /** @var Component[] $conditionalSubcomponents */
                     // Calculate those fields which are certainly to be propagated, and not part of the direct subcomponents
                     // Using this really ugly way because, for comparing components, using `array_diff` and `intersect` fail
                     for ($i = count($conditionalSubcomponents) - 1; $i >= 0; $i--) {
@@ -1500,6 +1509,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         if ($pos === false) {
                             continue;
                         }
+                        /** @var int $pos  */
                         array_splice($subcomponents, $pos, 1);
                     }
                 }
@@ -1567,10 +1577,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // If it has subcomponent components, integrate them under 'subcomponents'
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        /** @var ComponentFieldNodeInterface $subcomponentComponentFieldNode */
         foreach ($relationalSubcomponents as $subcomponentComponentFieldNode) {
-            /** @var ComponentFieldNodeInterface $subcomponentComponentFieldNode */
+            /** @var Component[] */
             $subcomponent_components = $relationalSubcomponents[$subcomponentComponentFieldNode];
-            /** @var Component[] $subcomponent_components */
             $subcomponent_components_data_properties = [
                 DataProperties::DIRECT_COMPONENT_FIELD_NODES => [],
                 DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES => new SplObjectStorage(),
@@ -1592,10 +1602,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]>|null */
                 $subcomponentConditionalFields = $subcomponent_component_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? null;
                 if ($subcomponentConditionalFields !== null) {
+                    /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
                     foreach ($subcomponentConditionalFields as $conditionComponentFieldNode) {
-                        /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                        /** @var ComponentFieldNodeInterface[] */
                         $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalFields[$conditionComponentFieldNode];
-                        /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldSplObjectStorage */
                         $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] = array_merge(
                             $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] ?? [],
                             $conditionalComponentFieldSplObjectStorage
@@ -1625,10 +1635,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $subcomponentConditionalFields = $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
             if ($subcomponentConditionalFields->count() > 0) {
                 $subcomponentsSubcomponentFieldNode[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();
+                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
                 foreach ($subcomponentConditionalFields as $conditionComponentFieldNode) {
-                    /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                    /** @var ComponentFieldNodeInterface[] */
                     $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalFields[$conditionComponentFieldNode];
-                    /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldSplObjectStorage */
                     $subcomponentsSubcomponentFieldNode[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] = array_merge(
                         $subcomponentsSubcomponentFieldNode[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] ?? [],
                         $conditionalComponentFieldSplObjectStorage

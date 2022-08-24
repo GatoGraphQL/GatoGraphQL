@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
+use function file_exists;
+use function file_get_contents;
+use function json_decode;
+
 use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
-
-use function file_get_contents;
-use function file_exists;
-use function json_decode;
+use RuntimeException;
 
 abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
@@ -57,10 +58,27 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
             $variables = [];
             $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
             if (file_exists($graphQLVariablesFile)) {
+                $fileContents = file_get_contents($graphQLVariablesFile);
+                if ($fileContents === false) {
+                    throw new RuntimeException(
+                        sprintf(
+                            'File "%s" cannot be read',
+                            $graphQLVariablesFile
+                        )
+                    );
+                }
                 $variables = json_decode(
-                    file_get_contents($graphQLVariablesFile),
+                    $fileContents,
                     true
                 );
+                if (!is_array($variables)) {
+                    throw new RuntimeException(
+                        sprintf(
+                            'Decoding the JSON inside file "%s" failed',
+                            $graphQLVariablesFile
+                        )
+                    );
+                }
             }
 
             $dataName = $fileName;

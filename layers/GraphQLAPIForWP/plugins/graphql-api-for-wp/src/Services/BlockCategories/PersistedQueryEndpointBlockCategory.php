@@ -18,6 +18,7 @@ class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
     }
     final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
         return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
 

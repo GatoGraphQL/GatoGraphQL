@@ -23,9 +23,11 @@ trait ObjectTypeOrDirectiveResolverTrait
     {
         $fieldOrDirectiveArgNameDefaultValues = [];
         foreach ($fieldOrDirectiveArgsSchemaDefinition as $fieldOrDirectiveSchemaDefinitionArg) {
+            /** @var string */
+            $fieldOrDirectiveName = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME];
             if (\array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldOrDirectiveSchemaDefinitionArg)) {
                 // If it has a default value, set it
-                $fieldOrDirectiveArgNameDefaultValues[$fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME]] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
+                $fieldOrDirectiveArgNameDefaultValues[$fieldOrDirectiveName] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
                 continue;
             }
             if (
@@ -34,7 +36,7 @@ trait ObjectTypeOrDirectiveResolverTrait
                 $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface
                 && !($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false)
             ) {
-                $fieldOrDirectiveArgNameDefaultValues[$fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME]] = new stdClass();
+                $fieldOrDirectiveArgNameDefaultValues[$fieldOrDirectiveName] = new stdClass();
             }
         }
         return $fieldOrDirectiveArgNameDefaultValues;

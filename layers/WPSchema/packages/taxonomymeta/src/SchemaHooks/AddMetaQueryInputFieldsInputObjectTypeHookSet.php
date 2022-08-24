@@ -20,6 +20,7 @@ class AddMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractAddMetaQuery
     }
     final protected function getTaxonomyMetaQueryInputObjectTypeResolver(): TaxonomyMetaQueryInputObjectTypeResolver
     {
+        /** @var TaxonomyMetaQueryInputObjectTypeResolver */
         return $this->taxonomyMetaQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomyMetaQueryInputObjectTypeResolver::class);
     }
 

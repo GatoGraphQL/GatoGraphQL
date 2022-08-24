@@ -38,6 +38,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getRootPostsFilterInputObjectTypeResolver(): RootPostsFilterInputObjectTypeResolver
     {
+        /** @var RootPostsFilterInputObjectTypeResolver */
         return $this->rootPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootPostsFilterInputObjectTypeResolver::class);
     }
     final public function setPostPaginationInputObjectTypeResolver(PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver): void
@@ -46,6 +47,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getPostPaginationInputObjectTypeResolver(): PostPaginationInputObjectTypeResolver
     {
+        /** @var PostPaginationInputObjectTypeResolver */
         return $this->postPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostPaginationInputObjectTypeResolver::class);
     }
     final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver): void
@@ -54,6 +56,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
     {
+        /** @var CustomPostSortInputObjectTypeResolver */
         return $this->customPostSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
@@ -62,6 +65,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
+        /** @var IntScalarTypeResolver */
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
@@ -70,6 +74,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
+        /** @var PostObjectTypeResolver */
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
@@ -78,6 +83,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
+        /** @var PostTypeAPIInterface */
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
 

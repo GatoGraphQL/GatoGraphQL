@@ -7,6 +7,7 @@ namespace PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPCMSSchema\UserRolesWP\RelationalTypeDataLoaders\ObjectType\UserRoleTypeDataLoader;
+use WP_Role;
 
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {
@@ -18,6 +19,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getUserRoleTypeDataLoader(): UserRoleTypeDataLoader
     {
+        /** @var UserRoleTypeDataLoader */
         return $this->userRoleTypeDataLoader ??= $this->instanceManager->getInstance(UserRoleTypeDataLoader::class);
     }
 
@@ -33,6 +35,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getID(object $object): string|int|null
     {
+        /** @var WP_Role */
         $role = $object;
         return $role->name;
     }

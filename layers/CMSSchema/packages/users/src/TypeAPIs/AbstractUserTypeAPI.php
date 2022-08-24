@@ -19,6 +19,7 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
     }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
+        /** @var CMSHelperServiceInterface */
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 

@@ -19,6 +19,7 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
+        /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 

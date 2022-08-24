@@ -26,6 +26,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     }
     final protected function getCMSService(): CMSServiceInterface
     {
+        /** @var CMSServiceInterface */
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
@@ -34,6 +35,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     }
     final protected function getNameResolver(): NameResolverInterface
     {
+        /** @var NameResolverInterface */
         return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
     }
 

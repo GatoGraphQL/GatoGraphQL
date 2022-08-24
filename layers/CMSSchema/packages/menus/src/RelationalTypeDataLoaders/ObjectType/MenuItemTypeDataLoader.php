@@ -17,6 +17,7 @@ class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     final protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
     {
+        /** @var MenuItemRuntimeRegistryInterface */
         return $this->menuItemRuntimeRegistry ??= $this->instanceManager->getInstance(MenuItemRuntimeRegistryInterface::class);
     }
 

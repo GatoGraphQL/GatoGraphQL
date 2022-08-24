@@ -12,7 +12,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 abstract class AbstractCodeThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest
 {
     /**
-     * @return array<string,array<string>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
+     * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
     protected function getPluginNameEntries(): array
     {

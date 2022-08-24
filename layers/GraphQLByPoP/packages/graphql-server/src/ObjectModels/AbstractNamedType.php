@@ -18,6 +18,7 @@ abstract class AbstractNamedType extends AbstractSchemaDefinitionReferenceObject
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
+        /** @var string[] */
         $namedTypeExtensionsSchemaDefinitionPath = array_merge(
             $schemaDefinitionPath,
             [

@@ -25,6 +25,7 @@ class CacheControlManager extends UpstreamCacheControlManager
     }
     final protected function getMandatoryDirectivesForFieldsRootTypeEntryDuplicator(): MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
     {
+        /** @var MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface */
         return $this->mandatoryDirectivesForFieldsRootTypeEntryDuplicator ??= $this->instanceManager->getInstance(MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface::class);
     }
 

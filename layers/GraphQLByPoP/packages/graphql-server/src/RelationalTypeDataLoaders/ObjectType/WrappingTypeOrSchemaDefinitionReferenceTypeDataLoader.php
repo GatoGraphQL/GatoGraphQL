@@ -26,6 +26,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     }
     final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
+        /** @var SchemaDefinitionReferenceRegistryInterface */
         return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
     }
     final public function setGraphQLSyntaxService(GraphQLSyntaxServiceInterface $graphQLSyntaxService): void
@@ -34,6 +35,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     }
     final protected function getGraphQLSyntaxService(): GraphQLSyntaxServiceInterface
     {
+        /** @var GraphQLSyntaxServiceInterface */
         return $this->graphQLSyntaxService ??= $this->instanceManager->getInstance(GraphQLSyntaxServiceInterface::class);
     }
     final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
@@ -42,6 +44,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     }
     final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
+        /** @var ObjectDictionaryInterface */
         return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
     }
 
@@ -53,6 +56,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
      */
     public function getObjects(array $ids): array
     {
+        /** @var string[] $ids */
         return array_map(
             $this->getWrappingTypeOrSchemaDefinitionReferenceObject(...),
             $ids

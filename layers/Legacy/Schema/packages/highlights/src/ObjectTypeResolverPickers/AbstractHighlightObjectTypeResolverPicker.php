@@ -19,6 +19,7 @@ abstract class AbstractHighlightObjectTypeResolverPicker extends AbstractObjectT
     }
     final protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
     {
+        /** @var HighlightObjectTypeResolver */
         return $this->highlightObjectTypeResolver ??= $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
     }
     

@@ -23,6 +23,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     }
     final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
     {
+        /** @var ObjectSerializationManagerInterface */
         return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
     }
 

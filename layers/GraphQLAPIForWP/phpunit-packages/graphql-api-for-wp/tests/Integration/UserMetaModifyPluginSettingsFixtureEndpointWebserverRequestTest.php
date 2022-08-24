@@ -30,7 +30,7 @@ class UserMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        $dataName = $this->dataName();
+        $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':1')) {
             return [
                 '/.*name/',

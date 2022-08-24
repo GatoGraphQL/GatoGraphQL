@@ -24,6 +24,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
+        /** @var PostObjectTypeResolver */
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
     final public function setSetTagsOnPostMutationResolver(SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver): void
@@ -32,6 +33,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getSetTagsOnPostMutationResolver(): SetTagsOnPostMutationResolver
     {
+        /** @var SetTagsOnPostMutationResolver */
         return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
     }
     final public function setRootSetTagsOnCustomPostFilterInputObjectTypeResolver(RootSetTagsOnCustomPostFilterInputObjectTypeResolver $rootSetTagsOnCustomPostFilterInputObjectTypeResolver): void
@@ -40,6 +42,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getRootSetTagsOnCustomPostFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
     {
+        /** @var RootSetTagsOnCustomPostFilterInputObjectTypeResolver */
         return $this->rootSetTagsOnCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetTagsOnCustomPostFilterInputObjectTypeResolver::class);
     }
 

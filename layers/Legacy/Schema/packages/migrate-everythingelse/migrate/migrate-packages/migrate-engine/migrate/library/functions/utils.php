@@ -3,7 +3,7 @@
 function removeScheme($domain)
 {
     $arr = explode("//", $domain);
-    return count($arr) == 1 ? $arr[0] : $arr[1];
+    return count($arr) === 1 ? $arr[0] : $arr[1];
 }
 
 function arrayFlatten(array $array, bool $firstLevelOnly = false)

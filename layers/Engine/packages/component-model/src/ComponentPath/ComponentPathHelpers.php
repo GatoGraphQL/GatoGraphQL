@@ -27,6 +27,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
+        /** @var ComponentPathManagerInterface */
         return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
@@ -35,6 +36,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
+        /** @var ComponentHelpersInterface */
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
@@ -74,7 +76,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
     }
 
     /**
-     * @return array<string[]>
+     * @return array<array<Component|null>>
      */
     public function getComponentPaths(): array
     {
@@ -94,7 +96,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
         // Check that the last character is ".", to avoid toplevel1 to be removed
         $paths = array_filter(
             $paths,
-            function ($item) use ($paths): bool {
+            function (string $item) use ($paths): bool {
                 foreach ($paths as $path) {
                     if (strlen($item) > strlen($path) && str_starts_with($item, $path) && $item[strlen($path)] == ComponentPath::COMPONENT_SEPARATOR) {
                         return false;

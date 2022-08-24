@@ -22,6 +22,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
+        /** @var CustomPostTypeAPIInterface */
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
     final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
@@ -30,6 +31,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
     }
     final protected function getFilterCustomPostStatusEnumTypeResolver(): FilterCustomPostStatusEnumTypeResolver
     {
+        /** @var FilterCustomPostStatusEnumTypeResolver */
         return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
     }
 

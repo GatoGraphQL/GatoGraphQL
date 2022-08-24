@@ -19,6 +19,7 @@ class QueryASTTransformationServiceTest extends AbstractTestCase
 {
     protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {
+        /** @var QueryASTTransformationServiceInterface */
         return $this->getService(QueryASTTransformationServiceInterface::class);
     }
 

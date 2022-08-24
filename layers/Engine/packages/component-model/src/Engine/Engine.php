@@ -91,6 +91,7 @@ class Engine implements EngineInterface
     }
     final public function getPersistentCache(): PersistentCacheInterface
     {
+        /** @var PersistentCacheInterface */
         return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
     }
     final public function setDataStructureManager(DataStructureManagerInterface $dataStructureManager): void
@@ -99,6 +100,7 @@ class Engine implements EngineInterface
     }
     final protected function getDataStructureManager(): DataStructureManagerInterface
     {
+        /** @var DataStructureManagerInterface */
         return $this->dataStructureManager ??= $this->instanceManager->getInstance(DataStructureManagerInterface::class);
     }
     final public function setModelInstance(ModelInstanceInterface $modelInstance): void
@@ -107,6 +109,7 @@ class Engine implements EngineInterface
     }
     final protected function getModelInstance(): ModelInstanceInterface
     {
+        /** @var ModelInstanceInterface */
         return $this->modelInstance ??= $this->instanceManager->getInstance(ModelInstanceInterface::class);
     }
     final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
@@ -115,6 +118,7 @@ class Engine implements EngineInterface
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
+        /** @var ComponentPathHelpersInterface */
         return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
     }
     final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
@@ -123,6 +127,7 @@ class Engine implements EngineInterface
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
+        /** @var ComponentPathManagerInterface */
         return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
     }
     final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
@@ -131,6 +136,7 @@ class Engine implements EngineInterface
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
+        /** @var ComponentFilterManagerInterface */
         return $this->componentFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
     }
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
@@ -139,6 +145,7 @@ class Engine implements EngineInterface
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
+        /** @var ComponentProcessorManagerInterface */
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
     final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
@@ -147,6 +154,7 @@ class Engine implements EngineInterface
     }
     final protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
+        /** @var DataloadHelperServiceInterface */
         return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
     }
     final public function setEntryComponentManager(EntryComponentManagerInterface $entryComponentManager): void
@@ -155,6 +163,7 @@ class Engine implements EngineInterface
     }
     final protected function getEntryComponentManager(): EntryComponentManagerInterface
     {
+        /** @var EntryComponentManagerInterface */
         return $this->entryComponentManager ??= $this->instanceManager->getInstance(EntryComponentManagerInterface::class);
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -163,6 +172,7 @@ class Engine implements EngineInterface
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
+        /** @var RequestHelperServiceInterface */
         return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
     final public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
@@ -171,6 +181,7 @@ class Engine implements EngineInterface
     }
     final protected function getApplicationInfo(): ApplicationInfoInterface
     {
+        /** @var ApplicationInfoInterface */
         return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
@@ -179,6 +190,7 @@ class Engine implements EngineInterface
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
+        /** @var ComponentHelpersInterface */
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
     final public function setFeedbackEntryManager(FeedbackEntryManagerInterface $feedbackEntryService): void
@@ -187,6 +199,7 @@ class Engine implements EngineInterface
     }
     final protected function getFeedbackEntryManager(): FeedbackEntryManagerInterface
     {
+        /** @var FeedbackEntryManagerInterface */
         return $this->feedbackEntryService ??= $this->instanceManager->getInstance(FeedbackEntryManagerInterface::class);
     }
     final public function setDatabaseEntryManager(DatabaseEntryManagerInterface $databaseEntryManager): void
@@ -195,6 +208,7 @@ class Engine implements EngineInterface
     }
     final protected function getDatabaseEntryManager(): DatabaseEntryManagerInterface
     {
+        /** @var DatabaseEntryManagerInterface */
         return $this->databaseEntryManager ??= $this->instanceManager->getInstance(DatabaseEntryManagerInterface::class);
     }
 
@@ -269,7 +283,7 @@ class Engine implements EngineInterface
             $moduleInfo->getRand(),
             $moduleInfo->getTime(),
         );
-        $commoncode = str_replace($differentiators, '', json_encode($engineState->data));
+        $commoncode = str_replace($differentiators, '', (string)json_encode($engineState->data));
 
         /**
          * Also replace all those tags with content that, even if it's different,
@@ -1372,7 +1386,14 @@ class Engine implements EngineInterface
                     // Store the ids under $data under key dataload_name => id
                     $directComponentFieldNodes = $data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [];
                     $conditionalComponentFieldNodesSplObjectStorage = $data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
-                    $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $relationalTypeResolver, $relationalTypeOutputKey, $typeDBObjectIDs, $directComponentFieldNodes, $conditionalComponentFieldNodesSplObjectStorage);
+                    $this->combineIDsDatafields(
+                        $engineState->relationalTypeOutputKeyIDFieldSets,
+                        $relationalTypeResolver,
+                        $relationalTypeOutputKey,
+                        $typeDBObjectIDs,
+                        $directComponentFieldNodes,
+                        $conditionalComponentFieldNodesSplObjectStorage,
+                    );
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
                     $this->initializeTypeResolverEntry($engineState->dbdata, $relationalTypeOutputKey, $component_path_key);
@@ -1400,8 +1421,14 @@ class Engine implements EngineInterface
                         $extend_conditional_data_fields = $extend_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
                         $extend_ids = $extend_data_properties[DataProperties::IDS];
                         $extend_typeResolver = $extend_data_properties[DataProperties::RESOLVER];
-
-                        $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $extend_typeResolver, $extendTypeOutputKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
+                        $this->combineIDsDatafields(
+                            $engineState->relationalTypeOutputKeyIDFieldSets,
+                            $extend_typeResolver,
+                            $extendTypeOutputKey,
+                            $extend_ids,
+                            $extend_data_fields,
+                            $extend_conditional_data_fields,
+                        );
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
                         $this->initializeTypeResolverEntry($engineState->dbdata, $extendTypeOutputKey, $component_path_key);
@@ -1926,14 +1953,18 @@ class Engine implements EngineInterface
                  * Then, whenever it's a union type data resolver, we obtain the values
                  * for the relationship under this other object.
                  */
+                /** @var array<string|int,string> */
                 $typedSubcomponentIDs = [];
                 /**
                  * Get the types for all of the IDs all at once.
                  * Flatten 3 levels: dbName => typeOutputKey => id => ...
+                 *
+                 * @var array<string|int>
                  */
                 $allSubcomponentIDs = array_values(array_unique(
                     GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
                 ));
+                /** @var array<string|int> */
                 $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
                 // Create a map, from ID to TypedID
                 for ($i = 0; $i < count($allSubcomponentIDs); $i++) {
@@ -1982,6 +2013,7 @@ class Engine implements EngineInterface
                                     fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
+                            /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
                             $id_subcomponent_conditional_fields_storage = new SplObjectStorage();
                             foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
                                 /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
@@ -2002,11 +2034,24 @@ class Engine implements EngineInterface
                             $id_subcomponent_direct_fields = $subcomponent_direct_fields;
                             $id_subcomponent_conditional_fields_storage = $subcomponent_conditional_fields_storage;
                         }
-                        // Important: do ALWAYS execute the lines below, even if $id_subcomponent_direct_fields is empty
-                        // That is because we can load additional data for an object that was already loaded in a previous iteration
-                        // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
-                        // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
-                        $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $subcomponentTypeResolver, $subcomponentTypeOutputKey, array($field_id), $id_subcomponent_direct_fields, $id_subcomponent_conditional_fields_storage);
+
+                        /**
+                         * Important: do ALWAYS execute the lines below, even if
+                         * $id_subcomponent_direct_fields is empty.
+                         * That is because we can load additional data for an object
+                         * that was already loaded in a previous iteration.
+                         * Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
+                         * In this case, property "title" at the end would not be fetched otherwise
+                         * (that post was already loaded at the beginning)
+                         */
+                        $this->combineIDsDatafields(
+                            $engineState->relationalTypeOutputKeyIDFieldSets,
+                            $subcomponentTypeResolver,
+                            $subcomponentTypeOutputKey,
+                            array($field_id),
+                            $id_subcomponent_direct_fields,
+                            $id_subcomponent_conditional_fields_storage,
+                        );
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
                     $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(

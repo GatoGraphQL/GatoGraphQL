@@ -17,6 +17,7 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvider exten
     }
     final protected function getCustomEndpointGraphQLQueryResolutionEndpointExecuter(): CustomEndpointGraphQLQueryResolutionEndpointExecuter
     {
+        /** @var CustomEndpointGraphQLQueryResolutionEndpointExecuter */
         return $this->customEndpointGraphQLQueryResolutionEndpointExecuter ??= $this->instanceManager->getInstance(CustomEndpointGraphQLQueryResolutionEndpointExecuter::class);
     }
 

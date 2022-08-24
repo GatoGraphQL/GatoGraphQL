@@ -25,6 +25,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     }
     final protected function getCustomPostModeratedStatusEnumTypeResolver(): CustomPostModeratedStatusEnumTypeResolver
     {
+        /** @var CustomPostModeratedStatusEnumTypeResolver */
         return $this->customPostModeratedStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostModeratedStatusEnumTypeResolver::class);
     }
     final public function setCustomPostUnmoderatedStatusEnumTypeResolver(CustomPostUnmoderatedStatusEnumTypeResolver $customPostUnmoderatedStatusEnumTypeResolver): void
@@ -33,6 +34,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     }
     final protected function getCustomPostUnmoderatedStatusEnumTypeResolver(): CustomPostUnmoderatedStatusEnumTypeResolver
     {
+        /** @var CustomPostUnmoderatedStatusEnumTypeResolver */
         return $this->customPostUnmoderatedStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnmoderatedStatusEnumTypeResolver::class);
     }
 

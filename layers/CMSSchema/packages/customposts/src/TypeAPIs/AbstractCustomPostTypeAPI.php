@@ -19,6 +19,7 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
     }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
+        /** @var CMSHelperServiceInterface */
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 

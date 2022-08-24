@@ -56,6 +56,7 @@ class FeedbackItemResolution
 
     final public function getFeedbackItemProvider(): FeedbackItemProviderInterface
     {
+        /** @var FeedbackItemProviderInterface */
         return InstanceManagerFacade::getInstance()->getInstance($this->feedbackProviderServiceClass);
     }
 

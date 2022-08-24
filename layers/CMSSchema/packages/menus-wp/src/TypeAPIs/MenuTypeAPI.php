@@ -35,6 +35,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
      */
     public function getMenuItems(string|int|object $menuObjectOrID): array
     {
+        /** @var string|int|WP_Term $menuObjectOrID */
         $menuItems = wp_get_nav_menu_items($menuObjectOrID);
         if ($menuItems === false) {
             return [];
@@ -81,6 +82,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         if ($menuID === null) {
             return null;
         }
+        /** @var WP_Term|null */
         return $this->getMenu($menuID);
     }
 

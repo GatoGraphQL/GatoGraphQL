@@ -51,6 +51,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
+        /** @var string|int|float|bool $inputValue */
 
         /**
          * Type ID in GraphQL spec: only String or Int allowed.

@@ -40,6 +40,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
     final protected function getSettingsNormalizer(): SettingsNormalizerInterface
     {
+        /** @var SettingsNormalizerInterface */
         return $this->settingsNormalizer ??= $this->instanceManager->getInstance(SettingsNormalizerInterface::class);
     }
 

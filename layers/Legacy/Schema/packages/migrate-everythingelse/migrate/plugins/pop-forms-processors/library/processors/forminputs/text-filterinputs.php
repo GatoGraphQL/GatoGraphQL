@@ -26,6 +26,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
@@ -34,6 +35,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
+        /** @var SearchFilterInput */
         return $this->searchFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
     }
     final public function setNameFilterInput(NameFilterInput $nameFilterInput): void
@@ -42,6 +44,7 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     }
     final protected function getNameFilterInput(): NameFilterInput
     {
+        /** @var NameFilterInput */
         return $this->nameFilterInput ??= $this->instanceManager->getInstance(NameFilterInput::class);
     }
 

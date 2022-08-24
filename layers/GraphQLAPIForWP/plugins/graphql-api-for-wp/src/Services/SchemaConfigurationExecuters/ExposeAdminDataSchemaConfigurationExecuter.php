@@ -20,6 +20,7 @@ class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDi
     }
     final protected function getSchemaConfigExposeAdminDataBlock(): SchemaConfigExposeAdminDataBlock
     {
+        /** @var SchemaConfigExposeAdminDataBlock */
         return $this->schemaConfigExposeAdminDataBlock ??= $this->instanceManager->getInstance(SchemaConfigExposeAdminDataBlock::class);
     }
 

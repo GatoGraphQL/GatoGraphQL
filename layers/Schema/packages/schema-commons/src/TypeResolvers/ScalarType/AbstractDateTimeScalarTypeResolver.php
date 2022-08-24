@@ -37,6 +37,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
     ): string|int|float|bool|object|null {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrors();
         $this->validateIsString($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+        /** @var string $inputValue */
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
             return null;
         }
@@ -48,7 +49,11 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
          */
         foreach ($this->getDateTimeInputFormats() as $format) {
             $dt = DateTime::createFromFormat($format, $inputValue);
-            if ($dt === false || array_sum($dt::getLastErrors())) {
+            if ($dt === false) {
+                continue;
+            }
+            $lastErrors = $dt::getLastErrors();
+            if ($lastErrors !== false && array_sum($lastErrors)) {
                 continue;
             }
             return $dt;

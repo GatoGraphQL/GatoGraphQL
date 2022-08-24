@@ -20,6 +20,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     }
     final protected function getUnsubscribeFromTagMutationResolver(): UnsubscribeFromTagMutationResolver
     {
+        /** @var UnsubscribeFromTagMutationResolver */
         return $this->unsubscribeFromTagMutationResolver ??= $this->instanceManager->getInstance(UnsubscribeFromTagMutationResolver::class);
     }
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
@@ -28,6 +29,7 @@ class UnsubscribeFromTagMutationResolverBridge extends AbstractTagUpdateUserMeta
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
+        /** @var PostTagTypeAPIInterface */
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 

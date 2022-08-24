@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\APIClients;
 
 use PoP\ComponentModel\Configuration\RequestHelpers;
+use PoP\Root\Exception\ShouldNotHappenException;
 
 trait ClientTrait
 {
@@ -48,6 +49,8 @@ trait ClientTrait
      */
     abstract protected function getEndpointURLOrURLPath(): string;
 
+    abstract protected function __(string $text, string $domain = 'default'): string;
+
     /**
      * HTML to print the client
      */
@@ -60,6 +63,14 @@ trait ClientTrait
         $assetRelativePath = $this->getClientRelativePath();
         $file = $this->getModuleBaseDir() . $assetRelativePath . '/' . $this->getIndexFilename();
         $fileContents = \file_get_contents($file, true);
+        if ($fileContents === false) {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Cannot read the contents of file \'%s\''),
+                    $file
+                )
+            );
+        }
         $jsFileName = $this->getJSFilename();
         /**
          * Relative asset paths do not work, since the location of the JS/CSS file is

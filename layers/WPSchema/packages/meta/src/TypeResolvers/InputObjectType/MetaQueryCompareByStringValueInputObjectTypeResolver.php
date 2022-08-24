@@ -22,6 +22,7 @@ class MetaQueryCompareByStringValueInputObjectTypeResolver extends AbstractInput
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setMetaQueryCompareByStringValueOperatorEnumTypeResolver(MetaQueryCompareByStringValueOperatorEnumTypeResolver $metaQueryCompareByStringValueOperatorEnumTypeResolver): void
@@ -30,6 +31,7 @@ class MetaQueryCompareByStringValueInputObjectTypeResolver extends AbstractInput
     }
     final protected function getMetaQueryCompareByStringValueOperatorEnumTypeResolver(): MetaQueryCompareByStringValueOperatorEnumTypeResolver
     {
+        /** @var MetaQueryCompareByStringValueOperatorEnumTypeResolver */
         return $this->metaQueryCompareByStringValueOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByStringValueOperatorEnumTypeResolver::class);
     }
 

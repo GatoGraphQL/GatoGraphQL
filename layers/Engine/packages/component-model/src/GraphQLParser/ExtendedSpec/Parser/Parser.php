@@ -31,6 +31,7 @@ class Parser extends AbstractParser
     }
     final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
     {
+        /** @var MetaDirectiveRegistryInterface */
         return $this->metaDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(MetaDirectiveRegistryInterface::class);
     }
     final public function setDynamicVariableDefinerDirectiveRegistry(DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry): void
@@ -39,6 +40,7 @@ class Parser extends AbstractParser
     }
     final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
     {
+        /** @var DynamicVariableDefinerDirectiveRegistryInterface */
         return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
     }
     final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
@@ -47,6 +49,7 @@ class Parser extends AbstractParser
     }
     final protected function getDirectiveRegistry(): DirectiveRegistryInterface
     {
+        /** @var DirectiveRegistryInterface */
         return $this->directiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DirectiveRegistryInterface::class);
     }
 

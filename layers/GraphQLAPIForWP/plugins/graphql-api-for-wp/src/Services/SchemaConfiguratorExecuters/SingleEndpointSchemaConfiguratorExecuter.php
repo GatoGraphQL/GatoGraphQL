@@ -35,6 +35,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
+        /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
     final public function setSingleEndpointSchemaConfigurator(SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator): void
@@ -43,6 +44,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
     final protected function getSingleEndpointSchemaConfigurator(): SingleEndpointSchemaConfigurator
     {
+        /** @var SingleEndpointSchemaConfigurator */
         return $this->singleEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(SingleEndpointSchemaConfigurator::class);
     }
     final public function setGraphQLEndpointHandler(GraphQLEndpointHandler $graphQLEndpointHandler): void
@@ -51,6 +53,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
     final protected function getGraphQLEndpointHandler(): GraphQLEndpointHandler
     {
+        /** @var GraphQLEndpointHandler */
         return $this->graphQLEndpointHandler ??= $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
     }
 

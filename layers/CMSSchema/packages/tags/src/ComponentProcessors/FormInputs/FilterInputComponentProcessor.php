@@ -32,6 +32,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
+        /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -40,6 +41,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
+        /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setTagSlugsFilterInput(TagSlugsFilterInput $tagSlugsFilterInput): void
@@ -48,6 +50,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getTagSlugsFilterInput(): TagSlugsFilterInput
     {
+        /** @var TagSlugsFilterInput */
         return $this->tagSlugsFilterInput ??= $this->instanceManager->getInstance(TagSlugsFilterInput::class);
     }
     final public function setTagIDsFilterInput(TagIDsFilterInput $tagIDsFilterInput): void
@@ -56,6 +59,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getTagIDsFilterInput(): TagIDsFilterInput
     {
+        /** @var TagIDsFilterInput */
         return $this->tagIDsFilterInput ??= $this->instanceManager->getInstance(TagIDsFilterInput::class);
     }
 

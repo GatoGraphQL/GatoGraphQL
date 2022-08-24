@@ -92,7 +92,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
      */
     public function getPage(int|string $id): ?object
     {
-        $page = get_post($id);
+        $page = get_post((int)$id);
         if (!$page || $page->post_type !== 'page') {
             return null;
         }
@@ -178,6 +178,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
 
     public function getPageId(object $page): string|int
     {
+        /** @var WP_Post $page */
         return $page->ID;
     }
 }

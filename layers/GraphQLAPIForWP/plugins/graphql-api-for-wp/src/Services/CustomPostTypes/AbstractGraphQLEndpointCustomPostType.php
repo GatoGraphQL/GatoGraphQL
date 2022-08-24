@@ -21,6 +21,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     }
     final protected function getBlockHelpers(): BlockHelpers
     {
+        /** @var BlockHelpers */
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 

@@ -22,6 +22,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
     }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
+        /** @var SchemaDefinitionServiceInterface */
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 

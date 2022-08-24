@@ -49,7 +49,10 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     final protected function getDirectiveResolvers(): array
     {
         return array_map(
-            $this->getInstanceManager()->getInstance(...),
+            function (string $directiveResolverClass): DirectiveResolverInterface {
+                /** @var DirectiveResolverInterface */
+                return $this->getInstanceManager()->getInstance($directiveResolverClass);
+            },
             $this->getDirectiveResolverClasses()
         );
     }
@@ -57,7 +60,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     /**
      * Remove directiveName "translate" if the user is not logged in
      *
-     * @return string[]
+     * @return array<class-string<DirectiveResolverInterface>>
      */
     protected function getDirectiveResolverClasses(): array
     {

@@ -28,7 +28,11 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
 
     public function getMediaItemSrc(string|int $media_id): ?string
     {
-        return \wp_get_attachment_url($media_id);
+        $url = \wp_get_attachment_url((int)$media_id);
+        if ($url === false) {
+            return null;
+        }
+        return $url;
     }
 
     public function getImageSrc(string|int $image_id, ?string $size = null): ?string
@@ -42,7 +46,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
 
     public function getImageSrcSet(string|int $image_id, ?string $size = null): ?string
     {
-        $srcSet = \wp_get_attachment_image_srcset($image_id, $size);
+        $srcSet = \wp_get_attachment_image_srcset((int)$image_id, $size);
         if ($srcSet === false) {
             return null;
         }
@@ -55,8 +59,9 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         if ($imageProperties === null) {
             return null;
         }
-        $imageSize = [$imageProperties['width'], $imageProperties['height']];
-        $sizes = \wp_calculate_image_sizes($imageSize, $imageProperties['src'], null, $image_id);
+        /** @var int[] */
+        $imageSize = [(int)$imageProperties['width'], (int)$imageProperties['height']];
+        $sizes = \wp_calculate_image_sizes($imageSize, $imageProperties['src'], null, (int)$image_id);
         if ($sizes === false) {
             return null;
         }
@@ -68,7 +73,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
      */
     public function getImageProperties(string|int $image_id, ?string $size = null): ?array
     {
-        $img = wp_get_attachment_image_src($image_id, $size);
+        $img = wp_get_attachment_image_src((int)$image_id, $size);
         if ($img === false) {
             return null;
         }
@@ -157,9 +162,10 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $query;
     }
 
-    public function getMediaItemID(object $media): string|int
+    public function getMediaItemID(object $mediaItem): string|int
     {
-        return $media->ID;
+        /** @var WP_Post $mediaItem */
+        return $mediaItem->ID;
     }
 
     public function getTitle(string|int|object $mediaObjectOrID): ?string
