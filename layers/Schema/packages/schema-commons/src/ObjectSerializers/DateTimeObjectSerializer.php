@@ -17,7 +17,7 @@ class DateTimeObjectSerializer extends AbstractObjectSerializer
     }
     public function serialize(object $object): string
     {
-        /** @var $object DateTime */
+        /** @var DateTime $object */
         return $object->format(DateTimeInterface::ATOM);
     }
 }
