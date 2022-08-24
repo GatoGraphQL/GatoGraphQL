@@ -20,6 +20,8 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
     {
         /**
          * Pretend we are sending ?datastructure=html in the request.
+         *
+         * @var HTMLDataStructureFormatter
          */
         $htmlDataStructureFormatter = self::$container->get(HTMLDataStructureFormatter::class);
         App::getRequest()->query->set(Params::DATASTRUCTURE, $htmlDataStructureFormatter->getName());
