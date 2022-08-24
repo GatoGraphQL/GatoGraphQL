@@ -66,7 +66,7 @@ class PHPHooks
    * @access public
    * @since 0.1
    * @param string $tag The name of the filter to hook the $function_to_add to.
-   * @param callback $function_to_add The name of the function to be called when the filter is applied.
+   * @param callable $function_to_add The name of the function to be called when the filter is applied.
    * @param int $priority optional. Used to specify the order in which the functions associated with a particular action are executed (default: 10). Lower numbers correspond with earlier execution, and functions with the same priority are executed in the order in which they were added to the action.
    * @param int $accepted_args optional. The number of arguments the function accept (default 1).
    * @return boolean true
@@ -82,7 +82,7 @@ class PHPHooks
    * @access public
    * @since 0.1
    * @param string $tag The filter hook to which the function to be removed is hooked.
-   * @param callback $function_to_remove The name of the function which should be removed.
+   * @param callable $function_to_remove The name of the function which should be removed.
    * @param int $priority optional. The priority of the function (default: 10).
    * @param int $accepted_args optional. The number of arguments the function accepts (default: 1).
    * @return boolean Whether the function existed before it was removed.
@@ -126,7 +126,7 @@ class PHPHooks
    * @access public
    * @since 0.1
    * @param string $tag The name of the filter hook.
-   * @param callback $function_to_check optional.
+   * @param callable $function_to_check optional.
    * @return mixed If $function_to_check is omitted, returns boolean for whether the hook has anything registered.
    *   When checking a specific function, the priority of that hook is returned, or false if the function is not attached.
    *   When using the $function_to_check argument, this function may return a non-boolean value that evaluates to false
@@ -251,7 +251,7 @@ class PHPHooks
    * @access public
    * @since 0.1
    * @param string $tag The name of the action to which the $function_to_add is hooked.
-   * @param callback $function_to_add The name of the function you wish to be called.
+   * @param callable $function_to_add The name of the function you wish to be called.
    * @param int $priority optional. Used to specify the order in which the functions associated with a particular action are executed (default: 10). Lower numbers correspond with earlier execution, and functions with the same priority are executed in the order in which they were added to the action.
    * @param int $accepted_args optional. The number of arguments the function accept (default 1).
    */
@@ -263,7 +263,7 @@ class PHPHooks
    * @access public
    * @since 0.1
    * @param string $tag The name of the action hook.
-   * @param callback $function_to_check optional.
+   * @param callable $function_to_check optional.
    * @return mixed If $function_to_check is omitted, returns boolean for whether the hook has anything registered.
    *   When checking a specific function, the priority of that hook is returned, or false if the function is not attached.
    *   When using the $function_to_check argument, this function may return a non-boolean value that evaluates to false
@@ -277,7 +277,7 @@ class PHPHooks
    * @access public
    * @since 0.1
    * @param string $tag The action hook to which the function to be removed is hooked.
-   * @param callback $function_to_remove The name of the function which should be removed.
+   * @param callable $function_to_remove The name of the function which should be removed.
    * @param int $priority optional The priority of the function (default: 10).
    * @return boolean Whether the function is removed.
    */
@@ -490,7 +490,7 @@ class PHPHooks
   /**
    * __filter_build_unique_id Build Unique ID for storage and retrieval.
    * @param string $tag Used in counting how many hooks were applied
-   * @param callback $function Used for creating unique id
+   * @param callable $function Used for creating unique id
    * @param int|bool $priority Used in counting how many hooks were applied. If === false and $function is an object reference, we return the unique id only if it already has one, false otherwise.
    * @return string|bool Unique ID for usage as array key or false if $priority === false and $function is an object reference, and it does not already have a unique id.
    */
