@@ -47,10 +47,11 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 
     protected function getTerm(string|int $termObjectID, string $taxonomy = ''): ?WP_Term
     {
-        $term = get_term($termObjectID, $taxonomy);
+        $term = get_term((int)$termObjectID, $taxonomy);
         if ($term instanceof WP_Error) {
             return null;
         }
+        /** @var WP_Term */
         return $term;
     }
 
