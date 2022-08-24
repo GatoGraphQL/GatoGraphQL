@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
+use RuntimeException;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
@@ -66,11 +67,11 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         $response = self::getGraphQLServer()->execute($queryOrExecutableDocument, $variables, $operationName);
         $expectedResponseJSON = json_encode($expectedResponse);
         if ($expectedResponseJSON === false) {
-            $this->fail('Encoding the expected response as JSON failed');
+            throw new RuntimeException('Encoding the expected response as JSON failed');
         }
         $responseContent = $response->getContent();
         if ($responseContent === false) {
-            $this->fail('Obtaining the content of the response failed');
+            throw new RuntimeException('Obtaining the content of the response failed');
         }
         $this->assertJsonStringEqualsJsonString(
             $expectedResponseJSON,
@@ -109,7 +110,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
         $responseContent = $response->getContent();
         if ($responseContent === false) {
-            $this->fail('Obtaining the content of the response failed');
+            throw new RuntimeException('Obtaining the content of the response failed');
         }
 
         // Allow to override method
