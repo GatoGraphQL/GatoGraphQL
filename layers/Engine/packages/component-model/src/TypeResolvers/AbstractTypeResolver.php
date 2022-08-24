@@ -58,6 +58,7 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     protected function getClassToNamespace(): string
     {
+        /** @var string */
         return get_called_class();
     }
 
