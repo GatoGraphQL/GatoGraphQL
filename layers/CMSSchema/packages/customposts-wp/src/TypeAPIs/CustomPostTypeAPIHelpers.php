@@ -17,11 +17,13 @@ class CustomPostTypeAPIHelpers
     public static function getCustomPostObjectAndID(string|int|object $customPostObjectOrID): array
     {
         if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
             $customPost = $customPostObjectOrID;
             $customPostID = $customPost->ID;
         } else {
             $customPostID = $customPostObjectOrID;
-            $customPost = \get_post($customPostID);
+            /** @var WP_Post|null */
+            $customPost = \get_post((int)$customPostID);
         }
         return [
             $customPost,
