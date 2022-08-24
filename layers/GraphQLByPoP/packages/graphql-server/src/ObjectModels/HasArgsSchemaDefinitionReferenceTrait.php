@@ -21,7 +21,9 @@ trait HasArgsSchemaDefinitionReferenceTrait
     {
         $this->args = [];
         if ($args = $this->schemaDefinition[SchemaDefinition::ARGS] ?? null) {
+            /** @var string $fieldArgName */
             foreach (array_keys($args) as $fieldArgName) {
+                /** @var string[] */
                 $fieldArgSchemaDefinitionPath = array_merge(
                     $schemaDefinitionPath,
                     [

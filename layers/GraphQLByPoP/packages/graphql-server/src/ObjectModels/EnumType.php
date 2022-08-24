@@ -31,7 +31,9 @@ class EnumType extends AbstractNamedType
     {
         $this->enumValues = [];
         $enumItems = $this->schemaDefinition[SchemaDefinition::ITEMS];
+        /** @var string $enumValue */
         foreach (array_keys($enumItems) as $enumValue) {
+            /** @var string[] */
             $enumValueSchemaDefinitionPath = array_merge(
                 $schemaDefinitionPath,
                 [

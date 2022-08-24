@@ -20,6 +20,7 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
+        /** @var string[] */
         $inputValueExtensionsSchemaDefinitionPath = array_merge(
             $schemaDefinitionPath,
             [

@@ -21,6 +21,7 @@ class Field extends AbstractSchemaDefinitionReferenceObject
     {
         parent::__construct($fullSchemaDefinition, $schemaDefinitionPath);
 
+        /** @var string[] */
         $fieldExtensionsSchemaDefinitionPath = array_merge(
             $schemaDefinitionPath,
             [
