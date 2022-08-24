@@ -6,6 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 
 use GraphQLByPoP\GraphQLServer\Unit\EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
+use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
@@ -20,7 +21,7 @@ abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest 
     }
 
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     protected static function getGraphQLServerModuleClasses(): array
     {

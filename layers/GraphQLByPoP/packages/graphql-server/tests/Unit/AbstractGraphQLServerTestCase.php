@@ -8,6 +8,7 @@ use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 use PHPUnit\Framework\TestCase;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
@@ -37,7 +38,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     protected static function getGraphQLServerModuleClasses(): array
     {
