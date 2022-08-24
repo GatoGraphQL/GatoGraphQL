@@ -124,7 +124,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
     /**
      * @param array<string|int> $ids
-     * @return array<string,ObjectTypeResolverInterface|null>
+     * @return array<string|int,ObjectTypeResolverInterface|null>
      */
     private function recursiveGetObjectIDTargetTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver, array $ids): array
     {
@@ -190,7 +190,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // This is mandatory, because the UnionType doesn't have fields by itself.
         // Otherwise, RelationalTypeResolverDecorators can't have their defined ACL rules
         // work when querying a union type (eg: "customPosts")
-        /** @var array<string,Directive[]> */
+        /** @var array<string,array<string,Directive[]>> */
         $targetObjectTypeResolverClassMandatoryDirectivesForFields = [];
         $targetObjectTypeResolvers = $this->getTargetObjectTypeResolvers();
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
