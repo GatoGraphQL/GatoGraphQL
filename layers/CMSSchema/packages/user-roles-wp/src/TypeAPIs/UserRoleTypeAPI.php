@@ -46,6 +46,7 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
                 array_keys($role['capabilities'])
             );
         }
+        /** @var string[] */
         return array_values(array_unique($capabilities));
     }
 
@@ -94,6 +95,13 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
 
     public function userCan(string|int|object $userObjectOrID, string $capability): bool
     {
-        return user_can($userObjectOrID, $capability);
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            $userID = $user->ID;
+        } else {
+            $userID = (int) $userObjectOrID;
+        }
+        return user_can($userID, $capability);
     }
 }
