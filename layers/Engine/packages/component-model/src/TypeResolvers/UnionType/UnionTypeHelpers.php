@@ -43,7 +43,7 @@ class UnionTypeHelpers
         );
         // If the UnionTypeResolver didn't have a TypeResolver to process the passed object, the Type will not be added
         // In that case, the ID will be on the first position
-        return count($elements) == 1 ? $elements[0] : $elements[1];
+        return count($elements) === 1 ? $elements[0] : $elements[1];
     }
 
     /**
@@ -74,7 +74,7 @@ class UnionTypeHelpers
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->useSingleTypeInsteadOfUnionType()) {
-                return count($targetTypeResolvers) == 1 ?
+                return count($targetTypeResolvers) === 1 ?
                     $targetTypeResolvers[0] :
                     $unionTypeResolver;
             }
