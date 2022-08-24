@@ -30,6 +30,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $params = $this->maybeAddXDebugTriggerParam($params);
             $options['query'] = $params;
         } else {
+            /** @var string */
             $endpointURL = $this->maybeAddXDebugTriggerParam($endpointURL);
         }
 
