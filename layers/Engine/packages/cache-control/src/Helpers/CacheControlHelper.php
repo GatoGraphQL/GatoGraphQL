@@ -18,6 +18,7 @@ class CacheControlHelper
     final protected static function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver
     {
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var CacheControlDirectiveResolver */
         return $instanceManager->getInstance(CacheControlDirectiveResolver::class);
     }
 
