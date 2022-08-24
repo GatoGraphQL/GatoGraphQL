@@ -318,7 +318,9 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     {
         $params = $request->get_params();
         $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+        /** @var string */
         $blockNamespace = $params[Params::BLOCK_NAMESPACE];
+        /** @var string */
         $blockID = $params[Params::BLOCK_ID];
         /** @var WP_Post */
         $customPost = $this->getCustomPost($customPostID);
@@ -453,8 +455,11 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         try {
             $params = $request->get_params();
             $customPostID = (int)$params[Params::CUSTOM_POST_ID];
+            /** @var string */
             $blockNamespace = $params[Params::BLOCK_NAMESPACE];
+            /** @var string */
             $blockID = $params[Params::BLOCK_ID];
+            /** @var string */
             $jsonEncodedBlockAttributeValues = $params[Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES];
             $blockAttributeValues = json_decode($jsonEncodedBlockAttributeValues, true);
             if ($blockAttributeValues === null) {

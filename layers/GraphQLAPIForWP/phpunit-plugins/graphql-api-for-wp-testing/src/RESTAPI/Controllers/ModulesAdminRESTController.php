@@ -155,6 +155,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
     public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $params = $request->get_params();
+        /** @var string */
         $moduleID = $params[Params::MODULE_ID];
         $module = $this->getModuleByID($moduleID);
         return $this->prepareItemForResponse($module);
@@ -207,7 +208,9 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 
         try {
             $params = $request->get_params();
+            /** @var string */
             $moduleID = $params[Params::MODULE_ID];
+            /** @var string|null */
             $moduleState = $params[Params::STATE] ?? null;
             $module = $this->getModuleByID($moduleID);
 

@@ -226,6 +226,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
     public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $params = $request->get_params();
+        /** @var string */
         $moduleID = $params[Params::MODULE_ID];
         $module = $this->getModuleByID($moduleID);
         $item = $this->prepareItemForResponse($module);
@@ -279,8 +280,14 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
 
         try {
             $params = $request->get_params();
+            /** @var string */
             $moduleID = $params[Params::MODULE_ID];
-            $optionValues = json_decode($params[Params::JSON_ENCODED_OPTION_VALUES], true);
+            /** @var string */
+            $jsonEncodedOptionValues = $params[Params::JSON_ENCODED_OPTION_VALUES];
+            $optionValues = json_decode($jsonEncodedOptionValues, true);
+            if (!is_array($optionValues)) {
+                $optionValues = [];
+            }
             $module = $this->getModuleByID($moduleID);
 
             // Normalize the values
