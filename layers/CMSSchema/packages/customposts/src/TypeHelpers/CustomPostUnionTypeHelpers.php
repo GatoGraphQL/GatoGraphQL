@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeHelpers;
 
+use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
@@ -53,8 +54,9 @@ class CustomPostUnionTypeHelpers
      */
     public static function getCustomPostUnionOrTargetObjectTypeResolver(
         ?UnionTypeResolverInterface $unionTypeResolver = null
-    ): ?UnionTypeResolverInterface {
+    ): UnionTypeResolverInterface|ObjectTypeResolverInterface|null {
         $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var CustomPostUnionTypeResolver */
         $unionTypeResolver ??= $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
         $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
         if ($targetTypeResolvers) {
