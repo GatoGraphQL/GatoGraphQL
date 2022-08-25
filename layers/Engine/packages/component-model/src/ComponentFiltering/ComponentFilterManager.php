@@ -187,7 +187,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
                 $this->not_excluded_ancestor_component = $this->getComponentPathHelpers()->stringifyComponentPath($component_propagation_current_path);
 
                 // Add it to the list of not-excluded components
-                if (!in_array($this->not_excluded_ancestor_component, $this->not_excluded_component_sets_as_string)) {
+                /** @var string[] */
+                $not_excluded_component_sets_as_string = $this->not_excluded_component_sets_as_string;
+                if (!in_array($this->not_excluded_ancestor_component, $not_excluded_component_sets_as_string)) {
                     $this->not_excluded_component_sets_as_string[] = $this->not_excluded_ancestor_component;
                     $this->not_excluded_component_sets[] = $component_propagation_current_path;
                 }
