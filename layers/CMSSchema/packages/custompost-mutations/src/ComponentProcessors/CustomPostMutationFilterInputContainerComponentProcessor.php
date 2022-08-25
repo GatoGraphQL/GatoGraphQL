@@ -39,6 +39,9 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
             self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT =>new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT),
             default => null,
         };
+        if ($targetComponent === null) {
+            return [];
+        }
         /** @var FilterInputContainerComponentProcessorInterface */
         $targetComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($targetComponent);
         $targetFilterInputComponents = $targetComponentProcessor->getFilterInputComponents($targetComponent);

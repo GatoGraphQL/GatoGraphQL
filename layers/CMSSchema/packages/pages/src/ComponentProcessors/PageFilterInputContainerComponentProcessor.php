@@ -43,6 +43,9 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
             self::COMPONENT_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT),
             default => null,
         };
+        if ($targetComponent === null) {
+            return [];
+        }
         $filterInputComponents = parent::getFilterInputComponents($targetComponent);
         // Add the parentIDs and parentID filterInputs
         $filterInputComponents[] = new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_IDS);
