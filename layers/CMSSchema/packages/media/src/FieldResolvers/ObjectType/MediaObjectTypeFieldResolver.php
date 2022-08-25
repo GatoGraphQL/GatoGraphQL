@@ -235,7 +235,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 $properties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
                 return $properties[$fieldDataAccessor->getFieldName()];
             case 'srcSet':
-                return $this->getMediaTypeAPI()->getImageSrcSet($objectTypeResolver->getID($media), $size);
+                return $this->getMediaTypeAPI()->getImageSrcSet($media, $size);
             case 'sizes':
                 return $this->getMediaTypeAPI()->getImageSizes($media, $size);
             case 'title':
