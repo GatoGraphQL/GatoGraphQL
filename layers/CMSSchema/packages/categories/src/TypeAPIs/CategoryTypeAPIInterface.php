@@ -49,5 +49,5 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function getCategoryURL(string|int|object $catObjectOrID): string;
     public function getCategoryURLPath(string|int|object $catObjectOrID): string;
     public function getCategoryDescription(string|int|object $catObjectOrID): string;
-    public function getCategoryItemCount(string|int|object $catObjectOrID): int;
+    public function getCategoryItemCount(string|int|object $catObjectOrID): ?int;
 }

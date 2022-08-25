@@ -313,9 +313,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         return $category->description;
     }
-    public function getCategoryItemCount(string|int|object $catObjectOrID): int
+    public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         return $category->count;
     }
 }

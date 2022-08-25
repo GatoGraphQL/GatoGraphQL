@@ -140,7 +140,9 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
                 return $categoryTypeAPI->getCategoryParentID($category);
 
             case 'count':
-                return $categoryTypeAPI->getCategoryItemCount($category);
+                /** @var int */
+                $count = $categoryTypeAPI->getCategoryItemCount($category);
+                return $count;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
