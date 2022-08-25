@@ -45,3 +45,11 @@ parameters:
 		- 
 			message: '#Cannot access offset .* on bool\|string\.#'
 			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Argument of an invalid type array<SimpleXMLElement>\|false\|null supplied for foreach, only iterables are supported\.#'
+			path: src/Parsers/WXR_Parser_SimpleXML.php
+			count: 4
+		- 
+			message: '#Parameter \#3 \$subject of function str_replace expects array\|string, string\|null given\.#'
+			path: src/Parsers/WXR_Parser_Regex.php
+			count: 2
