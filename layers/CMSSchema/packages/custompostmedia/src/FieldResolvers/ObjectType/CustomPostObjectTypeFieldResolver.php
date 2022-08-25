@@ -74,13 +74,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $post = $object;
+        $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'hasFeaturedImage':
-                return $this->getCustomPostMediaTypeAPI()->hasCustomPostThumbnail($objectTypeResolver->getID($post));
+                return $this->getCustomPostMediaTypeAPI()->hasCustomPostThumbnail($customPost);
 
             case 'featuredImage':
-                return $this->getCustomPostMediaTypeAPI()->getCustomPostThumbnailID($post);
+                return $this->getCustomPostMediaTypeAPI()->getCustomPostThumbnailID($customPost);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

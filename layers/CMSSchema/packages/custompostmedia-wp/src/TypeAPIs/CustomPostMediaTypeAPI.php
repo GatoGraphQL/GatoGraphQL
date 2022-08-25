@@ -15,9 +15,16 @@ use function has_post_thumbnail;
  */
 class CustomPostMediaTypeAPI implements CustomPostMediaTypeAPIInterface
 {
-    public function hasCustomPostThumbnail(string|int $post_id): bool
+    public function hasCustomPostThumbnail(string|int|object $customPostObjectOrID): bool
     {
-        return has_post_thumbnail((int)$post_id);
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = (int)$customPostObjectOrID;
+        }
+        return has_post_thumbnail($customPostID);
     }
 
     public function getCustomPostThumbnailID(string|int|object $customPostObjectOrID): string|int|null
