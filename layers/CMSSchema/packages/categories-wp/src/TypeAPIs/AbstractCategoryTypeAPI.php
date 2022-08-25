@@ -82,7 +82,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         } else {
             $customPostID = (int)$customPostObjectOrID;
         }
-        
+
         $query = $this->convertCategoriesQuery($query, $options);
 
         $categories =  wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
@@ -105,7 +105,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         } else {
             $customPostID = (int)$customPostObjectOrID;
         }
-        
+
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
         // but it doesn't work)
