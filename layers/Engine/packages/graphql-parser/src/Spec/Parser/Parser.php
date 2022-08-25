@@ -50,7 +50,8 @@ class Parser extends Tokenizer implements ParserInterface
         $this->init($source);
 
         while (!$this->end()) {
-            $tokenType = $this->peek()->getType();
+            $token = $this->peek();
+            $tokenType = $token->getType();
 
             switch ($tokenType) {
                 case Token::TYPE_LBRACE:
@@ -69,7 +70,7 @@ class Parser extends Tokenizer implements ParserInterface
                             GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
                             GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1
                         ),
-                        $this->getLocation()
+                        $this->getTokenLocation($token)
                     );
 
                 default:
