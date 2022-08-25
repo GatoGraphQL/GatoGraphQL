@@ -13,6 +13,7 @@ class FeedbackItemResolution
     use StandaloneServiceTrait;
 
     /**
+     * @phpstan-param class-string<FeedbackItemProviderInterface> $feedbackProviderServiceClass
      * @param array<string|int|float|bool> $messageParams
      * @param FeedbackItemResolution[] $causes
      */
@@ -28,6 +29,9 @@ class FeedbackItemResolution
     ) {
     }
 
+    /**
+     * @return class-string<FeedbackItemProviderInterface>
+     */
     public function getFeedbackProviderServiceClass(): string
     {
         return $this->feedbackProviderServiceClass;
