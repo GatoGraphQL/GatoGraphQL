@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractTestCase extends TestCase
 {
-    protected static ?ContainerInterface $container = null;
+    protected static ContainerInterface $container;
 
     public static function setUpBeforeClass(): void
     {
@@ -97,11 +97,6 @@ abstract class AbstractTestCase extends TestCase
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
         return $classNamespace . '\\Module';
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        self::$container = null;
     }
 
     protected function getService(string $service): mixed
