@@ -19,6 +19,7 @@ class CustomPostUserTypeAPI implements CustomPostUserTypeAPIInterface
             $customPost = $customPostObjectOrID;
             return $customPost->post_author;
         }
+
         $customPostID = $customPostObjectOrID;
         /** @var WP_Post|null */
         $customPost = \get_post((int)$customPostID);
