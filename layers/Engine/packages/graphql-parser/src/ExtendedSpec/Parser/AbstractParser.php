@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
@@ -107,6 +108,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      *
      * @throws ASTNodeParserException
      * @throws SyntaxErrorException
+     * @throws FeatureNotSupportedException
      */
     public function parse(string $source): Document
     {
