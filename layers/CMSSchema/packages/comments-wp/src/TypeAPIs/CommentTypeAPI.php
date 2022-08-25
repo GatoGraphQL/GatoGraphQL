@@ -179,9 +179,16 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         return (int) get_comments_number((int) $post_id);
     }
 
-    public function areCommentsOpen(string|int $post_id): bool
+    public function areCommentsOpen(string|int|object $customPostObjectOrID): bool
     {
-        return comments_open((int)$post_id);
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = (int)$customPostObjectOrID;
+        }
+        return comments_open($customPostID);
     }
 
     protected function getOrderByQueryArgValue(string $orderBy): string

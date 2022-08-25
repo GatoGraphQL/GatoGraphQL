@@ -79,14 +79,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $post = $object;
+        $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'areCommentsOpen':
-                return $this->getCommentTypeAPI()->areCommentsOpen($objectTypeResolver->getID($post));
+                return $this->getCommentTypeAPI()->areCommentsOpen($customPost);
 
             case 'hasComments':
                 return $objectTypeResolver->resolveValue(
-                    $post,
+                    $customPost,
                     new LeafField(
                         'commentCount',
                         null,
@@ -101,7 +101,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
             [
-                'customPostID' => $objectTypeResolver->getID($post),
+                'customPostID' => $objectTypeResolver->getID($customPost),
             ]
         );
         switch ($fieldDataAccessor->getFieldName()) {
