@@ -1377,6 +1377,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
             return null;
         }
+        /** @var array<string,mixed> $fieldArgs */
 
         foreach ($remainingObjectIDs as $id) {
             $object = $idObjects[$id];
@@ -1865,6 +1866,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): FieldDataAccessorInterface {
         if (!$this->fieldDataAccessorForMutationCache->contains($fieldDataAccessor)) {
             $fieldDataAccessorForMutation = $fieldDataAccessor;
+            /** @var ObjectTypeFieldResolverInterface */
             $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
             if ($executableObjectTypeFieldResolver->extractInputObjectFieldForMutation($this, $fieldDataAccessor->getFieldName())) {
                 $inputObjectSubpropertyName = $executableObjectTypeFieldResolver->getFieldArgsInputObjectSubpropertyName($this, $fieldDataAccessor->getField());
