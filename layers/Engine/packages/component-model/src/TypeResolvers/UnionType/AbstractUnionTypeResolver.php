@@ -231,11 +231,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             return null;
         }
 
+        /** @var string|int */
+        $objectID = $targetObjectTypeResolver->getID($object);
+
         // Add the type to the ID, so that elements of different types can live side by side
         // The type will be removed again in `getIDsToQuery`
         return UnionTypeHelpers::getObjectComposedTypeAndID(
             $targetObjectTypeResolver,
-            $targetObjectTypeResolver->getID($object)
+            $objectID
         );
     }
 
