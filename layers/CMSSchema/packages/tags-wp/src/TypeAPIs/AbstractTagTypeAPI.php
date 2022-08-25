@@ -109,8 +109,15 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostTagCount(string|int $customPostID, array $query = [], array $options = []): int
+    public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
     {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = $customPostObjectOrID;
+        }
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_tags`,
         // but it doesn't work)
