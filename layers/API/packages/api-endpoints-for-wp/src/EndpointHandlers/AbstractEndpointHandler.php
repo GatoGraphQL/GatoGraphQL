@@ -95,8 +95,10 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
      */
     public function addRewriteEndpoints(): void
     {
+        /** @var string */
+        $endpoint = $this->endpoint;
         // The endpoint passed to `add_rewrite_endpoint` cannot have "/" on either end, or it doesn't work
-        \add_rewrite_endpoint(trim($this->endpoint, '/'), $this->getRewriteMask());
+        \add_rewrite_endpoint(trim($endpoint, '/'), $this->getRewriteMask());
     }
 
     /**
