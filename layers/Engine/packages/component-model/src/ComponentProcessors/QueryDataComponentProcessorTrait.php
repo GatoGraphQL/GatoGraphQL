@@ -164,13 +164,15 @@ trait QueryDataComponentProcessorTrait
     abstract public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface;
 
     /**
-     * @return mixed[]
+     * @param array<string,mixed> $ret
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param string|int|array<string|int> $objectIDOrIDs
      * @param array<string,mixed>|null $executed
+     * @return mixed[]
      */
-    public function getDatasetmeta(
+    public function addQueryHandlerDatasetmeta(
+        array $ret,
         Component $component,
         array &$props,
         array $data_properties,
@@ -179,18 +181,19 @@ trait QueryDataComponentProcessorTrait
         ?array $executed,
         string|int|array $objectIDOrIDs,
     ): array {
-        $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
+        $queryHandler = $this->getQueryInputOutputHandler($component);
+        if ($queryHandler === null) {
+            return $ret;
+        }
 
-        if ($queryHandler = $this->getQueryInputOutputHandler($component)) {
-            if ($query_state = $queryHandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
-                $ret['querystate'] = $query_state;
-            }
-            if ($query_params = $queryHandler->getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
-                $ret['queryparams'] = $query_params;
-            }
-            if ($query_result = $queryHandler->getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
-                $ret['queryresult'] = $query_result;
-            }
+        if ($query_state = $queryHandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
+            $ret['querystate'] = $query_state;
+        }
+        if ($query_params = $queryHandler->getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
+            $ret['queryparams'] = $query_params;
+        }
+        if ($query_result = $queryHandler->getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
+            $ret['queryresult'] = $query_result;
         }
 
         return $ret;
