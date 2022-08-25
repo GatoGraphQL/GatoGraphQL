@@ -280,12 +280,25 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         return get_the_excerpt($customPostID);
     }
+
     /**
-     * @return mixed[]
+     * @return array{0:WP_Post|null,1:null|string|int}
      */
     protected function getCustomPostObjectAndID(string|int|object $customPostObjectOrID): array
     {
-        return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = $customPostObjectOrID;
+            /** @var WP_Post|null */
+            $customPost = \get_post((int)$customPostID);
+        }
+        return [
+            $customPost,
+            $customPostID,
+        ];
     }
 
     protected function getCustomPostObject(string|int|object $customPostObjectOrID): ?object
