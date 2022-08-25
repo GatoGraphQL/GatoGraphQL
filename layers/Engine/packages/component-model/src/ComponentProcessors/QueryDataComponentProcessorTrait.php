@@ -134,11 +134,6 @@ trait QueryDataComponentProcessorTrait
                 ARRAY_FILTER_USE_KEY
             );
 
-            $params_from_request = App::applyFilters(
-                'QueryDataComponentProcessorTrait:request:filter_params',
-                $params_from_request
-            );
-
             // Finally merge it into the data properties
             $data_properties[DataloadingConstants::QUERYARGS] = array_merge(
                 $data_properties[DataloadingConstants::QUERYARGS],
