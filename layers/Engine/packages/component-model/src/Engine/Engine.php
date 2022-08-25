@@ -350,16 +350,18 @@ class Engine implements EngineInterface
     }
 
     /**
-     * @return array{0: bool, 1: ?string, 2: ?string}
+     * @return array{0:bool,1:?string,2:?string}
      */
     public function listExtraRouteVars(): array
     {
-        $model_instance_id = $current_uri = null;
-        if ($has_extra_routes = $this->getExtraRoutes() !== []) {
+        $has_extra_routes = $this->getExtraRoutes() !== [];
+        if ($has_extra_routes) {
             $model_instance_id = $this->getModelInstance()->getModelInstanceID();
-            $current_uri = GeneralUtils::removeDomain(
-                $this->getRequestHelperService()->getCurrentURL()
-            );
+            $currentURL = $this->getRequestHelperService()->getCurrentURL();
+            $current_uri = $currentURL !== null ? GeneralUtils::removeDomain($currentURL) : null;
+        } else {
+            $model_instance_id = null;
+            $current_uri = null;
         }
 
         return array($has_extra_routes, $model_instance_id, $current_uri);
@@ -1368,6 +1370,7 @@ class Engine implements EngineInterface
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
                 $load_data = !isset($data_properties[DataloadingConstants::SKIPDATALOAD]) || !$data_properties[DataloadingConstants::SKIPDATALOAD];
                 if ($load_data) {
+                    /** @var RelationalTypeResolverInterface */
                     $relationalTypeResolver = $processor->getRelationalTypeResolver($component);
                     $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
                     $relationalTypeOutputKey = $relationalTypeResolver->getTypeOutputKey();
@@ -1380,6 +1383,8 @@ class Engine implements EngineInterface
                     if ($objectIDOrIDs === null) {
                         $objectIDOrIDs = [];
                     }
+                    /** @var string|int|array<string|int> $objectIDOrIDs */
+
                     // If the type is union, we must add the type to each object
                     $typeDBObjectIDOrIDs = $isUnionTypeResolver ?
                         $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDOrIDs)
@@ -1474,7 +1479,7 @@ class Engine implements EngineInterface
 
             // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
-                if (!is_null($datasetcomponentmeta)) {
+                if ($datasetcomponentmeta !== null) {
                     if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDOrIDs)) {
                         $this->assignValueForComponent($datasetcomponentmeta, $component_path, $component, DataLoading::META, $dataset_meta);
                     }
