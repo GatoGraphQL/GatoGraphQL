@@ -62,6 +62,8 @@ class Engine implements EngineInterface
     public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
     public final const CACHETYPE_PROPS = 'props';
 
+    public final const HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT = __CLASS__ . ':engine-iteration-on-dataloading-component';
+
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
 
@@ -1517,7 +1519,7 @@ class Engine implements EngineInterface
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
             App::doAction(
-                '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
+                self::HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT,
                 $component,
                 array(&$component_props),
                 array(&$data_properties),

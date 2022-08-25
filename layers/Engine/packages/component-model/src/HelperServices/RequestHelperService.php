@@ -14,7 +14,7 @@ class RequestHelperService implements RequestHelperServiceInterface
 {
     use BasicServiceTrait;
 
-    public const HOOK_CURRENT_URL_REMOVE_PARAMS = __CLASS__ . ':current-url:remove-params';
+    public final const HOOK_CURRENT_URL_REMOVE_PARAMS = __CLASS__ . ':current-url:remove-params';
 
     public function getCurrentURL(): ?string
     {
