@@ -385,7 +385,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         }
         return $gmt ? $customPost->post_modified_gmt : $customPost->post_modified;
     }
-    public function getCustomPostType(string|int|object $customPostObjectOrID): string
+    public function getCustomPostType(string|int|object $customPostObjectOrID): ?string
     {
         /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);

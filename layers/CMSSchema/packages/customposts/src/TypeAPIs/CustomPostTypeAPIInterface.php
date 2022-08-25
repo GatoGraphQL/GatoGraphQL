@@ -27,7 +27,7 @@ interface CustomPostTypeAPIInterface
      * Get the custom post with provided ID or, if it doesn't exist, null
      */
     public function getCustomPost(int|string $id): ?object;
-    public function getCustomPostType(string|int|object $customPostObjectOrID): string;
+    public function getCustomPostType(string|int|object $customPostObjectOrID): ?string;
     /**
      * If param "status" in $query is not passed, it defaults to "publish"
      *
