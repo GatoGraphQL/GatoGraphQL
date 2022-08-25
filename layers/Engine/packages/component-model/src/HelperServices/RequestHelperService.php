@@ -14,6 +14,8 @@ class RequestHelperService implements RequestHelperServiceInterface
 {
     use BasicServiceTrait;
 
+    public const HOOK_CURRENT_URL_REMOVE_PARAMS = __CLASS__ . ':current-url:remove-params';
+
     public function getCurrentURL(): ?string
     {
         if (!App::isHTTPRequest()) {
@@ -27,7 +29,7 @@ class RequestHelperService implements RequestHelperServiceInterface
 
         // Strip the Target and Output off it, users don't need to see those
         $remove_params = (array) App::applyFilters(
-            'RequestUtils:current_url:remove_params',
+            self::HOOK_CURRENT_URL_REMOVE_PARAMS,
             [
                 Params::VERSION,
                 Params::COMPONENTFILTER,

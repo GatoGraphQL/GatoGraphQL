@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\HelperServices\RequestHelperService;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('GD_URLPARAM_SWNETWORKFIRST', 'sw-networkfirst');
@@ -17,7 +18,7 @@ define('GD_URLPARAM_SWNETWORKFIRST', 'sw-networkfirst');
  */
 define('GD_URLPARAM_SWCACHEBUST', 'sw-cachebust');
 
-\PoP\Root\App::addFilter('RequestUtils:current_url:remove_params', 'popSwRemoveUrlparams');
+\PoP\Root\App::addFilter(RequestHelperService::HOOK_CURRENT_URL_REMOVE_PARAMS, 'popSwRemoveUrlparams');
 function popSwRemoveUrlparams($remove_params)
 {
     $remove_params[] = GD_URLPARAM_SWNETWORKFIRST;

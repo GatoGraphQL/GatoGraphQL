@@ -1,6 +1,8 @@
 <?php
 
-\PoP\Root\App::addFilter('RequestUtils:current_url:remove_params', 'popThemeRemoveUrlparams');
+use PoP\ComponentModel\HelperServices\RequestHelperService;
+
+\PoP\Root\App::addFilter(RequestHelperService::HOOK_CURRENT_URL_REMOVE_PARAMS, 'popThemeRemoveUrlparams');
 function popThemeRemoveUrlparams($remove_params)
 {
     $remove_params[] = GD_URLPARAM_THEME;
