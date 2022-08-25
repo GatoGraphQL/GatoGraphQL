@@ -60,6 +60,15 @@ class Parser extends Tokenizer implements ParserInterface
                     $this->fragments[] = $this->parseFragment();
                     break;
 
+                case Token::TYPE_SUBSCRIPTION:
+                    throw new SyntaxErrorException(
+                        new FeedbackItemResolution(
+                            GraphQLParserErrorFeedbackItemProvider::class,
+                            GraphQLParserErrorFeedbackItemProvider::E_7
+                        ),
+                        $this->getLocation()
+                    );
+
                 default:
                     throw new SyntaxErrorException(
                         new FeedbackItemResolution(

@@ -212,6 +212,7 @@ class Tokenizer
             'query' => Token::TYPE_QUERY,
             'fragment' => Token::TYPE_FRAGMENT,
             'mutation' => Token::TYPE_MUTATION,
+            'subscription' => Token::TYPE_SUBSCRIPTION,
             'on' => Token::TYPE_ON,
             default => Token::TYPE_IDENTIFIER,
         };

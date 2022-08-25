@@ -15,6 +15,7 @@ class GraphQLParserErrorFeedbackItemProvider extends AbstractFeedbackItemProvide
     public final const E_4 = '4';
     public final const E_5 = '5';
     public final const E_6 = '6';
+    public final const E_7 = '7';
 
     protected function getNamespace(): string
     {
@@ -33,6 +34,7 @@ class GraphQLParserErrorFeedbackItemProvider extends AbstractFeedbackItemProvide
             self::E_4,
             self::E_5,
             self::E_6,
+            self::E_7,
         ];
     }
 
@@ -45,6 +47,7 @@ class GraphQLParserErrorFeedbackItemProvider extends AbstractFeedbackItemProvide
             self::E_4 => $this->__('Unexpected string escaped character \'%s\'', 'graphql-server'),
             self::E_5 => $this->__('Can\t recognize token type', 'graphql-server'),
             self::E_6 => $this->__('Unexpected token \'%s\'', 'graphql-server'),
+            self::E_7 => $this->__('Subscriptions are currently not supported', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
     }
