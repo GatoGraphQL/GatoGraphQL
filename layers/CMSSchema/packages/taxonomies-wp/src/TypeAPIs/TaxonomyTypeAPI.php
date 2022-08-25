@@ -26,25 +26,6 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
-    /**
-     * @return array{0:WP_Term|null,1:null|string|int}
-     */
-    protected function getTermObjectAndID(string|int|object $termObjectOrID): array
-    {
-        if (is_object($termObjectOrID)) {
-            /** @var WP_Term */
-            $termObject = $termObjectOrID;
-            $termObjectID = $termObject->term_id;
-        } else {
-            $termObjectID = $termObjectOrID;
-            $termObject = $this->getTerm($termObjectID);
-        }
-        return [
-            $termObject,
-            $termObjectID,
-        ];
-    }
-
     protected function getTerm(string|int $termObjectID, string $taxonomy = ''): ?WP_Term
     {
         $term = get_term((int)$termObjectID, $taxonomy);
