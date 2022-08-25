@@ -33,10 +33,6 @@ parameters:
 			path: src/Parsers/WXR_Parser_SimpleXML.php
 			count: 2
 		- 
-			message: '#Argument of an invalid type array<SimpleXMLElement>\|false supplied for foreach, only iterables are supported\.#'
-			path: src/Parsers/WXR_Parser_SimpleXML.php
-			count: 4
-		- 
 			message: '#Parameter \#2 \$data of function xml_parse expects string, string\|false given\.#'
 			path: src/Parsers/WXR_Parser_XML.php
 		- 
