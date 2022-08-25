@@ -1799,11 +1799,11 @@ class Engine implements EngineInterface
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
                             $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $targetObjectIDItems, $engineIterationFeedbackStore);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $idObjects, $engineIterationFeedbackStore);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs);
                     }
                 }
             }
@@ -1854,7 +1854,6 @@ class Engine implements EngineInterface
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
-     * @param array<string|int,object> $idObjects
      * @param array<string|int> $typeResolverIDs
      * @param array<string,array<string|int,FieldInterface[]>> $already_loaded_id_fields
      * @param SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> $subcomponents_data_properties
@@ -1869,8 +1868,6 @@ class Engine implements EngineInterface
         array &$already_loaded_id_fields,
         array &$unionTypeOutputKeyIDs,
         array &$combinedUnionTypeOutputKeyIDs,
-        array $idObjects,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $engineState = App::getEngineState();
         $targetTypeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();
