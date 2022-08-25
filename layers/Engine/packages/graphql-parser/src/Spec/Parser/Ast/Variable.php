@@ -51,11 +51,17 @@ class Variable extends AbstractAst implements WithValueInterface
         if ($this->isRequired) {
             $strType .= '!';
         }
+        $defaultValue = '';
+        if ($this->hasDefaultValue()) {
+            /** @var InputList|InputObject|Literal|Enum */
+            $defaultValueAST = $this->getDefaultValueAST();
+            $defaultValue = sprintf(' = %s', $defaultValueAST->asQueryString());
+        }
         return sprintf(
             '$%s: %s%s',
             $this->name,
             $strType,
-            $this->hasDefaultValue() ? sprintf(' = %s', $this->getDefaultValueAST()->asQueryString()) : ''
+            $defaultValue
         );
     }
 
@@ -71,11 +77,17 @@ class Variable extends AbstractAst implements WithValueInterface
         if ($this->isRequired) {
             $strType .= '!';
         }
+        $defaultValue = '';
+        if ($this->hasDefaultValue()) {
+            /** @var InputList|InputObject|Literal|Enum */
+            $defaultValueAST = $this->getDefaultValueAST();
+            $defaultValue = sprintf(' = %s', $defaultValueAST->asQueryString());
+        }
         return sprintf(
             '$%s: %s%s',
             $this->name,
             $strType,
-            $this->hasDefaultValue() ? sprintf(' = %s', $this->getDefaultValueAST()->asQueryString()) : ''
+            $defaultValue
         );
     }
 
