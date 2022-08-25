@@ -11,7 +11,7 @@ class PoP_UserState_EngineHooks
     public function __construct()
     {
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getComponentData:start',
+            Engine::HOOK_ENGINE_ITERATION_START,
             $this->start(...),
             10,
             4
