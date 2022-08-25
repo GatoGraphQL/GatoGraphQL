@@ -32,7 +32,7 @@ trait WPClientTrait
     /**
      * Endpoint URL or URL Path
      */
-    protected function getEndpointURLOrURLPath(): string
+    protected function getEndpointURLOrURLPath(): ?string
     {
         /** @var GraphQLEndpointForWPModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
