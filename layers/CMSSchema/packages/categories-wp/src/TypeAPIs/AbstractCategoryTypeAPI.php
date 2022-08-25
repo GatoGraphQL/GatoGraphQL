@@ -12,6 +12,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Error;
+use WP_Post;
 use WP_Taxonomy;
 use WP_Term;
 
@@ -298,6 +299,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         // If it has no parent, it is assigned 0. In that case, return null
         if ($parent = $category->parent) {
             return $parent;
@@ -321,6 +325,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function getCategoryDescription(string|int|object $catObjectOrID): ?string
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         return $category->description;
     }
     public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
