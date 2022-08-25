@@ -36,9 +36,7 @@ class ComponentPathManager implements ComponentPathManagerInterface
      */
     public function prepareForPropagation(Component $component, array &$props): void
     {
-        if ($this->propagation_current_path === null) {
-            throw new ShouldNotHappenException('Property \'propagation_current_path\' has not been initialized');
-        }
+        $this->propagation_current_path ??= [];
 
         // Add the component to the path
         // Prepare for the subcomponent, going one level down, and adding it to the current path
@@ -54,7 +52,7 @@ class ComponentPathManager implements ComponentPathManagerInterface
             throw new ShouldNotHappenException('Property \'propagation_current_path\' has not been initialized');
         }
 
-        // Remove the component to the path
+        // Remove the component from the path
         array_pop($this->propagation_current_path);
     }
 }
