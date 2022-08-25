@@ -51,12 +51,6 @@ class RequestHelperService implements RequestHelperServiceInterface
             $requestedFullURL
         );
 
-        // Allow plug-ins to do their own logic to the URL
-        $url = App::applyFilters(
-            'RequestUtils:getCurrentURL',
-            $url
-        );
-
         return urldecode($url);
     }
 
