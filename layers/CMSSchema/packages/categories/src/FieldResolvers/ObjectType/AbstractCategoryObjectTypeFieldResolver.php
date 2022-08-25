@@ -128,7 +128,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
                 return $categoryTypeAPI->getCategoryURLPath($objectTypeResolver->getID($category));
 
             case 'name':
-                return $categoryTypeAPI->getCategoryName($objectTypeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryName($category);
 
             case 'slug':
                 return $categoryTypeAPI->getCategorySlug($category);
