@@ -8,11 +8,12 @@ use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\HookNames;
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 trait QueryDataComponentProcessorTrait
 {
@@ -151,10 +152,16 @@ trait QueryDataComponentProcessorTrait
         }
 
         $relationalTypeResolver = $this->getRelationalTypeResolver($component);
+        if ($relationalTypeResolver === null) {
+            return null;
+        }
+
         /** @var ObjectTypeQueryableDataLoaderInterface */
         $typeDataLoader = $relationalTypeResolver->getRelationalTypeDataLoader();
         return $typeDataLoader->findIDs($data_properties);
     }
+
+    abstract public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface;
 
     /**
      * @return mixed[]
