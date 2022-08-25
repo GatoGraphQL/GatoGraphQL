@@ -8,6 +8,7 @@ use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
@@ -1770,7 +1771,7 @@ GRAPHQL;
     public function testUnsupportedSubscriptions(): void
     {
         $this->expectException(FeatureNotSupportedException::class);
-        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_7))->getMessage());
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1))->getMessage());
         $parser = $this->getParser();
         $parser->parse('
           subscription {

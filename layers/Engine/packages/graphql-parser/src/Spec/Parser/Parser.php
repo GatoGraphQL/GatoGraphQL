@@ -8,6 +8,7 @@ use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -65,8 +66,8 @@ class Parser extends Tokenizer implements ParserInterface
                 case Token::TYPE_SUBSCRIPTION:
                     throw new FeatureNotSupportedException(
                         new FeedbackItemResolution(
-                            GraphQLParserErrorFeedbackItemProvider::class,
-                            GraphQLParserErrorFeedbackItemProvider::E_7
+                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1
                         ),
                         $this->getLocation()
                     );
