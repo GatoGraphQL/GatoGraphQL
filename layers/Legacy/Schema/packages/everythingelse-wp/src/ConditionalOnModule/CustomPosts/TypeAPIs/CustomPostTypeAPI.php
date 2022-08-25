@@ -18,6 +18,9 @@ class CustomPostTypeAPI extends \PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostT
             $customPost,
             $customPostID,
         ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
         $readmore = sprintf(
             TranslationAPIFacade::getInstance()->__('... <a href="%s">Read more</a>', 'everythingelse-wp'),
             $this->getPermalink($customPostObjectOrID)
