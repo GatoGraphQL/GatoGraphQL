@@ -7,6 +7,7 @@ namespace PoPAPI\API\StaticHelpers;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -21,6 +22,7 @@ class GraphQLParserHelpers
 
     /**
      * @throws SyntaxErrorException
+     * @throws FeatureNotSupportedException
      * @throws ASTNodeParserException
      * @param array<string,mixed> $variableValues
      */

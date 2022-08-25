@@ -14,6 +14,7 @@ class Token
 
     public final const TYPE_QUERY              = 'query';
     public final const TYPE_MUTATION           = 'mutation';
+    public final const TYPE_SUBSCRIPTION       = 'subscription';
     public final const TYPE_FRAGMENT           = 'fragment';
     public final const TYPE_FRAGMENT_REFERENCE = '...';
     public final const TYPE_INLINE_FRAGMENT     = 'inline fragment';
@@ -68,6 +69,7 @@ class Token
             self::TYPE_ON                 => 'ON',
             self::TYPE_QUERY              => 'QUERY',
             self::TYPE_MUTATION           => 'MUTATION',
+            self::TYPE_SUBSCRIPTION       => 'SUBSCRIPTION',
             self::TYPE_FRAGMENT           => 'FRAGMENT',
             self::TYPE_FRAGMENT_REFERENCE => 'FRAGMENT_REFERENCE',
             self::TYPE_INLINE_FRAGMENT     => 'TYPED_FRAGMENT',

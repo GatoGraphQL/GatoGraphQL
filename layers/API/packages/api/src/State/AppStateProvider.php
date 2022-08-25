@@ -14,8 +14,8 @@ use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
+use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
-use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
@@ -101,18 +101,18 @@ class AppStateProvider extends AbstractAppStateProvider
             );
             $executableDocument = $graphQLQueryParsingPayload->executableDocument;
             $state['document-object-resolved-field-value-referenced-fields'] = $graphQLQueryParsingPayload->objectResolvedFieldValueReferencedFields;
-        } catch (SyntaxErrorException $syntaxErrorException) {
-            App::getFeedbackStore()->documentFeedbackStore->addError(
-                new DocumentFeedback(
-                    $syntaxErrorException->getFeedbackItemResolution(),
-                    $syntaxErrorException->getLocation(),
-                )
-            );
         } catch (ASTNodeParserException $astNodeParserException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
                     $astNodeParserException->getFeedbackItemResolution(),
                     $astNodeParserException->getAstNode(),
+                )
+            );
+        } catch (AbstractParserException $parserException) {
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new DocumentFeedback(
+                    $parserException->getFeedbackItemResolution(),
+                    $parserException->getLocation(),
                 )
             );
         }

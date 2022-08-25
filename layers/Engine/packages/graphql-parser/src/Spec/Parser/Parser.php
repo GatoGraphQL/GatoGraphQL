@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
@@ -26,6 +27,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
@@ -41,13 +43,15 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @throws SyntaxErrorException
+     * @throws FeatureNotSupportedException
      */
     public function parse(string $source): Document
     {
         $this->init($source);
 
         while (!$this->end()) {
-            $tokenType = $this->peek()->getType();
+            $token = $this->peek();
+            $tokenType = $token->getType();
 
             switch ($tokenType) {
                 case Token::TYPE_LBRACE:
@@ -59,6 +63,15 @@ class Parser extends Tokenizer implements ParserInterface
                 case Token::TYPE_FRAGMENT:
                     $this->fragments[] = $this->parseFragment();
                     break;
+
+                case Token::TYPE_SUBSCRIPTION:
+                    throw new FeatureNotSupportedException(
+                        new FeedbackItemResolution(
+                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1
+                        ),
+                        $this->getTokenLocation($token)
+                    );
 
                 default:
                     throw new SyntaxErrorException(
