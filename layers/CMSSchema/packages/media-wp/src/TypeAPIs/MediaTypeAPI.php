@@ -55,16 +55,16 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
 
     public function getImageSizes(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
     {
+        $imageProperties = $this->getImageProperties($mediaItemObjectOrID, $size);
+        if ($imageProperties === null) {
+            return null;
+        }
         if (is_object($mediaItemObjectOrID)) {
             /** @var WP_Post */
             $mediaItemObject = $mediaItemObjectOrID;
             $mediaItemID = $mediaItemObject->ID;
         } else {
             $mediaItemID = $mediaItemObjectOrID;
-        }
-        $imageProperties = $this->getImageProperties($mediaItemID, $size);
-        if ($imageProperties === null) {
-            return null;
         }
         /** @var int[] */
         $imageSize = [(int)$imageProperties['width'], (int)$imageProperties['height']];
@@ -78,9 +78,16 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     /**
      * @return array{src: string, width: ?int, height: ?int}
      */
-    public function getImageProperties(string|int $image_id, ?string $size = null): ?array
+    public function getImageProperties(string|int|object $mediaItemObjectOrID, ?string $size = null): ?array
     {
-        $img = wp_get_attachment_image_src((int)$image_id, $size);
+        if (is_object($mediaItemObjectOrID)) {
+            /** @var WP_Post */
+            $mediaItemObject = $mediaItemObjectOrID;
+            $mediaItemID = $mediaItemObject->ID;
+        } else {
+            $mediaItemID = $mediaItemObjectOrID;
+        }
+        $img = wp_get_attachment_image_src((int)$mediaItemID, $size);
         if ($img === false) {
             return null;
         }
