@@ -67,6 +67,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
             // Obtain its ID and the required data-fields for that ID
             $object = $idObjects[$id];
             if ($isUnionTypeResolver) {
+                /** @var UnionTypeResolverInterface $unionTypeResolver */
                 $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
             }
             /** @var SplObjectStorage<FieldInterface,mixed> */
@@ -77,6 +78,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
                     continue;
                 }
 
+                /** @var ObjectTypeResolverInterface $targetObjectTypeResolver */
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field);
                 if ($fieldTypeResolver === null) {
                     continue;
