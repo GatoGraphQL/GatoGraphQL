@@ -159,9 +159,9 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'categories':
-                return $categoryTypeAPI->getCustomPostCategories($objectTypeResolver->getID($customPost), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $categoryTypeAPI->getCustomPostCategories($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'categoryNames':
-                return $categoryTypeAPI->getCustomPostCategories($objectTypeResolver->getID($customPost), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $categoryTypeAPI->getCustomPostCategories($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'categoryCount':
                 return $categoryTypeAPI->getCustomPostCategoryCount($customPost, $query);
         }

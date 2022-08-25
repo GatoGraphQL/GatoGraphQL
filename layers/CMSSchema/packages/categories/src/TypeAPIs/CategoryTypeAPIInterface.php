@@ -33,7 +33,7 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array;
+    public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array;
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
