@@ -30,11 +30,11 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     }
 
     /**
-     * @return array<string,mixed>
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param string|int|array<string|int> $objectIDOrIDs
      * @param array<string,mixed>|null $executed
+     * @return array<string,mixed>
      */
     public function getDatasetmeta(
         Component $component,
