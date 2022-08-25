@@ -30,9 +30,10 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     use BasicServiceTrait;
 
     /**
-     * @var array<string,mixed>|null
+     * @var array<string,mixed>
      */
-    protected ?array $fullSchemaDefinitionForGraphQL = null;
+    protected array $fullSchemaDefinitionForGraphQL;
+    protected bool $fullSchemaDefinitionForGraphQLInitialized = false;
     /**
      * @var array<string,SchemaDefinitionReferenceObjectInterface>
      */
@@ -90,7 +91,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     public function &getFullSchemaDefinitionForGraphQL(): array
     {
-        if ($this->fullSchemaDefinitionForGraphQL === null) {
+        if (!$this->fullSchemaDefinitionForGraphQLInitialized) {
+            $this->fullSchemaDefinitionForGraphQLInitialized = true;
             $this->fullSchemaDefinitionForGraphQL = $this->doGetGraphQLSchemaDefinition();
         }
 
@@ -109,6 +111,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      */
     private function &doGetGraphQLSchemaDefinition(): array
     {
+        /**
+         * @var array<string,mixed>|null
+         */
+        $fullSchemaDefinitionForGraphQL = null;
+
         // Attempt to retrieve from the cache, if enabled
         /** @var APIModuleConfiguration */
         $moduleConfiguration = App::getModule(APIModule::class)->getConfiguration();
@@ -127,25 +134,28 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
             $persistentCache = $this->getPersistentCache();
             if ($persistentCache->hasCache($cacheKey, $cacheType)) {
-                $this->fullSchemaDefinitionForGraphQL = $persistentCache->getCache($cacheKey, $cacheType);
+                $fullSchemaDefinitionForGraphQL = $persistentCache->getCache($cacheKey, $cacheType);
             }
         }
 
         // If either not using cache, or using but the value had not been cached, then calculate the value
-        if ($this->fullSchemaDefinitionForGraphQL === null) {
+        if ($fullSchemaDefinitionForGraphQL === null) {
             // Get the schema definitions
-            $this->fullSchemaDefinitionForGraphQL = $this->getSchemaDefinitionService()->getFullSchemaDefinition();
+            $fullSchemaDefinitionForGraphQL = $this->getSchemaDefinitionService()->getFullSchemaDefinition();
 
             // Convert the schema from PoP's format to what GraphQL needs to work with
             $this->prepareSchemaDefinitionForGraphQL();
 
             // Store in the cache
             if ($useCache) {
-                $persistentCache->storeCache($cacheKey, $cacheType, $this->fullSchemaDefinitionForGraphQL);
+                $persistentCache->storeCache($cacheKey, $cacheType, $fullSchemaDefinitionForGraphQL);
             }
         }
 
-        return $this->fullSchemaDefinitionForGraphQL;
+        /**
+         * @var array<string,mixed>
+         */
+        return $fullSchemaDefinitionForGraphQL;
     }
 
     protected function prepareSchemaDefinitionForGraphQL(): void
