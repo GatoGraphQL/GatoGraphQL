@@ -138,7 +138,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
             if ($this->neverExclude) {
                 return false;
             }
-            if (!is_null($this->not_excluded_ancestor_component)) {
+            if ($this->not_excluded_ancestor_component !== null) {
                 return false;
             }
 
@@ -178,7 +178,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
             $this->init();
         }
         if ($this->selected_filter_name) {
-            if (!$this->neverExclude && is_null($this->not_excluded_ancestor_component) && $this->excludeSubcomponent($component, $props) === false) {
+            if (!$this->neverExclude && $this->not_excluded_ancestor_component === null && $this->excludeSubcomponent($component, $props) === false) {
                 // Set the current component as the one which is not excluded.
                 $component_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
@@ -211,7 +211,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         $this->getComponentPathManager()->restoreFromPropagation($component, $props);
 
         if ($this->selected_filter_name) {
-            if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_component) && $this->excludeSubcomponent($component, $props) === false) {
+            if (!$this->neverExclude && $this->not_excluded_ancestor_component !== null && $this->excludeSubcomponent($component, $props) === false) {
                 $component_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
 
