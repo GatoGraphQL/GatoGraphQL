@@ -108,7 +108,9 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
      */
     public function addQueryVar(array $query_vars): array
     {
-        $query_vars[] = (string)$this->endpoint;
+        /** @var string */
+        $endpoint = $this->endpoint;
+        $query_vars[] = $endpoint;
         return $query_vars;
     }
 }
