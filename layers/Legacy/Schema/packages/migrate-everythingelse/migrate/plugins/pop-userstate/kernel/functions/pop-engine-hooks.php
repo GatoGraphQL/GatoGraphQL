@@ -23,7 +23,7 @@ class PoP_UserState_EngineHooks
             8
         );
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getComponentData:end',
+            Engine::HOOK_ENGINE_ITERATION_END,
             $this->end(...),
             10,
             5

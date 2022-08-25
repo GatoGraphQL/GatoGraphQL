@@ -1620,7 +1620,7 @@ class Engine implements EngineInterface
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
-            '\PoP\ComponentModel\Engine:getComponentData:end',
+            self::HOOK_ENGINE_ITERATION_END,
             $root_component,
             array(&$root_model_props),
             array(&$root_props),
