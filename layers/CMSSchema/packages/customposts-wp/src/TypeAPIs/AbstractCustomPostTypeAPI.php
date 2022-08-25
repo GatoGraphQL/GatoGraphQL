@@ -300,11 +300,12 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     protected function getCustomPostObject(string|int|object $customPostObjectOrID): ?object
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPost;
+        if (is_object($customPostObjectOrID)) {
+            return $customPostObjectOrID;
+        }
+        /** @var string|int */
+        $customPostID = $customPostObjectOrID;
+        return \get_post((int)$customPostID);
     }
 
     protected function getCustomPostID(string|int|object $customPostObjectOrID): int
