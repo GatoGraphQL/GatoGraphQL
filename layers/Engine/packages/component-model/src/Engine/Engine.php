@@ -1784,15 +1784,17 @@ class Engine implements EngineInterface
                         $targetObjectTypeResolvers = $relationalTypeResolver->getObjectIDTargetTypeResolvers($objectTypeResolver_ids);
                         $iterationObjectTypeResolverNameDataItems = [];
                         foreach ($objectTypeResolver_ids as $id) {
+                            $targetObjectTypeResolver = $targetObjectTypeResolvers[$id];
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
-                            if ($targetObjectTypeResolver = $targetObjectTypeResolvers[$id] ?? null) {
-                                $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
-                                $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
-                                    'targetObjectTypeResolver' => $targetObjectTypeResolver,
-                                    'objectIDs' => [],
-                                ];
-                                $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName]['objectIDs'][] = $id;
+                            if ($targetObjectTypeResolver === null) {
+                                continue;
                             }
+                            $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
+                            $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
+                                'targetObjectTypeResolver' => $targetObjectTypeResolver,
+                                'objectIDs' => [],
+                            ];
+                            $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName]['objectIDs'][] = $id;
                         }
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
