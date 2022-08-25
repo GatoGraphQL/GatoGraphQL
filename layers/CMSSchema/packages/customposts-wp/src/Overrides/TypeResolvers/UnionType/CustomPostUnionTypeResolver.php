@@ -29,9 +29,10 @@ class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
         if ($customPosts = array_filter($customPostUnionTypeDataLoader->getObjects($ids))) {
             foreach ($customPosts as $customPost) {
                 $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($customPost);
-                if ($targetObjectTypeResolver !== null) {
-                    $objectIDTargetTypeResolvers[$targetObjectTypeResolver->getID($customPost)] = $targetObjectTypeResolver;
+                if ($targetObjectTypeResolver === null) {
+                    continue;
                 }
+                $objectIDTargetTypeResolvers[$targetObjectTypeResolver->getID($customPost)] = $targetObjectTypeResolver;
             }
         }
         return $objectIDTargetTypeResolvers;
