@@ -283,9 +283,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $category->slug;
     }
 
-    public function getCategoryName(string|int|object $catObjectOrID): string
+    public function getCategoryName(string|int|object $catObjectOrID): ?string
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         return $category->name;
     }
 
