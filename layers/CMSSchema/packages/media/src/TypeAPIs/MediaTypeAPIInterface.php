@@ -14,7 +14,7 @@ interface MediaTypeAPIInterface
      */
     public function isInstanceOfMediaType(object $object): bool;
 
-    public function getMediaItemSrc(string|int $media_id): ?string;
+    public function getMediaItemSrc(string|int|object $mediaItemObjectOrID): ?string;
     public function getImageSrc(string|int $image_id, ?string $size = null): ?string;
     public function getImageSrcSet(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string;
     public function getImageSizes(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string;

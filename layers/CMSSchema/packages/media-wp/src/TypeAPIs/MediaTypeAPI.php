@@ -26,9 +26,16 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return ($object instanceof WP_Post) && $object->post_type === 'attachment';
     }
 
-    public function getMediaItemSrc(string|int $media_id): ?string
+    public function getMediaItemSrc(string|int|object $mediaItemObjectOrID): ?string
     {
-        $url = \wp_get_attachment_url((int)$media_id);
+        if (is_object($mediaItemObjectOrID)) {
+            /** @var WP_Post */
+            $mediaItemObject = $mediaItemObjectOrID;
+            $mediaItemID = $mediaItemObject->ID;
+        } else {
+            $mediaItemID = $mediaItemObjectOrID;
+        }
+        $url = \wp_get_attachment_url((int)$mediaItemID);
         if ($url === false) {
             return null;
         }
