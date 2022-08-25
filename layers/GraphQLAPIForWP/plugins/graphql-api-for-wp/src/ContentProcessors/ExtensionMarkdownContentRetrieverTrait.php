@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 
 trait ExtensionMarkdownContentRetrieverTrait
 {
+    /**
+     * @phpstan-return class-string<ExtensionInterface>
+     */
     abstract protected function getExtensionClass(): string;
 
     /**
