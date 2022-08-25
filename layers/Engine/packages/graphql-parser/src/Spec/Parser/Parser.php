@@ -238,6 +238,7 @@ class Parser extends Tokenizer implements ParserInterface
         while (!$this->match(Token::TYPE_RPAREN) && !$this->end()) {
             $this->eat(Token::TYPE_COMMA);
 
+            /** @var Token */
             $variableToken = $this->eat(Token::TYPE_VARIABLE);
             $nameToken     = $this->eatIdentifierToken();
             $this->eat(Token::TYPE_COLON);
@@ -641,6 +642,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function parseList(): InputList
     {
+        /** @var Token */
         $startToken = $this->eat(Token::TYPE_LSQUARE_BRACE);
 
         $list = [];
@@ -670,6 +672,7 @@ class Parser extends Tokenizer implements ParserInterface
      */
     protected function parseObject(): InputObject
     {
+        /** @var Token */
         $startToken = $this->eat(Token::TYPE_LBRACE);
 
         // Use stdClass instead of array
