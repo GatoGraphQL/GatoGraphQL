@@ -94,7 +94,9 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 $value = array();
                 $cats = $eventTypeAPI->getCategories($event);
                 foreach ($cats as $cat) {
-                    $value[] = $eventTagTypeAPI->getCategorySlug($cat);
+                    /** @var string */
+                    $slug = $eventTagTypeAPI->getCategorySlug($cat);
+                    $value[] = $slug;
                 }
                 return $value;
 

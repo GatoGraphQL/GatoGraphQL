@@ -134,6 +134,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
                 return $categoryTypeAPI->getCategoryName($category);
 
             case 'slug':
+                /** @var string */
                 return $categoryTypeAPI->getCategorySlug($category);
 
             case 'description':
