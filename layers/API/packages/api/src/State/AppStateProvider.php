@@ -101,18 +101,18 @@ class AppStateProvider extends AbstractAppStateProvider
             );
             $executableDocument = $graphQLQueryParsingPayload->executableDocument;
             $state['document-object-resolved-field-value-referenced-fields'] = $graphQLQueryParsingPayload->objectResolvedFieldValueReferencedFields;
-        } catch (AbstractParserException $parserException) {
-            App::getFeedbackStore()->documentFeedbackStore->addError(
-                new DocumentFeedback(
-                    $parserException->getFeedbackItemResolution(),
-                    $parserException->getLocation(),
-                )
-            );
         } catch (ASTNodeParserException $astNodeParserException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
                     $astNodeParserException->getFeedbackItemResolution(),
                     $astNodeParserException->getAstNode(),
+                )
+            );
+        } catch (AbstractParserException $parserException) {
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new DocumentFeedback(
+                    $parserException->getFeedbackItemResolution(),
+                    $parserException->getLocation(),
                 )
             );
         }
