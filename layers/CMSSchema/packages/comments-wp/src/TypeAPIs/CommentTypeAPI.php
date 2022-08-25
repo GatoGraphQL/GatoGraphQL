@@ -13,6 +13,7 @@ use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
+use WP_Post;
 
 use function get_comments;
 use function get_comment;
