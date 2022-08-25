@@ -41,7 +41,7 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostTags(string|int $customPostID, array $query = [], array $options = []): array;
+    public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array;
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
