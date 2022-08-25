@@ -20,6 +20,11 @@ class RequestHelperService implements RequestHelperServiceInterface
             return null;
         }
 
+        $requestedFullURL = $this->getRequestedFullURL();
+        if ($requestedFullURL === null) {
+            return null;
+        }
+
         // Strip the Target and Output off it, users don't need to see those
         $remove_params = (array) App::applyFilters(
             'RequestUtils:current_url:remove_params',
@@ -41,7 +46,7 @@ class RequestHelperService implements RequestHelperServiceInterface
         );
         $url = GeneralUtils::removeQueryArgs(
             $remove_params,
-            $this->getRequestedFullURL()
+            $requestedFullURL
         );
 
         // Allow plug-ins to do their own logic to the URL
