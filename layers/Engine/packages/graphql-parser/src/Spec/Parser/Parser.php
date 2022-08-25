@@ -109,9 +109,9 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function parseOperation(string $type): OperationInterface
     {
-        $operationLocation  = null;
         $directives = [];
-        $operationName = null;
+        $operationLocation = $this->getLocation();
+        $operationName = '';
         $variables = [];
         $this->variables = [];
 
@@ -121,8 +121,10 @@ class Parser extends Tokenizer implements ParserInterface
             $this->lex();
 
             $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
-            $operationName = $operationToken === null ? '' : (string)$operationToken->getData();
-            $operationLocation = $operationToken !== null ? $this->getTokenLocation($operationToken) : $this->getLocation();
+            if ($operationToken !== null) {
+                $operationName = (string)$operationToken->getData();
+                $operationLocation = $this->getTokenLocation($operationToken);
+            }
 
             if ($this->match(Token::TYPE_LPAREN)) {
                 $variables = $this->parseVariables();
