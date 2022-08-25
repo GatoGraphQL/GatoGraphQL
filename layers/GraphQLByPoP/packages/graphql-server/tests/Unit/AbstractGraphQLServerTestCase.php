@@ -13,7 +13,7 @@ use RuntimeException;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
-    private static ?GraphQLServer $graphQLServer = null;
+    private static GraphQLServer $graphQLServer;
 
     public static function setUpBeforeClass(): void
     {
