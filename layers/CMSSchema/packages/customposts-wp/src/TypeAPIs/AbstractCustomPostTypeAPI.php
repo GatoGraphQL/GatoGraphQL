@@ -235,9 +235,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getPermalink(string|int|object $customPostObjectOrID): ?string
     {
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
-        if ($customPostID === null) {
-            return null;
-        }
         if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
             $permalink = get_permalink($customPostID);
             if ($permalink === false) {
@@ -310,13 +307,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $customPost;
     }
 
-    protected function getCustomPostID(string|int|object $customPostObjectOrID): ?int
+    protected function getCustomPostID(string|int|object $customPostObjectOrID): int
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPostID;
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            return $customPost->ID;
+        }
+        return $customPostObjectOrID;
     }
 
     public function getTitle(string|int|object $customPostObjectOrID): ?string

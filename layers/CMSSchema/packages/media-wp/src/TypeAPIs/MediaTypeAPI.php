@@ -191,9 +191,6 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     public function getAltText(string|int|object $mediaObjectOrID): ?string
     {
         $mediaItemID = $this->getCustomPostID($mediaObjectOrID);
-        if ($mediaItemID === null) {
-            return null;
-        }
         return get_post_meta($mediaItemID, '_wp_attachment_image_alt', true);
     }
 
