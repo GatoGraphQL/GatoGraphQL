@@ -62,7 +62,7 @@ class GraphQLQueryPostTypeHelpers
          */
         $graphQLQuery = '';
         $graphQLVariables = [];
-        while (!is_null($graphQLQueryPost)) {
+        while ($graphQLQueryPost !== null) {
             /**
              * If the query has a parent, maybe get the query/variables from the parent
              */
