@@ -94,6 +94,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
              * If this input field is an InputObject, then copy as an array under the specified entry
              */
             if ($isQueryableInputObjectTypeResolver) {
+                /** @var QueryableInputObjectTypeResolverInterface $queryableInputObjectTypeResolver */
                 $query[$queryArgName] = [];
                 $queryableInputObjectTypeResolver->integrateInputValueToFilteringQueryArgs($query[$queryArgName], $inputFieldValue);
                 return;
@@ -109,6 +110,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
          * If the input field is an InputObject, recursively apply this function
          */
         if ($isQueryableInputObjectTypeResolver) {
+            /** @var QueryableInputObjectTypeResolverInterface $queryableInputObjectTypeResolver */
             $queryableInputObjectTypeResolver->integrateInputValueToFilteringQueryArgs($query, $inputFieldValue);
         }
     }
