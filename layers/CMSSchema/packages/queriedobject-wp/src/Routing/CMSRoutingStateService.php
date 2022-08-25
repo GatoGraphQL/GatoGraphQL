@@ -44,14 +44,17 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
             return null;
         }
 
+        /** @var WP_Query */
+        $query = $this->query;
+
         if (
-            $this->query->is_tag() ||
-            $this->query->is_page() ||
-            $this->query->is_single() ||
-            $this->query->is_author() ||
-            $this->query->is_category()
+            $query->is_tag() ||
+            $query->is_page() ||
+            $query->is_single() ||
+            $query->is_author() ||
+            $query->is_category()
         ) {
-            return $this->query->get_queried_object_id();
+            return $query->get_queried_object_id();
         }
 
         return null;
