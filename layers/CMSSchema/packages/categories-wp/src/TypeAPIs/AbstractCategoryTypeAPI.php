@@ -87,8 +87,16 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostCategoryCount(string|int $customPostID, array $query = [], array $options = []): int
+    public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
     {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = (int)$customPostObjectOrID;
+        }
+        
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
         // but it doesn't work)
@@ -101,7 +109,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Resolve and count
-        $categories = wp_get_post_terms((int)$customPostID, $this->getCategoryTaxonomyName(), $query);
+        $categories = wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
         if ($categories instanceof WP_Error) {
             return 0;
         }
