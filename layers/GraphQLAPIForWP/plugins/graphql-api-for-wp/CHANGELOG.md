@@ -194,7 +194,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements in Development and Testing
 
-- Completed hundreds of new PHPUnit tests
+- Created several hundred new unit and integration tests
+- Upgraded all code to PHPStan's level 8
 - Bumped the min PHP version to 8.1 for development
 
 ### Breaking changes
