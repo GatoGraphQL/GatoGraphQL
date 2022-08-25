@@ -60,7 +60,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         } else {
             $mediaItemID = $mediaItemObjectOrID;
         }
-        $srcSet = \wp_get_attachment_image_srcset((int)$mediaItemID, $size);
+        $srcSet = \wp_get_attachment_image_srcset((int)$mediaItemID, $size ?? 'medium');
         if ($srcSet === false) {
             return null;
         }
@@ -101,7 +101,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         } else {
             $mediaItemID = $mediaItemObjectOrID;
         }
-        $img = wp_get_attachment_image_src((int)$mediaItemID, $size);
+        $img = wp_get_attachment_image_src((int)$mediaItemID, $size ?? 'thumbnail');
         if ($img === false) {
             return null;
         }
