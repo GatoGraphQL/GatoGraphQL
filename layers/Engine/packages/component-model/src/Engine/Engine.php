@@ -1339,8 +1339,8 @@ class Engine implements EngineInterface
             $component_path_key = $this->getComponentPathKey($component_path, $component);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
-            $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
-            $mutation_checkpoint_validation = $executed = $objectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeOutputKey = null;
+            $dataset_meta = $objectIDs = $typeDBObjectIDs = $objectIDOrIDs = $typeDBObjectIDOrIDs = [];
+            $mutation_checkpoint_validation = $executed = $relationalTypeOutputKey = null;
             if ($load_data) {
                 // ------------------------------------------
                 // Action Executers
