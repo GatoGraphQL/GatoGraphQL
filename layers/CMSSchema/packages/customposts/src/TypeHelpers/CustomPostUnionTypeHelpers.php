@@ -58,7 +58,7 @@ class CustomPostUnionTypeHelpers
      */
     public static function getCustomPostUnionOrTargetObjectTypeResolver(
         ?UnionTypeResolverInterface $unionTypeResolver = null
-    ): UnionTypeResolverInterface|ObjectTypeResolverInterface|null {
+    ): UnionTypeResolverInterface|ObjectTypeResolverInterface {
         if ($unionTypeResolver === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var CustomPostUnionTypeResolver */
@@ -74,8 +74,7 @@ class CustomPostUnionTypeHelpers
                     $targetTypeResolvers[0] :
                     $unionTypeResolver;
             }
-            return $unionTypeResolver;
         }
-        return null;
+        return $unionTypeResolver;
     }
 }
