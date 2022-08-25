@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -1762,6 +1763,18 @@ GRAPHQL;
               id
               dateStr(format: $1)
             }
+          }
+        ');
+    }
+
+    public function testUnsupportedSubscriptions(): void
+    {
+        $this->expectException(FeatureNotSupportedException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_7))->getMessage());
+        $parser = $this->getParser();
+        $parser->parse('
+          subscription {
+            id
           }
         ');
     }
