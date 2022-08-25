@@ -225,7 +225,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
-                $imgSrc = $this->getMediaTypeAPI()->getImageSrc($objectTypeResolver->getID($media), $size);
+                $imgSrc = $this->getMediaTypeAPI()->getImageSrc($media, $size);
                 if ($imgSrc !== null) {
                     return $imgSrc;
                 }

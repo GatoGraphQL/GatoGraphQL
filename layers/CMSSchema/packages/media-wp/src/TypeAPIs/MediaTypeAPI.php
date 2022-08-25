@@ -42,9 +42,9 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $url;
     }
 
-    public function getImageSrc(string|int $image_id, ?string $size = null): ?string
+    public function getImageSrc(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
     {
-        $img = $this->getImageProperties($image_id, $size);
+        $img = $this->getImageProperties($mediaItemObjectOrID, $size);
         if ($img === null) {
             return null;
         }
