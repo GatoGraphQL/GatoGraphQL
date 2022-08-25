@@ -1373,11 +1373,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this,
             [$field],
         );
+        /** @var array<string,mixed> $fieldArgs */
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
             return null;
         }
-        /** @var array<string,mixed> $fieldArgs */
 
         foreach ($remainingObjectIDs as $id) {
             $object = $idObjects[$id];
