@@ -641,10 +641,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ) {
             /**
              * Please notice: we can get the fieldVersion directly from this instance,
-             * and not from the schemaDefinition, because the version is set at the ObjectTypeFieldResolver level,
-             * and not the InterfaceTypeFieldResolver, which is the other entity filling data
-             * inside the schemaDefinition object.
+             * and not from the schemaDefinition, because the version is set at
+             * the ObjectTypeFieldResolver level, and not the InterfaceTypeFieldResolver,
+             * which is the other entity filling data inside the schemaDefinition object.
+             *
              * If this field is tagged with a version...
+             *
+             * @var string
              */
             $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $field->getName());
             /**
