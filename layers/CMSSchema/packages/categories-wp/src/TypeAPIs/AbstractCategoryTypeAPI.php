@@ -95,7 +95,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
+    public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
         if (is_object($customPostObjectOrID)) {
             /** @var WP_Post */
@@ -119,7 +119,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         // Resolve and count
         $categories = wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
         if ($categories instanceof WP_Error) {
-            return 0;
+            return null;
         }
         /** @var string[] $categories */
         return count($categories);

@@ -163,6 +163,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             case 'categoryNames':
                 return $categoryTypeAPI->getCustomPostCategories($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'categoryCount':
+                /** @var int */
                 return $categoryTypeAPI->getCustomPostCategoryCount($customPost, $query);
         }
 
