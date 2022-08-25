@@ -19,35 +19,36 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
         /**
          * Subject to the endpoint having been defined
          */
-        if ($this->endpoint) {
-            /**
-             * Register the endpoints
-             */
-            App::addAction(
-                'init',
-                $this->addRewriteEndpoints(...)
-            );
-            App::addFilter(
-                'query_vars',
-                $this->addQueryVar(...),
-                10,
-                1
-            );
-            App::addAction(
-                'parse_request',
-                $this->parseRequest(...)
-            );
-
-            // // If it is a partial endpoint, we must add all the combinations of routes to Cortex
-            // if (!$this->doesEndpointMatchWholeURL()) {
-            //     App::addFilter(
-            //         'route-endpoints',
-            //         $this->getRouteEndpoints(...),
-            //         10,
-            //         1
-            //     );
-            // }
+        if (!$this->endpoint) {
+            return;
         }
+        /**
+         * Register the endpoints
+         */
+        App::addAction(
+            'init',
+            $this->addRewriteEndpoints(...)
+        );
+        App::addFilter(
+            'query_vars',
+            $this->addQueryVar(...),
+            10,
+            1
+        );
+        App::addAction(
+            'parse_request',
+            $this->parseRequest(...)
+        );
+
+        // // If it is a partial endpoint, we must add all the combinations of routes to Cortex
+        // if (!$this->doesEndpointMatchWholeURL()) {
+        //     App::addFilter(
+        //         'route-endpoints',
+        //         $this->getRouteEndpoints(...),
+        //         10,
+        //         1
+        //     );
+        // }
     }
 
     // public function getRouteEndpoints(array $endpoints): array
@@ -64,9 +65,10 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
      */
     public function parseRequest(): void
     {
-        if ($this->isEndpointRequested()) {
-            $this->executeEndpoint();
+        if (!$this->isEndpointRequested()) {
+            return;
         }
+        $this->executeEndpoint();
     }
 
     /**
