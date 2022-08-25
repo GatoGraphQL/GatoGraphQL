@@ -53,15 +53,22 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $srcSet;
     }
 
-    public function getImageSizes(string|int $image_id, ?string $size = null): ?string
+    public function getImageSizes(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
     {
-        $imageProperties = $this->getImageProperties($image_id, $size);
+        if (is_object($mediaItemObjectOrID)) {
+            /** @var WP_Post */
+            $mediaItemObject = $mediaItemObjectOrID;
+            $mediaItemID = $mediaItemObject->ID;
+        } else {
+            $mediaItemID = $mediaItemObjectOrID;
+        }
+        $imageProperties = $this->getImageProperties($mediaItemID, $size);
         if ($imageProperties === null) {
             return null;
         }
         /** @var int[] */
         $imageSize = [(int)$imageProperties['width'], (int)$imageProperties['height']];
-        $sizes = \wp_calculate_image_sizes($imageSize, $imageProperties['src'], null, (int)$image_id);
+        $sizes = \wp_calculate_image_sizes($imageSize, $imageProperties['src'], null, (int)$mediaItemID);
         if ($sizes === false) {
             return null;
         }
