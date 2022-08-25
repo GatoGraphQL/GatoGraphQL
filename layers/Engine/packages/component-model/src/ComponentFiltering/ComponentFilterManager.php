@@ -26,7 +26,8 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     protected array $componentfilters = [];
     protected bool $initialized = false;
     /**
-     * From the moment in which a component is not excluded, every component from then on must also be included
+     * From the moment in which a component is not excluded,
+     * every component from then on must also be included
      */
     protected ?string $not_excluded_ancestor_component = null;
     /**
