@@ -1507,13 +1507,13 @@ class Engine implements EngineInterface
                     }
                     $this->processAndAddComponentData($referencer_componentPath, $referencer_component, $referencer_component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
                 }
-            }
 
-            // Incorporate the background URLs
-            $engineState->backgroundload_urls = array_merge(
-                $engineState->backgroundload_urls,
-                $processor->getBackgroundurlsMergeddatasetcomponentTree($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
-            );
+                // Incorporate the background URLs
+                $engineState->backgroundload_urls = array_merge(
+                    $engineState->backgroundload_urls,
+                    $processor->getBackgroundurlsMergeddatasetcomponentTree($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
+                );
+            }
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
             App::doAction(
