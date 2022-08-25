@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserMetaWP\TypeAPIs;
 
 use PoPCMSSchema\UserMeta\TypeAPIs\AbstractUserMetaTypeAPI;
-
 use WP_User;
 
 /**
