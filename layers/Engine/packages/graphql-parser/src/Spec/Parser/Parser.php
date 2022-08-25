@@ -110,20 +110,29 @@ class Parser extends Tokenizer implements ParserInterface
     protected function parseOperation(string $type): OperationInterface
     {
         $directives = [];
-        $operationLocation = $this->getLocation();
-        $operationName = '';
         $variables = [];
         $this->variables = [];
 
         $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
-
-        if (!$isShorthandQuery && $this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])) {
+        if ($isShorthandQuery) {
+            $lbraceToken = $this->lex();
+            /**
+             * Query shorthand: it has no name, variables or directives
+             * @see https://spec.graphql.org/draft/#sec-Language.Operations.Query-shorthand
+             */
+            $operationName = '';
+            $operationLocation = $this->getTokenLocation($lbraceToken);
+        } else {
+            // Eat: $this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])
             $this->lex();
 
             $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
             if ($operationToken !== null) {
                 $operationName = (string)$operationToken->getData();
                 $operationLocation = $this->getTokenLocation($operationToken);
+            } else {
+                $operationName = '';
+                $operationLocation = $this->getLocation();
             }
 
             if ($this->match(Token::TYPE_LPAREN)) {
@@ -133,17 +142,8 @@ class Parser extends Tokenizer implements ParserInterface
             if ($this->match(Token::TYPE_AT)) {
                 $directives = $this->parseDirectiveList();
             }
-        }
 
-        $lbraceToken = $this->lex();
-
-        /**
-         * Query shorthand: it has no name, variables or directives
-         * @see https://spec.graphql.org/draft/#sec-Language.Operations.Query-shorthand
-         */
-        if ($isShorthandQuery) {
-            $operationName = '';
-            $operationLocation = $this->getTokenLocation($lbraceToken);
+            $lbraceToken = $this->lex();
         }
 
         $fieldsOrFragmentBonds = [];
