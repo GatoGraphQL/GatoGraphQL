@@ -36,7 +36,7 @@ trait ContainerBuilderFactoryTrait
         $directory ??= Environment::getCacheContainerConfigurationDirectory();
         $throwExceptionIfCacheSetupError = Environment::throwExceptionIfCacheSetupError();
         $cacheSetupSuccess = true;
-        $containerClass = $containerNamespace = null;
+        $containerClassName = $containerNamespace = null;
 
         if ($this->cacheContainerConfiguration) {
             /**
@@ -74,9 +74,9 @@ trait ContainerBuilderFactoryTrait
             $directory .= \DIRECTORY_SEPARATOR;
             // Since we have 2 containers, store each under its namespace and classname
             $containerNamespace = $this->getContainerNamespace();
-            $containerClass = $this->getContainerClass();
+            $containerClassName = $this->getContainerClassName();
             $directory .= $containerNamespace . \DIRECTORY_SEPARATOR;
-            $directory .= $containerClass . \DIRECTORY_SEPARATOR;
+            $directory .= $containerClassName . \DIRECTORY_SEPARATOR;
             // On Windows the whole path is limited to 258 chars
             if ($cacheSetupSuccess && '\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
                 if ($throwExceptionIfCacheSetupError) {
@@ -110,7 +110,7 @@ trait ContainerBuilderFactoryTrait
         } else {
             require_once $this->cacheFile;
             /** @var class-string<ContainerBuilder> */
-            $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClass}";
+            $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClassName}";
             $this->instance = new $containerFullyQuantifiedClass();
         }
     }
@@ -129,7 +129,7 @@ trait ContainerBuilderFactoryTrait
         return 'PoPContainer';
     }
 
-    abstract public function getContainerClass(): string;
+    abstract public function getContainerClassName(): string;
 
     /**
      * If the container is not cached, then compile it and cache it
@@ -167,7 +167,7 @@ trait ContainerBuilderFactoryTrait
                         $this->cacheFile,
                         $dumper->dump(
                             [
-                                'class' => $this->getContainerClass(),
+                                'class' => $this->getContainerClassName(),
                                 // Save under own namespace to avoid conflicts
                                 'namespace' => $this->getContainerNamespace(),
                                 /**

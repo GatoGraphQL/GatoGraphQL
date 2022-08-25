@@ -117,6 +117,25 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
                 )
             );
         }
+        // Make sure the parent comment exists
+        // Either provide the customPostID, or retrieve it from the parent comment
+        if ($parentCommentID = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID)) {
+            $parentComment = $this->getCommentTypeAPI()->getComment($parentCommentID);
+            if ($parentComment === null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E6,
+                            [
+                                $parentCommentID,
+                            ]
+                        ),
+                        $field,
+                    )
+                );
+            }
+        }
         if (!$fieldDataAccessor->getValue(MutationInputProperties::COMMENT)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
@@ -178,6 +197,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         // If the parent comment is provided and the custom post is not,
         // then retrieve it from there
         if ($comment_data['parent'] && !$comment_data['customPostID']) {
+            /** @var object */
             $parentComment = $this->getCommentTypeAPI()->getComment($comment_data['parent']);
             $comment_data['customPostID'] = $this->getCommentTypeAPI()->getCommentPostID($parentComment);
         }

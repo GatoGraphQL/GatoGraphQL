@@ -235,9 +235,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getPermalink(string|int|object $customPostObjectOrID): ?string
     {
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
-        if ($customPostID === null) {
-            return null;
-        }
         if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
             $permalink = get_permalink($customPostID);
             if ($permalink === false) {
@@ -271,7 +268,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // Function get_sample_permalink comes from the file below, so it must be included
         // Code below copied from `function get_sample_permalink_html`
         include_once ABSPATH . 'wp-admin/includes/post.php';
-        list($permalink, $post_name) = get_sample_permalink($customPostID, null, null);
+        list($permalink, $post_name) = get_sample_permalink((int)$customPostID, null, null);
         return $post_name;
     }
 
@@ -280,30 +277,45 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         return get_the_excerpt($customPostID);
     }
+
     /**
-     * @return mixed[]
+     * @return array{0:WP_Post|null,1:null|string|int}
      */
     protected function getCustomPostObjectAndID(string|int|object $customPostObjectOrID): array
     {
-        return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = $customPostObjectOrID;
+            /** @var WP_Post|null */
+            $customPost = \get_post((int)$customPostID);
+        }
+        return [
+            $customPost,
+            $customPostID,
+        ];
     }
 
     protected function getCustomPostObject(string|int|object $customPostObjectOrID): ?object
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPost;
+        if (is_object($customPostObjectOrID)) {
+            return $customPostObjectOrID;
+        }
+        /** @var string|int */
+        $customPostID = $customPostObjectOrID;
+        return \get_post((int)$customPostID);
     }
 
-    protected function getCustomPostID(string|int|object $customPostObjectOrID): ?int
+    protected function getCustomPostID(string|int|object $customPostObjectOrID): int
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
-        return $customPostID;
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            return $customPost->ID;
+        }
+        return (int)$customPostObjectOrID;
     }
 
     public function getTitle(string|int|object $customPostObjectOrID): ?string
@@ -373,7 +385,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         }
         return $gmt ? $customPost->post_modified_gmt : $customPost->post_modified;
     }
-    public function getCustomPostType(string|int|object $customPostObjectOrID): string
+    public function getCustomPostType(string|int|object $customPostObjectOrID): ?string
     {
         /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);

@@ -356,12 +356,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
 
+        $objectID = $this->getID($object);
+        if ($objectID === null) {
+            return null;
+        }
+
         /**
          * Resolve promises, or customize the fieldArgs for the object
          */
         $fieldDataAccessor = $this->maybeGetFieldDataAccessorForObject(
             $fieldDataAccessor,
-            $this->getID($object),
+            $objectID,
             $objectTypeFieldResolutionFeedbackStore,
         );
         if ($fieldDataAccessor === null) {
@@ -1368,6 +1373,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this,
             [$field],
         );
+        /** @var array<string,mixed> $fieldArgs */
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
             return null;
@@ -1860,6 +1866,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): FieldDataAccessorInterface {
         if (!$this->fieldDataAccessorForMutationCache->contains($fieldDataAccessor)) {
             $fieldDataAccessorForMutation = $fieldDataAccessor;
+            /** @var ObjectTypeFieldResolverInterface */
             $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
             if ($executableObjectTypeFieldResolver->extractInputObjectFieldForMutation($this, $fieldDataAccessor->getFieldName())) {
                 $inputObjectSubpropertyName = $executableObjectTypeFieldResolver->getFieldArgsInputObjectSubpropertyName($this, $fieldDataAccessor->getField());

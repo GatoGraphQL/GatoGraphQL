@@ -6,13 +6,14 @@ namespace PoP\Root;
 
 use PHPUnit\Framework\TestCase;
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\StateManagers\HookManager;
 use PoP\Root\StateManagers\HookManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class AbstractTestCase extends TestCase
 {
-    protected static ?ContainerInterface $container = null;
+    protected static ContainerInterface $container;
 
     public static function setUpBeforeClass(): void
     {
@@ -70,7 +71,7 @@ abstract class AbstractTestCase extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     protected static function getModuleClassesToInitialize(): array
     {
@@ -92,16 +93,14 @@ abstract class AbstractTestCase extends TestCase
     /**
      * Package's Module class, of type ModuleInterface.
      * By standard, it is "NamespaceOwner\Project\Module::class"
+     *
+     * @return class-string<ModuleInterface>
      */
     protected static function getModuleClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        /** @var class-string<ModuleInterface> */
         return $classNamespace . '\\Module';
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        self::$container = null;
     }
 
     protected function getService(string $service): mixed

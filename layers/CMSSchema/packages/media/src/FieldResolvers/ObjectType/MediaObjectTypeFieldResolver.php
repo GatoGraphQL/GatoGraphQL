@@ -225,19 +225,19 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
-                $imgSrc = $this->getMediaTypeAPI()->getImageSrc($objectTypeResolver->getID($media), $size);
+                $imgSrc = $this->getMediaTypeAPI()->getImageSrc($media, $size);
                 if ($imgSrc !== null) {
                     return $imgSrc;
                 }
-                return $this->getMediaTypeAPI()->getMediaItemSrc($objectTypeResolver->getID($media));
+                return $this->getMediaTypeAPI()->getMediaItemSrc($media);
             case 'width':
             case 'height':
-                $properties = $this->getMediaTypeAPI()->getImageProperties($objectTypeResolver->getID($media), $size);
-                return $properties[$fieldDataAccessor->getFieldName()];
+                $properties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
+                return $properties[$fieldDataAccessor->getFieldName()] ?? null;
             case 'srcSet':
-                return $this->getMediaTypeAPI()->getImageSrcSet($objectTypeResolver->getID($media), $size);
+                return $this->getMediaTypeAPI()->getImageSrcSet($media, $size);
             case 'sizes':
-                return $this->getMediaTypeAPI()->getImageSizes($objectTypeResolver->getID($media), $size);
+                return $this->getMediaTypeAPI()->getImageSizes($media, $size);
             case 'title':
                 return $this->getMediaTypeAPI()->getTitle($media);
             case 'caption':
@@ -247,18 +247,26 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return new DateTime($this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt')));
+                /** @var string */
+                $date = $this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt'));
+                return new DateTime($date);
             case 'dateStr':
+                /** @var string */
+                $date = $this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt'));
                 return $this->getDateFormatter()->format(
                     $fieldDataAccessor->getValue('format'),
-                    $this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt'))
+                    $date
                 );
             case 'modifiedDate':
-                return new DateTime($this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt')));
+                /** @var string */
+                $modifiedDate = $this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt'));
+                return new DateTime($modifiedDate);
             case 'modifiedDateStr':
+                /** @var string */
+                $modifiedDate = $this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt'));
                 return $this->getDateFormatter()->format(
                     $fieldDataAccessor->getValue('format'),
-                    $this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt'))
+                    $modifiedDate
                 );
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);

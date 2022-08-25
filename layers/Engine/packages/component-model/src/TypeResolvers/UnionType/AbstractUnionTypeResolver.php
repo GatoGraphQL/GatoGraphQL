@@ -79,15 +79,15 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $typeDBObjectIDOrIDs = [];
         foreach ($objectIDs as $objectID) {
             // Make sure there is a resolver for this object. If there is none, return the same ID
-            $targetObjectTypeResolver = $objectIDTargetObjectTypeResolvers[$objectID] ?? null;
-            if ($targetObjectTypeResolver !== null) {
-                $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getObjectComposedTypeAndID(
-                    $targetObjectTypeResolver,
-                    $objectID
-                );
-            } else {
+            $targetObjectTypeResolver = $objectIDTargetObjectTypeResolvers[$objectID];
+            if ($targetObjectTypeResolver === null) {
                 $typeDBObjectIDOrIDs[] = $objectID;
+                continue;
             }
+            $typeDBObjectIDOrIDs[] = UnionTypeHelpers::getObjectComposedTypeAndID(
+                $targetObjectTypeResolver,
+                $objectID
+            );
         }
         if (!is_array($objectIDOrIDs)) {
             return $typeDBObjectIDOrIDs[0];
@@ -125,16 +125,17 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             /** @var UnionTypeResolverInterface $relationalTypeResolver */
             $targetTypeResolverNameDataItems = [];
             foreach ($ids as $objectID) {
-                if ($targetObjectTypeResolver = $relationalTypeResolver->getObjectTypeResolverForObject($objectID)) {
-                    $targetObjectTypeName = $targetObjectTypeResolver->getNamespacedTypeName();
-                    $targetTypeResolverNameDataItems[$targetObjectTypeName] ??= [
-                        'targetObjectTypeResolver' => $targetObjectTypeResolver,
-                        'objectIDs' => [],
-                    ];
-                    $targetTypeResolverNameDataItems[$targetObjectTypeName]['objectIDs'][] = $objectID;
-                } else {
+                $targetObjectTypeResolver = $relationalTypeResolver->getObjectTypeResolverForObject($objectID);
+                if ($targetObjectTypeResolver === null) {
                     $objectIDTargetTypeResolvers[$objectID] = null;
+                    continue;
                 }
+                $targetObjectTypeName = $targetObjectTypeResolver->getNamespacedTypeName();
+                $targetTypeResolverNameDataItems[$targetObjectTypeName] ??= [
+                    'targetObjectTypeResolver' => $targetObjectTypeResolver,
+                    'objectIDs' => [],
+                ];
+                $targetTypeResolverNameDataItems[$targetObjectTypeName]['objectIDs'][] = $objectID;
             }
             foreach ($targetTypeResolverNameDataItems as $targetObjectTypeName => $targetTypeResolverDataItems) {
                 $targetObjectTypeResolver = $targetTypeResolverDataItems['targetObjectTypeResolver'];
@@ -143,16 +144,17 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     $targetObjectTypeResolver,
                     $objectIDs
                 );
-                foreach ($targetObjectIDTargetTypeResolvers as $targetObjectID => $targetObjectTypeResolver) {
-                    $objectIDTargetTypeResolvers[$targetObjectID] = $targetObjectTypeResolver;
-                }
+                $objectIDTargetTypeResolvers = array_merge(
+                    $objectIDTargetTypeResolvers,
+                    $targetObjectIDTargetTypeResolvers
+                );
             }
-        } else {
-            /** @var ObjectTypeResolverInterface */
-            $objectTypeResolver = $relationalTypeResolver;
-            foreach ($ids as $objectID) {
-                $objectIDTargetTypeResolvers[$objectID] = $objectTypeResolver;
-            }
+            return $objectIDTargetTypeResolvers;
+        }
+        /** @var ObjectTypeResolverInterface */
+        $objectTypeResolver = $relationalTypeResolver;
+        foreach ($ids as $objectID) {
+            $objectIDTargetTypeResolvers[$objectID] = $objectTypeResolver;
         }
         return $objectIDTargetTypeResolvers;
     }
@@ -207,6 +209,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 $objectID
             ) = UnionTypeHelpers::extractObjectTypeAndID($id);
             $objectIDTargetTypeResolver = $objectIDTargetTypeResolvers[$objectID];
+            if ($objectIDTargetTypeResolver === null) {
+                continue;
+            }
             $mandatoryDirectivesForFields = $targetObjectTypeResolverClassMandatoryDirectivesForFields[get_class($objectIDTargetTypeResolver)];
 
             $this->doEnqueueFillingObjectsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $fieldSet);
@@ -226,11 +231,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             return null;
         }
 
+        /** @var string|int */
+        $objectID = $targetObjectTypeResolver->getID($object);
+
         // Add the type to the ID, so that elements of different types can live side by side
         // The type will be removed again in `getIDsToQuery`
         return UnionTypeHelpers::getObjectComposedTypeAndID(
             $targetObjectTypeResolver,
-            $targetObjectTypeResolver->getID($object)
+            $objectID
         );
     }
 

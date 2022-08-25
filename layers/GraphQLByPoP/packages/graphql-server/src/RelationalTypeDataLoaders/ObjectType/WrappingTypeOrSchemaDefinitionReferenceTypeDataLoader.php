@@ -52,7 +52,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
      * The IDs can contain GraphQL's type wrappers, such as `[String]!`
      *
      * @param array<string|int> $ids
-     * @return array<WrappingTypeInterface|SchemaDefinitionReferenceObjectInterface>
+     * @return array<object|null>
      */
     public function getObjects(array $ids): array
     {
@@ -63,7 +63,7 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
         );
     }
 
-    protected function getWrappingTypeOrSchemaDefinitionReferenceObject(string $typeID): WrappingTypeInterface | SchemaDefinitionReferenceObjectInterface
+    protected function getWrappingTypeOrSchemaDefinitionReferenceObject(string $typeID): WrappingTypeInterface|SchemaDefinitionReferenceObjectInterface|null
     {
         // Check if the type is non-null or an array
         $isNonNullWrappingType = $this->getGraphQLSyntaxService()->isNonNullWrappingType($typeID);

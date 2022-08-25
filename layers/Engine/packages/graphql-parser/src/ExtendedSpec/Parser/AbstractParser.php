@@ -427,11 +427,11 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     ): ?Argument;
 
     /**
-     * @return int[]|null
+     * @return int[]
      */
     abstract protected function getAffectDirectivesUnderPosArgumentDefaultValue(
         Directive $directive,
-    ): ?array;
+    ): array;
 
     /**
      * @return int[]

@@ -8,11 +8,12 @@ use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\HookNames;
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 trait QueryDataComponentProcessorTrait
 {
@@ -118,10 +119,10 @@ trait QueryDataComponentProcessorTrait
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
             $whitelisted_params = (array)App::applyFilters(
                 HookNames::QUERYDATA_WHITELISTEDPARAMS,
-                array(
+                [
                     PaginationParams::PAGE_NUMBER,
                     PaginationParams::LIMIT,
-                )
+                ]
             );
 
             $params_from_request = array_filter(
@@ -131,11 +132,6 @@ trait QueryDataComponentProcessorTrait
                 ),
                 fn (string $param) => in_array($param, $whitelisted_params),
                 ARRAY_FILTER_USE_KEY
-            );
-
-            $params_from_request = App::applyFilters(
-                'QueryDataComponentProcessorTrait:request:filter_params',
-                $params_from_request
             );
 
             // Finally merge it into the data properties
@@ -151,32 +147,48 @@ trait QueryDataComponentProcessorTrait
         }
 
         $relationalTypeResolver = $this->getRelationalTypeResolver($component);
+        if ($relationalTypeResolver === null) {
+            return null;
+        }
+
         /** @var ObjectTypeQueryableDataLoaderInterface */
         $typeDataLoader = $relationalTypeResolver->getRelationalTypeDataLoader();
         return $typeDataLoader->findIDs($data_properties);
     }
 
+    abstract public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface;
+
     /**
-     * @return mixed[]
+     * @param array<string,mixed> $ret
      * @param array<string,mixed> $props
      * @param array<string,mixed> $data_properties
      * @param string|int|array<string|int> $objectIDOrIDs
      * @param array<string,mixed>|null $executed
+     * @return mixed[]
      */
-    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, string|int|array $objectIDOrIDs): array
-    {
-        $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
+    public function addQueryHandlerDatasetmeta(
+        array $ret,
+        Component $component,
+        array &$props,
+        array $data_properties,
+        ?FeedbackItemResolution $dataaccess_checkpoint_validation,
+        ?FeedbackItemResolution $actionexecution_checkpoint_validation,
+        ?array $executed,
+        string|int|array $objectIDOrIDs,
+    ): array {
+        $queryHandler = $this->getQueryInputOutputHandler($component);
+        if ($queryHandler === null) {
+            return $ret;
+        }
 
-        if ($queryHandler = $this->getQueryInputOutputHandler($component)) {
-            if ($query_state = $queryHandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
-                $ret['querystate'] = $query_state;
-            }
-            if ($query_params = $queryHandler->getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
-                $ret['queryparams'] = $query_params;
-            }
-            if ($query_result = $queryHandler->getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
-                $ret['queryresult'] = $query_result;
-            }
+        if ($query_state = $queryHandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
+            $ret['querystate'] = $query_state;
+        }
+        if ($query_params = $queryHandler->getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
+            $ret['queryparams'] = $query_params;
+        }
+        if ($query_result = $queryHandler->getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
+            $ret['queryresult'] = $query_result;
         }
 
         return $ret;

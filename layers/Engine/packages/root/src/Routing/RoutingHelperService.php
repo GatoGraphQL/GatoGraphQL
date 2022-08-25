@@ -31,6 +31,10 @@ class RoutingHelperService implements RoutingHelperServiceInterface
         }
 
         $route = $this->getRequestURI();
+        if ($route === null) {
+            return null;
+        }
+
         $params_pos = strpos($route, '?');
         if ($params_pos !== false) {
             $route = substr($route, 0, $params_pos);

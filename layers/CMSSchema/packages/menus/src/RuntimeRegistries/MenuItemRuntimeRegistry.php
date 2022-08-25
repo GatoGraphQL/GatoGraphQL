@@ -30,8 +30,13 @@ class MenuItemRuntimeRegistry implements MenuItemRuntimeRegistryInterface
     }
 
     /** @return array<string|int,MenuItem> */
-    public function getMenuItemChildren(string|int $id): array
+    public function getMenuItemChildren(string|int|MenuItem $menuItemObjectOrID): array
     {
-        return $this->menuItemsByParent[$id] ?? [];
+        if ($menuItemObjectOrID instanceof MenuItem) {
+            $menuItemID = $menuItemObjectOrID->id;
+        } else {
+            $menuItemID = $menuItemObjectOrID;
+        }
+        return $this->menuItemsByParent[$menuItemID] ?? [];
     }
 }

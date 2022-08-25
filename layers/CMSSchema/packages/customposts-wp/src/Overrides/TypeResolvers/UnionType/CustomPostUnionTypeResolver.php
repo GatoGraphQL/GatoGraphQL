@@ -25,14 +25,23 @@ class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
     {
         $objectIDTargetTypeResolvers = [];
         $customPostUnionTypeDataLoader = $this->getRelationalTypeDataLoader();
+        $resolvedObjectIDs = [];
+        $customPosts = array_filter($customPostUnionTypeDataLoader->getObjects($ids));
         // If any ID cannot be resolved, the object will be null
-        if ($customPosts = array_filter($customPostUnionTypeDataLoader->getObjects($ids))) {
-            foreach ($customPosts as $customPost) {
-                $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($customPost);
-                if ($targetObjectTypeResolver !== null) {
-                    $objectIDTargetTypeResolvers[$targetObjectTypeResolver->getID($customPost)] = $targetObjectTypeResolver;
-                }
+        foreach ($customPosts as $customPost) {
+            $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($customPost);
+            if ($targetObjectTypeResolver === null) {
+                continue;
             }
+            $objectID = $targetObjectTypeResolver->getID($customPost);
+            $resolvedObjectIDs[] = $objectID;
+            $objectIDTargetTypeResolvers[$objectID] = $targetObjectTypeResolver;
+        }
+        /**
+         * Set all the unresolved IDs to null
+         */
+        foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
+            $objectIDTargetTypeResolvers[$unresolvedObjectID] = null;
         }
         return $objectIDTargetTypeResolvers;
     }

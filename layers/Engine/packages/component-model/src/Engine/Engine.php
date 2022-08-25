@@ -62,6 +62,10 @@ class Engine implements EngineInterface
     public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
     public final const CACHETYPE_PROPS = 'props';
 
+    public final const HOOK_ENGINE_ITERATION_START = __CLASS__ . ':engine-iteration-start';
+    public final const HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT = __CLASS__ . ':engine-iteration-on-dataloading-component';
+    public final const HOOK_ENGINE_ITERATION_END = __CLASS__ . ':engine-iteration-end';
+
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
 
@@ -346,16 +350,18 @@ class Engine implements EngineInterface
     }
 
     /**
-     * @return array{0: bool, 1: ?string, 2: ?string}
+     * @return array{0:bool,1:?string,2:?string}
      */
     public function listExtraRouteVars(): array
     {
-        $model_instance_id = $current_uri = null;
-        if ($has_extra_routes = $this->getExtraRoutes() !== []) {
+        $has_extra_routes = $this->getExtraRoutes() !== [];
+        if ($has_extra_routes) {
             $model_instance_id = $this->getModelInstance()->getModelInstanceID();
-            $current_uri = GeneralUtils::removeDomain(
-                $this->getRequestHelperService()->getCurrentURL()
-            );
+            $currentURL = $this->getRequestHelperService()->getCurrentURL();
+            $current_uri = $currentURL !== null ? GeneralUtils::removeDomain($currentURL) : null;
+        } else {
+            $model_instance_id = null;
+            $current_uri = null;
         }
 
         return array($has_extra_routes, $model_instance_id, $current_uri);
@@ -1209,7 +1215,7 @@ class Engine implements EngineInterface
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
-            '\PoP\ComponentModel\Engine:getComponentData:start',
+            self::HOOK_ENGINE_ITERATION_START,
             $root_component,
             array(&$root_model_props),
             array(&$root_props),
@@ -1269,6 +1275,7 @@ class Engine implements EngineInterface
             // The component is the last element in the path.
             // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($component_path);
+            /** @var Component $component */
             $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
@@ -1332,8 +1339,8 @@ class Engine implements EngineInterface
             $component_path_key = $this->getComponentPathKey($component_path, $component);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
-            $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
-            $mutation_checkpoint_validation = $executed = $objectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeOutputKey = null;
+            $dataset_meta = $objectIDs = $typeDBObjectIDs = $objectIDOrIDs = $typeDBObjectIDOrIDs = [];
+            $mutation_checkpoint_validation = $executed = $relationalTypeOutputKey = null;
             if ($load_data) {
                 // ------------------------------------------
                 // Action Executers
@@ -1363,6 +1370,7 @@ class Engine implements EngineInterface
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
                 $load_data = !isset($data_properties[DataloadingConstants::SKIPDATALOAD]) || !$data_properties[DataloadingConstants::SKIPDATALOAD];
                 if ($load_data) {
+                    /** @var RelationalTypeResolverInterface */
                     $relationalTypeResolver = $processor->getRelationalTypeResolver($component);
                     $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
                     $relationalTypeOutputKey = $relationalTypeResolver->getTypeOutputKey();
@@ -1375,6 +1383,8 @@ class Engine implements EngineInterface
                     if ($objectIDOrIDs === null) {
                         $objectIDOrIDs = [];
                     }
+                    /** @var string|int|array<string|int> $objectIDOrIDs */
+
                     // If the type is union, we must add the type to each object
                     $typeDBObjectIDOrIDs = $isUnionTypeResolver ?
                         $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDOrIDs)
@@ -1469,7 +1479,7 @@ class Engine implements EngineInterface
 
             // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
-                if (!is_null($datasetcomponentmeta)) {
+                if ($datasetcomponentmeta !== null) {
                     if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDOrIDs)) {
                         $this->assignValueForComponent($datasetcomponentmeta, $component_path, $component, DataLoading::META, $dataset_meta);
                     }
@@ -1509,15 +1519,9 @@ class Engine implements EngineInterface
                 }
             }
 
-            // Incorporate the background URLs
-            $engineState->backgroundload_urls = array_merge(
-                $engineState->backgroundload_urls,
-                $processor->getBackgroundurlsMergeddatasetcomponentTree($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
-            );
-
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
             App::doAction(
-                '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
+                self::HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT,
                 $component,
                 array(&$component_props),
                 array(&$data_properties),
@@ -1527,6 +1531,12 @@ class Engine implements EngineInterface
                 $objectIDOrIDs,
                 array(&$engineState->helperCalculations),
                 $this
+            );
+
+            // Incorporate the background URLs
+            $engineState->backgroundload_urls = array_merge(
+                $engineState->backgroundload_urls,
+                $processor->getBackgroundurlsMergeddatasetcomponentTree($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
             );
         }
 
@@ -1616,7 +1626,7 @@ class Engine implements EngineInterface
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
-            '\PoP\ComponentModel\Engine:getComponentData:end',
+            self::HOOK_ENGINE_ITERATION_END,
             $root_component,
             array(&$root_model_props),
             array(&$root_props),
@@ -1784,24 +1794,26 @@ class Engine implements EngineInterface
                         $targetObjectTypeResolvers = $relationalTypeResolver->getObjectIDTargetTypeResolvers($objectTypeResolver_ids);
                         $iterationObjectTypeResolverNameDataItems = [];
                         foreach ($objectTypeResolver_ids as $id) {
+                            $targetObjectTypeResolver = $targetObjectTypeResolvers[$id];
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
-                            if ($targetObjectTypeResolver = $targetObjectTypeResolvers[$id] ?? null) {
-                                $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
-                                $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
-                                    'targetObjectTypeResolver' => $targetObjectTypeResolver,
-                                    'objectIDs' => [],
-                                ];
-                                $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName]['objectIDs'][] = $id;
+                            if ($targetObjectTypeResolver === null) {
+                                continue;
                             }
+                            $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
+                            $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
+                                'targetObjectTypeResolver' => $targetObjectTypeResolver,
+                                'objectIDs' => [],
+                            ];
+                            $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName]['objectIDs'][] = $id;
                         }
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
                             $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $targetObjectIDItems, $engineIterationFeedbackStore);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $idObjects, $engineIterationFeedbackStore);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs);
                     }
                 }
             }
@@ -1852,7 +1864,6 @@ class Engine implements EngineInterface
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
-     * @param array<string|int,object> $idObjects
      * @param array<string|int> $typeResolverIDs
      * @param array<string,array<string|int,FieldInterface[]>> $already_loaded_id_fields
      * @param SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> $subcomponents_data_properties
@@ -1867,8 +1878,6 @@ class Engine implements EngineInterface
         array &$already_loaded_id_fields,
         array &$unionTypeOutputKeyIDs,
         array &$combinedUnionTypeOutputKeyIDs,
-        array $idObjects,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $engineState = App::getEngineState();
         $targetTypeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();

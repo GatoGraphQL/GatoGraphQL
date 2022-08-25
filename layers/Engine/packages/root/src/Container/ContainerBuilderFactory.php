@@ -8,7 +8,7 @@ class ContainerBuilderFactory
 {
     use ContainerBuilderFactoryTrait;
 
-    public function getContainerClass(): string
+    public function getContainerClassName(): string
     {
         return 'ApplicationServiceContainer';
     }

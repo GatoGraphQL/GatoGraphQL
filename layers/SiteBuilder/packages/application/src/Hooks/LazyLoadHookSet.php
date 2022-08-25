@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
-use PoP\ComponentModel\Component\Component;
-use PoP\Application\Constants\Actions;
 use PoP\Application\ComponentFilters\Lazy;
 use PoP\Application\ComponentProcessors\DataloadingConstants;
+use PoP\Application\Constants\Actions;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Engine\Engine;
 use PoP\ComponentModel\Engine\EngineInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ConfigurationComponentModel\Constants\Targets;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class LazyLoadHookSet extends AbstractHookSet
@@ -45,19 +46,19 @@ class LazyLoadHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            '\PoP\ComponentModel\Engine:getComponentData:start',
+            Engine::HOOK_ENGINE_ITERATION_START,
             $this->start(...),
             10,
             4
         );
         App::addAction(
-            '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
+            Engine::HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT,
             $this->calculateDataloadingComponentData(...),
             10,
             8
         );
         App::addAction(
-            '\PoP\ComponentModel\Engine:getComponentData:end',
+            Engine::HOOK_ENGINE_ITERATION_END,
             $this->end(...),
             10,
             5

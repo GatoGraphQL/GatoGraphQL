@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Engine\Engine;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -10,19 +11,19 @@ class PoP_UserState_EngineHooks
     public function __construct()
     {
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getComponentData:start',
+            Engine::HOOK_ENGINE_ITERATION_START,
             $this->start(...),
             10,
             4
         );
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getComponentData:dataloading-component',
+            Engine::HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT,
             $this->calculateDataloadingComponentData(...),
             10,
             8
         );
         \PoP\Root\App::addAction(
-            '\PoP\ComponentModel\Engine:getComponentData:end',
+            Engine::HOOK_ENGINE_ITERATION_END,
             $this->end(...),
             10,
             5

@@ -17,11 +17,15 @@ class FeedbackItemRegistry implements FeedbackItemRegistryInterface
     public function useFeedbackItemProvider(FeedbackItemProviderInterface $feedbackItemProvider): void
     {
         foreach ($feedbackItemProvider->getCodes() as $code) {
-            $this->feedbackItemEntries[$feedbackItemProvider->getNamespacedCode($code)] = [
+            $feedbackItemEntry = [
                 FeedbackItemEntryKeys::CATEGORY => $feedbackItemProvider->getCategory($code),
                 FeedbackItemEntryKeys::MESSAGE_PLACEHOLDER => $feedbackItemProvider->getMessagePlaceholder($code),
-                FeedbackItemEntryKeys::SPECIFIED_BY_URL => $feedbackItemProvider->getSpecifiedByURL($code),
             ];
+            $specifiedByURL = $feedbackItemProvider->getSpecifiedByURL($code);
+            if ($specifiedByURL !== null) {
+                $feedbackItemEntry[FeedbackItemEntryKeys::SPECIFIED_BY_URL] = $specifiedByURL;
+            }
+            $this->feedbackItemEntries[$feedbackItemProvider->getNamespacedCode($code)] = $feedbackItemEntry;
         }
     }
 

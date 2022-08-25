@@ -122,24 +122,30 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         $category = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
-                return $categoryTypeAPI->getCategoryURL($objectTypeResolver->getID($category));
+                /** @var string */
+                return $categoryTypeAPI->getCategoryURL($category);
 
             case 'urlAbsolutePath':
-                return $categoryTypeAPI->getCategoryURLPath($objectTypeResolver->getID($category));
+                /** @var string */
+                return $categoryTypeAPI->getCategoryURLPath($category);
 
             case 'name':
-                return $categoryTypeAPI->getCategoryName($objectTypeResolver->getID($category));
+                /** @var string */
+                return $categoryTypeAPI->getCategoryName($category);
 
             case 'slug':
+                /** @var string */
                 return $categoryTypeAPI->getCategorySlug($category);
 
             case 'description':
+                /** @var string */
                 return $categoryTypeAPI->getCategoryDescription($category);
 
             case 'parent':
-                return $categoryTypeAPI->getCategoryParentID($objectTypeResolver->getID($category));
+                return $categoryTypeAPI->getCategoryParentID($category);
 
             case 'count':
+                /** @var int */
                 return $categoryTypeAPI->getCategoryItemCount($category);
         }
 

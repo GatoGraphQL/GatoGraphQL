@@ -69,6 +69,9 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function reset(): void
     {
+        if ($this->requestedOperations === null) {
+            return;
+        }
         foreach ($this->requestedOperations as $operation) {
             $this->propagateContext($operation, null);
         }

@@ -12,6 +12,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Error;
+use WP_Post;
 use WP_Taxonomy;
 use WP_Term;
 
@@ -72,11 +73,19 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostCategories(string|int $customPostID, array $query = [], array $options = []): array
+    public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = (int)$customPostObjectOrID;
+        }
+
         $query = $this->convertCategoriesQuery($query, $options);
 
-        $categories =  wp_get_post_terms((int)$customPostID, $this->getCategoryTaxonomyName(), $query);
+        $categories =  wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
         if ($categories instanceof WP_Error) {
             return [];
         }
@@ -87,8 +96,16 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostCategoryCount(string|int $customPostID, array $query = [], array $options = []): int
+    public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = (int)$customPostObjectOrID;
+        }
+
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
         // but it doesn't work)
@@ -101,9 +118,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Resolve and count
-        $categories = wp_get_post_terms((int)$customPostID, $this->getCategoryTaxonomyName(), $query);
+        $categories = wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
         if ($categories instanceof WP_Error) {
-            return 0;
+            return null;
         }
         /** @var string[] $categories */
         return count($categories);
@@ -170,20 +187,24 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         );
     }
 
-    public function getCategoryURL(string|int|object $catObjectOrID): string
+    public function getCategoryURL(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
         $termLink = get_term_link($catObjectOrID, $this->getCategoryTaxonomyName());
         if ($termLink instanceof WP_Error) {
-            return '';
+            return null;
         }
         return $termLink;
     }
 
-    public function getCategoryURLPath(string|int|object $catObjectOrID): string
+    public function getCategoryURLPath(string|int|object $catObjectOrID): ?string
     {
+        $categoryURL = $this->getCategoryURL($catObjectOrID);
+        if ($categoryURL === null) {
+            return null;
+        }
         /** @var string */
-        return $this->getCMSHelperService()->getLocalURLPath($this->getCategoryURL($catObjectOrID));
+        return $this->getCMSHelperService()->getLocalURLPath($categoryURL);
     }
 
     public function getCategoryBase(): string
@@ -257,21 +278,30 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $catObject;
     }
 
-    public function getCategorySlug(string|int|object $catObjectOrID): string
+    public function getCategorySlug(string|int|object $catObjectOrID): ?string
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         return $category->slug;
     }
 
-    public function getCategoryName(string|int|object $catObjectOrID): string
+    public function getCategoryName(string|int|object $catObjectOrID): ?string
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         return $category->name;
     }
 
     public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         // If it has no parent, it is assigned 0. In that case, return null
         if ($parent = $category->parent) {
             return $parent;
@@ -292,14 +322,20 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $childrenIDs;
     }
 
-    public function getCategoryDescription(string|int|object $catObjectOrID): string
+    public function getCategoryDescription(string|int|object $catObjectOrID): ?string
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         return $category->description;
     }
-    public function getCategoryItemCount(string|int|object $catObjectOrID): int
+    public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
+        if ($category === null) {
+            return null;
+        }
         return $category->count;
     }
 }

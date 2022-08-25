@@ -60,6 +60,8 @@ class App extends AbstractComponentModelAppProxy implements AppInterface
 
     /**
      * Shortcut function.
+     *
+     * @phpstan-param class-string<ExtensionInterface> $extensionClass
      */
     public static function getExtension(string $extensionClass): ExtensionInterface
     {

@@ -11,6 +11,7 @@ class InstanceManager implements InstanceManagerInterface
     public function getInstance(string $class): object
     {
         $containerBuilder = App::getContainer();
+        /** @var object */
         return $containerBuilder->get($class);
     }
 

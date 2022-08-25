@@ -228,6 +228,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
         $params = $request->get_params();
         /** @var string */
         $moduleID = $params[Params::MODULE_ID];
+        /** @var string */
         $module = $this->getModuleByID($moduleID);
         $item = $this->prepareItemForResponse($module);
         return rest_ensure_response($item);
@@ -288,6 +289,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
             if (!is_array($optionValues)) {
                 $optionValues = [];
             }
+            /** @var string */
             $module = $this->getModuleByID($moduleID);
 
             // Normalize the values

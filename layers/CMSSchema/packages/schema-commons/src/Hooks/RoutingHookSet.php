@@ -66,7 +66,9 @@ class RoutingHookSet extends AbstractHookSet
         $homeURL = $this->getCMSService()->getHomeURL();
 
         // Remove the protocol to avoid erroring on http/https
+        /** @var string */
         $homeURL = preg_replace('#^https?://#', '', $homeURL);
+        /** @var string */
         $currentURL = preg_replace('#^https?://#', '', $currentURL);
         if (substr($currentURL, 0, strlen($homeURL)) !== $homeURL) {
             // This is too harsh. Just ignore hook

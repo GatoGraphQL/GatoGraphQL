@@ -109,20 +109,31 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function parseOperation(string $type): OperationInterface
     {
-        $operationLocation  = null;
         $directives = [];
-        $operationName = null;
         $variables = [];
         $this->variables = [];
 
         $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
-
-        if (!$isShorthandQuery && $this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])) {
+        if ($isShorthandQuery) {
+            $lbraceToken = $this->lex();
+            /**
+             * Query shorthand: it has no name, variables or directives
+             * @see https://spec.graphql.org/draft/#sec-Language.Operations.Query-shorthand
+             */
+            $operationName = '';
+            $operationLocation = $this->getTokenLocation($lbraceToken);
+        } else {
+            // Eat: $this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])
             $this->lex();
 
             $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
-            $operationName = $operationToken === null ? '' : (string)$operationToken->getData();
-            $operationLocation = $operationToken !== null ? $this->getTokenLocation($operationToken) : $this->getLocation();
+            if ($operationToken !== null) {
+                $operationName = (string)$operationToken->getData();
+                $operationLocation = $this->getTokenLocation($operationToken);
+            } else {
+                $operationName = '';
+                $operationLocation = $this->getLocation();
+            }
 
             if ($this->match(Token::TYPE_LPAREN)) {
                 $variables = $this->parseVariables();
@@ -131,17 +142,8 @@ class Parser extends Tokenizer implements ParserInterface
             if ($this->match(Token::TYPE_AT)) {
                 $directives = $this->parseDirectiveList();
             }
-        }
 
-        $lbraceToken = $this->lex();
-
-        /**
-         * Query shorthand: it has no name, variables or directives
-         * @see https://spec.graphql.org/draft/#sec-Language.Operations.Query-shorthand
-         */
-        if ($isShorthandQuery) {
-            $operationName = '';
-            $operationLocation = $this->getTokenLocation($lbraceToken);
+            $lbraceToken = $this->lex();
         }
 
         $fieldsOrFragmentBonds = [];
@@ -238,6 +240,7 @@ class Parser extends Tokenizer implements ParserInterface
         while (!$this->match(Token::TYPE_RPAREN) && !$this->end()) {
             $this->eat(Token::TYPE_COMMA);
 
+            /** @var Token */
             $variableToken = $this->eat(Token::TYPE_VARIABLE);
             $nameToken     = $this->eatIdentifierToken();
             $this->eat(Token::TYPE_COLON);
@@ -641,6 +644,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     protected function parseList(): InputList
     {
+        /** @var Token */
         $startToken = $this->eat(Token::TYPE_LSQUARE_BRACE);
 
         $list = [];
@@ -670,6 +674,7 @@ class Parser extends Tokenizer implements ParserInterface
      */
     protected function parseObject(): InputObject
     {
+        /** @var Token */
         $startToken = $this->eat(Token::TYPE_LBRACE);
 
         // Use stdClass instead of array

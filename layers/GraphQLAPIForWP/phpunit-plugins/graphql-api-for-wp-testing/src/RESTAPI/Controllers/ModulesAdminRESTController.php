@@ -157,6 +157,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         $params = $request->get_params();
         /** @var string */
         $moduleID = $params[Params::MODULE_ID];
+        /** @var string */
         $module = $this->getModuleByID($moduleID);
         return $this->prepareItemForResponse($module);
     }
@@ -212,6 +213,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             $moduleID = $params[Params::MODULE_ID];
             /** @var string|null */
             $moduleState = $params[Params::STATE] ?? null;
+            /** @var string */
             $module = $this->getModuleByID($moduleID);
 
             if ($moduleState !== null) {

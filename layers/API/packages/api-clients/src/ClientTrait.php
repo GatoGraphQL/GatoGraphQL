@@ -47,7 +47,7 @@ trait ClientTrait
     /**
      * Endpoint URL
      */
-    abstract protected function getEndpointURLOrURLPath(): string;
+    abstract protected function getEndpointURLOrURLPath(): ?string;
 
     abstract protected function __(string $text, string $domain = 'default'): string;
 
@@ -91,6 +91,11 @@ trait ClientTrait
 
         // Can pass either URL or path under current domain
         $endpoint = $this->getEndpointURLOrURLPath();
+        if ($endpoint === null) {
+            throw new ShouldNotHappenException(
+                $this->__('There is no endpoint for the client')
+            );
+        }
 
         // Maybe enable XDebug
         $endpoint = RequestHelpers::maybeAddParamToDebugRequest($endpoint);
@@ -98,6 +103,8 @@ trait ClientTrait
         /**
          * Must remove the protocol, or we might get an error with status 406
          * @see https://github.com/leoloso/PoP/issues/436
+         *
+         * @var string
          */
         $endpoint = preg_replace('#^https?:#', '', $endpoint);
         // // If namespaced, add /?use_namespace=1 to the endpoint

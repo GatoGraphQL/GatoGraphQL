@@ -26,42 +26,63 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return ($object instanceof WP_Post) && $object->post_type === 'attachment';
     }
 
-    public function getMediaItemSrc(string|int $media_id): ?string
+    public function getMediaItemSrc(string|int|object $mediaItemObjectOrID): ?string
     {
-        $url = \wp_get_attachment_url((int)$media_id);
+        if (is_object($mediaItemObjectOrID)) {
+            /** @var WP_Post */
+            $mediaItemObject = $mediaItemObjectOrID;
+            $mediaItemID = $mediaItemObject->ID;
+        } else {
+            $mediaItemID = $mediaItemObjectOrID;
+        }
+        $url = \wp_get_attachment_url((int)$mediaItemID);
         if ($url === false) {
             return null;
         }
         return $url;
     }
 
-    public function getImageSrc(string|int $image_id, ?string $size = null): ?string
+    public function getImageSrc(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
     {
-        $img = $this->getImageProperties($image_id, $size);
+        $img = $this->getImageProperties($mediaItemObjectOrID, $size);
         if ($img === null) {
             return null;
         }
         return $img['src'];
     }
 
-    public function getImageSrcSet(string|int $image_id, ?string $size = null): ?string
+    public function getImageSrcSet(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
     {
-        $srcSet = \wp_get_attachment_image_srcset((int)$image_id, $size);
+        if (is_object($mediaItemObjectOrID)) {
+            /** @var WP_Post */
+            $mediaItemObject = $mediaItemObjectOrID;
+            $mediaItemID = $mediaItemObject->ID;
+        } else {
+            $mediaItemID = $mediaItemObjectOrID;
+        }
+        $srcSet = \wp_get_attachment_image_srcset((int)$mediaItemID, $size ?? '');
         if ($srcSet === false) {
             return null;
         }
         return $srcSet;
     }
 
-    public function getImageSizes(string|int $image_id, ?string $size = null): ?string
+    public function getImageSizes(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
     {
-        $imageProperties = $this->getImageProperties($image_id, $size);
+        $imageProperties = $this->getImageProperties($mediaItemObjectOrID, $size);
         if ($imageProperties === null) {
             return null;
         }
+        if (is_object($mediaItemObjectOrID)) {
+            /** @var WP_Post */
+            $mediaItemObject = $mediaItemObjectOrID;
+            $mediaItemID = $mediaItemObject->ID;
+        } else {
+            $mediaItemID = $mediaItemObjectOrID;
+        }
         /** @var int[] */
         $imageSize = [(int)$imageProperties['width'], (int)$imageProperties['height']];
-        $sizes = \wp_calculate_image_sizes($imageSize, $imageProperties['src'], null, (int)$image_id);
+        $sizes = \wp_calculate_image_sizes($imageSize, $imageProperties['src'], null, (int)$mediaItemID);
         if ($sizes === false) {
             return null;
         }
@@ -71,9 +92,16 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     /**
      * @return array{src: string, width: ?int, height: ?int}
      */
-    public function getImageProperties(string|int $image_id, ?string $size = null): ?array
+    public function getImageProperties(string|int|object $mediaItemObjectOrID, ?string $size = null): ?array
     {
-        $img = wp_get_attachment_image_src((int)$image_id, $size);
+        if (is_object($mediaItemObjectOrID)) {
+            /** @var WP_Post */
+            $mediaItemObject = $mediaItemObjectOrID;
+            $mediaItemID = $mediaItemObject->ID;
+        } else {
+            $mediaItemID = $mediaItemObjectOrID;
+        }
+        $img = wp_get_attachment_image_src((int)$mediaItemID, $size ?? '');
         if ($img === false) {
             return null;
         }
@@ -191,9 +219,6 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     public function getAltText(string|int|object $mediaObjectOrID): ?string
     {
         $mediaItemID = $this->getCustomPostID($mediaObjectOrID);
-        if ($mediaItemID === null) {
-            return null;
-        }
         return get_post_meta($mediaItemID, '_wp_attachment_image_alt', true);
     }
 

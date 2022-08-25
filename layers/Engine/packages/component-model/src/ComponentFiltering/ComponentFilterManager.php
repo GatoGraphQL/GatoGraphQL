@@ -26,7 +26,8 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     protected array $componentfilters = [];
     protected bool $initialized = false;
     /**
-     * From the moment in which a component is not excluded, every component from then on must also be included
+     * From the moment in which a component is not excluded,
+     * every component from then on must also be included
      */
     protected ?string $not_excluded_ancestor_component = null;
     /**
@@ -76,7 +77,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         // Lazy initialize so that we can inject all the componentFilters before checking the selected one
         $this->selected_filter_name = $this->selected_filter_name ?? $this->getSelectedComponentFilterName();
         if ($this->selected_filter_name) {
-            $this->selected_filter = $this->componentfilters[$this->selected_filter_name];
+            $this->selected_filter = $this->componentfilters[$this->selected_filter_name] ?? null;
 
             // Initialize only if we are intending to filter components. This way, passing componentFilter=somewrongpath will return an empty array, meaning to not render anything
             $this->not_excluded_component_sets = $this->not_excluded_component_sets_as_string = array();
@@ -134,11 +135,11 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         if (!$this->initialized) {
             $this->init();
         }
-        if ($this->selected_filter_name) {
+        if ($this->selected_filter !== null) {
             if ($this->neverExclude) {
                 return false;
             }
-            if (!is_null($this->not_excluded_ancestor_component)) {
+            if ($this->not_excluded_ancestor_component !== null) {
                 return false;
             }
 
@@ -157,7 +158,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         if (!$this->initialized) {
             $this->init();
         }
-        if ($this->selected_filter_name) {
+        if ($this->selected_filter !== null) {
             if ($this->neverExclude) {
                 return $subcomponents;
             }
@@ -177,8 +178,8 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         if (!$this->initialized) {
             $this->init();
         }
-        if ($this->selected_filter_name) {
-            if (!$this->neverExclude && is_null($this->not_excluded_ancestor_component) && $this->excludeSubcomponent($component, $props) === false) {
+        if ($this->selected_filter !== null) {
+            if (!$this->neverExclude && $this->not_excluded_ancestor_component === null && $this->excludeSubcomponent($component, $props) === false) {
                 // Set the current component as the one which is not excluded.
                 $component_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
@@ -186,7 +187,9 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
                 $this->not_excluded_ancestor_component = $this->getComponentPathHelpers()->stringifyComponentPath($component_propagation_current_path);
 
                 // Add it to the list of not-excluded components
-                if (!in_array($this->not_excluded_ancestor_component, $this->not_excluded_component_sets_as_string)) {
+                /** @var string[] */
+                $not_excluded_component_sets_as_string = $this->not_excluded_component_sets_as_string;
+                if (!in_array($this->not_excluded_ancestor_component, $not_excluded_component_sets_as_string)) {
                     $this->not_excluded_component_sets_as_string[] = $this->not_excluded_ancestor_component;
                     $this->not_excluded_component_sets[] = $component_propagation_current_path;
                 }
@@ -210,8 +213,8 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         // Remove the component from the path
         $this->getComponentPathManager()->restoreFromPropagation($component, $props);
 
-        if ($this->selected_filter_name) {
-            if (!$this->neverExclude && !is_null($this->not_excluded_ancestor_component) && $this->excludeSubcomponent($component, $props) === false) {
+        if ($this->selected_filter !== null) {
+            if (!$this->neverExclude && $this->not_excluded_ancestor_component !== null && $this->excludeSubcomponent($component, $props) === false) {
                 $component_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;
 

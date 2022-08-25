@@ -11,6 +11,7 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Error;
+use WP_Post;
 use WP_Taxonomy;
 use WP_Term;
 
@@ -87,8 +88,15 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostTags(string|int $customPostID, array $query = [], array $options = []): array
+    public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = $customPostObjectOrID;
+        }
         $query = $this->convertTagsQuery($query, $options);
         $tags = wp_get_post_terms((int)$customPostID, $this->getTagTaxonomyName(), $query);
         if ($tags instanceof WP_Error) {
@@ -101,8 +109,15 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostTagCount(string|int $customPostID, array $query = [], array $options = []): int
+    public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
     {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = $customPostObjectOrID;
+        }
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_tags`,
         // but it doesn't work)

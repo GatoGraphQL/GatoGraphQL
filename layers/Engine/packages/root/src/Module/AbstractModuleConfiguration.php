@@ -6,6 +6,7 @@ namespace PoP\Root\Module;
 
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractModuleConfiguration implements ModuleConfigurationInterface
 {
@@ -80,10 +81,13 @@ abstract class AbstractModuleConfiguration implements ModuleConfigurationInterfa
     /**
      * Package's Module class, of type ModuleInterface.
      * By standard, it is "NamespaceOwner\Project\Module::class"
+     *
+     * @phpstan-return class-string<ModuleInterface>
      */
     protected function getModuleClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        /** @var class-string<ModuleInterface> */
         return $classNamespace . '\\Module';
     }
 }

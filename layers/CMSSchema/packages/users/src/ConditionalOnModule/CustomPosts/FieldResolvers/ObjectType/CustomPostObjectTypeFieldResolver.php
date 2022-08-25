@@ -83,6 +83,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'author':
+                /** @var string|int */
                 return $this->getCustomPostUserTypeAPI()->getAuthorID($object);
         }
 

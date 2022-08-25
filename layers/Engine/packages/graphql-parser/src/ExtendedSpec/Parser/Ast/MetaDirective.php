@@ -16,9 +16,9 @@ class MetaDirective extends Directive
      */
     public function __construct(
         string $name,
-        array $arguments = [],
-        protected array $nestedDirectives = [],
-        ?Location $location = null,
+        array $arguments,
+        protected array $nestedDirectives,
+        Location $location,
     ) {
         parent::__construct(
             $name,

@@ -641,10 +641,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ) {
             /**
              * Please notice: we can get the fieldVersion directly from this instance,
-             * and not from the schemaDefinition, because the version is set at the ObjectTypeFieldResolver level,
-             * and not the InterfaceTypeFieldResolver, which is the other entity filling data
-             * inside the schemaDefinition object.
+             * and not from the schemaDefinition, because the version is set at
+             * the ObjectTypeFieldResolver level, and not the InterfaceTypeFieldResolver,
+             * which is the other entity filling data inside the schemaDefinition object.
+             *
              * If this field is tagged with a version...
+             *
+             * @var string
              */
             $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $field->getName());
             /**
@@ -1043,13 +1046,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    protected function executeMutation(
+    private function executeMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        // If a MutationResolver is declared, let it resolve the value
+        /** @var MutationResolverInterface */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         try {
             if ($this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {

@@ -110,11 +110,11 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
 
     public function getParentPageID(int|string|object $pageObjectOrID): int|string|null
     {
+        $page = $this->getCustomPostObject($pageObjectOrID);
+        if ($page === null) {
+            return null;
+        }
         /** @var WP_Post $page */
-        list(
-            $page,
-            $pageID,
-        ) = $this->getCustomPostObjectAndID($pageObjectOrID);
 
         $pageParentID = $page->post_parent;
         if ($pageParentID === 0) {

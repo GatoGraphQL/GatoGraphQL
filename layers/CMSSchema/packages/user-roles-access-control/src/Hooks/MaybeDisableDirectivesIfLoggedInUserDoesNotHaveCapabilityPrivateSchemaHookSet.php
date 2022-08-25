@@ -26,6 +26,6 @@ class MaybeDisableDirectivesIfLoggedInUserDoesNotHaveCapabilityPrivateSchemaHook
      */
     protected function doesCurrentUserHaveAnyItem(array $capabilities): bool
     {
-        return UserRoleHelper::doesCurrentUserHaveAnyCapability($capabilities);
+        return UserRoleHelper::doesCurrentUserHaveAnyCapability($capabilities) === true;
     }
 }

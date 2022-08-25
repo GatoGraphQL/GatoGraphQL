@@ -21,12 +21,12 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
      * @param array<string,mixed> $options
      * @throws MetaKeyNotAllowedException
      */
-    final public function getCommentMeta(string|int $commentID, string $key, bool $single = false, array $options = []): mixed
+    final public function getCommentMeta(string|int|object $commentObjectOrID, string $key, bool $single = false, array $options = []): mixed
     {
         if ($options['assert-is-meta-key-allowed'] ?? null) {
             $this->assertIsMetaKeyAllowed($key);
         }
-        return $this->doGetCommentMeta($commentID, $key, $single);
+        return $this->doGetCommentMeta($commentObjectOrID, $key, $single);
     }
 
     /**
@@ -49,5 +49,5 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.
      */
-    abstract protected function doGetCommentMeta(string|int $commentID, string $key, bool $single = false): mixed;
+    abstract protected function doGetCommentMeta(string|int|object $commentObjectOrID, string $key, bool $single = false): mixed;
 }

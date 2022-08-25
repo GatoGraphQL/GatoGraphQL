@@ -12,11 +12,12 @@ use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\Root\Module\ModuleInterface;
 
 class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
 {
     /**
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     protected static function getModuleClassesToInitialize(): array
     {

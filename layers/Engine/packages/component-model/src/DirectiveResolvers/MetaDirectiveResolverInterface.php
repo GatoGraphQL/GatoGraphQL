@@ -15,7 +15,7 @@ interface MetaDirectiveResolverInterface extends DirectiveResolverInterface
      */
     public function getAffectDirectivesUnderPosArgumentName(): string;
     /**
-     * @return int[]|null
+     * @return int[]
      */
-    public function getAffectDirectivesUnderPosArgumentDefaultValue(): ?array;
+    public function getAffectDirectivesUnderPosArgumentDefaultValue(): array;
 }

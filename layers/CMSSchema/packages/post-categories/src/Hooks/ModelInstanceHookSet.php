@@ -72,7 +72,9 @@ class ModelInstanceHookSet extends AbstractHookSet
                 $categories = [];
                 foreach ($this->getPostCategoryTypeAPI()->getCustomPostCategories($postID) as $cat) {
                     $categoryID = is_object($cat) ? $this->getPostCategoryTypeAPI()->getCategoryID($cat) : $cat;
-                    $categories[] = $this->getPostCategoryTypeAPI()->getCategorySlug($cat) . $categoryID;
+                    /** @var string */
+                    $slug = $this->getPostCategoryTypeAPI()->getCategorySlug($cat);
+                    $categories[] = $slug . $categoryID;
                 }
                 $elements[] = $this->__('categories:', 'post-categories') . implode('.', $categories);
             }

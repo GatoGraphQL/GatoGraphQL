@@ -24,6 +24,10 @@ abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoa
         // Organize all IDs by same typeResolver
         $objectTypeResolverNameDataItems = [];
         foreach ($objectIDTargetTypeResolvers as $objectID => $targetObjectTypeResolver) {
+            // If there's no resolver, it's an error: the ID can't be processed by anyone
+            if ($targetObjectTypeResolver === null) {
+                continue;
+            }
             $targetObjectTypeName = $targetObjectTypeResolver->getNamespacedTypeName();
             $objectTypeResolverNameDataItems[$targetObjectTypeName] ??= [
                 'targetObjectTypeResolver' => $targetObjectTypeResolver,

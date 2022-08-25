@@ -14,7 +14,7 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * Have the extensions organized by their class
      *
-     * @var array<string,ExtensionInterface>
+     * @var array<class-string<ExtensionInterface>,ExtensionInterface>
      */
     private array $extensionClassInstances = [];
 
@@ -35,6 +35,9 @@ class ExtensionManager extends AbstractPluginManager
         return $this->extensionBaseNameInstances;
     }
 
+    /**
+     * @param class-string<ExtensionInterface> $extensionClass
+     */
     public function getExtension(string $extensionClass): ExtensionInterface
     {
         if (!isset($this->extensionClassInstances[$extensionClass])) {

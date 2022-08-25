@@ -157,10 +157,13 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Package's Module class, of type PluginModuleInterface.
      * By standard, it is "NamespaceOwner\Project\Module::class"
+     *
+     * @phpstan-return class-string<ModuleInterface>
      */
     protected function getModuleClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        /** @var class-string<ModuleInterface> */
         return $classNamespace . '\\Module';
     }
 
