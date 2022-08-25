@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\FilterDataComponentProcessorInterface;
 use PoP\ComponentModel\ComponentProcessors\FilterInputContainerComponentProcessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\QueryableInputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 
@@ -77,6 +78,9 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
+    /**
+     * @return class-string<InterfaceSchemaDefinitionResolverAdapter>
+     */
     protected function getInterfaceSchemaDefinitionResolverAdapterClass(): string
     {
         return QueryableInterfaceSchemaDefinitionResolverAdapter::class;
