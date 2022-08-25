@@ -1273,6 +1273,7 @@ class Engine implements EngineInterface
             // The component is the last element in the path.
             // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($component_path);
+            /** @var Component $component */
             $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
