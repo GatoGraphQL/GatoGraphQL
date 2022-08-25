@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentPath;
 
 use PoP\ComponentModel\Component\Component;
+use PoP\Root\Exception\ShouldNotHappenException;
 
 class ComponentPathManager implements ComponentPathManagerInterface
 {
@@ -35,6 +36,10 @@ class ComponentPathManager implements ComponentPathManagerInterface
      */
     public function prepareForPropagation(Component $component, array &$props): void
     {
+        if ($this->propagation_current_path === null) {
+            throw new ShouldNotHappenException('Property \'propagation_current_path\' has not been initialized');
+        }
+
         // Add the component to the path
         // Prepare for the subcomponent, going one level down, and adding it to the current path
         // We add $component instead of the first element from $this->propagation_unsettled_paths, so that calculating $this->propagation_current_path works also when not doing ?componentPaths=...
@@ -45,6 +50,10 @@ class ComponentPathManager implements ComponentPathManagerInterface
      */
     public function restoreFromPropagation(Component $component, array &$props): void
     {
+        if ($this->propagation_current_path === null) {
+            throw new ShouldNotHappenException('Property \'propagation_current_path\' has not been initialized');
+        }
+
         // Remove the component to the path
         array_pop($this->propagation_current_path);
     }
