@@ -46,7 +46,7 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
      * @return array<string|int>|null
      */
     public function getCategoryChildIDs(string|int|object $catObjectOrID): ?array;
-    public function getCategoryURL(string|int|object $catObjectOrID): string;
+    public function getCategoryURL(string|int|object $catObjectOrID): ?string;
     public function getCategoryURLPath(string|int|object $catObjectOrID): ?string;
     public function getCategoryDescription(string|int|object $catObjectOrID): ?string;
     public function getCategoryItemCount(string|int|object $catObjectOrID): ?int;

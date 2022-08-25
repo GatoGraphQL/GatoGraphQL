@@ -122,12 +122,12 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         $category = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
+                /** @var string */
                 return $categoryTypeAPI->getCategoryURL($category);
 
             case 'urlAbsolutePath':
                 /** @var string */
-                $path = $categoryTypeAPI->getCategoryURLPath($category);
-                return $path;
+                return $categoryTypeAPI->getCategoryURLPath($category);
 
             case 'name':
                 return $categoryTypeAPI->getCategoryName($category);
@@ -137,16 +137,14 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
 
             case 'description':
                 /** @var string */
-                $description = $categoryTypeAPI->getCategoryDescription($category);
-                return $description;
+                return $categoryTypeAPI->getCategoryDescription($category);
 
             case 'parent':
                 return $categoryTypeAPI->getCategoryParentID($category);
 
             case 'count':
                 /** @var int */
-                $count = $categoryTypeAPI->getCategoryItemCount($category);
-                return $count;
+                return $categoryTypeAPI->getCategoryItemCount($category);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
