@@ -1043,13 +1043,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    protected function executeMutation(
+    private function executeMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        // If a MutationResolver is declared, let it resolve the value
+        /** @var MutationResolverInterface */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         try {
             if ($this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
