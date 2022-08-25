@@ -119,10 +119,10 @@ trait QueryDataComponentProcessorTrait
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
             $whitelisted_params = (array)App::applyFilters(
                 HookNames::QUERYDATA_WHITELISTEDPARAMS,
-                array(
+                [
                     PaginationParams::PAGE_NUMBER,
                     PaginationParams::LIMIT,
-                )
+                ]
             );
 
             $params_from_request = array_filter(
