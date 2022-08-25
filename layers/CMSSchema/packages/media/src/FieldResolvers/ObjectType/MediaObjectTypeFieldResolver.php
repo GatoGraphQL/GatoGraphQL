@@ -247,18 +247,26 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return new DateTime($this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt')));
+                /** @var string */
+                $date = $this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt'));
+                return new DateTime($date);
             case 'dateStr':
+                /** @var string */
+                $date = $this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt'));
                 return $this->getDateFormatter()->format(
                     $fieldDataAccessor->getValue('format'),
-                    $this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt'))
+                    $date
                 );
             case 'modifiedDate':
-                return new DateTime($this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt')));
+                /** @var string */
+                $modifiedDate = $this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt'));
+                return new DateTime($modifiedDate);
             case 'modifiedDateStr':
+                /** @var string */
+                $modifiedDate = $this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt'));
                 return $this->getDateFormatter()->format(
                     $fieldDataAccessor->getValue('format'),
-                    $this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt'))
+                    $modifiedDate
                 );
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);
