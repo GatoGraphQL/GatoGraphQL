@@ -74,6 +74,9 @@ class GraphQLQueryPostTypeHelpers
                 }
             }
             $graphiQLBlockAttributes = $this->getPersistedQueryEndpointGraphiQLBlockAccessor()->getAttributes($graphQLQueryPost);
+            if ($graphiQLBlockAttributes === null) {
+                break;
+            }
             // Set the query unless it must be inherited from the parent
             if (empty($graphQLQuery) && !$inheritQuery) {
                 $graphQLQuery = $graphiQLBlockAttributes->getQuery();
@@ -90,7 +93,7 @@ class GraphQLQueryPostTypeHelpers
             if ($inheritQuery) {
                 $graphQLQueryPost = \get_post($graphQLQueryPost->post_parent);
                 // If it's trashed, then do not use
-                if (!is_null($graphQLQueryPost) && $graphQLQueryPost->post_status == 'trash') {
+                if ($graphQLQueryPost !== null && $graphQLQueryPost->post_status === 'trash') {
                     $graphQLQueryPost = null;
                 }
             } else {
