@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use Exception;
-
-use function __;
-use function add_action;
-use function do_action;
-use function get_called_class;
-use function get_option;
-use function is_admin;
-use function register_activation_hook;
-use function update_option;
-
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
@@ -25,6 +15,15 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
+
+use function __;
+use function add_action;
+use function do_action;
+use function get_called_class;
+use function get_option;
+use function is_admin;
+use function register_activation_hook;
+use function update_option;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
