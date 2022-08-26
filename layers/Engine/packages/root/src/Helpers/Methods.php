@@ -13,7 +13,7 @@ class Methods
     public static function arrayIntersectAssocRecursive(mixed &$arr1, mixed &$arr2): mixed
     {
         if (!is_array($arr1) || !is_array($arr2)) {
-            return (string) $arr1 == (string) $arr2 ? $arr1 : null;
+            return (string) $arr1 === (string) $arr2 ? $arr1 : null;
         }
 
         $commonkeys = array_intersect(
