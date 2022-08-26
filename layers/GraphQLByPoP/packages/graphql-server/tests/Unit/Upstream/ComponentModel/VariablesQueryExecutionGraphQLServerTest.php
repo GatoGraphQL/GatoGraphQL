@@ -13,27 +13,29 @@ class VariablesQueryExecutionGraphQLServerTest extends AbstractGraphQLServerTest
 {
     public function testQueries(): void
     {
-        $feedbackItemResolution = new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, ['id']);
+        $feedbackItemResolution = new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, ['include']);
         $items = [
             'var-defined' => [
                 '
-                query Echo($id: ID!) {
-                    echo(value: $id)
+                query Echo($include: Boolean!, $skip: Boolean!) {
+                    id @include(if: $include)
+                    again: id @skip(if: $skip)
                 }
                 ',
                 [
                     'data' => [
-                        'echo' => "hallo friend!",
+                        'id' => "root",
                     ],
                 ],
                 [
-                    'id' => "hallo friend!",
+                    'include' => true,
+                    'skip' => true,
                 ]
             ],
             'var-not-defined' => [
                 '
                 query Echo {
-                    echo(value: $id)
+                    id @include(if: $include)
                 }
                 ',
                 [
@@ -42,15 +44,16 @@ class VariablesQueryExecutionGraphQLServerTest extends AbstractGraphQLServerTest
                             'extensions' => [
                                 'code' => $feedbackItemResolution->getNamespacedCode(),
                                 'path' => [
-                                    '$id',
-                                    '(value: $id)',
-                                    'echo(value: $id)',
+                                    '$include',
+                                    '(if: $include)',
+                                    '@include(if: $include)',
+                                    'id @include(if: $include)',
                                     'query Echo { ... }',
                                 ],
                                 'specifiedBy' => $feedbackItemResolution->getSpecifiedByURL()
                             ],
                             'locations' => [
-                                (new Location(3, 33))->toArray()
+                                (new Location(3, 37))->toArray()
                             ],
                             'message' => $feedbackItemResolution->getMessage(),
                         ],
