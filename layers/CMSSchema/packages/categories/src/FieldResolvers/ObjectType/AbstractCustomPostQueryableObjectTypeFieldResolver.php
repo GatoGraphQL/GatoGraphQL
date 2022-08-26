@@ -130,20 +130,16 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
             'categories',
-            'categoryNames' => array_merge(
-                $fieldArgNameTypeResolvers,
-                [
-                    'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
-                    'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
-                    'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
-                ]
-            ),
-            'categoryCount' => array_merge(
-                $fieldArgNameTypeResolvers,
-                [
-                    'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
-                ]
-            ),
+            'categoryNames' => [
+                ...$fieldArgNameTypeResolvers,
+                'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
+                'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
+                'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
+            ],
+            'categoryCount' => [
+                ...$fieldArgNameTypeResolvers,
+                'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
+            ],
             default => $fieldArgNameTypeResolvers,
         };
     }

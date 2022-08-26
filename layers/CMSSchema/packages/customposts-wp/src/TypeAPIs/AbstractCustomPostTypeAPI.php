@@ -114,11 +114,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         }
 
         // The query overrides the defaults, and is overriden by the required args
-        $query = array_merge(
-            $this->getCustomPostQueryDefaults(),
-            $query,
-            $this->getCustomPostQueryRequiredArgs(),
-        );
+        $query = [
+            ...$this->getCustomPostQueryDefaults(),
+            ...$query,
+            ...$this->getCustomPostQueryRequiredArgs(),
+        ];
 
         // Convert the parameters
         if (isset($query['status'])) {
