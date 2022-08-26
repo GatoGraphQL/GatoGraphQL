@@ -132,17 +132,13 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             'categories',
             'categoryNames' => [
                 ...$fieldArgNameTypeResolvers,
-                [
-                    'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
-                    'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
-                    'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
-                ]
+                'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
+                'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
+                'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
             ],
             'categoryCount' => [
                 ...$fieldArgNameTypeResolvers,
-                [
-                    'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
-                ]
+                'filter' => $this->getCustomPostCategoriesFilterInputObjectTypeResolver(),
             ],
             default => $fieldArgNameTypeResolvers,
         };
