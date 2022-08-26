@@ -54,9 +54,9 @@
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
-        "phpstan/phpstan": "^1.4",
+        "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.13",
+        "rector/rector": "^0.14",
         "squizlabs/php_codesniffer": "^3.6",
         "symfony/var-dumper": "^6.0",
         "szepeviktor/phpstan-wordpress": "^1.0"
