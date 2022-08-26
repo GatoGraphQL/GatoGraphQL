@@ -8,5 +8,5 @@ class OperationTypes
 {
     public final const QUERY = 'query';
     public final const MUTATION = 'mutation';
-    // public final const SUBSCRIPTION = 'subscription';
+    public final const SUBSCRIPTION = 'subscription';
 }
