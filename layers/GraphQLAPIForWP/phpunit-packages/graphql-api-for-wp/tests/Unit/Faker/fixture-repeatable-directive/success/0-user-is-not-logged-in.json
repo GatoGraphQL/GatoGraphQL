@@ -20,7 +20,7 @@
       }
     },
     {
-      "message": "You must be logged in to access field 'hi: echo(value: \"Hi there\")' for type 'QueryRoot'",
+      "message": "You must be logged in to access field 'hi: id' for type 'QueryRoot'",
       "locations": [
         {
           "line": 7,
@@ -29,11 +29,11 @@
       ],
       "extensions": {
         "path": [
-          "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
+          "hi: id @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "hi: echo(value: \"Hi there\") @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
+        "field": "hi: id @validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]) @validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
         "id": "root",
         "code": "PoPCMSSchema/UserStateAccessControl@e2"
       }

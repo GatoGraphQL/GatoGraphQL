@@ -1,8 +1,6 @@
 <?php
 namespace PoP\Theme;
 
-use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
-
 class PoP_Theme_UtilsHooks
 {
     /**

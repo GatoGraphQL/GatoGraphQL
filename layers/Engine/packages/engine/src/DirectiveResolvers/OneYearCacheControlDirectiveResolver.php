@@ -15,16 +15,6 @@ class OneYearCacheControlDirectiveResolver extends AbstractCacheControlDirective
     {
         return [
             'id',
-            // operators and helpers...
-            'if',
-            'not',
-            'and',
-            'or',
-            'equals',
-            'empty',
-            'isNull',
-            'extract',
-            'echo',
         ];
     }
 
