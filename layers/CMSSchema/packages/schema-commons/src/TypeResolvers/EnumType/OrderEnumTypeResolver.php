@@ -19,17 +19,17 @@ class OrderEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        return [
-            Order::ASC,
-            Order::DESC,
-        ];
+        return array_map(
+            fn (Order $order) => $order->value,
+            Order::cases()
+        );
     }
 
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            Order::ASC => $this->__('Ascending order', 'schema-commons'),
-            Order::DESC => $this->__('Descending order', 'schema-commons'),
+            Order::Asc => $this->__('Ascending order', 'schema-commons'),
+            Order::Desc => $this->__('Descending order', 'schema-commons'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\Constants;
 
-class Order
+enum Order: string
 {
-    public final const ASC = 'ASC';
-    public final const DESC = 'DESC';
+    case Asc = 'ASC';
+    case Desc = 'DESC';
 }
