@@ -1,8 +1,0 @@
-{
-    intStraight: echo(value: 1)
-    intInArray: echo(value: [1])
-    intInObject: echo(value: {foo: 1})
-    floatStraight: echo(value: 1.5)
-    floatInArray: echo(value: [1.5])
-    floatInObject: echo(value: {foo: 1.5})
-}

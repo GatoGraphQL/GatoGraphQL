@@ -1,9 +1,0 @@
-query UpperCaseText($text: String!) {
-    echo(value: [
-        "One",
-        {
-            a: "Two",
-            b: [$text, "Four"]
-        }
-    ])
-}
