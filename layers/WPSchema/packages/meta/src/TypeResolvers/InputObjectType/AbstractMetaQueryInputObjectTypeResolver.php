@@ -82,7 +82,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

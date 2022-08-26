@@ -79,7 +79,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {

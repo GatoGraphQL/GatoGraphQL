@@ -60,7 +60,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     abstract protected function addParentIDInputField(): bool;
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

@@ -70,7 +70,7 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

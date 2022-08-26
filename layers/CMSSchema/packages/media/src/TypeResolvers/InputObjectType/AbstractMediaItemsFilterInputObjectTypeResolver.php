@@ -58,7 +58,7 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {

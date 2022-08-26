@@ -68,7 +68,7 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {
