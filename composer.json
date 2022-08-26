@@ -41,7 +41,7 @@
         "johnpbloch/wordpress": ">=5.5",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.13",
+        "rector/rector": "^0.14",
         "slevomat/coding-standard": "^7.0",
         "squizlabs/php_codesniffer": "^3.6",
         "symfony/var-dumper": "^6.0",

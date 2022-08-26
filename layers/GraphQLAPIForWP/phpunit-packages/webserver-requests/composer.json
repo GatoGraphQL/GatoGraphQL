@@ -168,7 +168,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.13",
+        "rector/rector": "^0.14",
         "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
