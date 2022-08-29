@@ -42,7 +42,6 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\SettingsWP\Module::class,
             \PoPCMSSchema\TaxonomyQueryWP\Module::class,
             \PoPCMSSchema\UserAvatarsWP\Module::class,
-            \PoPCMSSchema\UserRolesAccessControl\Module::class,
             \PoPCMSSchema\UserRolesWP\Module::class,
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
             \PoPCMSSchema\UserStateWP\Module::class,
