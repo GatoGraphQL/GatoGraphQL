@@ -8,12 +8,6 @@ services:
     PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter:
         class: \GraphQLByPoP\GraphQLServer\Overrides\DataStructureFormatters\GraphQLDataStructureFormatter
 
-    PoP\AccessControl\Services\AccessControlManagerInterface:
-        class: GraphQLByPoP\GraphQLServer\Overrides\AccessControl\AccessControlManager
-
-    PoP\CacheControl\Managers\CacheControlManagerInterface:
-        class: GraphQLByPoP\GraphQLServer\Overrides\CacheControl\CacheControlManager
-
     PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
 

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Overrides\AccessControl;
+namespace GraphQLByPoP\GraphQLServer\CacheControl\Overrides\Services;
 
 use GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface;
-use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlManager;
+use PoP\CacheControl\Managers\CacheControlManager as UpstreamCacheControlManager;
 use PoP\Root\Services\BasicServiceTrait;
 
-class AccessControlManager extends UpstreamAccessControlManager
+class CacheControlManager extends UpstreamCacheControlManager
 {
     use BasicServiceTrait;
 
     /**
-     * @var array<string,array<mixed[]>>
+     * @var array<mixed[]>|null
      */
-    protected array $overriddenFieldEntries = [];
+    protected ?array $overriddenFieldEntries = null;
 
     private ?MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface $mandatoryDirectivesForFieldsRootTypeEntryDuplicator = null;
 
@@ -32,12 +32,12 @@ class AccessControlManager extends UpstreamAccessControlManager
     /**
      * @param array<mixed[]> $fieldEntries
      */
-    public function addEntriesForFields(string $group, array $fieldEntries): void
+    public function addEntriesForFields(array $fieldEntries): void
     {
-        parent::addEntriesForFields($group, $fieldEntries);
+        parent::addEntriesForFields($fieldEntries);
 
         // Make sure to reset getting the entries
-        unset($this->overriddenFieldEntries[$group]);
+        $this->overriddenFieldEntries = null;
     }
 
     /**
@@ -52,16 +52,16 @@ class AccessControlManager extends UpstreamAccessControlManager
      *
      * @return array<mixed[]>
      */
-    public function getEntriesForFields(string $group): array
+    public function getEntriesForFields(): array
     {
-        if (isset($this->overriddenFieldEntries[$group])) {
-            return $this->overriddenFieldEntries[$group];
+        if ($this->overriddenFieldEntries !== null) {
+            return $this->overriddenFieldEntries;
         }
 
-        $this->overriddenFieldEntries[$group] = $this->getMandatoryDirectivesForFieldsRootTypeEntryDuplicator()->maybeAppendAdditionalRootEntriesForFields(
-            parent::getEntriesForFields($group)
+        $this->overriddenFieldEntries = $this->getMandatoryDirectivesForFieldsRootTypeEntryDuplicator()->maybeAppendAdditionalRootEntriesForFields(
+            parent::getEntriesForFields()
         );
 
-        return $this->overriddenFieldEntries[$group];
+        return $this->overriddenFieldEntries;
     }
 }
