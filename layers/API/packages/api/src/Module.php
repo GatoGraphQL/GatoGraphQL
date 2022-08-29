@@ -71,20 +71,19 @@ class Module extends AbstractModule
         // Conditional packages
         if (class_exists(AccessControlModule::class)) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/AccessControl');
-        }
 
-        /** @var AccessControlModuleConfiguration */
-        $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
-        if (
-            class_exists(CacheControlModule::class)
-            && class_exists(AccessControlModule::class)
-            && $moduleConfiguration->canSchemaBePrivate()
-        ) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
-            );
+            /** @var AccessControlModuleConfiguration */
+            $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
+            if (
+                class_exists(CacheControlModule::class)
+                && $moduleConfiguration->canSchemaBePrivate()
+            ) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
+                );
+            }
         }
     }
 }
