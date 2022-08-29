@@ -209,7 +209,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Must update the inputs for mutations
 - Merged the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Schema Expose Admin Data` is enabled
 - `User.email` is treated as "admin" field
-- The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
 - Settings for several modules must be set again
 - Must re-set options "default limit" and "max limit" for Posts and Pages
 
