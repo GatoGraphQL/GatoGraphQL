@@ -488,8 +488,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          *
          * Then, do not make them public, but still allow to access them.
          *
-         * This way, executing query `{ posts(postTypes:["graphql-acl"]) }`
-         * will fail, and we execute instead `{ accessControlLists }`
+         * This way, executing query `{ posts(postTypes:["graphql-schemaconfig"]) }`
+         * will fail, and we execute instead `{ schemaConfigurations }`
          * which can be @validated
          */
         $securityPostTypeArgs = array(
