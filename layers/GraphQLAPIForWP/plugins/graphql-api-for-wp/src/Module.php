@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverC
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginModule;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
