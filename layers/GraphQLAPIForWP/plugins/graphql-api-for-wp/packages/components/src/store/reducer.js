@@ -8,12 +8,6 @@ const DEFAULT_STATE = {
 	directives: [],
 	hasRetrievedDirectives: false,
 	retrievingDirectivesErrorMessage: null,
-	accessControlLists: [],
-	hasRetrievedAccessControlLists: false,
-	retrievingAccessControlListsErrorMessage: null,
-	cacheControlLists: [],
-	hasRetrievedCacheControlLists: false,
-	retrievingCacheControlListsErrorMessage: null,
 };
 
 /**
@@ -42,20 +36,6 @@ const schemaInstrospection = (
 				directives: action.directives,
 				hasRetrievedDirectives: true,
 				retrievingDirectivesErrorMessage: action.errorMessage,
-			};
-		case 'SET_ACCESS_CONTROL_LISTS':
-			return {
-				...state,
-				accessControlLists: action.accessControlLists,
-				hasRetrievedAccessControlLists: true,
-				retrievingAccessControlListsErrorMessage: action.errorMessage,
-			};
-		case 'SET_CACHE_CONTROL_LISTS':
-			return {
-				...state,
-				cacheControlLists: action.cacheControlLists,
-				hasRetrievedCacheControlLists: true,
-				retrievingCacheControlListsErrorMessage: action.errorMessage,
 			};
 	}
 	return state;

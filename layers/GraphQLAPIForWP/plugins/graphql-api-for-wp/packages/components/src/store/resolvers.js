@@ -11,10 +11,6 @@ import {
 	setTypeFields,
 	receiveDirectives,
 	setDirectives,
-	receiveAccessControlLists,
-	setAccessControlLists,
-	receiveCacheControlLists,
-	setCacheControlLists,
 } from './action-creators';
 
 import { DIRECTIVE_KINDS } from '../constants/directive-kinds'
@@ -48,32 +44,6 @@ export const FETCH_DIRECTIVES_GRAPHQL_QUERY = `
 			directives(ofKinds: [ "${ DIRECTIVE_KINDS.QUERY }" ]) {
 				name
 			}
-		}
-	}
-`
-
-/**
- * GraphQL query to fetch the list of Access Control Lists from the GraphQL schema
- */
-export const FETCH_ACCESS_CONTROL_LISTS_GRAPHQL_QUERY = `
-	query GetAccessControlLists {
-		accessControlLists {
-			id
-			title
-			excerpt
-		}
-	}
-`
-
-/**
- * GraphQL query to fetch the list of Cache Control Lists from the GraphQL schema
- */
-export const FETCH_CACHE_CONTROL_LISTS_GRAPHQL_QUERY = `
-	query GetCacheControlLists {
-		cacheControlLists {
-			id
-			title
-			excerpt
 		}
 	}
 `
@@ -148,37 +118,5 @@ export default {
 		 */
 		const directives = response.data?.__schema?.directives?.map(element => element.name) || [];
 		return setDirectives( directives );
-	},
-
-	/**
-	 * Fetch the Access Control Lists from the GraphQL server
-	 */
-	* getAccessControlLists() {
-
-		const response = yield receiveAccessControlLists( FETCH_ACCESS_CONTROL_LISTS_GRAPHQL_QUERY );
-		/**
-		 * If there were erros when executing the query, return an empty list, and keep the error in the state
-		 */
-		const maybeErrorMessage = maybeGetErrorMessage(response);
-		if (maybeErrorMessage) {
-			return setAccessControlLists( [], maybeErrorMessage );
-		}
-		return setAccessControlLists( response.data?.accessControlLists );
-	},
-
-	/**
-	 * Fetch the Cache Control Lists from the GraphQL server
-	 */
-	* getCacheControlLists() {
-
-		const response = yield receiveCacheControlLists( FETCH_CACHE_CONTROL_LISTS_GRAPHQL_QUERY );
-		/**
-		 * If there were erros when executing the query, return an empty list, and keep the error in the state
-		 */
-		const maybeErrorMessage = maybeGetErrorMessage(response);
-		if (maybeErrorMessage) {
-			return setCacheControlLists( [], maybeErrorMessage );
-		}
-		return setCacheControlLists( response.data?.cacheControlLists );
 	},
 };
