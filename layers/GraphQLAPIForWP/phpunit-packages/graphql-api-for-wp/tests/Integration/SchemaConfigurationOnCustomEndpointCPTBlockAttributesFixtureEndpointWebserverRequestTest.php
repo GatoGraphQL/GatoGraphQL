@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 class SchemaConfigurationOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
 {
     public const WEBSITE_CUSTOM_ENDPOINT_ID = 196;
-    public const POWER_USERS_SCHEMA_CONFIGURATION_ID = 261;
+    public const UNRESTRICTED_SCHEMA_SCHEMA_CONFIGURATION_ID = 304;
 
     protected function getEndpoint(): string
     {
@@ -33,7 +33,7 @@ class SchemaConfigurationOnCustomEndpointCPTBlockAttributesFixtureEndpointWebser
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [
-            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => self::POWER_USERS_SCHEMA_CONFIGURATION_ID,
+            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => self::UNRESTRICTED_SCHEMA_SCHEMA_CONFIGURATION_ID,
         ];
     }
 
