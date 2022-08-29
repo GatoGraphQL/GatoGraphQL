@@ -4,12 +4,13 @@ A schema configuration is used by Custom Endpoints and Persisted Queries to cust
 
 ## Description
 
-The schema can be configured with the following elements (more items can also provided by extensions), and one or more entries can be selected for each:
+The schema can be configured with those elements provided by the different installed and enabled modules.
+<!-- The schema can be configured with the following elements (more items can also provided by extensions), and one or more entries can be selected for each:
 
 - Access Control Lists: to define who can access the schema
-- Cache Control Lists: to set-up HTTP caching
+- Cache Control Lists: to set-up HTTP caching -->
 
-Modules can define their own configuration to be applied in the schema through their own option blocks, including:
+Modules can define their own configuration to be applied in the schema through their own option blocks, such as:
 
 - Setting the schema as public or private
 - Enabling "admin" elements exposing private data
