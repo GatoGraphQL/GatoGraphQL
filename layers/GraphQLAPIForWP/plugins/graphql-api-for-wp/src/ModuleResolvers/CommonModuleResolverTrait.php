@@ -23,6 +23,6 @@ trait CommonModuleResolverTrait
 
     protected function getAdminClientAndConfigurationDescription(): string
     {
-        return \__('It will be applied on the GraphiQL and Interactive Schema clients, and configuration in Access/Cache Control Lists and extensions', 'graphql-api');
+        return \__('It will be applied on the GraphiQL and Interactive Schema clients, and configuration in extensions', 'graphql-api');
     }
 }
