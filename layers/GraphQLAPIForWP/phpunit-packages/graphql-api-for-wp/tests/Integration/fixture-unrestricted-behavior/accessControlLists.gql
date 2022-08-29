@@ -1,7 +1,0 @@
-query GetAccessControlLists {
-  accessControlLists {
-    id
-    title
-    excerpt
-  }
-}
