@@ -119,9 +119,6 @@ class Module extends AbstractPluginModule
             );
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/CacheControl/Overrides');
-        }
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
