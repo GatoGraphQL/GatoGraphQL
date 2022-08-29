@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
@@ -14,7 +11,6 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use PoP\AccessControl\Schema\SchemaModes;
 use WP_Post;
 
 class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -24,7 +20,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
-    public final const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
     public final const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
@@ -50,12 +45,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     }
 
     /**
-     * Setting options
-     */
-    public final const OPTION_MODE = 'mode';
-    public final const OPTION_ENABLE_GRANULAR = 'granular';
-
-    /**
      * @return string[]
      */
     public function getModulesToResolve(): array
@@ -64,7 +53,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_NAMESPACING,
             self::NESTED_MUTATIONS,
-            self::PUBLIC_PRIVATE_SCHEMA,
         ];
     }
 
@@ -83,12 +71,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                         self::SCHEMA_CONFIGURATION,
                     ],
                 ];
-            case self::PUBLIC_PRIVATE_SCHEMA:
-                return [
-                    [
-                        AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
-                    ],
-                ];
         }
         return parent::getDependedModuleLists($module);
     }
@@ -98,7 +80,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $names = [
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'graphql-api'),
-            self::PUBLIC_PRIVATE_SCHEMA => \__('Public/Private Schema', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
         ];
         return $names[$module] ?? $module;
@@ -111,8 +92,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 return \__('Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'graphql-api');
             case self::SCHEMA_NAMESPACING:
                 return \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'graphql-api');
-            case self::PUBLIC_PRIVATE_SCHEMA:
-                return \__('Enable to communicate the existence of some field from the schema to certain users only (private mode) or to everyone (public mode). If disabled, fields are always available to everyone (public mode)', 'graphql-api');
             case self::NESTED_MUTATIONS:
                 return \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api');
         }
@@ -133,10 +112,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::DEFAULT_VALUE => false,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
             ],
-            self::PUBLIC_PRIVATE_SCHEMA => [
-                self::OPTION_MODE => SchemaModes::PUBLIC_SCHEMA_MODE,
-                self::OPTION_ENABLE_GRANULAR => true,
-            ],
             self::NESTED_MUTATIONS => [
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => MutationSchemes::STANDARD,
@@ -152,8 +127,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      */
     public function getSettings(string $module): array
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $moduleSettings = parent::getSettings($module);
         $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
@@ -254,48 +227,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Namespace the schema in the wp-admin? %s', 'graphql-api'),
                     $adminClientAndConfigDesc
                 ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        } elseif ($module === self::PUBLIC_PRIVATE_SCHEMA) {
-            $whereModules = [
-                SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-                AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
-            ];
-            $whereModuleNames = array_map(
-                fn ($whereModule) => '▹ ' . $this->getModuleRegistry()->getModuleResolver($whereModule)->getName($whereModule),
-                $whereModules
-            );
-            $option = self::OPTION_MODE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Default visibility', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Visibility to use for fields and directives in the schema when option <code>"%s"</code> is selected (in %s)', 'graphql-api'),
-                    $moduleConfiguration->getSettingsValueLabel(),
-                    implode(
-                        \__(', ', 'graphql-api'),
-                        $whereModuleNames
-                    )
-                ),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => [
-                    SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api'),
-                    SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
-                ],
-            ];
-            $option = self::OPTION_ENABLE_GRANULAR;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Enable granular control?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Enable to select the visibility for a set of fields/directives when editing the Access Control List', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::NESTED_MUTATIONS) {
