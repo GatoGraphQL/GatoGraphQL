@@ -147,10 +147,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_CUSTOMPOST_META => \__('Schema Custom Post Meta', 'graphql-api'),
-            self::SCHEMA_USER_META => \__('Schema User Meta', 'graphql-api'),
-            self::SCHEMA_COMMENT_META => \__('Schema Comment Meta', 'graphql-api'),
-            self::SCHEMA_TAXONOMY_META => \__('Schema Taxonomy Meta', 'graphql-api'),
+            self::SCHEMA_CUSTOMPOST_META => \__('Custom Post Meta', 'graphql-api'),
+            self::SCHEMA_USER_META => \__('User Meta', 'graphql-api'),
+            self::SCHEMA_COMMENT_META => \__('Comment Meta', 'graphql-api'),
+            self::SCHEMA_TAXONOMY_META => \__('Taxonomy Meta', 'graphql-api'),
             default => $module,
         };
     }

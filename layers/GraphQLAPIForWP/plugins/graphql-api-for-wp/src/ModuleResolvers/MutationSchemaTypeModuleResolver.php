@@ -143,15 +143,15 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_MUTATIONS => \__('Schema Mutations', 'graphql-api'),
-            self::SCHEMA_USER_STATE_MUTATIONS => \__('Schema User State Mutations', 'graphql-api'),
-            self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Schema Custom Post Mutations', 'graphql-api'),
-            self::SCHEMA_POST_MUTATIONS => \__('Schema Post Mutations', 'graphql-api'),
-            self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Schema Custom Post Media Mutations', 'graphql-api'),
-            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Schema Post Media Mutations', 'graphql-api'),
-            self::SCHEMA_POST_TAG_MUTATIONS => \__('Schema Post Tag Mutations', 'graphql-api'),
-            self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Schema Post Category Mutations', 'graphql-api'),
-            self::SCHEMA_COMMENT_MUTATIONS => \__('Schema Comment Mutations', 'graphql-api'),
+            self::SCHEMA_MUTATIONS => \__('Mutations', 'graphql-api'),
+            self::SCHEMA_USER_STATE_MUTATIONS => \__('User State Mutations', 'graphql-api'),
+            self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Custom Post Mutations', 'graphql-api'),
+            self::SCHEMA_POST_MUTATIONS => \__('Post Mutations', 'graphql-api'),
+            self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Custom Post Media Mutations', 'graphql-api'),
+            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Post Media Mutations', 'graphql-api'),
+            self::SCHEMA_POST_TAG_MUTATIONS => \__('Post Tag Mutations', 'graphql-api'),
+            self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Post Category Mutations', 'graphql-api'),
+            self::SCHEMA_COMMENT_MUTATIONS => \__('Comment Mutations', 'graphql-api'),
             default => $module,
         };
     }
