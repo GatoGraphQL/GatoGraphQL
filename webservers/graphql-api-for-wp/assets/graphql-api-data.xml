@@ -145,7 +145,7 @@
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">http://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=8</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  users(pagination: {\n    limit: $limit\n  }) {\n    id\n    url\n    displayName\n    websiteURL\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  users(pagination: {\n    limit: $limit\n  }) {\n    id\n    url\n    displayName\n    websiteURL\n    email\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":-2} /-->
 
