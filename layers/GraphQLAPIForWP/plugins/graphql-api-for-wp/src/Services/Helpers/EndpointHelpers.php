@@ -7,8 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Constants\Params as GraphQLServerParams;
 use PoP\ComponentModel\Configuration\RequestHelpers;
@@ -20,7 +18,6 @@ class EndpointHelpers
     use BasicServiceTrait;
 
     private ?PluginMenu $pluginMenu = null;
-    private ?ModuleRegistryInterface $moduleRegistry = null;
 
     final public function setPluginMenu(PluginMenu $pluginMenu): void
     {
@@ -30,15 +27,6 @@ class EndpointHelpers
     {
         /** @var PluginMenu */
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
-    }
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-    final protected function getModuleRegistry(): ModuleRegistryInterface
-    {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
     /**
