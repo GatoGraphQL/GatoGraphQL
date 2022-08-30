@@ -85,18 +85,27 @@ class Module extends AbstractModule
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
         // Boot conditionals
-        /** @var AccessControlModuleConfiguration */
-        $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
-        if (
-            class_exists(CacheControlModule::class)
-            && class_exists(AccessControlModule::class)
-            && $moduleConfiguration->canSchemaBePrivate()
-        ) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
-            );
+        if (class_exists(AccessControlModule::class)) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/AccessControl/Overrides');
+        }
+
+        if (class_exists(CacheControlModule::class)) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CacheControl/Overrides');
+        }
+
+        if (class_exists(AccessControlModule::class)) {
+            /** @var AccessControlModuleConfiguration */
+            $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
+            if (
+                class_exists(CacheControlModule::class)
+                && $moduleConfiguration->canSchemaBePrivate()
+            ) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
+                );
+            }
         }
     }
 }

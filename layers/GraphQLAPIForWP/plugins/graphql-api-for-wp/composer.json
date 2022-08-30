@@ -36,7 +36,6 @@
         "pop-cms-schema/settings-wp": "^0.9",
         "pop-cms-schema/taxonomyquery-wp": "^0.9",
         "pop-cms-schema/user-avatars-wp": "^0.9",
-        "pop-cms-schema/user-roles-access-control": "^0.9",
         "pop-cms-schema/user-roles-wp": "^0.9",
         "pop-cms-schema/user-state-mutations-wp": "^0.9",
         "pop-cms-schema/user-state-wp": "^0.9",

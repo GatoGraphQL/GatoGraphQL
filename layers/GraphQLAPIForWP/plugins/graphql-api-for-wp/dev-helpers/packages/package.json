@@ -14,7 +14,6 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"@graphqlapi/access-control": "file:../../packages/access-control",
 		"@graphqlapi/api-fetch": "file:../../packages/api-fetch",
 		"@graphqlapi/components": "file:../../packages/components",
 		"@wordpress/base-styles": "^2.0.0",

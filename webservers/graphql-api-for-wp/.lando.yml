@@ -37,8 +37,6 @@ services:
         - >-
           ../../layers/Backbone/packages/php-hooks:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-backbone/php-hooks
         - >-
-          ../../layers/Engine/packages/access-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/access-control
-        - >-
           ../../layers/Engine/packages/cache-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/cache-control
         - >-
           ../../layers/Engine/packages/component-model:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/component-model
@@ -195,13 +193,9 @@ services:
         - >-
           ../../layers/CMSSchema/packages/user-avatars:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/user-avatars
         - >-
-          ../../layers/CMSSchema/packages/user-roles-access-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/user-roles-access-control
-        - >-
           ../../layers/CMSSchema/packages/user-roles-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/user-roles-wp
         - >-
           ../../layers/CMSSchema/packages/user-roles:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/user-roles
-        - >-
-          ../../layers/CMSSchema/packages/user-state-access-control:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/user-state-access-control
         - >-
           ../../layers/CMSSchema/packages/user-state-mutations-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/user-state-mutations-wp
         - >-

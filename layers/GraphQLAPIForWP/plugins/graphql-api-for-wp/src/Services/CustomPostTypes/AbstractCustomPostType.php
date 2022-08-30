@@ -482,10 +482,16 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $name_uc = $this->getCustomPostTypeName();
         $names_uc = $this->getCustomPostTypePluralNames(true);
         $names_lc = $this->getCustomPostTypePluralNames(false);
-        // Configuration CPTs are to configure data, and not to be directly accessible by themselves
-        // Then, do not make them public, but still allow to access them
-        // This way, executing query `{ posts(postTypes:["graphql-acl"]) }` will fail,
-        // and we execute instead `{ accessControlLists }` which can be @validated
+        /**
+         * Configuration CPTs are to configure data,
+         * and not to be directly accessible by themselves.
+         *
+         * Then, do not make them public, but still allow to access them.
+         *
+         * This way, executing query `{ posts(postTypes:["graphql-schemaconfig"]) }`
+         * will fail, and we execute instead `{ schemaConfigurations }`
+         * which can be @validated
+         */
         $securityPostTypeArgs = array(
             'public' => $this->isPublic(),
             'show_in_nav_menus' => true,

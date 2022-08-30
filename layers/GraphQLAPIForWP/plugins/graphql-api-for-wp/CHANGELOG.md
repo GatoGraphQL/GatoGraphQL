@@ -161,10 +161,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Print the full path to the GraphQL query node producing errors
 - Allow to use unsafe default settings
 - Schema Configuration for the Single Endpoint
-- Exposed the `__schema` field in the ACLs, allowing us to disable introspection
 - Display `"causes"` for errors in response ([#893](https://github.com/graphql/graphql-spec/issues/893))
 - Sort fields and connections together, alphabetically
-- In the ACLs and CCLs, display fields for the `Root` type only, and automatically replicate the configuration for the `QueryRoot`+`MutationRoot` types
 - The entities from the WordPress data model are not namespaced anymore ([#990](https://github.com/leoloso/PoP/pull/990))
 - Split options into 2 entries, "Default value for Schema Configuration" and "Apply on Admin clients", for the following settings:
   - Namespacing
@@ -211,7 +209,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Must update the inputs for mutations
 - Merged the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Schema Expose Admin Data` is enabled
 - `User.email` is treated as "admin" field
-- The Access Control and Cache Control configuration lists will be broken: all fields for all non-root types broken will appear under "(Undefined entries)". These lists must be recreated
+- Removed modules: Access Control, Cache Control and Public/Private Schema Mode
 - Settings for several modules must be set again
 - Must re-set options "default limit" and "max limit" for Posts and Pages
 

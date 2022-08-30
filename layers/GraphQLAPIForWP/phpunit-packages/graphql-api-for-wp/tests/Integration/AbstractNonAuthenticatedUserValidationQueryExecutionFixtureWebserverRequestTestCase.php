@@ -1,9 +1,0 @@
-<?php
-
-declare(strict_types=1);
-
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
-
-abstract class AbstractNonAuthenticatedUserValidationQueryExecutionFixtureWebserverRequestTestCase extends AbstractUserValidationQueryExecutionFixtureWebserverRequestTestCase
-{
-}

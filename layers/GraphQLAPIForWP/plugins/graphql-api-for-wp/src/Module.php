@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverC
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginModule;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
@@ -43,7 +42,6 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\SettingsWP\Module::class,
             \PoPCMSSchema\TaxonomyQueryWP\Module::class,
             \PoPCMSSchema\UserAvatarsWP\Module::class,
-            \PoPCMSSchema\UserRolesAccessControl\Module::class,
             \PoPCMSSchema\UserRolesWP\Module::class,
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
             \PoPCMSSchema\UserStateWP\Module::class,
@@ -119,9 +117,6 @@ class Module extends AbstractPluginModule
             );
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        if ($moduleRegistry->isModuleEnabled(PerformanceFunctionalityModuleResolver::CACHE_CONTROL)) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/CacheControl/Overrides');
-        }
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);

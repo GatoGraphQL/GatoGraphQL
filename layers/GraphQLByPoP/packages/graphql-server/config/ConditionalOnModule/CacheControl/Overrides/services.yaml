@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\CacheControl\Managers\CacheControlManagerInterface:
+        class: \GraphQLByPoP\GraphQLServer\ConditionalOnModule\CacheControl\Overrides\Services\CacheControlManager
+    

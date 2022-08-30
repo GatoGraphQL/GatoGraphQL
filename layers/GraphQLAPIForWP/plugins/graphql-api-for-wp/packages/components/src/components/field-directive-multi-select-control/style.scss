@@ -3,7 +3,7 @@
 @import "~@wordpress/base-styles/breakpoints";
 @import '../multi-select-control/base_styles.scss';
 
-.graphql-api-access-control-list__tab_panel .active-tab {
+.graphql-api-multi-select-control-list__tab_panel .active-tab {
 	border-bottom: 3px solid $blue-medium-600;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
@@ -11,11 +11,11 @@
 	font-weight: 700;
 	background-color: $blue-medium-200;
 }
-// .editor-styles-wrapper ul.graphql-api-access-control-list__item_data__list{
+// .editor-styles-wrapper ul.graphql-api-multi-select-control-list__item_data__list{
 // 	list-style: none;
 // }
 
-.graphql-api-access-control-list {
+.graphql-api-multi-select-control-list {
 	&__item_data {
 		&__title {
 			text-align: center;
@@ -24,7 +24,7 @@
 }
 
 @media (min-width: #{ ($break-small) }) {
-	.graphql-api-access-control-list {
+	.graphql-api-multi-select-control-list {
 
 		&__item_data {
 			display: grid;

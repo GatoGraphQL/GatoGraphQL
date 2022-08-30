@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\AccessControl\Services\AccessControlManagerInterface:
+        class: \GraphQLByPoP\GraphQLServer\ConditionalOnModule\AccessControl\Overrides\Services\AccessControlManager
+    

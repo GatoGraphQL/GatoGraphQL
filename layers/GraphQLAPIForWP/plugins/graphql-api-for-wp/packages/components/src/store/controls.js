@@ -19,18 +19,6 @@ const controls = {
 			action.query
 		);
 	},
-	RECEIVE_ACCESS_CONTROL_LISTS( action ) {
-		return fetchGraphQLQuery(
-			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
-			action.query
-		);
-	},
-	RECEIVE_CACHE_CONTROL_LISTS( action ) {
-		return fetchGraphQLQuery(
-			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
-			action.query
-		);
-	},
 };
 
 export default controls;

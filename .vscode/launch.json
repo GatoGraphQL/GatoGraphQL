@@ -10,6 +10,7 @@
             "request": "launch",
             "port": 9003,
             "pathMappings": {
+              "/app": "${workspaceFolder}",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/access-control": "${workspaceFolder}/layers/Engine/packages/access-control",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/cache-control": "${workspaceFolder}/layers/Engine/packages/cache-control",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/component-model": "${workspaceFolder}/layers/Engine/packages/component-model",
@@ -131,8 +132,7 @@
               "/app/wordpress/Engine/": "${workspaceFolder}/layers/Engine/",
               "/app/wordpress/GraphQLByPoP/": "${workspaceFolder}/layers/GraphQLByPoP/",
               "/app/wordpress/Schema/": "${workspaceFolder}/layers/Schema/",
-              "/app/wordpress/WPSchema/": "${workspaceFolder}/layers/WPSchema/",
-              "/app": "${workspaceFolder}/webservers/graphql-api-for-wp"
+              "/app/wordpress/WPSchema/": "${workspaceFolder}/layers/WPSchema/"
             }
         },
         {

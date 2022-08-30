@@ -26,7 +26,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			disableDirectives,
 			hideLabels
 		} = props;
-		const className = 'graphql-api-access-control-list';
+		const className = 'graphql-api-multi-select-control-list';
 		const leftSideLabel = selectLabel || __('Select fields and directives:', 'graphql-api');
 		const rightSideLabel = configurationLabel || __('Configuration:', 'graphql-api');
 		return (

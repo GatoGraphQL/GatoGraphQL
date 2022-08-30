@@ -1,6 +1,0 @@
-mutation {
-  loginUser(by: {}) {
-    id
-    username
-  }
-}

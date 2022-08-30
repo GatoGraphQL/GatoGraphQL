@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MetaSchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
@@ -24,11 +23,6 @@ use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
-use PoP\AccessControl\Environment as AccessControlEnvironment;
-use PoP\AccessControl\Module as AccessControlModule;
-use PoP\AccessControl\Schema\SchemaModes;
-use PoP\CacheControl\Environment as CacheControlEnvironment;
-use PoP\CacheControl\Module as CacheControlModule;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\Engine\Environment as EngineEnvironment;
@@ -165,26 +159,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ),
                 'condition' => 'any',
             ],
-            // Use private schema mode?
-            [
-                'class' => AccessControlModule::class,
-                'envVariable' => AccessControlEnvironment::USE_PRIVATE_SCHEMA_MODE,
-                'module' => SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA,
-                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_MODE,
-                // It is stored as string "private" in DB, and must be passed as bool `true` to component
-                'callback' => fn ($value) => $value === SchemaModes::PRIVATE_SCHEMA_MODE,
-            ],
-            // Enable individual access control for the schema mode?
-            [
-                'class' => AccessControlModule::class,
-                'envVariable' => AccessControlEnvironment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE,
-                'module' => SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA,
-                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_ENABLE_GRANULAR,
-                // Also make sure that the module is enabled.
-                // Otherwise set the value in `false`, to override a potential `true` in the Settings
-                'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA) && $value,
-                'condition' => 'any',
-            ],
             // Use namespacing?
             [
                 'class' => ComponentModelModule::class,
@@ -208,13 +182,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
-            ],
-            // Cache-Control default max-age
-            [
-                'class' => CacheControlModule::class,
-                'envVariable' => CacheControlEnvironment::DEFAULT_CACHE_CONTROL_MAX_AGE,
-                'module' => PerformanceFunctionalityModuleResolver::CACHE_CONTROL,
-                'option' => PerformanceFunctionalityModuleResolver::OPTION_MAX_AGE,
             ],
             // Custom Post default/max limits, Supported custom post types
             [
@@ -551,20 +518,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
             ],
             [
-                'class' => AccessControlModule::class,
-                'envVariable' => AccessControlEnvironment::USE_PRIVATE_SCHEMA_MODE,
-            ],
-            [
-                'class' => AccessControlModule::class,
-                'envVariable' => AccessControlEnvironment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE,
-            ],
-            [
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
-            ],
-            [
-                'class' => CacheControlModule::class,
-                'envVariable' => CacheControlEnvironment::DEFAULT_CACHE_CONTROL_MAX_AGE,
             ],
             [
                 'class' => ComponentModelModule::class,
@@ -630,8 +585,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
             // Do not disable redundant mutation fields in the root type
             $moduleClassConfiguration[\PoP\Engine\Module::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
-            // Allow disabling introspection via Access Control on field "__schema"
-            $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA] = true;
             // Allow access to all entries for Root.option
             $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
             $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
