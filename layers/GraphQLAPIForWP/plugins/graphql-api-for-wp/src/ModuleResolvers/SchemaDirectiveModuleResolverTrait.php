@@ -14,7 +14,7 @@ trait SchemaDirectiveModuleResolverTrait
      */
     public function getPriority(): int
     {
-        return 90;
+        return 80;
     }
 
     /**
