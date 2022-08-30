@@ -390,7 +390,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             [
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // White/Blacklisted entries to CustomPost.meta

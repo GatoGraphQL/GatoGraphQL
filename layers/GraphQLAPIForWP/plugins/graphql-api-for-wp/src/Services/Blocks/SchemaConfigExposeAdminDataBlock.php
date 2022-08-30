@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
 class SchemaConfigExposeAdminDataBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
 {
@@ -22,7 +22,7 @@ class SchemaConfigExposeAdminDataBlock extends AbstractDefaultEnableDisableFunct
 
     public function getEnablingModule(): ?string
     {
-        return SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA;
+        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA;
     }
 
     protected function getBlockLabel(): string

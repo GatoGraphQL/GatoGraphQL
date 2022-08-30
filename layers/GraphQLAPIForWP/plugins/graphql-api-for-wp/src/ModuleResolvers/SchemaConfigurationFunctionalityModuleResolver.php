@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use WP_Post;
@@ -21,6 +22,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
     public final const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
+    public final const SCHEMA_EXPOSE_ADMIN_DATA = Plugin::NAMESPACE . '\schema-expose-admin-data';
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -53,6 +55,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_NAMESPACING,
             self::NESTED_MUTATIONS,
+            self::SCHEMA_EXPOSE_ADMIN_DATA,
         ];
     }
 
@@ -81,6 +84,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
+            self::SCHEMA_EXPOSE_ADMIN_DATA => \__('Schema Expose Admin Data', 'graphql-api'),
         ];
         return $names[$module] ?? $module;
     }
@@ -94,6 +98,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 return \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'graphql-api');
             case self::NESTED_MUTATIONS:
                 return \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api');
+            case self::SCHEMA_EXPOSE_ADMIN_DATA:
+                return \__('Expose "admin" elements in the schema', 'graphql-api');
         }
         return parent::getDescription($module);
     }
@@ -103,6 +109,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
+        // Lower the security constraints for the static app
+        $useUnsafe = PluginEnvironment::areUnsafeDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_CONFIGURATION => [
                 ModuleSettingOptions::DEFAULT_VALUE => ModuleSettingOptionValues::NO_VALUE_ID,
@@ -115,6 +123,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::NESTED_MUTATIONS => [
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => MutationSchemes::STANDARD,
+            ],
+            self::SCHEMA_EXPOSE_ADMIN_DATA => [
+                ModuleSettingOptions::DEFAULT_VALUE => $useUnsafe,
+                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -273,6 +285,38 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TITLE => \__('Info: Redundant fields', 'graphql-api'),
                 Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_NULL,
+            ];
+        } elseif ($module === self::SCHEMA_EXPOSE_ADMIN_DATA) {
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    \__('Add admin fields to schema? %s', 'graphql-api'),
+                    $defaultValueLabel
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Expose "admin" elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to private data. %s', 'graphql-api'),
+                    $defaultValueDesc
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Expose admin elements for the Admin?', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Expose "admin" elements in the wp-admin? %s', 'graphql-api'),
+                    $adminClientsDesc
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }
         return $moduleSettings;
