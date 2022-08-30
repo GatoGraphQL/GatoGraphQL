@@ -55,10 +55,10 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
 
     public function getName(string $module): string
     {
-        $names = [
+        return match ($module) {
             self::API_HIERARCHY => \__('API Hierarchy', 'graphql-api'),
-        ];
-        return $names[$module] ?? $module;
+            default => $module,
+        };
     }
 
     public function getDescription(string $module): string

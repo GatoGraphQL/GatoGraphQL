@@ -80,13 +80,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public function getName(string $module): string
     {
-        $names = [
+        return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
             self::SCHEMA_EXPOSE_ADMIN_DATA => \__('Schema Expose Admin Data', 'graphql-api'),
-        ];
-        return $names[$module] ?? $module;
+            default => $module,
+        };
     }
 
     public function getDescription(string $module): string

@@ -85,11 +85,11 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
 
     public function getName(string $module): string
     {
-        $names = [
+        return match ($module) {
             self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'graphql-api'),
             self::WELCOME_GUIDES => \__('Welcome Guides', 'graphql-api'),
-        ];
-        return $names[$module] ?? $module;
+            default => $module,
+        };
     }
 
     public function getDescription(string $module): string

@@ -63,10 +63,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
 
     public function getName(string $module): string
     {
-        $names = [
+        return match ($module) {
             self::GENERAL => \__('General', 'graphql-api'),
-        ];
-        return $names[$module] ?? $module;
+            default => $module,
+        };
     }
 
     public function getDescription(string $module): string
