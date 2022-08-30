@@ -655,56 +655,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
 
     /**
-     * Comment: this function below to remove block types doesn't work,
-     * because some of the most basic ones, such as "core/paragraph",
-     * are never registered using `register_block_types`, then they can't be obtained
-     * from `\WP_Block_Type_Registry::get_instance()->get_all_registered()`,
-     * and this information exists nowhere.
-     *
-     * As a consequence, I am currently disabling blocks by assigning them a category
-     * (Eg: "Access Control for GraphiQL") which is not registered for other CPTs
-     * Unluckily, this produces an error on JavaScript:
-     * > The block "graphql-api/access-control" must have a registered category.
-     * > The block "graphql-api/access-control-disable-access" must have a registered category.
-     * > ...
-     *
-     * But at least it works
-     */
-    // /**
-    //  * Restrict the Gutenberg blocks available for this Custom Post Type
-    //  */
-    // public function allowGutenbergBlocksForCustomPostType($allowedBlocks, $post)
-    // {
-    //     if ($blocks = $this->getGutenbergBlocksForCustomPostType()) {
-    //         /**
-    //          * Check if it is this CPT
-    //          */
-    //         if ($post->post_type === $this->getCustomPostType()) {
-    //             return $blocks;
-    //         } elseif ($this->removeGutenbergBlocksForOtherPostTypes($post)) {
-    //             // Remove this CPT's blocks from other post types.
-    //             // $allowedBlocks can be a boolean. In that case, retrieve all blocks types, and substract the blocks
-    //             if (!is_array($allowedBlocks)) {
-    //                 $blockTypes = \WP_Block_Type_Registry::get_instance()->get_all_registered();
-    //                 $allowedBlocks = array_keys($blockTypes);
-    //             }
-    //             $allowedBlocks = array_values(array_diff(
-    //                 $allowedBlocks,
-    //                 $blocks
-    //             ));
-    //         }
-    //     }
-    //     return $allowedBlocks;
-    // }
-    // /**
-    //  * Indicate if to not allow this CPT's blocks in other Custom Post Types
-    //  */
-    // protected function removeGutenbergBlocksForOtherPostTypes($post): bool
-    // {
-    //     return true;
-    // }
-
-    /**
      * By default, if providing a template, then restrict the CPT to the blocks involved in the template
      *
      * @return string[] The list of block names
