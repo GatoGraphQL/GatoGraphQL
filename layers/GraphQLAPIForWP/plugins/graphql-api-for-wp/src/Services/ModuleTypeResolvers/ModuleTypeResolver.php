@@ -14,6 +14,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public final const ACCESS_CONTROL = Plugin::NAMESPACE . '\access-control';
     public final const CLIENT = Plugin::NAMESPACE . '\client';
     public final const ENDPOINT = Plugin::NAMESPACE . '\endpoint';
+    public final const ENDPOINT_CONFIGURATION = Plugin::NAMESPACE . '\endpoint-configuration';
     public final const FUNCTIONALITY = Plugin::NAMESPACE . '\functionality';
     public final const OPERATIONAL = Plugin::NAMESPACE . '\operational';
     public final const PERFORMANCE = Plugin::NAMESPACE . '\performance';
@@ -33,6 +34,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::ACCESS_CONTROL,
             self::CLIENT,
             self::ENDPOINT,
+            self::ENDPOINT_CONFIGURATION,
             self::FUNCTIONALITY,
             self::OPERATIONAL,
             self::PERFORMANCE,
@@ -51,6 +53,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::ACCESS_CONTROL => \__('Access Control', 'graphql-api'),
             self::CLIENT => \__('Client', 'graphql-api'),
             self::ENDPOINT => \__('Endpoint', 'graphql-api'),
+            self::ENDPOINT_CONFIGURATION => \__('Endpoint Configuration', 'graphql-api'),
             self::FUNCTIONALITY => \__('Functionality', 'graphql-api'),
             self::OPERATIONAL => \__('Operational', 'graphql-api'),
             self::PERFORMANCE => \__('Performance', 'graphql-api'),
