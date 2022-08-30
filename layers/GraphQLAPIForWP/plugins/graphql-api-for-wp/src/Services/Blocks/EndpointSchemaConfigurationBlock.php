@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\EndpointBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
@@ -87,7 +87,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isAPIHierarchyEnabled' => $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::API_HIERARCHY),
+                'isAPIHierarchyEnabled' => $this->getModuleRegistry()->isModuleEnabled(EndpointConfigurationFunctionalityModuleResolver::API_HIERARCHY),
             ]
         );
     }

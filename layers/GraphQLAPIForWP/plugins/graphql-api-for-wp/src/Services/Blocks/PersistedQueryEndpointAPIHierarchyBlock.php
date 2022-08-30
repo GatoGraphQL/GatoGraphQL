@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 
@@ -42,7 +42,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
 
     public function getEnablingModule(): ?string
     {
-        return EndpointFunctionalityModuleResolver::API_HIERARCHY;
+        return EndpointConfigurationFunctionalityModuleResolver::API_HIERARCHY;
     }
 
     protected function isDynamicBlock(): bool

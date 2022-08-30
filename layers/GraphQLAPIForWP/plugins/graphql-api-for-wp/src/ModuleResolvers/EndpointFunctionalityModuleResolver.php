@@ -22,7 +22,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
     public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
     public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
-    public final const API_HIERARCHY = Plugin::NAMESPACE . '\api-hierarchy';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -45,7 +44,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             self::SINGLE_ENDPOINT,
             self::CUSTOM_ENDPOINTS,
             self::PERSISTED_QUERIES,
-            self::API_HIERARCHY,
         ];
     }
 
@@ -64,13 +62,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                         SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
                     ],
                 ];
-            case self::API_HIERARCHY:
-                return [
-                    [
-                        self::PERSISTED_QUERIES,
-                        self::CUSTOM_ENDPOINTS,
-                    ],
-                ];
         }
         return parent::getDependedModuleLists($module);
     }
@@ -81,7 +72,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             self::SINGLE_ENDPOINT => \__('Single Endpoint', 'graphql-api'),
             self::PERSISTED_QUERIES => \__('Persisted Queries', 'graphql-api'),
             self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'graphql-api'),
-            self::API_HIERARCHY => \__('API Hierarchy', 'graphql-api'),
         ];
         return $names[$module] ?? $module;
     }
@@ -100,8 +90,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 return \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api');
             case self::CUSTOM_ENDPOINTS:
                 return \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'graphql-api');
-            case self::API_HIERARCHY:
-                return \__('Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties', 'graphql-api');
         }
         return parent::getDescription($module);
     }
