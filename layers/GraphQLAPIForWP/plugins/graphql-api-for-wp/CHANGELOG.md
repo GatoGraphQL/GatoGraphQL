@@ -209,7 +209,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Must update the inputs for mutations
 - Merged the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Schema Expose Admin Data` is enabled
 - `User.email` is treated as "admin" field
-- Removed modules: Access Control, Cache Control and Public/Private Schema Mode
+- Removed modules: Access Control, Cache Control, Public/Private Schema Mode, and Low-Level Persisted Query Editing
 - Settings for several modules must be set again
 - Must re-set options "default limit" and "max limit" for Posts and Pages
 
