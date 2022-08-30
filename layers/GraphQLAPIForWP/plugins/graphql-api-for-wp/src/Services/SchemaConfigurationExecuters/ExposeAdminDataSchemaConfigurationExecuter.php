@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigExposeAdminDataBlock;
 use PoP\ComponentModel\Module as ComponentModelModule;
@@ -26,7 +26,7 @@ class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDi
 
     public function getEnablingModule(): ?string
     {
-        return SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA;
+        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA;
     }
 
     protected function getBlock(): BlockInterface
