@@ -13,7 +13,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     use UserInterfaceFunctionalityModuleResolverTrait;
 
     public final const EXCERPT_AS_DESCRIPTION = Plugin::NAMESPACE . '\excerpt-as-description';
-    public final const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\low-level-persisted-query-editing';
     public final const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -34,7 +33,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getModulesToResolve(): array
     {
         return [
-            self::LOW_LEVEL_PERSISTED_QUERY_EDITING,
             self::EXCERPT_AS_DESCRIPTION,
             self::WELCOME_GUIDES,
         ];
@@ -46,12 +44,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                    ],
-                ];
             case self::EXCERPT_AS_DESCRIPTION:
                 return [];
             case self::WELCOME_GUIDES:
@@ -95,7 +87,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         $names = [
             self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'graphql-api'),
-            self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Low-Level Persisted Query Editing', 'graphql-api'),
             self::WELCOME_GUIDES => \__('Welcome Guides', 'graphql-api'),
         ];
         return $names[$module] ?? $module;
@@ -106,8 +97,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         switch ($module) {
             case self::EXCERPT_AS_DESCRIPTION:
                 return \__('Provide a description of the different entities (Custom Endpoints, Persisted Queries, and others) through their excerpt', 'graphql-api');
-            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
-                return \__('Have access to directives to be applied to the schema when editing persisted queries', 'graphql-api');
             case self::WELCOME_GUIDES:
                 return sprintf(
                     \__('Display welcome guides which demonstrate how to use the plugin\'s different functionalities. <em>It requires WordPress version \'%s\' or above, or Gutenberg version \'%s\' or above</em>', 'graphql-api'),
@@ -121,7 +110,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function isEnabledByDefault(string $module): bool
     {
         switch ($module) {
-            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
             case self::WELCOME_GUIDES:
                 return false;
         }
