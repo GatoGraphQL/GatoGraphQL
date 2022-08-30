@@ -111,7 +111,6 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/en/modules/nested-mutations.md">Nested Mutations</a></td><td>Execute mutations from any type in the schema, not only from the root</td></tr>
 <tr><td><a href="docs/en/modules/public-private-schema.md">Public/Private Schema</a></td><td>Enable to communicate the existence of some field from the schema to certain users only (private mode) or to everyone (public mode). If disabled, fields are always available to everyone (public mode)</td></tr>
 <tr><th colspan="2"><br/>User Interface</th></tr>
-<tr><td><a href="docs/en/modules/low-level-persisted-query-editing.md">Low-Level Persisted Query Editing</a></td><td>Have access to schema-configuration low-level directives when editing GraphQL queries in the admin</td></tr>
 <tr><td><a href="docs/en/modules/excerpt-as-description.md">Excerpt as Description</a></td><td>Provide a description of the different entities (Custom Endpoints, Persisted Queries, and others) through their excerpt</td></tr>
 <tr><th colspan="2"><br/>Clients</th></tr>
 <tr><td><a href="docs/en/modules/graphiql-for-single-endpoint.md">GraphiQL for Single Endpoint</a></td><td>Make a public GraphiQL client available under <code>/graphiql/</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled</td></tr>
