@@ -112,4 +112,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $defaultValue,
         );
     }
+
+    public function enableLowLevelPersistedQueryEditing(): bool
+    {
+        $envVariable = Environment::ENABLE_LOW_LEVEL_PERSISTED_QUERY_EDITING;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
