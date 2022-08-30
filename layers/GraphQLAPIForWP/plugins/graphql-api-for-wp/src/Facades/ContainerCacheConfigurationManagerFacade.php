@@ -26,7 +26,7 @@ class ContainerCacheConfigurationManagerFacade
 
     public static function getInstance(): CacheConfigurationManagerInterface
     {
-        if (is_null(self::$instance)) {
+        if (self::$instance === null) {
             // We can't use the InstanceManager, since at this stage
             // it hasn't been initialized yet.
             // We can create a new instance of these classes
