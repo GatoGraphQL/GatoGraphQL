@@ -172,3 +172,16 @@
 .subsubsub a.module-type-endpoint {
     border-color: #d200cf;
 }
+
+.plugins .active.module-endpoint-configuration td,
+.plugins .active.module-endpoint-configuration th,
+.subsubsub a.module-type-endpoint-configuration {
+    background-color: #f0faf4;
+}
+.plugin-update-tr.active.module-endpoint-configuration td,
+.plugins .active.module-endpoint-configuration th.check-column {
+    border-left-color: #00acd2;
+}
+.subsubsub a.module-type-endpoint-configuration {
+    border-color: #00d282;
+}
