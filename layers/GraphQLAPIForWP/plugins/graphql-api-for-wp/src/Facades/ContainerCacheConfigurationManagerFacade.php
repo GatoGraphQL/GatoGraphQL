@@ -34,7 +34,6 @@ class ContainerCacheConfigurationManagerFacade
             // because their instantiation produces no side-effects
             // (maybe that happens under `initialize`)
             $instanceManager = new InstanceManager();
-            $moduleRegistry = new ModuleRegistry();
             $userAuthorizationSchemeRegistry = new UserAuthorizationSchemeRegistry();
             $manageOptionsUserAuthorizationScheme = new ManageOptionsUserAuthorizationScheme();
             $userAuthorizationSchemeRegistry->addUserAuthorizationScheme($manageOptionsUserAuthorizationScheme);
@@ -45,7 +44,6 @@ class ContainerCacheConfigurationManagerFacade
             $pluginMenu->setUserAuthorization($userAuthorization);
             $endpointHelpers = new EndpointHelpers();
             $endpointHelpers->setPluginMenu($pluginMenu);
-            $endpointHelpers->setModuleRegistry($moduleRegistry);
             $containerCacheConfigurationManager = new ContainerCacheConfigurationManager();
             $containerCacheConfigurationManager->setEndpointHelpers($endpointHelpers);
             self::$instance = $containerCacheConfigurationManager;
