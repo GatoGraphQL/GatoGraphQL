@@ -86,6 +86,14 @@ class Module extends AbstractModule
 
         // Boot conditionals
         if (class_exists(AccessControlModule::class)) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/AccessControl/Overrides');
+        }
+
+        if (class_exists(CacheControlModule::class)) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CacheControl/Overrides');
+        }
+
+        if (class_exists(AccessControlModule::class)) {
             /** @var AccessControlModuleConfiguration */
             $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
             if (

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\CacheControl\Overrides\Services;
+namespace GraphQLByPoP\GraphQLServer\ConditionalOnModule\CacheControl\Overrides\Services;
 
 use GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface;
 use PoP\CacheControl\Managers\CacheControlManager as UpstreamCacheControlManager;

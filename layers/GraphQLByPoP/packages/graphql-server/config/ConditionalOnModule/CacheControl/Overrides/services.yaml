@@ -5,5 +5,5 @@ services:
         autoconfigure: true
 
     PoP\CacheControl\Managers\CacheControlManagerInterface:
-        class: GraphQLByPoP\GraphQLServer\CacheControl\Overrides\Services\CacheControlManager
+        class: \GraphQLByPoP\GraphQLServer\ConditionalOnModule\CacheControl\Overrides\Services\CacheControlManager
     

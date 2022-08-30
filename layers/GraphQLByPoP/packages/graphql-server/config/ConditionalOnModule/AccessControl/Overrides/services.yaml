@@ -5,5 +5,5 @@ services:
         autoconfigure: true
 
     PoP\AccessControl\Services\AccessControlManagerInterface:
-        class: GraphQLByPoP\GraphQLServer\ConditionalOnModule\AccessControl\Overrides\Services\AccessControlManager
+        class: \GraphQLByPoP\GraphQLServer\ConditionalOnModule\AccessControl\Overrides\Services\AccessControlManager
     
