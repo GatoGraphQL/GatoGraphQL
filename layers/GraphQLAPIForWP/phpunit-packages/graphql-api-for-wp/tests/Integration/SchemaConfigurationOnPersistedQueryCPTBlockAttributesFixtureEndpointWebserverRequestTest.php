@@ -8,18 +8,12 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 
 class SchemaConfigurationOnPersistedQueryCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
 {
-    public const LATEST_POSTS_FOR_MOBILE_APP_PERSISTED_QUERY_ID = 65;
-    public const POWER_USERS_SCHEMA_CONFIGURATION_ID = 261;
+    public const HOME_USER_WIDGET_PERSISTED_QUERY_ID = 12;
+    public const UNRESTRICTED_SCHEMA_SCHEMA_CONFIGURATION_ID = 304;
 
     protected function getEndpoint(): string
     {
-        /**
-         * This endpoint:
-         *
-         * - Originally has the Schema Configuration "Mobile App"
-         * - Then changed to "Power users"
-         */
-        return 'graphql-query/latest-posts-for-mobile-app/';
+        return 'graphql-query/website/home-user-widget/';
     }
 
     protected function getFixtureFolder(): string
@@ -33,13 +27,13 @@ class SchemaConfigurationOnPersistedQueryCPTBlockAttributesFixtureEndpointWebser
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [
-            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => self::POWER_USERS_SCHEMA_CONFIGURATION_ID,
+            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => self::UNRESTRICTED_SCHEMA_SCHEMA_CONFIGURATION_ID,
         ];
     }
 
     protected function getCustomPostID(string $dataName): int
     {
-        return self::LATEST_POSTS_FOR_MOBILE_APP_PERSISTED_QUERY_ID;
+        return self::HOME_USER_WIDGET_PERSISTED_QUERY_ID;
     }
 
     protected function getBlockNamespacedID(string $dataName): string

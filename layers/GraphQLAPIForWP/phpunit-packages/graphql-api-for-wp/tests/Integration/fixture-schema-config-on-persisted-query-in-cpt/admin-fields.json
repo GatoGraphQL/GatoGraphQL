@@ -1,0 +1,41 @@
+{
+    "data": {
+        "users": [
+            {
+                "id": 6,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
+                "displayName": "Editor Smith",
+                "websiteURL": "",
+                "email": "editor@test.com"
+            },
+            {
+                "id": 5,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
+                "displayName": "Author Marquez",
+                "websiteURL": "",
+                "email": "author@test.com"
+            },
+            {
+                "id": 4,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
+                "displayName": "Contributor Johnson",
+                "websiteURL": "",
+                "email": "contributor@test.com"
+            },
+            {
+                "id": 3,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/subscriber\/",
+                "displayName": "Subscriber Bennett",
+                "websiteURL": "",
+                "email": "subscriber@test.com"
+            },
+            {
+                "id": 2,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/",
+                "displayName": "Blogger Davenport",
+                "websiteURL": "",
+                "email": "blogger@test.com"
+            }
+        ]
+    }
+}
