@@ -1,0 +1,14 @@
+/**
+ * Override WP Admin styles for the modal
+ */
+
+.components-modal__frame {
+	ul,
+	ol {
+		padding: revert;
+	}
+
+	ul {
+		list-style: initial;
+	}
+}
