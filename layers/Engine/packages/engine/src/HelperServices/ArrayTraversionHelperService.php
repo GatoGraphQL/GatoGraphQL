@@ -115,7 +115,7 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
 
         // Iterate the data array to the provided path.
         foreach (explode(OperationSymbols::ARRAY_PATH_DELIMITER, $path) as $pathLevel) {
-            if (!isset($dataPointer[$pathLevel])) {
+            if (!array_key_exists($pathLevel, $dataPointer)) {
                 // If we reached the end of the array and can't keep going down any level more, then it's an error
                 $this->throwNoArrayItemUnderPathException($data, $path);
             }
