@@ -63,9 +63,9 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
      * @param array<array<string,mixed>> $categories List of categories, each item is an array with props "slug" and "title"
      * @return array<array<string,mixed>> List of categories, each item is an array with props "slug" and "title"
      */
-    public function getBlockCategoriesViaBlockEditorContext(array $categories, WP_Block_Editor_Context $blockEditorContext): array
+    public function getBlockCategoriesViaBlockEditorContext(array $categories, ?WP_Block_Editor_Context $blockEditorContext): array
     {
-        if ($blockEditorContext->post === null) {
+        if ($blockEditorContext === null || $blockEditorContext->post === null) {
             return $categories;
         }
         return $this->getBlockCategories(
