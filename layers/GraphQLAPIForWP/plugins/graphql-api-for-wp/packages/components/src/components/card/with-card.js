@@ -22,7 +22,7 @@ const withCard = () => createHigherOrderComponent(
 				<CardHeader isShady>
 					<span>
 						{ header }
-						{ isSelected && getMarkdownContentCallback && (
+						{ getMarkdownContentCallback && (
 							<MarkdownInfoModalButton
 								title={ documentationTitle }
 								getMarkdownContentCallback={ getMarkdownContentCallback }
