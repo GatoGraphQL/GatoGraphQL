@@ -11,7 +11,7 @@ For persisted queries, it will also inherit:
 
 The child custom endpoint and persisted query will include, within their endpoint, the full path of its ancestor endpoint(s), such as `/graphql-query/posts/mobile-app/`.
 
-## How it works
+## Description
 
 Inheritance is useful for creating a hierarchy of API endpoints, such as:
 

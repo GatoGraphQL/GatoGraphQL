@@ -9,6 +9,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
 	withCard,
 	withEditableOnFocus,
@@ -78,6 +79,7 @@ const PersistedQueryEndpointAPIHierarchy = ( props ) => {
 export default compose( [
 	withState( {
 		header: __('API Hierarchy', 'graphql-api'),
+		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withSelect( ( select ) => {
 		const { getEditedPostAttribute } = select(

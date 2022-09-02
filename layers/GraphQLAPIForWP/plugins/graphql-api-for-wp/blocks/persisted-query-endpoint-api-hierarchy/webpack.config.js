@@ -1,6 +1,15 @@
-const path = require( 'path' );
+/**
+ * Define constants
+ */
+const MODULE = 'api-hierarchy';
+const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
+const BASE_URL = process.env.NODE_ENV === 'production'
+	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
+	: 'https://raw.githubusercontent.com/leoloso/PoP/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp'
 
 const config = require( '@wordpress/scripts/config/webpack.config' );
+const path = require( 'path' );
+config.resolve.alias['@moduleDocs'] = path.resolve(process.cwd(), `../../${ MODULE_DOCS_PATH }`)
 
 /**
  * Resolve folder docs/ as @docs
@@ -37,9 +46,25 @@ config.module.rules.push(
 				loader: "html-loader"
 			},
 			{
-				loader: "markdown-loader"
+				loader: "markdown-loader",
+				options: {
+					baseUrl: `${ BASE_URL }/${MODULE_DOCS_PATH }`
+				}
 			}
 		]
+	},
+	{
+		test: /\.(gif|png|jpe?g|svg)$/i,
+		use: [
+			'file-loader',
+			{
+				loader: 'image-webpack-loader',
+				options: {
+					bypassOnDebug: true, // webpack@1.x
+					disable: true, // webpack@2.x and newer
+				},
+			},
+		],
 	}
 );
 
