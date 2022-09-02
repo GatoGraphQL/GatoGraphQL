@@ -13,7 +13,6 @@ const withCard = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
 		const {
 			header,
-			isSelected,
 			getMarkdownContentCallback
 		} = props;
 		const documentationTitle = __(`Documentation for: "${ header }"`, 'graphql-api');
@@ -22,7 +21,7 @@ const withCard = () => createHigherOrderComponent(
 				<CardHeader isShady>
 					<span>
 						{ header }
-						{ getMarkdownContentCallback && (
+						{ !! getMarkdownContentCallback && (
 							<MarkdownInfoModalButton
 								title={ documentationTitle }
 								getMarkdownContentCallback={ getMarkdownContentCallback }
