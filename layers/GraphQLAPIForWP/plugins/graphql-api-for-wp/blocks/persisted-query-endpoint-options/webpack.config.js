@@ -1,15 +1,15 @@
 /**
  * Define constants
  */
- const MODULE = 'persisted-queries';
- const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
- const BASE_URL = process.env.NODE_ENV === 'production'
-	 ? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
-	 : 'https://raw.githubusercontent.com/leoloso/PoP/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp'
- 
- const config = require( '@wordpress/scripts/config/webpack.config' );
- const path = require( 'path' );
- config.resolve.alias['@moduleDocs'] = path.resolve(process.cwd(), `../../${ MODULE_DOCS_PATH }`)
+const MODULE = 'persisted-queries';
+const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
+const BASE_URL = process.env.NODE_ENV === 'production'
+	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
+	: 'https://raw.githubusercontent.com/leoloso/PoP/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp'
+
+const config = require( '@wordpress/scripts/config/webpack.config' );
+const path = require( 'path' );
+config.resolve.alias['@moduleDocs'] = path.resolve(process.cwd(), `../../${ MODULE_DOCS_PATH }`)
 
 /**
  * Resolve folder docs/ as @docs
