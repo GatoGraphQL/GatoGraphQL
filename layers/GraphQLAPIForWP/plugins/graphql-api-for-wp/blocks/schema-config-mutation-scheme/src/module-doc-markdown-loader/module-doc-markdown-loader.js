@@ -2,7 +2,7 @@
  * Path to load the lazy chunks on the fly
  * @see https://v4.webpack.js.org/guides/public-path/#on-the-fly
  */
- __webpack_public_path__ = window.graphqlApiSchemaConfigMutationScheme?.publicPath;
+__webpack_public_path__ = window.graphqlApiSchemaConfigMutationScheme?.publicPath;
 
 /**
  * Read the content from a Markdown file in a given language, and return it as HTML
