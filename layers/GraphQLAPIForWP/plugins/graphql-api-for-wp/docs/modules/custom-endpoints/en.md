@@ -97,7 +97,7 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 
 These are the inputs in the Document settings:
 
-| Input | Description | 
+| Input | Description |
 | --- | --- |
 | **Permalink** | The endpoint under which the custom endpoint will be available |
 | **Categories** | Can categorize the custom endpoint.<br/>Eg: `mobile`, `app`, etc |

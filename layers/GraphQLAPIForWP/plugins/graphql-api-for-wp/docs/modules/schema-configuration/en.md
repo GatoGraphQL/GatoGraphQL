@@ -80,6 +80,6 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 
 These are the inputs in the Document settings:
 
-| Input | Description | 
+| Input | Description |
 | --- | --- |
 | **Excerpt** | Provide a description for the schema configuration.<br/>This input is available when module `Excerpt as Description` is enabled |

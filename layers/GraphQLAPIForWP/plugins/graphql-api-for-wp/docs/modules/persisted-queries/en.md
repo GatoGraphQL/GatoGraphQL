@@ -136,7 +136,7 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 
 These are the inputs in the Document settings:
 
-| Input | Description | 
+| Input | Description |
 | --- | --- |
 | **Permalink** | The endpoint under which the persisted query will be available |
 | **Categories** | Can categorize the persisted query.<br/>Eg: `mobile`, `app`, etc |
