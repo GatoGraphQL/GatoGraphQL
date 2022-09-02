@@ -1,7 +1,7 @@
 /**
  * Define constants
  */
-const MODULE = 'namespacing';
+const MODULE = 'schema-namespacing';
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
