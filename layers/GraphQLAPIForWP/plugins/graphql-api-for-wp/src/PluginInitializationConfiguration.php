@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\MetaSchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
