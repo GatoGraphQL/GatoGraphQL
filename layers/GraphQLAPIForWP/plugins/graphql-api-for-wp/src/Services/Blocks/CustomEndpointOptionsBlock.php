@@ -57,4 +57,12 @@ class CustomEndpointOptionsBlock extends AbstractEndpointOptionsBlock implements
         // English
         return 'en';
     }
+
+    /**
+     * Register style-index.css
+     */
+    protected function registerCommonStyleCSS(): bool
+    {
+        return true;
+    }
 }
