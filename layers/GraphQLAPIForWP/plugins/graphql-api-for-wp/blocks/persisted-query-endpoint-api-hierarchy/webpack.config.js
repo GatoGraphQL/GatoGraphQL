@@ -48,7 +48,7 @@ config.module.rules.push(
 			{
 				loader: "markdown-loader",
 				options: {
-					baseUrl: `${ BASE_URL }/${MODULE_DOCS_PATH }`
+					baseUrl: `${ BASE_URL }/${ MODULE_DOCS_PATH }`
 				}
 			}
 		]
