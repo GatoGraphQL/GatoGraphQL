@@ -7,4 +7,3 @@ Each custom endpoint can be attached its own GraphiQL client, available under th
 The client can be opened from the Custom Endpoints page, on link "GraphiQL" when hovering on the custom endpoint entry:
 
 ![Custom endpoint's link to the GraphiQL client](../../images/custom-endpoints-actions-graphiql.png "Custom endpoint's link to the GraphiQL client")
-
