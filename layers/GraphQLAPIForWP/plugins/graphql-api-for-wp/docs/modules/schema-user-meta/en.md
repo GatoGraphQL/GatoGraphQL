@@ -4,7 +4,7 @@ Retrieve meta values for users, by querying fields `metaValue` and `metaValues`.
 
 For security reasons, which meta keys can be queried must be explicitly configured. By default, the list is empty.
 
-## How to use
+## Description
 
 Query fields `metaValue` and `metaValues` on a user, passing the required meta key as field argument `key`.
 

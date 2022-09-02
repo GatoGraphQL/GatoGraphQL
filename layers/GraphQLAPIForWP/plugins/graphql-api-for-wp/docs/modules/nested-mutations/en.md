@@ -2,7 +2,7 @@
 
 Nested mutations enable to perform mutations on a type other than the root type in GraphQL.
 
-## How to use
+## Description
 
 The query below executes a standard mutation, using the mutation field `updatePost` from the root type:
 

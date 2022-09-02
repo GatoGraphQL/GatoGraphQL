@@ -2,7 +2,7 @@
 
 GraphQL mutations enable to modify data (i.e. perform side-effect) through the query.
 
-## How to use
+## Description
 
 The query must use the operation type `mutation`:
 

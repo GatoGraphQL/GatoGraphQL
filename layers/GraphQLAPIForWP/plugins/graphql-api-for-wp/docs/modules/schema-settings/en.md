@@ -17,7 +17,7 @@ By default, only the following options can be queried:
 - `"time_format"`
 - `"blog_charset"`
 
-## How to use
+## Description
 
 Query field `Root.option`, passing the required option as field argument `name`.
 

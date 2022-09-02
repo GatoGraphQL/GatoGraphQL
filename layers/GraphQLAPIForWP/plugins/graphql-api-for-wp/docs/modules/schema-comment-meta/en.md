@@ -4,7 +4,7 @@ Retrieve meta values for comments, by querying fields `metaValue` and `metaValue
 
 For security reasons, which meta keys can be queried must be explicitly configured. By default, the list is empty.
 
-## How to use
+## Description
 
 Query fields `metaValue` and `metaValues` on a comment, passing the required meta key as field argument `key`.
 
