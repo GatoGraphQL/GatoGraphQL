@@ -40,11 +40,11 @@ Each entry can either be:
 
 For instance, both entries `siteurl` and `/site.*/` match option name `"siteurl"`.
 
-<a href="../../images/schema-configuration-settings-entries.jpg" target="_blank">![Defining the entries for the Settings](../../images/schema-configuration-settings-entries.jpg "Defining the entries for the Settings")</a>
+![Defining the entries for the Settings](../../images/schema-configuration-settings-entries.jpg "Defining the entries for the Settings")
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
 👉🏽 <strong>Allow access:</strong> only the configured entries can be accessed, and no other can<br/>
 👉🏽 <strong>Deny access:</strong> the configured entries cannot be accessed, all other entries can
 
-<a href="../../images/schema-configuration-settings-behavior.jpg" target="_blank">![Defining the access behavior](../../images/schema-configuration-settings-behavior.jpg "Defining the access behavior")</a>
+![Defining the access behavior](../../images/schema-configuration-settings-behavior.jpg "Defining the access behavior")

@@ -12,11 +12,11 @@ In the namespaced schema, types `Event` and `Location` become `EM_Event` and `EM
 
 While the schema normally looks like this:
 
-<a href="../../images/normal-interactive-schema.png" target="_blank">![Interactive schema](../../images/normal-interactive-schema.png)</a>
+![Interactive schema](../../images/normal-interactive-schema.png)
 
 ...its namespaced version looks like this:
 
-<a href="../../images/namespaced-interactive-schema.png" target="_blank">![Namespaced interactive schema](../../images/namespaced-interactive-schema.png)</a>
+![Namespaced interactive schema](../../images/namespaced-interactive-schema.png)
 
 ## How to use
 
@@ -24,13 +24,13 @@ Namespacing the schema can be configured as follows, in order of priority:
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-<a href="../../images/schema-configuration-namespacing.png" target="_blank">![Namespacing, set in the Schema configuration](../../images/schema-configuration-namespacing.png "Namespacing, set in the Schema configuration")</a>
+![Namespacing, set in the Schema configuration](../../images/schema-configuration-namespacing.png "Namespacing, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
-<a href="../../images/settings-namespacing.png" target="_blank">![Namespacing in Settings](../../images/settings-namespacing.png "Namespacing in Settings")</a>
+![Namespacing in Settings](../../images/settings-namespacing.png "Namespacing in Settings")
 
 ## When to use
 

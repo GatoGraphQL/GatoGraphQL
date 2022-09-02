@@ -77,27 +77,27 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 
 Clicking on the Persisted Queries link in the menu, it displays the list of all the created persisted queries:
 
-<a href="../../images/persisted-queries-page.png" target="_blank">![Persisted Queries in the admin](../../images/persisted-queries-page.png)</a>
+![Persisted Queries in the admin](../../images/persisted-queries-page.png)
 
 A persisted query is a custom post type (CPT). To create a new persisted query, click on button "Add New GraphQL persisted query", which will open the WordPress editor:
 
-<a href="../../images/new-persisted-query.png" target="_blank">![Creating a new Persisted Query](../../images/new-persisted-query.png)</a>
+![Creating a new Persisted Query](../../images/new-persisted-query.png)
 
 The main input is the GraphiQL client, which comes with the Explorer by default. Clicking on the fields on the left side panel adds them to the query, and clicking on the "Run" button executes the query:
 
-<a href="../../images/graphiql-explorer.gif" target="_blank">![Writing and executing a persisted query](../../images/graphiql-explorer.gif)</a>
+![Writing and executing a persisted query](../../images/graphiql-explorer.gif)
 
 When the query is ready, publish it, and its permalink becomes its endpoint:
 
-<a href="../../images/publishing-persisted-query.gif" target="_blank">![Publishing the persisted query](../../images/publishing-persisted-query.gif)</a>
+![Publishing the persisted query](../../images/publishing-persisted-query.gif)
 
 Appending `?view=source` to the permalink, it will show the persisted query and its configuration (as long as the user has access to it):
 
-<a href="../../images/persisted-query-source.png" target="_blank">![Persisted query source](../../images/persisted-query-source.png)</a>
+![Persisted query source](../../images/persisted-query-source.png)
 
 By default, the persisted query's endpoint has path `/graphql-query/`, and this value is configurable through the Settings:
 
-<a href="../../images/settings-persisted-queries.png" target="_blank">![Persisted query Settings](../../images/settings-persisted-queries.png)</a>
+![Persisted query Settings](../../images/settings-persisted-queries.png)
 
 ## Editor Inputs
 

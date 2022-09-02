@@ -27,19 +27,19 @@ The number of levels is unlimited, so we can also create:
 
 Children persisted queries can override variables defined in the parent query. For instance, variable `$limit` is defined in the parent, and overriden in the child:
 
-<a href="../../images/parent-persisted-query.png" target="_blank">![Parent persisted query](../../images/parent-persisted-query.png "Parent persisted query")</a>
+![Parent persisted query](../../images/parent-persisted-query.png "Parent persisted query")
 
-<a href="../../images/child-persisted-query.png" target="_blank">![Child persisted query](../../images/child-persisted-query.png "Child persisted query")</a>
+![Child persisted query](../../images/child-persisted-query.png "Child persisted query")
 
 ## How to use
 
 In the custom endpoint or persisted query, in the Document settings, there is section `Page Attributes` with a dropdown of all other entities, to select as the parent:
 
-<a href="../../images/api-inheritance.png" target="_blank">![API inheritance](../../images/api-inheritance.png "API inheritance")</a>
+![API inheritance](../../images/api-inheritance.png "API inheritance")
 
 When selected, in the Options of the persisted query we can choose to inherit the parent's query:
 
-<a href="../../images/api-inheritance.gif" target="_blank">![API inheritance](../../images/api-inheritance.gif "API inheritance")</a>
+![API inheritance](../../images/api-inheritance.gif "API inheritance")
 
 Different strategies can be applied to create the API hierarchy.
 

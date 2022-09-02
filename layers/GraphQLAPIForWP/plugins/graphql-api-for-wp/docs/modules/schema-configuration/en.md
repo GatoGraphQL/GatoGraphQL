@@ -17,29 +17,29 @@ Modules can define their own configuration to be applied in the schema through t
 - Namespacing the schema
 - Using nested mutations
 
-<a href="../../images/schema-configuration.png" target="_blank">![Creating a new schema configuration](../../images/schema-configuration.png "Creating a new schema configuration")</a>
+![Creating a new schema configuration](../../images/schema-configuration.png "Creating a new schema configuration")
 
 ## How to use
 
 Clicking on the Schema Configurations link in the menu, it displays the list of all of them:
 
-<a href="../../images/schema-configurations-page.png" target="_blank">![Schema Configurations in the admin](../../images/schema-configurations-page.png)</a>
+![Schema Configurations in the admin](../../images/schema-configurations-page.png)
 
 A schema configuration is a custom post type (CPT). To create a new schema configuration, click on button "Add New Schema Configuration", which will open the WordPress editor:
 
-<a href="../../images/new-schema-configuration.png" target="_blank">![Creating a new Persisted Query](../../images/new-schema-configuration.png)</a>
+![Creating a new Persisted Query](../../images/new-schema-configuration.png)
 
 To configure the different elements in the schema configuration, click on corresponding input, and it becomes editable. Then select the entries that apply to the configuration. When you are done, click on "Publish":
 
-<a href="../../images/editing-schema-configuration.gif" target="_blank">![Creating a new schema configuration](../../images/editing-schema-configuration.gif)</a>
+![Creating a new schema configuration](../../images/editing-schema-configuration.gif)
 
 Once published, the schema configuration becomes available when editing a Custom Endpoint or Persisted Query:
 
-<a href="../../images/schema-configuration-in-custom-endpoint.png" target="_blank">![Selecting the Schema Configuration in the Custom Endpoint](../../images/schema-configuration-in-custom-endpoint.png)</a>
+![Selecting the Schema Configuration in the Custom Endpoint](../../images/schema-configuration-in-custom-endpoint.png)
 
 If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema configuration selected in the Settings will be used:
 
-<a href="../../images/settings-default-schema-configuration.png" target="_blank">![Persisted query source](../../images/settings-default-schema-configuration.png)</a>
+![Persisted query source](../../images/settings-default-schema-configuration.png)
 
 ## Editor Inputs
 

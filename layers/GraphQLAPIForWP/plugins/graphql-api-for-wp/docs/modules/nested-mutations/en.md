@@ -61,19 +61,19 @@ mutation {
 
 Nested mutations change the root type, from `QueryRoot` and `MutationRoot`, to a single `Root` type handling both queries and mutations:
 
-<a href="../../images/schema-docs-nested-mutation.png" target="_blank">![Nested mutations in the schema docs](../../images/schema-docs-nested-mutation.png)</a>
+![Nested mutations in the schema docs](../../images/schema-docs-nested-mutation.png)
 
 With nested mutations, every type in the schema can contain both query and mutation fields. To differentiate them, the mutation field's description is prepended with label `"[Mutation] "`.
 
 For instance, these are the fields for type `Root`:
 
-<a href="../../images/mutation-desc-in-graphiql-docs.png" target="_blank">![Description for type `Root` in GraphiQL docs](../../images/mutation-desc-in-graphiql-docs.png)</a>
+![Description for type `Root` in GraphiQL docs](../../images/mutation-desc-in-graphiql-docs.png)
 
 ## Settings
 
 Item "Default Mutation scheme" in the module settings enables to configure if to enable nested mutations or not, and its behavior:
 
-<a href="../../images/settings-nested-mutations.jpg" target="_blank">![Settings for nested mutations](../../images/settings-nested-mutations.jpg)</a>
+![Settings for nested mutations](../../images/settings-nested-mutations.jpg)
 
 It has these options:
 
@@ -111,7 +111,7 @@ Same option as above, but removing the "duplicated" mutation fields from the roo
 
 A "Mutation Scheme" section has been added to a Schema Configuration, allowing to enable/disable/configure nested mutations for Custom Endpoints and Persisted Queries on an individual basis.
 
-<a href="../../images/schema-configuration-mutation-scheme.jpg" target="_blank">![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.jpg)</a>
+![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.jpg)
 
 ## GraphQL spec
 

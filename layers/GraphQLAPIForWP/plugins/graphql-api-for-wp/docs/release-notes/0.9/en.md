@@ -8,7 +8,7 @@ These are all the changes added for version 0.9 of the GraphQL API for WordPress
 
 The GraphQL schema mapping the WordPress data model has been significantly completed! 💪
 
-<a href="../../images/graphql-schema-v09.png" target="_blank">![GraphQL schema](../../images/graphql-schema-v09.png)</a>
+![GraphQL schema](../../images/graphql-schema-v09.png)
 
 Let's see what new elements have been added.
 
@@ -919,7 +919,7 @@ This means we can now configure the single endpoint:
 
 To configure the single endpoint, go to tab "Schema Configuration" on the Settings page, and select the desired Schema Configuration entry from the dropdown for "Schema Configuration for the Single Endpoint", and click on "Save Changes":
 
-<a href="../../images/settings-schema-configuration-for-single-endpoint.png" target="_blank">![Settings for the Schema Configuration for the Single Endpoint](../../images/settings-schema-configuration-for-single-endpoint.png)</a>
+![Settings for the Schema Configuration for the Single Endpoint](../../images/settings-schema-configuration-for-single-endpoint.png)
 
 ## Display `"causes"` for errors in response (#893)
 
@@ -941,7 +941,7 @@ For instance, type `Post` was namespaced as `PoPSchema_Posts_Post`. From `v0.9`,
 
 Namespacing applies to those types added by extensions. In this image, types `Event` and `Location` have been namespaced using the `EM_` prefix:
 
-<a href="../../images/namespaced-interactive-schema.png" target="_blank">![Namespaced schema](../../images/namespaced-interactive-schema.png)</a>
+![Namespaced schema](../../images/namespaced-interactive-schema.png)
 
 ## Split Settings into "Default value for Schema Configuration" and "Value for the Admin"
 
@@ -958,7 +958,7 @@ The updated modules are:
 - Nested Mutations
 - Schema Expose Admin Data
 
-<a href="../../images/releases/v09/split-settings-into-2.png" target="_blank">![Selecting the same field on the two possible root types](../../images/releases/v09/split-settings-into-2.png)</a>
+![Selecting the same field on the two possible root types](../../images/releases/v09/split-settings-into-2.png)
 
 ## Validate constraints for field and directive arguments
 
@@ -1003,7 +1003,7 @@ The Settings for Posts and Pages used the "default limit" and "max limit" values
 
 Now, they have their own:
 
-<a href="../../images/releases/v09/posts-settings-new-options.png" target="_blank">![Default and max limit options for posts in the Settings page](../../images/releases/v09/posts-settings-new-options.png)</a>
+![Default and max limit options for posts in the Settings page](../../images/releases/v09/posts-settings-new-options.png)
 
 ## Return an error if access is not allowed for the option name or meta key
 
@@ -1226,7 +1226,7 @@ From `v0.9` it is not needed to modify any value on the Settings. Just clicking 
 
 The GraphQL queries in the module documentation are now prettyprinted:
 
-<a href="../../images/releases/v09/prettyprinted-code.png" target="_blank">![Prettyprinted GraphQL queries in module docs](../../images/releases/v09/prettyprinted-code.png)</a>
+![Prettyprinted GraphQL queries in module docs](../../images/releases/v09/prettyprinted-code.png)
 
 ## Upgraded GraphiQL
 
@@ -1371,7 +1371,7 @@ Renamed module "Schema for the Admin" to "Schema Expose Admin Data". If this mod
 
 In addition, its block for the Schema Configuration also got renamed, so you must click on "Reset the template" on all Schema Configurations to show the block again:
 
-<a href="../../images/releases/v09/schema-config-reset-the-template.png" target="_blank">![Click on "Reset the template" on all Schema Configurations](../../images/releases/v09/schema-config-reset-the-template.png)</a>
+![Click on "Reset the template" on all Schema Configurations](../../images/releases/v09/schema-config-reset-the-template.png)
 
 ### Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 
@@ -1530,7 +1530,7 @@ From now on, field `User.email` is treated as private data. As such, it is expos
 
 This behavior can be overriden in the Settings page:
 
-<a href="../../images/settings-treat-user-email-as-private-data.png" target="_blank">![Settings to treat user email as private data](../../images/settings-treat-user-email-as-private-data.png)</a>
+![Settings to treat user email as private data](../../images/settings-treat-user-email-as-private-data.png)
 
 ### Removed modules
 
@@ -1551,7 +1551,7 @@ Those modules which had their Settings value split into 2 ("Default value for Sc
 
 In addition, the `Default Schema Configuration` option for module "Schema Configuration" has been renamed, and it must also be set again.
 
-<a href="../../images/releases/v09/renamed-option-set-again.png" target="_blank">![Must set again the value for Default Schema Configuration](../../images/releases/v09/renamed-option-set-again.png)</a>
+![Must set again the value for Default Schema Configuration](../../images/releases/v09/renamed-option-set-again.png)
 
 ### Must re-set options "default limit" and "max limit" for Posts and Pages
 

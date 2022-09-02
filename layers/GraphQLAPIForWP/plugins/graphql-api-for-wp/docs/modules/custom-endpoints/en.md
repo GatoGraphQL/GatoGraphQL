@@ -16,7 +16,7 @@ In addition to supporting the single endpoint, the GraphQL API also makes it pos
 
 The custom endpoint is a Custom Post Type, and its permalink is the endpoint. An endpoint with title `"My endpoint"` and slug `my-endpoint` will be accessible under `/graphql/my-endpoint/`.
 
-<a href="../../images/custom-endpoint.png" target="_blank">![Creating a custom endpoint](../../images/custom-endpoint.png "Creating a custom endpoint")</a>
+![Creating a custom endpoint](../../images/custom-endpoint.png "Creating a custom endpoint")
 
 ## Clients
 
@@ -26,35 +26,35 @@ Each custom endpoint has its own set of clients to interact with:
 
 Module `GraphiQL for Custom Endpoints` must be enabled.
 
-<a href="../../images/custom-endpoint-graphiql.png" target="_blank">![Custom endpoint's GraphiQL client](../../images/custom-endpoint-graphiql.png "Custom endpoint's GraphiQL client")</a>
+![Custom endpoint's GraphiQL client](../../images/custom-endpoint-graphiql.png "Custom endpoint's GraphiQL client")
 
 ✅ An **Interactive schema client**, available under the endpoint + `?view=schema` (eg: `/graphql/my-endpoint/?view=schema`).
 
 Module `Interactive Schema for Custom Endpoints` must be enabled.
 
-<a href="../../images/custom-endpoint-interactive-schema.png" target="_blank">![Custom endpoint's Interactive schema](../../images/custom-endpoint-interactive-schema.png "Custom endpoint's Interactive schema")</a>
+![Custom endpoint's Interactive schema](../../images/custom-endpoint-interactive-schema.png "Custom endpoint's Interactive schema")
 
 ## How to use
 
 Clicking on the Custom Endpoints link in the menu, it displays the list of all the created custom endpoints:
 
-<a href="../../images/custom-endpoints-page.png" target="_blank">![Custom Endpoints in the admin](../../images/custom-endpoints-page.png)</a>
+![Custom Endpoints in the admin](../../images/custom-endpoints-page.png)
 
 A custom endpoint is a custom post type (CPT). To create a new custom endpoint, click on button "Add New GraphQL endpoint", which will open the WordPress editor:
 
-<a href="../../images/new-custom-endpoint.png" target="_blank">![Creating a new Custom Endpoint](../../images/new-custom-endpoint.png)</a>
+![Creating a new Custom Endpoint](../../images/new-custom-endpoint.png)
 
 When the endpoint is ready, publish it, and its permalink becomes its endpoint:
 
-<a href="../../images/publishing-custom-endpoint.gif" target="_blank">![Publishing the custom endpoint](../../images/publishing-custom-endpoint.gif)</a>
+![Publishing the custom endpoint](../../images/publishing-custom-endpoint.gif)
 
 Appending `?view=source` to the permalink, it will show the endpoint's configuration (as long as the user has access to it):
 
-<a href="../../images/custom-endpoint-source.png" target="_blank">![Custom endpoint source](../../images/custom-endpoint-source.png)</a>
+![Custom endpoint source](../../images/custom-endpoint-source.png)
 
 By default, the custom endpoint has path `/graphql/`, and this value is configurable through the Settings:
 
-<a href="../../images/settings-custom-endpoints.png" target="_blank">![Custom endpoint Settings](../../images/settings-custom-endpoints.png)</a>
+![Custom endpoint Settings](../../images/settings-custom-endpoints.png)
 
 ## Editor Inputs
 

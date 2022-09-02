@@ -16,6 +16,6 @@ Input `Included custom post types` in the Settings lists down all the Custom Pos
 
 From the list, select those CPTs that need to be queried through GraphQL (more than one can be selected by pressing the `ctrl` or `shift` keys), and field `genericCustomPosts` will fetch their entries:
 
-<a href="../../images/settings-generic-customposts.png" target="_blank">![Settings for Generic Custom Post](../../images/settings-generic-customposts.png "Settings for Generic Custom Post")</a>
+![Settings for Generic Custom Post](../../images/settings-generic-customposts.png "Settings for Generic Custom Post")
 
 

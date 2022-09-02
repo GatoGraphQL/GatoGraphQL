@@ -19,4 +19,4 @@ mutation {
 
 The available mutation fields are those under the `MutationRoot` type:
 
-<a href="../../images/schema-mutations.png" target="_blank">![Schema mutations](../../images/schema-mutations.png)</a>
+![Schema mutations](../../images/schema-mutations.png)

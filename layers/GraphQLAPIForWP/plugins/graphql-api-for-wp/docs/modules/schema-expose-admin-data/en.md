@@ -72,7 +72,7 @@ The elements listed above can be made public.
 
 In the Settings page, in the corresponding tab for each, there is a checkbox to configure if to treat them as private or public:
 
-<a href="../../images/settings-treat-user-email-as-private-data.png" target="_blank">![Settings to treat user email as private data](../../images/settings-treat-user-email-as-private-data.png)</a>
+![Settings to treat user email as private data](../../images/settings-treat-user-email-as-private-data.png)
 
 ## How to use
 
@@ -80,13 +80,13 @@ Exposing admin elements in the schema can be configured as follows, in order of 
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-<a href="../../images/schema-configuration-adding-admin-fields-to-schema.png" target="_blank">![Adding admin fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-admin-fields-to-schema.png "Adding admin fields to the schema, set in the Schema configuration")</a>
+![Adding admin fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-admin-fields-to-schema.png "Adding admin fields to the schema, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
-<a href="../../images/settings-admin-schema.png" target="_blank">![Schema Expose Admin Data, in the Settings](../../images/settings-admin-schema.png "Schema Expose Admin Data, in the Settings")</a>
+![Schema Expose Admin Data, in the Settings](../../images/settings-admin-schema.png "Schema Expose Admin Data, in the Settings")
 
 ## When to use
 

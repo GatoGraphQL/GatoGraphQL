@@ -30,14 +30,14 @@ Each entry can either be:
 
 For instance, both entries `_edit_last` and `/_edit_.*/` match meta key `"_edit_last"`.
 
-<a href="../../images/schema-configuration-custompost-meta-entries.png" target="_blank">![Defining the entries](../../images/schema-configuration-custompost-meta-entries.png "Defining the entries")</a>
+![Defining the entries](../../images/schema-configuration-custompost-meta-entries.png "Defining the entries")
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
 👉🏽 <strong>Allow access:</strong> only the configured entries can be accessed, and no other can<br/>
 👉🏽 <strong>Deny access:</strong> the configured entries cannot be accessed, all other entries can
 
-<a href="../../images/schema-configuration-custompost-meta-behavior.png" target="_blank">![Defining the access behavior](../../images/schema-configuration-custompost-meta-behavior.png "Defining the access behavior")</a>
+![Defining the access behavior](../../images/schema-configuration-custompost-meta-behavior.png "Defining the access behavior")
 
 ## Performance considerations
 

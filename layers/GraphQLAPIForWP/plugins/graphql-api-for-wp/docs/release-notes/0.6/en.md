@@ -8,7 +8,7 @@ You can now use [GitHub Updater](https://github.com/afragen/github-updater/) to 
 
 The GraphiQL Explorer enables to code the GraphQL query by point-and-clicking on fields:
 
-<a href="../../images/graphiql-explorer.gif" target="_blank">![Writing and executing a persisted query](../../images/graphiql-explorer.gif)</a>
+![Writing and executing a persisted query](../../images/graphiql-explorer.gif)
 
 Previously, it was only available on the GraphiQL client for creating persisted queries. It has now been also added in the other locations:
 
@@ -16,11 +16,11 @@ Previously, it was only available on the GraphiQL client for creating persisted 
 - Single endpoint public GraphiQL client
 - Custom endpoint public GraphiQL clients
 
-<a href="../../images/public-client-with-graphiql-explorer.png" target="_blank">![Public client with GraphiQL Explorer](../../images/public-client-with-graphiql-explorer.png)</a>
+![Public client with GraphiQL Explorer](../../images/public-client-with-graphiql-explorer.png)
 
 Enabled by default, the GraphiQL Explorer can be disabled for selected clients via the Settings:
 
-<a href="../../images/settings-graphiql-explorer.png" target="_blank">![Public client with GraphiQL Explorer](../../images/settings-graphiql-explorer.png)</a>
+![Public client with GraphiQL Explorer](../../images/settings-graphiql-explorer.png)
 
 ## Embeddable fields
 
@@ -80,14 +80,14 @@ A new About page has been added containing:
 - The Slack workspace for support
 - The list of the release notes for each version
 
-<a href="../../images/about-page.png" target="_blank">![About page](../../images/about-page.png)</a>
+![About page](../../images/about-page.png)
 
 ## Release notes
 
 Starting from this version, immediately after updating the plugin, an admin notice will display a link to read the release notes for the new version:
 
-<a href="../../images/admin-notice-release-notes.png" target="_blank">![Offering to read the release notes via an admin notice](../../images/admin-notice-release-notes.png)</a>
+![Offering to read the release notes via an admin notice](../../images/admin-notice-release-notes.png)
 
 When clicking on the link, the release notes are shown on a modal window:
 
-<a href="../../images/release-notes-in-modal.png" target="_blank">![Release notes in a modal window](../../images/release-notes-in-modal.png)</a>
+![Release notes in a modal window](../../images/release-notes-in-modal.png)

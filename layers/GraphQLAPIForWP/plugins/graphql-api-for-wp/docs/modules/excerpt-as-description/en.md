@@ -15,14 +15,14 @@ Use the excerpt field to provide a description for the different Custom Post Typ
 
 The description is shown in the table listing the entities for each Custom Post Type, under column `Description`:
 
-<a href="../../images/persisted-queries-with-description.png" target="_blank">![Persisted queries with description](../../images/persisted-queries-with-description.png "Persisted queries with description")</a>
+![Persisted queries with description](../../images/persisted-queries-with-description.png "Persisted queries with description")
 
 The description is also displayed when visualizing the entity:
 
-<a href="../../images/persisted-query-source-with-description.png" target="_blank">![Persisted query source with description](../../images/persisted-query-source-with-description.png "Persisted query source with description")</a>
+![Persisted query source with description](../../images/persisted-query-source-with-description.png "Persisted query source with description")
 
 ## How to use
 
 When editing the entity, use the excerpt field to provide a description:
 
-<a href="../../images/excerpt-as-description.png" target="_blank">![Excerpt as description](../../images/excerpt-as-description.png "Excerpt as description")</a>
+![Excerpt as description](../../images/excerpt-as-description.png "Excerpt as description")

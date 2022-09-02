@@ -6,7 +6,7 @@ Interactive explorer plugin for GraphiQL
 
 The Explorer is an addon for the GraphiQL client, which enables to compose the GraphQL persisted query by point-and-clicking on fields:
 
-<a href="../../images/graphiql-explorer.gif" target="_blank">![Writing and executing a persisted query](../../images/graphiql-explorer.gif)</a>
+![Writing and executing a persisted query](../../images/graphiql-explorer.gif)
 
 ## How to use
 
@@ -17,4 +17,4 @@ Customize in the Settings which GraphiQL clients will have the Explorer enabled,
 - In the single endpoint's public GraphiQL client
 - In the custom endpoints' public GraphiQL client
 
-<a href="../../images/settings-graphiql-explorer.png" target="_blank">![GraphiQL Explorer settings](../../images/settings-graphiql-explorer.png)</a>
+![GraphiQL Explorer settings](../../images/settings-graphiql-explorer.png)
