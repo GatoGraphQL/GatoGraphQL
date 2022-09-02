@@ -67,6 +67,14 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
         return 'en';
     }
 
+    /**
+     * Register style-index.css
+     */
+    protected function registerCommonStyleCSS(): bool
+    {
+        return true;
+    }
+
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return $this->getPersistedQueryEndpointBlockCategory();

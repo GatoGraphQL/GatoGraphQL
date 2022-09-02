@@ -1,0 +1,51 @@
+/**
+ * Override WP Admin styles for the modal
+ */
+
+.components-modal__frame {
+	ul,
+	ol {
+		padding: revert;
+		margin: revert;
+	}
+
+	ul {
+		list-style: initial;
+	}
+
+	/** Restrain images from exceeding the container */
+	img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+	pre > code {
+		padding: initial;
+		margin: initial;
+		background: initial;
+	}
+
+	pre {
+		background-color: aliceblue;
+		padding: 5px 10px;
+	}
+
+	table {
+		border: 1px solid #c3c4c7;
+		box-shadow: 0 1px 1px rgba(0,0,0,.04);
+		background: #fff;
+
+		tbody > :nth-child(2n+1) {
+			background-color: #f6f7f7;
+		}
+	
+		td,
+		th {
+			color: #50575e;
+			padding: 8px 10px;
+			font-size: 13px;
+			line-height: 1.5em;
+			vertical-align: top;
+		}
+	}
+}

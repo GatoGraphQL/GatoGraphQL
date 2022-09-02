@@ -55,6 +55,14 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
         return 'en';
     }
 
+    /**
+     * Register style-index.css
+     */
+    protected function registerCommonStyleCSS(): bool
+    {
+        return true;
+    }
+
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return $this->getPersistedQueryEndpointBlockCategory();

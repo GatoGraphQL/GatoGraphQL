@@ -144,4 +144,29 @@ EOF;
             $schemaConfigurationContent
         );
     }
+
+    /**
+     * Add the locale language to the localized data?
+     */
+    protected function addLocalLanguage(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Default language for the script/component's documentation
+     */
+    protected function getDefaultLanguage(): ?string
+    {
+        // English
+        return 'en';
+    }
+
+    /**
+     * Register style-index.css
+     */
+    protected function registerCommonStyleCSS(): bool
+    {
+        return true;
+    }
 }

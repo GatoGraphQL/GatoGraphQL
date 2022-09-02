@@ -2,30 +2,31 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Card, CardHeader, CardBody, RadioControl } from '@wordpress/components';
+import { RadioControl } from '@wordpress/components';
+import { compose, withState } from '@wordpress/compose';
 
 /**
  * Internal dependencies
  */
+import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
 	InfoTooltip,
-	getEditableOnFocusComponentClass,
 	SETTINGS_VALUE_LABEL,
 	ATTRIBUTE_VALUE_DEFAULT,
 	ATTRIBUTE_VALUE_ENABLED,
 	ATTRIBUTE_VALUE_DISABLED,
+	withCard,
+	withEditableOnFocus,
 } from '@graphqlapi/components';
 
 const SchemaConfigExposeAdminDataCard = ( props ) => {
 	const {
 		isSelected,
-		className,
 		setAttributes,
 		attributes: {
 			enabledConst,
 		},
 	} = props;
-	const componentClassName = `${ className } ${ getEditableOnFocusComponentClass(isSelected) }`;
 	const options = [
 		{
 			label: SETTINGS_VALUE_LABEL,
@@ -42,49 +43,48 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 	];
 	const optionValues = options.map( option => option.value );
 	return (
-		<div className={ componentClassName }>
-			<Card { ...props }>
-				<CardHeader isShady>
-					{ __('Schema Expose Admin Data', 'graphql-api') }
-				</CardHeader>
-				<CardBody>
-					<div className={ `${ className }__admin_schema` }>
-						<em>{ __('Expose admin elements in the schema?', 'graphql-api') }</em>
-						<InfoTooltip
-							{ ...props }
-							text={ __('Expose "admin" elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to private data', 'graphql-api') }
-						/>
-						{ !isSelected && (
-							<>
-								<br />
-								{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
-									<span>🟡 { __('Default', 'graphql-api') }</span>
-								}
-								{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-									<span>✅ { __('Expose "admin" elements in the schema', 'graphql-api') }</span>
-								}
-								{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-									<span>❌ { __('Do not expose admin elements', 'graphql-api') }</span>
-								}
-							</>
-						) }
-						{ isSelected &&
-							<RadioControl
-								{ ...props }
-								options={ options }
-								selected={ enabledConst }
-								onChange={ newValue => (
-									setAttributes( {
-										enabledConst: newValue
-									} )
-								)}
-							/>
-						}
-					</div>
-				</CardBody>
-			</Card>
-		</div>
+		<>
+			<em>{ __('Expose admin elements in the schema?', 'graphql-api') }</em>
+			<InfoTooltip
+				{ ...props }
+				text={ __('Expose "admin" elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to private data', 'graphql-api') }
+			/>
+			{ !isSelected && (
+				<>
+					<br />
+					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
+						<span>🟡 { __('Default', 'graphql-api') }</span>
+					}
+					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
+						<span>✅ { __('Expose "admin" elements in the schema', 'graphql-api') }</span>
+					}
+					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
+						<span>❌ { __('Do not expose admin elements', 'graphql-api') }</span>
+					}
+				</>
+			) }
+			{ isSelected &&
+				<RadioControl
+					{ ...props }
+					options={ options }
+					selected={ enabledConst }
+					onChange={ newValue => (
+						setAttributes( {
+							enabledConst: newValue
+						} )
+					)}
+				/>
+			}
+		</>
 	);
 }
 
-export default SchemaConfigExposeAdminDataCard;
+export default compose( [
+	withState( {
+		header: __('Schema Expose Admin Data', 'graphql-api'),
+		className: 'graphql-api-schema-expose-admin-data',
+		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
+	} ),
+	withEditableOnFocus(),
+	withCard(),
+] )( SchemaConfigExposeAdminDataCard );

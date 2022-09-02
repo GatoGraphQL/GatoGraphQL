@@ -36,7 +36,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
     protected function getContentToPrint(): string
     {
         return $this->getMarkdownContent(
-            'about.md',
+            'general/about',
             '',
             [
                 ContentParserOptions::TAB_CONTENT => true,

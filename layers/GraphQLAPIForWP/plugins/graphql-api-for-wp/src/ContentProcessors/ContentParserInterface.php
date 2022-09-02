@@ -26,20 +26,10 @@ interface ContentParserInterface
      */
     public function getContent(
         string $filename,
+        string $extension,
         string $relativePathDir = '',
         array $options = []
     ): string;
-
-    /**
-     * Where the markdown file localized to the user's language is stored
-     */
-    public function getLocalizedFileDir(): string;
-
-    /**
-     * Where the default markdown file (for if the localized language is not available) is stored
-     * Default language for documentation: English
-     */
-    public function getDefaultFileDir(): string;
 
     /**
      * Default language for documentation

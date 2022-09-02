@@ -8,6 +8,7 @@ import { ToggleControl } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
 	withCard,
 	withEditableOnFocus,
@@ -84,7 +85,8 @@ const PersistedQueryEndpointOptions = ( props ) => {
 
 export default compose( [
 	withState( {
-		header: __('Options', 'graphql-api'),
+		header: __('Persisted Query Options', 'graphql-api'),
+		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withEditableOnFocus(),
 	withCard(),

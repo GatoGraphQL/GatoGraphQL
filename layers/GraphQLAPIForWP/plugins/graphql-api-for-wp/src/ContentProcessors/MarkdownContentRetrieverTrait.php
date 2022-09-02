@@ -13,7 +13,7 @@ trait MarkdownContentRetrieverTrait
     /**
      * @param array<string,mixed> $options
      */
-    public function getMarkdownContent(
+    protected function getMarkdownContent(
         string $markdownFilename,
         string $relativePathDir = '',
         array $options = []
@@ -24,6 +24,7 @@ trait MarkdownContentRetrieverTrait
         try {
             return $this->getMarkdownContentParser()->getContent(
                 $markdownFilename,
+                'md',
                 $relativePathDir,
                 $options
             );

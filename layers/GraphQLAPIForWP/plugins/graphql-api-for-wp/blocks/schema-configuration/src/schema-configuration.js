@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import { SelectCard, getLabelForNotFoundElement } from '@graphqlapi/components';
 import {
 	ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
@@ -153,6 +154,7 @@ const SchemaConfigurationSelectCard = ( props ) => {
 export default compose( [
 	withState( {
 		label: __('Schema configuration', 'graphql-api'),
+		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withSelect( ( select ) => {
 		const {

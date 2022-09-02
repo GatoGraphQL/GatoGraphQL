@@ -83,6 +83,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function getContent(
         string $filename,
+        string $extension,
         string $relativePathDir = '',
         array $options = []
     ): string {
@@ -90,13 +91,15 @@ abstract class AbstractContentParser implements ContentParserInterface
         if ($relativePathDir) {
             $relativePathDir = \trailingslashit($relativePathDir);
         }
-        $localizeFile = \trailingslashit($this->getLocalizedFileDir()) . $filename;
+        $localeLanguage = $this->getLocaleHelper()->getLocaleLanguage();
+        $localizeFile = \trailingslashit($this->getFileDir()) . $filename . '/' . $localeLanguage . '.' . $extension;
         if (file_exists($localizeFile)) {
             // First check if the localized version exists
             $file = $localizeFile;
         } else {
             // Otherwise, use the default language version
-            $file = \trailingslashit($this->getDefaultFileDir()) . $filename;
+            $defaultDocsLanguage = $this->getDefaultDocsLanguage();
+            $file = \trailingslashit($this->getFileDir()) . $filename . '/' . $defaultDocsLanguage . '.' . $extension;
             // Make sure this file exists
             if (!file_exists($file)) {
                 throw new ContentNotExistsException(sprintf(
@@ -122,23 +125,6 @@ abstract class AbstractContentParser implements ContentParserInterface
     }
 
     /**
-     * Where the markdown file localized to the user's language is stored
-     */
-    public function getLocalizedFileDir(): string
-    {
-        return $this->getFileDir($this->getLocaleHelper()->getLocaleLanguage());
-    }
-
-    /**
-     * Where the default markdown file (for if the localized language is not available) is stored
-     * Default language for documentation: English
-     */
-    public function getDefaultFileDir(): string
-    {
-        return $this->getFileDir($this->getDefaultDocsLanguage());
-    }
-
-    /**
      * Default language for documentation: English
      */
     public function getDefaultDocsLanguage(): string
@@ -149,9 +135,9 @@ abstract class AbstractContentParser implements ContentParserInterface
     /**
      * Path where to find the local images
      */
-    protected function getFileDir(string $lang): string
+    protected function getFileDir(): string
     {
-        return $this->baseDir . "/docs/${lang}";
+        return $this->baseDir . "/docs";
     }
 
     /**
