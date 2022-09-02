@@ -151,4 +151,4 @@ These are the inputs in the Document settings:
 
 ## Resources
 
-Video showing how to create a persisted query: <https://vimeo.com/443790273>.
+Video showing how to create a persisted query: <a href="https://vimeo.com/443790273" target="_blank">vimeo.com/443790273</a>.

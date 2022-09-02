@@ -112,4 +112,4 @@ These are the inputs in the Document settings:
 
 ## Resources
 
-Video showing how to create a custom endpoint: <https://vimeo.com/413503485>.
+Video showing how to create a custom endpoint: <a href="https://vimeo.com/413503485" target="_blank">vimeo.com/413503485</a>.
