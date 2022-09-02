@@ -8,18 +8,19 @@ import { compose, withState } from '@wordpress/compose';
 /**
  * Internal dependencies
  */
-import {
-	InfoTooltip,
-	SETTINGS_VALUE_LABEL,
-	withCard,
-	withEditableOnFocus,
-} from '@graphqlapi/components';
+import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
 	ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT,
 	ATTRIBUTE_VALUE_MUTATION_SCHEME_STANDARD,
 	ATTRIBUTE_VALUE_MUTATION_SCHEME_NESTED_WITH_REDUNDANT_ROOT_FIELDS,
 	ATTRIBUTE_VALUE_MUTATION_SCHEME_NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
 } from './mutation-scheme-values';
+import {
+	InfoTooltip,
+	SETTINGS_VALUE_LABEL,
+	withCard,
+	withEditableOnFocus,
+} from '@graphqlapi/components';
 
 const SchemaConfigMutationSchemeCard = ( props ) => {
 	const {
@@ -92,6 +93,7 @@ export default compose( [
 	withState( {
 		header: __('Mutation Scheme', 'graphql-api'),
 		className: 'graphql-api-mutation-scheme',
+		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withEditableOnFocus(),
 	withCard(),

@@ -8,6 +8,7 @@ import { compose, withState } from '@wordpress/compose';
 /**
  * Internal dependencies
  */
+import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
 	InfoTooltip,
 	SETTINGS_VALUE_LABEL,
@@ -82,6 +83,7 @@ export default compose( [
 	withState( {
 		header: __('Namespacing', 'graphql-api'),
 		className: 'graphql-api-namespacing',
+		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withEditableOnFocus(),
 	withCard(),
