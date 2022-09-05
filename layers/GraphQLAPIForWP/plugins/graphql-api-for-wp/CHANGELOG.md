@@ -185,6 +185,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Prettyprint GraphQL queries in the module docs
 - Upgraded GraphiQL to `v1.5.7`
 - Finished decoupling the GraphQL server code from WordPress
+- Browse documentation when editing a Schema Configuration, Custom Endpoint and Persisted Query
 
 ### Fixed
 

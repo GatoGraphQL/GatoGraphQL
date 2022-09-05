@@ -1259,6 +1259,14 @@ $response->sendHeaders();
 echo $response->getContent();
 ```
 
+## Browse documentation when editing a Schema Configuration, Custom Endpoint and Persisted Query
+
+All the blocks shown when editing a Schema Configuration, Custom Endpoint and Persisted Query now have an "info" button which, when clicked, displays documentation on a modal window.
+
+![Clicking on an "info" button...](../../images/releases/v09/modal-window-with-module-doc-1.png)
+
+![...opens a modal window with documentation](../../images/releases/v09/modal-window-with-module-doc-2.png)
+
 ## Fixed issues
 
 - Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/leoloso/PoP/pull/972))
