@@ -1,9 +1,4 @@
 parameters:
-    ignoreErrors:
-        # PHPStan bug!?
-        -
-            message: '#^Anonymous function should return (.*) but returns non-empty-string\.$#'
-            path: src/ContentProcessors/AbstractContentParser.php
     # bootstrapFiles:
     #     - graphql-api.php
     level: 8

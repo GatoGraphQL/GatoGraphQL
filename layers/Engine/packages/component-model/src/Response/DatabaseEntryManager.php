@@ -44,11 +44,13 @@ class DatabaseEntryManager implements DatabaseEntryManagerInterface
                     $fields,
                     fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
                 );
-                $dbNameEntries[$dbName][$id] ??= new SplObjectStorage();
+                /** @var SplObjectStorage<FieldInterface,mixed> */
+                $idDBNameEntries = $dbNameEntries[$dbName][$id] ?? new SplObjectStorage();
                 foreach ($fields_to_move as $field) {
-                    $dbNameEntries[$dbName][$id][$field] = $dbNameEntries[self::PRIMARY_DBNAME][$id][$field];
+                    $idDBNameEntries[$field] = $dbNameEntries[self::PRIMARY_DBNAME][$id][$field];
                     $dbNameEntries[self::PRIMARY_DBNAME][$id]->detach($field);
                 }
+                $dbNameEntries[$dbName][$id] = $idDBNameEntries;
             }
         }
         return $dbNameEntries;

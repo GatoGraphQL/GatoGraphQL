@@ -248,6 +248,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                         $tabbedPanel = '';
                     }
                     $headers[] = $matches[1];
+                    /** @var string */
                     return $tabbedPanel . sprintf(
                         '<div id="doc-panel-%s" class="tab-content" style="display: %s;">',
                         count($headers),

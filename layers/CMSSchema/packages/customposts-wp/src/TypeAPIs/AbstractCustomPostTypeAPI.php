@@ -146,7 +146,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             ]);
         }
         // Querying "attachment" doesn't work in an array!
-        if (isset($query['post_type']) && is_array($query['post_type']) && count($query['post_type']) === 1) {
+        if (is_array($query['post_type']) && count($query['post_type']) === 1) {
             $query['post_type'] = $query['post_type'][0];
         }
         if (isset($query['offset'])) {
