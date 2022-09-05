@@ -32,7 +32,7 @@ class SchemaConfigExposeAdminDataBlock extends AbstractDefaultEnableDisableFunct
 
     protected function getBlockTitle(): string
     {
-        return \__('Schema Expose Admin Data', 'graphql-api');
+        return \__('Expose Admin Data in the Schema', 'graphql-api');
     }
 
     /**

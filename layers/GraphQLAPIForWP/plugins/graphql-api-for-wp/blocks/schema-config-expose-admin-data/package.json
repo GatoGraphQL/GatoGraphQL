@@ -1,7 +1,7 @@
 {
 	"name": "schema-config-expose-admin-data",
 	"version": "0.1.0",
-	"description": "Configure the 'Schema Expose Admin Data' module in the Schema Configuration",
+	"description": "Configure the 'Expose Admin Data in the Schema' module in the Schema Configuration",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",

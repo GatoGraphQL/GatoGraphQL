@@ -84,7 +84,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
-            self::SCHEMA_EXPOSE_ADMIN_DATA => \__('Schema Expose Admin Data', 'graphql-api'),
+            self::SCHEMA_EXPOSE_ADMIN_DATA => \__('Expose Admin Data in the Schema', 'graphql-api'),
             default => $module,
         };
     }
