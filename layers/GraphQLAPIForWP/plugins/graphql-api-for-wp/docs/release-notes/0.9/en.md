@@ -47,7 +47,7 @@ The following fields have been upgraded, accepting the following properties in t
 - `Root.user`:
   - `id`
   - `username`
-  - `email` (considered as "admin" data, so `Schema Expose Admin Data` must be enabled; see later on)
+  - `email` (considered as "admin" data, so `Expose Admin Data in the Schema` must be enabled; see later on)
 
 ### Filter elements via the new `filter` field argument
 
@@ -956,7 +956,7 @@ The updated modules are:
 
 - Schema Namespacing
 - Nested Mutations
-- Schema Expose Admin Data
+- Expose Admin Data in the Schema
 
 ![Selecting the same field on the two possible root types](../../images/releases/v09/split-settings-into-2.png)
 
@@ -1373,9 +1373,9 @@ There are a few exceptions, though, such as:
 
 Please visualize the Explorer Docs in GraphiQL, and the Interactive Schema, to understand how the GraphQL schema has been upgraded.
 
-### Renamed module "Schema Expose Admin Data"
+### Renamed module "Expose Admin Data in the Schema"
 
-Renamed module "Schema for the Admin" to "Schema Expose Admin Data". If this module had been disabled, it must be disabled again.
+Renamed module "Schema for the Admin" to "Expose Admin Data in the Schema". If this module had been disabled, it must be disabled again.
 
 In addition, its block for the Schema Configuration also got renamed, so you must click on "Reset the template" on all Schema Configurations to show the block again:
 
@@ -1495,9 +1495,9 @@ mutation {
 
 ### Merged the "admin" and non-admin fields
 
-Removed all the "unrestricted" fields (which were exposed via module `Schema Expose Admin Data`). Instead, a single field will now tackle all of its data, whether it is "admin" data or not.
+Removed all the "unrestricted" fields (which were exposed via module `Expose Admin Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is "admin" data or not.
 
-To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as "admin" or not. (This is configured in block `Schema Expose Admin Data` from the Schema Configuration).
+To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as "admin" or not. (This is configured in block `Expose Admin Data in the Schema` from the Schema Configuration).
 
 For instance, field `Root.posts` has argument `filter`. When the GraphQL schema is configured to expose "admin" data, this input object exposes an additional input field `status`, enabling to filter posts by status `"draft"`, `"pending"` or `"trash"` (i.e. allowing to fetch private posts).
 
@@ -1555,7 +1555,7 @@ Those modules which had their Settings value split into 2 ("Default value for Sc
 
 - Schema Namespacing
 - Nested Mutations
-- Schema Expose Admin Data
+- Expose Admin Data in the Schema
 
 In addition, the `Default Schema Configuration` option for module "Schema Configuration" has been renamed, and it must also be set again.
 

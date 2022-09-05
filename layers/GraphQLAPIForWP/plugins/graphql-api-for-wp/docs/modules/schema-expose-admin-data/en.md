@@ -1,10 +1,10 @@
-# Schema Expose Admin Data
+# Expose Admin Data in the Schema
 
 Expose "admin" elements in the GraphQL schema, which provide access to private data.
 
 The GraphQL schema must strike a balance between public and private elements (including fields and input fields), as to avoid exposing private information in a public API.
 
-For instance, to access post data, we have field `Root.posts`, which by default can only retrieve published posts. With this module, a new property `Schema Expose Admin Data` is added to the Schema Configuration. When enabled, argument `filter` in `Root.posts` exposes an additional input `status`, enabling to retrieve non-published posts (eg: posts with status `"draft"`), which is private data.
+For instance, to access post data, we have field `Root.posts`, which by default can only retrieve published posts. With this module, a new option `Expose Admin Data in the Schema` is added to the Schema Configuration. When enabled, argument `filter` in `Root.posts` exposes an additional input `status`, enabling to retrieve non-published posts (eg: posts with status `"draft"`), which is private data.
 
 ## List of admin elements
 
@@ -86,7 +86,7 @@ Exposing admin elements in the schema can be configured as follows, in order of 
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
-![Schema Expose Admin Data, in the Settings](../../images/settings-admin-schema.png "Schema Expose Admin Data, in the Settings")
+![Expose Admin Data in the Schema, in the Settings](../../images/settings-admin-schema.png "Expose Admin Data in the Schema, in the Settings")
 
 ## When to use
 
