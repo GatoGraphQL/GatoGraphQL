@@ -93,7 +93,7 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
         throw new RuntimeOperationException(
             is_integer($path)
                 ? sprintf(
-                    $this->__('Index \'%s\' is not set for object: %s', 'component-model'),
+                    $this->__('Index \'%s\' is not set for array: %s', 'component-model'),
                     $path,
                     $this->getOutputService()->jsonEncodeArrayOrStdClassValue($data)
                 )

@@ -36,7 +36,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E4 => $this->__('The value for field \'%s\' is not an array, so execution of this directive can\'t continue', 'engine'),
             self::E5 => $this->__('No composed directives were provided to \'%s\'', 'engine'),
             self::E6 => $this->__('There is no property \'%s\' in the application state', 'engine'),
-            self::E7 => $this->__('Traversing the array produced error: %s', 'component-model'),
+            self::E7 => $this->__('%s', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
