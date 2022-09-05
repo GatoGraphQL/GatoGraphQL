@@ -771,7 +771,7 @@ Exactly the same result from section above (`<skip(if(isNull(...)))>`) can be ac
 
 Directives can be nested, unlimited levels deep, enabling to create complex logic such as iterating over array elements and applying a function on them, changing the context under which a directive must execute, and others.
 
-In the example below, directive `<forEach>` iterates all the elements from an array, and passes each of them to directive `<applyFunction>` which executes field `arrayJoin` on them:
+In the example below, directive `<forEach>` iterates all the elements from an array, and passes each of them to directive `<applyFunctionField>` which executes field `arrayJoin` on them:
 
 ```less
 /?query=
@@ -780,7 +780,7 @@ In the example below, directive `<forEach>` iterates all the elements from an ar
     [strawberry, grape, melon]
   ])@fruitJoin<
     forEach<
-      applyFunction(
+      applyFunctionField(
         function: arrayJoin,
         addArguments: [
           array: %{value}%,
@@ -791,7 +791,7 @@ In the example below, directive `<forEach>` iterates all the elements from an ar
   >
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5B%5Bbanana,apple%5D,%5Bstrawberry,grape,melon%5D%5D)@fruitJoin%3CforEach%3CapplyFunction(function:arrayJoin,addArguments:%5Barray:%{value}%,separator:%22---%22%5D)%3E%3E">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5B%5Bbanana,apple%5D,%5Bstrawberry,grape,melon%5D%5D)@fruitJoin%3CforEach%3CapplyFunctionField(function:arrayJoin,addArguments:%5Barray:%{value}%,separator:%22---%22%5D)%3E%3E">View query results</a>
 
 ### Directive expressions
 
@@ -1559,7 +1559,7 @@ query=
   >|
   getSelfProp(%{self}%, userData)@userPostData<
     forEach<
-      applyFunction(
+      applyFunctionField(
         function: arrayAddItem(
           array: [],
           value: ""
@@ -1576,7 +1576,7 @@ query=
           )
         ]
       ),
-      applyFunction(
+      applyFunctionField(
         function: arrayAddItem(
           array: [],
           value: ""
@@ -1623,7 +1623,7 @@ query=
 
   getSelfProp(%{self}%,translatedUserPostProps)@emails<
     forEach<
-      applyFunction(
+      applyFunctionField(
         function: arrayAddItem(
           array: [],
           value: []
@@ -1637,7 +1637,7 @@ query=
           ])
         ]
       ),
-      applyFunction(
+      applyFunctionField(
         function: arrayAddItem(
           array: [],
           value: []
@@ -1648,7 +1648,7 @@ query=
           value: extract(%{value}%, email)
         ]
       ),
-      applyFunction(
+      applyFunctionField(
         function: arrayAddItem(
           array: [],
           value: []
@@ -1664,7 +1664,7 @@ query=
   >
 ```
 
-<a href='https://newapi.getpop.org/api/graphql/?postId=1&query=post({id:$postId})@post.content|dateStr(d/m/Y)@date,getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|arrayUnique(extract(getSelfProp(%{self}%,userList),lang))@userLangs|extract(getSelfProp(%{self}%,userList),email)@userEmails|arrayOrObjectFill(getJSON(sprintf("https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",[arrayJoin(getSelfProp(%{self}%,userEmails),"%26emails[]=")])),getSelfProp(%{self}%,userList),email)@userData;post({id:$postId})@post<copyRelationalResults([content,date],[postContent,postDate])>;getSelfProp(%{self}%,postContent)@postContent<translateMultiple(from:en,to:arrayDiff([getSelfProp(%{self}%,userLangs),[en]])),renameProperty(postContent-en)>|getSelfProp(%{self}%,userData)@userPostData<forEach<applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:postContent,array:%{value}%,value:getSelfProp(%{self}%,sprintf(postContent-%s,[extract(%{value}%,lang)]))]),applyFunction(function:arrayAddItem(array:[],value:""),addArguments:[key:header,array:%{value}%,value:sprintf(string:"<p>Hi %s, we published this post on %s,enjoy!</p>",values:[extract(%{value}%,name),getSelfProp(%{self}%,postDate)])])>>;getSelfProp(%{self}%,userPostData)@translatedUserPostProps<forEach(if:not(equals(extract(%{value}%,lang),en)))<underJSONObjectProperty(path:header,appendExpressions:{toLang:extract(%{value}%,lang)})<translateMultiple(from:en,to:%{toLang}%,oneLanguagePerField:true,override:true)>>>;getSelfProp(%{self}%,translatedUserPostProps)@emails<forEach<applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:content,array:%{value}%,value:concat([extract(%{value}%,header),extract(%{value}%,postContent)])]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:to,array:%{value}%,value:extract(%{value}%,email)]),applyFunction(function:arrayAddItem(array:[],value:[]),addArguments:[key:subject,array:%{value}%,value:"PoP API example :)"]),sendByEmail>>'>View query results</a>
+<a href='https://newapi.getpop.org/api/graphql/?postId=1&query=post({id:$postId})@post.content|dateStr(d/m/Y)@date,getJSON("https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions")@userList|arrayUnique(extract(getSelfProp(%{self}%,userList),lang))@userLangs|extract(getSelfProp(%{self}%,userList),email)@userEmails|arrayOrObjectFill(getJSON(sprintf("https://newapi.getpop.org/users/api/rest/?query=name|email%26emails[]=%s",[arrayJoin(getSelfProp(%{self}%,userEmails),"%26emails[]=")])),getSelfProp(%{self}%,userList),email)@userData;post({id:$postId})@post<copyRelationalResults([content,date],[postContent,postDate])>;getSelfProp(%{self}%,postContent)@postContent<translateMultiple(from:en,to:arrayDiff([getSelfProp(%{self}%,userLangs),[en]])),renameProperty(postContent-en)>|getSelfProp(%{self}%,userData)@userPostData<forEach<applyFunctionField(function:arrayAddItem(array:[],value:""),addArguments:[key:postContent,array:%{value}%,value:getSelfProp(%{self}%,sprintf(postContent-%s,[extract(%{value}%,lang)]))]),applyFunctionField(function:arrayAddItem(array:[],value:""),addArguments:[key:header,array:%{value}%,value:sprintf(string:"<p>Hi %s, we published this post on %s,enjoy!</p>",values:[extract(%{value}%,name),getSelfProp(%{self}%,postDate)])])>>;getSelfProp(%{self}%,userPostData)@translatedUserPostProps<forEach(if:not(equals(extract(%{value}%,lang),en)))<underJSONObjectProperty(path:header,appendExpressions:{toLang:extract(%{value}%,lang)})<translateMultiple(from:en,to:%{toLang}%,oneLanguagePerField:true,override:true)>>>;getSelfProp(%{self}%,translatedUserPostProps)@emails<forEach<applyFunctionField(function:arrayAddItem(array:[],value:[]),addArguments:[key:content,array:%{value}%,value:concat([extract(%{value}%,header),extract(%{value}%,postContent)])]),applyFunctionField(function:arrayAddItem(array:[],value:[]),addArguments:[key:to,array:%{value}%,value:extract(%{value}%,email)]),applyFunctionField(function:arrayAddItem(array:[],value:[]),addArguments:[key:subject,array:%{value}%,value:"PoP API example :)"]),sendByEmail>>'>View query results</a>
 
 **Step-by-step description of the solution:**
 
