@@ -16,7 +16,7 @@ const getMarkdownContent = ( fileName, lang ) => {
  * in a default language (which for sure exists), and return it as HTML
  *
  * @param {string} fileName The Markdown file name
- * @param {string|null} defaultLang The default language. If none provided, get it from the localized data
+ * @param {string} defaultLang The default language. If none provided, get it from the localized data
  * @param {string|null} lang The language to translate to. If none provided, get it from the localized data
  */
 const getMarkdownContentOrUseDefault = ( fileName, defaultLang, lang ) => {
