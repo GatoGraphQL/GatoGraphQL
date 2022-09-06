@@ -1,7 +1,7 @@
 /**
  * Application imports
  */
-import SchemaConfigExposeAdminDataCard from './schema-config-expose-admin-data-card';
+import SchemaConfigExposeAdminDataCard from './schema-config-expose-sensitive-data-card';
 
 const EditBlock = ( props ) => {
 	const { className } = props;

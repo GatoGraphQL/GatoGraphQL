@@ -44,6 +44,6 @@ class SchemaExposeAdminDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-expose-admin-data';
+        return 'graphql-api/schema-config-expose-sensitive-data';
     }
 }

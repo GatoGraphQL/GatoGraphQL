@@ -12,7 +12,7 @@ class SchemaConfigExposeAdminDataBlock extends AbstractDefaultEnableDisableFunct
 
     protected function getBlockName(): string
     {
-        return 'schema-config-expose-admin-data';
+        return 'schema-config-expose-sensitive-data';
     }
 
     public function getBlockPriority(): int
