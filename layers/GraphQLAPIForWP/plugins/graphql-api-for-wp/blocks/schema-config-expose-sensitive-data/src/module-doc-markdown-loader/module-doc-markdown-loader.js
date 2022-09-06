@@ -2,7 +2,7 @@
  * Path to load the lazy chunks on the fly
  * @see https://v4.webpack.js.org/guides/public-path/#on-the-fly
  */
-__webpack_public_path__ = window.graphqlApiSchemaConfigExposeAdminData?.publicPath;
+__webpack_public_path__ = window.graphqlApiSchemaConfigExposeSensitiveData?.publicPath;
 
 /**
  * Read the content from a Markdown file in a given language, and return it as HTML
@@ -22,8 +22,8 @@ const getModuleDocMarkdownContent = ( lang ) => {
  * @param {string|null} lang The language to translate to. If none provided, get it from the localized data
  */
 const getModuleDocMarkdownContentOrUseDefault = ( defaultLang, lang ) => {
-	lang = lang || window.graphqlApiSchemaConfigExposeAdminData?.localeLang
-	defaultLang = defaultLang || window.graphqlApiSchemaConfigExposeAdminData?.defaultLang
+	lang = lang || window.graphqlApiSchemaConfigExposeSensitiveData?.localeLang
+	defaultLang = defaultLang || window.graphqlApiSchemaConfigExposeSensitiveData?.defaultLang
 	return getModuleDocMarkdownContent( lang )
 		.catch(err => getModuleDocMarkdownContent( defaultLang ) )
 }

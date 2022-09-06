@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigExposeAdminDataBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
+class SchemaConfigExposeSensitiveDataBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
 {
     use MainPluginBlockTrait;
 

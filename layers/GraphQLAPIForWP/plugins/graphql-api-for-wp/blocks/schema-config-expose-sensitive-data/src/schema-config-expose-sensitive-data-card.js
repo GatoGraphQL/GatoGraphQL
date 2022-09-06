@@ -19,7 +19,7 @@ import {
 	withEditableOnFocus,
 } from '@graphqlapi/components';
 
-const SchemaConfigExposeAdminDataCard = ( props ) => {
+const SchemaConfigExposeSensitiveDataCard = ( props ) => {
 	const {
 		isSelected,
 		setAttributes,
@@ -87,4 +87,4 @@ export default compose( [
 	} ),
 	withEditableOnFocus(),
 	withCard(),
-] )( SchemaConfigExposeAdminDataCard );
+] )( SchemaConfigExposeSensitiveDataCard );

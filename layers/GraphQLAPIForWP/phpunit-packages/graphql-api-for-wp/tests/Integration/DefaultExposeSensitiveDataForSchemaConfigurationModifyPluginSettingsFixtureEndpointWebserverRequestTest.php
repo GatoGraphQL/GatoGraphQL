@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 
-class DefaultExposeAdminDataForSchemaConfigurationModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class DefaultExposeSensitiveDataForSchemaConfigurationModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {
