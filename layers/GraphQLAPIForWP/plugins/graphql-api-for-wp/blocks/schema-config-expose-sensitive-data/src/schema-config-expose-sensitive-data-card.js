@@ -47,7 +47,7 @@ const SchemaConfigExposeSensitiveDataCard = ( props ) => {
 			<em>{ __('Expose “sensitive” data elements in the schema?', 'graphql-api') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Expose “sensitive” data elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to potentially private user data', 'graphql-api') }
+				text={ __('Expose “sensitive” data elements in the GraphQL schema (such as field "Root.roles", field arg "Root.posts(status:)", and others), which provide access to potentially private user data', 'graphql-api') }
 			/>
 			{ !isSelected && (
 				<>
