@@ -1141,7 +1141,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
+                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1417,7 +1417,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
+                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1677,7 +1677,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
+                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
