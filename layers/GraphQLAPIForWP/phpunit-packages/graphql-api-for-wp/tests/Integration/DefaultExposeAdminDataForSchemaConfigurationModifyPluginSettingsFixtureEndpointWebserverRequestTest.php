@@ -26,7 +26,7 @@ class DefaultExposeAdminDataForSchemaConfigurationModifyPluginSettingsFixtureEnd
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-expose-admin-data';
+        return 'graphqlapi_graphqlapi_schema-expose-sensitive-data';
     }
 
     protected function getPluginSettingsNewValue(): mixed

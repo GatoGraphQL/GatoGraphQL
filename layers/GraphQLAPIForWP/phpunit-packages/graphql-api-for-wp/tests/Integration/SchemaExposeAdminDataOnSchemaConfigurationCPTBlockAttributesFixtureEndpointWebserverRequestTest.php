@@ -24,7 +24,7 @@ class SchemaExposeAdminDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-schema-expose-admin-data-in-cpt';
+        return __DIR__ . '/fixture-schema-expose-sensitive-data-in-cpt';
     }
 
     /**
