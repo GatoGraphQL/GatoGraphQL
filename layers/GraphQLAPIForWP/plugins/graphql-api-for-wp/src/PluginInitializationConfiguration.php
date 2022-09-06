@@ -389,7 +389,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             [
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA,
-                'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_SENSITIVE_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // White/Blacklisted entries to CustomPost.meta
