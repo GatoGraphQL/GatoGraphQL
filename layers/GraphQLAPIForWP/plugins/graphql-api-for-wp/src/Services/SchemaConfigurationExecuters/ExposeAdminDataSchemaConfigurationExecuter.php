@@ -41,6 +41,6 @@ class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDi
 
     public function getHookEnvironmentClass(): string
     {
-        return ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA;
+        return ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA;
     }
 }

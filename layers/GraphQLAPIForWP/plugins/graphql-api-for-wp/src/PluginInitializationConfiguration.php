@@ -388,7 +388,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // be set by configuration. Otherwise, it uses this mapping
             [
                 'class' => ComponentModelModule::class,
-                'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
+                'envVariable' => ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
@@ -522,7 +522,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => ComponentModelModule::class,
-                'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
+                'envVariable' => ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA,
             ],
         ];
     }
@@ -573,7 +573,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
             // Enable the "admin" fields
-            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
+            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA] = true;
             // Enable the "self" fields
             $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
             // Enable Nested mutations

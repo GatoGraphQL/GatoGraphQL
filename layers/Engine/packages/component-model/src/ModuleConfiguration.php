@@ -89,7 +89,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function exposeSensitiveDataInSchema(): bool
     {
-        $envVariable = Environment::ENABLE_ADMIN_SCHEMA;
+        $envVariable = Environment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
