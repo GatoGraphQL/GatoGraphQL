@@ -54,14 +54,14 @@ Code compiled for development, i.e. after running `npm start`, cannot be commite
 The GraphQL API for WordPress provides safe default settings, to make "live" sites secure:
 
 - The single endpoint is disabled
-- The "sensitive" data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
+- The “sensitive” data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
 - Only a few of settings options and meta keys (for posts, users, etc) can be queried
 - The number of entities (for posts, users, etc) that can be queried at once is limited
 
 These safe default settings are not needed when building "static" sites, where the WordPress site is not exposed to the Internet. These settings can be used instead:
 
 - The single endpoint is enabled
-- The "sensitive" data elements are exposed in the schema
+- The “sensitive” data elements are exposed in the schema
 - All settings options and meta keys can be queried
 - The number of entities that can be queried at once is unlimited
 
@@ -119,7 +119,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/modules/interactive-schema-for-custom-endpoints/en.md">Interactive Schema for Custom Endpoints</a></td><td>Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset</td></tr>
 <tr><td><a href="docs/modules/graphiql-explorer/en.md">GraphiQL Explorer</a></td><td>Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)</td></tr>
 <tr><th colspan="2"><br/>Schema Type</th></tr>
-<tr><td><a href="docs/modules/schema-expose-admin-data/en.md">Expose Sensitive Data in the Schema</a></td><td>Expose "sensitive" data elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data</td></tr>
+<tr><td><a href="docs/modules/schema-expose-admin-data/en.md">Expose Sensitive Data in the Schema</a></td><td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data</td></tr>
 <tr><td><a href="docs/modules/schema-customposts/en.md">Schema Custom Posts</a></td><td>Base functionality for all custom posts</td></tr>
 <tr><td><a href="docs/modules/schema-generic-customposts/en.md">Schema Generic Custom Posts</a></td><td>Query any custom post type (added to the schema or not), through a generic type <code>GenericCustomPost</code></td></tr>
 <tr><td>Schema Posts</td><td>Query posts, through type <code>Post</code> added to the schema</td></tr>

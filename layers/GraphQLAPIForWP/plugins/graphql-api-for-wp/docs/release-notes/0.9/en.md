@@ -47,7 +47,7 @@ The following fields have been upgraded, accepting the following properties in t
 - `Root.user`:
   - `id`
   - `username`
-  - `email` (considered as "sensitive" data, so `Expose Sensitive Data in the Schema` must be enabled; see later on)
+  - `email` (considered as “sensitive” data, so `Expose Sensitive Data in the Schema` must be enabled; see later on)
 
 ### Filter elements via the new `filter` field argument
 
@@ -107,8 +107,8 @@ On fields to retrieve custom posts, such as:
 - `authorIDs: [ID]`
 - `authorSlug: String`
 - `excludeAuthorIDs: [ID]`
-- `hasPassword: Bool` (considered as "sensitive" data)
-- `password: String` (considered as "sensitive" data)
+- `hasPassword: Bool` (considered as “sensitive” data)
+- `password: String` (considered as “sensitive” data)
 
 For instance, this query retrieves posts containing either tag `"graphql"`, `"wordpress"` or `"plugin"`:
 
@@ -886,7 +886,7 @@ The response is the following:
 The GraphQL API for WordPress provides safe default settings:
 
 - The single endpoint is disabled
-- The "sensitive" data elements in the GraphQL schema (such as `User.roles`, or filtering posts by `status`) are not exposed
+- The “sensitive” data elements in the GraphQL schema (such as `User.roles`, or filtering posts by `status`) are not exposed
 - Only a handful of the settings options and meta keys (for posts, users, etc) can be queried
 - The number of entities that can be queried at once is limited (for posts, users, etc)
 
@@ -903,7 +903,7 @@ Alternatively, we can define this same key/value as an environment variable.
 When enabling unsafe defaults, the default plugin settings are transformed like this:
 
 - The single endpoint is enabled
-- The "sensitive" data elements are exposed in the GraphQL schema
+- The “sensitive” data elements are exposed in the GraphQL schema
 - All settings options and meta keys can be queried
 - The number of entities that can be queried at once is unlimited
 
@@ -915,7 +915,7 @@ This means we can now configure the single endpoint:
 
 - Nested mutations
 - Schema namespacing
-- Expose "sensitive" data
+- Expose “sensitive” data
 
 To configure the single endpoint, go to tab "Schema Configuration" on the Settings page, and select the desired Schema Configuration entry from the dropdown for "Schema Configuration for the Single Endpoint", and click on "Save Changes":
 
@@ -1168,7 +1168,7 @@ extend type __EnumValue {
 
 ### Implemented extension `isSensitiveDataElement`
 
-Several `extensions` fields expose property `isSensitiveDataElement`, to identify which are the "sensitive" data elements from the schema (i.e. elements which can only be accessed when "Expose Sensitive Data in the Schema" is enabled in the Schema Configuration).
+Several `extensions` fields expose property `isSensitiveDataElement`, to identify which are the “sensitive” data elements from the schema (i.e. elements which can only be accessed when "Expose Sensitive Data in the Schema" is enabled in the Schema Configuration).
 
 To retrieve this data, execute this query:
 
@@ -1493,15 +1493,15 @@ mutation {
 }
 ```
 
-### Merged the "sensitive" data and non-sensitive-data fields
+### Merged the “sensitive” data and non-sensitive-data fields
 
-Removed all the "unrestricted" fields (which were exposed via module `Expose Sensitive Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is "sensitive" data or not.
+Removed all the "unrestricted" fields (which were exposed via module `Expose Sensitive Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is “sensitive” data or not.
 
-To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as "sensitive" or not. (This is configured in block `Expose Sensitive Data in the Schema` from the Schema Configuration).
+To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as “sensitive” or not. (This is configured in block `Expose Sensitive Data in the Schema` from the Schema Configuration).
 
-For instance, field `Root.posts` has argument `filter`. When the GraphQL schema is configured to expose "sensitive" data, this input object exposes an additional input field `status`, enabling to filter posts by status `"draft"`, `"pending"` or `"trash"` (i.e. allowing to fetch private posts).
+For instance, field `Root.posts` has argument `filter`. When the GraphQL schema is configured to expose “sensitive” data, this input object exposes an additional input field `status`, enabling to filter posts by status `"draft"`, `"pending"` or `"trash"` (i.e. allowing to fetch private posts).
 
-The list of "sensitive" (or "unrestricted") fields which were removed, and what fields now handle their, is this one:
+The list of “sensitive” (or "unrestricted") fields which were removed, and what fields now handle their, is this one:
 
 Root:
 
@@ -1532,7 +1532,7 @@ PostTag:
 - `unrestrictedPosts` => `posts`
 - `unrestrictedPostCount` => `postCount`
 
-### `User.email` is treated as "sensitive" field
+### `User.email` is treated as “sensitive” field
 
 From now on, field `User.email` is treated as private data. As such, it is exposed only if property `Expose Sensitive Data in the Schema` is enabled.
 

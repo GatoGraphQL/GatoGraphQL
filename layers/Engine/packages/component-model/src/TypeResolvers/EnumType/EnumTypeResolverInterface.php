@@ -17,7 +17,7 @@ interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, Depre
      */
     public function getEnumValues(): array;
     /**
-     * The "sensitive" values in the enum
+     * The “sensitive” values in the enum
      *
      * @return string[]
      */

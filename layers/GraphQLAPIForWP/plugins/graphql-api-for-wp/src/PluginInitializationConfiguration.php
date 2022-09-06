@@ -384,7 +384,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
-            // Enable the "sensitive" data: if doing ?behavior=unrestricted, it will already
+            // Enable the “sensitive” data: if doing ?behavior=unrestricted, it will already
             // be set by configuration. Otherwise, it uses this mapping
             [
                 'class' => ComponentModelModule::class,
@@ -572,7 +572,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
-            // Enable the "sensitive" data
+            // Enable the “sensitive” data
             $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA] = true;
             // Enable the "self" fields
             $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
