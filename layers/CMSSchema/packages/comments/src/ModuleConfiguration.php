@@ -50,7 +50,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function treatCommentStatusAsSensitiveData(): bool
     {
-        $envVariable = Environment::TREAT_COMMENT_STATUS_AS_ADMIN_DATA;
+        $envVariable = Environment::TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 

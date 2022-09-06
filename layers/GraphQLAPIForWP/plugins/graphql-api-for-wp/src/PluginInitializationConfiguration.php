@@ -239,9 +239,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => UsersModule::class,
-                'envVariable' => UsersEnvironment::TREAT_USER_EMAIL_AS_ADMIN_DATA,
+                'envVariable' => UsersEnvironment::TREAT_USER_EMAIL_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA,
             ],
             // Comment default/max limits
             [
@@ -264,9 +264,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => CommentsModule::class,
-                'envVariable' => CommentsEnvironment::TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
+                'envVariable' => CommentsEnvironment::TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA,
             ],
             // Media default/max limits
             [
@@ -358,9 +358,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => CustomPostsModule::class,
-                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
+                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
             ],
             // Custom post, if there is only one custom type, use it instead of the Union
             [
@@ -460,15 +460,15 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => UserRolesModule::class,
-                'envVariable' => UserRolesEnvironment::TREAT_USER_ROLE_AS_ADMIN_DATA,
+                'envVariable' => UserRolesEnvironment::TREAT_USER_ROLE_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA,
             ],
             [
                 'class' => UserRolesModule::class,
-                'envVariable' => UserRolesEnvironment::TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
+                'envVariable' => UserRolesEnvironment::TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA,
             ],
         ];
     }

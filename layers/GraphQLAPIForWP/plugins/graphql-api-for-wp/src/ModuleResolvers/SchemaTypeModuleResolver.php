@@ -55,11 +55,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public final const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
     public final const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public final const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
-    public final const OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA = 'treat-custompost-status-as-admin-data';
-    public final const OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA = 'treat-comment-status-as-admin-data';
-    public final const OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA = 'treat-user-email-as-admin-data';
-    public final const OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA = 'treat-user-role-as-admin-data';
-    public final const OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA = 'treat-user-capability-as-admin-data';
+    public final const OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA = 'treat-custompost-status-as-admin-data';
+    public final const OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA = 'treat-comment-status-as-admin-data';
+    public final const OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA = 'treat-user-email-as-admin-data';
+    public final const OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA = 'treat-user-role-as-admin-data';
+    public final const OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA = 'treat-user-capability-as-admin-data';
 
     /**
      * Hooks
@@ -474,7 +474,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
-                self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA => true,
+                self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_GENERIC_CUSTOMPOSTS => [
                 ModuleSettingOptions::CUSTOMPOST_TYPES => ['post'],
@@ -492,11 +492,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
-                self::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA => true,
+                self::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_USER_ROLES => [
-                self::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA => true,
-                self::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA => true,
+                self::OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA => true,
+                self::OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_MEDIA => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -538,7 +538,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT => 10,
                 self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT => -1,
                 ModuleSettingOptions::LIST_MAX_LIMIT => -1,
-                self::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA => true,
+                self::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -642,7 +642,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
 
-                $option = self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA;
+                $option = self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
                     Properties::NAME => $this->getSettingOptionName(
@@ -708,7 +708,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             } elseif ($module === self::SCHEMA_USERS) {
-                $option = self::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA;
+                $option = self::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
                     Properties::NAME => $this->getSettingOptionName(
@@ -784,7 +784,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::MIN_NUMBER => -1,
             ];
 
-            $option = self::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA;
+            $option = self::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -937,7 +937,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::MIN_NUMBER => 1,
             ];
         } elseif ($module === self::SCHEMA_USER_ROLES) {
-            $option = self::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA;
+            $option = self::OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -955,7 +955,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
-            $option = self::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA;
+            $option = self::OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

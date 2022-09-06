@@ -52,7 +52,7 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
                     \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                 ],
                 \PoPCMSSchema\UserRoles\Module::class => [
-                    \PoPCMSSchema\UserRoles\Environment::TREAT_USER_ROLE_AS_ADMIN_DATA => false,
+                    \PoPCMSSchema\UserRoles\Environment::TREAT_USER_ROLE_AS_SENSITIVE_DATA => false,
                 ]
             ]
         ];
