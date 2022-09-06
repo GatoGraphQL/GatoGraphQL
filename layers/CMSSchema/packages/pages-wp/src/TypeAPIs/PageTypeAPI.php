@@ -146,15 +146,15 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
             $pageIDs = [];
             /** @var ComponentModelModuleConfiguration */
             $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-            $enableAdminSchema = $moduleConfiguration->enableAdminSchema();
+            $exposeSensitiveDataInSchema = $moduleConfiguration->exposeSensitiveDataInSchema();
             foreach ($paths as $path) {
                 /** @var WP_Post|null */
                 $page = \get_page_by_path($path);
                 if ($page === null) {
                     continue;
                 }
-                // If the "admin" schema is not enabled, Only expose posts with status "publish"
-                if (!$enableAdminSchema && $page->post_status !== "publish") {
+                // If the "sensitive" data is not exposed, then only expose posts with status "publish"
+                if (!$exposeSensitiveDataInSchema && $page->post_status !== "publish") {
                     continue;
                 }
                 $pageIDs[] = $returnIDs ? $page->ID : $page;

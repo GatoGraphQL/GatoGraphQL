@@ -36,10 +36,10 @@ trait RolesObjectTypeFieldResolverTrait
         $sensitiveFieldNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->treatUserRoleAsAdminData()) {
+        if ($moduleConfiguration->treatUserRoleAsSensitiveData()) {
             $sensitiveFieldNames[] = 'roles';
         }
-        if ($moduleConfiguration->treatUserCapabilityAsAdminData()) {
+        if ($moduleConfiguration->treatUserCapabilityAsSensitiveData()) {
             $sensitiveFieldNames[] = 'capabilities';
         }
         return $sensitiveFieldNames;

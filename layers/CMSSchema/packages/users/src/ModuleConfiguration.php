@@ -46,9 +46,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function treatUserEmailAsAdminData(): bool
+    public function treatUserEmailAsSensitiveData(): bool
     {
-        $envVariable = Environment::TREAT_USER_EMAIL_AS_ADMIN_DATA;
+        $envVariable = Environment::TREAT_USER_EMAIL_AS_SENSITIVE_DATA;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 

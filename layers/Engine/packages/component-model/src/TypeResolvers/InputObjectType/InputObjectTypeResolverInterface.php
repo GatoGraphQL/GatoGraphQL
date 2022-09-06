@@ -26,7 +26,7 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
     /**
      * @return string[]
      */
-    public function getAdminInputFieldNames(): array;
+    public function getSensitiveInputFieldNames(): array;
     public function getInputFieldDescription(string $inputFieldName): ?string;
     public function getInputFieldDefaultValue(string $inputFieldName): mixed;
     public function getInputFieldTypeModifiers(string $inputFieldName): int;

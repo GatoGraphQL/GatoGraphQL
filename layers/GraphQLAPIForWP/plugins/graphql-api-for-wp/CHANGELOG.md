@@ -90,7 +90,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `search: String`
   - `types: [String!]`
 - Comment mutations: support creating comments by non logged-in users
-- Filter users by email (considered as "admin" data)
+- Filter users by email (considered as "sensitive" data)
 - Query properties for users:
   - `User.nicename: String!`
   - `User.nickname: String!`
@@ -102,7 +102,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `User.hasAnyRole: Bool!`
   - `User.hasCapability: Bool!`
   - `User.hasAnyCapability: Bool!`
-- Added arguments `roles` and `excludeRoles` to filter by user roles ("admin" input fields)
+- Added arguments `roles` and `excludeRoles` to filter by user roles ("sensitive" input fields)
 - Fetch children from Categories:
   - `PostCategory.children: [PostCategory]!`
   - `PostCategory.childNames: [String]!`
@@ -179,7 +179,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Variables are input types
   - Queried fields are unambiguous
 - Query `extensions` in the schema introspection
-  - Implemented extension `isAdminElement`
+  - Implemented extension `isSensitiveDataElement`
 - Performance improvement: Avoid regenerating the container when the schema is modified
 - Clicking on "Save Changes" on the Settings page will always regenerate the schema
 - Prettyprint GraphQL queries in the module docs
@@ -201,15 +201,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Replaced argument `id` with `by` in fields fetching a single entity
 - Must update GraphQL queries to use the new `filter`, `pagination` and `sort` field arguments
-- Renamed module "Schema for the Admin" to "Expose Admin Data in the Schema"
+- Renamed module "Schema for the Admin" to "Expose Sensitive Data in the Schema"
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
 - Renamed field `Root.option` to `Root.optionValue`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
 - Must update `content(format:PLAIN_TEXT)` to `rawContent`
 - Must update the inputs for mutations
-- Merged the "admin" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Expose Admin Data in the Schema` is enabled
-- `User.email` is treated as "admin" field
+- Merged the "sensitive" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Expose Sensitive Data in the Schema` is enabled
+- `User.email` is treated as "sensitive" field
 - Removed modules: Access Control, Cache Control, Public/Private Schema Mode, and Low-Level Persisted Query Editing
 - Settings for several modules must be set again
 - Must re-set options "default limit" and "max limit" for Posts and Pages

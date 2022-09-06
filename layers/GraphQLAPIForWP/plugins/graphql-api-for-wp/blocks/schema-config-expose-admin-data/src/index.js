@@ -30,14 +30,14 @@ registerBlockType( 'graphql-api/schema-config-expose-admin-data', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( '"Expose Admin Data in the Schema" for the Schema Configuration', 'graphql-api' ),
+	title: __( '"Expose Sensitive Data in the Schema" for the Schema Configuration', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Enable "admin" elements in the Schema Configuration',
+		'Enable "sensitive" data elements in the Schema Configuration',
 		'graphql-api'
 	),
 

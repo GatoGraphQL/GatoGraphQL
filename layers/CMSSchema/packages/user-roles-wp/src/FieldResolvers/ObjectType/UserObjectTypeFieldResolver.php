@@ -69,7 +69,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $sensitiveFieldNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->treatUserRoleAsAdminData()) {
+        if ($moduleConfiguration->treatUserRoleAsSensitiveData()) {
             $sensitiveFieldNames[] = 'roleNames';
         }
         return $sensitiveFieldNames;

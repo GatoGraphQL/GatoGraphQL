@@ -16,7 +16,7 @@ class SchemaExposeAdminDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
         /**
          * This endpoint:
          *
-         * - Has "Expose admin elements in the schema?" as "Do not expose"
+         * - Has "Expose sensitive data in the schema" as "Do not expose"
          * - Has the Schema Configuration "Website" (with ID 191)
          */
         return 'graphql/website/';

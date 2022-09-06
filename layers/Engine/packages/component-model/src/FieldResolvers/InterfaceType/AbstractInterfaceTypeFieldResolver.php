@@ -342,10 +342,10 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $fieldName,
         );
 
-        // Exclude the admin field args, if "Admin" Schema is not enabled
+        // Exclude the sensitive field args, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableAdminSchema()) {
+        if (!$moduleConfiguration->exposeSensitiveDataInSchema()) {
             $sensitiveFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
                 $consolidatedFieldArgNameTypeResolvers,
@@ -508,7 +508,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     {
         return [
             SchemaDefinition::FIELD_IS_MUTATION => $this->isFieldAMutation($fieldName),
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
         ];
     }
 
@@ -630,7 +630,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     {
         $sensitiveFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($fieldName);
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldArgName, $sensitiveFieldArgNames),
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($fieldArgName, $sensitiveFieldArgNames),
         ];
     }
 

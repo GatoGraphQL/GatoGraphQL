@@ -15,7 +15,7 @@ abstract class AbstractTreatUserRoleAsPrivateDataModifyPluginSettingsFixtureEndp
 
     protected function getSettingsKey(): string
     {
-        return SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA;
+        return SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA;
     }
 
     protected function getModuleID(string $dataName): string

@@ -15,7 +15,7 @@ abstract class AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEnd
 
     protected function getSettingsKey(): string
     {
-        return SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA;
+        return SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA;
     }
 
     protected function getModuleID(string $dataName): string

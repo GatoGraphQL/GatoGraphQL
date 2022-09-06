@@ -33,11 +33,11 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Expose "admin" elements in the schema', 'graphql-api'),
+			label: __('Expose "sensitive" data elements in the schema', 'graphql-api'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Do not expose admin elements', 'graphql-api'),
+			label: __('Do not expose "sensitive" data elements', 'graphql-api'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
@@ -47,7 +47,7 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 			<em>{ __('Expose admin elements in the schema?', 'graphql-api') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Expose "admin" elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to private data', 'graphql-api') }
+				text={ __('Expose "sensitive" data elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to potentially private user data', 'graphql-api') }
 			/>
 			{ !isSelected && (
 				<>
@@ -56,10 +56,10 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 						<span>🟡 { __('Default', 'graphql-api') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-						<span>✅ { __('Expose "admin" elements in the schema', 'graphql-api') }</span>
+						<span>✅ { __('Expose "sensitive" data elements in the schema', 'graphql-api') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Do not expose admin elements', 'graphql-api') }</span>
+						<span>❌ { __('Do not expose "sensitive" data elements', 'graphql-api') }</span>
 					}
 				</>
 			) }
@@ -81,7 +81,7 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 
 export default compose( [
 	withState( {
-		header: __('Expose Admin Data in the Schema', 'graphql-api'),
+		header: __('Expose Sensitive Data in the Schema', 'graphql-api'),
 		className: 'graphql-api-schema-expose-admin-data',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),

@@ -69,7 +69,7 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
         );
         App::addFilter(
             HookNames::ADMIN_INPUT_FIELD_NAMES,
-            $this->getAdminInputFieldNames(...),
+            $this->getSensitiveInputFieldNames(...),
             10,
             2
         );
@@ -121,7 +121,7 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
      * @param string[] $inputFieldNames
      * @return string[]
      */
-    public function getAdminInputFieldNames(
+    public function getSensitiveInputFieldNames(
         array $inputFieldNames,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {

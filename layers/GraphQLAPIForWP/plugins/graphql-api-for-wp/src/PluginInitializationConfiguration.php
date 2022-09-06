@@ -239,9 +239,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => UsersModule::class,
-                'envVariable' => UsersEnvironment::TREAT_USER_EMAIL_AS_ADMIN_DATA,
+                'envVariable' => UsersEnvironment::TREAT_USER_EMAIL_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA,
             ],
             // Comment default/max limits
             [
@@ -264,9 +264,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => CommentsModule::class,
-                'envVariable' => CommentsEnvironment::TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
+                'envVariable' => CommentsEnvironment::TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA,
             ],
             // Media default/max limits
             [
@@ -358,9 +358,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => CustomPostsModule::class,
-                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
+                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
             ],
             // Custom post, if there is only one custom type, use it instead of the Union
             [
@@ -384,12 +384,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
-            // Enable the "admin" schema: if doing ?behavior=unrestricted, it will already
+            // Enable the "sensitive" data: if doing ?behavior=unrestricted, it will already
             // be set by configuration. Otherwise, it uses this mapping
             [
                 'class' => ComponentModelModule::class,
-                'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
-                'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
+                'envVariable' => ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_SENSITIVE_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // White/Blacklisted entries to CustomPost.meta
@@ -460,15 +460,15 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => UserRolesModule::class,
-                'envVariable' => UserRolesEnvironment::TREAT_USER_ROLE_AS_ADMIN_DATA,
+                'envVariable' => UserRolesEnvironment::TREAT_USER_ROLE_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA,
             ],
             [
                 'class' => UserRolesModule::class,
-                'envVariable' => UserRolesEnvironment::TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
+                'envVariable' => UserRolesEnvironment::TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA,
             ],
         ];
     }
@@ -522,7 +522,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => ComponentModelModule::class,
-                'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
+                'envVariable' => ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA,
             ],
         ];
     }
@@ -572,8 +572,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
-            // Enable the "admin" fields
-            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
+            // Enable the "sensitive" data
+            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA] = true;
             // Enable the "self" fields
             $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
             // Enable Nested mutations

@@ -218,7 +218,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
         switch ($fieldName) {
             case 'genericCustomPost':
-                if ($moduleConfiguration->treatCustomPostStatusAsAdminData()) {
+                if ($moduleConfiguration->treatCustomPostStatusAsSensitiveData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                         FilterInputComponentProcessor::class,
                         FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS

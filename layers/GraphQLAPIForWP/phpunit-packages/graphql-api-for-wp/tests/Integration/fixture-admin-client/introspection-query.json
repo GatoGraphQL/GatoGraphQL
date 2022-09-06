@@ -9611,7 +9611,7 @@
               "deprecationReason": null
             },
             {
-              "name": "isAdminElement",
+              "name": "isSensitiveDataElement",
               "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
               "args": [],
               "type": {
@@ -9660,7 +9660,7 @@
               "deprecationReason": null
             },
             {
-              "name": "isAdminElement",
+              "name": "isSensitiveDataElement",
               "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
               "args": [],
               "type": {
@@ -9725,7 +9725,7 @@
               "deprecationReason": null
             },
             {
-              "name": "isAdminElement",
+              "name": "isSensitiveDataElement",
               "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
               "args": [],
               "type": {

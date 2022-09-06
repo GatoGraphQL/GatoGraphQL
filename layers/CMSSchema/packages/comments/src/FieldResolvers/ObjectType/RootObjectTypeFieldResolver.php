@@ -219,7 +219,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'comment':
-                if ($moduleConfiguration->treatCommentStatusAsAdminData()) {
+                if ($moduleConfiguration->treatCommentStatusAsSensitiveData()) {
                     $commentStatusFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                         FilterInputComponentProcessor::class,
                         FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS

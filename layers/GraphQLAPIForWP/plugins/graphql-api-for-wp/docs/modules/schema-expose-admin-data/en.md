@@ -1,10 +1,10 @@
-# Expose Admin Data in the Schema
+# Expose Sensitive Data in the Schema
 
-Expose "admin" elements in the GraphQL schema, which provide access to private data.
+Expose "sensitive" data elements in the GraphQL schema, which provide access to potentially private user data.
 
 The GraphQL schema must strike a balance between public and private elements (including fields and input fields), as to avoid exposing private information in a public API.
 
-For instance, to access post data, we have field `Root.posts`, which by default can only retrieve published posts. With this module, a new option `Expose Admin Data in the Schema` is added to the Schema Configuration. When enabled, argument `filter` in `Root.posts` exposes an additional input `status`, enabling to retrieve non-published posts (eg: posts with status `"draft"`), which is private data.
+For instance, to access post data, we have field `Root.posts`, which by default can only retrieve published posts. With this module, a new option `Expose Sensitive Data in the Schema` is added to the Schema Configuration. When enabled, argument `filter` in `Root.posts` exposes an additional input `status`, enabling to retrieve non-published posts (eg: posts with status `"draft"`), which is private data.
 
 ## List of admin elements
 
@@ -26,9 +26,9 @@ The elements below (among others) are, by default, treated as private data:
 
 - `status`
 
-## Inspecting the "admin" elements via schema introspection
+## Inspecting the "sensitive" data elements via schema introspection
 
-The `isAdminElement` property is added to field `extensions` when doing schema introspection. To find out which are the "admin" elements from the schema, execute this query:
+The `isSensitiveDataElement` property is added to field `extensions` when doing schema introspection. To find out which are the "sensitive" data elements from the schema, execute this query:
 
 ```graphql
 query ViewAdminElements {
@@ -38,25 +38,25 @@ query ViewAdminElements {
       fields {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
         args {
           name
           extensions {
-            isAdminElement
+            isSensitiveDataElement
           }
         }
       }
       inputFields {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
       }
       enumValues {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
       }
     }
@@ -64,7 +64,7 @@ query ViewAdminElements {
 }
 ```
 
-And then search for entries with `"isAdminElement": true` in the results.
+And then search for entries with `"isSensitiveDataElement": true` in the results.
 
 ## Overriding the default configuration
 
@@ -80,13 +80,13 @@ Exposing admin elements in the schema can be configured as follows, in order of 
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-![Adding admin fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-admin-fields-to-schema.png "Adding admin fields to the schema, set in the Schema configuration")
+![Adding sensitive fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-sensitive-fields-to-schema.png "Adding sensitive fields to the schema, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
-![Expose Admin Data in the Schema, in the Settings](../../images/settings-admin-schema.png "Expose Admin Data in the Schema, in the Settings")
+![Expose Sensitive Data in the Schema, in the Settings](../../images/settings-admin-schema.png "Expose Sensitive Data in the Schema, in the Settings")
 
 ## When to use
 

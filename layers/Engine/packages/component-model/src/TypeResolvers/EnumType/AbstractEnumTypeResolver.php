@@ -47,11 +47,11 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     }
 
     /**
-     * The "admin" values in the enum
+     * The "sensitive" values in the enum
      *
      * @return string[]
      */
-    public function getAdminEnumValues(): array
+    public function getSensitiveEnumValues(): array
     {
         return [];
     }
@@ -197,7 +197,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         // Exclude the admin enum values, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableAdminSchema()) {
+        if (!$moduleConfiguration->exposeSensitiveDataInSchema()) {
             $adminEnumValues = $this->getConsolidatedAdminEnumValues();
             $consolidatedEnumValues = array_filter(
                 $consolidatedEnumValues,
@@ -217,7 +217,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         }
         return $this->consolidatedAdminEnumValuesCache = App::applyFilters(
             HookNames::ADMIN_ENUM_VALUES,
-            $this->getAdminEnumValues(),
+            $this->getSensitiveEnumValues(),
             $this,
         );
     }
@@ -307,7 +307,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected function getEnumValueExtensionsSchemaDefinition(string $enumValue): array
     {
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($enumValue, $this->getConsolidatedAdminEnumValues()),
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($enumValue, $this->getConsolidatedAdminEnumValues()),
         ];
     }
 

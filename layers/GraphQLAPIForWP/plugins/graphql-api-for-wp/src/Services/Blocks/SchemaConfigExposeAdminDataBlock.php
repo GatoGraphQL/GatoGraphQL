@@ -22,17 +22,17 @@ class SchemaConfigExposeAdminDataBlock extends AbstractDefaultEnableDisableFunct
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA;
+        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_SENSITIVE_DATA;
     }
 
     protected function getBlockLabel(): string
     {
-        return \__('Add admin fields to schema?', 'graphql-api');
+        return \__('Add "sensitive" fields to schema?', 'graphql-api');
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Expose Admin Data in the Schema', 'graphql-api');
+        return \__('Expose Sensitive Data in the Schema', 'graphql-api');
     }
 
     /**

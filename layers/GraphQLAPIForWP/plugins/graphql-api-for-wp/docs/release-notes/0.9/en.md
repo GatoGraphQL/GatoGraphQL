@@ -47,7 +47,7 @@ The following fields have been upgraded, accepting the following properties in t
 - `Root.user`:
   - `id`
   - `username`
-  - `email` (considered as "admin" data, so `Expose Admin Data in the Schema` must be enabled; see later on)
+  - `email` (considered as "sensitive" data, so `Expose Sensitive Data in the Schema` must be enabled; see later on)
 
 ### Filter elements via the new `filter` field argument
 
@@ -107,8 +107,8 @@ On fields to retrieve custom posts, such as:
 - `authorIDs: [ID]`
 - `authorSlug: String`
 - `excludeAuthorIDs: [ID]`
-- `hasPassword: Bool` (considered as "admin" data)
-- `password: String` (considered as "admin" data)
+- `hasPassword: Bool` (considered as "sensitive" data)
+- `password: String` (considered as "sensitive" data)
 
 For instance, this query retrieves posts containing either tag `"graphql"`, `"wordpress"` or `"plugin"`:
 
@@ -886,7 +886,7 @@ The response is the following:
 The GraphQL API for WordPress provides safe default settings:
 
 - The single endpoint is disabled
-- The "admin" elements in the GraphQL schema (such as `User.roles`, or filtering posts by `status`) are not exposed
+- The "sensitive" data elements in the GraphQL schema (such as `User.roles`, or filtering posts by `status`) are not exposed
 - Only a handful of the settings options and meta keys (for posts, users, etc) can be queried
 - The number of entities that can be queried at once is limited (for posts, users, etc)
 
@@ -903,7 +903,7 @@ Alternatively, we can define this same key/value as an environment variable.
 When enabling unsafe defaults, the default plugin settings are transformed like this:
 
 - The single endpoint is enabled
-- The "admin" elements are exposed in the GraphQL schema
+- The "sensitive" data elements are exposed in the GraphQL schema
 - All settings options and meta keys can be queried
 - The number of entities that can be queried at once is unlimited
 
@@ -915,7 +915,7 @@ This means we can now configure the single endpoint:
 
 - Nested mutations
 - Schema namespacing
-- Expose "admin" data
+- Expose "sensitive" data
 
 To configure the single endpoint, go to tab "Schema Configuration" on the Settings page, and select the desired Schema Configuration entry from the dropdown for "Schema Configuration for the Single Endpoint", and click on "Save Changes":
 
@@ -956,7 +956,7 @@ The updated modules are:
 
 - Schema Namespacing
 - Nested Mutations
-- Expose Admin Data in the Schema
+- Expose Sensitive Data in the Schema
 
 ![Selecting the same field on the two possible root types](../../images/releases/v09/split-settings-into-2.png)
 
@@ -1142,7 +1142,7 @@ type _FieldExtensions {
   isMutation: Boolean!
 
   # `true` => Only exposed when "Expose admin elements" is enabled
-  isAdminElement: Boolean!
+  isSensitiveDataElement: Boolean!
 }
 
 extend type __Field {
@@ -1150,7 +1150,7 @@ extend type __Field {
 }
 
 type _InputValueExtensions {
-  isAdminElement: Boolean!
+  isSensitiveDataElement: Boolean!
 }
 
 extend type __InputValue {
@@ -1158,7 +1158,7 @@ extend type __InputValue {
 }
 
 type _EnumValueExtensions {
-  isAdminElement: Boolean!
+  isSensitiveDataElement: Boolean!
 }
 
 extend type __EnumValue {
@@ -1166,9 +1166,9 @@ extend type __EnumValue {
 }
 ```
 
-### Implemented extension `isAdminElement`
+### Implemented extension `isSensitiveDataElement`
 
-Several `extensions` fields expose property `isAdminElement`, to identify which are the "admin" elements from the schema (i.e. elements which can only be accessed when "Expose admin elements" is enabled in the Schema Configuration).
+Several `extensions` fields expose property `isSensitiveDataElement`, to identify which are the "sensitive" data elements from the schema (i.e. elements which can only be accessed when "Expose Sensitive Data in the Schema" is enabled in the Schema Configuration).
 
 To retrieve this data, execute this query:
 
@@ -1180,25 +1180,25 @@ query ViewAdminElements {
       fields {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
         args {
           name
           extensions {
-            isAdminElement
+            isSensitiveDataElement
           }
         }
       }
       inputFields {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
       }
       enumValues {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
       }
     }
@@ -1206,7 +1206,7 @@ query ViewAdminElements {
 }
 ```
 
-And then search for entries with `"isAdminElement": true` in the results.
+And then search for entries with `"isSensitiveDataElement": true` in the results.
 
 ## Performance improvement: Avoid regenerating the container when the schema is modified
 
@@ -1373,9 +1373,9 @@ There are a few exceptions, though, such as:
 
 Please visualize the Explorer Docs in GraphiQL, and the Interactive Schema, to understand how the GraphQL schema has been upgraded.
 
-### Renamed module "Expose Admin Data in the Schema"
+### Renamed module "Expose Sensitive Data in the Schema"
 
-Renamed module "Schema for the Admin" to "Expose Admin Data in the Schema". If this module had been disabled, it must be disabled again.
+Renamed module "Schema for the Admin" to "Expose Sensitive Data in the Schema". If this module had been disabled, it must be disabled again.
 
 In addition, its block for the Schema Configuration also got renamed, so you must click on "Reset the template" on all Schema Configurations to show the block again:
 
@@ -1493,15 +1493,15 @@ mutation {
 }
 ```
 
-### Merged the "admin" and non-admin fields
+### Merged the "sensitive" data and non-sensitive-data fields
 
-Removed all the "unrestricted" fields (which were exposed via module `Expose Admin Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is "admin" data or not.
+Removed all the "unrestricted" fields (which were exposed via module `Expose Sensitive Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is "sensitive" data or not.
 
-To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as "admin" or not. (This is configured in block `Expose Admin Data in the Schema` from the Schema Configuration).
+To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as "sensitive" or not. (This is configured in block `Expose Sensitive Data in the Schema` from the Schema Configuration).
 
-For instance, field `Root.posts` has argument `filter`. When the GraphQL schema is configured to expose "admin" data, this input object exposes an additional input field `status`, enabling to filter posts by status `"draft"`, `"pending"` or `"trash"` (i.e. allowing to fetch private posts).
+For instance, field `Root.posts` has argument `filter`. When the GraphQL schema is configured to expose "sensitive" data, this input object exposes an additional input field `status`, enabling to filter posts by status `"draft"`, `"pending"` or `"trash"` (i.e. allowing to fetch private posts).
 
-The list of "admin" (or "unrestricted") fields which were removed, and what fields now handle their, is this one:
+The list of "sensitive" (or "unrestricted") fields which were removed, and what fields now handle their, is this one:
 
 Root:
 
@@ -1532,9 +1532,9 @@ PostTag:
 - `unrestrictedPosts` => `posts`
 - `unrestrictedPostCount` => `postCount`
 
-### `User.email` is treated as "admin" field
+### `User.email` is treated as "sensitive" field
 
-From now on, field `User.email` is treated as private data. As such, it is exposed only if property `Expose Admin Data` is enabled.
+From now on, field `User.email` is treated as private data. As such, it is exposed only if property `Expose Sensitive Data in the Schema` is enabled.
 
 This behavior can be overriden in the Settings page:
 
@@ -1555,7 +1555,7 @@ Those modules which had their Settings value split into 2 ("Default value for Sc
 
 - Schema Namespacing
 - Nested Mutations
-- Expose Admin Data in the Schema
+- Expose Sensitive Data in the Schema
 
 In addition, the `Default Schema Configuration` option for module "Schema Configuration" has been renamed, and it must also be set again.
 

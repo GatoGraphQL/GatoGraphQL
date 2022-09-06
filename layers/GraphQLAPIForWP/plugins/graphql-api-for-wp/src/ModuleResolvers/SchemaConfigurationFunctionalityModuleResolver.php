@@ -22,7 +22,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
     public final const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
-    public final const SCHEMA_EXPOSE_ADMIN_DATA = Plugin::NAMESPACE . '\schema-expose-admin-data';
+    public final const SCHEMA_EXPOSE_SENSITIVE_DATA = Plugin::NAMESPACE . '\schema-expose-admin-data';
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -55,7 +55,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_NAMESPACING,
             self::NESTED_MUTATIONS,
-            self::SCHEMA_EXPOSE_ADMIN_DATA,
+            self::SCHEMA_EXPOSE_SENSITIVE_DATA,
         ];
     }
 
@@ -84,7 +84,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
-            self::SCHEMA_EXPOSE_ADMIN_DATA => \__('Expose Admin Data in the Schema', 'graphql-api'),
+            self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose Sensitive Data in the Schema', 'graphql-api'),
             default => $module,
         };
     }
@@ -98,8 +98,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 return \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'graphql-api');
             case self::NESTED_MUTATIONS:
                 return \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api');
-            case self::SCHEMA_EXPOSE_ADMIN_DATA:
-                return \__('Expose "admin" elements in the schema', 'graphql-api');
+            case self::SCHEMA_EXPOSE_SENSITIVE_DATA:
+                return \__('Expose "sensitive" data elements in the schema', 'graphql-api');
         }
         return parent::getDescription($module);
     }
@@ -124,7 +124,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => MutationSchemes::STANDARD,
             ],
-            self::SCHEMA_EXPOSE_ADMIN_DATA => [
+            self::SCHEMA_EXPOSE_SENSITIVE_DATA => [
                 ModuleSettingOptions::DEFAULT_VALUE => $useUnsafe,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
@@ -286,7 +286,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
-        } elseif ($module === self::SCHEMA_EXPOSE_ADMIN_DATA) {
+        } elseif ($module === self::SCHEMA_EXPOSE_SENSITIVE_DATA) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -295,11 +295,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => sprintf(
-                    \__('Add admin fields to schema? %s', 'graphql-api'),
+                    \__('Add "sensitive" fields to schema? %s', 'graphql-api'),
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose "admin" elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to private data. %s', 'graphql-api'),
+                    \__('Expose "sensitive" data elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data. %s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -311,9 +311,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Expose admin elements for the Admin?', 'graphql-api'),
+                Properties::TITLE => \__('Expose "sensitive" data elements for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose "admin" elements in the wp-admin? %s', 'graphql-api'),
+                    \__('Expose "sensitive" data elements in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,

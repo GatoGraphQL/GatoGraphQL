@@ -26,7 +26,7 @@ class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDi
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA;
+        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_SENSITIVE_DATA;
     }
 
     protected function getBlock(): BlockInterface
@@ -41,6 +41,6 @@ class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDi
 
     public function getHookEnvironmentClass(): string
     {
-        return ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA;
+        return ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA;
     }
 }

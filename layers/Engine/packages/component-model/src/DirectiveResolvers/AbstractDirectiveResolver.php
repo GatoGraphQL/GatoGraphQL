@@ -901,9 +901,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected function getDirectiveArgExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): array
     {
-        // @todo Implement "admin" directive args, if needed
+        // @todo Implement "sensitive" directive args, if needed
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => false,
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => false,
         ];
     }
 
@@ -1418,8 +1418,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function getDirectiveExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return [
-            // @todo Implement "admin" directive, if needed
-            SchemaDefinition::IS_ADMIN_ELEMENT => false,
+            // @todo Implement "sensitive" directive, if needed
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => false,
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];

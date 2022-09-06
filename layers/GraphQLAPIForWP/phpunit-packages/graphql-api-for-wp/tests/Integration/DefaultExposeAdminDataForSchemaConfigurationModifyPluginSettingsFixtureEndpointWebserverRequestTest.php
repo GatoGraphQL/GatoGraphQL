@@ -10,7 +10,7 @@ class DefaultExposeAdminDataForSchemaConfigurationModifyPluginSettingsFixtureEnd
 {
     protected function getEndpoint(): string
     {
-        // This endpoint has "Expose admin elements in the schema?" as "Default"
+        // This endpoint has "Expose sensitive data in the schema" as "Default"
         return 'graphql/mobile-app/';
     }
 

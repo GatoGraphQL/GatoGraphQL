@@ -67,7 +67,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * @return string[]
      */
-    public function getAdminInputFieldNames(): array
+    public function getSensitiveInputFieldNames(): array
     {
         return [];
     }
@@ -105,7 +105,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         // Exclude the admin input fields, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableAdminSchema()) {
+        if (!$moduleConfiguration->exposeSensitiveDataInSchema()) {
             $adminInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
             $consolidatedInputFieldNameTypeResolvers = array_filter(
                 $consolidatedInputFieldNameTypeResolvers,
@@ -130,7 +130,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         $this->consolidatedAdminInputFieldNames = App::applyFilters(
             HookNames::ADMIN_INPUT_FIELD_NAMES,
-            $this->getAdminInputFieldNames(),
+            $this->getSensitiveInputFieldNames(),
             $this,
         );
         return $this->consolidatedAdminInputFieldNames;
@@ -554,7 +554,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     protected function getInputFieldExtensionsSchemaDefinition(string $inputFieldName): array
     {
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($inputFieldName, $this->getConsolidatedAdminInputFieldNames()),
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($inputFieldName, $this->getConsolidatedAdminInputFieldNames()),
         ];
     }
 
