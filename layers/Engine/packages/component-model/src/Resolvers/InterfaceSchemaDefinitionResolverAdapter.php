@@ -99,9 +99,9 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
     /**
      * @return string[]
      */
-    public function getConsolidatedAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getConsolidatedSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedAdminFieldArgNames($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedSensitiveFieldArgNames($fieldName);
     }
 
     public function getConsolidatedFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string

@@ -38,7 +38,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     /**
      * @return string[]
      */
-    public function getConsolidatedAdminFieldArgNames(string $fieldName): array;
+    public function getConsolidatedSensitiveFieldArgNames(string $fieldName): array;
     public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;

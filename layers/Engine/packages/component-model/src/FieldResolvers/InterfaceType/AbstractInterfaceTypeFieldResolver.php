@@ -45,7 +45,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
     /** @var array<string,string[]> */
-    protected array $consolidatedAdminFieldArgNamesCache = [];
+    protected array $consolidatedSensitiveFieldArgNamesCache = [];
     /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
     /** @var array<string,string|null> */
@@ -346,7 +346,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableAdminSchema()) {
-            $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
+            $adminFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
                 $consolidatedFieldArgNameTypeResolvers,
                 fn (string $fieldArgName) => !in_array($fieldArgName, $adminFieldArgNames),
@@ -362,20 +362,20 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final public function getConsolidatedAdminFieldArgNames(string $fieldName): array
+    final public function getConsolidatedSensitiveFieldArgNames(string $fieldName): array
     {
         // Cache the result
         $cacheKey = $fieldName;
-        if (array_key_exists($cacheKey, $this->consolidatedAdminFieldArgNamesCache)) {
-            return $this->consolidatedAdminFieldArgNamesCache[$cacheKey];
+        if (array_key_exists($cacheKey, $this->consolidatedSensitiveFieldArgNamesCache)) {
+            return $this->consolidatedSensitiveFieldArgNamesCache[$cacheKey];
         }
-        $this->consolidatedAdminFieldArgNamesCache[$cacheKey] = App::applyFilters(
+        $this->consolidatedSensitiveFieldArgNamesCache[$cacheKey] = App::applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
             $this->getSensitiveFieldArgNames($fieldName),
             $this,
             $fieldName,
         );
-        return $this->consolidatedAdminFieldArgNamesCache[$cacheKey];
+        return $this->consolidatedSensitiveFieldArgNamesCache[$cacheKey];
     }
 
     /**
@@ -628,7 +628,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     protected function getFieldArgExtensionsSchemaDefinition(string $fieldName, string $fieldArgName): array
     {
-        $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
+        $adminFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($fieldName);
         return [
             SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldArgName, $adminFieldArgNames),
         ];
