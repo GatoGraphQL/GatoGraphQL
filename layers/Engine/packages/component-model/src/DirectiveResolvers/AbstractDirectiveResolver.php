@@ -903,7 +903,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     {
         // @todo Implement "sensitive" directive args, if needed
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => false,
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => false,
         ];
     }
 
@@ -1419,7 +1419,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     {
         return [
             // @todo Implement "sensitive" directive, if needed
-            SchemaDefinition::IS_ADMIN_ELEMENT => false,
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => false,
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];

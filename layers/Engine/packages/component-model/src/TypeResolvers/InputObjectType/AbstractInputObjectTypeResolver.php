@@ -554,7 +554,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     protected function getInputFieldExtensionsSchemaDefinition(string $inputFieldName): array
     {
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($inputFieldName, $this->getConsolidatedAdminInputFieldNames()),
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($inputFieldName, $this->getConsolidatedAdminInputFieldNames()),
         ];
     }
 

@@ -549,7 +549,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         $sensitiveFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldArgName, $sensitiveFieldArgNames),
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($fieldArgName, $sensitiveFieldArgNames),
         ];
     }
 
@@ -831,7 +831,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         return [
             SchemaDefinition::FIELD_IS_MUTATION => $this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null,
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
         ];
     }
 

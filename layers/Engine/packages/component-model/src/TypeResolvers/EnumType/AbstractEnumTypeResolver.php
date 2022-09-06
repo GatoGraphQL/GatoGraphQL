@@ -307,7 +307,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected function getEnumValueExtensionsSchemaDefinition(string $enumValue): array
     {
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($enumValue, $this->getConsolidatedAdminEnumValues()),
+            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($enumValue, $this->getConsolidatedAdminEnumValues()),
         ];
     }
 
