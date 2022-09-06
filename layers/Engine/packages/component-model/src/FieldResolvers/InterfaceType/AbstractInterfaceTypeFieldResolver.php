@@ -268,11 +268,11 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     /**
      * @return string[]
      */
-    public function getAdminFieldArgNames(string $fieldName): array
+    public function getSensitiveFieldArgNames(string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getAdminFieldArgNames($fieldName);
+            return $schemaDefinitionResolver->getSensitiveFieldArgNames($fieldName);
         }
         return [];
     }
@@ -371,7 +371,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
         $this->consolidatedAdminFieldArgNamesCache[$cacheKey] = App::applyFilters(
             HookNames::INTERFACE_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
-            $this->getAdminFieldArgNames($fieldName),
+            $this->getSensitiveFieldArgNames($fieldName),
             $this,
             $fieldName,
         );

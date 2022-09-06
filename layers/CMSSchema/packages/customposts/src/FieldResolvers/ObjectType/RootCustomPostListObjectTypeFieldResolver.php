@@ -116,9 +116,9 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     /**
      * @return string[]
      */
-    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        $adminFieldArgNames = parent::getSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         switch ($fieldName) {

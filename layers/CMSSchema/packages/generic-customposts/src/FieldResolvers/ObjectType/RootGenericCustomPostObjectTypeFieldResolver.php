@@ -211,9 +211,9 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     /**
      * @return string[]
      */
-    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        $adminFieldArgNames = parent::getSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         /** @var CustomPostsModuleConfiguration */
         $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
         switch ($fieldName) {
