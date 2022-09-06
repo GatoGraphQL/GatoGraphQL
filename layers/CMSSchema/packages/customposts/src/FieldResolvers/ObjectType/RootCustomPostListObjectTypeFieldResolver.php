@@ -118,7 +118,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
      */
     public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $adminFieldArgNames = parent::getSensitiveFieldArgNames($objectTypeResolver, $fieldName);
+        $sensitiveFieldArgNames = parent::getSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         switch ($fieldName) {
@@ -128,11 +128,11 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
                         FilterInputComponentProcessor::class,
                         FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS
                     ));
-                    $adminFieldArgNames[] = $customPostStatusFilterInputName;
+                    $sensitiveFieldArgNames[] = $customPostStatusFilterInputName;
                 }
                 break;
         }
-        return $adminFieldArgNames;
+        return $sensitiveFieldArgNames;
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int

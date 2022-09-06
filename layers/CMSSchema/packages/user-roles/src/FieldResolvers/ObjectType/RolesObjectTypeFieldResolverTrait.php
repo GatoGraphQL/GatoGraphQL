@@ -33,16 +33,16 @@ trait RolesObjectTypeFieldResolverTrait
      */
     public function getSensitiveFieldNames(): array
     {
-        $adminFieldNames = parent::getSensitiveFieldNames();
+        $sensitiveFieldNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatUserRoleAsAdminData()) {
-            $adminFieldNames[] = 'roles';
+            $sensitiveFieldNames[] = 'roles';
         }
         if ($moduleConfiguration->treatUserCapabilityAsAdminData()) {
-            $adminFieldNames[] = 'capabilities';
+            $sensitiveFieldNames[] = 'capabilities';
         }
-        return $adminFieldNames;
+        return $sensitiveFieldNames;
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

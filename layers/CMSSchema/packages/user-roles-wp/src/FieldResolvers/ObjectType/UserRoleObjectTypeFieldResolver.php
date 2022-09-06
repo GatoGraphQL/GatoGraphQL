@@ -49,13 +49,13 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
      */
     public function getSensitiveFieldNames(): array
     {
-        $adminFieldNames = parent::getSensitiveFieldNames();
+        $sensitiveFieldNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatUserCapabilityAsAdminData()) {
-            $adminFieldNames[] = 'capabilities';
+            $sensitiveFieldNames[] = 'capabilities';
         }
-        return $adminFieldNames;
+        return $sensitiveFieldNames;
     }
 
     /**

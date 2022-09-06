@@ -411,10 +411,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableAdminSchema()) {
-            $adminFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($objectTypeResolver, $fieldName);
+            $sensitiveFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($objectTypeResolver, $fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
                 $consolidatedFieldArgNameTypeResolvers,
-                fn (string $fieldArgName) => !in_array($fieldArgName, $adminFieldArgNames),
+                fn (string $fieldArgName) => !in_array($fieldArgName, $sensitiveFieldArgNames),
                 ARRAY_FILTER_USE_KEY
             );
         }
@@ -547,9 +547,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function getFieldArgExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): array
     {
-        $adminFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($objectTypeResolver, $fieldName);
+        $sensitiveFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldArgName, $adminFieldArgNames),
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldArgName, $sensitiveFieldArgNames),
         ];
     }
 
