@@ -28,7 +28,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         // Enable to exclude fieldNames, so they are not added to the schema.
         $excludedFieldNames = [];
         // Whenever:
-        // 1. Exclude the admin fields, if "Admin" Schema is not enabled
+        // 1. Exclude the sensitive fields, if not enabled by env var
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->exposeSensitiveDataInSchema()) {

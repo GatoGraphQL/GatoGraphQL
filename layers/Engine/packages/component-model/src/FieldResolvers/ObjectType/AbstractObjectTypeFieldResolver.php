@@ -407,7 +407,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
 
-        // Exclude the admin field args, if "Admin" Schema is not enabled
+        // Exclude the sensitive field args, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->exposeSensitiveDataInSchema()) {
