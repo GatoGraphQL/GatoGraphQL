@@ -10,7 +10,7 @@ abstract class AbstractTreatUserRoleAsPrivateDataModifyPluginSettingsFixtureEndp
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-user-role-as-private-data';
+        return __DIR__ . '/fixture-user-role-as-sensitive-data';
     }
 
     protected function getSettingsKey(): string

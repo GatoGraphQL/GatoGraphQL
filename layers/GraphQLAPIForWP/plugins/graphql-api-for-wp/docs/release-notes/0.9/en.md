@@ -1538,7 +1538,7 @@ From now on, field `User.email` is treated as “sensitive” data. As such, it 
 
 This behavior can be overriden in the Settings page:
 
-![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-private-data.png)
+![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.png)
 
 ### Removed modules
 

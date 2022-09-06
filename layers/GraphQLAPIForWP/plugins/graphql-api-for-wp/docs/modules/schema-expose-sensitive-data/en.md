@@ -72,7 +72,7 @@ The elements listed above can be made public.
 
 In the Settings page, in the corresponding tab for each, there is a checkbox to configure if to treat them as private or public:
 
-![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-private-data.png)
+![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.png)
 
 ## How to use
 
