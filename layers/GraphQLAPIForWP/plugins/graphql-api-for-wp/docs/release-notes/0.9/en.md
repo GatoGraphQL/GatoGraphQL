@@ -1173,7 +1173,7 @@ Several `extensions` fields expose property `isSensitiveDataElement`, to identif
 To retrieve this data, execute this query:
 
 ```graphql
-query ViewAdminElements {
+query ViewSensitiveDataElements {
   __schema {
     types {
       name

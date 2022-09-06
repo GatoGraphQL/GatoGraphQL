@@ -31,7 +31,7 @@ The elements below (among others) are, by default, treated as private data:
 The `isSensitiveDataElement` property is added to field `extensions` when doing schema introspection. To find out which are the “sensitive” data elements from the schema, execute this query:
 
 ```graphql
-query ViewAdminElements {
+query ViewSensitiveDataElements {
   __schema {
     types {
       name
