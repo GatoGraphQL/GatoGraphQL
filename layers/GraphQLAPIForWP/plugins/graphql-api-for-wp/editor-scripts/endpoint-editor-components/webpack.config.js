@@ -5,7 +5,7 @@ const config = require( '@wordpress/scripts/config/webpack.config' );
 /**
  * Documentation in different languages
  */
-langs = ['en', 'es']
+langs = ['en']
 langs.forEach( lang => config.entry[`docs-${ lang }`] = path.resolve( process.cwd(), `docs/${ lang }`, 'index.js' ) )
 config.resolve.alias['@docs'] = path.resolve(process.cwd(), 'docs/')
 
