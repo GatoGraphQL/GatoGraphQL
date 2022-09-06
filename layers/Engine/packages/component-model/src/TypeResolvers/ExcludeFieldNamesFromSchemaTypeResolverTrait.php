@@ -31,7 +31,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         // 1. Exclude the admin fields, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableAdminSchema()) {
+        if (!$moduleConfiguration->exposeSensitiveDataInSchema()) {
             $excludedFieldNames = $objectTypeOrInterfaceTypeFieldResolver->getSensitiveFieldNames();
         }
         // 2. By filter hook

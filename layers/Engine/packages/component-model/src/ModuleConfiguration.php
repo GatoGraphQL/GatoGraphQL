@@ -87,7 +87,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function enableAdminSchema(): bool
+    public function exposeSensitiveDataInSchema(): bool
     {
         $envVariable = Environment::ENABLE_ADMIN_SCHEMA;
         $defaultValue = false;

@@ -105,7 +105,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         // Exclude the admin input fields, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableAdminSchema()) {
+        if (!$moduleConfiguration->exposeSensitiveDataInSchema()) {
             $adminInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
             $consolidatedInputFieldNameTypeResolvers = array_filter(
                 $consolidatedInputFieldNameTypeResolvers,

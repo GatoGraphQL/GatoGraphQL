@@ -56,7 +56,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
         $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
                 FieldDataloadComponentProcessor::class,
-                $componentModelModuleConfiguration->enableAdminSchema() ?
+                $componentModelModuleConfiguration->exposeSensitiveDataInSchema() ?
                     FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
                     : FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST,
                 [
