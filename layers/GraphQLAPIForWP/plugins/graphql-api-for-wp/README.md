@@ -54,7 +54,7 @@ Code compiled for development, i.e. after running `npm start`, cannot be commite
 The GraphQL API for WordPress provides safe default settings, to make "live" sites secure:
 
 - The single endpoint is disabled
-- The "sensitive" elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
+- The "sensitive" data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
 - Only a few of settings options and meta keys (for posts, users, etc) can be queried
 - The number of entities (for posts, users, etc) that can be queried at once is limited
 
