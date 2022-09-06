@@ -1,6 +1,6 @@
 # Expose Sensitive Data in the Schema
 
-Expose "sensitive" data elements in the GraphQL schema, which provide access to potentially private user data.
+Expose “sensitive” data elements in the GraphQL schema, which provide access to potentially private user data.
 
 The GraphQL schema must strike a balance between public and private elements (including fields and input fields), as to avoid exposing private information in a public API.
 
@@ -26,9 +26,9 @@ The elements below (among others) are, by default, treated as private data:
 
 - `status`
 
-## Inspecting the "sensitive" data elements via schema introspection
+## Inspecting the “sensitive” data elements via schema introspection
 
-The `isSensitiveDataElement` property is added to field `extensions` when doing schema introspection. To find out which are the "sensitive" data elements from the schema, execute this query:
+The `isSensitiveDataElement` property is added to field `extensions` when doing schema introspection. To find out which are the “sensitive” data elements from the schema, execute this query:
 
 ```graphql
 query ViewAdminElements {

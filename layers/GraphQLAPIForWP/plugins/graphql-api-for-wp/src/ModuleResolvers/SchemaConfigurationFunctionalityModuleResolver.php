@@ -99,7 +99,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             case self::NESTED_MUTATIONS:
                 return \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api');
             case self::SCHEMA_EXPOSE_SENSITIVE_DATA:
-                return \__('Expose "sensitive" data elements in the schema', 'graphql-api');
+                return \__('Expose “sensitive” data elements in the schema', 'graphql-api');
         }
         return parent::getDescription($module);
     }
@@ -295,11 +295,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => sprintf(
-                    \__('Add "sensitive" fields to schema? %s', 'graphql-api'),
+                    \__('Add “sensitive” fields to schema? %s', 'graphql-api'),
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose "sensitive" data elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data. %s', 'graphql-api'),
+                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data. %s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -311,9 +311,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Expose "sensitive" data elements for the Admin?', 'graphql-api'),
+                Properties::TITLE => \__('Expose “sensitive” data elements for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose "sensitive" data elements in the wp-admin? %s', 'graphql-api'),
+                    \__('Expose “sensitive” data elements in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,

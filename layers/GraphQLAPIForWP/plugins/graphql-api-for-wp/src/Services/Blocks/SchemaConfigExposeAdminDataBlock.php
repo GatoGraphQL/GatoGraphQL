@@ -27,7 +27,7 @@ class SchemaConfigExposeAdminDataBlock extends AbstractDefaultEnableDisableFunct
 
     protected function getBlockLabel(): string
     {
-        return \__('Add "sensitive" fields to schema?', 'graphql-api');
+        return \__('Add “sensitive” fields to schema?', 'graphql-api');
     }
 
     protected function getBlockTitle(): string
