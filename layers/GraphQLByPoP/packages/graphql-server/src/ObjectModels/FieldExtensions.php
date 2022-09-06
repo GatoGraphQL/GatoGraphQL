@@ -13,7 +13,7 @@ class FieldExtensions extends AbstractSchemaDefinitionReferenceObject
         return $this->schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION];
     }
 
-    public function isAdminElement(): bool
+    public function isSensitiveDataElement(): bool
     {
         return $this->schemaDefinition[SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT];
     }

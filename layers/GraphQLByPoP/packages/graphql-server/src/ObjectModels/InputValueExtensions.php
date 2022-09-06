@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class InputValueExtensions extends AbstractSchemaDefinitionReferenceObject
 {
-    public function isAdminElement(): bool
+    public function isSensitiveDataElement(): bool
     {
         return $this->schemaDefinition[SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT];
     }

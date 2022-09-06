@@ -44,14 +44,14 @@ class EnumValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldNamesToResolve(): array
     {
         return [
-            'isAdminElement',
+            'isSensitiveDataElement',
         ];
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isAdminElement' => $this->__('Is this element considered an \'admin\' element in the schema? (If so, it is only exposed in the schema when \'Expose admin elements\' is enabled)', 'graphql-server'),
+            'isSensitiveDataElement' => $this->__('Is this element considered an \'admin\' element in the schema? (If so, it is only exposed in the schema when \'Expose admin elements\' is enabled)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -59,7 +59,7 @@ class EnumValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'isAdminElement' => SchemaTypeModifiers::NON_NULLABLE,
+            'isSensitiveDataElement' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -73,7 +73,7 @@ class EnumValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         /** @var EnumValueExtensions */
         $enumValueExtensions = $object;
         return match ($fieldDataAccessor->getFieldName()) {
-            'isAdminElement' => $enumValueExtensions->isAdminElement(),
+            'isSensitiveDataElement' => $enumValueExtensions->isSensitiveDataElement(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
@@ -81,7 +81,7 @@ class EnumValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'isAdminElement' => $this->getBooleanScalarTypeResolver(),
+            'isSensitiveDataElement' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

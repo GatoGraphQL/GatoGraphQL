@@ -179,7 +179,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Variables are input types
   - Queried fields are unambiguous
 - Query `extensions` in the schema introspection
-  - Implemented extension `isAdminElement`
+  - Implemented extension `isSensitiveDataElement`
 - Performance improvement: Avoid regenerating the container when the schema is modified
 - Clicking on "Save Changes" on the Settings page will always regenerate the schema
 - Prettyprint GraphQL queries in the module docs

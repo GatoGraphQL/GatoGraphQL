@@ -1133,7 +1133,7 @@
               "name": "id"
             },
             {
-              "name": "isAdminElement"
+              "name": "isSensitiveDataElement"
             }
           ]
         },
@@ -1147,7 +1147,7 @@
               "name": "id"
             },
             {
-              "name": "isAdminElement"
+              "name": "isSensitiveDataElement"
             },
             {
               "name": "isMutation"
@@ -1164,7 +1164,7 @@
               "name": "id"
             },
             {
-              "name": "isAdminElement"
+              "name": "isSensitiveDataElement"
             }
           ]
         },

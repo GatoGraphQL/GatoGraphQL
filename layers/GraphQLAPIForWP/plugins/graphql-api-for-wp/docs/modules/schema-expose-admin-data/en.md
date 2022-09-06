@@ -28,7 +28,7 @@ The elements below (among others) are, by default, treated as private data:
 
 ## Inspecting the "sensitive" data elements via schema introspection
 
-The `isAdminElement` property is added to field `extensions` when doing schema introspection. To find out which are the "sensitive" data elements from the schema, execute this query:
+The `isSensitiveDataElement` property is added to field `extensions` when doing schema introspection. To find out which are the "sensitive" data elements from the schema, execute this query:
 
 ```graphql
 query ViewAdminElements {
@@ -38,25 +38,25 @@ query ViewAdminElements {
       fields {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
         args {
           name
           extensions {
-            isAdminElement
+            isSensitiveDataElement
           }
         }
       }
       inputFields {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
       }
       enumValues {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
       }
     }
@@ -64,7 +64,7 @@ query ViewAdminElements {
 }
 ```
 
-And then search for entries with `"isAdminElement": true` in the results.
+And then search for entries with `"isSensitiveDataElement": true` in the results.
 
 ## Overriding the default configuration
 

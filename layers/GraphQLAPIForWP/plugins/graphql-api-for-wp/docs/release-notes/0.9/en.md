@@ -1142,7 +1142,7 @@ type _FieldExtensions {
   isMutation: Boolean!
 
   # `true` => Only exposed when "Expose admin elements" is enabled
-  isAdminElement: Boolean!
+  isSensitiveDataElement: Boolean!
 }
 
 extend type __Field {
@@ -1150,7 +1150,7 @@ extend type __Field {
 }
 
 type _InputValueExtensions {
-  isAdminElement: Boolean!
+  isSensitiveDataElement: Boolean!
 }
 
 extend type __InputValue {
@@ -1158,7 +1158,7 @@ extend type __InputValue {
 }
 
 type _EnumValueExtensions {
-  isAdminElement: Boolean!
+  isSensitiveDataElement: Boolean!
 }
 
 extend type __EnumValue {
@@ -1166,9 +1166,9 @@ extend type __EnumValue {
 }
 ```
 
-### Implemented extension `isAdminElement`
+### Implemented extension `isSensitiveDataElement`
 
-Several `extensions` fields expose property `isAdminElement`, to identify which are the "sensitive" data elements from the schema (i.e. elements which can only be accessed when "Expose Sensitive Data in the Schema" is enabled in the Schema Configuration).
+Several `extensions` fields expose property `isSensitiveDataElement`, to identify which are the "sensitive" data elements from the schema (i.e. elements which can only be accessed when "Expose Sensitive Data in the Schema" is enabled in the Schema Configuration).
 
 To retrieve this data, execute this query:
 
@@ -1180,25 +1180,25 @@ query ViewAdminElements {
       fields {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
         args {
           name
           extensions {
-            isAdminElement
+            isSensitiveDataElement
           }
         }
       }
       inputFields {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
       }
       enumValues {
         name
         extensions {
-          isAdminElement
+          isSensitiveDataElement
         }
       }
     }
@@ -1206,7 +1206,7 @@ query ViewAdminElements {
 }
 ```
 
-And then search for entries with `"isAdminElement": true` in the results.
+And then search for entries with `"isSensitiveDataElement": true` in the results.
 
 ## Performance improvement: Avoid regenerating the container when the schema is modified
 
