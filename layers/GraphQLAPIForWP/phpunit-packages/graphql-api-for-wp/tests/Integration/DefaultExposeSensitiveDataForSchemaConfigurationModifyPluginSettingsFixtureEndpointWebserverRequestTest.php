@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 
-class DefaultExposeAdminDataForSchemaConfigurationModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class DefaultExposeSensitiveDataForSchemaConfigurationModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {
@@ -16,7 +16,7 @@ class DefaultExposeAdminDataForSchemaConfigurationModifyPluginSettingsFixtureEnd
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-default-expose-admin-data-for-schema-configuration';
+        return __DIR__ . '/fixture-default-expose-sensitive-data-for-schema-configuration';
     }
 
     protected function getSettingsKey(): string
@@ -26,7 +26,7 @@ class DefaultExposeAdminDataForSchemaConfigurationModifyPluginSettingsFixtureEnd
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-expose-admin-data';
+        return 'graphqlapi_graphqlapi_schema-expose-sensitive-data';
     }
 
     protected function getPluginSettingsNewValue(): mixed

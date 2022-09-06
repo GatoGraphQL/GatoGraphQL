@@ -10,7 +10,7 @@ abstract class AbstractTreatUserCapabilityAsPrivateDataModifyPluginSettingsFixtu
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-user-capability-as-private-data';
+        return __DIR__ . '/fixture-user-capability-as-sensitive-data';
     }
 
     protected function getSettingsKey(): string

@@ -1273,7 +1273,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=191</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-admin-data {"enabledConst":"disabled"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-sensitive-data {"enabledConst":"disabled"} /-->
 
 <!-- wp:graphql-api/schema-config-mutation-scheme /-->
 
@@ -1301,7 +1301,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=193</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-admin-data /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-sensitive-data /-->
 
 <!-- wp:graphql-api/schema-config-mutation-scheme /-->
 
@@ -1354,7 +1354,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=261</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-admin-data {"enabledConst":"disabled"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-sensitive-data {"enabledConst":"disabled"} /-->
 
 <!-- wp:graphql-api/schema-config-mutation-scheme /-->
 
@@ -1412,7 +1412,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=304</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-admin-data {"enabledConst":"enabled"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-sensitive-data {"enabledConst":"enabled"} /-->
 
 <!-- wp:graphql-api/schema-config-mutation-scheme /-->
 

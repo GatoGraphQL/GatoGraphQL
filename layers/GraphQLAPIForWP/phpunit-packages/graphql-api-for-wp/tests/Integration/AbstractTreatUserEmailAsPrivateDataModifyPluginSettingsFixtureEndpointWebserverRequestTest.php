@@ -10,7 +10,7 @@ abstract class AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEnd
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-user-email-as-private-data';
+        return __DIR__ . '/fixture-user-email-as-sensitive-data';
     }
 
     protected function getSettingsKey(): string

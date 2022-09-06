@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 
-class SchemaExposeAdminDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
+class SchemaExposeSensitiveDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
 {
     public const WEBSITE_SCHEMA_CONFIGURATION_ID = 191;
 
@@ -24,7 +24,7 @@ class SchemaExposeAdminDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-schema-expose-admin-data-in-cpt';
+        return __DIR__ . '/fixture-schema-expose-sensitive-data-in-cpt';
     }
 
     /**
@@ -44,6 +44,6 @@ class SchemaExposeAdminDataOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-expose-admin-data';
+        return 'graphql-api/schema-config-expose-sensitive-data';
     }
 }

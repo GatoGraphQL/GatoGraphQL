@@ -19,7 +19,7 @@ import {
 	withEditableOnFocus,
 } from '@graphqlapi/components';
 
-const SchemaConfigExposeAdminDataCard = ( props ) => {
+const SchemaConfigExposeSensitiveDataCard = ( props ) => {
 	const {
 		isSelected,
 		setAttributes,
@@ -44,7 +44,7 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Expose admin elements in the schema?', 'graphql-api') }</em>
+			<em>{ __('Expose “sensitive” data elements in the schema?', 'graphql-api') }</em>
 			<InfoTooltip
 				{ ...props }
 				text={ __('Expose “sensitive” data elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to potentially private user data', 'graphql-api') }
@@ -82,9 +82,9 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 export default compose( [
 	withState( {
 		header: __('Expose Sensitive Data in the Schema', 'graphql-api'),
-		className: 'graphql-api-schema-expose-admin-data',
+		className: 'graphql-api-schema-expose-sensitive-data',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withEditableOnFocus(),
 	withCard(),
-] )( SchemaConfigExposeAdminDataCard );
+] )( SchemaConfigExposeSensitiveDataCard );

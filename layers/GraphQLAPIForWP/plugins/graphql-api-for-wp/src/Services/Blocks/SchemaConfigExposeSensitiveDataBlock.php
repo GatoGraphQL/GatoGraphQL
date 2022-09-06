@@ -6,13 +6,13 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigExposeAdminDataBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
+class SchemaConfigExposeSensitiveDataBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
 {
     use MainPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-expose-admin-data';
+        return 'schema-config-expose-sensitive-data';
     }
 
     public function getBlockPriority(): int

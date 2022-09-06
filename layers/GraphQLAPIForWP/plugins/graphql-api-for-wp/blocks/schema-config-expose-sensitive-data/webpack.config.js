@@ -1,7 +1,7 @@
 /**
  * Define constants
  */
-const MODULE = 'schema-expose-admin-data';
+const MODULE = 'schema-expose-sensitive-data';
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
@@ -49,7 +49,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPIExposeAdminData';
+config.output.jsonpFunction = 'webpackJsonpGraphQLAPIExposeSensitiveData';
 // ------------------------------------------------------
 
 module.exports = config;

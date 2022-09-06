@@ -17,8 +17,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -28,7 +26,9 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -50,8 +50,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -61,7 +59,9 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -83,8 +83,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -94,31 +92,33 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "mutationRoot",
                             "description": "Get the Mutation Root type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "MutationRoot",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "queryRoot",
                             "description": "Get the Query Root type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "QueryRoot",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -140,8 +140,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -151,13 +149,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "needsDataToExecute",
                             "description": "If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -167,7 +165,9 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -189,8 +189,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -200,13 +198,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
+                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -216,7 +214,9 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -238,8 +238,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -249,29 +247,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
-                        },
-                        {
-                            "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
+                            },
                             "isDeprecated": false,
-                            "deprecationReason": null,
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "Boolean!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "Boolean",
-                                    "ofType": null
-                                }
-                            }
+                            "deprecationReason": null
                         },
                         {
                             "name": "isMutation",
                             "description": "Is this a mutation field? Particularly required when doing 'nested mutations' (where mutation fields can be present on any type, not only on `MutationRoot`)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -281,7 +263,25 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "isSensitiveDataElement",
+                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -303,8 +303,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -314,13 +312,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
+                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -330,7 +328,9 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -352,8 +352,6 @@
                         {
                             "name": "elementName",
                             "description": "The type's non-namespaced name",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -363,13 +361,13 @@
                                     "name": "String",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -379,13 +377,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "namespacedName",
                             "description": "The type's namespaced name",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -395,7 +393,9 @@
                                     "name": "String",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -417,8 +417,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -428,13 +426,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "isNamespaced",
                             "description": "Is the schema namespaced?",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -444,7 +442,9 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -466,8 +466,6 @@
                         {
                             "name": "args",
                             "description": "Directive's arguments",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -485,25 +483,25 @@
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "description",
                             "description": "Directive's description",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "extensions",
                             "description": "Extensions (custom metadata) added to the directive (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -513,13 +511,13 @@
                                     "name": "_DirectiveExtensions",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -529,13 +527,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "isRepeatable",
                             "description": "Can the directive be executed more than once in the same field?",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -545,13 +543,13 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "locations",
                             "description": "The locations where the directive may be placed",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -569,13 +567,13 @@
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "name",
                             "description": "Directive's name",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -585,7 +583,9 @@
                                     "name": "String",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -607,32 +607,30 @@
                         {
                             "name": "deprecationReason",
                             "description": "Why was the enum value deprecated?",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "description",
                             "description": "Enum value's description as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACyBIC1BHnjL)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "extensions",
                             "description": "Extensions (custom metadata) added to the enum value (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -642,13 +640,13 @@
                                     "name": "_EnumValueExtensions",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -658,13 +656,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "isDeprecated",
                             "description": "Is the enum value deprecated?",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -674,13 +672,13 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "name",
                             "description": "Enum value's name as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACvBBCyBH6rd)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -690,7 +688,9 @@
                                     "name": "String",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -712,8 +712,6 @@
                         {
                             "name": "args",
                             "description": "Field arguments",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -731,37 +729,37 @@
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "deprecationReason",
                             "description": "Why was the field deprecated?",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "description",
                             "description": "Field's description",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "extensions",
                             "description": "Extensions (custom metadata) added to the field (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -771,13 +769,13 @@
                                     "name": "_FieldExtensions",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -787,13 +785,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "isDeprecated",
                             "description": "Is the field deprecated?",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -803,13 +801,13 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "name",
                             "description": "Field's name",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -819,13 +817,13 @@
                                     "name": "String",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "type",
                             "description": "Type to which the field belongs",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -835,7 +833,9 @@
                                     "name": "__Type",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -857,32 +857,30 @@
                         {
                             "name": "defaultValue",
                             "description": "Default value of the input value",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "description",
                             "description": "Input value's description",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "extensions",
                             "description": "Extensions (custom metadata) added to the input (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -892,13 +890,13 @@
                                     "name": "_InputValueExtensions",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -908,13 +906,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "name",
                             "description": "Input value's name as defined by the GraphQL spec",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -924,13 +922,13 @@
                                     "name": "String",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "type",
                             "description": "Type of the input value",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -940,7 +938,9 @@
                                     "name": "__Type",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -962,13 +962,10 @@
                         {
                             "name": "directives",
                             "description": "All directives registered in the data graph",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [
                                 {
                                     "name": "ofKinds",
                                     "description": "Include only directives of provided types",
-                                    "defaultValue": null,
                                     "type": {
                                         "kind": "LIST",
                                         "name": "[DirectiveKindEnum!]",
@@ -981,7 +978,8 @@
                                                 "ofType": null
                                             }
                                         }
-                                    }
+                                    },
+                                    "defaultValue": null
                                 }
                             ],
                             "type": {
@@ -1000,13 +998,13 @@
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "extensions",
                             "description": "Extensions (custom metadata) added to the GraphQL schema",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1016,13 +1014,13 @@
                                     "name": "_SchemaExtensions",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1032,25 +1030,25 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "mutationType",
                             "description": "The type, accessible from the root, that resolves mutations",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "__Type",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "queryType",
                             "description": "The type, accessible from the root, that resolves queries",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1060,30 +1058,29 @@
                                     "name": "__Type",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "subscriptionType",
                             "description": "The type, accessible from the root, that resolves subscriptions",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "__Type",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "type",
                             "description": "Obtain a specific type from the schema",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [
                                 {
                                     "name": "name",
                                     "description": "The name of the type",
-                                    "defaultValue": null,
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": "String!",
@@ -1092,20 +1089,21 @@
                                             "name": "String",
                                             "ofType": null
                                         }
-                                    }
+                                    },
+                                    "defaultValue": null
                                 }
                             ],
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "__Type",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "types",
                             "description": "All types registered in the data graph",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1123,7 +1121,9 @@
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -1145,30 +1145,28 @@
                         {
                             "name": "description",
                             "description": "Type's description as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACyBIC1BHnjL)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "enumValues",
                             "description": "Type's enum values (available for Enum type only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLAC9CDD_CAA2lB)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [
                                 {
                                     "name": "includeDeprecated",
                                     "description": "Include deprecated fields?",
-                                    "defaultValue": null,
                                     "type": {
                                         "kind": "SCALAR",
                                         "name": "Boolean",
                                         "ofType": null
-                                    }
+                                    },
+                                    "defaultValue": null
                                 }
                             ],
                             "type": {
@@ -1183,35 +1181,35 @@
                                         "ofType": null
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "extensions",
                             "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject) (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "_NamedTypeExtensions",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "fields",
                             "description": "Type's fields (available for Object and Interface types only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLAC3BBCnCA8pY)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [
                                 {
                                     "name": "includeDeprecated",
                                     "description": "Include deprecated fields?",
-                                    "defaultValue": null,
                                     "type": {
                                         "kind": "SCALAR",
                                         "name": "Boolean",
                                         "ofType": null
-                                    }
+                                    },
+                                    "defaultValue": null
                                 }
                             ],
                             "type": {
@@ -1226,13 +1224,13 @@
                                         "ofType": null
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1242,13 +1240,13 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "inputFields",
                             "description": "Type's input Fields (available for InputObject type only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-HAJbLAuDABCBIu9N)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "LIST",
@@ -1262,13 +1260,13 @@
                                         "ofType": null
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "interfaces",
                             "description": "Type's interfaces (available for Object type only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACpCBCxCA7tB)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "LIST",
@@ -1282,13 +1280,13 @@
                                         "ofType": null
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "kind",
                             "description": "Type's kind as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACqBBCvBAtrC)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1298,37 +1296,37 @@
                                     "name": "TypeKind",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "name",
                             "description": "Type's name as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACvBBCyBH6rd)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "ofType",
                             "description": "The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-HAJbLA4DABCBIu9N)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "__Type",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "possibleTypes",
                             "description": "Type's possible types (available for Interface and Union types only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACzCBC7CA0vN)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "LIST",
@@ -1342,19 +1340,21 @@
                                         "ofType": null
                                     }
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "specifiedByURL",
                             "description": "A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https:\/\/spec.graphql.org\/draft\/#sel-IAJXNFA0EABABL9N)",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -1416,8 +1416,6 @@
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
-                            "isDeprecated": false,
-                            "deprecationReason": null,
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1427,7 +1425,9 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -1724,12 +1724,12 @@
                         {
                             "name": "maxAge",
                             "description": "Use a specific max-age value for the field, instead of the one configured in the directive",
-                            "defaultValue": null,
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "Int",
                                 "ofType": null
-                            }
+                            },
+                            "defaultValue": null
                         }
                     ]
                 },
@@ -1761,7 +1761,6 @@
                         {
                             "name": "if",
                             "description": "Argument that must evaluate to `true` to include the field value in the output",
-                            "defaultValue": null,
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
@@ -1770,7 +1769,8 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "defaultValue": null
                         }
                     ]
                 },
@@ -1786,7 +1786,6 @@
                         {
                             "name": "if",
                             "description": "Argument that must evaluate to `false` to include the field value in the output",
-                            "defaultValue": null,
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
@@ -1795,7 +1794,8 @@
                                     "name": "Boolean",
                                     "ofType": null
                                 }
-                            }
+                            },
+                            "defaultValue": null
                         }
                     ]
                 }

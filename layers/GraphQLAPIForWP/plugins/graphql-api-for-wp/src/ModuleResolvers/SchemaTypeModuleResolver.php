@@ -557,8 +557,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $unlimitedValue = -1;
         $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited', 'graphql-api');
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
-        $privateDataTitlePlaceholder = \__('Treat %s as private data', 'graphql-api');
-        $privateDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled (i.e. the data is for private use only); otherwise, the data is always exposed in the schema (i.e. it is public)', 'graphql-api');
+        $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
+        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if (
             in_array($module, [
@@ -650,11 +650,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $option
                     ),
                     Properties::TITLE => sprintf(
-                        $privateDataTitlePlaceholder,
+                        $sensitiveDataTitlePlaceholder,
                         \__('custom post status', 'graphql-api'),
                     ),
                     Properties::DESCRIPTION => sprintf(
-                        $privateDataDescPlaceholder,
+                        $sensitiveDataDescPlaceholder,
                         \__('custom post status', 'graphql-api'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
@@ -716,11 +716,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $option
                     ),
                     Properties::TITLE => sprintf(
-                        $privateDataTitlePlaceholder,
+                        $sensitiveDataTitlePlaceholder,
                         \__('user email', 'graphql-api'),
                     ),
                     Properties::DESCRIPTION => sprintf(
-                        $privateDataDescPlaceholder,
+                        $sensitiveDataDescPlaceholder,
                         \__('user email', 'graphql-api'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
@@ -792,11 +792,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => sprintf(
-                    $privateDataTitlePlaceholder,
+                    $sensitiveDataTitlePlaceholder,
                     \__('comment status', 'graphql-api'),
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    $privateDataDescPlaceholder,
+                    $sensitiveDataDescPlaceholder,
                     \__('comment status', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -945,11 +945,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => sprintf(
-                    $privateDataTitlePlaceholder,
+                    $sensitiveDataTitlePlaceholder,
                     \__('user roles', 'graphql-api'),
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    $privateDataDescPlaceholder,
+                    $sensitiveDataDescPlaceholder,
                     \__('user roles', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -963,11 +963,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => sprintf(
-                    $privateDataTitlePlaceholder,
+                    $sensitiveDataTitlePlaceholder,
                     \__('user capabilities', 'graphql-api'),
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    $privateDataDescPlaceholder,
+                    $sensitiveDataDescPlaceholder,
                     \__('user capabilities', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
