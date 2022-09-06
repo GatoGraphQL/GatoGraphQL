@@ -1,4 +1,4 @@
-# Schema Settings
+# Settings
 
 Retrieve the settings from the site (stored in table `wp_options`), by querying field `option`.
 

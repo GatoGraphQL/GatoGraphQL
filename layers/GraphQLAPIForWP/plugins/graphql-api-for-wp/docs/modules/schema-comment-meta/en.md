@@ -1,4 +1,4 @@
-# Schema Comment Meta
+# Comment Meta
 
 Retrieve meta values for comments, by querying fields `metaValue` and `metaValues`.
 

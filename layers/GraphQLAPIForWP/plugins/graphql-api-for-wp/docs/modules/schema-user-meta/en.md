@@ -1,4 +1,4 @@
-# Schema User Meta
+# User Meta
 
 Retrieve meta values for users, by querying fields `metaValue` and `metaValues`.
 

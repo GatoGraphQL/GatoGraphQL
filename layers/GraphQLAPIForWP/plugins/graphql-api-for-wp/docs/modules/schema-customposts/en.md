@@ -1,4 +1,4 @@
-# Schema Custom Posts
+# Custom Posts
 
 Base functionality for all custom posts
 

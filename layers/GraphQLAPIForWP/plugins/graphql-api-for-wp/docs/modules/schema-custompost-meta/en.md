@@ -1,4 +1,4 @@
-# Schema Custom Post Meta
+# Custom Post Meta
 
 Retrieve meta values for custom posts, by querying fields `metaValue` and `metaValues`.
 

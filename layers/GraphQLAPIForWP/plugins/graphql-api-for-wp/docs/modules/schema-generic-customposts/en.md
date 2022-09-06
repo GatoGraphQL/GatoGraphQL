@@ -1,4 +1,4 @@
-# Schema Generic Custom Posts
+# Generic Custom Posts
 
 Query any Custom Post Type (added to the schema or not), through a generic type `GenericCustomPost`
 

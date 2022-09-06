@@ -1,4 +1,4 @@
-# Schema Taxonomy Meta
+# Taxonomy Meta
 
 Retrieve meta values for taxonomies (i.e. tags and categories), by querying fields `metaValue` and `metaValues`.
 

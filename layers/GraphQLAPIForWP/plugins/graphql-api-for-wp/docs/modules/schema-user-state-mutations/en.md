@@ -1,4 +1,4 @@
-# Schema User State Mutations
+# User State Mutations
 
 Have the user log-in, and be able to perform mutations
 
