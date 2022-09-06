@@ -62,7 +62,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
     /** @var array<string,string[]> */
-    protected array $consolidatedAdminFieldArgNamesCache = [];
+    protected array $consolidatedSensitiveFieldArgNamesCache = [];
     /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
     /** @var array<string,string|null> */
@@ -329,11 +329,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @return string[]
      */
-    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getAdminFieldArgNames($objectTypeResolver, $fieldName);
+            return $schemaDefinitionResolver->getSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         }
         return [];
     }
@@ -411,10 +411,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableAdminSchema()) {
-            $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($objectTypeResolver, $fieldName);
+            $sensitiveFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($objectTypeResolver, $fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
                 $consolidatedFieldArgNameTypeResolvers,
-                fn (string $fieldArgName) => !in_array($fieldArgName, $adminFieldArgNames),
+                fn (string $fieldArgName) => !in_array($fieldArgName, $sensitiveFieldArgNames),
                 ARRAY_FILTER_USE_KEY
             );
         }
@@ -427,21 +427,21 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    public function getConsolidatedAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getConsolidatedSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         // Cache the result
         $cacheKey = $objectTypeResolver::class . '.' . $fieldName;
-        if (array_key_exists($cacheKey, $this->consolidatedAdminFieldArgNamesCache)) {
-            return $this->consolidatedAdminFieldArgNamesCache[$cacheKey];
+        if (array_key_exists($cacheKey, $this->consolidatedSensitiveFieldArgNamesCache)) {
+            return $this->consolidatedSensitiveFieldArgNamesCache[$cacheKey];
         }
-        $this->consolidatedAdminFieldArgNamesCache[$cacheKey] = App::applyFilters(
+        $this->consolidatedSensitiveFieldArgNamesCache[$cacheKey] = App::applyFilters(
             HookNames::OBJECT_TYPE_FIELD_ARG_NAME_TYPE_RESOLVERS,
-            $this->getAdminFieldArgNames($objectTypeResolver, $fieldName),
+            $this->getSensitiveFieldArgNames($objectTypeResolver, $fieldName),
             $this,
             $objectTypeResolver,
             $fieldName,
         );
-        return $this->consolidatedAdminFieldArgNamesCache[$cacheKey];
+        return $this->consolidatedSensitiveFieldArgNamesCache[$cacheKey];
     }
 
     /**
@@ -547,9 +547,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function getFieldArgExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): array
     {
-        $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($objectTypeResolver, $fieldName);
+        $sensitiveFieldArgNames = $this->getConsolidatedSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         return [
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldArgName, $adminFieldArgNames),
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldArgName, $sensitiveFieldArgNames),
         ];
     }
 
@@ -831,7 +831,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         return [
             SchemaDefinition::FIELD_IS_MUTATION => $this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null,
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getAdminFieldNames()),
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
         ];
     }
 

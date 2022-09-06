@@ -212,10 +212,10 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      *
      * @return string[]
      */
-    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->getAdminFieldArgNames(
+        return $aliasedObjectTypeFieldResolver->getSensitiveFieldArgNames(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );
@@ -284,10 +284,10 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      *
      * @return string[]
      */
-    public function getConsolidatedAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getConsolidatedSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->getConsolidatedAdminFieldArgNames(
+        return $aliasedObjectTypeFieldResolver->getConsolidatedSensitiveFieldArgNames(
             $objectTypeResolver,
             $this->getAliasedFieldName($fieldName)
         );

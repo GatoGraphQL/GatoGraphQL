@@ -67,15 +67,15 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     /**
      * @return string[]
      */
-    public function getAdminFieldNames(): array
+    public function getSensitiveFieldNames(): array
     {
-        $adminFieldNames = parent::getAdminFieldNames();
+        $sensitiveFieldNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatUserRoleAsAdminData()) {
-            $adminFieldNames[] = 'roleNames';
+            $sensitiveFieldNames[] = 'roleNames';
         }
-        return $adminFieldNames;
+        return $sensitiveFieldNames;
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

@@ -212,9 +212,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     /**
      * @return string[]
      */
-    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        $sensitiveFieldArgNames = parent::getSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         switch ($fieldName) {
@@ -224,11 +224,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                         FilterInputComponentProcessor::class,
                         FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS
                     ));
-                    $adminFieldArgNames[] = $commentStatusFilterInputName;
+                    $sensitiveFieldArgNames[] = $commentStatusFilterInputName;
                 }
                 break;
         }
-        return $adminFieldArgNames;
+        return $sensitiveFieldArgNames;
     }
 
     public function resolveValue(

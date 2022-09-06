@@ -42,7 +42,7 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
      *
      * @return string[]
      */
-    public function getAdminFieldNames(): array
+    public function getSensitiveFieldNames(): array
     {
         return [];
     }
@@ -68,9 +68,9 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
     /**
      * @return string[]
      */
-    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->getAdminFieldArgNames($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getSensitiveFieldArgNames($fieldName);
     }
 
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
@@ -99,9 +99,9 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
     /**
      * @return string[]
      */
-    public function getConsolidatedAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getConsolidatedSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedAdminFieldArgNames($fieldName);
+        return $this->interfaceTypeFieldSchemaDefinitionResolver->getConsolidatedSensitiveFieldArgNames($fieldName);
     }
 
     public function getConsolidatedFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string

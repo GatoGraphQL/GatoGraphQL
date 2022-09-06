@@ -98,9 +98,9 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     /**
      * @return string[]
      */
-    public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
+        $sensitiveFieldArgNames = parent::getSensitiveFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         switch ($fieldName) {
@@ -110,11 +110,11 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
                         FilterInputComponentProcessor::class,
                         FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS
                     ));
-                    $adminFieldArgNames[] = $customPostStatusFilterInputName;
+                    $sensitiveFieldArgNames[] = $customPostStatusFilterInputName;
                 }
                 break;
         }
-        return $adminFieldArgNames;
+        return $sensitiveFieldArgNames;
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int

@@ -118,15 +118,15 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     /**
      * @return string[]
      */
-    public function getAdminFieldNames(): array
+    public function getSensitiveFieldNames(): array
     {
-        $adminFieldNames = parent::getAdminFieldNames();
+        $sensitiveFieldNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatUserEmailAsAdminData()) {
-            $adminFieldNames[] = 'email';
+            $sensitiveFieldNames[] = 'email';
         }
-        return $adminFieldNames;
+        return $sensitiveFieldNames;
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

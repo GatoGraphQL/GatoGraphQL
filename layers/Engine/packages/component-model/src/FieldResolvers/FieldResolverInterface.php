@@ -15,7 +15,7 @@ interface FieldResolverInterface extends AttachableExtensionInterface
      *
      * @return string[]
      */
-    public function getAdminFieldNames(): array;
+    public function getSensitiveFieldNames(): array;
     /**
      * Each InterfaceTypeFieldResolver provides a list of fieldNames to the Interface.
      * The Interface may also accept other fieldNames from other InterfaceTypeFieldResolvers.

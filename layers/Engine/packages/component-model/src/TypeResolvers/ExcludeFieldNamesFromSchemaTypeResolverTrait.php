@@ -32,7 +32,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableAdminSchema()) {
-            $excludedFieldNames = $objectTypeOrInterfaceTypeFieldResolver->getAdminFieldNames();
+            $excludedFieldNames = $objectTypeOrInterfaceTypeFieldResolver->getSensitiveFieldNames();
         }
         // 2. By filter hook
         $excludedFieldNames = App::applyFilters(
