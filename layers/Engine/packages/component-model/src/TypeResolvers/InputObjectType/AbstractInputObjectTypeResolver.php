@@ -67,7 +67,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * @return string[]
      */
-    public function getAdminInputFieldNames(): array
+    public function getSensitiveInputFieldNames(): array
     {
         return [];
     }
@@ -130,7 +130,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         $this->consolidatedAdminInputFieldNames = App::applyFilters(
             HookNames::ADMIN_INPUT_FIELD_NAMES,
-            $this->getAdminInputFieldNames(),
+            $this->getSensitiveInputFieldNames(),
             $this,
         );
         return $this->consolidatedAdminInputFieldNames;

@@ -68,7 +68,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         );
         App::addFilter(
             HookNames::ADMIN_INPUT_FIELD_NAMES,
-            $this->getAdminInputFieldNames(...),
+            $this->getSensitiveInputFieldNames(...),
             10,
             2
         );
@@ -110,7 +110,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
      * @param string[] $adminInputFieldNames
      * @return string[]
      */
-    public function getAdminInputFieldNames(
+    public function getSensitiveInputFieldNames(
         array $adminInputFieldNames,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {

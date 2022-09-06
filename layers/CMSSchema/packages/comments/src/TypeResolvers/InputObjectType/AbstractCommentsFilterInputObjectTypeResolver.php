@@ -186,9 +186,9 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     /**
      * @return string[]
      */
-    public function getAdminInputFieldNames(): array
+    public function getSensitiveInputFieldNames(): array
     {
-        $adminInputFieldNames = parent::getAdminInputFieldNames();
+        $adminInputFieldNames = parent::getSensitiveInputFieldNames();
         if ($this->treatCommentStatusAsAdminData()) {
             $adminInputFieldNames[] = 'status';
         }
