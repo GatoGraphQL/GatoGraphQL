@@ -51,7 +51,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      *
      * @return string[]
      */
-    public function getAdminEnumValues(): array
+    public function getSensitiveEnumValues(): array
     {
         return [];
     }
@@ -217,7 +217,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         }
         return $this->consolidatedAdminEnumValuesCache = App::applyFilters(
             HookNames::ADMIN_ENUM_VALUES,
-            $this->getAdminEnumValues(),
+            $this->getSensitiveEnumValues(),
             $this,
         );
     }

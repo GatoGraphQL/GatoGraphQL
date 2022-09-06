@@ -23,7 +23,7 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
         );
         App::addFilter(
             HookNames::ADMIN_ENUM_VALUES,
-            $this->getAdminEnumValues(...),
+            $this->getSensitiveEnumValues(...),
             10,
             2
         );
@@ -60,7 +60,7 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
      * @param string[] $adminEnumValues
      * @return string[]|mixed[]
      */
-    public function getAdminEnumValues(
+    public function getSensitiveEnumValues(
         array $adminEnumValues,
         EnumTypeResolverInterface $enumTypeResolver,
     ): array {
