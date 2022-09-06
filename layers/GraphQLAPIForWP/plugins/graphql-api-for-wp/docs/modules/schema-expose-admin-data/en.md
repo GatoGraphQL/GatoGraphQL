@@ -80,7 +80,7 @@ Exposing admin elements in the schema can be configured as follows, in order of 
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-![Adding admin fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-admin-fields-to-schema.png "Adding admin fields to the schema, set in the Schema configuration")
+![Adding sensitive fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-sensitive-fields-to-schema.png "Adding sensitive fields to the schema, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
