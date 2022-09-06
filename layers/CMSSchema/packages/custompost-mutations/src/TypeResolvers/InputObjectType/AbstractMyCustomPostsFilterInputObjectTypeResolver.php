@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostsFilterInpu
 
 abstract class AbstractMyCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver implements CustomPostsFilterInputObjectTypeResolverInterface
 {
-    protected function treatCustomPostStatusAsAdminData(): bool
+    protected function treatCustomPostStatusAsSensitiveData(): bool
     {
         return false;
     }

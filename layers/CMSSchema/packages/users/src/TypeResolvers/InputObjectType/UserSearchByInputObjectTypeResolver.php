@@ -94,7 +94,7 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
         $adminInputFieldNames = parent::getSensitiveInputFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->treatUserEmailAsAdminData()) {
+        if ($moduleConfiguration->treatUserEmailAsSensitiveData()) {
             $adminInputFieldNames[] = 'emails';
         }
         return $adminInputFieldNames;

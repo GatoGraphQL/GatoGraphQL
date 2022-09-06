@@ -25,7 +25,7 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
         $adminEnumValues = parent::getSensitiveEnumValues();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->treatUserEmailAsAdminData()) {
+        if ($moduleConfiguration->treatUserEmailAsSensitiveData()) {
             $adminEnumValues[] = UserOrderBy::EMAIL;
         }
         return $adminEnumValues;

@@ -123,7 +123,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'customPost':
-                if ($moduleConfiguration->treatCustomPostStatusAsAdminData()) {
+                if ($moduleConfiguration->treatCustomPostStatusAsSensitiveData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                         FilterInputComponentProcessor::class,
                         FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS

@@ -48,7 +48,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function treatCustomPostStatusAsAdminData(): bool
+    public function treatCustomPostStatusAsSensitiveData(): bool
     {
         $envVariable = Environment::TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA;
         $defaultValue = true;

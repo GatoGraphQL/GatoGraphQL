@@ -105,7 +105,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'post':
-                if ($moduleConfiguration->treatCustomPostStatusAsAdminData()) {
+                if ($moduleConfiguration->treatCustomPostStatusAsSensitiveData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                         FilterInputComponentProcessor::class,
                         FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS

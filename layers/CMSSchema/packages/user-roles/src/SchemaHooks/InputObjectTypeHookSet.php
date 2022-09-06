@@ -119,7 +119,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->treatUserRoleAsAdminData()) {
+        if ($moduleConfiguration->treatUserRoleAsSensitiveData()) {
             $adminInputFieldNames[] = 'roles';
             $adminInputFieldNames[] = 'excludeRoles';
         }

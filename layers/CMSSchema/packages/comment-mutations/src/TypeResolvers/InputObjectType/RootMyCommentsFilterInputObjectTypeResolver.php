@@ -28,7 +28,7 @@ class RootMyCommentsFilterInputObjectTypeResolver extends AbstractCommentsFilter
         return true;
     }
 
-    protected function treatCommentStatusAsAdminData(): bool
+    protected function treatCommentStatusAsSensitiveData(): bool
     {
         return false;
     }

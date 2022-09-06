@@ -100,17 +100,17 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     public function getSensitiveInputFieldNames(): array
     {
         $adminInputFieldNames = parent::getSensitiveInputFieldNames();
-        if ($this->treatCustomPostStatusAsAdminData()) {
+        if ($this->treatCustomPostStatusAsSensitiveData()) {
             $adminInputFieldNames[] = 'status';
         }
         return $adminInputFieldNames;
     }
 
-    protected function treatCustomPostStatusAsAdminData(): bool
+    protected function treatCustomPostStatusAsSensitiveData(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->treatCustomPostStatusAsAdminData();
+        return $moduleConfiguration->treatCustomPostStatusAsSensitiveData();
     }
 
     protected function addCustomPostInputFields(): bool
