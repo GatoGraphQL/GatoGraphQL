@@ -1493,15 +1493,15 @@ mutation {
 }
 ```
 
-### Merged the "admin" and non-admin fields
+### Merged the "sensitive data" and non-sensitive-data fields
 
-Removed all the "unrestricted" fields (which were exposed via module `Expose Admin Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is "admin" data or not.
+Removed all the "unrestricted" fields (which were exposed via module `Expose Admin Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is "sensitive" data or not.
 
-To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as "admin" or not. (This is configured in block `Expose Admin Data in the Schema` from the Schema Configuration).
+To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as "sensitive" or not. (This is configured in block `Expose Admin Data in the Schema` from the Schema Configuration).
 
-For instance, field `Root.posts` has argument `filter`. When the GraphQL schema is configured to expose "admin" data, this input object exposes an additional input field `status`, enabling to filter posts by status `"draft"`, `"pending"` or `"trash"` (i.e. allowing to fetch private posts).
+For instance, field `Root.posts` has argument `filter`. When the GraphQL schema is configured to expose "sensitive" data, this input object exposes an additional input field `status`, enabling to filter posts by status `"draft"`, `"pending"` or `"trash"` (i.e. allowing to fetch private posts).
 
-The list of "admin" (or "unrestricted") fields which were removed, and what fields now handle their, is this one:
+The list of "sensitive" (or "unrestricted") fields which were removed, and what fields now handle their, is this one:
 
 Root:
 
@@ -1532,9 +1532,9 @@ PostTag:
 - `unrestrictedPosts` => `posts`
 - `unrestrictedPostCount` => `postCount`
 
-### `User.email` is treated as "admin" field
+### `User.email` is treated as "sensitive" field
 
-From now on, field `User.email` is treated as private data. As such, it is exposed only if property `Expose Admin Data` is enabled.
+From now on, field `User.email` is treated as private data. As such, it is exposed only if property `Expose Admin Data in the Schema` is enabled.
 
 This behavior can be overriden in the Settings page:
 
