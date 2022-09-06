@@ -44,7 +44,7 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Expose admin elements in the schema?', 'graphql-api') }</em>
+			<em>{ __('Expose “sensitive” data elements in the schema?', 'graphql-api') }</em>
 			<InfoTooltip
 				{ ...props }
 				text={ __('Expose “sensitive” data elements in the GraphQL schema (such as field "Root.roles", input field "Root.posts(status:)", and others), which provide access to potentially private user data', 'graphql-api') }

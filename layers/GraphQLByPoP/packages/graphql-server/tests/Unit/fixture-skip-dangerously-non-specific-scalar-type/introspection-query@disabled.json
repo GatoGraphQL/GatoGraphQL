@@ -1079,7 +1079,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
+                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose “sensitive” data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1339,7 +1339,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
+                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose “sensitive” data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1615,7 +1615,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose admin elements' is enabled)",
+                            "description": "Is this element considered an 'admin' element in the schema? (If so, it is only exposed in the schema when 'Expose “sensitive” data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",

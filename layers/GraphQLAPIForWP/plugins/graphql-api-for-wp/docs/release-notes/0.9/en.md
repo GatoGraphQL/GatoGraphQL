@@ -1141,7 +1141,7 @@ type _FieldExtensions {
   # Useful for nested mutations
   isMutation: Boolean!
 
-  # `true` => Only exposed when "Expose admin elements" is enabled
+  # `true` => Only exposed when "Expose “sensitive” data elements" is enabled
   isSensitiveDataElement: Boolean!
 }
 

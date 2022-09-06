@@ -6,7 +6,7 @@ The GraphQL schema must strike a balance between public and private elements (in
 
 For instance, to access post data, we have field `Root.posts`, which by default can only retrieve published posts. With this module, a new option `Expose Sensitive Data in the Schema` is added to the Schema Configuration. When enabled, argument `filter` in `Root.posts` exposes an additional input `status`, enabling to retrieve non-published posts (eg: posts with status `"draft"`), which is private data.
 
-## List of admin elements
+## List of “sensitive” data elements
 
 The elements below (among others) are, by default, treated as private data:
 
@@ -76,7 +76,7 @@ In the Settings page, in the corresponding tab for each, there is a checkbox to 
 
 ## How to use
 
-Exposing admin elements in the schema can be configured as follows, in order of priority:
+Exposing “sensitive” data elements in the schema can be configured as follows, in order of priority:
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
