@@ -1493,7 +1493,7 @@ mutation {
 }
 ```
 
-### Merged the "sensitive data" and non-sensitive-data fields
+### Merged the "sensitive" data and non-sensitive-data fields
 
 Removed all the "unrestricted" fields (which were exposed via module `Expose Admin Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is "sensitive" data or not.
 
