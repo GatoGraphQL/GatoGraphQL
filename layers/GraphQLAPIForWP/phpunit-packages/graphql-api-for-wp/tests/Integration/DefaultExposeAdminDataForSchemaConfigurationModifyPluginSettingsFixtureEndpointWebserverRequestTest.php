@@ -16,7 +16,7 @@ class DefaultExposeAdminDataForSchemaConfigurationModifyPluginSettingsFixtureEnd
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-default-expose-admin-data-for-schema-configuration';
+        return __DIR__ . '/fixture-default-expose-sensitive-data-for-schema-configuration';
     }
 
     protected function getSettingsKey(): string
