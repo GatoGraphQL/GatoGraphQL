@@ -1534,11 +1534,11 @@ PostTag:
 
 ### `User.email` is treated as “sensitive” field
 
-From now on, field `User.email` is treated as private data. As such, it is exposed only if property `Expose Sensitive Data in the Schema` is enabled.
+From now on, field `User.email` is treated as “sensitive” data. As such, it is exposed only if property `Expose Sensitive Data in the Schema` is enabled.
 
 This behavior can be overriden in the Settings page:
 
-![Settings to treat user email as private data](../../images/settings-treat-user-email-as-private-data.png)
+![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-private-data.png)
 
 ### Removed modules
 
