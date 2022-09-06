@@ -81,7 +81,7 @@ const SchemaConfigExposeAdminDataCard = ( props ) => {
 
 export default compose( [
 	withState( {
-		header: __('Expose Admin Data in the Schema', 'graphql-api'),
+		header: __('Expose Sensitive Data in the Schema', 'graphql-api'),
 		className: 'graphql-api-schema-expose-admin-data',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
