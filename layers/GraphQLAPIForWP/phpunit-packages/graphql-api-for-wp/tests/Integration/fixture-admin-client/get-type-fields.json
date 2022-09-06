@@ -5,8 +5,6 @@
         {
           "name": "Comment",
           "namespacedName": "Comment",
-          "kind": "OBJECT",
-          "description": "Comments added to custom posts",
           "fields": [
             {
               "name": "approved"
@@ -71,13 +69,13 @@
             {
               "name": "type"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Comments added to custom posts"
         },
         {
           "name": "GenericCustomPost",
           "namespacedName": "GenericCustomPost",
-          "kind": "OBJECT",
-          "description": "Any custom post, with or without its own type for the schema",
           "fields": [
             {
               "name": "areCommentsOpen"
@@ -151,13 +149,13 @@
             {
               "name": "urlAbsolutePath"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Any custom post, with or without its own type for the schema"
         },
         {
           "name": "Media",
           "namespacedName": "Media",
-          "kind": "OBJECT",
-          "description": "Media elements (such as images, videos, etc), attached to a post or independent",
           "fields": [
             {
               "name": "altText"
@@ -216,13 +214,13 @@
             {
               "name": "width"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Media elements (such as images, videos, etc), attached to a post or independent"
         },
         {
           "name": "Menu",
           "namespacedName": "Menu",
-          "kind": "OBJECT",
-          "description": "Representation of a navigation menu",
           "fields": [
             {
               "name": "count"
@@ -245,13 +243,13 @@
             {
               "name": "slug"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of a navigation menu"
         },
         {
           "name": "MenuItem",
           "namespacedName": "MenuItem",
-          "kind": "OBJECT",
-          "description": "Items (links, pages, etc) added to a menu",
           "fields": [
             {
               "name": "children"
@@ -289,13 +287,13 @@
             {
               "name": "url"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Items (links, pages, etc) added to a menu"
         },
         {
           "name": "MutationRoot",
           "namespacedName": "MutationRoot",
-          "kind": "OBJECT",
-          "description": "Mutation type, starting from which mutations are executed",
           "fields": [
             {
               "name": "addCommentToCustomPost"
@@ -330,13 +328,13 @@
             {
               "name": "updatePost"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Mutation type, starting from which mutations are executed"
         },
         {
           "name": "Page",
           "namespacedName": "Page",
-          "kind": "OBJECT",
-          "description": "Representation of a page",
           "fields": [
             {
               "name": "areCommentsOpen"
@@ -422,13 +420,13 @@
             {
               "name": "urlAbsolutePath"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of a page"
         },
         {
           "name": "Post",
           "namespacedName": "Post",
-          "kind": "OBJECT",
-          "description": "Representation of a post",
           "fields": [
             {
               "name": "areCommentsOpen"
@@ -526,13 +524,13 @@
             {
               "name": "urlAbsolutePath"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of a post"
         },
         {
           "name": "PostCategory",
           "namespacedName": "PostCategory",
-          "kind": "OBJECT",
-          "description": "Representation of a category, added to a post",
           "fields": [
             {
               "name": "childCount"
@@ -579,13 +577,13 @@
             {
               "name": "urlAbsolutePath"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of a category, added to a post"
         },
         {
           "name": "PostTag",
           "namespacedName": "PostTag",
-          "kind": "OBJECT",
-          "description": "Representation of a tag, added to a post",
           "fields": [
             {
               "name": "count"
@@ -620,13 +618,13 @@
             {
               "name": "urlAbsolutePath"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of a tag, added to a post"
         },
         {
           "name": "QueryRoot",
           "namespacedName": "QueryRoot",
-          "kind": "OBJECT",
-          "description": "Query type, starting from which the query is executed",
           "fields": [
             {
               "name": "capabilities"
@@ -778,13 +776,13 @@
             {
               "name": "users"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Query type, starting from which the query is executed"
         },
         {
           "name": "Root",
           "namespacedName": "Root",
-          "kind": "OBJECT",
-          "description": "Root type, starting from which the query is executed",
           "fields": [
             {
               "name": "addCommentToCustomPost"
@@ -972,13 +970,13 @@
             {
               "name": "users"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Root type, starting from which the query is executed"
         },
         {
           "name": "User",
           "namespacedName": "User",
-          "kind": "OBJECT",
-          "description": "Representation of a user",
           "fields": [
             {
               "name": "avatar"
@@ -1073,13 +1071,13 @@
             {
               "name": "websiteURL"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of a user"
         },
         {
           "name": "UserAvatar",
           "namespacedName": "UserAvatar",
-          "kind": "OBJECT",
-          "description": "User avatar",
           "fields": [
             {
               "name": "id"
@@ -1090,13 +1088,13 @@
             {
               "name": "src"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "User avatar"
         },
         {
           "name": "UserRole",
           "namespacedName": "UserRole",
-          "kind": "OBJECT",
-          "description": "User roles",
           "fields": [
             {
               "name": "capabilities"
@@ -1107,13 +1105,13 @@
             {
               "name": "name"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "User roles"
         },
         {
           "name": "_DirectiveExtensions",
           "namespacedName": "_DirectiveExtensions",
-          "kind": "OBJECT",
-          "description": "Extensions (custom metadata) added to the directive",
           "fields": [
             {
               "name": "id"
@@ -1121,13 +1119,13 @@
             {
               "name": "needsDataToExecute"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Extensions (custom metadata) added to the directive"
         },
         {
           "name": "_EnumValueExtensions",
           "namespacedName": "_EnumValueExtensions",
-          "kind": "OBJECT",
-          "description": "Extensions (custom metadata) added to the enum value",
           "fields": [
             {
               "name": "id"
@@ -1135,30 +1133,30 @@
             {
               "name": "isSensitiveDataElement"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Extensions (custom metadata) added to the enum value"
         },
         {
           "name": "_FieldExtensions",
           "namespacedName": "_FieldExtensions",
-          "kind": "OBJECT",
-          "description": "Extensions (custom metadata) added to the field",
           "fields": [
             {
               "name": "id"
             },
             {
-              "name": "isSensitiveDataElement"
+              "name": "isMutation"
             },
             {
-              "name": "isMutation"
+              "name": "isSensitiveDataElement"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Extensions (custom metadata) added to the field"
         },
         {
           "name": "_InputValueExtensions",
           "namespacedName": "_InputValueExtensions",
-          "kind": "OBJECT",
-          "description": "Extensions (custom metadata) added to the input value",
           "fields": [
             {
               "name": "id"
@@ -1166,13 +1164,13 @@
             {
               "name": "isSensitiveDataElement"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Extensions (custom metadata) added to the input value"
         },
         {
           "name": "_NamedTypeExtensions",
           "namespacedName": "_NamedTypeExtensions",
-          "kind": "OBJECT",
-          "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject)",
           "fields": [
             {
               "name": "elementName"
@@ -1183,13 +1181,13 @@
             {
               "name": "namespacedName"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject)"
         },
         {
           "name": "_SchemaExtensions",
           "namespacedName": "_SchemaExtensions",
-          "kind": "OBJECT",
-          "description": "Extensions (custom metadata) added to the GraphQL schema",
           "fields": [
             {
               "name": "id"
@@ -1197,13 +1195,13 @@
             {
               "name": "isNamespaced"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Extensions (custom metadata) added to the GraphQL schema"
         },
         {
           "name": "__Directive",
           "namespacedName": "__Directive",
-          "kind": "OBJECT",
-          "description": "A GraphQL directive in the data graph",
           "fields": [
             {
               "name": "args"
@@ -1226,13 +1224,13 @@
             {
               "name": "name"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "A GraphQL directive in the data graph"
         },
         {
           "name": "__EnumValue",
           "namespacedName": "__EnumValue",
-          "kind": "OBJECT",
-          "description": "Representation of an Enum value in GraphQL",
           "fields": [
             {
               "name": "deprecationReason"
@@ -1252,13 +1250,13 @@
             {
               "name": "name"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of an Enum value in GraphQL"
         },
         {
           "name": "__Field",
           "namespacedName": "__Field",
-          "kind": "OBJECT",
-          "description": "Representation of a GraphQL type's field",
           "fields": [
             {
               "name": "args"
@@ -1284,13 +1282,13 @@
             {
               "name": "type"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of a GraphQL type's field"
         },
         {
           "name": "__InputValue",
           "namespacedName": "__InputValue",
-          "kind": "OBJECT",
-          "description": "Representation of an input object in GraphQL",
           "fields": [
             {
               "name": "defaultValue"
@@ -1310,13 +1308,13 @@
             {
               "name": "type"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of an input object in GraphQL"
         },
         {
           "name": "__Schema",
           "namespacedName": "__Schema",
-          "kind": "OBJECT",
-          "description": "Schema type, to implement the introspection fields",
           "fields": [
             {
               "name": "directives"
@@ -1342,13 +1340,13 @@
             {
               "name": "types"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Schema type, to implement the introspection fields"
         },
         {
           "name": "__Type",
           "namespacedName": "__Type",
-          "kind": "OBJECT",
-          "description": "Representation of each GraphQL type in the graph",
           "fields": [
             {
               "name": "description"
@@ -1386,111 +1384,111 @@
             {
               "name": "specifiedByURL"
             }
-          ]
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of each GraphQL type in the graph"
         },
         {
           "name": "AnyBuiltInScalar",
           "namespacedName": "AnyBuiltInScalar",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "Wildcard type representing any of GraphQL's built-in types (String, Int, Boolean, Float or ID)",
-          "fields": null
+          "description": "Wildcard type representing any of GraphQL's built-in types (String, Int, Boolean, Float or ID)"
         },
         {
           "name": "Boolean",
           "namespacedName": "Boolean",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "The Boolean scalar type represents `true` or `false`.",
-          "fields": null
+          "description": "The Boolean scalar type represents `true` or `false`."
         },
         {
           "name": "Date",
           "namespacedName": "Date",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "Date scalar. It follows the ISO 8601 specification, with format \"Y-m-d\")",
-          "fields": null
+          "description": "Date scalar. It follows the ISO 8601 specification, with format \"Y-m-d\")"
         },
         {
           "name": "DateTime",
           "namespacedName": "DateTime",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "DateTime scalar. It follows the ISO 8601 specification, with format \"Y-m-d\\TH:i:sP\")",
-          "fields": null
+          "description": "DateTime scalar. It follows the ISO 8601 specification, with format \"Y-m-d\\TH:i:sP\")"
         },
         {
           "name": "Email",
           "namespacedName": "Email",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "Email scalar, such as leo@mysite.com",
-          "fields": null
+          "description": "Email scalar, such as leo@mysite.com"
         },
         {
           "name": "HTML",
           "namespacedName": "HTML",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "HTML scalar, such as \"<p>Hello <strong>world</strong>!</p>\"",
-          "fields": null
+          "description": "HTML scalar, such as \"<p>Hello <strong>world<\/strong>!<\/p>\""
         },
         {
           "name": "ID",
           "namespacedName": "ID",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "The ID scalar type represents a unique identifier.",
-          "fields": null
+          "description": "The ID scalar type represents a unique identifier."
         },
         {
           "name": "Int",
           "namespacedName": "Int",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "The Int scalar type represents non-fractional signed whole numeric values.",
-          "fields": null
+          "description": "The Int scalar type represents non-fractional signed whole numeric values."
         },
         {
           "name": "JSONObject",
           "namespacedName": "JSONObject",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "Custom scalar representing a JSON Object of unrestricted shape",
-          "fields": null
+          "description": "Custom scalar representing a JSON Object of unrestricted shape"
         },
         {
           "name": "MenuLocationSelectableString",
           "namespacedName": "MenuLocationSelectableString",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "Menu Locations, with possible values: `\"\"`.",
-          "fields": null
+          "description": "Menu Locations, with possible values: `\"\"`."
         },
         {
           "name": "Numeric",
           "namespacedName": "Numeric",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "Wildcard type representing any of the numeric types (Int or Float)",
-          "fields": null
+          "description": "Wildcard type representing any of the numeric types (Int or Float)"
         },
         {
           "name": "String",
           "namespacedName": "String",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
-          "fields": null
+          "description": "The String scalar type represents textual data, represented as UTF-8 character sequences."
         },
         {
           "name": "URL",
           "namespacedName": "URL",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "URL scalar, such as https://mysite.com/my-fabulous-page",
-          "fields": null
+          "description": "URL scalar, such as https:\/\/mysite.com\/my-fabulous-page"
         },
         {
           "name": "URLAbsolutePath",
           "namespacedName": "URLAbsolutePath",
+          "fields": null,
           "kind": "SCALAR",
-          "description": "URL Absolute Path scalar, such as \"/my-fabulous-page\" in URL \"https://mysite.com/my-fabulous-page\". The absolute path starts with \"/\", followed by the URL relative path",
-          "fields": null
+          "description": "URL Absolute Path scalar, such as \"\/my-fabulous-page\" in URL \"https:\/\/mysite.com\/my-fabulous-page\". The absolute path starts with \"\/\", followed by the URL relative path"
         },
         {
           "name": "Commentable",
           "namespacedName": "Commentable",
-          "kind": "INTERFACE",
-          "description": "The entity can receive comments",
           "fields": [
             {
               "name": "areCommentsOpen"
@@ -1504,13 +1502,13 @@
             {
               "name": "hasComments"
             }
-          ]
+          ],
+          "kind": "INTERFACE",
+          "description": "The entity can receive comments"
         },
         {
           "name": "IsCustomPost",
           "namespacedName": "IsCustomPost",
-          "kind": "INTERFACE",
-          "description": "Entities representing a custom post",
           "fields": [
             {
               "name": "content"
@@ -1554,24 +1552,24 @@
             {
               "name": "urlAbsolutePath"
             }
-          ]
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities representing a custom post"
         },
         {
           "name": "Node",
           "namespacedName": "Node",
-          "kind": "INTERFACE",
-          "description": "The fundamental fields that must be implemented by all objects",
           "fields": [
             {
               "name": "id"
             }
-          ]
+          ],
+          "kind": "INTERFACE",
+          "description": "The fundamental fields that must be implemented by all objects"
         },
         {
           "name": "Queryable",
           "namespacedName": "Queryable",
-          "kind": "INTERFACE",
-          "description": "Entities that can be queried through an URL",
           "fields": [
             {
               "name": "slug"
@@ -1582,13 +1580,13 @@
             {
               "name": "urlAbsolutePath"
             }
-          ]
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities that can be queried through an URL"
         },
         {
           "name": "SupportingFeaturedImage",
           "namespacedName": "SupportingFeaturedImage",
-          "kind": "INTERFACE",
-          "description": "Fields concerning an entity's featured image",
           "fields": [
             {
               "name": "featuredImage"
@@ -1596,24 +1594,24 @@
             {
               "name": "hasFeaturedImage"
             }
-          ]
+          ],
+          "kind": "INTERFACE",
+          "description": "Fields concerning an entity's featured image"
         },
         {
           "name": "WithAuthor",
           "namespacedName": "WithAuthor",
-          "kind": "INTERFACE",
-          "description": "Entities that have an author",
           "fields": [
             {
               "name": "author"
             }
-          ]
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities that have an author"
         },
         {
           "name": "WithMeta",
           "namespacedName": "WithMeta",
-          "kind": "INTERFACE",
-          "description": "Fields with meta values",
           "fields": [
             {
               "name": "metaValue"
@@ -1621,644 +1619,646 @@
             {
               "name": "metaValues"
             }
-          ]
+          ],
+          "kind": "INTERFACE",
+          "description": "Fields with meta values"
         },
         {
           "name": "CategoryPaginationInput",
           "namespacedName": "CategoryPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate categories",
-          "fields": null
+          "description": "Input to paginate categories"
         },
         {
           "name": "CommentByInput",
           "namespacedName": "CommentByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a comment",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a comment"
         },
         {
           "name": "CommentMetaQueryInput",
           "namespacedName": "CommentMetaQueryInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/",
-          "fields": null
+          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/"
         },
         {
           "name": "CommentResponsePaginationInput",
           "namespacedName": "CommentResponsePaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate response comments",
-          "fields": null
+          "description": "Input to paginate response comments"
         },
         {
           "name": "CommentResponsesFilterInput",
           "namespacedName": "CommentResponsesFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter comment responses",
-          "fields": null
+          "description": "Input to filter comment responses"
         },
         {
           "name": "CommentSortInput",
           "namespacedName": "CommentSortInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to sort custom posts",
-          "fields": null
+          "description": "Input to sort custom posts"
         },
         {
           "name": "CustomPostByInput",
           "namespacedName": "CustomPostByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a custom post",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a custom post"
         },
         {
           "name": "CustomPostCategoriesFilterInput",
           "namespacedName": "CustomPostCategoriesFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter categories from a custom post",
-          "fields": null
+          "description": "Input to filter categories from a custom post"
         },
         {
           "name": "CustomPostCommentPaginationInput",
           "namespacedName": "CustomPostCommentPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate custom post comments",
-          "fields": null
+          "description": "Input to paginate custom post comments"
         },
         {
           "name": "CustomPostCommentsFilterInput",
           "namespacedName": "CustomPostCommentsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter comments from custom posts",
-          "fields": null
+          "description": "Input to filter comments from custom posts"
         },
         {
           "name": "CustomPostMetaQueryInput",
           "namespacedName": "CustomPostMetaQueryInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/",
-          "fields": null
+          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/"
         },
         {
           "name": "CustomPostPaginationInput",
           "namespacedName": "CustomPostPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate custom posts",
-          "fields": null
+          "description": "Input to paginate custom posts"
         },
         {
           "name": "CustomPostSortInput",
           "namespacedName": "CustomPostSortInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to sort custom posts",
-          "fields": null
+          "description": "Input to sort custom posts"
         },
         {
           "name": "CustomPostTagsFilterInput",
           "namespacedName": "CustomPostTagsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter tags from a custom post",
-          "fields": null
+          "description": "Input to filter tags from a custom post"
         },
         {
           "name": "DateQueryInput",
           "namespacedName": "DateQueryInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "GenericCustomPostPaginationInput",
           "namespacedName": "GenericCustomPostPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate generic custom posts",
-          "fields": null
+          "description": "Input to paginate generic custom posts"
         },
         {
           "name": "LoginCredentialsInput",
           "namespacedName": "LoginCredentialsInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "LoginUserByInput",
           "namespacedName": "LoginUserByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "MediaItemByInput",
           "namespacedName": "MediaItemByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a media item",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a media item"
         },
         {
           "name": "MediaItemSortInput",
           "namespacedName": "MediaItemSortInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to sort custom posts",
-          "fields": null
+          "description": "Input to sort custom posts"
         },
         {
           "name": "MenuByInput",
           "namespacedName": "MenuByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a menu",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a menu"
         },
         {
           "name": "MenuSortInput",
           "namespacedName": "MenuSortInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to sort custom posts",
-          "fields": null
+          "description": "Input to sort custom posts"
         },
         {
           "name": "MetaQueryCompareByArrayValueInput",
           "namespacedName": "MetaQueryCompareByArrayValueInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "MetaQueryCompareByInput",
           "namespacedName": "MetaQueryCompareByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "MetaQueryCompareByKeyInput",
           "namespacedName": "MetaQueryCompareByKeyInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "MetaQueryCompareByNumericValueInput",
           "namespacedName": "MetaQueryCompareByNumericValueInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "MetaQueryCompareByStringValueInput",
           "namespacedName": "MetaQueryCompareByStringValueInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "PageByInput",
           "namespacedName": "PageByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a page",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a page"
         },
         {
           "name": "PageChildrenFilterInput",
           "namespacedName": "PageChildrenFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter the page children",
-          "fields": null
+          "description": "Input to filter the page children"
         },
         {
           "name": "PagePaginationInput",
           "namespacedName": "PagePaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate pages",
-          "fields": null
+          "description": "Input to paginate pages"
         },
         {
           "name": "PostByInput",
           "namespacedName": "PostByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a post",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a post"
         },
         {
           "name": "PostCategoryByInput",
           "namespacedName": "PostCategoryByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a category",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a category"
         },
         {
           "name": "PostPaginationInput",
           "namespacedName": "PostPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate posts",
-          "fields": null
+          "description": "Input to paginate posts"
         },
         {
           "name": "PostTagByInput",
           "namespacedName": "PostTagByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a tag",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a tag"
         },
         {
           "name": "RootAddCommentToCustomPostFilterInput",
           "namespacedName": "RootAddCommentToCustomPostFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to add a comment to a custom post",
-          "fields": null
+          "description": "Input to add a comment to a custom post"
         },
         {
           "name": "RootCategoriesFilterInput",
           "namespacedName": "RootCategoriesFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter categories",
-          "fields": null
+          "description": "Input to filter categories"
         },
         {
           "name": "RootCommentPaginationInput",
           "namespacedName": "RootCommentPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate comments",
-          "fields": null
+          "description": "Input to paginate comments"
         },
         {
           "name": "RootCommentsFilterInput",
           "namespacedName": "RootCommentsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter comments",
-          "fields": null
+          "description": "Input to filter comments"
         },
         {
           "name": "RootCreatePostFilterInput",
           "namespacedName": "RootCreatePostFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to update a custom post",
-          "fields": null
+          "description": "Input to update a custom post"
         },
         {
           "name": "RootCustomPostsFilterInput",
           "namespacedName": "RootCustomPostsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter custom posts",
-          "fields": null
+          "description": "Input to filter custom posts"
         },
         {
           "name": "RootGenericCustomPostsFilterInput",
           "namespacedName": "RootGenericCustomPostsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter generic custom posts",
-          "fields": null
+          "description": "Input to filter generic custom posts"
         },
         {
           "name": "RootMediaItemPaginationInput",
           "namespacedName": "RootMediaItemPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate media items",
-          "fields": null
+          "description": "Input to paginate media items"
         },
         {
           "name": "RootMediaItemsFilterInput",
           "namespacedName": "RootMediaItemsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter media items",
-          "fields": null
+          "description": "Input to filter media items"
         },
         {
           "name": "RootMenuPaginationInput",
           "namespacedName": "RootMenuPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate menus",
-          "fields": null
+          "description": "Input to paginate menus"
         },
         {
           "name": "RootMenusFilterInput",
           "namespacedName": "RootMenusFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter menus",
-          "fields": null
+          "description": "Input to filter menus"
         },
         {
           "name": "RootMyCommentsFilterInput",
           "namespacedName": "RootMyCommentsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter the logged-in user's comments",
-          "fields": null
+          "description": "Input to filter the logged-in user's comments"
         },
         {
           "name": "RootMyCustomPostsFilterInput",
           "namespacedName": "RootMyCustomPostsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter the logged-in user's custom posts",
-          "fields": null
+          "description": "Input to filter the logged-in user's custom posts"
         },
         {
           "name": "RootMyPostsFilterInput",
           "namespacedName": "RootMyPostsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter the logged-in user's posts",
-          "fields": null
+          "description": "Input to filter the logged-in user's posts"
         },
         {
           "name": "RootPagesFilterInput",
           "namespacedName": "RootPagesFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter pages",
-          "fields": null
+          "description": "Input to filter pages"
         },
         {
           "name": "RootPostsFilterInput",
           "namespacedName": "RootPostsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter posts",
-          "fields": null
+          "description": "Input to filter posts"
         },
         {
           "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
           "namespacedName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to remove the featured image from a custom post",
-          "fields": null
+          "description": "Input to remove the featured image from a custom post"
         },
         {
           "name": "RootReplyCommentFilterInput",
           "namespacedName": "RootReplyCommentFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to add a comment to a custom post",
-          "fields": null
+          "description": "Input to add a comment to a custom post"
         },
         {
           "name": "RootSetCategoriesOnCustomPostFilterInput",
           "namespacedName": "RootSetCategoriesOnCustomPostFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to set categories on a custom post",
-          "fields": null
+          "description": "Input to set categories on a custom post"
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostFilterInput",
           "namespacedName": "RootSetFeaturedImageOnCustomPostFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to set the featured image on a custom post",
-          "fields": null
+          "description": "Input to set the featured image on a custom post"
         },
         {
           "name": "RootSetTagsOnCustomPostFilterInput",
           "namespacedName": "RootSetTagsOnCustomPostFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to set tags on a custom post",
-          "fields": null
+          "description": "Input to set tags on a custom post"
         },
         {
           "name": "RootTagsFilterInput",
           "namespacedName": "RootTagsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter tags",
-          "fields": null
+          "description": "Input to filter tags"
         },
         {
           "name": "RootUpdatePostFilterInput",
           "namespacedName": "RootUpdatePostFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to update a custom post",
-          "fields": null
+          "description": "Input to update a custom post"
         },
         {
           "name": "TagPaginationInput",
           "namespacedName": "TagPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate tags",
-          "fields": null
+          "description": "Input to paginate tags"
         },
         {
           "name": "TaxonomyMetaQueryInput",
           "namespacedName": "TaxonomyMetaQueryInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/",
-          "fields": null
+          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/"
         },
         {
           "name": "TaxonomySortInput",
           "namespacedName": "TaxonomySortInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to sort custom posts",
-          "fields": null
+          "description": "Input to sort custom posts"
         },
         {
           "name": "TaxonomyTaxonomiesFilterInput",
           "namespacedName": "TaxonomyTaxonomiesFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter child taxonomies",
-          "fields": null
+          "description": "Input to filter child taxonomies"
         },
         {
           "name": "UserByInput",
           "namespacedName": "UserByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a user",
-          "fields": null
+          "description": "Oneof input to specify the property and data to fetch a user"
         },
         {
           "name": "UserCustomPostsFilterInput",
           "namespacedName": "UserCustomPostsFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter the user's custom posts",
-          "fields": null
+          "description": "Input to filter the user's custom posts"
         },
         {
           "name": "UserMetaQueryInput",
           "namespacedName": "UserMetaQueryInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/",
-          "fields": null
+          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/"
         },
         {
           "name": "UserPaginationInput",
           "namespacedName": "UserPaginationInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to paginate users",
-          "fields": null
+          "description": "Input to paginate users"
         },
         {
           "name": "UserSearchByInput",
           "namespacedName": "UserSearchByInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to search users",
-          "fields": null
+          "description": "Oneof input to specify the property and data to search users"
         },
         {
           "name": "UserSortInput",
           "namespacedName": "UserSortInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to sort custom posts",
-          "fields": null
+          "description": "Input to sort custom posts"
         },
         {
           "name": "UsersFilterInput",
           "namespacedName": "UsersFilterInput",
+          "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to filter users",
-          "fields": null
+          "description": "Input to filter users"
         },
         {
           "name": "CommentOrderByEnum",
           "namespacedName": "CommentOrderByEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "CommentStatusEnum",
           "namespacedName": "CommentStatusEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "CommentTypeEnum",
           "namespacedName": "CommentTypeEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "CustomPostEnum",
           "namespacedName": "CustomPostEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "CustomPostOrderByEnum",
           "namespacedName": "CustomPostOrderByEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "CustomPostStatusEnum",
           "namespacedName": "CustomPostStatusEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "DirectiveKindEnum",
           "namespacedName": "DirectiveKindEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "DirectiveLocation",
           "namespacedName": "DirectiveLocation",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "FilterCustomPostStatusEnum",
           "namespacedName": "FilterCustomPostStatusEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "GenericCustomPostEnum",
           "namespacedName": "GenericCustomPostEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "MediaItemOrderByEnum",
           "namespacedName": "MediaItemOrderByEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "MenuOrderByEnum",
           "namespacedName": "MenuOrderByEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "MetaQueryCompareByArrayValueOperator",
           "namespacedName": "MetaQueryCompareByArrayValueOperator",
+          "fields": null,
           "kind": "ENUM",
-          "description": "Operators to compare against an array value",
-          "fields": null
+          "description": "Operators to compare against an array value"
         },
         {
           "name": "MetaQueryCompareByKeyOperator",
           "namespacedName": "MetaQueryCompareByKeyOperator",
+          "fields": null,
           "kind": "ENUM",
-          "description": "Operators to compare against the meta key",
-          "fields": null
+          "description": "Operators to compare against the meta key"
         },
         {
           "name": "MetaQueryCompareByNumericValueOperator",
           "namespacedName": "MetaQueryCompareByNumericValueOperator",
+          "fields": null,
           "kind": "ENUM",
-          "description": "Operators to compare against a numeric value",
-          "fields": null
+          "description": "Operators to compare against a numeric value"
         },
         {
           "name": "MetaQueryCompareByStringValueOperator",
           "namespacedName": "MetaQueryCompareByStringValueOperator",
+          "fields": null,
           "kind": "ENUM",
-          "description": "Operators to compare against a string value",
-          "fields": null
+          "description": "Operators to compare against a string value"
         },
         {
           "name": "MetaQueryValueTypesEnum",
           "namespacedName": "MetaQueryValueTypesEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": "Custom field type",
-          "fields": null
+          "description": "Custom field type"
         },
         {
           "name": "OrderEnum",
           "namespacedName": "OrderEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "RelationEnum",
           "namespacedName": "RelationEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": "The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one",
-          "fields": null
+          "description": "The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one"
         },
         {
           "name": "TaxonomyOrderByEnum",
           "namespacedName": "TaxonomyOrderByEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "TypeKind",
           "namespacedName": "TypeKind",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "UserOrderByEnum",
           "namespacedName": "UserOrderByEnum",
+          "fields": null,
           "kind": "ENUM",
-          "description": null,
-          "fields": null
+          "description": null
         },
         {
           "name": "CustomPostUnion",
           "namespacedName": "CustomPostUnion",
+          "fields": null,
           "kind": "UNION",
-          "description": "Union of 'custom post' type resolvers",
-          "fields": null
+          "description": "Union of 'custom post' type resolvers"
         }
       ]
     }
