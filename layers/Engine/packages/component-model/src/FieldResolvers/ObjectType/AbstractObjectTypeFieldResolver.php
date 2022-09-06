@@ -831,7 +831,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         return [
             SchemaDefinition::FIELD_IS_MUTATION => $this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null,
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getAdminFieldNames()),
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
         ];
     }
 

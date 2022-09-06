@@ -19,7 +19,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     /**
      * @return string[]
      */
-    public function getAdminFieldNames(): array;
+    public function getSensitiveFieldNames(): array;
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface;
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int;

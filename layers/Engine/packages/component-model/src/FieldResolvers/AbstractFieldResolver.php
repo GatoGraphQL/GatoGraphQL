@@ -13,7 +13,7 @@ abstract class AbstractFieldResolver implements FieldResolverInterface
     /**
      * @return string[]
      */
-    public function getAdminFieldNames(): array
+    public function getSensitiveFieldNames(): array
     {
         return [];
     }

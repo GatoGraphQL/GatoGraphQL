@@ -508,7 +508,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     {
         return [
             SchemaDefinition::FIELD_IS_MUTATION => $this->isFieldAMutation($fieldName),
-            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getAdminFieldNames()),
+            SchemaDefinition::IS_ADMIN_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
         ];
     }
 

@@ -42,7 +42,7 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
      *
      * @return string[]
      */
-    public function getAdminFieldNames(): array
+    public function getSensitiveFieldNames(): array
     {
         return [];
     }
