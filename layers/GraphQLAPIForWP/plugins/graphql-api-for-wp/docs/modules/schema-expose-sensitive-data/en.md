@@ -8,7 +8,7 @@ For instance, to access post data, we have field `Root.posts`, which by default 
 
 ## List of “sensitive” data elements
 
-The elements below (among others) are, by default, treated as private data:
+By default, the following data elements are treated as “sensitive” (they can also be configured as “normal” in the Settings page for the corresponding module):
 
 **User:**
 
