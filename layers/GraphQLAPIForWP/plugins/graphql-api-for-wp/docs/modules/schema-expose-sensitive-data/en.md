@@ -8,7 +8,7 @@ For instance, to access post data, we have field `Root.posts`, which by default 
 
 ## List of “sensitive” data elements
 
-By default, the following data elements are treated as “sensitive” (they can also be configured as “normal” in the Settings page for the corresponding module):
+By default, the following data elements are treated as “sensitive” (they can also be configured as “normal” in the Settings page for the corresponding module; see below):
 
 **User:**
 
@@ -70,7 +70,7 @@ And then search for entries with `"isSensitiveDataElement": true` in the results
 
 The elements listed above can be made public.
 
-In the Settings page, in the corresponding tab for each, there is a checkbox to configure if to treat them as private or public:
+In the Settings page, in the corresponding tab for each, there is a checkbox to configure if to treat them as “sensitive” or “normal”:
 
 ![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.png)
 
