@@ -47,7 +47,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     }
 
     /**
-     * The "admin" values in the enum
+     * The "sensitive" values in the enum
      *
      * @return string[]
      */

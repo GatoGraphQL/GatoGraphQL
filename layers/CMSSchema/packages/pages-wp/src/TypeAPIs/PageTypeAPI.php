@@ -153,7 +153,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
                 if ($page === null) {
                     continue;
                 }
-                // If the "admin" schema is not enabled, Only expose posts with status "publish"
+                // If the "sensitive data" schema is not enabled, only expose posts with status "publish"
                 if (!$exposeSensitiveDataInSchema && $page->post_status !== "publish") {
                     continue;
                 }

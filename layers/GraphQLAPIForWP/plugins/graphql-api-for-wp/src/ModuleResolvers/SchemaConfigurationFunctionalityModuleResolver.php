@@ -99,7 +99,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             case self::NESTED_MUTATIONS:
                 return \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api');
             case self::SCHEMA_EXPOSE_ADMIN_DATA:
-                return \__('Expose "admin" elements in the schema', 'graphql-api');
+                return \__('Expose "sensitive" data elements in the schema', 'graphql-api');
         }
         return parent::getDescription($module);
     }
@@ -311,9 +311,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Expose admin elements for the Admin?', 'graphql-api'),
+                Properties::TITLE => \__('Expose "sensitive" data elements for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose "admin" elements in the wp-admin? %s', 'graphql-api'),
+                    \__('Expose "sensitive" data elements in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
