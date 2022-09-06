@@ -63,7 +63,7 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 </tr> -->
 <tr>
     <td><strong>Expose Sensitive Data in the Schema</strong></td>
-    <td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, input field <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
+    <td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <!-- <tr>
     <td><strong>Public/Private Schema</strong></td>

@@ -1497,7 +1497,7 @@ mutation {
 
 Removed all the "unrestricted" fields (which were exposed via module `Expose Sensitive Data in the Schema`). Instead, a single field will now tackle all of its data, whether it is “sensitive” data or not.
 
-To do this, fields will expose a schema element (whether a field argument, input field, or enum value), or not, depending on the GraphQL schema being exposed as “sensitive” or not. (This is configured in block `Expose Sensitive Data in the Schema` from the Schema Configuration).
+To do this, fields will show or hide some element (such as a field argument or enum value) depending on the GraphQL schema being exposed as “sensitive” or not. (This is configured in block `Expose Sensitive Data in the Schema` from the Schema Configuration).
 
 For instance, field `Root.posts` has argument `filter`. When the GraphQL schema is configured to expose “sensitive” data, this input object exposes an additional input field `status`, enabling to filter posts by status `"draft"`, `"pending"` or `"trash"` (i.e. allowing to fetch private posts).
 
