@@ -219,12 +219,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             /**
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
              */
-            $keepSelfFieldForRootType = $moduleConfiguration->exposeSelfFieldForRootTypeInGraphQLSchema();
+            $exposeSelfFieldForRootType = $moduleConfiguration->exposeSelfFieldForRootTypeInGraphQLSchema();
             /** @var string $typeKind */
             foreach ($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
                 /** @var string $typeName */
                 foreach (array_keys($typeSchemaDefinitions) as $typeName) {
-                    if (!$keepSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {
+                    if (!$exposeSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {
                         unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind][$typeName][SchemaDefinition::FIELDS]['self']);
                     }
                 }
