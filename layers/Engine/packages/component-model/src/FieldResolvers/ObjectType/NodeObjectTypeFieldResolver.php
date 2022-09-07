@@ -91,7 +91,11 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return true;
             }
 
-            /** @var ModuleConfiguration */
+            /**
+             * Enable if enabled by configuration.
+             *
+             * @var ModuleConfiguration
+             */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             return $moduleConfiguration->enableSelfField();
         }
