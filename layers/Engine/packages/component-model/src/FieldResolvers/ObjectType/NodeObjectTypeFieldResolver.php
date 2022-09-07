@@ -76,9 +76,17 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldInterface $field,
     ): bool {
         if ($field->getName() === 'self') {
+            /**
+             * Enable for internally-executed functionality
+             * (eg: Multiple Query Execution)
+             */
+            if ($field->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
+                return true;
+            }
+
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            return $moduleConfiguration->enableSelfField() || $field->getLocation() === ASTNodesFactory::getNonSpecificLocation();
+            return $moduleConfiguration->enableSelfField();
         }
         return parent::resolveCanProcess(
             $objectTypeResolver,
