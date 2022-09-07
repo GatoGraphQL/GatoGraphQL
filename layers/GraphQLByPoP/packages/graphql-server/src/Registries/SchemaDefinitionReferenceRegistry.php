@@ -10,6 +10,8 @@ use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
@@ -216,8 +218,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         /**
          * Remove unneeded data
+         *
+         * @var ComponentModelModuleConfiguration
          */
-        if (!$moduleConfiguration->enableSelfField()) {
+        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        if (!$componentModelModuleConfiguration->enableSelfField()) {
             /** @var string $typeKind */
             foreach ($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
                 /** @var string $typeName */
