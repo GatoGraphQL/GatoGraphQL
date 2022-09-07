@@ -82,6 +82,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             if ($objectTypeResolver->isIntrospectionObjectTypeResolver()) {
                 return false;
             }
+
             /**
              * Enable for internally-executed functionality
              * (eg: Multiple Query Execution)
