@@ -27,6 +27,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function exposeSelfFieldForRootTypeInGraphQLSchema(): bool
     {
+        if ($this->exposeSelfFieldInGraphQLSchema()) {
+            return true;
+        }
+
         $envVariable = Environment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
