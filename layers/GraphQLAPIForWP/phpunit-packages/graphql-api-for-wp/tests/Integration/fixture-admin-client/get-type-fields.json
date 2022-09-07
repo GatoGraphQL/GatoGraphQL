@@ -64,6 +64,9 @@
               "name": "responses"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "status"
             },
             {
@@ -135,6 +138,9 @@
               "name": "rawContent"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "slug"
             },
             {
@@ -191,6 +197,9 @@
               "name": "modifiedDateStr"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "sizes"
             },
             {
@@ -241,6 +250,9 @@
               "name": "name"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "slug"
             }
           ],
@@ -279,6 +291,9 @@
               "name": "parentID"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "target"
             },
             {
@@ -315,6 +330,9 @@
             },
             {
               "name": "replyComment"
+            },
+            {
+              "name": "self"
             },
             {
               "name": "setCategoriesOnPost"
@@ -404,6 +422,9 @@
             },
             {
               "name": "rawContent"
+            },
+            {
+              "name": "self"
             },
             {
               "name": "slug"
@@ -501,6 +522,9 @@
               "name": "rawContent"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "slug"
             },
             {
@@ -569,6 +593,9 @@
               "name": "posts"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "slug"
             },
             {
@@ -608,6 +635,9 @@
             },
             {
               "name": "posts"
+            },
+            {
+              "name": "self"
             },
             {
               "name": "slug"
@@ -766,6 +796,9 @@
             },
             {
               "name": "roles"
+            },
+            {
+              "name": "self"
             },
             {
               "name": "user"
@@ -950,6 +983,9 @@
               "name": "roles"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "setCategoriesOnPost"
             },
             {
@@ -1057,6 +1093,9 @@
               "name": "roles"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "slug"
             },
             {
@@ -1083,6 +1122,9 @@
               "name": "id"
             },
             {
+              "name": "self"
+            },
+            {
               "name": "size"
             },
             {
@@ -1104,6 +1146,9 @@
             },
             {
               "name": "name"
+            },
+            {
+              "name": "self"
             }
           ],
           "kind": "OBJECT",
