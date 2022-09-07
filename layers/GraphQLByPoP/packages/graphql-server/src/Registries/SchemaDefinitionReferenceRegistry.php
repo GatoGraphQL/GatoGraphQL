@@ -10,6 +10,8 @@ use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
@@ -214,19 +216,18 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             }
         }
 
-        // Remove unneeded data
-        if (!$moduleConfiguration->exposeSelfFieldInGraphQLSchema()) {
-            /**
-             * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
-             */
-            $keepSelfFieldForRootType = $moduleConfiguration->exposeSelfFieldForRootTypeInGraphQLSchema();
+        /**
+         * Remove unneeded data
+         *
+         * @var ComponentModelModuleConfiguration
+         */
+        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        if (!$componentModelModuleConfiguration->enableSelfField()) {
             /** @var string $typeKind */
             foreach ($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
                 /** @var string $typeName */
                 foreach (array_keys($typeSchemaDefinitions) as $typeName) {
-                    if (!$keepSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {
-                        unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind][$typeName][SchemaDefinition::FIELDS]['self']);
-                    }
+                    unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind][$typeName][SchemaDefinition::FIELDS]['self']);
                 }
             }
         }

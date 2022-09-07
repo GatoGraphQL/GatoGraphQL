@@ -29,6 +29,22 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
+                        },
+                        {
+                            "name": "self",
+                            "description": "The same object",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "MutationRoot!",
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "MutationRoot",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -57,6 +73,22 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "self",
+                            "description": "The same object",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "QueryRoot!",
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "QueryRoot",
                                     "ofType": null
                                 }
                             },
@@ -116,6 +148,22 @@
                                 "kind": "OBJECT",
                                 "name": "QueryRoot",
                                 "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "self",
+                            "description": "The same object",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Root!",
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "Root",
+                                    "ofType": null
+                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -204,7 +252,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
+                            "description": "Is this element considered a \u201csensitive\u201d data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -269,7 +317,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
+                            "description": "Is this element considered a \u201csensitive\u201d data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -318,7 +366,7 @@
                         },
                         {
                             "name": "isSensitiveDataElement",
-                            "description": "Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
+                            "description": "Is this element considered a \u201csensitive\u201d data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",

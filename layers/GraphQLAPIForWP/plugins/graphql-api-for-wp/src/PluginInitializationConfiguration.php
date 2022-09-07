@@ -544,7 +544,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
         ];
-        $moduleClassConfiguration[\PoP\ComponentModel\Module::class] = [
+        $moduleClassConfiguration[ComponentModelModule::class] = [
             /**
              * Do not expose the `DangerouslyNonSpecificScalar` scalar type
              */
@@ -573,9 +573,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
             // Enable the “sensitive” data
-            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA] = true;
+            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA] = true;
             // Enable the "self" fields
-            $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
+            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::ENABLE_SELF_FIELD] = true;
             // Enable Nested mutations
             $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
             // Do not disable redundant mutation fields in the root type

@@ -415,6 +415,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Comment!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Comment",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "status",
               "description": "Status of the comment",
               "args": [],
@@ -944,6 +960,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "GenericCustomPost!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GenericCustomPost",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "slug",
               "description": "URL's slug",
               "args": [],
@@ -1318,6 +1350,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Media!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Media",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "sizes",
               "description": "Media element's \u2018sizes\u2019 attribute value for an image",
               "args": [
@@ -1623,6 +1671,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Menu!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Menu",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "slug",
               "description": "Menu's slug",
               "args": [],
@@ -1775,6 +1839,22 @@
                 "kind": "SCALAR",
                 "name": "ID",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "MenuItem!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "MenuItem",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1991,6 +2071,22 @@
                 "kind": "OBJECT",
                 "name": "Comment",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "MutationRoot!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "MutationRoot",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2699,6 +2795,22 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Page!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Page",
                   "ofType": null
                 }
               },
@@ -3473,6 +3585,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Post!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Post",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "slug",
               "description": "URL's slug",
               "args": [],
@@ -4082,6 +4210,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostCategory!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PostCategory",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "slug",
               "description": "Category slug",
               "args": [],
@@ -4351,6 +4495,22 @@
                       "ofType": null
                     }
                   }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostTag!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PostTag",
+                  "ofType": null
                 }
               },
               "isDeprecated": false,
@@ -6273,6 +6433,22 @@
                       "ofType": null
                     }
                   }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "QueryRoot!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "QueryRoot",
+                  "ofType": null
                 }
               },
               "isDeprecated": false,
@@ -8423,6 +8599,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Root!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Root",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "setCategoriesOnPost",
               "description": "Set categories on a post",
               "args": [
@@ -9305,6 +9497,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "User!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "User",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "slug",
               "description": "Slug of the URL of the user's profile in the website",
               "args": [],
@@ -9424,6 +9632,22 @@
               "deprecationReason": null
             },
             {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "UserAvatar!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "UserAvatar",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "size",
               "description": "Avatar size",
               "args": [],
@@ -9522,6 +9746,22 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "UserRole!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "UserRole",
                   "ofType": null
                 }
               },
