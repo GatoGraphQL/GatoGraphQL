@@ -227,9 +227,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             foreach ($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
                 /** @var string $typeName */
                 foreach (array_keys($typeSchemaDefinitions) as $typeName) {
-                    if ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName)) {
-                        unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind][$typeName][SchemaDefinition::FIELDS]['self']);
-                    }
+                    unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][$typeKind][$typeName][SchemaDefinition::FIELDS]['self']);
                 }
             }
         }
