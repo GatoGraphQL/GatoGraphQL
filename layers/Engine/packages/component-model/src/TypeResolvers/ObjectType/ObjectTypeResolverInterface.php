@@ -110,4 +110,5 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
         FieldInterface $field,
     ): FeedbackItemResolution;
+    public function isIntrospectionObjectTypeResolver(): bool;
 }

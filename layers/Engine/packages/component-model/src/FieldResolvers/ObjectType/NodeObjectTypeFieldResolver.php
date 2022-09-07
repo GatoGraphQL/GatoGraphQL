@@ -77,6 +77,12 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): bool {
         if ($field->getName() === 'self') {
             /**
+             * Disable for introspection types
+             */
+            if ($objectTypeResolver->isIntrospectionObjectTypeResolver()) {
+                return false;
+            }
+            /**
              * Enable for internally-executed functionality
              * (eg: Multiple Query Execution)
              */

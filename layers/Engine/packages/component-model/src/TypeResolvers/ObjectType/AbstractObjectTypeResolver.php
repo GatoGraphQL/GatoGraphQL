@@ -1882,4 +1882,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         return $this->fieldDataAccessorForMutationCache[$fieldDataAccessor];
     }
+
+    public function isIntrospectionObjectTypeResolver(): bool
+    {
+        return str_starts_with($this->getTypeName(), '__');
+    }
 }
