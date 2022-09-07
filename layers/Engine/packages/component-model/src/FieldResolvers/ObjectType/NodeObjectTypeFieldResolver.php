@@ -79,7 +79,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             /**
              * Disable for introspection types
              */
-            if ($objectTypeResolver->isIntrospectionObjectTypeResolver()) {
+            if ($objectTypeResolver->isIntrospectionType()) {
                 return false;
             }
 

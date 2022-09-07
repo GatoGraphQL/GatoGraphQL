@@ -87,4 +87,9 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     {
         return null;
     }
+
+    public function isIntrospectionType(): bool
+    {
+        return false;
+    }
 }

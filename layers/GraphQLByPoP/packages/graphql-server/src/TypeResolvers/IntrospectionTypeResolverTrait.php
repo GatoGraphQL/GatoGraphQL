@@ -12,4 +12,9 @@ use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 trait IntrospectionTypeResolverTrait
 {
     use CanonicalTypeNameTypeResolverTrait;
+
+    public function isIntrospectionType(): bool
+    {
+        return true;
+    }
 }

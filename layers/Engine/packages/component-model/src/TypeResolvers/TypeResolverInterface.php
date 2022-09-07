@@ -12,4 +12,5 @@ interface TypeResolverInterface
     public function getMaybeNamespacedTypeName(): string;
     public function getTypeOutputKey(): string;
     public function getTypeDescription(): ?string;
+    public function isIntrospectionType(): bool;
 }
