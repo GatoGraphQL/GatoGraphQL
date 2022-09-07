@@ -12,19 +12,6 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
-    public function exposeSelfFieldInGraphQLSchema(): bool
-    {
-        $envVariable = Environment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function sortGraphQLSchemaAlphabetically(): bool
     {
         $envVariable = Environment::SORT_GRAPHQL_SCHEMA_ALPHABETICALLY;
