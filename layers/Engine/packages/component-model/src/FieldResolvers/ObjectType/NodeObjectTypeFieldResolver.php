@@ -64,7 +64,8 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * The "self" field is enable either when enabled by configuration,
+     * The "self" field is enabled only for non-introspection types,
+     * and only when either it is enabled by configuration,
      * or when invoked internally within the GraphQL server,
      * as to allow for Multiple Query Execution.
      *
