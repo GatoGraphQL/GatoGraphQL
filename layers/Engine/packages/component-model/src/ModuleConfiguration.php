@@ -284,7 +284,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function enableSelfField(): bool
     {
         $envVariable = Environment::ENABLE_SELF_FIELD;
-        $defaultValue = false;
+        $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
