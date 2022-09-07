@@ -63,6 +63,13 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ];
     }
 
+    /**
+     * The "self" field is enable either when enabled by configuration,
+     * or when invoked internally within the GraphQL server,
+     * as to allow for Multiple Query Execution.
+     *
+     * @see QueryASTTransformationService.php
+     */
     public function resolveCanProcess(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
@@ -70,7 +77,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($field->getName()) {
-            'self' => $field->getLocation() === ASTNodesFactory::getNonSpecificLocation() || $moduleConfiguration->enableSelfField(),
+            'self' => $moduleConfiguration->enableSelfField() || $field->getLocation() === ASTNodesFactory::getNonSpecificLocation(),
             default => parent::resolveCanProcess(
                 $objectTypeResolver,
                 $field,
