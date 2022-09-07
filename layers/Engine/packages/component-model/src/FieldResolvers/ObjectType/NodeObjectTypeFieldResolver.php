@@ -74,15 +74,15 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return match ($field->getName()) {
-            'self' => $moduleConfiguration->enableSelfField() || $field->getLocation() === ASTNodesFactory::getNonSpecificLocation(),
-            default => parent::resolveCanProcess(
-                $objectTypeResolver,
-                $field,
-            ),
-        };
+        if ($field->getName() === 'self') {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            return $moduleConfiguration->enableSelfField() || $field->getLocation() === ASTNodesFactory::getNonSpecificLocation();
+        }
+        return parent::resolveCanProcess(
+            $objectTypeResolver,
+            $field,
+        );
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
