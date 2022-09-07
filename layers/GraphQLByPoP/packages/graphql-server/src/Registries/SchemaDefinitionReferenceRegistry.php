@@ -214,7 +214,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             }
         }
 
-        // Remove unneeded data
+        /**
+         * Remove unneeded data
+         */
         if (!$moduleConfiguration->exposeSelfFieldInGraphQLSchema()) {
             /**
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
