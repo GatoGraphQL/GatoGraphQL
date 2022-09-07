@@ -217,7 +217,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         /**
          * Remove unneeded data
          */
-        if (!$moduleConfiguration->exposeSelfFieldInGraphQLSchema()) {
+        if (!$moduleConfiguration->enableSelfField()) {
             /** @var string $typeKind */
             foreach ($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
                 /** @var string $typeName */

@@ -23,7 +23,7 @@ class Environment
     public final const LOG_EXCEPTION_ERROR_MESSAGES_AND_TRACES = 'LOG_EXCEPTION_ERROR_MESSAGES_AND_TRACES';
     public final const SEND_EXCEPTION_ERROR_MESSAGES = 'SEND_EXCEPTION_ERROR_MESSAGES';
     public final const SEND_EXCEPTION_TRACES = 'SEND_EXCEPTION_TRACES';
-    public final const EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA = 'EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA';
+    public final const ENABLE_SELF_FIELD = 'ENABLE_SELF_FIELD';
 
     /**
      * Indicate if to enable to restrict a field and directive by version,

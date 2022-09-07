@@ -575,7 +575,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Enable the “sensitive” data
             $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA] = true;
             // Enable the "self" fields
-            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
+            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::ENABLE_SELF_FIELD] = true;
             // Enable Nested mutations
             $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
             // Do not disable redundant mutation fields in the root type

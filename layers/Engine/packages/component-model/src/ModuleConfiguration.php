@@ -280,10 +280,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
-    
-    public function exposeSelfFieldInGraphQLSchema(): bool
+
+    public function enableSelfField(): bool
     {
-        $envVariable = Environment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA;
+        $envVariable = Environment::ENABLE_SELF_FIELD;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 

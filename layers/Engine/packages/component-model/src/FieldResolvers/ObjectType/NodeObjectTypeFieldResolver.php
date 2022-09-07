@@ -70,7 +70,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($field->getName()) {
-            'self' => $field->getLocation() === ASTNodesFactory::getNonSpecificLocation() || $moduleConfiguration->exposeSelfFieldInGraphQLSchema(),
+            'self' => $field->getLocation() === ASTNodesFactory::getNonSpecificLocation() || $moduleConfiguration->enableSelfField(),
             default => parent::resolveCanProcess(
                 $objectTypeResolver,
                 $field,
