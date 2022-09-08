@@ -669,14 +669,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /**
          * Check if the directive only handles specific types
          */
-        $supportedFieldTypeResolverClasses = $this->getSupportedFieldTypeResolverClasses();
-        if ($supportedFieldTypeResolverClasses !== null
-            && array_filter(
-                $supportedFieldTypeResolverClasses,
-                fn (string $supportedFieldTypeResolverClass) => $fieldTypeResolver instanceof $supportedFieldTypeResolverClass
-            ) === []
-        ) {
-            return false;
+        if (!($fieldTypeResolver instanceof DangerouslyNonSpecificScalarTypeScalarTypeResolver)) {
+            $supportedFieldTypeResolverClasses = $this->getSupportedFieldTypeResolverClasses();
+            if ($supportedFieldTypeResolverClasses !== null
+                && array_filter(
+                    $supportedFieldTypeResolverClasses,
+                    fn (string $supportedFieldTypeResolverClass) => $fieldTypeResolver instanceof $supportedFieldTypeResolverClass
+                ) === []
+            ) {
+                return false;
+            }
         }
         
         return true;
