@@ -290,10 +290,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             ErrorFeedbackItemProvider::E21,
                             [
                                 $directive->getName(),
-                                json_encode(array_map(
-                                    fn (Argument $argument) => $argument->asQueryString(),
-                                    $directive->getArguments()
-                                )),
                                 implode(
                                     $this->__('\', \'', 'component-model'),
                                     array_map(
@@ -318,13 +314,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         new SchemaFeedback(
                             new FeedbackItemResolution(
                                 ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E22,
+                                ErrorFeedbackItemProvider::E21,
                                 [
                                     $directive->getName(),
-                                    json_encode(array_map(
-                                        fn (Argument $argument) => $argument->asQueryString(),
-                                        $directive->getArguments()
-                                    )),
                                     $field->asFieldOutputQueryString(),
                                 ]
                             ),
