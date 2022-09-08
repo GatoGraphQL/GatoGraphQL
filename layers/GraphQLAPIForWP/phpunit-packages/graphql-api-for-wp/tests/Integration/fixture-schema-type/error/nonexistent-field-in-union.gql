@@ -1,0 +1,6 @@
+{
+  customPosts(pagination: { limit: 2 }) {
+    id
+    nonExisting
+  }
+}
