@@ -1,5 +1,5 @@
 {  
-  # `733` and `735` are Pages, their ID is sretrieved but the DataLoader was not loaded
+  # `733` and `735` are Pages, their ID is retrieved but the DataLoader was not loaded
   customPosts (filter: { ids: [1724, 358, 733, 735, 555] }) {
     __typename
     ...on IsCustomPost {
