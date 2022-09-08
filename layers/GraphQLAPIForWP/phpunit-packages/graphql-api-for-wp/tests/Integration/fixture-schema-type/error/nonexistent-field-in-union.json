@@ -11,7 +11,7 @@
         "extensions": {
           "path": [
             "nonExisting",
-            "customPosts(pagination: {limit: 2}, sort: {order: ASC, by: ID}) { ... }",
+            "customPosts(pagination: {limit: 3}, sort: {order: ASC, by: ID}) { ... }",
             "query { ... }"
           ],
           "type": "CustomPostUnion",
@@ -31,7 +31,7 @@
         "extensions": {
           "path": [
             "nonExisting",
-            "customPosts(pagination: {limit: 2}, sort: {order: ASC, by: ID}) { ... }",
+            "customPosts(pagination: {limit: 3}, sort: {order: ASC, by: ID}) { ... }",
             "query { ... }"
           ],
           "type": "CustomPostUnion",
@@ -51,6 +51,11 @@
         {
           "__typename": "Page",
           "id": 2,
+          "nonExisting": null
+        },
+        {
+          "__typename": "Post",
+          "id": 13,
           "nonExisting": null
         }
       ]
