@@ -11,14 +11,14 @@ use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
@@ -33,12 +33,15 @@ use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
@@ -50,8 +53,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
@@ -611,15 +614,107 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return true;
     }
 
-    public function resolveCanProcessField(
+    final public function resolveCanProcessField(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
+        bool $isNested,
     ): bool {
         $directiveSupportedFieldNames = $this->getFieldNamesToApplyTo();
         if ($directiveSupportedFieldNames !== [] && !in_array($field->getName(), $directiveSupportedFieldNames)) {
             return false;
         }
+
+        /**
+         * If passing a UnionTypeResolver, simply evaluate the condition
+         * in any of the targetObjectTypeResolver, expecting them to
+         * have the same rules for applying the directive (or not)
+         *
+         * Eg:
+         *
+         * ```
+         * {
+         *   customPosts {
+         *     id
+         *     # This is delegated to Post to be resolved
+         *     date @default(value:"1982-06-29T17:48:25+00:00")
+         *   }
+         * }
+         * ```
+         */
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+            /** @var UnionTypeResolverInterface */
+            $unionTypeResolver = $relationalTypeResolver;
+            $targetObjectTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
+            /**
+             * There will be a GraphQL error somewhere else,
+             * process the field as to avoid adding yet another error
+             */
+            if ($targetObjectTypeResolvers === []) {
+                return true;
+            }
+            $targetObjectTypeResolver = $targetObjectTypeResolvers[0];
+            return $this->resolveCanProcessField($targetObjectTypeResolver, $field, $isNested);
+        }
+
+        /**
+         * Nested directives must not validate the type,
+         * as they will be most likely applied on a subitem
+         * from the field value (eg: an array item, or a JSON
+         * property).
+         *
+         * Eg: in this query, the field is of type JSONObject,
+         * but the directive is applied on a string
+         *
+         * ```
+         * {
+         *   postData: getJSON(
+         *     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
+         *   )
+         *     @underJSONObjectProperty(path: "title.rendered")
+         *       @upperCase
+         * }
+         * ```
+         */
+        if ($isNested) {
+            return true;
+        }
+
+        /** @var ObjectTypeResolverInterface */
+        $objectTypeResolver = $relationalTypeResolver;
+        $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
+        /**
+         * There will be a GraphQL error somewhere else,
+         * process the field as to avoid adding yet another error
+         */
+        if ($fieldTypeResolver === null) {
+            return true;
+        }
+
+        /**
+         * Check if the directive only handles specific types
+         */
+        if (!($fieldTypeResolver instanceof DangerouslyNonSpecificScalarTypeScalarTypeResolver)) {
+            $supportedFieldTypeResolverClasses = $this->getSupportedFieldTypeResolverClasses();
+            if (
+                $supportedFieldTypeResolverClasses !== null
+                && array_filter(
+                    $supportedFieldTypeResolverClasses,
+                    fn (string $supportedFieldTypeResolverClass) => $fieldTypeResolver instanceof $supportedFieldTypeResolverClass
+                ) === []
+            ) {
+                return false;
+            }
+        }
+
         return true;
+    }
+
+    /**
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     */
+    protected function getSupportedFieldTypeResolverClasses(): ?array
+    {
+        return null;
     }
 
     /**

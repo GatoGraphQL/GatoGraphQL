@@ -75,6 +75,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     public function resolveDirectivesIntoPipelineData(
         array $directives,
         SplObjectStorage $directiveFields,
+        bool $isNested,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage;
 
