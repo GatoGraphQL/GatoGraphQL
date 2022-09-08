@@ -575,7 +575,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * By default, the directiveResolver instance can process the directive
      * This function can be overriden to force certain value on the directive args before it can be executed
      */
-    public function resolveCanProcess(
+    public function resolveCanProcessDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
     ): bool {
@@ -607,6 +607,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * Compare using semantic versioning constraint rules, as used by Composer
              */
             return $this->getSemverHelperService()->satisfies($schemaDirectiveVersion, $versionConstraint);
+        }
+        return true;
+    }
+
+    public function resolveCanProcessField(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        $directiveSupportedFieldNames = $this->getFieldNamesToApplyTo();
+        if ($directiveSupportedFieldNames !== [] && !in_array($field->getName(), $directiveSupportedFieldNames)) {
+            return false;
         }
         return true;
     }

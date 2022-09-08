@@ -456,7 +456,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Only consider the directiveResolvers that can satisfy this directive
         $directiveResolvers = array_filter(
             $directiveResolvers,
-            fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->resolveCanProcess($this, $directive)
+            fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->resolveCanProcessDirective($this, $directive)
         );
         if ($directiveResolvers === []) {
             return null;
@@ -474,11 +474,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * the directive (for instance, validating that a required directiveArg is present)
              */
             foreach ($directiveResolvers as $directiveResolver) {
-                $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
-                if ($directiveSupportedFieldNames !== [] && !in_array($field->getName(), $directiveSupportedFieldNames)) {
+                if (!$directiveResolver->resolveCanProcessField($this, $field)) {
                     continue;
                 }
+
                 /**
                  * Create a non-shared directiveResolver instance to handle
                  * this specific $directive object instance.
