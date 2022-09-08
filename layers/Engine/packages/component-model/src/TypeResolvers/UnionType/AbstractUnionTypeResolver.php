@@ -9,7 +9,6 @@ use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
@@ -544,7 +543,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                  * time, and retrieve it from the cache from then on, so the error is
                  * not added more than once to the response.
                  *
-                 * @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>
+                 * @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>
                  */
                 $fieldObjectTypeResolverObjectFieldData = $this->fieldObjectTypeResolverObjectFieldDataCache[$targetObjectTypeResolver] ?? new SplObjectStorage();
                 if (!$fieldObjectTypeResolverObjectFieldData->contains($field)) {
