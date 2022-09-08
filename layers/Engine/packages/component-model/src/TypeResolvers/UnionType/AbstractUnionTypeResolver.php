@@ -7,10 +7,11 @@ namespace PoP\ComponentModel\TypeResolvers\UnionType;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
@@ -31,6 +32,17 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * @var ObjectTypeResolverPickerInterface[]|null
      */
     protected ?array $objectTypeResolverPickers = null;
+
+    /**
+     * @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>>
+     */
+    protected SplObjectStorage $fieldObjectTypeResolverObjectFieldDataCache;
+
+    public function __construct()
+    {
+        $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
+        parent::__construct();
+    }
 
     /**
      * @return InterfaceTypeResolverInterface[]
@@ -526,6 +538,26 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
              * If the field does not exist, then nothing to do
              */
             if ($executableObjectTypeFieldResolver === null) {
+                /**
+                 * If the field does not exist in the schema, then add an error the first
+                 * time, and retrieve it from the cache from then on, so the error is
+                 * not added more than once to the response.
+                 *
+                 * @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>
+                 */
+                $fieldObjectTypeResolverObjectFieldData = $this->fieldObjectTypeResolverObjectFieldDataCache[$targetObjectTypeResolver] ?? new SplObjectStorage();
+                if (!$fieldObjectTypeResolverObjectFieldData->contains($field)) {
+                    $fieldObjectTypeResolverObjectFieldData[$field] = null;
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            $targetObjectTypeResolver->getFieldNotResolvedByObjectTypeFeedbackItemResolution($field),
+                            $field,
+                            $this,
+                            [$field],
+                        )
+                    );
+                }
+                $this->fieldObjectTypeResolverObjectFieldDataCache[$targetObjectTypeResolver] = $fieldObjectTypeResolverObjectFieldData;
                 continue;
             }
 

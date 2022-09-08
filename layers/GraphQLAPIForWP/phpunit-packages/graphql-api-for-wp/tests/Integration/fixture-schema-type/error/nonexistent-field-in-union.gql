@@ -1,0 +1,7 @@
+{
+  customPosts(pagination: { limit: 3 }, sort: { order: ASC, by: ID }) {
+    __typename
+    id
+    nonExisting
+  }
+}
