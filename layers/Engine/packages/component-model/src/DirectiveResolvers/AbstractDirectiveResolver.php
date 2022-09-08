@@ -695,7 +695,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          */
         if (!($fieldTypeResolver instanceof DangerouslyNonSpecificScalarTypeScalarTypeResolver)) {
             $supportedFieldTypeResolverClasses = $this->getSupportedFieldTypeResolverClasses();
-            if ($supportedFieldTypeResolverClasses !== null
+            if (
+                $supportedFieldTypeResolverClasses !== null
                 && array_filter(
                     $supportedFieldTypeResolverClasses,
                     fn (string $supportedFieldTypeResolverClass) => $fieldTypeResolver instanceof $supportedFieldTypeResolverClass
@@ -704,7 +705,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 return false;
             }
         }
-        
+
         return true;
     }
 
