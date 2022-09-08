@@ -611,6 +611,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return true;
     }
 
+    public function resolveCanProcessField(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        $directiveSupportedFieldNames = $this->getFieldNamesToApplyTo();
+        if ($directiveSupportedFieldNames !== [] && !in_array($field->getName(), $directiveSupportedFieldNames)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Validate the constraints for a directive argument
      */
