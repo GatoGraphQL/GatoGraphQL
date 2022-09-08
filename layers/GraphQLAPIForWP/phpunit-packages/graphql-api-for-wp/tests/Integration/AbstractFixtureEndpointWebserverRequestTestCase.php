@@ -81,7 +81,12 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 }
             }
 
-            $dataName = $fileName;
+            /**
+             * If the test is organized under a subfolder (such as "Success" or "Error"),
+             * append it to the named dataset
+             */
+            $graphQLFilesSubfolder = substr($filePath, strlen($fixtureFolder) + 1);
+            $dataName = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
             $providerItems[$dataName] = [
                 'application/json',
                 file_get_contents($graphQLResponseFile),
