@@ -114,7 +114,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     /**
      * Indicate if the directiveResolver can process the directive with the given name and args
      */
-    public function resolveCanProcess(
+    public function resolveCanProcessDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
     ): bool;

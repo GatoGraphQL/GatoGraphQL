@@ -205,12 +205,12 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function resolveCanProcess(
+    public function resolveCanProcessDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
     ): bool {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->resolveCanProcess(
+        return $aliasedDirectiveResolver->resolveCanProcessDirective(
             $relationalTypeResolver,
             $directive,
         );

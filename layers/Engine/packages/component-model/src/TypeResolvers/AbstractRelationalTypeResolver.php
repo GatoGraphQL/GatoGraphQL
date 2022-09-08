@@ -456,7 +456,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Only consider the directiveResolvers that can satisfy this directive
         $directiveResolvers = array_filter(
             $directiveResolvers,
-            fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->resolveCanProcess($this, $directive)
+            fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->resolveCanProcessDirective($this, $directive)
         );
         if ($directiveResolvers === []) {
             return null;
