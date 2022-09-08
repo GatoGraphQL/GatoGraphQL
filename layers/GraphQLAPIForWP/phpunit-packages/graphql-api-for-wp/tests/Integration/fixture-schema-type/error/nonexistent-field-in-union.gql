@@ -1,5 +1,6 @@
 {
-  customPosts(pagination: { limit: 2 }) {
+  customPosts(pagination: { limit: 2 }, sort: { order: ASC, by: ID }) {
+    __typename
     id
     nonExisting
   }
