@@ -181,6 +181,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public function resolveDirectivesIntoPipelineData(
         array $directives,
         SplObjectStorage $directiveFields,
+        bool $isNested,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
         /**
@@ -208,6 +209,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $directiveResolverFields = $this->validateAndResolveDirectiveResolverToFields(
             $directives,
             $directiveFields,
+            $isNested,
             $engineIterationFeedbackStore,
         );
 
@@ -244,6 +246,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function validateAndResolveDirectiveResolverToFields(
         array $directives,
         SplObjectStorage $directiveFields,
+        bool $isNested,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
         /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
@@ -257,6 +260,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveResolvers = $this->getFieldDirectiveResolvers(
                 $directive,
                 $directiveFields[$directive],
+                $isNested,
             );
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolvers === null) {
@@ -445,6 +449,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function getFieldDirectiveResolvers(
         Directive $directive,
         array $fields,
+        bool $isNested,
     ): ?SplObjectStorage {
         $directiveName = $directive->getName();
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
@@ -475,7 +480,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              */
             foreach ($directiveResolvers as $directiveResolver) {
                 // If this field is not supported by the directive, skip
-                if (!$directiveResolver->resolveCanProcessField($this, $field)) {
+                if (!$directiveResolver->resolveCanProcessField($this, $field, $isNested)) {
                     continue;
                 }
 
@@ -1053,6 +1058,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
                 $directives,
                 $directiveFields,
+                false,
                 $separateEngineIterationFeedbackStore,
             );
             $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
