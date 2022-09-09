@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 
-use GraphQLByPoP\GraphQLServer\Unit\EnabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
+use GraphQLByPoP\GraphQLServer\Unit\DisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 
 class DisabledNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest
 {
-    use EnabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
+    use DisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 }

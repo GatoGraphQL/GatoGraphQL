@@ -2,7 +2,7 @@
   "data": {
     "customPosts": [
       {
-        "__typename": "PoPCMSSchema_Posts_Post",
+        "__typename": "Post",
         "isObjectTypeWithNamespacing": true,
         "isObjectTypeWithoutNamespacing": true,
         "isObjectTypeWithWrongNamespacing": false,
@@ -14,7 +14,7 @@
         "isInUnionTypeWithWrongNamespacing": false
       },
       {
-        "__typename": "PoPCMSSchema_Posts_Post",
+        "__typename": "Post",
         "isObjectTypeWithNamespacing": true,
         "isObjectTypeWithoutNamespacing": true,
         "isObjectTypeWithWrongNamespacing": false,
@@ -26,7 +26,7 @@
         "isInUnionTypeWithWrongNamespacing": false
       },
       {
-        "__typename": "PoPCMSSchema_Posts_Post",
+        "__typename": "Post",
         "isObjectTypeWithNamespacing": true,
         "isObjectTypeWithoutNamespacing": true,
         "isObjectTypeWithWrongNamespacing": false,
@@ -40,7 +40,7 @@
     ],
     "users": [
       {
-        "__typename": "PoPCMSSchema_Users_User",
+        "__typename": "User",
         "isObjectTypeWithNamespacing": false,
         "isObjectTypeWithoutNamespacing": false,
         "isObjectTypeWithWrongNamespacing": false,
@@ -52,7 +52,7 @@
         "isInUnionTypeWithWrongNamespacing": false
       },
       {
-        "__typename": "PoPCMSSchema_Users_User",
+        "__typename": "User",
         "isObjectTypeWithNamespacing": false,
         "isObjectTypeWithoutNamespacing": false,
         "isObjectTypeWithWrongNamespacing": false,
@@ -64,7 +64,7 @@
         "isInUnionTypeWithWrongNamespacing": false
       },
       {
-        "__typename": "PoPCMSSchema_Users_User",
+        "__typename": "User",
         "isObjectTypeWithNamespacing": false,
         "isObjectTypeWithoutNamespacing": false,
         "isObjectTypeWithWrongNamespacing": false,
