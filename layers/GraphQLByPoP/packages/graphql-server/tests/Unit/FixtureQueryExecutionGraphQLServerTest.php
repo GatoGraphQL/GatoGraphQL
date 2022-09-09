@@ -13,4 +13,19 @@ class FixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecuti
     {
         return __DIR__ . '/fixture';
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getGraphQLServerModuleClassConfiguration(): array
+    {
+        return [
+            ...parent::getGraphQLServerModuleClassConfiguration(),
+            ...[
+                \PoP\ComponentModel\Module::class => [
+                    \PoP\ComponentModel\Environment::EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS => true,
+                ],
+            ]
+        ];
+    }
 }

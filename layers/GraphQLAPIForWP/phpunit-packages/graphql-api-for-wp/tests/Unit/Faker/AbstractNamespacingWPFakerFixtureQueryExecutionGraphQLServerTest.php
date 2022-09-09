@@ -44,6 +44,7 @@ abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest 
             ...[
                 \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES => static::isEnabled(),
+                    \PoP\ComponentModel\Environment::EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS => true,
                 ],
             ]
         ];
