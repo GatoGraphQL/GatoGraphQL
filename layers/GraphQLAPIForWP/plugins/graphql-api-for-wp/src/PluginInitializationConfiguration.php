@@ -545,6 +545,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
         ];
         $moduleClassConfiguration[ComponentModelModule::class] = [
+            ComponentModelEnvironment::ENABLE_TYPENAME_GLOBAL_FIELDS => false,
             /**
              * Enable Mutations?
              */
