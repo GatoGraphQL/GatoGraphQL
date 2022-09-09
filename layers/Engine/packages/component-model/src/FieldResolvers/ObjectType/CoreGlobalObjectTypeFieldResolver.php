@@ -4,20 +4,25 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 
 class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
@@ -60,9 +65,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldNamesToResolve(): array
     {
         return [
-            'typeName',
-            'namespace',
-            'qualifiedTypeName',
             'isObjectType',
             'implements',
             'isInUnionType',
@@ -71,12 +73,50 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         ];
     }
 
+    /**
+     * Do not expose these fields in the Schema
+     */
+    public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        return !$this->exposeCoreFunctionalityGlobalFields();
+    }
+
+    public function exposeCoreFunctionalityGlobalFields(): bool
+    {
+        /**
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->exposeCoreFunctionalityGlobalFields();
+    }
+
+    /**
+     * Only process internally
+     */
+    public function resolveCanProcess(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        if ($this->exposeCoreFunctionalityGlobalFields()) {
+            return true;
+        }
+
+        /**
+         * Enable when executed within the GraphQL server
+         */
+        if ($field->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
+            return true;
+        }
+
+        /**
+         * Disable when invoked from the GraphQL API
+         */
+        return false;
+    }
+
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'typeName' => $this->getStringScalarTypeResolver(),
-            'namespace' => $this->getStringScalarTypeResolver(),
-            'qualifiedTypeName' => $this->getStringScalarTypeResolver(),
             'isObjectType' => $this->getBooleanScalarTypeResolver(),
             'implements' => $this->getBooleanScalarTypeResolver(),
             'isInUnionType' => $this->getBooleanScalarTypeResolver(),
@@ -89,9 +129,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'typeName',
-            'namespace',
-            'qualifiedTypeName',
             'isObjectType',
             'implements',
             'isInUnionType',
@@ -106,9 +143,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'typeName' => $this->__('The object\'s type', 'component-model'),
-            'namespace' => $this->__('The object\'s namespace', 'component-model'),
-            'qualifiedTypeName' => $this->__('The object\'s namespace + type', 'component-model'),
             'isObjectType' => $this->__('Indicate if the object is of a given type', 'component-model'),
             'implements' => $this->__('Indicate if the object implements a given interface', 'component-model'),
             'isInUnionType' => $this->__('Indicate if the object is part of a given union type', 'component-model'),
@@ -177,15 +211,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'typeName':
-                return $objectTypeResolver->getTypeName();
-
-            case 'namespace':
-                return $objectTypeResolver->getNamespace();
-
-            case 'qualifiedTypeName':
-                return $objectTypeResolver->getNamespacedTypeName();
-
             case 'isObjectType':
                 $typeName = $fieldDataAccessor->getValue('type');
                 // If the provided typeName contains the namespace separator, then compare by qualifiedType

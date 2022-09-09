@@ -12,21 +12,21 @@ use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
 use PoP\ComponentModel\QueryResolution\InputObjectSubpropertyFieldDataAccessor;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
@@ -44,6 +44,7 @@ use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -104,6 +105,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>
      */
     protected SplObjectStorage $fieldObjectTypeResolverObjectFieldDataCache;
+
+    protected ?Location $schemaGenerationLocation = null;
 
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?OutputServiceInterface $outputService = null;
@@ -1149,7 +1152,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 null,
                 [],
                 [],
-                ASTNodesFactory::getNonSpecificLocation()
+                /**
+                 * Do NOT use ASTNodesFactory::getNonSpecificLocation(), as that
+                 * represents "field executed internally", but here is a different
+                 * purpose, which is to calculate the fields for the Schema.
+                 * Then, internal fields (such as `implements`, `isInUnionType`,
+                 * `isTypeOrImplements` and `isTypeOrImplementsAll`) can be executed
+                 * only internally.
+                 *
+                 * @see layers/Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php
+                 */
+                $this->getSchemaGenerationLocation()
             );
         }
 
@@ -1190,6 +1203,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         // Return all the units that resolve the fieldName
         return array_values($objectTypeFieldResolvers);
+    }
+
+    protected function getSchemaGenerationLocation(): Location
+    {
+        if ($this->schemaGenerationLocation === null) {
+            $this->schemaGenerationLocation = new Location(-2, -2);
+        }
+        return $this->schemaGenerationLocation;
     }
 
     /**

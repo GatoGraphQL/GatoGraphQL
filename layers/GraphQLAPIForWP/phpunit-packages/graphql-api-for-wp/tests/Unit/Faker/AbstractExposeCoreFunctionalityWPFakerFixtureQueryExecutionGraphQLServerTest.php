@@ -8,16 +8,13 @@ use GraphQLByPoP\GraphQLServer\Unit\EnabledDisabledFixtureQueryExecutionGraphQLS
 use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 use PoP\Root\Module\ModuleInterface;
 
-abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
+abstract class AbstractExposeCoreFunctionalityWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     use EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    /**
-     * Directory under the fixture files are placed
-     */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-namespacing';
+        return __DIR__ . '/fixture-expose-core-functionality';
     }
 
     /**
@@ -43,8 +40,7 @@ abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest 
             ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
                 \PoP\ComponentModel\Module::class => [
-                    \PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES => static::isEnabled(),
-                    \PoP\ComponentModel\Environment::EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS => true,
+                    \PoP\ComponentModel\Environment::EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS => static::isEnabled(),
                 ],
             ]
         ];

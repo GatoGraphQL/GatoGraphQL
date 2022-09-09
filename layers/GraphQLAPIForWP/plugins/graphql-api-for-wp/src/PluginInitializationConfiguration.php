@@ -545,6 +545,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
         ];
         $moduleClassConfiguration[ComponentModelModule::class] = [
+            ComponentModelEnvironment::ENABLE_TYPENAME_GLOBAL_FIELDS => false,
             /**
              * Enable Mutations?
              */
@@ -557,9 +558,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Disable the Native endpoint
             \PoPAPI\APIEndpointsForWP\Environment::DISABLE_NATIVE_API_ENDPOINT => true,
         ];
-        $moduleClassConfiguration[\PoPAPI\API\Module::class] = [
-            // Do not expose global fields
-            \PoPAPI\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
+        $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class] = [
+            // Expose global fields
+            \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
         ];
 
         // If doing ?behavior=unrestricted, always enable certain features

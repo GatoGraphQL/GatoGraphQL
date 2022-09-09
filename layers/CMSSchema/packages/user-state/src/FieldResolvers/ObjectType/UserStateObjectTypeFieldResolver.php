@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserState\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\Root\App;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Root\App;
 
-class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObjectTypeFieldResolver
+class UserStateObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
@@ -32,6 +33,16 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
     {
         return [
             'loggedInUserID',
+        ];
+    }
+
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
+    public function getObjectTypeResolverClassesToAttachTo(): array
+    {
+        return [
+            RootObjectTypeResolver::class,
         ];
     }
 

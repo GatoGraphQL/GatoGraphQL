@@ -293,4 +293,30 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function enableTypeNameGlobalFields(): bool
+    {
+        $envVariable = Environment::ENABLE_TYPENAME_GLOBAL_FIELDS;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    public function exposeCoreFunctionalityGlobalFields(): bool
+    {
+        $envVariable = Environment::EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

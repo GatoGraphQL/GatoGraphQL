@@ -7,20 +7,20 @@ namespace PoPCMSSchema\UserState\Hooks;
 use PoP\ComponentModel\Response\DatabaseEntryManager;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\UserState\FieldResolvers\ObjectType\GlobalObjectTypeFieldResolver;
+use PoPCMSSchema\UserState\FieldResolvers\ObjectType\ObjectTypeFieldResolver;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
-    private ?GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver = null;
+    private ?ObjectTypeFieldResolver $globalObjectTypeFieldResolver = null;
 
-    final public function setGlobalObjectTypeFieldResolver(GlobalObjectTypeFieldResolver $globalObjectTypeFieldResolver): void
+    final public function setObjectTypeFieldResolver(ObjectTypeFieldResolver $globalObjectTypeFieldResolver): void
     {
         $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;
     }
-    final protected function getGlobalObjectTypeFieldResolver(): GlobalObjectTypeFieldResolver
+    final protected function getObjectTypeFieldResolver(): ObjectTypeFieldResolver
     {
-        /** @var GlobalObjectTypeFieldResolver */
-        return $this->globalObjectTypeFieldResolver ??= $this->instanceManager->getInstance(GlobalObjectTypeFieldResolver::class);
+        /** @var ObjectTypeFieldResolver */
+        return $this->globalObjectTypeFieldResolver ??= $this->instanceManager->getInstance(ObjectTypeFieldResolver::class);
     }
 
     protected function init(): void
@@ -41,7 +41,7 @@ class DBEntriesHookSet extends AbstractHookSet
     {
         $dbNameToFieldNames['userstate'] = App::applyFilters(
             'PoPCMSSchema\UserState\DataloaderHooks:metaFields',
-            $this->getGlobalObjectTypeFieldResolver()->getFieldNamesToResolve()
+            $this->getObjectTypeFieldResolver()->getFieldNamesToResolve()
         );
         return $dbNameToFieldNames;
     }
