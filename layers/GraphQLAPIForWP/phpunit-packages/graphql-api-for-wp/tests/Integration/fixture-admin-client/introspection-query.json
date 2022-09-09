@@ -5093,6 +5093,34 @@
               "deprecationReason": null
             },
             {
+              "name": "isUserLoggedIn",
+              "description": "Is the user logged-in?",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "loggedInUserID",
+              "description": "The logged-in user's ID",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "me",
               "description": "The logged-in user",
               "args": [],
@@ -7131,6 +7159,34 @@
                     }
                   }
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "isUserLoggedIn",
+              "description": "Is the user logged-in?",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "loggedInUserID",
+              "description": "The logged-in user's ID",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null

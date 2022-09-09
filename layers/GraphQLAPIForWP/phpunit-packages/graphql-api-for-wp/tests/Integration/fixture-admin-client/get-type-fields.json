@@ -693,6 +693,12 @@
               "name": "imageSizeNames"
             },
             {
+              "name": "isUserLoggedIn"
+            },
+            {
+              "name": "loggedInUserID"
+            },
+            {
               "name": "me"
             },
             {
@@ -858,6 +864,12 @@
             },
             {
               "name": "imageSizeNames"
+            },
+            {
+              "name": "isUserLoggedIn"
+            },
+            {
+              "name": "loggedInUserID"
             },
             {
               "name": "loginUser"
