@@ -89,13 +89,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         FieldInterface $field,
     ): bool {
         /**
-         * Disable for introspection types
-         */
-        if ($objectTypeResolver->isIntrospectionType()) {
-            return false;
-        }
-
-        /**
          * Enable when executed within the GraphQL server
          */
         if ($field->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
