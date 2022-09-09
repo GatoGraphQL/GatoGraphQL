@@ -62,9 +62,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldNamesToResolve(): array
     {
         return [
-            'typeName',
-            'namespace',
-            'qualifiedTypeName',
             'isObjectType',
             'implements',
             'isInUnionType',
@@ -104,9 +101,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'typeName' => $this->getStringScalarTypeResolver(),
-            'namespace' => $this->getStringScalarTypeResolver(),
-            'qualifiedTypeName' => $this->getStringScalarTypeResolver(),
             'isObjectType' => $this->getBooleanScalarTypeResolver(),
             'implements' => $this->getBooleanScalarTypeResolver(),
             'isInUnionType' => $this->getBooleanScalarTypeResolver(),
@@ -119,9 +113,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'typeName',
-            'namespace',
-            'qualifiedTypeName',
             'isObjectType',
             'implements',
             'isInUnionType',
@@ -136,9 +127,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'typeName' => $this->__('The object\'s type', 'component-model'),
-            'namespace' => $this->__('The object\'s namespace', 'component-model'),
-            'qualifiedTypeName' => $this->__('The object\'s namespace + type', 'component-model'),
             'isObjectType' => $this->__('Indicate if the object is of a given type', 'component-model'),
             'implements' => $this->__('Indicate if the object implements a given interface', 'component-model'),
             'isInUnionType' => $this->__('Indicate if the object is part of a given union type', 'component-model'),
@@ -207,15 +195,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'typeName':
-                return $objectTypeResolver->getTypeName();
-
-            case 'namespace':
-                return $objectTypeResolver->getNamespace();
-
-            case 'qualifiedTypeName':
-                return $objectTypeResolver->getNamespacedTypeName();
-
             case 'isObjectType':
                 $typeName = $fieldDataAccessor->getValue('type');
                 // If the provided typeName contains the namespace separator, then compare by qualifiedType
