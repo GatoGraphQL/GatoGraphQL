@@ -1,0 +1,442 @@
+{
+  "errors": [
+    {
+      "message": "There is no field 'isObjectType' on type 'Post'",
+      "locations": [
+        {
+          "line": 8,
+          "column": 34
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isObjectTypeWithNamespacing: isObjectType(type: \"PoPCMSSchema_Posts_Post\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "isObjectTypeWithNamespacing: isObjectType(type: \"PoPCMSSchema_Posts_Post\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isObjectType' on type 'Post'",
+      "locations": [
+        {
+          "line": 9,
+          "column": 37
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isObjectTypeWithoutNamespacing: isObjectType(type: \"Post\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "isObjectTypeWithoutNamespacing: isObjectType(type: \"Post\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isObjectType' on type 'Post'",
+      "locations": [
+        {
+          "line": 10,
+          "column": 39
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isObjectTypeWithWrongNamespacing: isObjectType(type: \"NonExisting_PoPCMSSchema_Posts_Post\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "isObjectTypeWithWrongNamespacing: isObjectType(type: \"NonExisting_PoPCMSSchema_Posts_Post\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'implements' on type 'Post'",
+      "locations": [
+        {
+          "line": 11,
+          "column": 32
+        }
+      ],
+      "extensions": {
+        "path": [
+          "implementsWithNamespacing: implements(interface: \"PoPCMSSchema_CustomPosts_IsCustomPost\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "implementsWithNamespacing: implements(interface: \"PoPCMSSchema_CustomPosts_IsCustomPost\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'implements' on type 'Post'",
+      "locations": [
+        {
+          "line": 12,
+          "column": 35
+        }
+      ],
+      "extensions": {
+        "path": [
+          "implementsWithoutNamespacing: implements(interface: \"IsCustomPost\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "implementsWithoutNamespacing: implements(interface: \"IsCustomPost\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'implements' on type 'Post'",
+      "locations": [
+        {
+          "line": 13,
+          "column": 37
+        }
+      ],
+      "extensions": {
+        "path": [
+          "implementsWithWrongNamespacing: implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "implementsWithWrongNamespacing: implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isInUnionType' on type 'Post'",
+      "locations": [
+        {
+          "line": 14,
+          "column": 35
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isInUnionTypeWithNamespacing: isInUnionType(type: \"PoPCMSSchema_CustomPosts_CustomPostUnion\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "isInUnionTypeWithNamespacing: isInUnionType(type: \"PoPCMSSchema_CustomPosts_CustomPostUnion\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isInUnionType' on type 'Post'",
+      "locations": [
+        {
+          "line": 15,
+          "column": 38
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isInUnionTypeWithoutNamespacing: isInUnionType(type: \"CustomPostUnion\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "isInUnionTypeWithoutNamespacing: isInUnionType(type: \"CustomPostUnion\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isInUnionType' on type 'Post'",
+      "locations": [
+        {
+          "line": 16,
+          "column": 40
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isInUnionTypeWithWrongNamespacing: isInUnionType(type: \"NonExisting_PoPCMSSchema_CustomPosts_CustomPostUnion\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "CustomPostUnion",
+        "field": "isInUnionTypeWithWrongNamespacing: isInUnionType(type: \"NonExisting_PoPCMSSchema_CustomPosts_CustomPostUnion\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isObjectType' on type 'User'",
+      "locations": [
+        {
+          "line": 25,
+          "column": 34
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isObjectTypeWithNamespacing: isObjectType(type: \"PoPCMSSchema_Posts_Post\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "isObjectTypeWithNamespacing: isObjectType(type: \"PoPCMSSchema_Posts_Post\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isObjectType' on type 'User'",
+      "locations": [
+        {
+          "line": 26,
+          "column": 37
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isObjectTypeWithoutNamespacing: isObjectType(type: \"Post\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "isObjectTypeWithoutNamespacing: isObjectType(type: \"Post\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isObjectType' on type 'User'",
+      "locations": [
+        {
+          "line": 27,
+          "column": 39
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isObjectTypeWithWrongNamespacing: isObjectType(type: \"NonExisting_PoPCMSSchema_Posts_Post\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "isObjectTypeWithWrongNamespacing: isObjectType(type: \"NonExisting_PoPCMSSchema_Posts_Post\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'implements' on type 'User'",
+      "locations": [
+        {
+          "line": 28,
+          "column": 32
+        }
+      ],
+      "extensions": {
+        "path": [
+          "implementsWithNamespacing: implements(interface: \"PoPCMSSchema_CustomPosts_IsCustomPost\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "implementsWithNamespacing: implements(interface: \"PoPCMSSchema_CustomPosts_IsCustomPost\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'implements' on type 'User'",
+      "locations": [
+        {
+          "line": 29,
+          "column": 35
+        }
+      ],
+      "extensions": {
+        "path": [
+          "implementsWithoutNamespacing: implements(interface: \"IsCustomPost\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "implementsWithoutNamespacing: implements(interface: \"IsCustomPost\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'implements' on type 'User'",
+      "locations": [
+        {
+          "line": 30,
+          "column": 37
+        }
+      ],
+      "extensions": {
+        "path": [
+          "implementsWithWrongNamespacing: implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "implementsWithWrongNamespacing: implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isInUnionType' on type 'User'",
+      "locations": [
+        {
+          "line": 31,
+          "column": 35
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isInUnionTypeWithNamespacing: isInUnionType(type: \"PoPCMSSchema_CustomPosts_CustomPostUnion\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "isInUnionTypeWithNamespacing: isInUnionType(type: \"PoPCMSSchema_CustomPosts_CustomPostUnion\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isInUnionType' on type 'User'",
+      "locations": [
+        {
+          "line": 32,
+          "column": 38
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isInUnionTypeWithoutNamespacing: isInUnionType(type: \"CustomPostUnion\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "isInUnionTypeWithoutNamespacing: isInUnionType(type: \"CustomPostUnion\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
+      "message": "There is no field 'isInUnionType' on type 'User'",
+      "locations": [
+        {
+          "line": 33,
+          "column": 40
+        }
+      ],
+      "extensions": {
+        "path": [
+          "isInUnionTypeWithWrongNamespacing: isInUnionType(type: \"NonExisting_PoPCMSSchema_CustomPosts_CustomPostUnion\")",
+          "users(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "isInUnionTypeWithWrongNamespacing: isInUnionType(type: \"NonExisting_PoPCMSSchema_CustomPosts_CustomPostUnion\")",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    }
+  ],
+  "data": {
+    "customPosts": [
+      {
+        "__typename": "Post",
+        "isObjectTypeWithNamespacing": null,
+        "isObjectTypeWithoutNamespacing": null,
+        "isObjectTypeWithWrongNamespacing": null,
+        "implementsWithNamespacing": null,
+        "implementsWithoutNamespacing": null,
+        "implementsWithWrongNamespacing": null,
+        "isInUnionTypeWithNamespacing": null,
+        "isInUnionTypeWithoutNamespacing": null,
+        "isInUnionTypeWithWrongNamespacing": null
+      },
+      {
+        "__typename": "Post",
+        "isObjectTypeWithNamespacing": null,
+        "isObjectTypeWithoutNamespacing": null,
+        "isObjectTypeWithWrongNamespacing": null,
+        "implementsWithNamespacing": null,
+        "implementsWithoutNamespacing": null,
+        "implementsWithWrongNamespacing": null,
+        "isInUnionTypeWithNamespacing": null,
+        "isInUnionTypeWithoutNamespacing": null,
+        "isInUnionTypeWithWrongNamespacing": null
+      },
+      {
+        "__typename": "Post",
+        "isObjectTypeWithNamespacing": null,
+        "isObjectTypeWithoutNamespacing": null,
+        "isObjectTypeWithWrongNamespacing": null,
+        "implementsWithNamespacing": null,
+        "implementsWithoutNamespacing": null,
+        "implementsWithWrongNamespacing": null,
+        "isInUnionTypeWithNamespacing": null,
+        "isInUnionTypeWithoutNamespacing": null,
+        "isInUnionTypeWithWrongNamespacing": null
+      }
+    ],
+    "users": [
+      {
+        "__typename": "User",
+        "isObjectTypeWithNamespacing": null,
+        "isObjectTypeWithoutNamespacing": null,
+        "isObjectTypeWithWrongNamespacing": null,
+        "implementsWithNamespacing": null,
+        "implementsWithoutNamespacing": null,
+        "implementsWithWrongNamespacing": null,
+        "isInUnionTypeWithNamespacing": null,
+        "isInUnionTypeWithoutNamespacing": null,
+        "isInUnionTypeWithWrongNamespacing": null
+      },
+      {
+        "__typename": "User",
+        "isObjectTypeWithNamespacing": null,
+        "isObjectTypeWithoutNamespacing": null,
+        "isObjectTypeWithWrongNamespacing": null,
+        "implementsWithNamespacing": null,
+        "implementsWithoutNamespacing": null,
+        "implementsWithWrongNamespacing": null,
+        "isInUnionTypeWithNamespacing": null,
+        "isInUnionTypeWithoutNamespacing": null,
+        "isInUnionTypeWithWrongNamespacing": null
+      },
+      {
+        "__typename": "User",
+        "isObjectTypeWithNamespacing": null,
+        "isObjectTypeWithoutNamespacing": null,
+        "isObjectTypeWithWrongNamespacing": null,
+        "implementsWithNamespacing": null,
+        "implementsWithoutNamespacing": null,
+        "implementsWithWrongNamespacing": null,
+        "isInUnionTypeWithNamespacing": null,
+        "isInUnionTypeWithoutNamespacing": null,
+        "isInUnionTypeWithWrongNamespacing": null
+      }
+    ]
+  }
+}

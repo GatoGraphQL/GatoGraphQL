@@ -1,0 +1,80 @@
+{
+  "data": {
+    "customPosts": [
+      {
+        "__typename": "Post",
+        "isObjectTypeWithNamespacing": true,
+        "isObjectTypeWithoutNamespacing": true,
+        "isObjectTypeWithWrongNamespacing": false,
+        "implementsWithNamespacing": true,
+        "implementsWithoutNamespacing": true,
+        "implementsWithWrongNamespacing": false,
+        "isInUnionTypeWithNamespacing": true,
+        "isInUnionTypeWithoutNamespacing": true,
+        "isInUnionTypeWithWrongNamespacing": false
+      },
+      {
+        "__typename": "Post",
+        "isObjectTypeWithNamespacing": true,
+        "isObjectTypeWithoutNamespacing": true,
+        "isObjectTypeWithWrongNamespacing": false,
+        "implementsWithNamespacing": true,
+        "implementsWithoutNamespacing": true,
+        "implementsWithWrongNamespacing": false,
+        "isInUnionTypeWithNamespacing": true,
+        "isInUnionTypeWithoutNamespacing": true,
+        "isInUnionTypeWithWrongNamespacing": false
+      },
+      {
+        "__typename": "Post",
+        "isObjectTypeWithNamespacing": true,
+        "isObjectTypeWithoutNamespacing": true,
+        "isObjectTypeWithWrongNamespacing": false,
+        "implementsWithNamespacing": true,
+        "implementsWithoutNamespacing": true,
+        "implementsWithWrongNamespacing": false,
+        "isInUnionTypeWithNamespacing": true,
+        "isInUnionTypeWithoutNamespacing": true,
+        "isInUnionTypeWithWrongNamespacing": false
+      }
+    ],
+    "users": [
+      {
+        "__typename": "User",
+        "isObjectTypeWithNamespacing": false,
+        "isObjectTypeWithoutNamespacing": false,
+        "isObjectTypeWithWrongNamespacing": false,
+        "implementsWithNamespacing": false,
+        "implementsWithoutNamespacing": false,
+        "implementsWithWrongNamespacing": false,
+        "isInUnionTypeWithNamespacing": false,
+        "isInUnionTypeWithoutNamespacing": false,
+        "isInUnionTypeWithWrongNamespacing": false
+      },
+      {
+        "__typename": "User",
+        "isObjectTypeWithNamespacing": false,
+        "isObjectTypeWithoutNamespacing": false,
+        "isObjectTypeWithWrongNamespacing": false,
+        "implementsWithNamespacing": false,
+        "implementsWithoutNamespacing": false,
+        "implementsWithWrongNamespacing": false,
+        "isInUnionTypeWithNamespacing": false,
+        "isInUnionTypeWithoutNamespacing": false,
+        "isInUnionTypeWithWrongNamespacing": false
+      },
+      {
+        "__typename": "User",
+        "isObjectTypeWithNamespacing": false,
+        "isObjectTypeWithoutNamespacing": false,
+        "isObjectTypeWithWrongNamespacing": false,
+        "implementsWithNamespacing": false,
+        "implementsWithoutNamespacing": false,
+        "implementsWithWrongNamespacing": false,
+        "isInUnionTypeWithNamespacing": false,
+        "isInUnionTypeWithoutNamespacing": false,
+        "isInUnionTypeWithWrongNamespacing": false
+      }
+    ]
+  }
+}
