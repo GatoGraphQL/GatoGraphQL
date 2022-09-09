@@ -546,10 +546,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         ];
         $moduleClassConfiguration[ComponentModelModule::class] = [
             /**
-             * Do not expose the `DangerouslyNonSpecificScalar` scalar type
-             */
-            ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_NON_SPECIFIC_SCALAR_TYPE_IN_SCHEMA => true,
-            /**
              * Enable Mutations?
              */
             ComponentModelEnvironment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
