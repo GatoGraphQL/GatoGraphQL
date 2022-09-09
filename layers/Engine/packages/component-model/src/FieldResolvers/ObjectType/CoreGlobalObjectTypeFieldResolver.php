@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
@@ -75,7 +78,16 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
      */
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        return true;
+        return !$this->exposeCoreFunctionalityGlobalFields();
+    }
+
+    public function exposeCoreFunctionalityGlobalFields(): bool
+    {
+        /**
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->exposeCoreFunctionalityGlobalFields();
     }
 
     /**
@@ -85,6 +97,10 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
+        if ($this->exposeCoreFunctionalityGlobalFields()) {
+            return true;
+        }
+
         /**
          * Enable when executed within the GraphQL server
          */

@@ -306,4 +306,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function exposeCoreFunctionalityGlobalFields(): bool
+    {
+        $envVariable = Environment::EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

@@ -25,6 +25,7 @@ class Environment
     public final const SEND_EXCEPTION_TRACES = 'SEND_EXCEPTION_TRACES';
     public final const ENABLE_SELF_FIELD = 'ENABLE_SELF_FIELD';
     public final const ENABLE_TYPENAME_GLOBAL_FIELDS = 'ENABLE_TYPENAME_GLOBAL_FIELDS';
+    public final const EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS = 'EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS';
 
     /**
      * Indicate if to enable to restrict a field and directive by version,
