@@ -557,10 +557,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Disable the Native endpoint
             \PoPAPI\APIEndpointsForWP\Environment::DISABLE_NATIVE_API_ENDPOINT => true,
         ];
-        $moduleClassConfiguration[\PoPAPI\API\Module::class] = [
-            // Do not expose global fields
-            \PoPAPI\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
-        ];
 
         // If doing ?behavior=unrestricted, always enable certain features
         // Retrieve this service from the SystemContainer
