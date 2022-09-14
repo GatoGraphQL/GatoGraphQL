@@ -25,20 +25,20 @@ class WildcardACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
                 [
                     // Wildcard type or interface
                     [
-                        WildcardConfigurationValues::TYPE_OR_INTERFACE_RESOLVER_CLASS,
+                        WildcardConfigurationValues::MATCH_ANY,
                         'users',
                         UserStates::IN,
                     ],
                     // Wildcard field on type
                     [
                         CommentObjectTypeResolver::class,
-                        WildcardConfigurationValues::FIELD_NAME,
+                        WildcardConfigurationValues::MATCH_ANY,
                         UserStates::IN,
                     ],
                     // Wildcard field on interface
                     [
                         IsCustomPostInterfaceTypeResolver::class,
-                        WildcardConfigurationValues::FIELD_NAME,
+                        WildcardConfigurationValues::MATCH_ANY,
                         UserStates::IN,
                     ],
                 ]

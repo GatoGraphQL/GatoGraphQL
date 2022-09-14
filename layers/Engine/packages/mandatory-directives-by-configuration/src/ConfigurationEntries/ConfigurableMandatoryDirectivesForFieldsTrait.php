@@ -105,11 +105,11 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
                 $entry[0] === $objectTypeOrInterfaceTypeResolverClass
                 || in_array($entry[0], $interfaceTypeResolverClasses)
                 // If using the wildcard "*", all types/interfaces match
-                || $entry[0] === WildcardConfigurationValues::TYPE_OR_INTERFACE_RESOLVER_CLASS
+                || $entry[0] === WildcardConfigurationValues::MATCH_ANY
             ) && (
                 $entry[1] === $fieldName
                 // If using the wildcard "*", all fieldNames match
-                || $entry[1] === WildcardConfigurationValues::FIELD_NAME
+                || $entry[1] === WildcardConfigurationValues::MATCH_ANY
             )
         ));
     }

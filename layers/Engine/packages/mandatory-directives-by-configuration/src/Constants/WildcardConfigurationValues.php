@@ -7,10 +7,9 @@ namespace PoP\MandatoryDirectivesByConfiguration\Constants;
 /**
  * When storing the ACL configuration for fields,
  * we can use value "*" to represent "any type or interface"
- * and also "any field (within a certain type)"
+ * and also "any field (for a certain type or interface)"
  */
 class WildcardConfigurationValues
 {
-    final public const TYPE_OR_INTERFACE_RESOLVER_CLASS = '*';
-    final public const FIELD_NAME = '*';
+    final public const MATCH_ANY = '*';
 }
