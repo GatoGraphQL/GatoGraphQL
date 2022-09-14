@@ -7,10 +7,10 @@ namespace PoP\AccessControl\ConfigurationEntries;
 use PoP\Root\App;
 use PoP\AccessControl\Module;
 use PoP\AccessControl\ModuleConfiguration;
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
-use PoP\MandatoryDirectivesByConfiguration\Constants\ConfigurationValues;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
 {

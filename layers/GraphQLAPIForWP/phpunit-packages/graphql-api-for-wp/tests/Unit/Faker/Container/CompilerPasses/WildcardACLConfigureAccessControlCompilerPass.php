@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTy
 use PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPCMSSchema\UserStateAccessControl\Services\AccessControlGroups as UserStateAccessControlGroups;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\MandatoryDirectivesByConfiguration\Constants\ConfigurationValues;
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 

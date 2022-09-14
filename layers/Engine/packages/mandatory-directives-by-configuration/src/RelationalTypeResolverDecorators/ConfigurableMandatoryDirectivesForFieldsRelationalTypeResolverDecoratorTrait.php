@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators;
 
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
-use PoP\MandatoryDirectivesByConfiguration\Constants\ConfigurationValues;
 
 trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTrait
 {

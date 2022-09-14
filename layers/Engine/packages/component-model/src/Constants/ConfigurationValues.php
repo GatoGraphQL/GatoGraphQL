@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\MandatoryDirectivesByConfiguration\Constants;
+namespace PoP\ComponentModel\Constants;
 
 /**
  * When storing the ACL configuration for fields,
