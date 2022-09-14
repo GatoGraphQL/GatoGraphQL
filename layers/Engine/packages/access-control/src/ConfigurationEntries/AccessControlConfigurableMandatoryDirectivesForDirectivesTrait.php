@@ -39,7 +39,7 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesTrait
          * Sometimes there's a value (eg: filter by role), sometimes not (eg: disable).
          * When there's a value, filter all entries that contain it
          */
-        if ($value) {
+        if ($value !== null) {
             $entryList = array_filter(
                 $entryList,
                 fn ($entry) => ($entry[1] ?? null) === $value

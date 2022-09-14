@@ -82,7 +82,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
      */
     final protected function getMatchingEntries(array $entryList, ?string $value): array
     {
-        if ($value) {
+        if ($value !== null) {
             return array_values(array_filter(
                 $entryList,
                 fn (array $entry) => ($entry[1] ?? null) === $value
