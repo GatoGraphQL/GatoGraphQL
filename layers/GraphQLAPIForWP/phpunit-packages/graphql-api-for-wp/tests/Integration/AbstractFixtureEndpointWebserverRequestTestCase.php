@@ -29,7 +29,20 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
     {
         $endpoint = $this->getEndpoint();
 
+        /**
+         * Source folder for the .gql files and,
+         * by default, their .json responses
+         */
         $fixtureFolder = $this->getFixtureFolder();
+
+        /**
+         * Possibly define a different folder for the .json responses
+         */
+        $responseFixtureFolder = $this->getResponseFixtureFolder();
+
+        /**
+         * Retrieve all non-disabled GraphQL files
+         */
         $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],
@@ -51,12 +64,26 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
              */
             $filePath = $graphQLQueryFileInfo->getPath();
             $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
+            if ($responseFixtureFolder !== $fixtureFolder) {
+                $graphQLResponseFile = str_replace(
+                    $fixtureFolder,
+                    $responseFixtureFolder,
+                    $graphQLResponseFile
+                );
+            }
             if (!file_exists($graphQLResponseFile)) {
                 $this->throwFileNotExistsException($graphQLResponseFile);
             }
 
             $variables = [];
             $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+            if ($responseFixtureFolder !== $fixtureFolder) {
+                $graphQLVariablesFile = str_replace(
+                    $fixtureFolder,
+                    $responseFixtureFolder,
+                    $graphQLVariablesFile
+                );
+            }
             if (file_exists($graphQLVariablesFile)) {
                 $fileContents = file_get_contents($graphQLVariablesFile);
                 if ($fileContents === false) {
@@ -103,7 +130,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
              * produce a different response (eg: by not executing `setUp` and `tearDown`)
              */
             $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
-                $fixtureFolder,
+                $responseFixtureFolder,
                 [$fileName . ':*.json'],
                 ['*.disabled.json'],
             );
