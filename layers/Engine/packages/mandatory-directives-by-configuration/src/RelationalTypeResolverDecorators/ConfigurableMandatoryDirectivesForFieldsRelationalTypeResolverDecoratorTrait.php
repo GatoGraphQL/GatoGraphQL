@@ -9,6 +9,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
+use PoP\MandatoryDirectivesByConfiguration\Constants\ConfigurationValues;
 
 trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTrait
 {
@@ -44,10 +45,12 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             // Calculate all the interfaces that define this fieldName
-            $interfaceTypeResolversForField = array_values(array_filter(
-                $interfaceTypeResolvers,
-                fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement()),
-            ));
+            $interfaceTypeResolversForField = $fieldName === ConfigurationValues::ANY
+                ? $interfaceTypeResolvers
+                : array_values(array_filter(
+                    $interfaceTypeResolvers,
+                    fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement()),
+                ));
             foreach (
                 $this->getEntriesByTypeAndInterfaces(
                     $objectTypeResolver,
