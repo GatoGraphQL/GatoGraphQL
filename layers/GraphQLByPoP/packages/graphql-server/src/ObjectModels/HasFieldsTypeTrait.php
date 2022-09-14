@@ -35,6 +35,7 @@ trait HasFieldsTypeTrait
                 ]
             )
         );
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
