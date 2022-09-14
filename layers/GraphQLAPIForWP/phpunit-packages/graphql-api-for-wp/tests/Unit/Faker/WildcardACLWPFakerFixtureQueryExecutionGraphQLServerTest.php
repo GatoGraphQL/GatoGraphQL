@@ -30,7 +30,7 @@ class WildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractW
                 \PoPWPSchema\Comments\Module::class,
                 \PoPWPSchema\Users\Module::class,
                 \PoPCMSSchema\UserStateAccessControl\Module::class,
-                \PoPCMSSchema\UserStateMutationsWP\Module::class,
+                \PoPCMSSchema\UserStateWP\Module::class,
             ]
         ];
     }
