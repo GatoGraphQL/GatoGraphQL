@@ -1,39 +1,17 @@
 {
-    "errors": [
-        {
-            "message": "There is no field 'content' on type 'Comment'",
-            "locations": [
-                {
-                    "line": 4,
-                    "column": 5
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "content",
-                    "comments(pagination: {limit: 3}) { ... }",
-                    "query { ... }"
-                ],
-                "type": "Comment",
-                "field": "content",
-                "code": "gql@5.3.1",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
-            }
-        }
-    ],
     "data": {
         "comments": [
             {
                 "id": 1900,
-                "content": null
+                "content": "Comments? I love comments!"
             },
             {
                 "id": 1901,
-                "content": null
+                "content": "These tests are amazing!"
             },
             {
                 "id": 1903,
-                "content": null
+                "content": "Author Comment."
             }
         ]
     }
