@@ -42,6 +42,8 @@ trait HasFieldsTypeTrait
             )
         );
 
+        $globalFields = [];
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
@@ -50,8 +52,8 @@ trait HasFieldsTypeTrait
              * simply get the reference to the existing objects
              * from the registryMap
              */
-            $this->fields = array_merge(
-                $this->fields,
+            $globalFields = array_merge(
+                $globalFields,
                 SchemaDefinitionHelpers::getFieldsFromPath(
                     $fullSchemaDefinition,
                     [
@@ -60,12 +62,34 @@ trait HasFieldsTypeTrait
                 )
             );
         }
-
+        
         // Maybe sort fields and connections all together
         if ($moduleConfiguration->sortGraphQLSchemaAlphabetically()) {
-            uasort($this->fields, function (Field $a, Field $b): int {
-                return $a->getName() <=> $b->getName();
-            });
+            if ($moduleConfiguration->sortGlobalFieldsAfterNormalFieldsInGraphQLSchema()) {
+                /**
+                 * Sort them separately, then merge them
+                 */
+                uasort($this->fields, fn (Field $a, Field $b) => $a->getName() <=> $b->getName());
+                uasort($globalFields, fn (Field $a, Field $b) => $a->getName() <=> $b->getName());
+                $this->fields = array_merge(
+                    $this->fields,
+                    $globalFields
+                );
+            } else {
+                /**
+                 * Merge them, then sort them together
+                 */
+                $this->fields = array_merge(
+                    $this->fields,
+                    $globalFields
+                );
+                uasort($this->fields, fn (Field $a, Field $b) => $a->getName() <=> $b->getName());
+            }
+        } else {
+            $this->fields = array_merge(
+                $this->fields,
+                $globalFields
+            );
         }
     }
 
