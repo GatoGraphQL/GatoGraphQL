@@ -1,1 +1,58 @@
-{}
+{
+    "errors": [
+        {
+            "message": "There is no field 'id' on type 'Comment'",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "id",
+                    "comments { ... }",
+                    "query { ... }"
+                ],
+                "type": "Comment",
+                "field": "id",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "comments": [
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            }
+        ]
+    }
+}
