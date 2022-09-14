@@ -20,10 +20,10 @@ abstract class AbstractACLWPFakerFixtureQueryExecutionGraphQLServerTest extends 
 
     final protected function getResponseFixtureFolder(): string
     {
-        return $this->getWildcardResponseFixtureFolder();
+        return $this->getACLResponseFixtureFolder();
     }
 
-    abstract protected function getWildcardResponseFixtureFolder(): string;
+    abstract protected function getACLResponseFixtureFolder(): string;
 
     /**
      * @return array<class-string<ModuleInterface>>
@@ -49,7 +49,7 @@ abstract class AbstractACLWPFakerFixtureQueryExecutionGraphQLServerTest extends 
     protected static function getGraphQLServerApplicationContainerCompilerPassClasses(): array
     {
         $graphQLServerApplicationContainerCompilerPassClasses = parent::getGraphQLServerApplicationContainerCompilerPassClasses();
-        $wildcardCompilerPassClass = static::getWildcardCompilerPassClass();
+        $wildcardCompilerPassClass = static::getACLCompilerPassClass();
         if ($wildcardCompilerPassClass === null) {
             return $graphQLServerApplicationContainerCompilerPassClasses;
         }
@@ -64,5 +64,5 @@ abstract class AbstractACLWPFakerFixtureQueryExecutionGraphQLServerTest extends 
     /**
      * @return class-string<CompilerPassInterface>|null
      */
-    abstract protected static function getWildcardCompilerPassClass(): ?string;
+    abstract protected static function getACLCompilerPassClass(): ?string;
 }
