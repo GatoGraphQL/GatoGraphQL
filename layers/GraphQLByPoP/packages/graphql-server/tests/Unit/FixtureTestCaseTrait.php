@@ -11,9 +11,18 @@ use Symfony\Component\Finder\SplFileInfo;
 trait FixtureTestCaseTrait
 {
     /**
-     * Directory under the fixture files are placed
+     * Directory under which the fixture files are placed
      */
     abstract protected function getFixtureFolder(): string;
+    
+    /**
+     * Directory under which the response fixture files are placed.
+     * By default it's the same where the query fixture files are.
+     */
+    protected function getResponseFixtureFolder(): string
+    {
+        return $this->getFixtureFolder();
+    }
 
     /**
      * @return SplFileInfo[]
