@@ -1,0 +1,29 @@
+{
+    "data": {
+        "users": [
+            {
+                "id": 1
+            },
+            {
+                "id": 2
+            },
+            {
+                "id": 3
+            }
+        ],
+        "postCategories": [
+            {
+                "name": "aciform",
+                "count": 1
+            },
+            {
+                "name": "antiquarianism",
+                "count": 1
+            },
+            {
+                "name": "arrangement",
+                "count": 1
+            }
+        ]
+    }
+}

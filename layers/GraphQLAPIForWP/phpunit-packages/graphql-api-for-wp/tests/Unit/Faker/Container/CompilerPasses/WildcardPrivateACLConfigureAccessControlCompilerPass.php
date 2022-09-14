@@ -31,7 +31,7 @@ class WildcardPrivateACLConfigureAccessControlCompilerPass extends AbstractCompi
                         UserStates::IN,
                         SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],
-                    // Wildcard type or interface (test on Category)
+                    // Wildcard type or interface (test on PostCategory)
                     [
                         ConfigurationValues::ANY,
                         'count',

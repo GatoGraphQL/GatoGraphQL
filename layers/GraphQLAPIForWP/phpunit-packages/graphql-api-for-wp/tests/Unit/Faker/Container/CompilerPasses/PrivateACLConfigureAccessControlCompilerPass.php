@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker\Container\CompilerPasses;
 
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 use PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPCMSSchema\UserStateAccessControl\Services\AccessControlGroups as UserStateAccessControlGroups;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
+use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 
-class WildcardPublicACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
+class PrivateACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {
     protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
@@ -24,33 +25,33 @@ class WildcardPublicACLConfigureAccessControlCompilerPass extends AbstractCompil
             [
                 UserStateAccessControlGroups::STATE,
                 [
-                    // Wildcard type or interface (test on Root)
+                    // Type or interface (test on QueryRoot)
                     [
-                        ConfigurationValues::ANY,
+                        QueryRootObjectTypeResolver::class,
                         'users',
                         UserStates::IN,
-                        SchemaModes::PUBLIC_SCHEMA_MODE,
+                        SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],
-                    // Wildcard type or interface (test on PostCategory)
+                    // Type or interface (test on PostCategory)
                     [
-                        ConfigurationValues::ANY,
+                        PostCategoryObjectTypeResolver::class,
                         'count',
                         UserStates::IN,
-                        SchemaModes::PUBLIC_SCHEMA_MODE,
+                        SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],
-                    // Wildcard field on type
+                    // Field on type
                     [
                         CommentObjectTypeResolver::class,
-                        ConfigurationValues::ANY,
+                        'content',
                         UserStates::IN,
-                        SchemaModes::PUBLIC_SCHEMA_MODE,
+                        SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],
-                    // Wildcard field on interface
+                    // Field on interface
                     [
                         IsCustomPostInterfaceTypeResolver::class,
-                        ConfigurationValues::ANY,
+                        'title',
                         UserStates::IN,
-                        SchemaModes::PUBLIC_SCHEMA_MODE,
+                        SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],
                 ]
             ]
