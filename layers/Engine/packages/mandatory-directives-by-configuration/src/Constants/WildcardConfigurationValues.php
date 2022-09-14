@@ -11,5 +11,5 @@ namespace PoP\MandatoryDirectivesByConfiguration\Constants;
  */
 class WildcardConfigurationValues
 {
-    final public const MATCH_ANY = '*';
+    final public const ANY = '*';
 }
