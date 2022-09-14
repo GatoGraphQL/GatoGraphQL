@@ -225,7 +225,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
              * Watch out! Can't use `===` because (for some reason) the same value
              * could be passed as int or string!
              */
-            if ($entries[$pos]['id'] == $menuItemID) {
+            if ($entries[$pos]['id'] === $menuItemID) {
                 return $pos;
             }
         }

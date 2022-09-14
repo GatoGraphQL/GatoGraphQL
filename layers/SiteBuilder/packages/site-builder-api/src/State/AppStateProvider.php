@@ -52,6 +52,6 @@ class AppStateProvider extends AbstractAppStateProvider
         $platformmanager = StratumManagerFactory::getInstance();
         $state['stratum'] = Stratum::DATA;
         $state['strata'] = $platformmanager->getStrata($state['stratum']);
-        $state['stratum-isdefault'] = $state['stratum'] == $platformmanager->getDefaultStratum();
+        $state['stratum-isdefault'] = $state['stratum'] === $platformmanager->getDefaultStratum();
     }
 }

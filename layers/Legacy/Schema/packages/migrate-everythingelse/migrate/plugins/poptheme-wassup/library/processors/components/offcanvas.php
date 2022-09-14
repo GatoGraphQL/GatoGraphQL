@@ -77,7 +77,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                         self::COMPONENT_OFFCANVAS_BODYTABS => self::COMPONENT_OFFCANVAS_BODY,
                         self::COMPONENT_OFFCANVAS_BODYSIDEINFO => self::COMPONENT_OFFCANVAS_BODY,
                     );
-                    $load_component = $dependencies[$component->name] == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_component = $dependencies[$component->name] === $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
                 $subcomponents = array(

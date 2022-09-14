@@ -216,7 +216,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         printf(
                             '<a href="#%s" class="nav-tab %s">%s</a>',
                             $item['id'],
-                            $item['id'] == $activeModuleID ? 'nav-tab-active' : '',
+                            $item['id'] === $activeModuleID ? 'nav-tab-active' : '',
                             $item['name']
                         );
                     }
@@ -249,7 +249,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     if ($printWithTabs) {
                         $sectionStyle = sprintf(
                             'display: %s;',
-                            $item['id'] == $activeModuleID ? 'block' : 'none'
+                            $item['id'] === $activeModuleID ? 'block' : 'none'
                         );
                     }
                     ?>

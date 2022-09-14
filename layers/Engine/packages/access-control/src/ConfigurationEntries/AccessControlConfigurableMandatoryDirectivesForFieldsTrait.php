@@ -58,14 +58,14 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
             $entryList,
             fn ($entry): bool =>
                 (
-                    $entry[0] == $objectTypeOrInterfaceTypeResolverClass
+                    $entry[0] === $objectTypeOrInterfaceTypeResolverClass
                     || in_array($entry[0], $interfaceTypeResolverClasses)
                 )
-                && $entry[1] == $fieldName
+                && $entry[1] === $fieldName
                 && (
                     (
                         isset($entry[3])
-                        && $entry[3] == $individualControlSchemaMode
+                        && $entry[3] === $individualControlSchemaMode
                     )
                     || (
                         !isset($entry[3])
