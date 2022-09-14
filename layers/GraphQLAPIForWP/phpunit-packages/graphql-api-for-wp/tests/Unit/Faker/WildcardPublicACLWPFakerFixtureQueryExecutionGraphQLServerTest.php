@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-class WildcardPublicACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest
+class WildcardPublicACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractACLWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     protected function getWildcardResponseFixtureFolder(): string
     {
