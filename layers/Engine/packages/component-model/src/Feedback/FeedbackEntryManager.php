@@ -597,7 +597,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
      * Re-create the path to the AST node.
      *
      * Skip if the AST node was created on runtime.
-     * Eg: _id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])
+     * Eg: _id6x7_title7x7_isTypeOrImplementsAll_IsCustomPost_: _isTypeOrImplementsAll(typesOrInterfaces: [\"IsCustomPost\"])
      *
      * @return string[]
      */
