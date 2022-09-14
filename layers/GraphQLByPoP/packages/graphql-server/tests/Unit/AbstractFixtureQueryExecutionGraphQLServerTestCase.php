@@ -75,7 +75,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
              * If the test is organized under a subfolder (such as "Success" or "Error"),
              * append it to the named dataset
              */
-            $graphQLFilesSubfolder = substr($filePath, strlen($fixtureFolder) + 1);
+            $graphQLFilesSubfolder = substr($filePath, strlen($responseFixtureFolder) + 1);
             $dataName = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
 
             /**
