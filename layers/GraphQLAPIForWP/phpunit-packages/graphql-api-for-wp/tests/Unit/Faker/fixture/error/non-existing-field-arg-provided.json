@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "On field 'implements' of type 'Post', there is no argument with name 'type'",
+      "message": "On field '_implements' of type 'Post', there is no argument with name 'type'",
       "locations": [
         {
           "line": 4,
@@ -10,10 +10,10 @@
       ],
       "extensions": {
         "type": "Post",
-        "field": "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+        "field": "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "path": [
           "(type: \"DoesntMatter\")",
-          "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+          "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
@@ -22,7 +22,7 @@
       }
     },
     {
-      "message": "On field 'isObjectType' of type 'Post', there is no argument with name 'interface'",
+      "message": "On field '_isObjectType' of type 'Post', there is no argument with name 'interface'",
       "locations": [
         {
           "line": 8,
@@ -31,10 +31,10 @@
       ],
       "extensions": {
         "type": "Post",
-        "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
+        "field": "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "path": [
           "(interface: \"DoesntMatter\")",
-          "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
+          "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
@@ -43,7 +43,7 @@
       }
     },
     {
-      "message": "On field 'isObjectType' of type 'Page', there is no argument with name 'interface'",
+      "message": "On field '_isObjectType' of type 'Page', there is no argument with name 'interface'",
       "locations": [
         {
           "line": 8,
@@ -52,10 +52,10 @@
       ],
       "extensions": {
         "type": "Page",
-        "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
+        "field": "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "path": [
           "(interface: \"DoesntMatter\")",
-          "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
+          "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
@@ -68,29 +68,29 @@
     "posts": [
       {
         "__typename": "Post",
-        "implements": null
+        "_implements": null
       },
       {
         "__typename": "Post",
-        "implements": null
+        "_implements": null
       },
       {
         "__typename": "Post",
-        "implements": null
+        "_implements": null
       }
     ],
     "customPosts": [
       {
         "__typename": "Post",
-        "isObjectType": null
+        "_isObjectType": null
       },
       {
         "__typename": "Page",
-        "isObjectType": null
+        "_isObjectType": null
       },
       {
         "__typename": "Page",
-        "isObjectType": null
+        "_isObjectType": null
       }
     ]
   }

@@ -3,41 +3,41 @@
     "customPosts": [
       {
         "__typename": "Post",
-        "isObjectType": true,
-        "implements": true,
-        "isInUnionType": true
+        "_isObjectType": true,
+        "_implements": true,
+        "_isInUnionType": true
       },
       {
         "__typename": "Page",
-        "isObjectType": false,
-        "implements": true,
-        "isInUnionType": true
+        "_isObjectType": false,
+        "_implements": true,
+        "_isInUnionType": true
       },
       {
         "__typename": "Page",
-        "isObjectType": false,
-        "implements": true,
-        "isInUnionType": true
+        "_isObjectType": false,
+        "_implements": true,
+        "_isInUnionType": true
       }
     ],
     "users": [
       {
         "__typename": "User",
-        "isObjectType": false,
-        "implements": false,
-        "isInUnionType": false
+        "_isObjectType": false,
+        "_implements": false,
+        "_isInUnionType": false
       },
       {
         "__typename": "User",
-        "isObjectType": false,
-        "implements": false,
-        "isInUnionType": false
+        "_isObjectType": false,
+        "_implements": false,
+        "_isInUnionType": false
       },
       {
         "__typename": "User",
-        "isObjectType": false,
-        "implements": false,
-        "isInUnionType": false
+        "_isObjectType": false,
+        "_implements": false,
+        "_isInUnionType": false
       }
     ]
   }

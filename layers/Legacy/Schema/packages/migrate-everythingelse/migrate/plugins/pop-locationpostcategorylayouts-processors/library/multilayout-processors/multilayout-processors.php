@@ -14,7 +14,7 @@ class PoP_LocationPostCategoryLayouts_Multilayout_Processor extends PoP_Applicat
                     /** @var RelationalTypeResolverInterface */
                     $locationPostTypeResolver = $instanceManager->getInstance(LocationPostObjectTypeResolver::class);
                     $field = /* @todo Re-do this code! Left undone */ new Field(
-                        'isObjectType',
+                        '_isObjectType',
                         [
                             'type' => $locationPostTypeResolver->getTypeName(),
                         ]

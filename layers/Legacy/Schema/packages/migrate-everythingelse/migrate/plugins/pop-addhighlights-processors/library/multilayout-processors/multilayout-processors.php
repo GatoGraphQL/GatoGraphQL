@@ -19,7 +19,7 @@ class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayou
                     /** @var RelationalTypeResolverInterface */
                     $highlightTypeResolver = $instanceManager->getInstance(HighlightObjectTypeResolver::class);
                     $field = /* @todo Re-do this code! Left undone */ new Field(
-                        'isObjectType',
+                        '_isObjectType',
                         [
                             'type' => $highlightTypeResolver->getTypeName(),
                         ]

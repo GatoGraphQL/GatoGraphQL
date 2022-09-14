@@ -5,9 +5,9 @@
     }
   ) {
     __typename
-    isObjectType(type: "Post")
-    implements(interface: "IsCustomPost")
-    isInUnionType(type: "CustomPostUnion")
+    _isObjectType(type: "Post")
+    _implements(interface: "IsCustomPost")
+    _isInUnionType(type: "CustomPostUnion")
   }
 
   users(
@@ -16,8 +16,8 @@
     }
   ) {
     __typename
-    isObjectType(type: "Post")
-    implements(interface: "IsCustomPost")
-    isInUnionType(type: "CustomPostUnion")
+    _isObjectType(type: "Post")
+    _implements(interface: "IsCustomPost")
+    _isInUnionType(type: "CustomPostUnion")
   }
 }

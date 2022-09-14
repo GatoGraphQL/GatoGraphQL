@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'type'",
+      "message": "On field '_implements' of type 'QueryRoot', there is no argument with name 'type'",
       "locations": [
         {
           "line": 2,
@@ -10,10 +10,10 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+        "field": "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "path": [
           "(type: \"DoesntMatter\")",
-          "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+          "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
           "query { ... }"
         ],
         "code": "gql@5.4.1[a]",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'someType'",
+      "message": "On field '_implements' of type 'QueryRoot', there is no argument with name 'someType'",
       "locations": [
         {
           "line": 3,
@@ -30,10 +30,10 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+        "field": "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "path": [
           "(someType: \"DoesntMatter\")",
-          "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+          "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
         "code": "gql@5.4.1[a]",
@@ -41,7 +41,7 @@
       }
     },
     {
-      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'anotherType'",
+      "message": "On field '_implements' of type 'QueryRoot', there is no argument with name 'anotherType'",
       "locations": [
         {
           "line": 3,
@@ -50,10 +50,10 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+        "field": "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "path": [
           "(anotherType: \"AlsoDoesntMatter\")",
-          "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+          "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
         "code": "gql@5.4.1[a]",
@@ -62,7 +62,7 @@
     }
   ],
   "data": {
-    "implements": null,
+    "_implements": null,
     "multiple": null
   }
 }

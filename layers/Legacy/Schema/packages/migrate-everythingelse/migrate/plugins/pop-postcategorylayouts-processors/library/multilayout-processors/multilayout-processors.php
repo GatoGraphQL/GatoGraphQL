@@ -20,7 +20,7 @@ class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Mult
                         /** @var RelationalTypeResolverInterface */
                         $postObjectTypeResolver = $instanceManager->getInstance(PostObjectTypeResolver::class);
                         $field = /* @todo Re-do this code! Left undone */ new Field(
-                            'isObjectType',
+                            '_isObjectType',
                             [
                                 'type' => $postObjectTypeResolver->getTypeName(),
                             ]

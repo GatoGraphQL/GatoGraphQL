@@ -1,6 +1,6 @@
 query {
   # The input expects a String, but passing a Boolean/Int/Float gets coerced successfully
-  passingBoolean: implements(interface: false)
-  passingInt: implements(interface: 15)
-  passingFloat: implements(interface: 15.5)
+  passingBoolean: _implements(interface: false)
+  passingInt: _implements(interface: 15)
+  passingFloat: _implements(interface: 15.5)
 }
