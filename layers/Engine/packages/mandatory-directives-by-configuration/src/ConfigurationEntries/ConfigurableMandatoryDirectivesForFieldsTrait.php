@@ -72,8 +72,12 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
         array $interfaceTypeResolvers,
         string $fieldName
     ): array {
+        $entryList = $this->getConfigurationEntries();
+        if ($entryList === []) {
+            return [];
+        }
         return $this->getMatchingEntries(
-            $this->getConfigurationEntries(),
+            $entryList,
             $objectTypeOrInterfaceTypeResolver,
             $interfaceTypeResolvers,
             $fieldName

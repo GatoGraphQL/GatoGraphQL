@@ -26,6 +26,9 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     final protected function getEntries(): array
     {
         $entryList = $this->getConfigurationEntries();
+        if ($entryList === []) {
+            return [];
+        }
         $requiredEntryValue = $this->getRequiredEntryValue();
         return $this->getMatchingEntries(
             $entryList,
