@@ -5,19 +5,19 @@
       "locations": [
         {
           "line": 2,
-          "column": 42
+          "column": 43
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "path": [
           "(type: \"DoesntMatter\")",
           "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     },
     {
@@ -25,19 +25,19 @@
       "locations": [
         {
           "line": 3,
-          "column": 52
+          "column": 53
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "path": [
           "(someType: \"DoesntMatter\")",
           "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     },
     {
@@ -45,19 +45,19 @@
       "locations": [
         {
           "line": 3,
-          "column": 78
+          "column": 79
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "path": [
           "(anotherType: \"AlsoDoesntMatter\")",
           "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     }
   ],

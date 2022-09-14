@@ -5,20 +5,20 @@
       "locations": [
         {
           "line": 4,
-          "column": 44
+          "column": 45
         }
       ],
       "extensions": {
-        "type": "Post",
-        "field": "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "path": [
           "(type: \"DoesntMatter\")",
           "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
+        "type": "Post",
+        "field": "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     },
     {
@@ -26,20 +26,20 @@
       "locations": [
         {
           "line": 8,
-          "column": 36
+          "column": 37
         }
       ],
       "extensions": {
-        "type": "Post",
-        "field": "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "path": [
           "(interface: \"DoesntMatter\")",
           "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
+        "type": "Post",
+        "field": "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     },
     {
@@ -47,20 +47,20 @@
       "locations": [
         {
           "line": 8,
-          "column": 36
+          "column": 37
         }
       ],
       "extensions": {
-        "type": "Page",
-        "field": "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "path": [
           "(interface: \"DoesntMatter\")",
           "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
+        "type": "Page",
+        "field": "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     }
   ],
