@@ -23,22 +23,17 @@ trait HasFieldsTypeTrait
      */
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
-        $this->fields = [];
-
         /**
          * Iterate to the definition of the fields in the schema,
          * and create an object for each of them
          */
-        $this->fields = array_merge(
-            $this->fields,
-            SchemaDefinitionHelpers::createFieldsFromPath(
-                $fullSchemaDefinition,
-                array_merge(
-                    $schemaDefinitionPath,
-                    [
-                        SchemaDefinition::FIELDS,
-                    ]
-                )
+        $this->fields = SchemaDefinitionHelpers::createFieldsFromPath(
+            $fullSchemaDefinition,
+            array_merge(
+                $schemaDefinitionPath,
+                [
+                    SchemaDefinition::FIELDS,
+                ]
             )
         );
 
