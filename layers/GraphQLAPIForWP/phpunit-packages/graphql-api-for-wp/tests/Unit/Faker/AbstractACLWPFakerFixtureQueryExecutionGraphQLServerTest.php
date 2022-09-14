@@ -49,14 +49,14 @@ abstract class AbstractACLWPFakerFixtureQueryExecutionGraphQLServerTest extends 
     protected static function getGraphQLServerApplicationContainerCompilerPassClasses(): array
     {
         $graphQLServerApplicationContainerCompilerPassClasses = parent::getGraphQLServerApplicationContainerCompilerPassClasses();
-        $wildcardCompilerPassClass = static::getACLCompilerPassClass();
-        if ($wildcardCompilerPassClass === null) {
+        $aclCompilerPassClass = static::getACLCompilerPassClass();
+        if ($aclCompilerPassClass === null) {
             return $graphQLServerApplicationContainerCompilerPassClasses;
         }
         return [
             ...$graphQLServerApplicationContainerCompilerPassClasses,
             ...[
-                $wildcardCompilerPassClass,
+                $aclCompilerPassClass,
             ]
         ];
     }
