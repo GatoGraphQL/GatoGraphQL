@@ -26,6 +26,9 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     final protected function getEntries(): array
     {
         $entryList = $this->getConfigurationEntries();
+        if ($entryList === []) {
+            return [];
+        }
         $requiredEntryValue = $this->getRequiredEntryValue();
         return $this->getMatchingEntries(
             $entryList,
@@ -79,7 +82,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
      */
     final protected function getMatchingEntries(array $entryList, ?string $value): array
     {
-        if ($value) {
+        if ($value !== null) {
             return array_values(array_filter(
                 $entryList,
                 fn (array $entry) => ($entry[1] ?? null) === $value

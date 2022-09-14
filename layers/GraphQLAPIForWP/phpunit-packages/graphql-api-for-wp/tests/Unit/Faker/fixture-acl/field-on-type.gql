@@ -1,0 +1,6 @@
+{
+  comments(pagination: { limit: 3 }) {
+    id
+    content
+  }
+}

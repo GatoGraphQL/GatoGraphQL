@@ -9,6 +9,7 @@ use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
@@ -97,7 +98,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
-            if ($forceBothTypes || in_array($fieldName, $objectTypeResolverMandatoryFields)) {
+            if ($forceBothTypes || $fieldName === ConfigurationValues::ANY || in_array($fieldName, $objectTypeResolverMandatoryFields)) {
                 $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
                 $additionalFieldEntries[] = $rootFieldEntry;
                 $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
@@ -133,7 +134,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     {
         return array_values(array_filter(
             $fieldEntries,
-            fn (array $fieldEntry) => $fieldEntry[0] === RootObjectTypeResolver::class
+            fn (array $fieldEntry) => $fieldEntry[0] === ConfigurationValues::ANY || $fieldEntry[0] === RootObjectTypeResolver::class
         ));
     }
 }

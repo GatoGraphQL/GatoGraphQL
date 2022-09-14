@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators;
 
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -15,18 +16,18 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
     use ConfigurableMandatoryDirectivesForFieldsTrait;
 
     /**
-     * @return array<class-string<RelationalTypeResolverInterface>>
+     * @return array<class-string<RelationalTypeResolverInterface>|string> Either the class, or the constant "*" to represent _any_ class
      */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
-        return array_map(
-            // The tuple has format [typeOrInterfaceTypeFieldResolverClass, fieldName]
-            // or [typeOrInterfaceTypeFieldResolverClass, fieldName, $role]
-            // or [typeOrInterfaceTypeFieldResolverClass, fieldName, $capability]
-            // So, in position [0], will always be the $typeOrInterfaceTypeFieldResolverClass
+        return array_values(array_unique(array_map(
+            // The tuple has format [typeOrInterfaceTypeFieldResolverClass | "*", fieldName]
+            // or [typeOrInterfaceTypeFieldResolverClass | "*", fieldName, $role]
+            // or [typeOrInterfaceTypeFieldResolverClass | "*", fieldName, $capability]
+            // So, in position [0], will always be the $typeOrInterfaceTypeFieldResolverClass or "*" (for any type or interface)
             fn (array $entry) => $entry[0],
             $this->getConfigurationEntries()
-        );
+        )));
     }
 
     /**
@@ -35,7 +36,7 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
     /**
-     * @return array<string,Directive[]> Key: fieldName, Value: List of Directives
+     * @return array<string,Directive[]> Key: fieldName or "*" (for any field), Value: List of Directives
      */
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
@@ -44,10 +45,12 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
         // Obtain all capabilities allowed for the current combination of typeResolver/fieldName
         foreach ($this->getFieldNames() as $fieldName) {
             // Calculate all the interfaces that define this fieldName
-            $interfaceTypeResolversForField = array_values(array_filter(
-                $interfaceTypeResolvers,
-                fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement()),
-            ));
+            $interfaceTypeResolversForField = $fieldName === ConfigurationValues::ANY
+                ? $interfaceTypeResolvers
+                : array_values(array_filter(
+                    $interfaceTypeResolvers,
+                    fn (InterfaceTypeResolverInterface $interfaceTypeResolver) => in_array($fieldName, $interfaceTypeResolver->getFieldNamesToImplement()),
+                ));
             foreach (
                 $this->getEntriesByTypeAndInterfaces(
                     $objectTypeResolver,

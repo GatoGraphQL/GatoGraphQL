@@ -14,7 +14,7 @@ trait FixtureTestCaseTrait
      * Directory under which the fixture files are placed
      */
     abstract protected function getFixtureFolder(): string;
-    
+
     /**
      * Directory under which the response fixture files are placed.
      * By default it's the same where the query fixture files are.

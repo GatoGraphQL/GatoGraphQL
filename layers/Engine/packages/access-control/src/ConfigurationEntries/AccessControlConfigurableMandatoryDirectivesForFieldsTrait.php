@@ -7,6 +7,7 @@ namespace PoP\AccessControl\ConfigurationEntries;
 use PoP\Root\App;
 use PoP\AccessControl\Module;
 use PoP\AccessControl\ModuleConfiguration;
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
@@ -60,8 +61,14 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
                 (
                     $entry[0] === $objectTypeOrInterfaceTypeResolverClass
                     || in_array($entry[0], $interfaceTypeResolverClasses)
+                    // If using the wildcard "*", all types/interfaces match
+                    || $entry[0] === ConfigurationValues::ANY
                 )
-                && $entry[1] === $fieldName
+                && (
+                    $entry[1] === $fieldName
+                    // If using the wildcard "*", all fieldNames match
+                    || $entry[1] === ConfigurationValues::ANY
+                )
                 && (
                     (
                         isset($entry[3])

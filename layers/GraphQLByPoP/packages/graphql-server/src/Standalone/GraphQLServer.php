@@ -6,6 +6,10 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
+use PoPAPI\API\Response\Schemes;
+use PoPAPI\API\Routing\RequestNature;
+use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
@@ -14,15 +18,12 @@ use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
-use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
+use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
-use PoPAPI\API\Response\Schemes;
-use PoPAPI\API\Routing\RequestNature;
-use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class GraphQLServer implements GraphQLServerInterface
 {
@@ -34,6 +35,8 @@ class GraphQLServer implements GraphQLServerInterface
     /**
      * @param array<class-string<ModuleInterface>> $moduleClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
      * @param array<string,mixed> $moduleClassConfiguration Predefined configuration for the components
+     * @param array<class-string<CompilerPassInterface>> $systemContainerCompilerPassClasses
+     * @param array<class-string<CompilerPassInterface>> $applicationContainerCompilerPassClasses
      */
     public function __construct(
         array $moduleClasses,
@@ -60,7 +63,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Inject the Compiler Passes
         $appLoader->addSystemContainerCompilerPassClasses($this->systemContainerCompilerPassClasses);
-        
+
         $appLoader->bootSystem(
             $this->cacheContainerConfiguration,
             $this->containerNamespace,
