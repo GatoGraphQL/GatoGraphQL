@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\QueryResolution;
 
 use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -16,14 +17,14 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\AbstractTestCase;
+use PoP\Root\Module\ModuleInterface;
 use SplObjectStorage;
 
 abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServiceTest extends AbstractTestCase
 {
     /**
-     * @return array<string,mixed> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected static function getModuleClassConfiguration(): array
     {

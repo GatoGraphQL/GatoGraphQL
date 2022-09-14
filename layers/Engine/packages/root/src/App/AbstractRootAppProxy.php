@@ -105,7 +105,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
      * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $moduleClasses List of `Module` class to initialize
+     * @param array<class-string<ModuleInterface>> $moduleClasses List of `Module` class to initialize
      */
     public static function stockAndInitializeModuleClasses(
         array $moduleClasses
@@ -132,6 +132,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
     /**
      * Shortcut function.
      *
+     * @phpstan-param class-string<ModuleInterface> $moduleClass
      * @throws ComponentNotExistsException
      */
     final public static function getModule(string $moduleClass): ModuleInterface

@@ -13,7 +13,7 @@ use PoPCMSSchema\Pages\Module as PagesModule;
 class Module extends AbstractModule
 {
     /**
-     * @return array<class-string<\PoPCMSSchema\Pages\Module>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getSatisfiedModuleClasses(): array
     {

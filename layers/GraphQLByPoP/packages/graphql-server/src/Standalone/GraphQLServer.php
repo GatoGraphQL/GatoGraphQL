@@ -34,7 +34,7 @@ class GraphQLServer implements GraphQLServerInterface
 
     /**
      * @param array<class-string<ModuleInterface>> $moduleClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
-     * @param array<string,mixed> $moduleClassConfiguration Predefined configuration for the components
+     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration Predefined configuration for the components
      * @param array<class-string<CompilerPassInterface>> $systemContainerCompilerPassClasses
      * @param array<class-string<CompilerPassInterface>> $applicationContainerCompilerPassClasses
      */

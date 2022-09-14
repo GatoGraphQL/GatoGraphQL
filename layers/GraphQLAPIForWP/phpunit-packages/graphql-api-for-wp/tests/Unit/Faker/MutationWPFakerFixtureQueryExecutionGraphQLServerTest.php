@@ -35,7 +35,7 @@ class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFa
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array<class-string<ModuleInterface>,array<string,mixed>>
      */
     protected static function getGraphQLServerModuleClassConfiguration(): array
     {

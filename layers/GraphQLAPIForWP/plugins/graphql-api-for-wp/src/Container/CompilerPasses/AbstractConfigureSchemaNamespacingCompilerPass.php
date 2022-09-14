@@ -8,6 +8,7 @@ use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
+use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractConfigureSchemaNamespacingCompilerPass extends AbstractCompilerPass
 {
@@ -38,6 +39,7 @@ abstract class AbstractConfigureSchemaNamespacingCompilerPass extends AbstractCo
 
     /**
      * @return string[]
+     * @phpstan-return array<class-string<ModuleInterface>>
      */
     abstract protected function getModuleClasses(): array;
     abstract protected function getSchemaNamespace(): string;

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
+use PoP\Root\Module\ModuleInterface;
+
 abstract class AbstractConvertInputValueFromSingleToListFixtureQueryExecutionGraphQLServerTest extends AbstractEnabledDisabledFixtureQueryExecutionGraphQLServerTestCase
 {
     protected function getFixtureFolder(): string
@@ -12,7 +14,7 @@ abstract class AbstractConvertInputValueFromSingleToListFixtureQueryExecutionGra
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array<class-string<ModuleInterface>,array<string,mixed>>
      */
     protected static function getGraphQLServerModuleClassConfiguration(): array
     {

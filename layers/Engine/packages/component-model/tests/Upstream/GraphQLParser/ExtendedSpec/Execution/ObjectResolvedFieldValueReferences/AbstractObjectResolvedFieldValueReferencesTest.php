@@ -21,6 +21,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\AbstractTestCase;
+use PoP\Root\Module\ModuleInterface;
 
 /**
  * When ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES is enabled:
@@ -43,7 +44,7 @@ abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTe
     private ?ParserInterface $parser = null;
 
     /**
-     * @return array<string,mixed> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected static function getModuleClassConfiguration(): array
     {

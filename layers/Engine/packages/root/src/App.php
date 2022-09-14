@@ -35,7 +35,7 @@ class App implements AppInterface
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
     protected static ModuleManagerInterface $moduleManager;
     protected static AppStateManagerInterface $appStateManager;
-    /** @var string[] */
+    /** @var array<class-string<ModuleInterface>> */
     protected static array $moduleClassesToInitialize = [];
     protected static bool $isHTTPRequest;
 
@@ -174,7 +174,7 @@ class App implements AppInterface
      * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $moduleClasses List of `Module` class to initialize
+     * @param array<class-string<ModuleInterface>> $moduleClasses List of `Module` class to initialize
      */
     public static function stockAndInitializeModuleClasses(
         array $moduleClasses
@@ -204,6 +204,7 @@ class App implements AppInterface
     /**
      * Shortcut function.
      *
+     * @phpstan-param class-string<ModuleInterface> $moduleClass
      * @throws ComponentNotExistsException
      */
     final public static function getModule(string $moduleClass): ModuleInterface

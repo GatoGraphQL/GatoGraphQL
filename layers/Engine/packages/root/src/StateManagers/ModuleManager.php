@@ -32,6 +32,7 @@ class ModuleManager implements ModuleManagerInterface
     }
 
     /**
+     * @phpstan-param class-string<ModuleInterface> $moduleClass
      * @throws ComponentNotExistsException If the class of the module does not exist or has not been initialized
      */
     public function getModule(string $moduleClass): ModuleInterface

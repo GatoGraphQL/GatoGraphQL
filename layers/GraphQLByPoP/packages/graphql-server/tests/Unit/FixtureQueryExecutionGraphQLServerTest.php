@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
+use PoP\Root\Module\ModuleInterface;
+
 class FixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
     /**
@@ -15,7 +17,7 @@ class FixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecuti
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array<class-string<ModuleInterface>,array<string,mixed>>
      */
     protected static function getGraphQLServerModuleClassConfiguration(): array
     {
