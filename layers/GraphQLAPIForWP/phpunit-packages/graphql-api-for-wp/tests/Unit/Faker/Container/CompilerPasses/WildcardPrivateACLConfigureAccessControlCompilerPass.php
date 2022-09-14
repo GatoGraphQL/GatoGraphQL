@@ -14,7 +14,7 @@ use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
-class WildcardPublicACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
+class WildcardPrivateACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {
     protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
@@ -29,21 +29,21 @@ class WildcardPublicACLConfigureAccessControlCompilerPass extends AbstractCompil
                         ConfigurationValues::ANY,
                         'users',
                         UserStates::IN,
-                        SchemaModes::PUBLIC_SCHEMA_MODE,
+                        SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],
                     // Wildcard field on type
                     [
                         CommentObjectTypeResolver::class,
                         ConfigurationValues::ANY,
                         UserStates::IN,
-                        SchemaModes::PUBLIC_SCHEMA_MODE,
+                        SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],
                     // Wildcard field on interface
                     [
                         IsCustomPostInterfaceTypeResolver::class,
                         ConfigurationValues::ANY,
                         UserStates::IN,
-                        SchemaModes::PUBLIC_SCHEMA_MODE,
+                        SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],
                 ]
             ]
