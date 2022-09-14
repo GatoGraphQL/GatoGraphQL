@@ -55,7 +55,7 @@ trait FixtureTestCaseTrait
     {
         return sprintf(
             ' (fixture folder: "%s")%s',
-            $this->getFixtureFolder(),
+            $this->getResponseFixtureFolder(),
             $string,
         );
     }
