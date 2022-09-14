@@ -13,7 +13,7 @@ use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
-class WildcardACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
+class WildcardPublicACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
 {
     protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
@@ -29,19 +29,19 @@ class WildcardACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
                         'users',
                         UserStates::IN,
                     ],
-                    // // Wildcard field on type
-                    // [
-                    //     CommentObjectTypeResolver::class,
-                    //     ConfigurationValues::ANY,
-                    //     UserStates::IN,
-                    //     // 'private'
-                    // ],
-                    // // Wildcard field on interface
-                    // [
-                    //     IsCustomPostInterfaceTypeResolver::class,
-                    //     ConfigurationValues::ANY,
-                    //     UserStates::IN,
-                    // ],
+                    // Wildcard field on type
+                    [
+                        CommentObjectTypeResolver::class,
+                        ConfigurationValues::ANY,
+                        UserStates::IN,
+                        // 'private'
+                    ],
+                    // Wildcard field on interface
+                    [
+                        IsCustomPostInterfaceTypeResolver::class,
+                        ConfigurationValues::ANY,
+                        UserStates::IN,
+                    ],
                 ]
             ]
         );

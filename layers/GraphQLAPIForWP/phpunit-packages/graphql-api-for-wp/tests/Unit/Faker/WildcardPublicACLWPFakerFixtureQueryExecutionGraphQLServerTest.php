@@ -8,7 +8,7 @@ use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecution
 use PoP\Root\Module\ModuleInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-class WildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
+class WildcardPublicACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     /**
      * Directory under the fixture files are placed
@@ -43,7 +43,7 @@ class WildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractW
         return [
             ...parent::getGraphQLServerApplicationContainerCompilerPassClasses(),
             ...[
-                \PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker\Container\CompilerPasses\WildcardACLConfigureAccessControlCompilerPass::class,
+                \PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker\Container\CompilerPasses\WildcardPublicACLConfigureAccessControlCompilerPass::class,
             ]
         ];
     }
