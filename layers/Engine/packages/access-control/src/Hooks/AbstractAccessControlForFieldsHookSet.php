@@ -6,6 +6,7 @@ namespace PoP\AccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
@@ -42,7 +43,17 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractAfterAppBoo
 
         // If no field defined => it applies to any field
         if ($fieldNames = $this->getFieldNames()) {
+            // If "*" defined => it applies to any field
             foreach ($fieldNames as $fieldName) {
+                if ($fieldName === ConfigurationValues::ANY) {
+                    App::addFilter(
+                        HookHelpers::getHookNameToFilterField(),
+                        $this->maybeFilterFieldName(...),
+                        10,
+                        5
+                    );
+                    continue;
+                }
                 App::addFilter(
                     HookHelpers::getHookNameToFilterField($fieldName),
                     $this->maybeFilterFieldName(...),
