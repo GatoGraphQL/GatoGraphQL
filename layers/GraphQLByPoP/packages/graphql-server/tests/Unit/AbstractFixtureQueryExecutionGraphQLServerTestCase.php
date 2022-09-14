@@ -51,7 +51,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
          * Possibly define a different folder for the .json responses
          */
         $responseFixtureFolder = $this->getResponseFixtureFolder();
-        
+
         /**
          * Retrieve all non-disabled GraphQL files
          */

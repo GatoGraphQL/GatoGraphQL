@@ -63,7 +63,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Inject the Compiler Passes
         $appLoader->addSystemContainerCompilerPassClasses($this->systemContainerCompilerPassClasses);
-        
+
         $appLoader->bootSystem(
             $this->cacheContainerConfiguration,
             $this->containerNamespace,
