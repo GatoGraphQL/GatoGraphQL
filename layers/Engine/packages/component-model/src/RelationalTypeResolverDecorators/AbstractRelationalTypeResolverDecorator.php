@@ -29,7 +29,7 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     }
 
     /**
-     * @return string[]
+     * @return string[] Either the class, or the constant "*" to represent _any_ class
      */
     final public function getClassesToAttachTo(): array
     {

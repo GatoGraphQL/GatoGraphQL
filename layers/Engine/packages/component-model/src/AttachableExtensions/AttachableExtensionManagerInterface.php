@@ -6,6 +6,9 @@ namespace PoP\ComponentModel\AttachableExtensions;
 
 interface AttachableExtensionManagerInterface
 {
+    /**
+     * @param string $attachableClass Class or "*" to represent _any_ class
+     */
     public function attachExtensionToClass(string $attachableClass, string $group, AttachableExtensionInterface $attachableExtension): void;
     /**
      * @return AttachableExtensionInterface[]

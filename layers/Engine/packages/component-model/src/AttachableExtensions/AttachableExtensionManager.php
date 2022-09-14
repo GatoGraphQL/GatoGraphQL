@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\AttachableExtensions;
 
+use PoP\ComponentModel\Constants\ConfigurationValues;
+
 class AttachableExtensionManager implements AttachableExtensionManagerInterface
 {
     /**
@@ -11,6 +13,9 @@ class AttachableExtensionManager implements AttachableExtensionManagerInterface
      */
     protected array $attachableExtensions = [];
 
+    /**
+     * @param string $attachableClass Class or "*" to represent _any_ class
+     */
     public function attachExtensionToClass(string $attachableClass, string $group, AttachableExtensionInterface $attachableExtension): void
     {
         $this->attachableExtensions[$attachableClass][$group][] = $attachableExtension;
@@ -21,6 +26,9 @@ class AttachableExtensionManager implements AttachableExtensionManagerInterface
      */
     public function getAttachedExtensions(string $attachableClass, string $group): array
     {
-        return $this->attachableExtensions[$attachableClass][$group] ?? [];
+        return array_merge(
+            $this->attachableExtensions[ConfigurationValues::ANY][$group] ?? [],
+            $this->attachableExtensions[$attachableClass][$group] ?? []
+        );
     }
 }

@@ -16,7 +16,7 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
     use ConfigurableMandatoryDirectivesForFieldsTrait;
 
     /**
-     * @return array<class-string<RelationalTypeResolverInterface>>
+     * @return array<class-string<RelationalTypeResolverInterface>|string> Either the class, or the constant "*" to represent _any_ class
      */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
