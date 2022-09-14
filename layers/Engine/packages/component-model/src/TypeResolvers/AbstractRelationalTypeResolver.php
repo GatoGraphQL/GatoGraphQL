@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
@@ -668,7 +669,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Add preceding mandatory directives
             if (
                 $mandatoryDirectivesForDirective = array_merge(
-                    $precedingMandatoryDirectivesForDirectives[FieldSymbols::ANY_FIELD] ?? [],
+                    $precedingMandatoryDirectivesForDirectives[ConfigurationValues::ANY] ?? [],
                     $precedingMandatoryDirectivesForDirectives[$directiveName] ?? []
                 )
             ) {
@@ -682,7 +683,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Add succeeding mandatory directives
             if (
                 $mandatoryDirectivesForDirective = array_merge(
-                    $succeedingMandatoryDirectivesForDirectives[FieldSymbols::ANY_FIELD] ?? [],
+                    $succeedingMandatoryDirectivesForDirectives[ConfigurationValues::ANY] ?? [],
                     $succeedingMandatoryDirectivesForDirectives[$directiveName] ?? []
                 )
             ) {
@@ -916,7 +917,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldName = $field->getName();
                 if (
                     $mandatoryDirectivesForField = array_merge(
-                        $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
+                        $mandatoryDirectivesForFields[ConfigurationValues::ANY] ?? [],
                         $mandatoryDirectivesForFields[$fieldName] ?? []
                     )
                 ) {
