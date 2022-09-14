@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PoP\Root\Module\ModuleInterface;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 interface AppLoaderInterface
 {
@@ -24,6 +25,24 @@ interface AppLoaderInterface
      */
     public function addModuleClassConfiguration(
         array $moduleClassConfiguration
+    ): void;
+
+    /**
+     * Inject Compiler Pass classes (eg: for testing)
+     *
+     * @param array<class-string<CompilerPassInterface>> $systemContainerCompilerPassClasses List of `CompilerPass` class to initialize
+     */
+    public function addSystemContainerCompilerPassClasses(
+        array $systemContainerCompilerPassClasses
+    ): void;
+
+    /**
+     * Inject Compiler Pass classes (eg: for testing)
+     *
+     * @param array<class-string<CompilerPassInterface>> $applicationContainerCompilerPassClasses List of `CompilerPass` class to initialize
+     */
+    public function addApplicationContainerCompilerPassClasses(
+        array $applicationContainerCompilerPassClasses
     ): void;
 
     /**
