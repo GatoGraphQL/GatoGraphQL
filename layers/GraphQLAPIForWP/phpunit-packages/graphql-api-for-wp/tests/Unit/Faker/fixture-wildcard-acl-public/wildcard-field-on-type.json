@@ -1,1 +1,69 @@
-{}
+{
+    "errors": [
+        {
+            "message": "You must be logged in to access field 'id' for type 'Comment'",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "id",
+                    "comments { ... }",
+                    "query { ... }"
+                ],
+                "type": "Comment",
+                "field": "id",
+                "ids": [
+                    1900,
+                    1901,
+                    1903,
+                    1904,
+                    1905,
+                    1906,
+                    1907,
+                    167,
+                    168,
+                    169
+                ],
+                "code": "PoPCMSSchema\/UserStateAccessControl@e2"
+            }
+        }
+    ],
+    "data": {
+        "comments": [
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            }
+        ]
+    }
+}

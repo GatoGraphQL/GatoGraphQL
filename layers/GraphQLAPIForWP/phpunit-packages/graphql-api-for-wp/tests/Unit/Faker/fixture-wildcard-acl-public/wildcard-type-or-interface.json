@@ -1,1 +1,26 @@
-{}
+{
+    "errors": [
+        {
+            "message": "You must be logged in to access field 'users' for type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "users { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "users { ... }",
+                "id": "root",
+                "code": "PoPCMSSchema\/UserStateAccessControl@e2"
+            }
+        }
+    ],
+    "data": {
+        "users": null
+    }
+}

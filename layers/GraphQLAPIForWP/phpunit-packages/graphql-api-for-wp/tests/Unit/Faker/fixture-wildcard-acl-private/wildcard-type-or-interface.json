@@ -1,1 +1,26 @@
-{}
+{
+    "errors": [
+        {
+            "message": "There is no field 'users' on type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "users { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "users { ... }",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "users": null
+    }
+}

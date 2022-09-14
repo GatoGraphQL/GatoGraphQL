@@ -1,1 +1,69 @@
-{}
+{
+    "errors": [
+        {
+            "message": "You must be logged in to access field 'id' for type 'Post'",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "id",
+                    "posts { ... }",
+                    "query { ... }"
+                ],
+                "type": "Post",
+                "field": "id",
+                "ids": [
+                    1724,
+                    358,
+                    555,
+                    559,
+                    562,
+                    565,
+                    568,
+                    575,
+                    579,
+                    582
+                ],
+                "code": "PoPCMSSchema\/UserStateAccessControl@e2"
+            }
+        }
+    ],
+    "data": {
+        "posts": [
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            },
+            {
+                "id": null
+            }
+        ]
+    }
+}
