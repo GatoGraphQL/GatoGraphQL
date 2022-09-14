@@ -42,7 +42,19 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
      */
     public function fixtureGraphQLServerExecutionProvider(): array
     {
+        /**
+         * Source folder for the .gql files and,
+         * by default, their .json responses
+         */
         $fixtureFolder = $this->getFixtureFolder();
+        /**
+         * Possibly define a different folder for the .json responses
+         */
+        $responseFixtureFolder = $this->getResponseFixtureFolder();
+        
+        /**
+         * Retrieve all non-disabled GraphQL files
+         */
         $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
             $fixtureFolder,
             ['*.gql', '*.graphql'],
@@ -90,7 +102,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
              * Retrieve additional GraphQL responses to execute some "operationName"
              */
             $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
-                $fixtureFolder,
+                $responseFixtureFolder,
                 [$fileName . ':*.json'],
                 ['*.disabled.json'],
             );
@@ -111,12 +123,32 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
 
     protected function getGraphQLResponseFile(string $filePath, string $fileName): string
     {
-        return $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
+        $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
+        $fixtureFolder = $this->getFixtureFolder();
+        $responseFixtureFolder = $this->getResponseFixtureFolder();
+        if ($responseFixtureFolder !== $fixtureFolder) {
+            $graphQLResponseFile = str_replace(
+                $fixtureFolder,
+                $responseFixtureFolder,
+                $graphQLResponseFile
+            );
+        }
+        return $graphQLResponseFile;
     }
 
     protected function getGraphQLVariablesFile(string $filePath, string $fileName): string
     {
-        return $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+        $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+        $fixtureFolder = $this->getFixtureFolder();
+        $responseFixtureFolder = $this->getResponseFixtureFolder();
+        if ($responseFixtureFolder !== $fixtureFolder) {
+            $graphQLVariablesFile = str_replace(
+                $fixtureFolder,
+                $responseFixtureFolder,
+                $graphQLVariablesFile
+            );
+        }
+        return $graphQLVariablesFile;
     }
 
     protected function isProviderTestDisabled(string $dataName): bool
