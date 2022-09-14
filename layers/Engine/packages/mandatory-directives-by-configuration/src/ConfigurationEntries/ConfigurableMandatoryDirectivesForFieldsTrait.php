@@ -27,10 +27,10 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
     protected function getFieldNames(): array
     {
         return array_values(array_unique(array_map(
-            // The tuple has format [typeOrInterfaceTypeFieldResolverClass, fieldName]
-            // or [typeOrInterfaceTypeFieldResolverClass, fieldName, $role]
-            // or [typeOrInterfaceTypeFieldResolverClass, fieldName, $capability]
-            // So, in position [1], will always be the $fieldName
+            // The tuple has format [typeOrInterfaceTypeFieldResolverClass, fieldName | "*"]
+            // or [typeOrInterfaceTypeFieldResolverClass, fieldName | "*", $role]
+            // or [typeOrInterfaceTypeFieldResolverClass, fieldName | "*", $capability]
+            // So, in position [1], will always be the $fieldName or "*" (for any field)
             fn (array $entry) => $entry[1],
             $this->getConfigurationEntries()
         )));
