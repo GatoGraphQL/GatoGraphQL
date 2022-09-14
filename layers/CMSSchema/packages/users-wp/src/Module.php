@@ -11,7 +11,7 @@ use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 class Module extends AbstractModule
 {
     /**
-     * @return array<class-string<\PoPCMSSchema\Users\Module>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getSatisfiedModuleClasses(): array
     {

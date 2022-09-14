@@ -11,7 +11,7 @@ use PoPCMSSchema\Users\Module as UsersModule;
 class Module extends AbstractModule
 {
     /**
-     * @return array<class-string<\PoPCMSSchema\Media\Module>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getSatisfiedModuleClasses(): array
     {

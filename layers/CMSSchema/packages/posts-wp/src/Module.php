@@ -13,7 +13,7 @@ use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 class Module extends AbstractModule
 {
     /**
-     * @return array<class-string<\PoPCMSSchema\Posts\Module>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getSatisfiedModuleClasses(): array
     {

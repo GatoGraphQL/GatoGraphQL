@@ -12,7 +12,7 @@ interface AppLoaderInterface
     /**
      * Add Module classes to be initialized
      *
-     * @param string[] $moduleClasses List of `Module` class to initialize
+     * @param array<class-string<ModuleInterface>> $moduleClasses List of `Module` class to initialize
      */
     public function addModuleClassesToInitialize(
         array $moduleClasses
@@ -22,6 +22,7 @@ interface AppLoaderInterface
      * Add configuration for the Module classes
      *
      * @param array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     * @phpstan-param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
      */
     public function addModuleClassConfiguration(
         array $moduleClassConfiguration

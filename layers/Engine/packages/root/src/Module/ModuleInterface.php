@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\Module;
 
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+
 /**
  * Initialize module
  */
@@ -36,6 +38,7 @@ interface ModuleInterface
 
     /**
      * @return string[]
+     * @phpstan-return array<class-string<ModuleInterface>>
      */
     public function getSatisfiedModuleClasses(): array;
 
@@ -43,6 +46,7 @@ interface ModuleInterface
      * All module classes that this module depends upon, to initialize them
      *
      * @return string[]
+     * @phpstan-return array<class-string<ModuleInterface>>
      */
     public function getDependedModuleClasses(): array;
 
@@ -50,6 +54,7 @@ interface ModuleInterface
      * All DEV module classes that this module depends upon, to initialize them
      *
      * @return string[]
+     * @phpstan-return array<class-string<ModuleInterface>>
      */
     public function getDevDependedModuleClasses(): array;
 
@@ -57,6 +62,7 @@ interface ModuleInterface
      * All DEV PHPUnit module classes that this module depends upon, to initialize them
      *
      * @return string[]
+     * @phpstan-return array<class-string<ModuleInterface>>
      */
     public function getDevPHPUnitDependedModuleClasses(): array;
 
@@ -64,6 +70,7 @@ interface ModuleInterface
      * All conditional module classes that this module depends upon, to initialize them
      *
      * @return string[]
+     * @phpstan-return array<class-string<ModuleInterface>>
      */
     public function getDependedConditionalModuleClasses(): array;
 
@@ -101,6 +108,7 @@ interface ModuleInterface
      * Compiler Passes for the System Container
      *
      * @return string[]
+     * @phpstan-return array<class-string<CompilerPassInterface>>
      */
     public function getSystemContainerCompilerPassClasses(): array;
 
@@ -109,6 +117,7 @@ interface ModuleInterface
      * itself and its depended modules
      *
      * @param array<string,mixed> $moduleClassConfiguration
+     * @phpstan-param array<class-string<ModuleInterface>,mixed> $moduleClassConfiguration
      */
     public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration

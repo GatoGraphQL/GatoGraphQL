@@ -6,6 +6,7 @@ namespace PoP\Root\Module;
 
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractModule implements ModuleInterface
 {
@@ -100,7 +101,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * All module classes that this module satisfies
      *
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getSatisfiedModuleClasses(): array
     {
@@ -111,13 +112,14 @@ abstract class AbstractModule implements ModuleInterface
      * All module classes that this module depends upon, to initialize them
      *
      * @return string[]
+     * @phpstan-return array<class-string<ModuleInterface>>
      */
     abstract public function getDependedModuleClasses(): array;
 
     /**
      * All DEV module classes that this module depends upon, to initialize them
      *
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDevDependedModuleClasses(): array
     {
@@ -127,7 +129,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * All DEV PHPUnit module classes that this module depends upon, to initialize them
      *
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDevPHPUnitDependedModuleClasses(): array
     {
@@ -137,7 +139,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * All conditional module classes that this module depends upon, to initialize them
      *
-     * @return string[]
+     * @return array<class-string<ModuleInterface>>
      */
     public function getDependedConditionalModuleClasses(): array
     {

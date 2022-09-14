@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleConfiguration;
 
-use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\DataStructureFormatters\HTMLDataStructureFormatter;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\Root\AbstractTestCase;
 use PoP\Root\App;
-use PoP\Root\Module as RootModule;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Module as RootModule;
+use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends AbstractTestCase
 {
@@ -28,9 +29,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
     }
 
     /**
-     * Add configuration for the Module classes
-     *
-     * @return array<string,mixed> [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected static function getModuleClassConfiguration(): array
     {

@@ -61,7 +61,7 @@ interface AppInterface
      * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $moduleClasses List of `Module` class to initialize
+     * @param array<class-string<ModuleInterface>> $moduleClasses List of `Module` class to initialize
      */
     public static function stockAndInitializeModuleClasses(
         array $moduleClasses
@@ -80,6 +80,7 @@ interface AppInterface
     /**
      * Shortcut function.
      *
+     * @phpstan-param class-string<ModuleInterface> $moduleClass
      * @throws ComponentNotExistsException
      */
     public static function getModule(string $moduleClass): ModuleInterface;

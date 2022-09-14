@@ -19,24 +19,28 @@ class AppLoader implements AppLoaderInterface
      * Has the module been initialized?
      *
      * @var string[]
+     * @phpstan-var array<class-string<ModuleInterface>>
      */
     protected array $initializedModuleClasses = [];
     /**
      * Module in their initialization order
      *
      * @var string[]
+     * @phpstan-var array<class-string<ModuleInterface>>
      */
     protected array $orderedModuleClasses = [];
     /**
      * Module classes to be initialized
      *
      * @var string[]
+     * @phpstan-var array<class-string<ModuleInterface>>
      */
     protected array $moduleClassesToInitialize = [];
     /**
      * [key]: Module class, [value]: Configuration
      *
      * @var array<string,array<string,mixed>>
+     * @phpstan-var array<class-string<ModuleInterface>,array<string,mixed>>
      */
     protected array $moduleClassConfiguration = [];
     /**
@@ -49,12 +53,14 @@ class AppLoader implements AppLoaderInterface
      * List of `Module` class which must not initialize their Schema services
      *
      * @var string[]
+     * @phpstan-var array<class-string<ModuleInterface>>
      */
     protected array $skipSchemaModuleClasses = [];
     /**
      * Cache if a module must skipSchema or not, stored under its class
      *
      * @var array<string,bool>
+     * @phpstan-var array<class-string<ModuleInterface>,bool>
      */
     protected array $skipSchemaForModuleCache = [];
     /**
@@ -73,7 +79,7 @@ class AppLoader implements AppLoaderInterface
     /**
      * Add Module classes to be initialized
      *
-     * @param string[] $moduleClasses List of `Module` class to initialize
+     * @param array<class-string<ModuleInterface>> $moduleClasses List of `Module` class to initialize
      */
     public function addModuleClassesToInitialize(
         array $moduleClasses
@@ -88,6 +94,7 @@ class AppLoader implements AppLoaderInterface
      * Add configuration for the Module classes
      *
      * @param array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     * @phpstan-param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
      */
     public function addModuleClassConfiguration(
         array $moduleClassConfiguration
@@ -172,6 +179,7 @@ class AppLoader implements AppLoaderInterface
      * following the Composer dependencies tree
      *
      * @param string[] $moduleClasses List of `Module` class to initialize
+     * @phpstan-param array<class-string<ModuleInterface>> $moduleClasses
      */
     private function addComponentsOrderedForInitialization(
         array $moduleClasses,

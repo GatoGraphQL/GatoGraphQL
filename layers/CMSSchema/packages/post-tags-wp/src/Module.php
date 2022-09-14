@@ -10,7 +10,7 @@ use PoP\Root\Module\AbstractModule;
 class Module extends AbstractModule
 {
     /**
-     * @return array<class-string<\PoPCMSSchema\PostTags\Module>>
+     * @return array<class-string<ModuleInterface>>
      */
     public function getSatisfiedModuleClasses(): array
     {
