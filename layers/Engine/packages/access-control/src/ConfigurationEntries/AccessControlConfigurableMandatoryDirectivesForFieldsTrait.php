@@ -63,7 +63,10 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
                     || in_array($entry[0], $interfaceTypeResolverClasses)
                     || $entry[0] === WildcardConfigurationValues::TYPE_OR_INTERFACE_RESOLVER_CLASS
                 )
-                && $entry[1] === $fieldName
+                && (
+                    $entry[1] === $fieldName
+                    || $entry[1] === WildcardConfigurationValues::FIELD_NAME
+                )
                 && (
                     (
                         isset($entry[3])

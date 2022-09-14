@@ -8,6 +8,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverIn
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\MandatoryDirectivesByConfiguration\Constants\WildcardConfigurationValues;
 
 trait ConfigurableMandatoryDirectivesForFieldsTrait
 {
@@ -103,7 +104,11 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
             fn (array $entry) => (
                 $entry[0] === $objectTypeOrInterfaceTypeResolverClass
                 || in_array($entry[0], $interfaceTypeResolverClasses)
-            ) && $entry[1] === $fieldName
+                || $entry[0] === WildcardConfigurationValues::TYPE_OR_INTERFACE_RESOLVER_CLASS
+            ) && (
+                $entry[1] === $fieldName
+                || $entry[1] === WildcardConfigurationValues::FIELD_NAME
+            )
         ));
     }
 }
