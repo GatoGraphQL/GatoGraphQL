@@ -10,6 +10,7 @@ use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
@@ -24,7 +25,9 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
     {
         return new GraphQLServer(
             static::getGraphQLServerModuleClasses(),
-            static::getGraphQLServerModuleClassConfiguration()
+            static::getGraphQLServerModuleClassConfiguration(),
+            static::getGraphQLServerSystemContainerCompilerPassClasses(),
+            static::getGraphQLServerApplicationContainerCompilerPassClasses()
         );
     }
 
@@ -50,6 +53,22 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
      * @return array<string,mixed>
      */
     protected static function getGraphQLServerModuleClassConfiguration(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<class-string<CompilerPassInterface>>
+     */
+    protected static function getGraphQLServerSystemContainerCompilerPassClasses(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<class-string<CompilerPassInterface>>
+     */
+    protected static function getGraphQLServerApplicationContainerCompilerPassClasses(): array
     {
         return [];
     }
