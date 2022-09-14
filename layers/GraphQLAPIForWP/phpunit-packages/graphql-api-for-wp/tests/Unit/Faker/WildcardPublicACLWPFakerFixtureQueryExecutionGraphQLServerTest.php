@@ -8,6 +8,11 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class WildcardPublicACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest
 {
+    protected function getWildcardResponseFixtureFolder(): string
+    {
+        return __DIR__ . '/fixture-wildcard-acl-public';
+    }
+
     /**
      * @return class-string<CompilerPassInterface>|null
      */

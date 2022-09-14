@@ -18,6 +18,13 @@ abstract class AbstractWildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest 
         return __DIR__ . '/fixture-wildcard-acl';
     }
 
+    final protected function getResponseFixtureFolder(): string
+    {
+        return $this->getWildcardResponseFixtureFolder();
+    }
+
+    abstract protected function getWildcardResponseFixtureFolder(): string;
+
     /**
      * @return array<class-string<ModuleInterface>>
      */

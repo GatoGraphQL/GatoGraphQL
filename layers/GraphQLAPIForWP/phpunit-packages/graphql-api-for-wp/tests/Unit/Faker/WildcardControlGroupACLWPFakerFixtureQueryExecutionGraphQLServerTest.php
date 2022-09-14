@@ -6,11 +6,11 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-class WildcardPrivateACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest
+class WildcardControlGroupACLWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     protected function getWildcardResponseFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-wildcard-acl-private';
+        return __DIR__ . '/fixture-wildcard-acl-control-group';
     }
 
     /**
@@ -18,6 +18,6 @@ class WildcardPrivateACLWPFakerFixtureQueryExecutionGraphQLServerTest extends Ab
      */
     protected static function getWildcardCompilerPassClass(): ?string
     {
-        return \PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker\Container\CompilerPasses\WildcardPrivateACLConfigureAccessControlCompilerPass::class;
+        return null;
     }
 }
