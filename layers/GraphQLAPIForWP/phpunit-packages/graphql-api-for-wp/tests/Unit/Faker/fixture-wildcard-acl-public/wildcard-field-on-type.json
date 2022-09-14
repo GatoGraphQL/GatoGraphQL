@@ -11,7 +11,7 @@
             "extensions": {
                 "path": [
                     "id",
-                    "comments { ... }",
+                    "comments(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
                 "type": "Comment",
@@ -19,14 +19,31 @@
                 "ids": [
                     1900,
                     1901,
-                    1903,
-                    1904,
-                    1905,
-                    1906,
-                    1907,
-                    167,
-                    168,
-                    169
+                    1903
+                ],
+                "code": "PoPCMSSchema\/UserStateAccessControl@e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field 'content' for type 'Comment'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "content",
+                    "comments(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Comment",
+                "field": "content",
+                "ids": [
+                    1900,
+                    1901,
+                    1903
                 ],
                 "code": "PoPCMSSchema\/UserStateAccessControl@e2"
             }
@@ -35,34 +52,16 @@
     "data": {
         "comments": [
             {
-                "id": null
+                "id": null,
+                "content": null
             },
             {
-                "id": null
+                "id": null,
+                "content": null
             },
             {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
+                "id": null,
+                "content": null
             }
         ]
     }

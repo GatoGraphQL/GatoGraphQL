@@ -1,5 +1,6 @@
 {
-  posts {
+  posts(pagination: { limit: 3 }) {
     id
+    title
   }
 }

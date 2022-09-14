@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "You must be logged in to access field 'users' for type 'QueryRoot'",
+            "message": "You must be logged in to access field 'users(pagination: {limit: 3})' for type 'QueryRoot'",
             "locations": [
                 {
                     "line": 2,
@@ -10,17 +10,55 @@
             ],
             "extensions": {
                 "path": [
-                    "users { ... }",
+                    "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
                 "type": "QueryRoot",
-                "field": "users { ... }",
+                "field": "users(pagination: {limit: 3}) { ... }",
                 "id": "root",
+                "code": "PoPCMSSchema\/UserStateAccessControl@e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field 'count' for type 'PostCategory'",
+            "locations": [
+                {
+                    "line": 7,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "count",
+                    "postCategories(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "PostCategory",
+                "field": "count",
+                "ids": [
+                    2835016,
+                    1020423,
+                    33280
+                ],
                 "code": "PoPCMSSchema\/UserStateAccessControl@e2"
             }
         }
     ],
     "data": {
-        "users": null
+        "users": null,
+        "postCategories": [
+            {
+                "name": "aciform",
+                "count": null
+            },
+            {
+                "name": "antiquarianism",
+                "count": null
+            },
+            {
+                "name": "arrangement",
+                "count": null
+            }
+        ]
     }
 }

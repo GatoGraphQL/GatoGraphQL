@@ -11,11 +11,31 @@
             "extensions": {
                 "path": [
                     "id",
-                    "comments { ... }",
+                    "comments(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
                 "type": "Comment",
                 "field": "id",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        },
+        {
+            "message": "There is no field 'content' on type 'Comment'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "content",
+                    "comments(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Comment",
+                "field": "content",
                 "code": "gql@5.3.1",
                 "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
@@ -24,34 +44,16 @@
     "data": {
         "comments": [
             {
-                "id": null
+                "id": null,
+                "content": null
             },
             {
-                "id": null
+                "id": null,
+                "content": null
             },
             {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
+                "id": null,
+                "content": null
             }
         ]
     }

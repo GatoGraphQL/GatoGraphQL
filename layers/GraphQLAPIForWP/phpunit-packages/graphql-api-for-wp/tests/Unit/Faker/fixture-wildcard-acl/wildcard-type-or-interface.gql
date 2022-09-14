@@ -1,5 +1,9 @@
 {
-  users {
+  users(pagination: { limit: 3 }) {
     id
+  }
+  postCategories(pagination: { limit: 3 }) {
+    name
+    count
   }
 }

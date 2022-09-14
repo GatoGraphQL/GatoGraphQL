@@ -10,17 +10,51 @@
             ],
             "extensions": {
                 "path": [
-                    "users { ... }",
+                    "users(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
                 "type": "QueryRoot",
-                "field": "users { ... }",
+                "field": "users(pagination: {limit: 3}) { ... }",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        },
+        {
+            "message": "There is no field 'count' on type 'PostCategory'",
+            "locations": [
+                {
+                    "line": 7,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "count",
+                    "postCategories(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "PostCategory",
+                "field": "count",
                 "code": "gql@5.3.1",
                 "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
             }
         }
     ],
     "data": {
-        "users": null
+        "users": null,
+        "postCategories": [
+            {
+                "name": "aciform",
+                "count": null
+            },
+            {
+                "name": "antiquarianism",
+                "count": null
+            },
+            {
+                "name": "arrangement",
+                "count": null
+            }
+        ]
     }
 }

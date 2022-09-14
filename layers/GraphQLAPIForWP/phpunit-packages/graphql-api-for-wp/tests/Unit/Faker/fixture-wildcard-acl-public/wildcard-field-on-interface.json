@@ -11,7 +11,7 @@
             "extensions": {
                 "path": [
                     "id",
-                    "posts { ... }",
+                    "posts(pagination: {limit: 3}) { ... }",
                     "query { ... }"
                 ],
                 "type": "Post",
@@ -19,14 +19,31 @@
                 "ids": [
                     1724,
                     358,
-                    555,
-                    559,
-                    562,
-                    565,
-                    568,
-                    575,
-                    579,
-                    582
+                    555
+                ],
+                "code": "PoPCMSSchema\/UserStateAccessControl@e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field 'title' for type 'Post'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "title",
+                    "posts(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Post",
+                "field": "title",
+                "ids": [
+                    1724,
+                    358,
+                    555
                 ],
                 "code": "PoPCMSSchema\/UserStateAccessControl@e2"
             }
@@ -35,34 +52,16 @@
     "data": {
         "posts": [
             {
-                "id": null
+                "id": null,
+                "title": null
             },
             {
-                "id": null
+                "id": null,
+                "title": null
             },
             {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
-            },
-            {
-                "id": null
+                "id": null,
+                "title": null
             }
         ]
     }

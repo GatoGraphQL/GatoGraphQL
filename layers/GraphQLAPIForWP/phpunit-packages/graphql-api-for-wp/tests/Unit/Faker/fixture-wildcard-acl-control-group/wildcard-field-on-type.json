@@ -2,34 +2,16 @@
     "data": {
         "comments": [
             {
-                "id": 1900
+                "id": 1900,
+                "content": "Comments? I love comments!"
             },
             {
-                "id": 1901
+                "id": 1901,
+                "content": "These tests are amazing!"
             },
             {
-                "id": 1903
-            },
-            {
-                "id": 1904
-            },
-            {
-                "id": 1905
-            },
-            {
-                "id": 1906
-            },
-            {
-                "id": 1907
-            },
-            {
-                "id": 167
-            },
-            {
-                "id": 168
-            },
-            {
-                "id": 169
+                "id": 1903,
+                "content": "Author Comment."
             }
         ]
     }

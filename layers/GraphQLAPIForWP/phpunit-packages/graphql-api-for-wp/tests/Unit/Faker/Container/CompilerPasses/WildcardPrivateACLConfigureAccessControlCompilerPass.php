@@ -24,10 +24,17 @@ class WildcardPrivateACLConfigureAccessControlCompilerPass extends AbstractCompi
             [
                 UserStateAccessControlGroups::STATE,
                 [
-                    // Wildcard type or interface
+                    // Wildcard type or interface (test on Root)
                     [
                         ConfigurationValues::ANY,
                         'users',
+                        UserStates::IN,
+                        SchemaModes::PRIVATE_SCHEMA_MODE,
+                    ],
+                    // Wildcard type or interface (test on Category)
+                    [
+                        ConfigurationValues::ANY,
+                        'count',
                         UserStates::IN,
                         SchemaModes::PRIVATE_SCHEMA_MODE,
                     ],

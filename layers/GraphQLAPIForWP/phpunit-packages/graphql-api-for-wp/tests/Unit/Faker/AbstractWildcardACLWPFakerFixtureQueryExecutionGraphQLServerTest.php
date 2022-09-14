@@ -34,6 +34,7 @@ abstract class AbstractWildcardACLWPFakerFixtureQueryExecutionGraphQLServerTest 
             ...parent::getGraphQLServerModuleClasses(),
             ...[
                 \PoPWPSchema\Posts\Module::class,
+                \PoPCMSSchema\PostCategoriesWP\Module::class,
                 \PoPWPSchema\Comments\Module::class,
                 \PoPWPSchema\Users\Module::class,
                 \PoPCMSSchema\UserStateAccessControl\Module::class,
