@@ -36,7 +36,7 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
     /**
-     * @return array<string,Directive[]> Key: fieldName, Value: List of Directives
+     * @return array<string,Directive[]> Key: fieldName or "*" (for any field), Value: List of Directives
      */
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {

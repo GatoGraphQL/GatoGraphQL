@@ -47,7 +47,7 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     /**
      * Return an array of fieldNames as keys, and, for each fieldName, an array of directives (including directive arguments) to be applied always on the field
      *
-     * @return array<string,Directive[]> Key: fieldName, Value: List of Directives
+     * @return array<string,Directive[]> Key: fieldName or "*" (for any field), Value: List of Directives
      */
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
