@@ -6,6 +6,6 @@ namespace PoP\MandatoryDirectivesByConfiguration\Constants;
 
 class WildcardConfigurationValues
 {
-    final public const TYPENAME = '*';
-    final public const FIELDNAME = '*';
+    final public const TYPE_OR_INTERFACE_RESOLVER_CLASS = '*';
+    final public const FIELD_NAME = '*';
 }

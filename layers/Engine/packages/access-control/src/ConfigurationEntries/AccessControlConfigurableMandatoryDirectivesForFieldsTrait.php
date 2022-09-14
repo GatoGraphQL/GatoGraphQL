@@ -10,6 +10,7 @@ use PoP\AccessControl\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
+use PoP\MandatoryDirectivesByConfiguration\Constants\WildcardConfigurationValues;
 
 trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
 {
@@ -60,6 +61,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
                 (
                     $entry[0] === $objectTypeOrInterfaceTypeResolverClass
                     || in_array($entry[0], $interfaceTypeResolverClasses)
+                    || $entry[0] === WildcardConfigurationValues::TYPE_OR_INTERFACE_RESOLVER_CLASS
                 )
                 && $entry[1] === $fieldName
                 && (
