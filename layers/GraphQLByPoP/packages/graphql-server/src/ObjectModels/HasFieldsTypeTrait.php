@@ -25,26 +25,39 @@ trait HasFieldsTypeTrait
     {
         $this->fields = [];
 
-        // Iterate to the definition of the fields in the schema, and create an object for each of them
-        $this->createFieldsFromPath(
-            $fullSchemaDefinition,
-            array_merge(
-                $schemaDefinitionPath,
-                [
-                    SchemaDefinition::FIELDS,
-                ]
+        /**
+         * Iterate to the definition of the fields in the schema,
+         * and create an object for each of them
+         */
+        $this->fields = array_merge(
+            $this->fields,
+            SchemaDefinitionHelpers::createFieldsFromPath(
+                $fullSchemaDefinition,
+                array_merge(
+                    $schemaDefinitionPath,
+                    [
+                        SchemaDefinition::FIELDS,
+                    ]
+                )
             )
         );
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
-            // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
-            $this->getFieldsFromPath(
-                $fullSchemaDefinition,
-                [
-                    SchemaDefinition::GLOBAL_FIELDS,
-                ]
+            /**
+             * Global fields have already been initialized,
+             * simply get the reference to the existing objects
+             * from the registryMap
+             */
+            $this->fields = array_merge(
+                $this->fields,
+                SchemaDefinitionHelpers::getFieldsFromPath(
+                    $fullSchemaDefinition,
+                    [
+                        SchemaDefinition::GLOBAL_FIELDS,
+                    ]
+                )
             );
         }
 
@@ -54,28 +67,6 @@ trait HasFieldsTypeTrait
                 return $a->getName() <=> $b->getName();
             });
         }
-    }
-    /**
-     * @param array<string,mixed> $fullSchemaDefinition
-     * @param string[] $fieldSchemaDefinitionPath
-     */
-    protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
-    {
-        $this->fields = array_merge(
-            $this->fields,
-            SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
-        );
-    }
-    /**
-     * @param array<string,mixed> $fullSchemaDefinition
-     * @param string[] $fieldSchemaDefinitionPath
-     */
-    protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
-    {
-        $this->fields = array_merge(
-            $this->fields,
-            SchemaDefinitionHelpers::getFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
-        );
     }
 
     /**
