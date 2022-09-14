@@ -7,6 +7,7 @@ namespace PoP\Root\Module;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 abstract class AbstractModule implements ModuleInterface
 {
@@ -149,7 +150,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Compiler Passes for the System Container
      *
-     * @return string[]
+     * @return array<class-string<CompilerPassInterface>>
      */
     public function getSystemContainerCompilerPassClasses(): array
     {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\Root\Module\ModuleInterface;
 use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterUserAuthorizationSchemeCompilerPass;
 use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
@@ -13,6 +12,8 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginModule;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Module\ModuleInterface;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class Module extends AbstractPluginModule
 {
@@ -60,7 +61,7 @@ class Module extends AbstractPluginModule
     /**
      * Compiler Passes for the System Container
      *
-     * @return string[]
+     * @return array<class-string<CompilerPassInterface>>
      */
     public function getSystemContainerCompilerPassClasses(): array
     {

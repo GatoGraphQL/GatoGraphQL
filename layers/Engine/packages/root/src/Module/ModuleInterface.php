@@ -107,8 +107,7 @@ interface ModuleInterface
     /**
      * Compiler Passes for the System Container
      *
-     * @return string[]
-     * @phpstan-return array<class-string<CompilerPassInterface>>
+     * @return array<class-string<CompilerPassInterface>>
      */
     public function getSystemContainerCompilerPassClasses(): array;
 

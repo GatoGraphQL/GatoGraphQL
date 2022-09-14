@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Module\ModuleInterface;
-use PoP\Root\Module\AbstractModule;
-use PoP\Root\Module\ApplicationEvents;
 use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
+use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ApplicationEvents;
+use PoP\Root\Module\ModuleInterface;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class Module extends AbstractModule
 {
@@ -24,7 +25,7 @@ class Module extends AbstractModule
     /**
      * Compiler Passes for the System Container
      *
-     * @return string[]
+     * @return array<class-string<CompilerPassInterface>>
      */
     public function getSystemContainerCompilerPassClasses(): array
     {
