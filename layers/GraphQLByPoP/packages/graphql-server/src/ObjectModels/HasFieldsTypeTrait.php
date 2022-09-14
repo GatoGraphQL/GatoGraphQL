@@ -47,14 +47,11 @@ trait HasFieldsTypeTrait
              * simply get the reference to the existing objects
              * from the registryMap
              */
-            $globalFields = array_merge(
-                $globalFields,
-                SchemaDefinitionHelpers::getFieldsFromPath(
-                    $fullSchemaDefinition,
-                    [
-                        SchemaDefinition::GLOBAL_FIELDS,
-                    ]
-                )
+            $globalFields = SchemaDefinitionHelpers::getFieldsFromPath(
+                $fullSchemaDefinition,
+                [
+                    SchemaDefinition::GLOBAL_FIELDS,
+                ]
             );
         }
         
