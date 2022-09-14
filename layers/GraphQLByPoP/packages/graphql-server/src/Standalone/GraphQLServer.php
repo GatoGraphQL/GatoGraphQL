@@ -38,6 +38,8 @@ class GraphQLServer implements GraphQLServerInterface
     public function __construct(
         array $moduleClasses,
         private readonly array $moduleClassConfiguration = [],
+        private readonly array $systemContainerCompilerPassClasses = [],
+        private readonly array $applicationContainerCompilerPassClasses = [],
         private readonly ?bool $cacheContainerConfiguration = null,
         private readonly ?string $containerNamespace = null,
         private readonly ?string $containerDirectory = null,
@@ -55,6 +57,10 @@ class GraphQLServer implements GraphQLServerInterface
         $appLoader = App::getAppLoader();
         $appLoader->addModuleClassesToInitialize($this->moduleClasses);
         $appLoader->initializeModules();
+
+        // Inject the Compiler Passes
+        $appLoader->addSystemContainerCompilerPassClasses($this->systemContainerCompilerPassClasses);
+        
         $appLoader->bootSystem(
             $this->cacheContainerConfiguration,
             $this->containerNamespace,
@@ -64,6 +70,9 @@ class GraphQLServer implements GraphQLServerInterface
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         $appLoader->addModuleClassConfiguration($this->moduleClassConfiguration);
+
+        // Inject the Compiler Passes
+        $appLoader->addApplicationContainerCompilerPassClasses($this->applicationContainerCompilerPassClasses);
 
         // Boot the application
         $appLoader->bootApplication(

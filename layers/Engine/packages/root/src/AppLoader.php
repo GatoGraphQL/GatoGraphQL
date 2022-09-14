@@ -57,6 +57,18 @@ class AppLoader implements AppLoaderInterface
      * @var array<string,bool>
      */
     protected array $skipSchemaForModuleCache = [];
+    /**
+     * Inject Compiler Passes to boot the System (eg: when testing)
+     *
+     * @var array<class-string<CompilerPassInterface>>
+     */
+    protected array $systemContainerCompilerPassClasses = [];
+    /**
+     * Inject Compiler Passes to boot the Application (eg: when testing)
+     *
+     * @var array<class-string<CompilerPassInterface>>
+     */
+    protected array $applicationContainerCompilerPassClasses = [];
 
     /**
      * Add Module classes to be initialized
@@ -88,6 +100,34 @@ class AppLoader implements AppLoaderInterface
                 $moduleConfiguration
             );
         }
+    }
+
+    /**
+     * Inject Compiler Passes to boot the System (eg: when testing)
+     *
+     * @param array<class-string<CompilerPassInterface>> $systemContainerCompilerPassClasses List of `CompilerPass` class to initialize
+     */
+    public function addSystemContainerCompilerPassClasses(
+        array $systemContainerCompilerPassClasses
+    ): void {
+        $this->systemContainerCompilerPassClasses = array_merge(
+            $this->systemContainerCompilerPassClasses,
+            $systemContainerCompilerPassClasses
+        );
+    }
+
+    /**
+     * Inject Compiler Passes to boot the Application (eg: when testing)
+     *
+     * @param array<class-string<CompilerPassInterface>> $applicationContainerCompilerPassClasses List of `CompilerPass` class to initialize
+     */
+    public function addApplicationContainerCompilerPassClasses(
+        array $applicationContainerCompilerPassClasses
+    ): void {
+        $this->applicationContainerCompilerPassClasses = array_merge(
+            $this->applicationContainerCompilerPassClasses,
+            $applicationContainerCompilerPassClasses
+        );
     }
 
     /**
@@ -297,7 +337,7 @@ class AppLoader implements AppLoaderInterface
     final protected function getSystemContainerCompilerPasses(): array
     {
         // Collect the compiler pass classes from all modules
-        $compilerPassClasses = [];
+        $compilerPassClasses = $this->systemContainerCompilerPassClasses;
         foreach ($this->orderedModuleClasses as $moduleClass) {
             $module = App::getModule($moduleClass);
             if (!$module->isEnabled()) {
@@ -373,7 +413,14 @@ class AppLoader implements AppLoaderInterface
         // Symfony's DependencyInjection Application Container
         $systemCompilerPassRegistry = SystemCompilerPassRegistryFacade::getInstance();
         $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
-        App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
+        $applicationCompilerPasses = [
+            ...$systemCompilerPasses,
+            ...array_map(
+                fn (string $compilerPassClass) => new $compilerPassClass(),
+                $this->applicationContainerCompilerPassClasses
+            )
+        ];
+        App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($applicationCompilerPasses);
 
         // Initialize the modules
         App::getModuleManager()->moduleLoaded();

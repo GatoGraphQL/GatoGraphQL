@@ -11,6 +11,6 @@ class DisableFieldIfUserIsLoggedInConfigurableAccessControlForFieldsInPrivateSch
     protected function removeFieldNameBasedOnUserState(string $entryValue, bool $isUserLoggedIn): bool
     {
         // Remove if the user is not logged in and, by configuration, he/she must be
-        return $isUserLoggedIn && UserStates::OUT == $entryValue;
+        return $isUserLoggedIn && UserStates::OUT === $entryValue;
     }
 }
