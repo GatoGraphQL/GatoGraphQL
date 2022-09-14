@@ -481,7 +481,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $alias = sprintf(
                 '_%s_%s_%s_',
                 implode('_', $fragmentModelListFieldAliasFriendlyIDs),
-                'isTypeOrImplementsAll',
+                '_isTypeOrImplementsAll',
                 $fragmentModelListName
             );
             /**
@@ -492,7 +492,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
              */
             if (!isset($this->fieldInstanceContainer[$query][$alias])) {
                 $this->fieldInstanceContainer[$query][$alias] = new LeafField(
-                    'isTypeOrImplementsAll',
+                    '_isTypeOrImplementsAll',
                     $alias,
                     [
                         new Argument(

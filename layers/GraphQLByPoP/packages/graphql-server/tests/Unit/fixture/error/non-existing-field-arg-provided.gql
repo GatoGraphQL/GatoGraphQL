@@ -1,4 +1,4 @@
 query {
-  implements(interface: "SomeInterface", type: "DoesntMatter")
-  multiple: implements(interface: "SomeInterface", someType: "DoesntMatter", anotherType: "AlsoDoesntMatter")
+  _implements(interface: "SomeInterface", type: "DoesntMatter")
+  multiple: _implements(interface: "SomeInterface", someType: "DoesntMatter", anotherType: "AlsoDoesntMatter")
 }

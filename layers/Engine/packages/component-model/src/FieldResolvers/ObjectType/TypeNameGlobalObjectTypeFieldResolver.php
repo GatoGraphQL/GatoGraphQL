@@ -34,9 +34,9 @@ class TypeNameGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldNamesToResolve(): array
     {
         return [
-            'typeName',
-            'namespace',
-            'qualifiedTypeName',
+            '_typeName',
+            '_namespace',
+            '_qualifiedTypeName',
         ];
     }
 
@@ -52,9 +52,9 @@ class TypeNameGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'typeName' => $this->getStringScalarTypeResolver(),
-            'namespace' => $this->getStringScalarTypeResolver(),
-            'qualifiedTypeName' => $this->getStringScalarTypeResolver(),
+            '_typeName' => $this->getStringScalarTypeResolver(),
+            '_namespace' => $this->getStringScalarTypeResolver(),
+            '_qualifiedTypeName' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -62,9 +62,9 @@ class TypeNameGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'typeName',
-            'namespace',
-            'qualifiedTypeName'
+            '_typeName',
+            '_namespace',
+            '_qualifiedTypeName'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -74,9 +74,9 @@ class TypeNameGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'typeName' => $this->__('The object\'s type', 'component-model'),
-            'namespace' => $this->__('The object\'s namespace', 'component-model'),
-            'qualifiedTypeName' => $this->__('The object\'s namespace + type', 'component-model'),
+            '_typeName' => $this->__('The object\'s type', 'component-model'),
+            '_namespace' => $this->__('The object\'s namespace', 'component-model'),
+            '_qualifiedTypeName' => $this->__('The object\'s namespace + type', 'component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -88,13 +88,13 @@ class TypeNameGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'typeName':
+            case '_typeName':
                 return $objectTypeResolver->getTypeName();
 
-            case 'namespace':
+            case '_namespace':
                 return $objectTypeResolver->getNamespace();
 
-            case 'qualifiedTypeName':
+            case '_qualifiedTypeName':
                 return $objectTypeResolver->getNamespacedTypeName();
         }
 

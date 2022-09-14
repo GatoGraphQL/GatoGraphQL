@@ -15,6 +15,54 @@
                     "description": "Mutation type, starting from which mutations are executed",
                     "fields": [
                         {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -31,38 +79,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "self",
                             "description": "The same object",
                             "args": [],
@@ -72,22 +88,6 @@
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "MutationRoot",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -112,6 +112,54 @@
                     "description": "Query type, starting from which the query is executed",
                     "fields": [
                         {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -128,38 +176,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "self",
                             "description": "The same object",
                             "args": [],
@@ -169,22 +185,6 @@
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "QueryRoot",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -209,6 +209,54 @@
                     "description": "Root type, starting from which the query is executed",
                     "fields": [
                         {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -232,38 +280,6 @@
                                 "kind": "OBJECT",
                                 "name": "MutationRoot",
                                 "ofType": null
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -295,22 +311,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -330,6 +330,54 @@
                     "description": "Extensions (custom metadata) added to the directive",
                     "fields": [
                         {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -346,22 +394,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "needsDataToExecute",
                             "description": "If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?",
                             "args": [],
@@ -371,38 +403,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -426,6 +426,54 @@
                     "name": "_EnumValueExtensions",
                     "description": "Extensions (custom metadata) added to the enum value",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -457,54 +505,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -523,6 +523,54 @@
                     "name": "_FieldExtensions",
                     "description": "Extensions (custom metadata) added to the field",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -570,54 +618,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -636,6 +636,54 @@
                     "name": "_InputValueExtensions",
                     "description": "Extensions (custom metadata) added to the input value",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -667,54 +715,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -733,6 +733,54 @@
                     "name": "_NamedTypeExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject)",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "elementName",
                             "description": "The type's non-namespaced name",
@@ -766,56 +814,8 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "namespacedName",
                             "description": "The type's namespaced name",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -847,6 +847,54 @@
                     "description": "Extensions (custom metadata) added to the GraphQL schema",
                     "fields": [
                         {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -877,54 +925,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -943,6 +943,54 @@
                     "name": "__Directive",
                     "description": "A GraphQL directive in the data graph",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "args",
                             "description": "Directive's arguments",
@@ -1066,54 +1114,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -1132,6 +1132,54 @@
                     "name": "__EnumValue",
                     "description": "Representation of an Enum value in GraphQL",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "deprecationReason",
                             "description": "Why was the enum value deprecated?",
@@ -1219,54 +1267,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -1285,6 +1285,54 @@
                     "name": "__Field",
                     "description": "Representation of a GraphQL type's field",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "args",
                             "description": "Field arguments",
@@ -1398,38 +1446,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "type",
                             "description": "Type to which the field belongs",
                             "args": [],
@@ -1439,22 +1455,6 @@
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "__Type",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -1478,6 +1478,54 @@
                     "name": "__InputValue",
                     "description": "Representation of an input object in GraphQL",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "defaultValue",
                             "description": "Default value of the input value",
@@ -1551,38 +1599,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "type",
                             "description": "Type of the input value",
                             "args": [],
@@ -1592,22 +1608,6 @@
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "__Type",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -1631,6 +1631,54 @@
                     "name": "__Schema",
                     "description": "Schema type, to implement the introspection fields",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "directives",
                             "description": "All directives registered in the data graph",
@@ -1719,38 +1767,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "queryType",
                             "description": "The type, accessible from the root, that resolves queries",
                             "args": [],
@@ -1806,22 +1822,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "types",
                             "description": "All types registered in the data graph",
                             "args": [],
@@ -1862,6 +1862,54 @@
                     "name": "__Type",
                     "description": "Representation of each GraphQL type in the graph",
                     "fields": [
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "description",
                             "description": "Type's description as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACyBIC1BHnjL)",
@@ -2033,22 +2081,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "ofType",
                             "description": "The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-HAJbLA4DABCBIu9N)",
                             "args": [],
@@ -2081,22 +2113,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "specifiedByURL",
                             "description": "A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https:\/\/spec.graphql.org\/draft\/#sel-IAJXNFA0EABABL9N)",
                             "args": [],
@@ -2104,22 +2120,6 @@
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -2182,23 +2182,7 @@
                     "description": "The fundamental fields that must be implemented by all objects",
                     "fields": [
                         {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "namespace",
+                            "name": "_namespace",
                             "description": "The object's namespace",
                             "args": [],
                             "type": {
@@ -2214,7 +2198,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "qualifiedTypeName",
+                            "name": "_qualifiedTypeName",
                             "description": "The object's namespace + type",
                             "args": [],
                             "type": {
@@ -2230,7 +2214,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "typeName",
+                            "name": "_typeName",
                             "description": "The object's type",
                             "args": [],
                             "type": {
@@ -2239,6 +2223,22 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "id",
+                            "description": "The object's unique identifier for its type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             },

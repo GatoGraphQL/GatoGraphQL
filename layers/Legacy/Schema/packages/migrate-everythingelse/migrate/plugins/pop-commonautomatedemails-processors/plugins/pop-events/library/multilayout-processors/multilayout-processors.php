@@ -28,7 +28,7 @@ class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Applica
                         /** @var RelationalTypeResolverInterface */
                         $eventObjectTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
                         $field = /* @todo Re-do this code! Left undone */ new Field(
-                            'isObjectType',
+                            '_isObjectType',
                             [
                                 'type' => $eventObjectTypeResolver->getTypeName(),
                             ]

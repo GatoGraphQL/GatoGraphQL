@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Mandatory argument 'interface' in field 'implements' of type 'Post' has not been provided",
+      "message": "Mandatory argument 'interface' in field '_implements' of type 'Post' has not been provided",
       "locations": [
         {
           "line": 3,
@@ -10,18 +10,18 @@
       ],
       "extensions": {
         "path": [
-          "implements",
+          "_implements",
           "posts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "Post",
-        "field": "implements",
+        "field": "_implements",
         "code": "gql@5.4.2.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
       }
     },
     {
-      "message": "Mandatory argument 'type' in field 'isObjectType' of type 'Post' has not been provided",
+      "message": "Mandatory argument 'type' in field '_isObjectType' of type 'Post' has not been provided",
       "locations": [
         {
           "line": 6,
@@ -30,18 +30,18 @@
       ],
       "extensions": {
         "path": [
-          "isObjectType",
+          "_isObjectType",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "Post",
-        "field": "isObjectType",
+        "field": "_isObjectType",
         "code": "gql@5.4.2.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
       }
     },
     {
-      "message": "Mandatory argument 'type' in field 'isObjectType' of type 'Page' has not been provided",
+      "message": "Mandatory argument 'type' in field '_isObjectType' of type 'Page' has not been provided",
       "locations": [
         {
           "line": 6,
@@ -50,12 +50,12 @@
       ],
       "extensions": {
         "path": [
-          "isObjectType",
+          "_isObjectType",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "Page",
-        "field": "isObjectType",
+        "field": "_isObjectType",
         "code": "gql@5.4.2.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
       }
@@ -64,24 +64,24 @@
   "data": {
     "posts": [
       {
-        "implements": null
+        "_implements": null
       },
       {
-        "implements": null
+        "_implements": null
       },
       {
-        "implements": null
+        "_implements": null
       }
     ],
     "customPosts": [
       {
-        "isObjectType": null
+        "_isObjectType": null
       },
       {
-        "isObjectType": null
+        "_isObjectType": null
       },
       {
-        "isObjectType": null
+        "_isObjectType": null
       }
     ]
   }

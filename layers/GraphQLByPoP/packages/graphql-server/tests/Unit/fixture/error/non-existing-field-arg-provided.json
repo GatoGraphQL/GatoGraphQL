@@ -1,68 +1,68 @@
 {
   "errors": [
     {
-      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'type'",
+      "message": "On field '_implements' of type 'QueryRoot', there is no argument with name 'type'",
       "locations": [
         {
           "line": 2,
-          "column": 42
+          "column": 43
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "path": [
           "(type: \"DoesntMatter\")",
-          "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+          "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     },
     {
-      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'someType'",
+      "message": "On field '_implements' of type 'QueryRoot', there is no argument with name 'someType'",
       "locations": [
         {
           "line": 3,
-          "column": 52
+          "column": 53
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "path": [
           "(someType: \"DoesntMatter\")",
-          "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+          "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     },
     {
-      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'anotherType'",
+      "message": "On field '_implements' of type 'QueryRoot', there is no argument with name 'anotherType'",
       "locations": [
         {
           "line": 3,
-          "column": 78
+          "column": 79
         }
       ],
       "extensions": {
-        "type": "QueryRoot",
-        "field": "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "path": [
           "(anotherType: \"AlsoDoesntMatter\")",
-          "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+          "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
           "query { ... }"
         ],
+        "type": "QueryRoot",
+        "field": "multiple: _implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     }
   ],
   "data": {
-    "implements": null,
+    "_implements": null,
     "multiple": null
   }
 }

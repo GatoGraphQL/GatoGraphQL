@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Mandatory argument 'interface' in field 'implements' of type 'QueryRoot' has not been provided",
+      "message": "Mandatory argument 'interface' in field '_implements' of type 'QueryRoot' has not been provided",
       "locations": [
         {
           "line": 2,
@@ -10,17 +10,17 @@
       ],
       "extensions": {
         "path": [
-          "implements",
+          "_implements",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "implements",
+        "field": "_implements",
         "code": "gql@5.4.2.1[a]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
       }
     }
   ],
   "data": {
-    "implements": null
+    "_implements": null
   }
 }

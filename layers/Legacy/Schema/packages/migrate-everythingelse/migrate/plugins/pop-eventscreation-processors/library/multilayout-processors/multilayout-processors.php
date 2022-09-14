@@ -34,7 +34,7 @@ class PoP_EventsCreation_Multilayout_Processor extends PoP_Application_Multilayo
                         /** @var RelationalTypeResolverInterface */
                         $eventObjectTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
                         $field = /* @todo Re-do this code! Left undone */ new Field(
-                            'isObjectType',
+                            '_isObjectType',
                             [
                                 'type' => $eventObjectTypeResolver->getTypeName(),
                             ]

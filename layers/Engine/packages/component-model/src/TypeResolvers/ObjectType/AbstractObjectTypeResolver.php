@@ -1155,8 +1155,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                  * Do NOT use ASTNodesFactory::getNonSpecificLocation(), as that
                  * represents "field executed internally", but here is a different
                  * purpose, which is to calculate the fields for the Schema.
-                 * Then, internal fields (such as `implements`, `isInUnionType`,
-                 * `isTypeOrImplements` and `isTypeOrImplementsAll`) can be executed
+                 * Then, internal fields (such as `_implements`, `_isInUnionType`,
+                 * `_isTypeOrImplements` and `_isTypeOrImplementsAll`) can be executed
                  * only internally.
                  *
                  * @see layers/Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php
