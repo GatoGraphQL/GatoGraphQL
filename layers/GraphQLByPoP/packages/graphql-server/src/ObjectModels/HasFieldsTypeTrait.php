@@ -23,10 +23,11 @@ trait HasFieldsTypeTrait
      */
     protected function initFields(array &$fullSchemaDefinition, array $schemaDefinitionPath): void
     {
-        $this->fields = [];
-
-        // Iterate to the definition of the fields in the schema, and create an object for each of them
-        $this->createFieldsFromPath(
+        /**
+         * Iterate to the definition of the fields in the schema,
+         * and create an object for each of them
+         */
+        $this->fields = SchemaDefinitionHelpers::createFieldsFromPath(
             $fullSchemaDefinition,
             array_merge(
                 $schemaDefinitionPath,
@@ -35,46 +36,53 @@ trait HasFieldsTypeTrait
                 ]
             )
         );
+
+        $globalFields = [];
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
-            // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
-            $this->getFieldsFromPath(
+            /**
+             * Global fields have already been initialized,
+             * simply get the reference to the existing objects
+             * from the registryMap
+             */
+            $globalFields = SchemaDefinitionHelpers::getFieldsFromPath(
                 $fullSchemaDefinition,
                 [
                     SchemaDefinition::GLOBAL_FIELDS,
                 ]
             );
         }
-
+        
         // Maybe sort fields and connections all together
         if ($moduleConfiguration->sortGraphQLSchemaAlphabetically()) {
-            uasort($this->fields, function (Field $a, Field $b): int {
-                return $a->getName() <=> $b->getName();
-            });
+            if ($moduleConfiguration->sortGlobalFieldsAfterNormalFieldsInGraphQLSchema()) {
+                /**
+                 * Sort them separately, then merge them
+                 */
+                uasort($this->fields, fn (Field $a, Field $b) => $a->getName() <=> $b->getName());
+                uasort($globalFields, fn (Field $a, Field $b) => $a->getName() <=> $b->getName());
+                $this->fields = array_merge(
+                    $this->fields,
+                    $globalFields
+                );
+            } else {
+                /**
+                 * Merge them, then sort them together
+                 */
+                $this->fields = array_merge(
+                    $this->fields,
+                    $globalFields
+                );
+                uasort($this->fields, fn (Field $a, Field $b) => $a->getName() <=> $b->getName());
+            }
+        } else {
+            $this->fields = array_merge(
+                $this->fields,
+                $globalFields
+            );
         }
-    }
-    /**
-     * @param array<string,mixed> $fullSchemaDefinition
-     * @param string[] $fieldSchemaDefinitionPath
-     */
-    protected function createFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
-    {
-        $this->fields = array_merge(
-            $this->fields,
-            SchemaDefinitionHelpers::createFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
-        );
-    }
-    /**
-     * @param array<string,mixed> $fullSchemaDefinition
-     * @param string[] $fieldSchemaDefinitionPath
-     */
-    protected function getFieldsFromPath(array &$fullSchemaDefinition, array $fieldSchemaDefinitionPath): void
-    {
-        $this->fields = array_merge(
-            $this->fields,
-            SchemaDefinitionHelpers::getFieldsFromPath($fullSchemaDefinition, $fieldSchemaDefinitionPath)
-        );
     }
 
     /**
