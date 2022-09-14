@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTy
 use PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
 use PoPCMSSchema\UserStateAccessControl\Services\AccessControlGroups as UserStateAccessControlGroups;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\MandatoryDirectivesByConfiguration\Constants\WildcardConfigurationValues;
+use PoP\MandatoryDirectivesByConfiguration\Constants\ConfigurationValues;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
@@ -25,20 +25,20 @@ class WildcardACLConfigureAccessControlCompilerPass extends AbstractCompilerPass
                 [
                     // Wildcard type or interface
                     [
-                        WildcardConfigurationValues::ANY,
+                        ConfigurationValues::ANY,
                         'users',
                         UserStates::IN,
                     ],
                     // Wildcard field on type
                     [
                         CommentObjectTypeResolver::class,
-                        WildcardConfigurationValues::ANY,
+                        ConfigurationValues::ANY,
                         UserStates::IN,
                     ],
                     // Wildcard field on interface
                     [
                         IsCustomPostInterfaceTypeResolver::class,
-                        WildcardConfigurationValues::ANY,
+                        ConfigurationValues::ANY,
                         UserStates::IN,
                     ],
                 ]

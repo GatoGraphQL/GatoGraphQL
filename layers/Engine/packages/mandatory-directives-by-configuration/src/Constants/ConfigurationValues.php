@@ -9,7 +9,7 @@ namespace PoP\MandatoryDirectivesByConfiguration\Constants;
  * we can use value "*" to represent "any type or interface"
  * and also "any field (for a certain type or interface)"
  */
-class WildcardConfigurationValues
+class ConfigurationValues
 {
     final public const ANY = '*';
 }
