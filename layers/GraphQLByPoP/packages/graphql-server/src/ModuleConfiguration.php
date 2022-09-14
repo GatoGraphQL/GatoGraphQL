@@ -25,6 +25,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function sortGlobalFieldsAfterNormalFieldsInGraphQLSchema(): bool
+    {
+        $envVariable = Environment::SORT_GLOBAL_FIELDS_AFTER_NORMAL_FIELDS_IN_GRAPHQL_SCHEMA;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function enableProactiveFeedback(): bool
     {
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK;
