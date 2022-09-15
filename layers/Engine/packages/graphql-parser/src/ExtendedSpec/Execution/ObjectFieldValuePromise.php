@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
+use PoP\GraphQLParser\Exception\ObjectFieldValuePromiseException;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
-use PoP\Root\Exception\ShouldNotHappenException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
 
@@ -24,11 +26,15 @@ class ObjectFieldValuePromise implements ValueResolutionPromiseInterface
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
         if (!$objectResolvedFieldValues->contains($this->field)) {
-            throw new ShouldNotHappenException(
-                sprintf(
-                    $this->__('The ObjectFieldValuePromise cannot resolve field \'%s\'', 'graphql-parser'),
-                    $this->field->asFieldOutputQueryString()
-                )
+            throw new ObjectFieldValuePromiseException(
+                new FeedbackItemResolution(
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::E11,
+                    [
+                        $this->field->asFieldOutputQueryString(),
+                    ]
+                ),
+                $this->field
             );
         }
 

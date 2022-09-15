@@ -19,6 +19,7 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
     public final const E8 = '8';
     public final const E9 = '9';
     public final const E10 = '10';
+    public final const E11 = '11';
     public final const E_5_8_3 = '5.8.3';
 
     protected function getNamespace(): string
@@ -42,6 +43,7 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E8,
             self::E9,
             self::E10,
+            self::E11,
             self::E_5_8_3,
         ];
     }
@@ -59,6 +61,7 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E8 => $this->__('The reference to the Resolved Field Value \'%1$s\' cannot share the same name with the variable \'%1$s\'', 'graphql-parser'),
             self::E9 => $this->__('Dynamic variable \'%1$s\' cannot share the same name with the reference to the Resolved Field Value \'%2$s\'', 'graphql-parser'),
             self::E10 => $this->__('No value has been exported for dynamic variable \'%s\' for object with ID \'%s\'', 'graphql-server'),
+            self::E11 => $this->__('The reference to field \'%s\' cannot be resolved', 'graphql-server'),
             self::E_5_8_3 => $this->__('No value has been exported for dynamic variable \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
