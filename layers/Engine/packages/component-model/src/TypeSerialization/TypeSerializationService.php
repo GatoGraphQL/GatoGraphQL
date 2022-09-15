@@ -138,11 +138,6 @@ class TypeSerializationService implements TypeSerializationServiceInterface
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): string|int|float|bool|array {
-        /** @var int */
-        $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
-        $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-
         /**
          * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
@@ -158,6 +153,11 @@ class TypeSerializationService implements TypeSerializationServiceInterface
             }
             return $fieldLeafOutputTypeResolver->serialize($value);
         }
+
+        /** @var int */
+        $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
+        $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
 
         // If the value is an array of arrays, then serialize each subelement to the item type
         // To make sure the array is not associative (on which case it should be treated
