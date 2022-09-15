@@ -1580,7 +1580,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      *   1. The fieldArgs contain Promises, which will be resolved
      *      by the time ->resolveValue is executed on the object
-     *   2. When a field is dynamically created (eg: `@applyFunctionField`)
+     *   2. When a field is dynamically created (eg: `@applyField`)
      *
      * @param array<string,mixed> $fieldArgs
      */
