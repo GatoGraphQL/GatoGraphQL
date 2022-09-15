@@ -15,54 +15,6 @@
                     "description": "Mutation type, starting from which mutations are executed",
                     "fields": [
                         {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -93,24 +45,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "QueryRoot",
-                    "description": "Query type, starting from which the query is executed",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -158,7 +93,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "QueryRoot",
+                    "description": "Query type, starting from which the query is executed",
+                    "fields": [
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -190,24 +142,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "Root",
-                    "description": "Root type, starting from which the query is executed",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -255,7 +190,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "Root",
+                    "description": "Root type, starting from which the query is executed",
+                    "fields": [
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -311,24 +263,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "_DirectiveExtensions",
-                    "description": "Extensions (custom metadata) added to the directive",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -376,7 +311,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "_DirectiveExtensions",
+                    "description": "Extensions (custom metadata) added to the directive",
+                    "fields": [
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -408,24 +360,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "_EnumValueExtensions",
-                    "description": "Extensions (custom metadata) added to the enum value",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -473,7 +408,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "_EnumValueExtensions",
+                    "description": "Extensions (custom metadata) added to the enum value",
+                    "fields": [
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -505,24 +457,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "_FieldExtensions",
-                    "description": "Extensions (custom metadata) added to the field",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -570,7 +505,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "_FieldExtensions",
+                    "description": "Extensions (custom metadata) added to the field",
+                    "fields": [
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -618,24 +570,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "_InputValueExtensions",
-                    "description": "Extensions (custom metadata) added to the input value",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -683,7 +618,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "_InputValueExtensions",
+                    "description": "Extensions (custom metadata) added to the input value",
+                    "fields": [
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -715,24 +667,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "_NamedTypeExtensions",
-                    "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject)",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -780,7 +715,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "_NamedTypeExtensions",
+                    "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject)",
+                    "fields": [
                         {
                             "name": "elementName",
                             "description": "The type's non-namespaced name",
@@ -828,24 +780,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "_SchemaExtensions",
-                    "description": "Extensions (custom metadata) added to the GraphQL schema",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -893,7 +828,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "_SchemaExtensions",
+                    "description": "Extensions (custom metadata) added to the GraphQL schema",
+                    "fields": [
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -925,24 +877,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "__Directive",
-                    "description": "A GraphQL directive in the data graph",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -990,7 +925,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "__Directive",
+                    "description": "A GraphQL directive in the data graph",
+                    "fields": [
                         {
                             "name": "args",
                             "description": "Directive's arguments",
@@ -1114,24 +1066,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "__EnumValue",
-                    "description": "Representation of an Enum value in GraphQL",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -1179,7 +1114,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "__EnumValue",
+                    "description": "Representation of an Enum value in GraphQL",
+                    "fields": [
                         {
                             "name": "deprecationReason",
                             "description": "Why was the enum value deprecated?",
@@ -1267,24 +1219,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "__Field",
-                    "description": "Representation of a GraphQL type's field",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -1332,7 +1267,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "__Field",
+                    "description": "Representation of a GraphQL type's field",
+                    "fields": [
                         {
                             "name": "args",
                             "description": "Field arguments",
@@ -1460,24 +1412,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "__InputValue",
-                    "description": "Representation of an input object in GraphQL",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -1525,7 +1460,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "__InputValue",
+                    "description": "Representation of an input object in GraphQL",
+                    "fields": [
                         {
                             "name": "defaultValue",
                             "description": "Default value of the input value",
@@ -1613,24 +1565,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "__Schema",
-                    "description": "Schema type, to implement the introspection fields",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -1678,7 +1613,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "__Schema",
+                    "description": "Schema type, to implement the introspection fields",
+                    "fields": [
                         {
                             "name": "directives",
                             "description": "All directives registered in the data graph",
@@ -1844,24 +1796,7 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "Node",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "__Type",
-                    "description": "Representation of each GraphQL type in the graph",
-                    "fields": [
+                        },
                         {
                             "name": "_namespace",
                             "description": "The object's namespace",
@@ -1909,7 +1844,24 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Node",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "__Type",
+                    "description": "Representation of each GraphQL type in the graph",
+                    "fields": [
                         {
                             "name": "description",
                             "description": "Type's description as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACyBIC1BHnjL)",
@@ -2123,6 +2075,54 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
+                        },
+                        {
+                            "name": "_namespace",
+                            "description": "The object's namespace",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_qualifiedTypeName",
+                            "description": "The object's namespace + type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_typeName",
+                            "description": "The object's type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -2182,6 +2182,22 @@
                     "description": "The fundamental fields that must be implemented by all objects",
                     "fields": [
                         {
+                            "name": "id",
+                            "description": "The object's unique identifier for its type",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "_namespace",
                             "description": "The object's namespace",
                             "args": [],
@@ -2223,22 +2239,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
                                     "ofType": null
                                 }
                             },
