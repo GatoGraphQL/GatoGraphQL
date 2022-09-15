@@ -159,9 +159,11 @@ class TypeSerializationService implements TypeSerializationServiceInterface
         $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
         $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
 
-        // If the value is an array of arrays, then serialize each subelement to the item type
-        // To make sure the array is not associative (on which case it should be treated
-        // as a JSONObject instead of an array), also apply `array_values`
+        /**
+         * If the value is an array of arrays, then serialize each subelement to the item type.
+         * To make sure the array is not associative (on which case it should be treated
+         * as a JSONObject instead of an array), also apply `array_values`
+         */
         if ($fieldLeafOutputTypeIsArrayOfArrays) {
             return array_values(array_map(
                 // If it contains a null value, return it as is
