@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeSerialization;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -154,8 +155,26 @@ class TypeSerializationService implements TypeSerializationServiceInterface
             return $fieldLeafOutputTypeResolver->serialize($value);
         }
 
-        /** @var int */
-        $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
+        /**
+         * Allow to force the modifiers for "IsArrayOfArrays" and
+         * "IsArray", because the serialization could come from @forEach,
+         * which will decrease on 1 level the cardinality of the value,
+         * not corresponding anymore with that one from the type in the field.
+         *
+         * And these values can't be passed as param, since @forEach @forEach
+         * would not be aware of the concatenation. Then, simply store
+         * the "current" field modifiers in the AppState, and let @forEach
+         * modify the values there.
+         *
+         * @var int|null
+         */
+        $currentFieldTypeModifiers = App::getState('current-field-type-modifiers');
+        if ($currentFieldTypeModifiers !== null) {
+            $fieldTypeModifiers = $currentFieldTypeModifiers;
+        } else {
+            /** @var int */
+            $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
+        }
         $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
         $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
 
