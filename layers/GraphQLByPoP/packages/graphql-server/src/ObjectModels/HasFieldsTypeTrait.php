@@ -54,7 +54,7 @@ trait HasFieldsTypeTrait
                 ]
             );
         }
-        
+
         // Maybe sort fields and connections all together
         if ($moduleConfiguration->sortGraphQLSchemaAlphabetically()) {
             if ($moduleConfiguration->sortGlobalFieldsAfterNormalFieldsInGraphQLSchema()) {
