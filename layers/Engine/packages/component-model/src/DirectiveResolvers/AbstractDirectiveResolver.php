@@ -656,6 +656,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return $this->resolveCanProcessField($targetObjectTypeResolver, $field, $isNested);
         }
 
+        return $this->resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses(
+            $relationalTypeResolver,
+            $field,
+            $isNested,
+        );
+    }
+
+    /**
+     * Check if the directive only handles specific types
+     */
+    protected function resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        FieldInterface $field,
+        bool $isNested,
+    ): bool {
         /**
          * Nested directives must not validate the type,
          * as they will be most likely applied on a subitem
@@ -698,9 +713,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return true;
         }
 
-        /**
-         * Check if the directive only handles specific types
-         */
         $supportedFieldTypeResolverClasses = $this->getSupportedFieldTypeResolverClasses();
         if (
             $supportedFieldTypeResolverClasses !== null
