@@ -8,7 +8,9 @@ OneOf Input Objects are a special variant of Input Objects where the type system
 
 The "oneof" input object is a particular type of input object, where exactly one of the input fields must be provided as input (or otherwise it returns a validation error). This behavior introduces polymorphism for inputs.
 
-For instance, the field `QueryRoot.post` now receives a field argument `by`, which is a oneof input object allowing is to retrieve the post via different properties, such as by `id`:
+The benefit is that a single field can then be used to tackle different use cases (such as the field `post` selecting posts by either ID or slug), so we can avoid creating a different field for each use case (such as `postByID`, `postBySlug`, etc), thus making the GraphQL schema leaner and more elegant.
+
+For instance, the field `QueryRoot.post` receives a field argument `by`, which is a oneof input object allowing is to retrieve the post via different properties, including by `id`:
 
 ```graphql
 {
@@ -23,7 +25,7 @@ For instance, the field `QueryRoot.post` now receives a field argument `by`, whi
 }
 ```
 
-...or by `slug`:
+...and by `slug`:
 
 ```graphql
 {
@@ -38,7 +40,41 @@ For instance, the field `QueryRoot.post` now receives a field argument `by`, whi
 }
 ```
 
-The benefit is that a single field can then be used to tackle different use cases, so we can avoid creating a different field for each use case (such as `postByID`, `postBySlug`, etc), thus making the GraphQL schema leaner and more elegant.
+It is mandatory to provide one, and only one, of the available properties. If we provide two or more, such as both `id` and `slug`:
+
+```graphql
+{
+  post(
+    by: {
+      id: 1
+      slug: "hello-world"
+    }
+  ) {
+    id
+    title
+  }
+}
+```
+
+...we will then get an error:
+
+```json
+{
+  "errors": [
+    {
+      "message": "The oneof input object 'PostByInput' must be provided exactly one value, but 2 have been provided",
+      "extensions": {
+        "type": "QueryRoot",
+        "field": "post(by:{id:1,slig:\"hello-world\"})",
+        "argument": "by"
+      }
+    }
+  ],
+  "data": {
+    "post": null
+  }
+}
+```
 
 ## GraphQL spec
 
