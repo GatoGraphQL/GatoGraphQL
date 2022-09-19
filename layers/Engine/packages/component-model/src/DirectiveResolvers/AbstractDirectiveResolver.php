@@ -692,7 +692,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
 
         /**
-         * DangerousNonSpecific is always processed
+         * DangerouslyNonSpecific Scalar is always processed
          */
         if ($fieldTypeResolver instanceof DangerouslyNonSpecificScalarTypeScalarTypeResolver) {
             return true;
