@@ -617,7 +617,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final public function resolveCanProcessField(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
-        bool $isNested,
     ): bool {
         $directiveSupportedFieldNames = $this->getFieldNamesToApplyTo();
         if ($directiveSupportedFieldNames !== [] && !in_array($field->getName(), $directiveSupportedFieldNames)) {
@@ -653,13 +652,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 return true;
             }
             $targetObjectTypeResolver = $targetObjectTypeResolvers[0];
-            return $this->resolveCanProcessField($targetObjectTypeResolver, $field, $isNested);
+            return $this->resolveCanProcessField($targetObjectTypeResolver, $field);
         }
 
         return $this->resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses(
             $relationalTypeResolver,
             $field,
-            $isNested,
         );
     }
 
@@ -669,31 +667,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
-        bool $isNested,
     ): bool {
-        /**
-         * Nested directives must not validate the type,
-         * as they will be most likely applied on a subitem
-         * from the field value (eg: an array item, or a JSON
-         * property).
-         *
-         * Eg: in this query, the field is of type JSONObject,
-         * but the directive is applied on a string
-         *
-         * ```
-         * {
-         *   postData: getJSON(
-         *     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
-         *   )
-         *     @underJSONObjectProperty(path: "title.rendered")
-         *       @upperCase
-         * }
-         * ```
-         */
-        if ($isNested) {
-            return true;
-        }
-
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
         $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
