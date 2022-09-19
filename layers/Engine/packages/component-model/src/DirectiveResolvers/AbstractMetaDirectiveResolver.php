@@ -184,11 +184,16 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     }
 
     /**
-     * Indicate if the directive will modify the type
-     * being processed, originally being the one from
-     * the field, as to avoid validating if the
-     * upcoming directives-in-the-nested-pipeline can
-     * process it or not.
+     * Indicate if the directive will modify the type being processed
+     * to DangerouslyNonScalar (originally being the one from the field).
+     * 
+     * This is to avoid the resolution of any downstream nested directive
+     * failing, when it's been set to process a certain type only.
+     *
+     * Eg: `@upperCase` has been set to process `String`, but doing
+     * `{ _getJSON(url: ...) @underJSONObjectProperty(...) @upperCase }`
+     * must not fail. Then, @underJSONObjectProperty indicates to
+     * switch from the original JSONObject to DangerouslyNonScalar.
      */
     abstract protected function mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution(): bool;
 
