@@ -12,7 +12,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
@@ -186,7 +185,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     /**
      * Indicate if the directive will modify the type being processed
      * to DangerouslyNonScalar (originally being the one from the field).
-     * 
+     *
      * This is to avoid the resolution of any downstream nested directive
      * failing, when it's been set to process a certain type only.
      *

@@ -41,7 +41,6 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
@@ -728,7 +727,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($currentSupportedDirectiveResolutionFieldTypeResolver !== null) {
             return $currentSupportedDirectiveResolutionFieldTypeResolver;
         }
-        
+
         return $objectTypeResolver->getFieldTypeResolver($field);
     }
 
