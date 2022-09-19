@@ -199,14 +199,20 @@ class TypeSerializationService implements TypeSerializationServiceInterface
      *
      * For instance, in the following query, the cardinality
      * of `roleNames` is `[String]`, but that one received
-     * by `@upperCase` is `String`:
+     * by field `_titleCase` is `String`:
      *
      *   ```
      *   {
-     *     user {
+     *     users {
      *       roleNames
-     *         @forEach
-     *           @upperCase
+     *         @forEach(passOnwardsAs: "value")
+     *           @applyField(
+     *             name: "_titleCase"
+     *             arguments: {
+     *               text: $value
+     *             },
+     *             setResultInResponse: true
+     *           )
      *     }
      *   }
      *   ```
