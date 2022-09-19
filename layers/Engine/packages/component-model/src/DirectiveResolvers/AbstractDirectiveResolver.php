@@ -682,6 +682,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
         $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
+
         /**
          * There will be a GraphQL error somewhere else,
          * process the field as to avoid adding yet another error
@@ -691,19 +692,24 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
 
         /**
+         * DangerousNonSpecific is always processed
+         */
+        if ($fieldTypeResolver instanceof DangerouslyNonSpecificScalarTypeScalarTypeResolver) {
+            return true;
+        }
+
+        /**
          * Check if the directive only handles specific types
          */
-        if (!($fieldTypeResolver instanceof DangerouslyNonSpecificScalarTypeScalarTypeResolver)) {
-            $supportedFieldTypeResolverClasses = $this->getSupportedFieldTypeResolverClasses();
-            if (
-                $supportedFieldTypeResolverClasses !== null
-                && array_filter(
-                    $supportedFieldTypeResolverClasses,
-                    fn (string $supportedFieldTypeResolverClass) => $fieldTypeResolver instanceof $supportedFieldTypeResolverClass
-                ) === []
-            ) {
-                return false;
-            }
+        $supportedFieldTypeResolverClasses = $this->getSupportedFieldTypeResolverClasses();
+        if (
+            $supportedFieldTypeResolverClasses !== null
+            && array_filter(
+                $supportedFieldTypeResolverClasses,
+                fn (string $supportedFieldTypeResolverClass) => $fieldTypeResolver instanceof $supportedFieldTypeResolverClass
+            ) === []
+        ) {
+            return false;
         }
 
         return true;
