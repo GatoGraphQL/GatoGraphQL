@@ -41,6 +41,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
@@ -655,8 +656,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return $this->resolveCanProcessField($targetObjectTypeResolver, $field);
         }
 
+        /** @var ObjectTypeResolverInterface */
+        $objectTypeResolver = $relationalTypeResolver;
+
         return $this->resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses(
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $field,
         );
     }
@@ -665,22 +669,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Check if the directive only handles specific types
      */
     protected function resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
         /**
-         * Nested directives could modify the type being processed,
-         * as when applied on a sub item from the field value
-         * (eg: @underJSONObjectProperty has type JSONObject,
-         * but the value being processed will have some other type).
-         *
-         * Then, either retrieve the type provided via AppState or,
+         * The field type resolver may be provided via AppState or,
          * if absent, only then retrieve it from the Field.
          */
-
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
-        $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
+        $fieldTypeResolver = $this->getFieldTypeResolverFromAppStateOrField(
+            $objectTypeResolver,
+            $field,
+        );
 
         /**
          * There will be a GraphQL error somewhere else,
@@ -709,6 +708,28 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
 
         return true;
+    }
+
+    /**
+     * Nested directives could modify the type being processed,
+     * as when applied on a sub item from the field value
+     * (eg: @underJSONObjectProperty has type JSONObject,
+     * but the value being processed will have some other type).
+     *
+     * Then, either retrieve the type provided via AppState or,
+     * if absent, only then retrieve it from the Field.
+     */
+    protected function getFieldTypeResolverFromAppStateOrField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): ?ConcreteTypeResolverInterface {
+        /** @var ConcreteTypeResolverInterface|null */
+        $currentSupportedDirectiveResolutionFieldTypeResolver = App::getState('field-type-resolver-for-supported-directive-resolution');
+        if ($currentSupportedDirectiveResolutionFieldTypeResolver !== null) {
+            return $currentSupportedDirectiveResolutionFieldTypeResolver;
+        }
+        
+        return $objectTypeResolver->getFieldTypeResolver($field);
     }
 
     /**

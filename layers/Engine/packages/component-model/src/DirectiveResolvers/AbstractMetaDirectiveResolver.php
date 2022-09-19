@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
@@ -136,11 +137,11 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
          * If it has, keep that TypeResolver (eg: directive
          * @underJSONObjectProperty could be applied twice).
          */
-        $currentDirectiveSupportValidationFieldTypeResolver = null;
+        $currentSupportedDirectiveResolutionFieldTypeResolver = null;
         $mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution = $this->mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution();
         if ($mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution) {
-            /** @var TypeResolverInterface|null */
-            $currentDirectiveSupportValidationFieldTypeResolver = App::getState('field-type-resolver-for-supported-directive-resolution');
+            /** @var ConcreteTypeResolverInterface|null */
+            $currentSupportedDirectiveResolutionFieldTypeResolver = App::getState('field-type-resolver-for-supported-directive-resolution');
             $appStateManager->override('field-type-resolver-for-supported-directive-resolution', $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver());
         }
         $nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
@@ -152,7 +153,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
          * Restore from DangerouslyNonScalar to original field type
          */
         if ($mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution) {
-            $appStateManager->override('field-type-resolver-for-supported-directive-resolution', $currentDirectiveSupportValidationFieldTypeResolver);
+            $appStateManager->override('field-type-resolver-for-supported-directive-resolution', $currentSupportedDirectiveResolutionFieldTypeResolver);
         }
         if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
             return null;
