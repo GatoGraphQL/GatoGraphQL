@@ -197,12 +197,19 @@ class TypeSerializationService implements TypeSerializationServiceInterface
      * not corresponding anymore with that one from the type
      * in the field.
      *
-     * For instance, after applying @forEach, the cardinality
-     * of the type modifiers must be handled like this:
+     * For instance, in the following query, the cardinality
+     * of `roleNames` is `[String]`, but that one received
+     * by `@upperCase` is `String`:
      *
-     * - [[String]] => [String]
-     * - [String] => String
-     * - String => ShouldNotHappenException!?
+     *   ```
+     *   {
+     *     user {
+     *       roleNames
+     *         @forEach
+     *           @upperCase
+     *     }
+     *   }
+     *   ```
      */
     protected function getFieldTypeModifiersFromAppStateOrField(
         ObjectTypeResolverInterface $objectTypeResolver,
