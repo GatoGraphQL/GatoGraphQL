@@ -668,6 +668,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
     ): bool {
+        /**
+         * Nested directives could modify the type being processed,
+         * as when applied on a sub item from the field value
+         * (eg: @underJSONObjectProperty has type JSONObject,
+         * but the value being processed will have some other type).
+         *
+         * Then, either retrieve the type provided via AppState or,
+         * if absent, only then retrieve it from the Field.
+         */
+
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
         $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
