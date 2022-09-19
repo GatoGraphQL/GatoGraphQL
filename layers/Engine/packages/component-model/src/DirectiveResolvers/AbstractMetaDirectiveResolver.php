@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
@@ -101,6 +102,8 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             return null;
         }
 
+        $appStateManager = App::getAppStateManager();
+
         /**
          * Each composed directive will deal with the same fields
          * as the current directive.
@@ -112,12 +115,45 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             $nestedDirectiveFields[$nestedDirective] = $fields;
         }
         $errorCount = $engineIterationFeedbackStore->getErrorCount();
+
+        /**
+         * Modify the field type being processed to DangerouslyNonScalar.
+         *
+         * Originally being the one from the field, this avoids validating
+         * if the directives in the downstream-nested-pipeline
+         * can process the field or not.
+         *
+         * For instance, @forEach modifies the type modifiers
+         * from [[String]] => [String], so the underlying type,
+         * `String`, does not change.
+         *
+         * However, @underJSONObjectProperty modifies the type
+         * from JSONObject to whatever value is contained under
+         * that entry (maybe Scalar, maybe Int), so represent
+         * it as DangerouslyNonScalar.
+         *
+         * First check that the AppState has not been set further upstream!
+         * If it has, keep that TypeResolver (eg: directive
+         * @underJSONObjectProperty could be applied twice).
+         */
+        $currentSupportedDirectiveResolutionFieldTypeResolver = null;
+        $mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution = $this->mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution();
+        if ($mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution) {
+            /** @var ConcreteTypeResolverInterface|null */
+            $currentSupportedDirectiveResolutionFieldTypeResolver = App::getState('field-type-resolver-for-supported-directive-resolution');
+            $appStateManager->override('field-type-resolver-for-supported-directive-resolution', $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver());
+        }
         $nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
             $nestedDirectives,
             $nestedDirectiveFields,
-            true,
             $engineIterationFeedbackStore,
         );
+        /**
+         * Restore from DangerouslyNonScalar to original field type
+         */
+        if ($mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution) {
+            $appStateManager->override('field-type-resolver-for-supported-directive-resolution', $currentSupportedDirectiveResolutionFieldTypeResolver);
+        }
         if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
@@ -145,6 +181,20 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
 
         return $nestedDirectivePipelineData;
     }
+
+    /**
+     * Indicate if the directive will modify the type being processed
+     * to DangerouslyNonScalar (originally being the one from the field).
+     *
+     * This is to avoid the resolution of any downstream nested directive
+     * failing, when it's been set to process a certain type only.
+     *
+     * Eg: `@upperCase` has been set to process `String`, but doing
+     * `{ _getJSON(url: ...) @underJSONObjectProperty(...) @upperCase }`
+     * must not fail. Then, @underJSONObjectProperty indicates to
+     * switch from the original JSONObject to DangerouslyNonScalar.
+     */
+    abstract protected function mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution(): bool;
 
     /**
      * Name for the directive arg to indicate which directives

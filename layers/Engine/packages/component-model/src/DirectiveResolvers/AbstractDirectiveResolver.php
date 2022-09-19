@@ -617,7 +617,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final public function resolveCanProcessField(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
-        bool $isNested,
     ): bool {
         $directiveSupportedFieldNames = $this->getFieldNamesToApplyTo();
         if ($directiveSupportedFieldNames !== [] && !in_array($field->getName(), $directiveSupportedFieldNames)) {
@@ -653,13 +652,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 return true;
             }
             $targetObjectTypeResolver = $targetObjectTypeResolvers[0];
-            return $this->resolveCanProcessField($targetObjectTypeResolver, $field, $isNested);
+            return $this->resolveCanProcessField($targetObjectTypeResolver, $field);
         }
 
+        /** @var ObjectTypeResolverInterface */
+        $objectTypeResolver = $relationalTypeResolver;
+
         return $this->resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses(
-            $relationalTypeResolver,
+            $objectTypeResolver,
             $field,
-            $isNested,
         );
     }
 
@@ -667,36 +668,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Check if the directive only handles specific types
      */
     protected function resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-        bool $isNested,
     ): bool {
         /**
-         * Nested directives must not validate the type,
-         * as they will be most likely applied on a subitem
-         * from the field value (eg: an array item, or a JSON
-         * property).
-         *
-         * Eg: in this query, the field is of type JSONObject,
-         * but the directive is applied on a string
-         *
-         * ```
-         * {
-         *   postData: getJSON(
-         *     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
-         *   )
-         *     @underJSONObjectProperty(path: "title.rendered")
-         *       @upperCase
-         * }
-         * ```
+         * The field type resolver may be provided via AppState or,
+         * if absent, only then retrieve it from the Field.
          */
-        if ($isNested) {
-            return true;
-        }
-
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
-        $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field);
+        $fieldTypeResolver = $this->getFieldTypeResolverFromAppStateOrField(
+            $objectTypeResolver,
+            $field,
+        );
 
         /**
          * There will be a GraphQL error somewhere else,
@@ -725,6 +707,28 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
 
         return true;
+    }
+
+    /**
+     * Nested directives could modify the type being processed,
+     * as when applied on a sub item from the field value
+     * (eg: @underJSONObjectProperty has type JSONObject,
+     * but the value being processed will have some other type).
+     *
+     * Then, either retrieve the type provided via AppState or,
+     * if absent, only then retrieve it from the Field.
+     */
+    protected function getFieldTypeResolverFromAppStateOrField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): ?ConcreteTypeResolverInterface {
+        /** @var ConcreteTypeResolverInterface|null */
+        $currentSupportedDirectiveResolutionFieldTypeResolver = App::getState('field-type-resolver-for-supported-directive-resolution');
+        if ($currentSupportedDirectiveResolutionFieldTypeResolver !== null) {
+            return $currentSupportedDirectiveResolutionFieldTypeResolver;
+        }
+
+        return $objectTypeResolver->getFieldTypeResolver($field);
     }
 
     /**
