@@ -155,26 +155,10 @@ class TypeSerializationService implements TypeSerializationServiceInterface
             return $fieldLeafOutputTypeResolver->serialize($value);
         }
 
-        /**
-         * Allow to force the modifiers for "IsArrayOfArrays" and
-         * "IsArray", because the serialization could come from @forEach,
-         * which will decrease on 1 level the cardinality of the value,
-         * not corresponding anymore with that one from the type in the field.
-         *
-         * And these values can't be passed as param, since @forEach @forEach
-         * would not be aware of the concatenation. Then, simply store
-         * the "current" field modifiers in the AppState, and let @forEach
-         * modify the values there.
-         *
-         * @var int|null
-         */
-        $currentFieldTypeModifiers = App::getState('field-type-modifiers-for-serialization');
-        if ($currentFieldTypeModifiers !== null) {
-            $fieldTypeModifiers = $currentFieldTypeModifiers;
-        } else {
-            /** @var int */
-            $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
-        }
+        $fieldTypeModifiers = $this->getFieldTypeModifiersFromAppStateOrField(
+            $objectTypeResolver,
+            $field
+        );
         $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
         $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
 
@@ -204,5 +188,33 @@ class TypeSerializationService implements TypeSerializationServiceInterface
 
         // Otherwise, simply serialize the given value directly
         return $fieldLeafOutputTypeResolver->serialize($value);
+    }
+
+    /**
+     * The modifiers for "IsArrayOfArrays" and "IsArray"
+     * can be provided via the AppState, because @forEach
+     * will decrease on 1 level the cardinality of the value,
+     * not corresponding anymore with that one from the type
+     * in the field.
+     *
+     * For instance, after applying @forEach, the cardinality
+     * of the type modifiers must be handled like this:
+     *
+     * - [[String]] => [String]
+     * - [String] => String
+     * - String => ShouldNotHappenException!?
+     */
+    protected function getFieldTypeModifiersFromAppStateOrField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): int {
+        /** @var int|null */
+        $currentFieldTypeModifiers = App::getState('field-type-modifiers-for-serialization');
+        if ($currentFieldTypeModifiers !== null) {
+            return $currentFieldTypeModifiers;
+        }
+
+        /** @var int */
+        return $objectTypeResolver->getFieldTypeModifiers($field);
     }
 }
