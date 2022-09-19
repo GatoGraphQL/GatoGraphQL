@@ -60,7 +60,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // For Serialization
         $state['field-type-modifiers-for-serialization'] = null;
         // For Validating if the Directive supports only certain types
-        $state['field-type-resolver-for-directive-support-validation'] = null;
+        $state['field-type-resolver-for-supported-directive-resolution'] = null;
 
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getVariableManager()->getVariablesFromRequest();

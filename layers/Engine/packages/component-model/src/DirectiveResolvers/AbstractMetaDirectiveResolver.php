@@ -137,11 +137,11 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
          * @underJSONObjectProperty could be applied twice).
          */
         $currentDirectiveSupportValidationFieldTypeResolver = null;
-        $mustChangeProcessingFieldTypeToDangerouslyNonScalarForNestedDirectivesLookup = $this->mustChangeProcessingFieldTypeToDangerouslyNonScalarForNestedDirectivesLookup();
-        if ($mustChangeProcessingFieldTypeToDangerouslyNonScalarForNestedDirectivesLookup) {
+        $mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution = $this->mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution();
+        if ($mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution) {
             /** @var TypeResolverInterface|null */
-            $currentDirectiveSupportValidationFieldTypeResolver = App::getState('field-type-resolver-for-directive-support-validation');
-            $appStateManager->override('field-type-resolver-for-directive-support-validation', $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver());
+            $currentDirectiveSupportValidationFieldTypeResolver = App::getState('field-type-resolver-for-supported-directive-resolution');
+            $appStateManager->override('field-type-resolver-for-supported-directive-resolution', $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver());
         }
         $nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
             $nestedDirectives,
@@ -152,8 +152,8 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         /**
          * Restore from DangerouslyNonScalar to original field type
          */
-        if ($mustChangeProcessingFieldTypeToDangerouslyNonScalarForNestedDirectivesLookup) {
-            $appStateManager->override('field-type-resolver-for-directive-support-validation', $currentDirectiveSupportValidationFieldTypeResolver);
+        if ($mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution) {
+            $appStateManager->override('field-type-resolver-for-supported-directive-resolution', $currentDirectiveSupportValidationFieldTypeResolver);
         }
         if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
             return null;
@@ -190,7 +190,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
      * upcoming directives-in-the-nested-pipeline can
      * process it or not.
      */
-    abstract protected function mustChangeProcessingFieldTypeToDangerouslyNonScalarForNestedDirectivesLookup(): bool;
+    abstract protected function mustChangeProcessingFieldTypeToDangerouslyNonScalarForSupportedNestedDirectivesResolution(): bool;
 
     /**
      * Name for the directive arg to indicate which directives
