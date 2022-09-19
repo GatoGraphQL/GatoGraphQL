@@ -1045,7 +1045,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
                 $directives,
                 $directiveFields,
-                false,
                 $separateEngineIterationFeedbackStore,
             );
             $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
