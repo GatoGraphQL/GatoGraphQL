@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeSerialization;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -138,11 +139,6 @@ class TypeSerializationService implements TypeSerializationServiceInterface
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): string|int|float|bool|array {
-        /** @var int */
-        $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($field);
-        $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-
         /**
          * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
@@ -159,9 +155,18 @@ class TypeSerializationService implements TypeSerializationServiceInterface
             return $fieldLeafOutputTypeResolver->serialize($value);
         }
 
-        // If the value is an array of arrays, then serialize each subelement to the item type
-        // To make sure the array is not associative (on which case it should be treated
-        // as a JSONObject instead of an array), also apply `array_values`
+        $fieldTypeModifiers = $this->getFieldTypeModifiersFromAppStateOrField(
+            $objectTypeResolver,
+            $field
+        );
+        $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+
+        /**
+         * If the value is an array of arrays, then serialize each subelement to the item type.
+         * To make sure the array is not associative (on which case it should be treated
+         * as a JSONObject instead of an array), also apply `array_values`
+         */
         if ($fieldLeafOutputTypeIsArrayOfArrays) {
             return array_values(array_map(
                 // If it contains a null value, return it as is
@@ -183,5 +188,46 @@ class TypeSerializationService implements TypeSerializationServiceInterface
 
         // Otherwise, simply serialize the given value directly
         return $fieldLeafOutputTypeResolver->serialize($value);
+    }
+
+    /**
+     * The modifiers for "IsArrayOfArrays" and "IsArray"
+     * can be provided via the AppState, because @forEach
+     * will decrease on 1 level the cardinality of the value,
+     * not corresponding anymore with that one from the type
+     * in the field.
+     *
+     * For instance, in the following query, the cardinality
+     * of `roleNames` is `[String]`, but that one received
+     * by field `_titleCase` is `String`:
+     *
+     *   ```
+     *   {
+     *     users {
+     *       roleNames
+     *         @forEach(passOnwardsAs: "value")
+     *           @applyField(
+     *             name: "_titleCase"
+     *             arguments: {
+     *               text: $value
+     *             },
+     *             setResultInResponse: true
+     *           )
+     *     }
+     *   }
+     *   ```
+     */
+    protected function getFieldTypeModifiersFromAppStateOrField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): int {
+        /** @var int|null */
+        $currentFieldTypeModifiers = App::getState('field-type-modifiers-for-serialization');
+        if ($currentFieldTypeModifiers !== null) {
+            return $currentFieldTypeModifiers;
+        }
+
+        /** @var int */
+        return $objectTypeResolver->getFieldTypeModifiers($field);
     }
 }

@@ -57,6 +57,9 @@ class AppStateProvider extends AbstractAppStateProvider
      */
     public function initialize(array &$state): void
     {
+        // For Serialization
+        $state['field-type-modifiers-for-serialization'] = null;
+
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getVariableManager()->getVariablesFromRequest();
 
