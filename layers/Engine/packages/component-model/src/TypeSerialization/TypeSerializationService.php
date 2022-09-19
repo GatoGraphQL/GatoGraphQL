@@ -168,7 +168,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
          *
          * @var int|null
          */
-        $currentFieldTypeModifiers = App::getState('current-field-type-modifiers');
+        $currentFieldTypeModifiers = App::getState('field-type-modifiers-for-serialization');
         if ($currentFieldTypeModifiers !== null) {
             $fieldTypeModifiers = $currentFieldTypeModifiers;
         } else {
