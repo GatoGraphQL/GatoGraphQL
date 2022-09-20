@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PHPUnitForGraphQLAPI\DummySchema\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PHPUnitForGraphQLAPI\DummySchema\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
