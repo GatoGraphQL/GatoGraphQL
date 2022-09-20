@@ -5,6 +5,3 @@ services:
 
     PHPUnitForGraphQLAPI\DummySchema\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
-
-    PHPUnitForGraphQLAPI\DummySchema\SchemaHooks\:
-        resource: '../src/SchemaHooks/*'
