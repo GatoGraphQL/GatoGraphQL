@@ -254,12 +254,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
         $directiveResolverInstanceFields = new SplObjectStorage();
         foreach ($directives as $directive) {
-            $fieldFieldDirectiveResolvers = $this->getFieldDirectiveResolvers(
+            $fieldDirectiveResolvers = $this->getFieldDirectiveResolvers(
                 $directive,
                 $directiveFields[$directive],
             );
             // If there is no directive with this name, show an error and skip it
-            if ($fieldFieldDirectiveResolvers === null) {
+            if ($fieldDirectiveResolvers === null) {
                 $fields = $directiveFields[$directive];
                 $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                     new SchemaFeedback(
@@ -277,7 +277,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 );
                 continue;
             }
-            if ($fieldFieldDirectiveResolvers->count() === 0) {
+            if ($fieldDirectiveResolvers->count() === 0) {
                 $fields = $directiveFields[$directive];
                 $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                     new SchemaFeedback(
@@ -304,7 +304,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             foreach ($directiveFields[$directive] as $field) {
-                $directiveResolver = $fieldFieldDirectiveResolvers[$field] ?? null;
+                $directiveResolver = $fieldDirectiveResolvers[$field] ?? null;
                 if ($directiveResolver === null) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -459,7 +459,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          *
          * @var SplObjectStorage<FieldInterface,DirectiveResolverInterface>
          */
-        $fieldFieldDirectiveResolvers = new SplObjectStorage();
+        $fieldDirectiveResolvers = new SplObjectStorage();
         foreach ($fields as $field) {
             /**
              * Check that at least one class which deals with this directiveName can satisfy
@@ -475,7 +475,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                  * Create a non-shared directiveResolver instance to handle
                  * this specific $directive object instance.
                  */
-                $fieldFieldDirectiveResolvers[$field] = $this->getUniqueFieldDirectiveResolverForDirective(
+                $fieldDirectiveResolvers[$field] = $this->getUniqueFieldDirectiveResolverForDirective(
                     $directiveResolver,
                     $directive,
                 );
@@ -484,7 +484,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 break;
             }
         }
-        return $fieldFieldDirectiveResolvers;
+        return $fieldDirectiveResolvers;
     }
 
     /**
