@@ -152,44 +152,44 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldDataAccessor->getFieldName()) {
             case 'dummyListOfInts':
                 return [
-                    $post->comment_count + 1,
-                    $post->comment_count,
-                    $post->comment_count + 3,
+                    (int)$post->comment_count + 1,
+                    (int)$post->comment_count,
+                    (int)$post->comment_count + 3,
                 ];
             case 'dummyListOfListsOfInts':
                 return [
                     [
-                        $post->comment_count + 1,
-                        $post->comment_count,
-                        $post->comment_count + 3,
+                        (int)$post->comment_count + 1,
+                        (int)$post->comment_count,
+                        (int)$post->comment_count + 3,
                     ],
                     [
-                        $post->comment_count + 7,
-                        $post->comment_count + 13,
+                        (int)$post->comment_count + 7,
+                        (int)$post->comment_count + 13,
                     ],
                     [
-                        $post->comment_count + 33,
+                        (int)$post->comment_count + 33,
                     ],
                 ];
             case 'dummyListOfFloats':
                 return [
-                    $post->comment_count + 1.5,
-                    $post->comment_count + 0.5,
-                    $post->comment_count + 3.5,
+                    (float)$post->comment_count + 1.5,
+                    (float)$post->comment_count + 0.5,
+                    (float)$post->comment_count + 3.5,
                 ];
             case 'dummyListOfListsOfFloats':
                 return [
                     [
-                        $post->comment_count + 1.5,
-                        $post->comment_count + 0.5,
-                        $post->comment_count + 3.5,
+                        (float)$post->comment_count + 1.5,
+                        (float)$post->comment_count + 0.5,
+                        (float)$post->comment_count + 3.5,
                     ],
                     [
-                        $post->comment_count + 7.5,
-                        $post->comment_count + 13.5,
+                        (float)$post->comment_count + 7.5,
+                        (float)$post->comment_count + 13.5,
                     ],
                     [
-                        $post->comment_count + 33.5,
+                        (float)$post->comment_count + 33.5,
                     ],
                 ];
             case 'dummyListOfStrings':
@@ -216,22 +216,22 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'dummyListOfDates':
                 return [
                     new DateTime($post->post_date),
-                    new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +1 day'))),
-                    new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +7 day'))),
+                    new DateTime(date('Y-m-d H:i:s', (int)strtotime($post->post_date . ' +1 day'))),
+                    new DateTime(date('Y-m-d H:i:s', (int)strtotime($post->post_date . ' +7 day'))),
                 ];
             case 'dummyListOfListsOfDates':
                 return [
                     [
                         new DateTime($post->post_date),
-                        new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +1 day'))),
-                        new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +7 day'))),
+                        new DateTime(date('Y-m-d H:i:s', (int)strtotime($post->post_date . ' +1 day'))),
+                        new DateTime(date('Y-m-d H:i:s', (int)strtotime($post->post_date . ' +7 day'))),
                     ],
                     [
-                        new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +9 day'))),
-                        new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +28 day'))),
+                        new DateTime(date('Y-m-d H:i:s', (int)strtotime($post->post_date . ' +9 day'))),
+                        new DateTime(date('Y-m-d H:i:s', (int)strtotime($post->post_date . ' +28 day'))),
                     ],
                     [
-                        new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +66 day'))),
+                        new DateTime(date('Y-m-d H:i:s', (int)strtotime($post->post_date . ' +66 day'))),
                     ],
                 ];
         }
