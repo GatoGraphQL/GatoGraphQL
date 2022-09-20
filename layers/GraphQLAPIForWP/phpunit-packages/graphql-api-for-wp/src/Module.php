@@ -15,6 +15,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
+            \PHPUnitForGraphQLAPI\DummySchema\Module::class,
             \PHPUnitForGraphQLAPI\WPFakerSchema\Module::class,
             \PHPUnitForGraphQLAPI\WebserverRequests\Module::class,
         ];
