@@ -67,6 +67,10 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
+            'dummyListOfInts',
+            'dummyListOfListsOfInts',
+            'dummyListOfStrings',
+            'dummyListOfListsOfStrings',
             'dummyListOfDates',
             'dummyListOfListsOfDates',
         ];
@@ -75,6 +79,10 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
+            'dummyListOfInts' => $this->__('Dummy field that returns a list of integers: [Int]', 'dummy-schema'),
+            'dummyListOfListsOfInts' => $this->__('Dummy field that returns a list of lists of integers: [[Int]]', 'dummy-schema'),
+            'dummyListOfStrings' => $this->__('Dummy field that returns a list of strings: [String]', 'dummy-schema'),
+            'dummyListOfListsOfStrings' => $this->__('Dummy field that returns a list of lists of strings: [[String]]', 'dummy-schema'),
             'dummyListOfDates' => $this->__('Dummy field that returns a list of dates: [Date]', 'dummy-schema'),
             'dummyListOfListsOfDates' => $this->__('Dummy field that returns a list of lists of dates: [[Date]]', 'dummy-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -84,6 +92,12 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
+            'dummyListOfInts',
+            'dummyListOfListsOfInts'
+                => $this->getIntScalarTypeResolver(),
+            'dummyListOfStrings',
+            'dummyListOfListsOfStrings'
+                => $this->getStringScalarTypeResolver(),
             'dummyListOfDates',
             'dummyListOfListsOfDates'
                 => $this->getDateTimeScalarTypeResolver(),
@@ -95,8 +109,14 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'dummyListOfDates' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            'dummyListOfListsOfDates' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            'dummyListOfInts',
+            'dummyListOfStrings',
+            'dummyListOfDates'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            'dummyListOfListsOfInts',
+            'dummyListOfListsOfStrings',
+            'dummyListOfListsOfDates'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -110,6 +130,48 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         /** @var WP_Post */
         $post = $object;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'dummyListOfInts':
+                return [
+                    $post->comment_count,
+                    $post->comment_count + 1,
+                    $post->comment_count + 3,
+                ];
+            case 'dummyListOfListsOfInts':
+                return [
+                    [
+                        $post->comment_count,
+                        $post->comment_count + 1,
+                        $post->comment_count + 3,
+                    ],
+                    [
+                        $post->comment_count + 7,
+                        $post->comment_count + 13,
+                    ],
+                    [
+                        $post->comment_count + 33,
+                    ],
+                ];
+            case 'dummyListOfStrings':
+                return [
+                    $post->post_title,
+                    $post->post_excerpt,
+                    $post->post_mime_type,
+                ];
+            case 'dummyListOfListsOfStrings':
+                return [
+                    [
+                        $post->post_title,
+                        $post->post_excerpt,
+                        $post->post_mime_type,
+                    ],
+                    [
+                        $post->post_name,
+                        $post->post_type,
+                    ],
+                    [
+                        $post->post_content,
+                    ],
+                ];
             case 'dummyListOfDates':
                 return [
                     new DateTime($post->post_date),
