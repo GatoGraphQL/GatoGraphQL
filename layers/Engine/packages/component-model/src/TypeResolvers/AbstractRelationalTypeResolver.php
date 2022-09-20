@@ -254,7 +254,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
         $directiveResolverInstanceFields = new SplObjectStorage();
         foreach ($directives as $directive) {
-            $fieldFieldDirectiveResolvers = $this->getFieldFieldDirectiveResolvers(
+            $fieldFieldDirectiveResolvers = $this->getFieldDirectiveResolvers(
                 $directive,
                 $directiveFields[$directive],
             );
@@ -434,7 +434,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param FieldInterface[] $fields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    protected function getFieldFieldDirectiveResolvers(
+    protected function getFieldDirectiveResolvers(
         Directive $directive,
         array $fields,
     ): ?SplObjectStorage {
