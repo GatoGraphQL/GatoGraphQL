@@ -109,8 +109,8 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
                 if ($ofKinds = $fieldDataAccessor->getValue('ofKinds')) {
-                    $ofTypeDirectiveResolvers = array_filter(
-                        $this->getDirectiveRegistry()->getDirectiveResolvers(),
+                    $ofTypeFieldDirectiveResolvers = array_filter(
+                        $this->getDirectiveRegistry()->getFieldDirectiveResolvers(),
                         fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
                     );
                     // Calculate the directive IDs
@@ -125,7 +125,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                             ];
                             return SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($directiveSchemaDefinitionPath);
                         },
-                        $ofTypeDirectiveResolvers
+                        $ofTypeFieldDirectiveResolvers
                     );
                     return array_values(array_intersect(
                         $directiveIDs,

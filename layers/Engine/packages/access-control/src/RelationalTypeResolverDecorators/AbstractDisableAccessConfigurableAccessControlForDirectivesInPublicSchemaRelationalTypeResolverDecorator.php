@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 
-use PoP\AccessControl\DirectiveResolvers\DisableAccessForDirectivesDirectiveResolver;
+use PoP\AccessControl\DirectiveResolvers\DisableAccessForDirectivesFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
@@ -12,16 +12,16 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
 {
     protected ?Directive $disableAccessDirective = null;
 
-    private ?DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver = null;
+    private ?DisableAccessForDirectivesFieldDirectiveResolver $disableAccessForDirectivesFieldDirectiveResolver = null;
 
-    final public function setDisableAccessForDirectivesDirectiveResolver(DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver): void
+    final public function setDisableAccessForDirectivesFieldDirectiveResolver(DisableAccessForDirectivesFieldDirectiveResolver $disableAccessForDirectivesFieldDirectiveResolver): void
     {
-        $this->disableAccessForDirectivesDirectiveResolver = $disableAccessForDirectivesDirectiveResolver;
+        $this->disableAccessForDirectivesFieldDirectiveResolver = $disableAccessForDirectivesFieldDirectiveResolver;
     }
-    final protected function getDisableAccessForDirectivesDirectiveResolver(): DisableAccessForDirectivesDirectiveResolver
+    final protected function getDisableAccessForDirectivesFieldDirectiveResolver(): DisableAccessForDirectivesFieldDirectiveResolver
     {
-        /** @var DisableAccessForDirectivesDirectiveResolver */
-        return $this->disableAccessForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessForDirectivesDirectiveResolver::class);
+        /** @var DisableAccessForDirectivesFieldDirectiveResolver */
+        return $this->disableAccessForDirectivesFieldDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessForDirectivesFieldDirectiveResolver::class);
     }
 
     /**
@@ -38,7 +38,7 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
     {
         if ($this->disableAccessDirective === null) {
             $this->disableAccessDirective = new Directive(
-                $this->getDisableAccessForDirectivesDirectiveResolver()->getDirectiveName(),
+                $this->getDisableAccessForDirectivesFieldDirectiveResolver()->getDirectiveName(),
                 [],
                 ASTNodesFactory::getNonSpecificLocation()
             );

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Container\CompilerPasses;
 
-use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\MetaFieldDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
-class RegisterMetaDirectiveResolverCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
+class RegisterMetaFieldDirectiveResolverCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
@@ -16,10 +16,10 @@ class RegisterMetaDirectiveResolverCompilerPass extends AbstractInjectServiceInt
     }
     protected function getServiceClass(): string
     {
-        return MetaDirectiveResolverInterface::class;
+        return MetaFieldDirectiveResolverInterface::class;
     }
     protected function getRegistryMethodCallName(): string
     {
-        return 'addMetaDirectiveResolver';
+        return 'addMetaFieldDirectiveResolver';
     }
 }

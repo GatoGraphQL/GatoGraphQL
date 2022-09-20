@@ -15,7 +15,7 @@ use PoP\ComponentModel\TypeSerialization\TypeSerializationServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
-final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
+final class SerializeLeafOutputTypeValuesFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
     private ?TypeSerializationServiceInterface $typeSerializationService = null;
 
@@ -57,7 +57,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<DirectiveResolverInterface> $succeedingPipelineDirectiveResolvers
+     * @param array<DirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
@@ -66,7 +66,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
-        array $succeedingPipelineDirectiveResolvers,
+        array $succeedingPipelineFieldDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,

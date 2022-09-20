@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionFieldDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
@@ -20,7 +20,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserRolesAccessControl\FeedbackItemProviders\FeedbackItemProvider;
 
-class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends AbstractValidateConditionDirectiveResolver
+class ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver extends AbstractValidateConditionFieldDirectiveResolver
 {
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

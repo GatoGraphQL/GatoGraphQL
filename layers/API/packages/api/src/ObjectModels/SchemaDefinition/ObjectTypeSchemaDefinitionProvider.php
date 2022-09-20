@@ -62,19 +62,19 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
     final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         // Add the directives (non-global)
-        $schemaDirectiveResolvers = $this->objectTypeResolver->getSchemaDirectiveResolvers($useGlobal);
-        if ($schemaDirectiveResolvers === []) {
+        $schemaFieldDirectiveResolvers = $this->objectTypeResolver->getSchemaFieldDirectiveResolvers($useGlobal);
+        if ($schemaFieldDirectiveResolvers === []) {
             return;
         }
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
-        foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
+        foreach ($schemaFieldDirectiveResolvers as $directiveName => $directiveResolver) {
             // Directives may not be directly visible in the schema
             if ($directiveResolver->skipExposingDirectiveInSchema($this->objectTypeResolver)) {
                 continue;
             }
             $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
-            $this->accessedTypeAndDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
-            $this->accessedDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class] = $this->objectTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
+            $this->accessedFieldDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class] = $this->objectTypeResolver;
         }
     }
 
@@ -106,7 +106,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
             // Extract the typeResolvers
             /** @var TypeResolverInterface */
             $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
-            $this->accessedTypeAndDirectiveResolvers[$fieldTypeResolver::class] = $fieldTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$fieldTypeResolver::class] = $fieldTypeResolver;
             SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($fieldSchemaDefinition);
 
             foreach (($fieldSchemaDefinition[SchemaDefinition::ARGS] ?? []) as $fieldArgName => &$fieldArgSchemaDefinition) {
@@ -124,7 +124,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
                     continue;
                 }
 
-                $this->accessedTypeAndDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
+                $this->accessedTypeAndFieldDirectiveResolvers[$fieldArgTypeResolver::class] = $fieldArgTypeResolver;
                 SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
             }
             $schemaDefinition[SchemaDefinition::FIELDS][$fieldName] = $fieldSchemaDefinition;
@@ -148,7 +148,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
             ];
             SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
             $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
-            $this->accessedTypeAndDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$interfaceTypeResolver::class] = $interfaceTypeResolver;
         }
     }
 }

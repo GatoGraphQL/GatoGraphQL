@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
-interface CacheControlDirectiveResolverInterface
+interface CacheControlFieldDirectiveResolverInterface
 {
     /**
      * Resolves the directive. It differs from `resolveDirective` in that it can be executed without params

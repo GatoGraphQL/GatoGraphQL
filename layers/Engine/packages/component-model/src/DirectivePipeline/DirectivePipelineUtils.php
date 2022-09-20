@@ -20,14 +20,14 @@ class DirectivePipelineUtils
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      * @return array<string,mixed>
-     * @param array<DirectiveResolverInterface> $pipelineDirectiveResolvers
+     * @param array<DirectiveResolverInterface> $pipelineFieldDirectiveResolvers
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
      */
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $pipelineDirectiveResolvers,
+        array $pipelineFieldDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
@@ -39,7 +39,7 @@ class DirectivePipelineUtils
     ): array {
         return [
             'typeResolver' => &$relationalTypeResolver,
-            'pipelineDirectiveResolvers' => &$pipelineDirectiveResolvers,
+            'pipelineFieldDirectiveResolvers' => &$pipelineFieldDirectiveResolvers,
             'idObjects' => &$idObjects,
             'unionTypeOutputKeyIDs' => &$unionTypeOutputKeyIDs,
             'previouslyResolvedIDFieldValues' => &$previouslyResolvedIDFieldValues,
@@ -59,7 +59,7 @@ class DirectivePipelineUtils
     {
         return [
             &$payload['typeResolver'],
-            &$payload['pipelineDirectiveResolvers'],
+            &$payload['pipelineFieldDirectiveResolvers'],
             &$payload['idObjects'],
             &$payload['unionTypeOutputKeyIDs'],
             &$payload['previouslyResolvedIDFieldValues'],

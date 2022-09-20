@@ -83,5 +83,5 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      *
      * @return array<string,DirectiveResolverInterface>
      */
-    public function getSchemaDirectiveResolvers(bool $global): array;
+    public function getSchemaFieldDirectiveResolvers(bool $global): array;
 }

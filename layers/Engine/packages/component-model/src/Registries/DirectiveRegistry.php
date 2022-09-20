@@ -13,7 +13,7 @@ class DirectiveRegistry implements DirectiveRegistryInterface
      */
     protected array $directiveResolvers = [];
 
-    public function addDirectiveResolver(DirectiveResolverInterface $directiveResolver): void
+    public function addFieldDirectiveResolver(DirectiveResolverInterface $directiveResolver): void
     {
         $this->directiveResolvers[$directiveResolver->getDirectiveName()] = $directiveResolver;
     }
@@ -21,12 +21,12 @@ class DirectiveRegistry implements DirectiveRegistryInterface
     /**
      * @return array<string,DirectiveResolverInterface>
      */
-    public function getDirectiveResolvers(): array
+    public function getFieldDirectiveResolvers(): array
     {
         return $this->directiveResolvers;
     }
 
-    public function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
+    public function getFieldDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
     {
         return $this->directiveResolvers[$directiveName] ?? null;
     }

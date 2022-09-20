@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 
-class ValidateIsUserLoggedInForDirectivesDirectiveResolver extends ValidateIsUserLoggedInDirectiveResolver
+class ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver extends ValidateIsUserLoggedInFieldDirectiveResolver
 {
     public function getDirectiveName(): string
     {

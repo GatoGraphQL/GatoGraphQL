@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-abstract class AbstractValidateConditionDirectiveResolver extends AbstractValidateDirectiveResolver
+abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractValidateFieldDirectiveResolver
 {
     // /**
     //  * Validations are naturally added through code and not through the query, so no need to expose them in the schema

@@ -8,10 +8,10 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 interface DirectiveRegistryInterface
 {
-    public function addDirectiveResolver(DirectiveResolverInterface $directiveResolver): void;
+    public function addFieldDirectiveResolver(DirectiveResolverInterface $directiveResolver): void;
     /**
      * @return array<string,DirectiveResolverInterface>
      */
-    public function getDirectiveResolvers(): array;
-    public function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface;
+    public function getFieldDirectiveResolvers(): array;
+    public function getFieldDirectiveResolver(string $directiveName): ?DirectiveResolverInterface;
 }

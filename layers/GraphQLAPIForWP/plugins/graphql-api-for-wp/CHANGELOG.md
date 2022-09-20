@@ -439,7 +439,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Query Batching
-- Directive aliases (through trait `AliasSchemaDirectiveResolverTrait`)
+- Directive aliases (through trait `AliasSchemaFieldDirectiveResolverTrait`)
 - Field aliases on the server (through trait `AliasSchemaObjectTypeFieldResolverTrait`)
 
 ### Fixed

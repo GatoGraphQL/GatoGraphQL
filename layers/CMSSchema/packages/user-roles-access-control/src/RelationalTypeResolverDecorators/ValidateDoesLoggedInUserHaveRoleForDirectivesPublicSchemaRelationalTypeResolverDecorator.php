@@ -6,23 +6,23 @@ namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
+use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver;
 use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
 class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
     use ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait;
 
-    private ?ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver = null;
+    private ?ValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver = null;
 
-    final public function setValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver(ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver): void
+    final public function setValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver(ValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver): void
     {
-        $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver;
+        $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver;
     }
-    final protected function getValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver
+    final protected function getValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver
     {
-        /** @var ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver */
-        return $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver::class);
+        /** @var ValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver */
+        return $this->validateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver::class);
     }
 
     /**
@@ -33,8 +33,8 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeRes
         return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::ROLES);
     }
 
-    protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface
+    protected function getValidateRoleFieldDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->getValidateDoesLoggedInUserHaveAnyRoleForDirectivesDirectiveResolver();
+        return $this->getValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver();
     }
 }

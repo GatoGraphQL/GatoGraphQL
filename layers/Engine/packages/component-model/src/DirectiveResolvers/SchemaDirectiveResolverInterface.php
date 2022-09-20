@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-interface SchemaDirectiveResolverInterface
+interface SchemaFieldDirectiveResolverInterface
 {
     /**
      * Description of the directive, to be output as documentation in the schema

@@ -15,7 +15,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
  *
  * @see https://github.com/graphql/graphql-spec/issues/583
  */
-interface DynamicVariableDefinerDirectiveResolverInterface extends DirectiveResolverInterface
+interface DynamicVariableDefinerFieldDirectiveResolverInterface extends DirectiveResolverInterface
 {
     /**
      * Name for the directive arg to indicate the name of the

@@ -22,26 +22,26 @@ use SplObjectStorage;
  * This trait, to be applied on a DirectiveResolver class, uses the Proxy design pattern:
  * every function executed on the aliasing directive executes the same function on the aliased directive.
  *
- * The aliased DirectiveResolver is chosen to be of class `AbstractDirectiveResolver`,
+ * The aliased DirectiveResolver is chosen to be of class `AbstractFieldDirectiveResolver`,
  * since it comprises interfaces `DirectiveResolverInterface`
- * and `SchemaDirectiveResolverInterface`, whose functions must be aliased.
+ * and `SchemaFieldDirectiveResolverInterface`, whose functions must be aliased.
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-trait AliasSchemaDirectiveResolverTrait
+trait AliasSchemaFieldDirectiveResolverTrait
 {
     /**
      * The specific `DirectiveResolver` class that is being aliased
      */
-    abstract protected function getAliasedDirectiveResolver(): AbstractDirectiveResolver;
+    abstract protected function getAliasedFieldDirectiveResolver(): AbstractFieldDirectiveResolver;
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveDescription(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveDescription(
             $relationalTypeResolver
         );
     }
@@ -53,8 +53,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveArgNameTypeResolvers(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveArgNameTypeResolvers(
             $relationalTypeResolver
         );
     }
@@ -64,8 +64,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveArgDescription(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveArgDescription(
             $relationalTypeResolver,
             $directiveArgName
         );
@@ -76,8 +76,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveArgDefaultValue(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveArgDefaultValue(
             $relationalTypeResolver,
             $directiveArgName
         );
@@ -88,8 +88,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveArgTypeModifiers(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveArgTypeModifiers(
             $relationalTypeResolver,
             $directiveArgName
         );
@@ -101,8 +101,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getConsolidatedDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getConsolidatedDirectiveArgNameTypeResolvers(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getConsolidatedDirectiveArgNameTypeResolvers(
             $relationalTypeResolver
         );
     }
@@ -112,8 +112,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getConsolidatedDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getConsolidatedDirectiveArgDescription(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getConsolidatedDirectiveArgDescription(
             $relationalTypeResolver,
             $directiveArgName
         );
@@ -124,8 +124,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getConsolidatedDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getConsolidatedDirectiveArgDefaultValue(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getConsolidatedDirectiveArgDefaultValue(
             $relationalTypeResolver,
             $directiveArgName
         );
@@ -136,8 +136,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getConsolidatedDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getConsolidatedDirectiveArgTypeModifiers(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getConsolidatedDirectiveArgTypeModifiers(
             $relationalTypeResolver,
             $directiveArgName
         );
@@ -148,8 +148,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveDeprecationMessage(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveDeprecationMessage(
             $relationalTypeResolver
         );
     }
@@ -159,8 +159,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function isGlobal(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->isGlobal(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->isGlobal(
             $relationalTypeResolver
         );
     }
@@ -171,8 +171,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getFieldNamesToApplyTo(): array
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getFieldNamesToApplyTo();
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getFieldNamesToApplyTo();
     }
 
     /**
@@ -180,8 +180,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getDirectiveKind(): string
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveKind();
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveKind();
     }
 
     /**
@@ -189,8 +189,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getPipelinePosition(): string
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getPipelinePosition();
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getPipelinePosition();
     }
 
     /**
@@ -198,8 +198,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function isDirectiveEnabled(): bool
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->isDirectiveEnabled();
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->isDirectiveEnabled();
     }
 
     /**
@@ -209,8 +209,8 @@ trait AliasSchemaDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
     ): bool {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->resolveCanProcessDirective(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->resolveCanProcessDirective(
             $relationalTypeResolver,
             $directive,
         );
@@ -221,8 +221,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function isRepeatable(): bool
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->isRepeatable();
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->isRepeatable();
     }
 
     /**
@@ -230,8 +230,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function needsSomeIDFieldToExecute(): bool
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->needsSomeIDFieldToExecute();
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->needsSomeIDFieldToExecute();
     }
 
     /**
@@ -242,7 +242,7 @@ trait AliasSchemaDirectiveResolverTrait
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<DirectiveResolverInterface> $succeedingPipelineDirectiveResolvers
+     * @param array<DirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
@@ -251,7 +251,7 @@ trait AliasSchemaDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
-        array $succeedingPipelineDirectiveResolvers,
+        array $succeedingPipelineFieldDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
@@ -261,12 +261,12 @@ trait AliasSchemaDirectiveResolverTrait
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        $aliasedDirectiveResolver->resolveDirective(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        $aliasedFieldDirectiveResolver->resolveDirective(
             $relationalTypeResolver,
             $idFieldSet,
             $fieldDataAccessProvider,
-            $succeedingPipelineDirectiveResolvers,
+            $succeedingPipelineFieldDirectiveResolvers,
             $idObjects,
             $unionTypeOutputKeyIDs,
             $previouslyResolvedIDFieldValues,
@@ -283,8 +283,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->skipExposingDirectiveInSchema($relationalTypeResolver);
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->skipExposingDirectiveInSchema($relationalTypeResolver);
     }
 
     /**
@@ -292,8 +292,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->decideCanProcessBasedOnVersionConstraint(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->decideCanProcessBasedOnVersionConstraint(
             $relationalTypeResolver
         );
     }
@@ -303,8 +303,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveVersion(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveVersion(
             $relationalTypeResolver
         );
     }
@@ -314,8 +314,8 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface
     {
-        $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->getDirectiveVersionInputTypeResolver(
+        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
+        return $aliasedFieldDirectiveResolver->getDirectiveVersionInputTypeResolver(
             $relationalTypeResolver
         );
     }

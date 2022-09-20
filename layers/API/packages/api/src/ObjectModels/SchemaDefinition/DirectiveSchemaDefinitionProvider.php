@@ -54,7 +54,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
                 continue;
             }
 
-            $this->accessedTypeAndDirectiveResolvers[$directiveArgTypeResolver::class] = $directiveArgTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$directiveArgTypeResolver::class] = $directiveArgTypeResolver;
             SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);
         }
 

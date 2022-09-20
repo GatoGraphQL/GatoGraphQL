@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
+use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlFieldDirectiveResolver;
 
-class OneYearCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
+class OneYearCacheControlFieldDirectiveResolver extends AbstractCacheControlFieldDirectiveResolver
 {
     /**
      * @return string[]

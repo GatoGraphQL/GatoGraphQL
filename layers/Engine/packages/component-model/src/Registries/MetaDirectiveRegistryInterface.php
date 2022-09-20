@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\MetaFieldDirectiveResolverInterface;
 
 interface MetaDirectiveRegistryInterface
 {
-    public function addMetaDirectiveResolver(MetaDirectiveResolverInterface $metaDirectiveResolver): void;
+    public function addMetaFieldDirectiveResolver(MetaFieldDirectiveResolverInterface $metaFieldDirectiveResolver): void;
     /**
-     * @return array<string,MetaDirectiveResolverInterface>
+     * @return array<string,MetaFieldDirectiveResolverInterface>
      */
-    public function getMetaDirectiveResolvers(): array;
-    public function getMetaDirectiveResolver(string $directiveName): ?MetaDirectiveResolverInterface;
+    public function getMetaFieldDirectiveResolvers(): array;
+    public function getMetaFieldDirectiveResolver(string $directiveName): ?MetaFieldDirectiveResolverInterface;
 }

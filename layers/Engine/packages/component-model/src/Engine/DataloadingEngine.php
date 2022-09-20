@@ -11,17 +11,17 @@ class DataloadingEngine implements DataloadingEngineInterface
     /**
      * @var DirectiveResolverInterface[]
      */
-    protected array $mandatoryDirectiveResolvers = [];
+    protected array $mandatoryFieldDirectiveResolvers = [];
 
-    public function addMandatoryDirectiveResolver(DirectiveResolverInterface $directiveResolver): void
+    public function addMandatoryFieldDirectiveResolver(DirectiveResolverInterface $directiveResolver): void
     {
-        $this->mandatoryDirectiveResolvers[] = $directiveResolver;
+        $this->mandatoryFieldDirectiveResolvers[] = $directiveResolver;
     }
     /**
      * @return DirectiveResolverInterface[]
      */
-    public function getMandatoryDirectiveResolvers(): array
+    public function getMandatoryFieldDirectiveResolvers(): array
     {
-        return $this->mandatoryDirectiveResolvers;
+        return $this->mandatoryFieldDirectiveResolvers;
     }
 }

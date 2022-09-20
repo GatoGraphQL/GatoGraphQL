@@ -36,7 +36,7 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
         $rolesKey = implode('|', $roles);
         if (!isset($this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey])) {
             $this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey] = new Directive(
-                $this->getValidateRoleDirectiveResolver()->getDirectiveName(),
+                $this->getValidateRoleFieldDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
                         'roles',
@@ -53,5 +53,5 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
         return $this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey];
     }
 
-    abstract protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface;
+    abstract protected function getValidateRoleFieldDirectiveResolver(): DirectiveResolverInterface;
 }

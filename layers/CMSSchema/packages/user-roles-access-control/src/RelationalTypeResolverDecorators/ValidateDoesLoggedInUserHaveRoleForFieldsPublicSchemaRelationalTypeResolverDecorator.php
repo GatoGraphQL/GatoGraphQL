@@ -8,7 +8,7 @@ use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelat
 use PoP\AccessControl\RelationalTypeResolverDecorators\ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver;
 use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
 class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
@@ -17,7 +17,7 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
     use ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait;
 
     private ?AccessControlManagerInterface $accessControlManager = null;
-    private ?ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = null;
+    private ?ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver = null;
 
     final public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
     {
@@ -28,14 +28,14 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
         /** @var AccessControlManagerInterface */
         return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
     }
-    final public function setValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver): void
+    final public function setValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver(ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver): void
     {
-        $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+        $this->validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver;
     }
-    final protected function getValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver
+    final protected function getValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver
     {
-        /** @var ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver */
-        return $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::class);
+        /** @var ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver */
+        return $this->validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver::class);
     }
 
     /**
@@ -46,8 +46,8 @@ class ValidateDoesLoggedInUserHaveRoleForFieldsPublicSchemaRelationalTypeResolve
         return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::ROLES);
     }
 
-    protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface
+    protected function getValidateRoleFieldDirectiveResolver(): DirectiveResolverInterface
     {
-        return $this->getValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver();
+        return $this->getValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver();
     }
 }

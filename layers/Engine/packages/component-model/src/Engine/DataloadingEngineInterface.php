@@ -8,9 +8,9 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 
 interface DataloadingEngineInterface
 {
-    public function addMandatoryDirectiveResolver(DirectiveResolverInterface $directiveResolver): void;
+    public function addMandatoryFieldDirectiveResolver(DirectiveResolverInterface $directiveResolver): void;
     /**
      * @return DirectiveResolverInterface[]
      */
-    public function getMandatoryDirectiveResolvers(): array;
+    public function getMandatoryFieldDirectiveResolvers(): array;
 }

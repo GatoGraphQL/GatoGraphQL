@@ -10,7 +10,7 @@ use PoP\CacheControl\ModuleConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-final class CacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver implements MandatoryDirectiveServiceTagInterface
+final class CacheControlFieldDirectiveResolver extends AbstractCacheControlFieldDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
     /**
      * It must execute after everyone else!

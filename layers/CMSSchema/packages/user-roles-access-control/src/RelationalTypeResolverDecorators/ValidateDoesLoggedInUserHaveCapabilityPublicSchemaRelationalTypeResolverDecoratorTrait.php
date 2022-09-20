@@ -36,7 +36,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
         $capabilitiesKey = implode('|', $capabilities);
         if (!isset($this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey])) {
             $this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey] = new Directive(
-                $this->getValidateCapabilityDirectiveResolver()->getDirectiveName(),
+                $this->getValidateCapabilityFieldDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
                         'capabilities',
@@ -53,5 +53,5 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
         return $this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey];
     }
 
-    abstract protected function getValidateCapabilityDirectiveResolver(): DirectiveResolverInterface;
+    abstract protected function getValidateCapabilityFieldDirectiveResolver(): DirectiveResolverInterface;
 }

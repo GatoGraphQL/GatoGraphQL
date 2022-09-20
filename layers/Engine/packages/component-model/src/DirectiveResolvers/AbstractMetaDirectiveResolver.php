@@ -21,7 +21,7 @@ use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
-abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
+abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirectiveResolver implements MetaFieldDirectiveResolverInterface
 {
     /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
     protected SplObjectStorage $nestedDirectivePipelineData;

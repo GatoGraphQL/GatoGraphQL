@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 
-trait RemoveIDFieldSetDirectiveResolverTrait
+trait RemoveIDFieldSetFieldDirectiveResolverTrait
 {
     /**
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet

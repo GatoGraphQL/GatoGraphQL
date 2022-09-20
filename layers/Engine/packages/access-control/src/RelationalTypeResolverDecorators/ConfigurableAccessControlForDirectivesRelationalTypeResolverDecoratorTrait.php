@@ -18,8 +18,8 @@ trait ConfigurableAccessControlForDirectivesRelationalTypeResolverDecoratorTrait
         // It was resolved by PHP 7.3.9, though, but handle to add compatibility up to PHP 7.1
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getEntries insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getRequiredEntryValue insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
-        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getDirectiveResolvers insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
-        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getDirectiveResolverClasses insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
+        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getFieldDirectiveResolvers insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
+        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getFieldDirectiveResolverClasses insteadof ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecoratorTrait;
     }
 
     /**

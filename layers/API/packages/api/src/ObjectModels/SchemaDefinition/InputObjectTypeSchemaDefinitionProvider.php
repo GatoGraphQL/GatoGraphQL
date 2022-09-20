@@ -54,7 +54,7 @@ class InputObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDef
             // Extract the typeResolvers
             /** @var TypeResolverInterface */
             $inputFieldTypeResolver = $inputFieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
-            $this->accessedTypeAndDirectiveResolvers[$inputFieldTypeResolver::class] = $inputFieldTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$inputFieldTypeResolver::class] = $inputFieldTypeResolver;
             SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($inputFieldSchemaDefinition);
 
             $schemaDefinition[SchemaDefinition::INPUT_FIELDS][$inputFieldName] = $inputFieldSchemaDefinition;

@@ -17,8 +17,8 @@ abstract class AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHook
         // It was resolved by PHP 7.3.9, though, but handle to add compatibility up to PHP 7.1
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getEntries insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
         AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getRequiredEntryValue insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
-        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getDirectiveResolvers insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
-        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getDirectiveResolverClasses insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
+        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getFieldDirectiveResolvers insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
+        AccessControlConfigurableMandatoryDirectivesForDirectivesTrait::getFieldDirectiveResolverClasses insteadof ConfigurableMandatoryDirectivesForDirectivesTrait;
     }
 
     protected function enabled(): bool

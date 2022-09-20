@@ -12,9 +12,9 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
-abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
+abstract class AbstractValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
 {
-    use RemoveIDFieldSetDirectiveResolverTrait;
+    use RemoveIDFieldSetFieldDirectiveResolverTrait;
 
     /**
      * Validations are by default a "Schema" type directive
@@ -38,7 +38,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<DirectiveResolverInterface> $succeedingPipelineDirectiveResolvers
+     * @param array<DirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
@@ -47,7 +47,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
-        array $succeedingPipelineDirectiveResolvers,
+        array $succeedingPipelineFieldDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,

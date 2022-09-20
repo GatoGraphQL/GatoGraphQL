@@ -22,10 +22,10 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
-use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -47,8 +47,8 @@ use SplObjectStorage;
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
     use AttachableExtensionTrait;
-    use WithVersionConstraintFieldOrDirectiveResolverTrait;
-    use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
+    use WithVersionConstraintFieldOrFieldDirectiveResolverTrait;
+    use CheckDangerouslyNonSpecificScalarTypeFieldOrFieldDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
 
     /** @var array<string,array<string,mixed>> */

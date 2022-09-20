@@ -12,10 +12,10 @@ abstract class AbstractSchemaDefinitionProvider implements SchemaDefinitionProvi
     /**
      * @var array<string,TypeResolverInterface|DirectiveResolverInterface> Key: class, Value: Accessed Type and Directive Resolver
      */
-    protected array $accessedTypeAndDirectiveResolvers = [];
+    protected array $accessedTypeAndFieldDirectiveResolvers = [];
 
-    final public function getAccessedTypeAndDirectiveResolvers(): array
+    final public function getAccessedTypeAndFieldDirectiveResolvers(): array
     {
-        return array_values($this->accessedTypeAndDirectiveResolvers);
+        return array_values($this->accessedTypeAndFieldDirectiveResolvers);
     }
 }

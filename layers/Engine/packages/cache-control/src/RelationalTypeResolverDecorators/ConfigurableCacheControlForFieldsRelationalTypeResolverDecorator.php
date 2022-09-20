@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\RelationalTypeResolverDecorators;
 
-use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
+use PoP\CacheControl\DirectiveResolvers\CacheControlFieldDirectiveResolver;
 use PoP\CacheControl\Managers\CacheControlManagerInterface;
 use PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators\AbstractMandatoryDirectivesForFieldsRelationalTypeResolverDecorator;
 
@@ -13,7 +13,7 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
     use ConfigurableCacheControlRelationalTypeResolverDecoratorTrait;
 
     private ?CacheControlManagerInterface $cacheControlManager = null;
-    private ?CacheControlDirectiveResolver $cacheControlDirectiveResolver = null;
+    private ?CacheControlFieldDirectiveResolver $cacheControlFieldDirectiveResolver = null;
 
     final public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
     {
@@ -24,14 +24,14 @@ class ConfigurableCacheControlForFieldsRelationalTypeResolverDecorator extends A
         /** @var CacheControlManagerInterface */
         return $this->cacheControlManager ??= $this->instanceManager->getInstance(CacheControlManagerInterface::class);
     }
-    final public function setCacheControlDirectiveResolver(CacheControlDirectiveResolver $cacheControlDirectiveResolver): void
+    final public function setCacheControlFieldDirectiveResolver(CacheControlFieldDirectiveResolver $cacheControlFieldDirectiveResolver): void
     {
-        $this->cacheControlDirectiveResolver = $cacheControlDirectiveResolver;
+        $this->cacheControlFieldDirectiveResolver = $cacheControlFieldDirectiveResolver;
     }
-    final protected function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver
+    final protected function getCacheControlFieldDirectiveResolver(): CacheControlFieldDirectiveResolver
     {
-        /** @var CacheControlDirectiveResolver */
-        return $this->cacheControlDirectiveResolver ??= $this->instanceManager->getInstance(CacheControlDirectiveResolver::class);
+        /** @var CacheControlFieldDirectiveResolver */
+        return $this->cacheControlFieldDirectiveResolver ??= $this->instanceManager->getInstance(CacheControlFieldDirectiveResolver::class);
     }
 
     /**

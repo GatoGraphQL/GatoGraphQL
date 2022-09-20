@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Resolvers;
 
 use PoP\Root\Translation\TranslationAPIInterface;
 
-trait WithVersionConstraintFieldOrDirectiveResolverTrait
+trait WithVersionConstraintFieldOrFieldDirectiveResolverTrait
 {
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
 

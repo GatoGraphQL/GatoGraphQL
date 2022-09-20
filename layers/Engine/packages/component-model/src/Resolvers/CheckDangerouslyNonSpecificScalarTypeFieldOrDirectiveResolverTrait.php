@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-trait CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait
+trait CheckDangerouslyNonSpecificScalarTypeFieldOrFieldDirectiveResolverTrait
 {
     abstract protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 

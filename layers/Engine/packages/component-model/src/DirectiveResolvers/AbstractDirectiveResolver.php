@@ -25,10 +25,10 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\DirectiveDataAccessor;
 use PoP\ComponentModel\QueryResolution\DirectiveDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
-use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
-use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
-use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\ObjectTypeOrFieldDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -58,15 +58,15 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
-abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
+abstract class AbstractFieldDirectiveResolver implements DirectiveResolverInterface
 {
     use AttachableExtensionTrait;
-    use RemoveIDFieldSetDirectiveResolverTrait;
+    use RemoveIDFieldSetFieldDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
-    use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use WithVersionConstraintFieldOrFieldDirectiveResolverTrait;
     use BasicServiceTrait;
-    use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
-    use ObjectTypeOrDirectiveResolverTrait;
+    use CheckDangerouslyNonSpecificScalarTypeFieldOrFieldDirectiveResolverTrait;
+    use ObjectTypeOrFieldDirectiveResolverTrait;
 
     protected Directive $directive;
     /** @var array<string,array<string,InputTypeResolverInterface>> */
@@ -1147,7 +1147,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         list(
             /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver,
-            $pipelineDirectiveResolvers,
+            $pipelineFieldDirectiveResolvers,
             $idObjects,
             $unionTypeOutputKeyIDs,
             $previouslyResolvedIDFieldValues,
@@ -1169,9 +1169,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $directiveDataAccessProvider = $pipelineFieldDataAccessProviders[0];
         array_shift($pipelineFieldDataAccessProviders);
 
-        // The $pipelineDirectiveResolvers is the series of directives executed in the pipeline
+        // The $pipelineFieldDirectiveResolvers is the series of directives executed in the pipeline
         // The current stage is at the head. Remove it
-        array_shift($pipelineDirectiveResolvers);
+        array_shift($pipelineFieldDirectiveResolvers);
 
         // // 2. Validate operation
         // $this->validateDirective(
@@ -1179,7 +1179,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $idFieldSet,
         //     $pipelineIDFieldSet,
         //     $pipelineFieldDataAccessProviders,
-        //     $pipelineDirectiveResolvers,
+        //     $pipelineFieldDirectiveResolvers,
         //     $idObjects,
         //     $resolvedIDFieldValues,
         //     $previouslyResolvedIDFieldValues,
@@ -1206,7 +1206,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $relationalTypeResolver,
                     $idFieldSet,
                     $directiveDataAccessProvider,
-                    $pipelineDirectiveResolvers,
+                    $pipelineFieldDirectiveResolvers,
                     $idObjects,
                     $unionTypeOutputKeyIDs,
                     $previouslyResolvedIDFieldValues,
@@ -1293,7 +1293,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // 3. Re-create the payload from the modified variables
         return DirectivePipelineUtils::convertArgumentsToPayload(
             $relationalTypeResolver,
-            $pipelineDirectiveResolvers,
+            $pipelineFieldDirectiveResolvers,
             $idObjects,
             $unionTypeOutputKeyIDs,
             $previouslyResolvedIDFieldValues,
@@ -1434,7 +1434,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Return the object implementing the schema definition for this DirectiveResolver.
      * By default, it is this same object
      */
-    protected function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): SchemaDirectiveResolverInterface
+    protected function getSchemaDefinitionResolver(RelationalTypeResolverInterface $relationalTypeResolver): SchemaFieldDirectiveResolverInterface
     {
         return $this;
     }

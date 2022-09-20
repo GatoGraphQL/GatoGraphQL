@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserState\DirectiveResolvers;
 
-use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
+use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlFieldDirectiveResolver;
 
-class NoCacheCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
+class NoCacheCacheControlFieldDirectiveResolver extends AbstractCacheControlFieldDirectiveResolver
 {
     /**
      * @return string[]

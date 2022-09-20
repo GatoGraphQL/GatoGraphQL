@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointFieldDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
@@ -17,7 +17,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserState\Checkpoints\UserNotLoggedInCheckpoint;
 use PoPCMSSchema\UserStateAccessControl\FeedbackItemProviders\FeedbackItemProvider;
 
-class ValidateIsUserNotLoggedInDirectiveResolver extends AbstractValidateCheckpointDirectiveResolver
+class ValidateIsUserNotLoggedInFieldDirectiveResolver extends AbstractValidateCheckpointFieldDirectiveResolver
 {
     private ?UserNotLoggedInCheckpoint $userNotLoggedInCheckpoint = null;
 

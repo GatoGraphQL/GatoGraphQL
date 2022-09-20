@@ -9,22 +9,22 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
-use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
+use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver;
 
 abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
 {
     protected ?Directive $validateIsUserLoggedInDirective = null;
 
-    private ?ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver = null;
+    private ?ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver $validateIsUserLoggedInForDirectivesFieldDirectiveResolver = null;
 
-    final public function setValidateIsUserLoggedInForDirectivesDirectiveResolver(ValidateIsUserLoggedInForDirectivesDirectiveResolver $validateIsUserLoggedInForDirectivesDirectiveResolver): void
+    final public function setValidateIsUserLoggedInForDirectivesFieldDirectiveResolver(ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver $validateIsUserLoggedInForDirectivesFieldDirectiveResolver): void
     {
-        $this->validateIsUserLoggedInForDirectivesDirectiveResolver = $validateIsUserLoggedInForDirectivesDirectiveResolver;
+        $this->validateIsUserLoggedInForDirectivesFieldDirectiveResolver = $validateIsUserLoggedInForDirectivesFieldDirectiveResolver;
     }
-    final protected function getValidateIsUserLoggedInForDirectivesDirectiveResolver(): ValidateIsUserLoggedInForDirectivesDirectiveResolver
+    final protected function getValidateIsUserLoggedInForDirectivesFieldDirectiveResolver(): ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver
     {
-        /** @var ValidateIsUserLoggedInForDirectivesDirectiveResolver */
-        return $this->validateIsUserLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesDirectiveResolver::class);
+        /** @var ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver */
+        return $this->validateIsUserLoggedInForDirectivesFieldDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver::class);
     }
 
     /**
@@ -37,8 +37,8 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
         // This is the required "validateIsUserLoggedIn" directive
         $validateIsUserLoggedInDirective = $this->getValidateIsUserLoggedInDirective();
         // Add the mapping
-        foreach ($this->getDirectiveResolvers() as $needValidateIsUserLoggedInDirectiveResolver) {
-            $mandatoryDirectivesForDirectives[$needValidateIsUserLoggedInDirectiveResolver->getDirectiveName()] = [
+        foreach ($this->getFieldDirectiveResolvers() as $needValidateIsUserLoggedInFieldDirectiveResolver) {
+            $mandatoryDirectivesForDirectives[$needValidateIsUserLoggedInFieldDirectiveResolver->getDirectiveName()] = [
                 $validateIsUserLoggedInDirective,
             ];
         }
@@ -49,7 +49,7 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
     {
         if ($this->validateIsUserLoggedInDirective === null) {
             $this->validateIsUserLoggedInDirective = new Directive(
-                $this->getValidateIsUserLoggedInForDirectivesDirectiveResolver()->getDirectiveName(),
+                $this->getValidateIsUserLoggedInForDirectivesFieldDirectiveResolver()->getDirectiveName(),
                 [],
                 ASTNodesFactory::getNonSpecificLocation()
             );
@@ -62,5 +62,5 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
      *
      * @return DirectiveResolverInterface[]
      */
-    abstract protected function getDirectiveResolvers(): array;
+    abstract protected function getFieldDirectiveResolvers(): array;
 }

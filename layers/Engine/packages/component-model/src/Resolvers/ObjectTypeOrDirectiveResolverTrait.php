@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use stdClass;
 
-trait ObjectTypeOrDirectiveResolverTrait
+trait ObjectTypeOrFieldDirectiveResolverTrait
 {
     /**
      * Get the field/directive arguments which have a default value.

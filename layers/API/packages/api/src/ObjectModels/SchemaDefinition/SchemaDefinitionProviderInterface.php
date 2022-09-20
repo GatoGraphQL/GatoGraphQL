@@ -16,5 +16,5 @@ interface SchemaDefinitionProviderInterface
     /**
      * @return array<TypeResolverInterface|DirectiveResolverInterface>
      */
-    public function getAccessedTypeAndDirectiveResolvers(): array;
+    public function getAccessedTypeAndFieldDirectiveResolvers(): array;
 }

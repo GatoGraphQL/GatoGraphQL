@@ -12,5 +12,5 @@ interface TypeSchemaDefinitionProviderInterface extends SchemaDefinitionProvider
     /**
      * @return array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
      */
-    public function getAccessedDirectiveResolverClassRelationalTypeResolvers(): array;
+    public function getAccessedFieldDirectiveResolverClassRelationalTypeResolvers(): array;
 }

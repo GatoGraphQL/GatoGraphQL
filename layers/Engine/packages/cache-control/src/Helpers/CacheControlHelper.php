@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\Helpers;
 
-use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
+use PoP\CacheControl\DirectiveResolvers\CacheControlFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -15,18 +15,18 @@ class CacheControlHelper
 {
     protected static ?Directive $noCacheDirective = null;
 
-    final protected static function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver
+    final protected static function getCacheControlFieldDirectiveResolver(): CacheControlFieldDirectiveResolver
     {
         $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var CacheControlDirectiveResolver */
-        return $instanceManager->getInstance(CacheControlDirectiveResolver::class);
+        /** @var CacheControlFieldDirectiveResolver */
+        return $instanceManager->getInstance(CacheControlFieldDirectiveResolver::class);
     }
 
     public static function getNoCacheDirective(): Directive
     {
         if (self::$noCacheDirective === null) {
             self::$noCacheDirective = new Directive(
-                static::getCacheControlDirectiveResolver()->getDirectiveName(),
+                static::getCacheControlFieldDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
                         'maxAge',

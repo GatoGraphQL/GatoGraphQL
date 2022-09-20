@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\DirectiveResolvers;
 
-class DisableAccessForDirectivesDirectiveResolver extends DisableAccessDirectiveResolver
+class DisableAccessForDirectivesFieldDirectiveResolver extends DisableAccessFieldDirectiveResolver
 {
     public function getDirectiveName(): string
     {

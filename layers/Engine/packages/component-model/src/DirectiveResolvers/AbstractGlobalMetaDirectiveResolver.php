@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-abstract class AbstractGlobalMetaDirectiveResolver extends AbstractMetaDirectiveResolver
+abstract class AbstractGlobalMetaFieldDirectiveResolver extends AbstractMetaFieldDirectiveResolver
 {
-    use GlobalDirectiveResolverTrait;
+    use GlobalFieldDirectiveResolverTrait;
 }

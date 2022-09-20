@@ -26,7 +26,7 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
     {
         if ($this->validateUserStateDirective === null) {
             $this->validateUserStateDirective = new Directive(
-                $this->getValidateUserStateDirectiveResolver()->getDirectiveName(),
+                $this->getValidateUserStateFieldDirectiveResolver()->getDirectiveName(),
                 [],
                 ASTNodesFactory::getNonSpecificLocation()
             );
@@ -34,5 +34,5 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
         return $this->validateUserStateDirective;
     }
 
-    abstract protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface;
+    abstract protected function getValidateUserStateFieldDirectiveResolver(): DirectiveResolverInterface;
 }

@@ -43,11 +43,11 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      *
      * @var array<class-string<TypeResolverInterface|DirectiveResolverInterface>>
      */
-    private array $processedTypeAndDirectiveResolverClasses = [];
+    private array $processedTypeAndFieldDirectiveResolverClasses = [];
     /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
-    private array $pendingTypeOrDirectiveResolvers = [];
+    private array $pendingTypeOrFieldDirectiveResolvers = [];
     /** @var array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
-    private array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
+    private array $accessedFieldDirectiveResolverClassRelationalTypeResolvers = [];
     /** @var array<string,ObjectTypeResolverInterface[]> Key: InterfaceType name, Value: List of ObjectType resolvers implementing the interface */
     private array $accessedInterfaceTypeNameObjectTypeResolvers = [];
 
@@ -115,26 +115,26 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                 SchemaDefinition::TYPES => [],
             ];
 
-            $this->processedTypeAndDirectiveResolverClasses = [];
-            $this->accessedDirectiveResolverClassRelationalTypeResolvers = [];
+            $this->processedTypeAndFieldDirectiveResolverClasses = [];
+            $this->accessedFieldDirectiveResolverClassRelationalTypeResolvers = [];
             $this->accessedInterfaceTypeNameObjectTypeResolvers = [];
 
-            $this->pendingTypeOrDirectiveResolvers = [
+            $this->pendingTypeOrFieldDirectiveResolvers = [
                 $this->getSchemaRootObjectTypeResolver(),
             ];
-            while (!empty($this->pendingTypeOrDirectiveResolvers)) {
-                $typeOrDirectiveResolver = array_pop($this->pendingTypeOrDirectiveResolvers);
-                $this->processedTypeAndDirectiveResolverClasses[] = $typeOrDirectiveResolver::class;
-                if ($typeOrDirectiveResolver instanceof TypeResolverInterface) {
+            while (!empty($this->pendingTypeOrFieldDirectiveResolvers)) {
+                $typeOrFieldDirectiveResolver = array_pop($this->pendingTypeOrFieldDirectiveResolvers);
+                $this->processedTypeAndFieldDirectiveResolverClasses[] = $typeOrFieldDirectiveResolver::class;
+                if ($typeOrFieldDirectiveResolver instanceof TypeResolverInterface) {
                     /** @var TypeResolverInterface */
-                    $typeResolver = $typeOrDirectiveResolver;
+                    $typeResolver = $typeOrFieldDirectiveResolver;
                     $this->addTypeSchemaDefinition(
                         $typeResolver,
                         $schemaDefinition,
                     );
                 } else {
                     /** @var DirectiveResolverInterface */
-                    $directiveResolver = $typeOrDirectiveResolver;
+                    $directiveResolver = $typeOrFieldDirectiveResolver;
                     $this->addDirectiveSchemaDefinition(
                         $directiveResolver,
                         $schemaDefinition,
@@ -262,17 +262,17 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
 
     /**
-     * @param array<TypeResolverInterface|DirectiveResolverInterface> $accessedTypeAndDirectiveResolvers
+     * @param array<TypeResolverInterface|DirectiveResolverInterface> $accessedTypeAndFieldDirectiveResolvers
      */
-    private function addAccessedTypeAndDirectiveResolvers(
-        array $accessedTypeAndDirectiveResolvers,
+    private function addAccessedTypeAndFieldDirectiveResolvers(
+        array $accessedTypeAndFieldDirectiveResolvers,
     ): void {
         // Add further accessed TypeResolvers and DirectiveResolvers to the stack and keep iterating
-        foreach ($accessedTypeAndDirectiveResolvers as $accessedTypeOrDirectiveResolver) {
-            if (in_array($accessedTypeOrDirectiveResolver::class, $this->processedTypeAndDirectiveResolverClasses)) {
+        foreach ($accessedTypeAndFieldDirectiveResolvers as $accessedTypeOrFieldDirectiveResolver) {
+            if (in_array($accessedTypeOrFieldDirectiveResolver::class, $this->processedTypeAndFieldDirectiveResolverClasses)) {
                 continue;
             }
-            $this->pendingTypeOrDirectiveResolvers[] = $accessedTypeOrDirectiveResolver;
+            $this->pendingTypeOrFieldDirectiveResolvers[] = $accessedTypeOrFieldDirectiveResolver;
         }
     }
 
@@ -296,12 +296,12 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
         $schemaDefinition[SchemaDefinition::TYPES][$typeKind][$typeName] = $typeSchemaDefinition;
 
-        $this->addAccessedTypeAndDirectiveResolvers(
-            $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers(),
+        $this->addAccessedTypeAndFieldDirectiveResolvers(
+            $schemaDefinitionProvider->getAccessedTypeAndFieldDirectiveResolvers(),
         );
-        $this->accessedDirectiveResolverClassRelationalTypeResolvers = array_merge(
-            $this->accessedDirectiveResolverClassRelationalTypeResolvers,
-            $schemaDefinitionProvider->getAccessedDirectiveResolverClassRelationalTypeResolvers(),
+        $this->accessedFieldDirectiveResolverClassRelationalTypeResolvers = array_merge(
+            $this->accessedFieldDirectiveResolverClassRelationalTypeResolvers,
+            $schemaDefinitionProvider->getAccessedFieldDirectiveResolverClassRelationalTypeResolvers(),
         );
         /**
          * ObjectTypeResolvers must be injected into the POSSIBLE_TYPES of their implemented InterfaceTypes
@@ -351,7 +351,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         DirectiveResolverInterface $directiveResolver,
         array &$schemaDefinition,
     ): void {
-        $relationalTypeResolver = $this->accessedDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class];
+        $relationalTypeResolver = $this->accessedFieldDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class];
         $schemaDefinitionProvider = new DirectiveSchemaDefinitionProvider($directiveResolver, $relationalTypeResolver);
         $directiveName = $directiveResolver->getDirectiveName();
         $directiveSchemaDefinition = $schemaDefinitionProvider->getSchemaDefinition();
@@ -360,8 +360,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             : SchemaDefinition::DIRECTIVES;
         $schemaDefinition[$entry][$directiveName] = $directiveSchemaDefinition;
 
-        $this->addAccessedTypeAndDirectiveResolvers(
-            $schemaDefinitionProvider->getAccessedTypeAndDirectiveResolvers()
+        $this->addAccessedTypeAndFieldDirectiveResolvers(
+            $schemaDefinitionProvider->getAccessedTypeAndFieldDirectiveResolvers()
         );
     }
 

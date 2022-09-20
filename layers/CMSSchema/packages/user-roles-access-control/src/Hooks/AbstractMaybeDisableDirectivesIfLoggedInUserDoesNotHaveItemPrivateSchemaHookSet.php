@@ -17,7 +17,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
 
     protected function enabled(): bool
     {
-        return parent::enabled() && !empty($this->getDirectiveResolverClasses());
+        return parent::enabled() && !empty($this->getFieldDirectiveResolverClasses());
     }
 
     /**
@@ -32,7 +32,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
      *
      * @return array<class-string<DirectiveResolverInterface>>
      */
-    protected function getDirectiveResolverClasses(): array
+    protected function getFieldDirectiveResolverClasses(): array
     {
         if ($this->directiveResolverClasses === null) {
             $entries = $this->getEntries();

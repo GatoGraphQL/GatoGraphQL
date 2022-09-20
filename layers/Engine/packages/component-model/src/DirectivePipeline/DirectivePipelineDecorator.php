@@ -25,7 +25,7 @@ class DirectivePipelineDecorator
      * @param array<FieldDataAccessProviderInterface> $pipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<DirectiveResolverInterface> $pipelineDirectiveResolvers
+     * @param array<DirectiveResolverInterface> $pipelineFieldDirectiveResolvers
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
@@ -34,7 +34,7 @@ class DirectivePipelineDecorator
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $pipelineIDFieldSet,
         array $pipelineFieldDataAccessProviders,
-        array $pipelineDirectiveResolvers,
+        array $pipelineFieldDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
@@ -45,7 +45,7 @@ class DirectivePipelineDecorator
         $payload = $this->pipeline->__invoke(
             DirectivePipelineUtils::convertArgumentsToPayload(
                 $relationalTypeResolver,
-                $pipelineDirectiveResolvers,
+                $pipelineFieldDirectiveResolvers,
                 $idObjects,
                 $unionTypeOutputKeyIDs,
                 $previouslyResolvedIDFieldValues,
@@ -58,7 +58,7 @@ class DirectivePipelineDecorator
         );
         list(
             $relationalTypeResolver,
-            $pipelineDirectiveResolvers,
+            $pipelineFieldDirectiveResolvers,
             $idObjects,
             $unionTypeOutputKeyIDs,
             $previouslyResolvedIDFieldValues,

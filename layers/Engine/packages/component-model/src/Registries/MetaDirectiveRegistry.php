@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\MetaFieldDirectiveResolverInterface;
 
 class MetaDirectiveRegistry implements MetaDirectiveRegistryInterface
 {
     /**
-     * @var array<string,MetaDirectiveResolverInterface>
+     * @var array<string,MetaFieldDirectiveResolverInterface>
      */
-    protected array $metaDirectiveResolvers = [];
+    protected array $metaFieldDirectiveResolvers = [];
 
-    public function addMetaDirectiveResolver(MetaDirectiveResolverInterface $metaDirectiveResolver): void
+    public function addMetaFieldDirectiveResolver(MetaFieldDirectiveResolverInterface $metaFieldDirectiveResolver): void
     {
-        $this->metaDirectiveResolvers[$metaDirectiveResolver->getDirectiveName()] = $metaDirectiveResolver;
+        $this->metaFieldDirectiveResolvers[$metaFieldDirectiveResolver->getDirectiveName()] = $metaFieldDirectiveResolver;
     }
 
     /**
-     * @return array<string,MetaDirectiveResolverInterface>
+     * @return array<string,MetaFieldDirectiveResolverInterface>
      */
-    public function getMetaDirectiveResolvers(): array
+    public function getMetaFieldDirectiveResolvers(): array
     {
-        return $this->metaDirectiveResolvers;
+        return $this->metaFieldDirectiveResolvers;
     }
 
-    public function getMetaDirectiveResolver(string $directiveName): ?MetaDirectiveResolverInterface
+    public function getMetaFieldDirectiveResolver(string $directiveName): ?MetaFieldDirectiveResolverInterface
     {
-        return $this->metaDirectiveResolvers[$directiveName] ?? null;
+        return $this->metaFieldDirectiveResolvers[$directiveName] ?? null;
     }
 }

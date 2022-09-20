@@ -34,7 +34,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
         if (
             $directiveNames = array_map(
                 fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getDirectiveName(),
-                $this->getDirectiveResolvers()
+                $this->getFieldDirectiveResolvers()
             )
         ) {
             /** @var string[] $directiveNames */
@@ -78,7 +78,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
      *
      * @return DirectiveResolverInterface[]
      */
-    abstract protected function getDirectiveResolvers(): array;
+    abstract protected function getFieldDirectiveResolvers(): array;
 
     /**
      * Decide if to remove the directiveNames

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\RelationalTypeResolverDecorators;
 
-use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
+use PoP\CacheControl\DirectiveResolvers\CacheControlFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -17,7 +17,7 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
      */
     protected array $cacheControlDirectives = [];
 
-    abstract protected function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver;
+    abstract protected function getCacheControlFieldDirectiveResolver(): CacheControlFieldDirectiveResolver;
 
     /**
      * By default, only the admin can see the roles from the users
@@ -36,7 +36,7 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     {
         if (!isset($this->cacheControlDirectives[$maxAge])) {
             $this->cacheControlDirectives[$maxAge] = new Directive(
-                $this->getCacheControlDirectiveResolver()->getDirectiveName(),
+                $this->getCacheControlFieldDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
                         'maxAge',

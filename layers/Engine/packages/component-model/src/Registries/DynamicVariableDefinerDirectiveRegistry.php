@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
 
 class DynamicVariableDefinerDirectiveRegistry implements DynamicVariableDefinerDirectiveRegistryInterface
 {
     /**
-     * @var array<string,DynamicVariableDefinerDirectiveResolverInterface>
+     * @var array<string,DynamicVariableDefinerFieldDirectiveResolverInterface>
      */
-    protected array $dynamicVariableDefinerDirectiveResolvers = [];
+    protected array $dynamicVariableDefinerFieldDirectiveResolvers = [];
 
-    public function addDynamicVariableDefinerDirectiveResolver(DynamicVariableDefinerDirectiveResolverInterface $dynamicVariableDefinerDirectiveResolver): void
+    public function addDynamicVariableDefinerFieldDirectiveResolver(DynamicVariableDefinerFieldDirectiveResolverInterface $dynamicVariableDefinerFieldDirectiveResolver): void
     {
-        $this->dynamicVariableDefinerDirectiveResolvers[$dynamicVariableDefinerDirectiveResolver->getDirectiveName()] = $dynamicVariableDefinerDirectiveResolver;
+        $this->dynamicVariableDefinerFieldDirectiveResolvers[$dynamicVariableDefinerFieldDirectiveResolver->getDirectiveName()] = $dynamicVariableDefinerFieldDirectiveResolver;
     }
 
     /**
-     * @return array<string,DynamicVariableDefinerDirectiveResolverInterface>
+     * @return array<string,DynamicVariableDefinerFieldDirectiveResolverInterface>
      */
-    public function getDynamicVariableDefinerDirectiveResolvers(): array
+    public function getDynamicVariableDefinerFieldDirectiveResolvers(): array
     {
-        return $this->dynamicVariableDefinerDirectiveResolvers;
+        return $this->dynamicVariableDefinerFieldDirectiveResolvers;
     }
 
-    public function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface
+    public function getDynamicVariableDefinerFieldDirectiveResolver(string $directiveName): ?DynamicVariableDefinerFieldDirectiveResolverInterface
     {
-        return $this->dynamicVariableDefinerDirectiveResolvers[$directiveName] ?? null;
+        return $this->dynamicVariableDefinerFieldDirectiveResolvers[$directiveName] ?? null;
     }
 }

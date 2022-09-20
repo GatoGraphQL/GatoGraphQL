@@ -49,14 +49,14 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
      *
      * @return DirectiveResolverInterface[]
      */
-    final protected function getDirectiveResolvers(): array
+    final protected function getFieldDirectiveResolvers(): array
     {
         return array_map(
             function (string $directiveResolverClass): DirectiveResolverInterface {
                 /** @var DirectiveResolverInterface */
                 return $this->getInstanceManager()->getInstance($directiveResolverClass);
             },
-            $this->getDirectiveResolverClasses()
+            $this->getFieldDirectiveResolverClasses()
         );
     }
 
@@ -65,7 +65,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
      *
      * @return array<class-string<DirectiveResolverInterface>>
      */
-    protected function getDirectiveResolverClasses(): array
+    protected function getFieldDirectiveResolverClasses(): array
     {
         // Obtain all entries for the current combination of typeResolver/fieldName
         return array_values(array_unique(array_map(
