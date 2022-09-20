@@ -159,14 +159,13 @@ class TypeSerializationService implements TypeSerializationServiceInterface
             $objectTypeResolver,
             $field
         );
-        $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
 
         /**
          * If the value is an array of arrays, then serialize each subelement to the item type.
          * To make sure the array is not associative (on which case it should be treated
          * as a JSONObject instead of an array), also apply `array_values`
          */
+        $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
         if ($fieldLeafOutputTypeIsArrayOfArrays) {
             return array_values(array_map(
                 // If it contains a null value, return it as is
@@ -179,6 +178,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
         }
 
         // If the value is an array, then serialize each element to the item type
+        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
         if ($fieldLeafOutputTypeIsArray) {
             return array_values(array_map(
                 fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldLeafOutputTypeResolver->serialize($arrayValueElem),
