@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\Schema;
 
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -41,10 +41,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      * SchemaDefinition for all TypeResolvers and DirectiveResolvers
      * accessed in the schema
      *
-     * @var array<class-string<TypeResolverInterface|DirectiveResolverInterface>>
+     * @var array<class-string<TypeResolverInterface|FieldDirectiveResolverInterface>>
      */
     private array $processedTypeAndFieldDirectiveResolverClasses = [];
-    /** @var array<TypeResolverInterface|DirectiveResolverInterface> */
+    /** @var array<TypeResolverInterface|FieldDirectiveResolverInterface> */
     private array $pendingTypeOrFieldDirectiveResolvers = [];
     /** @var array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive */
     private array $accessedFieldDirectiveResolverClassRelationalTypeResolvers = [];
@@ -133,7 +133,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
                         $schemaDefinition,
                     );
                 } else {
-                    /** @var DirectiveResolverInterface */
+                    /** @var FieldDirectiveResolverInterface */
                     $directiveResolver = $typeOrFieldDirectiveResolver;
                     $this->addDirectiveSchemaDefinition(
                         $directiveResolver,
@@ -262,7 +262,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
 
     /**
-     * @param array<TypeResolverInterface|DirectiveResolverInterface> $accessedTypeAndFieldDirectiveResolvers
+     * @param array<TypeResolverInterface|FieldDirectiveResolverInterface> $accessedTypeAndFieldDirectiveResolvers
      */
     private function addAccessedTypeAndFieldDirectiveResolvers(
         array $accessedTypeAndFieldDirectiveResolvers,
@@ -348,7 +348,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      * @param array<string,mixed> $schemaDefinition
      */
     private function addDirectiveSchemaDefinition(
-        DirectiveResolverInterface $directiveResolver,
+        FieldDirectiveResolverInterface $directiveResolver,
         array &$schemaDefinition,
     ): void {
         $relationalTypeResolver = $this->accessedFieldDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class];

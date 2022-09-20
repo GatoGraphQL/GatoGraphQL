@@ -15,7 +15,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
-interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaFieldDirectiveResolverInterface
+interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, SchemaFieldDirectiveResolverInterface
 {
     /**
      * The classes of the ObjectTypeResolvers and/or InterfaceTypeResolvers
@@ -142,7 +142,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<\PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
+     * @param array<\PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
      */

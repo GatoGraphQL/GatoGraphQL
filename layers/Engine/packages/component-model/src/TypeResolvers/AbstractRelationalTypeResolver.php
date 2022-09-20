@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -36,7 +36,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected array $directives = [];
 
     /**
-     * @var array<string,DirectiveResolverInterface[]>|null
+     * @var array<string,FieldDirectiveResolverInterface[]>|null
      */
     protected ?array $directiveNameResolvers = null;
     /**
@@ -61,7 +61,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private SplObjectStorage $fieldDirectives;
     /**
-     * @var array<string,SplObjectStorage<Directive,DirectiveResolverInterface>>
+     * @var array<string,SplObjectStorage<Directive,FieldDirectiveResolverInterface>>
      */
     private array $directiveResolverClassDirectivesCache = [];
     /**
@@ -99,7 +99,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @return array<string,DirectiveResolverInterface[]>
+     * @return array<string,FieldDirectiveResolverInterface[]>
      */
     protected function getDirectiveNameResolvers(): array
     {
@@ -150,7 +150,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function getMandatoryDirectives(): array
     {
         return array_map(
-            fn (DirectiveResolverInterface $directiveResolver) => $this->getDirective($directiveResolver->getDirectiveName()),
+            fn (FieldDirectiveResolverInterface $directiveResolver) => $this->getDirective($directiveResolver->getDirectiveName()),
             $this->getDataloadingEngine()->getMandatoryFieldDirectiveResolvers()
         );
     }
@@ -176,7 +176,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @param Directive[] $directives
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
+     * @return SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]>
      */
     public function resolveDirectivesIntoPipelineData(
         array $directives,
@@ -213,7 +213,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Create an array with the dataFields affected by each directive, in order in which they will be invoked
         foreach ($directiveResolverFields as $directiveResolver) {
-            /** @var DirectiveResolverInterface $directiveResolver */
+            /** @var FieldDirectiveResolverInterface $directiveResolver */
             $fields = $directiveResolverFields[$directiveResolver];
             /** @var FieldInterface[] $fields */
             // Add the directive in its required position in the pipeline, and retrieve what fields it will process
@@ -225,7 +225,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Once we have them ordered, we can simply discard the positions, keep only the values
         // Each item has 2 elements: the DirectiveResolver instance and the fields it affects
-        /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
+        /** @var SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]> */
         $pipelineData = new SplObjectStorage();
         foreach ($directiveResolversByPosition as $position => $directiveResolvers) {
             for ($i = 0; $i < count($directiveResolvers); $i++) {
@@ -239,19 +239,19 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @param Directive[] $directives
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
+     * @return SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]>
      */
     protected function validateAndResolveFieldDirectiveResolverToFields(
         array $directives,
         SplObjectStorage $directiveFields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
-        /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
+        /** @var SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]> */
         $instances = new SplObjectStorage();
         // Count how many times each directive is added
         /** @var array<string,FieldInterface[]> */
         $directiveFieldTrack = [];
-        /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
+        /** @var SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]> */
         $directiveResolverInstanceFields = new SplObjectStorage();
         foreach ($directives as $directive) {
             $fieldDirectiveResolvers = $this->getFieldDirectiveResolvers(
@@ -335,7 +335,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         /**
          * Validate all the directiveResolvers in the field.
          */
-        /** @var DirectiveResolverInterface $directiveResolver */
+        /** @var FieldDirectiveResolverInterface $directiveResolver */
         foreach ($directiveResolverInstanceFields as $directiveResolver) {
             /** @var FieldInterface[] */
             $directiveResolverFields = $directiveResolverInstanceFields[$directiveResolver];
@@ -432,7 +432,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * @param FieldInterface[] $fields
-     * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
+     * @return SplObjectStorage<FieldInterface,FieldDirectiveResolverInterface>|null
      */
     protected function getFieldDirectiveResolvers(
         Directive $directive,
@@ -448,7 +448,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Only consider the directiveResolvers that can satisfy this directive
         $directiveResolvers = array_filter(
             $directiveResolvers,
-            fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->resolveCanProcessDirective($this, $directive)
+            fn (FieldDirectiveResolverInterface $directiveResolver) => $directiveResolver->resolveCanProcessDirective($this, $directive)
         );
         if ($directiveResolvers === []) {
             return null;
@@ -457,7 +457,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         /**
          * Calculate directiveResolvers per field
          *
-         * @var SplObjectStorage<FieldInterface,DirectiveResolverInterface>
+         * @var SplObjectStorage<FieldInterface,FieldDirectiveResolverInterface>
          */
         $fieldDirectiveResolvers = new SplObjectStorage();
         foreach ($fields as $field) {
@@ -492,9 +492,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * to set the unique $directive. So clone the service.
      */
     protected function getUniqueFieldDirectiveResolverForDirective(
-        DirectiveResolverInterface $directiveResolver,
+        FieldDirectiveResolverInterface $directiveResolver,
         Directive $directive,
-    ): DirectiveResolverInterface {
+    ): FieldDirectiveResolverInterface {
         $directiveResolverClass = get_class($directiveResolver);
         // Get the instance from the cache if it exists, or create it if not
         if (!isset($this->directiveResolverClassDirectivesCache[$directiveResolverClass]) || !$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->contains($directive)) {
@@ -503,7 +503,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directive,
             );
             /**
-             * @var SplObjectStorage<Directive,DirectiveResolverInterface>
+             * @var SplObjectStorage<Directive,FieldDirectiveResolverInterface>
              */
             $directivesCache = $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ?? new SplObjectStorage();
             $directivesCache[$directive] = $uniqueFieldDirectiveResolver;
@@ -831,8 +831,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * Execute a hook to allow to disable directives (eg: to implement a private schema)
      *
-     * @param array<string,DirectiveResolverInterface[]> $directiveNameResolvers
-     * @return array<string,DirectiveResolverInterface[]> $directiveNameResolvers
+     * @param array<string,FieldDirectiveResolverInterface[]> $directiveNameResolvers
+     * @return array<string,FieldDirectiveResolverInterface[]> $directiveNameResolvers
      */
     protected function filterDirectiveNameResolvers(array $directiveNameResolvers): array
     {
@@ -1110,7 +1110,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * @var FieldDataAccessProvider[]
              */
             $pipelineFieldDataAccessProviders = [];
-            /** @var DirectiveResolverInterface $directiveResolver */
+            /** @var FieldDirectiveResolverInterface $directiveResolver */
             foreach ($directivePipelineData as $directiveResolver) {
                 /** @var FieldInterface[] */
                 $directiveFields = $directivePipelineData[$directiveResolver];
@@ -1302,7 +1302,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     ): ?SplObjectStorage;
 
     /**
-     * @return array<string,DirectiveResolverInterface>
+     * @return array<string,FieldDirectiveResolverInterface>
      */
     public function getSchemaFieldDirectiveResolvers(bool $global): array
     {
@@ -1329,7 +1329,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @return array<string,DirectiveResolverInterface[]>
+     * @return array<string,FieldDirectiveResolverInterface[]>
      */
     protected function calculateFieldDirectiveNameResolvers(): array
     {
@@ -1349,11 +1349,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
-                /** @var DirectiveResolverInterface[] */
+                /** @var FieldDirectiveResolverInterface[] */
                 $attachedFieldDirectiveResolvers = array_reverse($this->getAttachableExtensionManager()->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVE_RESOLVERS));
                 // Order them by priority: higher priority are evaluated first
                 $extensionPriorities = array_map(
-                    fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachToClasses(),
+                    fn (FieldDirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachToClasses(),
                     $attachedFieldDirectiveResolvers
                 );
                 array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedFieldDirectiveResolvers);

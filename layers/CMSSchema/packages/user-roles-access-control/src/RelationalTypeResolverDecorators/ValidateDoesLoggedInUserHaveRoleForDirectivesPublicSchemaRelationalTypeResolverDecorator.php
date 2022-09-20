@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver;
 use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
@@ -33,7 +33,7 @@ class ValidateDoesLoggedInUserHaveRoleForDirectivesPublicSchemaRelationalTypeRes
         return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::ROLES);
     }
 
-    protected function getValidateRoleFieldDirectiveResolver(): DirectiveResolverInterface
+    protected function getValidateRoleFieldDirectiveResolver(): FieldDirectiveResolverInterface
     {
         return $this->getValidateDoesLoggedInUserHaveAnyRoleForDirectivesFieldDirectiveResolver();
     }

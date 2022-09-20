@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\MetaFieldDirectiveResolverInterface;
 use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
@@ -104,7 +104,7 @@ class Parser extends AbstractParser
         );
     }
 
-    protected function getFieldDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
+    protected function getFieldDirectiveResolver(string $directiveName): ?FieldDirectiveResolverInterface
     {
         return $this->getDirectiveRegistry()->getFieldDirectiveResolver($directiveName);
     }

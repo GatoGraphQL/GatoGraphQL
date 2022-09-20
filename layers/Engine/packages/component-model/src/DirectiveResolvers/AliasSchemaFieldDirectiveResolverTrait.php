@@ -23,7 +23,7 @@ use SplObjectStorage;
  * every function executed on the aliasing directive executes the same function on the aliased directive.
  *
  * The aliased DirectiveResolver is chosen to be of class `AbstractFieldDirectiveResolver`,
- * since it comprises interfaces `DirectiveResolverInterface`
+ * since it comprises interfaces `FieldDirectiveResolverInterface`
  * and `SchemaFieldDirectiveResolverInterface`, whose functions must be aliased.
  *
  * @author Leonardo Losoviz <leo@getpop.org>
@@ -242,7 +242,7 @@ trait AliasSchemaFieldDirectiveResolverTrait
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<DirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
+     * @param array<FieldDirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
      * @param array<string|int,object> $idObjects
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages

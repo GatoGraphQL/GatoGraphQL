@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
 class DataloadingEngine implements DataloadingEngineInterface
 {
     /**
-     * @var DirectiveResolverInterface[]
+     * @var FieldDirectiveResolverInterface[]
      */
     protected array $mandatoryFieldDirectiveResolvers = [];
 
-    public function addMandatoryFieldDirectiveResolver(DirectiveResolverInterface $directiveResolver): void
+    public function addMandatoryFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void
     {
         $this->mandatoryFieldDirectiveResolvers[] = $directiveResolver;
     }
     /**
-     * @return DirectiveResolverInterface[]
+     * @return FieldDirectiveResolverInterface[]
      */
     public function getMandatoryFieldDirectiveResolvers(): array
     {

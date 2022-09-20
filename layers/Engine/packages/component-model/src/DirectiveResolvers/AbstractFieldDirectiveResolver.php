@@ -58,7 +58,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
-abstract class AbstractFieldDirectiveResolver implements DirectiveResolverInterface
+abstract class AbstractFieldDirectiveResolver implements FieldDirectiveResolverInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDFieldSetFieldDirectiveResolverTrait;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver;
 use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver;
@@ -48,7 +48,7 @@ class GlobalValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDec
     /**
      * Provide the DirectiveResolvers that need the "validateIsUserLoggedIn" directive
      *
-     * @return DirectiveResolverInterface[]
+     * @return FieldDirectiveResolverInterface[]
      */
     protected function getFieldDirectiveResolvers(): array
     {

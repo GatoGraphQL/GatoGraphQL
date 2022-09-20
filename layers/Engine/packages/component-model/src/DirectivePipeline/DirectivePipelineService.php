@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectivePipeline;
 
 use League\Pipeline\PipelineBuilder;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
 class DirectivePipelineService implements DirectivePipelineServiceInterface
 {
     /**
-     * @param DirectiveResolverInterface[] $directiveResolvers
+     * @param FieldDirectiveResolverInterface[] $directiveResolvers
      */
     public function getDirectivePipeline(array $directiveResolvers): DirectivePipelineDecorator
     {

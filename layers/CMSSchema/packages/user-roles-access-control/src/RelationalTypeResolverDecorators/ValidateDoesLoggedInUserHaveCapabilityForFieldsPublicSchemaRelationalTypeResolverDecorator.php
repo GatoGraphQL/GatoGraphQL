@@ -7,7 +7,7 @@ namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelationalTypeResolverDecorator;
 use PoP\AccessControl\RelationalTypeResolverDecorators\ConfigurableAccessControlForFieldsRelationalTypeResolverDecoratorTrait;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver;
 use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
@@ -46,7 +46,7 @@ class ValidateDoesLoggedInUserHaveCapabilityForFieldsPublicSchemaRelationalTypeR
         return $this->getAccessControlManager()->getEntriesForFields(AccessControlGroups::CAPABILITIES);
     }
 
-    protected function getValidateCapabilityFieldDirectiveResolver(): DirectiveResolverInterface
+    protected function getValidateCapabilityFieldDirectiveResolver(): FieldDirectiveResolverInterface
     {
         return $this->getValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver();
     }

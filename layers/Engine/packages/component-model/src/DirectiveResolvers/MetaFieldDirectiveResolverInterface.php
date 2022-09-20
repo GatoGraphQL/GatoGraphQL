@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-interface MetaFieldDirectiveResolverInterface extends DirectiveResolverInterface
+interface MetaFieldDirectiveResolverInterface extends FieldDirectiveResolverInterface
 {
     /**
      * Name for the directive arg to indicate which directives

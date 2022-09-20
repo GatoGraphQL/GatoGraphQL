@@ -13,7 +13,7 @@ use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use PoPAPI\API\Schema\SchemaDefinition;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -111,11 +111,11 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                 if ($ofKinds = $fieldDataAccessor->getValue('ofKinds')) {
                     $ofTypeFieldDirectiveResolvers = array_filter(
                         $this->getDirectiveRegistry()->getFieldDirectiveResolvers(),
-                        fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
+                        fn (FieldDirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
                     );
                     // Calculate the directive IDs
                     $ofTypeDirectiveIDs = array_map(
-                        function (DirectiveResolverInterface $directiveResolver): string {
+                        function (FieldDirectiveResolverInterface $directiveResolver): string {
                             // To retrieve the ID, use the same method to calculate the ID
                             // used when creating a new Directive instance
                             // (which we can't do here, since it has side-effects)

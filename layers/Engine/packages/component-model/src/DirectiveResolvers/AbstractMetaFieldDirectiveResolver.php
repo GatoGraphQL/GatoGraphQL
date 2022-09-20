@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
@@ -23,7 +23,7 @@ use SplObjectStorage;
 
 abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirectiveResolver implements MetaFieldDirectiveResolverInterface
 {
-    /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
+    /** @var SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]> */
     protected SplObjectStorage $nestedDirectivePipelineData;
 
     public function isDirectiveEnabled(): bool
@@ -70,7 +70,7 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
 
     /**
      * @param FieldInterface[] $fields
-     * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>|null
+     * @return SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]>|null
      */
     protected function getNestedDirectivePipelineData(
         RelationalTypeResolverInterface $relationalTypeResolver,

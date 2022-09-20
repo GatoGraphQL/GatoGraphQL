@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelationalTypeResolverDecorator;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -63,7 +63,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
     /**
      * Provide the DirectiveResolvers that need the "validateIsUserLoggedIn" directive
      *
-     * @return DirectiveResolverInterface[]
+     * @return FieldDirectiveResolverInterface[]
      */
     protected function getFieldDirectiveResolvers(): array
     {

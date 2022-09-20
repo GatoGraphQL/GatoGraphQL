@@ -7,12 +7,12 @@ namespace PoP\AccessControl\Hooks;
 use PoP\Root\App;
 use PoP\AccessControl\Module;
 use PoP\AccessControl\ModuleConfiguration;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
 {
-    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $relationalTypeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $relationalTypeResolver, FieldDirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         /**
          * If not enabling individual control, then the parent case already deals with the general case
