@@ -67,16 +67,16 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
-            'listOfDates',
-            'listOfListsOfDates',
+            'dummyListOfDates',
+            'dummyListOfListsOfDates',
         ];
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'listOfDates' => $this->__('Dummy field that returns a list of dates: [Date]', 'dummy-schema'),
-            'listOfListsOfDates' => $this->__('Dummy field that returns a list of lists of dates: [[Date]]', 'dummy-schema'),
+            'dummyListOfDates' => $this->__('Dummy field that returns a list of dates: [Date]', 'dummy-schema'),
+            'dummyListOfListsOfDates' => $this->__('Dummy field that returns a list of lists of dates: [[Date]]', 'dummy-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -84,8 +84,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'listOfDates',
-            'listOfListsOfDates'
+            'dummyListOfDates',
+            'dummyListOfListsOfDates'
                 => $this->getDateTimeScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -95,8 +95,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'listOfDates',
-            'listOfListsOfDates'
+            'dummyListOfDates',
+            'dummyListOfListsOfDates'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -112,13 +112,13 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         /** @var WP_Post */
         $post = $object;
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'listOfDates':
+            case 'dummyListOfDates':
                 return [
                     new DateTime($post->post_date),
                     new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +1 day'))),
                     new DateTime(date('Y-m-d H:i:s', strtotime($post->post_date . ' +7 day'))),
                 ];
-            case 'listOfListsOfDates':
+            case 'dummyListOfListsOfDates':
                 return [
                     [
                         new DateTime($post->post_date),
