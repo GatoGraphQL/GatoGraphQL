@@ -132,8 +132,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldDataAccessor->getFieldName()) {
             case 'dummyListOfInts':
                 return [
-                    $post->comment_count,
                     $post->comment_count + 1,
+                    $post->comment_count,
                     $post->comment_count + 3,
                 ];
             case 'dummyListOfListsOfInts':
