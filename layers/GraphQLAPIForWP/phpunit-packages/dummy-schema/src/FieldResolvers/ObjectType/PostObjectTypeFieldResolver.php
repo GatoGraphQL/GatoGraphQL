@@ -13,6 +13,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use WP_Post;
@@ -22,6 +23,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?DateTimeScalarTypeResolver $dateTimeScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?FloatScalarTypeResolver $floatScalarTypeResolver = null;
 
     final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
@@ -50,6 +52,15 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setFloatScalarTypeResolver(FloatScalarTypeResolver $floatScalarTypeResolver): void
+    {
+        $this->floatScalarTypeResolver = $floatScalarTypeResolver;
+    }
+    final protected function getFloatScalarTypeResolver(): FloatScalarTypeResolver
+    {
+        /** @var FloatScalarTypeResolver */
+        return $this->floatScalarTypeResolver ??= $this->instanceManager->getInstance(FloatScalarTypeResolver::class);
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -69,6 +80,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return [
             'dummyListOfInts',
             'dummyListOfListsOfInts',
+            'dummyListOfFloats',
+            'dummyListOfListsOfFloats',
             'dummyListOfStrings',
             'dummyListOfListsOfStrings',
             'dummyListOfDates',
@@ -81,6 +94,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'dummyListOfInts' => $this->__('Dummy field that returns a list of integers: [Int]', 'dummy-schema'),
             'dummyListOfListsOfInts' => $this->__('Dummy field that returns a list of lists of integers: [[Int]]', 'dummy-schema'),
+            'dummyListOfFloats' => $this->__('Dummy field that returns a list of floats: [Float]', 'dummy-schema'),
+            'dummyListOfListsOfFloats' => $this->__('Dummy field that returns a list of lists of floats: [[Float]]', 'dummy-schema'),
             'dummyListOfStrings' => $this->__('Dummy field that returns a list of strings: [String]', 'dummy-schema'),
             'dummyListOfListsOfStrings' => $this->__('Dummy field that returns a list of lists of strings: [[String]]', 'dummy-schema'),
             'dummyListOfDates' => $this->__('Dummy field that returns a list of dates: [Date]', 'dummy-schema'),
@@ -95,6 +110,9 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'dummyListOfInts',
             'dummyListOfListsOfInts'
                 => $this->getIntScalarTypeResolver(),
+            'dummyListOfFloats',
+            'dummyListOfListsOfFloats'
+                => $this->getFloatScalarTypeResolver(),
             'dummyListOfStrings',
             'dummyListOfListsOfStrings'
                 => $this->getStringScalarTypeResolver(),
@@ -110,10 +128,12 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'dummyListOfInts',
+            'dummyListOfFloats',
             'dummyListOfStrings',
             'dummyListOfDates'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             'dummyListOfListsOfInts',
+            'dummyListOfListsOfFloats',
             'dummyListOfListsOfStrings',
             'dummyListOfListsOfDates'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -139,8 +159,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'dummyListOfListsOfInts':
                 return [
                     [
-                        $post->comment_count,
                         $post->comment_count + 1,
+                        $post->comment_count,
                         $post->comment_count + 3,
                     ],
                     [
@@ -149,6 +169,27 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     ],
                     [
                         $post->comment_count + 33,
+                    ],
+                ];
+            case 'dummyListOfFloats':
+                return [
+                    $post->comment_count + 1.5,
+                    $post->comment_count + 0.5,
+                    $post->comment_count + 3.5,
+                ];
+            case 'dummyListOfListsOfFloats':
+                return [
+                    [
+                        $post->comment_count + 1.5,
+                        $post->comment_count + 0.5,
+                        $post->comment_count + 3.5,
+                    ],
+                    [
+                        $post->comment_count + 7.5,
+                        $post->comment_count + 13.5,
+                    ],
+                    [
+                        $post->comment_count + 33.5,
                     ],
                 ];
             case 'dummyListOfStrings':
