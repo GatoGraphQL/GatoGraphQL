@@ -178,7 +178,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
         }
 
         // If the value is an array, then serialize each element to the item type
-        $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+        $fieldLeafOutputTypeIsArray = $fieldLeafOutputTypeIsArrayOfArrays || ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
         if ($fieldLeafOutputTypeIsArray) {
             return array_values(array_map(
                 fn (mixed $arrayValueElem) => $arrayValueElem === null ? null : $fieldLeafOutputTypeResolver->serialize($arrayValueElem),
