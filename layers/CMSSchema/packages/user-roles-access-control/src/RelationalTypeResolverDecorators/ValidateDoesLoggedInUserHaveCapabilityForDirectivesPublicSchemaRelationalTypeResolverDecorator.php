@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
+use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver;
 use PoPCMSSchema\UserRolesAccessControl\Services\AccessControlGroups;
 
 class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
     use ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait;
 
-    private ?ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver = null;
+    private ?ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver = null;
 
-    final public function setValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver(ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver): void
+    final public function setValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver(ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver): void
     {
-        $this->validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver = $validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver;
+        $this->validateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver = $validateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver;
     }
-    final protected function getValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver
+    final protected function getValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver
     {
-        /** @var ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver */
-        return $this->validateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver::class);
+        /** @var ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver */
+        return $this->validateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver::class);
     }
 
     /**
@@ -33,8 +33,8 @@ class ValidateDoesLoggedInUserHaveCapabilityForDirectivesPublicSchemaRelationalT
         return $this->getAccessControlManager()->getEntriesForDirectives(AccessControlGroups::CAPABILITIES);
     }
 
-    protected function getValidateCapabilityDirectiveResolver(): DirectiveResolverInterface
+    protected function getValidateCapabilityFieldDirectiveResolver(): FieldDirectiveResolverInterface
     {
-        return $this->getValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesDirectiveResolver();
+        return $this->getValidateDoesLoggedInUserHaveAnyCapabilityForDirectivesFieldDirectiveResolver();
     }
 }

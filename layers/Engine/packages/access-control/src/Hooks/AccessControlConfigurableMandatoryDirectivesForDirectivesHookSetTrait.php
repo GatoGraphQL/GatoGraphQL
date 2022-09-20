@@ -7,12 +7,12 @@ namespace PoP\AccessControl\Hooks;
 use PoP\Root\App;
 use PoP\AccessControl\Module;
 use PoP\AccessControl\ModuleConfiguration;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
 {
-    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $relationalTypeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $relationalTypeResolver, FieldDirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         /**
          * If not enabling individual control, then the parent case already deals with the general case
@@ -28,10 +28,10 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
          * If there is any entry for this directive resolver, after filtering, then enable it
          * Otherwise, exit by returning the original hook value
          */
-        $ancestorDirectiveResolverClasses = [];
+        $ancestorFieldDirectiveResolverClasses = [];
         $directiveResolverClass = get_class($directiveResolver);
         do {
-            $ancestorDirectiveResolverClasses[] = $directiveResolverClass;
+            $ancestorFieldDirectiveResolverClasses[] = $directiveResolverClass;
             $directiveResolverClass = get_parent_class($directiveResolverClass);
         } while ($directiveResolverClass !== false);
         $entries = $this->getEntries();
@@ -39,7 +39,7 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
             /**
              * If there is any entry for this directive, then continue the normal execution: that of the parent
              */
-            if (in_array($entry[0], $ancestorDirectiveResolverClasses)) {
+            if (in_array($entry[0], $ancestorFieldDirectiveResolverClasses)) {
                 return parent::maybeFilterDirectiveName($include, $relationalTypeResolver, $directiveResolver, $directiveName);
             }
         }

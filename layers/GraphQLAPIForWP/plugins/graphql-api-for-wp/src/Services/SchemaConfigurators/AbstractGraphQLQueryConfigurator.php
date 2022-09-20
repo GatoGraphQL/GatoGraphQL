@@ -137,7 +137,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initDirectiveNameClasses(): void
     {
-        $directiveResolvers = $this->getDirectiveRegistry()->getDirectiveResolvers();
+        $directiveResolvers = $this->getDirectiveRegistry()->getFieldDirectiveResolvers();
         // For each class, obtain its directive name. Notice that different directives
         // can have the same name (eg: @translate as implemented for Google and Azure),
         // then the mapping goes from name to list of resolvers
@@ -198,9 +198,9 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         $directiveNameClasses = $this->getDirectiveNameClasses();
         // Obtain the directive resolver class from the directive name.
         // If more than one resolver has the same directive name, add all of them
-        if ($selectedDirectiveResolverClasses = $directiveNameClasses[$selectedDirective] ?? null) {
+        if ($selectedFieldDirectiveResolverClasses = $directiveNameClasses[$selectedDirective] ?? null) {
             $entriesForDirective = [];
-            foreach ($selectedDirectiveResolverClasses as $directiveResolverClass) {
+            foreach ($selectedFieldDirectiveResolverClasses as $directiveResolverClass) {
                 $entriesForDirective[] = [$directiveResolverClass, $value];
             }
             return $entriesForDirective;

@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoPCMSSchema\UserStateAccessControl\ConfigurationEntries\UserStates;
-use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
+use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver;
 
 trait ValidateUserLoggedInForDirectivesRelationalTypeResolverDecoratorTrait
 {
-    abstract protected function getValidateIsUserLoggedInForDirectivesDirectiveResolver(): ValidateIsUserLoggedInForDirectivesDirectiveResolver;
+    abstract protected function getValidateIsUserLoggedInForDirectivesFieldDirectiveResolver(): ValidateIsUserLoggedInForDirectivesFieldDirectiveResolver;
 
     protected function getRequiredEntryValue(): ?string
     {
         return UserStates::IN;
     }
-    protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface
+    protected function getValidateUserStateFieldDirectiveResolver(): FieldDirectiveResolverInterface
     {
-        return $this->getValidateIsUserLoggedInForDirectivesDirectiveResolver();
+        return $this->getValidateIsUserLoggedInForDirectivesFieldDirectiveResolver();
     }
 }

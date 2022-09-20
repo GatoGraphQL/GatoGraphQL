@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\Root\Instances\InstanceManagerInterface;
 
 trait ConfigurableMandatoryDirectivesForDirectivesTrait
@@ -47,25 +47,25 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     /**
      * Affected directives
      *
-     * @return DirectiveResolverInterface[]
+     * @return FieldDirectiveResolverInterface[]
      */
-    final protected function getDirectiveResolvers(): array
+    final protected function getFieldDirectiveResolvers(): array
     {
         return array_map(
-            function (string $directiveResolverClass): DirectiveResolverInterface {
-                /** @var DirectiveResolverInterface */
+            function (string $directiveResolverClass): FieldDirectiveResolverInterface {
+                /** @var FieldDirectiveResolverInterface */
                 return $this->getInstanceManager()->getInstance($directiveResolverClass);
             },
-            $this->getDirectiveResolverClasses()
+            $this->getFieldDirectiveResolverClasses()
         );
     }
 
     /**
      * Remove directiveName "translate" if the user is not logged in
      *
-     * @return array<class-string<DirectiveResolverInterface>>
+     * @return array<class-string<FieldDirectiveResolverInterface>>
      */
-    protected function getDirectiveResolverClasses(): array
+    protected function getFieldDirectiveResolverClasses(): array
     {
         // Obtain all entries for the current combination of typeResolver/fieldName
         return array_values(array_unique(array_map(

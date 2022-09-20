@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ExtendedSpec\Parser\Ast;
 
-use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -27,21 +27,21 @@ class Document extends AbstractDocument
 
     protected function isDynamicVariableDefinerDirective(Directive $directive): bool
     {
-        return $this->getDynamicVariableDefinerDirectiveResolver($directive) !== null;
+        return $this->getDynamicVariableDefinerFieldDirectiveResolver($directive) !== null;
     }
 
-    protected function getDynamicVariableDefinerDirectiveResolver(Directive $directive): ?DynamicVariableDefinerDirectiveResolverInterface
+    protected function getDynamicVariableDefinerFieldDirectiveResolver(Directive $directive): ?DynamicVariableDefinerFieldDirectiveResolverInterface
     {
-        return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerDirectiveResolver($directive->getName());
+        return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerFieldDirectiveResolver($directive->getName());
     }
 
     protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument
     {
-        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive);
-        if ($dynamicVariableDefinerDirectiveResolver === null) {
+        $dynamicVariableDefinerFieldDirectiveResolver = $this->getDynamicVariableDefinerFieldDirectiveResolver($directive);
+        if ($dynamicVariableDefinerFieldDirectiveResolver === null) {
             return null;
         }
-        $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
+        $exportUnderVariableNameArgumentName = $dynamicVariableDefinerFieldDirectiveResolver->getExportUnderVariableNameArgumentName();
         return $directive->getArgument($exportUnderVariableNameArgumentName);
     }
 }

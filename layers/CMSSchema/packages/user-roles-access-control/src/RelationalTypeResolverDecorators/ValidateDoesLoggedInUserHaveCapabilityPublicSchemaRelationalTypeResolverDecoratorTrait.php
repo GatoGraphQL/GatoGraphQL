@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -36,7 +36,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
         $capabilitiesKey = implode('|', $capabilities);
         if (!isset($this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey])) {
             $this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey] = new Directive(
-                $this->getValidateCapabilityDirectiveResolver()->getDirectiveName(),
+                $this->getValidateCapabilityFieldDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
                         'capabilities',
@@ -53,5 +53,5 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
         return $this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey];
     }
 
-    abstract protected function getValidateCapabilityDirectiveResolver(): DirectiveResolverInterface;
+    abstract protected function getValidateCapabilityFieldDirectiveResolver(): FieldDirectiveResolverInterface;
 }

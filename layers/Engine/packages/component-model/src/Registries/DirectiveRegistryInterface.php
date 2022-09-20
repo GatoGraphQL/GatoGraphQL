@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
 interface DirectiveRegistryInterface
 {
-    public function addDirectiveResolver(DirectiveResolverInterface $directiveResolver): void;
+    public function addFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void;
     /**
-     * @return array<string,DirectiveResolverInterface>
+     * @return array<string,FieldDirectiveResolverInterface>
      */
-    public function getDirectiveResolvers(): array;
-    public function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface;
+    public function getFieldDirectiveResolvers(): array;
+    public function getFieldDirectiveResolver(string $directiveName): ?FieldDirectiveResolverInterface;
 }

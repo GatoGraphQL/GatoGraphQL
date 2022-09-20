@@ -54,7 +54,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
             ];
             SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($pickerObjectTypeSchemaDefinition);
             $schemaDefinition[SchemaDefinition::POSSIBLE_TYPES][$pickerObjectTypeName] = $pickerObjectTypeSchemaDefinition;
-            $this->accessedTypeAndDirectiveResolvers[$pickerObjectTypeResolver::class] = $pickerObjectTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$pickerObjectTypeResolver::class] = $pickerObjectTypeResolver;
         }
     }
 
@@ -82,7 +82,7 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
             ];
             SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($interfaceTypeSchemaDefinition);
             $schemaDefinition[SchemaDefinition::INTERFACES][$interfaceTypeName] = $interfaceTypeSchemaDefinition;
-            $this->accessedTypeAndDirectiveResolvers[$implementedInterfaceTypeResolver::class] = $implementedInterfaceTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$implementedInterfaceTypeResolver::class] = $implementedInterfaceTypeResolver;
         }
     }
 
@@ -92,19 +92,19 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
     final protected function addDirectiveSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
         // Add the directives (non-global)
-        $schemaDirectiveResolvers = $this->unionTypeResolver->getSchemaDirectiveResolvers(false);
-        if ($schemaDirectiveResolvers === []) {
+        $schemaFieldDirectiveResolvers = $this->unionTypeResolver->getSchemaFieldDirectiveResolvers(false);
+        if ($schemaFieldDirectiveResolvers === []) {
             return;
         }
         $schemaDefinition[SchemaDefinition::DIRECTIVES] = [];
-        foreach ($schemaDirectiveResolvers as $directiveName => $directiveResolver) {
+        foreach ($schemaFieldDirectiveResolvers as $directiveName => $directiveResolver) {
             // Directives may not be directly visible in the schema
             if ($directiveResolver->skipExposingDirectiveInSchema($this->unionTypeResolver)) {
                 continue;
             }
             $schemaDefinition[SchemaDefinition::DIRECTIVES][] = $directiveName;
-            $this->accessedTypeAndDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
-            $this->accessedDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class] = $this->unionTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$directiveResolver::class] = $directiveResolver;
+            $this->accessedFieldDirectiveResolverClassRelationalTypeResolvers[$directiveResolver::class] = $this->unionTypeResolver;
         }
     }
 }

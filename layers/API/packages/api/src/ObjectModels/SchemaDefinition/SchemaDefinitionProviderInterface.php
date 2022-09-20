@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 interface SchemaDefinitionProviderInterface
@@ -14,7 +14,7 @@ interface SchemaDefinitionProviderInterface
      */
     public function getSchemaDefinition(): array;
     /**
-     * @return array<TypeResolverInterface|DirectiveResolverInterface>
+     * @return array<TypeResolverInterface|FieldDirectiveResolverInterface>
      */
-    public function getAccessedTypeAndDirectiveResolvers(): array;
+    public function getAccessedTypeAndFieldDirectiveResolvers(): array;
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\Hooks;
 
 use PoP\AccessControl\Hooks\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\Root\App;
 
 abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivateSchemaHookSet extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaHookSet
@@ -17,7 +17,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
 
     protected function enabled(): bool
     {
-        return parent::enabled() && !empty($this->getDirectiveResolverClasses());
+        return parent::enabled() && !empty($this->getFieldDirectiveResolverClasses());
     }
 
     /**
@@ -30,9 +30,9 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
     /**
      * Remove directiveName "translate" if the user is not logged in
      *
-     * @return array<class-string<DirectiveResolverInterface>>
+     * @return array<class-string<FieldDirectiveResolverInterface>>
      */
-    protected function getDirectiveResolverClasses(): array
+    protected function getFieldDirectiveResolverClasses(): array
     {
         if ($this->directiveResolverClasses === null) {
             $entries = $this->getEntries();
@@ -54,7 +54,7 @@ abstract class AbstractMaybeDisableDirectivesIfLoggedInUserDoesNotHaveItemPrivat
                 }
             }
         }
-        /** @var array<class-string<DirectiveResolverInterface>> */
+        /** @var array<class-string<FieldDirectiveResolverInterface>> */
         return $this->directiveResolverClasses;
     }
 }

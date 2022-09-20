@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
 
 interface DynamicVariableDefinerDirectiveRegistryInterface
 {
-    public function addDynamicVariableDefinerDirectiveResolver(DynamicVariableDefinerDirectiveResolverInterface $metaDirectiveResolver): void;
+    public function addDynamicVariableDefinerFieldDirectiveResolver(DynamicVariableDefinerFieldDirectiveResolverInterface $metaFieldDirectiveResolver): void;
     /**
-     * @return array<string,DynamicVariableDefinerDirectiveResolverInterface>
+     * @return array<string,DynamicVariableDefinerFieldDirectiveResolverInterface>
      */
-    public function getDynamicVariableDefinerDirectiveResolvers(): array;
-    public function getDynamicVariableDefinerDirectiveResolver(string $directiveName): ?DynamicVariableDefinerDirectiveResolverInterface;
+    public function getDynamicVariableDefinerFieldDirectiveResolvers(): array;
+    public function getDynamicVariableDefinerFieldDirectiveResolver(string $directiveName): ?DynamicVariableDefinerFieldDirectiveResolverInterface;
 }

@@ -11,7 +11,7 @@ class MonorepoArrowFnUnionTypeChainedRuleContainerConfigurationService extends A
         return [
             $this->rootDirectory . '/layers/Engine/packages/component-model/src/TypeResolvers/AbstractRelationalTypeResolver.php',
             $this->rootDirectory . '/layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php',
-            $this->rootDirectory . '/layers/Engine/packages/engine/src/DirectiveResolvers/FilterIDsSatisfyingConditionDirectiveResolverTrait.php',
+            $this->rootDirectory . '/layers/Engine/packages/engine/src/DirectiveResolvers/FilterIDsSatisfyingConditionFieldDirectiveResolverTrait.php',
             $this->rootDirectory . '/layers/CMSSchema/packages/menus/src/RelationalTypeDataLoaders/ObjectType/MenuItemTypeDataLoader.php',
             $this->rootDirectory . '/layers/CMSSchema/packages/menus/src/RelationalTypeDataLoaders/ObjectType/MenuTypeDataLoader.php',
             $this->rootDirectory . '/layers/CMSSchema/packages/user-avatars/src/RelationalTypeDataLoaders/ObjectType/UserAvatarTypeDataLoader.php',

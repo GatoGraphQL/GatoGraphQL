@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -70,7 +70,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      *
      * @param Directive[] $directives
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
-     * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
+     * @return SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]>
      */
     public function resolveDirectivesIntoPipelineData(
         array $directives,
@@ -81,7 +81,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     /**
      * Array of directive name => resolver
      *
-     * @return array<string,DirectiveResolverInterface>
+     * @return array<string,FieldDirectiveResolverInterface>
      */
-    public function getSchemaDirectiveResolvers(bool $global): array;
+    public function getSchemaFieldDirectiveResolvers(bool $global): array;
 }

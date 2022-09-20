@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 
@@ -26,7 +26,7 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
     {
         if ($this->validateUserStateDirective === null) {
             $this->validateUserStateDirective = new Directive(
-                $this->getValidateUserStateDirectiveResolver()->getDirectiveName(),
+                $this->getValidateUserStateFieldDirectiveResolver()->getDirectiveName(),
                 [],
                 ASTNodesFactory::getNonSpecificLocation()
             );
@@ -34,5 +34,5 @@ trait UserStateConfigurableAccessControlInPublicSchemaRelationalTypeResolverDeco
         return $this->validateUserStateDirective;
     }
 
-    abstract protected function getValidateUserStateDirectiveResolver(): DirectiveResolverInterface;
+    abstract protected function getValidateUserStateFieldDirectiveResolver(): FieldDirectiveResolverInterface;
 }

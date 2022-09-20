@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
 class DirectiveRegistry implements DirectiveRegistryInterface
 {
     /**
-     * @var array<string,DirectiveResolverInterface>
+     * @var array<string,FieldDirectiveResolverInterface>
      */
     protected array $directiveResolvers = [];
 
-    public function addDirectiveResolver(DirectiveResolverInterface $directiveResolver): void
+    public function addFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void
     {
         $this->directiveResolvers[$directiveResolver->getDirectiveName()] = $directiveResolver;
     }
 
     /**
-     * @return array<string,DirectiveResolverInterface>
+     * @return array<string,FieldDirectiveResolverInterface>
      */
-    public function getDirectiveResolvers(): array
+    public function getFieldDirectiveResolvers(): array
     {
         return $this->directiveResolvers;
     }
 
-    public function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
+    public function getFieldDirectiveResolver(string $directiveName): ?FieldDirectiveResolverInterface
     {
         return $this->directiveResolvers[$directiveName] ?? null;
     }

@@ -11,9 +11,9 @@ use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
-use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
@@ -30,9 +30,9 @@ use PoP\Root\App;
 abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver implements InterfaceTypeFieldResolverInterface
 {
     use AttachableExtensionTrait;
-    use WithVersionConstraintFieldOrDirectiveResolverTrait;
+    use WithVersionConstraintFieldOrFieldDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
-    use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
+    use CheckDangerouslyNonSpecificScalarTypeFieldOrFieldDirectiveResolverTrait;
 
     /** @var array<string,array<string,mixed>> */
     protected array $schemaDefinitionForFieldCache = [];

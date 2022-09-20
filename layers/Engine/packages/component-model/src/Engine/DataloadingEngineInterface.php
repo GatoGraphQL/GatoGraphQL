@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
 interface DataloadingEngineInterface
 {
-    public function addMandatoryDirectiveResolver(DirectiveResolverInterface $directiveResolver): void;
+    public function addMandatoryFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void;
     /**
-     * @return DirectiveResolverInterface[]
+     * @return FieldDirectiveResolverInterface[]
      */
-    public function getMandatoryDirectiveResolvers(): array;
+    public function getMandatoryFieldDirectiveResolvers(): array;
 }

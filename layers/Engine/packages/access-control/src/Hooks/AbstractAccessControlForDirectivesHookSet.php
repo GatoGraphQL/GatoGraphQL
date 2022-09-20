@@ -6,7 +6,7 @@ namespace PoP\AccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Services\AccessControlManagerInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\HookHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Hooks\AbstractAfterAppBootHookSet;
@@ -33,8 +33,8 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
         // If no directiveNames defined, apply to all of them
         if (
             $directiveNames = array_map(
-                fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->getDirectiveName(),
-                $this->getDirectiveResolvers()
+                fn (FieldDirectiveResolverInterface $directiveResolver) => $directiveResolver->getDirectiveName(),
+                $this->getFieldDirectiveResolvers()
             )
         ) {
             /** @var string[] $directiveNames */
@@ -64,7 +64,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
         return true;
     }
 
-    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $relationalTypeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    public function maybeFilterDirectiveName(bool $include, RelationalTypeResolverInterface $relationalTypeResolver, FieldDirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         // Because there may be several hooks chained, if any of them has already rejected the field, then already return that response
         if (!$include) {
@@ -76,14 +76,14 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
     /**
      * Affected directives
      *
-     * @return DirectiveResolverInterface[]
+     * @return FieldDirectiveResolverInterface[]
      */
-    abstract protected function getDirectiveResolvers(): array;
+    abstract protected function getFieldDirectiveResolvers(): array;
 
     /**
      * Decide if to remove the directiveNames
      */
-    protected function removeDirective(RelationalTypeResolverInterface $relationalTypeResolver, DirectiveResolverInterface $directiveResolver, string $directiveName): bool
+    protected function removeDirective(RelationalTypeResolverInterface $relationalTypeResolver, FieldDirectiveResolverInterface $directiveResolver, string $directiveName): bool
     {
         return true;
     }

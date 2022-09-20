@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorators;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForDirectivesTrait;
@@ -43,10 +43,10 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
              * Just to be on the safe side, also validate the instance is a directive
              */
             $directiveResolver = $this->getInstanceManager()->getInstance($directiveResolverClass);
-            if (!($directiveResolver instanceof DirectiveResolverInterface)) {
+            if (!($directiveResolver instanceof FieldDirectiveResolverInterface)) {
                 continue;
             }
-            /** @var DirectiveResolverInterface $directiveResolver */
+            /** @var FieldDirectiveResolverInterface $directiveResolver */
             $directiveName = $directiveResolver->getDirectiveName();
             $mandatoryDirectivesForDirectives[$directiveName] = $this->getMandatoryDirectives($entryValue);
         }

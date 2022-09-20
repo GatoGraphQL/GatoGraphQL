@@ -5,34 +5,34 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
-use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
-use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver;
+use PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers\ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver;
 use PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators\AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator;
 
 class GlobalValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator extends AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator
 {
-    private ?ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = null;
-    private ?ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver = null;
+    private ?ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver = null;
+    private ?ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver = null;
 
-    final public function setValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver): void
+    final public function setValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver(ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver): void
     {
-        $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleDirectiveResolver;
+        $this->validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver = $validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver;
     }
-    final protected function getValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver
+    final protected function getValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver
     {
-        /** @var ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver */
-        return $this->validateDoesLoggedInUserHaveAnyRoleDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver::class);
+        /** @var ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver */
+        return $this->validateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver::class);
     }
-    final public function setValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver): void
+    final public function setValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver(ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver $validateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver): void
     {
-        $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver = $validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver;
+        $this->validateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver = $validateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver;
     }
-    final protected function getValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver
+    final protected function getValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver(): ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver
     {
-        /** @var ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver */
-        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver::class);
+        /** @var ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver */
+        return $this->validateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver ??= $this->instanceManager->getInstance(ValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver::class);
     }
 
     /**
@@ -48,13 +48,13 @@ class GlobalValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDec
     /**
      * Provide the DirectiveResolvers that need the "validateIsUserLoggedIn" directive
      *
-     * @return DirectiveResolverInterface[]
+     * @return FieldDirectiveResolverInterface[]
      */
-    protected function getDirectiveResolvers(): array
+    protected function getFieldDirectiveResolvers(): array
     {
         return [
-            $this->getValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver(),
-            $this->getValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver(),
+            $this->getValidateDoesLoggedInUserHaveAnyRoleFieldDirectiveResolver(),
+            $this->getValidateDoesLoggedInUserHaveAnyCapabilityFieldDirectiveResolver(),
         ];
     }
 }

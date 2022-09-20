@@ -20,6 +20,6 @@ class RegisterMandatoryDirectiveServiceTagCompilerPass extends AbstractInjectSer
     }
     protected function getRegistryMethodCallName(): string
     {
-        return 'addMandatoryDirectiveResolver';
+        return 'addMandatoryFieldDirectiveResolver';
     }
 }

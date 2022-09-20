@@ -13,7 +13,7 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
     /**
      * @var array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
      */
-    protected array $accessedDirectiveResolverClassRelationalTypeResolvers = [];
+    protected array $accessedFieldDirectiveResolverClassRelationalTypeResolvers = [];
 
 
     public function __construct(
@@ -24,9 +24,9 @@ abstract class AbstractTypeSchemaDefinitionProvider extends AbstractSchemaDefini
     /**
      * @return array<string,RelationalTypeResolverInterface> Key: directive resolver class, Value: The Type Resolver Class which loads the directive
      */
-    final public function getAccessedDirectiveResolverClassRelationalTypeResolvers(): array
+    final public function getAccessedFieldDirectiveResolverClassRelationalTypeResolvers(): array
     {
-        return $this->accessedDirectiveResolverClassRelationalTypeResolvers;
+        return $this->accessedFieldDirectiveResolverClassRelationalTypeResolvers;
     }
 
     /**

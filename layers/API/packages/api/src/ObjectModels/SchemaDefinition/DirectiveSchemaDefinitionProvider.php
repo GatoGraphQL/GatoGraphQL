@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -18,7 +18,7 @@ use PoPAPI\API\Schema\SchemaDefinitionHelpers;
 class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider implements SchemaDefinitionProviderInterface
 {
     public function __construct(
-        protected DirectiveResolverInterface $directiveResolver,
+        protected FieldDirectiveResolverInterface $directiveResolver,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
     ) {
     }
@@ -54,7 +54,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
                 continue;
             }
 
-            $this->accessedTypeAndDirectiveResolvers[$directiveArgTypeResolver::class] = $directiveArgTypeResolver;
+            $this->accessedTypeAndFieldDirectiveResolvers[$directiveArgTypeResolver::class] = $directiveArgTypeResolver;
             SchemaDefinitionHelpers::replaceTypeResolverWithTypeProperties($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);
         }
 

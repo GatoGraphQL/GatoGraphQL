@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl\ConditionalOnModule\CacheControl\RelationalTypeResolverDecorators;
 
-use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInForDirectivesDirectiveResolver;
+use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserNotLoggedInForDirectivesFieldDirectiveResolver;
 use PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators\ValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait;
 
 class ValidateUserNotLoggedInForDirectivesPrivateSchemaRelationalTypeResolverDecorator extends AbstractNoCacheConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator
 {
     use ValidateUserNotLoggedInForDirectivesRelationalTypeResolverDecoratorTrait;
 
-    private ?ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver = null;
+    private ?ValidateIsUserNotLoggedInForDirectivesFieldDirectiveResolver $validateIsUserNotLoggedInForDirectivesFieldDirectiveResolver = null;
 
-    final public function setValidateIsUserNotLoggedInForDirectivesDirectiveResolver(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver $validateIsUserNotLoggedInForDirectivesDirectiveResolver): void
+    final public function setValidateIsUserNotLoggedInForDirectivesFieldDirectiveResolver(ValidateIsUserNotLoggedInForDirectivesFieldDirectiveResolver $validateIsUserNotLoggedInForDirectivesFieldDirectiveResolver): void
     {
-        $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver = $validateIsUserNotLoggedInForDirectivesDirectiveResolver;
+        $this->validateIsUserNotLoggedInForDirectivesFieldDirectiveResolver = $validateIsUserNotLoggedInForDirectivesFieldDirectiveResolver;
     }
-    final protected function getValidateIsUserNotLoggedInForDirectivesDirectiveResolver(): ValidateIsUserNotLoggedInForDirectivesDirectiveResolver
+    final protected function getValidateIsUserNotLoggedInForDirectivesFieldDirectiveResolver(): ValidateIsUserNotLoggedInForDirectivesFieldDirectiveResolver
     {
-        /** @var ValidateIsUserNotLoggedInForDirectivesDirectiveResolver */
-        return $this->validateIsUserNotLoggedInForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesDirectiveResolver::class);
+        /** @var ValidateIsUserNotLoggedInForDirectivesFieldDirectiveResolver */
+        return $this->validateIsUserNotLoggedInForDirectivesFieldDirectiveResolver ??= $this->instanceManager->getInstance(ValidateIsUserNotLoggedInForDirectivesFieldDirectiveResolver::class);
     }
 }

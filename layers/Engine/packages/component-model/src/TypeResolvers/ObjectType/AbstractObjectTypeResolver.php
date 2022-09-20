@@ -28,7 +28,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\InputObjectSubpropertyFieldDataAccessor;
-use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\ObjectTypeOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -51,7 +51,7 @@ use stdClass;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
-    use ObjectTypeOrDirectiveResolverTrait;
+    use ObjectTypeOrFieldDirectiveResolverTrait;
 
     /**
      * Cache of which objectTypeFieldResolvers will process the given field

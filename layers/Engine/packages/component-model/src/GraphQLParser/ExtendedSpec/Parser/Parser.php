@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerDirectiveResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\MetaFieldDirectiveResolverInterface;
 use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
@@ -55,21 +55,21 @@ class Parser extends AbstractParser
 
     protected function isMetaDirective(string $directiveName): bool
     {
-        $metaDirectiveResolver = $this->getMetaDirectiveResolver($directiveName);
-        return $metaDirectiveResolver !== null;
+        $metaFieldDirectiveResolver = $this->getMetaFieldDirectiveResolver($directiveName);
+        return $metaFieldDirectiveResolver !== null;
     }
 
-    protected function getMetaDirectiveResolver(string $directiveName): ?MetaDirectiveResolverInterface
+    protected function getMetaFieldDirectiveResolver(string $directiveName): ?MetaFieldDirectiveResolverInterface
     {
-        return $this->getMetaDirectiveRegistry()->getMetaDirectiveResolver($directiveName);
+        return $this->getMetaDirectiveRegistry()->getMetaFieldDirectiveResolver($directiveName);
     }
 
     protected function getAffectDirectivesUnderPosArgument(
         Directive $directive,
     ): ?Argument {
-        /** @var MetaDirectiveResolverInterface */
-        $metaDirectiveResolver = $this->getMetaDirectiveResolver($directive->getName());
-        $affectDirectivesUnderPosArgumentName = $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentName();
+        /** @var MetaFieldDirectiveResolverInterface */
+        $metaFieldDirectiveResolver = $this->getMetaFieldDirectiveResolver($directive->getName());
+        $affectDirectivesUnderPosArgumentName = $metaFieldDirectiveResolver->getAffectDirectivesUnderPosArgumentName();
         foreach ($directive->getArguments() as $argument) {
             if ($argument->getName() !== $affectDirectivesUnderPosArgumentName) {
                 continue;
@@ -85,9 +85,9 @@ class Parser extends AbstractParser
     protected function getAffectDirectivesUnderPosArgumentDefaultValue(
         Directive $directive,
     ): array {
-        /** @var MetaDirectiveResolverInterface */
-        $metaDirectiveResolver = $this->getMetaDirectiveResolver($directive->getName());
-        return $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
+        /** @var MetaFieldDirectiveResolverInterface */
+        $metaFieldDirectiveResolver = $this->getMetaFieldDirectiveResolver($directive->getName());
+        return $metaFieldDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
     }
 
     /**
@@ -104,34 +104,34 @@ class Parser extends AbstractParser
         );
     }
 
-    protected function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
+    protected function getFieldDirectiveResolver(string $directiveName): ?FieldDirectiveResolverInterface
     {
-        return $this->getDirectiveRegistry()->getDirectiveResolver($directiveName);
+        return $this->getDirectiveRegistry()->getFieldDirectiveResolver($directiveName);
     }
 
     protected function isDynamicVariableDefinerDirective(Directive $directive): bool
     {
-        return $this->getDynamicVariableDefinerDirectiveResolver($directive) !== null;
+        return $this->getDynamicVariableDefinerFieldDirectiveResolver($directive) !== null;
     }
 
-    protected function getDynamicVariableDefinerDirectiveResolver(Directive $directive): ?DynamicVariableDefinerDirectiveResolverInterface
+    protected function getDynamicVariableDefinerFieldDirectiveResolver(Directive $directive): ?DynamicVariableDefinerFieldDirectiveResolverInterface
     {
-        return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerDirectiveResolver($directive->getName());
+        return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerFieldDirectiveResolver($directive->getName());
     }
 
     protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument
     {
-        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive);
-        if ($dynamicVariableDefinerDirectiveResolver === null) {
+        $dynamicVariableDefinerFieldDirectiveResolver = $this->getDynamicVariableDefinerFieldDirectiveResolver($directive);
+        if ($dynamicVariableDefinerFieldDirectiveResolver === null) {
             return null;
         }
-        $exportUnderVariableNameArgumentName = $dynamicVariableDefinerDirectiveResolver->getExportUnderVariableNameArgumentName();
+        $exportUnderVariableNameArgumentName = $dynamicVariableDefinerFieldDirectiveResolver->getExportUnderVariableNameArgumentName();
         return $directive->getArgument($exportUnderVariableNameArgumentName);
     }
 
     protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string
     {
-        $directiveResolver = $this->getDirectiveResolver($directive->getName());
+        $directiveResolver = $this->getFieldDirectiveResolver($directive->getName());
         if ($directiveResolver === null) {
             return null;
         }
@@ -140,10 +140,10 @@ class Parser extends AbstractParser
 
     protected function mustResolveDynamicVariableOnObject(Directive $directive): ?bool
     {
-        $dynamicVariableDefinerDirectiveResolver = $this->getDynamicVariableDefinerDirectiveResolver($directive);
-        if ($dynamicVariableDefinerDirectiveResolver === null) {
+        $dynamicVariableDefinerFieldDirectiveResolver = $this->getDynamicVariableDefinerFieldDirectiveResolver($directive);
+        if ($dynamicVariableDefinerFieldDirectiveResolver === null) {
             return null;
         }
-        return $dynamicVariableDefinerDirectiveResolver->mustResolveDynamicVariableOnObject();
+        return $dynamicVariableDefinerFieldDirectiveResolver->mustResolveDynamicVariableOnObject();
     }
 }
