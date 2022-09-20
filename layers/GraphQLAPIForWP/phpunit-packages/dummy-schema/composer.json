@@ -1,5 +1,28 @@
 {
-    "name": "phpunit-for-graphql-api/graphql-api-for-wp",
+    "name": "phpunit-for-graphql-api/dummy-schema",
+    "type": "library",
+    "description": "Dummy schema resolvers for testing with PHPUnit",
+    "keywords": ["GraphQL", "PHP", "PoP", "WP", "dummy", "schema"],
+    "homepage": "https://github.com/PHPUnitForGraphQLAPI/dummy-schema",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "pop-wp-schema/posts": "^0.9"
+    },
+    "require-dev": {
+        "johnpbloch/wordpress": ">=5.5",
+        "phpunit/phpunit": "^9.5",
+        "rector/rector": "^0.14",
+        "squizlabs/php_codesniffer": "^3.6",
+        "szepeviktor/phpstan-wordpress": "^1.0"
+    },
     "conflict": {
         "getpop/componentrouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -15,6 +38,7 @@
         "getpop/routing": "<0.8.9",
         "getpop/access-control": "<0.8.9",
         "getpop/definitions": "<0.8.9",
+        "getpop/engine": "<0.8.9",
         "getpop/engine-wp-bootloader": "<0.8.9",
         "getpop/cache-control": "<0.8.9",
         "pop-api/api-rest": "<0.8.9",
@@ -28,7 +52,6 @@
         "pop-cms-schema/settings": "<0.8.9",
         "pop-cms-schema/user-state-access-control": "<0.8.9",
         "pop-cms-schema/comments": "<0.8.9",
-        "pop-cms-schema/users-wp": "<0.8.9",
         "pop-cms-schema/custompostmeta-wp": "<0.8.9",
         "pop-cms-schema/custompost-mutations": "<0.8.9",
         "pop-cms-schema/post-tag-mutations-wp": "<0.8.9",
@@ -55,7 +78,6 @@
         "pop-cms-schema/user-state-mutations-wp": "<0.8.9",
         "pop-cms-schema/user-roles": "<0.8.9",
         "pop-cms-schema/usermeta": "<0.8.9",
-        "pop-cms-schema/queriedobject-wp": "<0.8.9",
         "pop-cms-schema/user-avatars-wp": "<0.8.9",
         "pop-cms-schema/taxonomyquery-wp": "<0.8.9",
         "pop-cms-schema/customposts": "<0.8.9",
@@ -69,24 +91,19 @@
         "pop-cms-schema/post-tags-wp": "<0.8.9",
         "pop-cms-schema/custompost-categories-wp": "<0.8.9",
         "pop-cms-schema/settings-wp": "<0.8.9",
-        "pop-cms-schema/users": "<0.8.9",
         "pop-cms-schema/queriedobject": "<0.8.9",
         "pop-cms-schema/customposts-wp": "<0.8.9",
         "pop-cms-schema/taxonomies-wp": "<0.8.9",
         "pop-cms-schema/comment-mutations-wp": "<0.8.9",
         "pop-cms-schema/custompostmedia-wp": "<0.8.9",
-        "pop-cms-schema/menus": "<0.8.9",
         "pop-wp-schema/block-metadata-for-wp": "<0.8.9",
         "pop-cms-schema/post-categories": "<0.8.9",
-        "pop-cms-schema/pages-wp": "<0.8.9",
         "pop-cms-schema/custompostmedia-mutations-wp": "<0.8.9",
         "pop-cms-schema/user-roles-acl": "<0.8.9",
         "pop-cms-schema/user-avatars": "<0.8.9",
-        "pop-cms-schema/comments-wp": "<0.8.9",
+        "pop-cms-schema/comments-wp": "<0.8.8",
         "pop-cms-schema/generic-customposts": "<0.8.9",
         "pop-cms-schema/metaquery-wp": "<0.8.9",
-        "pop-cms-schema/pages": "<0.8.9",
-        "pop-cms-schema/menus-wp": "<0.8.9",
         "pop-cms-schema/custompostmeta": "<0.8.9",
         "pop-cms-schema/categories": "<0.8.9",
         "pop-cms-schema/taxonomies": "<0.8.9",
@@ -103,6 +120,7 @@
         "getpop/graphql-parser": "<0.8.9",
         "graphql-by-pop/graphql-server": "<0.8.9",
         "graphql-api/external-dependency-wrappers": "<0.8.9",
+        "graphql-api/markdown-convertor": "<0.8.9",
         "graphql-api/extension-demo": "<0.8.9",
         "graphql-api/graphql-api-for-wp": "<0.8.9",
         "getpop/definitions-emoji": "<0.8.9",
@@ -138,56 +156,29 @@
         "pop-sites-wassup/share-mutations": "<0.8.9",
         "pop-sites-wassup/system-mutations": "<0.8.9",
         "pop-sites-wassup/custompostlink-mutations": "<0.8.9",
+        "pop-cms-schema/users-wp": "<0.8.9",
+        "pop-cms-schema/queriedobject-wp": "<0.8.9",
+        "pop-cms-schema/users": "<0.8.9",
+        "pop-cms-schema/menus": "<0.8.9",
+        "pop-cms-schema/pages-wp": "<0.8.9",
+        "pop-cms-schema/pages": "<0.8.9",
+        "pop-cms-schema/menus-wp": "<0.8.9",
         "pop-wp-schema/posts": "<0.8.9",
-        "pop-wp-schema/customposts": "<0.8.9",
         "pop-wp-schema/users": "<0.8.9",
         "pop-wp-schema/menus": "<0.8.9",
         "pop-wp-schema/pages": "<0.8.9",
         "pop-wp-schema/media": "<0.8.9",
         "pop-cms-schema/postmedia-mutations": "<0.8.9",
-        "pop-wp-schema/comments": "<0.8.9",
-        "pop-wp-schema/schema-commons": "<0.8.9"
-    },
-    "type": "library",
-    "description": "Mock the WordPress schema when running PHPUnit tests",
-    "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit", "API"],
-    "homepage": "https://github.com/PHPUnitForGraphQLAPI/graphql-api-for-wp",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Leonardo Losoviz",
-            "email": "leo@getpop.org",
-            "homepage": "https://getpop.org"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "phpunit-for-graphql-api/dummy-schema": "^0.9",
-        "phpunit-for-graphql-api/wpfaker-schema": "^0.9",
-        "phpunit-for-graphql-api/webserver-requests": "^0.9",
-        "pop-wp-schema/users": "^0.9",
-        "pop-wp-schema/pages": "^0.9",
-        "pop-wp-schema/posts": "^0.9",
-        "pop-wp-schema/comments": "^0.9",
-        "pop-cms-schema/comment-mutations-wp": "^0.9",
-        "pop-cms-schema/post-categories-wp": "^0.9",
-        "pop-cms-schema/post-tags-wp": "^0.9",
-        "pop-cms-schema/user-state-mutations-wp": "^0.9"
-    },
-    "require-dev": {
-        "phpstan/phpstan": "^1.8",
-        "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.14",
-        "squizlabs/php_codesniffer": "^3.6"
+        "pop-wp-schema/customposts": "<0.8.9"
     },
     "autoload": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "src"
+            "PHPUnitForGraphQLAPI\\DummySchema\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "tests"
+            "PHPUnitForGraphQLAPI\\DummySchema\\": "tests"
         }
     },
     "scripts": {
@@ -197,6 +188,7 @@
         "analyse": "phpstan analyse"
     },
     "extra": {
+        "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
             "dev-master": "0.9-dev"
         }
