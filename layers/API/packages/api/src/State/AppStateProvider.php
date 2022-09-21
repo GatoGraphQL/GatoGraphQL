@@ -35,11 +35,8 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['does-api-query-have-errors'] = null;
 
         // Passing the query via URL param?
-        /** @var ComponentModelModuleConfiguration */
-        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
-        $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
-        $state['operation-name'] = EngineRequest::getOperationName($enableModifyingEngineBehaviorViaRequest);
+        $state['query'] = EngineRequest::getQuery();
+        $state['operation-name'] = EngineRequest::getOperationName();
     }
 
     /**
