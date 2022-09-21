@@ -17,27 +17,15 @@ class PassQueryViaURLParamQueryExecutionFixtureWebserverRequestTest extends Abst
     {
         /**
          * Add the query in the endpoint. If no query is passed via the body,
-         * then this query will be executed.
+         * eg: because of executing via GET (instead of PSOT), then
+         * this query will be executed.
          */
         return 'graphql/website/?query={ self { id } }';
     }
 
-    /**
-     * Do not send the GraphQL query in the body
-     *
-     * @param array<string,mixed> $providerItems
-     * @return array<string,mixed>
-     */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
-    {
-        // query. null => no passing GraphQL query in body
-        $providerItems['query-wont-be-executed'][4] = '';
-        return $providerItems;
-    }
-
     protected function getMethod(): string
     {
-        if ($this->dataName() === 'query-wont-be-executed') {
+        if ($this->dataName() === 'via-get-url-param-query-will-be-executed') {
             return 'GET';
         }
         return parent::getMethod();
