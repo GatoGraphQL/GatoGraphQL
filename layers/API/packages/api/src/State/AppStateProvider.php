@@ -11,8 +11,6 @@ use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
