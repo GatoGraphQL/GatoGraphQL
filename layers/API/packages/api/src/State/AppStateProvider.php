@@ -34,8 +34,16 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['document-object-resolved-field-value-referenced-fields'] = [];
         $state['does-api-query-have-errors'] = null;
 
-        // Passing the query via URL param?
+        /**
+         * Passing the query via URL param? Eg: ?query={ posts { id } }
+         */
         $state['query'] = EngineRequest::getQuery();
+        /**
+         * Passing the operationName via URL param? Eg: ?operationName=One.
+         *
+         * This is needed when using Multiple Query Execution
+         * in a Persisted Query, to indicate which operation to execute.
+         */
         $state['operation-name'] = EngineRequest::getOperationName();
     }
 
