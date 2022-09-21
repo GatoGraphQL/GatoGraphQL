@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
+use WP_Post;
+
 class EditorHelpers
 {
     /**
@@ -50,7 +52,9 @@ class EditorHelpers
     }
 
     /**
-     * Get the post ID currently being edited in the editor
+     * Get the post ID currently being edited in the editor,
+     * whether on the Edit Post screen (post.php), or on the
+     * New Post screen (post-new.php)
      *
      * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
      */
@@ -59,10 +63,30 @@ class EditorHelpers
         if (!\is_admin()) {
             return null;
         }
+        /** @global string */
         global $pagenow;
-        if ($pagenow != 'post.php') {
+        if ($pagenow !== 'post.php' && $pagenow !== 'post-new.php') {
             return null;
         }
+
+        /**
+         * If in the New Post screen, the global $post, with status
+         * "auto_draft", will already have been created.
+         *
+         * Retrieve and use this ID already, so that when creating
+         * a Persisted Query, the GraphiQL client already has the
+         * right endpoint URL, with the right configuration based
+         * on the chosen Schema Configuration.
+         */
+        if ($pagenow === 'post-new.php') {
+            /** @global WP_Post */
+            global $post;
+            return $post->ID;
+        }
+
+        /**
+         * We are in the Edit Post screen
+         */
         $post_id = null;
         if (isset($_GET['post']) && isset($_POST['post_ID']) && (int) $_GET['post'] !== (int) $_POST['post_ID']) {
             // Do nothing
