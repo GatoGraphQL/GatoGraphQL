@@ -11,8 +11,6 @@ use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
@@ -34,12 +32,17 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['document-object-resolved-field-value-referenced-fields'] = [];
         $state['does-api-query-have-errors'] = null;
 
-        // Passing the query via URL param?
-        /** @var ComponentModelModuleConfiguration */
-        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
-        $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
-        $state['operation-name'] = EngineRequest::getOperationName($enableModifyingEngineBehaviorViaRequest);
+        /**
+         * Passing the query via URL param? Eg: ?query={ posts { id } }
+         */
+        $state['query'] = EngineRequest::getQuery();
+        /**
+         * Passing the operationName via URL param? Eg: ?operationName=One.
+         *
+         * This is needed when using Multiple Query Execution
+         * in a Persisted Query, to indicate which operation to execute.
+         */
+        $state['operation-name'] = EngineRequest::getOperationName();
     }
 
     /**
