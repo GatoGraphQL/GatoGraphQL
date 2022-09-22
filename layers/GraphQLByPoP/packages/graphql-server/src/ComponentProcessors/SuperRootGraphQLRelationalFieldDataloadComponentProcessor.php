@@ -11,7 +11,7 @@ use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\App;
 
-class SuperRootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
+class SuperRootGraphQLRelationalFieldDataloadComponentProcessor extends AbstractGraphQLRelationalFieldDataloadComponentProcessor
 {
     public final const COMPONENT_DATALOAD_RELATIONALFIELDS_SUPERROOT = 'dataload-relationalfields-superroot';
 

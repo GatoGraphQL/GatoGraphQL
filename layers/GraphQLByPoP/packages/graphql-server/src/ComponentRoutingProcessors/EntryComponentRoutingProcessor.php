@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors;
 
-use GraphQLByPoP\GraphQLServer\ComponentProcessors\SuperRootRelationalFieldDataloadComponentProcessor;
+use GraphQLByPoP\GraphQLServer\ComponentProcessors\SuperRootGraphQLRelationalFieldDataloadComponentProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
@@ -34,8 +34,8 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
 
         $ret[RequestNature::QUERY_ROOT][] = [
             'component' => new Component(
-                SuperRootRelationalFieldDataloadComponentProcessor::class,
-                SuperRootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_SUPERROOT
+                SuperRootGraphQLRelationalFieldDataloadComponentProcessor::class,
+                SuperRootGraphQLRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_SUPERROOT
             ),
             'conditions' => [
                 'scheme' => APISchemes::API,
