@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\QueryParsing;
 
+use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
@@ -11,7 +12,7 @@ use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 
 class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
 {
@@ -27,7 +28,7 @@ class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
         ?string $operationName,
     ): GraphQLQueryParsingPayload {
         $parser = $this->createParser();
-        $document = $parser->parse($query);
+        $document = $this->parseQuery($parser, $query);
         $executableDocument = new ExecutableDocument(
             $document,
             new Context($operationName, $variableValues)
@@ -41,5 +42,10 @@ class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
     protected function createParser(): ParserInterface
     {
         return new Parser();
+    }
+    
+    protected function parseQuery(ParserInterface $parser, string $query): Document
+    {
+        return $parser->parse($query);
     }
 }
