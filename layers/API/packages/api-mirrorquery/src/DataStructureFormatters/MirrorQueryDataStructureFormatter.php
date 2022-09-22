@@ -12,6 +12,7 @@ use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\AST\ASTHelperServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
@@ -22,7 +23,6 @@ use SplObjectStorage;
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter
 {
     private ?ASTHelperServiceInterface $astHelperService = null;
-    private ?QueryASTTransformationServiceInterface $queryASTTransformationService = null;
 
     final public function setASTHelperService(ASTHelperServiceInterface $astHelperService): void
     {
@@ -32,15 +32,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     {
         /** @var ASTHelperServiceInterface */
         return $this->astHelperService ??= $this->instanceManager->getInstance(ASTHelperServiceInterface::class);
-    }
-    final public function setQueryASTTransformationService(QueryASTTransformationServiceInterface $queryASTTransformationService): void
-    {
-        $this->queryASTTransformationService = $queryASTTransformationService;
-    }
-    final protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
-    {
-        /** @var QueryASTTransformationServiceInterface */
-        return $this->queryASTTransformationService ??= $this->instanceManager->getInstance(QueryASTTransformationServiceInterface::class);
     }
 
     public function getName(): string
@@ -75,42 +66,32 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     protected function getFieldsFromExecutableDocument(
         ExecutableDocument $executableDocument,
     ): array {
-        $fragments = $executableDocument->getDocument()->getFragments();
-        $fields = [];
-        $operationFieldOrFragmentBonds = $this->getOperationFieldOrFragmentBonds(
-            $executableDocument,
+        return $this->getFieldsFromOperations(
+            $executableDocument->getRequestedOperations(),
+            $executableDocument->getDocument()->getFragments()
         );
-        foreach ($executableDocument->getRequestedOperations() as $operation) {
-            /** @var array<FieldInterface|FragmentBondInterface> */
-            $fieldOrFragmentBonds = $operationFieldOrFragmentBonds[$operation];
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     * @return FieldInterface[]
+     */
+    protected function getFieldsFromOperations(
+        array $operations,
+        array $fragments,
+    ): array {
+        $fields = [];
+        foreach ($operations as $operation) {
             $fields = array_merge(
                 $fields,
                 $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
-                    $fieldOrFragmentBonds,
+                    $operation->getFieldsOrFragmentBonds(),
                     $fragments,
                 )
             );
         }
         return $fields;
-    }
-
-    /**
-     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
-     */
-    protected function getOperationFieldOrFragmentBonds(
-        ExecutableDocument $executableDocument,
-    ): SplObjectStorage {
-        /**
-         * Multiple Query Execution: In order to have the fields
-         * of the subsequent operations be resolved in the same
-         * order as the operations (which is necessary for `@export`
-         * to work), then wrap them on a "self" field.
-         */
-        return $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
-            $executableDocument->getDocument(),
-            $executableDocument->getRequestedOperations(),
-            $executableDocument->getDocument()->getFragments(),
-        );
     }
 
     /**
