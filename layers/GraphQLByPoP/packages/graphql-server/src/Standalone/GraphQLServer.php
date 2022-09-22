@@ -6,9 +6,9 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
+use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
-use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
@@ -31,6 +31,18 @@ class GraphQLServer implements GraphQLServerInterface
      * @var array<class-string<ModuleInterface>>
      */
     private readonly array $moduleClasses;
+
+    private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
+
+    final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
+    {
+        $this->graphQLParserHelperService = $graphQLParserHelperService;
+    }
+    final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
+    {
+        /** @var GraphQLParserHelperServiceInterface */
+        return $this->graphQLParserHelperService ??= $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+    }
 
     /**
      * @param array<class-string<ModuleInterface>> $moduleClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
@@ -159,7 +171,7 @@ class GraphQLServer implements GraphQLServerInterface
         $documentASTNodeAncestors = null;
         $documentObjectResolvedFieldValueReferencedFields = [];
         try {
-            $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
+            $graphQLQueryParsingPayload = $this->getGraphQLParserHelperService()->parseGraphQLQuery(
                 $query,
                 $variables,
                 $operationName

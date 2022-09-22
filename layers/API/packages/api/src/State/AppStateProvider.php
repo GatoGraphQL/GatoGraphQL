@@ -4,24 +4,36 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\State;
 
+use PoPAPI\API\Configuration\EngineRequest;
+use PoPAPI\API\Constants\Actions;
+use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
+use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
-use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
+use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoPAPI\API\Configuration\EngineRequest;
-use PoPAPI\API\Constants\Actions;
-use PoPAPI\API\Response\Schemes as APISchemes;
-use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
+
+    final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
+    {
+        $this->graphQLParserHelperService = $graphQLParserHelperService;
+    }
+    final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
+    {
+        /** @var GraphQLParserHelperServiceInterface */
+        return $this->graphQLParserHelperService ??= $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+    }
+
     /**
      * @param array<string,mixed> $state
      */
@@ -97,7 +109,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $executableDocument = null;
         try {
-            $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
+            $graphQLQueryParsingPayload = $this->getGraphQLParserHelperService()->parseGraphQLQuery(
                 $query,
                 $variableValues,
                 $operationName

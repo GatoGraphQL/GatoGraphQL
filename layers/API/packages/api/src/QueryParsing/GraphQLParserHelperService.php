@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\StaticHelpers;
+namespace PoPAPI\API\QueryParsing;
 
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
@@ -13,9 +13,9 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
 
-class GraphQLParserHelpers
+class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
 {
-    protected static function createParser(): ParserInterface
+    protected function createParser(): ParserInterface
     {
         return new Parser();
     }
@@ -26,12 +26,12 @@ class GraphQLParserHelpers
      * @throws ASTNodeParserException
      * @param array<string,mixed> $variableValues
      */
-    public static function parseGraphQLQuery(
+    public function parseGraphQLQuery(
         string $query,
         array $variableValues,
         ?string $operationName,
     ): GraphQLQueryParsingPayload {
-        $parser = static::createParser();
+        $parser = $this->createParser();
         $document = $parser->parse($query);
         $executableDocument = new ExecutableDocument(
             $document,
