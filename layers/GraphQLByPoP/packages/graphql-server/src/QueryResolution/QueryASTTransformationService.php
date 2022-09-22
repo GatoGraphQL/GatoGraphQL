@@ -6,16 +6,17 @@ namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
+use PoPAPI\API\QueryResolution\QueryASTTransformationService as UpstreamQueryASTTransformationService;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Exception\ShouldNotHappenException;
-use PoPAPI\API\QueryResolution\QueryASTTransformationService as UpstreamQueryASTTransformationService;
 
 class QueryASTTransformationService extends UpstreamQueryASTTransformationService implements QueryASTTransformationServiceInterface
 {
@@ -26,16 +27,19 @@ class QueryASTTransformationService extends UpstreamQueryASTTransformationServic
      * the type from which the GraphQL query is resolved.
      *
      * @see layers/GraphQLByPoP/packages/graphql-server/src/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php
+     *
+     * @param OperationInterface[] $operations
+     * @return OperationInterface[]
      */
-    public function convertOperationsToSuperRootFieldsInAST(Document $document): Document
+    public function convertOperationsToContainGraphQLSuperRootFields(array $operations): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $enableNestedMutations = $moduleConfiguration->enableNestedMutations();
 
         $parser = $this->createParser();
-        $operations = [];
-        foreach ($document->getOperations() as $operation) {
+        $convertedOperations = [];
+        foreach ($operations as $operation) {
             /**
              * As there is no setFields method, must create
              * a new object for the Query/Mutation Operations.
@@ -46,7 +50,7 @@ class QueryASTTransformationService extends UpstreamQueryASTTransformationServic
              * there as a standard Field Directive.
              */
             if ($operation instanceof QueryOperation) {
-                $operations[] = $parser->createQueryOperation(
+                $convertedOperations[] = $parser->createQueryOperation(
                     $operation->getName(),
                     $operation->getVariables(),
                     $operation->getDirectives(),
@@ -65,7 +69,7 @@ class QueryASTTransformationService extends UpstreamQueryASTTransformationServic
                 continue;
             }
             if ($operation instanceof MutationOperation) {
-                $operations[] = $parser->createMutationOperation(
+                $convertedOperations[] = $parser->createMutationOperation(
                     $operation->getName(),
                     $operation->getVariables(),
                     $operation->getDirectives(),
@@ -90,10 +94,7 @@ class QueryASTTransformationService extends UpstreamQueryASTTransformationServic
                 )
             );
         }
-        return $parser->createDocument(
-            $operations,
-            $document->getFragments()
-        );
+        return $convertedOperations;
     }
     
     protected function createParser(): ParserInterface

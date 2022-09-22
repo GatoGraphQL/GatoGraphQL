@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
 use PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface as UpstreamQueryASTTransformationServiceInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 
 interface QueryASTTransformationServiceInterface extends UpstreamQueryASTTransformationServiceInterface
 {
@@ -16,6 +15,9 @@ interface QueryASTTransformationServiceInterface extends UpstreamQueryASTTransfo
      * the type from which the GraphQL query is resolved.
      *
      * @see layers/GraphQLByPoP/packages/graphql-server/src/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php
+     *
+     * @param OperationInterface[] $operations
+     * @return OperationInterface[]
      */
-    public function convertOperationsToSuperRootFieldsInAST(Document $document): Document;
+    public function convertOperationsToContainGraphQLSuperRootFields(array $operations): array;
 }
