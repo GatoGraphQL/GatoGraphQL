@@ -92,7 +92,11 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
         if ($operationsCount === 1 || !$moduleConfiguration->enableMultipleQueryExecution()) {
             foreach ($operations as $operation) {
-                $operationFieldOrFragmentBonds[$operation] = $operation->getFieldsOrFragmentBonds();
+                /**
+                 * Allow to override the original fields from the operation,
+                 * to inject the SuperRoot field for GraphQL
+                 */
+                $operationFieldOrFragmentBonds[$operation] = $this->getOperationFieldsOrFragmentBonds($document, $operation);
             }
             return $operationFieldOrFragmentBonds;
         }
