@@ -8,12 +8,17 @@ use PoPAPI\API\QueryParsing\GraphQLParserHelperService as UpstreamGraphQLParserH
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 
-class GraphQLParserHelperService extends UpstreamGraphQLParserHelperService
+class GraphQLParserHelperService extends UpstreamGraphQLParserHelperService implements GraphQLParserHelperServiceInterface
 {
     protected function parseQuery(ParserInterface $parser, string $query): Document
     {
-        $document = $parser->parse($query);
+        return $this->convertOperationsToSuperRootFieldsInAST(
+            parent::parseQuery($parser, $query)
+        );
+    }
 
+    public function convertOperationsToSuperRootFieldsInAST(Document $document): Document
+    {
         return $document;
     }
 }
