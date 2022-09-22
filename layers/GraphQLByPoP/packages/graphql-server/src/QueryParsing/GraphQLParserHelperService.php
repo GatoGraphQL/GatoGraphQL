@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\QueryParsing;
 
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use PoPAPI\API\QueryParsing\GraphQLParserHelperService as UpstreamGraphQLParserHelperService;
+use PoP\ComponentModel\App;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 
@@ -30,20 +35,37 @@ class GraphQLParserHelperService extends UpstreamGraphQLParserHelperService impl
      */
     public function convertOperationsToSuperRootFieldsInAST(Document $document): Document
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $enableNestedMutations = $moduleConfiguration->enableNestedMutations();
+
         $parser = $this->createParser();
         $operations = [];
         foreach ($document->getOperations() as $operation) {
             /**
              * As there is no setFields method, must create
-             * a new object for the Query/Mutation Operations
+             * a new object for the Query/Mutation Operations.
+             *
+             * Please notice that support for Operation Directives
+             * is handled here, by transferring them into the
+             * SuperRoot Field, to be validated and executed
+             * there as a standard Field Directive.
              */
-            $fields = $operation->getFieldsOrFragmentBonds();
             if ($operation instanceof QueryOperation) {
                 $operations[] = $parser->createQueryOperation(
                     $operation->getName(),
                     $operation->getVariables(),
                     $operation->getDirectives(),
-                    $fields,
+                    [
+                        new RelationalField(
+                            $enableNestedMutations ? 'root' : 'queryRoot',
+                            null,
+                            [],
+                            $operation->getFieldsOrFragmentBonds(),
+                            $operation->getDirectives(),
+                            ASTNodesFactory::getNonSpecificLocation()
+                        ),
+                    ],
                     $operation->getLocation()
                 );
                 continue;
@@ -53,7 +75,16 @@ class GraphQLParserHelperService extends UpstreamGraphQLParserHelperService impl
                     $operation->getName(),
                     $operation->getVariables(),
                     $operation->getDirectives(),
-                    $fields,
+                    [
+                        new RelationalField(
+                            $enableNestedMutations ? 'root' : 'mutationRoot',
+                            null,
+                            [],
+                            $operation->getFieldsOrFragmentBonds(),
+                            $operation->getDirectives(),
+                            ASTNodesFactory::getNonSpecificLocation()
+                        ),
+                    ],
                     $operation->getLocation()
                 );
                 continue;
