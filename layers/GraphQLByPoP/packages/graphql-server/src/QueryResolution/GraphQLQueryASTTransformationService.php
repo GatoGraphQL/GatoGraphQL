@@ -85,6 +85,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                 $superRootField,
                 $operation->getName()
             );
+
             /**
              * Please notice that support for Operation Directives
              * is handled here, by transferring them into the
