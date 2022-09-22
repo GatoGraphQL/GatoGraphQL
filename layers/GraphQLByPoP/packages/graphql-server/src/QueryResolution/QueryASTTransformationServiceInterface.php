@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\QueryParsing;
+namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
-use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface as UpstreamGraphQLParserHelperServiceInterface;
+use PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface as UpstreamQueryASTTransformationServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 
-interface GraphQLParserHelperServiceInterface extends UpstreamGraphQLParserHelperServiceInterface
+interface QueryASTTransformationServiceInterface extends UpstreamQueryASTTransformationServiceInterface
 {
     /**
      * Convert the operations (query, mutation, subscription) in the

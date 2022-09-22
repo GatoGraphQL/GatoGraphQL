@@ -2,29 +2,23 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\QueryParsing;
+namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
-use PoPAPI\API\QueryParsing\GraphQLParserHelperService as UpstreamGraphQLParserHelperService;
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
+use PoPAPI\API\QueryResolution\QueryASTTransformationService as UpstreamQueryASTTransformationService;
 
-class GraphQLParserHelperService extends UpstreamGraphQLParserHelperService implements GraphQLParserHelperServiceInterface
+class QueryASTTransformationService extends UpstreamQueryASTTransformationService implements QueryASTTransformationServiceInterface
 {
-    protected function parseQuery(ParserInterface $parser, string $query): Document
-    {
-        return $this->convertOperationsToSuperRootFieldsInAST(
-            parent::parseQuery($parser, $query)
-        );
-    }
-
     /**
      * Convert the operations (query, mutation, subscription) in the
      * GraphQL Documents, to the corresponding field in the SuperRoot
@@ -100,5 +94,10 @@ class GraphQLParserHelperService extends UpstreamGraphQLParserHelperService impl
             $operations,
             $document->getFragments()
         );
+    }
+    
+    protected function createParser(): ParserInterface
+    {
+        return new Parser();
     }
 }

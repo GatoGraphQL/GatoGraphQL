@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
-use GraphQLByPoP\GraphQLServer\QueryParsing\GraphQLParserHelperServiceInterface;
+use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;

@@ -17,12 +17,15 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
 use function max;
 
 class QueryASTTransformationService implements QueryASTTransformationServiceInterface
 {
+    use BasicServiceTrait;
+    
     /**
      * Because fields are stored in SplObjectStorage,
      * the same instance must be retrieved in every case.
