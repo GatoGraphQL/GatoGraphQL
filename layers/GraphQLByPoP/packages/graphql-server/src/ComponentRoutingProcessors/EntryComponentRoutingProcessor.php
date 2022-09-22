@@ -42,29 +42,6 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
                 'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
             ],
         ];
-        // @todo Remove this commented code
-        // $ret[RequestNature::QUERY_ROOT][] = [
-        //     'component' => new Component(
-        //         RootRelationalFieldDataloadComponentProcessor::class,
-        //         RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT
-        //     ),
-        //     'conditions' => [
-        //         'scheme' => APISchemes::API,
-        //         'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
-        //         'graphql-operation-type' => OperationTypes::QUERY,
-        //     ],
-        // ];
-        // $ret[RequestNature::QUERY_ROOT][] = [
-        //     'component' => new Component(
-        //         RootRelationalFieldDataloadComponentProcessor::class,
-        //         RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT
-        //     ),
-        //     'conditions' => [
-        //         'scheme' => APISchemes::API,
-        //         'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
-        //         'graphql-operation-type' => OperationTypes::MUTATION,
-        //     ],
-        // ];
 
         return $ret;
     }
