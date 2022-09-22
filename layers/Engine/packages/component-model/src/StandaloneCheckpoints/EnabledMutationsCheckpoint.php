@@ -61,7 +61,7 @@ class EnabledMutationsCheckpoint extends AbstractStandaloneCheckpoint
             if (!($operation instanceof MutationOperation)) {
                 return new FeedbackItemResolution(
                     CheckpointErrorFeedbackItemProvider::class,
-                    CheckpointErrorFeedbackItemProvider::E1
+                    CheckpointErrorFeedbackItemProvider::E2
                 );
             }
         }

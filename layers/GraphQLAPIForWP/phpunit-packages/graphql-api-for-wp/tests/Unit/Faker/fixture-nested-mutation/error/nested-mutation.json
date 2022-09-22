@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Mutations cannot be executed",
+      "message": "Use the operation 'mutation' to mutate data",
       "locations": [
         {
           "line": 3,
@@ -16,7 +16,7 @@
           "customPost(by: {id: 1724}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@1"
+        "code": "PoP/ComponentModel@2"
       }
     }
   ],
