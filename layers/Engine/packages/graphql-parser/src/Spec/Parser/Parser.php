@@ -97,7 +97,7 @@ class Parser extends Tokenizer implements ParserInterface
      * @param OperationInterface[] $operations
      * @param Fragment[] $fragments
      */
-    public function createDocument(
+    protected function createDocument(
         array $operations,
         array $fragments,
     ): Document {
@@ -186,7 +186,7 @@ class Parser extends Tokenizer implements ParserInterface
      * @param Directive[] $directives
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      */
-    public function createQueryOperation(
+    protected function createQueryOperation(
         string $name,
         array $variables,
         array $directives,
@@ -201,7 +201,7 @@ class Parser extends Tokenizer implements ParserInterface
      * @param Directive[] $directives
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      */
-    public function createMutationOperation(
+    protected function createMutationOperation(
         string $name,
         array $variables,
         array $directives,
