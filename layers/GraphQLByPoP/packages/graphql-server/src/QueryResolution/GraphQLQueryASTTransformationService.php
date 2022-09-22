@@ -63,10 +63,26 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
 
         /** @var OperationInterface $operation */
         foreach ($operationFieldAndFragmentBonds as $operation) {
+            if ($enableNestedMutations) {
+                $superRootField = 'root';
+            } elseif ($operation instanceof QueryOperation) {
+                $superRootField = 'queryRoot';
+            } elseif ($operation instanceof MutationOperation) {
+                $superRootField = 'mutationRoot';
+            } else {
+                throw new ShouldNotHappenException(
+                    sprintf(
+                        $this->__('Cannot recognize GraphQL Operation AST object, with class \'%s\''),
+                        get_class($operation)
+                    )
+                );
+            }
+
             /** @var array<FieldInterface|FragmentBondInterface> */
             $fieldAndFragmentBonds = $operationFieldAndFragmentBonds[$operation];
             $alias = sprintf(
-                '_superRoot_%s_',
+                '_superRoot_%s_%s_',
+                $superRootField,
                 $operation->getName()
             );
             /**
@@ -75,38 +91,16 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
              * SuperRoot Field, to be validated and executed
              * there as a standard Field Directive.
              */
-            if ($operation instanceof QueryOperation) {
-                $operationFieldAndFragmentBonds[$operation] = [
-                    new RelationalField(
-                        $enableNestedMutations ? 'root' : 'queryRoot',
-                        $alias,
-                        [],
-                        $fieldAndFragmentBonds,
-                        $operation->getDirectives(),
-                        ASTNodesFactory::getNonSpecificLocation()
-                    ),
-                ];
-                continue;
-            }
-            if ($operation instanceof MutationOperation) {
-                $operationFieldAndFragmentBonds[$operation] = [
-                    new RelationalField(
-                        $enableNestedMutations ? 'root' : 'mutationRoot',
-                        $alias,
-                        [],
-                        $fieldAndFragmentBonds,
-                        $operation->getDirectives(),
-                        ASTNodesFactory::getNonSpecificLocation()
-                    ),
-                ];
-                continue;
-            }
-            throw new ShouldNotHappenException(
-                sprintf(
-                    $this->__('Cannot recognize GraphQL Operation AST object, with class \'%s\''),
-                    get_class($operation)
-                )
-            );
+            $operationFieldAndFragmentBonds[$operation] = [
+                new RelationalField(
+                    $superRootField,
+                    $alias,
+                    [],
+                    $fieldAndFragmentBonds,
+                    $operation->getDirectives(),
+                    ASTNodesFactory::getNonSpecificLocation()
+                ),
+            ];
         }
         return $operationFieldAndFragmentBonds;
     }
