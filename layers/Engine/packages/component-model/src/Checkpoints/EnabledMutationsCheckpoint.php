@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Checkpoints;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class EnabledMutationsCheckpoint extends AbstractCheckpoint
 {
@@ -24,7 +26,9 @@ class EnabledMutationsCheckpoint extends AbstractCheckpoint
 
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
-        if (!App::getState('are-mutations-enabled')) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableMutations()) {
             return new FeedbackItemResolution(
                 CheckpointErrorFeedbackItemProvider::class,
                 CheckpointErrorFeedbackItemProvider::E1

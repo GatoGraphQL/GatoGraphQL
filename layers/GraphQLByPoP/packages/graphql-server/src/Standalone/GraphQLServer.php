@@ -226,16 +226,8 @@ class GraphQLServer implements GraphQLServerInterface
          * Set the operation type and, based on it, if mutations are supported.
          * If there's an error in `parseGraphQLQuery`, $executableDocument will be null.
          */
-        if ($executableDocument !== null) {
-            /** @var OperationInterface */
-            $requestedOperation = $executableDocument->getRequestedOperation();
-            $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
-        } else {
+        if ($executableDocument === null) {
             $appStateManager->override('does-api-query-have-errors', true);
-
-            /** @var ComponentModelModuleConfiguration */
-            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-            $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
         }
 
         // Generate the data, print the response to buffer, and send headers
