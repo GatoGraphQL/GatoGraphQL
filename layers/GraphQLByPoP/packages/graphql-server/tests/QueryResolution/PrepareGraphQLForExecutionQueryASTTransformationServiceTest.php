@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
-class MultipleQueryExecutionGraphQLQueryASTTransformationServiceTest extends AbstractGraphQLQueryASTTransformationServiceTest
+class PrepareGraphQLForExecutionQueryASTTransformationServiceTest extends AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTest
 {
     protected static function isMultipleQueryExecutionEnabled(): bool
     {
-        return true;
+        return false;
     }
 
     protected static function isNestedMutationsEnabled(): bool

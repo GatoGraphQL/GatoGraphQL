@@ -21,7 +21,7 @@ use PoP\Root\AbstractTestCase;
 use PoP\Root\Module\ModuleInterface;
 use SplObjectStorage;
 
-abstract class AbstractGraphQLQueryASTTransformationServiceTest extends AbstractTestCase
+abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTest extends AbstractTestCase
 {
     /**
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
