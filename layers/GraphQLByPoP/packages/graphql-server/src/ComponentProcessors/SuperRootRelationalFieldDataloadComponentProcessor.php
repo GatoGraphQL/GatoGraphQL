@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\ComponentProcessors;
+namespace GraphQLByPoP\GraphQLServer\ComponentProcessors;
 
+use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
+use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\Engine\ObjectModels\SuperRoot;
-use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoP\Root\App;
 
 class SuperRootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor

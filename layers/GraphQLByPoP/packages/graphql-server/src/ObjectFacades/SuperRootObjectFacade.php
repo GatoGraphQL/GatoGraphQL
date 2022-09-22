@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ObjectFacades;
+namespace GraphQLByPoP\GraphQLServer\ObjectFacades;
 
 use PoP\Root\App;
-use PoP\Engine\ObjectModels\SuperRoot;
+use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
 
 class SuperRootObjectFacade
 {

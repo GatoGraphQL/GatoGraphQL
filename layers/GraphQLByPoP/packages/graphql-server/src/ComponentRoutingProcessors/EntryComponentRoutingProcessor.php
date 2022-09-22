@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors;
 
-use GraphQLByPoP\GraphQLServer\ComponentProcessors\RootRelationalFieldDataloadComponentProcessor;
-use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
-use PoPAPI\API\ComponentProcessors\SuperRootRelationalFieldDataloadComponentProcessor;
+use GraphQLByPoP\GraphQLServer\ComponentProcessors\SuperRootRelationalFieldDataloadComponentProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;

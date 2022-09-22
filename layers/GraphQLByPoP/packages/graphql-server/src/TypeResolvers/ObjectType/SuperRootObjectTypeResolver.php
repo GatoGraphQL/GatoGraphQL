@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\TypeResolvers\ObjectType;
+namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
+use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoP\Engine\ObjectModels\SuperRoot;
-use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 
 class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver

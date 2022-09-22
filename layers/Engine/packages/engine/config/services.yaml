@@ -17,9 +17,6 @@ services:
     PoP\Engine\ObjectModels\Root:
         class: \PoP\Engine\ObjectModels\Root
 
-    PoP\Engine\ObjectModels\SuperRoot:
-        class: \PoP\Engine\ObjectModels\SuperRoot
-
     PoP\Engine\Hooks\:
         resource: '../src/Hooks/*'
 

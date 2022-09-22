@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\RelationalTypeDataLoaders\ObjectType;
+namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
-use PoP\Engine\ObjectModels\SuperRoot;
+use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
 
 class SuperRootTypeDataLoader extends AbstractObjectTypeDataLoader
 {
