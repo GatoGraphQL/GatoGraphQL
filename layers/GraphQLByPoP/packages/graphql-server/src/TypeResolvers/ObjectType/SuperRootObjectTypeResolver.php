@@ -18,12 +18,12 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 
     final public function setSuperRootTypeDataLoader(SuperRootTypeDataLoader $superRootTypeDataLoader): void
     {
-        $this->rootTypeDataLoader = $superRootTypeDataLoader;
+        $this->superRootTypeDataLoader = $superRootTypeDataLoader;
     }
     final protected function getSuperRootTypeDataLoader(): SuperRootTypeDataLoader
     {
         /** @var SuperRootTypeDataLoader */
-        return $this->rootTypeDataLoader ??= $this->instanceManager->getInstance(SuperRootTypeDataLoader::class);
+        return $this->superRootTypeDataLoader ??= $this->instanceManager->getInstance(SuperRootTypeDataLoader::class);
     }
 
     public function getTypeName(): string
