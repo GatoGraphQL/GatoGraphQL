@@ -14,6 +14,23 @@ use SplObjectStorage;
 interface QueryASTTransformationServiceInterface
 {
     /**
+     * The AST for execution can be different than the
+     * parsed AST from the GraphQL document:
+     *
+     * - Wrap fields in "self" for Multiple Query Execution
+     * - Add SuperRoot fields for GraphQL
+     *
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
+     */
+    public function prepareOperationFieldAndFragmentBondsForExecution(
+        Document $document,
+        array $operations,
+        array $fragments,
+    ): SplObjectStorage;
+
+    /**
      * Multiple Query Execution: In order to have the fields
      * of the subsequent operations be resolved in the same
      * order as the operations (which is necessary for `@export`

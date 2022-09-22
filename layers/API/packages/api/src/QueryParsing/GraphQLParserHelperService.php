@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\StaticHelpers;
+namespace PoPAPI\API\QueryParsing;
 
+use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
@@ -11,14 +12,12 @@ use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
+use PoP\Root\Services\BasicServiceTrait;
 
-class GraphQLParserHelpers
+class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
 {
-    protected static function createParser(): ParserInterface
-    {
-        return new Parser();
-    }
+    use BasicServiceTrait;
 
     /**
      * @throws SyntaxErrorException
@@ -26,13 +25,13 @@ class GraphQLParserHelpers
      * @throws ASTNodeParserException
      * @param array<string,mixed> $variableValues
      */
-    public static function parseGraphQLQuery(
+    public function parseGraphQLQuery(
         string $query,
         array $variableValues,
         ?string $operationName,
     ): GraphQLQueryParsingPayload {
-        $parser = static::createParser();
-        $document = $parser->parse($query);
+        $parser = $this->createParser();
+        $document = $this->parseQuery($parser, $query);
         $executableDocument = new ExecutableDocument(
             $document,
             new Context($operationName, $variableValues)
@@ -41,5 +40,15 @@ class GraphQLParserHelpers
             $executableDocument,
             $parser->getObjectResolvedFieldValueReferencedFields(),
         );
+    }
+
+    protected function createParser(): ParserInterface
+    {
+        return new Parser();
+    }
+
+    protected function parseQuery(ParserInterface $parser, string $query): Document
+    {
+        return $parser->parse($query);
     }
 }

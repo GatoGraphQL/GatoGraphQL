@@ -13,6 +13,9 @@ services:
     PoPAPI\API\Schema\SchemaDefinitionServiceInterface:
         class: \PoPAPI\API\Schema\SchemaDefinitionService
 
+    PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface:
+        class: \PoPAPI\API\QueryParsing\GraphQLParserHelperService
+
     PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface:
         class: \PoPAPI\API\QueryResolution\QueryASTTransformationService
 

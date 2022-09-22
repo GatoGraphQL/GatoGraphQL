@@ -417,13 +417,11 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
      *
      * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging     *
      *
-     * @param FieldInterface[] $previouslyResolvedFieldsForObject
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function validateObjectData(
-        array $previouslyResolvedFieldsForObject,
         FieldInterface $field,
         string $typeOutputKey,
         array &$sourceRet,
@@ -436,6 +434,11 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             /** @var ExecutableDocument */
             $executableDocument = App::getState('executable-document-ast');
             $fragments = $executableDocument->getDocument()->getFragments();
+
+            /** @var array<string,array<string|int,FieldInterface[]>> */
+            $previouslyResolvedFieldsForObjects = App::getState('previously-resolved-fields-for-objects');
+            $previouslyResolvedFieldsForObject = $previouslyResolvedFieldsForObjects[$typeOutputKey][$objectID] ?? [];
+
             /**
              * Check that the original field is indeed different to this one.
              * To find out, search for the previous fields with the same
@@ -508,7 +511,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             return false;
         }
         return parent::validateObjectData(
-            $previouslyResolvedFieldsForObject,
             $field,
             $typeOutputKey,
             $sourceRet,

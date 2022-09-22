@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\State;
 
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
-use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
-use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -43,8 +39,6 @@ class AppStateProvider extends AbstractAppStateProvider
         } else {
             $state['edit-schema'] = null;
         }
-
-        $state['graphql-operation-type'] = null;
     }
 
     /**
@@ -61,23 +55,5 @@ class AppStateProvider extends AbstractAppStateProvider
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['graphql-introspection-enabled'] = $moduleConfiguration->enableGraphQLIntrospection() ?? true;
-
-        if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
-            return;
-        }
-
-        $executableDocument = $state['executable-document-ast'];
-        if ($executableDocument === null) {
-            return;
-        }
-        /** @var ExecutableDocument $executableDocument */
-
-        /**
-         * Set the operation type and, based on it, if mutations are supported.
-         */
-        $requestedOperation = $executableDocument->getRequestedOperation();
-        /** @var OperationInterface $requestedOperation */
-        $state['graphql-operation-type'] = $requestedOperation->getOperationType();
-        $state['are-mutations-enabled'] = $requestedOperation->getOperationType() === OperationTypes::MUTATION;
     }
 }

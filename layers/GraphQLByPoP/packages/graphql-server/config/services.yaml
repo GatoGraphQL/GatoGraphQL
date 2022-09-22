@@ -13,6 +13,9 @@ services:
     GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxService
 
+    GraphQLByPoP\GraphQLServer\QueryResolution\GraphQLQueryASTTransformationServiceInterface:
+        class: \GraphQLByPoP\GraphQLServer\QueryResolution\GraphQLQueryASTTransformationService
+
     GraphQLByPoP\GraphQLServer\State\:
         resource: '../src/State/*'
 
@@ -30,6 +33,9 @@ services:
 
     GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot:
         class: \GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot
+
+    GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot:
+        class: \GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot
 
     GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface:
         class: \GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicator

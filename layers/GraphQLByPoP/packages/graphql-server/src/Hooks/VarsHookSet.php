@@ -27,9 +27,6 @@ class VarsHookSet extends AbstractHookSet
     public function getModelInstanceElementsFromAppState(array $elements): array
     {
         $elements[] = $this->__('edit schema:', 'graphql-server') . App::getState('edit-schema');
-        if ($graphQLOperationType = App::getState('graphql-operation-type')) {
-            $elements[] = $this->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
-        }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $elements[] = $this->__('enable nested mutations:', 'graphql-server') . $moduleConfiguration->enableNestedMutations();

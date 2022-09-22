@@ -10,6 +10,7 @@ use PoP\Root\Feedback\FeedbackCategories;
 class CheckpointErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public final const E1 = '1';
+    public final const E2 = '2';
 
     /**
      * @return string[]
@@ -18,6 +19,7 @@ class CheckpointErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
+            self::E2,
         ];
     }
 
@@ -25,6 +27,7 @@ class CheckpointErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => $this->__('Mutations cannot be executed', 'component-model'),
+            self::E2 => $this->__('Use the operation \'mutation\' to mutate data', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }

@@ -11,7 +11,9 @@ use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\AST\ASTHelperServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\App;
 use SplObjectStorage;
@@ -62,9 +64,23 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     protected function getFieldsFromExecutableDocument(
         ExecutableDocument $executableDocument,
     ): array {
-        $fragments = $executableDocument->getDocument()->getFragments();
+        return $this->getFieldsFromOperations(
+            $executableDocument->getRequestedOperations(),
+            $executableDocument->getDocument()->getFragments()
+        );
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     * @return FieldInterface[]
+     */
+    protected function getFieldsFromOperations(
+        array $operations,
+        array $fragments,
+    ): array {
         $fields = [];
-        foreach ($executableDocument->getRequestedOperations() as $operation) {
+        foreach ($operations as $operation) {
             $fields = array_merge(
                 $fields,
                 $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
@@ -88,6 +104,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         }
 
         /**
+         * Allow GraphQL to validate that 2 different fields cannot
+         * have the same alias
+         */
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->override('previously-resolved-fields-for-objects', []);
+
+        /**
          * Re-create the shape of the query by iterating through all objectIDs
          * and all required fields, getting the data from the corresponding
          * typeOutputKeyPath
@@ -101,6 +124,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $objectIDorIDs = $componentData['objectIDs'];
             $this->addData($ret, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
         }
+
+        $appStateManager->override('previously-resolved-fields-for-objects', null);
+
         return $ret;
     }
 
@@ -165,12 +191,12 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
+        $appStateManager = App::getAppStateManager();
+
         $resolvedObjectRet ??= [];
 
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
-        /** @var FieldInterface[] */
-        $previouslyResolvedFieldsForObject = [];
         foreach ($fields as $field) {
             /**
              * If the key doesn't exist, then do nothing.
@@ -187,7 +213,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
              * Allow GraphQL to validate custom errors
              */
             $validObjectData = $this->validateObjectData(
-                $previouslyResolvedFieldsForObject,
                 $field,
                 $typeOutputKey,
                 $sourceRet,
@@ -198,7 +223,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             if (!$validObjectData) {
                 continue;
             }
-            $previouslyResolvedFieldsForObject[] = $field;
+            /** @var array<string,array<string|int,FieldInterface[]>> */
+            $previouslyResolvedFieldsForObjects = App::getState('previously-resolved-fields-for-objects');
+            $previouslyResolvedFieldsForObjects[$typeOutputKey][$objectID][] = $field;
+            $appStateManager->override('previously-resolved-fields-for-objects', $previouslyResolvedFieldsForObjects);
 
             if ($field instanceof LeafField) {
                 /** @var LeafField */
@@ -230,6 +258,24 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             // The type with ID may be stored under $unionTypeOutputKeyIDs
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$relationalField] ?? null;
 
+            /**
+             * The RelationalField can contain fragments.
+             * Replace these into fields.
+             */
+            /** @var ExecutableDocument */
+            $executableDocument = App::getState('executable-document-ast');
+            $fragments = $executableDocument->getDocument()->getFragments();
+            $relationalNestedFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
+                $relationalField->getFieldsOrFragmentBonds(),
+                $fragments
+            );
+
+            if ($this->skipAddingDataForType($typeOutputKey)) {
+                $resolvedObjectNestedPropertyRet = &$resolvedObjectRet;
+                $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
+                continue;
+            }
+
             // Add a new subarray for the nested property
             $resolvedObjectNestedPropertyRet = &$resolvedObjectRet[$relationalFieldOutputKey];
 
@@ -252,32 +298,24 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     $resolvedObjectRet[$relationalFieldOutputKey] = [];
                 }
             }
-            /**
-             * The RelationalField can contain fragments.
-             * Replace these into fields.
-             */
-            /** @var ExecutableDocument */
-            $executableDocument = App::getState('executable-document-ast');
-            $fragments = $executableDocument->getDocument()->getFragments();
-            $relationalNestedFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
-                $relationalField->getFieldsOrFragmentBonds(),
-                $fragments
-            );
             $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
+    }
+
+    protected function skipAddingDataForType(string $typeOutputKey): bool
+    {
+        return false;
     }
 
     /**
      * Allow GraphQL to override as to provide custom validations.
      * Return `false` if there is an error.
      *
-     * @param FieldInterface[] $previouslyResolvedFieldsForObject
      * @param array<string,mixed> $sourceRet
      * @param array<string,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function validateObjectData(
-        array $previouslyResolvedFieldsForObject,
         FieldInterface $field,
         string $typeOutputKey,
         array &$sourceRet,

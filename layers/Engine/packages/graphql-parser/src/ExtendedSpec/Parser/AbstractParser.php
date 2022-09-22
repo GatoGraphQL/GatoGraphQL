@@ -739,7 +739,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param OperationInterface[] $operations
      * @param Fragment[] $fragments
      */
-    public function createDocument(
+    protected function createDocument(
         array $operations,
         array $fragments,
     ): Document {

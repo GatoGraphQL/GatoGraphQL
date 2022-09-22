@@ -113,7 +113,6 @@ class AppStateProvider extends AbstractAppStateProvider
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
-        $state['are-mutations-enabled'] = $moduleConfiguration->enableMutations();
 
         $this->getEngine()->initializeState();
     }

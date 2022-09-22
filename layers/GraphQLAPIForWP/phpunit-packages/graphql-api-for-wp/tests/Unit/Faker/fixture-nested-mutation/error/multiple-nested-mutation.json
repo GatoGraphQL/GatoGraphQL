@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Mutations cannot be executed",
+      "message": "Use the operation 'mutation' to mutate data",
       "locations": [
         {
           "line": 8,
@@ -16,11 +16,11 @@
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@1"
+        "code": "PoP/ComponentModel@2"
       }
     },
     {
-      "message": "Mutations cannot be executed",
+      "message": "Use the operation 'mutation' to mutate data",
       "locations": [
         {
           "line": 8,
@@ -35,7 +35,7 @@
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@1"
+        "code": "PoP/ComponentModel@2"
       }
     }
   ],

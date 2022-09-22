@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ObjectModels;
+namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-class Root
+class SuperRoot
 {
-    public final const ID = 'root';
+    public final const ID = 'super-root';
 
     public function getID(): string
     {

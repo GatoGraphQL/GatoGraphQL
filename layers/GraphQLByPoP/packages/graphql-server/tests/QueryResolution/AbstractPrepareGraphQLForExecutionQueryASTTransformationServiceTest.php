@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\QueryResolution;
+namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
 use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
@@ -13,6 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
@@ -21,7 +22,7 @@ use PoP\Root\AbstractTestCase;
 use PoP\Root\Module\ModuleInterface;
 use SplObjectStorage;
 
-abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServiceTest extends AbstractTestCase
+abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTest extends AbstractTestCase
 {
     /**
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
@@ -29,16 +30,19 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
     protected static function getModuleClassConfiguration(): array
     {
         $moduleClassConfiguration = parent::getModuleClassConfiguration();
-        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = static::enabled();
+        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = static::isMultipleQueryExecutionEnabled();
+        $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][\GraphQLByPoP\GraphQLServer\Environment::ENABLE_NESTED_MUTATIONS] = static::isNestedMutationsEnabled();
         return $moduleClassConfiguration;
     }
 
-    abstract protected static function enabled(): bool;
+    abstract protected static function isMultipleQueryExecutionEnabled(): bool;
 
-    protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
+    abstract protected static function isNestedMutationsEnabled(): bool;
+
+    protected function getGraphQLQueryASTTransformationService(): GraphQLQueryASTTransformationServiceInterface
     {
-        /** @var QueryASTTransformationServiceInterface */
-        return $this->getService(QueryASTTransformationServiceInterface::class);
+        /** @var GraphQLQueryASTTransformationServiceInterface */
+        return $this->getService(GraphQLQueryASTTransformationServiceInterface::class);
     }
 
     public function testPrepareOperationFieldAndFragmentBondsForMultipleQueryExecution(): void
@@ -53,8 +57,8 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
          *     }
          *   }
          *
-         *   query Two {
-         *     post(id: 2) {
+         *   mutation Two {
+         *     updatePost(id: 2, title: "Hallo!") {
          *       title
          *     }
          *   }
@@ -97,13 +101,15 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
             new Location(2, 19)
         );
 
-        $argument2 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
+        $argument21 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
+        $argument22 = new Argument('title', new Literal("Hallo!", new Location(9, 33)), new Location(9, 29));
         $leafField2 = new LeafField('title', null, [], [], new Location(10, 21));
         $relationalField2 = new RelationalField(
-            'post',
+            'updatePost',
             null,
             [
-                $argument2,
+                $argument21,
+                $argument22,
             ],
             [
                 $leafField2,
@@ -111,7 +117,7 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
             [],
             new Location(9, 17)
         );
-        $queryTwoOperation = new QueryOperation(
+        $queryTwoOperation = new MutationOperation(
             'Two',
             [],
             [],
@@ -164,20 +170,63 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
             $queryThreeOperation,
         ];
 
+        $isNestedMutationsEnabled = static::isNestedMutationsEnabled();
+
         /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> */
         $expectedOperationFieldAndFragmentBonds = new SplObjectStorage();
         $expectedOperationFieldAndFragmentBonds[$queryOneOperation] = [
-            $relationalField1
+            new RelationalField(
+                $isNestedMutationsEnabled
+                    ? 'root'
+                    : 'queryRoot',
+                $isNestedMutationsEnabled
+                    ? '_superRoot_root_One_'
+                    : '_superRoot_queryRoot_One_',
+                [],
+                [
+                    $relationalField1,
+                ],
+                [],
+                ASTNodesFactory::getNonSpecificLocation()
+            )
         ];
 
-        if (!static::enabled()) {
-            $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
+        $relationalField1SuperRootField = new RelationalField(
+            $isNestedMutationsEnabled
+                ? 'root'
+                : 'mutationRoot',
+            $isNestedMutationsEnabled
+                ? '_superRoot_root_Two_'
+                : '_superRoot_mutationRoot_Two_',
+            [],
+            [
                 $relationalField2,
+            ],
+            [],
+            ASTNodesFactory::getNonSpecificLocation()
+        );
+
+        if (!static::isMultipleQueryExecutionEnabled()) {
+            $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
+                $relationalField1SuperRootField,
             ];
             $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
-                $leafField31,
-                $inlineFragment3,
-                $relationalField3,
+                new RelationalField(
+                    $isNestedMutationsEnabled
+                        ? 'root'
+                        : 'queryRoot',
+                    $isNestedMutationsEnabled
+                        ? '_superRoot_root_Three_'
+                        : '_superRoot_queryRoot_Three_',
+                    [],
+                    [
+                        $leafField31,
+                        $inlineFragment3,
+                        $relationalField3,
+                    ],
+                    [],
+                    ASTNodesFactory::getNonSpecificLocation()
+                )
             ];
         } else {
             $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
@@ -191,7 +240,7 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
                             '_dynamicSelf_op1_level2_',
                             [],
                             [
-                                $relationalField2,
+                                $relationalField1SuperRootField,
                             ],
                             [],
                             ASTNodesFactory::getNonSpecificLocation()
@@ -222,9 +271,22 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
                                             '_dynamicSelf_op2_level4_',
                                             [],
                                             [
-                                                $leafField31,
-                                                $inlineFragment3,
-                                                $relationalField3,
+                                                new RelationalField(
+                                                    $isNestedMutationsEnabled
+                                                        ? 'root'
+                                                        : 'queryRoot',
+                                                    $isNestedMutationsEnabled
+                                                        ? '_superRoot_root_Three_'
+                                                        : '_superRoot_queryRoot_Three_',
+                                                    [],
+                                                    [
+                                                        $leafField31,
+                                                        $inlineFragment3,
+                                                        $relationalField3,
+                                                    ],
+                                                    [],
+                                                    ASTNodesFactory::getNonSpecificLocation()
+                                                )
                                             ],
                                             [],
                                             ASTNodesFactory::getNonSpecificLocation()
@@ -245,7 +307,7 @@ abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServi
         }
 
         $document = new Document($operations);
-        $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($document, $operations, []);
+        $operationFieldAndFragmentBonds = $this->getGraphQLQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution($document, $operations, []);
 
         /**
          * Doing `assertEquals` on SplObjectStorage doesn't work!

@@ -4,33 +4,45 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
-use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
+use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
-use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
-use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
+use PoP\Root\Services\StandaloneServiceTrait;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class GraphQLServer implements GraphQLServerInterface
 {
+    use StandaloneServiceTrait;
+
     /**
      * @var array<class-string<ModuleInterface>>
      */
     private readonly array $moduleClasses;
+
+    private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
+
+    final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
+    {
+        $this->graphQLParserHelperService = $graphQLParserHelperService;
+    }
+    final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
+    {
+        /** @var GraphQLParserHelperServiceInterface */
+        return $this->graphQLParserHelperService ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLParserHelperServiceInterface::class);
+    }
 
     /**
      * @param array<class-string<ModuleInterface>> $moduleClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
@@ -159,7 +171,7 @@ class GraphQLServer implements GraphQLServerInterface
         $documentASTNodeAncestors = null;
         $documentObjectResolvedFieldValueReferencedFields = [];
         try {
-            $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
+            $graphQLQueryParsingPayload = $this->getGraphQLParserHelperService()->parseGraphQLQuery(
                 $query,
                 $variables,
                 $operationName
@@ -210,20 +222,8 @@ class GraphQLServer implements GraphQLServerInterface
          * Set the operation type and, based on it, if mutations are supported.
          * If there's an error in `parseGraphQLQuery`, $executableDocument will be null.
          */
-        if ($executableDocument !== null) {
-            /** @var OperationInterface */
-            $requestedOperation = $executableDocument->getRequestedOperation();
-            $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
-            $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
-        } else {
+        if ($executableDocument === null) {
             $appStateManager->override('does-api-query-have-errors', true);
-
-            // Reset to the initial state
-            $appStateManager->override('graphql-operation-type', null);
-
-            /** @var ComponentModelModuleConfiguration */
-            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-            $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
         }
 
         // Generate the data, print the response to buffer, and send headers

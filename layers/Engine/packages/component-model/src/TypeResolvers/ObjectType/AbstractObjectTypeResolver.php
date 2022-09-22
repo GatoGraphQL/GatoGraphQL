@@ -8,7 +8,6 @@ use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
@@ -33,6 +32,7 @@ use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\StandaloneCheckpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
@@ -112,7 +112,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
     private ?EngineInterface $engine = null;
-    private ?EnabledMutationsCheckpoint $enabledMutationsCheckpoint = null;
 
     final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
@@ -158,15 +157,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         /** @var EngineInterface */
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
-    }
-    final public function setEnabledMutationsCheckpoint(EnabledMutationsCheckpoint $enabledMutationsCheckpoint): void
-    {
-        $this->enabledMutationsCheckpoint = $enabledMutationsCheckpoint;
-    }
-    final protected function getEnabledMutationsCheckpoint(): EnabledMutationsCheckpoint
-    {
-        /** @var EnabledMutationsCheckpoint */
-        return $this->enabledMutationsCheckpoint ??= $this->instanceManager->getInstance(EnabledMutationsCheckpoint::class);
     }
 
     public function __construct()
@@ -1687,7 +1677,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Check that mutations can be executed
         $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $fieldDataAccessor->getFieldName());
         if ($mutationResolver !== null) {
-            $validationCheckpoints[] = $this->getEnabledMutationsCheckpoint();
+            $validationCheckpoints[] = new EnabledMutationsCheckpoint($fieldDataAccessor->getField());
         }
         return $validationCheckpoints;
     }

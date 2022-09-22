@@ -17,12 +17,15 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
 use function max;
 
 class QueryASTTransformationService implements QueryASTTransformationServiceInterface
 {
+    use BasicServiceTrait;
+
     /**
      * Because fields are stored in SplObjectStorage,
      * the same instance must be retrieved in every case.
@@ -39,6 +42,23 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
          */
         $fieldInstanceContainer = new SplObjectStorage();
         $this->fieldInstanceContainer = $fieldInstanceContainer;
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
+     */
+    public function prepareOperationFieldAndFragmentBondsForExecution(
+        Document $document,
+        array $operations,
+        array $fragments,
+    ): SplObjectStorage {
+        return $this->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+            $document,
+            $operations,
+            $fragments,
+        );
     }
 
     /**
@@ -72,10 +92,23 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
         if ($operationsCount === 1 || !$moduleConfiguration->enableMultipleQueryExecution()) {
             foreach ($operations as $operation) {
-                $operationFieldOrFragmentBonds[$operation] = $operation->getFieldsOrFragmentBonds();
+                /**
+                 * Allow to override the original fields from the operation,
+                 * to inject the SuperRoot field for GraphQL
+                 */
+                $operationFieldOrFragmentBonds[$operation] = $this->getOperationFieldsOrFragmentBonds($document, $operation);
             }
             return $operationFieldOrFragmentBonds;
         }
+
+        /**
+         * The cache must be stored per Document, or otherwise
+         * executing multiple PHPUnit tests may access the
+         * same cached objects and produce errors.
+         *
+         * @var array<string,RelationalField>
+         */
+        $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
 
         /**
          * Wrap subsequent queries "field and fragment bonds" under
@@ -87,7 +120,11 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         $accumulatedMaximumFieldDepth = 0;
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
             $operation = $operations[$operationOrder];
-            $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
+            /**
+             * Allow to override the original fields from the operation,
+             * to inject the SuperRoot field for GraphQL
+             */
+            $fieldOrFragmentBonds = $this->getOperationFieldsOrFragmentBonds($document, $operation);
 
             /**
              * Each level needs to add as many "self" as the sum of the
@@ -174,14 +211,6 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     $operationOrder,
                     $level
                 );
-                /**
-                 * The cache must be stored per Document, or otherwise
-                 * executing multiple PHPUnit tests may access the
-                 * same cached objects and produce errors.
-                 *
-                 * @var array<string,RelationalField>
-                 */
-                $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
                 if (!isset($documentFieldInstanceContainer[$alias])) {
                     $documentFieldInstanceContainer[$alias] = new RelationalField(
                         'self',
@@ -195,7 +224,6 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                 $fieldOrFragmentBonds = [
                     $documentFieldInstanceContainer[$alias],
                 ];
-                $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
             }
             $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
 
@@ -204,7 +232,21 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
              */
             $accumulatedMaximumFieldDepth += $this->getOperationMaximumFieldDepth($operation, $fragments);
         }
+        $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
         return $operationFieldOrFragmentBonds;
+    }
+
+    /**
+     * Allow to override the original fields from the operation,
+     * to inject the SuperRoot field for GraphQL
+     *
+     * @return array<FieldInterface|FragmentBondInterface>
+     */
+    protected function getOperationFieldsOrFragmentBonds(
+        Document $document,
+        OperationInterface $operation,
+    ): array {
+        return $operation->getFieldsOrFragmentBonds();
     }
 
     /**

@@ -16,9 +16,21 @@ abstract class AbstractRelationalFieldDataloadComponentProcessor extends Abstrac
     protected function getInnerSubcomponents(Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
-        // The fields to retrieve are passed through component atts, so simply transfer all component atts down the line
-        $ret[] = new Component(RelationalFieldQueryDataComponentProcessor::class, RelationalFieldQueryDataComponentProcessor::COMPONENT_LAYOUT_RELATIONALFIELDS, $component->atts);
+        $ret[] = $this->getRelationalFieldInnerComponent($component);
         return $ret;
+    }
+
+    protected function getRelationalFieldInnerComponent(Component $component): Component
+    {
+        /**
+         * The fields to retrieve are passed through component atts,
+         * so simply transfer all component atts down the line
+         */
+        return new Component(
+            RelationalFieldQueryDataComponentProcessor::class,
+            RelationalFieldQueryDataComponentProcessor::COMPONENT_LAYOUT_RELATIONALFIELDS,
+            $component->atts
+        );
     }
 
     public function getFormat(Component $component): ?string

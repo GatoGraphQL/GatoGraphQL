@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPAPI\RESTAPI\DataStructureFormatters;
 
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
-use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     private ?EngineInterface $engine = null;
+    private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
 
     final public function setEngine(EngineInterface $engine): void
     {
@@ -23,6 +24,15 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         /** @var EngineInterface */
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
+    }
+    final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
+    {
+        $this->graphQLParserHelperService = $graphQLParserHelperService;
+    }
+    final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
+    {
+        /** @var GraphQLParserHelperServiceInterface */
+        return $this->graphQLParserHelperService ??= $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
     }
 
     public function getName(): string
@@ -47,7 +57,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $variables = App::getState('variables');
 
         try {
-            $graphQLQueryParsingPayload = GraphQLParserHelpers::parseGraphQLQuery(
+            $graphQLQueryParsingPayload = $this->getGraphQLParserHelperService()->parseGraphQLQuery(
                 $query,
                 $variables,
                 null,

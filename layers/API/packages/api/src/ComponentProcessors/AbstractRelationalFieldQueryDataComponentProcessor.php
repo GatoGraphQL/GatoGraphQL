@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ComponentProcessors;
 
+use PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractQueryDataComponentProcessor;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -23,8 +25,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
-use PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface;
+use SplObjectStorage;
 
 abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
 {
@@ -174,19 +175,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     ): array {
         $fieldFragmentModelsTuples = [];
         $fragments = $executableDocument->getDocument()->getFragments();
-        $requestedOperations = $executableDocument->getRequestedOperations();
+        $operationFieldOrFragmentBonds = $this->getOperationFieldOrFragmentBonds($executableDocument);
 
-        /**
-         * Multiple Query Execution: In order to have the fields
-         * of the subsequent operations be resolved in the same
-         * order as the operations (which is necessary for `@export`
-         * to work), then wrap them on a "self" field.
-         */
-        $operationFieldOrFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
-            $executableDocument->getDocument(),
-            $requestedOperations,
-            $fragments,
-        );
         /** @var OperationInterface $operation */
         foreach ($operationFieldOrFragmentBonds as $operation) {
             $fieldOrFragmentBonds = $operationFieldOrFragmentBonds[$operation];
@@ -200,6 +190,33 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             );
         }
         return $fieldFragmentModelsTuples;
+    }
+
+    /**
+     * Extract and re-generate (if needed) the Fields and
+     * (Inline) Fragment References from the Document.
+     *
+     * Regeneration of the AST includes:
+     *
+     * - Addition of the SuperRoot fields for GraphQL
+     * - Wrapping operatins in `self` for Multiple Query Execution
+     *
+     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
+     */
+    protected function getOperationFieldOrFragmentBonds(
+        ExecutableDocument $executableDocument,
+    ): SplObjectStorage {
+        /**
+         * Multiple Query Execution: In order to have the fields
+         * of the subsequent operations be resolved in the same
+         * order as the operations (which is necessary for `@export`
+         * to work), then wrap them on a "self" field.
+         */
+        return $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
+            $executableDocument->getDocument(),
+            $executableDocument->getRequestedOperations(),
+            $executableDocument->getDocument()->getFragments(),
+        );
     }
 
     /**
