@@ -223,7 +223,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             if (!$validObjectData) {
                 continue;
             }
-            /** @var array<string,array<string|int,FieldInterface>> */
+            /** @var array<string,array<string|int,FieldInterface[]>> */
             $previouslyResolvedFieldsForObjects = App::getState('previously-resolved-fields-for-objects');
             $previouslyResolvedFieldsForObjects[$typeOutputKey][$objectID][] = $field;
             $appStateManager->override('previously-resolved-fields-for-objects', $previouslyResolvedFieldsForObjects);

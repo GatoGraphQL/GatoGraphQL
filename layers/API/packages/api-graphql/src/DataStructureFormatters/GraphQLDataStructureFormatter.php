@@ -435,7 +435,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $executableDocument = App::getState('executable-document-ast');
             $fragments = $executableDocument->getDocument()->getFragments();
 
-            /** @var array<string,array<string|int,FieldInterface>> */
+            /** @var array<string,array<string|int,FieldInterface[]>> */
             $previouslyResolvedFieldsForObjects = App::getState('previously-resolved-fields-for-objects');
             $previouslyResolvedFieldsForObject = $previouslyResolvedFieldsForObjects[$typeOutputKey][$objectID] ?? [];
 
