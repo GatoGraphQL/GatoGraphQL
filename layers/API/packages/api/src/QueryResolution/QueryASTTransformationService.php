@@ -237,6 +237,9 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
     }
 
     /**
+     * Allow to override the original fields from the operation,
+     * to inject the SuperRoot field for GraphQL
+     *
      * @return array<FieldInterface|FragmentBondInterface>
      */
     protected function getOperationFieldsOrFragmentBonds(
