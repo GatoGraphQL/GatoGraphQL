@@ -257,7 +257,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
             // The type with ID may be stored under $unionTypeOutputKeyIDs
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$relationalField] ?? null;
-            
+
             /**
              * The RelationalField can contain fragments.
              * Replace these into fields.

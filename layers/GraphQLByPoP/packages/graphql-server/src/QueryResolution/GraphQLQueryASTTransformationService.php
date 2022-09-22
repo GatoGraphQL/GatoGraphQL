@@ -40,7 +40,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
         $fieldInstanceContainer = new SplObjectStorage();
         $this->fieldInstanceContainer = $fieldInstanceContainer;
     }
-    
+
     /**
      * @return array<FieldInterface|FragmentBondInterface>
      */
@@ -66,7 +66,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
      * Always return the same object for the same Operation!
      *
      * @see layers/GraphQLByPoP/packages/graphql-server/src/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php
-     */    
+     */
     public function getGraphQLSuperRootOperationField(
         Document $document,
         OperationInterface $operation
@@ -115,7 +115,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                  * is handled here, by transferring them into the
                  * SuperRoot Field, to be validated and executed
                  * there as a standard Field Directive.
-                 */                
+                 */
                 $operation->getDirectives(),
                 ASTNodesFactory::getNonSpecificLocation()
             );

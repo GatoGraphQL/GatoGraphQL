@@ -25,7 +25,7 @@ use function max;
 class QueryASTTransformationService implements QueryASTTransformationServiceInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * Because fields are stored in SplObjectStorage,
      * the same instance must be retrieved in every case.

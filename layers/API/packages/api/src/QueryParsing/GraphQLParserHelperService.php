@@ -18,7 +18,7 @@ use PoP\Root\Services\BasicServiceTrait;
 class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * @throws SyntaxErrorException
      * @throws FeatureNotSupportedException
@@ -41,12 +41,12 @@ class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
             $parser->getObjectResolvedFieldValueReferencedFields(),
         );
     }
-    
+
     protected function createParser(): ParserInterface
     {
         return new Parser();
     }
-    
+
     protected function parseQuery(ParserInterface $parser, string $query): Document
     {
         return $parser->parse($query);

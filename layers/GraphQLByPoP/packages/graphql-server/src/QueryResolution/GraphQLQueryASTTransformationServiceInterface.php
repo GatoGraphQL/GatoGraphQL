@@ -21,7 +21,7 @@ interface GraphQLQueryASTTransformationServiceInterface extends QueryASTTransfor
      * Always return the same object for the same Operation!
      *
      * @see layers/GraphQLByPoP/packages/graphql-server/src/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php
-     */    
+     */
     public function getGraphQLSuperRootOperationField(
         Document $document,
         OperationInterface $operation

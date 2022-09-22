@@ -46,7 +46,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         /** @var SuperRootObjectTypeResolver */
         return $this->superRootObjectTypeResolver ??= $this->instanceManager->getInstance(SuperRootObjectTypeResolver::class);
     }
-    
+
     /**
      * Indicate if to add entry "extensions" as a top-level entry
      */
