@@ -229,13 +229,9 @@ class GraphQLServer implements GraphQLServerInterface
         if ($executableDocument !== null) {
             /** @var OperationInterface */
             $requestedOperation = $executableDocument->getRequestedOperation();
-            $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
             $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
         } else {
             $appStateManager->override('does-api-query-have-errors', true);
-
-            // Reset to the initial state
-            $appStateManager->override('graphql-operation-type', null);
 
             /** @var ComponentModelModuleConfiguration */
             $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();

@@ -43,8 +43,6 @@ class AppStateProvider extends AbstractAppStateProvider
         } else {
             $state['edit-schema'] = null;
         }
-
-        $state['graphql-operation-type'] = null;
     }
 
     /**
@@ -76,8 +74,6 @@ class AppStateProvider extends AbstractAppStateProvider
          * Set the operation type and, based on it, if mutations are supported.
          */
         $requestedOperation = $executableDocument->getRequestedOperation();
-        /** @var OperationInterface $requestedOperation */
-        $state['graphql-operation-type'] = $requestedOperation->getOperationType();
         $state['are-mutations-enabled'] = $requestedOperation->getOperationType() === OperationTypes::MUTATION;
     }
 }
