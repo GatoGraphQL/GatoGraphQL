@@ -11,18 +11,6 @@ use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorFeedbackItemProv
 
 class UserNotLoggedInCheckpoint extends AbstractCheckpoint
 {
-    private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
-
-    final public function setCheckpointErrorFeedbackItemProvider(CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider): void
-    {
-        $this->checkpointErrorFeedbackItemProvider = $checkpointErrorFeedbackItemProvider;
-    }
-    final protected function getCheckpointErrorFeedbackItemProvider(): CheckpointErrorFeedbackItemProvider
-    {
-        /** @var CheckpointErrorFeedbackItemProvider */
-        return $this->checkpointErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(CheckpointErrorFeedbackItemProvider::class);
-    }
-
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         if (App::getState('is-user-logged-in')) {

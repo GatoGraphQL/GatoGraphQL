@@ -15,18 +15,6 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class EnabledMutationsCheckpoint extends AbstractStandaloneCheckpoint
 {
-    private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
-
-    final public function setCheckpointErrorFeedbackItemProvider(CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider): void
-    {
-        $this->checkpointErrorFeedbackItemProvider = $checkpointErrorFeedbackItemProvider;
-    }
-    final protected function getCheckpointErrorFeedbackItemProvider(): CheckpointErrorFeedbackItemProvider
-    {
-        /** @var CheckpointErrorFeedbackItemProvider */
-        return $this->checkpointErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(CheckpointErrorFeedbackItemProvider::class);
-    }
-
     public function __construct(
         protected FieldInterface $field,
     ) {        
