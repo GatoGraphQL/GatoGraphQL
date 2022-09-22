@@ -65,6 +65,10 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
         foreach ($operationFieldAndFragmentBonds as $operation) {
             /** @var array<FieldInterface|FragmentBondInterface> */
             $fieldAndFragmentBonds = $operationFieldAndFragmentBonds[$operation];
+            $alias = sprintf(
+                '_superRoot_%s_',
+                $operation->getName()
+            );
             /**
              * Please notice that support for Operation Directives
              * is handled here, by transferring them into the
@@ -75,7 +79,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                 $operationFieldAndFragmentBonds[$operation] = [
                     new RelationalField(
                         $enableNestedMutations ? 'root' : 'queryRoot',
-                        null,
+                        $alias,
                         [],
                         $fieldAndFragmentBonds,
                         $operation->getDirectives(),
@@ -88,7 +92,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                 $operationFieldAndFragmentBonds[$operation] = [
                     new RelationalField(
                         $enableNestedMutations ? 'root' : 'mutationRoot',
-                        null,
+                        $alias,
                         [],
                         $fieldAndFragmentBonds,
                         $operation->getDirectives(),
