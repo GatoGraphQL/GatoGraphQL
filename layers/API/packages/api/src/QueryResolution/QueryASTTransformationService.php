@@ -49,6 +49,23 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      * @param Fragment[] $fragments
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
+    public function prepareOperationFieldAndFragmentBondsForExecution(
+        Document $document,
+        array $operations,
+        array $fragments,
+    ): SplObjectStorage {
+        return $this->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
+            $document,
+            $operations,
+            $fragments,
+        );
+    }
+
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
+     */
     public function prepareOperationFieldAndFragmentBondsForMultipleQueryExecution(
         Document $document,
         array $operations,

@@ -13,6 +13,12 @@ use SplObjectStorage;
 
 interface QueryASTTransformationServiceInterface
 {
+    public function prepareOperationFieldAndFragmentBondsForExecution(
+        Document $document,
+        array $operations,
+        array $fragments,
+    ): SplObjectStorage;
+
     /**
      * Multiple Query Execution: In order to have the fields
      * of the subsequent operations be resolved in the same
