@@ -6,20 +6,42 @@ namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
+use PoPAPI\API\QueryResolution\QueryASTTransformationService;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
-use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Exception\ShouldNotHappenException;
-use PoP\Root\Services\BasicServiceTrait;
+use SplObjectStorage;
 
-class GraphQLQueryASTTransformationService implements GraphQLQueryASTTransformationServiceInterface
+class GraphQLQueryASTTransformationService extends QueryASTTransformationService implements GraphQLQueryASTTransformationServiceInterface
 {
-    use BasicServiceTrait;
+    /**
+     * @param OperationInterface[] $operations
+     * @param Fragment[] $fragments
+     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
+     */
+    public function prepareOperationFieldAndFragmentBondsForExecution(
+        Document $document,
+        array $operations,
+        array $fragments,
+    ): SplObjectStorage {
+        $operationFieldAndFragmentBonds = parent::prepareOperationFieldAndFragmentBondsForExecution(
+            $document,
+            $operations,
+            $fragments,
+        );
+        return $operationFieldAndFragmentBonds;
+        return $this->convertOperationsToContainGraphQLSuperRootFields(
+            $operationFieldAndFragmentBonds
+        );
+    }
 
     /**
      * Convert the operations (query, mutation, subscription) in the
@@ -29,63 +51,50 @@ class GraphQLQueryASTTransformationService implements GraphQLQueryASTTransformat
      *
      * @see layers/GraphQLByPoP/packages/graphql-server/src/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php
      *
-     * @param OperationInterface[] $operations
-     * @return OperationInterface[]
+     * @param SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> $operationFieldAndFragmentBonds
+     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
-    public function convertOperationsToContainGraphQLSuperRootFields(array $operations): array
-    {
+    protected function convertOperationsToContainGraphQLSuperRootFields(
+        SplObjectStorage $operationFieldAndFragmentBonds,
+    ): SplObjectStorage {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $enableNestedMutations = $moduleConfiguration->enableNestedMutations();
 
-        $parser = $this->createParser();
-        $convertedOperations = [];
-        foreach ($operations as $operation) {
+        /** @var OperationInterface $operation */
+        foreach ($operationFieldAndFragmentBonds as $operation) {
+            /** @var array<FieldInterface|FragmentBondInterface> */
+            $fieldAndFragmentBonds = $operationFieldAndFragmentBonds[$operation];
             /**
-             * As there is no setFields method, must create
-             * a new object for the Query/Mutation Operations.
-             *
              * Please notice that support for Operation Directives
              * is handled here, by transferring them into the
              * SuperRoot Field, to be validated and executed
              * there as a standard Field Directive.
              */
             if ($operation instanceof QueryOperation) {
-                $convertedOperations[] = $parser->createQueryOperation(
-                    $operation->getName(),
-                    $operation->getVariables(),
-                    $operation->getDirectives(),
-                    [
-                        new RelationalField(
-                            $enableNestedMutations ? 'root' : 'queryRoot',
-                            null,
-                            [],
-                            $operation->getFieldsOrFragmentBonds(),
-                            $operation->getDirectives(),
-                            ASTNodesFactory::getNonSpecificLocation()
-                        ),
-                    ],
-                    $operation->getLocation()
-                );
+                $operationFieldAndFragmentBonds[$operation] = [
+                    new RelationalField(
+                        $enableNestedMutations ? 'root' : 'queryRoot',
+                        null,
+                        [],
+                        $fieldAndFragmentBonds,
+                        $operation->getDirectives(),
+                        ASTNodesFactory::getNonSpecificLocation()
+                    ),
+                ];
                 continue;
             }
             if ($operation instanceof MutationOperation) {
-                $convertedOperations[] = $parser->createMutationOperation(
-                    $operation->getName(),
-                    $operation->getVariables(),
-                    $operation->getDirectives(),
-                    [
-                        new RelationalField(
-                            $enableNestedMutations ? 'root' : 'mutationRoot',
-                            null,
-                            [],
-                            $operation->getFieldsOrFragmentBonds(),
-                            $operation->getDirectives(),
-                            ASTNodesFactory::getNonSpecificLocation()
-                        ),
-                    ],
-                    $operation->getLocation()
-                );
+                $operationFieldAndFragmentBonds[$operation] = [
+                    new RelationalField(
+                        $enableNestedMutations ? 'root' : 'mutationRoot',
+                        null,
+                        [],
+                        $fieldAndFragmentBonds,
+                        $operation->getDirectives(),
+                        ASTNodesFactory::getNonSpecificLocation()
+                    ),
+                ];
                 continue;
             }
             throw new ShouldNotHappenException(
@@ -95,11 +104,6 @@ class GraphQLQueryASTTransformationService implements GraphQLQueryASTTransformat
                 )
             );
         }
-        return $convertedOperations;
-    }
-    
-    protected function createParser(): ParserInterface
-    {
-        return new Parser();
+        return $operationFieldAndFragmentBonds;
     }
 }
