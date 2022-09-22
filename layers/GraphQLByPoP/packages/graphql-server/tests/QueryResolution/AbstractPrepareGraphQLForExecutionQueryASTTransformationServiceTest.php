@@ -212,8 +212,12 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
             ];
             $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
                 new RelationalField(
-                    'queryRoot',
-                    '_superRoot_queryRoot_Three_',
+                    $isNestedMutationsEnabled
+                        ? 'root'
+                        : 'queryRoot',
+                    $isNestedMutationsEnabled
+                        ? '_superRoot_root_Three_'
+                        : '_superRoot_queryRoot_Three_',
                     [],
                     [
                         $leafField31,
@@ -268,8 +272,12 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
                                             [],
                                             [
                                                 new RelationalField(
-                                                    'queryRoot',
-                                                    '_superRoot_queryRoot_Three_',
+                                                    $isNestedMutationsEnabled
+                                                        ? 'root'
+                                                        : 'queryRoot',
+                                                    $isNestedMutationsEnabled
+                                                        ? '_superRoot_root_Three_'
+                                                        : '_superRoot_queryRoot_Three_',
                                                     [],
                                                     [
                                                         $leafField31,
