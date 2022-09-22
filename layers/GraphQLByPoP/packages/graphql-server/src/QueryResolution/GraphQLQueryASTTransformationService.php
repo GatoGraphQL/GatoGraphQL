@@ -37,7 +37,6 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
             $operations,
             $fragments,
         );
-        return $operationFieldAndFragmentBonds;
         return $this->convertOperationsToContainGraphQLSuperRootFields(
             $operationFieldAndFragmentBonds
         );
