@@ -11,7 +11,6 @@ use PoP\ComponentModel\App;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
@@ -23,24 +22,15 @@ use SplObjectStorage;
 class GraphQLQueryASTTransformationService extends QueryASTTransformationService implements GraphQLQueryASTTransformationServiceInterface
 {
     /**
-     * @param OperationInterface[] $operations
-     * @param Fragment[] $fragments
-     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
+     * @return array<FieldInterface|FragmentBondInterface>
      */
-    public function prepareOperationFieldAndFragmentBondsForExecution(
+    protected function getOperationFieldsOrFragmentBonds(
         Document $document,
-        array $operations,
-        array $fragments,
-    ): SplObjectStorage {
-        $operationFieldAndFragmentBonds = parent::prepareOperationFieldAndFragmentBondsForExecution(
+        OperationInterface $operation,
+    ): array {
+        return $this->wrapOperationFieldsOrFragmentBondsInGraphQLSuperRootField(
             $document,
-            $operations,
-            $fragments,
-        );
-        // return $operationFieldAndFragmentBonds;
-        return $this->convertOperationsToContainGraphQLSuperRootFields(
-            $document,
-            $operationFieldAndFragmentBonds
+            $operation
         );
     }
 
@@ -52,13 +42,12 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
      *
      * @see layers/GraphQLByPoP/packages/graphql-server/src/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php
      *
-     * @param SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> $operationFieldAndFragmentBonds
-     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
+     * @return array<FieldInterface|FragmentBondInterface>
      */
-    protected function convertOperationsToContainGraphQLSuperRootFields(
+    protected function wrapOperationFieldsOrFragmentBondsInGraphQLSuperRootField(
         Document $document,
-        SplObjectStorage $operationFieldAndFragmentBonds,
-    ): SplObjectStorage {
+        OperationInterface $operation
+    ): array {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $enableNestedMutations = $moduleConfiguration->enableNestedMutations();
@@ -72,51 +61,46 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
          */
         $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
 
-        /** @var OperationInterface $operation */
-        foreach ($operationFieldAndFragmentBonds as $operation) {
-            if ($enableNestedMutations) {
-                $superRootField = 'root';
-            } elseif ($operation instanceof QueryOperation) {
-                $superRootField = 'queryRoot';
-            } elseif ($operation instanceof MutationOperation) {
-                $superRootField = 'mutationRoot';
-            } else {
-                throw new ShouldNotHappenException(
-                    sprintf(
-                        $this->__('Cannot recognize GraphQL Operation AST object, with class \'%s\''),
-                        get_class($operation)
-                    )
-                );
-            }
-
-            $alias = sprintf(
-                '_superRoot_%s_%s_',
-                $superRootField,
-                $operation->getName()
+        if ($enableNestedMutations) {
+            $superRootField = 'root';
+        } elseif ($operation instanceof QueryOperation) {
+            $superRootField = 'queryRoot';
+        } elseif ($operation instanceof MutationOperation) {
+            $superRootField = 'mutationRoot';
+        } else {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Cannot recognize GraphQL Operation AST object, with class \'%s\''),
+                    get_class($operation)
+                )
             );
-            if (!isset($documentFieldInstanceContainer[$alias])) {
-                /** @var array<FieldInterface|FragmentBondInterface> */
-                $fieldAndFragmentBonds = $operationFieldAndFragmentBonds[$operation];
-                $documentFieldInstanceContainer[$alias] = [
-                    new RelationalField(
-                        $superRootField,
-                        $alias,
-                        [],
-                        $fieldAndFragmentBonds,
-                        /**
-                         * Please notice that support for Operation Directives
-                         * is handled here, by transferring them into the
-                         * SuperRoot Field, to be validated and executed
-                         * there as a standard Field Directive.
-                         */                
-                        $operation->getDirectives(),
-                        ASTNodesFactory::getNonSpecificLocation()
-                    ),
-                ];
-            }
-            $operationFieldAndFragmentBonds[$operation] = $documentFieldInstanceContainer[$alias];
+        }
+
+        $alias = sprintf(
+            '_superRoot_%s_%s_',
+            $superRootField,
+            $operation->getName()
+        );
+        if (!isset($documentFieldInstanceContainer[$alias])) {
+            $documentFieldInstanceContainer[$alias] = new RelationalField(
+                $superRootField,
+                $alias,
+                [],
+                $operation->getFieldsOrFragmentBonds(),
+                /**
+                 * Please notice that support for Operation Directives
+                 * is handled here, by transferring them into the
+                 * SuperRoot Field, to be validated and executed
+                 * there as a standard Field Directive.
+                 */                
+                $operation->getDirectives(),
+                ASTNodesFactory::getNonSpecificLocation()
+            );
         }
         $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
-        return $operationFieldAndFragmentBonds;
+        /** @var array<FieldInterface|FragmentBondInterface> */
+        return [
+            $documentFieldInstanceContainer[$alias],
+        ];
     }
 }

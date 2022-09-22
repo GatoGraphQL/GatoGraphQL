@@ -116,7 +116,11 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         $accumulatedMaximumFieldDepth = 0;
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
             $operation = $operations[$operationOrder];
-            $fieldOrFragmentBonds = $operation->getFieldsOrFragmentBonds();
+            /**
+             * Allow to override the original fields from the operation,
+             * to inject the SuperRoot field for GraphQL
+             */
+            $fieldOrFragmentBonds = $this->getOperationFieldsOrFragmentBonds($document, $operation);
 
             /**
              * Each level needs to add as many "self" as the sum of the
@@ -226,6 +230,16 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         }
         $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
         return $operationFieldOrFragmentBonds;
+    }
+
+    /**
+     * @return array<FieldInterface|FragmentBondInterface>
+     */
+    protected function getOperationFieldsOrFragmentBonds(
+        Document $document,
+        OperationInterface $operation,
+    ): array {
+        return $operation->getFieldsOrFragmentBonds();
     }
 
     /**
