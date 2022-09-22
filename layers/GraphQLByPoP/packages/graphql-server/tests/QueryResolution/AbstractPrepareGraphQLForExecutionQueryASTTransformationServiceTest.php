@@ -13,6 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
@@ -56,8 +57,8 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
          *     }
          *   }
          *
-         *   query Two {
-         *     post(id: 2) {
+         *   mutation Two {
+         *     updatePost(id: 2, title: "Hallo!") {
          *       title
          *     }
          *   }
@@ -100,13 +101,15 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
             new Location(2, 19)
         );
 
-        $argument2 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
+        $argument21 = new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22));
+        $argument22 = new Argument('title', new Literal("Hallo!", new Location(9, 33)), new Location(9, 29));
         $leafField2 = new LeafField('title', null, [], [], new Location(10, 21));
         $relationalField2 = new RelationalField(
-            'post',
+            'updatePost',
             null,
             [
-                $argument2,
+                $argument21,
+                $argument22,
             ],
             [
                 $leafField2,
@@ -114,7 +117,7 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
             [],
             new Location(9, 17)
         );
-        $queryTwoOperation = new QueryOperation(
+        $queryTwoOperation = new MutationOperation(
             'Two',
             [],
             [],
@@ -183,8 +186,8 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
         ];
 
         $relationalField1SuperRootField = new RelationalField(
-            'queryRoot',
-            '_superRoot_queryRoot_Two_',
+            'mutationRoot',
+            '_superRoot_mutationRoot_Two_',
             [],
             [
                 $relationalField2,
