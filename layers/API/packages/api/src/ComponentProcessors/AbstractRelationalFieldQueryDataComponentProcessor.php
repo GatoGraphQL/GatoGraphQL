@@ -193,6 +193,14 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
 
     /**
+     * Extract and re-generate (if needed) the Fields and
+     * (Inline) Fragment References from the Document.
+     *
+     * Regeneration of the AST includes:
+     *
+     * - Addition of the SuperRoot fields for GraphQL
+     * - Wrapping operatins in `self` for Multiple Query Execution
+     *
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
     protected function getOperationFieldOrFragmentBonds(
