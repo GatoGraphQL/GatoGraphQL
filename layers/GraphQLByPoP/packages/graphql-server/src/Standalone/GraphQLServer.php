@@ -21,12 +21,16 @@ use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
+use PoP\Root\Services\StandaloneServiceTrait;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class GraphQLServer implements GraphQLServerInterface
 {
+    use StandaloneServiceTrait;
+
     /**
      * @var array<class-string<ModuleInterface>>
      */
@@ -41,7 +45,7 @@ class GraphQLServer implements GraphQLServerInterface
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {
         /** @var GraphQLParserHelperServiceInterface */
-        return $this->graphQLParserHelperService ??= $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+        return $this->graphQLParserHelperService ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLParserHelperServiceInterface::class);
     }
 
     /**
