@@ -98,6 +98,15 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         }
 
         /**
+         * The cache must be stored per Document, or otherwise
+         * executing multiple PHPUnit tests may access the
+         * same cached objects and produce errors.
+         *
+         * @var array<string,RelationalField>
+         */
+        $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
+
+        /**
          * Wrap subsequent queries "field and fragment bonds" under
          * the required multiple levels of `self`.
          *
@@ -194,14 +203,6 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                     $operationOrder,
                     $level
                 );
-                /**
-                 * The cache must be stored per Document, or otherwise
-                 * executing multiple PHPUnit tests may access the
-                 * same cached objects and produce errors.
-                 *
-                 * @var array<string,RelationalField>
-                 */
-                $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
                 if (!isset($documentFieldInstanceContainer[$alias])) {
                     $documentFieldInstanceContainer[$alias] = new RelationalField(
                         'self',
@@ -215,7 +216,6 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                 $fieldOrFragmentBonds = [
                     $documentFieldInstanceContainer[$alias],
                 ];
-                $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
             }
             $operationFieldOrFragmentBonds[$operation] = $fieldOrFragmentBonds;
 
@@ -224,6 +224,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
              */
             $accumulatedMaximumFieldDepth += $this->getOperationMaximumFieldDepth($operation, $fragments);
         }
+        $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
         return $operationFieldOrFragmentBonds;
     }
 
