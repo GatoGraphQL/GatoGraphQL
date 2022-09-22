@@ -13,9 +13,12 @@ use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
+use PoP\Root\Services\BasicServiceTrait;
 
 class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
 {
+    use BasicServiceTrait;
+    
     /**
      * @throws SyntaxErrorException
      * @throws FeatureNotSupportedException
