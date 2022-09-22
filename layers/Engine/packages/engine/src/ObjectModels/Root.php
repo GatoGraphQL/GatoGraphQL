@@ -7,6 +7,7 @@ namespace PoP\Engine\ObjectModels;
 class Root
 {
     public final const ID = 'root';
+
     public function getID(): string
     {
         return self::ID;
