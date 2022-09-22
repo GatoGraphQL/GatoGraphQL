@@ -15,11 +15,6 @@ use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
 
 class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
 {
-    protected function createParser(): ParserInterface
-    {
-        return new Parser();
-    }
-
     /**
      * @throws SyntaxErrorException
      * @throws FeatureNotSupportedException
@@ -41,5 +36,10 @@ class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
             $executableDocument,
             $parser->getObjectResolvedFieldValueReferencedFields(),
         );
+    }
+    
+    protected function createParser(): ParserInterface
+    {
+        return new Parser();
     }
 }
