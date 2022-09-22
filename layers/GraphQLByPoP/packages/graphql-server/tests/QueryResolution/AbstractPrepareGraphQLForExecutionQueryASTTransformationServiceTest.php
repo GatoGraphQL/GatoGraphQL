@@ -170,12 +170,18 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
             $queryThreeOperation,
         ];
 
+        $isNestedMutationsEnabled = static::isNestedMutationsEnabled();
+
         /** @var SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>> */
         $expectedOperationFieldAndFragmentBonds = new SplObjectStorage();
         $expectedOperationFieldAndFragmentBonds[$queryOneOperation] = [
             new RelationalField(
-                'queryRoot',
-                '_superRoot_queryRoot_One_',
+                $isNestedMutationsEnabled
+                    ? 'root'
+                    : 'queryRoot',
+                $isNestedMutationsEnabled
+                    ? '_superRoot_root_One_'
+                    : '_superRoot_queryRoot_One_',
                 [],
                 [
                     $relationalField1,
@@ -186,8 +192,12 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
         ];
 
         $relationalField1SuperRootField = new RelationalField(
-            'mutationRoot',
-            '_superRoot_mutationRoot_Two_',
+            $isNestedMutationsEnabled
+                ? 'root'
+                : 'mutationRoot',
+            $isNestedMutationsEnabled
+                ? '_superRoot_root_Two_'
+                : '_superRoot_mutationRoot_Two_',
             [],
             [
                 $relationalField2,
