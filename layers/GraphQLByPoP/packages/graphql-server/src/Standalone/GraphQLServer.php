@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
-use GraphQLByPoP\GraphQLServer\Constants\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
 use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoPAPI\API\Response\Schemes;
@@ -15,12 +14,9 @@ use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
-use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;

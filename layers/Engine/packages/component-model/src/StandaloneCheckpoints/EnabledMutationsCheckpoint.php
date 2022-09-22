@@ -19,7 +19,7 @@ class EnabledMutationsCheckpoint extends AbstractStandaloneCheckpoint
 {
     public function __construct(
         protected FieldInterface $field,
-    ) {        
+    ) {
     }
 
     public function validateCheckpoint(): ?FeedbackItemResolution
