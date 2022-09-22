@@ -21,7 +21,7 @@ use PoP\Root\AbstractTestCase;
 use PoP\Root\Module\ModuleInterface;
 use SplObjectStorage;
 
-abstract class AbstractMultipleQueryExecutionDisabledQueryASTTransformationServiceTest extends AbstractTestCase
+abstract class AbstractMultipleQueryExecutionQueryASTTransformationServiceTest extends AbstractTestCase
 {
     /**
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration

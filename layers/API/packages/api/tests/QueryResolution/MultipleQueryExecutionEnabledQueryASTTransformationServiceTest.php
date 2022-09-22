@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\QueryResolution;
 
-class MultipleQueryExecutionEnabledQueryASTTransformationServiceTest extends AbstractMultipleQueryExecutionDisabledQueryASTTransformationServiceTest
+class MultipleQueryExecutionEnabledQueryASTTransformationServiceTest extends AbstractMultipleQueryExecutionQueryASTTransformationServiceTest
 {
     protected static function enabled(): bool
     {
