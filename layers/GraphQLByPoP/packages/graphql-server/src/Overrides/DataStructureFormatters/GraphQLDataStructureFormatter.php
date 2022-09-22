@@ -50,17 +50,57 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     }
 
     /**
-     * Convert the operations to include the SuperRoot Fields
+     * The requested operation must obtain its field from
+     * the transformation service, to obtain the SuperRoot field.
      *
-     * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
+     * Otherwise, obtain the fields from the parsed AST,
+     * as is the original case.
+     *
+     * @return FieldInterface[]
      */
-    protected function getOperationFieldOrFragmentBonds(
+    protected function getFieldsFromExecutableDocument(
         ExecutableDocument $executableDocument,
-    ): SplObjectStorage {
-        return $this->getGraphQLQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
+    ): array {
+        $requestedOperation = $executableDocument->getRequestedOperation();
+        if ($requestedOperation === null) {
+            return [];
+        }
+
+        $fragments = $executableDocument->getDocument()->getFragments();
+        
+        /**
+         * Remove the requested operation, as it will be handled
+         * in a different way
+         */
+        $requestedOperations = array_diff(
+            $executableDocument->getRequestedOperations(),
+            [
+                $requestedOperation,
+            ]
+        );
+
+        /**
+         * For the requested operation, retrieve its Field
+         * from the Query Transformation Service, which is
+         * storing the SuperRoot field.
+         */
+        $operationFieldAndFragmentBonds = $this->getGraphQLQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
             $executableDocument->getDocument(),
             $executableDocument->getRequestedOperations(),
             $executableDocument->getDocument()->getFragments(),
+        );
+        /** @var FieldInterface[] */
+        $requestedOperationFields = $operationFieldAndFragmentBonds[$requestedOperation];
+
+        return array_merge(
+            $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
+                $requestedOperationFields,
+                $fragments
+            ),
+            $this->getFieldsFromOperations(
+                $requestedOperations,
+                $fragments
+            )
         );
     }
 }
