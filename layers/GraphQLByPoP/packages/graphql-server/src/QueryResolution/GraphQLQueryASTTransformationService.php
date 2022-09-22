@@ -38,6 +38,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
             $fragments,
         );
         return $this->convertOperationsToContainGraphQLSuperRootFields(
+            $document,
             $operationFieldAndFragmentBonds
         );
     }
@@ -54,11 +55,21 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
     protected function convertOperationsToContainGraphQLSuperRootFields(
+        Document $document,
         SplObjectStorage $operationFieldAndFragmentBonds,
     ): SplObjectStorage {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $enableNestedMutations = $moduleConfiguration->enableNestedMutations();
+
+        /**
+         * The cache must be stored per Document, or otherwise
+         * executing multiple PHPUnit tests may access the
+         * same cached objects and produce errors.
+         *
+         * @var array<string,RelationalField>
+         */
+        $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
 
         /** @var OperationInterface $operation */
         foreach ($operationFieldAndFragmentBonds as $operation) {
@@ -77,31 +88,34 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                 );
             }
 
-            /** @var array<FieldInterface|FragmentBondInterface> */
-            $fieldAndFragmentBonds = $operationFieldAndFragmentBonds[$operation];
             $alias = sprintf(
                 '_superRoot_%s_%s_',
                 $superRootField,
                 $operation->getName()
             );
-
-            /**
-             * Please notice that support for Operation Directives
-             * is handled here, by transferring them into the
-             * SuperRoot Field, to be validated and executed
-             * there as a standard Field Directive.
-             */
-            $operationFieldAndFragmentBonds[$operation] = [
-                new RelationalField(
-                    $superRootField,
-                    $alias,
-                    [],
-                    $fieldAndFragmentBonds,
-                    $operation->getDirectives(),
-                    ASTNodesFactory::getNonSpecificLocation()
-                ),
-            ];
+            if (!isset($documentFieldInstanceContainer[$alias])) {
+                /** @var array<FieldInterface|FragmentBondInterface> */
+                $fieldAndFragmentBonds = $operationFieldAndFragmentBonds[$operation];
+                $documentFieldInstanceContainer[$alias] = [
+                    new RelationalField(
+                        $superRootField,
+                        $alias,
+                        [],
+                        $fieldAndFragmentBonds,
+                        /**
+                         * Please notice that support for Operation Directives
+                         * is handled here, by transferring them into the
+                         * SuperRoot Field, to be validated and executed
+                         * there as a standard Field Directive.
+                         */                
+                        $operation->getDirectives(),
+                        ASTNodesFactory::getNonSpecificLocation()
+                    ),
+                ];
+            }
+            $operationFieldAndFragmentBonds[$operation] = $documentFieldInstanceContainer[$alias];
         }
+        $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
         return $operationFieldAndFragmentBonds;
     }
 }

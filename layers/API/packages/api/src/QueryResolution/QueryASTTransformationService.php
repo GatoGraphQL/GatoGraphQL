@@ -33,7 +33,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      *
      * @var SplObjectStorage<Document,array<string,RelationalField>>
      */
-    private SplObjectStorage $fieldInstanceContainer;
+    protected SplObjectStorage $fieldInstanceContainer;
 
     public function __construct()
     {
