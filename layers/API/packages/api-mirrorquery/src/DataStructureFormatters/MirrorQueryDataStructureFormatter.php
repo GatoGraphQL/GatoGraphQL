@@ -247,6 +247,24 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
             // The type with ID may be stored under $unionTypeOutputKeyIDs
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$relationalField] ?? null;
+            
+            /**
+             * The RelationalField can contain fragments.
+             * Replace these into fields.
+             */
+            /** @var ExecutableDocument */
+            $executableDocument = App::getState('executable-document-ast');
+            $fragments = $executableDocument->getDocument()->getFragments();
+            $relationalNestedFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
+                $relationalField->getFieldsOrFragmentBonds(),
+                $fragments
+            );
+
+            if ($this->skipAddingDataForType($typeOutputKey)) {
+                $resolvedObjectNestedPropertyRet = &$resolvedObjectRet;
+                $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
+                continue;
+            }
 
             // Add a new subarray for the nested property
             $resolvedObjectNestedPropertyRet = &$resolvedObjectRet[$relationalFieldOutputKey];
@@ -270,19 +288,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     $resolvedObjectRet[$relationalFieldOutputKey] = [];
                 }
             }
-            /**
-             * The RelationalField can contain fragments.
-             * Replace these into fields.
-             */
-            /** @var ExecutableDocument */
-            $executableDocument = App::getState('executable-document-ast');
-            $fragments = $executableDocument->getDocument()->getFragments();
-            $relationalNestedFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
-                $relationalField->getFieldsOrFragmentBonds(),
-                $fragments
-            );
             $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
+    }
+
+    protected function skipAddingDataForType(string $typeOutputKey): bool
+    {
+        return false;
     }
 
     /**
