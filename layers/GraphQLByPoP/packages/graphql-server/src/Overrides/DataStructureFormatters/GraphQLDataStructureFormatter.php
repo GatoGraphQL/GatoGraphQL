@@ -10,10 +10,7 @@ use GraphQLByPoP\GraphQLServer\QueryResolution\GraphQLQueryASTTransformationServ
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
-use SplObjectStorage;
 
 /**
  * Change the properties printed for the standard GraphQL response:
@@ -62,24 +59,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function getFieldsFromExecutableDocument(
         ExecutableDocument $executableDocument,
     ): array {
-        $requestedOperation = $executableDocument->getRequestedOperation();
-        if ($requestedOperation === null) {
-            return [];
-        }
-
-        $fragments = $executableDocument->getDocument()->getFragments();
-
-        /**
-         * Remove the requested operation, as it will be handled
-         * in a different way
-         */
-        $requestedOperations = array_diff(
-            $executableDocument->getRequestedOperations(),
-            [
-                $requestedOperation,
-            ]
-        );
-
         /**
          * For the requested operation, retrieve its Field
          * from the Query Transformation Service, which is
@@ -90,18 +69,17 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             $executableDocument->getRequestedOperations(),
             $executableDocument->getDocument()->getFragments(),
         );
-        /** @var FieldInterface[] */
-        $requestedOperationFields = $operationFieldAndFragmentBonds[$requestedOperation];
 
-        return array_merge(
-            $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
-                $requestedOperationFields,
-                $fragments
-            ),
-            $this->getFieldsFromOperations(
-                $requestedOperations,
-                $fragments
-            )
-        );
+        $fieldsFromExecutableDocument = [];
+        foreach ($executableDocument->getRequestedOperations() as $operation) {
+            // @todo Remove `?? []` after removing __ALL, since that's the only case that is needed
+            /** @var FieldInterface[] */
+            $operationFields = $operationFieldAndFragmentBonds[$operation] ?? [];
+            $fieldsFromExecutableDocument = [
+                ...$fieldsFromExecutableDocument,
+                ...$operationFields
+            ];
+        }
+        return $fieldsFromExecutableDocument;
     }
 }
