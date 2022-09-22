@@ -50,11 +50,12 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     }
 
     /**
-     * The requested operation must obtain its field from
-     * the transformation service, to obtain the SuperRoot field.
-     *
-     * Otherwise, obtain the fields from the parsed AST,
-     * as is the original case.
+     * Watch out! For GraphQL, the query (or mutation) fields in the AST
+     * were wrapped with a RelationalField('queryRoot'),
+     * so the initial Type being handled has changed, from
+     * QueryRoot to SuperRoot. So for this particular case,
+     * the Field comes from the Transformation Service, and not
+     * from the AST.
      *
      * @return FieldInterface[]
      */
@@ -67,7 +68,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         }
 
         $fragments = $executableDocument->getDocument()->getFragments();
-        
+
         /**
          * Remove the requested operation, as it will be handled
          * in a different way
