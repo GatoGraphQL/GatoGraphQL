@@ -59,27 +59,13 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function getFieldsFromExecutableDocument(
         ExecutableDocument $executableDocument,
     ): array {
-        /**
-         * For the requested operation, retrieve its Field
-         * from the Query Transformation Service, which is
-         * storing the SuperRoot field.
-         */
-        $operationFieldAndFragmentBonds = $this->getGraphQLQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
-            $executableDocument->getDocument(),
-            $executableDocument->getRequestedOperations(),
-            $executableDocument->getDocument()->getFragments(),
-        );
-
-        $fieldsFromExecutableDocument = [];
+        $superRootOperationFields = [];
         foreach ($executableDocument->getRequestedOperations() as $operation) {
-            // @todo Remove `?? []` after removing __ALL, since that's the only case that is needed
-            /** @var FieldInterface[] */
-            $operationFields = $operationFieldAndFragmentBonds[$operation] ?? [];
-            $fieldsFromExecutableDocument = [
-                ...$fieldsFromExecutableDocument,
-                ...$operationFields
-            ];
+            $superRootOperationFields[] = $this->getGraphQLQueryASTTransformationService()->getGraphQLSuperRootOperationField(
+                $executableDocument->getDocument(),
+                $operation
+            );
         }
-        return $fieldsFromExecutableDocument;
+        return $superRootOperationFields;
     }
 }

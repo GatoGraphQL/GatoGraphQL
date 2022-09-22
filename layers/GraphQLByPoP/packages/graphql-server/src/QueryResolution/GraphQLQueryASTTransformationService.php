@@ -22,6 +22,26 @@ use SplObjectStorage;
 class GraphQLQueryASTTransformationService extends QueryASTTransformationService implements GraphQLQueryASTTransformationServiceInterface
 {
     /**
+     * Because fields are stored in SplObjectStorage,
+     * the same instance must be retrieved in every case.
+     * Then, cache and reuse every created field
+     *
+     * @var SplObjectStorage<Document,array<string,RelationalField>>
+     */
+    private SplObjectStorage $fieldInstanceContainer;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        /**
+         * @var SplObjectStorage<Document,array<string,RelationalField>>
+         */
+        $fieldInstanceContainer = new SplObjectStorage();
+        $this->fieldInstanceContainer = $fieldInstanceContainer;
+    }
+    
+    /**
      * @return array<FieldInterface|FragmentBondInterface>
      */
     protected function getOperationFieldsOrFragmentBonds(
