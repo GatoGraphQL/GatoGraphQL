@@ -28,10 +28,12 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
         Document $document,
         OperationInterface $operation,
     ): array {
-        return $this->wrapOperationFieldsOrFragmentBondsInGraphQLSuperRootField(
-            $document,
-            $operation
-        );
+        return [
+            $this->getGraphQLSuperRootOperationField(
+                $document,
+                $operation
+            ),
+        ];
     }
 
     /**
@@ -40,14 +42,15 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
      * type ("queryRoot", "mutationRoot", "subscriptionRoot"), which is
      * the type from which the GraphQL query is resolved.
      *
-     * @see layers/GraphQLByPoP/packages/graphql-server/src/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php
+     * Object caching (via alias) is mandatory:
+     * Always return the same object for the same Operation!
      *
-     * @return array<FieldInterface|FragmentBondInterface>
-     */
-    protected function wrapOperationFieldsOrFragmentBondsInGraphQLSuperRootField(
+     * @see layers/GraphQLByPoP/packages/graphql-server/src/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php
+     */    
+    public function getGraphQLSuperRootOperationField(
         Document $document,
         OperationInterface $operation
-    ): array {
+    ): FieldInterface {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $enableNestedMutations = $moduleConfiguration->enableNestedMutations();
@@ -98,9 +101,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
             );
         }
         $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
-        /** @var array<FieldInterface|FragmentBondInterface> */
-        return [
-            $documentFieldInstanceContainer[$alias],
-        ];
+        /** @var FieldInterface */
+        return $documentFieldInstanceContainer[$alias];
     }
 }
