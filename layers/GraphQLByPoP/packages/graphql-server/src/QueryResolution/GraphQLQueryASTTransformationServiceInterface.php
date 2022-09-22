@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
-use PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface as UpstreamQueryASTTransformationServiceInterface;
-
-interface QueryASTTransformationServiceInterface extends UpstreamQueryASTTransformationServiceInterface
+interface GraphQLQueryASTTransformationServiceInterface
 {
     /**
      * Convert the operations (query, mutation, subscription) in the

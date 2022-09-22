@@ -6,20 +6,21 @@ namespace GraphQLByPoP\GraphQLServer\QueryResolution;
 
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
-use PoPAPI\API\QueryResolution\QueryASTTransformationService as UpstreamQueryASTTransformationService;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Exception\ShouldNotHappenException;
+use PoP\Root\Services\BasicServiceTrait;
 
-class QueryASTTransformationService extends UpstreamQueryASTTransformationService implements QueryASTTransformationServiceInterface
+class GraphQLQueryASTTransformationService implements GraphQLQueryASTTransformationServiceInterface
 {
+    use BasicServiceTrait;
+
     /**
      * Convert the operations (query, mutation, subscription) in the
      * GraphQL Documents, to the corresponding field in the SuperRoot

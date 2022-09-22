@@ -13,8 +13,8 @@ services:
     GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxService
 
-    GraphQLByPoP\GraphQLServer\QueryResolution\QueryASTTransformationServiceInterface:
-        class: \GraphQLByPoP\GraphQLServer\QueryResolution\QueryASTTransformationService
+    GraphQLByPoP\GraphQLServer\QueryResolution\GraphQLQueryASTTransformationServiceInterface:
+        class: \GraphQLByPoP\GraphQLServer\QueryResolution\GraphQLQueryASTTransformationService
 
     GraphQLByPoP\GraphQLServer\State\:
         resource: '../src/State/*'
