@@ -33,7 +33,7 @@ use PoP\Root\Services\BasicServiceTrait;
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
     use BasicServiceTrait;
-    
+
     protected Directive $directive;
 
     /**
@@ -102,5 +102,5 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function isRepeatable(): bool
     {
         return !($this->getDirectiveKind() == DirectiveKinds::SYSTEM || $this->getDirectiveKind() == DirectiveKinds::SCHEMA);
-    }    
+    }
 }
