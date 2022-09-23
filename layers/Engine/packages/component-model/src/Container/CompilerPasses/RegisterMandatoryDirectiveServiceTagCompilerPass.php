@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
-use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\Engine\MandatoryFieldDirectiveResolverRegistryInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterMandatoryDirectiveServiceTagCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
-        return DataloadingEngineInterface::class;
+        return MandatoryFieldDirectiveResolverRegistryInterface::class;
     }
     protected function getServiceClass(): string
     {

@@ -8,7 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
-use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\Engine\MandatoryFieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
@@ -69,17 +69,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private SplObjectStorage $objectTypeResolverObjectFieldDataCache;
 
-    private ?DataloadingEngineInterface $dataloadingEngine = null;
+    private ?MandatoryFieldDirectiveResolverRegistryInterface $mandatoryFieldDirectiveResolverRegistry = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
 
-    final public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
+    final public function setMandatoryFieldDirectiveResolverRegistry(MandatoryFieldDirectiveResolverRegistryInterface $mandatoryFieldDirectiveResolverRegistry): void
     {
-        $this->dataloadingEngine = $dataloadingEngine;
+        $this->mandatoryFieldDirectiveResolverRegistry = $mandatoryFieldDirectiveResolverRegistry;
     }
-    final protected function getDataloadingEngine(): DataloadingEngineInterface
+    final protected function getMandatoryFieldDirectiveResolverRegistry(): MandatoryFieldDirectiveResolverRegistryInterface
     {
-        /** @var DataloadingEngineInterface */
-        return $this->dataloadingEngine ??= $this->instanceManager->getInstance(DataloadingEngineInterface::class);
+        /** @var MandatoryFieldDirectiveResolverRegistryInterface */
+        return $this->mandatoryFieldDirectiveResolverRegistry ??= $this->instanceManager->getInstance(MandatoryFieldDirectiveResolverRegistryInterface::class);
     }
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
@@ -151,8 +151,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         return array_map(
             fn (FieldDirectiveResolverInterface $directiveResolver) => $this->getDirective($directiveResolver->getDirectiveName()),
-            $this->getDataloadingEngine()->getMandatoryFieldDirectiveResolvers()
+            $this->getMandatoryFieldOrOperationDirectiveResolvers()
         );
+    }
+
+    /**
+     * By default, handle mandatory directives for Fields.
+     * This method will be overriden by SuperRoot, to handle
+     * mandatory directives for Operations.
+     *
+     * @return FieldDirectiveResolverInterface[]
+     */
+    protected function getMandatoryFieldOrOperationDirectiveResolvers(): array
+    {
+        return $this->getMandatoryFieldDirectiveResolverRegistry()->getMandatoryFieldDirectiveResolvers();
     }
 
     protected function getDirective(string $directiveName): Directive

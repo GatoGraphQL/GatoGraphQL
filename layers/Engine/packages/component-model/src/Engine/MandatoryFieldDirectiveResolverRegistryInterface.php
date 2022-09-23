@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
-interface DataloadingEngineInterface
+interface MandatoryFieldDirectiveResolverRegistryInterface
 {
     public function addMandatoryFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void;
     /**

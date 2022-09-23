@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
-class DataloadingEngine implements DataloadingEngineInterface
+class MandatoryFieldDirectiveResolverRegistry implements MandatoryFieldDirectiveResolverRegistryInterface
 {
     /**
      * @var FieldDirectiveResolverInterface[]

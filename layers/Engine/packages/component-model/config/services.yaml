@@ -35,8 +35,8 @@ services:
     PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface:
         class: \PoP\ComponentModel\DirectivePipeline\DirectivePipelineService
 
-    PoP\ComponentModel\Engine\DataloadingEngineInterface:
-        class: \PoP\ComponentModel\Engine\DataloadingEngine
+    PoP\ComponentModel\Engine\MandatoryFieldDirectiveResolverRegistryInterface:
+        class: \PoP\ComponentModel\Engine\MandatoryFieldDirectiveResolverRegistry
 
     PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface:
         class: \PoP\ComponentModel\Feedback\FeedbackEntryManager
