@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\Engine;
+namespace PoP\ComponentModel\Facades\Registries;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Engine\MandatoryFieldDirectiveResolverRegistryInterface;
+use PoP\ComponentModel\Registries\MandatoryFieldDirectiveResolverRegistryInterface;
 
 class MandatoryFieldDirectiveResolverRegistryFacade
 {

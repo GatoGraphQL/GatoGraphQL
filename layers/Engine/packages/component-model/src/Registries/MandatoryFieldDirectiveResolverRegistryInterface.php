@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Engine;
+namespace PoP\ComponentModel\Registries;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 

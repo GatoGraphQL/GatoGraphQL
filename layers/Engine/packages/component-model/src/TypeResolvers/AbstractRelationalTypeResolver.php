@@ -8,7 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
-use PoP\ComponentModel\Engine\MandatoryFieldDirectiveResolverRegistryInterface;
+use PoP\ComponentModel\Registries\MandatoryFieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
