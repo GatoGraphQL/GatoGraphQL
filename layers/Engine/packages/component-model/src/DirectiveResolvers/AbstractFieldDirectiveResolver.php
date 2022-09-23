@@ -663,7 +663,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             && array_filter(
                 $excludedFieldTypeResolverClasses,
                 fn (string $excludedFieldTypeResolverClass) => $fieldTypeResolver instanceof $excludedFieldTypeResolverClass
-            ) === []
+            ) !== []
         ) {
             return false;
         }
