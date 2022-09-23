@@ -1530,7 +1530,13 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
+     * The FieldDirectiveResolver handles both Field and Query/Mutation
+     * Directives. Retrieve the corresponding Directive Locations,
+     * as defined by the GraphQL spec.
+     *
      * @return string[]
+     *
+     * @see https://spec.graphql.org/draft/#DirectiveLocation
      */
     public function getDirectiveLocations(): array
     {
