@@ -8,6 +8,9 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\ResolveValueAndMergeFieldDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\SerializeLeafOutputTypeValuesFieldDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\ValidateFieldDirectiveResolver;
 use PoP\ComponentModel\Registries\MandatoryFieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -147,12 +150,42 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @return Directive[]
      */
-    protected function getMandatoryDirectives(): array
+    final protected function getMandatoryDirectives(): array
     {
         return array_map(
             fn (FieldDirectiveResolverInterface $directiveResolver) => $this->getDirective($directiveResolver->getDirectiveName()),
-            $this->getMandatoryFieldOrOperationDirectiveResolvers()
+            array_merge(
+                $this->getMandatorySystemFieldDirectiveResolvers(),
+                $this->getMandatoryFieldOrOperationDirectiveResolvers()
+            )
         );
+    }
+
+    /**
+     * Mandatory system directives
+     *
+     * @return FieldDirectiveResolverInterface[]
+     */
+    final protected function getMandatorySystemFieldDirectiveResolvers(): array
+    {
+        return array_map(
+            fn (string $directiveResolverClass) => $this->instanceManager->getInstance($directiveResolverClass),
+            $this->getMandatorySystemFieldDirectiveResolverClasses()
+        );
+    }
+
+    /**
+     * Mandatory system directives
+     *
+     * @return array<string-class<FieldDirectiveResolverInterface>>
+     */
+    final protected function getMandatorySystemFieldDirectiveResolverClasses(): array
+    {
+        return [
+            ValidateFieldDirectiveResolver::class,
+            ResolveValueAndMergeFieldDirectiveResolver::class,
+            SerializeLeafOutputTypeValuesFieldDirectiveResolver::class,
+        ];
     }
 
     /**

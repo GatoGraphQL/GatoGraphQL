@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
+use GraphQLByPoP\GraphQLServer\Registries\MandatoryOperationDirectiveResolverRegistryInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 
 class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 {
     use CanonicalTypeNameTypeResolverTrait;
 
     private ?SuperRootTypeDataLoader $superRootTypeDataLoader = null;
+    private ?MandatoryOperationDirectiveResolverRegistryInterface $mandatoryOperationDirectiveResolverRegistry = null;
 
     final public function setSuperRootTypeDataLoader(SuperRootTypeDataLoader $superRootTypeDataLoader): void
     {
@@ -24,6 +27,15 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
     {
         /** @var SuperRootTypeDataLoader */
         return $this->superRootTypeDataLoader ??= $this->instanceManager->getInstance(SuperRootTypeDataLoader::class);
+    }
+    final public function setMandatoryOperationDirectiveResolverRegistry(MandatoryOperationDirectiveResolverRegistryInterface $mandatoryOperationDirectiveResolverRegistry): void
+    {
+        $this->mandatoryOperationDirectiveResolverRegistry = $mandatoryOperationDirectiveResolverRegistry;
+    }
+    final protected function getMandatoryOperationDirectiveResolverRegistry(): MandatoryOperationDirectiveResolverRegistryInterface
+    {
+        /** @var MandatoryOperationDirectiveResolverRegistryInterface */
+        return $this->mandatoryOperationDirectiveResolverRegistry ??= $this->instanceManager->getInstance(MandatoryOperationDirectiveResolverRegistryInterface::class);
     }
 
     public function getTypeName(): string
@@ -46,5 +58,15 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
         return $this->getSuperRootTypeDataLoader();
+    }
+
+    /**
+     * Provide the mandatory directives for Operations.
+     *
+     * @return FieldDirectiveResolverInterface[]
+     */
+    protected function getMandatoryFieldOrOperationDirectiveResolvers(): array
+    {
+        return $this->getMandatoryOperationDirectiveResolverRegistry()->getMandatoryOperationDirectiveResolvers();
     }
 }
