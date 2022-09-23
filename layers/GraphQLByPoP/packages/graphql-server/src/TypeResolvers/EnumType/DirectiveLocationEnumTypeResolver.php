@@ -19,6 +19,12 @@ class DirectiveLocationEnumTypeResolver extends AbstractIntrospectionEnumTypeRes
     public function getEnumValues(): array
     {
         return [
+            /**
+             * All the enums below are "Query Type",
+             * also called ExecutableDirectiveLocation
+             *
+             * @see https://spec.graphql.org/draft/#ExecutableDirectiveLocation
+             */
             DirectiveLocations::QUERY,
             DirectiveLocations::MUTATION,
             DirectiveLocations::SUBSCRIPTION,
@@ -26,6 +32,13 @@ class DirectiveLocationEnumTypeResolver extends AbstractIntrospectionEnumTypeRes
             DirectiveLocations::FRAGMENT_DEFINITION,
             DirectiveLocations::FRAGMENT_SPREAD,
             DirectiveLocations::INLINE_FRAGMENT,
+
+            /**
+             * All the enums below are "Schema Type",
+             * also called TypeSystemDirectiveLocation
+             *
+             * @see https://spec.graphql.org/draft/#TypeSystemDirectiveLocation
+             */
             DirectiveLocations::SCHEMA,
             DirectiveLocations::SCALAR,
             DirectiveLocations::OBJECT,
