@@ -17,16 +17,15 @@ use PoP\Root\Services\BasicServiceTrait;
  * resolvers for all types of directives defined by the
  * GraphQL spec:
  *
- * - OperationDirectiveResolver
- * - FragmentDirectiveResolver
- * - ArgumentDirectiveResolver
+ * - QueryOperationDirectiveResolver
+ * - MutationOperationDirectiveResolver
+ * - SubscriptionOperationDirectiveResolver
  *
  * However, in practice, only FieldDirectives are supported
  * by the GraphQL server, via the directive pipeline.
  *
  * It is through FieldDirectives that functionality for
- * Operation Directives and Fragment Directives is also
- * supported.
+ * Operation Directives is also supported.
  *
  * @see AbstractFieldDirectiveResolver
  */
