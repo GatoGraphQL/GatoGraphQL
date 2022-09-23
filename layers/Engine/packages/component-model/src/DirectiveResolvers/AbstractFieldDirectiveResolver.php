@@ -1561,21 +1561,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         $directiveLocations = [];
         $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
         $directiveKind = $this->getDirectiveKind();
-
-        /** @var GraphQLParserModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
-
-        /**
-         * There are 3 cases for adding the "Query" type locations:
-         *
-         *   1. When the type is "Query"
-         *   2. When the type is "Schema" and we are editing the query on the back-end
-         *      (as to replace the lack of SDL)
-         *   3. When the type is "Indexing" and composable directives are enabled
-         */
-        $isDirectiveExposedInClient = $directiveKind === DirectiveKinds::QUERY
-            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
-            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives());
+        $isQueryTypeDirective = $this->isQueryTypeDirective();
 
         /**
          * Add the "Operation" Directive Locations
@@ -1584,7 +1570,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             FieldDirectiveBehaviors::OPERATION,
             FieldDirectiveBehaviors::FIELD_AND_OPERATION,
         ])) {
-            if ($isDirectiveExposedInClient) {
+            if ($isQueryTypeDirective) {
                 $directiveLocations = [
                     DirectiveLocations::QUERY,
                     DirectiveLocations::MUTATION,
@@ -1599,7 +1585,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             FieldDirectiveBehaviors::FIELD,
             FieldDirectiveBehaviors::FIELD_AND_OPERATION,
         ])) {
-            if ($isDirectiveExposedInClient) {
+            if ($isQueryTypeDirective) {
                 /**
                  * Same DirectiveLocations as used by `@skip`
                  *
@@ -1611,12 +1597,10 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
                     DirectiveLocations::FRAGMENT_SPREAD,
                     DirectiveLocations::INLINE_FRAGMENT,
                 ];
-            }
-
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->exposeSchemaTypeDirectiveLocations()) {
-                if ($directiveKind === DirectiveKinds::SCHEMA) {
+            } elseif ($directiveKind === DirectiveKinds::SCHEMA) {
+                /** @var ModuleConfiguration */
+                $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+                if ($moduleConfiguration->exposeSchemaTypeDirectiveLocations()) {
                     $directiveLocations = [
                         ...$directiveLocations,
                         DirectiveLocations::FIELD_DEFINITION,
@@ -1626,6 +1610,34 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         return $directiveLocations;
+    }
+
+    /**
+     * A "query-type" directive, as defined by the GraphQL spec, 
+     * must be exposed to the client.
+     *
+     * Non-query-type directives include the "schema-type"
+     * directive, also defined in the GraphQL spec,
+     * and also the "system" directives, which are internal
+     * directives to this GraphQL server, such as @resolveValueAndMerge.
+     * 
+     * There are 3 cases for the directive being considered
+     * of "Query" type:
+     *
+     *   1. When the type is "Query"
+     *   2. When the type is "Schema" and we are editing the query on the back-end
+     *      (as to replace the lack of SDL)
+     *   3. When the type is "Indexing" and composable directives are enabled
+     */        
+    protected function isQueryTypeDirective(): bool
+    {
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        
+        $directiveKind = $this->getDirectiveKind();
+        return $directiveKind === DirectiveKinds::QUERY
+            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
+            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives());
     }
 
     /**
