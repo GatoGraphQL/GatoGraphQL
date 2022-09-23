@@ -7461,18 +7461,6 @@
               "deprecationReason": null
             },
             {
-              "name": "mutationRoot",
-              "description": "Get the Mutation Root type",
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "MutationRoot",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "myComment",
               "description": "Comment by the logged-in user on the site with a specific ID",
               "args": [
@@ -8536,18 +8524,6 @@
                     }
                   }
                 }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "queryRoot",
-              "description": "Get the Query Root type",
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "QueryRoot",
-                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null

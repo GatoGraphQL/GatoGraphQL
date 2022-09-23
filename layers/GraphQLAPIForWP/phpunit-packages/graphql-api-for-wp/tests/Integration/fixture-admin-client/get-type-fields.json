@@ -899,9 +899,6 @@
               "name": "menus"
             },
             {
-              "name": "mutationRoot"
-            },
-            {
               "name": "myComment"
             },
             {
@@ -978,9 +975,6 @@
             },
             {
               "name": "posts"
-            },
-            {
-              "name": "queryRoot"
             },
             {
               "name": "removeFeaturedImageFromCustomPost"
