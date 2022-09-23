@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use Exception;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
+use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Directives\DirectiveLocations;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -49,7 +52,6 @@ use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -1514,5 +1516,51 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDirectiveLocations(): array
+    {
+        $directiveLocations = [];
+        $directiveKind = $this->getDirectiveKind();
+
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+
+        /**
+         * There are 3 cases for adding the "Query" type locations:
+         * 1. When the type is "Query"
+         * 2. When the type is "Schema" and we are editing the query on the back-end (as to replace the lack of SDL)
+         * 3. When the type is "Indexing" and composable directives are enabled
+         */
+        if (
+            $directiveKind === DirectiveKinds::QUERY
+            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
+            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives())
+        ) {
+            // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
+            $directiveLocations = [
+                DirectiveLocations::FIELD,
+                DirectiveLocations::FRAGMENT_SPREAD,
+                DirectiveLocations::INLINE_FRAGMENT,
+            ];
+        }
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->exposeSchemaTypeDirectiveLocations()) {
+            if ($directiveKind === DirectiveKinds::SCHEMA) {
+                $directiveLocations = array_merge(
+                    $directiveLocations,
+                    [
+                        DirectiveLocations::FIELD_DEFINITION,
+                    ]
+                );
+            }
+        }
+
+        return $directiveLocations;
     }
 }
