@@ -177,12 +177,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         if (!$enableNestedMutations || $addConnectionFromRootToQueryRootAndMutationRoot) {
             $queryRootTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
             $queryRootTypeName = $queryRootTypeResolver->getMaybeNamespacedTypeName();
-            // Additionally append the QueryRoot and MutationRoot to the schema
-            if ($addConnectionFromRootToQueryRootAndMutationRoot) {
-                // Remove the fields connecting from Root to QueryRoot and MutationRoot
-                unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['queryRoot']);
-                unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['mutationRoot']);
-            }
+            // Remove the fields connecting from Root to QueryRoot and MutationRoot
+            unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['queryRoot']);
+            unset($fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['mutationRoot']);
         }
 
         if ($exposeGlobalFieldsInGraphQLSchema) {
