@@ -8,7 +8,6 @@ use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
-use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -43,7 +42,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarType
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
@@ -55,20 +53,28 @@ use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
-abstract class AbstractFieldDirectiveResolver implements FieldDirectiveResolverInterface
+/**
+ * The GraphQL server resolves only FieldDirectiveResolvers
+ * via the directive pipeline.
+ *
+ * FieldDirectiveResolvers can also handle Operation Directives,
+ * by having these be duplicated into the SuperRoot type fields.
+ *
+ * In addition, FieldDirectiveResolvers can also handle
+ * Fragment Reference Directives, by spreading these to the
+ * conditional fields that resolve the fragment.
+ */
+abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver implements FieldDirectiveResolverInterface
 {
     use AttachableExtensionTrait;
     use RemoveIDFieldSetFieldDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
     use WithVersionConstraintFieldOrFieldDirectiveResolverTrait;
-    use BasicServiceTrait;
     use CheckDangerouslyNonSpecificScalarTypeFieldOrFieldDirectiveResolverTrait;
     use ObjectTypeOrFieldDirectiveResolverTrait;
 
-    protected Directive $directive;
     /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedDirectiveArgNameTypeResolversCache = [];
     /** @var array<string,string|null> */
@@ -156,52 +162,11 @@ abstract class AbstractFieldDirectiveResolver implements FieldDirectiveResolverI
     }
 
     /**
-     * The directiveResolvers are instantiated through the service container,
-     * but NOT for the directivePipeline, since there each directiveResolver
-     * will require the actual $directive to process.
-     *
-     * By default, the directive is directly the directive name.
-     * This is what is used when instantiating the directive through the container.
-     */
-    public function __construct()
-    {
-        $this->directive = new Directive(
-            $this->getDirectiveName(),
-            [],
-            ASTNodesFactory::getNonSpecificLocation()
-        );
-    }
-
-    /**
-     * Invoked when creating the non-shared directive instance
-     * to resolve a directive in the pipeline
-     */
-    final public function setDirective(Directive $directive): void
-    {
-        $this->directive = $directive;
-    }
-
-    public function getDirective(): Directive
-    {
-        return $this->directive;
-    }
-
-    /**
      * @return string[]
      */
     final public function getClassesToAttachTo(): array
     {
         return $this->getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo();
-    }
-
-    /**
-     * Directives can be either of type "Schema" or "Query" and,
-     * depending on one case or the other, might be exposed to the user.
-     * By default, use the Query type
-     */
-    public function getDirectiveKind(): string
-    {
-        return DirectiveKinds::QUERY;
     }
 
     /**
@@ -550,23 +515,6 @@ abstract class AbstractFieldDirectiveResolver implements FieldDirectiveResolverI
     }
 
     /**
-     * ModuleConfiguration values cannot be accessed in `isServiceEnabled`,
-     * because the DirectiveResolver services are initialized on
-     * the "boot" event, and by then the `SchemaConfigurationExecuter`
-     * services, to set-up configuration hooks, have not been initialized yet.
-     * Then, the GraphQL custom endpoint will not have its Schema Configuration
-     * applied.
-     *
-     * That's why it is done in this method instead.
-     *
-     * @see BootAttachExtensionCompilerPass.php
-     */
-    public function isDirectiveEnabled(): bool
-    {
-        return true;
-    }
-
-    /**
      * Define if to use the version to decide if to process the directive or not
      */
     public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
@@ -757,16 +705,6 @@ abstract class AbstractFieldDirectiveResolver implements FieldDirectiveResolverI
     public function getPipelinePosition(): string
     {
         return PipelinePositions::AFTER_RESOLVE;
-    }
-
-    /**
-     * By default, a directive can be executed only one time for "Schema" and "System"
-     * type directives (eg: <translate(en,es),translate(es,en)>),
-     * and many times for the other types, "Query", "Scripting" and "Indexing"
-     */
-    public function isRepeatable(): bool
-    {
-        return !($this->getDirectiveKind() == DirectiveKinds::SYSTEM || $this->getDirectiveKind() == DirectiveKinds::SCHEMA);
     }
 
     /**
