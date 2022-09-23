@@ -100,6 +100,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function isRepeatable(): bool
     {
-        return !($this->getDirectiveKind() == DirectiveKinds::SYSTEM || $this->getDirectiveKind() == DirectiveKinds::SCHEMA);
+        return !($this->getDirectiveKind() === DirectiveKinds::SYSTEM || $this->getDirectiveKind() === DirectiveKinds::SCHEMA);
     }
 }
