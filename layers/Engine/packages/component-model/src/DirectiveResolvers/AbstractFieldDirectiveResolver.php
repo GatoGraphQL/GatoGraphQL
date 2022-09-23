@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use Exception;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
@@ -694,10 +695,21 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
+     * For a FieldDirectiveResolver to only behave as a
+     * OperationDirectiveResolver, it must only support
+     * the SuperRoot type.
+     *
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
     protected function getSupportedFieldTypeResolverClasses(): ?array
     {
+        $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
+        if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::OPERATION) {
+            return [
+                SuperRootObjectTypeResolver::class,
+            ];
+        }
+
         return null;
     }
 
@@ -705,12 +717,18 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      * For a FieldDirectiveResolver to not also behave as a
      * OperationDirectiveResolver, it must be excluded from
      * the SuperRoot type.
-     *
      * 
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
     protected function getExcludedFieldTypeResolverClasses(): ?array
     {
+        $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
+        if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::FIELD) {
+            return [
+                SuperRootObjectTypeResolver::class,
+            ];
+        }
+
         return null;
     }
 
