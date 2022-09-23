@@ -55,6 +55,17 @@ use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
+/**
+ * The GraphQL server resolves only FieldDirectiveResolvers
+ * via the directive pipeline.
+ *
+ * FieldDirectiveResolvers can also handle Operation Directives,
+ * by having these be duplicated into the SuperRoot type fields.
+ *
+ * In addition, FieldDirectiveResolvers can also handle
+ * Fragment Reference Directives, by spreading these to the
+ * conditional fields that resolve the fragment.
+ */
 abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver implements FieldDirectiveResolverInterface
 {
     use AttachableExtensionTrait;
