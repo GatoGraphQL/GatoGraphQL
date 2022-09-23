@@ -22,8 +22,8 @@ class DirectiveLocationEnumTypeResolver extends AbstractIntrospectionEnumTypeRes
      * GraphQL schema (as with SDL-first servers).
      *
      * Then, "Schema Type" directive locations are never used,
-     * and exposing this information in the schema is most
-     * likely meaningless. So it's disabled (by default).
+     * and exposing this information in the schema can be
+     * disabled (it's still enabled by default).
      *
      * @return string[]
      */
