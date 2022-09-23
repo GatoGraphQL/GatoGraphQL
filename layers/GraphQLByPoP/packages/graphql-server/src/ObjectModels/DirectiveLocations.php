@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
+/**
+ * @see https://spec.graphql.org/draft/#DirectiveLocation
+ */
 class DirectiveLocations
 {
     public final const QUERY = 'QUERY';
