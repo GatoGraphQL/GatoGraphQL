@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Services\BasicServiceTrait;
@@ -67,16 +66,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Directives can be either of type "Schema" or "Query" and,
-     * depending on one case or the other, might be exposed to the user.
-     * By default, use the Query type
-     */
-    public function getDirectiveKind(): string
-    {
-        return DirectiveKinds::QUERY;
-    }
-
-    /**
      * GraphQLParserModuleConfiguration values cannot be accessed in `isServiceEnabled`,
      * because the DirectiveResolver services are initialized on
      * the "boot" event, and by then the `SchemaConfigurationExecuter`
@@ -93,13 +82,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return true;
     }
 
-    /**
-     * By default, a directive can be executed only one time for "Schema" and "System"
-     * type directives (eg: <translate(en,es),translate(es,en)>),
-     * and many times for the other types, "Query", "Scripting" and "Indexing"
-     */
     public function isRepeatable(): bool
     {
-        return !($this->getDirectiveKind() === DirectiveKinds::SYSTEM || $this->getDirectiveKind() === DirectiveKinds::SCHEMA);
+        return true;
     }
 }

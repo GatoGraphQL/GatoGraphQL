@@ -55,6 +55,13 @@ interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, At
     public function getFieldNamesToApplyTo(): array;
 
     /**
+     * Directives can be either of type "Schema" or "Query" and,
+     * depending on one case or the other, might be exposed to the user.
+     * By default, use the Query type
+     */
+    public function getDirectiveKind(): string;
+
+    /**
      * Define where to place the directive in the directive execution pipeline
      *
      * 2 directives are mandatory, and executed in this order:

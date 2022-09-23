@@ -1519,6 +1519,16 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
+     * Directives can be either of type "Schema" or "Query" and,
+     * depending on one case or the other, might be exposed to the user.
+     * By default, use the Query type
+     */
+    public function getDirectiveKind(): string
+    {
+        return DirectiveKinds::QUERY;
+    }
+
+    /**
      * @return string[]
      */
     public function getDirectiveLocations(): array
@@ -1562,5 +1572,15 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         return $directiveLocations;
+    }
+
+    /**
+     * By default, a directive can be executed only one time for "Schema" and "System"
+     * type directives (eg: <translate(en,es),translate(es,en)>),
+     * and many times for the other types, "Query", "Scripting" and "Indexing"
+     */
+    public function isRepeatable(): bool
+    {
+        return !($this->getDirectiveKind() === DirectiveKinds::SYSTEM || $this->getDirectiveKind() === DirectiveKinds::SCHEMA);
     }
 }

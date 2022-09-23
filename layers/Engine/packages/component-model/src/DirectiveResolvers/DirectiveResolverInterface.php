@@ -34,13 +34,6 @@ interface DirectiveResolverInterface
     public function isDirectiveEnabled(): bool;
 
     /**
-     * Directives can be either of type "Schema" or "Query" and,
-     * depending on one case or the other, might be exposed to the user.
-     * By default, use the Query type
-     */
-    public function getDirectiveKind(): string;
-
-    /**
      * @return string[]
      */
     public function getDirectiveLocations(): array;
