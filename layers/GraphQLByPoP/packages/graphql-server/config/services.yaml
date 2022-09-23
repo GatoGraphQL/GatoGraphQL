@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    GraphQLByPoP\GraphQLServer\Registries\MandatoryOperationDirectiveResolverRegistryInterface:
+        class: \GraphQLByPoP\GraphQLServer\Registries\MandatoryOperationDirectiveResolverRegistry
+
     GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface:
         class: \GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistry
 
