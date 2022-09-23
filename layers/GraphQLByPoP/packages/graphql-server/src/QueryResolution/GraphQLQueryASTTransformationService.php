@@ -111,10 +111,10 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                 [],
                 $operation->getFieldsOrFragmentBonds(),
                 /**
-                 * Please notice that support for Operation Directives
-                 * is handled here, by transferring them into the
-                 * SuperRoot Field, to be validated and executed
-                 * there as a standard Field Directive.
+                 * Support for Operation Directives is handled here,
+                 * by transferring them into the SuperRoot Field,
+                 * to be validated and executed there as a standard
+                 * Field Directive.
                  */
                 $operation->getDirectives(),
                 ASTNodesFactory::getNonSpecificLocation()
