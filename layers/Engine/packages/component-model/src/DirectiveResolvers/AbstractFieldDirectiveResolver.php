@@ -654,6 +654,17 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             return false;
         }
 
+        $excludedFieldTypeResolverClasses = $this->getExcludedFieldTypeResolverClasses();
+        if (
+            $excludedFieldTypeResolverClasses !== null
+            && array_filter(
+                $excludedFieldTypeResolverClasses,
+                fn (string $excludedFieldTypeResolverClass) => $fieldTypeResolver instanceof $excludedFieldTypeResolverClass
+            ) === []
+        ) {
+            return false;
+        }
+
         return true;
     }
 
@@ -683,6 +694,14 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
     protected function getSupportedFieldTypeResolverClasses(): ?array
+    {
+        return null;
+    }
+
+    /**
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     */
+    protected function getExcludedFieldTypeResolverClasses(): ?array
     {
         return null;
     }
