@@ -717,13 +717,22 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      * For a FieldDirectiveResolver to not also behave as a
      * OperationDirectiveResolver, it must be excluded from
      * the SuperRoot type.
+     *
+     * Watch out: System directives (like @resolveValueAndMerge)
+     * must always be allowed, it's only the "query-type" and
+     * "schema-type" directives that must be excluded.
      * 
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
     protected function getExcludedFieldTypeResolverClasses(): ?array
     {
         $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
-        if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::FIELD) {
+        if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::FIELD
+            && (
+                $this->isQueryTypeDirective()
+                || $this->getDirectiveKind() === DirectiveKinds::SCHEMA
+            )
+        ) {
             return [
                 SuperRootObjectTypeResolver::class,
             ];
