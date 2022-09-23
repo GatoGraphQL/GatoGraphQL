@@ -32,6 +32,7 @@ class DirectiveLocationEnumTypeResolver extends AbstractIntrospectionEnumTypeRes
             DirectiveLocations::FRAGMENT_DEFINITION,
             DirectiveLocations::FRAGMENT_SPREAD,
             DirectiveLocations::INLINE_FRAGMENT,
+            DirectiveLocations::VARIABLE_DEFINITION,
 
             /**
              * All the enums below are "Schema Type",
