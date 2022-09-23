@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\ObjectModels;
+namespace PoP\ComponentModel\Directives;
 
 /**
  * @see https://spec.graphql.org/draft/#DirectiveLocation

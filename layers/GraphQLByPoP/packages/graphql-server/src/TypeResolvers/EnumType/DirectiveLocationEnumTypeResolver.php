@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\DirectiveLocations;
+use PoP\ComponentModel\Directives\DirectiveLocations;
 
 class DirectiveLocationEnumTypeResolver extends AbstractIntrospectionEnumTypeResolver
 {
