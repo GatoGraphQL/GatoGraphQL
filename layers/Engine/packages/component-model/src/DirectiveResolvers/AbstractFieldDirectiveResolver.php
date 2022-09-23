@@ -699,6 +699,11 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
+     * For a FieldDirectiveResolver to not also behave as a
+     * OperationDirectiveResolver, it must be excluded from
+     * the SuperRoot type.
+     *
+     * 
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
     protected function getExcludedFieldTypeResolverClasses(): ?array
