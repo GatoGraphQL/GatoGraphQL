@@ -105,14 +105,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives())
         ) {
             // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
-            $directiveLocations = array_merge(
-                $directiveLocations,
-                [
-                    DirectiveLocations::FIELD,
-                    DirectiveLocations::FRAGMENT_SPREAD,
-                    DirectiveLocations::INLINE_FRAGMENT,
-                ]
-            );
+            $directiveLocations = [
+                DirectiveLocations::FIELD,
+                DirectiveLocations::FRAGMENT_SPREAD,
+                DirectiveLocations::INLINE_FRAGMENT,
+            ];
         }
 
         /** @var ModuleConfiguration */
