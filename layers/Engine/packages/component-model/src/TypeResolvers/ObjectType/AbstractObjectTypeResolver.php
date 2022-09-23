@@ -211,12 +211,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * `array_merge_recursive` so that if 2 different decorators add a directive
              * for the same field, the results are merged together, not override each other.
              */
-            if ($typeResolverDecorator->enabled($this)) {
-                $mandatoryDirectivesForFields = array_merge_recursive(
-                    $mandatoryDirectivesForFields,
-                    $typeResolverDecorator->getMandatoryDirectivesForFields($this)
-                );
+            if (!$typeResolverDecorator->enabled($this)) {
+                continue;
             }
+            $mandatoryDirectivesForFields = array_merge_recursive(
+                $mandatoryDirectivesForFields,
+                $typeResolverDecorator->getMandatoryDirectivesForFields($this)
+            );
         }
         return $mandatoryDirectivesForFields;
     }
