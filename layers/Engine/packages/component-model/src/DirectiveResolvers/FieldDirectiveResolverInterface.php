@@ -15,7 +15,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
-interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, SchemaFieldDirectiveResolverInterface
+interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, AttachableExtensionInterface, SchemaFieldDirectiveResolverInterface
 {
     /**
      * The classes of the ObjectTypeResolvers and/or InterfaceTypeResolvers
@@ -26,14 +26,7 @@ interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, 
      * @return array<class-string<InterfaceTypeResolverInterface|RelationalTypeResolverInterface>>
      */
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array;
-    public function getDirectiveName(): string;
-    public function getDirective(): Directive;
-    /**
-     * Set the Directive to be resolved by the DirectiveResolver.
-     */
-    public function setDirective(
-        Directive $directive,
-    ): void;
+
     /**
      * Validate and initialize the Directive, such as adding
      * the default values for Arguments which were not provided
@@ -46,11 +39,13 @@ interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, 
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void;
+
     /**
      * After calling `prepareDirective`, indicate if casting
      * the Directive Arguments produced any error.
      */
     public function hasValidationErrors(): bool;
+
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
@@ -58,25 +53,6 @@ interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, 
      * @return string[]
      */
     public function getFieldNamesToApplyTo(): array;
-    /**
-     * ModuleConfiguration values cannot be accessed in `isServiceEnabled`,
-     * because the DirectiveResolver services are initialized on
-     * the "boot" event, and by then the `SchemaConfigurationExecuter`
-     * services, to set-up configuration hooks, have not been initialized yet.
-     * Then, the GraphQL custom endpoint will not have its Schema Configuration
-     * applied.
-     *
-     * That's why it is done in this method instead.
-     *
-     * @see BootAttachExtensionCompilerPass.php
-     */
-    public function isDirectiveEnabled(): bool;
-    /**
-     * Directives can be either of type "Schema" or "Query" and,
-     * depending on one case or the other, might be exposed to the user.
-     * By default, use the Query type
-     */
-    public function getDirectiveKind(): string;
 
     /**
      * Define where to place the directive in the directive execution pipeline
@@ -111,6 +87,7 @@ interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, 
      * @return mixed[]
      */
     public function resolveDirectivePipelinePayload(array $payload): array;
+
     /**
      * Indicate if the directiveResolver can process the directive with the given name and args
      */
@@ -118,6 +95,7 @@ interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, 
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
     ): bool;
+
     /**
      * Indicate if the directiveResolver can process the directive with the given name and args
      */
@@ -125,14 +103,12 @@ interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, 
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
     ): bool;
-    /**
-     * Indicates if the directive can be added several times to the pipeline, or only once
-     */
-    public function isRepeatable(): bool;
+
     /**
      * Indicate if the directive needs to be passed $idFieldSet filled with data to be able to execute
      */
     public function needsSomeIDFieldToExecute(): bool;
+
     /**
      * Execute the directive
      *
@@ -160,6 +136,7 @@ interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, 
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void;
+
     /**
      * A directive can decide to not be added to the schema, eg: when it is repeated/implemented several times
      */
@@ -181,6 +158,7 @@ interface FieldDirectiveResolverInterface extends AttachableExtensionInterface, 
     public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface;
 
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+
     /**
      * Name for the directive arg to indicate which additional fields
      * must be affected by the directive, by indicating their relative position.
