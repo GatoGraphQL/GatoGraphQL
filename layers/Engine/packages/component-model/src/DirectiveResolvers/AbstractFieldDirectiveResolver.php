@@ -1535,40 +1535,61 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     public function getDirectiveLocations(): array
     {
         $directiveLocations = [];
-        $directiveKind = $this->getDirectiveKind();
-
-        /** @var GraphQLParserModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
 
         /**
-         * There are 3 cases for adding the "Query" type locations:
-         * 1. When the type is "Query"
-         * 2. When the type is "Schema" and we are editing the query on the back-end (as to replace the lack of SDL)
-         * 3. When the type is "Indexing" and composable directives are enabled
+         * Add the "Operation" Directive Locations
          */
-        if (
-            $directiveKind === DirectiveKinds::QUERY
-            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
-            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives())
-        ) {
-            // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
+        if (in_array($fieldDirectiveBehavior, [
+            FieldDirectiveBehaviors::OPERATION,
+            FieldDirectiveBehaviors::FIELD_AND_OPERATION,
+        ])) {
             $directiveLocations = [
-                DirectiveLocations::FIELD,
-                DirectiveLocations::FRAGMENT_SPREAD,
-                DirectiveLocations::INLINE_FRAGMENT,
+                DirectiveLocations::QUERY,
+                DirectiveLocations::MUTATION,
             ];
         }
 
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->exposeSchemaTypeDirectiveLocations()) {
-            if ($directiveKind === DirectiveKinds::SCHEMA) {
-                $directiveLocations = array_merge(
-                    $directiveLocations,
-                    [
+        /**
+         * Add the "Field" Directive Locations
+         */
+        if (in_array($fieldDirectiveBehavior, [
+            FieldDirectiveBehaviors::FIELD,
+            FieldDirectiveBehaviors::FIELD_AND_OPERATION,
+        ])) {
+            /** @var GraphQLParserModuleConfiguration */
+            $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+
+            /**
+             * There are 3 cases for adding the "Query" type locations:
+             * 1. When the type is "Query"
+             * 2. When the type is "Schema" and we are editing the query on the back-end (as to replace the lack of SDL)
+             * 3. When the type is "Indexing" and composable directives are enabled
+             */
+            $directiveKind = $this->getDirectiveKind();
+            if (
+                $directiveKind === DirectiveKinds::QUERY
+                || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
+                || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives())
+            ) {
+                // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
+                $directiveLocations = [
+                    ...$directiveLocations,
+                    DirectiveLocations::FIELD,
+                    DirectiveLocations::FRAGMENT_SPREAD,
+                    DirectiveLocations::INLINE_FRAGMENT,
+                ];
+            }
+
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->exposeSchemaTypeDirectiveLocations()) {
+                if ($directiveKind === DirectiveKinds::SCHEMA) {
+                    $directiveLocations = [
+                        ...$directiveLocations,
                         DirectiveLocations::FIELD_DEFINITION,
-                    ]
-                );
+                    ];
+                }
             }
         }
 
