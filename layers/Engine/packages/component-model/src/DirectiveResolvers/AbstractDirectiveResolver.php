@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Directives\DirectiveLocations;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\Module;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -74,6 +78,49 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function getDirectiveKind(): string
     {
         return DirectiveKinds::QUERY;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDirectiveLocations(): array
+    {
+        $directiveLocations = [];
+        $directiveKind = $this->getDirectiveKind();
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+
+        /**
+         * There are 3 cases for adding the "Query" type locations:
+         * 1. When the type is "Query"
+         * 2. When the type is "Schema" and we are editing the query on the back-end (as to replace the lack of SDL)
+         * 3. When the type is "Indexing" and composable directives are enabled
+         */
+        if (
+            $directiveKind === DirectiveKinds::QUERY
+            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
+            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives())
+        ) {
+            // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
+            $directiveLocations = array_merge(
+                $directiveLocations,
+                [
+                    DirectiveLocations::FIELD,
+                    DirectiveLocations::FRAGMENT_SPREAD,
+                    DirectiveLocations::INLINE_FRAGMENT,
+                ]
+            );
+        }
+        if ($directiveKind === DirectiveKinds::SCHEMA) {
+            $directiveLocations = array_merge(
+                $directiveLocations,
+                [
+                    DirectiveLocations::FIELD_DEFINITION,
+                ]
+            );
+        }
+        return $directiveLocations;
     }
 
     /**

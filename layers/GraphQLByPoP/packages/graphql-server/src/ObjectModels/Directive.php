@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use PoP\Root\App;
-use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ModuleConfiguration;
-use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class Directive extends AbstractSchemaDefinitionReferenceObject
@@ -51,40 +47,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
      */
     public function getLocations(): array
     {
-        $directives = [];
-        $directiveKind = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        /**
-         * There are 3 cases for adding the "Query" type locations:
-         * 1. When the type is "Query"
-         * 2. When the type is "Schema" and we are editing the query on the back-end (as to replace the lack of SDL)
-         * 3. When the type is "Indexing" and composable directives are enabled
-         */
-        if (
-            $directiveKind === DirectiveKinds::QUERY
-            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
-            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives())
-        ) {
-            // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
-            $directives = array_merge(
-                $directives,
-                [
-                    DirectiveLocations::FIELD,
-                    DirectiveLocations::FRAGMENT_SPREAD,
-                    DirectiveLocations::INLINE_FRAGMENT,
-                ]
-            );
-        }
-        if ($directiveKind === DirectiveKinds::SCHEMA) {
-            $directives = array_merge(
-                $directives,
-                [
-                    DirectiveLocations::FIELD_DEFINITION,
-                ]
-            );
-        }
-        return $directives;
+        return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_LOCATIONS];
     }
 
     public function isRepeatable(): bool

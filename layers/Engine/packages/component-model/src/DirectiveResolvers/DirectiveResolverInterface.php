@@ -41,6 +41,11 @@ interface DirectiveResolverInterface
     public function getDirectiveKind(): string;
 
     /**
+     * @return string[]
+     */
+    public function getDirectiveLocations(): array;
+
+    /**
      * Indicates if the directive can be added several times to the pipeline, or only once
      */
     public function isRepeatable(): bool;

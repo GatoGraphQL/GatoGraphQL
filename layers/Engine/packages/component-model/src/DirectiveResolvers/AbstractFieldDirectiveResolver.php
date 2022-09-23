@@ -1472,6 +1472,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         $schemaDefinition = [
             SchemaDefinition::NAME => $directiveName,
             SchemaDefinition::DIRECTIVE_KIND => $this->getDirectiveKind(),
+            SchemaDefinition::DIRECTIVE_LOCATIONS => $this->getDirectiveLocations(),
             SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
             SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),
         ];
