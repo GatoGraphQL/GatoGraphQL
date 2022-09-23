@@ -11,6 +11,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Directives\DirectiveLocations;
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -1572,6 +1573,25 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         return $directiveLocations;
+    }
+
+    /**
+     * The FieldDirectiveResolver can handle Field Directives and,
+     * in addition, Operation Directives.
+     *
+     * This method indicates the behavior of the FieldDirectiveResolver,
+     * indicating one of the following:
+     *
+     * - Behave as Field (default)
+     * - Behave as Field and Operation
+     * - Behave as Operation
+     *
+     * Based on this value, the Directive Locations will be reflected
+     * as defined by the GraphQL spec.
+     */
+    protected function getFieldDirectiveBehavior(): string
+    {
+        return FieldDirectiveBehaviors::FIELD;
     }
 
     /**
