@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Directives\DirectiveLocations;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Directives\DirectiveLocations;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
-use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -88,8 +90,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $directiveLocations = [];
         $directiveKind = $this->getDirectiveKind();
 
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
 
         /**
          * There are 3 cases for adding the "Query" type locations:
@@ -112,19 +114,25 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 ]
             );
         }
-        if ($directiveKind === DirectiveKinds::SCHEMA) {
-            $directiveLocations = array_merge(
-                $directiveLocations,
-                [
-                    DirectiveLocations::FIELD_DEFINITION,
-                ]
-            );
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->exposeSchemaTypeDirectiveLocations()) {
+            if ($directiveKind === DirectiveKinds::SCHEMA) {
+                $directiveLocations = array_merge(
+                    $directiveLocations,
+                    [
+                        DirectiveLocations::FIELD_DEFINITION,
+                    ]
+                );
+            }
         }
+
         return $directiveLocations;
     }
 
     /**
-     * ModuleConfiguration values cannot be accessed in `isServiceEnabled`,
+     * GraphQLParserModuleConfiguration values cannot be accessed in `isServiceEnabled`,
      * because the DirectiveResolver services are initialized on
      * the "boot" event, and by then the `SchemaConfigurationExecuter`
      * services, to set-up configuration hooks, have not been initialized yet.
