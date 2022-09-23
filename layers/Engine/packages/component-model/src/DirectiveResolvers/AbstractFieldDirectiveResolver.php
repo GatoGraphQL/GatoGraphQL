@@ -1542,6 +1542,22 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     {
         $directiveLocations = [];
         $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
+        $directiveKind = $this->getDirectiveKind();
+
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+
+        /**
+         * There are 3 cases for adding the "Query" type locations:
+         *
+         *   1. When the type is "Query"
+         *   2. When the type is "Schema" and we are editing the query on the back-end
+         *      (as to replace the lack of SDL)
+         *   3. When the type is "Indexing" and composable directives are enabled
+         */
+        $isDirectiveExposedInClient = $directiveKind === DirectiveKinds::QUERY
+            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
+            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives());
 
         /**
          * Add the "Operation" Directive Locations
@@ -1550,10 +1566,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             FieldDirectiveBehaviors::OPERATION,
             FieldDirectiveBehaviors::FIELD_AND_OPERATION,
         ])) {
-            $directiveLocations = [
-                DirectiveLocations::QUERY,
-                DirectiveLocations::MUTATION,
-            ];
+            if ($isDirectiveExposedInClient) {
+                $directiveLocations = [
+                    DirectiveLocations::QUERY,
+                    DirectiveLocations::MUTATION,
+                ];
+            }
         }
 
         /**
@@ -1563,22 +1581,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             FieldDirectiveBehaviors::FIELD,
             FieldDirectiveBehaviors::FIELD_AND_OPERATION,
         ])) {
-            /** @var GraphQLParserModuleConfiguration */
-            $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
-
-            /**
-             * There are 3 cases for adding the "Query" type locations:
-             * 1. When the type is "Query"
-             * 2. When the type is "Schema" and we are editing the query on the back-end (as to replace the lack of SDL)
-             * 3. When the type is "Indexing" and composable directives are enabled
-             */
-            $directiveKind = $this->getDirectiveKind();
-            if (
-                $directiveKind === DirectiveKinds::QUERY
-                || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
-                || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives())
-            ) {
-                // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
+            if ($isDirectiveExposedInClient) {
+                /**
+                 * Same DirectiveLocations as used by `@skip`
+                 *
+                 * @see https://graphql.github.io/graphql-spec/draft/#sec--skip
+                 */
                 $directiveLocations = [
                     ...$directiveLocations,
                     DirectiveLocations::FIELD,
