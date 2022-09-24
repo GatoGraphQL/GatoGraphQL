@@ -74,7 +74,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
-            self::E21 => $this->__('No DirectiveResolver processes directive \'%s\' in field(s) \'%s\'', 'component-model'),
+            self::E21 => $this->__('There is no directive \'%s\' (or it is not supported at this directive location, or for this node in the GraphQL query)', 'component-model'),
             self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
