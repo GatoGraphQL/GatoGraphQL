@@ -334,23 +334,41 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
                                                             [
                                                                 new RelationalField(
                                                                     'self',
-                                                                    $isNestedMutationsEnabled
-                                                                        ? '_superRoot__root_Three_self_'
-                                                                        : '_superRoot__queryRoot_Three_self_',
+                                                                    '_dynamicSelf_op2_level7_',
                                                                     [],
                                                                     [
                                                                         new RelationalField(
-                                                                            $isNestedMutationsEnabled
-                                                                                ? '_root'
-                                                                                : '_queryRoot',
-                                                                            $isNestedMutationsEnabled
-                                                                                ? '_superRoot__root_Three_'
-                                                                                : '_superRoot__queryRoot_Three_',
+                                                                            'self',
+                                                                            '_dynamicSelf_op2_level8_',
                                                                             [],
                                                                             [
-                                                                                $leafField31,
-                                                                                $inlineFragment3,
-                                                                                $relationalField3,
+                                                                                new RelationalField(
+                                                                                    'self',
+                                                                                    $isNestedMutationsEnabled
+                                                                                        ? '_superRoot__root_Three_self_'
+                                                                                        : '_superRoot__queryRoot_Three_self_',
+                                                                                    [],
+                                                                                    [
+                                                                                        new RelationalField(
+                                                                                            $isNestedMutationsEnabled
+                                                                                                ? '_root'
+                                                                                                : '_queryRoot',
+                                                                                            $isNestedMutationsEnabled
+                                                                                                ? '_superRoot__root_Three_'
+                                                                                                : '_superRoot__queryRoot_Three_',
+                                                                                            [],
+                                                                                            [
+                                                                                                $leafField31,
+                                                                                                $inlineFragment3,
+                                                                                                $relationalField3,
+                                                                                            ],
+                                                                                            [],
+                                                                                            ASTNodesFactory::getNonSpecificLocation()
+                                                                                        ),
+                                                                                    ],
+                                                                                    [],
+                                                                                    ASTNodesFactory::getNonSpecificLocation()
+                                                                                ),
                                                                             ],
                                                                             [],
                                                                             ASTNodesFactory::getNonSpecificLocation()
