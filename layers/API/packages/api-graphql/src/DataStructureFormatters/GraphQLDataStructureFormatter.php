@@ -519,4 +519,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $objectID,
         );
     }
+
+    protected function getJsonEncodeType(): ?int
+    {
+        return JSON_FORCE_OBJECT;
+    }
 }
