@@ -331,13 +331,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             ErrorFeedbackItemProvider::E21,
                             [
                                 $directive->getName(),
-                                implode(
-                                    $this->__('\', \'', 'component-model'),
-                                    array_map(
-                                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                                        $directiveFields[$directive]
-                                    )
-                                ),
                             ]
                         ),
                         $directive,
@@ -358,7 +351,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 ErrorFeedbackItemProvider::E21,
                                 [
                                     $directive->getName(),
-                                    $field->asFieldOutputQueryString(),
                                 ]
                             ),
                             $directive,
