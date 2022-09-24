@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoPAPI\GraphQLAPI\Module;
+use PoPAPI\GraphQLAPI\ModuleConfiguration;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
@@ -15,7 +18,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use SplObjectStorage;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
@@ -329,7 +331,18 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($field = $item[Tokens::FIELD] ?? null) {
             $extensions['field'] = $field;
         } elseif ($dynamicField = $item[Tokens::DYNAMIC_FIELD] ?? null) {
-            $extensions['dynamicField'] = $dynamicField;
+            /**
+             * Print the "dynamic field"? By default it is disabled,
+             * because Operation Directives are handled via
+             * SuperRoot Fields, and it's confusing to print
+             * that dynamic field.
+             *
+             * @var ModuleConfiguration
+             */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->printDynamicFieldInExtensionsOutput()) {
+                $extensions['dynamicField'] = $dynamicField;
+            }
         }
         return $extensions;
     }
