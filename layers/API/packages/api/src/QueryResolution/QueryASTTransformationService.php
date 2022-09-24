@@ -118,6 +118,12 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
          * receive any `self`
          */
         $accumulatedMaximumFieldDepth = 0;
+        /**
+         * Allow the SuperRoot to add extra fields, and these must
+         * also be considered when generating the number of "self"
+         * fields.
+         */
+        $operationInitialDepth = $this->getOperationInitialDepth();
         for ($operationOrder = 0; $operationOrder < $operationsCount; $operationOrder++) {
             $operation = $operations[$operationOrder];
             /**
@@ -230,7 +236,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             /**
              * Add the maximum depth of this operation to the counter
              */
-            $accumulatedMaximumFieldDepth += $this->getOperationMaximumFieldDepth($operation, $fragments);
+            $accumulatedMaximumFieldDepth += $operationInitialDepth + $this->getOperationMaximumFieldDepth($operation, $fragments);
         }
         $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
         return $operationFieldOrFragmentBonds;
@@ -263,7 +269,11 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         }
 
         $depths = array_map(
-            fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(1, $fieldOrFragmentBond, $fragments),
+            fn (FieldInterface|FragmentBondInterface $fieldOrFragmentBond) => $this->getFieldOrFragmentBondDepth(
+                1,
+                $fieldOrFragmentBond,
+                $fragments
+            ),
             $fieldsOrFragmentBonds
         );
         return max($depths);
@@ -344,6 +354,19 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             $fieldsOrFragmentBonds
         );
         return max($depths);
+    }
+
+    /**
+     * The initial "cushion" of extra "self" fields to add
+     * at the beginning of an operation.
+     *
+     * It is needed for the SuperRoot to add its required fields,
+     * and have these still be executed after all previous fields
+     * from the previous operation.
+     */
+    protected function getOperationInitialDepth(): int
+    {
+        return 0;
     }
 
     /**

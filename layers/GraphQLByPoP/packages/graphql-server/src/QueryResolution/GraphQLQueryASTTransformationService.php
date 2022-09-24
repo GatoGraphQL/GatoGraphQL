@@ -105,11 +105,37 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
             $operation->getName()
         );
         if (!isset($documentFieldInstanceContainer[$alias])) {
+            /**
+             * Add 2 fields, because validating if a Directive
+             * is supported or excluded is executed against the
+             * fieldTypeResolver, hence the Field must be of type
+             * SuperRoot.
+             *
+             * Then, the 2 fields are:
+             *
+             *   1. self: [SuperRoot]
+             *   2. root: [Root] or queryRoot: [QueryRoot] or mutationRoot: [MutationRoot]
+             *
+             * And the Operation Directives are moved to the "self" field,
+             * which is of type SuperRoot, so the fieldTypeResolver will
+             * be of type SuperRoot.
+             *
+             * @see layers/Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php, method `resolveCanProcessFieldBasedOnSupportedFieldTypeResolverClasses`
+             */
             $documentFieldInstanceContainer[$alias] = new RelationalField(
-                $superRootField,
-                $alias,
+                'self',
+                $alias . 'self_',
                 [],
-                $operation->getFieldsOrFragmentBonds(),
+                [
+                    new RelationalField(
+                        $superRootField,
+                        $alias,
+                        [],
+                        $operation->getFieldsOrFragmentBonds(),
+                        [],
+                        ASTNodesFactory::getNonSpecificLocation()
+                    )
+                ],                
                 /**
                  * Support for Operation Directives is handled here,
                  * by transferring them into the SuperRoot Field,
@@ -123,5 +149,15 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
         $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
         /** @var FieldInterface */
         return $documentFieldInstanceContainer[$alias];
+    }
+
+    /**
+     * Added 2 extra fields, these must be taken into account
+     * when generating the "self" fields for Multiple Query
+     * Execution.
+     */
+    protected function getOperationInitialDepth(): int
+    {
+        return 2;
     }
 }
