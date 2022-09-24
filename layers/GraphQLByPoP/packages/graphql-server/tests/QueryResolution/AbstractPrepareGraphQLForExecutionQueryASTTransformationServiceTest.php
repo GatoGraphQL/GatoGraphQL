@@ -273,7 +273,25 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
                             '_dynamicSelf_op1_level2_',
                             [],
                             [
-                                $relationalField1SuperRootField,
+                                new RelationalField(
+                                    'self',
+                                    '_dynamicSelf_op1_level3_',
+                                    [],
+                                    [
+                                        new RelationalField(
+                                            'self',
+                                            '_dynamicSelf_op1_level4_',
+                                            [],
+                                            [
+                                                $relationalField1SuperRootField,
+                                            ],
+                                            [],
+                                            ASTNodesFactory::getNonSpecificLocation()
+                                        ),
+                                    ],
+                                    [],
+                                    ASTNodesFactory::getNonSpecificLocation()
+                                ),
                             ],
                             [],
                             ASTNodesFactory::getNonSpecificLocation()
