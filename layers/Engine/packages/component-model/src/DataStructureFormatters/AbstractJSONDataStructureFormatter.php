@@ -16,11 +16,6 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
      */
     public function getOutputContent(array &$data): string
     {
-        return (string)json_encode($data, $this->getJsonEncodeType() ?? 0);
-    }
-
-    protected function getJsonEncodeType(): ?int
-    {
-        return null;
+        return (string)json_encode($data);
     }
 }

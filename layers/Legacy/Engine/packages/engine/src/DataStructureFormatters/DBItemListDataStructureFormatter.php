@@ -16,9 +16,12 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
         return 'dbitemlist';
     }
 
-    protected function getJsonEncodeType(): ?int
+    /**
+     * @param array<string,mixed> $data
+     */
+    public function getOutputContent(array &$data): string
     {
-        return JSON_FORCE_OBJECT;
+        return (string)json_encode($data, JSON_FORCE_OBJECT);
     }
 
     protected function addDBEntries(&$database, &$merged_databases): void
