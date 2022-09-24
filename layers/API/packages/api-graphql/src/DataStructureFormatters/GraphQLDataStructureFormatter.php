@@ -534,4 +534,17 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $objectID,
         );
     }
+
+    /**
+     * Print an empty response as object, not as array.
+     *
+     * @param array<string,mixed> $data
+     */
+    public function getOutputContent(array &$data): string
+    {
+        if ($data === []) {
+            return (string)json_encode($data, JSON_FORCE_OBJECT);
+        }
+        return parent::getOutputContent($data);
+    }
 }
