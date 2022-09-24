@@ -176,31 +176,53 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
         $expectedOperationFieldAndFragmentBonds = new SplObjectStorage();
         $expectedOperationFieldAndFragmentBonds[$queryOneOperation] = [
             new RelationalField(
+                'self',
                 $isNestedMutationsEnabled
-                    ? '_root'
-                    : '_queryRoot',
-                $isNestedMutationsEnabled
-                    ? '_superRoot__root_One_'
-                    : '_superRoot__queryRoot_One_',
+                    ? '_superRoot__root_One_self_'
+                    : '_superRoot__queryRoot_One_self_',
                 [],
                 [
-                    $relationalField1,
+                    new RelationalField(
+                        $isNestedMutationsEnabled
+                            ? '_root'
+                            : '_queryRoot',
+                        $isNestedMutationsEnabled
+                            ? '_superRoot__root_One_'
+                            : '_superRoot__queryRoot_One_',
+                        [],
+                        [
+                            $relationalField1,
+                        ],
+                        [],
+                        ASTNodesFactory::getNonSpecificLocation()
+                    ),
                 ],
                 [],
                 ASTNodesFactory::getNonSpecificLocation()
-            )
+            ),
         ];
 
         $relationalField1SuperRootField = new RelationalField(
+            'self',
             $isNestedMutationsEnabled
-                ? '_root'
-                : '_mutationRoot',
-            $isNestedMutationsEnabled
-                ? '_superRoot__root_Two_'
-                : '_superRoot__mutationRoot_Two_',
+                ? '_superRoot__root_Two_self_'
+                : '_superRoot__mutationRoot_Two_self_',
             [],
             [
-                $relationalField2,
+                new RelationalField(
+                    $isNestedMutationsEnabled
+                        ? '_root'
+                        : '_mutationRoot',
+                    $isNestedMutationsEnabled
+                        ? '_superRoot__root_Two_'
+                        : '_superRoot__mutationRoot_Two_',
+                    [],
+                    [
+                        $relationalField2,
+                    ],
+                    [],
+                    ASTNodesFactory::getNonSpecificLocation()
+                ),
             ],
             [],
             ASTNodesFactory::getNonSpecificLocation()
@@ -212,21 +234,32 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
             ];
             $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
                 new RelationalField(
+                    'self',
                     $isNestedMutationsEnabled
-                        ? '_root'
-                        : '_queryRoot',
-                    $isNestedMutationsEnabled
-                        ? '_superRoot__root_Three_'
-                        : '_superRoot__queryRoot_Three_',
+                        ? '_superRoot__root_Three_self_'
+                        : '_superRoot__queryRoot_Three_self_',
                     [],
                     [
-                        $leafField31,
-                        $inlineFragment3,
-                        $relationalField3,
+                        new RelationalField(
+                            $isNestedMutationsEnabled
+                                ? '_root'
+                                : '_queryRoot',
+                            $isNestedMutationsEnabled
+                                ? '_superRoot__root_Three_'
+                                : '_superRoot__queryRoot_Three_',
+                            [],
+                            [
+                                $leafField31,
+                                $inlineFragment3,
+                                $relationalField3,
+                            ],
+                            [],
+                            ASTNodesFactory::getNonSpecificLocation()
+                        ),
                     ],
                     [],
                     ASTNodesFactory::getNonSpecificLocation()
-                )
+                ),
             ];
         } else {
             $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
@@ -272,21 +305,50 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
                                             [],
                                             [
                                                 new RelationalField(
-                                                    $isNestedMutationsEnabled
-                                                        ? '_root'
-                                                        : '_queryRoot',
-                                                    $isNestedMutationsEnabled
-                                                        ? '_superRoot__root_Three_'
-                                                        : '_superRoot__queryRoot_Three_',
+                                                    'self',
+                                                    '_dynamicSelf_op2_level5_',
                                                     [],
                                                     [
-                                                        $leafField31,
-                                                        $inlineFragment3,
-                                                        $relationalField3,
+                                                        new RelationalField(
+                                                            'self',
+                                                            '_dynamicSelf_op2_level6_',
+                                                            [],
+                                                            [
+                                                                new RelationalField(
+                                                                    'self',
+                                                                    $isNestedMutationsEnabled
+                                                                        ? '_superRoot__root_Three_self_'
+                                                                        : '_superRoot__queryRoot_Three_self_',
+                                                                    [],
+                                                                    [
+                                                                        new RelationalField(
+                                                                            $isNestedMutationsEnabled
+                                                                                ? '_root'
+                                                                                : '_queryRoot',
+                                                                            $isNestedMutationsEnabled
+                                                                                ? '_superRoot__root_Three_'
+                                                                                : '_superRoot__queryRoot_Three_',
+                                                                            [],
+                                                                            [
+                                                                                $leafField31,
+                                                                                $inlineFragment3,
+                                                                                $relationalField3,
+                                                                            ],
+                                                                            [],
+                                                                            ASTNodesFactory::getNonSpecificLocation()
+                                                                        ),
+                                                                    ],
+                                                                    [],
+                                                                    ASTNodesFactory::getNonSpecificLocation()
+                                                                ),
+                                                            ],
+                                                            [],
+                                                            ASTNodesFactory::getNonSpecificLocation()
+                                                        ),
                                                     ],
                                                     [],
                                                     ASTNodesFactory::getNonSpecificLocation()
-                                                )
+                                                ),
                                             ],
                                             [],
                                             ASTNodesFactory::getNonSpecificLocation()
