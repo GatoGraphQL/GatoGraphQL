@@ -54,23 +54,23 @@ class SkipFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
      *   {
      *     # Initialize the dynamic variable to `false`
      *     postExists: _echo(value: false) @export(as: "postExists")
-     *   
+     *
      *     post(by: { id: $id }) {
      *       # Found the Post => Set dynamic variable to `true`
      *       postExists: _echo(value: true) @export(as: "postExists")
      *     }
      *   }
-     *   
+     *
      *   mutation CreatePost @skip(if: $postExists)
      *   {
-     *     # Do something... 
+     *     # Do something...
      *   }
-     *   
+     *
      *   mutation UpdatePost @include(if: $postExists)
      *   {
      *     # Do something...
      *   }
-     *   
+     *
      *   mutation CreateOrUpdatePost @depends(on: ["CreatePost", "UpdatePost"])
      *   {
      *     # Do something...
@@ -84,7 +84,7 @@ class SkipFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
         if ($moduleConfiguration->enableMultipleQueryExecution()) {
             return FieldDirectiveBehaviors::FIELD_AND_OPERATION;
         }
-        
+
         return parent::getFieldDirectiveBehavior();
     }
 

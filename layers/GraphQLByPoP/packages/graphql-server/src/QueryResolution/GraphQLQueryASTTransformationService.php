@@ -135,7 +135,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                         [],
                         ASTNodesFactory::getNonSpecificLocation()
                     )
-                ],                
+                ],
                 /**
                  * Support for Operation Directives is handled here,
                  * by transferring them into the SuperRoot Field,

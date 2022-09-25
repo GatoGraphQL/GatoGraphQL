@@ -717,13 +717,14 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      * Watch out: System directives (like @resolveValueAndMerge)
      * must always be allowed, it's only the "query-type" and
      * "schema-type" directives that must be excluded.
-     * 
+     *
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
     protected function getExcludedFieldTypeResolverClasses(): ?array
     {
         $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
-        if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::FIELD
+        if (
+            $fieldDirectiveBehavior === FieldDirectiveBehaviors::FIELD
             && (
                 $this->isQueryTypeDirective()
                 || $this->getDirectiveKind() === DirectiveKinds::SCHEMA
@@ -1571,10 +1572,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         /**
          * Add the "Operation" Directive Locations
          */
-        if (in_array($fieldDirectiveBehavior, [
+        if (
+            in_array($fieldDirectiveBehavior, [
             FieldDirectiveBehaviors::OPERATION,
             FieldDirectiveBehaviors::FIELD_AND_OPERATION,
-        ])) {
+            ])
+        ) {
             if ($isQueryTypeDirective) {
                 $directiveLocations = [
                     DirectiveLocations::QUERY,
@@ -1586,10 +1589,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         /**
          * Add the "Field" Directive Locations
          */
-        if (in_array($fieldDirectiveBehavior, [
+        if (
+            in_array($fieldDirectiveBehavior, [
             FieldDirectiveBehaviors::FIELD,
             FieldDirectiveBehaviors::FIELD_AND_OPERATION,
-        ])) {
+            ])
+        ) {
             if ($isQueryTypeDirective) {
                 /**
                  * Same DirectiveLocations as used by `@skip`
@@ -1618,14 +1623,14 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
-     * A "query-type" directive, as defined by the GraphQL spec, 
+     * A "query-type" directive, as defined by the GraphQL spec,
      * must be exposed to the client.
      *
      * Non-query-type directives include the "schema-type"
      * directive, also defined in the GraphQL spec,
      * and also the "system" directives, which are internal
      * directives to this GraphQL server, such as @resolveValueAndMerge.
-     * 
+     *
      * There are 3 cases for the directive being considered
      * of "Query" type:
      *
@@ -1633,12 +1638,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      *   2. When the type is "Schema" and we are editing the query on the back-end
      *      (as to replace the lack of SDL)
      *   3. When the type is "Indexing" and composable directives are enabled
-     */        
+     */
     protected function isQueryTypeDirective(): bool
     {
         /** @var GraphQLParserModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
-        
+
         $directiveKind = $this->getDirectiveKind();
         return $directiveKind === DirectiveKinds::QUERY
             || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))

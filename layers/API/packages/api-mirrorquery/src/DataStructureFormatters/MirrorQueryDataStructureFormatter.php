@@ -247,7 +247,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
              * But for GraphQL's SuperRoot don't do anything, as we don't
              * want to show errors from this type.
              */
-            if ($resolvedObject[$relationalField] === null
+            if (
+                $resolvedObject[$relationalField] === null
                 && !$skipAddingDataForType
             ) {
                 $resolvedObjectRet[$relationalFieldOutputKey] = null;
