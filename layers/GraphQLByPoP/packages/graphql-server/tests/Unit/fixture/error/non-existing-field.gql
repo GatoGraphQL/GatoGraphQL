@@ -1,3 +1,13 @@
 query {
-  nonExisting
+    nonExisting
+    self {
+        ...SelfData
+        ...on QueryRoot {
+            nonExistingInInlineFragment
+        }
+    }
+}
+
+fragment SelfData on QueryRoot {
+    nonExistingInFragment
 }
