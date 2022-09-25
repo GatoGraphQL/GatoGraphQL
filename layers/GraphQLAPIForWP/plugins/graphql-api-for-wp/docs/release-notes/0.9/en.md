@@ -791,6 +791,40 @@ As mentioned earlier on, all fields to fetch a single entity now receive argumen
 - `Root.post(by:)`
 - `Root.user(by:)`
 
+## Operation Directives
+
+GraphQL operations (i.e. `query` and `mutation` operations) can now also receive directives.
+
+In the example below, directives `@skip` and `@include` can be declared in the operation, to process the operation or not based on some state (this example can't be run with `v0.9`; it will work in the future, once **Multiple Query Execution**, **Dynamic Variables** and **Function Fields** features are released):
+
+```graphql
+query CheckIfPostExists
+{
+  # Initialize the dynamic variable to `false`
+  postExists: _echo(value: false) @export(as: "postExists")
+
+  post(by: { id: $id }) {
+    # Found the Post => Set dynamic variable to `true`
+    postExists: _echo(value: true) @export(as: "postExists")
+  }
+}
+
+mutation MaybeCreatePost @skip(if: $postExists) @depends(on: "CheckIfPostExists")
+{
+  # Do something...
+}
+
+mutation MaybeUpdatePost @include(if: $postExists) @depends(on: "CheckIfPostExists")
+{
+  # Do something...
+}
+
+mutation CreateOrUpdatePost @depends(on: ["MaybeCreatePost","MaybeUpdatePost"])
+{
+  # Do something...
+}
+```
+
 ## Link to the online documentation of the GraphQL errors
 
 When executing a GraphQL query and an error is returned, if the error has been documented in the GraphQL spec, then the response will now include a link to its online documentation.
