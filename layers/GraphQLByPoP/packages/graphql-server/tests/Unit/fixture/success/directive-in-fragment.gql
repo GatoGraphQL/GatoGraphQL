@@ -1,0 +1,15 @@
+query SomeQuery($include: Boolean!) {
+    self {
+        ...SelfData
+    }
+}
+
+fragment SelfData on QueryRoot {
+    id
+    includedSelf: self @include(if: $include) {
+        id
+    }
+    skippedSelf: self @skip(if: $include) {
+        id
+    }
+}

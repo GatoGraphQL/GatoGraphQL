@@ -5,7 +5,7 @@
       "locations": [
         {
           "line": 2,
-          "column": 23
+          "column": 25
         }
       ],
       "extensions": {
@@ -18,7 +18,7 @@
         "type": "QueryRoot",
         "field": "id @skip(if: false, unless: true)",
         "code": "gql@5.4.1[b]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     },
     {
@@ -26,7 +26,7 @@
       "locations": [
         {
           "line": 3,
-          "column": 33
+          "column": 35
         }
       ],
       "extensions": {
@@ -39,7 +39,7 @@
         "type": "QueryRoot",
         "field": "multiple: id @skip(if: false, unless: true, orOtherwise: false)",
         "code": "gql@5.4.1[b]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     },
     {
@@ -47,7 +47,7 @@
       "locations": [
         {
           "line": 3,
-          "column": 47
+          "column": 49
         }
       ],
       "extensions": {
@@ -60,12 +60,62 @@
         "type": "QueryRoot",
         "field": "multiple: id @skip(if: false, unless: true, orOtherwise: false)",
         "code": "gql@5.4.1[b]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+      }
+    },
+    {
+      "message": "On directive 'skip', there is no argument with name 'inInlineFragment'",
+      "locations": [
+        {
+          "line": 8,
+          "column": 46
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(inInlineFragment: false)",
+          "@skip(if: false, inInlineFragment: false)",
+          "againSelf: self @skip(if: false, inInlineFragment: false) { ... }",
+          "...on QueryRoot { ... }",
+          "self { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "againSelf: self @skip(if: false, inInlineFragment: false) { ... }",
+        "code": "gql@5.4.1[b]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+      }
+    },
+    {
+      "message": "On directive 'skip', there is no argument with name 'inFragment'",
+      "locations": [
+        {
+          "line": 17,
+          "column": 27
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(inFragment: false)",
+          "@skip(if: false, inFragment: false)",
+          "self @skip(if: false, inFragment: false) { ... }",
+          "fragment SelfData on QueryRoot { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "self @skip(if: false, inFragment: false) { ... }",
+        "code": "gql@5.4.1[b]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     }
   ],
   "data": {
     "id": null,
-    "multiple": null
+    "multiple": null,
+    "self": {
+      "id": "root",
+      "self": null,
+      "again": "root",
+      "againSelf": null
+    }
   }
 }
