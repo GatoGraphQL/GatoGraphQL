@@ -169,7 +169,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     final protected function getMandatorySystemFieldDirectiveResolvers(): array
     {
         return array_map(
-            fn (string $directiveResolverClass) => $this->instanceManager->getInstance($directiveResolverClass),
+            function (string $directiveResolverClass): FieldDirectiveResolverInterface {
+                /** @var FieldDirectiveResolverInterface */
+                return $this->instanceManager->getInstance($directiveResolverClass);
+            },
             $this->getMandatorySystemFieldDirectiveResolverClasses()
         );
     }
@@ -177,7 +180,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * Mandatory system directives
      *
-     * @return array<string-class<FieldDirectiveResolverInterface>>
+     * @return array<class-string<FieldDirectiveResolverInterface>>
      */
     final protected function getMandatorySystemFieldDirectiveResolverClasses(): array
     {
