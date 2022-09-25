@@ -1,4 +1,20 @@
 query {
-  id @skip(if: false, unless: true)
-  multiple: id @skip(if: false, unless: true, orOtherwise: false)
+    id @skip(if: false, unless: true)
+    multiple: id @skip(if: false, unless: true, orOtherwise: false)
+    self {
+        ...SelfData
+        ...on QueryRoot {
+            again: id
+            againSelf: self @skip(if: false, inInlineFragment: false) {
+                id
+            }
+        }
+    }
+}
+
+fragment SelfData on QueryRoot {
+    id
+    self @skip(if: false, inFragment: false) {
+        id
+    }
 }
