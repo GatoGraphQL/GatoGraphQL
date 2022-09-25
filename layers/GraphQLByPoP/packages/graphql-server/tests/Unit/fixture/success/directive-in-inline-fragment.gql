@@ -1,0 +1,13 @@
+query SomeQuery($include: Boolean!) {
+    self {
+        ...on QueryRoot {
+            id
+            includedSelf: self @include(if: $include) {
+                id
+            }
+            skippedSelf: self @skip(if: $include) {
+                id
+            }
+        }
+    }
+}
