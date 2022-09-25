@@ -8,7 +8,10 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
-use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\DirectiveResolvers\ResolveValueAndMergeFieldDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\SerializeLeafOutputTypeValuesFieldDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\ValidateFieldDirectiveResolver;
+use PoP\ComponentModel\Registries\MandatoryFieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
@@ -69,17 +72,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private SplObjectStorage $objectTypeResolverObjectFieldDataCache;
 
-    private ?DataloadingEngineInterface $dataloadingEngine = null;
+    private ?MandatoryFieldDirectiveResolverRegistryInterface $mandatoryFieldDirectiveResolverRegistry = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
 
-    final public function setDataloadingEngine(DataloadingEngineInterface $dataloadingEngine): void
+    final public function setMandatoryFieldDirectiveResolverRegistry(MandatoryFieldDirectiveResolverRegistryInterface $mandatoryFieldDirectiveResolverRegistry): void
     {
-        $this->dataloadingEngine = $dataloadingEngine;
+        $this->mandatoryFieldDirectiveResolverRegistry = $mandatoryFieldDirectiveResolverRegistry;
     }
-    final protected function getDataloadingEngine(): DataloadingEngineInterface
+    final protected function getMandatoryFieldDirectiveResolverRegistry(): MandatoryFieldDirectiveResolverRegistryInterface
     {
-        /** @var DataloadingEngineInterface */
-        return $this->dataloadingEngine ??= $this->instanceManager->getInstance(DataloadingEngineInterface::class);
+        /** @var MandatoryFieldDirectiveResolverRegistryInterface */
+        return $this->mandatoryFieldDirectiveResolverRegistry ??= $this->instanceManager->getInstance(MandatoryFieldDirectiveResolverRegistryInterface::class);
     }
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
@@ -147,12 +150,57 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @return Directive[]
      */
-    protected function getMandatoryDirectives(): array
+    final protected function getMandatoryDirectives(): array
     {
         return array_map(
             fn (FieldDirectiveResolverInterface $directiveResolver) => $this->getDirective($directiveResolver->getDirectiveName()),
-            $this->getDataloadingEngine()->getMandatoryFieldDirectiveResolvers()
+            array_merge(
+                $this->getMandatorySystemFieldDirectiveResolvers(),
+                $this->getMandatoryFieldOrOperationDirectiveResolvers()
+            )
         );
+    }
+
+    /**
+     * Mandatory system directives
+     *
+     * @return FieldDirectiveResolverInterface[]
+     */
+    final protected function getMandatorySystemFieldDirectiveResolvers(): array
+    {
+        return array_map(
+            function (string $directiveResolverClass): FieldDirectiveResolverInterface {
+                /** @var FieldDirectiveResolverInterface */
+                return $this->instanceManager->getInstance($directiveResolverClass);
+            },
+            $this->getMandatorySystemFieldDirectiveResolverClasses()
+        );
+    }
+
+    /**
+     * Mandatory system directives
+     *
+     * @return array<class-string<FieldDirectiveResolverInterface>>
+     */
+    final protected function getMandatorySystemFieldDirectiveResolverClasses(): array
+    {
+        return [
+            ValidateFieldDirectiveResolver::class,
+            ResolveValueAndMergeFieldDirectiveResolver::class,
+            SerializeLeafOutputTypeValuesFieldDirectiveResolver::class,
+        ];
+    }
+
+    /**
+     * By default, handle mandatory directives for Fields.
+     * This method will be overriden by SuperRoot, to handle
+     * mandatory directives for Operations.
+     *
+     * @return FieldDirectiveResolverInterface[]
+     */
+    protected function getMandatoryFieldOrOperationDirectiveResolvers(): array
+    {
+        return $this->getMandatoryFieldDirectiveResolverRegistry()->getMandatoryFieldDirectiveResolvers();
     }
 
     protected function getDirective(string $directiveName): Directive
@@ -282,17 +330,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                     new SchemaFeedback(
                         new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E21,
+                            GraphQLSpecErrorFeedbackItemProvider::class,
+                            GraphQLSpecErrorFeedbackItemProvider::E_5_7_2,
                             [
                                 $directive->getName(),
-                                implode(
-                                    $this->__('\', \'', 'component-model'),
-                                    array_map(
-                                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                                        $directiveFields[$directive]
-                                    )
-                                ),
                             ]
                         ),
                         $directive,
@@ -309,11 +350,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E21,
+                                GraphQLSpecErrorFeedbackItemProvider::class,
+                                GraphQLSpecErrorFeedbackItemProvider::E_5_7_2,
                                 [
                                     $directive->getName(),
-                                    $field->asFieldOutputQueryString(),
                                 ]
                             ),
                             $directive,

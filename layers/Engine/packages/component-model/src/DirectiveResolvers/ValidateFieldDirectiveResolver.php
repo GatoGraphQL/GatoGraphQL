@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -22,7 +21,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
-final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver implements MandatoryDirectiveServiceTagInterface
+final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
 {
     private ?TypeSerializationServiceInterface $typeSerializationService = null;
 

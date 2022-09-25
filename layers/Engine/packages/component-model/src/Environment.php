@@ -26,6 +26,7 @@ class Environment
     public final const ENABLE_SELF_FIELD = 'ENABLE_SELF_FIELD';
     public final const ENABLE_TYPENAME_GLOBAL_FIELDS = 'ENABLE_TYPENAME_GLOBAL_FIELDS';
     public final const EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS = 'EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS';
+    public final const EXPOSE_SCHEMA_TYPE_DIRECTIVE_LOCATIONS = 'EXPOSE_SCHEMA_TYPE_DIRECTIVE_LOCATIONS';
 
     /**
      * Indicate if to enable to restrict a field and directive by version,

@@ -336,19 +336,21 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         array &$fullSchemaDefinitionForGraphQL,
         array $directiveSchemaDefinitionPath,
     ): void {
-        if (App::getState('edit-schema')) {
-            $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
-            if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_KIND] === DirectiveKinds::SCHEMA) {
-                $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(
-                    $this->__('%s %s', 'graphql-server'),
-                    sprintf(
-                        '_%s_', // Make it italic using markdown
-                        $this->__('("Schema" type directive)', 'graphql-server')
-                    ),
-                    $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION]
-                );
-            }
+        if (!App::getState('edit-schema')) {
+            return;
         }
+        $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);
+        if ($directiveSchemaDefinition[SchemaDefinition::DIRECTIVE_KIND] !== DirectiveKinds::SCHEMA) {
+            return;
+        }
+        $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(
+            $this->__('%s %s', 'graphql-server'),
+            sprintf(
+                '_%s_', // Make it italic using markdown
+                $this->__('("Schema" type directive)', 'graphql-server')
+            ),
+            $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION]
+        );
     }
 
     /**

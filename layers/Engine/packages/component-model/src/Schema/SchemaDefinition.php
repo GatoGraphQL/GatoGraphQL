@@ -41,6 +41,7 @@ class SchemaDefinition
     public final const IS_SENSITIVE_DATA_ELEMENT = 'isSensitiveDataElement';
     public final const FIELD_IS_MUTATION = 'isMutation';
     public final const DIRECTIVE_KIND = 'directiveKind';
+    public final const DIRECTIVE_LOCATIONS = 'directiveLocations';
     public final const DIRECTIVE_PIPELINE_POSITION = 'pipelinePosition';
     public final const DIRECTIVE_IS_REPEATABLE = 'isRepeatable';
     public final const DIRECTIVE_IS_GLOBAL = 'isGlobal';

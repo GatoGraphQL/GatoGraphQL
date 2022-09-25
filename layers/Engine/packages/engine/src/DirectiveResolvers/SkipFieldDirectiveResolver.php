@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalFieldDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
@@ -36,6 +40,52 @@ class SkipFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
     public function getDirectiveName(): string
     {
         return 'skip';
+    }
+
+    /**
+     * For Multiple Query Execution only, this directive
+     * can also be used in the operation (otherwise, it
+     * doesn't make any sense).
+     *
+     * Eg:
+     *
+     *   ```
+     *   query CheckIfPostExists($id: ID!)
+     *   {
+     *     # Initialize the dynamic variable to `false`
+     *     postExists: _echo(value: false) @export(as: "postExists")
+     *
+     *     post(by: { id: $id }) {
+     *       # Found the Post => Set dynamic variable to `true`
+     *       postExists: _echo(value: true) @export(as: "postExists")
+     *     }
+     *   }
+     *
+     *   mutation CreatePost @skip(if: $postExists)
+     *   {
+     *     # Do something...
+     *   }
+     *
+     *   mutation UpdatePost @include(if: $postExists)
+     *   {
+     *     # Do something...
+     *   }
+     *
+     *   mutation CreateOrUpdatePost @depends(on: ["CreatePost", "UpdatePost"])
+     *   {
+     *     # Do something...
+     *   }
+     *   ```
+     */
+    protected function getFieldDirectiveBehavior(): string
+    {
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        if ($moduleConfiguration->enableMultipleQueryExecution()) {
+            return FieldDirectiveBehaviors::FIELD_AND_OPERATION;
+        }
+
+        return parent::getFieldDirectiveBehavior();
     }
 
     /**

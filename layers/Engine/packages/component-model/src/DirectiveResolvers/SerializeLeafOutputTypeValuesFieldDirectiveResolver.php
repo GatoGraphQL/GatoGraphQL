@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
-use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -15,7 +14,7 @@ use PoP\ComponentModel\TypeSerialization\TypeSerializationServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
-final class SerializeLeafOutputTypeValuesFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver implements MandatoryDirectiveServiceTagInterface
+final class SerializeLeafOutputTypeValuesFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
 {
     private ?TypeSerializationServiceInterface $typeSerializationService = null;
 

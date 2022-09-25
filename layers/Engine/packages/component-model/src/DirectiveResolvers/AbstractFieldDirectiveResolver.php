@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use Exception;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
+use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Directives\DirectiveLocations;
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -49,7 +54,6 @@ use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -61,10 +65,6 @@ use SplObjectStorage;
  *
  * FieldDirectiveResolvers can also handle Operation Directives,
  * by having these be duplicated into the SuperRoot type fields.
- *
- * In addition, FieldDirectiveResolvers can also handle
- * Fragment Reference Directives, by spreading these to the
- * conditional fields that resolve the fragment.
  */
 abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver implements FieldDirectiveResolverInterface
 {
@@ -654,6 +654,17 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             return false;
         }
 
+        $excludedFieldTypeResolverClasses = $this->getExcludedFieldTypeResolverClasses();
+        if (
+            $excludedFieldTypeResolverClasses !== null
+            && array_filter(
+                $excludedFieldTypeResolverClasses,
+                fn (string $excludedFieldTypeResolverClass) => $fieldTypeResolver instanceof $excludedFieldTypeResolverClass
+            ) !== []
+        ) {
+            return false;
+        }
+
         return true;
     }
 
@@ -680,10 +691,50 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
+     * For a FieldDirectiveResolver to only behave as a
+     * OperationDirectiveResolver, it must only support
+     * the SuperRoot type.
+     *
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
     protected function getSupportedFieldTypeResolverClasses(): ?array
     {
+        $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
+        if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::OPERATION) {
+            return [
+                SuperRootObjectTypeResolver::class,
+            ];
+        }
+
+        return null;
+    }
+
+    /**
+     * For a FieldDirectiveResolver to not also behave as a
+     * OperationDirectiveResolver, it must be excluded from
+     * the SuperRoot type.
+     *
+     * Watch out: System directives (like @resolveValueAndMerge)
+     * must always be allowed, it's only the "query-type" and
+     * "schema-type" directives that must be excluded.
+     *
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     */
+    protected function getExcludedFieldTypeResolverClasses(): ?array
+    {
+        $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
+        if (
+            $fieldDirectiveBehavior === FieldDirectiveBehaviors::FIELD
+            && (
+                $this->isQueryTypeDirective()
+                || $this->getDirectiveKind() === DirectiveKinds::SCHEMA
+            )
+        ) {
+            return [
+                SuperRootObjectTypeResolver::class,
+            ];
+        }
+
         return null;
     }
 
@@ -1448,6 +1499,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         $schemaDefinition = [
             SchemaDefinition::NAME => $directiveName,
             SchemaDefinition::DIRECTIVE_KIND => $this->getDirectiveKind(),
+            SchemaDefinition::DIRECTIVE_LOCATIONS => $this->getDirectiveLocations(),
             SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
             SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),
         ];
@@ -1489,5 +1541,141 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];
+    }
+
+    /**
+     * Directives can be either of type "Schema" or "Query" and,
+     * depending on one case or the other, might be exposed to the user.
+     * By default, use the Query type
+     */
+    public function getDirectiveKind(): string
+    {
+        return DirectiveKinds::QUERY;
+    }
+
+    /**
+     * The FieldDirectiveResolver handles both Field and Query/Mutation
+     * Directives. Retrieve the corresponding Directive Locations,
+     * as defined by the GraphQL spec.
+     *
+     * @return string[]
+     *
+     * @see https://spec.graphql.org/draft/#DirectiveLocation
+     */
+    public function getDirectiveLocations(): array
+    {
+        $directiveLocations = [];
+        $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
+        $directiveKind = $this->getDirectiveKind();
+        $isQueryTypeDirective = $this->isQueryTypeDirective();
+
+        /**
+         * Add the "Operation" Directive Locations
+         */
+        if (
+            in_array($fieldDirectiveBehavior, [
+            FieldDirectiveBehaviors::OPERATION,
+            FieldDirectiveBehaviors::FIELD_AND_OPERATION,
+            ])
+        ) {
+            if ($isQueryTypeDirective) {
+                $directiveLocations = [
+                    DirectiveLocations::QUERY,
+                    DirectiveLocations::MUTATION,
+                ];
+            }
+        }
+
+        /**
+         * Add the "Field" Directive Locations
+         */
+        if (
+            in_array($fieldDirectiveBehavior, [
+            FieldDirectiveBehaviors::FIELD,
+            FieldDirectiveBehaviors::FIELD_AND_OPERATION,
+            ])
+        ) {
+            if ($isQueryTypeDirective) {
+                /**
+                 * Same DirectiveLocations as used by `@skip`
+                 *
+                 * @see https://graphql.github.io/graphql-spec/draft/#sec--skip
+                 */
+                $directiveLocations = [
+                    ...$directiveLocations,
+                    DirectiveLocations::FIELD,
+                    DirectiveLocations::FRAGMENT_SPREAD,
+                    DirectiveLocations::INLINE_FRAGMENT,
+                ];
+            } elseif ($directiveKind === DirectiveKinds::SCHEMA) {
+                /** @var ModuleConfiguration */
+                $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+                if ($moduleConfiguration->exposeSchemaTypeDirectiveLocations()) {
+                    $directiveLocations = [
+                        ...$directiveLocations,
+                        DirectiveLocations::FIELD_DEFINITION,
+                    ];
+                }
+            }
+        }
+
+        return $directiveLocations;
+    }
+
+    /**
+     * A "query-type" directive, as defined by the GraphQL spec,
+     * must be exposed to the client.
+     *
+     * Non-query-type directives include the "schema-type"
+     * directive, also defined in the GraphQL spec,
+     * and also the "system" directives, which are internal
+     * directives to this GraphQL server, such as @resolveValueAndMerge.
+     *
+     * There are 3 cases for the directive being considered
+     * of "Query" type:
+     *
+     *   1. When the type is "Query"
+     *   2. When the type is "Schema" and we are editing the query on the back-end
+     *      (as to replace the lack of SDL)
+     *   3. When the type is "Indexing" and composable directives are enabled
+     */
+    protected function isQueryTypeDirective(): bool
+    {
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+
+        $directiveKind = $this->getDirectiveKind();
+        return $directiveKind === DirectiveKinds::QUERY
+            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
+            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives());
+    }
+
+    /**
+     * The FieldDirectiveResolver can handle Field Directives and,
+     * in addition, Operation Directives.
+     *
+     * This method indicates the behavior of the FieldDirectiveResolver,
+     * indicating one of the following:
+     *
+     * - Behave as Field (default)
+     * - Behave as Field and Operation
+     * - Behave as Operation
+     *
+     * Based on this value, the Directive Locations will be reflected
+     * as defined by the GraphQL spec.
+     */
+    protected function getFieldDirectiveBehavior(): string
+    {
+        return FieldDirectiveBehaviors::FIELD;
+    }
+
+    /**
+     * By default, a directive can be executed only one time for "Schema" and "System"
+     * type directives (eg: <translate(en,es),translate(es,en)>),
+     * and many times for the other types, "Query", "Scripting" and "Indexing"
+     */
+    public function isRepeatable(): bool
+    {
+        return !($this->getDirectiveKind() === DirectiveKinds::SYSTEM || $this->getDirectiveKind() === DirectiveKinds::SCHEMA);
     }
 }

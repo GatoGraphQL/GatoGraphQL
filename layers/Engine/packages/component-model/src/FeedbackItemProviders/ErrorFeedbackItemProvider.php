@@ -25,7 +25,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E12 = 'e12';
     public final const E15 = 'e15';
     public final const E17 = 'e17';
-    public final const E21 = 'e21';
     public final const E26 = 'e26';
 
     /**
@@ -50,7 +49,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E12,
             self::E15,
             self::E17,
-            self::E21,
             self::E26,
         ];
     }
@@ -74,7 +72,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
-            self::E21 => $this->__('No DirectiveResolver processes directive \'%s\' in field(s) \'%s\'', 'component-model'),
             self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };

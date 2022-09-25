@@ -239,8 +239,18 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $relationalField = $field;
             $relationalFieldOutputKey = $relationalField->getOutputKey();
 
-            // If it's null, directly assign the null to the result
-            if ($resolvedObject[$relationalField] === null) {
+            $skipAddingDataForType = $this->skipAddingDataForType($typeOutputKey);
+
+            /**
+             * If it's null, directly assign the null to the result.
+             *
+             * But for GraphQL's SuperRoot don't do anything, as we don't
+             * want to show errors from this type.
+             */
+            if (
+                $resolvedObject[$relationalField] === null
+                && !$skipAddingDataForType
+            ) {
                 $resolvedObjectRet[$relationalFieldOutputKey] = null;
                 continue;
             }
@@ -270,7 +280,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $fragments
             );
 
-            if ($this->skipAddingDataForType($typeOutputKey)) {
+            if ($skipAddingDataForType) {
+                if ($resolvedObject[$relationalField] === null) {
+                    continue;
+                }
                 $resolvedObjectNestedPropertyRet = &$resolvedObjectRet;
                 $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
                 continue;

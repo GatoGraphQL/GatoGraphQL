@@ -126,6 +126,8 @@ class Parser extends Tokenizer implements ParserInterface
         $variables = [];
         $this->variables = [];
 
+        $this->beforeParsingOperation();
+
         $isShorthandQuery = $this->match(Token::TYPE_LBRACE);
         if ($isShorthandQuery) {
             $lbraceToken = $this->lex();
@@ -158,6 +160,8 @@ class Parser extends Tokenizer implements ParserInterface
 
             $lbraceToken = $this->lex();
         }
+
+        $this->afterParsingOperation();
 
         $fieldsOrFragmentBonds = [];
 
@@ -454,6 +458,20 @@ class Parser extends Tokenizer implements ParserInterface
         }
 
         return $this->createLeafField($nameToken->getData(), $alias, $arguments, $directives, $bodyLocation);
+    }
+
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
+    protected function beforeParsingOperation(): void
+    {
+    }
+
+    /**
+     * Allow to override, to support ObjectResolvedFieldValueReferences
+     */
+    protected function afterParsingOperation(): void
+    {
     }
 
     /**

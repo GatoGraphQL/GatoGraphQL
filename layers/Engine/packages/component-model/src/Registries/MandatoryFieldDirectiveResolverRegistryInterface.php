@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Engine;
+namespace PoP\ComponentModel\Registries;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
-interface DataloadingEngineInterface
+interface MandatoryFieldDirectiveResolverRegistryInterface
 {
     public function addMandatoryFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void;
     /**

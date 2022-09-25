@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Services\BasicServiceTrait;
@@ -17,16 +16,15 @@ use PoP\Root\Services\BasicServiceTrait;
  * resolvers for all types of directives defined by the
  * GraphQL spec:
  *
- * - OperationDirectiveResolver
- * - FragmentDirectiveResolver
- * - ArgumentDirectiveResolver
+ * - QueryOperationDirectiveResolver
+ * - MutationOperationDirectiveResolver
+ * - SubscriptionOperationDirectiveResolver
  *
  * However, in practice, only FieldDirectives are supported
  * by the GraphQL server, via the directive pipeline.
  *
  * It is through FieldDirectives that functionality for
- * Operation Directives and Fragment Directives is also
- * supported.
+ * Operation Directives is also supported.
  *
  * @see AbstractFieldDirectiveResolver
  */
@@ -68,17 +66,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Directives can be either of type "Schema" or "Query" and,
-     * depending on one case or the other, might be exposed to the user.
-     * By default, use the Query type
-     */
-    public function getDirectiveKind(): string
-    {
-        return DirectiveKinds::QUERY;
-    }
-
-    /**
-     * ModuleConfiguration values cannot be accessed in `isServiceEnabled`,
+     * GraphQLParserModuleConfiguration values cannot be accessed in `isServiceEnabled`,
      * because the DirectiveResolver services are initialized on
      * the "boot" event, and by then the `SchemaConfigurationExecuter`
      * services, to set-up configuration hooks, have not been initialized yet.
@@ -94,13 +82,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return true;
     }
 
-    /**
-     * By default, a directive can be executed only one time for "Schema" and "System"
-     * type directives (eg: <translate(en,es),translate(es,en)>),
-     * and many times for the other types, "Query", "Scripting" and "Indexing"
-     */
     public function isRepeatable(): bool
     {
-        return !($this->getDirectiveKind() == DirectiveKinds::SYSTEM || $this->getDirectiveKind() == DirectiveKinds::SCHEMA);
+        return true;
     }
 }

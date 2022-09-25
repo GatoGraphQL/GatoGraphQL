@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\ObjectModels;
+namespace PoP\ComponentModel\Directives;
 
+/**
+ * @see https://spec.graphql.org/draft/#DirectiveLocation
+ */
 class DirectiveLocations
 {
     public final const QUERY = 'QUERY';
@@ -13,6 +16,7 @@ class DirectiveLocations
     public final const FRAGMENT_DEFINITION = 'FRAGMENT_DEFINITION';
     public final const FRAGMENT_SPREAD = 'FRAGMENT_SPREAD';
     public final const INLINE_FRAGMENT = 'INLINE_FRAGMENT';
+    public final const VARIABLE_DEFINITION = 'VARIABLE_DEFINITION';
     public final const SCHEMA = 'SCHEMA';
     public final const SCALAR = 'SCALAR';
     public final const OBJECT = 'OBJECT';

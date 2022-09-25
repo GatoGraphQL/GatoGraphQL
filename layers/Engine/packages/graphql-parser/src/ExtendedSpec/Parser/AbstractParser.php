@@ -124,6 +124,20 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     }
 
     /**
+     * Dynamic Variable References can also be added
+     * in Operation Directives
+     */
+    protected function beforeParsingOperation(): void
+    {
+        array_unshift($this->parsedFieldDefinedObjectResolvedDynamicVariableNames, []);
+    }
+
+    protected function afterParsingOperation(): void
+    {
+        array_shift($this->parsedFieldDefinedObjectResolvedDynamicVariableNames);
+    }
+
+    /**
      * Append a new, empty block of [Field]
      */
     protected function beforeParsingFieldsOrFragmentBonds(): void

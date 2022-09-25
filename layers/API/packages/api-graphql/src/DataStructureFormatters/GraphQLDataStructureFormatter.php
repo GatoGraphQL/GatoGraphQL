@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoPAPI\GraphQLAPI\Module;
+use PoPAPI\GraphQLAPI\ModuleConfiguration;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
@@ -15,7 +18,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use SplObjectStorage;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
@@ -325,11 +327,24 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($path = $item[Tokens::PATH] ?? null) {
             $extensions['path'] = $path;
         }
-        $extensions['type'] = $typeOutputKey;
+        if (!$this->skipAddingDataForType($typeOutputKey)) {
+            $extensions['type'] = $typeOutputKey;
+        }
         if ($field = $item[Tokens::FIELD] ?? null) {
             $extensions['field'] = $field;
         } elseif ($dynamicField = $item[Tokens::DYNAMIC_FIELD] ?? null) {
-            $extensions['dynamicField'] = $dynamicField;
+            /**
+             * Print the "dynamic field"? By default it is disabled,
+             * because Operation Directives are handled via
+             * SuperRoot Fields, and it's confusing to print
+             * that dynamic field.
+             *
+             * @var ModuleConfiguration
+             */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->printDynamicFieldInExtensionsOutput()) {
+                $extensions['dynamicField'] = $dynamicField;
+            }
         }
         return $extensions;
     }
@@ -520,8 +535,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         );
     }
 
-    protected function getJsonEncodeType(): ?int
+    /**
+     * Print an empty response as object, not as array.
+     *
+     * @param array<string,mixed> $data
+     */
+    public function getOutputContent(array &$data): string
     {
-        return JSON_FORCE_OBJECT;
+        if ($data === []) {
+            return (string)json_encode($data, JSON_FORCE_OBJECT);
+        }
+        return parent::getOutputContent($data);
     }
 }

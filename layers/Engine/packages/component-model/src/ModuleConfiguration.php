@@ -319,4 +319,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function exposeSchemaTypeDirectiveLocations(): bool
+    {
+        $envVariable = Environment::EXPOSE_SCHEMA_TYPE_DIRECTIVE_LOCATIONS;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
