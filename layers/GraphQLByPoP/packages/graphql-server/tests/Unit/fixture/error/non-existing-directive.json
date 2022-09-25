@@ -5,7 +5,7 @@
       "locations": [
         {
           "line": 2,
-          "column": 7
+          "column": 9
         }
       ],
       "extensions": {
@@ -19,9 +19,57 @@
         "code": "gql@5.7.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Directives-Are-Defined"
       }
+    },
+    {
+      "message": "There is no directive with name 'nonExistingInInlineFragment'",
+      "locations": [
+        {
+          "line": 7,
+          "column": 30
+        }
+      ],
+      "extensions": {
+        "path": [
+          "@nonExistingInInlineFragment",
+          "againSelf: self @nonExistingInInlineFragment { ... }",
+          "...on QueryRoot { ... }",
+          "self { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "againSelf: self @nonExistingInInlineFragment { ... }",
+        "code": "gql@5.7.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Directives-Are-Defined"
+      }
+    },
+    {
+      "message": "There is no directive with name 'nonExistingInFragment'",
+      "locations": [
+        {
+          "line": 16,
+          "column": 11
+        }
+      ],
+      "extensions": {
+        "path": [
+          "@nonExistingInFragment",
+          "self @nonExistingInFragment { ... }",
+          "fragment SelfData on QueryRoot { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "self @nonExistingInFragment { ... }",
+        "code": "gql@5.7.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Directives-Are-Defined"
+      }
     }
   ],
   "data": {
-    "id": null
+    "id": null,
+    "self": {
+      "id": "root",
+      "self": null,
+      "again": "root",
+      "againSelf": null
+    }
   }
 }
