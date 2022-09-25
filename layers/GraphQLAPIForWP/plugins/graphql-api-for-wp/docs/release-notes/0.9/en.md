@@ -795,10 +795,10 @@ As mentioned earlier on, all fields to fetch a single entity now receive argumen
 
 GraphQL operations (i.e. `query` and `mutation` operations) can now also receive directives.
 
-In the example below, directives `@skip` and `@include` can be declared in the operation, to process the operation or not based on some state (this example can't be run with `v0.9`; it will work in the future, once **Multiple Query Execution**, **Dynamic Variables** and **Function Fields** features are released):
+In the example below, directives `@skip` and `@include` can be declared in the operation, to have the query or mutation be processed or not based on some state (this example can't be run with `v0.9`; it will work in the future, once **Multiple Query Execution**, **Dynamic Variables** and **Function Fields** features are released):
 
 ```graphql
-query CheckIfPostExists
+query CheckIfPostExistsAndExportAsDynamicVariable
 {
   # Initialize the dynamic variable to `false`
   postExists: _echo(value: false) @export(as: "postExists")
@@ -809,12 +809,14 @@ query CheckIfPostExists
   }
 }
 
-mutation MaybeCreatePost @skip(if: $postExists)
+# Execute this mutation only if dynamic variable $postExists is `false`
+mutation CreatePostIfItDoesntYetExist @skip(if: $postExists)
 {
   # Do something...
 }
 
-mutation MaybeUpdatePost @include(if: $postExists)
+# Execute this mutation only if dynamic variable $postExists is `true`
+mutation UpdatePostIfItAlreadyExists @include(if: $postExists)
 {
   # Do something...
 }
