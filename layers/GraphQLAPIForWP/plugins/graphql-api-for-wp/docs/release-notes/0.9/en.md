@@ -809,17 +809,12 @@ query CheckIfPostExists
   }
 }
 
-mutation MaybeCreatePost @skip(if: $postExists) @depends(on: "CheckIfPostExists")
+mutation MaybeCreatePost @skip(if: $postExists)
 {
   # Do something...
 }
 
-mutation MaybeUpdatePost @include(if: $postExists) @depends(on: "CheckIfPostExists")
-{
-  # Do something...
-}
-
-mutation CreateOrUpdatePost @depends(on: ["MaybeCreatePost","MaybeUpdatePost"])
+mutation MaybeUpdatePost @include(if: $postExists)
 {
   # Do something...
 }
