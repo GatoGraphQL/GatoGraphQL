@@ -21,7 +21,7 @@ interface OperationDependencyDefinerFieldDirectiveResolverInterface extends Fiel
      * the names of the Operations in the GraphQL Document
      * that must be loaded and processed before.
      *
-     * Eg: "on" for `@dependsOn(operations: ["GetPosts", "ProcessPostData"])`
+     * Eg: "operatins" for `@dependsOn(operations: ["GetPosts", "ProcessPostData"])`
      */
     public function getProvideDependedUponOperationNamesArgumentName(): string;
 }
