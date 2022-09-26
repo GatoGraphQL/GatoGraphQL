@@ -134,7 +134,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         $executableDocument = new ExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
-            $this->enabled() ?
+            $this->enabled() && $this->hasOperationDependencyDefinerDirectiveBeenDefined() ?
                 [
                     $queryOneOperation,
                     $queryTwoOperation,
@@ -148,8 +148,13 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
         // Passing no operationName => we must get an error "Must indicate operationName"
         $context = new Context('');
         $executableDocument = new ExecutableDocument($document, $context);
-        $executableDocument->validateAndInitialize();
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_B))->getMessage());
+        $executableDocument->validateAndInitialize();
+    }
+
+    protected function hasOperationDependencyDefinerDirectiveBeenDefined(): bool
+    {
+        return false;
     }
 }
