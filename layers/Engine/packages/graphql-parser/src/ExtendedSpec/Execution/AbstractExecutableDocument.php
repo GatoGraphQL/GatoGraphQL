@@ -147,6 +147,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          */
         array_unshift($multipleQueryExecutionOperations, $operation);
 
+        /** @var OperationInterface[] */
         $dependedUponOperations = [];
         foreach ($operation->getDirectives() as $directive) {
             /**
@@ -228,7 +229,11 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          * so that the depended-upon Operation appears before
          * all of its depending Operations.
          */
-        return array_values(array_unique($multipleQueryExecutionOperations));
+        $multipleQueryExecutionOperationsByName = [];
+        foreach ($multipleQueryExecutionOperations as $multipleQueryExecutionOperation) {
+            $multipleQueryExecutionOperationsByName[$multipleQueryExecutionOperation->getName()] = $multipleQueryExecutionOperation;
+        }
+        return array_values($multipleQueryExecutionOperationsByName);
     }
 
     abstract protected function isOperationDependencyDefinerDirective(Directive $directive): bool;
