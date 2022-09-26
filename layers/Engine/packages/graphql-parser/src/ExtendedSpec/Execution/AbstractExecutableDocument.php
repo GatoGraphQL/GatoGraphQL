@@ -32,10 +32,13 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
     {
         parent::validateAndInitialize();
 
+        $requestedOperation = $this->getRequestedOperation();
+        if ($requestedOperation === null) {
+            return;
+        }
+
         // Obtain the multiple operations that must be executed
         $this->multipleOperationsToExecute = $this->assertAndGetMultipleRequestedOperations();
-
-        $requestedOperation = $this->getRequestedOperation();
 
         // Inject the variable values into the objects
         foreach ($this->multipleOperationsToExecute as $operation) {
@@ -59,6 +62,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
      */
     protected function assertAndGetMultipleRequestedOperations(): array
     {
+        /** @var OperationInterface */
         $requestedOperation = $this->getRequestedOperation();
 
         /** @var ModuleConfiguration */
@@ -90,10 +94,13 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
      */
     public function reset(): void
     {
+        parent::reset();
+
         if ($this->multipleOperationsToExecute === null) {
             return;
         }
 
+        /** @var OperationInterface */
         $requestedOperation = $this->getRequestedOperation();
         foreach ($this->multipleOperationsToExecute as $operation) {
             /**
@@ -107,11 +114,11 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
     }
 
     /**
-     * @return OperationInterface[]
+     * @return OperationInterface[]|null
      * @throws InvalidRequestException
      * @throws ShouldNotHappenException When this function is not executed with the expected sequence
      */
-    public function getMultipleOperationsToExecute(): array
+    public function getMultipleOperationsToExecute(): ?array
     {
         if (!$this->isValidatedAndInitialized) {
             throw new ShouldNotHappenException(

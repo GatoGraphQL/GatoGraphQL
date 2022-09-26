@@ -11,8 +11,8 @@ use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface as UpstreamExec
 interface ExecutableDocumentInterface extends UpstreamExecutableDocumentInterface
 {
     /**
-     * @return OperationInterface[]
+     * @return OperationInterface[]|null
      * @throws InvalidRequestException
      */
-    public function getMultipleOperationsToExecute(): array;
+    public function getMultipleOperationsToExecute(): ?array;
 }
