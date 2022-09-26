@@ -109,8 +109,8 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             [],
             [
                 new Directive('dependsOn', [
-                    new Argument('operations', new InputList(["One", "Two"], new Location(14, 43)), new Location(14, 39))
-                ], new Location(14, 30))
+                    new Argument('operations', new InputList([new Literal("One", new Location(14, 55)), new Literal("Two", new Location(14, 62))], new Location(14, 53)), new Location(14, 41))
+                ], new Location(14, 31))
             ],
             [
                 new LeafField('id', null, [], [], new Location(15, 17))
