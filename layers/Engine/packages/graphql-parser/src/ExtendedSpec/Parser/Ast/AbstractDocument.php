@@ -129,8 +129,8 @@ abstract class AbstractDocument extends UpstreamDocument
          * and all operations exist
          */
         if ($moduleConfiguration->enableMultipleQueryExecution()) {
-            // @todo Implement here
             $this->assertDependedUponOperationsExist();
+            // @todo Implement here
             // $this->assertDependedUponOperationsDoNotFormLoop();
         }
     }
@@ -586,55 +586,65 @@ abstract class AbstractDocument extends UpstreamDocument
      */
     protected function assertDependedUponOperationsExist(): void
     {
+        $operationNames = $this->getAllOperationNames();
+
         $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArguments();
-        // $objectResolvedFieldValueReferences = $this->getObjectResolvedFieldValueReferences();
+        foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
+            /**
+             * A list is expected, but a single Operation name can also be provided.
+             *
+             * @var string|string[]
+             */
+            $dependendUponOperationNameOrNames = $operationDependencyDefinitionArgument->getValue();
+            if (!is_array($dependendUponOperationNameOrNames)) {
+                $dependendUponOperationNames = [$dependendUponOperationNameOrNames];
+            } else {
+                $dependendUponOperationNames = $dependendUponOperationNameOrNames;
+            }
+            
+            /**
+             * While iterating and validating, also make sure
+             * each of the elements is a String.
+             */
+            foreach ($dependendUponOperationNames as $dependendUponOperationName) {
+                if (!is_string($dependendUponOperationName)) {
+                    throw new InvalidRequestException(
+                        new FeedbackItemResolution(
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::E12,
+                            [
+                                $dependendUponOperationName,
+                            ]
+                        ),
+                        $operationDependencyDefinitionArgument->getValueAST()
+                    );
+                }
+                if (!in_array($dependendUponOperationName, $operationNames)) {
+                    throw new InvalidRequestException(
+                        new FeedbackItemResolution(
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::E13,
+                            [
+                                $dependendUponOperationName,
+                            ]
+                        ),
+                        $operationDependencyDefinitionArgument->getValueAST()
+                    );
+                }
+            }
+        }
+    }
 
-        // /**
-        //  * Organize by name and astNode, as to give the Location of the error.
-        //  * Notice that only 1 Location is raised, even if the error happens
-        //  * on multiple places.
-        //  */
-        // $dependendUponOperationNames = [];
-        // foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
-        //     $dependendUponOperationName = (string)$operationDependencyDefinitionArgument->getValue();
-        //     // If many AST nodes fail, and they have the same name, show the 1st one
-        //     if (isset($dependendUponOperationNames[$dependendUponOperationName])) {
-        //         continue;
-        //     }
-        //     $dependendUponOperationNames[$dependendUponOperationName] = $operationDependencyDefinitionArgument;
-        // }
-        // $objectResolvedFieldValueReferenceNames = [];
-        // foreach ($objectResolvedFieldValueReferences as $objectResolvedFieldValueReference) {
-        //     $objectResolvedFieldValueReferenceName = $objectResolvedFieldValueReference->getName();
-        //     // If many AST nodes fail, and they have the same name, show the 1st one
-        //     if (isset($objectResolvedFieldValueReferenceNames[$objectResolvedFieldValueReferenceName])) {
-        //         continue;
-        //     }
-        //     $objectResolvedFieldValueReferenceNames[$objectResolvedFieldValueReferenceName] = $objectResolvedFieldValueReference;
-        // }
-
-        // /** @var array<string,Argument> */
-        // $sharedVariableNames = array_intersect_key(
-        //     $dependendUponOperationNames,
-        //     $objectResolvedFieldValueReferenceNames
-        // );
-        // if ($sharedVariableNames === []) {
-        //     return;
-        // }
-
-        // $dependendUponOperationName = key($sharedVariableNames);
-        // $operationDependencyDefinitionArgument = $sharedVariableNames[$dependendUponOperationName];
-        // throw new InvalidRequestException(
-        //     new FeedbackItemResolution(
-        //         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-        //         GraphQLExtendedSpecErrorFeedbackItemProvider::E9,
-        //         [
-        //             $dependendUponOperationName,
-        //             '$' . $dependendUponOperationName,
-        //         ]
-        //     ),
-        //     $operationDependencyDefinitionArgument->getValueAST()
-        // );
+    /**
+     * @return string[]
+     */
+    protected function getAllOperationNames(): array
+    {
+        $operationNames = [];
+        foreach ($this->getOperations() as $operation) {
+            $operationNames[] = $operation->getName();
+        }
+        return $operationNames;
     }
 
     /**
