@@ -15,7 +15,10 @@ interface QueryAugmenterServiceInterface
      * Otherwise return null.
      *
      * @param OperationInterface[] $operations
-     * @return OperationInterface[]|null
+     * @return OperationInterface[]
      */
-    public function getMultipleQueryExecutionOperations(string $operationName, array $operations): ?array;
+    public function getMultipleQueryExecutionOperations(
+        OperationInterface $requestedOperation,
+        array $operations,
+    ): array;
 }

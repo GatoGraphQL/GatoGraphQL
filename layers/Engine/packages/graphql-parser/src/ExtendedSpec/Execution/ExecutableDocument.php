@@ -79,17 +79,10 @@ class ExecutableDocument extends UpstreamExecutableDocument implements Executabl
             ];
         }
 
-        $multipleQueryExecutionOperations = $this->getQueryAugmenterService()->getMultipleQueryExecutionOperations(
-            $this->context->getOperationName(),
+        return $this->getQueryAugmenterService()->getMultipleQueryExecutionOperations(
+            $this->requestedOperation,
             $this->document->getOperations(),
         );
-        if ($multipleQueryExecutionOperations !== null) {
-            return $multipleQueryExecutionOperations;
-        }
-
-        return [
-            $this->requestedOperation,
-        ];
     }
 
     /**
