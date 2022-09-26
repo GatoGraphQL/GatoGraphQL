@@ -7,12 +7,10 @@ namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\MetaFieldDirectiveResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\OperationDependencyDefinerFieldDirectiveResolverInterface;
 use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
-use PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistryInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -25,7 +23,6 @@ class Parser extends AbstractParser
 {
     private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
     private ?DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry = null;
-    private ?OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry = null;
     private ?DirectiveRegistryInterface $directiveRegistry = null;
 
     final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
@@ -45,15 +42,6 @@ class Parser extends AbstractParser
     {
         /** @var DynamicVariableDefinerDirectiveRegistryInterface */
         return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
-    }
-    final public function setOperationDependencyDefinerDirectiveRegistry(OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry): void
-    {
-        $this->operationDependencyDefinerDirectiveRegistry = $operationDependencyDefinerDirectiveRegistry;
-    }
-    final protected function getOperationDependencyDefinerDirectiveRegistry(): OperationDependencyDefinerDirectiveRegistryInterface
-    {
-        /** @var OperationDependencyDefinerDirectiveRegistryInterface */
-        return $this->operationDependencyDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(OperationDependencyDefinerDirectiveRegistryInterface::class);
     }
     final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
     {
@@ -157,25 +145,5 @@ class Parser extends AbstractParser
             return null;
         }
         return $dynamicVariableDefinerFieldDirectiveResolver->mustResolveDynamicVariableOnObject();
-    }
-
-    protected function isOperationDependencyDefinerDirective(Directive $directive): bool
-    {
-        return $this->getOperationDependencyDefinerFieldDirectiveResolver($directive) !== null;
-    }
-
-    protected function getOperationDependencyDefinerFieldDirectiveResolver(Directive $directive): ?OperationDependencyDefinerFieldDirectiveResolverInterface
-    {
-        return $this->getOperationDependencyDefinerDirectiveRegistry()->getOperationDependencyDefinerFieldDirectiveResolver($directive->getName());
-    }
-
-    protected function getProvideDependedUponOperationNamesArgument(Directive $directive): ?Argument
-    {
-        $operationDependencyDefinerFieldDirectiveResolver = $this->getOperationDependencyDefinerFieldDirectiveResolver($directive);
-        if ($operationDependencyDefinerFieldDirectiveResolver === null) {
-            return null;
-        }
-        $provideDependedUponOperationNamesArgumentName = $operationDependencyDefinerFieldDirectiveResolver->getProvideDependedUponOperationNamesArgumentName();
-        return $directive->getArgument($provideDependedUponOperationNamesArgumentName);
     }
 }
