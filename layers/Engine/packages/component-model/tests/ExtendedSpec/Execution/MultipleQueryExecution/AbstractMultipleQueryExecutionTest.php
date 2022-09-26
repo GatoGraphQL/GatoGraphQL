@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\ExtendedSpec\Execution\MultipleQueryExecution;
+namespace PoP\ComponentModel\ExtendedSpec\Execution\MultipleQueryExecution;
 
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
