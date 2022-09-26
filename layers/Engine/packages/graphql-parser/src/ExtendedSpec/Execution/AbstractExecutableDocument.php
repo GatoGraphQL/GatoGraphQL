@@ -143,6 +143,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         OperationInterface $operation,
         array $operations,
     ): array {
+        $dependedUponOperations = [];
         foreach ($operation->getDirectives() as $directive) {
             /**
              * Check if this Directive is a "OperationDependencyDefiner"
@@ -167,6 +168,12 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                 $dependedUponOperationNames = $dependedUponOperationNameOrNames;
             }
 
+            /**
+             * Make sure the same Operation is executed just once,
+             * even if provided more than once
+             */
+            $dependedUponOperationNames = array_values(array_unique($dependedUponOperationNames));
+
             foreach ($dependedUponOperationNames as $dependedUponOperationName) {
                 /**
                  * It can't be null, or it will already fail in ->validate
@@ -186,12 +193,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                     continue;
                 }
 
-                /**
-                 * Add the operation to the beginning of the list
-                 * (as it must be executed before), and recursively add
-                 * its own operation dependencies
-                 */
-                array_unshift($multipleQueryExecutionOperations, $dependedUponOperation);
+                $dependedUponOperations[] = $dependedUponOperation;
                 $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
                     $multipleQueryExecutionOperations,
                     $dependedUponOperation,
@@ -200,7 +202,14 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
             }
         }
 
-        return $multipleQueryExecutionOperations;
+        /**
+         * Add the depended-upon operations to the beginning of the list
+         * (as they must be executed before)
+         */
+        return array_merge(
+            $dependedUponOperations,
+            $multipleQueryExecutionOperations
+        );
     }
 
     abstract protected function isOperationDependencyDefinerDirective(Directive $directive): bool;
