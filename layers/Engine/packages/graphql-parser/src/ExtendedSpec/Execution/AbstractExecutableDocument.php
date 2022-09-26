@@ -177,6 +177,12 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
              */
             $dependedUponOperationNames = array_values(array_unique($dependedUponOperationNames));
 
+            /**
+             * Because the new operation is added at the beginning of the array,
+             * then iterate them from right to left
+             */
+            $dependedUponOperationNames = array_reverse($dependedUponOperationNames);
+
             foreach ($dependedUponOperationNames as $dependedUponOperationName) {
                 /**
                  * It can't be null, or it will already fail in ->validate
