@@ -1114,6 +1114,66 @@ GRAPHQL;
                 ),
                 'query GetUsersName @someOperationDirective { users { name } }'
             ],
+            // Directives in multiple operation
+            [
+                <<<GRAPHQL
+                    query GetUsersName @someOperationDirective {
+                        users {
+                            name
+                        }
+                    }
+                    query GetPostsTitle @anotherOperationDirective {
+                        posts {
+                            title
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName',
+                            [],
+                            [
+                                new Directive('someOperationDirective', [], new Location(1, 25))
+                            ],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [],
+                                    [
+                                        new LeafField('name', null, [], [], new Location(3, 13)),
+                                    ],
+                                    [],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        ),
+                        new QueryOperation(
+                            'GetPostsTitle',
+                            [],
+                            [
+                                new Directive('anotherOperationDirective', [], new Location(6, 26))
+                            ],
+                            [
+                                new RelationalField(
+                                    'posts',
+                                    null,
+                                    [],
+                                    [
+                                        new LeafField('title', null, [], [], new Location(8, 13)),
+                                    ],
+                                    [],
+                                    new Location(7, 9)
+                                ),
+                            ],
+                            new Location(6, 11)
+                        )
+                    ]
+                ),
+                'query GetUsersName @someOperationDirective { users { name } }' . PHP_EOL . PHP_EOL . 'query GetPostsTitle @anotherOperationDirective { posts { title } }'
+            ],
             // Directive in operation and leaf field
             [
                 <<<GRAPHQL
