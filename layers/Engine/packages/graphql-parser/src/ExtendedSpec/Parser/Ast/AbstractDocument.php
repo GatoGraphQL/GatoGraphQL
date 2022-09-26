@@ -123,6 +123,16 @@ abstract class AbstractDocument extends UpstreamDocument
         if ($enableDynamicVariables && $enableObjectResolvedFieldValueReferences) {
             $this->assertNonSharedDynamicVariableAndResolvedFieldValueReferenceNames();
         }
+
+        /**
+         * Validate that @depends(on:...) doesn't form loops,
+         * and all operations exist
+         */
+        if ($moduleConfiguration->enableMultipleQueryExecution()) {
+            // @todo Implement here
+            $this->assertDependedUponOperationsExist();
+            // $this->assertDependedUponOperationsDoNotFormLoop();
+        }
     }
 
     /**
@@ -567,4 +577,176 @@ abstract class AbstractDocument extends UpstreamDocument
     {
         return $this->getObjectResolvedFieldValueReferencesInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds());
     }
+
+    /**
+     * Validate that all Operations declared under
+     * @depends(on:...) all exist
+     *
+     * @throws InvalidRequestException
+     */
+    protected function assertDependedUponOperationsExist(): void
+    {
+        $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArguments();
+        // $objectResolvedFieldValueReferences = $this->getObjectResolvedFieldValueReferences();
+
+        // /**
+        //  * Organize by name and astNode, as to give the Location of the error.
+        //  * Notice that only 1 Location is raised, even if the error happens
+        //  * on multiple places.
+        //  */
+        // $dependendUponOperationNames = [];
+        // foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
+        //     $dependendUponOperationName = (string)$operationDependencyDefinitionArgument->getValue();
+        //     // If many AST nodes fail, and they have the same name, show the 1st one
+        //     if (isset($dependendUponOperationNames[$dependendUponOperationName])) {
+        //         continue;
+        //     }
+        //     $dependendUponOperationNames[$dependendUponOperationName] = $operationDependencyDefinitionArgument;
+        // }
+        // $objectResolvedFieldValueReferenceNames = [];
+        // foreach ($objectResolvedFieldValueReferences as $objectResolvedFieldValueReference) {
+        //     $objectResolvedFieldValueReferenceName = $objectResolvedFieldValueReference->getName();
+        //     // If many AST nodes fail, and they have the same name, show the 1st one
+        //     if (isset($objectResolvedFieldValueReferenceNames[$objectResolvedFieldValueReferenceName])) {
+        //         continue;
+        //     }
+        //     $objectResolvedFieldValueReferenceNames[$objectResolvedFieldValueReferenceName] = $objectResolvedFieldValueReference;
+        // }
+
+        // /** @var array<string,Argument> */
+        // $sharedVariableNames = array_intersect_key(
+        //     $dependendUponOperationNames,
+        //     $objectResolvedFieldValueReferenceNames
+        // );
+        // if ($sharedVariableNames === []) {
+        //     return;
+        // }
+
+        // $dependendUponOperationName = key($sharedVariableNames);
+        // $operationDependencyDefinitionArgument = $sharedVariableNames[$dependendUponOperationName];
+        // throw new InvalidRequestException(
+        //     new FeedbackItemResolution(
+        //         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+        //         GraphQLExtendedSpecErrorFeedbackItemProvider::E9,
+        //         [
+        //             $dependendUponOperationName,
+        //             '$' . $dependendUponOperationName,
+        //         ]
+        //     ),
+        //     $operationDependencyDefinitionArgument->getValueAST()
+        // );
+    }
+
+    /**
+     * @return Argument[]
+     */
+    protected function getOperationDependencyDefinitionArguments(): array
+    {
+        $operationDependencyDefinitionArguments = [];
+        foreach ($this->getOperations() as $operation) {
+            $operationDependencyDefinitionArguments = array_merge(
+                $operationDependencyDefinitionArguments,
+                $this->getOperationDependencyDefinitionArgumentsInOperation($operation),
+            );
+        }
+        foreach ($this->getFragments() as $fragment) {
+            $operationDependencyDefinitionArguments = array_merge(
+                $operationDependencyDefinitionArguments,
+                $this->getOperationDependencyDefinitionArgumentsInFragment($fragment),
+            );
+        }
+        return $operationDependencyDefinitionArguments;
+    }
+
+    /**
+     * @return Argument[]
+     */
+    protected function getOperationDependencyDefinitionArgumentsInOperation(OperationInterface $operation): array
+    {
+        return array_merge(
+            $this->getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds()),
+            $this->getOperationDependencyDefinitionArgumentsInDirectives($operation->getDirectives()),
+        );
+    }
+
+    /**
+     * @return Argument[]
+     */
+    protected function getOperationDependencyDefinitionArgumentsInFragment(Fragment $fragment): array
+    {
+        return array_merge(
+            $this->getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds()),
+            $this->getOperationDependencyDefinitionArgumentsInDirectives($fragment->getDirectives()),
+        );
+    }
+
+    /**
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     * @return Argument[]
+     */
+    protected function getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): array
+    {
+        $operationDependencyDefinitionArguments = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $operationDependencyDefinitionArguments = array_merge(
+                    $operationDependencyDefinitionArguments,
+                    $this->getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds())
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $operationDependencyDefinitionArguments = array_merge(
+                $operationDependencyDefinitionArguments,
+                $this->getOperationDependencyDefinitionArgumentsInDirectives($field->getDirectives())
+            );
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $operationDependencyDefinitionArguments = array_merge(
+                    $operationDependencyDefinitionArguments,
+                    $this->getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds())
+                );
+            }
+        }
+        return $operationDependencyDefinitionArguments;
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @return Argument[]
+     */
+    protected function getOperationDependencyDefinitionArgumentsInDirectives(array $directives): array
+    {
+        $operationDependencyDefinitionArguments = [];
+        foreach ($directives as $directive) {
+            /**
+             * Check if this Directive is a "OperationDependencyDefiner"
+             */
+            if (!$this->isOperationDependencyDefinerDirective($directive)) {
+                continue;
+            }
+            /**
+             * Get the Argument under which the Dynamic Variable is defined
+             */
+            $provideDependedUponOperationNamesArgument = $this->getProvideDependedUponOperationNamesArgument($directive);
+            if ($provideDependedUponOperationNamesArgument === null) {
+                continue;
+            }
+            /**
+             * All success!
+             */
+            $operationDependencyDefinitionArguments[] = $provideDependedUponOperationNamesArgument;
+        }
+        return $operationDependencyDefinitionArguments;
+    }
+
+    abstract protected function isOperationDependencyDefinerDirective(Directive $directive): bool;
+    abstract protected function getProvideDependedUponOperationNamesArgument(Directive $directive): ?Argument;
 }
