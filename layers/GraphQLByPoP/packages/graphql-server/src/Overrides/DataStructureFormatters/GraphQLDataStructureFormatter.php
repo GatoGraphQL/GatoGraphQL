@@ -11,6 +11,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SuperRootObjectTypeResol
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 
 /**
@@ -71,7 +72,9 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         ExecutableDocument $executableDocument,
     ): array {
         $superRootOperationFields = [];
-        foreach ($executableDocument->getMultipleOperationsToExecute() as $operation) {
+        /** @var OperationInterface[] */
+        $operations = $executableDocument->getMultipleOperationsToExecute();
+        foreach ($operations as $operation) {
             $superRootOperationFields[] = $this->getGraphQLQueryASTTransformationService()->getGraphQLSuperRootOperationField(
                 $executableDocument->getDocument(),
                 $operation
