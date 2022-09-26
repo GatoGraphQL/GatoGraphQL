@@ -47,7 +47,10 @@ class ExecutableDocument extends UpstreamExecutableDocument
             return parent::assertAndGetRequestedOperations();
         }
 
-        $multipleQueryExecutionOperations = $this->getQueryAugmenterService()->getMultipleQueryExecutionOperations($this->context->getOperationName(), $this->document->getOperations());
+        $multipleQueryExecutionOperations = $this->getQueryAugmenterService()->getMultipleQueryExecutionOperations(
+            $this->context->getOperationName(),
+            $this->document->getOperations(),
+        );
         if ($multipleQueryExecutionOperations !== null) {
             return $multipleQueryExecutionOperations;
         }
