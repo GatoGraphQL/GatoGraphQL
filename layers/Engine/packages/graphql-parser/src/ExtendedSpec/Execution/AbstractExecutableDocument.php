@@ -35,12 +35,14 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         // Obtain the multiple operations that must be executed
         $this->multipleOperationsToExecute = $this->assertAndGetMultipleRequestedOperations();
 
+        $requestedOperation = $this->getRequestedOperation();
+
         // Inject the variable values into the objects
         foreach ($this->multipleOperationsToExecute as $operation) {
             /**
              * This has already been set in parent method
              */
-            if ($operation === $this->getRequestedOperation()) {
+            if ($operation === $requestedOperation) {
                 continue;
             }
             $this->propagateContext($operation, $this->context);
@@ -57,13 +59,15 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
      */
     protected function assertAndGetMultipleRequestedOperations(): array
     {
+        $requestedOperation = $this->getRequestedOperation();
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableMultipleQueryExecution()
             || count($this->document->getOperations()) === 1
         ) {
             return [
-                $this->getRequestedOperation(),
+                $requestedOperation,
             ];
         }
 
@@ -74,9 +78,9 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          */
         return $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
             [
-                $this->getRequestedOperation(),
+                $requestedOperation,
             ],
-            $this->getRequestedOperation(),
+            $requestedOperation,
             $this->document->getOperations(),
         );
     }
@@ -89,11 +93,13 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         if ($this->multipleOperationsToExecute === null) {
             return;
         }
+
+        $requestedOperation = $this->getRequestedOperation();
         foreach ($this->multipleOperationsToExecute as $operation) {
             /**
              * This has already been set in parent method
              */
-            if ($operation === $this->getRequestedOperation()) {
+            if ($operation === $requestedOperation) {
                 continue;
             }
             $this->propagateContext($operation, null);
