@@ -187,10 +187,11 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                 }
 
                 /**
-                 * Add the operation to the list, and recursively add
+                 * Add the operation to the beginning of the list
+                 * (as it must be executed before), and recursively add
                  * its own operation dependencies
                  */
-                $multipleQueryExecutionOperations[] = $dependedUponOperation;
+                array_unshift($multipleQueryExecutionOperations, $dependedUponOperation);
                 $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
                     $multipleQueryExecutionOperations,
                     $dependedUponOperation,
