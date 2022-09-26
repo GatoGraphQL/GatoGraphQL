@@ -36,7 +36,7 @@ abstract class AbstractGraphQLRelationalFieldQueryDataComponentProcessor extends
     ): SplObjectStorage {
         return $this->getGraphQLQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
             $executableDocument->getDocument(),
-            $executableDocument->getRequestedOperations(),
+            $executableDocument->getMultipleOperationsToExecute(),
             $executableDocument->getDocument()->getFragments(),
         );
     }

@@ -4,17 +4,27 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
-use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
+use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
-class ExecutableDocument extends UpstreamExecutableDocument
+class ExecutableDocument extends UpstreamExecutableDocument implements ExecutableDocumentInterface
 {
+    /**
+     * For Multiple Query Execution: the requested
+     * operation can load and execute previous Operations.
+     * This is the list of all the operations to execute.
+     *
+     * @var OperationInterface[]|null
+     */
+    protected ?array $multipleOperationsToExecute = null;
+
     private ?QueryAugmenterServiceInterface $queryAugmenterService = null;
 
     final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryAugmenterService): void
@@ -28,6 +38,28 @@ class ExecutableDocument extends UpstreamExecutableDocument
     }
 
     /**
+     * @throws InvalidRequestException
+     */
+    public function validateAndInitialize(): void
+    {
+        parent::validateAndInitialize();
+
+        // Obtain the multiple operations that must be executed
+        $this->multipleOperationsToExecute = $this->assertAndGetMultipleRequestedOperations();
+
+        // Inject the variable values into the objects
+        foreach ($this->multipleOperationsToExecute as $operation) {
+            /**
+             * This has already been set in parent method
+             */
+            if ($operation === $this->requestedOperation) {
+                continue;
+            }
+            $this->propagateContext($operation, $this->context);
+        }
+    }
+
+    /**
      * Override to support the "multiple query execution" feature:
      * If passing operationName `__ALL`, or passing no operationName
      * but there is an operation `__ALL` in the document,
@@ -35,16 +67,16 @@ class ExecutableDocument extends UpstreamExecutableDocument
      *
      * @return OperationInterface[]
      */
-    protected function assertAndGetRequestedOperations(): array
+    protected function assertAndGetMultipleRequestedOperations(): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableMultipleQueryExecution()) {
-            return parent::assertAndGetRequestedOperations();
-        }
-
-        if (count($this->document->getOperations()) === 1) {
-            return parent::assertAndGetRequestedOperations();
+        if (!$moduleConfiguration->enableMultipleQueryExecution()
+            || count($this->document->getOperations()) === 1
+        ) {
+            return [
+                $this->requestedOperation,
+            ];
         }
 
         $multipleQueryExecutionOperations = $this->getQueryAugmenterService()->getMultipleQueryExecutionOperations(
@@ -55,30 +87,45 @@ class ExecutableDocument extends UpstreamExecutableDocument
             return $multipleQueryExecutionOperations;
         }
 
-        return parent::assertAndGetRequestedOperations();
+        return [
+            $this->requestedOperation,
+        ];
     }
 
     /**
-     * Override: If no operationName was provided, then it's assigned to __ALL
+     * @throws InvalidRequestException
      */
-    public function getRequestedOperation(): ?OperationInterface
+    public function reset(): void
     {
-        $requestedOperations = $this->getRequestedOperations();
-        if (count($requestedOperations) === 1) {
-            return parent::getRequestedOperation();
+        if ($this->multipleOperationsToExecute === null) {
+            return;
         }
-
-        $operationName = $this->context->getOperationName();
-        if (!empty($operationName) && $operationName !== QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME) {
-            return parent::getRequestedOperation();
+        foreach ($this->multipleOperationsToExecute as $operation) {
+            /**
+             * This has already been set in parent method
+             */
+            if ($operation === $this->requestedOperation) {
+                continue;
+            }
+            $this->propagateContext($operation, null);
         }
+    }
 
-        /**
-         * Multiple operations, and no operationName requested => use __ALL
-         */
-        return $this->getMatchingRequestedOperation(
-            $this->document->getOperations(),
-            QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
-        );
+    /**
+     * @return OperationInterface[]
+     * @throws InvalidRequestException
+     * @throws ShouldNotHappenException When this function is not executed with the expected sequence
+     */
+    public function getMultipleOperationsToExecute(): array
+    {
+        if ($this->multipleOperationsToExecute === null) {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Before executing `%s`, must call `validateAndInitialize`', 'graphql-server'),
+                    __FUNCTION__,
+                )
+            );
+        }
+        return $this->multipleOperationsToExecute;
     }
 }

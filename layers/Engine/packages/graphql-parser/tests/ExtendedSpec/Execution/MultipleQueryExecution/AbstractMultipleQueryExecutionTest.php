@@ -120,7 +120,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             [
                 $queryTwoOperation,
             ],
-            $executableDocument->getRequestedOperations()
+            $executableDocument->getMultipleOperationsToExecute()
         );
 
         // Test the __ALL operationName => execute all operations
@@ -135,7 +135,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 ] : [
                     $queryAllOperation,
                 ],
-            $executableDocument->getRequestedOperations()
+            $executableDocument->getMultipleOperationsToExecute()
         );
 
         // Passing no operationName, and has __ALL in document => execute all operations
@@ -153,7 +153,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                     $queryOneOperation,
                     $queryTwoOperation,
                 ],
-                $executableDocument->getRequestedOperations()
+                $executableDocument->getMultipleOperationsToExecute()
             );
         }
 

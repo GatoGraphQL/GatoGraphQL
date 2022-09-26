@@ -71,7 +71,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         ExecutableDocument $executableDocument,
     ): array {
         $superRootOperationFields = [];
-        foreach ($executableDocument->getRequestedOperations() as $operation) {
+        foreach ($executableDocument->getMultipleOperationsToExecute() as $operation) {
             $superRootOperationFields[] = $this->getGraphQLQueryASTTransformationService()->getGraphQLSuperRootOperationField(
                 $executableDocument->getDocument(),
                 $operation

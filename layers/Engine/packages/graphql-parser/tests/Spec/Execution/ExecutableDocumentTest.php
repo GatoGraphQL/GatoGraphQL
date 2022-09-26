@@ -233,13 +233,13 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->expectException(ShouldNotHappenException::class);
         $this->expectExceptionMessage(sprintf(
             'Before executing `%s`, must call `validateAndInitialize`',
-            'getRequestedOperations'
+            'getMultipleOperationsToExecute'
         ));
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
-        $executableDocument->getRequestedOperations();
+        $executableDocument->getMultipleOperationsToExecute();
     }
 
     public function testRequestedOperationsMatchOperations(): void
@@ -250,7 +250,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
-            $executableDocument->getRequestedOperations(),
+            $executableDocument->getMultipleOperationsToExecute(),
             [
                 new QueryOperation('', [], [], [
                     new RelationalField('film', null, [
@@ -284,7 +284,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
-            $executableDocument->getRequestedOperations(),
+            $executableDocument->getMultipleOperationsToExecute(),
             [
                 new QueryOperation('Two', [], [], [
                     new RelationalField('post', null, [

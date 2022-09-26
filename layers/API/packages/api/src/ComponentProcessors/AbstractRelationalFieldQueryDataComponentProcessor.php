@@ -214,7 +214,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          */
         return $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
             $executableDocument->getDocument(),
-            $executableDocument->getRequestedOperations(),
+            $executableDocument->getMultipleOperationsToExecute(),
             $executableDocument->getDocument()->getFragments(),
         );
     }
