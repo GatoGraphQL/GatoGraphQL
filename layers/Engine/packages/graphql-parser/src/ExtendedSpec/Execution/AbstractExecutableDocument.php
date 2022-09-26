@@ -70,7 +70,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         /**
          * Starting from the requested Operation,
          * retrieve and accumulate all extra required
-         * operations defined via @depends(on: ...)
+         * operations defined via @dependsOn(operations: ...)
          */
         return $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
             [
@@ -119,7 +119,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
     }
 
     /**
-     * Accumulate all operations defined via @depends(on: ...)
+     * Accumulate all operations defined via @dependsOn(operations: ...)
      *
      * @param OperationInterface[] $multipleQueryExecutionOperations
      * @param OperationInterface[] $operations

@@ -9,7 +9,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
  * dependencies to load previous Operations from the same
  * GraphQL Document, to be processed in the same request.
  *
- * By default, this will be `@depends(on: ["op1", "op2", etc])`,
+ * By default, this will be `@dependsOn(operations: ["op1", "op2", etc])`,
  * but the GraphQL spec does not define it. Then, through this
  * interface, we can provide different variations, or even
  * different directives, to provide this functionality.
@@ -21,7 +21,7 @@ interface OperationDependencyDefinerFieldDirectiveResolverInterface extends Fiel
      * the names of the Operations in the GraphQL Document
      * that must be loaded and processed before.
      *
-     * Eg: "on" for `@depends(on: ["GetPosts", "ProcessPostData"])`
+     * Eg: "on" for `@dependsOn(operations: ["GetPosts", "ProcessPostData"])`
      */
     public function getProvideDependedUponOperationNamesArgumentName(): string;
 }

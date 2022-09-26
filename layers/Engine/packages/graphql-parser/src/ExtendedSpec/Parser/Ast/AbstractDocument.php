@@ -125,7 +125,7 @@ abstract class AbstractDocument extends UpstreamDocument
         }
 
         /**
-         * Validate that @depends(on:...) doesn't form loops,
+         * Validate that @dependsOn(operations:...) doesn't form loops,
          * and all operations exist
          */
         if ($moduleConfiguration->enableMultipleQueryExecution()) {
@@ -580,7 +580,7 @@ abstract class AbstractDocument extends UpstreamDocument
 
     /**
      * Validate that all Operations declared under
-     * @depends(on:...) all exist
+     * @dependsOn(operations:...) all exist
      *
      * @throws InvalidRequestException
      */
