@@ -147,8 +147,6 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          */
         array_unshift($multipleQueryExecutionOperations, $operation);
 
-        /** @var OperationInterface[] */
-        $dependedUponOperations = [];
         foreach ($operation->getDirectives() as $directive) {
             /**
              * Check if this Directive is a "OperationDependencyDefiner"
@@ -189,19 +187,33 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                     $dependedUponOperationName,
                     $operations,
                 );
-                
-                /**
-                 * Add it always, even if this Operation has already
-                 * been added by another/previous operation, so that
-                 * the loading order is respected.
-                 */
-                $dependedUponOperations[] = $dependedUponOperation;
 
                 /**
                  * If some operation is depended-upon by more than
-                 * 1 operation, then avoid processing it twice
+                 * 1 operation, then avoid processing it twice.
                  */
                 if (in_array($dependedUponOperation, $multipleQueryExecutionOperations)) {
+                    /**
+                     * Also place the current operation behind it,
+                     * to respect the execution/dependency order
+                     * (there are no existing loops, or ->validate
+                     * will already have failed).
+                     *
+                     * Don't assume this operation is on the first position,
+                     * since it could've been moved already by yet another dependency!
+                     * So search for its position, and place it to the rightmost place.
+                     *
+                     * @var int
+                     */
+                    $dependedUponOperationPos = array_search($dependedUponOperation, $multipleQueryExecutionOperations);
+                    /** @var int */
+                    $operationPos = array_search($operation, $multipleQueryExecutionOperations);
+                    if ($dependedUponOperationPos > $operationPos) {
+                        // 1. Remove the operation from the array
+                        array_splice($multipleQueryExecutionOperations, $operationPos, 1);
+                        // 2. Place it again, after its depended-upon operation
+                        array_splice($multipleQueryExecutionOperations, $dependedUponOperationPos + 1, 0, [$operation]);
+                    }
                     continue;
                 }
 
@@ -212,15 +224,6 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                 );
             }
         }
-
-        /**
-         * Add the depended-upon operations to the beginning of the list
-         * (as they must be executed before)
-         */
-        $multipleQueryExecutionOperations = array_merge(
-            $dependedUponOperations,
-            $multipleQueryExecutionOperations
-        );
 
         /**
          * 2 Operations could've loaded the same dependency.
