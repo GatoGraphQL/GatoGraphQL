@@ -16,6 +16,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
 
+    protected bool $isValidatedAndInitialized = false;
+
     /**
      * The operation to execute:
      *
@@ -47,7 +49,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function validateAndInitialize(): void
     {
-        $this->requestedOperation = null;
+        $this->isValidatedAndInitialized = true;
 
         $this->validate();
 
@@ -72,6 +74,8 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function reset(): void
     {
+        $this->isValidatedAndInitialized = false;
+
         if ($this->requestedOperation === null) {
             return;
         }
@@ -192,7 +196,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function getRequestedOperation(): ?OperationInterface
     {
-        if ($this->requestedOperation === null) {
+        if (!$this->isValidatedAndInitialized) {
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__('Before executing `%s`, must call `validateAndInitialize`', 'graphql-server'),
