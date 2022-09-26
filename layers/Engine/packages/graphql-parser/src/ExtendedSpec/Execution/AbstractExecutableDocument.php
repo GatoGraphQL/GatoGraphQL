@@ -81,9 +81,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          * operations defined via @dependsOn(operations: ...)
          */
         return $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
-            [
-                $requestedOperation,
-            ],
+            [],
             $requestedOperation,
             $this->document->getOperations(),
         );
@@ -143,6 +141,12 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         OperationInterface $operation,
         array $operations,
     ): array {
+        /**
+         * Add the operation at the beginning of the list,
+         * as it must be processed before its depending one
+         */
+        array_unshift($multipleQueryExecutionOperations, $operation);
+
         $dependedUponOperations = [];
         foreach ($operation->getDirectives() as $directive) {
             /**
