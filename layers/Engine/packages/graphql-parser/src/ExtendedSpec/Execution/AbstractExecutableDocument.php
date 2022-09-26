@@ -186,6 +186,13 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                 );
                 
                 /**
+                 * Add it always, even if this Operation has already
+                 * been added by another/previous operation, so that
+                 * the loading order is respected.
+                 */
+                $dependedUponOperations[] = $dependedUponOperation;
+
+                /**
                  * If some operation is depended-upon by more than
                  * 1 operation, then avoid processing it twice
                  */
@@ -193,7 +200,6 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                     continue;
                 }
 
-                $dependedUponOperations[] = $dependedUponOperation;
                 $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
                     $multipleQueryExecutionOperations,
                     $dependedUponOperation,
@@ -206,10 +212,19 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          * Add the depended-upon operations to the beginning of the list
          * (as they must be executed before)
          */
-        return array_merge(
+        $multipleQueryExecutionOperations = array_merge(
             $dependedUponOperations,
             $multipleQueryExecutionOperations
         );
+
+        /**
+         * 2 Operations could've loaded the same dependency.
+         * By doing `array_unique` we will return only 1 instance of each,
+         * while already with the right dependency order,
+         * so that the depended-upon Operation appears before
+         * all of its depending Operations.
+         */
+        return array_values(array_unique($multipleQueryExecutionOperations));
     }
 
     abstract protected function isOperationDependencyDefinerDirective(Directive $directive): bool;
