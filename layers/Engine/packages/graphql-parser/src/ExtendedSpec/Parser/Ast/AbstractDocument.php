@@ -649,12 +649,6 @@ abstract class AbstractDocument extends UpstreamDocument
                 $this->getOperationDependencyDefinitionArgumentsInOperation($operation),
             );
         }
-        foreach ($this->getFragments() as $fragment) {
-            $operationDependencyDefinitionArguments = array_merge(
-                $operationDependencyDefinitionArguments,
-                $this->getOperationDependencyDefinitionArgumentsInFragment($fragment),
-            );
-        }
         return $operationDependencyDefinitionArguments;
     }
 
@@ -663,59 +657,7 @@ abstract class AbstractDocument extends UpstreamDocument
      */
     protected function getOperationDependencyDefinitionArgumentsInOperation(OperationInterface $operation): array
     {
-        return array_merge(
-            $this->getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds()),
-            $this->getOperationDependencyDefinitionArgumentsInDirectives($operation->getDirectives()),
-        );
-    }
-
-    /**
-     * @return Argument[]
-     */
-    protected function getOperationDependencyDefinitionArgumentsInFragment(Fragment $fragment): array
-    {
-        return array_merge(
-            $this->getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds()),
-            $this->getOperationDependencyDefinitionArgumentsInDirectives($fragment->getDirectives()),
-        );
-    }
-
-    /**
-     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
-     * @return Argument[]
-     */
-    protected function getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): array
-    {
-        $operationDependencyDefinitionArguments = [];
-        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
-            if ($fieldOrFragmentBond instanceof FragmentReference) {
-                continue;
-            }
-            if ($fieldOrFragmentBond instanceof InlineFragment) {
-                /** @var InlineFragment */
-                $inlineFragment = $fieldOrFragmentBond;
-                $operationDependencyDefinitionArguments = array_merge(
-                    $operationDependencyDefinitionArguments,
-                    $this->getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds())
-                );
-                continue;
-            }
-            /** @var FieldInterface */
-            $field = $fieldOrFragmentBond;
-            $operationDependencyDefinitionArguments = array_merge(
-                $operationDependencyDefinitionArguments,
-                $this->getOperationDependencyDefinitionArgumentsInDirectives($field->getDirectives())
-            );
-            if ($field instanceof RelationalField) {
-                /** @var RelationalField */
-                $relationalField = $field;
-                $operationDependencyDefinitionArguments = array_merge(
-                    $operationDependencyDefinitionArguments,
-                    $this->getOperationDependencyDefinitionArgumentsInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds())
-                );
-            }
-        }
-        return $operationDependencyDefinitionArguments;
+        return $this->getOperationDependencyDefinitionArgumentsInDirectives($operation->getDirectives());
     }
 
     /**
@@ -733,7 +675,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 continue;
             }
             /**
-             * Get the Argument under which the Dynamic Variable is defined
+             * Get the Argument under which the Depended-upon Operation is defined
              */
             $provideDependedUponOperationNamesArgument = $this->getProvideDependedUponOperationNamesArgument($directive);
             if ($provideDependedUponOperationNamesArgument === null) {
