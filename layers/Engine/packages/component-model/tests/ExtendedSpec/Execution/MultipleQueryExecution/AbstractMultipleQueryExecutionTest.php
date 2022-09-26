@@ -10,7 +10,9 @@ use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
@@ -57,7 +59,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 }
             }
 
-            query __ALL {
+            query ExecuteAll @depends(on: ["One", "Two"]) {
                 id
             }
         ';
@@ -103,16 +105,20 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             new Location(8, 19)
         );
         $queryAllOperation = new QueryOperation(
-            '__ALL',
+            'ExecuteAll',
             [],
-            [],
+            [
+                new Directive('depends', [
+                    new Argument('on', new InputList(["One", "Two"], new Location(14, 43)), new Location(14, 39))
+                ], new Location(14, 30))
+            ],
             [
                 new LeafField('id', null, [], [], new Location(15, 17))
             ],
             new Location(14, 19)
         );
 
-        // Test any other operationName than __ALL
+        // Test any other operationName than "ExecuteAll"
         $context = new Context('Two');
         $executableDocument = new ExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
@@ -123,8 +129,8 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             $executableDocument->getMultipleOperationsToExecute()
         );
 
-        // Test the __ALL operationName => execute all operations
-        $context = new Context('__ALL');
+        // Test the "ExecuteAll" operationName => execute all operations
+        $context = new Context('ExecuteAll');
         $executableDocument = new ExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
@@ -132,38 +138,17 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 [
                     $queryOneOperation,
                     $queryTwoOperation,
+                    $queryAllOperation,
                 ] : [
                     $queryAllOperation,
                 ],
             $executableDocument->getMultipleOperationsToExecute()
         );
 
-        // Passing no operationName, and has __ALL in document => execute all operations
-        // If env var disabled => we must get an error "Must indicate operationName"
+        // Passing no operationName => we must get an error "Must indicate operationName"
         $context = new Context('');
-        $executableDocument = new ExecutableDocument($document, $context);
-        if (!$this->enabled()) {
-            $this->expectException(InvalidRequestException::class);
-            $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_B))->getMessage());
-        }
-        $executableDocument->validateAndInitialize();
-        if ($this->enabled()) {
-            $this->assertEquals(
-                [
-                    $queryOneOperation,
-                    $queryTwoOperation,
-                ],
-                $executableDocument->getMultipleOperationsToExecute()
-            );
-        }
-
-        // Passing no operationName, and does not have __ALL in document =>
-        // we must get an error "Must indicate operationName"
-        $query = str_replace('__ALL', '__not_ALL', $query);
-        $document = $parser->parse($query);
         $executableDocument = new ExecutableDocument($document, $context);
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_6_1_B))->getMessage());
-        $executableDocument->validateAndInitialize();
     }
 }
