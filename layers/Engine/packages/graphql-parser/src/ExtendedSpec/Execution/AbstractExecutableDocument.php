@@ -166,8 +166,8 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                 );
                 
                 /**
-                 * If 2 operations have the same dependencies,
-                 * avoid processing it twice
+                 * If some operation is depended-upon by more than
+                 * 1 operation, then avoid processing it twice
                  */
                 if (in_array($dependedUponOperation, $multipleQueryExecutionOperations)) {
                     continue;
