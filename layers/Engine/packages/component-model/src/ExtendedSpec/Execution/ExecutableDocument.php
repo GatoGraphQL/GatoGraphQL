@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
-use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument as UpstreamExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Execution\AbstractExecutableDocument
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
@@ -26,7 +26,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class ExecutableDocument extends UpstreamExecutableDocument
+class ExecutableDocument extends AbstractExecutableDocument
 {
     /**
      * @var array<ObjectTypeResolverInterface|UnionTypeResolverInterface|InterfaceTypeResolverInterface>

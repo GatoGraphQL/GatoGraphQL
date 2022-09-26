@@ -4,9 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\GraphQLParser\Query\QueryAugmenterServiceInterface:
-        class: \PoP\GraphQLParser\Query\QueryAugmenterService
-
     PoP\GraphQLParser\Query\GraphQLQueryStringFormatterInterface:
         class: \PoP\GraphQLParser\Query\GraphQLQueryStringFormatter
 
