@@ -198,22 +198,12 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                      * to respect the execution/dependency order
                      * (there are no existing loops, or ->validate
                      * will already have failed).
-                     *
-                     * Don't assume this operation is on the first position,
-                     * since it could've been moved already by yet another dependency!
-                     * So search for its position, and place it to the rightmost place.
-                     *
-                     * @var int
                      */
-                    $dependedUponOperationPos = array_search($dependedUponOperation, $multipleQueryExecutionOperations);
-                    /** @var int */
-                    $operationPos = array_search($operation, $multipleQueryExecutionOperations);
-                    if ($dependedUponOperationPos > $operationPos) {
-                        // 1. Remove the operation from the array
-                        array_splice($multipleQueryExecutionOperations, $operationPos, 1);
-                        // 2. Place it again, after its depended-upon operation
-                        array_splice($multipleQueryExecutionOperations, $dependedUponOperationPos + 1, 0, [$operation]);
-                    }
+                    $multipleQueryExecutionOperations = $this->moveOperationBehindItsDependedUponOperation(
+                        $multipleQueryExecutionOperations,
+                        $operation,
+                        $dependedUponOperation,
+                    );
                     continue;
                 }
 
@@ -237,6 +227,53 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
             $multipleQueryExecutionOperationsByName[$multipleQueryExecutionOperation->getName()] = $multipleQueryExecutionOperation;
         }
         return array_values($multipleQueryExecutionOperationsByName);
+    }
+
+    /**
+     * Place the current operation behind it, to respect the
+     * execution/dependency order (there are no existing loops,
+     * or ->validate will already have failed).
+     *
+     * Don't assume this operation is on the first position,
+     * since it could've been moved already by yet another dependency!
+     * So search for its position, and place it to the rightmost place.
+     *
+     * @return OperationInterface[]
+     */
+    protected function moveOperationBehindItsDependedUponOperation(
+        array $multipleQueryExecutionOperations,
+        OperationInterface $operation,
+        OperationInterface $dependedUponOperation,
+    ): array {
+        /** @var int */
+        $dependedUponOperationPos = array_search(
+            $dependedUponOperation,
+            $multipleQueryExecutionOperations
+        );
+        /** @var int */
+        $operationPos = array_search(
+            $operation,
+            $multipleQueryExecutionOperations
+        );
+
+        /**
+         * If the depended-upon directive is already to the left,
+         * then nothing to do.
+         */
+        if ($dependedUponOperationPos <= $operationPos) {
+            return $multipleQueryExecutionOperations;
+        }
+
+        /**
+         * To reorder:
+         * 
+         *   1. Remove the operation from the array
+         *   2. Place it again, after its depended-upon operation
+         */
+        array_splice($multipleQueryExecutionOperations, $operationPos, 1);
+        array_splice($multipleQueryExecutionOperations, $dependedUponOperationPos + 1, 0, [$operation]);
+
+        return $multipleQueryExecutionOperations;
     }
 
     abstract protected function isOperationDependencyDefinerDirective(Directive $directive): bool;
