@@ -5,15 +5,28 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
-use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class ExecutableDocument extends UpstreamExecutableDocument
 {
+    private ?QueryAugmenterServiceInterface $queryAugmenterService = null;
+
+    final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryAugmenterService): void
+    {
+        $this->queryAugmenterService = $queryAugmenterService;
+    }
+    final protected function getQueryAugmenterService(): QueryAugmenterServiceInterface
+    {
+        /** @var QueryAugmenterServiceInterface */
+        return $this->queryAugmenterService ??= InstanceManagerFacade::getInstance()->getInstance(QueryAugmenterServiceInterface::class);
+    }
+
     /**
      * Override to support the "multiple query execution" feature:
      * If passing operationName `__ALL`, or passing no operationName
@@ -34,8 +47,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
             return parent::assertAndGetRequestedOperations();
         }
 
-        $queryAugmenterService = QueryAugmenterServiceFacade::getInstance();
-        $multipleQueryExecutionOperations = $queryAugmenterService->getMultipleQueryExecutionOperations($this->context->getOperationName(), $this->document->getOperations());
+        $multipleQueryExecutionOperations = $this->getQueryAugmenterService()->getMultipleQueryExecutionOperations($this->context->getOperationName(), $this->document->getOperations());
         if ($multipleQueryExecutionOperations !== null) {
             return $multipleQueryExecutionOperations;
         }
