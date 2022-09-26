@@ -24,7 +24,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      *
      * @var OperationInterface|null
      */
-    protected ?OperationInterface $requestedOperation = null;
+    private ?OperationInterface $requestedOperation = null;
 
     public function __construct(
         protected Document $document,
@@ -186,9 +186,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     }
 
     /**
-     * The actual requested operation. Even though with Multiple Query Execution
-     * the document can contain multiple operations, there is only one that
-     * can be requested via ?operationName=...
+     * The requested operation via ?operationName=...
      *
      * @throws InvalidRequestException
      */

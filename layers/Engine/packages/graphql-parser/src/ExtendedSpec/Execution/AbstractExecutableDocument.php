@@ -40,7 +40,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
             /**
              * This has already been set in parent method
              */
-            if ($operation === $this->requestedOperation) {
+            if ($operation === $this->getRequestedOperation()) {
                 continue;
             }
             $this->propagateContext($operation, $this->context);
@@ -63,7 +63,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
             || count($this->document->getOperations()) === 1
         ) {
             return [
-                $this->requestedOperation,
+                $this->getRequestedOperation(),
             ];
         }
 
@@ -74,9 +74,9 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          */
         return $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
             [
-                $this->requestedOperation,
+                $this->getRequestedOperation(),
             ],
-            $this->requestedOperation,
+            $this->getRequestedOperation(),
             $this->document->getOperations(),
         );
     }
@@ -93,7 +93,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
             /**
              * This has already been set in parent method
              */
-            if ($operation === $this->requestedOperation) {
+            if ($operation === $this->getRequestedOperation()) {
                 continue;
             }
             $this->propagateContext($operation, null);
