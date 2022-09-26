@@ -267,11 +267,11 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         /**
          * To reorder:
          * 
-         *   1. Remove the operation from the array
-         *   2. Place it again, after its depended-upon operation
+         *   1. Place the operation after its depended-upon operation
+         *   2. Remove it from the first position
          */
-        array_splice($multipleQueryExecutionOperations, $operationPos, 1);
         array_splice($multipleQueryExecutionOperations, $dependedUponOperationPos + 1, 0, [$operation]);
+        array_splice($multipleQueryExecutionOperations, $operationPos, 1);
 
         return $multipleQueryExecutionOperations;
     }
