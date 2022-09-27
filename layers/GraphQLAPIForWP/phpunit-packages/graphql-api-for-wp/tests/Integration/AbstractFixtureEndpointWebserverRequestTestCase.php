@@ -114,6 +114,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
              */
             $graphQLFilesSubfolder = substr($filePath, strlen($responseFixtureFolder) + 1);
             $dataName = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
+            $mainFixtureOperationName = $this->getMainFixtureOperationName($dataName);
             $providerItems[$dataName] = [
                 'application/json',
                 file_get_contents($graphQLResponseFile),
@@ -121,7 +122,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 [],
                 $query,
                 $variables,
-                $this->getMainFixtureOperationName($dataName),
+                $mainFixtureOperationName,
             ];
 
             /**
@@ -145,7 +146,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                     [],
                     $query,
                     $variables,
-                    is_numeric($operationName) ? '' : $operationName,
+                    is_numeric($operationName) ? $mainFixtureOperationName : $operationName,
                 ];
             }
         }
