@@ -29,6 +29,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
+use stdClass;
 
 abstract class AbstractDocument extends UpstreamDocument
 {
@@ -635,7 +636,9 @@ abstract class AbstractDocument extends UpstreamDocument
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E12,
                         [
-                            $dependendUponOperationName,
+                            is_array($dependendUponOperationName) || $dependendUponOperationName instanceof stdClass
+                                ? json_encode((array)$dependendUponOperationName)
+                                : $dependendUponOperationName,
                         ]
                     ),
                     $argument->getValueAST()
