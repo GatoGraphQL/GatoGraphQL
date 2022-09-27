@@ -95,7 +95,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
                 $graphQLQueryFile,
                 $graphQLResponseFile,
                 $graphQLVariablesFile,
-                $this->getMainFixtureOperationName(),
+                $this->getMainFixtureOperationName($dataName),
             ];
 
             /**
@@ -121,7 +121,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
         return $providerItems;
     }
 
-    protected function getMainFixtureOperationName(): ?string
+    protected function getMainFixtureOperationName(string $dataName): ?string
     {
         return null;
     }

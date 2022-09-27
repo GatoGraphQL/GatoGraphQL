@@ -121,7 +121,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 [],
                 $query,
                 $variables,
-                $this->getMainFixtureOperationName(),
+                $this->getMainFixtureOperationName($dataName),
             ];
 
             /**
@@ -152,7 +152,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
         return $this->customizeProviderEndpointEntries($providerItems);
     }
 
-    protected function getMainFixtureOperationName(): ?string
+    protected function getMainFixtureOperationName(string $dataName): ?string
     {
         return null;
     }
