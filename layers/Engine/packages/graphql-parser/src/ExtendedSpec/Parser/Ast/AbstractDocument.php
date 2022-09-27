@@ -130,7 +130,6 @@ abstract class AbstractDocument extends UpstreamDocument
          */
         if ($moduleConfiguration->enableMultipleQueryExecution()) {
             $this->assertDependedUponOperationsExist();
-            // @todo Implement here
             // $this->assertDependedUponOperationsDoNotFormLoop();
         }
     }
@@ -590,35 +589,8 @@ abstract class AbstractDocument extends UpstreamDocument
 
         $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArguments();
         foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
-            /**
-             * A list is expected, but a single Operation name can also be provided.
-             *
-             * @var string|string[]
-             */
-            $dependendUponOperationNameOrNames = $operationDependencyDefinitionArgument->getValue();
-            if (!is_array($dependendUponOperationNameOrNames)) {
-                $dependendUponOperationNames = [$dependendUponOperationNameOrNames];
-            } else {
-                $dependendUponOperationNames = $dependendUponOperationNameOrNames;
-            }
-            
-            /**
-             * While iterating and validating, also make sure
-             * each of the elements is a String.
-             */
+            $dependendUponOperationNames = $this->getDependedUponOperationNames($operationDependencyDefinitionArgument);
             foreach ($dependendUponOperationNames as $dependendUponOperationName) {
-                if (!is_string($dependendUponOperationName)) {
-                    throw new InvalidRequestException(
-                        new FeedbackItemResolution(
-                            GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                            GraphQLExtendedSpecErrorFeedbackItemProvider::E12,
-                            [
-                                $dependendUponOperationName,
-                            ]
-                        ),
-                        $operationDependencyDefinitionArgument->getValueAST()
-                    );
-                }
                 if (!in_array($dependendUponOperationName, $operationNames)) {
                     throw new InvalidRequestException(
                         new FeedbackItemResolution(
@@ -633,6 +605,44 @@ abstract class AbstractDocument extends UpstreamDocument
                 }
             }
         }
+    }
+
+    /**
+     * @return string[]
+     * @throws InvalidRequestException
+     */
+    protected function getDependedUponOperationNames(Argument $argument): array
+    {
+        /**
+         * A list is expected, but a single Operation name can also be provided.
+         *
+         * @var string|string[]
+         */
+        $dependendUponOperationNameOrNames = $argument->getValue();
+        if (!is_array($dependendUponOperationNameOrNames)) {
+            $dependendUponOperationNames = [$dependendUponOperationNameOrNames];
+        } else {
+            $dependendUponOperationNames = $dependendUponOperationNameOrNames;
+        }
+        
+        /**
+         * Make sure each of the elements is a String.
+         */
+        foreach ($dependendUponOperationNames as $dependendUponOperationName) {
+            if (!is_string($dependendUponOperationName)) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E12,
+                        [
+                            $dependendUponOperationName,
+                        ]
+                    ),
+                    $argument->getValueAST()
+                );
+            }
+        }
+        return $dependendUponOperationNames;
     }
 
     /**
@@ -701,4 +711,37 @@ abstract class AbstractDocument extends UpstreamDocument
 
     abstract protected function isOperationDependencyDefinerDirective(Directive $directive): bool;
     abstract protected function getProvideDependedUponOperationNamesArgument(Directive $directive): ?Argument;
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertDependedUponOperationsDoNotFormLoop(): void
+    {
+        // $dependedUponOperationNames = [];
+        // foreach ($this->getOperations() as $operation) {
+        //     $dependedUponOperationNames[] = $operation->getName();
+        // }
+        // return $dependedUponOperationNames;
+
+
+        // $operationNames = $this->getAllOperationNames();
+
+        // foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
+        //     $dependendUponOperationNames = $this->getDependedUponOperationNames($operationDependencyDefinitionArgument);
+        //     foreach ($dependendUponOperationNames as $dependendUponOperationName) {
+        //         if (!in_array($dependendUponOperationName, $operationNames)) {
+        //             throw new InvalidRequestException(
+        //                 new FeedbackItemResolution(
+        //                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+        //                     GraphQLExtendedSpecErrorFeedbackItemProvider::E13,
+        //                     [
+        //                         $dependendUponOperationName,
+        //                     ]
+        //                 ),
+        //                 $operationDependencyDefinitionArgument->getValueAST()
+        //             );
+        //         }
+        //     }
+        // }
+    }
 }
