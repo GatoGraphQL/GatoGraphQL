@@ -733,33 +733,36 @@ abstract class AbstractDocument extends UpstreamDocument
     protected function assertOperationDoesNotFormLoop(
         OperationInterface $operation,
     ): void {
-        $processedOperationNames = [];
+        $dependedUponOperationNames = [];
         $operationsToProcess = $this->getDependedUponOperations($operation);
         while ($operationsToProcess !== []) {
             $operationToProcess = array_shift($operationsToProcess);
-            if ($operationToProcess === $operation) {
-                throw new InvalidRequestException(
-                    new FeedbackItemResolution(
-                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                        GraphQLExtendedSpecErrorFeedbackItemProvider::E14,
-                        [
-                            $operation->getName(),
-                        ]
-                    ),
-                    $operation
-                );
-            }
-            $processedOperationNames[] = $operationToProcess->getName();
+            $dependedUponOperationNames[] = $operationToProcess->getName();
             $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArgumentsInOperation($operationToProcess);
             foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
                 $dependedUponOperations = $this->getDependedUponOperationsInArgument($operationDependencyDefinitionArgument);
-                /**
-                 * Two operation can have the same dependency, yet that alone
-                 * will not form a loop. In that case, just avoid processing
-                 * it again.
-                 */
                 foreach ($dependedUponOperations as $dependedUponOperation) {
-                    if (in_array($dependedUponOperation->getName(), $processedOperationNames)) {
+                    /**
+                     * Check there is no loop
+                     */
+                    if ($dependedUponOperation === $operation) {
+                        throw new InvalidRequestException(
+                            new FeedbackItemResolution(
+                                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                                GraphQLExtendedSpecErrorFeedbackItemProvider::E14,
+                                [
+                                    $operation->getName(),
+                                ]
+                            ),
+                            $operation
+                        );
+                    }
+                    /**
+                     * Two operation can have the same dependency, yet that alone
+                     * will not form a loop. In that case, just avoid processing
+                     * it again.
+                     */
+                    if (in_array($dependedUponOperation->getName(), $dependedUponOperationNames)) {
                         continue;
                     }
                 }
