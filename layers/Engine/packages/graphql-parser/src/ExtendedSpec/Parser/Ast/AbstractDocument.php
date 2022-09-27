@@ -753,6 +753,11 @@ abstract class AbstractDocument extends UpstreamDocument
             $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArgumentsInOperation($operationToProcess);
             foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
                 $dependedUponOperations = $this->getDependedUponOperationsInArgument($operationDependencyDefinitionArgument);
+                /**
+                 * Two operation can have the same dependency, yet that alone
+                 * will not form a loop. In that case, just avoid processing
+                 * it again.
+                 */
                 foreach ($dependedUponOperations as $dependedUponOperation) {
                     if (in_array($dependedUponOperation->getName(), $processedOperationNames)) {
                         continue;
