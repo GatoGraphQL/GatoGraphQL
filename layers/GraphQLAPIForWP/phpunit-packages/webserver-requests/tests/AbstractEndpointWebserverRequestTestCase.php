@@ -20,7 +20,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         array $params = [],
         string $query = '',
         array $variables = [],
-        string $operationName = '',
+        ?string $operationName = null,
         ?string $method = null,
     ): void {
         $client = static::getClient();
@@ -37,7 +37,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         $options['body'] = json_encode([
             'query' => $query,
             'variables' => $variables,
-            'operationName' => $operationName,
+            'operationName' => $operationName ?? '',
         ]);
 
         $response = $client->request(
