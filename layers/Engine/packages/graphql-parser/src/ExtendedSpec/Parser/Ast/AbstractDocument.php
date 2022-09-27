@@ -589,7 +589,7 @@ abstract class AbstractDocument extends UpstreamDocument
 
         $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArguments();
         foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
-            $dependendUponOperationNames = $this->getDependedUponOperationNames($operationDependencyDefinitionArgument);
+            $dependendUponOperationNames = $this->getDependedUponOperationNamesInArgument($operationDependencyDefinitionArgument);
             foreach ($dependendUponOperationNames as $dependendUponOperationName) {
                 if (!in_array($dependendUponOperationName, $operationNames)) {
                     throw new InvalidRequestException(
@@ -611,7 +611,7 @@ abstract class AbstractDocument extends UpstreamDocument
      * @return string[]
      * @throws InvalidRequestException
      */
-    protected function getDependedUponOperationNames(Argument $argument): array
+    protected function getDependedUponOperationNamesInArgument(Argument $argument): array
     {
         /**
          * A list is expected, but a single Operation name can also be provided.
@@ -734,28 +734,31 @@ abstract class AbstractDocument extends UpstreamDocument
         OperationInterface $operation,
     ): void {
         $processedOperationNames = [];
-        $operationsToProcess = [$operation];
+        $operationsToProcess = $this->getDependedUponOperations($operation);
         while ($operationsToProcess !== []) {
             $operationToProcess = array_shift($operationsToProcess);
-            if (in_array($operationToProcess->getName(), $processedOperationNames)) {
+            if ($operationToProcess === $operation) {
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E14,
                         [
-                            $operationToProcess->getName(),
+                            $operation->getName(),
                         ]
                     ),
-                    $operationToProcess
+                    $operation
                 );
             }
             $processedOperationNames[] = $operationToProcess->getName();
             $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArgumentsInOperation($operationToProcess);
             foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
-                $operationsToProcess = array_merge(
-                    $operationsToProcess,
-                    $this->getDependedUponOperations($operationDependencyDefinitionArgument)
-                );
+                $dependedUponOperations = $this->getDependedUponOperationsInArgument($operationDependencyDefinitionArgument);
+                foreach ($dependedUponOperations as $dependedUponOperation) {
+                    if (in_array($dependedUponOperation->getName(), $processedOperationNames)) {
+                        continue;
+                    }
+                }
+                $operationsToProcess[] = $dependedUponOperation;
             }
         }
     }
@@ -764,11 +767,28 @@ abstract class AbstractDocument extends UpstreamDocument
      * @return OperationInterface[]
      * @throws InvalidRequestException
      */
-    protected function getDependedUponOperations(Argument $argument): array
+    protected function getDependedUponOperations(OperationInterface $operation): array
+    {
+        $dependedUponOperations = [];
+        $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArgumentsInOperation($operation);
+        foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
+            $dependedUponOperations = [
+                ...$dependedUponOperations,
+                ...$this->getDependedUponOperationsInArgument($operationDependencyDefinitionArgument)
+            ];
+        }
+        return $dependedUponOperations;
+    }
+
+    /**
+     * @return OperationInterface[]
+     * @throws InvalidRequestException
+     */
+    protected function getDependedUponOperationsInArgument(Argument $argument): array
     {
         return array_map(
             $this->getOperation(...),
-            $this->getDependedUponOperationNames($argument)
+            $this->getDependedUponOperationNamesInArgument($argument)
         );
     }
 
