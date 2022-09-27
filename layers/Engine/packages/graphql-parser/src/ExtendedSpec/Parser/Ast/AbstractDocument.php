@@ -733,15 +733,15 @@ abstract class AbstractDocument extends UpstreamDocument
     protected function assertOperationDoesNotFormLoop(
         OperationInterface $operation,
     ): void {
-        $dependedUponOperationNames = [];
+        $dependedUponOperations = [];
         $operationsToProcess = $this->getDependedUponOperations($operation);
         while ($operationsToProcess !== []) {
             $operationToProcess = array_shift($operationsToProcess);
-            $dependedUponOperationNames[] = $operationToProcess->getName();
+            $dependedUponOperations[] = $operationToProcess;
             $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArgumentsInOperation($operationToProcess);
             foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
-                $dependedUponOperations = $this->getDependedUponOperationsInArgument($operationDependencyDefinitionArgument);
-                foreach ($dependedUponOperations as $dependedUponOperation) {
+                $dependedUponOperationsInArgument = $this->getDependedUponOperationsInArgument($operationDependencyDefinitionArgument);
+                foreach ($dependedUponOperationsInArgument as $dependedUponOperation) {
                     /**
                      * Check there is no loop
                      */
@@ -762,11 +762,11 @@ abstract class AbstractDocument extends UpstreamDocument
                      * will not form a loop. In that case, just avoid processing
                      * it again.
                      */
-                    if (in_array($dependedUponOperation->getName(), $dependedUponOperationNames)) {
+                    if (in_array($dependedUponOperation, $dependedUponOperations)) {
                         continue;
                     }
+                    $operationsToProcess[] = $dependedUponOperation;
                 }
-                $operationsToProcess[] = $dependedUponOperation;
             }
         }
     }
