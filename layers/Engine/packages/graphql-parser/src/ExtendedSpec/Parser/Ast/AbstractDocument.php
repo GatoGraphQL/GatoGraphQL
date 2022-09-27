@@ -13,6 +13,7 @@ use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -614,6 +615,24 @@ abstract class AbstractDocument extends UpstreamDocument
      */
     protected function getDependedUponOperationNamesInArgument(Argument $argument): array
     {
+        $argumentValueAST = $argument->getValueAST();
+
+        /**
+         * Passing a Variable will throw an Exception.
+         * Only String and [String] are allowed
+         */
+        if (!($argumentValueAST instanceof Literal
+            || $argumentValueAST instanceof InputList
+        )) {
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::E12,
+                ),
+                $argumentValueAST
+            );
+        }
+
         /**
          * A list is expected, but a single Operation name can also be provided.
          *
@@ -634,14 +653,14 @@ abstract class AbstractDocument extends UpstreamDocument
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                        GraphQLExtendedSpecErrorFeedbackItemProvider::E12,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E12a,
                         [
                             is_array($dependendUponOperationName) || $dependendUponOperationName instanceof stdClass
                                 ? json_encode((array)$dependendUponOperationName)
                                 : $dependendUponOperationName,
                         ]
                     ),
-                    $argument->getValueAST()
+                    $argumentValueAST
                 );
             }
         }
