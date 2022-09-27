@@ -653,7 +653,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                        GraphQLExtendedSpecErrorFeedbackItemProvider::E12a,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E12A,
                         [
                             is_array($dependendUponOperationName) || $dependendUponOperationName instanceof stdClass
                                 ? json_encode((array)$dependendUponOperationName)
