@@ -130,7 +130,7 @@ abstract class AbstractDocument extends UpstreamDocument
          */
         if ($moduleConfiguration->enableMultipleQueryExecution()) {
             $this->assertDependedUponOperationsExist();
-            // $this->assertDependedUponOperationsDoNotFormLoop();
+            $this->assertDependedUponOperationsDoNotFormLoop();
         }
     }
 
@@ -717,31 +717,69 @@ abstract class AbstractDocument extends UpstreamDocument
      */
     protected function assertDependedUponOperationsDoNotFormLoop(): void
     {
-        // $dependedUponOperationNames = [];
-        // foreach ($this->getOperations() as $operation) {
-        //     $dependedUponOperationNames[] = $operation->getName();
-        // }
-        // return $dependedUponOperationNames;
+        /**
+         * For each operation, iterate all the way down collecting
+         * the operations it depends upon (transitively), and assert
+         * it does not include itself
+         */        
+        foreach ($this->getOperations() as $operation) {
+            $this->assertOperationDoesNotFormLoop($operation);
+        }
+    }
 
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertOperationDoesNotFormLoop(
+        OperationInterface $operation,
+    ): void {
+        $processedOperationNames = [];
+        $operationsToProcess = [$operation];
+        while ($operationsToProcess !== []) {
+            $operationToProcess = array_shift($operationsToProcess);
+            if (in_array($operationToProcess->getName(), $processedOperationNames)) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E14,
+                        [
+                            $operationToProcess->getName(),
+                        ]
+                    ),
+                    $operationToProcess
+                );
+            }
+            $processedOperationNames[] = $operationToProcess->getName();
+            $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArgumentsInOperation($operationToProcess);
+            foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
+                $operationsToProcess = array_merge(
+                    $operationsToProcess,
+                    $this->getDependedUponOperations($operationDependencyDefinitionArgument)
+                );
+            }
+        }
+    }
 
-        // $operationNames = $this->getAllOperationNames();
+    /**
+     * @return OperationInterface[]
+     * @throws InvalidRequestException
+     */
+    protected function getDependedUponOperations(Argument $argument): array
+    {
+        return array_map(
+            $this->getOperation(...),
+            $this->getDependedUponOperationNames($argument)
+        );
+    }
 
-        // foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
-        //     $dependendUponOperationNames = $this->getDependedUponOperationNames($operationDependencyDefinitionArgument);
-        //     foreach ($dependendUponOperationNames as $dependendUponOperationName) {
-        //         if (!in_array($dependendUponOperationName, $operationNames)) {
-        //             throw new InvalidRequestException(
-        //                 new FeedbackItemResolution(
-        //                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-        //                     GraphQLExtendedSpecErrorFeedbackItemProvider::E13,
-        //                     [
-        //                         $dependendUponOperationName,
-        //                     ]
-        //                 ),
-        //                 $operationDependencyDefinitionArgument->getValueAST()
-        //             );
-        //         }
-        //     }
-        // }
+    public function getOperation(string $name): ?OperationInterface
+    {
+        foreach ($this->getOperations() as $operation) {
+            if ($operation->getName() === $name) {
+                return $operation;
+            }
+        }
+
+        return null;
     }
 }
