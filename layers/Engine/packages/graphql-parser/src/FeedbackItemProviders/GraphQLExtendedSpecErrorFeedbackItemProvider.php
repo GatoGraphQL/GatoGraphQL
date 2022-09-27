@@ -21,9 +21,9 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
     public final const E10 = '10';
     public final const E11 = '11';
     public final const E12 = '12';
-    public final const E12A = '12[a]';
     public final const E13 = '13';
     public final const E14 = '14';
+    public final const E15 = '15';
     public final const E_5_8_3 = '5.8.3';
 
     protected function getNamespace(): string
@@ -49,9 +49,9 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E10,
             self::E11,
             self::E12,
-            self::E12A,
             self::E13,
             self::E14,
+            self::E15,
             self::E_5_8_3,
         ];
     }
@@ -71,9 +71,9 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E10 => $this->__('No value has been exported for dynamic variable \'%s\' for object with ID \'%s\'', 'graphql-server'),
             self::E11 => $this->__('The reference to field \'%s\' cannot be resolved', 'graphql-server'),
             self::E12 => $this->__('The name of the operation must be a literal string', 'graphql-parser'),
-            self::E12A => $this->__('The name of the operation must be a string, but \'%s\' was provided', 'graphql-parser'),
-            self::E13 => $this->__('There is no operation with name \'%s\'', 'graphql-parser'),
-            self::E14 => $this->__('Dependency on operation \'%s\' forms a loop', 'graphql-parser'),
+            self::E13 => $this->__('The name of the operation must be a string, but \'%s\' was provided', 'graphql-parser'),
+            self::E14 => $this->__('There is no operation with name \'%s\'', 'graphql-parser'),
+            self::E15 => $this->__('Dependency on operation \'%s\' forms a loop', 'graphql-parser'),
             self::E_5_8_3 => $this->__('No value has been exported for dynamic variable \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };

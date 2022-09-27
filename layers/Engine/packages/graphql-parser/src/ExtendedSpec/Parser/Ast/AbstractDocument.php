@@ -597,7 +597,7 @@ abstract class AbstractDocument extends UpstreamDocument
                     throw new InvalidRequestException(
                         new FeedbackItemResolution(
                             GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                            GraphQLExtendedSpecErrorFeedbackItemProvider::E13,
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::E14,
                             [
                                 $dependendUponOperationName,
                             ]
@@ -653,7 +653,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                        GraphQLExtendedSpecErrorFeedbackItemProvider::E12A,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E13,
                         [
                             is_array($dependendUponOperationName) || $dependendUponOperationName instanceof stdClass
                                 ? json_encode((array)$dependendUponOperationName)
@@ -771,7 +771,7 @@ abstract class AbstractDocument extends UpstreamDocument
                         throw new InvalidRequestException(
                             new FeedbackItemResolution(
                                 GraphQLExtendedSpecErrorFeedbackItemProvider::class,
-                                GraphQLExtendedSpecErrorFeedbackItemProvider::E14,
+                                GraphQLExtendedSpecErrorFeedbackItemProvider::E15,
                                 [
                                     $operation->getName(),
                                 ]
