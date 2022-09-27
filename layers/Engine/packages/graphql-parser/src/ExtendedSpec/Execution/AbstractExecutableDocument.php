@@ -53,10 +53,10 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
     }
 
     /**
-     * Override to support the "multiple query execution" feature:
-     * If passing operationName `__ALL`, or passing no operationName
-     * but there is an operation `__ALL` in the document,
-     * then execute all operations (hack).
+     * Support the "Multiple Query Execution" feature,
+     * providing multiple operations to execute, in the
+     * order to be executed (calculated from the dependencies
+     * across operations).
      *
      * @return OperationInterface[]
      */
