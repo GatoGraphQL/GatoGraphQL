@@ -34,10 +34,13 @@ abstract class AbstractGraphQLRelationalFieldQueryDataComponentProcessor extends
     protected function getOperationFieldOrFragmentBonds(
         ExecutableDocument $executableDocument,
     ): SplObjectStorage {
+        $document = $executableDocument->getDocument();
+        /** @var OperationInterface[] */
+        $operations = $executableDocument->getMultipleOperationsToExecute();
         return $this->getGraphQLQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
-            $executableDocument->getDocument(),
-            $executableDocument->getRequestedOperations(),
-            $executableDocument->getDocument()->getFragments(),
+            $document,
+            $operations,
+            $document->getFragments(),
         );
     }
 }

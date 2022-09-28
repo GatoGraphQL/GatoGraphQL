@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\ExtendedSpec\Execution\MultipleQueryExecution;
+namespace PoP\ComponentModel\ExtendedSpec\Execution\MultipleQueryExecution;
 
 class MultipleQueryExecutionDisabledTest extends AbstractMultipleQueryExecutionTest
 {

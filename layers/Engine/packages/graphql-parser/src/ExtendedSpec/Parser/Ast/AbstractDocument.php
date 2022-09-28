@@ -13,6 +13,7 @@ use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -29,6 +30,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
+use stdClass;
 
 abstract class AbstractDocument extends UpstreamDocument
 {
@@ -122,6 +124,15 @@ abstract class AbstractDocument extends UpstreamDocument
 
         if ($enableDynamicVariables && $enableObjectResolvedFieldValueReferences) {
             $this->assertNonSharedDynamicVariableAndResolvedFieldValueReferenceNames();
+        }
+
+        /**
+         * Validate that @dependsOn(operations:...) doesn't form loops,
+         * and all operations exist
+         */
+        if ($moduleConfiguration->enableMultipleQueryExecution()) {
+            $this->assertDependedUponOperationsExist();
+            $this->assertDependedUponOperationsDoNotFormLoop();
         }
     }
 
@@ -566,5 +577,260 @@ abstract class AbstractDocument extends UpstreamDocument
     protected function getObjectResolvedFieldValueReferencesInFragment(Fragment $fragment): array
     {
         return $this->getObjectResolvedFieldValueReferencesInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds());
+    }
+
+    /**
+     * Validate that all Operations declared under
+     * @dependsOn(operations:...) all exist
+     *
+     * @throws InvalidRequestException
+     */
+    protected function assertDependedUponOperationsExist(): void
+    {
+        $operationNames = $this->getAllOperationNames();
+
+        $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArguments();
+        foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
+            $dependendUponOperationNames = $this->getDependedUponOperationNamesInArgument($operationDependencyDefinitionArgument);
+            foreach ($dependendUponOperationNames as $dependendUponOperationName) {
+                if (!in_array($dependendUponOperationName, $operationNames)) {
+                    throw new InvalidRequestException(
+                        new FeedbackItemResolution(
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::E14,
+                            [
+                                $dependendUponOperationName,
+                            ]
+                        ),
+                        $operationDependencyDefinitionArgument->getValueAST()
+                    );
+                }
+            }
+        }
+    }
+
+    /**
+     * @return string[]
+     * @throws InvalidRequestException
+     */
+    protected function getDependedUponOperationNamesInArgument(Argument $argument): array
+    {
+        $argumentValueAST = $argument->getValueAST();
+
+        /**
+         * Passing a Variable will throw an Exception.
+         * Only String and [String] are allowed
+         */
+        if (
+            !($argumentValueAST instanceof Literal
+            || $argumentValueAST instanceof InputList
+            )
+        ) {
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::E12,
+                ),
+                $argumentValueAST
+            );
+        }
+
+        /**
+         * A list is expected, but a single Operation name can also be provided.
+         */
+        $dependendUponOperationNameOrNames = $argument->getValue();
+        if (!is_array($dependendUponOperationNameOrNames)) {
+            $dependendUponOperationNames = [$dependendUponOperationNameOrNames];
+        } else {
+            $dependendUponOperationNames = $dependendUponOperationNameOrNames;
+        }
+
+        /**
+         * Make sure each of the elements is a String.
+         */
+        foreach ($dependendUponOperationNames as $dependendUponOperationName) {
+            if (!is_string($dependendUponOperationName)) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E13,
+                        [
+                            is_array($dependendUponOperationName) || $dependendUponOperationName instanceof stdClass
+                                ? json_encode((array)$dependendUponOperationName)
+                                : $dependendUponOperationName,
+                        ]
+                    ),
+                    $argumentValueAST
+                );
+            }
+        }
+        return $dependendUponOperationNames;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getAllOperationNames(): array
+    {
+        $operationNames = [];
+        foreach ($this->getOperations() as $operation) {
+            $operationNames[] = $operation->getName();
+        }
+        return $operationNames;
+    }
+
+    /**
+     * @return Argument[]
+     */
+    protected function getOperationDependencyDefinitionArguments(): array
+    {
+        $operationDependencyDefinitionArguments = [];
+        foreach ($this->getOperations() as $operation) {
+            $operationDependencyDefinitionArguments = array_merge(
+                $operationDependencyDefinitionArguments,
+                $this->getOperationDependencyDefinitionArgumentsInOperation($operation),
+            );
+        }
+        return $operationDependencyDefinitionArguments;
+    }
+
+    /**
+     * @return Argument[]
+     */
+    protected function getOperationDependencyDefinitionArgumentsInOperation(OperationInterface $operation): array
+    {
+        return $this->getOperationDependencyDefinitionArgumentsInDirectives($operation->getDirectives());
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @return Argument[]
+     */
+    protected function getOperationDependencyDefinitionArgumentsInDirectives(array $directives): array
+    {
+        $operationDependencyDefinitionArguments = [];
+        foreach ($directives as $directive) {
+            /**
+             * Check if this Directive is a "OperationDependencyDefiner"
+             */
+            if (!$this->isOperationDependencyDefinerDirective($directive)) {
+                continue;
+            }
+            /**
+             * Get the Argument under which the Depended-upon Operation is defined
+             */
+            $provideDependedUponOperationNamesArgument = $this->getProvideDependedUponOperationNamesArgument($directive);
+            if ($provideDependedUponOperationNamesArgument === null) {
+                continue;
+            }
+            /**
+             * All success!
+             */
+            $operationDependencyDefinitionArguments[] = $provideDependedUponOperationNamesArgument;
+        }
+        return $operationDependencyDefinitionArguments;
+    }
+
+    abstract protected function isOperationDependencyDefinerDirective(Directive $directive): bool;
+    abstract protected function getProvideDependedUponOperationNamesArgument(Directive $directive): ?Argument;
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertDependedUponOperationsDoNotFormLoop(): void
+    {
+        /**
+         * For each operation, iterate all the way down collecting
+         * the operations it depends upon (transitively), and assert
+         * it does not include itself
+         */
+        foreach ($this->getOperations() as $operation) {
+            $this->assertOperationDoesNotFormLoop($operation);
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function assertOperationDoesNotFormLoop(
+        OperationInterface $operation,
+    ): void {
+        $dependedUponOperations = [];
+        $operationsToProcess = $this->getDependedUponOperations($operation);
+        while ($operationsToProcess !== []) {
+            $operationToProcess = array_shift($operationsToProcess);
+            $dependedUponOperations[] = $operationToProcess;
+            $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArgumentsInOperation($operationToProcess);
+            foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
+                $dependedUponOperationsInArgument = $this->getDependedUponOperationsInArgument($operationDependencyDefinitionArgument);
+                foreach ($dependedUponOperationsInArgument as $dependedUponOperation) {
+                    /**
+                     * Check there is no loop
+                     */
+                    if ($dependedUponOperation === $operation) {
+                        throw new InvalidRequestException(
+                            new FeedbackItemResolution(
+                                GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                                GraphQLExtendedSpecErrorFeedbackItemProvider::E15,
+                                [
+                                    $operation->getName(),
+                                ]
+                            ),
+                            $operation
+                        );
+                    }
+                    /**
+                     * Two operation can have the same dependency, yet that alone
+                     * will not form a loop. In that case, just avoid processing
+                     * it again.
+                     */
+                    if (in_array($dependedUponOperation, $dependedUponOperations)) {
+                        continue;
+                    }
+                    $operationsToProcess[] = $dependedUponOperation;
+                }
+            }
+        }
+    }
+
+    /**
+     * @return OperationInterface[]
+     * @throws InvalidRequestException
+     */
+    protected function getDependedUponOperations(OperationInterface $operation): array
+    {
+        $dependedUponOperations = [];
+        $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArgumentsInOperation($operation);
+        foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
+            $dependedUponOperations = [
+                ...$dependedUponOperations,
+                ...$this->getDependedUponOperationsInArgument($operationDependencyDefinitionArgument)
+            ];
+        }
+        return $dependedUponOperations;
+    }
+
+    /**
+     * @return OperationInterface[]
+     * @throws InvalidRequestException
+     */
+    protected function getDependedUponOperationsInArgument(Argument $argument): array
+    {
+        /** @var OperationInterface[] */
+        return array_map(
+            $this->getOperation(...),
+            $this->getDependedUponOperationNamesInArgument($argument)
+        );
+    }
+
+    public function getOperation(string $name): ?OperationInterface
+    {
+        foreach ($this->getOperations() as $operation) {
+            if ($operation->getName() === $name) {
+                return $operation;
+            }
+        }
+
+        return null;
     }
 }

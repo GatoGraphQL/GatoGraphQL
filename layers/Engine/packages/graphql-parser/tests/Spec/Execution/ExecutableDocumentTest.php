@@ -233,13 +233,13 @@ class ExecutableDocumentTest extends AbstractTestCase
         $this->expectException(ShouldNotHappenException::class);
         $this->expectExceptionMessage(sprintf(
             'Before executing `%s`, must call `validateAndInitialize`',
-            'getRequestedOperations'
+            'getRequestedOperation'
         ));
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
-        $executableDocument->getRequestedOperations();
+        $executableDocument->getRequestedOperation();
     }
 
     public function testRequestedOperationsMatchOperations(): void
@@ -250,17 +250,15 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
-            $executableDocument->getRequestedOperations(),
-            [
-                new QueryOperation('', [], [], [
-                    new RelationalField('film', null, [
-                        new Argument('id', new Literal(1, new Location(1, 12)), new Location(1, 8)),
-                        new Argument('filmID', new Literal(2, new Location(1, 22)), new Location(1, 14)),
-                    ], [
-                        new LeafField('title', null, [], [], new Location(1, 27)),
-                    ], [], new Location(1, 3))
-                ], new Location(1, 1)),
-            ]
+            $executableDocument->getRequestedOperation(),
+            new QueryOperation('', [], [], [
+                new RelationalField('film', null, [
+                    new Argument('id', new Literal(1, new Location(1, 12)), new Location(1, 8)),
+                    new Argument('filmID', new Literal(2, new Location(1, 22)), new Location(1, 14)),
+                ], [
+                    new LeafField('title', null, [], [], new Location(1, 27)),
+                ], [], new Location(1, 3))
+            ], new Location(1, 1)),
         );
     }
 
@@ -284,16 +282,14 @@ class ExecutableDocumentTest extends AbstractTestCase
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
-            $executableDocument->getRequestedOperations(),
-            [
-                new QueryOperation('Two', [], [], [
-                    new RelationalField('post', null, [
-                        new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22)),
-                    ], [
-                        new LeafField('title', null, [], [], new Location(10, 21)),
-                    ], [], new Location(9, 17))
-                ], new Location(8, 19)),
-            ]
+            $executableDocument->getRequestedOperation(),
+            new QueryOperation('Two', [], [], [
+                new RelationalField('post', null, [
+                    new Argument('id', new Literal(2, new Location(9, 26)), new Location(9, 22)),
+                ], [
+                    new LeafField('title', null, [], [], new Location(10, 21)),
+                ], [], new Location(9, 17))
+            ], new Location(8, 19)),
         );
     }
 }

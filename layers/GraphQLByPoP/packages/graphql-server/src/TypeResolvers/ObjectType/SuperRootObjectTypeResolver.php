@@ -8,6 +8,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
 use GraphQLByPoP\GraphQLServer\Registries\MandatoryOperationDirectiveResolverRegistryInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
@@ -68,5 +69,17 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
     protected function getMandatoryFieldOrOperationDirectiveResolvers(): array
     {
         return $this->getMandatoryOperationDirectiveResolverRegistry()->getMandatoryOperationDirectiveResolvers();
+    }
+
+    /**
+     * Satisfy for Operation Directives
+     */
+    protected function getSupportedDirectiveLocationsByBehavior(): array
+    {
+        return [
+            FieldDirectiveBehaviors::OPERATION,
+            FieldDirectiveBehaviors::FIELD,
+            FieldDirectiveBehaviors::FIELD_AND_OPERATION,
+        ];
     }
 }

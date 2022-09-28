@@ -71,13 +71,13 @@ class IncludeFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
      *     # Do something...
      *   }
      *
-     *   mutation CreateOrUpdatePost @depends(on: ["CreatePost", "UpdatePost"])
+     *   mutation CreateOrUpdatePost @dependsOn(operations: ["CreatePost", "UpdatePost"])
      *   {
      *     # Do something...
      *   }
      *   ```
      */
-    protected function getFieldDirectiveBehavior(): string
+    public function getFieldDirectiveBehavior(): string
     {
         /** @var GraphQLParserModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();

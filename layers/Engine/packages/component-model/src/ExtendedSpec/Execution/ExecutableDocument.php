@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ExtendedSpec\Execution;
 
+use PoP\ComponentModel\DirectiveResolvers\OperationDependencyDefinerFieldDirectiveResolverInterface;
+use PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -12,9 +14,11 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
-use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument as UpstreamExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Execution\AbstractExecutableDocument;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
@@ -26,7 +30,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class ExecutableDocument extends UpstreamExecutableDocument
+class ExecutableDocument extends AbstractExecutableDocument
 {
     /**
      * @var array<ObjectTypeResolverInterface|UnionTypeResolverInterface|InterfaceTypeResolverInterface>
@@ -38,11 +42,25 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected array $nonCompositeUnionTypeResolvers;
 
     private ?TypeRegistryInterface $typeRegistry = null;
+    private ?OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry = null;
 
+    final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
+    {
+        $this->typeRegistry = $typeRegistry;
+    }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
         /** @var TypeRegistryInterface */
         return $this->typeRegistry ??= InstanceManagerFacade::getInstance()->getInstance(TypeRegistryInterface::class);
+    }
+    final public function setOperationDependencyDefinerDirectiveRegistry(OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry): void
+    {
+        $this->operationDependencyDefinerDirectiveRegistry = $operationDependencyDefinerDirectiveRegistry;
+    }
+    final protected function getOperationDependencyDefinerDirectiveRegistry(): OperationDependencyDefinerDirectiveRegistryInterface
+    {
+        /** @var OperationDependencyDefinerDirectiveRegistryInterface */
+        return $this->operationDependencyDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(OperationDependencyDefinerDirectiveRegistryInterface::class);
     }
 
     public function __construct(
@@ -220,5 +238,25 @@ class ExecutableDocument extends UpstreamExecutableDocument
                 );
             }
         }
+    }
+
+    protected function isOperationDependencyDefinerDirective(Directive $directive): bool
+    {
+        return $this->getOperationDependencyDefinerFieldDirectiveResolver($directive) !== null;
+    }
+
+    protected function getOperationDependencyDefinerFieldDirectiveResolver(Directive $directive): ?OperationDependencyDefinerFieldDirectiveResolverInterface
+    {
+        return $this->getOperationDependencyDefinerDirectiveRegistry()->getOperationDependencyDefinerFieldDirectiveResolver($directive->getName());
+    }
+
+    protected function getProvideDependedUponOperationNamesArgument(Directive $directive): ?Argument
+    {
+        $operationDependencyDefinerFieldDirectiveResolver = $this->getOperationDependencyDefinerFieldDirectiveResolver($directive);
+        if ($operationDependencyDefinerFieldDirectiveResolver === null) {
+            return null;
+        }
+        $provideDependedUponOperationNamesArgumentName = $operationDependencyDefinerFieldDirectiveResolver->getProvideDependedUponOperationNamesArgumentName();
+        return $directive->getArgument($provideDependedUponOperationNamesArgumentName);
     }
 }

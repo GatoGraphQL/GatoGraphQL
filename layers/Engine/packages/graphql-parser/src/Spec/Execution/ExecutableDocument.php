@@ -16,10 +16,17 @@ class ExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
 
+    protected bool $isValidatedAndInitialized = false;
+
     /**
-     * @var OperationInterface[]|null
+     * The operation to execute:
+     *
+     * - If the Document has only 1 operation, then that one
+     * - If it has more than 1 operation, the one indicated via ?operationName=...
+     *
+     * @var OperationInterface|null
      */
-    private ?array $requestedOperations = null;
+    private ?OperationInterface $requestedOperation = null;
 
     public function __construct(
         protected Document $document,
@@ -42,17 +49,15 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function validateAndInitialize(): void
     {
-        $this->requestedOperations = null;
+        $this->isValidatedAndInitialized = true;
 
         $this->validate();
 
         // Obtain the operations that must be executed
-        $this->requestedOperations = $this->assertAndGetRequestedOperations();
+        $this->requestedOperation = $this->assertAndGetRequestedOperation();
 
         // Inject the variable values into the objects
-        foreach ($this->requestedOperations as $operation) {
-            $this->propagateContext($operation, $this->context);
-        }
+        $this->propagateContext($this->requestedOperation, $this->context);
     }
 
     /**
@@ -69,29 +74,33 @@ class ExecutableDocument implements ExecutableDocumentInterface
      */
     public function reset(): void
     {
-        if ($this->requestedOperations === null) {
+        $this->isValidatedAndInitialized = false;
+
+        if ($this->requestedOperation === null) {
             return;
         }
-        foreach ($this->requestedOperations as $operation) {
-            $this->propagateContext($operation, null);
-        }
+        $this->propagateContext($this->requestedOperation, null);
     }
 
     /**
-     * Even though the GraphQL spec allows to execute only 1 Operation,
-     * retrieve a list of Operations, allowing to override it
-     * for the "multiple query execution" feature.
+     * The operation to execute:
      *
-     * @return OperationInterface[]
+     * - If the Document has only 1 operation, then that one
+     * - If it has more than 1 operation, the one indicated via ?operationName=...
+     *
+     * @return OperationInterface
      * @throws InvalidRequestException
      *
      * @see https://spec.graphql.org/draft/#sec-Executing-Requests
      */
-    protected function assertAndGetRequestedOperations(): array
+    protected function assertAndGetRequestedOperation(): OperationInterface
     {
         $operations = $this->document->getOperations();
         if ($this->context->getOperationName() === '') {
-            // It can't be 0, or validation already fails in Document
+            /**
+             * The count can't be 0, or the validation
+             * will already fail in the Document
+             */
             $operationCount = count($operations);
             if ($operationCount > 1) {
                 $lastOperation = $operations[$operationCount - 1];
@@ -104,27 +113,33 @@ class ExecutableDocument implements ExecutableDocumentInterface
                 );
             }
             // There is exactly 1 operation
-            return $operations;
+            return $operations[0];
         }
 
-        $requestedOperations = array_values(array_filter(
-            $this->document->getOperations(),
-            fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName()
-        ));
-        if ($requestedOperations === []) {
-            $firstOperation = $operations[0];
-            throw new InvalidRequestException(
-                new FeedbackItemResolution(
-                    GraphQLSpecErrorFeedbackItemProvider::class,
-                    GraphQLSpecErrorFeedbackItemProvider::E_6_1_A,
-                    [
-                         $this->context->getOperationName(),
-                    ]
-                ),
-                $firstOperation
-            );
+        /**
+         * Find the operation with the requested name
+         */
+        foreach ($this->document->getOperations() as $operation) {
+            if ($operation->getName() !== $this->context->getOperationName()) {
+                continue;
+            }
+            return $operation;
         }
-        return $requestedOperations;
+
+        /**
+         * None found, it's an error!
+         */
+        $firstOperation = $operations[0];
+        throw new InvalidRequestException(
+            new FeedbackItemResolution(
+                GraphQLSpecErrorFeedbackItemProvider::class,
+                GraphQLSpecErrorFeedbackItemProvider::E_6_1_A,
+                [
+                    $this->context->getOperationName(),
+                ]
+            ),
+            $firstOperation
+        );
     }
 
     /**
@@ -175,13 +190,13 @@ class ExecutableDocument implements ExecutableDocumentInterface
     }
 
     /**
-     * @return OperationInterface[]
+     * The requested operation via ?operationName=...
+     *
      * @throws InvalidRequestException
-     * @throws ShouldNotHappenException When this function is not executed with the expected sequence
      */
-    public function getRequestedOperations(): array
+    public function getRequestedOperation(): ?OperationInterface
     {
-        if ($this->requestedOperations === null) {
+        if (!$this->isValidatedAndInitialized) {
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__('Before executing `%s`, must call `validateAndInitialize`', 'graphql-server'),
@@ -189,45 +204,6 @@ class ExecutableDocument implements ExecutableDocumentInterface
                 )
             );
         }
-        return $this->requestedOperations;
-    }
-
-    /**
-     * The actual requested operation. Even though with Multiple Query Execution
-     * the document can contain multiple operations, there is only one that
-     * can be requested via ?operationName=...
-     *
-     * @throws InvalidRequestException
-     */
-    public function getRequestedOperation(): ?OperationInterface
-    {
-        $requestedOperations = $this->getRequestedOperations();
-        if (count($requestedOperations) === 1) {
-            return $requestedOperations[0];
-        }
-
-        /**
-         * Exactly one operation must have the requested name, or otherwise
-         * parsing the query would've thrown an error
-         */
-        return $this->getMatchingRequestedOperation(
-            $this->getRequestedOperations(),
-            $this->context->getOperationName(),
-        );
-    }
-
-    /**
-     * @param OperationInterface[] $operations
-     */
-    protected function getMatchingRequestedOperation(array $operations, string $operationName): ?OperationInterface
-    {
-        $matchingOperations = array_values(array_filter(
-            $operations,
-            fn (OperationInterface $operation) => $operation->getName() === $operationName
-        ));
-        if ($matchingOperations === []) {
-            return null;
-        }
-        return $matchingOperations[0];
+        return $this->requestedOperation;
     }
 }

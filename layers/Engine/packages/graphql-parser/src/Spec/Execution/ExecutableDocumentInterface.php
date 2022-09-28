@@ -21,12 +21,6 @@ interface ExecutableDocumentInterface
      * @see https://spec.graphql.org/draft/#sec-Validation
      */
     public function validateAndInitialize(): void;
-
-    /**
-     * @return OperationInterface[]
-     * @throws InvalidRequestException
-     */
-    public function getRequestedOperations(): array;
     /**
      * The actual requested operation. Even though with Multiple Query Execution
      * the document can contain multiple operations, there is only one that

@@ -206,6 +206,10 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     protected function getOperationFieldOrFragmentBonds(
         ExecutableDocument $executableDocument,
     ): SplObjectStorage {
+        $document = $executableDocument->getDocument();
+        /** @var OperationInterface[] */
+        $operations = $executableDocument->getMultipleOperationsToExecute();
+
         /**
          * Multiple Query Execution: In order to have the fields
          * of the subsequent operations be resolved in the same
@@ -213,9 +217,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          * to work), then wrap them on a "self" field.
          */
         return $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
-            $executableDocument->getDocument(),
-            $executableDocument->getRequestedOperations(),
-            $executableDocument->getDocument()->getFragments(),
+            $document,
+            $operations,
+            $document->getFragments(),
         );
     }
 

@@ -64,8 +64,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     protected function getFieldsFromExecutableDocument(
         ExecutableDocument $executableDocument,
     ): array {
+        /** @var OperationInterface[] */
+        $operations = $executableDocument->getMultipleOperationsToExecute();
         return $this->getFieldsFromOperations(
-            $executableDocument->getRequestedOperations(),
+            $operations,
             $executableDocument->getDocument()->getFragments()
         );
     }
