@@ -62,6 +62,22 @@ interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, At
     public function getDirectiveKind(): string;
 
     /**
+     * The FieldDirectiveResolver can handle Field Directives and,
+     * in addition, Operation Directives.
+     *
+     * This method indicates the behavior of the FieldDirectiveResolver,
+     * indicating one of the following:
+     *
+     * - Behave as Field (default)
+     * - Behave as Field and Operation
+     * - Behave as Operation
+     *
+     * Based on this value, the Directive Locations will be reflected
+     * as defined by the GraphQL spec.
+     */
+    public function getFieldDirectiveBehavior(): string;
+
+    /**
      * Define where to place the directive in the directive execution pipeline
      *
      * 2 directives are mandatory, and executed in this order:

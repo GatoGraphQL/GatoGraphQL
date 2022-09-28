@@ -77,7 +77,7 @@ class SkipFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
      *   }
      *   ```
      */
-    protected function getFieldDirectiveBehavior(): string
+    public function getFieldDirectiveBehavior(): string
     {
         /** @var GraphQLParserModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();

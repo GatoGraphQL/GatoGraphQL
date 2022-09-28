@@ -21,7 +21,7 @@ use SplObjectStorage;
  */
 trait PureOperationDirectiveResolverTrait
 {
-    protected function getFieldDirectiveBehavior(): string
+    public function getFieldDirectiveBehavior(): string
     {
         return FieldDirectiveBehaviors::OPERATION;
     }

@@ -1664,7 +1664,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      * Based on this value, the Directive Locations will be reflected
      * as defined by the GraphQL spec.
      */
-    protected function getFieldDirectiveBehavior(): string
+    public function getFieldDirectiveBehavior(): string
     {
         return FieldDirectiveBehaviors::FIELD;
     }
