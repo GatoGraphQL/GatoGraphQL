@@ -482,11 +482,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     ): bool {
         return in_array(
             $fieldDirectiveResolver->getFieldDirectiveBehavior(),
-            [
-                FieldDirectiveBehaviors::FIELD,
-                FieldDirectiveBehaviors::FIELD_AND_OPERATION,
-            ]
+            $this->getSupportedDirectiveLocationsByBehavior()
         );
+    }
+
+    /**
+     * Override by SuperRoot to satisfy for Operation Directives
+     *
+     * @return string[]
+     */
+    protected function getSupportedDirectiveLocationsByBehavior(): array
+    {
+        return [
+            FieldDirectiveBehaviors::FIELD,
+            FieldDirectiveBehaviors::FIELD_AND_OPERATION,
+        ];
     }
 
     /**
