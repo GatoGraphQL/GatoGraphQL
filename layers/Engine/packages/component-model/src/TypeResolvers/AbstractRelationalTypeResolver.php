@@ -11,13 +11,14 @@ use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\ResolveValueAndMergeFieldDirectiveResolver;
 use PoP\ComponentModel\DirectiveResolvers\SerializeLeafOutputTypeValuesFieldDirectiveResolver;
 use PoP\ComponentModel\DirectiveResolvers\ValidateFieldDirectiveResolver;
-use PoP\ComponentModel\Registries\MandatoryFieldDirectiveResolverRegistryInterface;
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProvider;
+use PoP\ComponentModel\Registries\MandatoryFieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -345,8 +346,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             foreach ($directiveFields[$directive] as $field) {
-                $directiveResolver = $fieldDirectiveResolvers[$field] ?? null;
-                if ($directiveResolver === null) {
+                $fieldDirectiveResolver = $fieldDirectiveResolvers[$field] ?? null;
+                if ($fieldDirectiveResolver === null
+                    || !$this->isFieldDirectiveResolverInRightDirectiveLocation($fieldDirectiveResolver, $field)
+                ) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
@@ -366,9 +369,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
                 // Consolidate the same DirectiveResolvers for different fields,
                 // as to do the validation only once on each of them
-                $directiveResolverFieldsSplObjectStorage = $directiveResolverInstanceFields[$directiveResolver] ?? [];
+                $directiveResolverFieldsSplObjectStorage = $directiveResolverInstanceFields[$fieldDirectiveResolver] ?? [];
                 $directiveResolverFieldsSplObjectStorage[] = $field;
-                $directiveResolverInstanceFields[$directiveResolver] = $directiveResolverFieldsSplObjectStorage;
+                $directiveResolverInstanceFields[$fieldDirectiveResolver] = $directiveResolverFieldsSplObjectStorage;
             }
         }
 
@@ -468,6 +471,22 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $instances[$directiveResolver] = $directiveResolverFields;
         }
         return $instances;
+    }
+
+    /**
+     * Override by SuperRoot to satisfy for Operation Directives
+     */
+    protected function isFieldDirectiveResolverInRightDirectiveLocation(
+        FieldDirectiveResolverInterface $fieldDirectiveResolver,
+        FieldInterface $field
+    ): bool {
+        return in_array(
+            $fieldDirectiveResolver->getFieldDirectiveBehavior(),
+            [
+                FieldDirectiveBehaviors::FIELD,
+                FieldDirectiveBehaviors::FIELD_AND_OPERATION,
+            ]
+        );
     }
 
     /**

@@ -11,6 +11,7 @@ use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 {
@@ -68,5 +69,15 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
     protected function getMandatoryFieldOrOperationDirectiveResolvers(): array
     {
         return $this->getMandatoryOperationDirectiveResolverRegistry()->getMandatoryOperationDirectiveResolvers();
+    }
+
+    /**
+     * Satisfy for Operation Directives
+     */
+    protected function isFieldDirectiveResolverInRightDirectiveLocation(
+        FieldDirectiveResolverInterface $fieldDirectiveResolver,
+        FieldInterface $field,
+    ): bool {
+        return true;
     }
 }
