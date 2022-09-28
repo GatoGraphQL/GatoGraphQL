@@ -347,7 +347,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
             foreach ($directiveFields[$directive] as $field) {
                 $fieldDirectiveResolver = $fieldDirectiveResolvers[$field] ?? null;
-                if ($fieldDirectiveResolver === null
+                if (
+                    $fieldDirectiveResolver === null
                     || !$this->isFieldDirectiveResolverInRightDirectiveLocation($fieldDirectiveResolver, $field)
                 ) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(

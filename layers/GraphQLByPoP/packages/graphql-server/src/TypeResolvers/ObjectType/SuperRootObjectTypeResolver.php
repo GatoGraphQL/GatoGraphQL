@@ -12,7 +12,6 @@ use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 {
