@@ -17,6 +17,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
+use stdClass;
 
 class TypeSerializationService implements TypeSerializationServiceInterface
 {
@@ -131,14 +132,14 @@ class TypeSerializationService implements TypeSerializationServiceInterface
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
      *
-     * @return string|int|float|bool|mixed[]
+     * @return string|int|float|bool|mixed[]|stdClass
      */
     public function serializeLeafOutputTypeValue(
         mixed $value,
         LeafOutputTypeResolverInterface $fieldLeafOutputTypeResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-    ): string|int|float|bool|array {
+    ): string|int|float|bool|array|stdClass {
         /**
          * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
@@ -149,10 +150,16 @@ class TypeSerializationService implements TypeSerializationServiceInterface
              * Array is not supported by `serialize`, but can still be handled
              * by DangerouslyNonSpecificScalar. So convert it into stdClass
              */
-            if (is_array($value)) {
+            $isArray = is_array($value);
+            if ($isArray) {
                 $value = (object) $value;
             }
-            return $fieldLeafOutputTypeResolver->serialize($value);
+            $serializedValue = $fieldLeafOutputTypeResolver->serialize($value);
+            if ($isArray) {
+                /** @var stdClass $serializedValue */
+                return (array)$serializedValue;
+            }
+            return $serializedValue;
         }
 
         $fieldTypeModifiers = $this->getFieldTypeModifiersFromAppStateOrField(

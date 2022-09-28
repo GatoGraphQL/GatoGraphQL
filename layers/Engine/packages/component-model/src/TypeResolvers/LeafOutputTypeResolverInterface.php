@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers;
 
+use stdClass;
+
 /**
  * This definition of "LeafOutput" type is different than the "Output"
  * type defined in the GraphQL spec:
@@ -29,7 +31,7 @@ interface LeafOutputTypeResolverInterface extends OutputTypeResolverInterface
      *
      * `array` is supported as an output type, as to support `JSONObject`.
      *
-     * @return string|int|float|bool|mixed[] formatted representation of the custom scalar
+     * @return string|int|float|bool|mixed[]|stdClass formatted representation of the custom scalar
      */
-    public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array;
+    public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array|stdClass;
 }

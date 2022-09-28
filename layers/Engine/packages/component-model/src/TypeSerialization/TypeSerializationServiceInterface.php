@@ -12,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
+use stdClass;
 
 interface TypeSerializationServiceInterface
 {
@@ -34,12 +35,12 @@ interface TypeSerializationServiceInterface
      * The response for Scalar Types and Enum types must be serialized.
      * The response type is the same as in the type's `serialize` method.
      *
-     * @return string|int|float|bool|mixed[]
+     * @return string|int|float|bool|mixed[]|stdClass
      */
     public function serializeLeafOutputTypeValue(
         mixed $value,
         LeafOutputTypeResolverInterface $fieldLeafOutputTypeResolver,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-    ): string|int|float|bool|array;
+    ): string|int|float|bool|array|stdClass;
 }
