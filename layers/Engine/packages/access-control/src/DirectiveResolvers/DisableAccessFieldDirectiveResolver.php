@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\AccessControl\DirectiveResolvers;
 
 use PoP\AccessControl\FeedbackItemProviders\FeedbackItemProvider;
-use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionFieldDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\DirectiveResolvers\AbstractValidateConditionFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
