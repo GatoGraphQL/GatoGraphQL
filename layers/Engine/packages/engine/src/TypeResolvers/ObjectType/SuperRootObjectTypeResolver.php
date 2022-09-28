@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
+namespace PoP\Engine\TypeResolvers\ObjectType;
 
 use PoP\Engine\ObjectModels\SuperRoot;
 use GraphQLByPoP\GraphQLServer\Registries\MandatoryOperationDirectiveResolverRegistryInterface;
