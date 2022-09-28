@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\ObjectFacades;
+namespace PoP\Engine\ObjectFacades;
 
 use PoP\Root\App;
 use PoP\Engine\ObjectModels\SuperRoot;
