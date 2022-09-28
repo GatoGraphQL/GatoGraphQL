@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Directive 'serializeLeafOutputTypeValues' can be executed only once for field(s) 'self'",
+      "message": "Directive 'serializeLeafOutputTypeValues' can be executed only once",
       "locations": [
         {
           "line": 3,

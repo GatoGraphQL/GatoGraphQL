@@ -445,13 +445,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     GraphQLSpecErrorFeedbackItemProvider::E_5_7_3,
                                     [
                                         $directive->getName(),
-                                        implode(
-                                            '\', \'',
-                                            array_map(
-                                                fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                                                $alreadyProcessingFields
-                                            )
-                                        ),
                                     ]
                                 ),
                                 $directive,
