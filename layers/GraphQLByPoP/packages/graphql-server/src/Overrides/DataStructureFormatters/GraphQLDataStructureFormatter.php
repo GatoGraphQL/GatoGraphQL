@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\Overrides\DataStructureFormatters;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\QueryResolution\GraphQLQueryASTTransformationServiceInterface;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -27,7 +26,6 @@ use PoP\Root\App;
 class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatter
 {
     private ?GraphQLQueryASTTransformationServiceInterface $graphQLQueryASTTransformationService = null;
-    private ?SuperRootObjectTypeResolver $superRootObjectTypeResolver = null;
 
     final public function setGraphQLQueryASTTransformationService(GraphQLQueryASTTransformationServiceInterface $graphQLQueryASTTransformationService): void
     {
@@ -37,15 +35,6 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     {
         /** @var GraphQLQueryASTTransformationServiceInterface */
         return $this->graphQLQueryASTTransformationService ??= $this->instanceManager->getInstance(GraphQLQueryASTTransformationServiceInterface::class);
-    }
-    final public function setSuperRootObjectTypeResolver(SuperRootObjectTypeResolver $superRootObjectTypeResolver): void
-    {
-        $this->superRootObjectTypeResolver = $superRootObjectTypeResolver;
-    }
-    final protected function getSuperRootObjectTypeResolver(): SuperRootObjectTypeResolver
-    {
-        /** @var SuperRootObjectTypeResolver */
-        return $this->superRootObjectTypeResolver ??= $this->instanceManager->getInstance(SuperRootObjectTypeResolver::class);
     }
 
     /**
@@ -82,17 +71,5 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             );
         }
         return $superRootOperationFields;
-    }
-
-    /**
-     * The SuperRoot type, for the first field (and others via
-     * Multiple Query Execution), must not be printed to the response
-     */
-    protected function skipAddingDataForType(string $typeOutputKey): bool
-    {
-        if ($typeOutputKey === $this->getSuperRootObjectTypeResolver()->getTypeOutputKey()) {
-            return true;
-        }
-        return parent::skipAddingDataForType($typeOutputKey);
     }
 }

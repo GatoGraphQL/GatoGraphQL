@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\DirectiveResolvers;
+namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
+use PoP\ComponentModel\DirectiveResolvers\RemoveIDFieldSetFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;

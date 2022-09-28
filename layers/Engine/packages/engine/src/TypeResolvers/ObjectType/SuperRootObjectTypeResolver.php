@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
+namespace PoP\Engine\TypeResolvers\ObjectType;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
+use PoP\Engine\ObjectModels\SuperRoot;
 use GraphQLByPoP\GraphQLServer\Registries\MandatoryOperationDirectiveResolverRegistryInterface;
-use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
+use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;

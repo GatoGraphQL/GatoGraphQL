@@ -7,7 +7,7 @@ namespace PoP\CacheControl\DirectiveResolvers;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\CacheControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalFieldDirectiveResolver;
+use PoP\Engine\DirectiveResolvers\AbstractGlobalFieldDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;

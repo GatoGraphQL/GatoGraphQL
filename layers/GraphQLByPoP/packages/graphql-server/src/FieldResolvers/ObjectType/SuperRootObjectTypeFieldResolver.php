@@ -6,17 +6,17 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
-use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\ObjectModels\Root;
+use PoP\Engine\ObjectModels\SuperRoot;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 
 class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {

@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointFieldDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\DirectiveResolvers\AbstractValidateCheckpointFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;

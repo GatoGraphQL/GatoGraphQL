@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionFieldDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
@@ -14,6 +13,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\DirectiveResolvers\AbstractValidateConditionFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;

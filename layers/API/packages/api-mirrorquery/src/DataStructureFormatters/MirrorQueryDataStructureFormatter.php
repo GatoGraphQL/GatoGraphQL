@@ -9,6 +9,7 @@ use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoP\GraphQLParser\AST\ASTHelperServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
@@ -21,6 +22,7 @@ use SplObjectStorage;
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter
 {
     private ?ASTHelperServiceInterface $astHelperService = null;
+    private ?SuperRootObjectTypeResolver $superRootObjectTypeResolver = null;
 
     final public function setASTHelperService(ASTHelperServiceInterface $astHelperService): void
     {
@@ -30,6 +32,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     {
         /** @var ASTHelperServiceInterface */
         return $this->astHelperService ??= $this->instanceManager->getInstance(ASTHelperServiceInterface::class);
+    }
+    final public function setSuperRootObjectTypeResolver(SuperRootObjectTypeResolver $superRootObjectTypeResolver): void
+    {
+        $this->superRootObjectTypeResolver = $superRootObjectTypeResolver;
+    }
+    final protected function getSuperRootObjectTypeResolver(): SuperRootObjectTypeResolver
+    {
+        /** @var SuperRootObjectTypeResolver */
+        return $this->superRootObjectTypeResolver ??= $this->instanceManager->getInstance(SuperRootObjectTypeResolver::class);
     }
 
     public function getName(): string
@@ -317,9 +328,18 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         }
     }
 
+    /**
+     * The SuperRoot type, for the first field (and others via
+     * Multiple Query Execution), must not be printed to the response
+     */
     protected function skipAddingDataForType(string $typeOutputKey): bool
     {
-        return false;
+        return in_array(
+            $typeOutputKey,
+            [
+                $this->getSuperRootObjectTypeResolver()->getTypeOutputKey(),
+            ]
+        );
     }
 
     /**
