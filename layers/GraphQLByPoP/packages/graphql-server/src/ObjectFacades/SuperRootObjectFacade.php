@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectFacades;
 
 use PoP\Root\App;
-use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
+use PoP\Engine\ObjectModels\SuperRoot;
 
 class SuperRootObjectFacade
 {

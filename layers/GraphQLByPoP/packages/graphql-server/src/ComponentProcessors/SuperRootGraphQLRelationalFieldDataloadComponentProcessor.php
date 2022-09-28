@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ComponentProcessors;
 
-use GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot;
+use PoP\Engine\ObjectModels\SuperRoot;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;

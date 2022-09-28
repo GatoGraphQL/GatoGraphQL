@@ -37,9 +37,6 @@ services:
     GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot:
         class: \GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot
 
-    GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot:
-        class: \GraphQLByPoP\GraphQLServer\ObjectModels\SuperRoot
-
     GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface:
         class: \GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicator
 
