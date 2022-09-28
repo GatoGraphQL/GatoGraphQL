@@ -6,7 +6,7 @@ namespace PoP\Engine\TypeResolvers\ObjectType;
 
 use PoP\Engine\ObjectModels\SuperRoot;
 use GraphQLByPoP\GraphQLServer\Registries\MandatoryOperationDirectiveResolverRegistryInterface;
-use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
+use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
