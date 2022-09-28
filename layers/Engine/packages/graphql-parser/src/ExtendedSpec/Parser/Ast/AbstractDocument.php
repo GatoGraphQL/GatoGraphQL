@@ -635,8 +635,6 @@ abstract class AbstractDocument extends UpstreamDocument
 
         /**
          * A list is expected, but a single Operation name can also be provided.
-         *
-         * @var string|string[]
          */
         $dependendUponOperationNameOrNames = $argument->getValue();
         if (!is_array($dependendUponOperationNameOrNames)) {
@@ -816,6 +814,7 @@ abstract class AbstractDocument extends UpstreamDocument
      */
     protected function getDependedUponOperationsInArgument(Argument $argument): array
     {
+        /** @var OperationInterface[] */
         return array_map(
             $this->getOperation(...),
             $this->getDependedUponOperationNamesInArgument($argument)

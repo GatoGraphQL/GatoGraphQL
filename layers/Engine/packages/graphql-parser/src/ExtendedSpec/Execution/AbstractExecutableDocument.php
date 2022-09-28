@@ -244,6 +244,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
      * since it could've been moved already by yet another dependency!
      * So search for its position, and place it to the rightmost place.
      *
+     * @param OperationInterface[] $multipleQueryExecutionOperations
      * @return OperationInterface[]
      */
     protected function moveOperationBehindItsDependedUponOperation(

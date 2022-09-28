@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Facades\Registries;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Registries\OperationDependencyDirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistryInterface;
 
-class OperationDependencyDirectiveRegistryFacade
+class OperationDependencyDefinerDirectiveRegistryFacade
 {
-    public static function getInstance(): OperationDependencyDirectiveRegistryInterface
+    public static function getInstance(): OperationDependencyDefinerDirectiveRegistryInterface
     {
         /**
-         * @var OperationDependencyDirectiveRegistryInterface
+         * @var OperationDependencyDefinerDirectiveRegistryInterface
          */
-        $service = App::getContainer()->get(OperationDependencyDirectiveRegistryInterface::class);
+        $service = App::getContainer()->get(OperationDependencyDefinerDirectiveRegistryInterface::class);
         return $service;
     }
 }
