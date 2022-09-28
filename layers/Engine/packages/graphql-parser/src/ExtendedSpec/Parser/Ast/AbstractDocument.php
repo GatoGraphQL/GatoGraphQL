@@ -621,9 +621,11 @@ abstract class AbstractDocument extends UpstreamDocument
          * Passing a Variable will throw an Exception.
          * Only String and [String] are allowed
          */
-        if (!($argumentValueAST instanceof Literal
+        if (
+            !($argumentValueAST instanceof Literal
             || $argumentValueAST instanceof InputList
-        )) {
+            )
+        ) {
             throw new InvalidRequestException(
                 new FeedbackItemResolution(
                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,
@@ -642,7 +644,7 @@ abstract class AbstractDocument extends UpstreamDocument
         } else {
             $dependendUponOperationNames = $dependendUponOperationNameOrNames;
         }
-        
+
         /**
          * Make sure each of the elements is a String.
          */
@@ -741,7 +743,7 @@ abstract class AbstractDocument extends UpstreamDocument
          * For each operation, iterate all the way down collecting
          * the operations it depends upon (transitively), and assert
          * it does not include itself
-         */        
+         */
         foreach ($this->getOperations() as $operation) {
             $this->assertOperationDoesNotFormLoop($operation);
         }

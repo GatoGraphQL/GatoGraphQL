@@ -67,7 +67,8 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableMultipleQueryExecution()
+        if (
+            !$moduleConfiguration->enableMultipleQueryExecution()
             || count($this->document->getOperations()) === 1
         ) {
             return [
@@ -273,7 +274,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
 
         /**
          * To reorder:
-         * 
+         *
          *   1. Place the operation after its depended-upon operation
          *   2. Remove it from the first position
          */
