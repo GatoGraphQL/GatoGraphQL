@@ -7,6 +7,7 @@ namespace PoP\Engine\DirectiveResolvers;
 use PoP\ComponentModel\DirectiveResolvers\AbstractFieldDirectiveResolver as UpstreamAbstractFieldDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 
 /**
