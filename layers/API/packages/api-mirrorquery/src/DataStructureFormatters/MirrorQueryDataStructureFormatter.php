@@ -334,10 +334,12 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      */
     protected function skipAddingDataForType(string $typeOutputKey): bool
     {
-        if ($typeOutputKey === $this->getSuperRootObjectTypeResolver()->getTypeOutputKey()) {
-            return true;
-        }
-        return false;
+        return in_array(
+            $typeOutputKey,
+            [
+                $this->getSuperRootObjectTypeResolver()->getTypeOutputKey(),
+            ]
+        );
     }
 
     /**
