@@ -33,17 +33,17 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     }
 
     /**
-     * @return string|int|float|bool|mixed[]
+     * @return string|int|float|bool|mixed[]|stdClass
      */
-    public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array
+    public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array|stdClass
     {
         /**
          * Convert stdClass to array, and apply recursively
          * (i.e. if some stdClass property is stdClass or object)
          */
         if ($scalarValue instanceof stdClass) {
-            return array_map(
-                function (mixed $scalarValueArrayElem): string|int|float|bool|array|null {
+            return (object)array_map(
+                function (mixed $scalarValueArrayElem): string|int|float|bool|array|null|stdClass {
                     if ($scalarValueArrayElem === null) {
                         return null;
                     }
