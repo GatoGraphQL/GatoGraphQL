@@ -76,19 +76,35 @@ class InputCoercingService implements InputCoercingServiceInterface
      * Validate that the expected array/non-array input is provided,
      * checking that the WrappingType is respected.
      *
+     * Nullable booleans can be `null` for the DangerouslyNonSpecificScalar,
+     * so they can also validate their cardinality:
+     *
+     *   - DangerouslyNonSpecificScalar does not need to validate anything => all null 
+     *   - [DangerouslyNonSpecificScalar] must certainly be an array, but it doesn't care
+     *     inside if it's an array or not => $inputIsArrayType => true, $inputIsArrayOfArraysType => null
+     *   - [[DangerouslyNonSpecificScalar]] must be array of arrays => $inputIsArrayType => true, $inputIsArrayOfArraysType => true
+     *
      * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
      */
     public function validateInputArrayModifiers(
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         string $inputName,
-        bool $inputIsArrayType,
-        bool $inputIsNonNullArrayItemsType,
-        bool $inputIsArrayOfArraysType,
-        bool $inputIsNonNullArrayOfArraysItemsType,
+        ?bool $inputIsArrayType,
+        ?bool $inputIsNonNullArrayItemsType,
+        ?bool $inputIsArrayOfArraysType,
+        ?bool $inputIsNonNullArrayOfArraysItemsType,
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        /**
+         * If the type is `DangerouslyNonSpecificScalar`, there's nothing
+         * to validate
+         */
+        if ($inputIsArrayType === null && $inputIsArrayOfArraysType === null) {
+            return;
+        }
+
         /**
          * If it is a Promise then don't convert it, since its underlying
          * value may actually be an array, but we don't know it yet.
@@ -96,8 +112,9 @@ class InputCoercingService implements InputCoercingServiceInterface
         if ($inputValue instanceof ValueResolutionPromiseInterface) {
             return;
         }
+
         if (
-            !$inputIsArrayType
+            $inputIsArrayType === false
             && is_array($inputValue)
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -161,7 +178,7 @@ class InputCoercingService implements InputCoercingServiceInterface
         }
         if (
             $inputIsArrayType
-            && !$inputIsArrayOfArraysType
+            && $inputIsArrayOfArraysType === false
             && array_filter(
                 $inputValue,
                 fn ($arrayItem) => is_array($arrayItem)
