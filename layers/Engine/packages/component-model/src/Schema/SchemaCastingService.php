@@ -108,21 +108,19 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 if (!$fieldOrDirectiveArgIsArrayOfArraysType) {
                     $fieldOrDirectiveArgIsArrayOfArraysType = null;
                 }
-            }
-
-            /**
-             * Modifying the AST and not directly its value, because
-             * a VariableReference may be converted to InputList([VariableReference]),
-             * so the underlying AST holding the value must also change.
-             *
-             * Support passing a single value where a list is expected:
-             * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
-             *
-             * Defined in the GraphQL spec.
-             *
-             * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
-             */
-            if (!$isDangerouslyNonSpecificScalar) {
+            } else {
+                /**
+                 * Modifying the AST and not directly its value, because
+                 * a VariableReference may be converted to InputList([VariableReference]),
+                 * so the underlying AST holding the value must also change.
+                 *
+                 * Support passing a single value where a list is expected:
+                 * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+                 *
+                 * Defined in the GraphQL spec.
+                 *
+                 * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+                 */
                 $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
                     $argValue,
                     $fieldOrDirectiveArgIsArrayType,

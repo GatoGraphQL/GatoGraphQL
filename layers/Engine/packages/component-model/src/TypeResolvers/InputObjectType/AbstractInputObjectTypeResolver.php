@@ -321,17 +321,15 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 if (!$inputFieldIsArrayType) {
                     $inputFieldIsArrayType = null;
                 }
-            }
-
-            /**
-             * Support passing a single value where a list is expected:
-             * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
-             *
-             * Defined in the GraphQL spec.
-             *
-             * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
-             */
-            if (!$isDangerouslyNonSpecificScalar) {
+            } else {
+                /**
+                 * Support passing a single value where a list is expected:
+                 * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+                 *
+                 * Defined in the GraphQL spec.
+                 *
+                 * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+                 */
                 $inputFieldValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
                     $inputFieldValue,
                     $inputFieldIsArrayType,
