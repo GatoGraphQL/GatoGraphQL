@@ -363,7 +363,12 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
-            // Cast (or "coerce" in GraphQL terms) the value
+            /**
+             * Cast (or "coerce" in GraphQL terms) the value
+             *
+             * @var bool $inputFieldIsArrayType
+             * @var bool $inputFieldIsArrayOfArraysType
+             */
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,

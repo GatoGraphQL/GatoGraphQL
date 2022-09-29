@@ -162,6 +162,12 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 continue;
             }
 
+            /**
+             * Cast (or "coerce" in GraphQL terms) the value
+             *
+             * @var bool $fieldOrDirectiveArgIsArrayType
+             * @var bool $fieldOrDirectiveArgIsArrayOfArraysType
+             */
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
