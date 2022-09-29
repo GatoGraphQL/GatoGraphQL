@@ -48,8 +48,8 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         return null;
                     }
                     if (is_array($scalarValueArrayElem)) {
-                        // Convert from array to stdClass
-                        $scalarValueArrayElem = (object) $scalarValueArrayElem;
+                        // Convert from array to stdClass and back
+                        return (array)$this->serialize((object)$scalarValueArrayElem);
                     }
                     return $this->serialize($scalarValueArrayElem);
                 },
