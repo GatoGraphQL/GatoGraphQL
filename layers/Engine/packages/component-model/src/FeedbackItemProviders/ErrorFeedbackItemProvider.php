@@ -56,18 +56,18 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E3 => $this->__('Resolving field \'%s\' triggered exception: \'%s\'', 'component-model'),
+            self::E3 => $this->__('Resolving field \'%s\' produced error: \'%s\'', 'component-model'),
             self::E3A => $this->__('Resolving field \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E4 => $this->__('Resolving field \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E5 => $this->__('Meta directive \'%s\' has no composed directives', 'component-model'),
             self::E5A => $this->__('The directive pipeline for \'%s\' is empty', 'component-model'),
-            self::E6 => $this->__('Resolving mutation \'%s\' triggered exception: \'%s\'', 'component-model'),
+            self::E6 => $this->__('Resolving mutation \'%s\' produced error: \'%s\'', 'component-model'),
             self::E6A => $this->__('Resolving mutation \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E7 => $this->__('Resolving mutation \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E8 => $this->__('No TypeResolver resolves the object', 'component-model'),
             self::E9 => $this->__('Data for object of type \'%s\' and ID \'%s\' cannot be loaded (possibly the DataLoader produced a wrong ID, or the data is corrupted)', 'component-model'),
             self::E10 => $this->__('In union type \'%s\', data for object with ID \'%s\' cannot be loaded (possibly the DataLoader produced a wrong ID, or the data is corrupted, or no TypeResolver in the Union can handle the type of this object)', 'component-model'),
-            self::E11 => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'', 'component-model'),
+            self::E11 => $this->__('Resolving directive \'%s\' produced error: \'%s\'', 'component-model'),
             self::E11A => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
