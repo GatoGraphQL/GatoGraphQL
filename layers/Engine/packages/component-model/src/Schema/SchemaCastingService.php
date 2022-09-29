@@ -66,6 +66,18 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $fieldOrDirectiveArgTypeResolver = $argumentSchemaDefinition[$argName][SchemaDefinition::TYPE_RESOLVER];
 
             /**
+             * Execute the validation, checking that the WrappingType is respected.
+             * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
+             *
+             * Coerce the value to the appropriate type.
+             * Eg: from string to boolean.
+             **/
+            $fieldOrDirectiveArgIsArrayType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY] ?? false;
+            $fieldOrDirectiveArgIsNonNullArrayItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+            $fieldOrDirectiveArgIsArrayOfArraysType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+            $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+
+            /**
              * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
              * In particular, it does not need to validate if it is an array or not,
              * as according to the applied WrappingType.
@@ -80,21 +92,14 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $isDangerouslyNonSpecificScalar = $fieldOrDirectiveArgTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver();
 
             /**
-             * Execute the validation, checking that the WrappingType is respected.
-             * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
-             *
-             * Coerce the value to the appropriate type.
-             * Eg: from string to boolean.
-             **/
-            $fieldOrDirectiveArgIsArrayType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY] ?? false;
-            $fieldOrDirectiveArgIsNonNullArrayItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-            $fieldOrDirectiveArgIsArrayOfArraysType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
-            $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-
-            /**
              * DangerouslyNonScalar: Validate the cardinality, but only
              * if explicitly set to `true`. Otherwise change from `false`
              * to `null`, to indicate "do not validate".
+             *
+             *   - DangerouslyNonSpecificScalar does not need to validate anything => all null 
+             *   - [DangerouslyNonSpecificScalar] must certainly be an array, but it doesn't care
+             *     inside if it's an array or not => $inputIsArrayType => true, $inputIsArrayOfArraysType => null
+             *   - [[DangerouslyNonSpecificScalar]] must be array of arrays => $inputIsArrayType => true, $inputIsArrayOfArraysType => true
              */
             if ($isDangerouslyNonSpecificScalar) {
                 if (!$fieldOrDirectiveArgIsArrayType) {
