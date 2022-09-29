@@ -96,7 +96,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              * if explicitly set to `true`. Otherwise change from `false`
              * to `null`, to indicate "do not validate".
              *
-             *   - DangerouslyNonSpecificScalar does not need to validate anything => all null 
+             *   - DangerouslyNonSpecificScalar does not need to validate anything => all null
              *   - [DangerouslyNonSpecificScalar] must certainly be an array, but it doesn't care
              *     inside if it's an array or not => $inputIsArrayType => true, $inputIsArrayOfArraysType => null
              *   - [[DangerouslyNonSpecificScalar]] must be array of arrays => $inputIsArrayType => true, $inputIsArrayOfArraysType => true
