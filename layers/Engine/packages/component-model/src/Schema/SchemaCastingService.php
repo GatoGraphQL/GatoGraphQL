@@ -77,9 +77,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
              * these values by types `String` and `[String]`.
              */
-            if ($fieldOrDirectiveArgTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
-                continue;
-            }
+            $isDangerouslyNonSpecificScalar = $fieldOrDirectiveArgTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver();
 
             /**
              * Execute the validation, checking that the WrappingType is respected.
@@ -94,6 +92,20 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
 
             /**
+             * DangerouslyNonScalar: Validate the cardinality, but only
+             * if explicitly set to `true`. Otherwise change from `false`
+             * to `null`, to indicate "do not validate".
+             */
+            if ($isDangerouslyNonSpecificScalar) {
+                if (!$fieldOrDirectiveArgIsArrayType) {
+                    $fieldOrDirectiveArgIsArrayType = null;
+                }
+                if (!$fieldOrDirectiveArgIsArrayOfArraysType) {
+                    $fieldOrDirectiveArgIsArrayOfArraysType = null;
+                }
+            }
+
+            /**
              * Modifying the AST and not directly its value, because
              * a VariableReference may be converted to InputList([VariableReference]),
              * so the underlying AST holding the value must also change.
@@ -105,11 +117,13 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              *
              * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
              */
-            $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
-                $argValue,
-                $fieldOrDirectiveArgIsArrayType,
-                $fieldOrDirectiveArgIsArrayOfArraysType,
-            );
+            if (!$isDangerouslyNonSpecificScalar) {
+                $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+                    $argValue,
+                    $fieldOrDirectiveArgIsArrayType,
+                    $fieldOrDirectiveArgIsArrayOfArraysType,
+                );
+            }
 
             // Cast (or "coerce" in GraphQL terms) the value
             if ($withArgumentsAST->hasArgument($argName)) {
@@ -134,6 +148,14 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 $objectTypeFieldResolutionFeedbackStore,
             );
             if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+                continue;
+            }
+
+            /**
+             * DangerouslyNonScalar: just validate the cardinality,
+             * no need to coerce the value
+             */
+            if ($isDangerouslyNonSpecificScalar) {
                 continue;
             }
 
