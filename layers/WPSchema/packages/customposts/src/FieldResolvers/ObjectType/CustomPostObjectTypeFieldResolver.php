@@ -51,7 +51,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'contentSource' => $this->__('Retrieve the format slug for a post', 'posts'),
+            'contentSource' => $this->__('Retrieve the content in its \'source\' format, including the (Gutenberg) block delimiter HTML comments', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
