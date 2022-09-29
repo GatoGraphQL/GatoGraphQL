@@ -284,6 +284,12 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $inputFieldIsNonNullArrayOfArraysItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS;
+            $inputFieldIsArrayType = $inputFieldIsArrayOfArraysType || ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+            $inputFieldIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
+
             /**
              * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
              * In particular, it does not need to validate if it is an array or not,
@@ -296,30 +302,40 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
              * these values by types `String` and `[String]`.
              */
-            if ($inputFieldTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
-                $coercedInputValue->$inputFieldName = $inputFieldValue;
-                continue;
-            }
-
-            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
-            $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
-            $inputFieldIsNonNullArrayOfArraysItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS;
-            $inputFieldIsArrayType = $inputFieldIsArrayOfArraysType || ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-            $inputFieldIsNonNullArrayItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
+            $isDangerouslyNonSpecificScalar = $inputFieldTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver();
 
             /**
-             * Support passing a single value where a list is expected:
-             * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+             * DangerouslyNonScalar: Validate the cardinality, but only
+             * if explicitly set to `true`. Otherwise change from `false`
+             * to `null`, to indicate "do not validate".
              *
-             * Defined in the GraphQL spec.
-             *
-             * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+             *   - DangerouslyNonSpecificScalar does not need to validate anything => all null
+             *   - [DangerouslyNonSpecificScalar] must certainly be an array, but it doesn't care
+             *     inside if it's an array or not => $inputIsArrayType => true, $inputIsArrayOfArraysType => null
+             *   - [[DangerouslyNonSpecificScalar]] must be array of arrays => $inputIsArrayType => true, $inputIsArrayOfArraysType => true
              */
-            $inputFieldValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
-                $inputFieldValue,
-                $inputFieldIsArrayType,
-                $inputFieldIsArrayOfArraysType,
-            );
+            if ($isDangerouslyNonSpecificScalar) {
+                if (!$inputFieldIsArrayOfArraysType) {
+                    $inputFieldIsArrayOfArraysType = null;
+                }
+                if (!$inputFieldIsArrayType) {
+                    $inputFieldIsArrayType = null;
+                }
+            } else {
+                /**
+                 * Support passing a single value where a list is expected:
+                 * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+                 *
+                 * Defined in the GraphQL spec.
+                 *
+                 * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+                 */
+                $inputFieldValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+                    $inputFieldValue,
+                    $inputFieldIsArrayType,
+                    $inputFieldIsArrayOfArraysType,
+                );
+            }
 
             // Validate that the expected array/non-array input is provided
             $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
@@ -338,7 +354,21 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
 
-            // Cast (or "coerce" in GraphQL terms) the value
+            /**
+             * DangerouslyNonScalar: just validate the cardinality,
+             * no need to coerce the value
+             */
+            if ($isDangerouslyNonSpecificScalar) {
+                $coercedInputValue->$inputFieldName = $inputFieldValue;
+                continue;
+            }
+
+            /**
+             * Cast (or "coerce" in GraphQL terms) the value
+             *
+             * @var bool $inputFieldIsArrayType
+             * @var bool $inputFieldIsArrayOfArraysType
+             */
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,

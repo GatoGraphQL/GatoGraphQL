@@ -66,22 +66,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $fieldOrDirectiveArgTypeResolver = $argumentSchemaDefinition[$argName][SchemaDefinition::TYPE_RESOLVER];
 
             /**
-             * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
-             * In particular, it does not need to validate if it is an array or not,
-             * as according to the applied WrappingType.
-             *
-             * This is to enable it to have an array as value, which is not
-             * allowed by GraphQL unless the array is explicitly defined.
-             *
-             * For instance, type `DangerouslyNonSpecificScalar` could have values
-             * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
-             * these values by types `String` and `[String]`.
-             */
-            if ($fieldOrDirectiveArgTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
-                continue;
-            }
-
-            /**
              * Execute the validation, checking that the WrappingType is respected.
              * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
              *
@@ -94,22 +78,55 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
 
             /**
-             * Modifying the AST and not directly its value, because
-             * a VariableReference may be converted to InputList([VariableReference]),
-             * so the underlying AST holding the value must also change.
+             * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
+             * In particular, it does not need to validate if it is an array or not,
+             * as according to the applied WrappingType.
              *
-             * Support passing a single value where a list is expected:
-             * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+             * This is to enable it to have an array as value, which is not
+             * allowed by GraphQL unless the array is explicitly defined.
              *
-             * Defined in the GraphQL spec.
-             *
-             * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+             * For instance, type `DangerouslyNonSpecificScalar` could have values
+             * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
+             * these values by types `String` and `[String]`.
              */
-            $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
-                $argValue,
-                $fieldOrDirectiveArgIsArrayType,
-                $fieldOrDirectiveArgIsArrayOfArraysType,
-            );
+            $isDangerouslyNonSpecificScalar = $fieldOrDirectiveArgTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver();
+
+            /**
+             * DangerouslyNonScalar: Validate the cardinality, but only
+             * if explicitly set to `true`. Otherwise change from `false`
+             * to `null`, to indicate "do not validate".
+             *
+             *   - DangerouslyNonSpecificScalar does not need to validate anything => all null
+             *   - [DangerouslyNonSpecificScalar] must certainly be an array, but it doesn't care
+             *     inside if it's an array or not => $inputIsArrayType => true, $inputIsArrayOfArraysType => null
+             *   - [[DangerouslyNonSpecificScalar]] must be array of arrays => $inputIsArrayType => true, $inputIsArrayOfArraysType => true
+             */
+            if ($isDangerouslyNonSpecificScalar) {
+                if (!$fieldOrDirectiveArgIsArrayType) {
+                    $fieldOrDirectiveArgIsArrayType = null;
+                }
+                if (!$fieldOrDirectiveArgIsArrayOfArraysType) {
+                    $fieldOrDirectiveArgIsArrayOfArraysType = null;
+                }
+            } else {
+                /**
+                 * Modifying the AST and not directly its value, because
+                 * a VariableReference may be converted to InputList([VariableReference]),
+                 * so the underlying AST holding the value must also change.
+                 *
+                 * Support passing a single value where a list is expected:
+                 * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+                 *
+                 * Defined in the GraphQL spec.
+                 *
+                 * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+                 */
+                $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+                    $argValue,
+                    $fieldOrDirectiveArgIsArrayType,
+                    $fieldOrDirectiveArgIsArrayOfArraysType,
+                );
+            }
 
             // Cast (or "coerce" in GraphQL terms) the value
             if ($withArgumentsAST->hasArgument($argName)) {
@@ -137,6 +154,20 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 continue;
             }
 
+            /**
+             * DangerouslyNonScalar: just validate the cardinality,
+             * no need to coerce the value
+             */
+            if ($isDangerouslyNonSpecificScalar) {
+                continue;
+            }
+
+            /**
+             * Cast (or "coerce" in GraphQL terms) the value
+             *
+             * @var bool $fieldOrDirectiveArgIsArrayType
+             * @var bool $fieldOrDirectiveArgIsArrayOfArraysType
+             */
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
