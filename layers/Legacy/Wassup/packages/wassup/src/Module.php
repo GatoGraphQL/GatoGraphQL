@@ -32,12 +32,8 @@ class Module extends AbstractModule
                 // These ones are working OK
                 \GraphQLByPoP\GraphQLServer\Module::class,
                 \PoPAPI\RESTAPI\Module::class,
-                \PoP\TraceTools\Module::class,
                 \PoPWPSchema\BlockMetadataWP\Module::class,
-                \PoPSchema\CDNDirective\Module::class,
-                \PoPSchema\ConvertCaseDirectives\Module::class,
                 \PoPCMSSchema\CustomPostMediaWP\Module::class,
-                \PoPCMSSchema\GoogleTranslateDirectiveForCustomPosts\Module::class,
                 \PoPCMSSchema\PagesWP\Module::class,
                 \PoPCMSSchema\PostsWP\Module::class,
                 \PoPCMSSchema\PostTagsWP\Module::class,
