@@ -16,6 +16,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\FloatScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use WP_Post;
 
 class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -24,6 +25,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?FloatScalarTypeResolver $floatScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
     final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
@@ -61,6 +63,15 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         /** @var FloatScalarTypeResolver */
         return $this->floatScalarTypeResolver ??= $this->instanceManager->getInstance(FloatScalarTypeResolver::class);
     }
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        /** @var JSONObjectScalarTypeResolver */
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -86,6 +97,9 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'dummyListOfListsOfStrings',
             'dummyListOfDates',
             'dummyListOfListsOfDates',
+            'dummyJSONObject',
+            'dummyListOfJSONObjects',
+            'dummyListOfListsOfJSONObjects',
         ];
     }
 
@@ -100,6 +114,9 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'dummyListOfListsOfStrings' => $this->__('Dummy field that returns a list of lists of strings: [[String]]', 'dummy-schema'),
             'dummyListOfDates' => $this->__('Dummy field that returns a list of dates: [Date]', 'dummy-schema'),
             'dummyListOfListsOfDates' => $this->__('Dummy field that returns a list of lists of dates: [[Date]]', 'dummy-schema'),
+            'dummyJSONObject' => $this->__('Dummy field that returns a JSON object: JSONObject', 'dummy-schema'),
+            'dummyListOfJSONObjects' => $this->__('Dummy field that returns a list of JSON objects: [JSONObject]', 'dummy-schema'),
+            'dummyListOfListsOfJSONObjects' => $this->__('Dummy field that returns a list of lists of JSON objects: [[JSONObject]]', 'dummy-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -119,6 +136,10 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'dummyListOfDates',
             'dummyListOfListsOfDates'
                 => $this->getDateTimeScalarTypeResolver(),
+            'dummyJSONObject',
+            'dummyListOfJSONObjects',
+            'dummyListOfListsOfJSONObjects'
+                => $this->getJSONObjectScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -127,15 +148,19 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
+            'dummyJSONObject'
+                => SchemaTypeModifiers::NON_NULLABLE,
             'dummyListOfInts',
             'dummyListOfFloats',
             'dummyListOfStrings',
-            'dummyListOfDates'
+            'dummyListOfDates',
+            'dummyListOfJSONObjects'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             'dummyListOfListsOfInts',
             'dummyListOfListsOfFloats',
             'dummyListOfListsOfStrings',
-            'dummyListOfListsOfDates'
+            'dummyListOfListsOfDates',
+            'dummyListOfListsOfJSONObjects'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -149,7 +174,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         /** @var WP_Post */
         $post = $object;
-        switch ($fieldDataAccessor->getFieldName()) {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
             case 'dummyListOfInts':
                 return [
                     (int)$post->comment_count + 1,
@@ -232,6 +258,50 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     ],
                     [
                         new DateTime(date('Y-m-d H:i:s', (int)strtotime($post->post_date . ' +66 day'))),
+                    ],
+                ];
+            case 'dummyJSONObject':
+                return (object) [
+                    'title' => $post->post_title,
+                    'dateStr' => $post->post_date,
+                    'commentCount' => (int)$post->comment_count,
+                ];
+            case 'dummyListOfJSONObjects':
+                return [
+                    (object) [
+                        'title' => $post->post_title,
+                        'dateStr' => $post->post_date,
+                        'commentCount' => (int)$post->comment_count,
+                    ],
+                    (object) [
+                        'excerpt' => $post->post_excerpt,
+                        'type' => $post->post_type,
+                    ],
+                    (object) [
+                        'hasComments' => ((int)$post->comment_count > 0),
+                    ],
+                ];
+            case 'dummyListOfListsOfJSONObjects':
+                return [
+                    [
+                        (object) [
+                            'title' => $post->post_title,
+                            'dateStr' => $post->post_date,
+                            'commentCount' => (int)$post->comment_count,
+                        ],
+                        (object) [
+                            'excerpt' => $post->post_excerpt,
+                            'type' => $post->post_type,
+                        ],
+                        (object) [
+                            'hasComments' => ((int)$post->comment_count > 0),
+                        ],
+                    ],
+                    [
+                        (object) [
+                            'mimeType' => $post->post_mime_type,
+                            'content' => $post->post_content,
+                        ],
                     ],
                 ];
         }
