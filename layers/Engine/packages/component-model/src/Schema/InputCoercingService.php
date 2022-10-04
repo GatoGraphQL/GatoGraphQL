@@ -205,7 +205,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             && array_filter(
                 $inputValue,
                 // `null` could be accepted as an array! (Validation against null comes next)
-                fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null
+                fn ($arrayItem) => !is_array($arrayItem) && $arrayItem !== null && !($arrayItem instanceof ValueResolutionPromiseInterface)
             )
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
