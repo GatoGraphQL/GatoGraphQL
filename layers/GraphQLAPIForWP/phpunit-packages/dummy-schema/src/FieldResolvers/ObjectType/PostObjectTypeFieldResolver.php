@@ -265,7 +265,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     'title' => (object) [
                         'rendered' => $post->post_title,
                     ],
-                    'dateStr' => $post->post_date,
+                    'date' => new DateTime($post->post_date),
                     'commentCount' => (int)$post->comment_count,
                 ];
             case 'dummyListOfJSONObjects':
@@ -274,7 +274,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                         'title' => (object) [
                             'rendered' => $post->post_title,
                         ],
-                        'dateStr' => $post->post_date,
+                        'date' => new DateTime($post->post_date),
                         'commentCount' => (int)$post->comment_count,
                     ],
                     (object) [
@@ -292,7 +292,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                             'title' => (object) [
                                 'rendered' => $post->post_title,
                             ],
-                            'dateStr' => $post->post_date,
+                            'date' => new DateTime($post->post_date),
                             'commentCount' => (int)$post->comment_count,
                         ],
                         (object) [
