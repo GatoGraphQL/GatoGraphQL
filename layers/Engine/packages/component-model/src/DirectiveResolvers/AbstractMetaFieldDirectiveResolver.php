@@ -189,8 +189,8 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
      * This is to avoid the resolution of any downstream nested directive
      * failing, when it's been set to process a certain type only.
      *
-     * Eg: `@upperCase` has been set to process `String`, but doing
-     * `{ _getJSON(url: ...) @underJSONObjectProperty(...) @upperCase }`
+     * Eg: `@strUpperCase` has been set to process `String`, but doing
+     * `{ _getJSON(url: ...) @underJSONObjectProperty(...) @strUpperCase }`
      * must not fail. Then, @underJSONObjectProperty indicates to
      * switch from the original JSONObject to DangerouslyNonScalar.
      */

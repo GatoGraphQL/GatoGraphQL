@@ -367,9 +367,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                 /**
                  * Every directive can be referenced only once.
                  *
-                 * Eg: This query is not valid (@upperCase is referenced twice):
+                 * Eg: This query is not valid (@strUpperCase is referenced twice):
                  *
-                 *   { groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @underJSONObjectProperty @upperCase }
+                 *   { groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @underJSONObjectProperty @strUpperCase }
                  */
                 if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
                     throw new ASTNodeParserException(
