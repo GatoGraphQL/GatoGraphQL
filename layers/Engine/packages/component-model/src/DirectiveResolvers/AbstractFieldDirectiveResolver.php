@@ -714,7 +714,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      *
      * @return string[]|null
      */
-    public function getSupportedFieldTypeNamesOrDescriptions(): ?array
+    protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
     {
         $supportedFieldTypeResolverContainerServiceIDs = $this->getSupportedFieldTypeResolverContainerServiceIDs();
         if ($supportedFieldTypeResolverContainerServiceIDs === null) {
