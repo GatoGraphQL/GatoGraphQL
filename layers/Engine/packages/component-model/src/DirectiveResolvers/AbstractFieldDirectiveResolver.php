@@ -706,6 +706,26 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
+     * @return ConcreteTypeResolverInterface[]|null
+     */
+    protected function getSupportedConcreteTypeResolvers(): ?array
+    {
+        $supportedFieldTypeResolverContainerServiceIDs = $this->getSupportedFieldTypeResolverContainerServiceIDs();
+        if ($supportedFieldTypeResolverContainerServiceIDs === null) {
+            return null;
+        }
+
+        /** @var ConcreteTypeResolverInterface[] */
+        return array_map(
+            function (string $serviceID): ConcreteTypeResolverInterface {
+                /** @var ConcreteTypeResolverInterface */
+                return $this->instanceManager->getInstance($serviceID);
+            },
+            $supportedFieldTypeResolverContainerServiceIDs
+        );
+    }
+
+    /**
      * Print what types does the directive support, or `null`
      * to mean it supports them all.
      *
@@ -716,22 +736,14 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      */
     protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
     {
-        $supportedFieldTypeResolverContainerServiceIDs = $this->getSupportedFieldTypeResolverContainerServiceIDs();
-        if ($supportedFieldTypeResolverContainerServiceIDs === null) {
+        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers();
+        if ($concreteTypeResolvers === null) {
             return null;
         }
 
-        /** @var ConcreteTypeResolverInterface[] */
-        $fieldTypeResolvers = array_map(
-            function (string $serviceID): ConcreteTypeResolverInterface {
-                /** @var ConcreteTypeResolverInterface */
-                return $this->instanceManager->getInstance($serviceID);
-            },
-            $supportedFieldTypeResolverContainerServiceIDs
-        );
         return array_map(
             fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
-            $fieldTypeResolvers
+            $concreteTypeResolvers
         );
     }
 
