@@ -12,4 +12,12 @@ class DirectiveExtensions extends AbstractSchemaDefinitionReferenceObject
     {
         return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE];
     }
+
+    /**
+     * @return string[]|null
+     */
+    public function getSupportedTypeNamesOrDescriptions(): ?array
+    {
+        return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_SUPPORTED_TYPE_NAMES_OR_DESCRIPTIONS];
+    }
 }
