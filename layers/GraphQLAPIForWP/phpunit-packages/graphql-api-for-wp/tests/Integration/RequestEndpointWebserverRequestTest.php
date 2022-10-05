@@ -85,7 +85,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                     "posts": [
                         {
                             "date": "2022-04-17T13:06:58+00:00",
-                            "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+                            "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing! Our privacy policy is at https://graphql-api-pro.lndo.site/privacy/, and we are based in Carimano.",
                             "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                             "title": "Hello world!",
                             "tags": [],
@@ -140,7 +140,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                     "posts": [
                         {
                             "date": "2022-04-17T13:06:58+00:00",
-                            "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+                            "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing! Our privacy policy is at https://graphql-api-pro.lndo.site/privacy/, and we are based in Carimano.",
                             "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                             "title": "Hello world!",
                             "tags": [],
