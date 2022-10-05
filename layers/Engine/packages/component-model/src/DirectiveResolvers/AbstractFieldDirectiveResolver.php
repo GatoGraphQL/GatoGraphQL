@@ -1540,13 +1540,19 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      */
     public function getDirectiveExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [
-            // @todo Implement “sensitive” directive, if needed
-            SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => false,
-            SchemaDefinition::DIRECTIVE_SUPPORTED_TYPE_NAMES_OR_DESCRIPTIONS => $this->getSupportedFieldTypeNamesOrDescriptions(),
-            SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
-            SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
-        ];
+        $supportedFieldTypeNamesOrDescriptions = $this->getSupportedFieldTypeNamesOrDescriptions();
+        return array_merge(
+            [
+                // @todo Implement “sensitive” directive, if needed
+                SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => false,
+                SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
+                SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
+            ],
+            $supportedFieldTypeNamesOrDescriptions !== null
+            ? [
+                SchemaDefinition::DIRECTIVE_SUPPORTED_TYPE_NAMES_OR_DESCRIPTIONS => $supportedFieldTypeNamesOrDescriptions,
+            ] : [],
+        );
     }
 
     /**
