@@ -31,7 +31,7 @@ abstract class AbstractFeedbackItemProvider implements FeedbackItemProviderInter
         return '@';
     }
 
-    final public function getMessage(string $code, string|int|float|bool ...$args): string
+    final public function getMessage(string $code, string|int|float|bool|null ...$args): string
     {
         return \sprintf(
             $this->getMessagePlaceholder($code),
