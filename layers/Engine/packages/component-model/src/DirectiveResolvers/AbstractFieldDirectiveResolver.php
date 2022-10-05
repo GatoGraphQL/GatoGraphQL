@@ -700,6 +700,56 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     /**
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
+    protected function getSupportedFieldTypeResolverContainerServiceIDs(): ?array
+    {
+        return $this->getSupportedFieldTypeResolverClasses();
+    }
+
+    /**
+     * @return ConcreteTypeResolverInterface[]|null
+     */
+    protected function getSupportedConcreteTypeResolvers(): ?array
+    {
+        $supportedFieldTypeResolverContainerServiceIDs = $this->getSupportedFieldTypeResolverContainerServiceIDs();
+        if ($supportedFieldTypeResolverContainerServiceIDs === null) {
+            return null;
+        }
+
+        /** @var ConcreteTypeResolverInterface[] */
+        return array_map(
+            function (string $serviceID): ConcreteTypeResolverInterface {
+                /** @var ConcreteTypeResolverInterface */
+                return $this->instanceManager->getInstance($serviceID);
+            },
+            $supportedFieldTypeResolverContainerServiceIDs
+        );
+    }
+
+    /**
+     * Print what types does the directive support, or `null`
+     * to mean it supports them all.
+     *
+     * It can be a name, such as `String`, or a description,
+     * such as `Any type implementing the CustomPost interface`.
+     *
+     * @return string[]|null
+     */
+    protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
+    {
+        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers();
+        if ($concreteTypeResolvers === null) {
+            return null;
+        }
+
+        return array_map(
+            fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
+            $concreteTypeResolvers
+        );
+    }
+
+    /**
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     */
     protected function getExcludedFieldTypeResolverClasses(): ?array
     {
         return null;
@@ -1507,6 +1557,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => false,
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
+            SchemaDefinition::DIRECTIVE_SUPPORTED_TYPE_NAMES_OR_DESCRIPTIONS => $this->getSupportedFieldTypeNamesOrDescriptions(),
         ];
     }
 

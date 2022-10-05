@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use GraphQLByPoP\GraphQLServer\ObjectModels\DirectiveExtensions;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveExtensionsObjectTypeResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -26,6 +28,15 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         /** @var BooleanScalarTypeResolver */
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        /** @var StringScalarTypeResolver */
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
     /**
@@ -45,6 +56,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         return [
             'needsDataToExecute',
+            'supportedTypeNamesOrDescriptions',
         ];
     }
 
@@ -52,6 +64,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         return match ($fieldName) {
             'needsDataToExecute' => $this->__('If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?', 'graphql-server'),
+            'supportedTypeNamesOrDescriptions' => $this->__('On field from which types can the directive be applied. `null` means all of them', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -61,6 +74,8 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         return match ($fieldName) {
             'needsDataToExecute'
                 => SchemaTypeModifiers::NON_NULLABLE,
+            'supportedTypeNamesOrDescriptions'
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -76,6 +91,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         $directiveExtensions = $object;
         return match ($fieldDataAccessor->getFieldName()) {
             'needsDataToExecute' => $directiveExtensions->needsDataToExecute(),
+            'supportedTypeNamesOrDescriptions' => $directiveExtensions->getSupportedTypeNamesOrDescriptions(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
@@ -84,6 +100,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         return match ($fieldName) {
             'needsDataToExecute' => $this->getBooleanScalarTypeResolver(),
+            'supportedTypeNamesOrDescriptions' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
