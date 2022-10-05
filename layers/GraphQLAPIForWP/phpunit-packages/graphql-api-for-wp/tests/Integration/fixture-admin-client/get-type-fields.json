@@ -96,6 +96,9 @@
               "name": "content"
             },
             {
+              "name": "contentSource"
+            },
+            {
               "name": "customPostType"
             },
             {
@@ -376,6 +379,9 @@
               "name": "content"
             },
             {
+              "name": "contentSource"
+            },
+            {
               "name": "customPostType"
             },
             {
@@ -472,6 +478,9 @@
             },
             {
               "name": "content"
+            },
+            {
+              "name": "contentSource"
             },
             {
               "name": "customPostType"

@@ -615,6 +615,22 @@
               "deprecationReason": null
             },
             {
+              "name": "contentSource",
+              "description": "Retrieve the content in its 'source' format, including the (Gutenberg) block delimiter HTML comments",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "customPostType",
               "description": "Custom post type",
               "args": [],
@@ -2429,6 +2445,22 @@
               "deprecationReason": null
             },
             {
+              "name": "contentSource",
+              "description": "Retrieve the content in its 'source' format, including the (Gutenberg) block delimiter HTML comments",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "customPostType",
               "description": "Custom post type",
               "args": [],
@@ -3201,6 +3233,22 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "HTML",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "contentSource",
+              "description": "Retrieve the content in its 'source' format, including the (Gutenberg) block delimiter HTML comments",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 }
               },
