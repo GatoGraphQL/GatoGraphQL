@@ -700,6 +700,44 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     /**
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
+    protected function getSupportedFieldTypeResolverContainerServiceIDs(): ?array
+    {
+        return $this->getSupportedFieldTypeResolverClasses();
+    }
+
+    /**
+     * Print what types does the directive support, or `null`
+     * to mean it supports them all.
+     *
+     * It can be a name, such as `String`, or a description,
+     * such as `Any type implementing the CustomPost interface`.
+     *
+     * @return string[]|null
+     */
+    public function getSupportedFieldTypeNamesOrDescriptions(): ?array
+    {
+        $supportedFieldTypeResolverContainerServiceIDs = $this->getSupportedFieldTypeResolverContainerServiceIDs();
+        if ($supportedFieldTypeResolverContainerServiceIDs === null) {
+            return null;
+        }
+
+        /** @var ConcreteTypeResolverInterface[] */
+        $fieldTypeResolvers = array_map(
+            function (string $serviceID): ConcreteTypeResolverInterface {
+                /** @var ConcreteTypeResolverInterface */
+                return $this->instanceManager->getInstance($serviceID);
+            },
+            $supportedFieldTypeResolverContainerServiceIDs
+        );
+        return array_map(
+            fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
+            $fieldTypeResolvers
+        );
+    }
+
+    /**
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     */
     protected function getExcludedFieldTypeResolverClasses(): ?array
     {
         return null;

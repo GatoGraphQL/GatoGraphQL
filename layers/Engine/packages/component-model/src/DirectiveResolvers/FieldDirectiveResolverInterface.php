@@ -191,4 +191,15 @@ interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, At
      * @return string Name of the directiveArg, or `null` to disable this feature for the directive
      */
     public function getAffectAdditionalFieldsUnderPosArgumentName(): ?string;
+
+    /**
+     * Print what types does the directive support, or `null`
+     * to mean it supports them all.
+     *
+     * It can be a name, such as `String`, or a description,
+     * such as `Any type implementing the CustomPost interface`.
+     *
+     * @return string[]|null
+     */
+    public function getSupportedFieldTypeNamesOrDescriptions(): ?array;
 }
