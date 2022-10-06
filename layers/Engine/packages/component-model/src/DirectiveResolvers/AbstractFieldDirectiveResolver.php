@@ -690,11 +690,27 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
-     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     * For Field Directives: Print what types does the directive support,
+     * or `null` to mean it supports them all.
+     *
+     * For Operation Directives: Print `null`.
+     *
+     * It can be a name, such as `String`, or a description,
+     * such as `Any type implementing the CustomPost interface`.
+     *
+     * @return string[]|null
      */
-    protected function getSupportedFieldTypeResolverContainerServiceIDs(): ?array
+    protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
     {
-        return $this->getSupportedFieldTypeResolverClasses();
+        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers();
+        if ($concreteTypeResolvers === null) {
+            return null;
+        }
+
+        return array_map(
+            fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
+            $concreteTypeResolvers
+        );
     }
 
     /**
@@ -718,27 +734,11 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
-     * For Field Directives: Print what types does the directive support,
-     * or `null` to mean it supports them all.
-     *
-     * For Operation Directives: Print `null`.
-     *
-     * It can be a name, such as `String`, or a description,
-     * such as `Any type implementing the CustomPost interface`.
-     *
-     * @return string[]|null
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
-    protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
+    protected function getSupportedFieldTypeResolverContainerServiceIDs(): ?array
     {
-        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers();
-        if ($concreteTypeResolvers === null) {
-            return null;
-        }
-
-        return array_map(
-            fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
-            $concreteTypeResolvers
-        );
+        return $this->getSupportedFieldTypeResolverClasses();
     }
 
     /**
