@@ -1646,6 +1646,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
         }
 
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         /**
          * Perform validation through checkpoints
          */
