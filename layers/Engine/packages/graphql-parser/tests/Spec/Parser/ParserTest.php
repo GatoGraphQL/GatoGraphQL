@@ -1040,7 +1040,7 @@ GRAPHQL;
     {
         return [
             [
-                'subscription { id }',
+                'subscription { someStream { id } }',
                 new Document(
                     [
                         new SubscriptionOperation(
@@ -1048,13 +1048,15 @@ GRAPHQL;
                             [],
                             [],
                             [
-                                new LeafField('id', null, [], [], new Location(1, 16)),
+                                new RelationalField('someStream', null, [], [
+                                    new LeafField('id', null, [], [], new Location(1, 29))
+                                ], [], new Location(1, 16)),
                             ],
                             new Location(1, 14)
                         )
                     ]
                 ),
-                'subscription { id }',
+                'subscription { someStream { id } }',
             ],
         ];
     }
