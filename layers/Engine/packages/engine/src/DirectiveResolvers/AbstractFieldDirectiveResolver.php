@@ -51,8 +51,10 @@ abstract class AbstractFieldDirectiveResolver extends UpstreamAbstractFieldDirec
     }
 
     /**
-     * Print what types does the directive support, or `null`
-     * to mean it supports them all.
+     * For Field Directives: Print what types does the directive support,
+     * or `null` to mean it supports them all.
+     *
+     * For Operation Directives: Print `null`.
      *
      * It can be a name, such as `String`, or a description,
      * such as `Any type implementing the CustomPost interface`.
