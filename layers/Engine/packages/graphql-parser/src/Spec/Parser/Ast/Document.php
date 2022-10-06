@@ -90,6 +90,7 @@ class Document implements DocumentInterface
      */
     public function validate(): void
     {
+        $this->assertNoUnsupportedFeatures();
         $this->assertQueryNotEmpty();
         $this->assertOperationsDefined();
         $this->assertOperationNamesUnique();
@@ -102,7 +103,82 @@ class Document implements DocumentInterface
         $this->assertAllVariablesExist();
         $this->assertAllVariablesAreUsed();
         $this->assertArgumentsUnique();
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoUnsupportedFeatures(): void
+    {
+        $this->assertNoSubscriptionOperation();
         $this->assertNoUnsupportedLocationDirectives();
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoSubscriptionOperation(): void
+    {
+        foreach ($this->getOperations() as $operation) {
+            if ($operation instanceof SubscriptionOperation) {
+                throw new FeatureNotSupportedException(
+                    new FeedbackItemResolution(
+                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1
+                    ),
+                    $operation->getLocation()
+                );
+            }
+        }
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoUnsupportedLocationDirectives(): void
+    {
+        $this->assertNoFragmentDefinitionDirectives();
+        $this->assertNoVariableDefinitionDirectives();
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoFragmentDefinitionDirectives(): void
+    {
+        foreach ($this->getFragments() as $fragment) {
+            if ($fragment->getDirectives() !== []) {
+                $directive = $fragment->getDirectives()[0];
+                throw new FeatureNotSupportedException(
+                    new FeedbackItemResolution(
+                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_2
+                    ),
+                    $directive->getLocation()
+                );
+            }
+        }
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoVariableDefinitionDirectives(): void
+    {
+        foreach ($this->getOperations() as $operation) {
+            foreach ($operation->getVariables() as $variable) {
+                if ($variable->getDirectives() !== []) {
+                    $directive = $variable->getDirectives()[0];
+                    throw new FeatureNotSupportedException(
+                        new FeedbackItemResolution(
+                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_3
+                        ),
+                        $directive->getLocation()
+                    );
+                }
+            }
+        }
     }
 
     /**
@@ -893,55 +969,6 @@ class Document implements DocumentInterface
         foreach ($fragment->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
             $astNodeAncestors[$fieldOrFragmentBond] = $fragment;
             $this->setAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
-        }
-    }
-
-    /**
-     * @throws FeatureNotSupportedException
-     */
-    protected function assertNoUnsupportedLocationDirectives(): void
-    {
-        $this->assertNoFragmentDefinitionDirectives();
-        $this->assertNoVariableDefinitionDirectives();
-    }
-
-    /**
-     * @throws FeatureNotSupportedException
-     */
-    protected function assertNoFragmentDefinitionDirectives(): void
-    {
-        foreach ($this->getFragments() as $fragment) {
-            if ($fragment->getDirectives() !== []) {
-                $directive = $fragment->getDirectives()[0];
-                throw new FeatureNotSupportedException(
-                    new FeedbackItemResolution(
-                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
-                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_2
-                    ),
-                    $directive->getLocation()
-                );
-            }
-        }
-    }
-
-    /**
-     * @throws FeatureNotSupportedException
-     */
-    protected function assertNoVariableDefinitionDirectives(): void
-    {
-        foreach ($this->getOperations() as $operation) {
-            foreach ($operation->getVariables() as $variable) {
-                if ($variable->getDirectives() !== []) {
-                    $directive = $variable->getDirectives()[0];
-                    throw new FeatureNotSupportedException(
-                        new FeedbackItemResolution(
-                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
-                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_3
-                        ),
-                        $directive->getLocation()
-                    );
-                }
-            }
         }
     }
 }
