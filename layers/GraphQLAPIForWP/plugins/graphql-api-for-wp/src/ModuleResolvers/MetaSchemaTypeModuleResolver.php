@@ -248,7 +248,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                                 [
                                     '_edit_last',
                                     '/_edit_.*/',
-                                    '#_edit_.*#',
+                                    '#_edit_([a-zA-Z]*)#',
                                 ]
                             )
                         )
@@ -271,7 +271,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                                 [
                                     'last_name',
                                     '/last_.*/',
-                                    '#last_.*#',
+                                    '#last_([a-zA-Z]*)#',
                                 ]
                             )
                         )
@@ -294,7 +294,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                                 [
                                     'description',
                                     '/desc.*/',
-                                    '#desc.*#',
+                                    '#desc([a-zA-Z]*)#',
                                 ]
                             )
                         )
@@ -317,7 +317,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                                 [
                                     'description',
                                     '/desc.*/',
-                                    '#desc.*#',
+                                    '#desc([a-zA-Z]*)#',
                                 ]
                             )
                         )

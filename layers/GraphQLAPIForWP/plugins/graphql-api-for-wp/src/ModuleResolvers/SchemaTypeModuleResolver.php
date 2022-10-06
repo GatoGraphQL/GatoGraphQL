@@ -895,7 +895,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                                 [
                                     'siteurl',
                                     '/site.*/',
-                                    '#site.*#',
+                                    '#site([a-zA-Z]*)#',
                                 ]
                             )
                         )
