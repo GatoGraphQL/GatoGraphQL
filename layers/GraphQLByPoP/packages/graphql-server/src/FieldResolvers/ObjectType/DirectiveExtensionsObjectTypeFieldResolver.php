@@ -56,7 +56,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         return [
             'needsDataToExecute',
-            'supportedTypeNamesOrDescriptions',
+            'fieldDirectiveSupportedTypeNamesOrDescriptions',
         ];
     }
 
@@ -64,7 +64,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         return match ($fieldName) {
             'needsDataToExecute' => $this->__('If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?', 'graphql-server'),
-            'supportedTypeNamesOrDescriptions' => $this->__('On field from which types can the directive be applied. `null` means all of them', 'graphql-server'),
+            'fieldDirectiveSupportedTypeNamesOrDescriptions' => $this->__('On field from which types can the directive be applied. `null` means all of them', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -74,7 +74,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         return match ($fieldName) {
             'needsDataToExecute'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'supportedTypeNamesOrDescriptions'
+            'fieldDirectiveSupportedTypeNamesOrDescriptions'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -91,7 +91,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         $directiveExtensions = $object;
         return match ($fieldDataAccessor->getFieldName()) {
             'needsDataToExecute' => $directiveExtensions->needsDataToExecute(),
-            'supportedTypeNamesOrDescriptions' => $directiveExtensions->getSupportedTypeNamesOrDescriptions(),
+            'fieldDirectiveSupportedTypeNamesOrDescriptions' => $directiveExtensions->getFieldDirectiveSupportedTypeNamesOrDescriptions(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
@@ -100,7 +100,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         return match ($fieldName) {
             'needsDataToExecute' => $this->getBooleanScalarTypeResolver(),
-            'supportedTypeNamesOrDescriptions' => $this->getStringScalarTypeResolver(),
+            'fieldDirectiveSupportedTypeNamesOrDescriptions' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
