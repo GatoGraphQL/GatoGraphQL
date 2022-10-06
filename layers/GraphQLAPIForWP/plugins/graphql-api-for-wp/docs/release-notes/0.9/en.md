@@ -822,6 +822,93 @@ mutation UpdatePostIfItAlreadyExists @include(if: $postExists)
 }
 ```
 
+## Restrict Field Directives to Specific Types
+
+Field Directives can be restricted to be applied on fields of some specific type only.
+
+GraphQL enables to apply directives to fields, to modify their value. For instance, let's assume we have a field directive `@strUpperCase` transforming the string in the field to upper case:
+
+```graphql
+{
+  posts {
+    title @strUpperCase
+  }
+}
+```
+
+...producing:
+
+```json
+{
+  "data": {
+    "posts": [
+      {
+        "title": "HELLO WORLD!"
+      }
+    ]
+  }
+}
+```
+
+The functionality for `@strUpperCase` makes sense when applied on a `String` (as in the field `Post.title` above), but not on other types, such as `Int`, `Bool`, `Float` or any custom scalar type.
+
+The **Restrict Field Directives to Specific Types** feature solves this problem, by having a field directive define what types it supports.
+
+Field directive `@strUpperCase` would define to support the following types only:
+
+- `String`
+- `ID`
+- `AnyBuiltInScalar`
+
+When the type is `String`, the validation succeeds automatically. When the type is `ID` or `AnyBuiltInScalar`, an extra validation `is_string` is performed on the value before it is accepted. For any other type, the validation fails, and an error message is returned.
+
+The query below would then not work, as field `Post.commentCount` has type `Int`, which cannot be converted to upper case:
+
+```graphql
+{
+  posts {
+    commentCount @strUpperCase
+  }
+}
+```
+
+...producing this response:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Directive 'strUpperCase' is not supported at this directive location, or for this node in the GraphQL query",
+      "locations": [
+        {
+          "line": 3,
+          "column": 19
+        }
+      ],
+      "extensions": {
+        "path": [
+          "@strUpperCase",
+          "commentCount @strUpperCase",
+          "posts { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "field": "commentCount @strUpperCase",
+        "code": "gql@5.7.2",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Directives-Are-In-Valid-Locations"
+      }
+    }
+  ],
+  "data": {
+    "posts": [
+      {
+        "commentCount": null
+      }
+    ]
+  }
+}
+```
+
 ## Link to the online documentation of the GraphQL errors
 
 When executing a GraphQL query and an error is returned, if the error has been documented in the GraphQL spec, then the response will now include a link to its online documentation.
