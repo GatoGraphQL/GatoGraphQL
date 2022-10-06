@@ -391,7 +391,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         ?>
             <label for="<?php echo $name; ?>">
-                <textarea name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10"><?php echo implode("\n", $value) ?></textarea>
+                <textarea name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10" cols="40"><?php echo implode("\n", $value) ?></textarea>
                 <?php echo $label; ?>
             </label>
         <?php
