@@ -702,6 +702,11 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      */
     protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
     {
+        $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
+        if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::OPERATION) {
+            return null;
+        }
+
         $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers();
         if ($concreteTypeResolvers === null) {
             return null;
