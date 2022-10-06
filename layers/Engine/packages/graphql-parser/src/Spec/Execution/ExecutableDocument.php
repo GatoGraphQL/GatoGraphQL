@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Execution;
 
 use PoP\GraphQLParser\Exception\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
@@ -46,6 +47,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     /**
      * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
      */
     public function validateAndInitialize(): void
     {
@@ -62,6 +64,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
     /**
      * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
      */
     protected function validate(): void
     {
