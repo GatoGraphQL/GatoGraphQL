@@ -700,7 +700,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      *
      * @return string[]|null
      */
-    protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
+    final protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
     {
         $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
         if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::OPERATION) {
