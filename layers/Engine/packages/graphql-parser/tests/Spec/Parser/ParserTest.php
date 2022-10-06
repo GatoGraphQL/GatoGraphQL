@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
@@ -545,7 +543,7 @@ GRAPHQL;
      */
     public function mutationProvider(): array
     {
-        $variable = new Variable('variable', 'Int', false, false, false, new Location(1, 8));
+        $variable = new Variable('variable', 'Int', false, false, false, [], new Location(1, 8));
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
@@ -1039,8 +1037,8 @@ GRAPHQL;
      */
     public function queryWithDirectiveProvider(): array
     {
-        $formatVariable = new Variable('format', 'String', true, false, false, new Location(1, 24));
-        $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));
+        $formatVariable = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
         return [
             // Directive in RelationalField
             [
@@ -1442,7 +1440,7 @@ GRAPHQL;
          *     }
          * }
          */
-        $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
         $variableReference2 = new VariableReference('format', $formatVariable2, new Location(3, 33));
         $argument2 = new Argument('format', $variableReference2, new Location(3, 25));
         $directive22 = new Directive(
@@ -1824,18 +1822,6 @@ GRAPHQL;
               id
               dateStr(format: $1)
             }
-          }
-        ');
-    }
-
-    public function testUnsupportedSubscriptions(): void
-    {
-        $this->expectException(FeatureNotSupportedException::class);
-        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1))->getMessage());
-        $parser = $this->getParser();
-        $parser->parse('
-          subscription {
-            id
           }
         ');
     }
