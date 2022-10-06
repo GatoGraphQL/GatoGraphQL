@@ -514,4 +514,36 @@ class DocumentTest extends AbstractTestCase
         ');
         $document->validate();
     }
+
+    public function testUnsupportedFragmentDefinitionDirectives(): void
+    {
+        $this->expectException(FeatureNotSupportedException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_2))->getMessage());
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query {
+                self {
+                    ...SomeFragment
+                }
+            }
+
+            fragment SomeFragment on QueryRoot @someDirective {
+                id
+            }
+        ');
+        $document->validate();
+    }
+
+    public function testUnsupportedVariableDefinitionDirectives(): void
+    {
+        $this->expectException(FeatureNotSupportedException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_3))->getMessage());
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query SomeQuery($someVar: String! @someDirective) {
+                echo(value: $someVar)
+            }
+        ');
+        $document->validate();
+    }
 }
