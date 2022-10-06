@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\Exception\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
@@ -21,6 +23,10 @@ interface DocumentInterface
      */
     public function getFragments(): array;
     public function getFragment(string $name): ?Fragment;
+    /**
+     * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
+     */
     public function validate(): void;
     /**
      * Gather all the VariableReference within the Operation.

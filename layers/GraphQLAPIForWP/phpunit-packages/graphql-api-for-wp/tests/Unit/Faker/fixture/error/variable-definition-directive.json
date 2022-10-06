@@ -1,0 +1,19 @@
+{
+  "errors": [
+    {
+      "message": "Variable Definition Directives are currently not supported",
+      "locations": [
+        {
+          "line": 1,
+          "column": 30
+        }
+      ],
+      "extensions": {
+        "path": [
+          "@unsupportedVariableDirective"
+        ],
+        "code": "gqlunsupported@3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ...CustomPost
+  }
+}
+
+fragment CustomPost on IsCustomPost @unsupportedFragmentDirective {
+  id
+}

@@ -1,0 +1,9 @@
+query GetPosts($limit: Int! @unsupportedVariableDirective) {
+  posts(
+    pagination: {
+      limit: $limit
+    }
+  ) {
+    id
+  }
+}

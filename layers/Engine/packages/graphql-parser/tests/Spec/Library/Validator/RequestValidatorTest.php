@@ -51,13 +51,13 @@ class RequestValidatorTest extends AbstractTestCase
             'test2' => 'chonga',
             'test3' => 'conga',
         ]);
-        $variable1 = new Variable('test', 'Int', false, false, true, new Location(1, 1));
+        $variable1 = new Variable('test', 'Int', false, false, true, [], new Location(1, 1));
         $variable1->setContext($context);
-        $variable2 = new Variable('test2', 'Int', false, false, true, new Location(1, 1));
+        $variable2 = new Variable('test2', 'Int', false, false, true, [], new Location(1, 1));
         $variable2->setContext($context);
-        $variable3 = new Variable('test3', 'Int', false, false, true, new Location(1, 1));
+        $variable3 = new Variable('test3', 'Int', false, false, true, [], new Location(1, 1));
         $variable3->setContext($context);
-        $requiredVariable = new Variable('test', 'Int', true, false, true, new Location(1, 1));
+        $requiredVariable = new Variable('test', 'Int', true, false, true, [], new Location(1, 1));
         $requiredVariable->setContext($context);
 
         return [

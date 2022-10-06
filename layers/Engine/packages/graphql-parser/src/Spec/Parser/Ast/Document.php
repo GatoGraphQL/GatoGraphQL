@@ -6,7 +6,9 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
@@ -84,9 +86,11 @@ class Document implements DocumentInterface
 
     /**
      * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
      */
     public function validate(): void
     {
+        $this->assertNoUnsupportedFeatures();
         $this->assertQueryNotEmpty();
         $this->assertOperationsDefined();
         $this->assertOperationNamesUnique();
@@ -99,6 +103,82 @@ class Document implements DocumentInterface
         $this->assertAllVariablesExist();
         $this->assertAllVariablesAreUsed();
         $this->assertArgumentsUnique();
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoUnsupportedFeatures(): void
+    {
+        $this->assertNoSubscriptionOperation();
+        $this->assertNoUnsupportedLocationDirectives();
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoSubscriptionOperation(): void
+    {
+        foreach ($this->getOperations() as $operation) {
+            if ($operation instanceof SubscriptionOperation) {
+                throw new FeatureNotSupportedException(
+                    new FeedbackItemResolution(
+                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1
+                    ),
+                    $operation
+                );
+            }
+        }
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoUnsupportedLocationDirectives(): void
+    {
+        $this->assertNoFragmentDefinitionDirectives();
+        $this->assertNoVariableDefinitionDirectives();
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoFragmentDefinitionDirectives(): void
+    {
+        foreach ($this->getFragments() as $fragment) {
+            if ($fragment->getDirectives() !== []) {
+                $directive = $fragment->getDirectives()[0];
+                throw new FeatureNotSupportedException(
+                    new FeedbackItemResolution(
+                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                        GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_2
+                    ),
+                    $directive
+                );
+            }
+        }
+    }
+
+    /**
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertNoVariableDefinitionDirectives(): void
+    {
+        foreach ($this->getOperations() as $operation) {
+            foreach ($operation->getVariables() as $variable) {
+                if ($variable->getDirectives() !== []) {
+                    $directive = $variable->getDirectives()[0];
+                    throw new FeatureNotSupportedException(
+                        new FeedbackItemResolution(
+                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_3
+                        ),
+                        $directive
+                    );
+                }
+            }
+        }
     }
 
     /**

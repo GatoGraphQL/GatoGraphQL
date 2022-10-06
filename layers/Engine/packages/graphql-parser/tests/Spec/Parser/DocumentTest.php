@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\Root\AbstractTestCase;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class DocumentTest extends AbstractTestCase
 {
@@ -498,5 +500,50 @@ class DocumentTest extends AbstractTestCase
                 }
             '],
         ];
+    }
+
+    public function testUnsupportedSubscriptions(): void
+    {
+        $this->expectException(FeatureNotSupportedException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1))->getMessage());
+        $parser = $this->getParser();
+        $document = $parser->parse('
+          subscription {
+            id
+          }
+        ');
+        $document->validate();
+    }
+
+    public function testUnsupportedFragmentDefinitionDirectives(): void
+    {
+        $this->expectException(FeatureNotSupportedException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_2))->getMessage());
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query {
+                self {
+                    ...SomeFragment
+                }
+            }
+
+            fragment SomeFragment on QueryRoot @someDirective {
+                id
+            }
+        ');
+        $document->validate();
+    }
+
+    public function testUnsupportedVariableDefinitionDirectives(): void
+    {
+        $this->expectException(FeatureNotSupportedException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_3))->getMessage());
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query SomeQuery($someVar: String! @someDirective) {
+                echo(value: $someVar)
+            }
+        ');
+        $document->validate();
     }
 }

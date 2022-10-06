@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Execution;
 
 use PoP\GraphQLParser\Exception\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 
@@ -17,6 +18,7 @@ interface ExecutableDocumentInterface
      * If any validation fails, throw an exception.
      *
      * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
      *
      * @see https://spec.graphql.org/draft/#sec-Validation
      */

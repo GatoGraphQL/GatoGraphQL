@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
@@ -26,6 +24,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\SubscriptionOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
@@ -545,7 +544,7 @@ GRAPHQL;
      */
     public function mutationProvider(): array
     {
-        $variable = new Variable('variable', 'Int', false, false, false, new Location(1, 8));
+        $variable = new Variable('variable', 'Int', false, false, false, [], new Location(1, 8));
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
@@ -1012,6 +1011,57 @@ GRAPHQL;
     }
 
     /**
+     * @dataProvider subscriptionProvider
+     */
+    public function testSubscriptions(
+        string $query,
+        Document $document,
+        string $documentAsStr
+    ): void {
+        $parser = $this->getParser();
+
+        // 1st test: Parsing is right
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
+
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function subscriptionProvider(): array
+    {
+        return [
+            [
+                'subscription { someStream { id } }',
+                new Document(
+                    [
+                        new SubscriptionOperation(
+                            '',
+                            [],
+                            [],
+                            [
+                                new RelationalField('someStream', null, [], [
+                                    new LeafField('id', null, [], [], new Location(1, 29))
+                                ], [], new Location(1, 16)),
+                            ],
+                            new Location(1, 14)
+                        )
+                    ]
+                ),
+                'subscription { someStream { id } }',
+            ],
+        ];
+    }
+
+    /**
      * @dataProvider queryWithDirectiveProvider
      */
     public function testDirectives(
@@ -1039,8 +1089,9 @@ GRAPHQL;
      */
     public function queryWithDirectiveProvider(): array
     {
-        $formatVariable = new Variable('format', 'String', true, false, false, new Location(1, 24));
-        $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));
+        $formatVariable = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
+        $limitVariable = new Variable('limit', 'String', true, false, false, [new Directive('someVariableDirective', [], new Location(1, 41))], new Location(1, 24));
         return [
             // Directive in RelationalField
             [
@@ -1215,6 +1266,43 @@ GRAPHQL;
                 ),
                 'query GetUsersName($format: String!) @someOperationDirective { users { name @style(format: $format) } }'
             ],
+            // Directive in Variable Definition
+            [
+                <<<GRAPHQL
+                    query GetUsersName(\$limit: String! @someVariableDirective) {
+                        users(limit: \$limit) {
+                            name
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName',
+                            [
+                                $limitVariable,
+                            ],
+                            [],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [
+                                        new Argument('limit', new VariableReference('limit', $limitVariable, new Location(2, 22)), new Location(2, 15)),
+                                    ],
+                                    [
+                                        new LeafField('name', null, [], [], new Location(3, 13))
+                                    ],
+                                    [],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+                'query GetUsersName($limit: String! @someVariableDirective) { users(limit: $limit) { name } }'
+            ],
             // Repeatable directives
             [
                 <<<GRAPHQL
@@ -1258,6 +1346,60 @@ GRAPHQL;
                     ]
                 ),
                 'query GetUsersName($format: String!) { users { name @style(format: $format) @someOtherDirective @style(format: $format) @someOtherDirective } }'
+            ],
+            // Directive in fragment definition
+            [
+                <<<GRAPHQL
+                    query GetUsersName {
+                        users {
+                            ...UserProps
+                        }
+                    }
+
+                    fragment UserProps on User @someFragmentDirective {
+                        id
+                        posts {
+                            id
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName',
+                            [],
+                            [],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [],
+                                    [
+                                        new FragmentReference('UserProps', new Location(3, 16)),
+                                    ],
+                                    [],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ],
+                    [
+                        new Fragment('UserProps', 'User', [
+                            new Directive('someFragmentDirective', [], new Location(7, 33)),
+                        ], [
+                            new LeafField('id', null, [], [], new Location(8, 9)),
+                            new RelationalField('posts', null, [], [
+                                new LeafField('id', null, [], [], new Location(10, 13)),
+                            ], [], new Location(9, 9)),
+                        ], new Location(7, 14)),
+                    ]
+                ),
+                <<<GRAPHQL
+                query GetUsersName { users { ...UserProps } }
+
+                fragment UserProps on User @someFragmentDirective { id posts { id } }
+                GRAPHQL,
             ],
             // Directive in fragment
             [
@@ -1442,7 +1584,7 @@ GRAPHQL;
          *     }
          * }
          */
-        $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
         $variableReference2 = new VariableReference('format', $formatVariable2, new Location(3, 33));
         $argument2 = new Argument('format', $variableReference2, new Location(3, 25));
         $directive22 = new Directive(
@@ -1824,18 +1966,6 @@ GRAPHQL;
               id
               dateStr(format: $1)
             }
-          }
-        ');
-    }
-
-    public function testUnsupportedSubscriptions(): void
-    {
-        $this->expectException(FeatureNotSupportedException::class);
-        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1))->getMessage());
-        $parser = $this->getParser();
-        $parser->parse('
-          subscription {
-            id
           }
         ');
     }

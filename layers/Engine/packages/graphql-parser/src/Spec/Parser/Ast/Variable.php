@@ -12,6 +12,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithDirectivesTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Exception\ShouldNotHappenException;
@@ -21,6 +23,7 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
+    use WithDirectivesTrait;
 
     protected ?Context $context = null;
 
@@ -28,15 +31,20 @@ class Variable extends AbstractAst implements WithValueInterface
 
     protected InputList|InputObject|Literal|Enum|null $defaultValueAST = null;
 
+    /**
+     * @param Directive[] $directives
+     */
     public function __construct(
         protected readonly string $name,
         protected readonly string $type,
         protected readonly bool $isRequired,
         protected readonly bool $isArray,
         protected readonly bool $isArrayElementRequired,
+        array $directives,
         Location $location,
     ) {
         parent::__construct($location);
+        $this->setDirectives($directives);
     }
 
     protected function doAsQueryString(): string
@@ -57,11 +65,26 @@ class Variable extends AbstractAst implements WithValueInterface
             $defaultValueAST = $this->getDefaultValueAST();
             $defaultValue = sprintf(' = %s', $defaultValueAST->asQueryString());
         }
+
+        // Generate the string for directives
+        $strVariableDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = [];
+            foreach ($this->directives as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strVariableDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+
         return sprintf(
-            '$%s: %s%s',
+            '$%s: %s%s%s',
             $this->name,
             $strType,
-            $defaultValue
+            $defaultValue,
+            $strVariableDirectives,
         );
     }
 

@@ -8,7 +8,6 @@ use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -27,6 +26,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\SubscriptionOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -57,21 +57,13 @@ class Parser extends Tokenizer implements ParserInterface
                 case Token::TYPE_LBRACE:
                 case Token::TYPE_QUERY:
                 case Token::TYPE_MUTATION:
+                case Token::TYPE_SUBSCRIPTION:
                     $this->operations[] = $this->parseOperation($tokenType);
                     break;
 
                 case Token::TYPE_FRAGMENT:
                     $this->fragments[] = $this->parseFragment();
                     break;
-
-                case Token::TYPE_SUBSCRIPTION:
-                    throw new FeatureNotSupportedException(
-                        new FeedbackItemResolution(
-                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
-                            GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1
-                        ),
-                        $this->getTokenLocation($token)
-                    );
 
                 default:
                     throw new SyntaxErrorException(
@@ -138,7 +130,7 @@ class Parser extends Tokenizer implements ParserInterface
             $operationName = '';
             $operationLocation = $this->getTokenLocation($lbraceToken);
         } else {
-            // Eat: $this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION])
+            // Eat: $this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION, Token::TYPE_SUBSCRIPTION])
             $this->lex();
 
             $operationToken = $this->eat(Token::TYPE_IDENTIFIER);
@@ -182,6 +174,10 @@ class Parser extends Tokenizer implements ParserInterface
             return $this->createMutationOperation($operationName, $variables, $directives, $fieldsOrFragmentBonds, $operationLocation);
         }
 
+        if ($type === Token::TYPE_SUBSCRIPTION) {
+            return $this->createSubscriptionOperation($operationName, $variables, $directives, $fieldsOrFragmentBonds, $operationLocation);
+        }
+
         return $this->createQueryOperation($operationName, $variables, $directives, $fieldsOrFragmentBonds, $operationLocation);
     }
 
@@ -213,6 +209,21 @@ class Parser extends Tokenizer implements ParserInterface
         Location $location,
     ): MutationOperation {
         return new MutationOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
+    }
+
+    /**
+     * @param Variable[] $variables
+     * @param Directive[] $directives
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     */
+    protected function createSubscriptionOperation(
+        string $name,
+        array $variables,
+        array $directives,
+        array $fieldsOrFragmentBonds,
+        Location $location,
+    ): SubscriptionOperation {
+        return new SubscriptionOperation($name, $variables, $directives, $fieldsOrFragmentBonds, $location);
     }
 
     /**
@@ -287,12 +298,18 @@ class Parser extends Tokenizer implements ParserInterface
                 $this->eat(Token::TYPE_REQUIRED);
             }
 
+            $directives = [];
+            if ($this->match(Token::TYPE_AT)) {
+                $directives = $this->parseDirectiveList();
+            }
+
             $variable = $this->createVariable(
                 (string)$nameToken->getData(),
                 (string)$type,
                 $isRequired,
                 $isArray,
                 $isArrayElementRequired,
+                $directives,
                 $this->getTokenLocation($variableToken),
             );
 
@@ -317,12 +334,16 @@ class Parser extends Tokenizer implements ParserInterface
         return new Location($token->getLine(), $token->getColumn());
     }
 
+    /**
+     * @param Directive[] $directives
+     */
     protected function createVariable(
         string $name,
         string $type,
         bool $isRequired,
         bool $isArray,
         bool $isArrayElementRequired,
+        array $directives,
         Location $location,
     ): Variable {
         return new Variable(
@@ -331,7 +352,8 @@ class Parser extends Tokenizer implements ParserInterface
             $isRequired,
             $isArray,
             $isArrayElementRequired,
-            $location
+            $directives,
+            $location,
         );
     }
 
@@ -416,6 +438,7 @@ class Parser extends Tokenizer implements ParserInterface
         return $this->expectMulti([
             Token::TYPE_IDENTIFIER,
             Token::TYPE_MUTATION,
+            Token::TYPE_SUBSCRIPTION,
             Token::TYPE_QUERY,
             Token::TYPE_FRAGMENT,
         ]);

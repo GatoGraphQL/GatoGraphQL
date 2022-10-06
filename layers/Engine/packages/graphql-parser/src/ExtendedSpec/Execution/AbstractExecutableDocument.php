@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\GraphQLParser\Exception\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument;
@@ -27,6 +28,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
 
     /**
      * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
      */
     public function validateAndInitialize(): void
     {
