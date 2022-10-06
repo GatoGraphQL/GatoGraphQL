@@ -22,7 +22,8 @@ class AllowOrDenySettingsService implements AllowOrDenySettingsServiceInterface
         $matchResults = array_filter(array_map(
             function (string $termOrRegex) use ($name): bool {
                 // Check if it is a regex expression
-                if ((str_starts_with($termOrRegex, '/') && str_ends_with($termOrRegex, '/'))
+                if (
+                    (str_starts_with($termOrRegex, '/') && str_ends_with($termOrRegex, '/'))
                     || (str_starts_with($termOrRegex, '#') && str_ends_with($termOrRegex, '#'))
                 ) {
                     return preg_match($termOrRegex, $name) === 1;
