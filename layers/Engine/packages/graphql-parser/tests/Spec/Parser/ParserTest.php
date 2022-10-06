@@ -24,6 +24,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\SubscriptionOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
@@ -1005,6 +1006,55 @@ GRAPHQL;
                     ]
                 ),
                 'query { films(filter: {title: "unrequested", director: "steven", attrs: {stars: 5}}) { title } }',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider subscriptionProvider
+     */
+    public function testSubscriptions(
+        string $query,
+        Document $document,
+        string $documentAsStr
+    ): void {
+        $parser = $this->getParser();
+
+        // 1st test: Parsing is right
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
+
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function subscriptionProvider(): array
+    {
+        return [
+            [
+                'subscription { id }',
+                new Document(
+                    [
+                        new SubscriptionOperation(
+                            '',
+                            [],
+                            [],
+                            [
+                                new LeafField('id', null, [], [], new Location(1, 16)),
+                            ],
+                            new Location(1, 14)
+                        )
+                    ]
+                ),
+                'subscription { id }',
             ],
         ];
     }
