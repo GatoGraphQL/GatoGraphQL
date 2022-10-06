@@ -1,19 +1,19 @@
 {
   "errors": [
     {
-      "message": "Fragment spread type 'NonExistingType' is not defined in the schema",
+      "message": "Fragment Definition Directives are currently not supported",
       "locations": [
         {
           "line": 12,
-          "column": 10
+          "column": 38
         }
       ],
       "extensions": {
         "path": [
-          "fragment NonExistingTypeData on NonExistingType { ... }"
+          "@unsupportedFragmentDirective",
+          "fragment CustomPost on IsCustomPost { ... }"
         ],
-        "code": "gql@5.5.1.2",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Fragment-Spread-Type-Existence"
+        "code": "gqlunsupported@2"
       }
     }
   ]
