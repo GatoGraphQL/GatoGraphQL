@@ -1,0 +1,20 @@
+{
+  "errors": [
+    {
+      "message": "Fragment spread type 'NonExistingType' is not defined in the schema",
+      "locations": [
+        {
+          "line": 12,
+          "column": 10
+        }
+      ],
+      "extensions": {
+        "path": [
+          "fragment NonExistingTypeData on NonExistingType { ... }"
+        ],
+        "code": "gql@5.5.1.2",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Fragment-Spread-Type-Existence"
+      }
+    }
+  ]
+}
