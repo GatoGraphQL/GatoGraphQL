@@ -126,7 +126,7 @@ class Document implements DocumentInterface
                         GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
                         GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_1
                     ),
-                    $operation->getLocation()
+                    $operation
                 );
             }
         }
@@ -154,7 +154,7 @@ class Document implements DocumentInterface
                         GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
                         GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_2
                     ),
-                    $directive->getLocation()
+                    $directive
                 );
             }
         }
@@ -174,7 +174,7 @@ class Document implements DocumentInterface
                             GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
                             GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_3
                         ),
-                        $directive->getLocation()
+                        $directive
                     );
                 }
             }
