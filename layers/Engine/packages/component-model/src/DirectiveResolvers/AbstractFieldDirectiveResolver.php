@@ -692,14 +692,6 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     /**
      * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
-    protected function getSupportedFieldTypeResolverClasses(): ?array
-    {
-        return null;
-    }
-
-    /**
-     * @return array<class-string<ConcreteTypeResolverInterface>>|null
-     */
     protected function getSupportedFieldTypeResolverContainerServiceIDs(): ?array
     {
         return $this->getSupportedFieldTypeResolverClasses();
@@ -747,6 +739,14 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
             $concreteTypeResolvers
         );
+    }
+
+    /**
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     */
+    protected function getSupportedFieldTypeResolverClasses(): ?array
+    {
+        return null;
     }
 
     /**
