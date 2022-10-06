@@ -12,6 +12,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithDirectivesTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Exception\ShouldNotHappenException;
@@ -21,6 +22,7 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
+    use WithDirectivesTrait;
 
     protected ?Context $context = null;
 
