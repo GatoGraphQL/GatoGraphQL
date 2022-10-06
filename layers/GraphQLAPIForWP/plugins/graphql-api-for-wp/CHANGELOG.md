@@ -180,7 +180,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Support fragment spread on unions
   - Variables are input types
   - Queried fields are unambiguous
-- Query schema `extensions` via introspection
+- Query schema extensions via introspection
   - Implemented extension `isSensitiveDataElement`
 - Performance improvement: Avoid regenerating the container when the schema is modified
 - Clicking on "Save Changes" on the Settings page will always regenerate the schema

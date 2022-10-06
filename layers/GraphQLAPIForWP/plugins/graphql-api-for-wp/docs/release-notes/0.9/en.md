@@ -1216,7 +1216,7 @@ The following ones where added:
 - Variables are input types ([spec](https://spec.graphql.org/draft/#sec-Variables-Are-Input-Types))
 - Queried fields are unambiguous ([spec](https://spec.graphql.org/draft/#sec-Field-Selection-Merging))
 
-## Query schema `extensions` via introspection
+## Query schema extensions via introspection
 
 Custom metadata attached to schema elements can now be queried via field `extensions`. This is a feature [requested for the GraphQL spec](https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306), but not yet approved. This GraphQL server already implements it, though, since it is very useful.
 
