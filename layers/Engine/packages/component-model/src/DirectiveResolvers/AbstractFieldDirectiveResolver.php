@@ -707,11 +707,25 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             return null;
         }
 
-        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers();
+        $supportedFieldTypeResolverContainerServiceIDs = $this->getSupportedFieldTypeResolverContainerServiceIDs();
+        if ($supportedFieldTypeResolverContainerServiceIDs === null) {
+            return null;
+        }
+
+        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers($supportedFieldTypeResolverContainerServiceIDs);
         if ($concreteTypeResolvers === null) {
             return null;
         }
 
+        return $this->getConcreteTypeResolverNamesOrDescriptions($concreteTypeResolvers);
+    }
+
+    /**
+     * @param ConcreteTypeResolverInterface[] $concreteTypeResolvers
+     * @return string[]
+     */
+    protected function getConcreteTypeResolverNamesOrDescriptions(array $concreteTypeResolvers): ?array
+    {
         return array_map(
             fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
             $concreteTypeResolvers
@@ -719,15 +733,11 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
+     * @param string[] $supportedFieldTypeResolverContainerServiceIDs
      * @return ConcreteTypeResolverInterface[]|null
      */
-    protected function getSupportedConcreteTypeResolvers(): ?array
+    protected function getSupportedConcreteTypeResolvers(array $supportedFieldTypeResolverContainerServiceIDs): ?array
     {
-        $supportedFieldTypeResolverContainerServiceIDs = $this->getSupportedFieldTypeResolverContainerServiceIDs();
-        if ($supportedFieldTypeResolverContainerServiceIDs === null) {
-            return null;
-        }
-
         /** @var ConcreteTypeResolverInterface[] */
         return array_map(
             function (string $serviceID): ConcreteTypeResolverInterface {
