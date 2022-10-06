@@ -205,6 +205,14 @@ class GraphQLServer implements GraphQLServerInterface
 
             try {
                 $executableDocument->validateAndInitialize();
+            } catch (AbstractASTNodeParserException $astNodeParserException) {
+                $executableDocument = null;
+                App::getFeedbackStore()->documentFeedbackStore->addError(
+                    new QueryFeedback(
+                        $astNodeParserException->getFeedbackItemResolution(),
+                        $astNodeParserException->getAstNode(),
+                    )
+                );
             } catch (AbstractQueryException $queryException) {
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(
