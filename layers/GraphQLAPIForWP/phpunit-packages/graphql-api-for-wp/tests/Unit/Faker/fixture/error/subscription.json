@@ -1,0 +1,19 @@
+{
+  "errors": [
+    {
+      "message": "Subscriptions are currently not supported",
+      "locations": [
+        {
+          "line": 1,
+          "column": 14
+        }
+      ],
+      "extensions": {
+        "path": [
+          "subscription { ... }"
+        ],
+        "code": "gqlunsupported@1"
+      }
+    }
+  ]
+}
