@@ -65,11 +65,26 @@ class Variable extends AbstractAst implements WithValueInterface
             $defaultValueAST = $this->getDefaultValueAST();
             $defaultValue = sprintf(' = %s', $defaultValueAST->asQueryString());
         }
+
+        // Generate the string for directives
+        $strVariableDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = [];
+            foreach ($this->directives as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strVariableDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+
         return sprintf(
-            '$%s: %s%s',
+            '$%s: %s%s%s',
             $this->name,
             $strType,
-            $defaultValue
+            $defaultValue,
+            $strVariableDirectives,
         );
     }
 
