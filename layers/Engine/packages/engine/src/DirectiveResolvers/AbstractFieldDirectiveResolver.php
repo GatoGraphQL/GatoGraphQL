@@ -19,18 +19,6 @@ use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
  */
 abstract class AbstractFieldDirectiveResolver extends UpstreamAbstractFieldDirectiveResolver
 {
-    private ?SuperRootObjectTypeResolver $superRootObjectTypeResolver = null;
-
-    final public function setSuperRootObjectTypeResolver(SuperRootObjectTypeResolver $superRootObjectTypeResolver): void
-    {
-        $this->superRootObjectTypeResolver = $superRootObjectTypeResolver;
-    }
-    final protected function getSuperRootObjectTypeResolver(): SuperRootObjectTypeResolver
-    {
-        /** @var SuperRootObjectTypeResolver */
-        return $this->superRootObjectTypeResolver ??= $this->instanceManager->getInstance(SuperRootObjectTypeResolver::class);
-    }
-
     /**
      * For a FieldDirectiveResolver to only behave as a
      * OperationDirectiveResolver, it must only support
@@ -51,29 +39,22 @@ abstract class AbstractFieldDirectiveResolver extends UpstreamAbstractFieldDirec
     }
 
     /**
-     * Print what types does the directive support, or `null`
-     * to mean it supports them all.
+     * The SuperRoot is reserved for the Operation Directives,
+     * so can remove it.
      *
-     * It can be a name, such as `String`, or a description,
-     * such as `Any type implementing the CustomPost interface`.
-     *
-     * @return string[]|null
+     * @param string[] $supportedFieldTypeResolverContainerServiceIDs
+     * @return ConcreteTypeResolverInterface[]|null
      */
-    protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
+    protected function getSupportedConcreteTypeResolvers(array $supportedFieldTypeResolverContainerServiceIDs): ?array
     {
-        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers();
-        if ($concreteTypeResolvers === null) {
-            return null;
-        }
-
-        return array_map(
-            function (ConcreteTypeResolverInterface $typeResolver): string {
-                if ($typeResolver === $this->getSuperRootObjectTypeResolver()) {
-                    return $this->__('Operation (`query` and `mutation`)', 'engine');
-                }
-                return $typeResolver->getMaybeNamespacedTypeName();
-            },
-            $concreteTypeResolvers
+        /** @var ConcreteTypeResolverInterface[] */
+        return parent::getSupportedConcreteTypeResolvers(
+            array_diff(
+                $supportedFieldTypeResolverContainerServiceIDs,
+                [
+                    SuperRootObjectTypeResolver::class,
+                ]
+            )
         );
     }
 

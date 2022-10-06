@@ -16,8 +16,8 @@ class DirectiveExtensions extends AbstractSchemaDefinitionReferenceObject
     /**
      * @return string[]|null
      */
-    public function getSupportedTypeNamesOrDescriptions(): ?array
+    public function getFieldDirectiveSupportedTypeNamesOrDescriptions(): ?array
     {
-        return $this->schemaDefinition[SchemaDefinition::DIRECTIVE_SUPPORTED_TYPE_NAMES_OR_DESCRIPTIONS];
+        return $this->schemaDefinition[SchemaDefinition::FIELD_DIRECTIVE_SUPPORTED_TYPE_NAMES_OR_DESCRIPTIONS];
     }
 }

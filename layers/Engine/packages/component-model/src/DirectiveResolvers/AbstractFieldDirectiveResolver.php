@@ -690,31 +690,54 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
-     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     * For Field Directives: Print what types does the directive support,
+     * or `null` to mean it supports them all.
+     *
+     * For Operation Directives: Print `null`.
+     *
+     * It can be a name, such as `String`, or a description,
+     * such as `Any type implementing the CustomPost interface`.
+     *
+     * @return string[]|null
      */
-    protected function getSupportedFieldTypeResolverClasses(): ?array
+    protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
     {
-        return null;
-    }
+        $fieldDirectiveBehavior = $this->getFieldDirectiveBehavior();
+        if ($fieldDirectiveBehavior === FieldDirectiveBehaviors::OPERATION) {
+            return null;
+        }
 
-    /**
-     * @return array<class-string<ConcreteTypeResolverInterface>>|null
-     */
-    protected function getSupportedFieldTypeResolverContainerServiceIDs(): ?array
-    {
-        return $this->getSupportedFieldTypeResolverClasses();
-    }
-
-    /**
-     * @return ConcreteTypeResolverInterface[]|null
-     */
-    protected function getSupportedConcreteTypeResolvers(): ?array
-    {
         $supportedFieldTypeResolverContainerServiceIDs = $this->getSupportedFieldTypeResolverContainerServiceIDs();
         if ($supportedFieldTypeResolverContainerServiceIDs === null) {
             return null;
         }
 
+        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers($supportedFieldTypeResolverContainerServiceIDs);
+        if ($concreteTypeResolvers === null) {
+            return null;
+        }
+
+        return $this->getConcreteTypeResolverNamesOrDescriptions($concreteTypeResolvers);
+    }
+
+    /**
+     * @param ConcreteTypeResolverInterface[] $concreteTypeResolvers
+     * @return string[]
+     */
+    protected function getConcreteTypeResolverNamesOrDescriptions(array $concreteTypeResolvers): ?array
+    {
+        return array_map(
+            fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
+            $concreteTypeResolvers
+        );
+    }
+
+    /**
+     * @param string[] $supportedFieldTypeResolverContainerServiceIDs
+     * @return ConcreteTypeResolverInterface[]|null
+     */
+    protected function getSupportedConcreteTypeResolvers(array $supportedFieldTypeResolverContainerServiceIDs): ?array
+    {
         /** @var ConcreteTypeResolverInterface[] */
         return array_map(
             function (string $serviceID): ConcreteTypeResolverInterface {
@@ -726,25 +749,19 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
-     * Print what types does the directive support, or `null`
-     * to mean it supports them all.
-     *
-     * It can be a name, such as `String`, or a description,
-     * such as `Any type implementing the CustomPost interface`.
-     *
-     * @return string[]|null
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
      */
-    protected function getSupportedFieldTypeNamesOrDescriptions(): ?array
+    protected function getSupportedFieldTypeResolverContainerServiceIDs(): ?array
     {
-        $concreteTypeResolvers = $this->getSupportedConcreteTypeResolvers();
-        if ($concreteTypeResolvers === null) {
-            return null;
-        }
+        return $this->getSupportedFieldTypeResolverClasses();
+    }
 
-        return array_map(
-            fn (ConcreteTypeResolverInterface $typeResolver) => $typeResolver->getMaybeNamespacedTypeName(),
-            $concreteTypeResolvers
-        );
+    /**
+     * @return array<class-string<ConcreteTypeResolverInterface>>|null
+     */
+    protected function getSupportedFieldTypeResolverClasses(): ?array
+    {
+        return null;
     }
 
     /**
@@ -1557,7 +1574,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => false,
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
-            SchemaDefinition::DIRECTIVE_SUPPORTED_TYPE_NAMES_OR_DESCRIPTIONS => $this->getSupportedFieldTypeNamesOrDescriptions(),
+            SchemaDefinition::FIELD_DIRECTIVE_SUPPORTED_TYPE_NAMES_OR_DESCRIPTIONS => $this->getSupportedFieldTypeNamesOrDescriptions(),
         ];
     }
 
