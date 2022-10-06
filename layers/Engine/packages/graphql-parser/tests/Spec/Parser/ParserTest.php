@@ -1091,6 +1091,7 @@ GRAPHQL;
     {
         $formatVariable = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
         $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
+        $limitVariable = new Variable('limit', 'String', true, false, false, [new Directive('someVariableDirective', [], new Location(1, 41))], new Location(1, 24));
         return [
             // Directive in RelationalField
             [
@@ -1264,6 +1265,43 @@ GRAPHQL;
                     ]
                 ),
                 'query GetUsersName($format: String!) @someOperationDirective { users { name @style(format: $format) } }'
+            ],
+            // Directive in Variable Definition
+            [
+                <<<GRAPHQL
+                    query GetUsersName(\$limit: String! @someVariableDirective) {
+                        users(limit: \$limit) {
+                            name
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'GetUsersName',
+                            [
+                                $limitVariable,
+                            ],
+                            [],
+                            [
+                                new RelationalField(
+                                    'users',
+                                    null,
+                                    [
+                                        new Argument('limit', new VariableReference('limit', $limitVariable, new Location(2, 22)), new Location(2, 15)),
+                                    ],
+                                    [
+                                        new LeafField('name', null, [], [], new Location(3, 13))
+                                    ],
+                                    [],
+                                    new Location(2, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+                'query GetUsersName($limit: String! @someVariableDirective) { users(limit: $limit) { name } }'
             ],
             // Repeatable directives
             [
