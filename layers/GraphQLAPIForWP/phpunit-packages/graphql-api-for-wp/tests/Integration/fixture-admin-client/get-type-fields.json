@@ -1174,6 +1174,9 @@
           "namespacedName": "_DirectiveExtensions",
           "fields": [
             {
+              "name": "fieldDirectiveSupportedTypeNamesOrDescriptions"
+            },
+            {
               "name": "id"
             },
             {
