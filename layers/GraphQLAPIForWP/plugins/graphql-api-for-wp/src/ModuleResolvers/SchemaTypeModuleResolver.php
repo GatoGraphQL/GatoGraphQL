@@ -873,14 +873,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ])
         ) {
             $entriesTitle = \__('Settings entries', 'graphql-api');
-            $headsUpDesc = sprintf(
-                \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).', 'graphql-api'),
-                'option',
-            );
-            $entryDesc = \__('Eg: Both entries <code>%1$s</code> and <code>/%2$s.*/</code> match option name <code>"%1$s"</code>.', 'graphql-api');
+            $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
+            $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'graphql-api');
+            $ulStyle = 'list-style: initial; padding-left: 15px;';
+            $ulPlaceholder = '<ul style=" ' . $ulStyle . '"><li><code>%s</code></li></ul>';
             $moduleDescriptions = [
                 self::SCHEMA_SETTINGS => sprintf(
-                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
                     sprintf(
                         \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.', 'graphql-api'),
                         'optionValue'
@@ -889,7 +888,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     sprintf(
                         $entryDesc,
                         'siteurl',
-                        'site'
+                        sprintf(
+                            $ulPlaceholder,
+                            implode(
+                                '</code></li><li><code>',
+                                [
+                                    'siteurl',
+                                    '/site.*/',
+                                    '#site([a-zA-Z]*)#',
+                                ]
+                            )
+                        )
                     )
                 ),
             ];

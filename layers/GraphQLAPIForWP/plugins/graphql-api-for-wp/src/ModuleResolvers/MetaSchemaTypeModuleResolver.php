@@ -226,14 +226,13 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         ) {
             $entriesTitle = \__('Meta keys', 'graphql-api');
             $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying field <code>meta</code> on %s.', 'graphql-api');
-            $headsUpDesc = sprintf(
-                \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> are evaluated as regex (regular expressions).', 'graphql-api'),
-                'option',
-            );
-            $entryDesc = \__('Eg: Both entries <code>%1$s</code> and <code>/%2$s.*/</code> match option name <code>"%1$s"</code>.', 'graphql-api');
+            $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
+            $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'graphql-api');
+            $ulStyle = 'list-style: initial; padding-left: 15px;';
+            $ulPlaceholder = '<ul style=" ' . $ulStyle . '"><li><code>%s</code></li></ul>';
             $moduleDescriptions = [
                 self::SCHEMA_CUSTOMPOST_META => sprintf(
-                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'custom posts'
@@ -242,11 +241,21 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     sprintf(
                         $entryDesc,
                         '_edit_last',
-                        '_edit_'
+                        sprintf(
+                            $ulPlaceholder,
+                            implode(
+                                '</code></li><li><code>',
+                                [
+                                    '_edit_last',
+                                    '/_edit_.*/',
+                                    '#_edit_([a-zA-Z]*)#',
+                                ]
+                            )
+                        )
                     )
                 ),
                 self::SCHEMA_USER_META => sprintf(
-                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'users'
@@ -255,11 +264,21 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     sprintf(
                         $entryDesc,
                         'last_name',
-                        'last_'
+                        sprintf(
+                            $ulPlaceholder,
+                            implode(
+                                '</code></li><li><code>',
+                                [
+                                    'last_name',
+                                    '/last_.*/',
+                                    '#last_([a-zA-Z]*)#',
+                                ]
+                            )
+                        )
                     )
                 ),
                 self::SCHEMA_COMMENT_META => sprintf(
-                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'comments'
@@ -268,11 +287,21 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     sprintf(
                         $entryDesc,
                         'description',
-                        'desc'
+                        sprintf(
+                            $ulPlaceholder,
+                            implode(
+                                '</code></li><li><code>',
+                                [
+                                    'description',
+                                    '/desc.*/',
+                                    '#desc([a-zA-Z]*)#',
+                                ]
+                            )
+                        )
                     )
                 ),
                 self::SCHEMA_TAXONOMY_META => sprintf(
-                    \__('%1$s<hr/>%2$s<br/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'taxonomies (tags and categories)'
@@ -281,7 +310,17 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     sprintf(
                         $entryDesc,
                         'description',
-                        'desc'
+                        sprintf(
+                            $ulPlaceholder,
+                            implode(
+                                '</code></li><li><code>',
+                                [
+                                    'description',
+                                    '/desc.*/',
+                                    '#desc([a-zA-Z]*)#',
+                                ]
+                            )
+                        )
                     )
                 ),
             ];
