@@ -25,10 +25,14 @@ In the "Schema Custom Post Meta" tab from the Settings, we must configure the li
 
 Each entry can either be:
 
-- A regex (regular expression), if it's surrounded by `/`, or
-- The full option name, otherwise
+- A regex (regular expression), if it's surrounded by `/` or `#`, or
+- The full meta key, otherwise
 
-For instance, both entries `_edit_last` and `/_edit_.*/` match meta key `"_edit_last"`.
+For instance, any of these entries match meta key `"_edit_last"`:
+
+- `_edit_last`
+- `/_edit_.*/`
+- `#_edit_([a-zA-Z]*)#`
 
 ![Defining the entries](../../images/schema-configuration-custompost-meta-entries.png "Defining the entries")
 

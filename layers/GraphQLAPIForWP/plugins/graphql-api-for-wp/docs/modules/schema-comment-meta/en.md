@@ -28,10 +28,14 @@ In the "Schema Comment Meta" tab from the Settings, we must configure the list o
 
 Each entry can either be:
 
-- A regex (regular expression), if it's surrounded by `/`, or
-- The full option name, otherwise
+- A regex (regular expression), if it's surrounded by `/` or `#`, or
+- The full meta key, otherwise
 
-For instance, both entries `description` and `/desc*/` match meta key `"description"`.
+For instance, any of these entries match meta key `"description"`:
+
+- `description`
+- `/desc.*/`
+- `#desc([a-zA-Z]*)#`
 
 ![Defining the entries](../../images/schema-configuration-comment-meta-entries.png "Defining the entries")
 

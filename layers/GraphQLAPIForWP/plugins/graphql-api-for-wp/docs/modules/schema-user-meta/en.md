@@ -25,10 +25,14 @@ In the "Schema User Meta" tab from the Settings, we must configure the list of m
 
 Each entry can either be:
 
-- A regex (regular expression), if it's surrounded by `/`, or
-- The full option name, otherwise
+- A regex (regular expression), if it's surrounded by `/` or `#`, or
+- The full meta key, otherwise
 
-For instance, both entries `last_name` and `/last_.*/` match meta key `"last_name"`.
+For instance, any of these entries match meta key `"last_name"`:
+
+- `last_name`
+- `/last_.*/`
+- `#last_([a-zA-Z]*)#`
 
 ![Defining the entries](../../images/schema-configuration-user-meta-entries.png "Defining the entries")
 

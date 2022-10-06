@@ -35,10 +35,14 @@ In the "Schema Settings" tab from the Settings, we must configure the list of op
 
 Each entry can either be:
 
-- A regex (regular expression), if it's surrounded by `/`, or
+- A regex (regular expression), if it's surrounded by `/` or `#`, or
 - The full option name, otherwise
 
-For instance, both entries `siteurl` and `/site.*/` match option name `"siteurl"`.
+For instance, any of these entries match option name `"siteurl"`:
+
+- `siteurl`
+- `/site.*/`
+- `#site([a-zA-Z]*)#`
 
 ![Defining the entries for the Settings](../../images/schema-configuration-settings-entries.jpg "Defining the entries for the Settings")
 
