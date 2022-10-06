@@ -105,7 +105,7 @@ class AstTest extends AbstractTestCase
 
     public function testVariable(): void
     {
-        $variable = new Variable('id', 'int', false, false, true, new Location(1, 1));
+        $variable = new Variable('id', 'int', false, false, true, [], new Location(1, 1));
 
         $this->assertEquals('id', $variable->getName());
         $this->assertEquals('int', $variable->getTypeName());
@@ -123,7 +123,7 @@ class AstTest extends AbstractTestCase
             'Context has not been set for Variable object (with name \'%s\')',
             'id'
         ));
-        $variable = new Variable('id', 'int', false, false, true, new Location(1, 1));
+        $variable = new Variable('id', 'int', false, false, true, [], new Location(1, 1));
         $variable->getValue();
     }
 }

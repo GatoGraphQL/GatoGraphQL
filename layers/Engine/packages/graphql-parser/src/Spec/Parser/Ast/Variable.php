@@ -12,6 +12,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithDirectivesTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -30,15 +31,20 @@ class Variable extends AbstractAst implements WithValueInterface
 
     protected InputList|InputObject|Literal|Enum|null $defaultValueAST = null;
 
+    /**
+     * @param Directive[] $directives
+     */
     public function __construct(
         protected readonly string $name,
         protected readonly string $type,
         protected readonly bool $isRequired,
         protected readonly bool $isArray,
         protected readonly bool $isArrayElementRequired,
+        array $directives,
         Location $location,
     ) {
         parent::__construct($location);
+        $this->setDirectives($directives);
     }
 
     protected function doAsQueryString(): string

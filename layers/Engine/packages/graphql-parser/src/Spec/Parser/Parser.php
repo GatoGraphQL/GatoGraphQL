@@ -299,12 +299,18 @@ class Parser extends Tokenizer implements ParserInterface
                 $this->eat(Token::TYPE_REQUIRED);
             }
 
+            $directives = [];
+            if ($this->match(Token::TYPE_AT)) {
+                $directives = $this->parseDirectiveList();
+            }
+
             $variable = $this->createVariable(
                 (string)$nameToken->getData(),
                 (string)$type,
                 $isRequired,
                 $isArray,
                 $isArrayElementRequired,
+                $directives,
                 $this->getTokenLocation($variableToken),
             );
 
@@ -329,12 +335,16 @@ class Parser extends Tokenizer implements ParserInterface
         return new Location($token->getLine(), $token->getColumn());
     }
 
+    /**
+     * @param Directive[] $directives
+     */
     protected function createVariable(
         string $name,
         string $type,
         bool $isRequired,
         bool $isArray,
         bool $isArrayElementRequired,
+        array $directives,
         Location $location,
     ): Variable {
         return new Variable(
@@ -343,7 +353,8 @@ class Parser extends Tokenizer implements ParserInterface
             $isRequired,
             $isArray,
             $isArrayElementRequired,
-            $location
+            $directives,
+            $location,
         );
     }
 
