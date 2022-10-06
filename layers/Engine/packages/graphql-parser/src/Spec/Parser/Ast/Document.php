@@ -14,6 +14,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\SubscriptionOperation;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
@@ -809,6 +810,7 @@ class Document implements DocumentInterface
     {
         foreach ($operation->getVariables() as $variable) {
             $astNodeAncestors[$variable] = $operation;
+            $this->setAncestorsUnderVariable($astNodeAncestors, $variable);
         }
         foreach ($operation->getDirectives() as $directive) {
             $astNodeAncestors[$directive] = $operation;
@@ -817,6 +819,17 @@ class Document implements DocumentInterface
         foreach ($operation->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
             $astNodeAncestors[$fieldOrFragmentBond] = $operation;
             $this->setAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
+        }
+    }
+
+    /**
+     * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
+     */
+    protected function setAncestorsUnderVariable(SplObjectStorage $astNodeAncestors, Variable $variable): void
+    {
+        foreach ($variable->getDirectives() as $directive) {
+            $astNodeAncestors[$directive] = $variable;
+            $this->setAncestorsUnderDirective($astNodeAncestors, $directive);
         }
     }
 
