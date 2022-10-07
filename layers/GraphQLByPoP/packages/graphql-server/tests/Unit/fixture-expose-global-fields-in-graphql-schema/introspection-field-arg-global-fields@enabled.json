@@ -1,0 +1,25 @@
+{
+    "data": {
+        "__schema": {
+            "type": {
+                "fields": [
+                    {
+                        "name": "id"
+                    },
+                    {
+                        "name": "self"
+                    },
+                    {
+                        "name": "_namespace"
+                    },
+                    {
+                        "name": "_qualifiedTypeName"
+                    },
+                    {
+                        "name": "_typeName"
+                    }
+                ]
+            }
+        }
+    }
+}
