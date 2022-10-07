@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { TabPanel } from '@wordpress/components';
-import TypeFieldMultiSelectControl from './field-multi-select-control';
+import TypeFieldMultiSelectControl from './type-field-multi-select-control';
 import DirectiveMultiSelectControl from './directive-multi-select-control';
 
 const FieldDirectiveTabPanel = ( props ) => {
