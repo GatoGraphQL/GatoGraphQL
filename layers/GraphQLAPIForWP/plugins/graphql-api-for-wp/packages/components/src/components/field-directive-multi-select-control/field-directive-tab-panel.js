@@ -28,24 +28,22 @@ const FieldDirectiveTabPanel = ( props ) => {
 				},
 			] }
 		>
-			{ ( tab ) => tab.name == 'tabTypeFields' && (
-				<TypeFieldMultiSelectControl
-					{ ...props }
-					selectedItems={ typeFields }
-				/>
-			) }
-			{ ( tab ) => tab.name == 'tabGlobalFields' && (
-				<GlobalFieldMultiSelectControl
-					{ ...props }
-					selectedItems={ globalFields }
-				/>
-			) }
-			{ ( tab ) => tab.name == 'tabDirectives' && (
-				<DirectiveMultiSelectControl
-					{ ...props }
-					selectedItems={ directives }
-				/>
-			) }
+			{
+				( tab ) => tab.name == 'tabTypeFields' ?
+					<TypeFieldMultiSelectControl
+						{ ...props }
+						selectedItems={ typeFields }
+					/> :
+				tab.name == 'tabGlobalFields' ?
+					<GlobalFieldMultiSelectControl
+						{ ...props }
+						selectedItems={ globalFields }
+					/> :
+					<DirectiveMultiSelectControl
+						{ ...props }
+						selectedItems={ directives }
+					/>
+			}
 		</TabPanel>
 	);
 }
