@@ -1208,6 +1208,9 @@
               "name": "id"
             },
             {
+              "name": "isGlobal"
+            },
+            {
               "name": "isMutation"
             },
             {
