@@ -127,7 +127,7 @@ const DirectivePrintoutBody = ( props ) => {
 							key={ directive }
 						>
 							<CheckboxControl
-								label={ `${ directive }` /* `@${ directive }` */ }
+								label={ `${ directive }` }
 								checked={ true }
 								disabled={ true }
 							/>
