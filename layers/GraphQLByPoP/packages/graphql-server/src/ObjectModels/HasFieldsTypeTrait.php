@@ -111,7 +111,7 @@ trait HasFieldsTypeTrait
 
         return $fields;
     }
-    
+
     /**
      * @param bool $includeGlobal Custom parameter by this GraphQL Server (i.e. it is not present in the GraphQL spec)
      * @return string[]
