@@ -42,9 +42,9 @@ const FieldDirectiveTabPanel = ( props ) => {
 			) }
 			{ ( tab ) => tab.name == 'tabDirectives' && (
 				<DirectiveMultiSelectControl
-				{ ...props }
-				selectedItems={ directives }
-			/>
+					{ ...props }
+					selectedItems={ directives }
+				/>
 			) }
 		</TabPanel>
 	);
