@@ -11,7 +11,7 @@ import withErrorMessage from '../loading/with-error-message';
 import { GROUP_FIELDS_UNDER_TYPE_FOR_PRINT, EMPTY_LABEL } from '../../default-configuration';
 import '../base-styles/checkbox-list.scss';
 
-const FieldPrintoutBody = ( props ) => {
+const TypeFieldPrintoutBody = ( props ) => {
 	const {
 		typeFields,
 		typeFieldNames,
@@ -82,10 +82,10 @@ const FieldPrintoutBody = ( props ) => {
 /**
  * Add a spinner when loading the typeFieldNames and typeFields is not empty
  */
-const WithSpinnerFieldPrintoutBody = compose( [
+const WithSpinnerTypeFieldPrintoutBody = compose( [
 	withSpinner(),
 	withErrorMessage(),
-] )( FieldPrintoutBody );
+] )( TypeFieldPrintoutBody );
 
 /**
  * Check if the typeFields are empty, then do not show the spinner
@@ -93,15 +93,15 @@ const WithSpinnerFieldPrintoutBody = compose( [
  *
  * @param {Object} props
  */
-const MaybeWithSpinnerFieldPrintoutBody = ( props ) => {
+const MaybeWithSpinnerTypeFieldPrintoutBody = ( props ) => {
 	const { typeFields } = props;
 	if ( !! typeFields.length ) {
 		return (
-			<WithSpinnerFieldPrintoutBody { ...props } />
+			<WithSpinnerTypeFieldPrintoutBody { ...props } />
 		)
 	}
 	return (
-		<FieldPrintoutBody { ...props } />
+		<TypeFieldPrintoutBody { ...props } />
 	);
 }
 
@@ -194,7 +194,7 @@ const FieldDirectivePrintout = ( props ) => {
 						<CardHeader isShady>{ fieldHeader }</CardHeader>
 					) }
 					<CardBody>
-						<MaybeWithSpinnerFieldPrintoutBody
+						<MaybeWithSpinnerTypeFieldPrintoutBody
 							{ ...props }
 							emptyLabelString={ emptyLabelString }
 						/>
