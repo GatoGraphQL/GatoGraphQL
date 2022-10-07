@@ -74,7 +74,10 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
-        return $field->getName() === 'name' && $field->hasArgument('namespaced');
+        return match ($field->getName()) {
+            'name' => $field->hasArgument('namespaced'),
+            default => parent::resolveCanProcess($objectTypeResolver, $field),
+        };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
