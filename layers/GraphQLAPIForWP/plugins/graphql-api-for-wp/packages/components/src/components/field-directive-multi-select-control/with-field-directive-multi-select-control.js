@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 import FieldDirectiveTabPanel from './field-directive-tab-panel';
 import FieldDirectivePrintout from './field-directive-printout';
 import TypeFieldMultiSelectControl from './type-field-multi-select-control';
+import GlobalFieldMultiSelectControl from './global-field-multi-select-control';
 import DirectiveMultiSelectControl from './directive-multi-select-control';
 
 /**
@@ -17,18 +18,23 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			isSelected,
 			attributes: {
 				typeFields,
+				globalFields,
 				directives
 			},
 			componentClassName,
 			selectLabel,
 			configurationLabel,
 			disableTypeFields,
+			disableGlobalFields,
 			disableDirectives,
 			hideLabels
 		} = props;
 		const className = 'graphql-api-multi-select-control-list';
 		const leftSideLabel = selectLabel || __('Select fields and directives:', 'graphql-api');
 		const rightSideLabel = configurationLabel || __('Configuration:', 'graphql-api');
+		const onlyEnableTypeFields = ! disableTypeFields && disableGlobalFields && disableDirectives;
+		const onlyEnableGlobalFields = ! disableGlobalFields && disableTypeFields && disableDirectives;
+		const onlyEnableDirectives = ! disableDirectives && disableTypeFields && disableGlobalFields;
 		return (
 			<div className={ className }>
 				<div className={ className+'__items' }>
@@ -43,24 +49,31 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 								<div className={ componentClassName }>
 									{ isSelected && (
 										<>
-											{ ! disableTypeFields && ! disableDirectives &&
-												<FieldDirectiveTabPanel
-													{ ...props }
-													typeFields={ typeFields }
-													directives={ directives }
-													className={ className }
-												/>
-											}
-											{ ! disableTypeFields && disableDirectives &&
+											{ onlyEnableTypeFields &&
 												<TypeFieldMultiSelectControl
 													{ ...props }
 													selectedItems={ typeFields }
 												/>
 											}
-											{ disableTypeFields && ! disableDirectives &&
+											{ onlyEnableGlobalFields &&
+												<GlobalFieldMultiSelectControl
+													{ ...props }
+													selectedItems={ globalFields }
+												/>
+											}
+											{ onlyEnableDirectives &&
 												<DirectiveMultiSelectControl
 													{ ...props }
 													selectedItems={ directives }
+												/>
+											}
+											{ 	! onlyEnableTypeFields && ! onlyEnableGlobalFields && ! onlyEnableDirectives &&
+												<FieldDirectiveTabPanel
+													{ ...props }
+													typeFields={ typeFields }
+													globalFields={ globalFields }
+													directives={ directives }
+													className={ className }
 												/>
 											}
 										</>
@@ -69,6 +82,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 										<FieldDirectivePrintout
 											{ ...props }
 											typeFields={ typeFields }
+											globalFields={ globalFields }
 											directives={ directives }
 											className={ className }
 										/>
