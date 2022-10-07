@@ -22,7 +22,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			componentClassName,
 			selectLabel,
 			configurationLabel,
-			disableFields,
+			disableTypeFields,
 			disableDirectives,
 			hideLabels
 		} = props;
@@ -43,7 +43,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 								<div className={ componentClassName }>
 									{ isSelected && (
 										<>
-											{ ! disableFields && ! disableDirectives &&
+											{ ! disableTypeFields && ! disableDirectives &&
 												<FieldDirectiveTabPanel
 													{ ...props }
 													typeFields={ typeFields }
@@ -51,13 +51,13 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 													className={ className }
 												/>
 											}
-											{ ! disableFields && disableDirectives &&
+											{ ! disableTypeFields && disableDirectives &&
 												<FieldMultiSelectControl
 													{ ...props }
 													selectedItems={ typeFields }
 												/>
 											}
-											{ disableFields && ! disableDirectives &&
+											{ disableTypeFields && ! disableDirectives &&
 												<DirectiveMultiSelectControl
 													{ ...props }
 													selectedItems={ directives }

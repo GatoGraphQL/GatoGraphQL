@@ -208,7 +208,7 @@ const DirectivePrintoutBody = ( props ) => {
 const FieldDirectivePrintout = ( props ) => {
 	const {
 		emptyLabel,
-		disableFields,
+		disableTypeFields,
 		disableDirectives,
 		removeHeaderIfItemDisabled,
 		fieldHeader = __('Fields', 'graphql-api'),
@@ -217,7 +217,7 @@ const FieldDirectivePrintout = ( props ) => {
 	const emptyLabelString = emptyLabel != undefined ? emptyLabel : EMPTY_LABEL;
 	return (
 		<Card { ...props }>
-			{ ! disableFields && (
+			{ ! disableTypeFields && (
 				<>
 					{ ( ! removeHeaderIfItemDisabled || ! disableDirectives ) && (
 						<CardHeader isShady>{ fieldHeader }</CardHeader>
@@ -232,7 +232,7 @@ const FieldDirectivePrintout = ( props ) => {
 			) }
 			{ ! disableDirectives && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableFields ) && (
+					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields ) && (
 						<CardHeader isShady>{ directiveHeader }</CardHeader>
 					) }
 					<CardBody>
@@ -250,8 +250,8 @@ const FieldDirectivePrintout = ( props ) => {
 
 export default compose( [
 	withSelect( ( select, ownProps ) => {
-		const { disableFields } = ownProps;
-		if ( disableFields ) {
+		const { disableTypeFields } = ownProps;
+		if ( disableTypeFields ) {
 			return {};
 		}
 
