@@ -4,7 +4,7 @@ import FieldMultiSelectControl from './field-multi-select-control';
 import DirectiveMultiSelectControl from './directive-multi-select-control';
 
 const FieldDirectiveTabPanel = ( props ) => {
-	const { className, typeFields, directives } = props;
+	const { className, typeFields, globalFields, directives } = props;
 	return (
 		<TabPanel
 			className={ className + '__tab_panel' }
@@ -13,7 +13,12 @@ const FieldDirectiveTabPanel = ( props ) => {
 				{
 					name: 'tabTypeFields',
 					title: __('Fields', 'graphql-api'),
-					className: 'tab tab-fields',
+					className: 'tab tab-fields tab-standard-fields',
+				},
+				{
+					name: 'tabGlobalFields',
+					title: __('Global Fields', 'graphql-api'),
+					className: 'tab tab-fields tab-global-fields',
 				},
 				{
 					name: 'tabDirectives',
@@ -22,17 +27,24 @@ const FieldDirectiveTabPanel = ( props ) => {
 				},
 			] }
 		>
-			{
-				( tab ) => tab.name == 'tabTypeFields' ?
-					<FieldMultiSelectControl
-						{ ...props }
-						selectedItems={ typeFields }
-					/> :
-					<DirectiveMultiSelectControl
-						{ ...props }
-						selectedItems={ directives }
-					/>
-			}
+			{ ( tab ) => tab.name == 'tabTypeFields' && (
+				<FieldMultiSelectControl
+					{ ...props }
+					selectedItems={ typeFields }
+				/>
+			) }
+			{ ( tab ) => tab.name == 'tabGlobalFields' && (
+				<FieldMultiSelectControl
+					{ ...props }
+					selectedItems={ globalFields }
+				/>
+			) }
+			{ ( tab ) => tab.name == 'tabDirectives' && (
+				<DirectiveMultiSelectControl
+				{ ...props }
+				selectedItems={ directives }
+			/>
+			) }
 		</TabPanel>
 	);
 }
