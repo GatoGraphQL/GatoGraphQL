@@ -3,7 +3,10 @@ query GetTypeFields {
     types {
       name
       namespacedName: name(namespaced: true)
-      fields(includeDeprecated: true) {
+      fields(
+        includeDeprecated: true
+        includeGlobal: false
+      ) {
         name
       }
       kind
