@@ -298,4 +298,4 @@ export default compose( [
 			errorMessage: getRetrievingTypeFieldsErrorMessage(),
 		};
 	} ),
-] )( FieldDirectivePrintout/*MaybeWithSpinnerFieldDirectivePrintout*/ );
+] )( FieldDirectivePrintout );
