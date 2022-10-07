@@ -44,6 +44,7 @@ class FieldExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldNamesToResolve(): array
     {
         return [
+            'isGlobal',
             'isMutation',
             'isSensitiveDataElement',
         ];
@@ -52,6 +53,7 @@ class FieldExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
+            'isGlobal' => $this->__('Is this a global field? (i.e. a field that is added to all types in the schema)', 'graphql-server'),
             'isMutation' => $this->__('Is this a mutation field? Particularly required when doing \'nested mutations\' (where mutation fields can be present on any type, not only on `MutationRoot`)', 'graphql-server'),
             'isSensitiveDataElement' => $this->__('Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when \'Expose “sensitive” data elements\' is enabled)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -61,6 +63,7 @@ class FieldExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
+            'isGlobal',
             'isMutation',
             'isSensitiveDataElement'
                 => SchemaTypeModifiers::NON_NULLABLE,
@@ -78,6 +81,7 @@ class FieldExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         /** @var FieldExtensions */
         $fieldExtensions = $object;
         return match ($fieldDataAccessor->getFieldName()) {
+            'isGlobal' => $fieldExtensions->isGlobal(),
             'isMutation' => $fieldExtensions->isMutation(),
             'isSensitiveDataElement' => $fieldExtensions->isSensitiveDataElement(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
@@ -87,6 +91,7 @@ class FieldExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
+            'isGlobal',
             'isMutation',
             'isSensitiveDataElement'
                 => $this->getBooleanScalarTypeResolver(),
