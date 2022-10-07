@@ -23,8 +23,11 @@ export const FETCH_TYPE_FIELDS_GRAPHQL_QUERY = `
 		__schema {
 			types {
 				name
-				namespacedName:name(namespaced: true)
-				fields(includeDeprecated: true) {
+				namespacedName: name(namespaced: true)
+				fields(
+					includeDeprecated: true
+					includeGlobal: false
+				) {
 					name
 				}
 				kind
