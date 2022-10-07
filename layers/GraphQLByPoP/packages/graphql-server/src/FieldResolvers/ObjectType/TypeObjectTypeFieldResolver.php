@@ -251,7 +251,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC1BJC3BAn6e):
                 // "should be non-null for OBJECT and INTERFACE only, must be null for the others"
                 if ($type instanceof HasFieldsTypeInterface) {
-                    return $type->getFieldIDs($fieldDataAccessor->getValue('includeDeprecated'));
+                    return $type->getFieldIDs($fieldDataAccessor->getValue('includeDeprecated') ?? false);
                 }
                 return null;
             case 'interfaces':
@@ -272,7 +272,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC7CCC9CA2nT):
                 // "should be non-null for ENUM only, must be null for the others"
                 if ($type instanceof EnumType) {
-                    return $type->getEnumValueIDs($fieldDataAccessor->getValue('includeDeprecated'));
+                    return $type->getEnumValueIDs($fieldDataAccessor->getValue('includeDeprecated') ?? false);
                 }
                 return null;
             case 'inputFields':

@@ -136,7 +136,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 /** @var ObjectType */
                 $rootType = $schema->getType($rootNamespacedTypeName);
                 $rootTypeFields = $rootType->getFields(
-                    $fieldDataAccessor->getValue('includeDeprecated'),
+                    $fieldDataAccessor->getValue('includeDeprecated') ?? false,
                     true
                 );
                 $globalFields = array_filter(

@@ -110,7 +110,7 @@ class TypeObjectTypeFieldResolver extends UpstreamTypeObjectTypeFieldResolver
                 // "should be non-null for OBJECT and INTERFACE only, must be null for the others"
                 if ($type instanceof HasFieldsTypeInterface) {
                     return $type->getFieldIDs(
-                        $fieldDataAccessor->getValue('includeDeprecated'),
+                        $fieldDataAccessor->getValue('includeDeprecated') ?? false,
                         $fieldDataAccessor->getValue('includeGlobal'),
                     );
                 }
