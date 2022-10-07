@@ -216,33 +216,6 @@ const FieldDirectivePrintout = ( props ) => {
 	);
 }
 
-// /**
-//  * Check if the typeFields are empty, then do not show the spinner
-//  * This is an improvement when loading a new Access Control post,
-//  * that it has no data, so the user is not waiting for nothing
-//  *
-//  * @param {Object} props
-//  */
-// const MaybeWithSpinnerFieldDirectivePrintout = ( props ) => {
-// 	const { typeFields } = props;
-// 	if ( !! typeFields.length ) {
-// 		return (
-// 			<WithSpinnerFieldDirectivePrintout { ...props } />
-// 		)
-// 	}
-// 	return (
-// 		<FieldDirectivePrintout { ...props } />
-// 	);
-// }
-
-// /**
-//  * Add a spinner when loading the typeFieldNames and typeFields is not empty
-//  */
-// const WithSpinnerFieldDirectivePrintout = compose( [
-// 	withSpinner(),
-// 	withErrorMessage(),
-// ] )( FieldDirectivePrintout );
-
 export default compose( [
 	withSelect( ( select, ownProps ) => {
 		const { disableFields } = ownProps;
