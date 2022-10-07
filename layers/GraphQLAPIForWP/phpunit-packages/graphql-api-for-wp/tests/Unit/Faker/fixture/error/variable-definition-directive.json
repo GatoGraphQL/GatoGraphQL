@@ -10,7 +10,9 @@
       ],
       "extensions": {
         "path": [
-          "@unsupportedVariableDirective"
+          "@unsupportedVariableDirective",
+          "$limit: Int!",
+          "query GetPosts($limit: Int! @unsupportedVariableDirective) { ... }"
         ],
         "code": "gqlunsupported@3"
       }
