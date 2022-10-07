@@ -109,6 +109,38 @@ const MaybeWithSpinnerTypeFieldPrintoutBody = ( props ) => {
 /**
  * @param {Object} props
  */
+const GlobalFieldPrintoutBody = ( props ) => {
+	const {
+		globalFields,
+		emptyLabelString,
+	} = props;
+	return (
+		<>
+			{ !! globalFields.length && (
+				<ul class="checkbox-list">
+					{ globalFields.map( globalField =>
+						<li
+							key={ globalField }
+						>
+							<CheckboxControl
+								label={ `${ globalField }` }
+								checked={ true }
+								disabled={ true }
+							/>
+						</li>
+					) }
+				</ul>
+			) }
+			{ !globalFields.length && (
+				emptyLabelString
+			) }
+		</>
+	);
+}
+
+/**
+ * @param {Object} props
+ */
 const DirectivePrintoutBody = ( props ) => {
 	const {
 		directives,
