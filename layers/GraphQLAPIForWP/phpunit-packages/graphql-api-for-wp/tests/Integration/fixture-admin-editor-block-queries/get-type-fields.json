@@ -1389,6 +1389,9 @@
               "name": "extensions"
             },
             {
+              "name": "globalFields"
+            },
+            {
               "name": "id"
             },
             {

@@ -10783,6 +10783,41 @@
               "deprecationReason": null
             },
             {
+              "name": "globalFields",
+              "description": "[Custom introspection field] All global fields (i.e. fields which are added to all types in the schema)",
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": "Include deprecated fields?",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[__Field!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[__Field!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "__Field!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "__Field",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "id",
               "description": "The object's unique identifier for its type",
               "args": [],
