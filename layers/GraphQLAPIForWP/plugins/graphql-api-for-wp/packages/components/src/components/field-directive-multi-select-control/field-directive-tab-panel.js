@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { TabPanel } from '@wordpress/components';
-import FieldMultiSelectControl from './field-multi-select-control';
+import TypeFieldMultiSelectControl from './field-multi-select-control';
 import DirectiveMultiSelectControl from './directive-multi-select-control';
 
 const FieldDirectiveTabPanel = ( props ) => {
@@ -28,13 +28,13 @@ const FieldDirectiveTabPanel = ( props ) => {
 			] }
 		>
 			{ ( tab ) => tab.name == 'tabTypeFields' && (
-				<FieldMultiSelectControl
+				<TypeFieldMultiSelectControl
 					{ ...props }
 					selectedItems={ typeFields }
 				/>
 			) }
 			{ ( tab ) => tab.name == 'tabGlobalFields' && (
-				<FieldMultiSelectControl
+				<TypeFieldMultiSelectControl
 					{ ...props }
 					selectedItems={ globalFields }
 				/>

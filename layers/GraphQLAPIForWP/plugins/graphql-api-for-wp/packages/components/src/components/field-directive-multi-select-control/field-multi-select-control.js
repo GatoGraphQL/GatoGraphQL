@@ -11,7 +11,7 @@ import MultiSelectControl from '../multi-select-control';
 import { TYPE_FIELD_SEPARATOR_FOR_DB } from './block-constants';
 import AddUndefinedSelectedItemIDs from '../multi-select-control/add-undefined-selected-item-ids';
 
-const FieldMultiSelectControl = compose( [
+const TypeFieldMultiSelectControl = compose( [
 	withState( { attributeName: 'typeFields' } ),
 	withSelect( ( select ) => {
 		const {
@@ -45,4 +45,4 @@ const FieldMultiSelectControl = compose( [
 	AddUndefinedSelectedItemIDs,
 ] )( MultiSelectControl );
 
-export default FieldMultiSelectControl;
+export default TypeFieldMultiSelectControl;
