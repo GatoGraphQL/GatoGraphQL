@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
@@ -166,9 +167,17 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         // Extract these values
         $entry = explode(BlockConstants::TYPE_FIELD_SEPARATOR_FOR_DB, $selectedField);
         // Maybe the namespaced name corresponds to a type, maybe to an interface
+        $field = $entry[1];
+        /**
+         * Wildcard type: accept everything
+         */
+        if ($entry[0] === ConfigurationValues::ANY) {
+            return [
+                [$entry[0], $field, $value],
+            ];
+        }
         $maybeNamespacedObjectTypeName = $entry[0];
         $maybeNamespacedInterfaceTypeName = $entry[0];
-        $field = $entry[1];
         // From the type, obtain which resolver class processes it
         if ($objectTypeResolverClass = $namespacedObjectTypeNameResolverClasses[$maybeNamespacedObjectTypeName] ?? null) {
             // Check `getConfigurationEntries` to understand format of each entry
