@@ -42,9 +42,9 @@ then
     echo "Installing dependencies for all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
 fi
 
-# Function `buildScripts` will run the selected command
+# Function `runCommand` will run the selected command
 # on all folders in the current directory
-buildScripts(){
+runCommand(){
     CURRENT_DIR=$( pwd )
     echo "In folder '$CURRENT_DIR'"
     for file in ./*
@@ -68,13 +68,13 @@ buildScripts(){
     done
 }
 
-# Function `maybeBuildScripts` will invoke `buildScripts`
+# Function `maybeRunCommandInTargetDirectory` will invoke `runCommand`
 # if the target folder exists
-maybeBuildScripts(){
+maybeRunCommandInTargetDirectory(){
     if [[ -d "$TARGET_DIR" ]]
     then
         cd "$TARGET_DIR"
-        buildScripts
+        runCommand
     else
         echo "Directory '$TARGET_DIR' does not exist"
     fi
@@ -82,13 +82,13 @@ maybeBuildScripts(){
 
 # Packages: used by Blocks/Editor Scripts
 TARGET_DIR="$PLUGIN_DIR/packages/"
-maybeBuildScripts
+maybeRunCommandInTargetDirectory
 
 # Blocks
 TARGET_DIR="$PLUGIN_DIR/blocks/"
-maybeBuildScripts
+maybeRunCommandInTargetDirectory
 
 # Editor Scripts
 TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
-maybeBuildScripts
+maybeRunCommandInTargetDirectory
 
