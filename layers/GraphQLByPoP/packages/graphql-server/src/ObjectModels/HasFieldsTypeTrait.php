@@ -94,9 +94,7 @@ trait HasFieldsTypeTrait
             $this->fields :
             array_filter(
                 $this->fields,
-                function (Field $field): bool {
-                    return !$field->isDeprecated();
-                }
+                fn (Field $field) => !$field->isDeprecated(),
             );
     }
     /**
@@ -105,9 +103,7 @@ trait HasFieldsTypeTrait
     public function getFieldIDs(bool $includeDeprecated = false): array
     {
         return array_map(
-            function (Field $field): string {
-                return $field->getID();
-            },
+            fn (Field $field) => $field->getID(),
             $this->getFields($includeDeprecated)
         );
     }
