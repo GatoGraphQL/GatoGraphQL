@@ -9,48 +9,12 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
-use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\TypeObjectTypeFieldResolver as UpstreamTypeObjectTypeFieldResolver;
 
-class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class TypeObjectTypeFieldResolver extends UpstreamTypeObjectTypeFieldResolver
 {
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
-    {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
-    }
-
-    /**
-     * @return array<class-string<ObjectTypeResolverInterface>>
-     */
-    public function getObjectTypeResolverClassesToAttachTo(): array
-    {
-        return [
-            TypeObjectTypeResolver::class,
-        ];
-    }
-
     public function getPriorityToAttachToClasses(): int
     {
         // Higher priority => Process first
@@ -77,30 +41,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($field->getName()) {
             'name' => $field->hasArgument('namespaced'),
             default => parent::resolveCanProcess($objectTypeResolver, $field),
-        };
-    }
-
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
-    {
-        return match ($fieldName) {
-            'name' => $this->getStringScalarTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
-    {
-        return match ($fieldName) {
-            'name' => SchemaTypeModifiers::NON_NULLABLE,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        return match ($fieldName) {
-            'name' => $this->__('Type\'s name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd), indicating if the type must be namespaced or not', 'graphql-server'),
-            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
