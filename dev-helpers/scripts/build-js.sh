@@ -10,37 +10,41 @@ set +x
 # DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 PWD="$( pwd )"
 
-# Must pass the path to the plugin root as first arg to the script
-PLUGIN_DIR="$PWD/$1"
-if [ -z "$PLUGIN_DIR" ]; then
-    echo "The path to the plugin directory is missing; pass it as first argument to the script"
-else
-    echo "Building all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
-fi
-
 ########################################################################
 # Inputs
 # ----------------------------------------------------------------------
-
-# Pass the environment as PROD or DEV
-# - PROD: run `npm build` for all blocks
-# - DEV: run `npm start` for all blocks in a new tab
-# Default to PROD
-ENVIROMENT="$2"
-ENVIROMENT=(${ENVIROMENT:=PROD})
-# For PROD:
-# To install the dependencies, exec script with arg "true"
-INSTALL_DEPS="$3"
+# Must pass the path to the plugin root as first arg to the script
+PLUGIN_DIR="$PWD/$1"
+# Pass the command to execute:
+# - BUILD_PROD: run `npm build` for all blocks
+# - COMPILE_DEV: run `npm start` for all blocks in a new tab
+# - INSTALL_DEPS: run `npm install --legacy-peers` for all blocks
+COMMAND="$2"
 ########################################################################
 
-if [ $ENVIROMENT = "DEV" ]
-then
-    echo "Using `ttab` to open multiple tabs. See: https://www.npmjs.com/package/ttab"
+if [ -z "$PLUGIN_DIR" ]; then
+    fail "The path to the plugin directory is missing; pass it as first argument to the script"
 fi
 
-# Function `buildScripts` will run `npm run build`
+if [ -z "$COMMAND" ]; then
+    fail "Please provide the Command [BUILD_PROD, COMPILE_DEV, INSTALL_DEPS]"
+fi
+
+# Show message
+if [ $COMMAND = "BUILD_PROD" ]
+then
+    echo "Building all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
+elif [ $COMMAND = "COMPILE_DEV" ]
+then
+    echo "Compiling all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'. Using `ttab` to open multiple tabs. See: https://www.npmjs.com/package/ttab"
+elif [ $COMMAND = "INSTALL_DEPS" ]
+then
+    echo "Installing dependencies for all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
+fi
+
+# Function `runCommand` will run the selected command
 # on all folders in the current directory
-buildScripts(){
+runCommand(){
     CURRENT_DIR=$( pwd )
     echo "In folder '$CURRENT_DIR'"
     for file in ./*
@@ -49,49 +53,42 @@ buildScripts(){
         if [ -d "$file" ]; then
             echo "In subfolder '$file'"
             cd "$file"
-            if [ $ENVIROMENT = "DEV" ]
+            if [ $COMMAND = "BUILD_PROD" ]
+            then
+                npm run build
+            elif [ $COMMAND = "COMPILE_DEV" ]
             then
                 ttab 'npm start'
-            else
-                # Install node_modules/ dependencies
-                if [ -n "$INSTALL_DEPS" ]; then
-                    echo "Installing dependencies"
-                    npm install --legacy-peer-deps
-                fi
-                npm run build
+            elif [ $COMMAND = "INSTALL_DEPS" ]
+            then
+                npm install --legacy-peer-deps
             fi
             cd ..
         fi
     done
 }
 
-# Function `maybeBuildScripts` will invoke `buildScripts`
+# Function `maybeRunCommandInTargetDirectory` will invoke `runCommand`
 # if the target folder exists
-maybeBuildScripts(){
+maybeRunCommandInTargetDirectory(){
     if [[ -d "$TARGET_DIR" ]]
     then
         cd "$TARGET_DIR"
-        buildScripts
+        runCommand
     else
         echo "Directory '$TARGET_DIR' does not exist"
     fi
 }
 
-# # First create the symlinks to node_modules/ everywhere
-# bash -x "$DIR/create-node-modules-symlinks.sh" >/dev/null 2>&1
-
 # Packages: used by Blocks/Editor Scripts
-# TARGET_DIR="$DIR/../../packages/"
 TARGET_DIR="$PLUGIN_DIR/packages/"
-maybeBuildScripts
+maybeRunCommandInTargetDirectory
 
 # Blocks
-# TARGET_DIR="$DIR/../../blocks/"
 TARGET_DIR="$PLUGIN_DIR/blocks/"
-maybeBuildScripts
+maybeRunCommandInTargetDirectory
 
 # Editor Scripts
-# TARGET_DIR="$DIR/../../editor-scripts/"
 TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
-maybeBuildScripts
+maybeRunCommandInTargetDirectory
 
