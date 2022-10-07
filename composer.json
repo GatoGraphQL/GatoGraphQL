@@ -613,8 +613,9 @@
         "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi",
         "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi",
         "remove-unused-imports": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
-        "build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
-        "install-deps-build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp true"
+        "build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp PROD",
+        "install-deps-build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp PROD true",
+        "npm-start-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp DEV"
     },
     "scripts-descriptions": {
         "all": "Execute all required tests (except downgrade)",
