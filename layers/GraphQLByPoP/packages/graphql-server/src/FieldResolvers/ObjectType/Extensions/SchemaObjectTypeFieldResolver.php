@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
 use GraphQLByPoP\GraphQLServer\ObjectModels\ObjectType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -68,9 +71,14 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      */
     public function getFieldNamesToResolve(): array
     {
-        return [
-            'globalFields',
-        ];
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return array_merge(
+            [],
+            $moduleConfiguration->exposeGlobalFieldsInGraphQLSchema() ? [
+                'globalFields',
+            ] : []
+        );
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
