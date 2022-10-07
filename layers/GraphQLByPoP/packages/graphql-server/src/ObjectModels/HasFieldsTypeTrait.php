@@ -93,19 +93,23 @@ trait HasFieldsTypeTrait
         bool $includeDeprecated = false,
         bool $includeGlobal = true,
     ): array {
-        $fields = $includeDeprecated ?
-            $this->fields :
-            array_filter(
-                $this->fields,
+        $fields = $this->fields;
+
+        if (!$includeDeprecated) {
+            $fields = array_filter(
+                $fields,
                 fn (Field $field) => !$field->isDeprecated(),
             );
+        }
 
-        return $includeGlobal ?
-            $fields :
-            array_filter(
+        if (!$includeGlobal) {
+            $fields = array_filter(
                 $fields,
                 fn (Field $field) => !$field->getExtensions()->isGlobal(),
             );
+        }
+
+        return $fields;
     }
     
     /**
