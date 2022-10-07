@@ -89,7 +89,8 @@ const WithSpinnerTypeFieldPrintoutBody = compose( [
 
 /**
  * Check if the typeFields are empty, then do not show the spinner
- * This is an improvement when loading a new Access Control post, that it has no data, so the user is not waiting for nothing
+ * This is an improvement when loading a new Access Control post,
+ * that it has no data, so the user is not waiting for nothing
  *
  * @param {Object} props
  */
@@ -147,7 +148,8 @@ const DirectivePrintoutBody = ( props ) => {
 
 // /**
 //  * Check if the typeFields are empty, then do not show the spinner
-//  * This is an improvement when loading a new Access Control post, that it has no data, so the user is not waiting for nothing
+//  * This is an improvement when loading a new Access Control post,
+//  * that it has no data, so the user is not waiting for nothing
 //  *
 //  * @param {Object} props
 //  */
@@ -216,7 +218,8 @@ const FieldDirectivePrintout = ( props ) => {
 
 // /**
 //  * Check if the typeFields are empty, then do not show the spinner
-//  * This is an improvement when loading a new Access Control post, that it has no data, so the user is not waiting for nothing
+//  * This is an improvement when loading a new Access Control post,
+//  * that it has no data, so the user is not waiting for nothing
 //  *
 //  * @param {Object} props
 //  */
