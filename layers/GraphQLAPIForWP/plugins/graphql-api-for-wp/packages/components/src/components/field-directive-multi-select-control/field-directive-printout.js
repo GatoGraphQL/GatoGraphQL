@@ -209,9 +209,11 @@ const FieldDirectivePrintout = ( props ) => {
 	const {
 		emptyLabel,
 		disableTypeFields,
+		disableGlobalFields,
 		disableDirectives,
 		removeHeaderIfItemDisabled,
 		typeFieldHeader = __('Fields', 'graphql-api'),
+		globalFieldHeader = __('Global Fields', 'graphql-api'),
 		directiveHeader = __('Directives', 'graphql-api'),
 	} = props;
 	const emptyLabelString = emptyLabel != undefined ? emptyLabel : EMPTY_LABEL;
@@ -224,6 +226,19 @@ const FieldDirectivePrintout = ( props ) => {
 					) }
 					<CardBody>
 						<MaybeWithSpinnerTypeFieldPrintoutBody
+							{ ...props }
+							emptyLabelString={ emptyLabelString }
+						/>
+					</CardBody>
+				</>
+			) }
+			{ ! disableGlobalFields && (
+				<>
+					{ ( ! removeHeaderIfItemDisabled || ! disableGlobalFields ) && (
+						<CardHeader isShady>{ globalFieldHeader }</CardHeader>
+					) }
+					<CardBody>
+						<GlobalFieldPrintoutBody
 							{ ...props }
 							emptyLabelString={ emptyLabelString }
 						/>
