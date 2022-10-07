@@ -15,25 +15,25 @@ const GlobalFieldMultiSelectControl = compose( [
 	withState( { attributeName: 'globalFields' } ),
 	withSelect( ( select ) => {
 		const {
-			getDirectives,
-			hasRetrievedDirectives,
-			getRetrievingDirectivesErrorMessage,
+			getGlobalFields,
+			hasRetrievedGlobalFields,
+			getRetrievingGlobalFieldsErrorMessage,
 		} = select ( 'graphql-api/components' );
 		/**
-		 * Convert the directives array to this structure:
-		 * [{group:"Directives",title:"directiveName",value:"directiveName"},...]
+		 * Convert the global fields array to this structure:
+		 * [{group:"Global Fields",title:"globalFieldName",value:"globalFieldName"},...]
 		 */
-		const items = getDirectives().map( directive => (
+		const items = getGlobalFields().map( globalField => (
 			{
-				group: __('Directives', 'graphql-api'),
-				title: `${ directive }`,//`@${ directive }`,
-				value: directive,
+				group: __('Global Fields', 'graphql-api'),
+				title: `${ globalField }`,
+				value: globalField,
 			}
 		) );
 		return {
 			items,
-			hasRetrievedItems: hasRetrievedDirectives(),
-			errorMessage: getRetrievingDirectivesErrorMessage(),
+			hasRetrievedItems: hasRetrievedGlobalFields(),
+			errorMessage: getRetrievingGlobalFieldsErrorMessage(),
 		};
 	} ),
 	AddUndefinedSelectedItemIDs,
