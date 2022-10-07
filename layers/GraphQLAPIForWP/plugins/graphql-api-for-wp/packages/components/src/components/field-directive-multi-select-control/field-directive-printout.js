@@ -221,7 +221,7 @@ const FieldDirectivePrintout = ( props ) => {
 		<Card { ...props }>
 			{ ! disableTypeFields && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableDirectives ) && (
+					{ ( ! removeHeaderIfItemDisabled || ! disableDirectives || ! disableGlobalFields ) && (
 						<CardHeader isShady>{ typeFieldHeader }</CardHeader>
 					) }
 					<CardBody>
@@ -234,7 +234,7 @@ const FieldDirectivePrintout = ( props ) => {
 			) }
 			{ ! disableGlobalFields && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableGlobalFields ) && (
+					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields || ! disableDirectives ) && (
 						<CardHeader isShady>{ globalFieldHeader }</CardHeader>
 					) }
 					<CardBody>
@@ -247,7 +247,7 @@ const FieldDirectivePrintout = ( props ) => {
 			) }
 			{ ! disableDirectives && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields ) && (
+					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields || ! disableGlobalFields ) && (
 						<CardHeader isShady>{ directiveHeader }</CardHeader>
 					) }
 					<CardBody>
