@@ -1,6 +1,6 @@
 #!/bin/bash
-# This bash script generates the JS build,
-# by running `npm run build` on all scripts (blocks/editor-scripts)
+# This bash script generates the JS build for DEV,
+# by running `npm run start` on all scripts (blocks/editor-scripts)
 
 # Silent
 set +x
@@ -18,26 +18,6 @@ else
     echo "Building all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
 fi
 
-########################################################################
-# Inputs
-# ----------------------------------------------------------------------
-
-# Pass the environment as PROD or DEV
-# - PROD: run `npm build` for all blocks
-# - DEV: run `npm start` for all blocks in a new tab
-# Default to PROD
-ENVIROMENT="$2"
-ENVIROMENT=(${ENVIROMENT:=PROD})
-# For PROD:
-# To install the dependencies, exec script with arg "true"
-INSTALL_DEPS="$3"
-########################################################################
-
-if [ $ENVIROMENT = "DEV" ]
-then
-    echo "Using `ttab` to open multiple tabs. See: https://www.npmjs.com/package/ttab"
-fi
-
 # Function `buildScripts` will run `npm run build`
 # on all folders in the current directory
 buildScripts(){
@@ -49,17 +29,7 @@ buildScripts(){
         if [ -d "$file" ]; then
             echo "In subfolder '$file'"
             cd "$file"
-            if [ $ENVIROMENT = "DEV" ]
-            then
-                ttab 'npm start'
-            else
-                # Install node_modules/ dependencies
-                if [ -n "$INSTALL_DEPS" ]; then
-                    echo "Installing dependencies"
-                    npm install --legacy-peer-deps
-                fi
-                npm run build
-            fi
+            ttab 'npm start'
             cd ..
         fi
     done
@@ -77,21 +47,15 @@ maybeBuildScripts(){
     fi
 }
 
-# # First create the symlinks to node_modules/ everywhere
-# bash -x "$DIR/create-node-modules-symlinks.sh" >/dev/null 2>&1
-
 # Packages: used by Blocks/Editor Scripts
-# TARGET_DIR="$DIR/../../packages/"
 TARGET_DIR="$PLUGIN_DIR/packages/"
 maybeBuildScripts
 
 # Blocks
-# TARGET_DIR="$DIR/../../blocks/"
 TARGET_DIR="$PLUGIN_DIR/blocks/"
 maybeBuildScripts
 
 # Editor Scripts
-# TARGET_DIR="$DIR/../../editor-scripts/"
 TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
 maybeBuildScripts
 
