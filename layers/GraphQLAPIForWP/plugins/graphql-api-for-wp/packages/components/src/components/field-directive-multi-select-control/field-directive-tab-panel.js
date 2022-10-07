@@ -11,7 +11,7 @@ const FieldDirectiveTabPanel = ( props ) => {
 			activeClass="active-tab"
 			tabs={ [
 				{
-					name: 'tabFields',
+					name: 'tabTypeFields',
 					title: __('Fields', 'graphql-api'),
 					className: 'tab tab-fields',
 				},
@@ -23,7 +23,7 @@ const FieldDirectiveTabPanel = ( props ) => {
 			] }
 		>
 			{
-				( tab ) => tab.name == 'tabFields' ?
+				( tab ) => tab.name == 'tabTypeFields' ?
 					<FieldMultiSelectControl
 						{ ...props }
 						selectedItems={ typeFields }
