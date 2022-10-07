@@ -42,7 +42,7 @@ then
     echo "Installing dependencies for all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
 fi
 
-# Function `buildScripts` will run `npm run build`
+# Function `buildScripts` will run the selected command
 # on all folders in the current directory
 buildScripts(){
     CURRENT_DIR=$( pwd )
@@ -80,21 +80,15 @@ maybeBuildScripts(){
     fi
 }
 
-# # First create the symlinks to node_modules/ everywhere
-# bash -x "$DIR/create-node-modules-symlinks.sh" >/dev/null 2>&1
-
 # Packages: used by Blocks/Editor Scripts
-# TARGET_DIR="$DIR/../../packages/"
 TARGET_DIR="$PLUGIN_DIR/packages/"
 maybeBuildScripts
 
 # Blocks
-# TARGET_DIR="$DIR/../../blocks/"
 TARGET_DIR="$PLUGIN_DIR/blocks/"
 maybeBuildScripts
 
 # Editor Scripts
-# TARGET_DIR="$DIR/../../editor-scripts/"
 TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
 maybeBuildScripts
 
