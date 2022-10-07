@@ -9,6 +9,8 @@ import { __, sprintf } from '@wordpress/i18n';
 import {
 	receiveTypeFields,
 	setTypeFields,
+	receiveGlobalFields,
+	setGlobalFields,
 	receiveDirectives,
 	setDirectives,
 } from './action-creators';
@@ -23,12 +25,28 @@ export const FETCH_TYPE_FIELDS_GRAPHQL_QUERY = `
 		__schema {
 			types {
 				name
-				namespacedName:name(namespaced: true)
-				fields(includeDeprecated: true) {
+				namespacedName: name(namespaced: true)
+				fields(
+					includeDeprecated: true
+					includeGlobal: false
+				) {
 					name
 				}
 				kind
 				description
+			}
+		}
+	}
+`;
+
+/**
+ * GraphQL query to fetch the global fields from the GraphQL schema
+*/
+export const FETCH_GLOBAL_FIELDS_GRAPHQL_QUERY = `
+	query GetGlobalFields {
+		__schema {
+			globalFields {
+				name
 			}
 		}
 	}
@@ -98,6 +116,26 @@ export default {
 			fields: element.fields == null ? null : element.fields.map(subelement => subelement.name),
 		})) || [];
 		return setTypeFields( typeFields );
+	},
+
+	/**
+	 * Fetch the global fields from the GraphQL server
+	 */
+	* getGlobalFields() {
+
+		const response = yield receiveGlobalFields( FETCH_GLOBAL_FIELDS_GRAPHQL_QUERY );
+		/**
+		 * If there were erros when executing the query, return an empty list, and keep the error in the state
+		 */
+		const maybeErrorMessage = maybeGetErrorMessage(response);
+		if (maybeErrorMessage) {
+			return setGlobalFields( [], maybeErrorMessage );
+		}
+		/**
+		 * Flatten the response to an array containing the global field name directly (extracting them from under the "name" key)
+		 */
+		const globalFields = response.data?.__schema?.globalFields?.map(element => element.name) || [];
+		return setGlobalFields( globalFields );
 	},
 
 	/**

@@ -5,6 +5,9 @@ const DEFAULT_STATE = {
 	typeFields: [],
 	hasRetrievedTypeFields: false,
 	retrievingTypeFieldsErrorMessage: null,
+	globalFields: [],
+	hasRetrievedGlobalFields: false,
+	retrievingGlobalFieldsErrorMessage: null,
 	directives: [],
 	hasRetrievedDirectives: false,
 	retrievingDirectivesErrorMessage: null,
@@ -29,6 +32,13 @@ const schemaInstrospection = (
 				typeFields: action.typeFields,
 				hasRetrievedTypeFields: true,
 				retrievingTypeFieldsErrorMessage: action.errorMessage,
+			};
+		case 'SET_GLOBAL_FIELDS':
+			return {
+				...state,
+				globalFields: action.globalFields,
+				hasRetrievedGlobalFields: true,
+				retrievingGlobalFieldsErrorMessage: action.errorMessage,
 			};
 		case 'SET_DIRECTIVES':
 			return {

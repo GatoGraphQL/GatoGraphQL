@@ -86,25 +86,43 @@ trait HasFieldsTypeTrait
     }
 
     /**
+     * @param bool $includeGlobal Custom parameter by this GraphQL Server (i.e. it is not present in the GraphQL spec)
      * @return Field[]
      */
-    public function getFields(bool $includeDeprecated = false): array
-    {
-        return $includeDeprecated ?
-            $this->fields :
-            array_filter(
-                $this->fields,
+    public function getFields(
+        bool $includeDeprecated = false,
+        bool $includeGlobal = true,
+    ): array {
+        $fields = $this->fields;
+
+        if (!$includeDeprecated) {
+            $fields = array_filter(
+                $fields,
                 fn (Field $field) => !$field->isDeprecated(),
             );
+        }
+
+        if (!$includeGlobal) {
+            $fields = array_filter(
+                $fields,
+                fn (Field $field) => !$field->getExtensions()->isGlobal(),
+            );
+        }
+
+        return $fields;
     }
+
     /**
+     * @param bool $includeGlobal Custom parameter by this GraphQL Server (i.e. it is not present in the GraphQL spec)
      * @return string[]
      */
-    public function getFieldIDs(bool $includeDeprecated = false): array
-    {
+    public function getFieldIDs(
+        bool $includeDeprecated = false,
+        bool $includeGlobal = true,
+    ): array {
         return array_map(
             fn (Field $field) => $field->getID(),
-            $this->getFields($includeDeprecated)
+            $this->getFields($includeDeprecated, $includeGlobal)
         );
     }
 }

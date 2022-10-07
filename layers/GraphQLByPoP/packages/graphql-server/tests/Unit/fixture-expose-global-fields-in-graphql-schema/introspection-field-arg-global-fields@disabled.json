@@ -1,0 +1,33 @@
+{
+    "errors": [
+        {
+            "message": "On field 'fields' of type '__Type', there is no argument with name 'includeGlobal'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 20
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(includeGlobal: true)",
+                    "fields(includeGlobal: true) { ... }",
+                    "type(name: \"QueryRoot\") { ... }",
+                    "__schema { ... }",
+                    "query IntrospectionFieldArgGlobalFields { ... }"
+                ],
+                "type": "__Type",
+                "field": "fields(includeGlobal: true) { ... }",
+                "code": "gql@5.4.1[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+            }
+        }
+    ],
+    "data": {
+        "__schema": {
+            "type": {
+                "fields": null
+            }
+        }
+    }
+}

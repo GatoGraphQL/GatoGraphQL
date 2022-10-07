@@ -1208,6 +1208,9 @@
               "name": "id"
             },
             {
+              "name": "isGlobal"
+            },
+            {
               "name": "isMutation"
             },
             {
@@ -1384,6 +1387,9 @@
             },
             {
               "name": "extensions"
+            },
+            {
+              "name": "globalFields"
             },
             {
               "name": "id"

@@ -1,0 +1,7 @@
+query IntrospectionGlobalFields {
+    __schema {
+        globalFields {
+            name
+        }
+    }
+}

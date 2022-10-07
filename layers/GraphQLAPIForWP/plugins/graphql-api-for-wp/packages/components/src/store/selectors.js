@@ -57,6 +57,39 @@ export function getRetrievingTypeFieldsErrorMessage( state ) {
 };
 
 /**
+ * Get the global fields from the GraphQL schema
+ *
+ * @param {Object} state Store state
+ *
+ * @return {array} The list of global fields from the GraphQL schema
+ */
+export function getGlobalFields( state ) {
+	return state.globalFields;
+};
+
+/**
+ * Have the global fields been retrieved from the GraphQL server?
+ *
+ * @param {Object} state Store state
+ *
+ * @return {bool} The list of global fields from the GraphQL schema
+ */
+export function hasRetrievedGlobalFields( state ) {
+	return state.hasRetrievedGlobalFields;
+};
+
+/**
+ * Get the error message from retrieving the global fields from the GraphQL server, if any
+ *
+ * @param {Object} state Store state
+ *
+ * @return {string|null} The error message
+ */
+export function getRetrievingGlobalFieldsErrorMessage( state ) {
+	return state.retrievingGlobalFieldsErrorMessage;
+};
+
+/**
  * Get the directives from the GraphQL schema
  *
  * @param {Object} state Store state

@@ -1,0 +1,17 @@
+{
+    "data": {
+        "__schema": {
+            "globalFields": [
+                {
+                    "name": "_namespace"
+                },
+                {
+                    "name": "_qualifiedTypeName"
+                },
+                {
+                    "name": "_typeName"
+                }
+            ]
+        }
+    }
+}

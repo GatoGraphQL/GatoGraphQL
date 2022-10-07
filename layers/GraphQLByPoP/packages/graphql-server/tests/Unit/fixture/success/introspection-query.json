@@ -296,6 +296,22 @@
                             "deprecationReason": null
                         },
                         {
+                          "name": "isGlobal",
+                          "description": "Is this a global field? (i.e. a field that is added to all types in the schema)",
+                          "args": [],
+                          "type": {
+                            "kind": "NON_NULL",
+                            "name": "Boolean!",
+                            "ofType": {
+                              "kind": "SCALAR",
+                              "name": "Boolean",
+                              "ofType": null
+                            }
+                          },
+                          "isDeprecated": false,
+                          "deprecationReason": null
+                        },
+                        {
                             "name": "isMutation",
                             "description": "Is this a mutation field? Particularly required when doing 'nested mutations' (where mutation fields can be present on any type, not only on `MutationRoot`)",
                             "args": [],

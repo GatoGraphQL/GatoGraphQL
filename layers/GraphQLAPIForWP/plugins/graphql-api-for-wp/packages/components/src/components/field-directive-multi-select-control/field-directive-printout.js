@@ -11,7 +11,7 @@ import withErrorMessage from '../loading/with-error-message';
 import { GROUP_FIELDS_UNDER_TYPE_FOR_PRINT, EMPTY_LABEL } from '../../default-configuration';
 import '../base-styles/checkbox-list.scss';
 
-const FieldPrintoutBody = ( props ) => {
+const TypeFieldPrintoutBody = ( props ) => {
 	const {
 		typeFields,
 		typeFieldNames,
@@ -82,35 +82,63 @@ const FieldPrintoutBody = ( props ) => {
 /**
  * Add a spinner when loading the typeFieldNames and typeFields is not empty
  */
-const WithSpinnerFieldPrintoutBody = compose( [
+const WithSpinnerTypeFieldPrintoutBody = compose( [
 	withSpinner(),
 	withErrorMessage(),
-] )( FieldPrintoutBody );
+] )( TypeFieldPrintoutBody );
 
 /**
  * Check if the typeFields are empty, then do not show the spinner
- * This is an improvement when loading a new Access Control post, that it has no data, so the user is not waiting for nothing
+ * This is an improvement when loading a new Access Control post,
+ * that it has no data, so the user is not waiting for nothing
  *
  * @param {Object} props
  */
-const MaybeWithSpinnerFieldPrintoutBody = ( props ) => {
+const MaybeWithSpinnerTypeFieldPrintoutBody = ( props ) => {
 	const { typeFields } = props;
 	if ( !! typeFields.length ) {
 		return (
-			<WithSpinnerFieldPrintoutBody { ...props } />
+			<WithSpinnerTypeFieldPrintoutBody { ...props } />
 		)
 	}
 	return (
-		<FieldPrintoutBody { ...props } />
+		<TypeFieldPrintoutBody { ...props } />
 	);
 }
 
 /**
- * Print the selected fields and directives.
- * Watch out: object `typeFields` contains the namespaced type as value, such as `PoP_ComponentModel_Root.users`, which is not proper
- * Then, convert this value to what the user expects: `Root/users`. Because of this formatting, we need to execute a call against the server,
- * to fetch the information of how the type name and type namespaced name
- *
+ * @param {Object} props
+ */
+const GlobalFieldPrintoutBody = ( props ) => {
+	const {
+		globalFields,
+		emptyLabelString,
+	} = props;
+	return (
+		<>
+			{ !! globalFields.length && (
+				<ul class="checkbox-list">
+					{ globalFields.map( globalField =>
+						<li
+							key={ globalField }
+						>
+							<CheckboxControl
+								label={ `${ globalField }` }
+								checked={ true }
+								disabled={ true }
+							/>
+						</li>
+					) }
+				</ul>
+			) }
+			{ !globalFields.length && (
+				emptyLabelString
+			) }
+		</>
+	);
+}
+
+/**
  * @param {Object} props
  */
 const DirectivePrintoutBody = ( props ) => {
@@ -127,7 +155,7 @@ const DirectivePrintoutBody = ( props ) => {
 							key={ directive }
 						>
 							<CheckboxControl
-								label={ `${ directive }` /* `@${ directive }` */ }
+								label={ `${ directive }` }
 								checked={ true }
 								disabled={ true }
 							/>
@@ -152,7 +180,8 @@ const DirectivePrintoutBody = ( props ) => {
 
 // /**
 //  * Check if the typeFields are empty, then do not show the spinner
-//  * This is an improvement when loading a new Access Control post, that it has no data, so the user is not waiting for nothing
+//  * This is an improvement when loading a new Access Control post,
+//  * that it has no data, so the user is not waiting for nothing
 //  *
 //  * @param {Object} props
 //  */
@@ -179,22 +208,37 @@ const DirectivePrintoutBody = ( props ) => {
 const FieldDirectivePrintout = ( props ) => {
 	const {
 		emptyLabel,
-		disableFields,
+		disableTypeFields,
+		disableGlobalFields,
 		disableDirectives,
 		removeHeaderIfItemDisabled,
-		fieldHeader = __('Fields', 'graphql-api'),
+		typeFieldHeader = __('Fields', 'graphql-api'),
+		globalFieldHeader = __('Global Fields', 'graphql-api'),
 		directiveHeader = __('Directives', 'graphql-api'),
 	} = props;
 	const emptyLabelString = emptyLabel != undefined ? emptyLabel : EMPTY_LABEL;
 	return (
 		<Card { ...props }>
-			{ ! disableFields && (
+			{ ! disableTypeFields && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableDirectives ) && (
-						<CardHeader isShady>{ fieldHeader }</CardHeader>
+					{ ( ! removeHeaderIfItemDisabled || ! disableDirectives || ! disableGlobalFields ) && (
+						<CardHeader isShady>{ typeFieldHeader }</CardHeader>
 					) }
 					<CardBody>
-						<MaybeWithSpinnerFieldPrintoutBody
+						<MaybeWithSpinnerTypeFieldPrintoutBody
+							{ ...props }
+							emptyLabelString={ emptyLabelString }
+						/>
+					</CardBody>
+				</>
+			) }
+			{ ! disableGlobalFields && (
+				<>
+					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields || ! disableDirectives ) && (
+						<CardHeader isShady>{ globalFieldHeader }</CardHeader>
+					) }
+					<CardBody>
+						<GlobalFieldPrintoutBody
 							{ ...props }
 							emptyLabelString={ emptyLabelString }
 						/>
@@ -203,7 +247,7 @@ const FieldDirectivePrintout = ( props ) => {
 			) }
 			{ ! disableDirectives && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableFields ) && (
+					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields || ! disableGlobalFields ) && (
 						<CardHeader isShady>{ directiveHeader }</CardHeader>
 					) }
 					<CardBody>
@@ -219,36 +263,10 @@ const FieldDirectivePrintout = ( props ) => {
 	);
 }
 
-// /**
-//  * Check if the typeFields are empty, then do not show the spinner
-//  * This is an improvement when loading a new Access Control post, that it has no data, so the user is not waiting for nothing
-//  *
-//  * @param {Object} props
-//  */
-// const MaybeWithSpinnerFieldDirectivePrintout = ( props ) => {
-// 	const { typeFields } = props;
-// 	if ( !! typeFields.length ) {
-// 		return (
-// 			<WithSpinnerFieldDirectivePrintout { ...props } />
-// 		)
-// 	}
-// 	return (
-// 		<FieldDirectivePrintout { ...props } />
-// 	);
-// }
-
-// /**
-//  * Add a spinner when loading the typeFieldNames and typeFields is not empty
-//  */
-// const WithSpinnerFieldDirectivePrintout = compose( [
-// 	withSpinner(),
-// 	withErrorMessage(),
-// ] )( FieldDirectivePrintout );
-
 export default compose( [
 	withSelect( ( select, ownProps ) => {
-		const { disableFields } = ownProps;
-		if ( disableFields ) {
+		const { disableTypeFields } = ownProps;
+		if ( disableTypeFields ) {
 			return {};
 		}
 
@@ -280,4 +298,4 @@ export default compose( [
 			errorMessage: getRetrievingTypeFieldsErrorMessage(),
 		};
 	} ),
-] )( FieldDirectivePrintout/*MaybeWithSpinnerFieldDirectivePrintout*/ );
+] )( FieldDirectivePrintout );

@@ -51,7 +51,7 @@ const PostListPrintoutBody = ( props ) => {
 }
 
 /**
- * Add a spinner when loading the typeFieldNames and typeFields is not empty
+ * Add a spinner when loading the post titles and the post list is not empty
  */
 const WithSpinnerPostListPrintoutBody = compose( [
 	withSpinner(),

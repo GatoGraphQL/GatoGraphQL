@@ -1256,6 +1256,8 @@ extend type __Directive {
 }
 
 type _FieldExtensions {
+  isGlobal: Boolean!
+
   # Useful for nested mutations
   isMutation: Boolean!
 

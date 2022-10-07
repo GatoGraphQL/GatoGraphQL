@@ -17,6 +17,7 @@ abstract class AbstractControlBlock extends AbstractBlock
     use WithTypeFieldControlBlockTrait;
 
     public final const ATTRIBUTE_NAME_TYPE_FIELDS = 'typeFields';
+    public final const ATTRIBUTE_NAME_GLOBAL_FIELDS = 'globalFields';
     public final const ATTRIBUTE_NAME_DIRECTIVES = 'directives';
 
     private ?TypeRegistryInterface $typeRegistry = null;
@@ -36,9 +37,14 @@ abstract class AbstractControlBlock extends AbstractBlock
         return true;
     }
 
-    protected function disableFields(): bool
+    protected function disableTypeFields(): bool
     {
         return false;
+    }
+
+    protected function disableGlobalFields(): bool
+    {
+        return true;
     }
 
     protected function disableDirectives(): bool
@@ -61,10 +67,10 @@ abstract class AbstractControlBlock extends AbstractBlock
     {
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
-        $fieldTypeContent = $directiveContent = '';
+        $fieldTypeContent = $globalFieldContent = $directiveContent = '';
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$this->disableFields()) {
+        if (!$this->disableTypeFields()) {
             $fieldTypeContent = $moduleConfiguration->getEmptyLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];
             if ($typeFields) {
@@ -103,38 +109,48 @@ abstract class AbstractControlBlock extends AbstractBlock
                 }
             }
         }
+        if (!$this->disableGlobalFields()) {
+            $globalFieldContent = $moduleConfiguration->getEmptyLabel();
+            $globalFields = $attributes[self::ATTRIBUTE_NAME_GLOBAL_FIELDS] ?? [];
+            if ($globalFields) {
+                $globalFieldContent = sprintf(
+                    '<ul><li><code>%s</code></li></ul>',
+                    implode('</code></li><li><code>', $globalFields)
+                );
+            }
+        }
         if (!$this->disableDirectives()) {
             $directiveContent = $moduleConfiguration->getEmptyLabel();
             $directives = $attributes[self::ATTRIBUTE_NAME_DIRECTIVES] ?? [];
             if ($directives) {
-                // // Notice we are adding the "@" symbol for GraphQL directives
                 $directiveContent = sprintf(
-                    // '<ul><li><code>@%s</code></li></ul>',
-                    // implode('</code></li><li><code>@', $directives)
                     '<ul><li><code>%s</code></li></ul>',
                     implode('</code></li><li><code>', $directives)
                 );
             }
         }
         $blockDataContent = '';
-        if (!$this->disableFields() && !$this->disableDirectives()) {
-            $blockDataPlaceholder = <<<EOT
-                <h4>%s</h4>
-                %s
-                <h4>%s</h4>
-                %s
-EOT;
-            $blockDataContent = sprintf(
+        $blockDataPlaceholder = '<h4>%s</h4>%s';
+        if (!$this->disableTypeFields()) {
+            $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
                 __('Fields', 'graphql-api'),
                 $fieldTypeContent,
-                __('Directives', 'graphql-api'),
-                $directiveContent
             );
-        } elseif (!$this->disableFields()) {
-            $blockDataContent = $fieldTypeContent;
-        } elseif (!$this->disableDirectives()) {
-            $blockDataContent = $directiveContent;
+        }
+        if (!$this->disableGlobalFields()) {
+            $blockDataContent .= sprintf(
+                $blockDataPlaceholder,
+                __('Global Fields', 'graphql-api'),
+                $globalFieldContent,
+            );
+        }
+        if (!$this->disableDirectives()) {
+            $blockDataContent .= sprintf(
+                $blockDataPlaceholder,
+                __('Directives', 'graphql-api'),
+                $directiveContent,
+            );
         }
 
         $blockContentPlaceholder = <<<EOT

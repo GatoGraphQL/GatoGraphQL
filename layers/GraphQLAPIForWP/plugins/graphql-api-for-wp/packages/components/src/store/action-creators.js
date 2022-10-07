@@ -30,6 +30,36 @@ export function receiveTypeFields( query ) {
 };
 
 /**
+ * Returns an action object used in setting the globalFields object in the state
+ *
+ * @param {Array} globalFields Array of globalField objects received, where each object has key "type" for the type name, and key "fields" with an array of the type's fields.
+ * @param {string} errorMessage Error message if fetching the objects failed
+ *
+ * @return {Object} Action object.
+ */
+ export function setGlobalFields( globalFields, errorMessage ) {
+	return {
+		type: 'SET_GLOBAL_FIELDS',
+		globalFields,
+		errorMessage,
+	};
+};
+
+/**
+ * Returns an action object used in signalling that the globalFields object must be received.
+ *
+ * @param {string} query GraphQL query to execute
+ *
+ * @return {Object} Action object.
+ */
+export function receiveGlobalFields( query ) {
+	return {
+		type: 'RECEIVE_GLOBAL_FIELDS',
+		query,
+	};
+};
+
+/**
  * Returns an action object used in setting the directives in the state
  *
  * @param {Array} directives Array of directives received.
