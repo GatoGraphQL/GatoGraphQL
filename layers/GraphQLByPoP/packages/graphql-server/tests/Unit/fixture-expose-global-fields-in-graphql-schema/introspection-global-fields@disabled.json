@@ -1,0 +1,29 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'globalFields' on type '__Schema'",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 9
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "globalFields { ... }",
+                    "__schema { ... }",
+                    "query IntrospectionGlobalFields { ... }"
+                ],
+                "type": "__Schema",
+                "field": "globalFields { ... }",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "__schema": {
+            "globalFields": null
+        }
+    }
+}
