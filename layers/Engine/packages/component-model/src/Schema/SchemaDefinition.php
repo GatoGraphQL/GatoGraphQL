@@ -39,6 +39,7 @@ class SchemaDefinition
     public final const DIRECTIVES = 'directives';
     public final const GLOBAL_DIRECTIVES = 'globalDirectives';
     public final const IS_SENSITIVE_DATA_ELEMENT = 'isSensitiveDataElement';
+    public final const FIELD_IS_GLOBAL = 'isGlobal';
     public final const FIELD_IS_MUTATION = 'isMutation';
     public final const DIRECTIVE_KIND = 'directiveKind';
     public final const DIRECTIVE_LOCATIONS = 'directiveLocations';

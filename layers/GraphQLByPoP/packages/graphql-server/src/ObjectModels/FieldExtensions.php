@@ -8,6 +8,11 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 
 class FieldExtensions extends AbstractSchemaDefinitionReferenceObject
 {
+    public function isGlobal(): bool
+    {
+        return $this->schemaDefinition[SchemaDefinition::FIELD_IS_GLOBAL];
+    }
+
     public function isMutation(): bool
     {
         return $this->schemaDefinition[SchemaDefinition::FIELD_IS_MUTATION];

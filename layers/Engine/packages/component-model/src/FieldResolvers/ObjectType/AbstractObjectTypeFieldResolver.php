@@ -830,6 +830,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function getFieldExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return [
+            SchemaDefinition::FIELD_IS_GLOBAL => $this->isGlobal($objectTypeResolver, $fieldName),
             SchemaDefinition::FIELD_IS_MUTATION => $this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null,
             SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
         ];

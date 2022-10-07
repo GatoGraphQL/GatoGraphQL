@@ -304,6 +304,21 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return SchemaTypeModifiers::NONE;
     }
 
+    public function isFieldGlobal(FieldInterface|string $fieldOrFieldName): bool
+    {
+        if ($fieldOrFieldName instanceof FieldInterface) {
+            $field = $fieldOrFieldName;
+            $fieldName = $field->getName();
+        } else {
+            $fieldName = $fieldOrFieldName;
+        }
+        $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
+        if ($schemaDefinitionResolver !== $this) {
+            return $schemaDefinitionResolver->isFieldGlobal($fieldOrFieldName);
+        }
+        return false;
+    }
+
     public function isFieldAMutation(FieldInterface|string $fieldOrFieldName): bool
     {
         if ($fieldOrFieldName instanceof FieldInterface) {
@@ -507,6 +522,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     protected function getFieldExtensionsSchemaDefinition(string $fieldName): array
     {
         return [
+            SchemaDefinition::FIELD_IS_GLOBAL => $this->isFieldGlobal($fieldName),
             SchemaDefinition::FIELD_IS_MUTATION => $this->isFieldAMutation($fieldName),
             SchemaDefinition::IS_SENSITIVE_DATA_ELEMENT => in_array($fieldName, $this->getSensitiveFieldNames()),
         ];
