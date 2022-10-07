@@ -211,7 +211,7 @@ const FieldDirectivePrintout = ( props ) => {
 		disableTypeFields,
 		disableDirectives,
 		removeHeaderIfItemDisabled,
-		fieldHeader = __('Fields', 'graphql-api'),
+		typeFieldHeader = __('Fields', 'graphql-api'),
 		directiveHeader = __('Directives', 'graphql-api'),
 	} = props;
 	const emptyLabelString = emptyLabel != undefined ? emptyLabel : EMPTY_LABEL;
@@ -220,7 +220,7 @@ const FieldDirectivePrintout = ( props ) => {
 			{ ! disableTypeFields && (
 				<>
 					{ ( ! removeHeaderIfItemDisabled || ! disableDirectives ) && (
-						<CardHeader isShady>{ fieldHeader }</CardHeader>
+						<CardHeader isShady>{ typeFieldHeader }</CardHeader>
 					) }
 					<CardBody>
 						<MaybeWithSpinnerTypeFieldPrintoutBody
