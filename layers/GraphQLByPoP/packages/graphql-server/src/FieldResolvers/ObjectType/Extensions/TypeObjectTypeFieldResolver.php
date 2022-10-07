@@ -111,7 +111,7 @@ class TypeObjectTypeFieldResolver extends UpstreamTypeObjectTypeFieldResolver
                 if ($type instanceof HasFieldsTypeInterface) {
                     return $type->getFieldIDs(
                         $fieldDataAccessor->getValue('includeDeprecated') ?? false,
-                        $fieldDataAccessor->getValue('includeGlobal'),
+                        $fieldDataAccessor->getValue('includeGlobal') ?? true,
                     );
                 }
                 return null;
