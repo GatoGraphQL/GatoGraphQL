@@ -5,9 +5,9 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 import FieldDirectiveTabPanel from './field-directive-tab-panel';
 import FieldDirectivePrintout from './field-directive-printout';
-import TypeFieldMultiSelectControl from './type-field-multi-select-control';
-import GlobalFieldMultiSelectControl from './global-field-multi-select-control';
-import DirectiveMultiSelectControl from './directive-multi-select-control';
+// import TypeFieldMultiSelectControl from './type-field-multi-select-control';
+// import GlobalFieldMultiSelectControl from './global-field-multi-select-control';
+// import DirectiveMultiSelectControl from './directive-multi-select-control';
 
 /**
  * Display an error message if loading data failed
