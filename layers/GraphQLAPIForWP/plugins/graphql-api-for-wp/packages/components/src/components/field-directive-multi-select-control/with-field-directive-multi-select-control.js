@@ -29,12 +29,15 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			disableDirectives,
 			hideLabels
 		} = props;
+		if (disableTypeFields && disableGlobalFields && disableDirectives) {
+			throw 'At least 1 option must be enabled: [type fields, global fields, directives]';
+		}
 		const className = 'graphql-api-multi-select-control-list';
 		const leftSideLabel = selectLabel || __('Select fields and directives:', 'graphql-api');
 		const rightSideLabel = configurationLabel || __('Configuration:', 'graphql-api');
-		const onlyEnableTypeFields = ! disableTypeFields && disableGlobalFields && disableDirectives;
-		const onlyEnableGlobalFields = ! disableGlobalFields && disableTypeFields && disableDirectives;
-		const onlyEnableDirectives = ! disableDirectives && disableTypeFields && disableGlobalFields;
+		// const onlyEnableTypeFields = ! disableTypeFields && disableGlobalFields && disableDirectives;
+		// const onlyEnableGlobalFields = ! disableGlobalFields && disableTypeFields && disableDirectives;
+		// const onlyEnableDirectives = ! disableDirectives && disableTypeFields && disableGlobalFields;
 		return (
 			<div className={ className }>
 				<div className={ className+'__items' }>
@@ -48,35 +51,41 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 								}
 								<div className={ componentClassName }>
 									{ isSelected && (
-										<>
-											{ onlyEnableTypeFields &&
-												<TypeFieldMultiSelectControl
-													{ ...props }
-													selectedItems={ typeFields }
-												/>
-											}
-											{ onlyEnableGlobalFields &&
-												<GlobalFieldMultiSelectControl
-													{ ...props }
-													selectedItems={ globalFields }
-												/>
-											}
-											{ onlyEnableDirectives &&
-												<DirectiveMultiSelectControl
-													{ ...props }
-													selectedItems={ directives }
-												/>
-											}
-											{ 	! onlyEnableTypeFields && ! onlyEnableGlobalFields && ! onlyEnableDirectives &&
-												<FieldDirectiveTabPanel
-													{ ...props }
-													typeFields={ typeFields }
-													globalFields={ globalFields }
-													directives={ directives }
-													className={ className }
-												/>
-											}
-										</>
+										/**
+										 * This previous code printed the inner component directly
+										 * if it's the only one enabled. But commented it out,
+										 * as it doesn't look as nice as still showing the TabPanel
+										 * (even though will have just a single tab).
+										 */
+										// <>
+										// 	{ onlyEnableTypeFields &&
+										// 		<TypeFieldMultiSelectControl
+										// 			{ ...props }
+										// 			selectedItems={ typeFields }
+										// 		/>
+										// 	}
+										// 	{ onlyEnableGlobalFields &&
+										// 		<GlobalFieldMultiSelectControl
+										// 			{ ...props }
+										// 			selectedItems={ globalFields }
+										// 		/>
+										// 	}
+										// 	{ onlyEnableDirectives &&
+										// 		<DirectiveMultiSelectControl
+										// 			{ ...props }
+										// 			selectedItems={ directives }
+										// 		/>
+										// 	}
+										// 	{ 	! onlyEnableTypeFields && ! onlyEnableGlobalFields && ! onlyEnableDirectives &&
+										<FieldDirectiveTabPanel
+											{ ...props }
+											typeFields={ typeFields }
+											globalFields={ globalFields }
+											directives={ directives }
+											className={ className }
+										/>
+										// 	}
+										// </>
 									) }
 									{ !isSelected && (
 										<FieldDirectivePrintout
