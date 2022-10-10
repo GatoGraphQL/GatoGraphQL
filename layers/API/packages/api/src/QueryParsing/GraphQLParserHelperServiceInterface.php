@@ -6,13 +6,13 @@ namespace PoPAPI\API\QueryParsing;
 
 use PoP\GraphQLParser\Exception\Parser\LogicErrorParserException;
 use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
-use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
 
 interface GraphQLParserHelperServiceInterface
 {
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
      * @throws LogicErrorParserException
      * @param array<string,mixed> $variableValues

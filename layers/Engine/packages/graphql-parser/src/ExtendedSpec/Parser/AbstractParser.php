@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\LogicErrorParserException;
 use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
-use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DocumentDynamicVariableReference;
@@ -107,7 +107,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * that can be thrown.
      *
      * @throws LogicErrorParserException
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
      */
     public function parse(string $source): Document
