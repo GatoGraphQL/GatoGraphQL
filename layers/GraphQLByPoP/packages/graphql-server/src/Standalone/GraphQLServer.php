@@ -14,6 +14,7 @@ use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
+use PoP\GraphQLParser\Exception\AbstractASTNodeException;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\AbstractASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
@@ -178,6 +179,13 @@ class GraphQLServer implements GraphQLServerInterface
             );
             $executableDocument = $graphQLQueryParsingPayload->executableDocument;
             $documentObjectResolvedFieldValueReferencedFields = $graphQLQueryParsingPayload->objectResolvedFieldValueReferencedFields;
+        } catch (AbstractASTNodeException $astNodeException) {
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new QueryFeedback(
+                    $astNodeException->getFeedbackItemResolution(),
+                    $astNodeException->getAstNode(),
+                )
+            );
         } catch (AbstractASTNodeParserException $astNodeParserException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
