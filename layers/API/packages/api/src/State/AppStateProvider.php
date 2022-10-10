@@ -149,6 +149,14 @@ class AppStateProvider extends AbstractAppStateProvider
 
             try {
                 $executableDocument->validateAndInitialize();
+            } catch (AbstractASTNodeException $astNodeException) {
+                $executableDocument = null;
+                App::getFeedbackStore()->documentFeedbackStore->addError(
+                    new QueryFeedback(
+                        $astNodeException->getFeedbackItemResolution(),
+                        $astNodeException->getAstNode(),
+                    )
+                );
             } catch (AbstractASTNodeParserException $astNodeParserException) {
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(

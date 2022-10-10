@@ -8,6 +8,7 @@ use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormat
 use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineInterface;
+use PoP\GraphQLParser\Exception\AbstractASTNodeException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
@@ -64,6 +65,8 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
             );
             $executableDocument = $graphQLQueryParsingPayload->executableDocument;
             $executableDocument->validateAndInitialize();
+        } catch (AbstractASTNodeException $e) {
+            return [];
         } catch (AbstractParserException $e) {
             return [];
         }
