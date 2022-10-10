@@ -7,9 +7,9 @@ namespace PoPAPI\API\QueryParsing;
 use PoPAPI\API\ObjectModels\GraphQLQueryParsingPayload;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Parser;
-use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
-use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\Exception\Parser\LogicErrorParserException;
+use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
@@ -20,9 +20,9 @@ class GraphQLParserHelperService implements GraphQLParserHelperServiceInterface
     use BasicServiceTrait;
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
-     * @throws ASTNodeParserException
+     * @throws LogicErrorParserException
      * @param array<string,mixed> $variableValues
      */
     public function parseGraphQLQuery(

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -51,7 +51,7 @@ class ParserTest extends AbstractTestCase
 
     public function testInvalidSelection(): void
     {
-        $this->expectException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorParserException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, [Token::tokenName(Token::TYPE_RBRACE)]))->getMessage());
         $parser = $this->getParser();
         $parser->parse('
@@ -157,7 +157,7 @@ GRAPHQL;
      */
     public function testWrongQueries(string $query): void
     {
-        $this->expectException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorParserException::class);
         $parser = $this->getParser();
 
         $parser->parse($query);
@@ -1912,7 +1912,7 @@ GRAPHQL;
 
     public function testNoDuplicateKeysInInputObjectInVariable(): void
     {
-        $this->expectException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorParserException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_6_3, ['name']))->getMessage());
         $parser = $this->getParser();
         $parser->parse('
@@ -1927,7 +1927,7 @@ GRAPHQL;
 
     public function testNoDuplicateKeysInInputObjectInArgument(): void
     {
-        $this->expectException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorParserException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_6_3, ['name']))->getMessage());
         $parser          = $this->getParser();
         $parser->parse('
@@ -1942,7 +1942,7 @@ GRAPHQL;
 
     public function testVariableStartingWithNumber(): void
     {
-        $this->expectException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorParserException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, ['NUMBER']))->getMessage());
         $parser = $this->getParser();
         $parser->parse('
@@ -1957,7 +1957,7 @@ GRAPHQL;
 
     public function testVariableReferenceStartingWithNumber(): void
     {
-        $this->expectException(SyntaxErrorException::class);
+        $this->expectException(SyntaxErrorParserException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, ['NUMBER']))->getMessage());
         $parser = $this->getParser();
         $parser->parse('

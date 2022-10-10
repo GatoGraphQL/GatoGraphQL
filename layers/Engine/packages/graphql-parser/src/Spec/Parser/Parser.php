@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
-use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -42,7 +42,7 @@ class Parser extends Tokenizer implements ParserInterface
     protected array $variables;
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
      */
     public function parse(string $source): Document
@@ -66,7 +66,7 @@ class Parser extends Tokenizer implements ParserInterface
                     break;
 
                 default:
-                    throw new SyntaxErrorException(
+                    throw new SyntaxErrorParserException(
                         new FeedbackItemResolution(
                             GraphQLParserErrorFeedbackItemProvider::class,
                             GraphQLParserErrorFeedbackItemProvider::E_1,
@@ -359,7 +359,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @param string[] $types
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function expectMulti(array $types): Token
     {
@@ -371,7 +371,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function parseVariableReference(): VariableReference
     {
@@ -412,7 +412,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function parseFragmentReference(): FragmentReference
     {
@@ -431,7 +431,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function eatIdentifierToken(): Token
     {
@@ -445,7 +445,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function parseBodyItem(string $type): FieldInterface|FragmentBondInterface
     {
@@ -652,7 +652,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function parseValue(): InputList|InputObject|Literal|Enum|VariableReference
     {
@@ -724,7 +724,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function parseObject(): InputObject
     {
@@ -743,7 +743,7 @@ class Parser extends Tokenizer implements ParserInterface
 
             // Validate no duplicated keys in InputObject
             if (property_exists($object, $key)) {
-                throw new SyntaxErrorException(
+                throw new SyntaxErrorParserException(
                     new FeedbackItemResolution(
                         GraphQLSpecErrorFeedbackItemProvider::class,
                         GraphQLSpecErrorFeedbackItemProvider::E_5_6_3,
@@ -771,7 +771,7 @@ class Parser extends Tokenizer implements ParserInterface
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function parseFragment(): Fragment
     {

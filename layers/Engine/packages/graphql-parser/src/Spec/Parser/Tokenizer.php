@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\Root\Services\StandaloneServiceTrait;
 
@@ -73,7 +73,7 @@ class Tokenizer
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function scan(): Token
     {
@@ -155,7 +155,7 @@ class Tokenizer
             return $this->scanString();
         }
 
-        throw new SyntaxErrorException(
+        throw new SyntaxErrorParserException(
             new FeedbackItemResolution(
                 GraphQLParserErrorFeedbackItemProvider::class,
                 GraphQLParserErrorFeedbackItemProvider::E_5,
@@ -219,7 +219,7 @@ class Tokenizer
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      */
     protected function expect(string $type): Token
     {
@@ -288,7 +288,7 @@ class Tokenizer
     }
 
     /**
-     * @throws SyntaxErrorException
+     * @throws SyntaxErrorParserException
      * @see http://facebook.github.io/graphql/October2016/#sec-String-Value
      */
     protected function scanString(): Token
@@ -329,7 +329,7 @@ class Tokenizer
                     case 'u':
                         $codepoint = substr($this->source, $this->pos + 1, 4);
                         if (!preg_match('/[0-9A-Fa-f]{4}/', $codepoint)) {
-                            throw new SyntaxErrorException(
+                            throw new SyntaxErrorParserException(
                                 new FeedbackItemResolution(
                                     GraphQLParserErrorFeedbackItemProvider::class,
                                     GraphQLParserErrorFeedbackItemProvider::E_3,
@@ -344,7 +344,7 @@ class Tokenizer
                         $this->pos += 4;
                         break;
                     default:
-                        throw new SyntaxErrorException(
+                        throw new SyntaxErrorParserException(
                             new FeedbackItemResolution(
                                 GraphQLParserErrorFeedbackItemProvider::class,
                                 GraphQLParserErrorFeedbackItemProvider::E_4,
@@ -382,14 +382,14 @@ class Tokenizer
         return $prev;
     }
 
-    protected function createUnexpectedException(Token $token): SyntaxErrorException
+    protected function createUnexpectedException(Token $token): SyntaxErrorParserException
     {
         return $this->createUnexpectedTokenTypeException($token->getType());
     }
 
-    protected function createUnexpectedTokenTypeException(string $tokenType): SyntaxErrorException
+    protected function createUnexpectedTokenTypeException(string $tokenType): SyntaxErrorParserException
     {
-        return new SyntaxErrorException(
+        return new SyntaxErrorParserException(
             new FeedbackItemResolution(
                 GraphQLParserErrorFeedbackItemProvider::class,
                 GraphQLParserErrorFeedbackItemProvider::E_6,

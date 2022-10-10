@@ -15,6 +15,7 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
+use PoP\GraphQLParser\Exception\AbstractASTNodeException;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\AbstractASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
@@ -116,6 +117,13 @@ class AppStateProvider extends AbstractAppStateProvider
             );
             $executableDocument = $graphQLQueryParsingPayload->executableDocument;
             $state['document-object-resolved-field-value-referenced-fields'] = $graphQLQueryParsingPayload->objectResolvedFieldValueReferencedFields;
+        } catch (AbstractASTNodeException $astNodeException) {
+            App::getFeedbackStore()->documentFeedbackStore->addError(
+                new QueryFeedback(
+                    $astNodeException->getFeedbackItemResolution(),
+                    $astNodeException->getAstNode(),
+                )
+            );
         } catch (AbstractASTNodeParserException $astNodeParserException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
@@ -141,12 +149,12 @@ class AppStateProvider extends AbstractAppStateProvider
 
             try {
                 $executableDocument->validateAndInitialize();
-            } catch (AbstractASTNodeParserException $astNodeParserException) {
+            } catch (AbstractASTNodeException $astNodeException) {
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(
                     new QueryFeedback(
-                        $astNodeParserException->getFeedbackItemResolution(),
-                        $astNodeParserException->getAstNode(),
+                        $astNodeException->getFeedbackItemResolution(),
+                        $astNodeException->getAstNode(),
                     )
                 );
             } catch (AbstractQueryException $queryException) {
