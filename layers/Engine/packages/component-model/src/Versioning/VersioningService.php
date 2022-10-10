@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Versioning;
 
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
@@ -64,7 +65,7 @@ class VersioningService implements VersioningServiceInterface
         if ($this->versionConstraintsForFields === null) {
             $this->initializeVersionConstraintsForFields();
         }
-        return $this->versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] ?? null;
+        return $this->versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] ?? $this->versionConstraintsForFields[ConfigurationValues::ANY][$fieldName] ?? null;
     }
 
     /**
