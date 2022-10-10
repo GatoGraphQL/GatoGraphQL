@@ -11,7 +11,7 @@ interface MetaFieldDirectiveResolverInterface extends FieldDirectiveResolverInte
      * are being nested, by indicating their relative position
      * to the meta-directive.
      *
-     * Eg: @foreach(affectDirectivesUnderPos: [1]) @translate
+     * Eg: @foreach(affectDirectivesUnderPos: [1]) @strTranslate
      */
     public function getAffectDirectivesUnderPosArgumentName(): string;
     /**

@@ -186,7 +186,7 @@ interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, At
      * Name for the directive arg to indicate which additional fields
      * must be affected by the directive, by indicating their relative position.
      *
-     * Eg: { posts { excerpt content @translate(affectAdditionalFieldsUnderPos: [1]) } }
+     * Eg: { posts { excerpt content @strTranslate(affectAdditionalFieldsUnderPos: [1]) } }
      *
      * @return string Name of the directiveArg, or `null` to disable this feature for the directive
      */

@@ -93,8 +93,8 @@ class Directive extends AbstractAst implements WithNameInterface, WithArgumentsI
          *
          *   ```
          *   {
-         *     id @translate(from: "en", to: "es")
-         *     id @translate(to: "es", from: "en")
+         *     id @strTranslate(from: "en", to: "es")
+         *     id @strTranslate(to: "es", from: "en")
          *   }
          *   ```
          *
