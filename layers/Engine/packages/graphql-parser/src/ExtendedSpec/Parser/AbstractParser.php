@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\GraphQLParser\Exception\Parser\ASTNodeParserException;
+use PoP\GraphQLParser\Exception\Parser\LogicErrorParserException;
 use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
@@ -106,7 +106,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Override to express the additional type of Exception
      * that can be thrown.
      *
-     * @throws ASTNodeParserException
+     * @throws LogicErrorParserException
      * @throws SyntaxErrorException
      * @throws FeatureNotSupportedException
      */
@@ -372,7 +372,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                  *   { groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @underJSONObjectProperty @strUpperCase }
                  */
                 if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
-                    throw new ASTNodeParserException(
+                    throw new LogicErrorParserException(
                         new FeedbackItemResolution(
                             GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                             GraphQLExtendedSpecErrorFeedbackItemProvider::E1,
@@ -451,7 +451,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * @return int[]
-     * @throws ASTNodeParserException
+     * @throws LogicErrorParserException
      */
     protected function getAffectDirectivesUnderPosArgumentValue(
         Directive $directive,
@@ -461,7 +461,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     ): array {
         $argumentValue = $argument->getValue();
         if ($argumentValue === null) {
-            throw new ASTNodeParserException(
+            throw new LogicErrorParserException(
                 new FeedbackItemResolution(
                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                     GraphQLExtendedSpecErrorFeedbackItemProvider::E2,
@@ -480,7 +480,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
 
         if ($argumentValue === []) {
-            throw new ASTNodeParserException(
+            throw new LogicErrorParserException(
                 new FeedbackItemResolution(
                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                     GraphQLExtendedSpecErrorFeedbackItemProvider::E2,
@@ -495,7 +495,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         foreach ($argumentValue as $argumentValueItem) {
             if (!is_int($argumentValueItem) || ((int)$argumentValueItem <= 0)) {
-                throw new ASTNodeParserException(
+                throw new LogicErrorParserException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E3,
@@ -510,7 +510,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             }
             $nestedDirectivePos = $directivePos + (int)$argumentValueItem;
             if ($nestedDirectivePos >= $directiveCount) {
-                throw new ASTNodeParserException(
+                throw new LogicErrorParserException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E4,
@@ -913,7 +913,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
         foreach ($affectedFieldPositions as $affectedFieldPosition) {
             if (!is_int($affectedFieldPosition) || ((int)$affectedFieldPosition <= 0)) {
-                throw new ASTNodeParserException(
+                throw new LogicErrorParserException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E3,
@@ -929,7 +929,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
             $fieldPosition = $originFieldPosition - $affectedFieldPosition;
             if ($fieldPosition < 0) {
-                throw new ASTNodeParserException(
+                throw new LogicErrorParserException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E5,
@@ -949,7 +949,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
              */
             $field = $fieldsOrFragmentBonds[$fieldPosition];
             if (!($field instanceof FieldInterface)) {
-                throw new ASTNodeParserException(
+                throw new LogicErrorParserException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E6,
