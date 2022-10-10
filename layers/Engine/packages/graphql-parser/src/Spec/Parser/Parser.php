@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;

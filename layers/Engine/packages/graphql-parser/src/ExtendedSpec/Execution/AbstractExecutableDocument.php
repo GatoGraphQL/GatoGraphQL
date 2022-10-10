@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\GraphQLParser\Exception\InvalidRequestException;
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument;

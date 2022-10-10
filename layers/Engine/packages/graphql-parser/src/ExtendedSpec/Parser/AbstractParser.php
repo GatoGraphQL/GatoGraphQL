@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\LogicErrorParserException;
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;

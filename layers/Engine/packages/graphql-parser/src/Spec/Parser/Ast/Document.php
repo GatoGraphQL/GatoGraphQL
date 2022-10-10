@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;

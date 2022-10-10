@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\InvalidRequestException;
-use PoP\GraphQLParser\Exception\Parser\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\Root\AbstractTestCase;
