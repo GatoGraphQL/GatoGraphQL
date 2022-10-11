@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\ObjectType;
 
-use GraphQLAPI\GraphQLAPI\Checkpoints\PluginInternalUseCheckpoint;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 /**
  * These fields must be accessed by the plugin only,
@@ -15,32 +14,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
  */
 abstract class AbstractForPluginInternalUseListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
 {
-    private ?PluginInternalUseCheckpoint $pluginInternalUseCheckpoint = null;
-
-    final public function setPluginInternalUseCheckpoint(PluginInternalUseCheckpoint $pluginInternalUseCheckpoint): void
-    {
-        $this->pluginInternalUseCheckpoint = $pluginInternalUseCheckpoint;
-    }
-    final protected function getPluginInternalUseCheckpoint(): PluginInternalUseCheckpoint
-    {
-        /** @var PluginInternalUseCheckpoint */
-        return $this->pluginInternalUseCheckpoint ??= $this->instanceManager->getInstance(PluginInternalUseCheckpoint::class);
-    }
-
-    /**
-     * @return CheckpointInterface[]
-     */
-    public function getValidationCheckpoints(
+    public function resolveCanProcess(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        object $object,
-    ): array {
-        $validationCheckpoints = parent::getValidationCheckpoints(
+        FieldInterface $field,
+    ): bool {
+        if (!parent::resolveCanProcess(
             $objectTypeResolver,
-            $fieldDataAccessor,
-            $object,
-        );
-        $validationCheckpoints[] = $this->getPluginInternalUseCheckpoint();
-        return $validationCheckpoints;
-    }    
+            $field,
+        )) {
+            return false;
+        }
+        return false;
+    }
 }
