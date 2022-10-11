@@ -177,17 +177,11 @@ services:
         - >-
           ../../layers/CMSSchema/packages/user-avatars:/app/vendor/pop-cms-schema/user-avatars
         - >-
-          ../../layers/CMSSchema/packages/user-roles-access-control:/app/vendor/pop-cms-schema/user-roles-access-control
-        - >-
-          ../../layers/CMSSchema/packages/user-roles-acl:/app/vendor/pop-cms-schema/user-roles-acl
-        - >-
           ../../layers/CMSSchema/packages/user-roles-wp:/app/vendor/pop-cms-schema/user-roles-wp
         - >-
           ../../layers/CMSSchema/packages/user-roles:/app/vendor/pop-cms-schema/user-roles
         - >-
           ../../layers/CMSSchema/packages/user-state:/app/vendor/pop-cms-schema/user-state
-        - >-
-          ../../layers/CMSSchema/packages/user-state-access-control:/app/vendor/pop-cms-schema/user-state-access-control
         - >-
           ../../layers/CMSSchema/packages/user-state-mutations:/app/vendor/pop-cms-schema/user-state-mutations
         - >-

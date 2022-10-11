@@ -11,7 +11,6 @@ App::stockAndInitializeModuleClasses([
     \PoPCMSSchema\TaxonomyQueryWP\Module::class,
     \PoPCMSSchema\UserStateWP\Module::class,
     \PoPCMSSchema\UserRolesWP\Module::class,
-    \PoPCMSSchema\UserRolesACL\Module::class,
     \PoPCMSSchema\PostTagsWP\Module::class,
     \PoPCMSSchema\PostCategoriesWP\Module::class,
     \PoPCMSSchema\MenusWP\Module::class,
