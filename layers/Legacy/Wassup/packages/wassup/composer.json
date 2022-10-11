@@ -30,7 +30,6 @@
         "pop-cms-schema/post-categories-wp": "^0.9",
         "pop-cms-schema/posts-wp": "^0.9",
         "pop-cms-schema/taxonomyquery-wp": "^0.9",
-        "pop-cms-schema/user-roles-acl": "^0.9",
         "pop-cms-schema/user-roles-wp": "^0.9",
         "pop-cms-schema/user-state-wp": "^0.9",
         "pop-cms-schema/usermeta-wp": "^0.9",

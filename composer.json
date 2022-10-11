@@ -499,7 +499,6 @@
         "pop-cms-schema/user-avatars-wp": "self.version",
         "pop-cms-schema/user-roles": "self.version",
         "pop-cms-schema/user-roles-access-control": "self.version",
-        "pop-cms-schema/user-roles-acl": "self.version",
         "pop-cms-schema/user-roles-wp": "self.version",
         "pop-cms-schema/user-state": "self.version",
         "pop-cms-schema/user-state-access-control": "self.version",

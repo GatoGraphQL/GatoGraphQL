@@ -36,7 +36,6 @@
         "pop-cms-schema/taxonomyquery-wp": "dev-master",
         "pop-cms-schema/taxonomymeta-wp": "dev-master",
         "pop-cms-schema/user-avatars-wp": "dev-master",
-        "pop-cms-schema/user-roles-acl": "dev-master",
         "pop-cms-schema/user-roles-wp": "dev-master",
         "pop-cms-schema/user-state-mutations-wp": "dev-master",
         "pop-cms-schema/user-state-wp": "dev-master",
