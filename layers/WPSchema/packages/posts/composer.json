@@ -72,7 +72,6 @@
         "pop-cms-schema/posts-wp": "<0.8.2",
         "pop-cms-schema/postmedia-mutations": "<0.8.9",
         "pop-cms-schema/post-categories-wp": "<0.8.9",
-        "pop-cms-schema/user-roles-access-control": "<0.8.9",
         "pop-cms-schema/postmedia": "<0.8.2",
         "pop-cms-schema/user-state-mutations-wp": "<0.8.9",
         "pop-cms-schema/user-roles": "<0.8.9",
