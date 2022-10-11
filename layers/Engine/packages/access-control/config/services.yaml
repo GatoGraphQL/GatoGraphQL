@@ -6,9 +6,3 @@ services:
 
     PoP\AccessControl\Services\AccessControlManagerInterface:
         class: \PoP\AccessControl\Services\AccessControlManager
-
-    PoP\AccessControl\Hooks\:
-        resource: '../src/Hooks/*'
-
-    PoP\AccessControl\FeedbackItemProviders\:
-        resource: '../src/FeedbackItemProviders/*'

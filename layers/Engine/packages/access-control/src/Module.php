@@ -35,6 +35,5 @@ class Module extends AbstractModule
         array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }
