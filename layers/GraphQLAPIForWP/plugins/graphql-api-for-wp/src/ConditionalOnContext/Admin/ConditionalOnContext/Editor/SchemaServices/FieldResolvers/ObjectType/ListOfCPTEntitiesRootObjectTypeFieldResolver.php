@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 /**
  * ObjectTypeFieldResolver for the Custom Post Types from this plugin
  */
-class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
+class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractForPluginInternalUseListOfCPTEntitiesRootObjectTypeFieldResolver
 {
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
