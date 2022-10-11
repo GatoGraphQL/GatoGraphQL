@@ -111,7 +111,6 @@ includes:
     - layers/CMSSchema/packages/user-roles/phpstan.neon.dist
     - layers/CMSSchema/packages/user-roles-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/user-state/phpstan.neon.dist
-    - layers/CMSSchema/packages/user-state-access-control/phpstan.neon.dist
     - layers/CMSSchema/packages/user-state-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/user-state-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/user-state-wp/phpstan.neon.dist
