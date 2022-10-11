@@ -177,8 +177,6 @@ services:
         - >-
           ../../layers/CMSSchema/packages/user-avatars:/app/vendor/pop-cms-schema/user-avatars
         - >-
-          ../../layers/CMSSchema/packages/user-roles-access-control:/app/vendor/pop-cms-schema/user-roles-access-control
-        - >-
           ../../layers/CMSSchema/packages/user-roles-wp:/app/vendor/pop-cms-schema/user-roles-wp
         - >-
           ../../layers/CMSSchema/packages/user-roles:/app/vendor/pop-cms-schema/user-roles
