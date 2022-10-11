@@ -26,7 +26,6 @@
         "pop-api/api-clients": "<0.8.9",
         "pop-api/api-mirrorquery": "<0.8.9",
         "pop-cms-schema/settings": "<0.8.9",
-        "pop-cms-schema/user-state-access-control": "<0.8.9",
         "pop-cms-schema/comments": "<0.8.9",
         "pop-cms-schema/users-wp": "<0.8.9",
         "pop-cms-schema/custompostmeta-wp": "<0.8.9",
