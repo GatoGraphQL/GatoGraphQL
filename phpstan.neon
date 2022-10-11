@@ -109,7 +109,6 @@ includes:
     - layers/CMSSchema/packages/user-avatars/phpstan.neon.dist
     - layers/CMSSchema/packages/user-avatars-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/user-roles/phpstan.neon.dist
-    - layers/CMSSchema/packages/user-roles-access-control/phpstan.neon.dist
     - layers/CMSSchema/packages/user-roles-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/user-state/phpstan.neon.dist
     - layers/CMSSchema/packages/user-state-access-control/phpstan.neon.dist
