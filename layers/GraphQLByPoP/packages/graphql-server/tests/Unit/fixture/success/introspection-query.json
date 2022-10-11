@@ -296,20 +296,20 @@
                             "deprecationReason": null
                         },
                         {
-                          "name": "isGlobal",
-                          "description": "Is this a global field? (i.e. a field that is added to all types in the schema)",
-                          "args": [],
-                          "type": {
-                            "kind": "NON_NULL",
-                            "name": "Boolean!",
-                            "ofType": {
-                              "kind": "SCALAR",
-                              "name": "Boolean",
-                              "ofType": null
-                            }
-                          },
-                          "isDeprecated": false,
-                          "deprecationReason": null
+                            "name": "isGlobal",
+                            "description": "Is this a global field? (i.e. a field that is added to all types in the schema)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         },
                         {
                             "name": "isMutation",
@@ -1798,22 +1798,6 @@
                             "defaultValue": null
                         }
                     ]
-                },
-                {
-                    "name": "disableAccess",
-                    "description": "It disables access to the field",
-                    "locations": [
-                        "FIELD_DEFINITION"
-                    ],
-                    "args": []
-                },
-                {
-                    "name": "disableAccessForDirectives",
-                    "description": "It disables access to the field",
-                    "locations": [
-                        "FIELD_DEFINITION"
-                    ],
-                    "args": []
                 },
                 {
                     "name": "include",

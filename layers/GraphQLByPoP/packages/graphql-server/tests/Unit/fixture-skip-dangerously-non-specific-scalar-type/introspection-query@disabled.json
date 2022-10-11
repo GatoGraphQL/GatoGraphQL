@@ -2603,22 +2603,6 @@
                     ]
                 },
                 {
-                    "name": "disableAccess",
-                    "description": "It disables access to the field",
-                    "locations": [
-                        "FIELD_DEFINITION"
-                    ],
-                    "args": []
-                },
-                {
-                    "name": "disableAccessForDirectives",
-                    "description": "It disables access to the field",
-                    "locations": [
-                        "FIELD_DEFINITION"
-                    ],
-                    "args": []
-                },
-                {
                     "name": "include",
                     "description": "Include the field value in the output only if the argument 'if' evals to `true`",
                     "locations": [
