@@ -1,8 +1,0 @@
-{
-  id
-  self @validateDoesLoggedInUserHaveAnyRole(roles: ["editor", "administrator"]) {
-    id
-    cool: id @validateDoesLoggedInUserHaveAnyRole(roles: ["editor", "administrator"]) @validateDoesLoggedInUserHaveAnyRole(roles: ["author", "administrator"])
-  }
-  hi: id @validateDoesLoggedInUserHaveAnyRole(roles: ["editor", "administrator"]) @validateDoesLoggedInUserHaveAnyRole(roles: ["author", "administrator"]) @validateDoesLoggedInUserHaveAnyRole(roles: ["subscriber"])
-}
