@@ -183,8 +183,6 @@ services:
         - >-
           ../../layers/CMSSchema/packages/user-state:/app/vendor/pop-cms-schema/user-state
         - >-
-          ../../layers/CMSSchema/packages/user-state-access-control:/app/vendor/pop-cms-schema/user-state-access-control
-        - >-
           ../../layers/CMSSchema/packages/user-state-mutations:/app/vendor/pop-cms-schema/user-state-mutations
         - >-
           ../../layers/CMSSchema/packages/user-state-mutations-wp:/app/vendor/pop-cms-schema/user-state-mutations-wp
