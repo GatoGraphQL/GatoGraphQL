@@ -45,3 +45,9 @@ services:
 
     GraphQLAPI\GraphQLAPI\State\:
         resource: '../src/State/*'
+
+    GraphQLAPI\GraphQLAPI\Checkpoints\:
+        resource: '../src/Checkpoints/*'
+
+    GraphQLAPI\GraphQLAPI\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
