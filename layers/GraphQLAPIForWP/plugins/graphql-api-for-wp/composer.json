@@ -124,7 +124,6 @@
         "pop-cms-schema/menus": "<0.8.9",
         "pop-wp-schema/block-metadata-for-wp": "<0.8.9",
         "pop-cms-schema/post-categories": "<0.8.9",
-        "pop-cms-schema/user-roles-acl": "<0.8.9",
         "pop-cms-schema/user-avatars": "<0.8.9",
         "pop-cms-schema/metaquery-wp": "<0.8.9",
         "pop-cms-schema/pages": "<0.8.9",

@@ -94,7 +94,6 @@
         "pop-wp-schema/block-metadata-for-wp": "<0.8.9",
         "pop-cms-schema/post-categories": "<0.8.9",
         "pop-cms-schema/postmedia-mutations-wp": "<0.8.2",
-        "pop-cms-schema/user-roles-acl": "<0.8.9",
         "pop-cms-schema/user-avatars": "<0.8.9",
         "pop-cms-schema/comments-wp": "<0.8.9",
         "pop-cms-schema/generic-posts": "<0.8.2",
