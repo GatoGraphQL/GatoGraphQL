@@ -14,6 +14,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 		const {
 			isSelected,
 			attributes: {
+				operations,
 				typeFields,
 				globalFields,
 				directives
@@ -48,6 +49,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 									{ isSelected && (
 										<FieldDirectiveTabPanel
 											{ ...props }
+											operations={ operations }
 											typeFields={ typeFields }
 											globalFields={ globalFields }
 											directives={ directives }
@@ -57,6 +59,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 									{ !isSelected && (
 										<FieldDirectivePrintout
 											{ ...props }
+											operations={ operations }
 											typeFields={ typeFields }
 											globalFields={ globalFields }
 											directives={ directives }
