@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\Editor\SchemaServices\FieldResolvers\ObjectType;
 
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
@@ -14,6 +15,18 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
  */
 abstract class AbstractForPluginInternalUseListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
 {
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    final protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        /** @var UserAuthorizationInterface */
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+    }
+
     public function resolveCanProcess(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
@@ -24,6 +37,6 @@ abstract class AbstractForPluginInternalUseListOfCPTEntitiesRootObjectTypeFieldR
         )) {
             return false;
         }
-        return false;
+        return $this->getUserAuthorization()->canAccessSchemaEditor();
     }
 }
