@@ -30,6 +30,7 @@ return array(
             'author_display_name' => 'Leo',
             'author_first_name' => '',
             'author_last_name' => '',
+            'role' => 'administrator',
         ),
         'themedemos' =>
         array(
