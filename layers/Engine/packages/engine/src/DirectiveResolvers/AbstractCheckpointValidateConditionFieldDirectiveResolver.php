@@ -8,7 +8,7 @@ use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-abstract class AbstractValidateCheckpointFieldDirectiveResolver extends AbstractValidateConditionFieldDirectiveResolver
+abstract class AbstractCheckpointValidateConditionFieldDirectiveResolver extends AbstractValidateConditionFieldDirectiveResolver
 {
     private ?EngineInterface $engine = null;
 
