@@ -139,25 +139,25 @@ const MaybeWithSpinnerTypeFieldPrintoutBody = ( props ) => {
 }
 
 // /**
-//  * Add a spinner when loading the typeFieldNames and typeFields is not empty
+//  * Add a spinner when loading the items and the corresponding attribute is not empty
 //  */
-// const WithSpinnerDirectivePrintoutBody = compose( [
+// const WithSpinnerItemPrintoutBody = compose( [
 // 	withSpinner(),
 // 	withErrorMessage(),
-// ] )( DirectivePrintoutBody );
+// ] )( ItemPrintoutBody );
 
 // /**
-//  * Check if the typeFields are empty, then do not show the spinner
+//  * Check if the items are empty, then do not show the spinner
 //  * This is an improvement when loading a new Access Control post,
 //  * that it has no data, so the user is not waiting for nothing
 //  *
 //  * @param {Object} props
 //  */
-// const MaybeWithSpinnerDirectivePrintoutBody = ( props ) => {
-// 	const { directives } = props;
-// 	if ( !! directives.length ) {
+// const MaybeWithSpinnerItemPrintoutBody = ( props ) => {
+// 	const { items } = props;
+// 	if ( !! items.length ) {
 // 		return (
-// 			<WithSpinnerDirectivePrintoutBody { ...props } />
+// 			<WithSpinnerItemPrintoutBody { ...props } />
 // 		)
 // 	}
 // 	return (
@@ -227,7 +227,7 @@ const FieldDirectivePrintout = ( props ) => {
 				<>
 					<CardHeader isShady>{ directiveHeader }</CardHeader>
 					<CardBody>
-						{/* <MaybeWithSpinnerDirectivePrintoutBody */}
+						{/* <MaybeWithSpinnerItemPrintoutBody */}
 						<ItemPrintoutBody
 							{ ...props }
 							items={ directives }
