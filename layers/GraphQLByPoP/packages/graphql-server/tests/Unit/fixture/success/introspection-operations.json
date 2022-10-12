@@ -3,10 +3,10 @@
     "__schema": {
       "operationTypes": [
         {
-          "name": "query"
+          "name": "QueryRoot"
         },
         {
-          "name": "mutation"
+          "name": "MutationRoot"
         }
       ]
     }
