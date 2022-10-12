@@ -16,7 +16,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 abstract class AbstractForPluginInternalUseListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEntitiesRootObjectTypeFieldResolver
 {
     private ?UserAuthorizationInterface $userAuthorization = null;
-    
+
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
@@ -31,10 +31,12 @@ abstract class AbstractForPluginInternalUseListOfCPTEntitiesRootObjectTypeFieldR
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
-        if (!parent::resolveCanProcess(
-            $objectTypeResolver,
-            $field,
-        )) {
+        if (
+            !parent::resolveCanProcess(
+                $objectTypeResolver,
+                $field,
+            )
+        ) {
             return false;
         }
         return $this->getUserAuthorization()->canAccessSchemaEditor();
