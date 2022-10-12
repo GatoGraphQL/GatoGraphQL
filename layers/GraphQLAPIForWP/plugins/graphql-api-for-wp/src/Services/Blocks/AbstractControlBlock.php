@@ -206,7 +206,7 @@ EOT;
 
     protected function getBlockDataTitle(): string
     {
-        return \__('Select fields and directives:', 'graphql-api');
+        return \__('Select schema elements', 'graphql-api');
     }
     protected function getBlockContentTitle(): string
     {

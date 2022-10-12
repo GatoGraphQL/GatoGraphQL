@@ -32,7 +32,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			throw 'At least 1 option must be enabled: [operations, type fields, global fields, directives]';
 		}
 		const className = 'graphql-api-multi-select-control-list';
-		const leftSideLabel = selectLabel || __('Select fields and directives:', 'graphql-api');
+		const leftSideLabel = selectLabel || __('Select schema elements:', 'graphql-api');
 		const rightSideLabel = configurationLabel || __('Configuration:', 'graphql-api');
 		return (
 			<div className={ className }>
