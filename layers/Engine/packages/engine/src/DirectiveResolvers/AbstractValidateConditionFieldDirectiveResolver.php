@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
@@ -23,6 +24,14 @@ abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractV
             return PipelinePositions::AFTER_RESOLVE;
         }
         return PipelinePositions::BEFORE_RESOLVE;
+    }
+
+    /**
+     * Also add all the @validate... directives to the Operation
+     */
+    public function getFieldDirectiveBehavior(): string
+    {
+        return FieldDirectiveBehaviors::FIELD_AND_OPERATION;
     }
 
     /**
