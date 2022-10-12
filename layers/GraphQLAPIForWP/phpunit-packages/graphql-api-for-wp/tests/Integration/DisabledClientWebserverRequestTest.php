@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
@@ -19,6 +16,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
     use ExecuteRESTWebserverRequestTestCaseTrait;
     use SingleEndpointClientWebserverRequestTestCaseTrait;
+    use EnableDisableModuleWebserverRequestTestTrait;
 
     protected function setUp(): void
     {
@@ -31,7 +29,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
          */
         $dataName = $this->getDataName();
         if (str_starts_with($dataName, 'single-endpoint-')) {
-            $this->executeRESTEndpointToEnableOrDisableClient($dataName, false);
+            $this->executeRESTEndpointToEnableOrDisableModule($dataName, false);
         }
     }
 
@@ -43,7 +41,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
          */
         $dataName = $this->getDataName();
         if (str_starts_with($dataName, 'single-endpoint-')) {
-            $this->executeRESTEndpointToEnableOrDisableClient($dataName, true);
+            $this->executeRESTEndpointToEnableOrDisableModule($dataName, true);
         }
 
         parent::tearDown();
@@ -72,26 +70,6 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
                 200,
             ],
         ];
-    }
-
-    protected function executeRESTEndpointToEnableOrDisableClient(
-        string $dataName,
-        bool $clientEnabled
-    ): void {
-        $client = static::getClient();
-        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE;
-        $endpointURL = sprintf(
-            $endpointURLPlaceholder,
-            $this->getModuleID($dataName),
-        );
-        $options = static::getRESTEndpointRequestOptions();
-        $options['query'][Params::STATE] = $clientEnabled ? ParamValues::ENABLED : ParamValues::DISABLED;
-        $response = $client->post(
-            $endpointURL,
-            $options,
-        );
-        // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTPostCallIsSuccessful($response);
     }
 
     protected function getModuleID(string $dataName): string
