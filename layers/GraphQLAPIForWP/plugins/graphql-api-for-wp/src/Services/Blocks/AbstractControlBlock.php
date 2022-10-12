@@ -42,9 +42,9 @@ abstract class AbstractControlBlock extends AbstractBlock
         return false;
     }
 
-    protected function disableGlobalFields(): bool
+    protected function enableGlobalFields(): bool
     {
-        return true;
+        return false;
     }
 
     protected function disableDirectives(): bool
@@ -109,7 +109,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                 }
             }
         }
-        if (!$this->disableGlobalFields()) {
+        if ($this->enableGlobalFields()) {
             $globalFieldContent = $moduleConfiguration->getEmptyLabel();
             $globalFields = $attributes[self::ATTRIBUTE_NAME_GLOBAL_FIELDS] ?? [];
             if ($globalFields) {
@@ -138,7 +138,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                 $fieldTypeContent,
             );
         }
-        if (!$this->disableGlobalFields()) {
+        if ($this->enableGlobalFields()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
                 __('Global Fields', 'graphql-api'),
