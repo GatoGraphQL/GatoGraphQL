@@ -115,7 +115,7 @@ export default {
 		/**
 		 * Flatten the response to an array containing the operation name directly (extracting them from under the "name" key)
 		 */
-		const operations = response.data?.__schema?.operations?.map(element => element.name) || [];
+		const operations = response.data?.__schema?.supportedOperationTypes?.map(element => element.name) || [];
 		return setOperations( operations );
 	},
 
