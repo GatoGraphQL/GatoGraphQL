@@ -37,7 +37,7 @@ abstract class AbstractControlBlock extends AbstractBlock
         return true;
     }
 
-    protected function disableTypeFields(): bool
+    protected function enableTypeFields(): bool
     {
         return false;
     }
@@ -70,7 +70,7 @@ abstract class AbstractControlBlock extends AbstractBlock
         $fieldTypeContent = $globalFieldContent = $directiveContent = '';
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$this->disableTypeFields()) {
+        if ($this->enableTypeFields()) {
             $fieldTypeContent = $moduleConfiguration->getEmptyLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];
             if ($typeFields) {
@@ -131,7 +131,7 @@ abstract class AbstractControlBlock extends AbstractBlock
         }
         $blockDataContent = '';
         $blockDataPlaceholder = '<h4>%s</h4>%s';
-        if (!$this->disableTypeFields()) {
+        if ($this->enableTypeFields()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
                 __('Fields', 'graphql-api'),
