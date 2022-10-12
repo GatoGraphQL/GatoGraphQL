@@ -10,26 +10,26 @@ const FieldDirectiveTabPanel = ( props ) => {
 		typeFields,
 		globalFields,
 		directives,
-		disableTypeFields,
-		disableGlobalFields,
-		disableDirectives,
+		enableTypeFields,
+		enableGlobalFields,
+		enableDirectives,
 	} = props;
 	const tabs = [
-		...( disableTypeFields ? [] : [ {
+		...( enableTypeFields ? [ {
 			name: 'tabTypeFields',
 			title: __('Fields', 'graphql-api'),
 			className: 'tab tab-fields tab-standard-fields',
-		} ] ),
-		...( disableGlobalFields ? [] : [ {
+		} ] : [] ),
+		...( enableGlobalFields ? [ {
 			name: 'tabGlobalFields',
 			title: __('Global Fields', 'graphql-api'),
 			className: 'tab tab-fields tab-global-fields',
-		} ] ),
-		...( disableDirectives ? [] : [ {
+		} ] : [] ),
+		...( enableDirectives ? [ {
 			name: 'tabDirectives',
 			title: __('Directives', 'graphql-api'),
 			className: 'tab tab-directives',
-		} ] ),
+		} ] : [] ),
 	]
 	return (
 		<TabPanel

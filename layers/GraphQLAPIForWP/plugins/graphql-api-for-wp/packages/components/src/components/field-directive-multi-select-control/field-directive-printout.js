@@ -208,10 +208,9 @@ const DirectivePrintoutBody = ( props ) => {
 const FieldDirectivePrintout = ( props ) => {
 	const {
 		emptyLabel,
-		disableTypeFields,
-		disableGlobalFields,
-		disableDirectives,
-		removeHeaderIfItemDisabled,
+		enableTypeFields,
+		enableGlobalFields,
+		enableDirectives,
 		typeFieldHeader = __('Fields', 'graphql-api'),
 		globalFieldHeader = __('Global Fields', 'graphql-api'),
 		directiveHeader = __('Directives', 'graphql-api'),
@@ -219,11 +218,9 @@ const FieldDirectivePrintout = ( props ) => {
 	const emptyLabelString = emptyLabel != undefined ? emptyLabel : EMPTY_LABEL;
 	return (
 		<Card { ...props }>
-			{ ! disableTypeFields && (
+			{ enableTypeFields && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableDirectives || ! disableGlobalFields ) && (
-						<CardHeader isShady>{ typeFieldHeader }</CardHeader>
-					) }
+					<CardHeader isShady>{ typeFieldHeader }</CardHeader>
 					<CardBody>
 						<MaybeWithSpinnerTypeFieldPrintoutBody
 							{ ...props }
@@ -232,11 +229,9 @@ const FieldDirectivePrintout = ( props ) => {
 					</CardBody>
 				</>
 			) }
-			{ ! disableGlobalFields && (
+			{ enableGlobalFields && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields || ! disableDirectives ) && (
-						<CardHeader isShady>{ globalFieldHeader }</CardHeader>
-					) }
+					<CardHeader isShady>{ globalFieldHeader }</CardHeader>
 					<CardBody>
 						<GlobalFieldPrintoutBody
 							{ ...props }
@@ -245,11 +240,9 @@ const FieldDirectivePrintout = ( props ) => {
 					</CardBody>
 				</>
 			) }
-			{ ! disableDirectives && (
+			{ enableDirectives && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields || ! disableGlobalFields ) && (
-						<CardHeader isShady>{ directiveHeader }</CardHeader>
-					) }
+					<CardHeader isShady>{ directiveHeader }</CardHeader>
 					<CardBody>
 						{/* <MaybeWithSpinnerDirectivePrintoutBody */}
 						<DirectivePrintoutBody
@@ -265,8 +258,8 @@ const FieldDirectivePrintout = ( props ) => {
 
 export default compose( [
 	withSelect( ( select, ownProps ) => {
-		const { disableTypeFields } = ownProps;
-		if ( disableTypeFields ) {
+		const { enableTypeFields } = ownProps;
+		if ( ! enableTypeFields ) {
 			return {};
 		}
 

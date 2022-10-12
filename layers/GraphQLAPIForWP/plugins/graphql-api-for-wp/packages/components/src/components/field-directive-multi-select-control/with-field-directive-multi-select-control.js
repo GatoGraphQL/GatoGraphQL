@@ -21,12 +21,12 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			componentClassName,
 			selectLabel,
 			configurationLabel,
-			disableTypeFields,
-			disableGlobalFields,
-			disableDirectives,
+			enableTypeFields,
+			enableGlobalFields,
+			enableDirectives,
 			hideLabels
 		} = props;
-		if (disableTypeFields && disableGlobalFields && disableDirectives) {
+		if (! enableTypeFields && ! enableGlobalFields && ! enableDirectives) {
 			throw 'At least 1 option must be enabled: [type fields, global fields, directives]';
 		}
 		const className = 'graphql-api-multi-select-control-list';
