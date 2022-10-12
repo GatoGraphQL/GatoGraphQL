@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { TabPanel } from '@wordpress/components';
+import OperationMultiSelectControl from './operation-multi-select-control';
 import TypeFieldMultiSelectControl from './type-field-multi-select-control';
 import GlobalFieldMultiSelectControl from './global-field-multi-select-control';
 import DirectiveMultiSelectControl from './directive-multi-select-control';
