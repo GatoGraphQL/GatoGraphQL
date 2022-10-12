@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\CacheControl\Helpers;
+namespace PoP\CacheControl\ASTNodes;
 
 use PoP\CacheControl\DirectiveResolvers\CacheControlFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -11,11 +11,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
-class CacheControlHelper
+class CacheControlASTNodesFactory
 {
     protected static ?Directive $noCacheDirective = null;
 
-    final protected static function getCacheControlFieldDirectiveResolver(): CacheControlFieldDirectiveResolver
+    private static function getCacheControlFieldDirectiveResolver(): CacheControlFieldDirectiveResolver
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var CacheControlFieldDirectiveResolver */
@@ -25,6 +25,7 @@ class CacheControlHelper
     public static function getNoCacheDirective(): Directive
     {
         if (self::$noCacheDirective === null) {
+            $nonSpecificLocation = ASTNodesFactory::getNonSpecificLocation();
             self::$noCacheDirective = new Directive(
                 static::getCacheControlFieldDirectiveResolver()->getDirectiveName(),
                 [
@@ -32,12 +33,12 @@ class CacheControlHelper
                         'maxAge',
                         new Literal(
                             0,
-                            ASTNodesFactory::getNonSpecificLocation()
+                            $nonSpecificLocation
                         ),
-                        ASTNodesFactory::getNonSpecificLocation()
+                        $nonSpecificLocation
                     ),
                 ],
-                ASTNodesFactory::getNonSpecificLocation()
+                $nonSpecificLocation
             );
         }
         return self::$noCacheDirective;
