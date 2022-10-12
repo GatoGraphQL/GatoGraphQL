@@ -211,7 +211,6 @@ const FieldDirectivePrintout = ( props ) => {
 		disableTypeFields,
 		disableGlobalFields,
 		disableDirectives,
-		removeHeaderIfItemDisabled,
 		typeFieldHeader = __('Fields', 'graphql-api'),
 		globalFieldHeader = __('Global Fields', 'graphql-api'),
 		directiveHeader = __('Directives', 'graphql-api'),
@@ -221,9 +220,7 @@ const FieldDirectivePrintout = ( props ) => {
 		<Card { ...props }>
 			{ ! disableTypeFields && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableDirectives || ! disableGlobalFields ) && (
-						<CardHeader isShady>{ typeFieldHeader }</CardHeader>
-					) }
+					<CardHeader isShady>{ typeFieldHeader }</CardHeader>
 					<CardBody>
 						<MaybeWithSpinnerTypeFieldPrintoutBody
 							{ ...props }
@@ -234,9 +231,7 @@ const FieldDirectivePrintout = ( props ) => {
 			) }
 			{ ! disableGlobalFields && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields || ! disableDirectives ) && (
-						<CardHeader isShady>{ globalFieldHeader }</CardHeader>
-					) }
+					<CardHeader isShady>{ globalFieldHeader }</CardHeader>
 					<CardBody>
 						<GlobalFieldPrintoutBody
 							{ ...props }
@@ -247,9 +242,7 @@ const FieldDirectivePrintout = ( props ) => {
 			) }
 			{ ! disableDirectives && (
 				<>
-					{ ( ! removeHeaderIfItemDisabled || ! disableTypeFields || ! disableGlobalFields ) && (
-						<CardHeader isShady>{ directiveHeader }</CardHeader>
-					) }
+					<CardHeader isShady>{ directiveHeader }</CardHeader>
 					<CardBody>
 						{/* <MaybeWithSpinnerDirectivePrintoutBody */}
 						<DirectivePrintoutBody
