@@ -7,13 +7,15 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
-use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Exception\ServerException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
+use PHPUnitForGraphQLAPI\WebserverRequests\Exception\ServerErrorException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 
+use RuntimeException;
 use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
@@ -76,10 +78,14 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             // Allow to retrieve/store data from the response, eg: during authentication
             static::postWebserverPingResponse($response, $options);
             return;
-        } catch (GuzzleException | RuntimeException) {
-            // The webserver is down
+        } catch (GuzzleException | RuntimeException $e) {
+            // The code produced a 500 error => bubble it up
+            if ($e instanceof ServerException && $e->getCode() === 500) {
+                throw $e;
+            }
         }
 
+        // The webserver is down
         self::$skipOrFailTestsReason = sprintf(
             'Webserver under "%s" is not running',
             static::getWebserverDomain()
