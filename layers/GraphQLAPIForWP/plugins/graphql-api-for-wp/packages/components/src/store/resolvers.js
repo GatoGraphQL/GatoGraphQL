@@ -25,7 +25,7 @@ import { DIRECTIVE_KINDS } from '../constants/directive-kinds'
 export const FETCH_OPERATIONS_GRAPHQL_QUERY = `
 	query GetOperations {
 		__schema {
-			operations {
+			operationTypes {
 				name
 			}
 		}
