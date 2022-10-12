@@ -208,9 +208,9 @@ const DirectivePrintoutBody = ( props ) => {
 const FieldDirectivePrintout = ( props ) => {
 	const {
 		emptyLabel,
-		disableTypeFields,
-		disableGlobalFields,
-		disableDirectives,
+		enableTypeFields,
+		enableGlobalFields,
+		enableDirectives,
 		typeFieldHeader = __('Fields', 'graphql-api'),
 		globalFieldHeader = __('Global Fields', 'graphql-api'),
 		directiveHeader = __('Directives', 'graphql-api'),
@@ -218,7 +218,7 @@ const FieldDirectivePrintout = ( props ) => {
 	const emptyLabelString = emptyLabel != undefined ? emptyLabel : EMPTY_LABEL;
 	return (
 		<Card { ...props }>
-			{ ! disableTypeFields && (
+			{ enableTypeFields && (
 				<>
 					<CardHeader isShady>{ typeFieldHeader }</CardHeader>
 					<CardBody>
@@ -229,7 +229,7 @@ const FieldDirectivePrintout = ( props ) => {
 					</CardBody>
 				</>
 			) }
-			{ ! disableGlobalFields && (
+			{ enableGlobalFields && (
 				<>
 					<CardHeader isShady>{ globalFieldHeader }</CardHeader>
 					<CardBody>
@@ -240,7 +240,7 @@ const FieldDirectivePrintout = ( props ) => {
 					</CardBody>
 				</>
 			) }
-			{ ! disableDirectives && (
+			{ enableDirectives && (
 				<>
 					<CardHeader isShady>{ directiveHeader }</CardHeader>
 					<CardBody>
@@ -258,8 +258,8 @@ const FieldDirectivePrintout = ( props ) => {
 
 export default compose( [
 	withSelect( ( select, ownProps ) => {
-		const { disableTypeFields } = ownProps;
-		if ( disableTypeFields ) {
+		const { enableTypeFields } = ownProps;
+		if ( ! enableTypeFields ) {
 			return {};
 		}
 
