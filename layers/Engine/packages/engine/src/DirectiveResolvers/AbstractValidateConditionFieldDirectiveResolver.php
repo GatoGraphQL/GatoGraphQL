@@ -10,10 +10,23 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractValidateFieldDirectiveResolver
 {
+    private ?SuperRootObjectTypeResolver $superRootObjectTypeResolver = null;
+
+    final public function setSuperRootObjectTypeResolver(SuperRootObjectTypeResolver $superRootObjectTypeResolver): void
+    {
+        $this->superRootObjectTypeResolver = $superRootObjectTypeResolver;
+    }
+    final protected function getSuperRootObjectTypeResolver(): SuperRootObjectTypeResolver
+    {
+        /** @var SuperRootObjectTypeResolver */
+        return $this->superRootObjectTypeResolver ??= $this->instanceManager->getInstance(SuperRootObjectTypeResolver::class);
+    }
+
     /**
      * If validating a directive, place it after resolveAndMerge
      * Otherwise, before
