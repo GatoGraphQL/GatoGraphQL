@@ -10,12 +10,11 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
-use PHPUnitForGraphQLAPI\WebserverRequests\Exception\ServerErrorException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-
 use RuntimeException;
+
 use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase

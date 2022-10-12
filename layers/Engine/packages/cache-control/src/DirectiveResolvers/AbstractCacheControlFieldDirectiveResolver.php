@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\CacheControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
-use PoP\Engine\DirectiveResolvers\AbstractGlobalFieldDirectiveResolver;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -16,6 +16,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\DirectiveResolvers\AbstractGlobalFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -38,6 +39,17 @@ abstract class AbstractCacheControlFieldDirectiveResolver extends AbstractGlobal
     public function getDirectiveName(): string
     {
         return 'cacheControl';
+    }
+
+    /**
+     * @cacheControl will never be applied to the Operation,
+     * however as the @validate... directives can be added
+     * to the Operation, and these add @cacheControl as a
+     * dependency, then also enable Operations for it.
+     */
+    public function getFieldDirectiveBehavior(): string
+    {
+        return FieldDirectiveBehaviors::FIELD_AND_OPERATION;
     }
 
     /**

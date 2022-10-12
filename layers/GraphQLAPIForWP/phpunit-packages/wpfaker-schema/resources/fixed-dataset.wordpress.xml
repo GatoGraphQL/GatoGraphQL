@@ -46,6 +46,7 @@
   <wp:author_display_name><![CDATA[Leo]]></wp:author_display_name>
   <wp:author_first_name><![CDATA[]]></wp:author_first_name>
   <wp:author_last_name><![CDATA[]]></wp:author_last_name>
+  <wp:role><![CDATA[administrator]]></wp:role>
 </wp:author>
 <wp:author>
   <wp:author_id>2</wp:author_id>

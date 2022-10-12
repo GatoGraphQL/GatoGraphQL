@@ -4,15 +4,29 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractValidateFieldDirectiveResolver
 {
+    private ?SuperRootObjectTypeResolver $superRootObjectTypeResolver = null;
+
+    final public function setSuperRootObjectTypeResolver(SuperRootObjectTypeResolver $superRootObjectTypeResolver): void
+    {
+        $this->superRootObjectTypeResolver = $superRootObjectTypeResolver;
+    }
+    final protected function getSuperRootObjectTypeResolver(): SuperRootObjectTypeResolver
+    {
+        /** @var SuperRootObjectTypeResolver */
+        return $this->superRootObjectTypeResolver ??= $this->instanceManager->getInstance(SuperRootObjectTypeResolver::class);
+    }
+
     /**
      * If validating a directive, place it after resolveAndMerge
      * Otherwise, before
@@ -23,6 +37,17 @@ abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractV
             return PipelinePositions::AFTER_RESOLVE;
         }
         return PipelinePositions::BEFORE_RESOLVE;
+    }
+
+    /**
+     * Also add all the @validate... directives to the Operation
+     */
+    public function getFieldDirectiveBehavior(): string
+    {
+        if (!$this->isValidatingDirective()) {
+            return FieldDirectiveBehaviors::FIELD_AND_OPERATION;
+        }
+        return parent::getFieldDirectiveBehavior();
     }
 
     /**
