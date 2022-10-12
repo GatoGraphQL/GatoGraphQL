@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Client;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 
 trait EnableDisableModuleWebserverRequestTestTrait
 {
+    use ExecuteRESTWebserverRequestTestCaseTrait;
+
     protected function executeRESTEndpointToEnableOrDisableModule(
         string $dataName,
         bool $moduleEnabled
@@ -36,6 +39,4 @@ trait EnableDisableModuleWebserverRequestTestTrait
     abstract protected function getRESTEndpointRequestOptions(): array;
 
     abstract protected function getModuleID(string $dataName): string;
-
-    abstract protected function assertRESTPostCallIsSuccessful();
 }

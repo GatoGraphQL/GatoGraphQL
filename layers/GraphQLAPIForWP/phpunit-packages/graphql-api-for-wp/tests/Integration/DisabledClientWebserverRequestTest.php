@@ -15,7 +15,6 @@ use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedU
 class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserverRequestTestCase
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
-    use ExecuteRESTWebserverRequestTestCaseTrait;
     use SingleEndpointClientWebserverRequestTestCaseTrait;
     use EnableDisableModuleWebserverRequestTestTrait;
 
