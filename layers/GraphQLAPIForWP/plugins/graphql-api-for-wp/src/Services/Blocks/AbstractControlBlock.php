@@ -47,7 +47,7 @@ abstract class AbstractControlBlock extends AbstractBlock
         return false;
     }
 
-    protected function disableDirectives(): bool
+    protected function enableDirectives(): bool
     {
         return false;
     }
@@ -119,7 +119,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                 );
             }
         }
-        if (!$this->disableDirectives()) {
+        if ($this->enableDirectives()) {
             $directiveContent = $moduleConfiguration->getEmptyLabel();
             $directives = $attributes[self::ATTRIBUTE_NAME_DIRECTIVES] ?? [];
             if ($directives) {
@@ -145,7 +145,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                 $globalFieldContent,
             );
         }
-        if (!$this->disableDirectives()) {
+        if ($this->enableDirectives()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
                 __('Directives', 'graphql-api'),
