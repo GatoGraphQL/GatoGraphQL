@@ -1,0 +1,14 @@
+{
+  "data": {
+    "__schema": {
+      "operationTypes": [
+        {
+          "name": "query"
+        },
+        {
+          "name": "mutation"
+        }
+      ]
+    }
+  }
+}
