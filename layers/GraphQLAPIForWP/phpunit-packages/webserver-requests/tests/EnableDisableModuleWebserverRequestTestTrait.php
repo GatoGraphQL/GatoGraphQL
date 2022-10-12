@@ -11,27 +11,6 @@ use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 
 trait EnableDisableModuleWebserverRequestTestTrait
 {
-    protected function enableOrDisableModule(
-        string $dataName,
-    ): void {
-        /**
-         * To test their disabled state works well, first execute
-         * a REST API call to disable the client, and then re-enable
-         * it afterwards.
-         */
-        if (str_ends_with($dataName, '@disabled')) {
-            $this->executeRESTEndpointToEnableOrDisableModule($dataName, false);
-            return;
-        }
-        /**
-         * Re-enable the clients for the single endpoint
-         * after the "disabled" test
-         */
-        if (str_ends_with($dataName, '@enabled')) {
-            $this->executeRESTEndpointToEnableOrDisableModule($dataName, true);
-        }
-    }
-
     protected function executeRESTEndpointToEnableOrDisableModule(
         string $dataName,
         bool $moduleEnabled
