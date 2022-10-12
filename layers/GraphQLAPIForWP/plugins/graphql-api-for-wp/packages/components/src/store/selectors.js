@@ -1,4 +1,37 @@
 /**
+ * Get the operations from the GraphQL schema
+ *
+ * @param {Object} state Store state
+ *
+ * @return {array} The list of operations from the GraphQL schema
+ */
+export function getOperations( state ) {
+	return state.operations;
+};
+
+/**
+ * Have the operations been retrieved from the GraphQL server?
+ *
+ * @param {Object} state Store state
+ *
+ * @return {bool} The list of operations from the GraphQL schema
+ */
+export function hasRetrievedOperations( state ) {
+	return state.hasRetrievedOperations;
+};
+
+/**
+ * Get the error message from retrieving the operations from the GraphQL server, if any
+ *
+ * @param {Object} state Store state
+ *
+ * @return {string|null} The error message
+ */
+export function getRetrievingOperationsErrorMessage( state ) {
+	return state.retrievingOperationsErrorMessage;
+};
+
+/**
  * Get the types and their fields from the GraphQL schema
  *
  * @param {Object} state Store state
