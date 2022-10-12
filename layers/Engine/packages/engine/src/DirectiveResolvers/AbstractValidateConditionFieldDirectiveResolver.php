@@ -31,7 +31,10 @@ abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractV
      */
     public function getFieldDirectiveBehavior(): string
     {
-        return FieldDirectiveBehaviors::FIELD_AND_OPERATION;
+        if (!$this->isValidatingDirective()) {
+            return FieldDirectiveBehaviors::FIELD_AND_OPERATION;
+        }
+        return parent::getFieldDirectiveBehavior();
     }
 
     /**
