@@ -11,6 +11,38 @@ import withErrorMessage from '../loading/with-error-message';
 import { GROUP_FIELDS_UNDER_TYPE_FOR_PRINT, EMPTY_LABEL } from '../../default-configuration';
 import '../base-styles/checkbox-list.scss';
 
+/**
+ * @param {Object} props
+ */
+const OperationPrintoutBody = ( props ) => {
+	const {
+		operations,
+		emptyLabelString,
+	} = props;
+	return (
+		<>
+			{ !! operations.length && (
+				<ul class="checkbox-list">
+					{ operations.map( operation =>
+						<li
+							key={ operation }
+						>
+							<CheckboxControl
+								label={ `${ operation }` }
+								checked={ true }
+								disabled={ true }
+							/>
+						</li>
+					) }
+				</ul>
+			) }
+			{ !operations.length && (
+				emptyLabelString
+			) }
+		</>
+	);
+}
+
 const TypeFieldPrintoutBody = ( props ) => {
 	const {
 		typeFields,
@@ -208,9 +240,11 @@ const DirectivePrintoutBody = ( props ) => {
 const FieldDirectivePrintout = ( props ) => {
 	const {
 		emptyLabel,
+		enableOperations,
 		enableTypeFields,
 		enableGlobalFields,
 		enableDirectives,
+		operationHeader = __('Operations', 'graphql-api'),
 		typeFieldHeader = __('Fields', 'graphql-api'),
 		globalFieldHeader = __('Global Fields', 'graphql-api'),
 		directiveHeader = __('Directives', 'graphql-api'),
@@ -218,6 +252,17 @@ const FieldDirectivePrintout = ( props ) => {
 	const emptyLabelString = emptyLabel != undefined ? emptyLabel : EMPTY_LABEL;
 	return (
 		<Card { ...props }>
+			{ enableOperations && (
+				<>
+					<CardHeader isShady>{ operationHeader }</CardHeader>
+					<CardBody>
+						<OperationPrintoutBody
+							{ ...props }
+							emptyLabelString={ emptyLabelString }
+						/>
+					</CardBody>
+				</>
+			) }
 			{ enableTypeFields && (
 				<>
 					<CardHeader isShady>{ typeFieldHeader }</CardHeader>
