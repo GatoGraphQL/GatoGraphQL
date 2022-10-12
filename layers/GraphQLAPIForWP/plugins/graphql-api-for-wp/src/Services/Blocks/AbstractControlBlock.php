@@ -37,6 +37,11 @@ abstract class AbstractControlBlock extends AbstractBlock
         return true;
     }
 
+    protected function enableOperations(): bool
+    {
+        return false;
+    }
+
     protected function enableTypeFields(): bool
     {
         return false;
@@ -67,9 +72,19 @@ abstract class AbstractControlBlock extends AbstractBlock
     {
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
-        $fieldTypeContent = $globalFieldContent = $directiveContent = '';
+        $operationContent = $fieldTypeContent = $globalFieldContent = $directiveContent = '';
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($this->enableOperations()) {
+            $operationContent = $moduleConfiguration->getEmptyLabel();
+            $operations = $attributes[self::ATTRIBUTE_NAME_GLOBAL_FIELDS] ?? [];
+            if ($operations) {
+                $operationContent = sprintf(
+                    '<ul><li><code>%s</code></li></ul>',
+                    implode('</code></li><li><code>', $operations)
+                );
+            }
+        }
         if ($this->enableTypeFields()) {
             $fieldTypeContent = $moduleConfiguration->getEmptyLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];
@@ -131,6 +146,13 @@ abstract class AbstractControlBlock extends AbstractBlock
         }
         $blockDataContent = '';
         $blockDataPlaceholder = '<h4>%s</h4>%s';
+        if ($this->enableOperations()) {
+            $blockDataContent .= sprintf(
+                $blockDataPlaceholder,
+                __('Operations', 'graphql-api'),
+                $operationContent,
+            );
+        }
         if ($this->enableTypeFields()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
