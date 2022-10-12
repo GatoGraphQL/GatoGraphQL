@@ -1,7 +1,7 @@
 {
   "data": {
     "__schema": {
-      "operationTypes": [
+      "supportedOperationTypes": [
         {
           "name": "QueryRoot"
         },

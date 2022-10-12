@@ -86,7 +86,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_merge(
             [
-                'operationTypes',
+                'supportedOperationTypes',
             ],
             $moduleConfiguration->exposeGlobalFieldsInGraphQLSchema() ? [
                 'globalFields',
@@ -97,7 +97,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'operationTypes',
+            'supportedOperationTypes',
             'globalFields'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
@@ -108,7 +108,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'operationTypes' => $this->__('[Custom introspection field] All supported operations (eg: `query`, `mutation`, `subscription`)', 'graphql-server'),
+            'supportedOperationTypes' => $this->__('[Custom introspection field] All supported operations (eg: `query`, `mutation`, `subscription`)', 'graphql-server'),
             'globalFields' => $this->__('[Custom introspection field] All global fields (i.e. fields which are added to all types in the schema)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -152,7 +152,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var Schema */
         $schema = $object;
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'operationTypes':
+            case 'supportedOperationTypes':
                 // There's always a QueryRoot
                 $operationTypeIDs = [
                     $schema->getQueryRootObjectTypeID(),
@@ -193,7 +193,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'operationTypes' => $this->getTypeObjectTypeResolver(),
+            'supportedOperationTypes' => $this->getTypeObjectTypeResolver(),
             'globalFields' => $this->getFieldObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

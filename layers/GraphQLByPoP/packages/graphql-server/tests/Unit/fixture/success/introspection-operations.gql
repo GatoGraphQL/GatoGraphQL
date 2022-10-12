@@ -1,6 +1,6 @@
 query GetOperations {
   __schema {
-    operationTypes {
+    supportedOperationTypes {
       name
     }
   }
