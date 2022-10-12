@@ -26,7 +26,7 @@ export const FETCH_OPERATIONS_GRAPHQL_QUERY = `
 	query GetOperations {
 		__schema {
 			supportedOperationTypes {
-				name
+				name(namespaced: true)
 			}
 		}
 	}
