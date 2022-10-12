@@ -12,6 +12,7 @@ use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
 use function current_user_can;
+use function is_user_logged_in;
 
 /**
  * UserAuthorization
@@ -60,6 +61,9 @@ class UserAuthorization implements UserAuthorizationInterface
 
     public function canAccessSchemaEditor(): bool
     {
+        if (!is_user_logged_in()) {
+            return false;
+        }
         return current_user_can($this->getSchemaEditorAccessCapability());
     }
 }
