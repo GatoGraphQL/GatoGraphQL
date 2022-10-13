@@ -9,7 +9,7 @@ import FieldDirectivePrintout from './field-directive-printout';
 /**
  * Display an error message if loading data failed
  */
-const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
+const withSchemaElementsMultiSelectControl = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
 		const {
 			isSelected,
@@ -87,7 +87,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			</div>
 		);
 	},
-	'withFieldDirectiveMultiSelectControl'
+	'withSchemaElementsMultiSelectControl'
 );
 
-export default withFieldDirectiveMultiSelectControl;
+export default withSchemaElementsMultiSelectControl;
