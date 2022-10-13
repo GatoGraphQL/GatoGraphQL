@@ -271,7 +271,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             /**
              * If the value was not serialized, it will not be included in the response
              */
-            if (!isset($id, $serializedIDFieldValues) || !$serializedIDFieldValues[$id]->contains($field)) {
+            if (!isset($serializedIDFieldValues[$id]) || !$serializedIDFieldValues[$id]->contains($field)) {
                 return;
             }
         }
