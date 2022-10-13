@@ -9,9 +9,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationTypes;
 class SuperRootHelper
 {
     public static function getOperationFromSuperRootFieldName(
-        string $fieldName,
+        string $superRootFieldName,
     ): ?string {
-        return match ($fieldName) {
+        return match ($superRootFieldName) {
             '_rootForQueryRoot',
             '_queryRoot'
                 => OperationTypes::QUERY,
