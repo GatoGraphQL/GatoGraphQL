@@ -173,7 +173,7 @@ const MaybeWithSpinnerTypeFieldPrintoutBody = ( props ) => {
  *
  * @param {Object} props
  */
-const FieldDirectivePrintout = ( props ) => {
+const SchemaElementsPrintout = ( props ) => {
 	const {
 		emptyLabel,
 		enableOperations,
@@ -278,4 +278,4 @@ export default compose( [
 			errorMessage: getRetrievingTypeFieldsErrorMessage(),
 		};
 	} ),
-] )( FieldDirectivePrintout );
+] )( SchemaElementsPrintout );
