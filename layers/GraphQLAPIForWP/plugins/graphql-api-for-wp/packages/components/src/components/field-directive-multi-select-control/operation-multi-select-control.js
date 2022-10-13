@@ -23,7 +23,7 @@ const OperationMultiSelectControl = compose( [
 		const items = getOperations().map( operation => (
 			{
 				group: __('Operations', 'graphql-api'),
-				title: `${ operation }`,
+				title: operation,
 				value: operation,
 			}
 		) );
