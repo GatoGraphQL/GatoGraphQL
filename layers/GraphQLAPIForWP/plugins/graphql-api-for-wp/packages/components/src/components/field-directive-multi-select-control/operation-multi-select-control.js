@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { withSelect } from '@wordpress/data';
 import { compose, withState } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 
@@ -11,26 +10,25 @@ import { __ } from '@wordpress/i18n';
 import MultiSelectControl from '../multi-select-control';
 import AddUndefinedSelectedItemIDs from '../multi-select-control/add-undefined-selected-item-ids';
 
-const getOperations = () => ["query", "mutation"];
+const OPERATIONS = ["query", "mutation"];
+
+/**
+ * Convert the global fields array to this structure:
+ * [{group:"Operations",title:"operation",value:"operation"},...]
+ */
+const items = OPERATIONS.map( operation => (
+	{
+		group: __('Operations', 'graphql-api'),
+		title: operation,
+		value: operation,
+	}
+) );
 
 const OperationMultiSelectControl = compose( [
-	withState( { attributeName: 'operations' } ),
-	withSelect( ( select ) => {
-		/**
-		 * Convert the global fields array to this structure:
-		 * [{group:"Operations",title:"operation",value:"operation"},...]
-		 */
-		const items = getOperations().map( operation => (
-			{
-				group: __('Operations', 'graphql-api'),
-				title: operation,
-				value: operation,
-			}
-		) );
-		return {
-			items,
-			hasRetrievedItems: true,
-		};
+	withState( {
+		attributeName: 'operations',
+		items,
+		hasRetrievedItems: true,
 	} ),
 	AddUndefinedSelectedItemIDs,
 ] )( MultiSelectControl );
