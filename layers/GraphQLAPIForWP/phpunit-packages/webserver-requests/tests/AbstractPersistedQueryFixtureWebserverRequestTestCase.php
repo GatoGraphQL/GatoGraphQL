@@ -31,7 +31,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
         $bodyResponseFileNameFileInfos = $this->findFilesInDirectory(
             $fixtureFolder,
             ['*.json'],
-            ['*.disabled.json']
+            ['*.disabled.json', '*.var.json'],
         );
 
         $providerItems = [];

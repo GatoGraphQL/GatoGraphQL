@@ -91,30 +91,39 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
                 $graphQLVariablesFile = null;
             }
 
+            $mainFixtureOperationName = $this->getMainFixtureOperationName($dataName);
+
             $providerItems[$dataName] = [
                 $graphQLQueryFile,
                 $graphQLResponseFile,
                 $graphQLVariablesFile,
-                $this->getMainFixtureOperationName($dataName),
+                $mainFixtureOperationName,
             ];
 
             /**
-             * Retrieve additional GraphQL responses to execute some "operationName"
+             * Retrieve additional GraphQL responses to execute some "operationName",
+             * unless it is numeric, in which case it just means "Execute the test
+             * again (maybe with this other .var.json), it should have these
+             * other results"
              */
             $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
                 $responseFixtureFolder,
                 [$fileName . ':*.json'],
-                ['*.disabled.json'],
+                ['*.disabled.json', '*.var.json'],
             );
             foreach ($graphQLResponseForOperationFileNameFileInfos as $graphQLResponseForOperationFileInfo) {
                 $graphQLResponseForOperationFile = $graphQLResponseForOperationFileInfo->getRealPath();
                 $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
                 $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
+                $graphQLVariablesForOperationFile = $this->getGraphQLVariablesFile($filePath, $fileName . ':' . $operationName);
+                if (!\file_exists($graphQLVariablesForOperationFile)) {
+                    $graphQLVariablesForOperationFile = $graphQLVariablesFile;
+                }
                 $providerItems["${dataName}:${operationName}"] = [
                     $graphQLQueryFile,
                     $graphQLResponseForOperationFile,
-                    $graphQLVariablesFile,
-                    $operationName,
+                    $graphQLVariablesForOperationFile,
+                    is_numeric($operationName) ? $mainFixtureOperationName : $operationName,
                 ];
             }
         }

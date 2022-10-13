@@ -134,7 +134,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
             $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
                 $responseFixtureFolder,
                 [$fileName . ':*.json'],
-                ['*.disabled.json'],
+                ['*.disabled.json', '*.var.json'],
             );
             foreach ($graphQLResponseForOperationFileNameFileInfos as $graphQLResponseForOperationFileInfo) {
                 $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
