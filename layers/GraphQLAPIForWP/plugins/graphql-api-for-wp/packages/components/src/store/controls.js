@@ -7,12 +7,6 @@ import { fetchGraphQLQuery } from '@graphqlapi/api-fetch';
  * Execute the GraphQL queries
  */
 const controls = {
-	RECEIVE_OPERATIONS( action ) {
-		return fetchGraphQLQuery(
-			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,
-			action.query
-		);
-	},
 	RECEIVE_TYPE_FIELDS( action ) {
 		return fetchGraphQLQuery(
 			GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT,

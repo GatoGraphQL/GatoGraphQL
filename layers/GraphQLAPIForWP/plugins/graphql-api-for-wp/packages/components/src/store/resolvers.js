@@ -7,8 +7,6 @@ import { __, sprintf } from '@wordpress/i18n';
  * External dependencies
  */
 import {
-	receiveOperations,
-	setOperations,
 	receiveTypeFields,
 	setTypeFields,
 	receiveGlobalFields,
@@ -18,19 +16,6 @@ import {
 } from './action-creators';
 
 import { DIRECTIVE_KINDS } from '../constants/directive-kinds'
-
-/**
- * GraphQL query to fetch the list of operations from the GraphQL schema
- */
-export const FETCH_OPERATIONS_GRAPHQL_QUERY = `
-	query GetOperations {
-		__schema {
-			supportedOperationTypes {
-				name(namespaced: true)
-			}
-		}
-	}
-`;
 
 /**
  * GraphQL query to fetch the list of types and their fields from the GraphQL schema
@@ -99,26 +84,6 @@ const maybeGetErrorMessage = (response) => {
 
 export { maybeGetErrorMessage };
 export default {
-	/**
-	 * Fetch the operations from the GraphQL server
-	 */
-	* getOperations() {
-
-		const response = yield receiveOperations( FETCH_OPERATIONS_GRAPHQL_QUERY );
-		/**
-		 * If there were erros when executing the query, return an empty list, and keep the error in the state
-		 */
-		const maybeErrorMessage = maybeGetErrorMessage(response);
-		if (maybeErrorMessage) {
-			return setOperations( [], maybeErrorMessage );
-		}
-		/**
-		 * Flatten the response to an array containing the operation name directly (extracting them from under the "name" key)
-		 */
-		const operations = response.data?.__schema?.supportedOperationTypes?.map(element => element.name) || [];
-		return setOperations( operations );
-	},
-
 	/**
 	 * Fetch the typeFields from the GraphQL server
 	 *

@@ -2,9 +2,6 @@
  * The initial state of the store
  */
 const DEFAULT_STATE = {
-	operations: [],
-	hasRetrievedOperations: false,
-	retrievingOperationsErrorMessage: null,
 	typeFields: [],
 	hasRetrievedTypeFields: false,
 	retrievingTypeFieldsErrorMessage: null,
@@ -29,13 +26,6 @@ const schemaInstrospection = (
 	action
 ) => {
 	switch ( action.type ) {
-		case 'SET_OPERATIONS':
-			return {
-				...state,
-				operations: action.operations,
-				hasRetrievedOperations: true,
-				retrievingOperationsErrorMessage: action.errorMessage,
-			};
 		case 'SET_TYPE_FIELDS':
 			return {
 				...state,
