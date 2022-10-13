@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Constants;
 
 class OperationTypes
 {
-    const QUERY = 'query';
-    const MUTATION = 'mutation';
+    public const QUERY = 'query';
+    public const MUTATION = 'mutation';
+    public const SUBSCRIPTION = 'subscription';
 }
