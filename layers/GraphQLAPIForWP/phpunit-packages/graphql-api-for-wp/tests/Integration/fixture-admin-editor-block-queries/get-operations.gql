@@ -1,7 +1,0 @@
-query GetOperations {
-  __schema {
-    supportedOperationTypes {
-      name(namespaced: true)
-    }
-  }
-}
