@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { SUPPORTED_OPERATION_TYPES } from '../constants/operations'
+import { SUPPORTED_OPERATION_TYPES } from '../../constants/operations'
 import MultiSelectControl from '../multi-select-control';
 import AddUndefinedSelectedItemIDs from '../multi-select-control/add-undefined-selected-item-ids';
 
