@@ -1,18 +1,18 @@
 /**
  * Same value as in:
- * GraphQLByPoP\GraphQLServer\Constants\OperationTypes::QUERY
+ * PoP\GraphQLParser\Spec\Parser\Ast\OperationTypes::QUERY
  */
 const OPERATION_TYPE_QUERY = 'query';
 
 /**
  * Same value as in:
- * GraphQLByPoP\GraphQLServer\Constants\OperationTypes::MUTATION
+ * PoP\GraphQLParser\Spec\Parser\Ast\OperationTypes::MUTATION
  */
 const OPERATION_TYPE_MUTATION = 'mutation';
 
 /**
  * Same value as in:
- * GraphQLByPoP\GraphQLServer\Constants\OperationTypes::SUBSCRIPTION
+ * PoP\GraphQLParser\Spec\Parser\Ast\OperationTypes::SUBSCRIPTION
  */
 const OPERATION_TYPE_SUBSCRIPTION = 'subscription';
 
