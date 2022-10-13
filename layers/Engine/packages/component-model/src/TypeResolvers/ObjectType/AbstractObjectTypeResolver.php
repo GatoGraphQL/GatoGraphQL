@@ -1691,8 +1691,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * Provide a different error message if:
      *
-     * - It is the SuperRoot field <= It represents an Operation
      * - A particular version was requested on the Field
+     * - (To be overriden by SuperRoot) It represents an Operation
      */
     public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
         FieldInterface $field,

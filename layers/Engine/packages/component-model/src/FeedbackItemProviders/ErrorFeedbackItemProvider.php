@@ -9,7 +9,6 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public final const E1 = 'e1';
     public final const E2 = 'e2';
     public final const E3 = 'e3';
     public final const E3A = 'e3a';
@@ -34,7 +33,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getCodes(): array
     {
         return [
-            self::E1,
             self::E2,
             self::E3,
             self::E3A,
@@ -58,7 +56,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The operation is not available', 'component-model'),
             self::E2 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
             self::E3 => $this->__('Resolving field \'%s\' produced error: \'%s\'', 'component-model'),
             self::E3A => $this->__('Resolving field \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
