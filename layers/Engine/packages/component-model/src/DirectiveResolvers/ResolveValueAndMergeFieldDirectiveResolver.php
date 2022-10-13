@@ -247,10 +247,6 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             return;
         }
 
-        if ($value === null) {
-            return;
-        }
-
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedFieldValues = new SplObjectStorage();
         $resolvedFieldValues[$field] = $value;
@@ -259,20 +255,25 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
         $resolvedIDFieldValues = array(
             $id => $resolvedFieldValues,
         );
-        $serializedIDFieldValues = $this->getTypeSerializationService()->serializeOutputTypeIDFieldValues(
-            $relationalTypeResolver,
-            $resolvedIDFieldValues,
-            [$id => new EngineIterationFieldSet([$field])],
-            [$id => $object],
-            $this->directive,
-            $engineIterationFeedbackStore,
-        );
 
-        /**
-         * If the value was not serialized, it will not be included in the response
-         */
-        if (!isset($serializedIDFieldValues[$id]) || !$serializedIDFieldValues[$id]->contains($field)) {
-            return;
+        if ($value === null) {
+            $serializedIDFieldValues = $resolvedIDFieldValues;
+        } else {
+            $serializedIDFieldValues = $this->getTypeSerializationService()->serializeOutputTypeIDFieldValues(
+                $relationalTypeResolver,
+                $resolvedIDFieldValues,
+                [$id => new EngineIterationFieldSet([$field])],
+                [$id => $object],
+                $this->directive,
+                $engineIterationFeedbackStore,
+            );
+
+            /**
+             * If the value was not serialized, it will not be included in the response
+             */
+            if (!isset($id, $serializedIDFieldValues) || !$serializedIDFieldValues[$id]->contains($field)) {
+                return;
+            }
         }
 
         /**
