@@ -13,8 +13,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\ObjectModels\SuperRoot;
 use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
+use PoP\Engine\StaticHelpers\SuperRootHelper;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\OperationTypes;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
@@ -94,15 +94,7 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
     public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
         FieldInterface $field,
     ): FeedbackItemResolution {
-        $operation = match ($field->getName()) {
-            '_rootForQueryRoot',
-            '_queryRoot'
-                => OperationTypes::QUERY,
-            '_rootForMutationRoot',
-            '_mutationRoot'
-                => OperationTypes::MUTATION,
-            default => null,
-        };
+        $operation = SuperRootHelper::getOperationFromSuperRootFieldName($field->getName());
         if ($operation !== null) {
             return new FeedbackItemResolution(
                 ErrorFeedbackItemProvider::class,
