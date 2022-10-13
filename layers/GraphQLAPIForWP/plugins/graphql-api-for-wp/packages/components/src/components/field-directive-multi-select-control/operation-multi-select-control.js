@@ -18,7 +18,7 @@ const OperationMultiSelectControl = compose( [
 	withSelect( ( select ) => {
 		/**
 		 * Convert the global fields array to this structure:
-		 * [{group:"Operations",title:"operationName",value:"operationName"},...]
+		 * [{group:"Operations",title:"operation",value:"operation"},...]
 		 */
 		const items = getOperations().map( operation => (
 			{
