@@ -14,6 +14,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 		const {
 			isSelected,
 			attributes: {
+				operations,
 				typeFields,
 				globalFields,
 				directives
@@ -21,16 +22,17 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			componentClassName,
 			selectLabel,
 			configurationLabel,
+			enableOperations,
 			enableTypeFields,
 			enableGlobalFields,
 			enableDirectives,
 			hideLabels
 		} = props;
-		if (! enableTypeFields && ! enableGlobalFields && ! enableDirectives) {
-			throw 'At least 1 option must be enabled: [type fields, global fields, directives]';
+		if (! enableOperations && ! enableTypeFields && ! enableGlobalFields && ! enableDirectives) {
+			throw 'At least 1 option must be enabled: [operations, type fields, global fields, directives]';
 		}
 		const className = 'graphql-api-multi-select-control-list';
-		const leftSideLabel = selectLabel || __('Select fields and directives:', 'graphql-api');
+		const leftSideLabel = selectLabel || __('Select schema elements:', 'graphql-api');
 		const rightSideLabel = configurationLabel || __('Configuration:', 'graphql-api');
 		return (
 			<div className={ className }>
@@ -47,6 +49,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 									{ isSelected && (
 										<FieldDirectiveTabPanel
 											{ ...props }
+											operations={ operations }
 											typeFields={ typeFields }
 											globalFields={ globalFields }
 											directives={ directives }
@@ -56,6 +59,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 									{ !isSelected && (
 										<FieldDirectivePrintout
 											{ ...props }
+											operations={ operations }
 											typeFields={ typeFields }
 											globalFields={ globalFields }
 											directives={ directives }

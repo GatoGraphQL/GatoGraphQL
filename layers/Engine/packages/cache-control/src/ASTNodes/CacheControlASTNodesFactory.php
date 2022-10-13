@@ -15,7 +15,7 @@ class CacheControlASTNodesFactory
 {
     protected static ?Directive $noCacheDirective = null;
 
-    private static function getCacheControlFieldDirectiveResolver(): CacheControlFieldDirectiveResolver
+    protected static function getCacheControlFieldDirectiveResolver(): CacheControlFieldDirectiveResolver
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var CacheControlFieldDirectiveResolver */

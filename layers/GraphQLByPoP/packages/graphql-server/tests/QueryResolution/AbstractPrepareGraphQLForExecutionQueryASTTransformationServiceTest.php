@@ -178,16 +178,16 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
             new RelationalField(
                 'self',
                 $isNestedMutationsEnabled
-                    ? '_superRoot__root_One_self_'
+                    ? '_superRoot__rootForQueryRoot_One_self_'
                     : '_superRoot__queryRoot_One_self_',
                 [],
                 [
                     new RelationalField(
                         $isNestedMutationsEnabled
-                            ? '_root'
+                            ? '_rootForQueryRoot'
                             : '_queryRoot',
                         $isNestedMutationsEnabled
-                            ? '_superRoot__root_One_'
+                            ? '_superRoot__rootForQueryRoot_One_'
                             : '_superRoot__queryRoot_One_',
                         [],
                         [
@@ -205,16 +205,16 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
         $relationalField1SuperRootField = new RelationalField(
             'self',
             $isNestedMutationsEnabled
-                ? '_superRoot__root_Two_self_'
+                ? '_superRoot__rootForMutationRoot_Two_self_'
                 : '_superRoot__mutationRoot_Two_self_',
             [],
             [
                 new RelationalField(
                     $isNestedMutationsEnabled
-                        ? '_root'
+                        ? '_rootForMutationRoot'
                         : '_mutationRoot',
                     $isNestedMutationsEnabled
-                        ? '_superRoot__root_Two_'
+                        ? '_superRoot__rootForMutationRoot_Two_'
                         : '_superRoot__mutationRoot_Two_',
                     [],
                     [
@@ -236,16 +236,16 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
                 new RelationalField(
                     'self',
                     $isNestedMutationsEnabled
-                        ? '_superRoot__root_Three_self_'
+                        ? '_superRoot__rootForQueryRoot_Three_self_'
                         : '_superRoot__queryRoot_Three_self_',
                     [],
                     [
                         new RelationalField(
                             $isNestedMutationsEnabled
-                                ? '_root'
+                                ? '_rootForQueryRoot'
                                 : '_queryRoot',
                             $isNestedMutationsEnabled
-                                ? '_superRoot__root_Three_'
+                                ? '_superRoot__rootForQueryRoot_Three_'
                                 : '_superRoot__queryRoot_Three_',
                             [],
                             [
@@ -345,16 +345,16 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
                                                                                 new RelationalField(
                                                                                     'self',
                                                                                     $isNestedMutationsEnabled
-                                                                                        ? '_superRoot__root_Three_self_'
+                                                                                        ? '_superRoot__rootForQueryRoot_Three_self_'
                                                                                         : '_superRoot__queryRoot_Three_self_',
                                                                                     [],
                                                                                     [
                                                                                         new RelationalField(
                                                                                             $isNestedMutationsEnabled
-                                                                                                ? '_root'
+                                                                                                ? '_rootForQueryRoot'
                                                                                                 : '_queryRoot',
                                                                                             $isNestedMutationsEnabled
-                                                                                                ? '_superRoot__root_Three_'
+                                                                                                ? '_superRoot__rootForQueryRoot_Three_'
                                                                                                 : '_superRoot__queryRoot_Three_',
                                                                                             [],
                                                                                             [

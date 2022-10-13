@@ -65,7 +65,19 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
-            '_root',
+            /**
+             * Have 2 fields to retrieve the Root when Nested Mutations
+             * are enabled (instead of a single one `_root`) because then
+             * we can define Access Control validations on the `query`
+             * or `mutation` operation:
+             *
+             * The corresponding `@validate...` directives will be added
+             * to either field `_rootForQueryRoot` or `_rootForMutationRoot`
+             * on the SuperRoot object.
+             */
+            '_rootForQueryRoot',
+            '_rootForMutationRoot',
+
             '_queryRoot',
             '_mutationRoot',
         ];
@@ -74,7 +86,8 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '_root' => $this->__('Get the Root type', 'engine'),
+            '_rootForQueryRoot' => $this->__('Get the Root type (as requested by a query operation)', 'engine'),
+            '_rootFoMutationRoot' => $this->__('Get the Root type (as requested by a mutation operation)', 'engine'),
             '_queryRoot' => $this->__('Get the Query Root type', 'engine'),
             '_mutationRoot' => $this->__('Get the Mutation Root type', 'engine'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -84,10 +97,15 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            '_root' => $this->getRootObjectTypeResolver(),
-            '_queryRoot' => $this->getQueryRootObjectTypeResolver(),
-            '_mutationRoot' => $this->getMutationRootObjectTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            '_rootForQueryRoot',
+            '_rootForMutationRoot'
+                => $this->getRootObjectTypeResolver(),
+            '_queryRoot'
+                => $this->getQueryRootObjectTypeResolver(),
+            '_mutationRoot'
+                => $this->getMutationRootObjectTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
@@ -100,10 +118,15 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var SuperRoot */
         $superRoot = $object;
         return match ($fieldDataAccessor->getFieldName()) {
-            '_root' => Root::ID,
-            '_queryRoot' => QueryRoot::ID,
-            '_mutationRoot' => MutationRoot::ID,
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
+            '_rootForQueryRoot',
+            '_rootForMutationRoot'
+                => Root::ID,
+            '_queryRoot'
+                => QueryRoot::ID,
+            '_mutationRoot'
+                => MutationRoot::ID,
+            default
+                => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
 }

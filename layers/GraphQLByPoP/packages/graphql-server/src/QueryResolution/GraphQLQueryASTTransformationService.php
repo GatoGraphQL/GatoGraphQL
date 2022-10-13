@@ -84,12 +84,10 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
          */
         $documentFieldInstanceContainer = $this->fieldInstanceContainer[$document] ?? [];
 
-        if ($enableNestedMutations) {
-            $superRootField = '_root';
-        } elseif ($operation instanceof QueryOperation) {
-            $superRootField = '_queryRoot';
+        if ($operation instanceof QueryOperation) {
+            $superRootField = $enableNestedMutations ? '_rootForQueryRoot' : '_queryRoot';
         } elseif ($operation instanceof MutationOperation) {
-            $superRootField = '_mutationRoot';
+            $superRootField = $enableNestedMutations ? '_rootForMutationRoot' : '_mutationRoot';
         } else {
             throw new ShouldNotHappenException(
                 sprintf(

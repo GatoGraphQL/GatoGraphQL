@@ -11,6 +11,38 @@ import withErrorMessage from '../loading/with-error-message';
 import { GROUP_FIELDS_UNDER_TYPE_FOR_PRINT, EMPTY_LABEL } from '../../default-configuration';
 import '../base-styles/checkbox-list.scss';
 
+/**
+ * @param {Object} props
+ */
+const ItemPrintoutBody = ( props ) => {
+	const {
+		items,
+		emptyLabelString,
+	} = props;
+	return (
+		<>
+			{ !! items.length && (
+				<ul class="checkbox-list">
+					{ items.map( item =>
+						<li
+							key={ item }
+						>
+							<CheckboxControl
+								label={ `${ item }` }
+								checked={ true }
+								disabled={ true }
+							/>
+						</li>
+					) }
+				</ul>
+			) }
+			{ !items.length && (
+				emptyLabelString
+			) }
+		</>
+	);
+}
+
 const TypeFieldPrintoutBody = ( props ) => {
 	const {
 		typeFields,
@@ -106,90 +138,26 @@ const MaybeWithSpinnerTypeFieldPrintoutBody = ( props ) => {
 	);
 }
 
-/**
- * @param {Object} props
- */
-const GlobalFieldPrintoutBody = ( props ) => {
-	const {
-		globalFields,
-		emptyLabelString,
-	} = props;
-	return (
-		<>
-			{ !! globalFields.length && (
-				<ul class="checkbox-list">
-					{ globalFields.map( globalField =>
-						<li
-							key={ globalField }
-						>
-							<CheckboxControl
-								label={ `${ globalField }` }
-								checked={ true }
-								disabled={ true }
-							/>
-						</li>
-					) }
-				</ul>
-			) }
-			{ !globalFields.length && (
-				emptyLabelString
-			) }
-		</>
-	);
-}
-
-/**
- * @param {Object} props
- */
-const DirectivePrintoutBody = ( props ) => {
-	const {
-		directives,
-		emptyLabelString,
-	} = props;
-	return (
-		<>
-			{ !! directives.length && (
-				<ul class="checkbox-list">
-					{ directives.map( directive =>
-						<li
-							key={ directive }
-						>
-							<CheckboxControl
-								label={ `${ directive }` }
-								checked={ true }
-								disabled={ true }
-							/>
-						</li>
-					) }
-				</ul>
-			) }
-			{ !directives.length && (
-				emptyLabelString
-			) }
-		</>
-	);
-}
-
 // /**
-//  * Add a spinner when loading the typeFieldNames and typeFields is not empty
+//  * Add a spinner when loading the items and the corresponding attribute is not empty
 //  */
-// const WithSpinnerDirectivePrintoutBody = compose( [
+// const WithSpinnerItemPrintoutBody = compose( [
 // 	withSpinner(),
 // 	withErrorMessage(),
-// ] )( DirectivePrintoutBody );
+// ] )( ItemPrintoutBody );
 
 // /**
-//  * Check if the typeFields are empty, then do not show the spinner
+//  * Check if the items are empty, then do not show the spinner
 //  * This is an improvement when loading a new Access Control post,
 //  * that it has no data, so the user is not waiting for nothing
 //  *
 //  * @param {Object} props
 //  */
-// const MaybeWithSpinnerDirectivePrintoutBody = ( props ) => {
-// 	const { directives } = props;
-// 	if ( !! directives.length ) {
+// const MaybeWithSpinnerItemPrintoutBody = ( props ) => {
+// 	const { items } = props;
+// 	if ( !! items.length ) {
 // 		return (
-// 			<WithSpinnerDirectivePrintoutBody { ...props } />
+// 			<WithSpinnerItemPrintoutBody { ...props } />
 // 		)
 // 	}
 // 	return (
@@ -208,9 +176,14 @@ const DirectivePrintoutBody = ( props ) => {
 const FieldDirectivePrintout = ( props ) => {
 	const {
 		emptyLabel,
+		enableOperations,
 		enableTypeFields,
 		enableGlobalFields,
 		enableDirectives,
+		operations,
+		globalFields,
+		directives,
+		operationHeader = __('Operations', 'graphql-api'),
 		typeFieldHeader = __('Fields', 'graphql-api'),
 		globalFieldHeader = __('Global Fields', 'graphql-api'),
 		directiveHeader = __('Directives', 'graphql-api'),
@@ -218,6 +191,18 @@ const FieldDirectivePrintout = ( props ) => {
 	const emptyLabelString = emptyLabel != undefined ? emptyLabel : EMPTY_LABEL;
 	return (
 		<Card { ...props }>
+			{ enableOperations && (
+				<>
+					<CardHeader isShady>{ operationHeader }</CardHeader>
+					<CardBody>
+						<ItemPrintoutBody
+							{ ...props }
+							items= { operations }
+							emptyLabelString={ emptyLabelString }
+						/>
+					</CardBody>
+				</>
+			) }
 			{ enableTypeFields && (
 				<>
 					<CardHeader isShady>{ typeFieldHeader }</CardHeader>
@@ -233,8 +218,9 @@ const FieldDirectivePrintout = ( props ) => {
 				<>
 					<CardHeader isShady>{ globalFieldHeader }</CardHeader>
 					<CardBody>
-						<GlobalFieldPrintoutBody
+						<ItemPrintoutBody
 							{ ...props }
+							items= { globalFields }
 							emptyLabelString={ emptyLabelString }
 						/>
 					</CardBody>
@@ -244,9 +230,10 @@ const FieldDirectivePrintout = ( props ) => {
 				<>
 					<CardHeader isShady>{ directiveHeader }</CardHeader>
 					<CardBody>
-						{/* <MaybeWithSpinnerDirectivePrintoutBody */}
-						<DirectivePrintoutBody
+						{/* <MaybeWithSpinnerItemPrintoutBody */}
+						<ItemPrintoutBody
 							{ ...props }
+							items={ directives }
 							emptyLabelString={ emptyLabelString }
 						/>
 					</CardBody>

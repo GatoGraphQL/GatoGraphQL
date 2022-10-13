@@ -1,4 +1,3 @@
-
 /**
  * Returns an action object used in setting the typeFields object in the state
  *
@@ -32,7 +31,7 @@ export function receiveTypeFields( query ) {
 /**
  * Returns an action object used in setting the globalFields object in the state
  *
- * @param {Array} globalFields Array of globalField objects received, where each object has key "type" for the type name, and key "fields" with an array of the type's fields.
+ * @param {Array} globalFields Array of global fields received
  * @param {string} errorMessage Error message if fetching the objects failed
  *
  * @return {Object} Action object.

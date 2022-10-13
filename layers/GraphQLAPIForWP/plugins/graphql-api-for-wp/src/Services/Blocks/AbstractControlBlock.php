@@ -16,6 +16,7 @@ abstract class AbstractControlBlock extends AbstractBlock
 {
     use WithTypeFieldControlBlockTrait;
 
+    public final const ATTRIBUTE_NAME_OPERATIONS = 'operations';
     public final const ATTRIBUTE_NAME_TYPE_FIELDS = 'typeFields';
     public final const ATTRIBUTE_NAME_GLOBAL_FIELDS = 'globalFields';
     public final const ATTRIBUTE_NAME_DIRECTIVES = 'directives';
@@ -35,6 +36,11 @@ abstract class AbstractControlBlock extends AbstractBlock
     protected function isDynamicBlock(): bool
     {
         return true;
+    }
+
+    protected function enableOperations(): bool
+    {
+        return false;
     }
 
     protected function enableTypeFields(): bool
@@ -67,9 +73,21 @@ abstract class AbstractControlBlock extends AbstractBlock
     {
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
-        $fieldTypeContent = $globalFieldContent = $directiveContent = '';
+        $operationContent = $fieldTypeContent = $globalFieldContent = $directiveContent = '';
+        $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
+        $liPlaceholder = '</code></li><li><code>';
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($this->enableOperations()) {
+            $operationContent = $moduleConfiguration->getEmptyLabel();
+            $operations = $attributes[self::ATTRIBUTE_NAME_OPERATIONS] ?? [];
+            if ($operations) {
+                $operationContent = sprintf(
+                    $ulPlaceholder,
+                    implode($liPlaceholder, $operations)
+                );
+            }
+        }
         if ($this->enableTypeFields()) {
             $fieldTypeContent = $moduleConfiguration->getEmptyLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];
@@ -85,10 +103,10 @@ abstract class AbstractControlBlock extends AbstractBlock
                     $fieldTypeContent = '';
                     foreach ($typeFieldsForPrint as $typeName => $fields) {
                         $fieldTypeContent .= sprintf(
-                            '<strong>%s</strong><ul><li><code>%s</code></li></ul>',
+                            '<strong>%s</strong>' . $ulPlaceholder,
                             $typeName,
                             implode(
-                                '</code></li><li><code>',
+                                $liPlaceholder,
                                 $fields
                             )
                         );
@@ -114,8 +132,8 @@ abstract class AbstractControlBlock extends AbstractBlock
             $globalFields = $attributes[self::ATTRIBUTE_NAME_GLOBAL_FIELDS] ?? [];
             if ($globalFields) {
                 $globalFieldContent = sprintf(
-                    '<ul><li><code>%s</code></li></ul>',
-                    implode('</code></li><li><code>', $globalFields)
+                    $ulPlaceholder,
+                    implode($liPlaceholder, $globalFields)
                 );
             }
         }
@@ -124,13 +142,20 @@ abstract class AbstractControlBlock extends AbstractBlock
             $directives = $attributes[self::ATTRIBUTE_NAME_DIRECTIVES] ?? [];
             if ($directives) {
                 $directiveContent = sprintf(
-                    '<ul><li><code>%s</code></li></ul>',
-                    implode('</code></li><li><code>', $directives)
+                    $ulPlaceholder,
+                    implode($liPlaceholder, $directives)
                 );
             }
         }
         $blockDataContent = '';
         $blockDataPlaceholder = '<h4>%s</h4>%s';
+        if ($this->enableOperations()) {
+            $blockDataContent .= sprintf(
+                $blockDataPlaceholder,
+                __('Operations', 'graphql-api'),
+                $operationContent,
+            );
+        }
         if ($this->enableTypeFields()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
@@ -181,7 +206,7 @@ EOT;
 
     protected function getBlockDataTitle(): string
     {
-        return \__('Select fields and directives:', 'graphql-api');
+        return \__('Select schema elements', 'graphql-api');
     }
     protected function getBlockContentTitle(): string
     {

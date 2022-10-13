@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ObjectType;
 
-use PoP\Engine\ObjectModels\SuperRoot;
 use GraphQLByPoP\GraphQLServer\Registries\MandatoryOperationDirectiveResolverRegistryInterface;
-use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\Engine\ObjectModels\SuperRoot;
+use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
+use PoP\Engine\StaticHelpers\SuperRootHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 {
@@ -81,5 +85,28 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
             FieldDirectiveBehaviors::FIELD,
             FieldDirectiveBehaviors::FIELD_AND_OPERATION,
         ];
+    }
+
+    /**
+     * Provide a different error message for the SuperRoot field,
+     * as it represents an Operation and not a Field
+     */
+    public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
+        FieldInterface $field,
+    ): FeedbackItemResolution {
+        $operation = SuperRootHelper::getOperationFromSuperRootFieldName($field->getName());
+        if ($operation !== null) {
+            return new FeedbackItemResolution(
+                ErrorFeedbackItemProvider::class,
+                ErrorFeedbackItemProvider::E1,
+                [
+                    $operation,
+                ]
+            );
+        }
+        return new FeedbackItemResolution(
+            ErrorFeedbackItemProvider::class,
+            ErrorFeedbackItemProvider::E1A
+        );
     }
 }
