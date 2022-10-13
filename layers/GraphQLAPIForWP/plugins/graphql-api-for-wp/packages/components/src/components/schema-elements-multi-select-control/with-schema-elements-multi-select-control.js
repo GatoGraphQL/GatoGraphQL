@@ -3,13 +3,13 @@
  */
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
-import FieldDirectiveTabPanel from './field-directive-tab-panel';
-import FieldDirectivePrintout from './field-directive-printout';
+import SchemaElementsTabPanel from './schema-elements-tab-panel';
+import SchemaElementsPrintout from './schema-elements-printout';
 
 /**
  * Display an error message if loading data failed
  */
-const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
+const withSchemaElementsMultiSelectControl = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
 		const {
 			isSelected,
@@ -47,7 +47,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 								}
 								<div className={ componentClassName }>
 									{ isSelected && (
-										<FieldDirectiveTabPanel
+										<SchemaElementsTabPanel
 											{ ...props }
 											operations={ operations }
 											typeFields={ typeFields }
@@ -57,7 +57,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 										/>
 									) }
 									{ !isSelected && (
-										<FieldDirectivePrintout
+										<SchemaElementsPrintout
 											{ ...props }
 											operations={ operations }
 											typeFields={ typeFields }
@@ -87,7 +87,7 @@ const withFieldDirectiveMultiSelectControl = () => createHigherOrderComponent(
 			</div>
 		);
 	},
-	'withFieldDirectiveMultiSelectControl'
+	'withSchemaElementsMultiSelectControl'
 );
 
-export default withFieldDirectiveMultiSelectControl;
+export default withSchemaElementsMultiSelectControl;

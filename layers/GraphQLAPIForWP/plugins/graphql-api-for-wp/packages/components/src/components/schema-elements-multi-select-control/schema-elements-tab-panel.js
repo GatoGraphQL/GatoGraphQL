@@ -5,7 +5,7 @@ import TypeFieldMultiSelectControl from './type-field-multi-select-control';
 import GlobalFieldMultiSelectControl from './global-field-multi-select-control';
 import DirectiveMultiSelectControl from './directive-multi-select-control';
 
-const FieldDirectiveTabPanel = ( props ) => {
+const SchemaElementsTabPanel = ( props ) => {
 	const {
 		className,
 		operations,
@@ -71,4 +71,4 @@ const FieldDirectiveTabPanel = ( props ) => {
 	);
 }
 
-export default FieldDirectiveTabPanel;
+export default SchemaElementsTabPanel;
