@@ -1689,8 +1689,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * Provide a different error message if a particular version was requested,
-     * or if not.
+     * Provide a different error message if:
+     *
+     * - It is the SuperRoot field <= It represents an Operation
+     * - A particular version was requested on the Field
      */
     public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
         FieldInterface $field,
@@ -1701,7 +1703,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT);
             return new FeedbackItemResolution(
                 ErrorFeedbackItemProvider::class,
-                ErrorFeedbackItemProvider::E26,
+                ErrorFeedbackItemProvider::E2,
                 [
                     $field->getName(),
                     $this->getMaybeNamespacedTypeName(),
