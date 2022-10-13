@@ -65,8 +65,19 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
+            /**
+             * Have 2 fields to retrieve the Root when Nested Mutations
+             * are enabled (instead of a single one `_root`) because then
+             * we can define Access Control validations on the `query`
+             * or `mutation` operation:
+             *
+             * The corresponding `@validate...` directives will be added
+             * to either field `_rootForQueryRoot` or `_rootForMutationRoot`
+             * on the SuperRoot object.
+             */
             '_rootForQueryRoot',
             '_rootForMutationRoot',
+
             '_queryRoot',
             '_mutationRoot',
         ];
