@@ -11,14 +11,11 @@ import { __ } from '@wordpress/i18n';
 import MultiSelectControl from '../multi-select-control';
 import AddUndefinedSelectedItemIDs from '../multi-select-control/add-undefined-selected-item-ids';
 
+const getOperations = () => ["query", "mutation"];
+
 const OperationMultiSelectControl = compose( [
 	withState( { attributeName: 'operations' } ),
 	withSelect( ( select ) => {
-		const {
-			getOperations,
-			hasRetrievedOperations,
-			getRetrievingOperationsErrorMessage,
-		} = select ( 'graphql-api/components' );
 		/**
 		 * Convert the global fields array to this structure:
 		 * [{group:"Operations",title:"operationName",value:"operationName"},...]
@@ -32,8 +29,7 @@ const OperationMultiSelectControl = compose( [
 		) );
 		return {
 			items,
-			hasRetrievedItems: hasRetrievedOperations(),
-			errorMessage: getRetrievingOperationsErrorMessage(),
+			hasRetrievedItems: true,
 		};
 	} ),
 	AddUndefinedSelectedItemIDs,
