@@ -3,8 +3,8 @@
  */
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
-import FieldDirectiveTabPanel from './field-directive-tab-panel';
-import FieldDirectivePrintout from './field-directive-printout';
+import FieldDirectiveTabPanel from './schema-elements-tab-panel';
+import FieldDirectivePrintout from './schema-elements-printout';
 
 /**
  * Display an error message if loading data failed
