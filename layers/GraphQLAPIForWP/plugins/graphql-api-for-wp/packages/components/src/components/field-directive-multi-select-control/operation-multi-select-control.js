@@ -7,16 +7,15 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { SUPPORTED_OPERATION_TYPES } from '../constants/operations'
 import MultiSelectControl from '../multi-select-control';
 import AddUndefinedSelectedItemIDs from '../multi-select-control/add-undefined-selected-item-ids';
-
-const OPERATIONS = ["query", "mutation"];
 
 /**
  * Convert the global fields array to this structure:
  * [{group:"Operations",title:"operation",value:"operation"},...]
  */
-const items = OPERATIONS.map( operation => (
+const items = SUPPORTED_OPERATION_TYPES.map( operation => (
 	{
 		group: __('Operations', 'graphql-api'),
 		title: operation,
