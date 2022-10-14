@@ -18,5 +18,5 @@ export { withCard } from './components/card';
 export { withEditableOnFocus } from './components/editable-on-focus';
 export { getLabelForNotFoundElement } from './components/helpers';
 export { maybeGetErrorMessage } from './store/resolvers';
-export { EMPTY_LABEL, SETTINGS_VALUE_LABEL } from './default-configuration';
+export { EMPTY_LABEL, SETTINGS_VALUE_LABEL, GROUP_FIELDS_UNDER_TYPE_FOR_PRINT } from './default-configuration';
 export { ATTRIBUTE_VALUE_DEFAULT, ATTRIBUTE_VALUE_ENABLED, ATTRIBUTE_VALUE_DISABLED } from './constants/enabled-disabled-values';
