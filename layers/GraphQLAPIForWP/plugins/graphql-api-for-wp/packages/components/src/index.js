@@ -20,5 +20,4 @@ export { withEditableOnFocus } from './components/editable-on-focus';
 export { getLabelForNotFoundElement } from './components/helpers';
 export { maybeGetErrorMessage } from './store/resolvers';
 export { EMPTY_LABEL, SETTINGS_VALUE_LABEL } from './default-configuration';
-export { AddUndefinedSelectedItemIDs } from './components/multi-select-control';
 export { ATTRIBUTE_VALUE_DEFAULT, ATTRIBUTE_VALUE_ENABLED, ATTRIBUTE_VALUE_DISABLED } from './constants/enabled-disabled-values';
