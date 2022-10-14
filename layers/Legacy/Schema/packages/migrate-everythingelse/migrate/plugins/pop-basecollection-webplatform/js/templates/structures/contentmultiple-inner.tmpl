@@ -1,9 +1,0 @@
-{{#each objectIDs}}
-	<div class="{{../class}} pop-structureinner" style="{{../style}}">
-		{{#each ../subcomponentoutputnames.layouts}}
-			{{#withModule ../../. this}}
-				{{enterModule ../../../. typeOutputKey=../../../typeOutputKey objectID=../../.}}
-			{{/withModule}}
-		{{/each}}
-	</div>
-{{/each}}

@@ -1,3 +1,0 @@
-<?php
-
-define('GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA', 'validate-captcha');

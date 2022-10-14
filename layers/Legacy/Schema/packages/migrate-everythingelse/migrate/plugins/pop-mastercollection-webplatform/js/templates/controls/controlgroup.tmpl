@@ -1,6 +1,0 @@
-<div {{#generateId}}{{id}}{{/generateId}} class="controls {{class}}" style="{{style}}">	
-	{{#each subcomponents}}
-		{{! Comment Leo: the typeOutputKey/resolvedObject below might be null (controlgroup) or have a value (quicklinkgroup)}}
-		{{enterModule ../.}}
-	{{/each}}
-</div>

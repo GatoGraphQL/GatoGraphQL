@@ -1,7 +1,0 @@
-{{#each feedback.msgs}}
-	{{#each ../subcomponentoutputnames.layouts}}
-		{{#withModule ../../. this}}
-			{{enterModule ../../../. feedbackObject=../../.}}
-		{{/withModule}}
-	{{/each}}
-{{/each}}

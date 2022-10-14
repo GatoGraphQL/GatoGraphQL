@@ -1,6 +1,0 @@
-<?php
-
-abstract class PoP_Module_Processor_SuggestionsSelectableTypeaheadFormComponentsBase extends PoP_Module_Processor_SelectableTypeaheadFormComponentsBase
-{
-    use SuggestionsSelectableTypeaheadFormComponentsTrait;
-}

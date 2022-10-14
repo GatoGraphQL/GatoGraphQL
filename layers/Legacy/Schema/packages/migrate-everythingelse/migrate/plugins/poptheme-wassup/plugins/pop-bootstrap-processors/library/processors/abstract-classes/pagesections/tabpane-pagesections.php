@@ -1,6 +1,0 @@
-<?php
-
-abstract class PoPTheme_Wassup_Module_Processor_CustomTabPanePageSectionsBase extends PoP_Module_Processor_TabPanePageSectionsBase
-{
-    use PoPTheme_Wassup_Module_Processor_PageSectionsTrait;
-}

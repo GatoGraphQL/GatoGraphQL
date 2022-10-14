@@ -1,7 +1,0 @@
-{{#with resolvedObject}}
-	<div {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} class="pop-sm clearfix {{../class}}" style="{{../style}}">
-		{{#each ../subcomponents}}
-			{{enterModule ../../.}}
-		{{/each}}
-	</div>
-{{/with}}
