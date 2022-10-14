@@ -7,7 +7,6 @@ import './store';
  * Exports
  */
 export { default as MultiSelectControl } from './components/multi-select-control';
-export { default as withSchemaElementsMultiSelectControl } from './components/schema-elements-multi-select-control';
 export { withErrorMessage, withSpinner } from './components/loading';
 export { SelectCard } from './components/select-card';
 export { LinkableInfoTooltip } from './components/linkable-info-tooltip';
