@@ -369,7 +369,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                  *
                  * Eg: This query is not valid (@strUpperCase is referenced twice):
                  *
-                 *   { groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @underJSONObjectProperty @strUpperCase }
+                 *   { groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @underJSONObjectProperty(key: "someKey") @strUpperCase }
                  */
                 if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
                     throw new LogicErrorParserException(
