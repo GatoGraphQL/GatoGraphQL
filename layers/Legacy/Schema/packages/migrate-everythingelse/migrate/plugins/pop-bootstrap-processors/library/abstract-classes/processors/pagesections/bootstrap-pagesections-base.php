@@ -1,5 +1,0 @@
-<?php
-
-abstract class PoP_Module_Processor_BootstrapPageSectionsBase extends PoP_Engine_Module_Processor_InterceptablePageSectionsBase
-{
-}

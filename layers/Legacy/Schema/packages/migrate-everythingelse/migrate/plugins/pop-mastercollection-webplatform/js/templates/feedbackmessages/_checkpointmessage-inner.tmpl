@@ -1,7 +1,0 @@
-{{#each bs.feedback.checkpoint-msgs}}
-	{{#each ../component-names.layouts}}
-		{{#withModule ../../. this}}
-			{{enterModule ../../../. feedbackObject=../../.}}
-		{{/withModule}}
-	{{/each}}
-{{/each}}

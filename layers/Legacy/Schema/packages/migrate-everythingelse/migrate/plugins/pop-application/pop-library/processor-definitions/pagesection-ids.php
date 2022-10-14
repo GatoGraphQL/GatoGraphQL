@@ -1,3 +1,0 @@
-<?php
-
-define('POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY', 'ps-body');
