@@ -196,7 +196,6 @@
         "getpop/component-model": "^0.9",
         "getpop/definitions": "^0.9",
         "getpop/engine": "^0.9",
-        "getpop/guzzle-helpers": "^0.9",
         "getpop/loosecontracts": "^0.9",
         "getpop/mandatory-directives-by-configuration": "^0.9",
         "getpop/componentrouting": "^0.9",

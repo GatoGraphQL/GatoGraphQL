@@ -394,7 +394,6 @@
         "getpop/engine-wp-bootloader": "self.version",
         "getpop/filestore": "self.version",
         "getpop/graphql-parser": "self.version",
-        "getpop/guzzle-helpers": "^0.9",
         "getpop/loosecontracts": "^0.9",
         "getpop/mandatory-directives-by-configuration": "^0.9",
         "getpop/multisite": "self.version",
