@@ -42,7 +42,8 @@ trait OneofInputObjectTypeResolverTrait
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $inputValueSize = count((array)$inputValue);
+        $inputValueAsArray = (array)$inputValue;
+        $inputValueSize = count($inputValueAsArray);
         if ($inputValueSize > 1) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
@@ -54,7 +55,7 @@ trait OneofInputObjectTypeResolverTrait
                             $inputValueSize,
                             implode(
                                 $this->getTranslationAPI()->__('\', \'', 'component-model'),
-                                array_keys((array)$inputValue)
+                                array_keys($inputValueAsArray)
                             ),
                         ]
                     ),
@@ -63,13 +64,37 @@ trait OneofInputObjectTypeResolverTrait
             );
             return;
         }
-        if ($inputValueSize === 0 && $this->isOneInputValueMandatory()) {
+        if ($inputValueSize === 0) {
+            if ($this->isOneInputValueMandatory()) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                            InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_7,
+                            [
+                                $this->getMaybeNamespacedTypeName(),
+                            ]
+                        ),
+                        $astNode,
+                    ),
+                );
+            }
+            return;
+        }
+        /** @var string */
+        $selectedInputPropertyName = array_keys($inputValueAsArray)[0];
+        /** @var mixed */
+        $selectedInputPropertyValue = $inputValue->$selectedInputPropertyName;
+        if ($selectedInputPropertyValue === null
+            && !$this->isOneOfInputPropertyNullable($selectedInputPropertyName)
+        ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
-                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_7,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_19,
                         [
+                            $selectedInputPropertyName,
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
@@ -77,6 +102,12 @@ trait OneofInputObjectTypeResolverTrait
                 ),
             );
         }
+    }
+
+    protected function isOneOfInputPropertyNullable(
+        string $propertyName
+    ): bool {
+        return false;
     }
 
     /**

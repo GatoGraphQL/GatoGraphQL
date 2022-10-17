@@ -25,6 +25,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
     public final const E_5_6_1_16 = '5.6.1[16]';
     public final const E_5_6_1_17 = '5.6.1[17]';
     public final const E_5_6_1_18 = '5.6.1[18]';
+    public final const E_5_6_1_19 = '5.6.1[19]';
 
     protected function getNamespace(): string
     {
@@ -53,6 +54,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
             self::E_5_6_1_16,
             self::E_5_6_1_17,
             self::E_5_6_1_18,
+            self::E_5_6_1_19,
         ];
     }
 
@@ -75,6 +77,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
             self::E_5_6_1_16 => $this->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
             self::E_5_6_1_17 => $this->__('Only strings or integers are allowed for type \'%s\'', 'component-model'),
             self::E_5_6_1_18 => $this->__('Enum values can only be strings, value \'%s\' for type \'%s\' is not allowed', 'component-model'),
+            self::E_5_6_1_19 => $this->__('Property \'%s\' in oneof input object \'%s\' cannot receive `null`', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
