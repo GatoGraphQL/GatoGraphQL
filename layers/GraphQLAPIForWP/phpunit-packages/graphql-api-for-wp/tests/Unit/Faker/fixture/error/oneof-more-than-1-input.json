@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "The oneof input object 'UserByInput' must receive exactly 1 input, but '2' inputs were provided ('id', 'username')",
+      "message": "The oneof input object 'UserByInput' must receive exactly 1 input, but 2 inputs were provided ('id', 'username')",
       "locations": [
         {
           "line": 2,

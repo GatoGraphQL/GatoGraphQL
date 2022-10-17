@@ -62,7 +62,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
             self::E_5_6_1_1 => $this->__('An object cannot be casted to type \'%s\'', 'component-model'),
             self::E_5_6_1_2 => $this->__('The format for \'%s\' is not correct for type \'%s\'', 'component-model'),
             self::E_5_6_1_3 => $this->__('Type \'%s\' must be provided as a string', 'component-model'),
-            self::E_5_6_1_6 => $this->__('The oneof input object \'%s\' must receive exactly 1 input, but \'%s\' inputs were provided (\'%s\')', 'component-model'),
+            self::E_5_6_1_6 => $this->__('The oneof input object \'%s\' must receive exactly 1 input, but %s inputs were provided (\'%s\')', 'component-model'),
             self::E_5_6_1_7 => $this->__('No input value was provided to the oneof input object \'%s\'', 'component-model'),
             self::E_5_6_1_8 => $this->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'component-model'),
             self::E_5_6_1_9 => $this->__('Argument \'%s\' expects an array, but value \'%s\' was provided', 'component-model'),
