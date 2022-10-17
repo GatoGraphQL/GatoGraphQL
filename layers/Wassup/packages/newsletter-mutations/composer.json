@@ -7,7 +7,6 @@
         "getpop/mandatory-directives-by-configuration": "<0.8.9",
         "getpop/component-model": "<0.8.9",
         "getpop/filestore": "<0.8.9",
-        "getpop/guzzle-helpers": "<0.8.9",
         "getpop/root-wp": "<0.8.9",
         "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.8.9",

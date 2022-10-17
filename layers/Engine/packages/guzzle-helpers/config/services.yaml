@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoP\GuzzleHelpers\Services\GuzzleServiceInterface:
-        class: \PoP\GuzzleHelpers\Services\GuzzleService

@@ -5,7 +5,6 @@
         "getpop/loosecontracts": "<0.8.9",
         "getpop/translation": "<0.8.9",
         "getpop/filestore": "<0.8.9",
-        "getpop/guzzle-helpers": "<0.8.9",
         "getpop/root-wp": "<0.8.9",
         "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.8.9",
