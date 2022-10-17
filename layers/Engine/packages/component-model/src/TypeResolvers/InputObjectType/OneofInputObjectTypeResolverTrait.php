@@ -85,7 +85,8 @@ trait OneofInputObjectTypeResolverTrait
         $selectedInputPropertyName = array_keys($inputValueAsArray)[0];
         /** @var mixed */
         $selectedInputPropertyValue = $inputValue->$selectedInputPropertyName;
-        if ($selectedInputPropertyValue === null
+        if (
+            $selectedInputPropertyValue === null
             && !$this->isOneOfInputPropertyNullable($selectedInputPropertyName)
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
