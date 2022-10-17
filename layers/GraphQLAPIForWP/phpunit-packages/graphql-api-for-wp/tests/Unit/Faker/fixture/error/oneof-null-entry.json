@@ -1,0 +1,28 @@
+{
+  "errors": [
+    {
+      "message": "Property 'username' in oneof input object 'UserByInput' cannot receive `null`",
+      "locations": [
+        {
+          "line": 2,
+          "column": 12
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{username: null}",
+          "(by: {username: null})",
+          "user(by: {username: null}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "user(by: {username: null}) { ... }",
+        "code": "gql@5.6.1[19]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    }
+  ],
+  "data": {
+    "user": null
+  }
+}
