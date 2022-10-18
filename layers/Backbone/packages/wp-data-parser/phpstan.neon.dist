@@ -22,19 +22,15 @@ parameters:
 			message: '#Parameter \#1 \$source of method DOMDocument::loadXML\(\) expects string, string\|false given\.#'
 			path: src/Parsers/WXR_Parser_SimpleXML.php
 		- 
-			message: '#Cannot access offset 0 on array<SimpleXMLElement>\|false\.#'
-			path: src/Parsers/WXR_Parser_SimpleXML.php
-		- 
 			message: '#Cannot access offset .* on array<string>\|false\.#'
 			path: src/Parsers/WXR_Parser_SimpleXML.php
-			count: 2
 		- 
 			message: '#Parameter \#2 \$data of function xml_parse expects string, string\|false given\.#'
 			path: src/Parsers/WXR_Parser_XML.php
 		- 
 			message: '#Cannot access offset .* on array\|bool\|string\.#'
 			path: src/Parsers/WXR_Parser_XML.php
-			count: 5
+			count: 4
 		- 
 			message: '#Cannot access offset .* on bool\|string\.#'
 			path: src/Parsers/WXR_Parser_XML.php
