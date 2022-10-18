@@ -34,6 +34,9 @@ class PluginDataSource
                     'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-graphql-api.inc.php',
                     'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-graphql-api.php',
                 ],
+                'bashScripts' => [
+                    'after_downgrade_code' => 'ci/downgrade/after_downgrade_code.sh',
+                ],
             ],
             // GraphQL API - Testing <= To run integration tests with InstaWP
             [

@@ -87,6 +87,9 @@ final class PluginConfigEntriesJsonProvider
             // Automatically set the entries for conditional checks in GitHub Actions
             $entryConfig['scope'] = isset($entryConfig['scoping']);
 
+            // Hacks to be executed on the plugin
+            $entryConfig['bashScripts'] ??= [];
+
             $pluginConfigEntries[] = $entryConfig;
         }
 
