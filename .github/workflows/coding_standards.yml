@@ -28,7 +28,7 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=package_code_paths::$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)"
+                    echo "package_code_paths=$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)" >> $GITHUB_OUTPUT
 
         outputs:
             package_code_paths: ${{ steps.output_data.outputs.package_code_paths }}

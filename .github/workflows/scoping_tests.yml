@@ -34,7 +34,7 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "::set-output name=plugin_config_entries::$(vendor/bin/monorepo-builder plugin-config-entries-json --config=config/monorepo-builder/plugin-config-entries-json.php --scoped-only)"
+                    echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json --config=config/monorepo-builder/plugin-config-entries-json.php --scoped-only)" >> $GITHUB_OUTPUT
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
 

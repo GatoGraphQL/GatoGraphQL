@@ -34,7 +34,7 @@ jobs:
             -   id: output_data
                 name: Calculate matrix for packages
                 run: |
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php)"
+                    echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php)" >> $GITHUB_OUTPUT
 
         # this step is needed, so the output gets to the next defined job
         outputs:
