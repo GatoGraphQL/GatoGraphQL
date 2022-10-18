@@ -60,7 +60,6 @@ return [
                 '#[getpop|graphql\-api|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/*/composer.json#',
                 // Exclude libraries
                 '#symfony/deprecation-contracts/#',
-                '#ralouphie/getallheaders/#',
                 // Exclude tests from libraries
                 '#nikic/fast-route/test/#',
                 '#psr/log/Psr/Log/Test/#',
