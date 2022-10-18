@@ -119,7 +119,7 @@ jobs:
 
             # after_downgrade_code.sh => Hacks to fix the codebase whenever Rector cannot handle it
             -   name: Custom bash script to fix items in the code that Rector cannot handle
-                run: "${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}"
+                run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}"
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}
             ################################################################################
