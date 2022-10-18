@@ -88,7 +88,7 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['scope'] = isset($entryConfig['scoping']);
 
             // Hacks to be executed on the plugin
-            $entryConfig['hacks'] ??= [];
+            $entryConfig['bashScripts'] ??= [];
 
             $pluginConfigEntries[] = $entryConfig;
         }
