@@ -125,7 +125,7 @@ jobs:
                 run: |
                     sed -i 's/function getItem($key): CacheItem/function getItem($key): \\Psr\\Cache\\CacheItemInterface/' vendor/symfony/cache/Traits/AbstractAdapterTrait.php
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scope }}
+                if: ${{ matrix.pluginConfig.hacks.changeFnReturnTypeInAbstractAdapterTrait }}
             ################################################################################
 
             -   name: Replace PHP version in plugin main file
