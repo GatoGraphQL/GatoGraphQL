@@ -72,7 +72,7 @@ jobs:
                 id: extract-instawp-domain                
                 run: |
                     instawp_domain="$(echo "${{ steps.create-instawp.outputs.instawp_url }}" | sed -e s#https://##)"
-                    echo "::set-output name=instawp-domain::$(echo $instawp_domain)"
+                    echo "instawp-domain=$(echo $instawp_domain)" >> $GITHUB_OUTPUT
 
             -   name: Sleep a bit to make sure InstaWP is ready
                 run: sleep 15s
