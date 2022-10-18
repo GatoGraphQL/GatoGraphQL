@@ -48,7 +48,7 @@ jobs:
                     packages_in_diff="$(echo $clean_diff | grep -E -o 'layers/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/' | sort -u)"
                     echo "[Packages in diff] $(echo $packages_in_diff | tr '\n' ' ')"
                     filter_arg="--filter=$(echo $packages_in_diff | sed -e 's/ / --filter=/g')"
-                    echo "::set-output name=matrix::$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php $(echo $filter_arg))"
+                    echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php $(echo $filter_arg))" >> $GITHUB_OUTPUT
 
         # this step is needed, so the output gets to the next defined job
         outputs:
