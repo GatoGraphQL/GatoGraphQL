@@ -51,13 +51,6 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
     }
 
     /**
-     * Register index.css
-     */
-    protected function registerEditorCSS(): bool
-    {
-        return true;
-    }
-    /**
      * Register style-index.css
      */
     protected function registerCommonStyleCSS(): bool

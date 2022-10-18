@@ -88,14 +88,23 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'content':
-                unset($fieldDataAccessor->getValue('branch'));
-                unset($fieldDataAccessor->getValue('project'));
+                /**
+                 * Transfer all arguments, except the ones from this
+                 * FieldResolver
+                 */
+                $arguments = [];
+                foreach ($fieldDataAccessor->getField()->getArguments() as $argument) {
+                    if (in_array($argument->getName(), ['branch', 'project'])) {
+                        continue;
+                    }
+                    $arguments[] = $argument;
+                }
                 return $objectTypeResolver->resolveValue(
                     $object,
                     new LeafField(
                         'blockMetadata',
                         null,
-                        $fieldDataAccessor->getField()->getArguments(),
+                        $arguments,
                         [],
                         $fieldDataAccessor->getField()->getLocation()
                     ),
