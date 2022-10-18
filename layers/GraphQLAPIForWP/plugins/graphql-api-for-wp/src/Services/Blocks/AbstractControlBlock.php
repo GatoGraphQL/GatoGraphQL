@@ -58,6 +58,16 @@ abstract class AbstractControlBlock extends AbstractBlock
         return false;
     }
 
+    protected function registerCommonStyleCSS(): bool
+    {
+        return true;
+    }
+
+    protected function registerEditorCSS(): bool
+    {
+        return true;
+    }
+
     /**
      * Block align class
      */

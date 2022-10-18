@@ -71,13 +71,6 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
     }
 
     /**
-     * Register index.css
-     */
-    protected function registerEditorCSS(): bool
-    {
-        return true;
-    }
-    /**
      * Register style-index.css
      */
     protected function registerCommonStyleCSS(): bool
