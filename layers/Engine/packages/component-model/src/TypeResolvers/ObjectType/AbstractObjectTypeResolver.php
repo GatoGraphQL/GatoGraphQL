@@ -1616,6 +1616,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         $this->validateFieldArgumentConstraints(
             $fieldArgs,
+            $fieldArgsSchemaDefinition,
             $objectTypeFieldResolver,
             $field,
             $objectTypeFieldResolutionFeedbackStore,
@@ -1827,35 +1828,67 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * Validate the constraints for the field arguments
      * @param array<string,mixed> $fieldArgs
+     * @param array<string,mixed> $fieldArgsSchemaDefinition
      */
     private function validateFieldArgumentConstraints(
         array $fieldArgs,
+        array $fieldArgsSchemaDefinition,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $fieldArgNameTypeResolvers = $objectTypeFieldResolver->getConsolidatedFieldArgNameTypeResolvers($this, $field->getName());
         foreach ($fieldArgs as $argName => $argValue) {
+            if (!array_key_exists($argName, $fieldArgsSchemaDefinition)) {
+                continue;
+            }
+            $fieldArgSchemaDefinition = $fieldArgsSchemaDefinition[$argName];
+
             $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
             $astNode = $field->getArgument($argName) ?? $field;
             /**
              * If the arg is an InputObject, let it perform validations on its input fields.
              */
             if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface) {
-                $fieldArgTypeResolver->validateInputValue(
+                $fieldArgIsArrayOfArraysType = $fieldArgSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+                $fieldArgIsArrayType = $fieldArgSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
+                if ($fieldArgIsArrayOfArraysType) {
+                    /** var stdClass[][] $argValue */
+                    foreach ($argValue as $arrayArgValue) {
+                        foreach ($arrayArgValue as $arrayOfArraysArgValue) {
+                            $fieldArgTypeResolver->validateInputValue(
+                                $arrayOfArraysArgValue,
+                                $astNode,
+                                $objectTypeFieldResolutionFeedbackStore,
+                            );
+                        }
+                    }
+                } elseif ($fieldArgIsArrayType) {
+                    /** var stdClass[] $argValue */
+                    foreach ($argValue as $arrayArgValue) {
+                        $fieldArgTypeResolver->validateInputValue(
+                            $arrayArgValue,
+                            $astNode,
+                            $objectTypeFieldResolutionFeedbackStore,
+                        );
+                    }
+                } else {
+                    /** var stdClass $argValue */
+                    $fieldArgTypeResolver->validateInputValue(
+                        $argValue,
+                        $astNode,
+                        $objectTypeFieldResolutionFeedbackStore,
+                    );
+                }
+                $objectTypeFieldResolver->validateFieldArgValue(
+                    $this,
+                    $field->getName(),
+                    $argName,
                     $argValue,
                     $astNode,
                     $objectTypeFieldResolutionFeedbackStore,
                 );
             }
-            $objectTypeFieldResolver->validateFieldArgValue(
-                $this,
-                $field->getName(),
-                $argName,
-                $argValue,
-                $astNode,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
         }
     }
 
