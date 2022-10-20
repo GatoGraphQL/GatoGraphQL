@@ -1880,15 +1880,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         $objectTypeFieldResolutionFeedbackStore,
                     );
                 }
-                $objectTypeFieldResolver->validateFieldArgValue(
-                    $this,
-                    $field->getName(),
-                    $argName,
-                    $argValue,
-                    $astNode,
-                    $objectTypeFieldResolutionFeedbackStore,
-                );
             }
+            $objectTypeFieldResolver->validateFieldArgValue(
+                $this,
+                $field->getName(),
+                $argName,
+                $argValue,
+                $astNode,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         }
     }
 
