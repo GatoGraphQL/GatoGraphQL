@@ -41,7 +41,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
          * Convert object to string or stdClass and,
          * in the latter case, it will be serialized yet again
          */
-        if (is_object($scalarValue)) {
+        if (is_object($scalarValue) && !($scalarValue instanceof stdClass)) {
             $scalarValue = $this->getObjectSerializationManager()->serialize($scalarValue);
         }
 
