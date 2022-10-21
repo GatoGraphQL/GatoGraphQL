@@ -9,5 +9,5 @@ use stdClass;
 interface ObjectSerializationManagerInterface
 {
     public function addObjectSerializer(ObjectSerializerInterface $objectSerializer): void;
-    public function serialize(object $object): string|int|float|bool|array|stdClass;
+    public function serialize(object $object): string|stdClass;
 }

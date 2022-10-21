@@ -38,6 +38,14 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array|stdClass
     {
         /**
+         * Convert object to string or stdClass and,
+         * in the latter case, it will be serialized yet again
+         */
+        if (is_object($scalarValue)) {
+            $scalarValue = $this->getObjectSerializationManager()->serialize($scalarValue);
+        }
+
+        /**
          * Convert stdClass to array, and apply recursively
          * (i.e. if some stdClass property is stdClass or object)
          */
@@ -55,10 +63,6 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                 },
                 (array) $scalarValue
             );
-        }
-        // Convert object to string
-        if (is_object($scalarValue)) {
-            return $this->getObjectSerializationManager()->serialize($scalarValue);
         }
         // Return as is
         return $scalarValue;

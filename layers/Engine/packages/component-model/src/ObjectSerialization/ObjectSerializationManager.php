@@ -22,7 +22,7 @@ class ObjectSerializationManager implements ObjectSerializationManagerInterface
         $this->objectSerializers[$objectSerializer->getObjectClassToSerialize()] = $objectSerializer;
     }
 
-    public function serialize(object $object): string|int|float|bool|array|stdClass
+    public function serialize(object $object): string|stdClass
     {
         // Find the Serialize that serializes this object
         $objectSerializer = null;
