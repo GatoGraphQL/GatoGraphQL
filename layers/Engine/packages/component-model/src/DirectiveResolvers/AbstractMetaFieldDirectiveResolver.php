@@ -190,7 +190,7 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
      * failing, when it's been set to process a certain type only.
      *
      * Eg: `@strUpperCase` has been set to process `String`, but doing
-     * `{ _unstructuredHTTPRequest(url: ...) @underJSONObjectProperty(...) @strUpperCase }`
+     * `{ _request(url: ...) @underJSONObjectProperty(...) @strUpperCase }`
      * must not fail. Then, @underJSONObjectProperty indicates to
      * switch from the original JSONObject to DangerouslyNonScalar.
      */
