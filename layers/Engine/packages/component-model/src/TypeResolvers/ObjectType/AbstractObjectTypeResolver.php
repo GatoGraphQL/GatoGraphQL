@@ -552,7 +552,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 if ($value instanceof stdClass) {
                     $valueAsString = $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value);
                 } elseif (is_object($value)) {
-                    $valueAsString = $this->getObjectSerializationManager()->serialize($value);
+                    $serializedValue = $this->getObjectSerializationManager()->serialize($value);
+                    if ($serializedValue instanceof stdClass) {
+                        $valueAsString = $this->getOutputService()->jsonEncodeArrayOrStdClassValue($serializedValue);
+                    } else {
+                        $valueAsString = (string) $serializedValue;
+                    }
                 } else {
                     $valueAsString = (string) $value;
                 }

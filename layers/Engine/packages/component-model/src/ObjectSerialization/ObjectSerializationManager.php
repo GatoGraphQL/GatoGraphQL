@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\ObjectSerialization;
 
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\BasicServiceTrait;
+use stdClass;
 
 class ObjectSerializationManager implements ObjectSerializationManagerInterface
 {
@@ -21,7 +22,7 @@ class ObjectSerializationManager implements ObjectSerializationManagerInterface
         $this->objectSerializers[$objectSerializer->getObjectClassToSerialize()] = $objectSerializer;
     }
 
-    public function serialize(object $object): string
+    public function serialize(object $object): string|int|float|bool|array|stdClass
     {
         // Find the Serialize that serializes this object
         $objectSerializer = null;
