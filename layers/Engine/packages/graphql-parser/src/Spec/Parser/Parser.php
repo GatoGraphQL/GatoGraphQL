@@ -667,6 +667,7 @@ class Parser extends Tokenizer implements ParserInterface
                 return $this->parseVariableReference();
 
             case Token::TYPE_NUMBER:
+            case Token::TYPE_BLOCK_STRING:
             case Token::TYPE_STRING:
             case Token::TYPE_NULL:
             case Token::TYPE_TRUE:

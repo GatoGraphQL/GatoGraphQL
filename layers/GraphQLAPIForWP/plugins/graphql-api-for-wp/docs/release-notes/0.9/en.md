@@ -1216,6 +1216,33 @@ The following ones where added:
 - Variables are input types ([spec](https://spec.graphql.org/draft/#sec-Variables-Are-Input-Types))
 - Queried fields are unambiguous ([spec](https://spec.graphql.org/draft/#sec-Field-Selection-Merging))
 
+## Support block string characthers
+
+Added support for the GraphQL spec-defined [block strings](https://spec.graphql.org/draft/#BlockStringCharacter), which are are strings that use `"""` as delimiter instead of `"`, allowing us to input multi-line strings.
+
+This query:
+
+```graphql
+{
+  _echo(
+    value: """
+        hello
+        world
+    """
+  ) 
+}
+```
+
+...would produce:
+
+```json
+{
+  "data": {
+    "_echo": "\n        hello\n        world\n    "
+  }
+}
+```
+
 ## Query schema extensions via introspection
 
 Custom metadata attached to schema elements can now be queried via field `extensions`. This is a feature [requested for the GraphQL spec](https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306), but not yet approved. This GraphQL server already implements it, though, since it is very useful.

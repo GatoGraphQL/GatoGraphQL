@@ -151,8 +151,17 @@ class Tokenizer
             return $this->scanNumber();
         }
 
+
+        if ($this->pos + 2 < strlen($this->source)) {
+            $chars = substr($this->source, $this->pos, 3);
+            if ($chars === '"""') {
+                $this->pos += 2;
+                return $this->scanString(true);
+            }
+        }
+
         if ($ch === '"') {
-            return $this->scanString();
+            return $this->scanString(false);
         }
 
         throw new SyntaxErrorParserException(
@@ -291,7 +300,7 @@ class Tokenizer
      * @throws SyntaxErrorParserException
      * @see http://facebook.github.io/graphql/October2016/#sec-String-Value
      */
-    protected function scanString(): Token
+    protected function scanString(bool $isBlockString): Token
     {
         $len = strlen($this->source);
         $this->pos++;
@@ -299,11 +308,23 @@ class Tokenizer
         $value = '';
         while ($this->pos < $len) {
             $ch = $this->source[$this->pos];
-            if ($ch === '"') {
-                $token = new Token(Token::TYPE_STRING, $this->getLine(), $this->getColumn(), $value);
-                $this->pos++;
+            if ($isBlockString) {
+                if ($this->pos + 2 < $len) {
+                    $chars = substr($this->source, $this->pos, 3);
+                    if ($chars === '"""') {
+                        $token = new Token(Token::TYPE_BLOCK_STRING, $this->getLine(), $this->getColumn(), $value);
+                        $this->pos += 3;
 
-                return $token;
+                        return $token;
+                    }
+                }
+            } else {
+                if ($ch === '"') {
+                    $token = new Token(Token::TYPE_STRING, $this->getLine(), $this->getColumn(), $value);
+                    $this->pos++;
+
+                    return $token;
+                }
             }
 
             if ($ch === '\\' && ($this->pos < ($len - 1))) {
