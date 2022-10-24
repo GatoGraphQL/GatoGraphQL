@@ -173,6 +173,7 @@ GRAPHQL;
             ['{ test (asd: [..., asd]) { id } }'],
             ['{ test (asd: { "a": 4, "m": null, "asd": false  "b": 5, "c" : { a }}) { id } }'],
             ['{ test (a: """asd") { id }'],
+            ['{ test (a: "asd""") { id }'],
             ['asdasd'],
             ['mutation { test(asd: ... ){ ...,asd, asd } }'],
             ['mutation { test{ . test on Test { id } } }'],
