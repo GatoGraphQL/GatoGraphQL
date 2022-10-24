@@ -22,7 +22,11 @@ class GraphQLQueryPayloadRetriever
         // Attempt to get the query from the body, following the GraphQL syntax
         if (App::server('CONTENT_TYPE') === 'application/json') {
             $rawBody = file_get_contents('php://input');
-            return json_decode($rawBody ?: '', true);
+            $decodedJSON = json_decode($rawBody ?: '', true);
+            if (!is_array($decodedJSON)) {
+                return null;
+            }
+            return $decodedJSON;
         }
 
         // Retrieve the entries from POST
