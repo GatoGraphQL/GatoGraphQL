@@ -875,6 +875,38 @@ GRAPHQL;
                 ),
                 'query { user(id: 10, name: "max", float: 123.123) { id name } }',
             ],
+            // Block Strings with newlines
+            [
+                '{ user (id: 10, name: """
+                    max
+                """, float: 123.123 ) { id, name } }',
+                new Document(
+                    [
+                        new QueryOperation('', [], [], [
+                            new RelationalField(
+                                'user',
+                                null,
+                                [
+                                    new Argument('id', new Literal(10, new Location(1, 13)), new Location(1, 9)),
+                                    new Argument('name', new Literal('
+                    max
+                ', new Location(1, 26)), new Location(1, 17)),
+                                    new Argument('float', new Literal(123.123, new Location(1, 79)), new Location(1, 72)),
+                                ],
+                                [
+                                    new LeafField('id', null, [], [], new Location(1, 91)),
+                                    new LeafField('name', null, [], [], new Location(1, 95)),
+                                ],
+                                [],
+                                new Location(1, 3)
+                            ),
+                        ], new Location(1, 1))
+                    ]
+                ),
+                'query { user(id: 10, name: "
+                    max
+                ", float: 123.123) { id name } }',
+            ],
             [
                 '{ allUsers : users ( id: [ 1, 2, 3] ) { id } }',
                 new Document(
