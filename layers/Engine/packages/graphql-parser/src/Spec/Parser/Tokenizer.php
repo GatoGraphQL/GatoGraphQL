@@ -151,6 +151,15 @@ class Tokenizer
             return $this->scanNumber();
         }
 
+
+        if ($this->pos + 2 < strlen($this->source)) {
+            $chars = substr($this->source, $this->pos, 3);
+            if ($chars === '"""') {
+                $this->pos += 2;
+                return $this->scanString();
+            }
+        }
+
         if ($ch === '"') {
             return $this->scanString();
         }
@@ -298,6 +307,16 @@ class Tokenizer
 
         $value = '';
         while ($this->pos < $len) {
+            if ($this->pos + 2 < $len) {
+                $chars = substr($this->source, $this->pos, 3);
+                if ($chars === '"""') {
+                    $token = new Token(Token::TYPE_BLOCK_STRING, $this->getLine(), $this->getColumn(), $value);
+                    $this->pos += 3;
+
+                    return $token;
+                }
+            }
+
             $ch = $this->source[$this->pos];
             if ($ch === '"') {
                 $token = new Token(Token::TYPE_STRING, $this->getLine(), $this->getColumn(), $value);

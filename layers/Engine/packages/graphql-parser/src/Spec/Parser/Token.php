@@ -6,11 +6,12 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 class Token
 {
-    public final const TYPE_END        = 'end';
-    public final const TYPE_IDENTIFIER = 'identifier';
-    public final const TYPE_NUMBER     = 'number';
-    public final const TYPE_STRING     = 'string';
-    public final const TYPE_ON         = 'on';
+    public final const TYPE_END          = 'end';
+    public final const TYPE_IDENTIFIER   = 'identifier';
+    public final const TYPE_NUMBER       = 'number';
+    public final const TYPE_BLOCK_STRING = 'block string';
+    public final const TYPE_STRING       = 'string';
+    public final const TYPE_ON           = 'on';
 
     public final const TYPE_QUERY              = 'query';
     public final const TYPE_MUTATION           = 'mutation';
@@ -65,6 +66,7 @@ class Token
             self::TYPE_END                => 'END',
             self::TYPE_IDENTIFIER         => 'IDENTIFIER',
             self::TYPE_NUMBER             => 'NUMBER',
+            self::TYPE_BLOCK_STRING       => 'BLOCK_STRING',
             self::TYPE_STRING             => 'STRING',
             self::TYPE_ON                 => 'ON',
             self::TYPE_QUERY              => 'QUERY',
