@@ -1220,18 +1220,25 @@ The following ones where added:
 
 Added support for the GraphQL spec-defined [block strings](https://spec.graphql.org/draft/#BlockStringCharacter), which are are strings that use `"""` as delimiter instead of `"`, allowing us to input multi-line strings.
 
-Now we can execute this query:
+This query:
 
 ```graphql
 {
-  posts(
-    filter:{
-      search: """
-        hello world
-      """
-    }
-  ) {
-    id
+  _echo(
+    value: """
+        hello
+        world
+    """
+  ) 
+}
+```
+
+...would produce:
+
+```json
+{
+  "data": {
+    "_echo": "\n        hello\n        world\n    "
   }
 }
 ```
