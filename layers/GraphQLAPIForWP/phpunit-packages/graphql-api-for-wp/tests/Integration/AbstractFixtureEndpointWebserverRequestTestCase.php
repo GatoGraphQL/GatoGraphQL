@@ -63,14 +63,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
              * From the GraphQL query file name, generate the remaining file names
              */
             $filePath = $graphQLQueryFileInfo->getPath();
-            $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
-            if ($responseFixtureFolder !== $fixtureFolder) {
-                $graphQLResponseFile = str_replace(
-                    $fixtureFolder,
-                    $responseFixtureFolder,
-                    $graphQLResponseFile
-                );
-            }
+            $graphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName);
             if (!file_exists($graphQLResponseFile)) {
                 $this->throwFileNotExistsException($graphQLResponseFile);
             }
