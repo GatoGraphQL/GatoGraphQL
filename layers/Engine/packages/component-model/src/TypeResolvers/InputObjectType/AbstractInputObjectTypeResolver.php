@@ -258,7 +258,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
                 $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY
                     || ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
-                if (!$inputFieldTypeModifiersIsMandatory && !$inputObjectTypeResolver->hasMandatoryInputFields()) {
+                if (!$inputFieldTypeModifiersIsMandatory && !$inputObjectTypeResolver->hasMandatoryWithNoDefaultValueInputFields()) {
                     $inputValue->$inputFieldName = new stdClass();
                 }
             }
@@ -454,14 +454,15 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $coercedInputValue;
     }
 
-    final public function hasMandatoryInputFields(): bool
+    final public function hasMandatoryWithNoDefaultValueInputFields(): bool
     {
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         foreach (array_keys($inputFieldNameTypeResolvers) as $inputFieldName) {
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName);
             $inputFieldTypeModifiersIsMandatory = ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY
                 || ($inputFieldTypeModifiers & SchemaTypeModifiers::MANDATORY_BUT_NULLABLE) === SchemaTypeModifiers::MANDATORY_BUT_NULLABLE;
-            if ($inputFieldTypeModifiersIsMandatory) {
+            if ($inputFieldTypeModifiersIsMandatory && $inputFieldDefaultValue === null) {
                 return true;
             }
         }

@@ -63,5 +63,5 @@ interface InputObjectTypeResolverInterface extends DeprecatableInputTypeResolver
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
-    public function hasMandatoryInputFields(): bool;
+    public function hasMandatoryWithNoDefaultValueInputFields(): bool;
 }
