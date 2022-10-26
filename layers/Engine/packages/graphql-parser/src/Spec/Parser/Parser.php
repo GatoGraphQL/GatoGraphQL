@@ -437,10 +437,12 @@ class Parser extends Tokenizer implements ParserInterface
     {
         return $this->expectMulti([
             Token::TYPE_IDENTIFIER,
+            // Accept also field/directive arguments "query", "on", etc
+            Token::TYPE_QUERY,
             Token::TYPE_MUTATION,
             Token::TYPE_SUBSCRIPTION,
-            Token::TYPE_QUERY,
             Token::TYPE_FRAGMENT,
+            Token::TYPE_ON,
         ]);
     }
 
