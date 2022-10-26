@@ -126,10 +126,10 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
     /**
      * @return array<string,mixed>
      */
-    protected function getGraphQLVariables(string $graphQLVariablesFile): ?array
+    protected function getGraphQLVariables(string $graphQLVariablesFile): array
     {
         if (!file_exists($graphQLVariablesFile)) {
-            return null;
+            return [];
         }
         
         $fileContents = file_get_contents($graphQLVariablesFile);
