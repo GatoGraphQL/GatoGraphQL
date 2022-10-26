@@ -735,7 +735,18 @@ class Parser extends Tokenizer implements ParserInterface
         // Use stdClass instead of array
         $object = new stdClass();
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
-            $keyToken = $this->expectMulti([Token::TYPE_STRING, Token::TYPE_IDENTIFIER]);
+            $keyToken = $this->expectMulti(
+                [
+                    Token::TYPE_STRING,
+                    Token::TYPE_IDENTIFIER,
+                    // Accept also object keys "query", "on", etc
+                    Token::TYPE_QUERY,
+                    Token::TYPE_MUTATION,
+                    Token::TYPE_SUBSCRIPTION,
+                    Token::TYPE_FRAGMENT,
+                    Token::TYPE_ON,
+                ]
+            );
             $key = $keyToken->getData();
             $this->expect(Token::TYPE_COLON);
             $value = $this->parseValue();
