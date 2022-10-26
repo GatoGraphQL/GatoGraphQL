@@ -75,38 +75,8 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 $this->throwFileNotExistsException($graphQLResponseFile);
             }
 
-            $variables = [];
-            $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
-            if ($responseFixtureFolder !== $fixtureFolder) {
-                $graphQLVariablesFile = str_replace(
-                    $fixtureFolder,
-                    $responseFixtureFolder,
-                    $graphQLVariablesFile
-                );
-            }
-            if (file_exists($graphQLVariablesFile)) {
-                $fileContents = file_get_contents($graphQLVariablesFile);
-                if ($fileContents === false) {
-                    throw new RuntimeException(
-                        sprintf(
-                            'File "%s" cannot be read',
-                            $graphQLVariablesFile
-                        )
-                    );
-                }
-                $variables = json_decode(
-                    $fileContents,
-                    true
-                );
-                if (!is_array($variables)) {
-                    throw new RuntimeException(
-                        sprintf(
-                            'Decoding the JSON inside file "%s" failed',
-                            $graphQLVariablesFile
-                        )
-                    );
-                }
-            }
+            $graphQLVariablesFile = $this->getGraphQLVariablesFile($filePath, $fileName);
+            $variables = $this->getGraphQLVariables($graphQLVariablesFile);
 
             /**
              * If the test is organized under a subfolder (such as "Success" or "Error"),
@@ -139,18 +109,73 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
             foreach ($graphQLResponseForOperationFileNameFileInfos as $graphQLResponseForOperationFileInfo) {
                 $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
                 $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
+                $graphQLVariablesForOperationFile = $this->getGraphQLVariablesFile($filePath, $fileName . ':' . $operationName);
+                if (\file_exists($graphQLVariablesForOperationFile)) {
+                    $graphQLVariablesForOperation = $this->getGraphQLVariables($graphQLVariablesForOperationFile);
+                } else {
+                    $graphQLVariablesForOperation = $variables;
+                }
+
                 $providerItems["${dataName}:${operationName}"] = [
                     'application/json',
                     $graphQLResponseForOperationFileInfo->getContents(),
                     $endpoint,
                     [],
                     $query,
-                    $variables,
+                    $graphQLVariablesForOperation,
                     is_numeric($operationName) ? $mainFixtureOperationName : $operationName,
                 ];
             }
         }
         return $this->customizeProviderEndpointEntries($providerItems);
+    }
+
+    protected function getGraphQLVariablesFile(string $filePath, string $fileName): string
+    {
+        $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+        $fixtureFolder = $this->getFixtureFolder();
+        $responseFixtureFolder = $this->getResponseFixtureFolder();
+        if ($responseFixtureFolder !== $fixtureFolder) {
+            $graphQLVariablesFile = str_replace(
+                $fixtureFolder,
+                $responseFixtureFolder,
+                $graphQLVariablesFile
+            );
+        }
+        return $graphQLVariablesFile;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getGraphQLVariables(string $graphQLVariablesFile): ?array
+    {
+        if (!file_exists($graphQLVariablesFile)) {
+            return null;
+        }
+        
+        $fileContents = file_get_contents($graphQLVariablesFile);
+        if ($fileContents === false) {
+            throw new RuntimeException(
+                sprintf(
+                    'File "%s" cannot be read',
+                    $graphQLVariablesFile
+                )
+            );
+        }
+        $variables = json_decode(
+            $fileContents,
+            true
+        );
+        if (!is_array($variables)) {
+            throw new RuntimeException(
+                sprintf(
+                    'Decoding the JSON inside file "%s" failed',
+                    $graphQLVariablesFile
+                )
+            );
+        }
+        return $variables;
     }
 
     protected function getMainFixtureOperationName(string $dataName): ?string
