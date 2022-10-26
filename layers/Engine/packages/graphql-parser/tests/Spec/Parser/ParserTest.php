@@ -682,6 +682,9 @@ GRAPHQL;
         $attrs = new stdClass();
         $attrs->stars = new Literal(5, new Location(1, 76));
         $filter->attrs = new InputObject($attrs, new Location(1, 67));
+
+        $on = new stdClass();
+        $on->query = new Literal('unrequested', new Location(1, 22));
         return [
             [
                 '{ film(id: 1 filmID: 2) { title } }',
@@ -1066,6 +1069,30 @@ GRAPHQL;
                     ]
                 ),
                 'query { films(filter: {title: "unrequested", director: "steven", attrs: {stars: 5}}) { title } }',
+            ],
+            // Keywords "query", "on", etc, can also be a fieldArg, directiveArg or objectKey
+            [
+                '{ films(on: {query: "unrequested"} ) { title @completeWith(fragment: "SomeValue") } }',
+                new Document(
+                    [
+                        new QueryOperation('', [], [], [
+                            new RelationalField('films', null, [
+                                new Argument('on', new InputObject($on, new Location(1, 13)), new Location(1, 9)),
+                            ], [
+                                new LeafField('title', null, [], [
+                                    new Directive(
+                                        'completeWith',
+                                        [
+                                            new Argument('fragment', new Literal("SomeValue", new Location(1, 71)), new Location(1, 60)),
+                                        ],
+                                        new Location(1, 47)
+                                    )
+                                ], new Location(1, 40)),
+                            ], [], new Location(1, 3))
+                        ], new Location(1, 1)),
+                    ]
+                ),
+                'query { films(on: {query: "unrequested"}) { title @completeWith(fragment: "SomeValue") } }',
             ],
         ];
     }
