@@ -306,6 +306,8 @@ class Tokenizer
         $this->pos++;
 
         $value = '';
+        $blockStringNewLines = 0;
+        $blockStringLineStart = $this->lineStart;
         while ($this->pos < $len) {
             $ch = $this->source[$this->pos];
             if ($isBlockString) {
@@ -313,6 +315,9 @@ class Tokenizer
                     $chars = substr($this->source, $this->pos, 3);
                     if ($chars === '"""') {
                         $token = new Token(Token::TYPE_BLOCK_STRING, $this->getLine(), $this->getColumn(), $value);
+                        
+                        $this->line += $blockStringNewLines;
+                        $this->lineStart = $blockStringLineStart;
                         $this->pos += 3;
 
                         return $token;
@@ -380,6 +385,11 @@ class Tokenizer
 
             $value .= $ch;
             $this->pos++;
+            
+            if ($ch === PHP_EOL && $isBlockString) {
+                $blockStringNewLines++;
+                $blockStringLineStart = $this->pos;
+            }
         }
 
         throw $this->createUnexpectedTokenTypeException(Token::TYPE_END);

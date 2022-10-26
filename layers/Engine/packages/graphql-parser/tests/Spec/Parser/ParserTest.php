@@ -853,7 +853,7 @@ GRAPHQL;
                 'query { user(id: 10, name: "max", float: 123.123) { id name } }',
             ],
             // Block Strings
-            [
+            'block-strings' => [
                 '{ user (id: 10, name: """max""", float: 123.123 ) { id, name } }',
                 new Document(
                     [
@@ -879,7 +879,7 @@ GRAPHQL;
                 'query { user(id: 10, name: "max", float: 123.123) { id name } }',
             ],
             // Block Strings with newlines and commented quotes
-            [
+            'block-strings-with-newlines' => [
                 '{ user (id: 10, name: """
                     max
                     \""" Commented quote
@@ -896,11 +896,11 @@ GRAPHQL;
                     max
                     """ Commented quote
                 ', new Location(1, 27)), new Location(1, 17)),
-                                    new Argument('float', new Literal(123.123, new Location(1, 120)), new Location(1, 113)),
+                                    new Argument('float', new Literal(123.123, new Location(4, 29)), new Location(4, 22)),
                                 ],
                                 [
-                                    new LeafField('id', null, [], [], new Location(1, 132)),
-                                    new LeafField('name', null, [], [], new Location(1, 136)),
+                                    new LeafField('id', null, [], [], new Location(4, 41)),
+                                    new LeafField('name', null, [], [], new Location(4, 45)),
                                 ],
                                 [],
                                 new Location(1, 3)
