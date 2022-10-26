@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 trait FixtureQueryExecutionGraphQLServerTestCaseTrait
 {
     use FixtureTestCaseTrait;
-    
+
     protected function getGraphQLResponseFile(string $filePath, string $fileName): string
     {
         $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';

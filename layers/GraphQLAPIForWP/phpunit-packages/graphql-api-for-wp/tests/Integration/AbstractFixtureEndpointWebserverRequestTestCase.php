@@ -131,7 +131,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
         if (!file_exists($graphQLVariablesFile)) {
             return [];
         }
-        
+
         $fileContents = file_get_contents($graphQLVariablesFile);
         if ($fileContents === false) {
             throw new RuntimeException(

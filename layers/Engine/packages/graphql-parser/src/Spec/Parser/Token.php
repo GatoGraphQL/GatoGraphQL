@@ -11,7 +11,7 @@ class Token
     public final const TYPE_NUMBER       = 'number';
     public final const TYPE_BLOCK_STRING = 'block string';
     public final const TYPE_STRING       = 'string';
-    
+
     public final const TYPE_QUERY              = 'query';
     public final const TYPE_MUTATION           = 'mutation';
     public final const TYPE_SUBSCRIPTION       = 'subscription';
