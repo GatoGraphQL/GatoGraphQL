@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
+use GraphQLByPoP\GraphQLServer\Unit\FixtureQueryExecutionGraphQLServerTestCaseTrait;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 use RuntimeException;
 
@@ -14,7 +14,7 @@ use function json_decode;
 
 abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
-    use FixtureTestCaseTrait;
+    use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
     public function getDataSetAsString(bool $includeData = true): string
     {
@@ -128,21 +128,6 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
             }
         }
         return $this->customizeProviderEndpointEntries($providerItems);
-    }
-
-    protected function getGraphQLVariablesFile(string $filePath, string $fileName): string
-    {
-        $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
-        $fixtureFolder = $this->getFixtureFolder();
-        $responseFixtureFolder = $this->getResponseFixtureFolder();
-        if ($responseFixtureFolder !== $fixtureFolder) {
-            $graphQLVariablesFile = str_replace(
-                $fixtureFolder,
-                $responseFixtureFolder,
-                $graphQLVariablesFile
-            );
-        }
-        return $graphQLVariablesFile;
     }
 
     /**
