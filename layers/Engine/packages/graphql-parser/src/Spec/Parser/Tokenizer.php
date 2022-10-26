@@ -42,14 +42,15 @@ class Tokenizer
 
     protected function skipWhitespace(): void
     {
-        while ($this->pos < strlen($this->source)) {
+        $sourceLength = strlen($this->source);
+        while ($this->pos < $sourceLength) {
             $ch = $this->source[$this->pos];
             if ($ch === ' ' || $ch === "\t" || $ch === ',') {
                 $this->pos++;
             } elseif ($ch === '#') {
                 $this->pos++;
                 while (
-                    $this->pos < strlen($this->source) &&
+                    $this->pos < $sourceLength &&
                     ($code = ord($this->source[$this->pos])) &&
                     $code !== 10 && $code !== 13 && $code !== 0x2028 && $code !== 0x2029
                 ) {
@@ -77,7 +78,8 @@ class Tokenizer
      */
     protected function scan(): Token
     {
-        if ($this->pos >= strlen($this->source)) {
+        $sourceLength = strlen($this->source);
+        if ($this->pos >= $sourceLength) {
             return new Token(Token::TYPE_END, $this->getLine(), $this->getColumn());
         }
 
@@ -152,7 +154,7 @@ class Tokenizer
         }
 
 
-        if ($this->pos + 2 < strlen($this->source)) {
+        if ($this->pos + 2 < $sourceLength) {
             $chars = substr($this->source, $this->pos, 3);
             if ($chars === '"""') {
                 $this->pos += 2;
@@ -197,7 +199,8 @@ class Tokenizer
         $start = $this->pos;
         $this->pos++;
 
-        while ($this->pos < strlen($this->source)) {
+        $sourceLength = strlen($this->source);
+        while ($this->pos < $sourceLength) {
             $ch = $this->source[$this->pos];
 
             if ($ch === '_' || $ch === '$' || ('a' <= $ch && $ch <= 'z') || ('A' <= $ch && $ch <= 'Z') || ('0' <= $ch && $ch <= '9')) {
@@ -271,7 +274,8 @@ class Tokenizer
 
     protected function skipInteger(): void
     {
-        while ($this->pos < strlen($this->source)) {
+        $sourceLength = strlen($this->source);
+        while ($this->pos < $sourceLength) {
             $ch = $this->source[$this->pos];
             if ('0' <= $ch && $ch <= '9') {
                 $this->pos++;
@@ -302,16 +306,16 @@ class Tokenizer
      */
     protected function scanString(bool $isBlockString): Token
     {
-        $len = strlen($this->source);
+        $sourceLength = strlen($this->source);
         $this->pos++;
 
         $value = '';
         $blockStringNewLines = 0;
         $blockStringLineStart = $this->lineStart;
-        while ($this->pos < $len) {
+        while ($this->pos < $sourceLength) {
             $ch = $this->source[$this->pos];
             if ($isBlockString) {
-                if ($this->pos + 2 < $len) {
+                if ($this->pos + 2 < $sourceLength) {
                     $chars = substr($this->source, $this->pos, 3);
                     if ($chars === '"""') {
                         $token = new Token(Token::TYPE_BLOCK_STRING, $this->getLine(), $this->getColumn(), $value);
@@ -332,7 +336,7 @@ class Tokenizer
                 }
             }
 
-            if ($ch === '\\' && ($this->pos < ($len - 1))) {
+            if ($ch === '\\' && ($this->pos < ($sourceLength - 1))) {
                 $this->pos++;
                 $ch = $this->source[$this->pos];
                 switch ($ch) {
