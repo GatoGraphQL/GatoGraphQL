@@ -11,14 +11,14 @@ class Token
     public final const TYPE_NUMBER       = 'number';
     public final const TYPE_BLOCK_STRING = 'block string';
     public final const TYPE_STRING       = 'string';
-    public final const TYPE_ON           = 'on';
-
+    
     public final const TYPE_QUERY              = 'query';
     public final const TYPE_MUTATION           = 'mutation';
     public final const TYPE_SUBSCRIPTION       = 'subscription';
     public final const TYPE_FRAGMENT           = 'fragment';
     public final const TYPE_FRAGMENT_REFERENCE = '...';
     public final const TYPE_INLINE_FRAGMENT     = 'inline fragment';
+    public final const TYPE_ON           = 'on';
 
     public final const TYPE_LBRACE        = '{';
     public final const TYPE_RBRACE        = '}';
