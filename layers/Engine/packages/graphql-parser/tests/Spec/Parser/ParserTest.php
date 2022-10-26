@@ -881,7 +881,11 @@ GRAPHQL;
             // Block Strings with newlines and commented quotes
             'block-strings-with-newlines' => [
                 '{ user (id: 10, name: """
-                    max
+                    Hello,
+                      World!
+              
+                    Yours,
+                      GraphQL.
                     \""" Commented quote
                 """, float: 123.123 ) { id, name } }',
                 new Document(
@@ -893,14 +897,18 @@ GRAPHQL;
                                 [
                                     new Argument('id', new Literal(10, new Location(1, 13)), new Location(1, 9)),
                                     new Argument('name', new Literal('
-                    max
+                    Hello,
+                      World!
+              
+                    Yours,
+                      GraphQL.
                     """ Commented quote
                 ', new Location(1, 27)), new Location(1, 17)),
-                                    new Argument('float', new Literal(123.123, new Location(4, 29)), new Location(4, 22)),
+                                    new Argument('float', new Literal(123.123, new Location(8, 29)), new Location(8, 22)),
                                 ],
                                 [
-                                    new LeafField('id', null, [], [], new Location(4, 41)),
-                                    new LeafField('name', null, [], [], new Location(4, 45)),
+                                    new LeafField('id', null, [], [], new Location(8, 41)),
+                                    new LeafField('name', null, [], [], new Location(8, 45)),
                                 ],
                                 [],
                                 new Location(1, 3)
@@ -909,7 +917,11 @@ GRAPHQL;
                     ]
                 ),
                 'query { user(id: 10, name: "
-                    max
+                    Hello,
+                      World!
+              
+                    Yours,
+                      GraphQL.
                     """ Commented quote
                 ", float: 123.123) { id name } }',
             ],
