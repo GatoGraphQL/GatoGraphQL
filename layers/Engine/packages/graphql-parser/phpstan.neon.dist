@@ -16,4 +16,9 @@ parameters:
 		- 
 			message: '#If condition is always true\.#'
 			path: src/Spec/Parser/Parser.php
+		# Some bug in PHPStan:
+		- 
+			message: '#Unreachable statement - code above always terminates\.#'
+			path: src/Spec/Parser/Parser.php
+			count: 2
 			
