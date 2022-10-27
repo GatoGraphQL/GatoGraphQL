@@ -12,4 +12,8 @@ parameters:
 		- 
 			message: '#Result of \|\| is always true\.#'
 			path: src/ExtendedSpec/Parser/Ast/AbstractDocument.php
+		# Some bug in PHPStan:
+		- 
+			message: '#If condition is always true\.#'
+			path: src/Spec/Parser/Parser.php
 			
