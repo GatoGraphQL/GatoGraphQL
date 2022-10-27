@@ -725,19 +725,19 @@ GRAPHQL;
                                     'items',
                                     null,
                                     [
-                                        new Argument('findBy1', new VariableReference('arrayVariable', $arrayVariable, new Location(1, 39)), new Location(1, 33)),
-                                        new Argument('findBy2', new VariableReference('arrayElemRequiredVariable', $arrayElemRequiredVariable, new Location(21, 39)), new Location(21, 33)),
-                                        new Argument('findBy3', new VariableReference('arrayOfArraysVariable', $arrayOfArraysVariable, new Location(31, 39)), new Location(31, 33)),
-                                        new Argument('findBy4', new VariableReference('arrayElemRequiredOfArraysVariable', $arrayElemRequiredOfArraysVariable, new Location(41, 39)), new Location(41, 33)),
-                                        new Argument('findBy5', new VariableReference('arrayOfArraysElemRequiredVariable', $arrayOfArraysElemRequiredVariable, new Location(51, 39)), new Location(51, 33)),
-                                        new Argument('findBy7', new VariableReference('arrayElemRequiredOfArraysElemRequiredVariable', $arrayElemRequiredOfArraysElemRequiredVariable, new Location(61, 39)), new Location(61, 33)),
-                                        new Argument('findBy6', new VariableReference('arrayElemRequiredOfArraysElemRequiredRequiredVariable', $arrayElemRequiredOfArraysElemRequiredRequiredVariable, new Location(71, 39)), new Location(71, 33)),
+                                        new Argument('findBy1', new VariableReference('arrayVariable', $arrayVariable, new Location(11, 22)), new Location(11, 13)),
+                                        new Argument('findBy2', new VariableReference('arrayElemRequiredVariable', $arrayElemRequiredVariable, new Location(12, 22)), new Location(12, 13)),
+                                        new Argument('findBy3', new VariableReference('arrayOfArraysVariable', $arrayOfArraysVariable, new Location(13, 22)), new Location(13, 13)),
+                                        new Argument('findBy4', new VariableReference('arrayElemRequiredOfArraysVariable', $arrayElemRequiredOfArraysVariable, new Location(14, 22)), new Location(14, 13)),
+                                        new Argument('findBy5', new VariableReference('arrayOfArraysElemRequiredVariable', $arrayOfArraysElemRequiredVariable, new Location(15, 22)), new Location(15, 13)),
+                                        new Argument('findBy6', new VariableReference('arrayElemRequiredOfArraysElemRequiredVariable', $arrayElemRequiredOfArraysElemRequiredVariable, new Location(16, 22)), new Location(16, 13)),
+                                        new Argument('findBy7', new VariableReference('arrayElemRequiredOfArraysElemRequiredRequiredVariable', $arrayElemRequiredOfArraysElemRequiredRequiredVariable, new Location(17, 22)), new Location(17, 13)),
                                     ],
                                     [
-                                        new LeafField('name', null, [], [], new Location(1, 60)),
+                                        new LeafField('name', null, [], [], new Location(19, 13)),
                                     ],
                                     [],
-                                    new Location(1, 25)
+                                    new Location(10, 9)
                                 ),
                             ],
                             new Location(1, 11)
