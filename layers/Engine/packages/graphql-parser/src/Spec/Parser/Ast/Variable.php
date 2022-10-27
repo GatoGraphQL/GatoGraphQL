@@ -53,6 +53,12 @@ class Variable extends AbstractAst implements WithValueInterface
     {
         $strType = $this->type;
         if ($this->isArray) {
+            if ($this->isArrayOfArrays) {
+                if ($this->isArrayEOfArrayslementRequired) {
+                    $strType .= '!';
+                }
+                $strType = sprintf('[%s]', $strType);
+            }
             if ($this->isArrayElementRequired) {
                 $strType .= '!';
             }
