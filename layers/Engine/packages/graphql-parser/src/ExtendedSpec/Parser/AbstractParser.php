@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\GraphQLParser\Exception\Parser\LogicErrorParserException;
 use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\Parser\LogicErrorParserException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
+use PoP\GraphQLParser\Exception\Parser\UnsupportedSyntaxErrorParserException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DocumentDynamicVariableReference;
@@ -109,12 +110,16 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @throws LogicErrorParserException
      * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
+     * @throws UnsupportedSyntaxErrorParserException
      */
     public function parse(string $source): Document
     {
         return parent::parse($source);
     }
 
+    /**
+     * @throws UnsupportedSyntaxErrorParserException
+     */
     protected function parseOperation(string $type): OperationInterface
     {
         $this->parsedFieldBlockStack = [];

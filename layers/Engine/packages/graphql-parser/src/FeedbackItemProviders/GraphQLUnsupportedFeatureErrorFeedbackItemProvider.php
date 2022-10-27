@@ -12,6 +12,7 @@ class GraphQLUnsupportedFeatureErrorFeedbackItemProvider extends AbstractFeedbac
     public final const E_1 = '1';
     public final const E_2 = '2';
     public final const E_3 = '3';
+    public final const E_4 = '4';
 
     protected function getNamespace(): string
     {
@@ -27,6 +28,7 @@ class GraphQLUnsupportedFeatureErrorFeedbackItemProvider extends AbstractFeedbac
             self::E_1,
             self::E_2,
             self::E_3,
+            self::E_4,
         ];
     }
 
@@ -36,6 +38,7 @@ class GraphQLUnsupportedFeatureErrorFeedbackItemProvider extends AbstractFeedbac
             self::E_1 => $this->__('Subscriptions are currently not supported', 'graphql-server'),
             self::E_2 => $this->__('Fragment Definition Directives are currently not supported', 'graphql-server'),
             self::E_3 => $this->__('Variable Definition Directives are currently not supported', 'graphql-server'),
+            self::E_4 => $this->__('Only up to 2 levels of List modifiers are supported (eg: `[[String]]`)', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
     }
