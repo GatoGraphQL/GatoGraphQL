@@ -677,10 +677,10 @@ GRAPHQL;
         $arrayVariable = new Variable('arrayVariable', 'String', false, true, false, false, false, [], new Location(2, 9));
         $arrayElemRequiredVariable = new Variable('arrayElemRequiredVariable', 'String', false, true, true, false, false, [], new Location(3, 9));
         $arrayOfArraysVariable = new Variable('arrayOfArraysVariable', 'Int', false, true, true, true, false, [], new Location(4, 9));
-        $arrayElemRequiredOfArraysVariable = new Variable('arrayOfArraysElemRequiredVariable', 'Int', false, true, true, true, false, [], new Location(5, 9));
+        $arrayElemRequiredOfArraysVariable = new Variable('arrayElemRequiredOfArraysVariable', 'Int', false, true, true, true, false, [], new Location(5, 9));
         $arrayOfArraysElemRequiredVariable = new Variable('arrayOfArraysElemRequiredVariable', 'Int', false, true, true, false, true, [], new Location(6, 9));
         $arrayOfArraysElemRequiredRequiredVariable = new Variable('arrayOfArraysElemRequiredRequiredVariable', 'Int', false, true, true, true, true, [], new Location(7, 9));
-        $arrayElemRequiredOfArraysElemRequiredVariable = new Variable('arrayOfArraysElemRequiredRequiredVariable', 'Boolean', true, true, true, true, true, [], new Location(8, 9));
+        $arrayElemRequiredOfArraysElemRequiredVariable = new Variable('arrayElemRequiredOfArraysElemRequiredVariable', 'Boolean', true, true, true, true, true, [], new Location(8, 9));
         return [
             [
                 <<<GRAPHQL
