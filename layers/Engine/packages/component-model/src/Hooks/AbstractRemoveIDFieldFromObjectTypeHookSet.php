@@ -12,6 +12,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
+/**
+ * To be used together with RemoveNodeInterfaceObjectTypeResolverTrait
+ */
 abstract class AbstractRemoveIDFieldFromObjectTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
