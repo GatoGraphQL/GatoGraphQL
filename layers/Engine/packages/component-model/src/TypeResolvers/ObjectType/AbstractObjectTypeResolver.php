@@ -1012,9 +1012,25 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getAllImplementedInterfaceTypeFieldResolvers(): array
     {
         if ($this->implementedInterfaceTypeFieldResolversCache === null) {
-            $this->implementedInterfaceTypeFieldResolversCache = $this->calculateAllImplementedInterfaceTypeFieldResolvers();
+            $this->implementedInterfaceTypeFieldResolversCache = $this->consolidateAllImplementedInterfaceTypeFieldResolvers(
+                $this->calculateAllImplementedInterfaceTypeFieldResolvers()
+            );
         }
         return $this->implementedInterfaceTypeFieldResolversCache;
+    }
+
+    /**
+     * Allow to override the interfaces, as for removing
+     * the Node interface whenever not exposing field "id"
+     * in an Object Type.
+     *
+     * @param InterfaceTypeFieldResolverInterface[] $interfaceTypeFieldResolvers
+     * @return InterfaceTypeFieldResolverInterface[]
+     */
+    protected function consolidateAllImplementedInterfaceTypeFieldResolvers(
+        array $interfaceTypeFieldResolvers,
+    ): array {
+        return $interfaceTypeFieldResolvers;
     }
 
     /**
