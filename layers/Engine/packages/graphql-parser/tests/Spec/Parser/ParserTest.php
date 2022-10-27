@@ -744,7 +744,7 @@ GRAPHQL;
                         )
                     ]
                 ),
-                'query SomeQuery ($arrayVariable: [String], $arrayElemRequiredVariable: [String!], $arrayOfArraysVariable: [[Int]], $arrayElemRequiredOfArraysVariable: [[JSONObject]!], $arrayOfArraysElemRequiredVariable: [[ID!]], $arrayElemRequiredOfArraysElemRequiredVariable: [[Float!]!], $arrayElemRequiredOfArraysElemRequiredRequiredVariable: [[Boolean!]!]!) { query(items(findBy1: $arrayVariable, findBy2: $arrayElemRequiredVariable, findBy3: $arrayOfArraysVariable, findBy4: $arrayElemRequiredOfArraysVariable, findBy5: $arrayOfArraysElemRequiredVariable, findBy6: $arrayElemRequiredOfArraysElemRequiredVariable, findBy7: $arrayElemRequiredOfArraysElemRequiredRequiredVariable) { name } }',
+                'query SomeQuery($arrayVariable: [String], $arrayElemRequiredVariable: [String!], $arrayOfArraysVariable: [[Int]], $arrayElemRequiredOfArraysVariable: [[JSONObject]!], $arrayOfArraysElemRequiredVariable: [[ID!]], $arrayElemRequiredOfArraysElemRequiredVariable: [[Float!]!], $arrayElemRequiredOfArraysElemRequiredRequiredVariable: [[Boolean!]!]!) { items(findBy1: $arrayVariable, findBy2: $arrayElemRequiredVariable, findBy3: $arrayOfArraysVariable, findBy4: $arrayElemRequiredOfArraysVariable, findBy5: $arrayOfArraysElemRequiredVariable, findBy6: $arrayElemRequiredOfArraysElemRequiredVariable, findBy7: $arrayElemRequiredOfArraysElemRequiredRequiredVariable) { name } }',
             ],
         ];
     }
