@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
+use PoP\GraphQLParser\Exception\Parser\UnsupportedSyntaxErrorParserException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
@@ -2173,5 +2175,13 @@ GRAPHQL;
             }
           }
         ');
+    }
+
+    public function testNoSurpassingListModifiersCardinalityInVariables(): void
+    {
+        $this->expectException(UnsupportedSyntaxErrorParserException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class, GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_4))->getMessage());
+        $parser = $this->getParser();
+        $parser->parse('query ($variable: [[[String]]]){ query ( teas: $variable ) { alias: name } }');
     }
 }
