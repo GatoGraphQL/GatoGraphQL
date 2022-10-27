@@ -28,6 +28,5 @@ trait RemoveNodeInterfaceObjectTypeResolverTrait
             $interfaceTypeFieldResolvers,
             fn (InterfaceTypeFieldResolverInterface $interfaceTypeFieldResolver) => $interfaceTypeFieldResolver !== $nodeInterfaceTypeFieldResolver
         ));
-        
     }
 }
