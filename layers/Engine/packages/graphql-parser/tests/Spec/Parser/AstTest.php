@@ -105,12 +105,14 @@ class AstTest extends AbstractTestCase
 
     public function testVariable(): void
     {
-        $variable = new Variable('id', 'int', false, false, true, false, false, [], new Location(1, 1));
+        $variable = new Variable('id', 'int', false, false, true, true, true, [], new Location(1, 1));
 
         $this->assertEquals('id', $variable->getName());
         $this->assertEquals('int', $variable->getTypeName());
         $this->assertFalse($variable->isRequired());
         $this->assertFalse($variable->isArray());
+        $this->assertTrue($variable->isArrayOfArrays());
+        $this->assertTrue($variable->isArrayOfArraysElementRequired());
 
         $variable->setContext(new Context(null, [$variable->getName() => 'text']));
         $this->assertEquals('text', $variable->getValue());
