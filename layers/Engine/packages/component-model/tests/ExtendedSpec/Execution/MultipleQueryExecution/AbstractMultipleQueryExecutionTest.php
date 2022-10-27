@@ -59,7 +59,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 }
             }
 
-            query ExecuteAll @dependsOn(operations: ["One", "Two"]) {
+            query ExecuteAll @depends(on: ["One", "Two"]) {
                 id
             }
         ';

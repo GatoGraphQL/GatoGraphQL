@@ -71,7 +71,7 @@ class IncludeFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
      *     # Do something...
      *   }
      *
-     *   mutation CreateOrUpdatePost @dependsOn(operations: ["CreatePost", "UpdatePost"])
+     *   mutation CreateOrUpdatePost @depends(on: ["CreatePost", "UpdatePost"])
      *   {
      *     # Do something...
      *   }
