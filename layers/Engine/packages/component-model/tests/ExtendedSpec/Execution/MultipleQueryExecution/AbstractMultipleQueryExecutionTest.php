@@ -59,7 +59,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
                 }
             }
 
-            query ExecuteAll @dependsOn(operations: ["One", "Two"]) {
+            query ExecuteAll @depends(on: ["One", "Two"]) {
                 id
             }
         ';
@@ -108,8 +108,8 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             'ExecuteAll',
             [],
             [
-                new Directive('dependsOn', [
-                    new Argument('operations', new InputList([new Literal("One", new Location(14, 55)), new Literal("Two", new Location(14, 62))], new Location(14, 53)), new Location(14, 41))
+                new Directive('depends', [
+                    new Argument('on', new InputList([new Literal("One", new Location(14, 45)), new Literal("Two", new Location(14, 52))], new Location(14, 43)), new Location(14, 39))
                 ], new Location(14, 31))
             ],
             [

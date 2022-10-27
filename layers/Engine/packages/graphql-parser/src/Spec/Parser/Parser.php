@@ -6,8 +6,10 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
+use PoP\GraphQLParser\Exception\Parser\UnsupportedSyntaxErrorParserException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -44,6 +46,7 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
+     * @throws UnsupportedSyntaxErrorParserException
      */
     public function parse(string $source): Document
     {
@@ -112,6 +115,9 @@ class Parser extends Tokenizer implements ParserInterface
         $this->variables = [];
     }
 
+    /**
+     * @throws UnsupportedSyntaxErrorParserException
+     */
     protected function parseOperation(string $type): OperationInterface
     {
         $directives = [];
@@ -258,6 +264,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @return Variable[]
+     * @throws UnsupportedSyntaxErrorParserException
      */
     protected function parseVariables(): array
     {
@@ -273,14 +280,46 @@ class Parser extends Tokenizer implements ParserInterface
             $nameToken     = $this->eatIdentifierToken();
             $this->eat(Token::TYPE_COLON);
 
-            $isArray              = false;
+            $isArray = false;
             $isArrayElementRequired = false;
+            $isArrayOfArrays = false;
+            $isArrayOfArraysElementRequired = false;
 
             if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
                 $isArray = true;
-
                 $this->eat(Token::TYPE_LSQUARE_BRACE);
-                $type = $this->eatIdentifierToken()->getData();
+
+                if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
+                    $isArrayOfArrays = true;
+                    $this->eat(Token::TYPE_LSQUARE_BRACE);
+
+                    /**
+                     * The GraphQL server currently supports receiving up to
+                     * 2 levels of List cardinality (eg: [[String]]), so if any
+                     * variable is defined surpassing this (eg: [[[String]]]),
+                     * then return an error
+                     */
+                    if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
+                        throw new UnsupportedSyntaxErrorParserException(
+                            new FeedbackItemResolution(
+                                GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                                GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_4,
+                            ),
+                            $this->getTokenLocation($variableToken)
+                        );
+                    }
+
+                    $type = $this->eatIdentifierToken()->getData();
+
+                    if ($this->match(Token::TYPE_REQUIRED)) {
+                        $isArrayOfArraysElementRequired = true;
+                        $this->eat(Token::TYPE_REQUIRED);
+                    }
+
+                    $this->eat(Token::TYPE_RSQUARE_BRACE);
+                } else {
+                    $type = $this->eatIdentifierToken()->getData();
+                }
 
                 if ($this->match(Token::TYPE_REQUIRED)) {
                     $isArrayElementRequired = true;
@@ -309,6 +348,8 @@ class Parser extends Tokenizer implements ParserInterface
                 $isRequired,
                 $isArray,
                 $isArrayElementRequired,
+                $isArrayOfArrays,
+                $isArrayOfArraysElementRequired,
                 $directives,
                 $this->getTokenLocation($variableToken),
             );
@@ -343,6 +384,8 @@ class Parser extends Tokenizer implements ParserInterface
         bool $isRequired,
         bool $isArray,
         bool $isArrayElementRequired,
+        bool $isArrayOfArrays,
+        bool $isArrayOfArraysElementRequired,
         array $directives,
         Location $location,
     ): Variable {
@@ -352,6 +395,8 @@ class Parser extends Tokenizer implements ParserInterface
             $isRequired,
             $isArray,
             $isArrayElementRequired,
+            $isArrayOfArrays,
+            $isArrayOfArraysElementRequired,
             $directives,
             $location,
         );

@@ -11,6 +11,7 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use stdClass;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
@@ -123,7 +124,16 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
                     )
                 );
             }
-            $graphQLVariables = json_decode($graphQLVariablesJSON, true);
+            $graphQLVariables = json_decode($graphQLVariablesJSON);
+            if (!is_array($graphQLVariables) && !($graphQLVariables instanceof stdClass)) {
+                throw new RuntimeException(
+                    sprintf(
+                        'Decoding the JSON inside file "%s" failed',
+                        $variablesFile
+                    )
+                );
+            }
+            $graphQLVariables = (array) $graphQLVariables;
         }
 
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);

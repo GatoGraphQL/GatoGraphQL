@@ -17,7 +17,7 @@ class VariableTest extends AbstractTestCase
      */
     public function testGetValue(mixed $actual, mixed $expected): void
     {
-        $var = new Variable('foo', 'bar', false, false, true, [], new Location(1, 1));
+        $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));
         $var->setContext(new Context(null, ['foo' => $actual]));
         $this->assertEquals($var->getValue(), $expected);
     }
@@ -29,13 +29,13 @@ class VariableTest extends AbstractTestCase
             'Context has not been set for Variable object (with name \'%s\')',
             'foo'
         ));
-        $var = new Variable('foo', 'bar', false, false, true, [], new Location(1, 1));
+        $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));
         $var->getValue();
     }
 
     public function testGetValueReturnsDefaultValueIfNoValueSet(): void
     {
-        $var = new Variable('foo', 'bar', false, false, true, [], new Location(1, 1));
+        $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));
         $var->setDefaultValueAST(new Literal('default-value', new Location(1, 1)));
         $var->setContext(new Context());
 
@@ -47,7 +47,7 @@ class VariableTest extends AbstractTestCase
 
     public function testGetValueReturnsSetValueEvenWithDefaultValue(): void
     {
-        $var = new Variable('foo', 'bar', false, false, true, [], new Location(1, 1));
+        $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));
         $var->setContext(new Context(null, ['foo' => 'real-value']));
         $var->setDefaultValueAST(new Literal('default-value', new Location(1, 1)));
 
@@ -59,7 +59,7 @@ class VariableTest extends AbstractTestCase
 
     public function testIndicatesDefaultValuePresent(): void
     {
-        $var = new Variable('foo', 'bar', false, false, true, [], new Location(1, 1));
+        $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));
         $var->setDefaultValueAST(new Literal('default-value', new Location(1, 1)));
 
         $this->assertTrue(
@@ -69,7 +69,7 @@ class VariableTest extends AbstractTestCase
 
     public function testHasNoDefaultValue(): void
     {
-        $var = new Variable('foo', 'bar', false, false, true, [], new Location(1, 1));
+        $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));
 
         $this->assertFalse(
             $var->hasDefaultValue()

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLRequest\StaticHelpers;
 
 use PoP\Root\App;
+use stdClass;
 
 class GraphQLQueryPayloadRetriever
 {
@@ -22,11 +23,24 @@ class GraphQLQueryPayloadRetriever
         // Attempt to get the query from the body, following the GraphQL syntax
         if (App::server('CONTENT_TYPE') === 'application/json') {
             $rawBody = file_get_contents('php://input');
-            $decodedJSON = json_decode($rawBody ?: '', true);
-            if (!is_array($decodedJSON)) {
+            if ($rawBody === false) {
                 return null;
             }
-            return $decodedJSON;
+            $decodedJSON = json_decode($rawBody);
+            if (!is_array($decodedJSON) && !($decodedJSON instanceof stdClass)) {
+                return null;
+            }
+            $json = (object) $decodedJSON;
+            $payload = [
+                'query' => $json->query,
+            ];
+            if (isset($json->variables)) {
+                $payload['variables'] = (array) $json->variables;
+            }
+            if (isset($json->operationName)) {
+                $payload['operationName'] = $json->operationName;
+            }
+            return $payload;
         }
 
         // Retrieve the entries from POST
