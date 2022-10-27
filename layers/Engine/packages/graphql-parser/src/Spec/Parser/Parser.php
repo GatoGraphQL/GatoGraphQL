@@ -6,8 +6,10 @@ namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
+use PoP\GraphQLParser\Exception\Parser\UnsupportedSyntaxErrorParserException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -44,6 +46,7 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
+     * @throws UnsupportedSyntaxErrorParserException
      */
     public function parse(string $source): Document
     {
@@ -112,6 +115,9 @@ class Parser extends Tokenizer implements ParserInterface
         $this->variables = [];
     }
 
+    /**
+     * @throws UnsupportedSyntaxErrorParserException
+     */
     protected function parseOperation(string $type): OperationInterface
     {
         $directives = [];
@@ -258,6 +264,7 @@ class Parser extends Tokenizer implements ParserInterface
 
     /**
      * @return Variable[]
+     * @throws UnsupportedSyntaxErrorParserException
      */
     protected function parseVariables(): array
     {
@@ -285,6 +292,22 @@ class Parser extends Tokenizer implements ParserInterface
                 if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
                     $isArrayOfArrays = true;
                     $this->eat(Token::TYPE_LSQUARE_BRACE);
+
+                    /**
+                     * The GraphQL server currently supports receiving up to
+                     * 2 levels of List cardinality (eg: [[String]]), so if any
+                     * variable is defined surpassing this (eg: [[[String]]]),
+                     * then return an error
+                     */
+                    if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
+                        throw new UnsupportedSyntaxErrorParserException(
+                            new FeedbackItemResolution(
+                                GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                                GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_4,
+                            ),
+                            $this->getTokenLocation($variableToken)
+                        );
+                    }
 
                     $type = $this->eatIdentifierToken()->getData();
 
