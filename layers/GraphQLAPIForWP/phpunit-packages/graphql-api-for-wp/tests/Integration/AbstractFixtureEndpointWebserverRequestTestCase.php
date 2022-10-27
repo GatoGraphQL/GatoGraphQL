@@ -7,6 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use GraphQLByPoP\GraphQLServer\Unit\FixtureQueryExecutionGraphQLServerTestCaseTrait;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 use RuntimeException;
+use stdClass;
 
 use function file_exists;
 use function file_get_contents;
@@ -141,11 +142,8 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 )
             );
         }
-        $variables = json_decode(
-            $fileContents,
-            true
-        );
-        if (!is_array($variables)) {
+        $variables = json_decode($fileContents);
+        if (!is_array($variables) && !($variables instanceof stdClass)) {
             throw new RuntimeException(
                 sprintf(
                     'Decoding the JSON inside file "%s" failed',
@@ -153,7 +151,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 )
             );
         }
-        return $variables;
+        return (array) $variables;
     }
 
     protected function getMainFixtureOperationName(string $dataName): ?string
