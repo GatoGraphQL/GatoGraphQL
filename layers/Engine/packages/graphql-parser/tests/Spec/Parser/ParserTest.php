@@ -546,7 +546,7 @@ GRAPHQL;
      */
     public function mutationProvider(): array
     {
-        $variable = new Variable('variable', 'Int', false, false, false, [], new Location(1, 8));
+        $variable = new Variable('variable', 'Int', false, false, false, false, false, [], new Location(1, 8));
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
@@ -1191,9 +1191,9 @@ GRAPHQL;
      */
     public function queryWithDirectiveProvider(): array
     {
-        $formatVariable = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
-        $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
-        $limitVariable = new Variable('limit', 'String', true, false, false, [new Directive('someVariableDirective', [], new Location(1, 41))], new Location(1, 24));
+        $formatVariable = new Variable('format', 'String', true, false, false, false, false, [], new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, false, false, [], new Location(1, 24));
+        $limitVariable = new Variable('limit', 'String', true, false, false, false, false, [new Directive('someVariableDirective', [], new Location(1, 41))], new Location(1, 24));
         return [
             // Directive in RelationalField
             [
@@ -1686,7 +1686,7 @@ GRAPHQL;
          *     }
          * }
          */
-        $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, false, false, [], new Location(1, 24));
         $variableReference2 = new VariableReference('format', $formatVariable2, new Location(3, 33));
         $argument2 = new Argument('format', $variableReference2, new Location(3, 25));
         $directive22 = new Directive(

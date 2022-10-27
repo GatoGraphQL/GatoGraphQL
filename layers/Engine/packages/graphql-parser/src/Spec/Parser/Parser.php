@@ -372,6 +372,8 @@ class Parser extends Tokenizer implements ParserInterface
             $isRequired,
             $isArray,
             $isArrayElementRequired,
+            $isArrayOfArrays,
+            $isArrayOfArraysElementRequired,
             $directives,
             $location,
         );

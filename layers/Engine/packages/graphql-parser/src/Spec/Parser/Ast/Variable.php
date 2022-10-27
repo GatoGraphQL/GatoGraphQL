@@ -40,6 +40,8 @@ class Variable extends AbstractAst implements WithValueInterface
         protected readonly bool $isRequired,
         protected readonly bool $isArray,
         protected readonly bool $isArrayElementRequired,
+        protected readonly bool $isArrayOfArrays,
+        protected readonly bool $isArrayOfArraysElementRequired,
         array $directives,
         Location $location,
     ) {
@@ -129,14 +131,29 @@ class Variable extends AbstractAst implements WithValueInterface
         return $this->type;
     }
 
+    public function isRequired(): bool
+    {
+        return $this->isRequired;
+    }
+
     public function isArray(): bool
     {
         return $this->isArray;
     }
 
-    public function isRequired(): bool
+    public function isArrayElementRequired(): bool
     {
-        return $this->isRequired;
+        return $this->isArrayElementRequired;
+    }
+
+    public function isArrayOfArrays(): bool
+    {
+        return $this->isArrayOfArrays;
+    }
+
+    public function isArrayOfArraysElementRequired(): bool
+    {
+        return $this->isArrayOfArraysElementRequired;
     }
 
     public function hasDefaultValue(): bool
@@ -153,11 +170,6 @@ class Variable extends AbstractAst implements WithValueInterface
     {
         $this->hasDefaultValue = $defaultValueAST !== null;
         $this->defaultValueAST = $defaultValueAST;
-    }
-
-    public function isArrayElementRequired(): bool
-    {
-        return $this->isArrayElementRequired;
     }
 
     /**
