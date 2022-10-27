@@ -676,9 +676,9 @@ GRAPHQL;
     {
         $arrayVariable = new Variable('arrayVariable', 'String', false, true, false, false, false, [], new Location(2, 9));
         $arrayElemRequiredVariable = new Variable('arrayElemRequiredVariable', 'String', false, true, true, false, false, [], new Location(3, 9));
-        $arrayOfArraysVariable = new Variable('arrayOfArraysVariable', 'Int', false, true, true, true, false, [], new Location(4, 9));
+        $arrayOfArraysVariable = new Variable('arrayOfArraysVariable', 'Int', false, true, false, true, false, [], new Location(4, 9));
         $arrayElemRequiredOfArraysVariable = new Variable('arrayElemRequiredOfArraysVariable', 'JSONObject', false, true, true, true, false, [], new Location(5, 9));
-        $arrayOfArraysElemRequiredVariable = new Variable('arrayOfArraysElemRequiredVariable', 'ID', false, true, true, false, true, [], new Location(6, 9));
+        $arrayOfArraysElemRequiredVariable = new Variable('arrayOfArraysElemRequiredVariable', 'ID', false, true, false, true, true, [], new Location(6, 9));
         $arrayElemRequiredOfArraysElemRequiredVariable = new Variable('arrayElemRequiredOfArraysElemRequiredVariable', 'Float', false, true, true, true, true, [], new Location(7, 9));
         $arrayElemRequiredOfArraysElemRequiredRequiredVariable = new Variable('arrayElemRequiredOfArraysElemRequiredRequiredVariable', 'Boolean', true, true, true, true, true, [], new Location(8, 9));
         return [
