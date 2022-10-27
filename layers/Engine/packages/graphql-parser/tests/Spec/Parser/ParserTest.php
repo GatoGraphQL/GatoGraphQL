@@ -677,8 +677,10 @@ GRAPHQL;
         $arrayVariable = new Variable('arrayVariable', 'String', false, true, false, false, false, [], new Location(2, 9));
         $arrayElemRequiredVariable = new Variable('arrayElemRequiredVariable', 'String', false, true, true, false, false, [], new Location(3, 9));
         $arrayOfArraysVariable = new Variable('arrayOfArraysVariable', 'Int', false, true, true, true, false, [], new Location(4, 9));
-        $arrayOfArraysElemRequiredVariable = new Variable('arrayOfArraysElemRequiredVariable', 'Int', false, true, true, true, true, [], new Location(5, 9));
-        $arrayOfArraysElemRequiredRequiredVariable = new Variable('arrayOfArraysElemRequiredRequiredVariable', 'Boolean', true, true, true, true, true, [], new Location(6, 9));
+        $arrayElemRequiredOfArraysVariable = new Variable('arrayOfArraysElemRequiredVariable', 'Int', false, true, true, true, false, [], new Location(5, 9));
+        $arrayOfArraysElemRequiredVariable = new Variable('arrayOfArraysElemRequiredVariable', 'Int', false, true, true, false, true, [], new Location(6, 9));
+        $arrayOfArraysElemRequiredRequiredVariable = new Variable('arrayOfArraysElemRequiredRequiredVariable', 'Int', false, true, true, true, true, [], new Location(7, 9));
+        $arrayElemRequiredOfArraysElemRequiredVariable = new Variable('arrayOfArraysElemRequiredRequiredVariable', 'Boolean', true, true, true, true, true, [], new Location(8, 9));
         return [
             [
                 <<<GRAPHQL
@@ -686,15 +688,19 @@ GRAPHQL;
                         \$arrayVariable: [String],
                         \$arrayElemRequiredVariable: [String!],
                         \$arrayOfArraysVariable: [[Int]],
-                        \$arrayOfArraysElemRequiredVariable: [[Int!]!],
+                        \$arrayElemRequiredOfArraysVariable: [[Int]!],
+                        \$arrayOfArraysElemRequiredVariable: [[Int!]],
+                        \$arrayElemRequiredOfArraysElemRequiredVariable: [[Int!]!],
                         \$arrayOfArraysElemRequiredRequiredVariable: [[Boolean!]!]!,
                     ) {
                         items(
                             findBy1: \$arrayVariable,
                             findBy2: \$arrayElemRequiredVariable,
                             findBy3: \$arrayOfArraysVariable,
-                            findBy4: \$arrayOfArraysElemRequiredVariable,
-                            findBy5: \$arrayOfArraysElemRequiredRequiredVariable,
+                            findBy4: \$arrayElemRequiredOfArraysVariable,
+                            findBy5: \$arrayOfArraysElemRequiredVariable,
+                            findBy6: \$arrayElemRequiredOfArraysElemRequiredVariable,
+                            findBy7: \$arrayOfArraysElemRequiredRequiredVariable,
                         ) {
                             name
                         }
@@ -708,7 +714,9 @@ GRAPHQL;
                                 $arrayVariable,
                                 $arrayElemRequiredVariable,
                                 $arrayOfArraysVariable,
+                                $arrayElemRequiredOfArraysVariable,
                                 $arrayOfArraysElemRequiredVariable,
+                                $arrayElemRequiredOfArraysElemRequiredVariable,
                                 $arrayOfArraysElemRequiredRequiredVariable,
                             ],
                             [],
@@ -720,8 +728,10 @@ GRAPHQL;
                                         new Argument('findBy1', new VariableReference('arrayVariable', $arrayVariable, new Location(1, 39)), new Location(1, 33)),
                                         new Argument('findBy2', new VariableReference('arrayElemRequiredVariable', $arrayElemRequiredVariable, new Location(21, 39)), new Location(21, 33)),
                                         new Argument('findBy3', new VariableReference('arrayOfArraysVariable', $arrayOfArraysVariable, new Location(31, 39)), new Location(31, 33)),
-                                        new Argument('findBy4', new VariableReference('arrayOfArraysElemRequiredVariable', $arrayOfArraysElemRequiredVariable, new Location(41, 39)), new Location(41, 33)),
-                                        new Argument('findBy5', new VariableReference('arrayOfArraysElemRequiredRequiredVariable', $arrayOfArraysElemRequiredRequiredVariable, new Location(51, 39)), new Location(51, 33)),
+                                        new Argument('findBy4', new VariableReference('arrayElemRequiredOfArraysVariable', $arrayElemRequiredOfArraysVariable, new Location(41, 39)), new Location(41, 33)),
+                                        new Argument('findBy5', new VariableReference('arrayOfArraysElemRequiredVariable', $arrayOfArraysElemRequiredVariable, new Location(51, 39)), new Location(51, 33)),
+                                        new Argument('findBy6', new VariableReference('arrayElemRequiredOfArraysElemRequiredVariable', $arrayElemRequiredOfArraysElemRequiredVariable, new Location(61, 39)), new Location(61, 33)),
+                                        new Argument('findBy7', new VariableReference('arrayOfArraysElemRequiredRequiredVariable', $arrayOfArraysElemRequiredRequiredVariable, new Location(71, 39)), new Location(71, 33)),
                                     ],
                                     [
                                         new LeafField('name', null, [], [], new Location(1, 60)),
@@ -734,7 +744,7 @@ GRAPHQL;
                         )
                     ]
                 ),
-                'query SomeQuery ($arrayVariable: [String], $arrayElemRequiredVariable: [String!], $arrayOfArraysVariable: [[Int]!], $arrayOfArraysElemRequiredVariable: [[Int!]!], $arrayOfArraysElemRequiredRequiredVariable: [[Int!]!]!) { query(items(findBy1: $arrayVariable, findBy2: $arrayElemRequiredVariable, findBy3: $arrayOfArraysVariable, findBy4: $arrayOfArraysElemRequiredVariable, findBy5: $arrayOfArraysElemRequiredRequiredVariable) { name } }',
+                'query SomeQuery ($arrayVariable: [String], $arrayElemRequiredVariable: [String!], $arrayOfArraysVariable: [[Int]], $arrayElemRequiredOfArraysVariable: [[Int]!], $arrayOfArraysElemRequiredVariable: [[Int!]], $arrayElemRequiredOfArraysElemRequiredVariable: [[Int!]!], $arrayOfArraysElemRequiredRequiredVariable: [[Boolean!]!]!) { query(items(findBy1: $arrayVariable, findBy2: $arrayElemRequiredVariable, findBy3: $arrayOfArraysVariable, findBy4: $arrayElemRequiredOfArraysVariable, findBy5: $arrayOfArraysElemRequiredVariable, findBy6: $arrayElemRequiredOfArraysElemRequiredVariable, findBy7: $arrayOfArraysElemRequiredRequiredVariable) { name } }',
             ],
         ];
     }
