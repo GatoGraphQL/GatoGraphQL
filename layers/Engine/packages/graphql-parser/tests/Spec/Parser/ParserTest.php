@@ -546,7 +546,7 @@ GRAPHQL;
      */
     public function mutationProvider(): array
     {
-        $variable = new Variable('variable', 'Int', false, false, false, [], new Location(1, 8));
+        $variable = new Variable('variable', 'Int', false, false, false, false, false, [], new Location(1, 8));
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
@@ -642,6 +642,109 @@ GRAPHQL;
                     ]
                 ),
                 'mutation { test: createUser(id: 4) }',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider queryWithVariablesProvider
+     */
+    public function testQueriesWithVariables(
+        string $query,
+        Document $document,
+        string $documentAsStr
+    ): void {
+        $parser = $this->getParser();
+
+        // 1st test: Parsing is right
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
+
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function queryWithVariablesProvider(): array
+    {
+        $arrayVariable = new Variable('arrayVariable', 'String', false, true, false, false, false, [], new Location(2, 9));
+        $arrayElemRequiredVariable = new Variable('arrayElemRequiredVariable', 'String', false, true, true, false, false, [], new Location(3, 9));
+        $arrayOfArraysVariable = new Variable('arrayOfArraysVariable', 'Int', false, true, false, true, false, [], new Location(4, 9));
+        $arrayElemRequiredOfArraysVariable = new Variable('arrayElemRequiredOfArraysVariable', 'JSONObject', false, true, true, true, false, [], new Location(5, 9));
+        $arrayOfArraysElemRequiredVariable = new Variable('arrayOfArraysElemRequiredVariable', 'ID', false, true, false, true, true, [], new Location(6, 9));
+        $arrayElemRequiredOfArraysElemRequiredVariable = new Variable('arrayElemRequiredOfArraysElemRequiredVariable', 'Float', false, true, true, true, true, [], new Location(7, 9));
+        $arrayElemRequiredOfArraysElemRequiredRequiredVariable = new Variable('arrayElemRequiredOfArraysElemRequiredRequiredVariable', 'Boolean', true, true, true, true, true, [], new Location(8, 9));
+        return [
+            [
+                <<<GRAPHQL
+                    query SomeQuery(
+                        \$arrayVariable: [String],
+                        \$arrayElemRequiredVariable: [String!],
+                        \$arrayOfArraysVariable: [[Int]],
+                        \$arrayElemRequiredOfArraysVariable: [[JSONObject]!],
+                        \$arrayOfArraysElemRequiredVariable: [[ID!]],
+                        \$arrayElemRequiredOfArraysElemRequiredVariable: [[Float!]!],
+                        \$arrayElemRequiredOfArraysElemRequiredRequiredVariable: [[Boolean!]!]!,
+                    ) {
+                        items(
+                            findBy1: \$arrayVariable,
+                            findBy2: \$arrayElemRequiredVariable,
+                            findBy3: \$arrayOfArraysVariable,
+                            findBy4: \$arrayElemRequiredOfArraysVariable,
+                            findBy5: \$arrayOfArraysElemRequiredVariable,
+                            findBy6: \$arrayElemRequiredOfArraysElemRequiredVariable,
+                            findBy7: \$arrayElemRequiredOfArraysElemRequiredRequiredVariable,
+                        ) {
+                            name
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'SomeQuery',
+                            [
+                                $arrayVariable,
+                                $arrayElemRequiredVariable,
+                                $arrayOfArraysVariable,
+                                $arrayElemRequiredOfArraysVariable,
+                                $arrayOfArraysElemRequiredVariable,
+                                $arrayElemRequiredOfArraysElemRequiredVariable,
+                                $arrayElemRequiredOfArraysElemRequiredRequiredVariable,
+                            ],
+                            [],
+                            [
+                                new RelationalField(
+                                    'items',
+                                    null,
+                                    [
+                                        new Argument('findBy1', new VariableReference('arrayVariable', $arrayVariable, new Location(11, 22)), new Location(11, 13)),
+                                        new Argument('findBy2', new VariableReference('arrayElemRequiredVariable', $arrayElemRequiredVariable, new Location(12, 22)), new Location(12, 13)),
+                                        new Argument('findBy3', new VariableReference('arrayOfArraysVariable', $arrayOfArraysVariable, new Location(13, 22)), new Location(13, 13)),
+                                        new Argument('findBy4', new VariableReference('arrayElemRequiredOfArraysVariable', $arrayElemRequiredOfArraysVariable, new Location(14, 22)), new Location(14, 13)),
+                                        new Argument('findBy5', new VariableReference('arrayOfArraysElemRequiredVariable', $arrayOfArraysElemRequiredVariable, new Location(15, 22)), new Location(15, 13)),
+                                        new Argument('findBy6', new VariableReference('arrayElemRequiredOfArraysElemRequiredVariable', $arrayElemRequiredOfArraysElemRequiredVariable, new Location(16, 22)), new Location(16, 13)),
+                                        new Argument('findBy7', new VariableReference('arrayElemRequiredOfArraysElemRequiredRequiredVariable', $arrayElemRequiredOfArraysElemRequiredRequiredVariable, new Location(17, 22)), new Location(17, 13)),
+                                    ],
+                                    [
+                                        new LeafField('name', null, [], [], new Location(19, 13)),
+                                    ],
+                                    [],
+                                    new Location(10, 9)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+                'query SomeQuery($arrayVariable: [String], $arrayElemRequiredVariable: [String!], $arrayOfArraysVariable: [[Int]], $arrayElemRequiredOfArraysVariable: [[JSONObject]!], $arrayOfArraysElemRequiredVariable: [[ID!]], $arrayElemRequiredOfArraysElemRequiredVariable: [[Float!]!], $arrayElemRequiredOfArraysElemRequiredRequiredVariable: [[Boolean!]!]!) { items(findBy1: $arrayVariable, findBy2: $arrayElemRequiredVariable, findBy3: $arrayOfArraysVariable, findBy4: $arrayElemRequiredOfArraysVariable, findBy5: $arrayOfArraysElemRequiredVariable, findBy6: $arrayElemRequiredOfArraysElemRequiredVariable, findBy7: $arrayElemRequiredOfArraysElemRequiredRequiredVariable) { name } }',
             ],
         ];
     }
@@ -1191,9 +1294,9 @@ GRAPHQL;
      */
     public function queryWithDirectiveProvider(): array
     {
-        $formatVariable = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
-        $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
-        $limitVariable = new Variable('limit', 'String', true, false, false, [new Directive('someVariableDirective', [], new Location(1, 41))], new Location(1, 24));
+        $formatVariable = new Variable('format', 'String', true, false, false, false, false, [], new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, false, false, [], new Location(1, 24));
+        $limitVariable = new Variable('limit', 'String', true, false, false, false, false, [new Directive('someVariableDirective', [], new Location(1, 41))], new Location(1, 24));
         return [
             // Directive in RelationalField
             [
@@ -1686,7 +1789,7 @@ GRAPHQL;
          *     }
          * }
          */
-        $formatVariable2 = new Variable('format', 'String', true, false, false, [], new Location(1, 24));
+        $formatVariable2 = new Variable('format', 'String', true, false, false, false, false, [], new Location(1, 24));
         $variableReference2 = new VariableReference('format', $formatVariable2, new Location(3, 33));
         $argument2 = new Argument('format', $variableReference2, new Location(3, 25));
         $directive22 = new Directive(
