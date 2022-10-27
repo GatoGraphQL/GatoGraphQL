@@ -108,7 +108,7 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
             'ExecuteAll',
             [],
             [
-                new Directive('dependsOn', [
+                new Directive('depends', [
                     new Argument('operations', new InputList([new Literal("One", new Location(14, 55)), new Literal("Two", new Location(14, 62))], new Location(14, 53)), new Location(14, 41))
                 ], new Location(14, 31))
             ],
