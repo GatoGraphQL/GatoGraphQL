@@ -647,6 +647,99 @@ GRAPHQL;
     }
 
     /**
+     * @dataProvider queryWithVariablesProvider
+     */
+    public function testQueriesWithVariables(
+        string $query,
+        Document $document,
+        string $documentAsStr
+    ): void {
+        $parser = $this->getParser();
+
+        // 1st test: Parsing is right
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
+
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function queryWithVariablesProvider(): array
+    {
+        $arrayVariable = new Variable('arrayVariable', 'String', false, true, false, false, false, [], new Location(2, 9));
+        $arrayMandatoryVariable = new Variable('arrayMandatoryVariable', 'String', false, true, true, false, false, [], new Location(3, 9));
+        $arrayOfArraysVariable = new Variable('arrayOfArraysVariable', 'Int', false, true, true, true, false, [], new Location(4, 9));
+        $arrayOfArraysMandatoryVariable = new Variable('arrayOfArraysMandatoryVariable', 'Int', false, true, true, true, true, [], new Location(5, 9));
+        $mandatoryArrayOfArraysMandatoryVariable = new Variable('mandatoryArrayOfArraysMandatoryVariable', 'Boolean', true, true, true, true, true, [], new Location(6, 9));
+        return [
+            [
+                <<<GRAPHQL
+                    query SomeQuery(
+                        \$arrayVariable: [String],
+                        \$arrayMandatoryVariable: [String!],
+                        \$arrayOfArraysVariable: [[Int]],
+                        \$arrayOfArraysMandatoryVariable: [[Int!]!],
+                        \$mandatoryArrayOfArraysMandatoryVariable: [[Boolean!]!]!,
+                    ) {
+                        items(
+                            findBy1: \$arrayVariable,
+                            findBy2: \$arrayMandatoryVariable,
+                            findBy3: \$arrayOfArraysVariable,
+                            findBy4: \$arrayOfArraysMandatoryVariable,
+                            findBy5: \$mandatoryArrayOfArraysMandatoryVariable,
+                        ) {
+                            name
+                        }
+                    }
+                GRAPHQL,
+                new Document(
+                    [
+                        new QueryOperation(
+                            'SomeQuery',
+                            [
+                                $arrayVariable,
+                                $arrayMandatoryVariable,
+                                $arrayOfArraysVariable,
+                                $arrayOfArraysMandatoryVariable,
+                                $mandatoryArrayOfArraysMandatoryVariable,
+                            ],
+                            [],
+                            [
+                                new RelationalField(
+                                    'items',
+                                    null,
+                                    [
+                                        new Argument('findBy1', new VariableReference('arrayVariable', $arrayVariable, new Location(1, 39)), new Location(1, 33)),
+                                        new Argument('findBy2', new VariableReference('arrayMandatoryVariable', $arrayMandatoryVariable, new Location(21, 39)), new Location(21, 33)),
+                                        new Argument('findBy3', new VariableReference('arrayOfArraysVariable', $arrayOfArraysVariable, new Location(31, 39)), new Location(31, 33)),
+                                        new Argument('findBy4', new VariableReference('arrayOfArraysMandatoryVariable', $arrayOfArraysMandatoryVariable, new Location(41, 39)), new Location(41, 33)),
+                                        new Argument('findBy5', new VariableReference('mandatoryArrayOfArraysMandatoryVariable', $mandatoryArrayOfArraysMandatoryVariable, new Location(51, 39)), new Location(51, 33)),
+                                    ],
+                                    [
+                                        new LeafField('name', null, [], [], new Location(1, 60)),
+                                    ],
+                                    [],
+                                    new Location(1, 25)
+                                ),
+                            ],
+                            new Location(1, 11)
+                        )
+                    ]
+                ),
+                'query SomeQuery ($arrayVariable: [String], $arrayMandatoryVariable: [String!], $arrayOfArraysVariable: [[Int]!], $arrayOfArraysMandatoryVariable: [[Int!]!], $mandatoryArrayOfArraysMandatoryVariable: [[Int!]!]!) { query(items(findBy1: $arrayVariable, findBy2: $arrayMandatoryVariable, findBy3: $arrayOfArraysVariable, findBy4: $arrayOfArraysMandatoryVariable, findBy5: $mandatoryArrayOfArraysMandatoryVariable) { name } }',
+            ],
+        ];
+    }
+
+    /**
      * @dataProvider queryProvider
      */
     public function testQueries(
