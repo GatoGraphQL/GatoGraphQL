@@ -283,16 +283,16 @@ class Parser extends Tokenizer implements ParserInterface
                 $this->eat(Token::TYPE_LSQUARE_BRACE);
 
                 if ($this->match(Token::TYPE_LSQUARE_BRACE)) {
-                    $isArrayOfArrays = true;    
+                    $isArrayOfArrays = true;
                     $this->eat(Token::TYPE_LSQUARE_BRACE);
 
                     $type = $this->eatIdentifierToken()->getData();
-    
+
                     if ($this->match(Token::TYPE_REQUIRED)) {
                         $isArrayOfArraysElementRequired = true;
                         $this->eat(Token::TYPE_REQUIRED);
                     }
-    
+
                     $this->eat(Token::TYPE_RSQUARE_BRACE);
                 } else {
                     $type = $this->eatIdentifierToken()->getData();
