@@ -172,7 +172,7 @@ jobs:
     ###########################################################################
 
             -   name: Create plugin as zip
-                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }}.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* vendor/**/phpstan.neon vendor/**/phpstan.neon.dist vendor/**/README.md vendor/**/LICENSE.md **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
+                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }}.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* vendor/**/phpstan.neon vendor/**/phpstan.neon.dist vendor/**/README.md vendor/**/LICENSE.md **/package.json **/package-lock.json tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Uncompress plugin zip contents into new folder
