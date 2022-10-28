@@ -15,13 +15,14 @@ class PluginDataSource
      */
     public function getPluginConfigEntries(): array
     {
+        $excludeJSBlockFilesPlaceholder = $this->getExcludeJSBlockFilesPlaceholder();
         return [
             // GraphQL API for WordPress
             [
                 'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
                 'zip_file' => 'graphql-api',
                 'main_file' => 'graphql-api.php',
-                'exclude_files' => 'dev-helpers/\* docs/images/\*',
+                'exclude_files' => 'dev-helpers/\* docs/images/\*' . sprintf($excludeJSBlockFilesPlaceholder, 'blocks') . ' ' . sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts') . ' ' . sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
                 'dist_repo_organization' => 'GraphQLAPI',
                 'dist_repo_name' => 'graphql-api-for-wp-dist',
                 'additional_rector_configs' => [
@@ -59,5 +60,10 @@ class PluginDataSource
             //     'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/extension-demo/rector.php',
             // ],
         ];
+    }
+
+    protected function getExcludeJSBlockFilesPlaceholder(): string
+    {
+        return '%1$s/*/docs/\* %1$s/*/src/\* %1$s/*/webpack.config.js';
     }
 }
