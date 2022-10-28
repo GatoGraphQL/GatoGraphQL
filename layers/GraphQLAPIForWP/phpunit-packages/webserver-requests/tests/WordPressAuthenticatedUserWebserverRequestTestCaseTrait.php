@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\RequestOptions;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use Psr\Http\Message\ResponseInterface;
@@ -63,7 +64,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
         array $options
     ): ?string {
         /** @var CookieJar */
-        $cookieJar = $options['cookies'];
+        $cookieJar = $options[RequestOptions::COOKIES];
         foreach ($cookieJar->getIterator() as $cookie) {
             if (str_starts_with($cookie->getName(), 'wordpress_logged_in_')) {
                 return null;

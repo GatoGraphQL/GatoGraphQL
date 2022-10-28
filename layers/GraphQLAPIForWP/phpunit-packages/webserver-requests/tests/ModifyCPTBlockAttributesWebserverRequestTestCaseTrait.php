@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
+use GuzzleHttp\RequestOptions;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
+use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 
 trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
 {
@@ -140,7 +141,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
          * In that case, pass an empty string instead of an empty array,
          * then it works!
          */
-        $options['query'][Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES] = (string)json_encode($value);
+        $options[RequestOptions::QUERY][Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES] = (string)json_encode($value);
         $response = $client->post(
             $endpointURL,
             $options,
