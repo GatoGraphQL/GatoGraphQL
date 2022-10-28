@@ -94,5 +94,5 @@ class MethodHelpers
             return (object) $array;
         }
         return $array;
-     }
+    }
 }
