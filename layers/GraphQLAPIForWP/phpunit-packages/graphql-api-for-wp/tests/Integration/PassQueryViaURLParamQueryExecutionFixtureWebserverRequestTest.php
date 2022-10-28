@@ -17,7 +17,7 @@ class PassQueryViaURLParamQueryExecutionFixtureWebserverRequestTest extends Abst
     {
         /**
          * Add the query in the endpoint. If no query is passed via the body,
-         * eg: because of executing via GET (instead of PSOT), then
+         * eg: because of executing via GET (instead of POST), then
          * this query will be executed.
          */
         return 'graphql/website/?query={ self { id } }';
