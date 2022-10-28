@@ -13,7 +13,7 @@ jobs:
         name: Launch InstaWP instance and execute integration tests against it
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
