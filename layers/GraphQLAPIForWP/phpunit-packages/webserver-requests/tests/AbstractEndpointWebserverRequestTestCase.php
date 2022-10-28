@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use GuzzleHttp\RequestOptions;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use RuntimeException;
 
 abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
@@ -27,21 +29,40 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         $options = static::getRequestBasicOptions();
         if ($params !== []) {
+            /** @var array<string,mixed> */
             $params = $this->maybeAddXDebugTriggerParam($params);
-            $options['query'] = $params;
+            $options[RequestOptions::QUERY] = $params;
         } else {
             /** @var string */
             $endpointURL = $this->maybeAddXDebugTriggerParam($endpointURL);
         }
 
-        $options['body'] = json_encode([
-            'query' => $query,
-            'variables' => $variables,
-            'operationName' => $operationName ?? '',
-        ]);
+        $method ??= $this->getMethod();
+
+        if ($method === "POST") {
+            $options[RequestOptions::BODY] = json_encode([
+                'query' => $query,
+                'variables' => $variables,
+                'operationName' => $operationName ?? '',
+            ]);
+        } elseif ($method === "GET") {
+            $options[RequestOptions::QUERY] = array_merge(
+                $options[RequestOptions::QUERY] ?? [],
+                [
+                    'query' => $query,
+                    'variables' => $variables,
+                    'operationName' => $operationName ?? '',
+                ]
+            );
+        } else {
+            throw new RuntimeException(sprintf(
+                'Unsupported method \'%s\' for testing a GraphQL endpoint',
+                $method
+            ));
+        }
 
         $response = $client->request(
-            $method ?? $this->getMethod(),
+            $method,
             $endpointURL,
             $options
         );
@@ -84,7 +105,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     protected static function getRequestBasicOptions(): array
     {
         $options = parent::getRequestBasicOptions();
-        $options['headers']['Content-Type'] = 'application/json';
+        $options[RequestOptions::HEADERS]['Content-Type'] = 'application/json';
         return $options;
     }
 
