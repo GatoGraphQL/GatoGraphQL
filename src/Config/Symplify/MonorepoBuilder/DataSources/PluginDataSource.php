@@ -22,7 +22,13 @@ class PluginDataSource
                 'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
                 'zip_file' => 'graphql-api',
                 'main_file' => 'graphql-api.php',
-                'exclude_files' => 'dev-helpers/\* docs/images/\*' . sprintf($excludeJSBlockFilesPlaceholder, 'blocks') . ' ' . sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts') . ' ' . sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
+                'exclude_files' => implode(' ', [
+                    'dev-helpers/\*',
+                    'docs/images/\*',
+                    sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
+                    sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
+                    sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
+                ]),
                 'dist_repo_organization' => 'GraphQLAPI',
                 'dist_repo_name' => 'graphql-api-for-wp-dist',
                 'additional_rector_configs' => [
