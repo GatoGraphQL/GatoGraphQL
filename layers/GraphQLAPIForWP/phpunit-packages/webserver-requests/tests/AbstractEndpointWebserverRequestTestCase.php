@@ -25,10 +25,18 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         ?string $operationName = null,
         ?string $method = null,
     ): void {
+        $method ??= $this->getMethod();
+        if (!in_array($method, ["POST", "GET"])) {
+            throw new RuntimeException(sprintf(
+                'Unsupported method \'%s\' for testing a GraphQL endpoint',
+                $method
+            ));
+        }
+
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         $options = static::getRequestBasicOptions();
-        if ($params !== []) {
+        if ($params !== [] || $method === "GET") {
             /** @var array<string,mixed> */
             $params = $this->maybeAddXDebugTriggerParam($params);
             $options[RequestOptions::QUERY] = $params;
@@ -36,8 +44,6 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             /** @var string */
             $endpointURL = $this->maybeAddXDebugTriggerParam($endpointURL);
         }
-
-        $method ??= $this->getMethod();
 
         if ($method === "POST") {
             $options[RequestOptions::BODY] = json_encode([
@@ -54,11 +60,6 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
                     'operationName' => $operationName ?? '',
                 ]
             );
-        } else {
-            throw new RuntimeException(sprintf(
-                'Unsupported method \'%s\' for testing a GraphQL endpoint',
-                $method
-            ));
         }
 
         $response = $client->request(
