@@ -36,7 +36,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         $options = static::getRequestBasicOptions();
-        if ($params !== [] || $method === "GET") {
+        if ($params !== []) {
             /** @var array<string,mixed> */
             $params = $this->maybeAddXDebugTriggerParam($params);
             $options[RequestOptions::QUERY] = $params;
