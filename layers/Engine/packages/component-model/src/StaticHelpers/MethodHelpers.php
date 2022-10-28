@@ -83,14 +83,14 @@ class MethodHelpers
      */
     public static function recursivelyConvertAssociativeArrayToStdClass(array $array): array|stdClass
     {
-        $isAssociativeArray = !array_is_list($array);
         foreach ($array as $key => $value) {
             if (!is_array($value)) {
                 continue;
             }
             $array[$key] = static::recursivelyConvertAssociativeArrayToStdClass($value);
         }
-        if ($isAssociativeArray) {
+        // If it is an associative array, transform to stdClass
+        if (!array_is_list($array)) {
             return (object) $array;
         }
         return $array;
