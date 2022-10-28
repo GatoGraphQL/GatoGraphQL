@@ -41,6 +41,9 @@ class VariableManager implements VariableManagerInterface
         }
 
         /**
+         * Obtain variables from $_POST and $_GET and, also,
+         * from the special "variables" entry.
+         *
          * Watch out! GraphiQL also uses the "variables" URL param,
          * but as a string. Hence, check if this param is an array,
          * and only then process it.
@@ -51,6 +54,7 @@ class VariableManager implements VariableManagerInterface
             App::getRequest()->query->has('variables') && is_array(App::getRequest()->query->all()['variables']) ? App::getRequest()->query->all()['variables'] : [],
             App::getRequest()->request->has('variables') && is_array(App::getRequest()->request->all()['variables']) ? App::getRequest()->request->all()['variables'] : []
         );
+        unset($variables['variables']);
 
         /**
          * Convert associative arrays to stdClass, which is the
@@ -61,12 +65,11 @@ class VariableManager implements VariableManagerInterface
          * then `JSONObjectScalar` can only receive `stdClass`, not an array.
          */
         foreach ($variables as $variableName => $variableValue) {
-            $isAssociativeArray = is_array($variableValue) && !array_is_list($variableValue);
-            if (!$isAssociativeArray) {
+            if (!is_array($variableValue)) {
                 continue;
             }
             /** @var mixed[] $variableValue */
-            $variables[$variableName] = MethodHelpers::convertAssociativeArrayToStdClass($variableValue);
+            $variables[$variableName] = MethodHelpers::recursivelyConvertAssociativeArrayToStdClass($variableValue);
         }
 
         return $variables;

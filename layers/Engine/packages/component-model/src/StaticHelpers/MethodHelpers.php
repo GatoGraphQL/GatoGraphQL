@@ -77,19 +77,22 @@ class MethodHelpers
      * data structure used for inputs in GraphQL.
      *
      * @param mixed[] $array
+     * @return mixed[]|stdClass
      *
      * @see https://stackoverflow.com/a/4790485
      */
-    public static function convertAssociativeArrayToStdClass(array $array): stdClass
+    public static function recursivelyConvertAssociativeArrayToStdClass(array $array): array|stdClass
     {
-        $object = new stdClass();     
+        $isAssociativeArray = !array_is_list($array);
         foreach ($array as $key => $value) {
-            if (is_array($value) && array_is_list($value)) {
-                $object->{$key} = static::convertAssociativeArrayToStdClass($value);
+            if (!is_array($value)) {
                 continue;
             }
-            $object->{$key} = $value;
-        }        
-        return $object;
+            $array[$key] = static::recursivelyConvertAssociativeArrayToStdClass($value);
+        }
+        if ($isAssociativeArray) {
+            return (object) $array;
+        }
+        return $array;
      }
 }
