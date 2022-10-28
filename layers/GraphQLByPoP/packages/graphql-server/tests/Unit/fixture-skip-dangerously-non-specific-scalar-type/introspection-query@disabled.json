@@ -2243,54 +2243,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
