@@ -33,10 +33,31 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             ));
         }
 
+        $doingGET = $method === 'GET';
+        $doingPOST = $method === 'POST';
+
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         $options = static::getRequestBasicOptions();
-        if ($params !== [] || $method === "GET") {
+
+        if ($doingPOST) {
+            $options[RequestOptions::BODY] = json_encode([
+                'query' => $query,
+                'variables' => $variables,
+                'operationName' => $operationName ?? '',
+            ]);
+        } elseif ($doingGET) {
+            $options[RequestOptions::QUERY] = array_merge(
+                $options[RequestOptions::QUERY] ?? [],
+                [
+                    'query' => $query,
+                    'variables' => $variables,
+                    'operationName' => $operationName ?? '',
+                ]
+            );
+        }
+
+        if ($params !== []) {
             /** @var array<string,mixed> */
             $params = $this->maybeAddXDebugTriggerParam($params);
             $options[RequestOptions::QUERY] = $params;
@@ -45,20 +66,19 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $endpointURL = $this->maybeAddXDebugTriggerParam($endpointURL);
         }
 
-        if ($method === "POST") {
-            $options[RequestOptions::BODY] = json_encode([
-                'query' => $query,
-                'variables' => $variables,
-                'operationName' => $operationName ?? '',
-            ]);
-        } elseif ($method === "GET") {
+        if ($doingGET) {
+            /**
+             * Because by passing option "query" Guzzle will ignore
+             * any URL param in the endpoint, copy these as queryParams.
+             *
+             * URL params override the GraphQL vars, so that passing
+             * ?query=... overrides the query passed in the unit test.
+             *
+             * @see PassQueryViaURLParamQueryExecutionFixtureWebserverRequestTest.php
+             */
             $options[RequestOptions::QUERY] = array_merge(
-                $options[RequestOptions::QUERY] ?? [],
-                [
-                    'query' => $query,
-                    'variables' => $variables,
-                    'operationName' => $operationName ?? '',
-                ]
+                $options[RequestOptions::QUERY],
+                GeneralUtils::getURLQueryParams($endpointURL)
             );
         }
 
