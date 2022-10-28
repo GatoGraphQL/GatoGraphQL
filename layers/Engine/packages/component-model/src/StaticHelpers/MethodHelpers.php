@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\StaticHelpers;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
+use stdClass;
 
 class MethodHelpers
 {
@@ -70,4 +71,25 @@ class MethodHelpers
         }
         return $restrictedIDFieldSet;
     }
+
+    /**
+     * Convert associative arrays to stdClass, which is the
+     * data structure used for inputs in GraphQL.
+     *
+     * @param mixed[] $array
+     *
+     * @see https://stackoverflow.com/a/4790485
+     */
+    public static function associativeArrayToObject(array $array): stdClass
+    {
+        $object = new stdClass();     
+        foreach ($array as $key => $value) {
+            if (is_array($value) && array_is_list($value)) {
+                $object->{$key} = static::associativeArrayToObject($value);
+                continue;
+            }
+            $object->{$key} = $value;
+        }        
+        return $object;
+     }
 }
