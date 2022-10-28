@@ -9,6 +9,7 @@ use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\TypeKinds;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -109,9 +110,16 @@ class TypeObjectTypeFieldResolver extends UpstreamTypeObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC1BJC3BAn6e):
                 // "should be non-null for OBJECT and INTERFACE only, must be null for the others"
                 if ($type instanceof HasFieldsTypeInterface) {
+                    /**
+                     * Only include the global fields for Objects!
+                     * (i.e. do not for Interfaces)
+                     */
+                    $includeGlobal = $type->getKind() === TypeKinds::OBJECT
+                        ? $fieldDataAccessor->getValue('includeGlobal') ?? true
+                        : false;
                     return $type->getFieldIDs(
                         $fieldDataAccessor->getValue('includeDeprecated') ?? false,
-                        $fieldDataAccessor->getValue('includeGlobal') ?? true,
+                        $includeGlobal,
                     );
                 }
                 return null;

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use GraphQLByPoP\GraphQLServer\ObjectModels\EnumType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasInterfacesTypeInterface;
@@ -15,6 +12,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\InputObjectType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\ScalarType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
+use GraphQLByPoP\GraphQLServer\ObjectModels\TypeKinds;
 use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\TypeKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\EnumValueObjectTypeResolver;
@@ -22,9 +20,12 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\FieldObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\InputValueObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\NamedTypeExtensionsObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -251,7 +252,15 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC1BJC3BAn6e):
                 // "should be non-null for OBJECT and INTERFACE only, must be null for the others"
                 if ($type instanceof HasFieldsTypeInterface) {
-                    return $type->getFieldIDs($fieldDataAccessor->getValue('includeDeprecated') ?? false);
+                    /**
+                     * Only include the global fields for Objects!
+                     * (i.e. do not for Interfaces)
+                     */
+                    $includeGlobal = $type->getKind() === TypeKinds::OBJECT;
+                    return $type->getFieldIDs(
+                        $fieldDataAccessor->getValue('includeDeprecated') ?? false,
+                        $includeGlobal
+                    );
                 }
                 return null;
             case 'interfaces':
