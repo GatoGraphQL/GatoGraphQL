@@ -73,8 +73,8 @@ class MethodHelpers
     }
 
     /**
-     * Convert associative arrays to stdClass, which is the
-     * data structure used for inputs in GraphQL.
+     * Convert associative arrays (and their elements) to stdClass,
+     * which is the data structure used for inputs in GraphQL.
      *
      * @param mixed[] $array
      * @return mixed[]|stdClass

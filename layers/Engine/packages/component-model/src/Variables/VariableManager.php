@@ -57,8 +57,8 @@ class VariableManager implements VariableManagerInterface
         unset($variables['variables']);
 
         /**
-         * Convert associative arrays to stdClass, which is the
-         * data structure used for inputs in GraphQL.
+         * Convert associative arrays (and their elements) to stdClass,
+         * which is the data structure used for inputs in GraphQL.
          *
          * Using associative array would not work, as ScalarTypeResolvers
          * can't receive an `array` as input to function `coerceValue`,
