@@ -80,12 +80,12 @@ class MethodHelpers
      *
      * @see https://stackoverflow.com/a/4790485
      */
-    public static function associativeArrayToObject(array $array): stdClass
+    public static function convertAssociativeArrayToStdClass(array $array): stdClass
     {
         $object = new stdClass();     
         foreach ($array as $key => $value) {
             if (is_array($value) && array_is_list($value)) {
-                $object->{$key} = static::associativeArrayToObject($value);
+                $object->{$key} = static::convertAssociativeArrayToStdClass($value);
                 continue;
             }
             $object->{$key} = $value;

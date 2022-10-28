@@ -65,8 +65,8 @@ class VariableManager implements VariableManagerInterface
             if (!$isAssociativeArray) {
                 continue;
             }
-            /** @var mixed[] $isAssociativeArray */
-            $variables[$variableName] = MethodHelpers::associativeArrayToObject($variableValue);
+            /** @var mixed[] $variableValue */
+            $variables[$variableName] = MethodHelpers::convertAssociativeArrayToStdClass($variableValue);
         }
 
         return $variables;
