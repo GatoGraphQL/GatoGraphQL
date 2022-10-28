@@ -70,15 +70,10 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
              *
              * @see PassQueryViaURLParamQueryExecutionFixtureWebserverRequestTest.php
              */
-            $endpointQueryString = parse_url($endpointURL, PHP_URL_QUERY);
-            if ($endpointQueryString) {
-                $endpointQueryParams = [];
-                parse_str($endpointQueryString, $endpointQueryParams);
-                $options[RequestOptions::QUERY] = array_merge(
-                    $options[RequestOptions::QUERY],
-                    $endpointQueryParams,
-                );
-            }
+            $options[RequestOptions::QUERY] = array_merge(
+                $options[RequestOptions::QUERY],
+                GeneralUtils::getURLQueryParams($endpointURL)
+            );
         }
 
         $response = $client->request(

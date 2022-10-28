@@ -160,4 +160,16 @@ class GeneralUtils
         array_push($array, ...$iterable);
         return $array;
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public static function getURLQueryParams(string $url): array
+    {
+        $queryParams = [];
+        if ($queryString = parse_url($url, PHP_URL_QUERY)) {
+            parse_str($queryString, $queryParams);
+        }
+        return $queryParams;
+    }
 }
