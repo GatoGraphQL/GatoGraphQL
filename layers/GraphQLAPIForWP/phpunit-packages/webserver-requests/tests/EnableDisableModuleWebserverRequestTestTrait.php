@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
@@ -25,7 +26,7 @@ trait EnableDisableModuleWebserverRequestTestTrait
             $this->getModuleID($dataName),
         );
         $options = $this->getRESTEndpointRequestOptions();
-        $options['query'][Params::STATE] = $moduleEnabled ? ParamValues::ENABLED : ParamValues::DISABLED;
+        $options[RequestOptions::QUERY][Params::STATE] = $moduleEnabled ? ParamValues::ENABLED : ParamValues::DISABLED;
         $response = $client->post(
             $endpointURL,
             $options,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use GuzzleHttp\RequestOptions;
 use PoP\ComponentModel\Constants\FrameworkParams;
 
 use function getenv;
@@ -41,10 +42,10 @@ trait RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait
     protected function getRESTEndpointRequestOptions(): array
     {
         $options = static::getRequestBasicOptions();
-        $options['headers']['X-WP-Nonce'] = static::$wpRESTNonce;
+        $options[RequestOptions::HEADERS]['X-WP-Nonce'] = static::$wpRESTNonce;
         $xdebugTrigger = getenv(FrameworkParams::XDEBUG_TRIGGER);
         if ($xdebugTrigger !== false) {
-            $options['query'][FrameworkParams::XDEBUG_TRIGGER] = $xdebugTrigger;
+            $options[RequestOptions::QUERY][FrameworkParams::XDEBUG_TRIGGER] = $xdebugTrigger;
         }
         return $options;
     }

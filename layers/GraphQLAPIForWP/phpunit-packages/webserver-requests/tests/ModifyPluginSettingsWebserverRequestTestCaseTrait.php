@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
+use GuzzleHttp\RequestOptions;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
+use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 
 trait ModifyPluginSettingsWebserverRequestTestCaseTrait
 {
@@ -131,7 +132,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
             $this->getModuleID($dataName),
         );
         $options = $this->getRESTEndpointRequestOptions();
-        $options['query'][Params::JSON_ENCODED_OPTION_VALUES] = json_encode([
+        $options[RequestOptions::QUERY][Params::JSON_ENCODED_OPTION_VALUES] = json_encode([
             $this->getSettingsKey() => $value,
         ]);
         $response = $client->post(

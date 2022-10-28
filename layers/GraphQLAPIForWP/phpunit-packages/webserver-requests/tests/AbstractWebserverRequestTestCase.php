@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\RequestOptions;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
@@ -53,10 +54,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         $options = static::getWebserverPingOptions();
         if (static::shareCookies()) {
             self::$cookieJar = static::createCookieJar();
-            $options['cookies'] = self::$cookieJar;
+            $options[RequestOptions::COOKIES] = self::$cookieJar;
         }
         if (static::useSSL()) {
-            $options['verify'] = false;
+            $options[RequestOptions::VERIFY] = false;
         }
         try {
             $response = $client->request(
@@ -97,15 +98,15 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static function getRequestBasicOptions(): array
     {
         $options = [
-            'headers' => [
+            RequestOptions::HEADERS => [
                 'Accept' => 'application/json',
             ],
         ];
         if (static::shareCookies()) {
-            $options['cookies'] = self::$cookieJar;
+            $options[RequestOptions::COOKIES] = self::$cookieJar;
         }
         if (static::useSSL()) {
-            $options['verify'] = false;
+            $options[RequestOptions::VERIFY] = false;
         }
         return $options;
     }
