@@ -1,0 +1,19 @@
+################################################
+# As `date` is a DateTime object, this test validates
+# that receiving it as a String is coerces it properly
+################################################
+query GetPosts($date: Date!) {
+    posts(
+        pagination: {
+            limit: 3
+        }
+        filter: {
+            dateQuery: {
+                after: $date
+            }
+        }
+    ) {
+        id
+        title
+    }
+}
