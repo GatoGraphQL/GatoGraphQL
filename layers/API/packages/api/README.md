@@ -1411,7 +1411,7 @@ Issues are handled differently depending on their severity:
 
 ### Type casting/validation
 
-When an argument has its type declared in the schema, its inputs will be casted to the type. If the input and the type are incompatible, it ignores setting the input and throws a warning.
+When an argument has its type declared in the schema, its inputs will be cast to the type. If the input and the type are incompatible, it ignores setting the input and throws a warning.
 
 ```less
 /?query=

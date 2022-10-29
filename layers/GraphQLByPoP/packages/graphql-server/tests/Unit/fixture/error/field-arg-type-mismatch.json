@@ -113,7 +113,7 @@
             }
         },
         {
-            "message": "An object cannot be casted to type 'Boolean'",
+            "message": "An object cannot be cast to type 'Boolean'",
             "locations": [
                 {
                     "line": 8,

@@ -61,7 +61,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E_5_6_1_1 => $this->__('An object cannot be casted to type \'%s\'', 'component-model'),
+            self::E_5_6_1_1 => $this->__('An object cannot be cast to type \'%s\'', 'component-model'),
             self::E_5_6_1_2 => $this->__('The format for \'%s\' is not correct for type \'%s\'', 'component-model'),
             self::E_5_6_1_3 => $this->__('Type \'%s\' must be provided as a string', 'component-model'),
             self::E_5_6_1_6 => $this->__('The oneof input object \'%s\' must receive exactly 1 input, but %s inputs were provided (\'%s\')', 'component-model'),
@@ -73,7 +73,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
             self::E_5_6_1_12 => $this->__('Argument \'%s\' expects an array of arrays, but value \'%s\' was provided', 'component-model'),
             self::E_5_6_1_13 => $this->__('Argument \'%s\' cannot receive an array of arrays with `null` values', 'component-model'),
             self::E_5_6_1_14 => $this->__('Value \'%1$s\' for enum type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'component-model'),
-            self::E_5_6_1_15 => $this->__('Input object of type \'%s\' cannot be casted from input value \'%s\'', 'component-model'),
+            self::E_5_6_1_15 => $this->__('Input object of type \'%s\' cannot be cast from input value \'%s\'', 'component-model'),
             self::E_5_6_1_16 => $this->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
             self::E_5_6_1_17 => $this->__('Only strings or integers are allowed for type \'%s\'', 'component-model'),
             self::E_5_6_1_18 => $this->__('Enum values can only be strings, value \'%s\' for type \'%s\' is not allowed', 'component-model'),

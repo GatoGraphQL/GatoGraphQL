@@ -22,7 +22,7 @@
             }
         },
         {
-            "message": "An object cannot be casted to type 'String'",
+            "message": "An object cannot be cast to type 'String'",
             "locations": [
                 {
                     "line": 6,
