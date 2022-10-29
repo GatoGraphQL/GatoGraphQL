@@ -47,7 +47,7 @@ abstract class AbstractCodeThirdPartyPluginDependencyWordPressAuthenticatedUserW
         $this->throwUnsupportedPluginName($pluginName);
     }
 
-    protected function throwUnsupportedPluginName(string $pluginName): never
+    protected function throwUnsupportedPluginName(string $pluginName): void
     {
         throw new ShouldNotHappenException(
             sprintf(

@@ -154,7 +154,7 @@ class AppStateManager implements AppStateManagerInterface
      * @throws AppStateNotExistsException If there is no state under the provided path
      * @param string[] $path
      */
-    protected function throwAppStateNotExistsException(array $path): never
+    protected function throwAppStateNotExistsException(array $path): void
     {
         throw new AppStateNotExistsException(
             \sprintf(

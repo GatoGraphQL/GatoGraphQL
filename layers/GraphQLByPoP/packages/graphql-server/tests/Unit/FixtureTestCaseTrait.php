@@ -41,7 +41,7 @@ trait FixtureTestCaseTrait
     /**
      * @throws RuntimeException
      */
-    protected function throwFileNotExistsException(string $file): never
+    protected function throwFileNotExistsException(string $file): void
     {
         throw new RuntimeException(
             sprintf(

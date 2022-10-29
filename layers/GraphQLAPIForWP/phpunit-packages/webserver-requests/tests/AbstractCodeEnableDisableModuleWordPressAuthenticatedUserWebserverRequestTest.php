@@ -47,7 +47,7 @@ abstract class AbstractCodeEnableDisableModuleWordPressAuthenticatedUserWebserve
         $this->throwUnsupportedModuleName($moduleName);
     }
 
-    protected function throwUnsupportedModuleName(string $moduleName): never
+    protected function throwUnsupportedModuleName(string $moduleName): void
     {
         throw new ShouldNotHappenException(
             sprintf(
