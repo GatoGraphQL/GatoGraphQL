@@ -96,7 +96,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
              * produce a different response (eg: by not executing `setUp` and `tearDown`)
              */
             $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
-                $responseFixtureFolder,
+                $responseFixtureFolder . ($graphQLFilesSubfolder !== '' ? \DIRECTORY_SEPARATOR . $graphQLFilesSubfolder : ''),
                 [$fileName . ':*.json'],
                 ['*.disabled.json', '*.var.json'],
             );

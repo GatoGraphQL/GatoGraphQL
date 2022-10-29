@@ -107,7 +107,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
              * other results"
              */
             $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
-                $responseFixtureFolder,
+                $responseFixtureFolder . ($graphQLFilesSubfolder !== '' ? \DIRECTORY_SEPARATOR . $graphQLFilesSubfolder : ''),
                 [$fileName . ':*.json'],
                 ['*.disabled.json', '*.var.json'],
             );
