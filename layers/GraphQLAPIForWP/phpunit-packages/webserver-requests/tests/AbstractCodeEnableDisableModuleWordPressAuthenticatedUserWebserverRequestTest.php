@@ -35,22 +35,19 @@ abstract class AbstractCodeEnableDisableModuleWordPressAuthenticatedUserWebserve
     protected function getModuleGraphQLQuery(string $moduleName): string
     {
         $this->throwUnsupportedModuleName($moduleName);
-        return '';
     }
 
     protected function getModuleEnabledExpectedGraphQLResponse(string $moduleName): string
     {
         $this->throwUnsupportedModuleName($moduleName);
-        return '';
     }
 
     protected function getModuleDisabledExpectedGraphQLResponse(string $moduleName): string
     {
         $this->throwUnsupportedModuleName($moduleName);
-        return '';
     }
 
-    protected function throwUnsupportedModuleName(string $moduleName): void
+    protected function throwUnsupportedModuleName(string $moduleName): never
     {
         throw new ShouldNotHappenException(
             sprintf(

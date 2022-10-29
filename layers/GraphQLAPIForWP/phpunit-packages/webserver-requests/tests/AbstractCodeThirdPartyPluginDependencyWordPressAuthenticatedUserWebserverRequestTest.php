@@ -35,22 +35,19 @@ abstract class AbstractCodeThirdPartyPluginDependencyWordPressAuthenticatedUserW
     protected function getPluginGraphQLQuery(string $pluginName): string
     {
         $this->throwUnsupportedPluginName($pluginName);
-        return '';
     }
 
     protected function getPluginEnabledExpectedGraphQLResponse(string $pluginName): string
     {
         $this->throwUnsupportedPluginName($pluginName);
-        return '';
     }
 
     protected function getPluginDisabledExpectedGraphQLResponse(string $pluginName): string
     {
         $this->throwUnsupportedPluginName($pluginName);
-        return '';
     }
 
-    protected function throwUnsupportedPluginName(string $pluginName): void
+    protected function throwUnsupportedPluginName(string $pluginName): never
     {
         throw new ShouldNotHappenException(
             sprintf(
