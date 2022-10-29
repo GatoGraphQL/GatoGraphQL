@@ -10,6 +10,10 @@ use RuntimeException;
 
 abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
+    public const RESPONSE_COMPARISON_EQUALS = 0;
+    public const RESPONSE_COMPARISON_NOT_EQUALS = 1;
+    public const RESPONSE_COMPARISON_REGEX = 2;
+
     /**
      * @dataProvider provideEndpointEntries
      * @param array<string,mixed> $params
@@ -91,8 +95,21 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         $this->assertEquals($this->getExpectedResponseStatusCode(), $response->getStatusCode());
         $this->assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
         if ($expectedResponseBody !== null) {
-            $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
+            $responseBody = $response->getBody()->__toString();
+            $responseComparisonType = $this->getResponseComparisonType();
+            if ($responseComparisonType === self::RESPONSE_COMPARISON_EQUALS) {
+                $this->assertJsonStringEqualsJsonString($expectedResponseBody, $responseBody);
+            } elseif ($responseComparisonType === self::RESPONSE_COMPARISON_NOT_EQUALS) {
+                $this->assertJsonStringNotEqualsJsonString($expectedResponseBody, $responseBody);
+            } elseif ($responseComparisonType === self::RESPONSE_COMPARISON_REGEX) {
+                $this->assertMatchesRegularExpression($expectedResponseBody, $responseBody);
+            }
         }
+    }
+
+    protected function getResponseComparisonType(): ?int
+    {
+        return self::RESPONSE_COMPARISON_EQUALS;
     }
 
     /**
