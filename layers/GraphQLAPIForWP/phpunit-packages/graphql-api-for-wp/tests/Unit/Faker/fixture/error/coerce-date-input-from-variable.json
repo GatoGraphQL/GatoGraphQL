@@ -1,0 +1,27 @@
+{
+    "errors": [
+        {
+            "message": "Type 'Date' must be provided with format 'Y-m-d'",
+            "locations": [
+                {
+                    "line": 10,
+                    "column": 17
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{dateQuery: {after: $date}}",
+                    "(filter: {dateQuery: {after: $date}})",
+                    "posts(pagination: {limit: 3}, filter: {dateQuery: {after: $date}}) { ... }",
+                    "query GetPosts($date: Date!) { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "posts(pagination: {limit: 3}, filter: {dateQuery: {after: $date}}) { ... }",
+                "code": "PoPSchema\/SchemaCommons@e1"
+            }
+        }
+    ],
+    "data": {
+        "posts": null
+    }
+}

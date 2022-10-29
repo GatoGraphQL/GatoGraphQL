@@ -1,0 +1,18 @@
+{
+    "data": {
+        "posts": [
+            {
+                "id": 1724,
+                "title": "Keyboard navigation"
+            },
+            {
+                "id": 1730,
+                "title": "Block category: Common"
+            },
+            {
+                "id": 1732,
+                "title": "Block category: Formatting"
+            }
+        ]
+    }
+}
