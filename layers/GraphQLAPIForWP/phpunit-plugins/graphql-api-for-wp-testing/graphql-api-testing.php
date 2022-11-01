@@ -37,7 +37,7 @@ add_action(
          * - we are executing integration tests (hosted in InstaWP)
          */
         $enablePlugin = RootEnvironment::isApplicationEnvironmentDev();
-        if (!$enablePlugin) {
+        if (!$enablePlugin && isset($_SERVER['HTTP_HOST'])) {
             $validTestingDomains = [
                 'instawp.xyz',
                 'lndo.site',
