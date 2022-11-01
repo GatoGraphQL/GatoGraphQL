@@ -40,6 +40,7 @@ add_action(
         if (!$enablePlugin) {
             $validTestingDomains = [
                 'instawp.xyz',
+                'lndo.site',
             ];
             // Calculate the top level domain (app.site.com => site.com)
             $hostNames = array_reverse(explode('.', $_SERVER['HTTP_HOST']));
