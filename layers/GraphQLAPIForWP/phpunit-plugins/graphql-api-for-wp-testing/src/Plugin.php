@@ -86,7 +86,7 @@ class Plugin
 
     function removeRESTAPIResponseLink(WP_REST_Response $data): WP_REST_Response
     {
-        foreach($data->get_links() as $_linkKey => $_linkVal) {
+        foreach ($data->get_links() as $_linkKey => $_linkVal) {
             $data->remove_link($_linkKey);
         }
         return $data;
