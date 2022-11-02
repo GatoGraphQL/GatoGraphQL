@@ -10,7 +10,7 @@
             },
             {
                 "id": 5,
-                "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
+                "slug": "author",
                 "displayName": "Author Marquez",
                 "websiteURL": "",
                 "email": "author@test.com"
@@ -31,7 +31,7 @@
             },
             {
                 "id": 2,
-                "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/",
+                "slug": "blogger",
                 "displayName": "Blogger Davenport",
                 "websiteURL": "",
                 "email": "blogger@test.com"

@@ -25,7 +25,7 @@
                 "slug": "hello-world",
                 "status": "publish",
                 "title": "Hello world!",
-                "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
+                "slug": "hello-world",
                 "urlAbsolutePath": "\/hello-world\/"
             },
             {

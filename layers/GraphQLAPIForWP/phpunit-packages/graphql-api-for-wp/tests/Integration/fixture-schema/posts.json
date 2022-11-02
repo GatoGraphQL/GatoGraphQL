@@ -39,7 +39,7 @@
                 "tagNames": [],
                 "tags": [],
                 "title": "Hello world!",
-                "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
+                "slug": "hello-world",
                 "urlAbsolutePath": "\/hello-world\/"
             },
             {
@@ -84,7 +84,7 @@
                 "tagNames": [],
                 "tags": [],
                 "title": "HTTP caching improves performance",
-                "url": "https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "slug": "http-caching-improves-performance",
                 "urlAbsolutePath": "\/http-caching-improves-performance\/"
             },
             {
@@ -157,7 +157,7 @@
                     }
                 ],
                 "title": "Public or Private API mode, for extra security",
-                "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "slug": "public-or-private-api-mode-for-extra-security",
                 "urlAbsolutePath": "\/public-or-private-api-mode-for-extra-security\/"
             }
         ],

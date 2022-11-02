@@ -126,7 +126,7 @@
                     "author"
                 ],
                 "slug": "author",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
+                "slug": "author",
                 "urlAbsolutePath": "\/author\/author\/",
                 "username": "author",
                 "websiteURL": "",

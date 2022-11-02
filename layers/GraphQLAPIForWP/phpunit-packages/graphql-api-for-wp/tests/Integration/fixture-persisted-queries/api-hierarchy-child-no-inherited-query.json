@@ -3,32 +3,32 @@
         "posts": [
             {
                 "id": 1,
-                "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
+                "slug": "hello-world",
                 "title": "Hello world!",
                 "author": {
                     "id": 2,
                     "username": "blogger",
-                    "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/"
+                    "slug": "blogger"
                 }
             },
             {
                 "id": 28,
-                "url": "https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "slug": "http-caching-improves-performance",
                 "title": "HTTP caching improves performance",
                 "author": {
                     "id": 5,
                     "username": "author",
-                    "url": "https:\/\/graphql-api.lndo.site\/author\/author\/"
+                    "slug": "author"
                 }
             },
             {
                 "id": 25,
-                "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "slug": "public-or-private-api-mode-for-extra-security",
                 "title": "Public or Private API mode, for extra security",
                 "author": {
                     "id": 2,
                     "username": "blogger",
-                    "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/"
+                    "slug": "blogger"
                 }
             }
         ]
