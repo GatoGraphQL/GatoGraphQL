@@ -3,17 +3,17 @@
         "postTags": [
             {
                 "id": 12,
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/wordpress\/",
+                "slug": "wordpress",
                 "name": "wordpress"
             },
             {
                 "id": 11,
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
+                "slug": "security",
                 "name": "security"
             },
             {
                 "id": 10,
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/release\/",
+                "slug": "release",
                 "name": "release"
             }
         ]

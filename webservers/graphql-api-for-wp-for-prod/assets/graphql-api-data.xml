@@ -115,7 +115,7 @@
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=5</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit:Int) {\n  posts(pagination: {\n    limit: $limit\n  }) {\n    id\n    url\n    title\n    author {\n      id\n      username\n      url\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit:Int) {\n  posts(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    title\n    author {\n      id\n      username\n      slug\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":-2} /-->
 
@@ -145,7 +145,7 @@
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">http://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=8</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  users(pagination: {\n    limit: $limit\n  }) {\n    id\n    url\n    displayName\n    websiteURL\n    email\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  users(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    displayName\n    websiteURL\n    email\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":-2} /-->
 
@@ -179,7 +179,7 @@
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=44</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int = 5) {\n  postTags(pagination: {\n    limit: $limit\n  }) {\n    id\n    url\n    name\n  }\n}\n"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int = 5) {\n  postTags(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    name\n  }\n}\n"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":-2} /-->
 
