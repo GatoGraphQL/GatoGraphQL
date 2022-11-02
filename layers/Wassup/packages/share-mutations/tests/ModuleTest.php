@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPSitesWassup\ShareMutations;
 
 use PoP\Root\AbstractModuleTest;

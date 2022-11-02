@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPSitesWassup\FormMutations;
 
 use PoP\Root\AbstractModuleTest;

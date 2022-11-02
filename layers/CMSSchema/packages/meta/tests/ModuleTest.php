@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\Meta;
 
 use PoP\Root\AbstractModuleTest;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\UserStateWP;
 
 use PoP\Root\AbstractModuleTest;

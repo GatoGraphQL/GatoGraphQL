@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\Multisite;
 
 use PoP\Root\AbstractModuleTest;

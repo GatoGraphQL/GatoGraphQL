@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\PostCategoriesWP;
 
 use PoP\Root\AbstractModuleTest;

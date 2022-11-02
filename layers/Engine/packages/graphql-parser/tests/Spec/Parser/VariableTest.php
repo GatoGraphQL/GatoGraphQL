@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Spec\Execution\Context;

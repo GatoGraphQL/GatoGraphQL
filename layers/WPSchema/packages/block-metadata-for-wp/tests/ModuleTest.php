@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPWPSchema\BlockMetadataWP;
 
 use PoP\Root\AbstractModuleTest;

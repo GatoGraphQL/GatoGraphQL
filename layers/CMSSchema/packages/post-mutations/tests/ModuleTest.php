@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\PostMutations;
 
 use PoP\Root\AbstractModuleTest;

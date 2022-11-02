@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\SiteWP;
 
 use PoP\Root\AbstractModuleTest;

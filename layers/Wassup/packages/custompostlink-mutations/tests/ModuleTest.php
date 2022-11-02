@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPSitesWassup\CustomPostLinkMutations;
 
 use PoP\Root\AbstractModuleTest;

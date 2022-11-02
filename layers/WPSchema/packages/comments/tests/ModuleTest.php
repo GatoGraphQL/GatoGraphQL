@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPWPSchema\Comments;
 
 use PoP\Root\AbstractModuleTest;

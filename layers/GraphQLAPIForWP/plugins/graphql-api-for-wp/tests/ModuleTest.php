@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GraphQLAPI\GraphQLAPI;
 
 use PoP\Root\AbstractModuleTest;

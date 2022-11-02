@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\DefinitionPersistence;
 
 use PoP\Root\AbstractModuleTest;

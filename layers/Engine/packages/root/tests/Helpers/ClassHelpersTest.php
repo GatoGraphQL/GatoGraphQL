@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\Root\Helpers;
 
 use PHPUnit\Framework\TestCase;

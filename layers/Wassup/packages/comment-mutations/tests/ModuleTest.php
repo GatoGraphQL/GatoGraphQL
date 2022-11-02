@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPSitesWassup\CommentMutations;
 
 use PoP\Root\AbstractModuleTest;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\CustomPostCategoryMutations;
 
 use PoP\Root\AbstractModuleTest;

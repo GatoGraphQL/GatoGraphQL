@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\CustomPostMediaMutationsWP;
 
 use PoP\Root\AbstractModuleTest;

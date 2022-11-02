@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\Root;
 
 abstract class AbstractModuleTest extends AbstractTestCase

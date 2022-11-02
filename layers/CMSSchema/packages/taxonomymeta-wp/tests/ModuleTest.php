@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\TaxonomyMetaWP;
 
 use PoP\Root\AbstractModuleTest;

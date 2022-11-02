@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\Menus;
 
 use PoP\Root\AbstractModuleTest;

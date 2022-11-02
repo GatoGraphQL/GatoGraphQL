@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\CommentMutationsWP;
 
 use PoP\Root\AbstractModuleTest;

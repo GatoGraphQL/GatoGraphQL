@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\SSG;
 
 use PoP\Root\AbstractModuleTest;

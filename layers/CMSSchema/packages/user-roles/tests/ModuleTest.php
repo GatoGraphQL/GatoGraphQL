@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\UserRoles;
 
 use PoP\Root\AbstractModuleTest;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\PostTagsWP;
 
 use PoP\Root\AbstractModuleTest;

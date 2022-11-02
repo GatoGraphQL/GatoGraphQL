@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GraphQLAPI\PluginUtils\Services\Helpers;
 
 use PoP\Root\AbstractTestCase;

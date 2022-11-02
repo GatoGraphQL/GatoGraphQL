@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoP\Resources;
 
 use PoP\Root\AbstractModuleTest;

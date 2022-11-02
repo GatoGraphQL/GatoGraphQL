@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHPUnitForGraphQLAPI\DummySchema;
 
 use PoP\Root\AbstractModuleTest;

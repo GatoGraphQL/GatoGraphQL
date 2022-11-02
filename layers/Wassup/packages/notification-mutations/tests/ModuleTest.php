@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPSitesWassup\NotificationMutations;
 
 use PoP\Root\AbstractModuleTest;

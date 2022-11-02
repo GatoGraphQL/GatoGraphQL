@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PoPCMSSchema\QueriedObjectWP;
 
 use PoP\Root\AbstractModuleTest;
