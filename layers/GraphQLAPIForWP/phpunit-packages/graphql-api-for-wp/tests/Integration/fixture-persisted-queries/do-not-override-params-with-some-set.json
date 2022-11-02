@@ -25,7 +25,7 @@
         "users": [
             {
                 "id": 6,
-                "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
+                "slug": "editor",
                 "displayName": "Editor Smith",
                 "websiteURL": "",
                 "email": null
@@ -39,14 +39,14 @@
             },
             {
                 "id": 4,
-                "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
+                "slug": "contributor",
                 "displayName": "Contributor Johnson",
                 "websiteURL": "",
                 "email": null
             },
             {
                 "id": 3,
-                "url": "https:\/\/graphql-api.lndo.site\/author\/subscriber\/",
+                "slug": "subscriber",
                 "displayName": "Subscriber Bennett",
                 "websiteURL": "",
                 "email": null

@@ -61,7 +61,6 @@
                     "editor"
                 ],
                 "slug": "editor",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
                 "urlAbsolutePath": "\/author\/editor\/",
                 "username": "editor",
                 "websiteURL": "",
@@ -186,7 +185,6 @@
                     "contributor"
                 ],
                 "slug": "contributor",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
                 "urlAbsolutePath": "\/author\/contributor\/",
                 "username": "contributor",
                 "websiteURL": "",

@@ -42,7 +42,7 @@ query {
       name
     }
     slug
-    url
+    # url
     urlAbsolutePath
     username
     websiteURL
