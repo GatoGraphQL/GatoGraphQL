@@ -13,7 +13,6 @@
         title
       }
       slug
-      url
       urlAbsolutePath
     }
     tagsByExcludeIDs: tags(filter: { excludeIDs: [5] }) {
