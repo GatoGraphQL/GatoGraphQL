@@ -1,0 +1,85 @@
+{
+    "name": "leoloso/graphql-api-for-prod-dev",
+    "description": "GraphQL API for PROD (PHP 7.1 + Generated .zip plugins)",
+    "homepage": "https://graphql-api.com",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "~7.1"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "installer-paths": {
+            "wordpress/wp-content/mu-plugins/{$name}/": [
+                "type:wordpress-muplugin"
+            ],
+            "wordpress/wp-content/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "wordpress/wp-content/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "hirak/prestissimo": true
+        }
+    },
+    "scripts": {
+        "ssh-server": "lando ssh",
+        "build-server": [
+            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-for-prod",
+            "@start-server",
+            "@install-site"
+        ],
+        "init-server": "@start-server",
+        "start-server": [
+            "lando start"
+        ],
+        "destroy-server": "lando destroy -y",
+        "reset-db": [
+            "lando wp db reset --yes --path=wordpress",
+            "@install-site"
+        ],
+        "install-site": "lando composer install-site-within-container",
+        "install-site-within-container": "/bin/sh /app/setup/setup.sh",
+        "import-data": "lando composer import-data-within-container",
+        "import-data-within-container": "/bin/sh /app/setup/import-data.sh",
+        "create-users": "lando composer create-users-within-container",
+        "create-users-within-container": "/bin/sh /app/setup/create-users.sh",
+        "rebuild-server": [
+            "lando rebuild appserver -y"
+        ],
+        "stop-server": "lando stop",
+        "log-server-errors": "lando logs -t -f | grep \"php:error\"",
+        "log-server-warnings": "lando logs -t -f | grep \"php:warn\"",
+        "enable-unsafe-defaults": [
+            "lando wp config set GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS true --raw --path=wordpress",
+            "@delete-settings"
+        ],
+        "disable-unsafe-defaults": [
+            "lando wp config set GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS false --raw --path=wordpress",
+            "@delete-settings"
+        ],
+        "use-default-unsafe-defaults": [
+            "lando wp config delete GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS --path=wordpress",
+            "@delete-settings"
+        ],
+        "delete-settings": [
+            "lando wp option delete graphql-api-settings --path=wordpress"
+        ],
+        "server-info": "lando info"
+    }
+}

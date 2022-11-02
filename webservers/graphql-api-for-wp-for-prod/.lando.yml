@@ -1,0 +1,11 @@
+name: graphql-api-for-prod
+recipe: wordpress
+config:
+  webroot: wordpress
+  php: '7.1'
+  ssl: true
+services:
+  database:
+    portforward: true
+env_file:
+  - defaults.local.env
