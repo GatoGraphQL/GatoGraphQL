@@ -11,6 +11,16 @@ set +x
 PWD="$( pwd )"
 
 ########################################################################
+# Helper functions
+# ----------------------------------------------------------------------
+
+# Failure helper function (https://stackoverflow.com/a/24597941)
+function fail {
+    printf '%s\n' "$1" >&2  ## Send message to stderr. Exclude >&2 if you don't want it that way.
+    exit "${2-1}"  ## Return a code specified by $2 or 1 by default.
+}
+
+########################################################################
 # Inputs
 # ----------------------------------------------------------------------
 # Must pass the path to the plugin root as first arg to the script
