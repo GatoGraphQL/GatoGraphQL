@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
 use PoP\Root\App;
-use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\APIClients\ClientTrait;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
@@ -76,10 +75,17 @@ abstract class AbstractClient extends AbstractEndpointHandler
         $response->setContent($this->getClientHTML());
         $response->headers->set('content-type', 'text/html');
 
-        // Add a Custom Header to test that enabling/disabling clients works
-        if (RootEnvironment::isApplicationEnvironmentDev()) {
-            $response->headers->set(CustomHeaders::CLIENT_ENDPOINT, $this->getEndpoint());
-        }
+        /**
+         * Add a Custom Header with the GraphQL endpoint to the response.
+         * 
+         * Add it always (i.e. for both PROD and DEV) so that:
+         * 
+         * - DEV: Can test that enabling/disabling the client works.
+         * - PROD: Can execute the "PROD Integration Tests"
+         * - In General: it's easier to find this useful information
+         *               (the endpoint is also printed in the HTML)
+         */
+        $response->headers->set(CustomHeaders::CLIENT_ENDPOINT, $this->getEndpoint());
 
         // Add a hook to send the Response to the client.
         $this->getTemplateHelpers()->sendResponseToClient();
