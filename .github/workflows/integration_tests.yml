@@ -81,8 +81,8 @@ jobs:
             -   name: Run tests
                 run: |
                     INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ steps.extract-instawp-domain.outputs.instawp-domain }} \
-                    INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME=${{ secrets.INSTAWP_ADMIN_USER_USERNAME }} \
-                    INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD=${{ secrets.INSTAWP_ADMIN_USER_PASSWORD }} \
+                    INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME=${{ steps.create-instawp.outputs.iwp_wp_username }} \
+                    INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD=${{ steps.create-instawp.outputs.iwp_wp_password }} \
                     vendor/bin/phpunit --filter=Integration
 
             -   name: Destroy InstaWP instance
