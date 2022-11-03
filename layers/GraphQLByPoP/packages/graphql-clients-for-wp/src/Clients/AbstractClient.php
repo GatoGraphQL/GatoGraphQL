@@ -77,9 +77,9 @@ abstract class AbstractClient extends AbstractEndpointHandler
 
         /**
          * Add a Custom Header with the GraphQL endpoint to the response.
-         * 
+         *
          * Add it always (i.e. for both PROD and DEV) so that:
-         * 
+         *
          * - DEV: Can test that enabling/disabling the client works.
          * - PROD: Can execute the "PROD Integration Tests"
          * - In General: it's easier to find this useful information
