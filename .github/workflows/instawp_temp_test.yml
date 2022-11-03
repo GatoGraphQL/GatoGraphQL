@@ -29,7 +29,7 @@ jobs:
                 # Temporary test of InstaWP with hardcoded site. Remove!
                 # run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=awning-yak-duxu.instawp.xyz INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME=instawp_admin INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD=VlmclfuHbdgntgobxkvboXUoqZM2Ie5y vendor/bin/phpunit --filter='Integration'
                 run: |
-                    INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ steps.extract-instawp-domain.outputs.instawp-domain }} \
+                    INTEGRATION_TESTS_WEBSERVER_DOMAIN=awning-yak-duxu.instawp.xyz \
                     INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME=${{ secrets.INSTAWP_ADMIN_USER_USERNAME }} \
                     INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD=${{ secrets.INSTAWP_ADMIN_USER_PASSWORD }} \
                     vendor/bin/phpunit --filter=Integration
