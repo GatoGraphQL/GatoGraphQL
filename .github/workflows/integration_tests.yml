@@ -8,9 +8,9 @@ env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
-    main:
+    provide_data:
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
-        name: Launch InstaWP instance and execute integration tests against it
+        name: Retrieve the GitHub Action artifact URLs to install in InstaWP
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v3
@@ -52,17 +52,28 @@ jobs:
             -   name: Artifact URL for InstaWP
                 run: echo "Artifact URL for InstaWP - ${{ steps.artifact-url.outputs.result }}"
                 shell: bash
-                
+        outputs:
+            artifact_url: ${{ steps.artifact-url.outputs.result }}
+
+    process:
+        name: Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}" and execute integration tests against it
+        needs: provide_data
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                instaWPTemplateSlug: ${{ fromJson(secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON) }}
+        steps:
             -   name: Create InstaWP instance
                 uses: instawp/wordpress-testing-automation@main
                 id: create-instawp
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-                    INSTAWP_TEMPLATE_SLUG: ${{ secrets.INSTAWP_TEMPLATE_SLUG }}
+                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPTemplateSlug }}
                     REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
                     INSTAWP_ACTION: create-site-template
-                    ARTIFACT_URL: ${{ steps.artifact-url.outputs.result }}
+                    ARTIFACT_URL: ${{ needs.provide_data.outputs.artifact_url }}
 
             -   name: InstaWP instance URL
                 run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
@@ -75,7 +86,7 @@ jobs:
                     echo "instawp-domain=$(echo $instawp_domain)" >> $GITHUB_OUTPUT
 
             -   name: Sleep a bit to make sure InstaWP is ready
-                run: sleep 180s
+                run: sleep 90s
                 shell: bash
 
             -   name: Run tests
@@ -92,6 +103,6 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-                    INSTAWP_TEMPLATE_SLUG: ${{ secrets.INSTAWP_TEMPLATE_SLUG }}
+                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPTemplateSlug }}
                     REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
                     INSTAWP_ACTION: destroy-site
