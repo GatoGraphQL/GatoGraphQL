@@ -54,7 +54,7 @@ jobs:
                 shell: bash
         outputs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
-            instawp_template_slugs: ${{ fromJson(secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON) }}
+            instawp_template_slugs_as_json: ${{ secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON }}
 
     process:
         name: Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}" and execute integration tests against it
@@ -63,7 +63,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                instaWPTemplateSlug: ${{ needs.provide_data.outputs.instawp_template_slugs }}
+                instaWPTemplateSlug: ${{ fromJson(needs.provide_data.outputs.instawp_template_slugs_as_json) }}
         steps:
             -   uses: actions/checkout@v3
                 with:
