@@ -7,12 +7,14 @@ namespace GraphQLAPI\GraphQLAPI\StaticHelpers;
 class SemverHelpers
 {
     /**
-     * Remove the "-dev..." section from the version, required during development
-     * and testing of a generated plugin as to regenerate the container,
-     * but not needed for version constaints.
+     * The "#..." section in the version is the commit hash
+     * added by CI when merging the PR. It is required
+     * to regenerate the container when testing a generated
+     * .zip plugin without modifying the plugin version.
+     * (Otherwise, we'd have to @purge-cache.)
      *
-     * Indeed, it must be removed as it is not supported by Composer Semver:
-     * "-dev" cannot be followed by the commit hash:
+     * The commit hash must be removed to check the plugin version
+     * constraint as it is not supported by Composer Semver:
      *
      *   > private static $modifierRegex = '[._-]?(?:(stable|beta|b|RC|alpha|a|patch|pl|p)((?:[.-]?\d+)*+)?)?([.-]?dev)?';
      *
@@ -20,7 +22,7 @@ class SemverHelpers
      */
     public static function removeCommitHashFromPluginVersion(string $pluginVersion): string
     {
-        $pos = strpos($pluginVersion, '-dev');
+        $pos = strpos($pluginVersion, '#');
         if ($pos === false) {
             return $pluginVersion;
         }
