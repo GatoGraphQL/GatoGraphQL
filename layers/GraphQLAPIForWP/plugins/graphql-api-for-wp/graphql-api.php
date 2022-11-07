@@ -62,7 +62,7 @@ if (class_exists(Plugin::class) && !App::getMainPluginManager()->assertIsValid($
  */
 $commitHash = null;
 
- // Load Composer’s autoloader
+// Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Initialize the GraphQL API App
