@@ -3,13 +3,13 @@ on:
     workflow_run:
         workflows: [Generate plugins]
         types:
-            - requested
+            - completed
 env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
     provide_data:
-        # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         name: Retrieve the GitHub Action artifact URLs to install in InstaWP
         runs-on: ubuntu-latest
         steps:
