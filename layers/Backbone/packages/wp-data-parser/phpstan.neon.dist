@@ -49,3 +49,6 @@ parameters:
 		- 
 			message: '#Cannot access offset (.*) on non-empty-array\|non-falsy-string\|true\.#'
 			path: src/Parsers/WXR_Parser_XML.php
+		- 
+			message: '#Method PoPBackbone\\WPDataParser\\Parsers\\WXR_Parser_Regex::get_tag\(\) should return string but returns string\|null\.#'
+			path: src/Parsers/WXR_Parser_Regex.php

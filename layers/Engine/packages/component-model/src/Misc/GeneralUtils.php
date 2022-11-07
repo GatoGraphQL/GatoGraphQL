@@ -93,6 +93,7 @@ class GeneralUtils
             return $urlOrURLPath;
         }
 
+        /** @var array<string,mixed> */
         $params = [];
         if (isset($url_parts['query'])) {
             parse_str($url_parts['query'], $params);
@@ -101,7 +102,7 @@ class GeneralUtils
         // Remove the indicated keys
         $params = array_filter(
             $params,
-            fn (string $param) => in_array($param, $keys),
+            fn (string $param): bool => in_array($param, $keys),
             ARRAY_FILTER_USE_KEY
         );
 
@@ -170,6 +171,7 @@ class GeneralUtils
         if ($queryString = parse_url($url, PHP_URL_QUERY)) {
             parse_str($queryString, $queryParams);
         }
+        /** @var array<string,mixed> */
         return $queryParams;
     }
 }

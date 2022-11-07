@@ -67,9 +67,12 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
         // This is crazy: passing ?module=Foo\Bar\module,
         // and then doing $_GET['module'], returns "Foo\\Bar\\module"
         // So parse the URL to extract the "module" param
+        /** @var array<string,mixed> */
         $result = [];
         parse_str(App::server('REQUEST_URI'), $result);
-        $module = urldecode($result[RequestParams::MODULE]);
+        /** @var string */
+        $requestedModule = $result[RequestParams::MODULE];
+        $module = urldecode($requestedModule);
         try {
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
         } catch (ContentNotExistsException) {
