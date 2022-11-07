@@ -3,7 +3,7 @@ on:
     workflow_run:
         workflows: [Generate plugins]
         types:
-            - completed
+            - requested
 env:
     CHECKOUT_SUBMODULES: ""
 
@@ -54,6 +54,7 @@ jobs:
                 shell: bash
         outputs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
+            instawp_template_slugs: ${{ fromJson(secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON) }}
 
     process:
         name: Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}" and execute integration tests against it
@@ -62,7 +63,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                instaWPTemplateSlug: ${{ fromJson(secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON) }}
+                instaWPTemplateSlug: ${{ needs.provide_data.outputs.instawp_template_slugs }}
         steps:
             -   uses: actions/checkout@v3
                 with:
@@ -76,7 +77,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   uses: "ramsey/composer-install@v2"
-            
+
             -   name: Create InstaWP instance
                 uses: instawp/wordpress-testing-automation@main
                 id: create-instawp
