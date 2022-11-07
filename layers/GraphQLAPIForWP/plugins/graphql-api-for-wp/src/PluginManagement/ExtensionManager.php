@@ -8,7 +8,6 @@ use GraphQLAPI\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Exception\ExtensionNotRegisteredException;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\SemverHelpers;
 
 class ExtensionManager extends AbstractPluginManager
 {
