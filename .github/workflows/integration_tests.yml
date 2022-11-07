@@ -29,7 +29,6 @@ jobs:
             -   id: output_data
                 run: |
                     echo "additional_integration_test_plugins=$(vendor/bin/monorepo-builder additional-integration-test-plugins --config=config/monorepo-builder/additional-integration-test-plugins.php)" >> $GITHUB_OUTPUT
-                    echo 'instawp_template_slugs_as_json=${{ secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON }}' >> $GITHUB_OUTPUT
     
             -   name: Retrieve artifact URLs from GitHub workflow
                 uses: actions/github-script@v6
@@ -56,7 +55,6 @@ jobs:
 
         outputs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
-            instawp_template_slugs_as_json: ${{ steps.output_data.outputs.instawp_template_slugs_as_json }}
 
     process:
         name: Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}" and execute integration tests against it
