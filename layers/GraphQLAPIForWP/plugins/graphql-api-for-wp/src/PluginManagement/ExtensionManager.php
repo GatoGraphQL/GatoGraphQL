@@ -99,9 +99,8 @@ class ExtensionManager extends AbstractPluginManager
          * and testing of a generated plugin as to regenerate the container,
          * but not needed for version constaints (and not supported by Composer Semver)
          */
-        $mainPluginVersion = SemverHelpers::removeDevMetadataFromPluginVersion(
-            App::getMainPluginManager()->getPlugin()->getPluginVersion()
-        );
+        $mainPluginVersion = App::getMainPluginManager()->getPlugin()->getPluginVersion();
+        $mainPluginVersion = SemverHelpers::removeDevMetadataFromPluginVersion($mainPluginVersion);
         if (
             $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
                 $mainPluginVersion,
