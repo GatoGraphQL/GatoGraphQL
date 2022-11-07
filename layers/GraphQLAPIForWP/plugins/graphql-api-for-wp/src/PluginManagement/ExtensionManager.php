@@ -94,13 +94,8 @@ class ExtensionManager extends AbstractPluginManager
 
         /**
          * Validate that the required version of the GraphQL API for WP plugin is installed.
-         *
-         * Remove the "-dev..." section from the version, required during development
-         * and testing of a generated plugin as to regenerate the container,
-         * but not needed for version constaints (and not supported by Composer Semver)
          */
         $mainPluginVersion = App::getMainPluginManager()->getPlugin()->getPluginVersion();
-        $mainPluginVersion = SemverHelpers::removeCommitHashFromPluginVersion($mainPluginVersion);
         if (
             $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
                 $mainPluginVersion,
