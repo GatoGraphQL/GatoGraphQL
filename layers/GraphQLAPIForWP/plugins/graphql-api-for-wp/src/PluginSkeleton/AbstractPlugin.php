@@ -63,6 +63,11 @@ abstract class AbstractPlugin implements PluginInterface
         return $this->pluginVersion;
     }
 
+    public function getCommitHash(): ?string
+    {
+        return $this->commitHash;
+    }
+
     /**
      * Plugin dir
      */
