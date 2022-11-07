@@ -30,11 +30,6 @@ add_action('init', function (): void {
     load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
 });
 
-/**
- * Important: Do not modify the `$pluginVersion` variable name!
- * It will be regex matched in the CI to append the "-dev{commit hash}"
- * metadata when generating the plugin. 
- */
 $pluginVersion = '0.9.0-dev';
 $pluginName = __('GraphQL API for WordPress', 'graphql-api');
 
@@ -45,7 +40,23 @@ if (class_exists(Plugin::class) && !App::getMainPluginManager()->assertIsValid($
     return;
 }
 
-// Load Composer’s autoloader
+/**
+ * The commit hash is added to the plugin version 
+ * through the CI when merging the PR.
+ *
+ * It is required to regenerate the container when
+ * testing a generated .zip plugin without modifying
+ * the plugin version.
+ * (Otherwise, we'd have to @purge-cache.)
+ *
+ * Important: Do not modify this code!
+ * It will be replaced in the CI to append "#{commit hash}"
+ * when generating the plugin. 
+ */
+$commitHash = '';
+$pluginVersion .= $commitHash !== '' ? '#' . $commitHash : '';
+
+ // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Initialize the GraphQL API App

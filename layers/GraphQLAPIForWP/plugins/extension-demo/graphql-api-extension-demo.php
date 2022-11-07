@@ -36,11 +36,6 @@ if (!defined('ABSPATH')) {
 add_action('plugins_loaded', function (): void {
     /**
      * Extension's name and version.
-     *
-     * Important: Do not modify the `$extensionVersion` variable name!
-     * It will be regex matched in the CI to append
-     * the "-dev{commit hash}" metadata when
-     * generating the plugin. 
      */
     $extensionVersion = '0.9.0-dev';
     $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
@@ -71,6 +66,22 @@ add_action('plugins_loaded', function (): void {
         $extensionName,
         $mainPluginVersionConstraint
     )) {
+        /**
+         * The commit hash is added to the plugin version 
+         * through the CI when merging the PR.
+         *
+         * It is required to regenerate the container when
+         * testing a generated .zip plugin without modifying
+         * the plugin version.
+         * (Otherwise, we'd have to @purge-cache.)
+         *
+         * Important: Do not modify this code!
+         * It will be replaced in the CI to append "#{commit hash}"
+         * when generating the plugin. 
+         */
+        $commitHash = '';
+        $extensionVersion .= $commitHash !== '' ? '#' . $commitHash : '';
+        
         // Load Composer’s autoloader
         require_once(__DIR__ . '/vendor/autoload.php');
 
