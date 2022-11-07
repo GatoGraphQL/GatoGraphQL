@@ -129,13 +129,11 @@ jobs:
                     sed -i 's/Requires PHP: 8.1/Requires PHP: 7.1/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
-            # For pushing to master or merging PR: Add "dev" commit hash to plugin version.
-            # Ignore for tagging, i.e. generating plugin for PROD
-            -   name: Append the "dev" commit hash to the plugin/extension version
+            # Add the commit hash to the plugin version, to regenerate the container when testing the generated plugin
+            -   name: Append the the commit hash to the plugin/extension version
                 run: |
-                    sed -i "s/([\$pluginVersion|\$extensionVersion]) = '(.*)';/($1) = '$2-dev${{ github.sha }}'/"" ${{ matrix.pluginConfig.main_file }}
+                    sed -i "s/$commitHash = '';/$commitHash = '${{ github.sha }}';/" ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
 
             -   name: Build project for production
                 run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
