@@ -3,7 +3,7 @@
 Plugin Name: GraphQL API - Extension Demo
 Plugin URI: https://github.com/GraphQLAPI/extension-demo
 Description: Demonstration of extending the GraphQL schema, for the GraphQL API for WordPress
-Version: 0.9.0
+Version: 0.9.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
 Author: Leonardo Losoviz
@@ -35,9 +35,13 @@ if (!defined('ABSPATH')) {
  */
 add_action('plugins_loaded', function (): void {
     /**
-     * Extension's name and version
+     * Extension's name and version.
+     *
+     * Use a stability suffix as supported by Composer.
+     *
+     * @see https://getcomposer.org/doc/articles/versions.md#stabilities
      */
-    $extensionVersion = '0.9.0';
+    $extensionVersion = '0.9.0-dev';
     $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
     $mainPluginVersionConstraint = '^0.9';
     
@@ -66,6 +70,21 @@ add_action('plugins_loaded', function (): void {
         $extensionName,
         $mainPluginVersionConstraint
     )) {
+        /**
+         * The commit hash is added to the plugin version 
+         * through the CI when merging the PR.
+         *
+         * It is required to regenerate the container when
+         * testing a generated .zip plugin without modifying
+         * the plugin version.
+         * (Otherwise, we'd have to @purge-cache.)
+         *
+         * Important: Do not modify this code!
+         * It will be replaced in the CI to append "#{commit hash}"
+         * when generating the plugin. 
+         */
+        $commitHash = null;
+
         // Load Composer’s autoloader
         require_once(__DIR__ . '/vendor/autoload.php');
 
@@ -73,7 +92,8 @@ add_action('plugins_loaded', function (): void {
         App::getExtensionManager()->register(new GraphQLAPIExtension(
             __FILE__,
             $extensionVersion,
-            $extensionName
+            $extensionName,
+            $commitHash
         ))->setup();
     }
 });

@@ -30,12 +30,14 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
+        ?string $commitHash = null,
         ?ExtensionInitializationConfigurationInterface $extensionInitializationConfiguration = null,
     ) {
         parent::__construct(
             $pluginFile,
             $pluginVersion,
             $pluginName,
+            $commitHash,
         );
         $this->extensionInitializationConfiguration = $extensionInitializationConfiguration ?? $this->maybeCreateInitializationConfiguration();
     }

@@ -3,7 +3,7 @@
 Plugin Name: GraphQL API for WordPress
 Plugin URI: https://graphql-api.com
 Description: Transform your WordPress site into a GraphQL server.
-Version: 0.9.0
+Version: 0.9.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
 Author: Leonardo Losoviz
@@ -30,7 +30,14 @@ add_action('init', function (): void {
     load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
 });
 
-$pluginVersion = '0.9.0';
+/**
+ * Plugin's name and version.
+ *
+ * Use a stability suffix as supported by Composer.
+ *
+ * @see https://getcomposer.org/doc/articles/versions.md#stabilities
+ */
+$pluginVersion = '0.9.0-dev';
 $pluginName = __('GraphQL API for WordPress', 'graphql-api');
 
 /**
@@ -39,6 +46,21 @@ $pluginName = __('GraphQL API for WordPress', 'graphql-api');
 if (class_exists(Plugin::class) && !App::getMainPluginManager()->assertIsValid($pluginVersion)) {
     return;
 }
+
+/**
+ * The commit hash is added to the plugin version 
+ * through the CI when merging the PR.
+ *
+ * It is required to regenerate the container when
+ * testing a generated .zip plugin without modifying
+ * the plugin version.
+ * (Otherwise, we'd have to @purge-cache.)
+ *
+ * Important: Do not modify this code!
+ * It will be replaced in the CI to append "#{commit hash}"
+ * when generating the plugin. 
+ */
+$commitHash = null;
 
 // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -50,5 +72,6 @@ App::initializePlugin();
 App::getMainPluginManager()->register(new Plugin(
     __FILE__,
     $pluginVersion,
-    $pluginName
+    $pluginName,
+    $commitHash
 ))->setup();

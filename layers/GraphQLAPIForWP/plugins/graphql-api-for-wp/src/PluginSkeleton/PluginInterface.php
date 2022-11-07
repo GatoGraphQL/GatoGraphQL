@@ -34,6 +34,17 @@ interface PluginInterface
     public function getPluginFile(): string;
 
     /**
+     * Commit hash when merging PR in repo, injected during the CI run
+     * when generating the .zip plugin.
+     */
+    public function getCommitHash(): ?string;
+
+    /**
+     * Plugin version + "#{commit hash}" (if it exists)
+     */
+    public function getPluginVersionWithCommitHash(): string;
+
+    /**
      * Plugin version
      */
     public function getPluginVersion(): string;

@@ -39,12 +39,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
+        ?string $commitHash = null,
         ?MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration = null,
     ) {
         parent::__construct(
             $pluginFile,
             $pluginVersion,
             $pluginName,
+            $commitHash,
         );
         $this->pluginInitializationConfiguration = $pluginInitializationConfiguration ?? $this->createInitializationConfiguration();
     }
@@ -261,7 +263,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
                 // Check if the main plugin has been activated or updated
                 $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
-                $isMainPluginJustUpdated = !$isMainPluginJustActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->pluginVersion;
+                $isMainPluginJustUpdated = !$isMainPluginJustActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->getPluginVersionWithCommitHash();
 
                 // Check if any extension has been activated or updated
                 $justActivatedExtensions = [];
@@ -269,7 +271,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
                     if (!isset($storedPluginVersions[$extensionBaseName])) {
                         $justActivatedExtensions[$extensionBaseName] = $extensionInstance;
-                    } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersion()) {
+                    } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersionWithCommitHash()) {
                         $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
                     }
                 }
@@ -295,9 +297,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 }
 
                 // Recalculate the updated entry and update on the DB
-                $storedPluginVersions[$this->pluginBaseName] = $this->pluginVersion;
+                $storedPluginVersions[$this->pluginBaseName] = $this->getPluginVersionWithCommitHash();
                 foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
-                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersion();
+                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
                 }
                 foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
                     unset($storedPluginVersions[$extensionBaseName]);

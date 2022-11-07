@@ -129,6 +129,12 @@ jobs:
                     sed -i 's/Requires PHP: 8.1/Requires PHP: 7.1/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
+            # Add the commit hash to the plugin version, to regenerate the container when testing the generated plugin
+            -   name: Append the the commit hash to the plugin/extension version
+                run: |
+                    sed -i "s/$commitHash = null;/$commitHash = '${{ github.sha }}';/" ${{ matrix.pluginConfig.main_file }}
+                working-directory: ${{ matrix.pluginConfig.path }}
+
             -   name: Build project for production
                 run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}

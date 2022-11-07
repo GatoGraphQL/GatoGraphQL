@@ -8,6 +8,7 @@ use GraphQLAPI\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Exception\ExtensionNotRegisteredException;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\SemverHelpers;
 
 class ExtensionManager extends AbstractPluginManager
 {
@@ -91,10 +92,13 @@ class ExtensionManager extends AbstractPluginManager
             return false;
         }
 
-        // Validate that the required version of the GraphQL API for WP plugin is installed
+        /**
+         * Validate that the required version of the GraphQL API for WP plugin is installed.
+         */
+        $mainPluginVersion = App::getMainPluginManager()->getPlugin()->getPluginVersion();
         if (
             $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
-                App::getMainPluginManager()->getPlugin()->getPluginVersion(),
+                $mainPluginVersion,
                 $mainPluginVersionConstraint
             )
         ) {
