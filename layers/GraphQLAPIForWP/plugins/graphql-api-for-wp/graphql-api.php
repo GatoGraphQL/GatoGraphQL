@@ -30,6 +30,11 @@ add_action('init', function (): void {
     load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
 });
 
+/**
+ * Important: Do not modify the `$pluginVersion` variable name!
+ * It will be regex matched in the CI to append the "-dev{commit hash}"
+ * metadata when generating the plugin. 
+ */
 $pluginVersion = '0.9.0';
 $pluginName = __('GraphQL API for WordPress', 'graphql-api');
 

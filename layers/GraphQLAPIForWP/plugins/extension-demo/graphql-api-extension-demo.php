@@ -35,7 +35,12 @@ if (!defined('ABSPATH')) {
  */
 add_action('plugins_loaded', function (): void {
     /**
-     * Extension's name and version
+     * Extension's name and version.
+     *
+     * Important: Do not modify the `$extensionVersion` variable name!
+     * It will be regex matched in the CI to append
+     * the "-dev{commit hash}" metadata when
+     * generating the plugin. 
      */
     $extensionVersion = '0.9.0';
     $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
