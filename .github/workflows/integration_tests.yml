@@ -64,6 +64,19 @@ jobs:
             matrix:
                 instaWPTemplateSlug: ${{ fromJson(secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON) }}
         steps:
+            -   uses: actions/checkout@v3
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   uses: "ramsey/composer-install@v2"
+            
             -   name: Create InstaWP instance
                 uses: instawp/wordpress-testing-automation@main
                 id: create-instawp
