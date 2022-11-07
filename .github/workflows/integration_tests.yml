@@ -56,7 +56,7 @@ jobs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
 
     process:
-        name: "Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}"  and execute integration tests against it"
+        name: Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}" and execute integration tests against it
         needs: provide_data
         runs-on: ubuntu-latest
         strategy:
