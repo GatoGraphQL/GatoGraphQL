@@ -93,7 +93,7 @@ add_action('plugins_loaded', function (): void {
             __FILE__,
             $extensionVersion,
             $extensionName,
-            $commitHash,
+            $commitHash
         ))->setup();
     }
 });

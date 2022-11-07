@@ -73,5 +73,5 @@ App::getMainPluginManager()->register(new Plugin(
     __FILE__,
     $pluginVersion,
     $pluginName,
-    $commitHash,
+    $commitHash
 ))->setup();
