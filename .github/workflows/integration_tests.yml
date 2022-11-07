@@ -105,7 +105,7 @@ jobs:
                     echo "instawp-domain=$(echo $instawp_domain)" >> $GITHUB_OUTPUT
 
             -   name: Sleep a bit to make sure InstaWP is ready
-                run: sleep 120s
+                run: sleep 180s
                 shell: bash
 
             -   name: Run tests
