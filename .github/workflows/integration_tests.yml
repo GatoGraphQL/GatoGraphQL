@@ -52,10 +52,13 @@ jobs:
             -   name: Artifact URL for InstaWP
                 run: echo "Artifact URL for InstaWP - ${{ steps.artifact-url.outputs.result }}"
                 shell: bash
+
+            -   id: output_data
+                run: |
+                    echo 'instawp_template_slugs_as_json=${{ secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON }}' >> $GITHUB_OUTPUT
         outputs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
-            # instawp_template_slugs_as_json: ${{ secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON }}
-            instawp_template_slugs_as_json: "[\"integration-tests\"]"
+            instawp_template_slugs_as_json: ${{ steps.output_data.outputs.instawp_template_slugs_as_json }}
 
     process:
         name: Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}" and execute integration tests against it
