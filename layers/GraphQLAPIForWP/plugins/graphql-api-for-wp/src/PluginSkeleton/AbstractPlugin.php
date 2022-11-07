@@ -22,6 +22,7 @@ abstract class AbstractPlugin implements PluginInterface
         protected string $pluginFile, /** The main plugin file */
         protected string $pluginVersion,
         ?string $pluginName = null,
+        protected ?string $commitHash = null, /** Useful for development to regenerate the container when testing the generated plugin */
     ) {
         $this->pluginBaseName = \plugin_basename($pluginFile);
         $this->pluginName = $pluginName ?? $this->pluginBaseName;

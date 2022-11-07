@@ -36,6 +36,10 @@ if (!defined('ABSPATH')) {
 add_action('plugins_loaded', function (): void {
     /**
      * Extension's name and version.
+     *
+     * Use a stability suffix as supported by Composer.
+     *
+     * @see https://getcomposer.org/doc/articles/versions.md#stabilities
      */
     $extensionVersion = '0.9.0-dev';
     $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
@@ -80,8 +84,7 @@ add_action('plugins_loaded', function (): void {
          * when generating the plugin. 
          */
         $commitHash = '';
-        $extensionVersion .= $commitHash !== '' ? '#' . $commitHash : '';
-        
+
         // Load Composer’s autoloader
         require_once(__DIR__ . '/vendor/autoload.php');
 
@@ -89,7 +92,8 @@ add_action('plugins_loaded', function (): void {
         App::getExtensionManager()->register(new GraphQLAPIExtension(
             __FILE__,
             $extensionVersion,
-            $extensionName
+            $extensionName,
+            $commitHash,
         ))->setup();
     }
 });

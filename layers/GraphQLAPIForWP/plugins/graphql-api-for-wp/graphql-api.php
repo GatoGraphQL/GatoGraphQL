@@ -30,6 +30,13 @@ add_action('init', function (): void {
     load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
 });
 
+/**
+ * Plugin's name and version.
+ *
+ * Use a stability suffix as supported by Composer.
+ *
+ * @see https://getcomposer.org/doc/articles/versions.md#stabilities
+ */
 $pluginVersion = '0.9.0-dev';
 $pluginName = __('GraphQL API for WordPress', 'graphql-api');
 
@@ -54,7 +61,6 @@ if (class_exists(Plugin::class) && !App::getMainPluginManager()->assertIsValid($
  * when generating the plugin. 
  */
 $commitHash = '';
-$pluginVersion .= $commitHash !== '' ? '#' . $commitHash : '';
 
  // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
@@ -66,5 +72,6 @@ App::initializePlugin();
 App::getMainPluginManager()->register(new Plugin(
     __FILE__,
     $pluginVersion,
-    $pluginName
+    $pluginName,
+    $commitHash,
 ))->setup();
