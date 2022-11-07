@@ -26,10 +26,9 @@ jobs:
 
             -   uses: "ramsey/composer-install@v2"
 
-            -   id: output_data
+            -   id: input_data
                 run: |
                     echo "additional_integration_test_plugins=$(vendor/bin/monorepo-builder additional-integration-test-plugins --config=config/monorepo-builder/additional-integration-test-plugins.php)" >> $GITHUB_OUTPUT
-                    echo "instawp_config_entries=$(vendor/bin/monorepo-builder instawp-config-entries-json --config=config/monorepo-builder/instawp-config-entries-json.php)" >> $GITHUB_OUTPUT
     
             -   name: Retrieve artifact URLs from GitHub workflow
                 uses: actions/github-script@v6
@@ -46,13 +45,17 @@ jobs:
                         // Allow installing additional plugins, set via the monorepo configuration
                         const artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
                             return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link') + '.zip'
-                        }).concat(${{ steps.output_data.outputs.additional_integration_test_plugins }});
+                        }).concat(${{ steps.input_data.outputs.additional_integration_test_plugins }});
                         return artifactURLs.join(',');
                     result-encoding: string
 
             -   name: Artifact URL for InstaWP
                 run: echo "Artifact URL for InstaWP - ${{ steps.artifact-url.outputs.result }}"
                 shell: bash
+
+            -   id: output_data
+                run: |
+                    echo "instawp_config_entries=$(vendor/bin/monorepo-builder instawp-config-entries-json --config=config/monorepo-builder/instawp-config-entries-json.php)" >> $GITHUB_OUTPUT
 
         outputs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
