@@ -8,8 +8,9 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\AdditionalIntegrationTes
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DataToAppendAndRemoveDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DowngradeRectorDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\EnvironmentVariablesDataSource;
-use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\InstaWPConfigDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PHPStanDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestPathsDataSource;
@@ -135,6 +136,16 @@ class ContainerConfigurationService
         }
 
         /**
+         * InstaWP config
+         */
+        if ($instaWPConfig = $this->getInstaWPConfigDataSource($this->rootDirectory)) {
+            $parameters->set(
+                CustomOption::INSTAWP_CONFIG_ENTRIES,
+                $instaWPConfig->getInstaWPConfigEntries()
+            );
+        }
+
+        /**
          * Configure services
          */
         $services = $this->containerConfigurator->services();
@@ -156,6 +167,11 @@ class ContainerConfigurationService
     protected function getPluginDataSource(): ?PluginDataSource
     {
         return new PluginDataSource($this->rootDirectory);
+    }
+
+    protected function getInstaWPConfigDataSource(): ?InstaWPConfigDataSource
+    {
+        return new InstaWPConfigDataSource($this->rootDirectory);
     }
 
     protected function getSkipDowngradeTestPathsDataSource(): ?SkipDowngradeTestPathsDataSource
