@@ -17,7 +17,7 @@ class SemverHelpersTest extends TestCase
     ): void {
         $this->assertEquals(
             $expectedPluginVersion,
-            SemverHelpers::removeDevMetadataFromPluginVersion($pluginVersion),
+            SemverHelpers::removeCommitHashFromPluginVersion($pluginVersion),
         );
     }
 

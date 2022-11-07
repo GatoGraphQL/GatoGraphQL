@@ -18,7 +18,7 @@ class SemverHelpers
      *
      * @see https://github.com/composer/semver/blob/9b2d75f/src/VersionParser.php#L39
      */
-    public static function removeDevMetadataFromPluginVersion(string $pluginVersion): string
+    public static function removeCommitHashFromPluginVersion(string $pluginVersion): string
     {
         $pos = strpos($pluginVersion, '-dev');
         if ($pos === false) {

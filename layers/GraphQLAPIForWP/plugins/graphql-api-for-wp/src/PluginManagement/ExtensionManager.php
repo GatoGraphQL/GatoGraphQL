@@ -100,7 +100,7 @@ class ExtensionManager extends AbstractPluginManager
          * but not needed for version constaints (and not supported by Composer Semver)
          */
         $mainPluginVersion = App::getMainPluginManager()->getPlugin()->getPluginVersion();
-        $mainPluginVersion = SemverHelpers::removeDevMetadataFromPluginVersion($mainPluginVersion);
+        $mainPluginVersion = SemverHelpers::removeCommitHashFromPluginVersion($mainPluginVersion);
         if (
             $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
                 $mainPluginVersion,
