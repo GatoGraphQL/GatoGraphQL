@@ -13,6 +13,10 @@ class SemverHelpers
      */
     public static function removeDevMetadataFromPluginVersion(string $pluginVersion): string
     {
-        return $pluginVersion;
+        $pos = strpos($pluginVersion, '-dev');
+        if ($pos === false) {
+            return $pluginVersion;
+        }
+        return substr($pluginVersion, 0, $pos);
     }
 }
