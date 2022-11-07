@@ -3,13 +3,13 @@ on:
     workflow_run:
         workflows: [Generate plugins]
         types:
-            - requested
+            - completed
 env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
     provide_data:
-        # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         name: Retrieve the GitHub Action artifact URLs to install in InstaWP
         runs-on: ubuntu-latest
         steps:
@@ -26,10 +26,9 @@ jobs:
 
             -   uses: "ramsey/composer-install@v2"
 
-            -   id: output_data
+            -   id: input_data
                 run: |
                     echo "additional_integration_test_plugins=$(vendor/bin/monorepo-builder additional-integration-test-plugins --config=config/monorepo-builder/additional-integration-test-plugins.php)" >> $GITHUB_OUTPUT
-                    echo 'instawp_template_slugs_as_json=${{ secrets.INSTAWP_TEMPLATE_SLUG_LIST_AS_JSON }}' >> $GITHUB_OUTPUT
     
             -   name: Retrieve artifact URLs from GitHub workflow
                 uses: actions/github-script@v6
@@ -46,7 +45,7 @@ jobs:
                         // Allow installing additional plugins, set via the monorepo configuration
                         const artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
                             return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link') + '.zip'
-                        }).concat(${{ steps.output_data.outputs.additional_integration_test_plugins }});
+                        }).concat(${{ steps.input_data.outputs.additional_integration_test_plugins }});
                         return artifactURLs.join(',');
                     result-encoding: string
 
@@ -54,18 +53,22 @@ jobs:
                 run: echo "Artifact URL for InstaWP - ${{ steps.artifact-url.outputs.result }}"
                 shell: bash
 
+            -   id: output_data
+                run: |
+                    echo "instawp_config_entries=$(vendor/bin/monorepo-builder instawp-config-entries-json --config=config/monorepo-builder/instawp-config-entries-json.php)" >> $GITHUB_OUTPUT
+
         outputs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
-            instawp_template_slugs_as_json: ${{ steps.output_data.outputs.instawp_template_slugs_as_json }}
+            instawp_config_entries: ${{ steps.output_data.outputs.instawp_config_entries }}
 
     process:
-        name: Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}" and execute integration tests against it
+        name: Launch InstaWP site from template "${{ matrix.instaWPConfig.templateSlug }}" and execute integration tests against it
         needs: provide_data
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
-                instaWPTemplateSlug: ${{ fromJson(needs.provide_data.outputs.instawp_template_slugs_as_json) }}
+                instaWPConfig: ${{ fromJson(needs.provide_data.outputs.instawp_config_entries) }}
         steps:
             -   uses: actions/checkout@v3
                 with:
@@ -86,8 +89,8 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPTemplateSlug }}
-                    REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
+                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPConfig.templateSlug }}
+                    REPO_ID: ${{ matrix.instaWPConfig.repoID }}
                     INSTAWP_ACTION: create-site-template
                     ARTIFACT_URL: ${{ needs.provide_data.outputs.artifact_url }}
 
@@ -119,6 +122,6 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPTemplateSlug }}
-                    REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
+                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPConfig.templateSlug }}
+                    REPO_ID: ${{ matrix.instaWPConfig.repoID }}
                     INSTAWP_ACTION: destroy-site

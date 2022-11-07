@@ -70,4 +70,8 @@ final class Option
      * @var string
      */
     public final const SCOPED_ONLY = 'scoped-only';
+    /**
+     * @var string
+     */
+    public final const INSTAWP_CONFIG_ENTRIES = 'instawp-config-entries';
 }
