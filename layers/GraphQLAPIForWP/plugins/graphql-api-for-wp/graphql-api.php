@@ -60,7 +60,7 @@ if (class_exists(Plugin::class) && !App::getMainPluginManager()->assertIsValid($
  * It will be replaced in the CI to append "#{commit hash}"
  * when generating the plugin. 
  */
-$commitHash = '';
+$commitHash = null;
 
  // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
