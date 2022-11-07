@@ -57,13 +57,13 @@ jobs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
 
     process:
-        name: Launch InstaWP site from template "${{ matrix.instaWPTemplateSlug }}" and execute integration tests against it
+        name: Launch InstaWP site from template "${{ matrix.instaWPConfig.templateSlug }}" and execute integration tests against it
         needs: provide_data
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
-                instaWPTemplateSlug: ${{ fromJson(needs.provide_data.outputs.instawp_template_slugs_as_json) }}
+                instaWPConfig: ${{ fromJson(needs.provide_data.outputs.instawp_config_entries) }}
         steps:
             -   uses: actions/checkout@v3
                 with:
@@ -84,8 +84,8 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPTemplateSlug }}
-                    REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
+                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPConfig.templateSlug }}
+                    REPO_ID: ${{ matrix.instaWPConfig.repoID }}
                     INSTAWP_ACTION: create-site-template
                     ARTIFACT_URL: ${{ needs.provide_data.outputs.artifact_url }}
 
@@ -117,6 +117,6 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPTemplateSlug }}
-                    REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
+                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPConfig.templateSlug }}
+                    REPO_ID: ${{ matrix.instaWPConfig.repoID }}
                     INSTAWP_ACTION: destroy-site
