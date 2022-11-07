@@ -22,7 +22,7 @@ class SemverHelpersTest extends TestCase
     }
 
     /**
-     * @return array{0:string,1:string}
+     * @return array<array{0:string,1:string}>
      */
     protected function provideRemoveDevMetadataFromPluginVersion(): array
     {
