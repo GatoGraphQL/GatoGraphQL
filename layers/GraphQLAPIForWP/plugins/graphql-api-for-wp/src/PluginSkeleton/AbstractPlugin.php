@@ -63,9 +63,21 @@ abstract class AbstractPlugin implements PluginInterface
         return $this->pluginVersion;
     }
 
+    /**
+     * Commit hash when merging PR in repo, injected during the CI run
+     * when generating the .zip plugin.
+     */
     public function getCommitHash(): ?string
     {
         return $this->commitHash;
+    }
+
+    /**
+     * Plugin version + "#{commit hash}" (if it exists)
+     */
+    public function getPluginVersionWithCommitHash(): string
+    {
+        return $this->pluginVersion . ($this->commitHash ? '#' . $this->commitHash : $this->commitHash);
     }
 
     /**
