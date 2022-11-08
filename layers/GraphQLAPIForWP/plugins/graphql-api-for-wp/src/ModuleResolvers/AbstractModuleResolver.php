@@ -55,6 +55,11 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
         return false;
     }
 
+    public function areSettingsHidden(string $module): bool
+    {
+        return false;
+    }
+
     public function getID(string $module): string
     {
         $moduleID = strtolower($module);
