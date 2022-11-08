@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-use Rector\DowngradePhp80\Rector\FunctionLike\DowngradeUnionTypeDeclarationRector;
+use Rector\DowngradePhp72\Rector\ClassMethod\DowngradeParameterTypeWideningRector;
 
 /**
  * Covariants in Symfony Definition require 2 passes:
@@ -22,7 +22,7 @@ abstract class AbstractCovariantChainedRuleContainerConfigurationService extends
     protected function getRectorRuleClasses(): array
     {
         return [
-            DowngradeUnionTypeDeclarationRector::class,
+            DowngradeParameterTypeWideningRector::class,
         ];
     }
 }
