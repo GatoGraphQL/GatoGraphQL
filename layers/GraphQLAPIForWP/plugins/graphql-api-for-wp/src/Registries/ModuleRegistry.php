@@ -70,7 +70,8 @@ class ModuleRegistry implements ModuleRegistryInterface
     public function getAllModules(
         bool $onlyEnabled = false,
         bool $onlyHasSettings = false,
-        bool $onlyVisible = true
+        bool $onlyVisible = true,
+        bool $onlyWithVisibleSettings = false,
     ): array {
         $modules = array_keys($this->getModuleResolversByModuleAndPriority());
         if ($onlyEnabled) {
@@ -89,6 +90,12 @@ class ModuleRegistry implements ModuleRegistryInterface
             $modules = array_filter(
                 $modules,
                 fn (string $module) => !$this->getModuleResolver($module)->isHidden($module)
+            );
+        }
+        if ($onlyWithVisibleSettings) {
+            $modules = array_filter(
+                $modules,
+                fn (string $module) => !$this->getModuleResolver($module)->areSettingsHidden($module)
             );
         }
         return array_values($modules);
