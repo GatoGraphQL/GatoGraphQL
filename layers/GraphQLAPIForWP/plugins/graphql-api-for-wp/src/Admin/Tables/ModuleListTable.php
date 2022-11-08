@@ -65,6 +65,7 @@ class ModuleListTable extends AbstractItemListTable
                     'can-be-disabled' => $moduleResolver->canBeDisabled($module),
                     'can-be-enabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
                     'has-settings' => $moduleResolver->hasSettings($module),
+                    'are-settings-hidden' => $moduleResolver->areSettingsHidden($module),
                     'name' => $moduleResolver->getName($module),
                     'description' => $moduleResolver->getDescription($module),
                     'depends-on' => $moduleResolver->getDependedModuleLists($module),
@@ -325,7 +326,7 @@ class ModuleListTable extends AbstractItemListTable
             }
 
             // Maybe add settings links
-            if ($item['has-settings']) {
+            if ($item['has-settings'] && !$item['are-settings-hidden']) {
                 $instanceManager = InstanceManagerFacade::getInstance();
                 /**
                  * @var SettingsMenuPage
