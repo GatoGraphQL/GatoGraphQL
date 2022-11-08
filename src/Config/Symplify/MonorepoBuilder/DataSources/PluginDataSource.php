@@ -39,7 +39,7 @@ class PluginDataSource
                      *
                      * @see https://github.com/leoloso/PoP/issues/1902
                      */
-                    'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/blocks/graphiql/\*',
+                    'blocks/graphiql/\*',
                 ]),
                 'dist_repo_organization' => 'GraphQLAPI',
                 'dist_repo_name' => 'graphql-api-for-wp-dist',
