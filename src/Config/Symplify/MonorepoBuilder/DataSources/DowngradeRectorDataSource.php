@@ -19,6 +19,7 @@ class DowngradeRectorDataSource
             $this->rootDir . '/config/rector/downgrade/monorepo/chained-rules/rector-cacheitem.php',
             $this->rootDir . '/config/rector/downgrade/monorepo/chained-rules/rector-arrowfunction-mixedtype.php',
             $this->rootDir . '/config/rector/downgrade/monorepo/chained-rules/rector-arrowfunction-uniontype.php',
+            $this->rootDir . '/config/rector/downgrade/monorepo/chained-rules/rector-covariant-return-type.php',
         ];
     }
 }
