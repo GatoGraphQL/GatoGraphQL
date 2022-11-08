@@ -247,4 +247,40 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
         }
         return $moduleSettings;
     }
+
+    /**
+     * Because GraphiQL v2.0 (yet to be integrated) has the
+     * Explorer already built-in, there's no need to have a
+     * separate module for it.
+     *
+     * Since this functionality is already built and working,
+     * simply hide it.
+     *
+     * @see https://github.com/leoloso/PoP/issues/1902
+     */
+    public function isHidden(string $module): bool
+    {
+        return match ($module) {
+            self::GRAPHIQL_EXPLORER => true,
+            default => parent::isHidden($module),
+        };
+    }
+
+    /**
+     * Because GraphiQL v2.0 (yet to be integrated) has the
+     * Explorer already built-in, there's no need to have a
+     * separate module for it.
+     *
+     * Since this functionality is already built and working,
+     * simply hide it.
+     *
+     * @see https://github.com/leoloso/PoP/issues/1902
+     */
+    public function areSettingsHidden(string $module): bool
+    {
+        return match ($module) {
+            self::GRAPHIQL_EXPLORER => true,
+            default => parent::areSettingsHidden($module),
+        };
+    }
 }

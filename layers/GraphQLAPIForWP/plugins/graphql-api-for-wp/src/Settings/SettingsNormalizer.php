@@ -133,7 +133,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
     public function getAllSettingsItems(): array
     {
         $items = [];
-        $modules = $this->getModuleRegistry()->getAllModules(true, true, false);
+        $modules = $this->getModuleRegistry()->getAllModules(true, true, false, true);
         foreach ($modules as $module) {
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
             $items[] = [

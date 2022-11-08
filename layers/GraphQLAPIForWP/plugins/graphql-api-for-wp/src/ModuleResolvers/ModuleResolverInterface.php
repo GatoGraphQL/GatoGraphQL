@@ -38,6 +38,7 @@ interface ModuleResolverInterface
      */
     public function canBeDisabled(string $module): bool;
     public function isHidden(string $module): bool;
+    public function areSettingsHidden(string $module): bool;
     public function getID(string $module): string;
     public function getName(string $module): string;
     public function getDescription(string $module): string;
