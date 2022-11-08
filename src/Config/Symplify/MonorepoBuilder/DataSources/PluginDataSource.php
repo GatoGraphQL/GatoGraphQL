@@ -28,6 +28,18 @@ class PluginDataSource
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
+                    /**
+                     * Because GraphiQL v2.0 (yet to be integrated) has the
+                     * Explorer already built-in, there's no need to have a
+                     * separate module for it.
+                     *
+                     * As a performance improvement, we can then exclude the
+                     * "graphiql" block from the plugin, since it won't ever
+                     * be used, and it's a good 700kb in size.
+                     *
+                     * @see https://github.com/leoloso/PoP/issues/1902
+                     */
+                    'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/blocks/graphiql/\*',
                 ]),
                 'dist_repo_organization' => 'GraphQLAPI',
                 'dist_repo_name' => 'graphql-api-for-wp-dist',
