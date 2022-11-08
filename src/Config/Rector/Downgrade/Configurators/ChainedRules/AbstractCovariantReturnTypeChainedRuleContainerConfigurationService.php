@@ -17,7 +17,7 @@ use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeCovariantReturnTypeRector;
  *
  * Because of chained rules not taking place, manually execute the 2nd rule
  */
-abstract class AbstractCovariantChainedRuleContainerConfigurationService extends AbstractChainedRuleContainerConfigurationService
+abstract class AbstractCovariantReturnTypeChainedRuleContainerConfigurationService extends AbstractChainedRuleContainerConfigurationService
 {
     protected function getRectorRuleClasses(): array
     {

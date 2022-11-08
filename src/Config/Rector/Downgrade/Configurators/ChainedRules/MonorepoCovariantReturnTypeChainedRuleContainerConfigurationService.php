@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-class MonorepoCovariantChainedRuleContainerConfigurationService extends AbstractCovariantChainedRuleContainerConfigurationService
+class MonorepoCovariantReturnTypeChainedRuleContainerConfigurationService extends AbstractCovariantReturnTypeChainedRuleContainerConfigurationService
 {
     protected function getPaths(): array
     {
