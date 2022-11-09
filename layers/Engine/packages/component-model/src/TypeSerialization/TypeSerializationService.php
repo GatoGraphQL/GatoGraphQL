@@ -228,8 +228,10 @@ class TypeSerializationService implements TypeSerializationServiceInterface
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): int {
+        /** @var SplObjectStorage<FieldInterface,int> */
+        $fieldTypeModifiersByField = App::getState('field-type-modifiers-for-serialization');
         /** @var int|null */
-        $currentFieldTypeModifiers = App::getState('field-type-modifiers-for-serialization');
+        $currentFieldTypeModifiers = $fieldTypeModifiersByField[$field] ?? null;
         if ($currentFieldTypeModifiers !== null) {
             return $currentFieldTypeModifiers;
         }
