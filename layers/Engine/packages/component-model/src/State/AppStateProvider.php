@@ -13,6 +13,7 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Variables\VariableManagerInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
@@ -60,7 +61,8 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         // For Serialization
         /** @var SplObjectStorage<FieldInterface,int> */
-        $state['field-type-modifiers-for-serialization'] = new SplObjectStorage();
+        $fieldTypeModifiersForSerialization = new SplObjectStorage();
+        $state['field-type-modifiers-for-serialization'] = $fieldTypeModifiersForSerialization;
 
         // For Validating if the Directive supports only certain types
         $state['field-type-resolver-for-supported-directive-resolution'] = null;
