@@ -1696,6 +1696,12 @@ Since `v0.9`, the following modules are not included anymore in the GraphQL API 
 - Public/Private Schema Mode
 - Low-Level Persisted Query Editing
 
+### Module "GraphiQL Explorer" has been hidden
+
+The GraphiQL Explorer module is still present in the plugin, but now it's hidden, so it can't be disabled or configured anymore.
+
+This is in preparation for the [switch to v2.0 of GraphiQL](https://github.com/leoloso/PoP/issues/1902), which already provides a plugin to support the Explorer. When this issue is completed, the standard GraphiQL client will already include the Explorer, and so a dedicated module will make no sense anymore and will then be removed.
+
 ### Settings for several modules must be set again
 
 Those modules which had their Settings value split into 2 ("Default value for Schema Configuration" and "Value for the Admin") must be set again:

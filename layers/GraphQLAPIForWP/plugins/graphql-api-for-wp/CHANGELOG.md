@@ -214,6 +214,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Merged the “sensitive” fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Expose Sensitive Data in the Schema` is enabled
 - `User.email` is treated as “sensitive” field
 - Removed modules: Access Control, Cache Control, Public/Private Schema Mode, and Low-Level Persisted Query Editing
+- Module "GraphiQL Explorer" has been hidden
 - Settings for several modules must be set again
 - Must re-set options "default limit" and "max limit" for Posts and Pages
 
