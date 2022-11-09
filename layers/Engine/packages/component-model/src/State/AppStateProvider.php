@@ -17,6 +17,7 @@ use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
+use SplObjectStorage;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
@@ -58,7 +59,9 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         // For Serialization
-        $state['field-type-modifiers-for-serialization'] = null;
+        /** @var SplObjectStorage<FieldInterface,int> */
+        $state['field-type-modifiers-for-serialization'] = new SplObjectStorage();
+
         // For Validating if the Directive supports only certain types
         $state['field-type-resolver-for-supported-directive-resolution'] = null;
 
