@@ -60,7 +60,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         // For Serialization
-        /** @var SplObjectStorage<FieldInterface,int> */
+        /** @var SplObjectStorage<FieldInterface,int|null> */
         $fieldTypeModifiersForSerialization = new SplObjectStorage();
         $state['field-type-modifiers-for-serialization'] = $fieldTypeModifiersForSerialization;
 
