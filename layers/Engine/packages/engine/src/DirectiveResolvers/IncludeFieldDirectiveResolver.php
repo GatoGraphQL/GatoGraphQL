@@ -122,7 +122,15 @@ class IncludeFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Check the condition field. If it is satisfied, then keep those fields, otherwise remove them from the $idFieldSet in the upcoming stages of the pipeline
-        $includeFieldSetForIDs = $this->getIDsSatisfyingCondition($relationalTypeResolver, $idObjects, $idFieldSet, $messages, $engineIterationFeedbackStore);
+        $includeFieldSetForIDs = $this->getIDsSatisfyingCondition(
+            $relationalTypeResolver,
+            $idObjects,
+            $idFieldSet,
+            $succeedingPipelineIDFieldSet,
+            $resolvedIDFieldValues,
+            $messages,
+            $engineIterationFeedbackStore,
+        );
         $idsToRemove = array_diff(array_keys($idFieldSet), $includeFieldSetForIDs);
         $this->removeFieldSetForIDs($idFieldSet, $idsToRemove, $succeedingPipelineIDFieldSet);
     }
