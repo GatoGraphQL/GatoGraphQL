@@ -10,7 +10,6 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedDynami
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
-use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 use SplObjectStorage;
@@ -39,13 +38,38 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          */
         $currentObjectID = App::getState('object-resolved-dynamic-variables-current-object-id');
         if ($currentObjectID === null) {
-            throw new ShouldNotHappenException(
-                sprintf(
-                    $this->__(
-                        'As the current objectID has not been set on the Application State, the Promise concerning the \'Object Resolved Dynamic Variable "%s"\' cannot be resolved'
-                    ),
-                    $this->objectResolvedDynamicVariableReference->getName()
-                )
+            /**
+             * Throw a message for the user instead of ShouldNotHappenException,
+             * as in certain situations the query could lead to this problem,
+             * so it's not only during development.
+             *
+             * Eg: attempting to use it with @skip or @include:
+             *
+             * ```
+             * {
+             *   users {
+             *     id
+             *     slug
+             *       @passOnwards(as: "userSlug")
+             *       @applyField(
+             *         name: "_strContains"
+             *         arguments: { search: "-", in: $userSlug }
+             *         passOnwardsAs: "isSpecialSlug"
+             *       )
+             *       @skip(if: $isSpecialSlug)
+             *   }
+             * }
+             * ```
+             */
+            throw new RuntimeVariableReferenceException(
+                new FeedbackItemResolution(
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::E16,
+                    [
+                        $this->objectResolvedDynamicVariableReference->getName(),
+                    ]
+                ),
+                $this->objectResolvedDynamicVariableReference
             );
         }
 
