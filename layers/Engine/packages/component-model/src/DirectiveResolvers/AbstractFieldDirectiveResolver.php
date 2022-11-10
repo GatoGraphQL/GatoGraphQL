@@ -96,7 +96,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      * When the directive args have promises, they must be
      * validated. Cache the validation result.
      */
-    protected bool $validatedDirectiveArgsHaveErrors = null;
+    protected ?bool $validatedDirectiveArgsHaveErrors = null;
 
     /**
      * @var array<string,array<string,mixed>>
