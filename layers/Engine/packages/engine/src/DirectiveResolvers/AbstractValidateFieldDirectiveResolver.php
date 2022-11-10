@@ -86,6 +86,8 @@ abstract class AbstractValidateFieldDirectiveResolver extends AbstractGlobalFiel
             $relationalTypeResolver,
             $idFieldSet,
             $fieldDataAccessProvider,
+            $succeedingPipelineIDFieldSet,
+            $resolvedIDFieldValues,
             $engineIterationFeedbackStore,
         );
 
@@ -105,11 +107,15 @@ abstract class AbstractValidateFieldDirectiveResolver extends AbstractGlobalFiel
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string|int,EngineIterationFieldSet> Failed $idFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     abstract protected function validateIDFieldSet(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        array &$succeedingPipelineIDFieldSet,
+        array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
 }

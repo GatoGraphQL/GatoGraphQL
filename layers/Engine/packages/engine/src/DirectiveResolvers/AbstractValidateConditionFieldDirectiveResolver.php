@@ -12,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractValidateFieldDirectiveResolver
 {
@@ -53,14 +54,24 @@ abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractV
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string|int,EngineIterationFieldSet> Failed $idFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     protected function validateIDFieldSet(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        array &$succeedingPipelineIDFieldSet,
+        array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
-        if ($this->isValidationSuccessful($relationalTypeResolver)) {
+        if ($this->isValidationSuccessful(
+            $relationalTypeResolver,
+            $idFieldSet,
+            $succeedingPipelineIDFieldSet,
+            $resolvedIDFieldValues,
+            $engineIterationFeedbackStore,
+        )) {
             return [];
         }
         // All fields failed
@@ -75,8 +86,18 @@ abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractV
 
     /**
      * Condition to validate. Return `true` for success, `false` for failure
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
-    abstract protected function isValidationSuccessful(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+    abstract protected function isValidationSuccessful(
+       RelationalTypeResolverInterface $relationalTypeResolver,
+       array $idFieldSet,
+       array &$succeedingPipelineIDFieldSet,
+       array &$resolvedIDFieldValues,
+       EngineIterationFeedbackStore $engineIterationFeedbackStore,
+   ): bool;
 
     /**
      * Add the errors to the FeedbackStore

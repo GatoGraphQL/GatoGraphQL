@@ -6,7 +6,11 @@ namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 abstract class AbstractCheckpointValidateConditionFieldDirectiveResolver extends AbstractValidateConditionFieldDirectiveResolver
 {
@@ -23,10 +27,17 @@ abstract class AbstractCheckpointValidateConditionFieldDirectiveResolver extends
     }
 
     /**
-     * Validate checkpoints
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
-    protected function isValidationSuccessful(RelationalTypeResolverInterface $relationalTypeResolver): bool
-    {
+    protected function isValidationSuccessful(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idFieldSet,
+        array &$succeedingPipelineIDFieldSet,
+        array &$resolvedIDFieldValues,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): bool {
         $checkpoints = $this->getValidationCheckpoints($relationalTypeResolver);
         $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
         return $feedbackItemResolution === null;
