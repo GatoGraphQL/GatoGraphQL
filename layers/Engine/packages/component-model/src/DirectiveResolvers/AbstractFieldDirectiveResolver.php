@@ -299,11 +299,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?array {
         $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
-        $resolveDirectiveArgsOnDocument = $this->directive->hasArgumentReferencingPromise();
-        if (!$resolveDirectiveArgsOnDocument) {
-            return $directiveArgs;
-        }
-
+        
         /**
          * Perform validations
          */
@@ -334,15 +330,6 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         string|int $id,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?array {
-        $resolveDirectiveArgsOnObject = $this->directive->hasArgumentReferencingResolvedOnObjectPromise();
-        if (!$resolveDirectiveArgsOnObject) {
-            return $this->getResolvedDirectiveArgsForDocument(
-                $relationalTypeResolver,
-                [$field],
-                $engineIterationFeedbackStore,
-            );
-        }
-
         $appStateManager = App::getAppStateManager();
         // The current object ID for which to retrieve the dynamic variable for.
         $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
