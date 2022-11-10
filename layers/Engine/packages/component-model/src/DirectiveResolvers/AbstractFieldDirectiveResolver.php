@@ -1805,4 +1805,13 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     {
         return !($this->getDirectiveKind() === DirectiveKinds::SYSTEM || $this->getDirectiveKind() === DirectiveKinds::SCHEMA);
     }
+
+    /**
+     * The directive needs to explicitly state that it can receive
+     * promises to be resolved on the object as arguments.
+     */
+    public function supportsArgumentReferencingResolvedOnObjectPromise(): bool
+    {
+        return false;
+    }
 }
