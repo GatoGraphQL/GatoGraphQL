@@ -65,13 +65,15 @@ abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractV
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
-        if ($this->isValidationSuccessful(
-            $relationalTypeResolver,
-            $idFieldSet,
-            $succeedingPipelineIDFieldSet,
-            $resolvedIDFieldValues,
-            $engineIterationFeedbackStore,
-        )) {
+        if (
+            $this->isValidationSuccessful(
+                $relationalTypeResolver,
+                $idFieldSet,
+                $succeedingPipelineIDFieldSet,
+                $resolvedIDFieldValues,
+                $engineIterationFeedbackStore,
+            )
+        ) {
             return [];
         }
         // All fields failed
@@ -92,12 +94,12 @@ abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractV
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     abstract protected function isValidationSuccessful(
-       RelationalTypeResolverInterface $relationalTypeResolver,
-       array $idFieldSet,
-       array &$succeedingPipelineIDFieldSet,
-       array &$resolvedIDFieldValues,
-       EngineIterationFeedbackStore $engineIterationFeedbackStore,
-   ): bool;
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idFieldSet,
+        array &$succeedingPipelineIDFieldSet,
+        array &$resolvedIDFieldValues,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): bool;
 
     /**
      * Add the errors to the FeedbackStore

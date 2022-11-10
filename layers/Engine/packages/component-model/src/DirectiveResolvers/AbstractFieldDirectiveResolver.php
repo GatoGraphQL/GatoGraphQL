@@ -271,8 +271,8 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
          */
         if ($this->directive->hasArgumentReferencingPromise()) {
             return $directiveArgs;
-        }        
-        
+        }
+
         /**
          * Perform validations
          */
