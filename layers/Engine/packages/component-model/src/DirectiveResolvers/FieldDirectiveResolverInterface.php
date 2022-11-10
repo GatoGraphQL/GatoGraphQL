@@ -191,10 +191,4 @@ interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, At
      * @return string Name of the directiveArg, or `null` to disable this feature for the directive
      */
     public function getAffectAdditionalFieldsUnderPosArgumentName(): ?string;
-
-    /**
-     * The directive needs to explicitly state that it can receive
-     * promises to be resolved on the object as arguments.
-     */
-    public function supportsArgumentReferencingResolvedOnObjectPromise(): bool;
 }
