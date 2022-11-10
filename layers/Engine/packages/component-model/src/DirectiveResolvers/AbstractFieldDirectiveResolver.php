@@ -92,6 +92,11 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      */
     protected DirectiveDataAccessorInterface $directiveDataAccessor;
     protected bool $hasValidationErrors;
+    /**
+     * When the directive args have promises, they must be
+     * validated. Cache the validation result.
+     */
+    protected ?bool $validatedDirectiveArgsHaveErrors = null;
 
     /**
      * @var array<string,array<string,mixed>>
@@ -261,6 +266,14 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         /**
+         * Validations can only be performed if there are no promises.
+         * If there are, the validation will be performed later on.
+         */
+        if ($this->directive->hasArgumentReferencingPromise()) {
+            return $directiveArgs;
+        }        
+        
+        /**
          * Perform validations
          */
         $errorCount = $engineIterationFeedbackStore->getErrorCount();
@@ -268,6 +281,85 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $directiveArgs,
             $relationalTypeResolver,
             $fields,
+            $engineIterationFeedbackStore,
+        );
+        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        return $directiveArgs;
+    }
+
+    /**
+     * Whenever a directive arg contains a promise to be resolved on
+     * the document, the directiveArgs and its validation must be
+     * performed only once the promise has been resolved.
+     *
+     * Otherwise, if there are no promises, all the validations have
+     * already been performed.
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @return array<string,mixed>|null Null if there was an error validating the directive
+     */
+    protected function getResolvedDirectiveArgs(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idFieldSet,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?array {
+        $hasArgumentReferencingPromise = $this->directive->hasArgumentReferencingPromise();
+        if ($hasArgumentReferencingPromise && $this->validatedDirectiveArgsHaveErrors) {
+            return null;
+        }
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
+        if ($hasArgumentReferencingPromise && $this->validatedDirectiveArgsHaveErrors === null) {
+            /**
+             * Perform validations
+             */
+            $errorCount = $engineIterationFeedbackStore->getErrorCount();
+            $this->validateDirectiveArgs(
+                $directiveArgs,
+                $relationalTypeResolver,
+                MethodHelpers::getFieldsFromIDFieldSet($idFieldSet),
+                $engineIterationFeedbackStore,
+            );
+            if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
+                $this->validatedDirectiveArgsHaveErrors = true;
+                return null;
+            }
+            $this->validatedDirectiveArgsHaveErrors = false;
+        }
+        return $directiveArgs;
+    }
+
+    /**
+     * Whenever a directive arg receives a promise to be resolved on
+     * an object, the directiveArgs and its validation must be
+     * performed for that object.
+     *
+     * @return array<string,mixed>|null Null if there was an error validating the directive
+     */
+    protected function getResolvedDirectiveArgsForObjectAndField(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        FieldInterface $field,
+        string|int $id,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?array {
+        $appStateManager = App::getAppStateManager();
+        // The current object ID for which to retrieve the dynamic variable for.
+        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
+        // The current field for which to retrieve the dynamic variable for.
+        $appStateManager->override('object-resolved-dynamic-variables-current-field', $field);
+        $this->directiveDataAccessor->resetDirectiveArgs();
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
+
+        /**
+         * Perform validations
+         */
+        $errorCount = $engineIterationFeedbackStore->getErrorCount();
+        $this->validateDirectiveArgs(
+            $directiveArgs,
+            $relationalTypeResolver,
+            [$field],
             $engineIterationFeedbackStore,
         );
         if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
