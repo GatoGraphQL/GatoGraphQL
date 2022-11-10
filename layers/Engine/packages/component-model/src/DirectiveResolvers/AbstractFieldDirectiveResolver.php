@@ -261,6 +261,14 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         /**
+         * Validations can only be performed if there are no promises.
+         * If there are, the validation will be performed later on.
+         */
+        if ($this->directive->hasArgumentReferencingPromise()) {
+            return $directiveArgs;
+        }        
+        
+        /**
          * Perform validations
          */
         $errorCount = $engineIterationFeedbackStore->getErrorCount();
@@ -268,6 +276,89 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $directiveArgs,
             $relationalTypeResolver,
             $fields,
+            $engineIterationFeedbackStore,
+        );
+        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        return $directiveArgs;
+    }
+
+    /**
+     * Whenever a directive arg contains a promise to be resolved on
+     * the document, the directiveArgs and its validation must be
+     * performed only once the promise has been resolved.
+     *
+     * @param FieldInterface[] $fields
+     * @return array<string,mixed>|null Null if there was an error validating the directive
+     */
+    protected function getResolvedDirectiveArgsForDocument(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?array {
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
+        $resolveDirectiveArgsOnDocument = $this->directive->hasArgumentReferencingPromise();
+        if (!$resolveDirectiveArgsOnDocument) {
+            return $directiveArgs;
+        }
+
+        /**
+         * Perform validations
+         */
+        $errorCount = $engineIterationFeedbackStore->getErrorCount();
+        $this->validateDirectiveArgs(
+            $directiveArgs,
+            $relationalTypeResolver,
+            $fields,
+            $engineIterationFeedbackStore,
+        );
+        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        return $directiveArgs;
+    }
+
+    /**
+     * Whenever a directive arg receives a promise to be resolved on
+     * an object, the directiveArgs and its validation must be
+     * performed for that object.
+     *
+     * @return array<string,mixed>|null Null if there was an error validating the directive
+     */
+    protected function getResolvedDirectiveArgsForObjectAndField(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        FieldInterface $field,
+        string|int $id,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?array {
+        $resolveDirectiveArgsOnObject = $this->directive->hasArgumentReferencingResolvedOnObjectPromise();
+        if (!$resolveDirectiveArgsOnObject) {
+            return $this->getResolvedDirectiveArgsForDocument(
+                $relationalTypeResolver,
+                [$field],
+                $engineIterationFeedbackStore,
+            );
+        }
+
+        $appStateManager = App::getAppStateManager();
+        // The current object ID for which to retrieve the dynamic variable for.
+        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
+        // The current field for which to retrieve the dynamic variable for.
+        $appStateManager->override('object-resolved-dynamic-variables-current-field', $field);
+        $this->directiveDataAccessor->resetDirectiveArgs();
+        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
+
+        /**
+         * Perform validations
+         */
+        $errorCount = $engineIterationFeedbackStore->getErrorCount();
+        $this->validateDirectiveArgs(
+            $directiveArgs,
+            $relationalTypeResolver,
+            [$field],
             $engineIterationFeedbackStore,
         );
         if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
