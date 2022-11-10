@@ -97,7 +97,7 @@ abstract class AbstractValidateFieldDirectiveResolver extends AbstractGlobalFiel
                 $succeedingPipelineIDFieldSet,
                 $failedIDFieldSet,
             );
-            $this->setFailingFieldResponseAsNull(
+            $this->setFieldResponseValueAsNull(
                 $resolvedIDFieldValues,
                 $failedIDFieldSet,
             );

@@ -51,7 +51,7 @@ trait FilterIDsSatisfyingConditionFieldDirectiveResolverTrait
                     $succeedingPipelineIDFieldSet,
                     $idFieldSet,
                 );
-                $this->setFailingFieldResponseAsNull(
+                $this->setFieldResponseValueAsNull(
                     $resolvedIDFieldValues,
                     $idFieldSet,
                 );

@@ -1472,7 +1472,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
                 $succeedingPipelineIDFieldSet,
                 $idFieldSetToRemove,
             );
-            $this->setFailingFieldResponseAsNull(
+            $this->setFieldResponseValueAsNull(
                 $resolvedIDFieldValues,
                 $idFieldSetToRemove,
             );
@@ -1534,7 +1534,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
-    protected function setFailingFieldResponseAsNull(
+    protected function setFieldResponseValueAsNull(
         array &$resolvedIDFieldValues,
         array $idFieldSet,
     ): void {
