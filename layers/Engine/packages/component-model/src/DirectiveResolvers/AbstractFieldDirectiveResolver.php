@@ -305,7 +305,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
+    ): ?array {
         $hasArgumentReferencingPromise = $this->directive->hasArgumentReferencingPromise();
         if ($hasArgumentReferencingPromise && $this->validatedDirectiveArgsHaveErrors) {
             return null;
