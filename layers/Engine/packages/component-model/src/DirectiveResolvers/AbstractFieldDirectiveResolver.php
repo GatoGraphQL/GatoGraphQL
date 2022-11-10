@@ -92,6 +92,11 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      */
     protected DirectiveDataAccessorInterface $directiveDataAccessor;
     protected bool $hasValidationErrors;
+    /**
+     * When the directive args have promises, they must be
+     * validated. Cache the validation result.
+     */
+    protected bool $validatedDirectiveArgsHaveErrors;
 
     /**
      * @var array<string,array<string,mixed>>
@@ -301,8 +306,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         array $idFieldSet,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
+        $hasArgumentReferencingPromise = $this->directive->hasArgumentReferencingPromise();
+        if ($hasArgumentReferencingPromise && $this->validatedDirectiveArgsHaveErrors) {
+            return null;
+        }
         $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
-        if ($this->directive->hasArgumentReferencingPromise()) {
+        if ($hasArgumentReferencingPromise && $this->validatedDirectiveArgsHaveErrors === null) {
             /**
              * Perform validations
              */
@@ -314,8 +323,10 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
                 $engineIterationFeedbackStore,
             );
             if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
+                $this->validatedDirectiveArgsHaveErrors = true;
                 return null;
             }
+            $this->validatedDirectiveArgsHaveErrors = false;
         }
         return $directiveArgs;
     }
