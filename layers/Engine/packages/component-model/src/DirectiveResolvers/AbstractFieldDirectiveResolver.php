@@ -285,40 +285,38 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         return $directiveArgs;
     }
 
-    protected function getResolvedDirectiveArgs(): array
-    {
-        return $this->directiveDataAccessor->getDirectiveArgs();
-    }
-
     /**
      * Whenever a directive arg contains a promise to be resolved on
      * the document, the directiveArgs and its validation must be
      * performed only once the promise has been resolved.
      *
-     * @param FieldInterface[] $fields
+     * Otherwise, if there are no promises, all the validations have
+     * already been performed.
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return array<string,mixed>|null Null if there was an error validating the directive
      */
-    protected function getResolvedDirectiveArgsForDocument(
+    protected function getResolvedDirectiveArgs(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $fields,
+        array $idFieldSet,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): ?array {
+    ): array {
         $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
-        
-        /**
-         * Perform validations
-         */
-        $errorCount = $engineIterationFeedbackStore->getErrorCount();
-        $this->validateDirectiveArgs(
-            $directiveArgs,
-            $relationalTypeResolver,
-            $fields,
-            $engineIterationFeedbackStore,
-        );
-        if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
-            return null;
+        if ($this->directive->hasArgumentReferencingPromise()) {
+            /**
+             * Perform validations
+             */
+            $errorCount = $engineIterationFeedbackStore->getErrorCount();
+            $this->validateDirectiveArgs(
+                $directiveArgs,
+                $relationalTypeResolver,
+                MethodHelpers::getFieldsFromIDFieldSet($idFieldSet),
+                $engineIterationFeedbackStore,
+            );
+            if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
+                return null;
+            }
         }
-
         return $directiveArgs;
     }
 
