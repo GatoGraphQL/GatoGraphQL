@@ -24,6 +24,7 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
     public final const E13 = '13';
     public final const E14 = '14';
     public final const E15 = '15';
+    public final const E16 = '16';
     public final const E_5_8_3 = '5.8.3';
 
     protected function getNamespace(): string
@@ -52,6 +53,7 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E13,
             self::E14,
             self::E15,
+            self::E16,
             self::E_5_8_3,
         ];
     }
@@ -74,6 +76,7 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E13 => $this->__('The name of the operation must be a string, but \'%s\' was provided', 'graphql-parser'),
             self::E14 => $this->__('There is no operation with name \'%s\'', 'graphql-parser'),
             self::E15 => $this->__('Dependency on operation \'%s\' forms a loop', 'graphql-parser'),
+            self::E16 => $this->__('No current object ID has been set on the Application State, hence the Promise concerning the \'Object Resolved Dynamic Variable "%s"\' cannot be resolved. Most likely the dynamic variable is not supported at that AST node', 'graphql-server'),
             self::E_5_8_3 => $this->__('No value has been exported for dynamic variable \'%s\'', 'graphql-server'),
             default => parent::getMessagePlaceholder($code),
         };
