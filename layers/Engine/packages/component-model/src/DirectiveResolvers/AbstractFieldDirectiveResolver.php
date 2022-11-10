@@ -285,6 +285,11 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         return $directiveArgs;
     }
 
+    protected function getResolvedDirectiveArgs(): array
+    {
+        return $this->directiveDataAccessor->getDirectiveArgs();
+    }
+
     /**
      * Whenever a directive arg contains a promise to be resolved on
      * the document, the directiveArgs and its validation must be
