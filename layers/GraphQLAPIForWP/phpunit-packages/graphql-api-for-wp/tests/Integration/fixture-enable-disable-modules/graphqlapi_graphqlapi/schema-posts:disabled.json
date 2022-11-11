@@ -1,0 +1,26 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'posts' on type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "posts(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "posts(pagination: {limit: 3}) { ... }",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "posts": null
+    }
+}
