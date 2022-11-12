@@ -115,13 +115,13 @@ jobs:
                     INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD=${{ steps.create-instawp.outputs.iwp_wp_password }} \
                     vendor/bin/phpunit --filter=Integration
 
-            # -   name: Destroy InstaWP instance
-            #     uses: instawp/wordpress-testing-automation@main
-            #     id: destroy-instawp
-            #     if: ${{ always() }}
-            #     with:
-            #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            #         INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-            #         INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPConfig.templateSlug }}
-            #         REPO_ID: ${{ matrix.instaWPConfig.repoID }}
-            #         INSTAWP_ACTION: destroy-site
+            -   name: Destroy InstaWP instance
+                uses: instawp/wordpress-testing-automation@main
+                id: destroy-instawp
+                if: ${{ always() }}
+                with:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
+                    INSTAWP_TEMPLATE_SLUG: ${{ matrix.instaWPConfig.templateSlug }}
+                    REPO_ID: ${{ matrix.instaWPConfig.repoID }}
+                    INSTAWP_ACTION: destroy-site
