@@ -4,7 +4,7 @@
 # it will not produce an error
 #######################################################
 query {
-  user(by: {id: 1}) {
+  user(by: {id: 2}) {
     avatar {
       id
     }
