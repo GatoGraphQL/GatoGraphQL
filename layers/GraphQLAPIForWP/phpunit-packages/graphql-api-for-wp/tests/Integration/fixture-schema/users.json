@@ -262,12 +262,12 @@
         ],
         "usersByIds": [
             {
-                "id": 2,
-                "name": "Blogger Davenport"
+                "id": 4,
+                "name": "Contributor Johnson"
             },
             {
-                "id": 1,
-                "name": "admin"
+                "id": 2,
+                "name": "Blogger Davenport"
             }
         ],
         "usersByMetaQuery": [
@@ -294,16 +294,16 @@
         ],
         "usersSortedASC": [
             {
-                "id": 1,
-                "name": "admin"
-            },
-            {
                 "id": 5,
                 "name": "Author Marquez"
             },
             {
                 "id": 2,
                 "name": "Blogger Davenport"
+            },
+            {
+                "id": 4,
+                "name": "Contributor Johnson"
             }
         ],
         "usersSortedDESC": [

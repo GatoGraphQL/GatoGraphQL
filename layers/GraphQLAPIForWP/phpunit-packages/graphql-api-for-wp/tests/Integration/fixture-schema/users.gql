@@ -56,7 +56,7 @@ query {
     id
     name
   }
-  usersByIds: users(filter: { ids: [1, 2] }) {
+  usersByIds: users(filter: { ids: [2, 4] }) {
     id
     name
   }
@@ -81,7 +81,7 @@ query {
     name
   }
 
-  usersSortedASC: users(pagination: { limit: 3 }, sort: { by: NAME, order: ASC}) {
+  usersSortedASC: users(pagination: { limit: 3 }, sort: { by: NAME, order: ASC}, filter: { excludeIDs: [1] }) {
     id
     name
   }
