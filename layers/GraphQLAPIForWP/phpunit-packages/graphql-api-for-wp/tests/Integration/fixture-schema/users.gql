@@ -85,7 +85,7 @@ query {
     id
     name
   }
-  usersSortedDESC: users(pagination: { limit: 3 }, sort: { by: NAME, order: DESC}) {
+  usersSortedDESC: users(pagination: { limit: 3 }, sort: { by: NAME, order: DESC}, filter: { excludeIDs: [1] }) {
     id
     name
   }
