@@ -203,11 +203,12 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         if ($iterationEntries->count() === 0) {
             return;
         }
+        $databaseEntryManager = $this->getDatabaseEntryManager();
         /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
         foreach ($iterationEntries as $iterationRelationalTypeResolver) {
             $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
             $entries = $iterationEntries[$iterationRelationalTypeResolver];
-            $dbNameEntries = $this->getDatabaseEntryManager()->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
+            $dbNameEntries = $databaseEntryManager->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
             foreach ($dbNameEntries as $dbName => $entries) {
                 /** @var SplObjectStorage<FieldInterface,mixed> */
                 $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
