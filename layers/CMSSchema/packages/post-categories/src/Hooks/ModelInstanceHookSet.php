@@ -68,12 +68,13 @@ class ModelInstanceHookSet extends AbstractHookSet
                     false
                 )
             ) {
+                $postCategoryTypeAPI = $this->getPostCategoryTypeAPI();
                 $postID = App::getState(['routing', 'queried-object-id']);
                 $categories = [];
-                foreach ($this->getPostCategoryTypeAPI()->getCustomPostCategories($postID) as $cat) {
-                    $categoryID = is_object($cat) ? $this->getPostCategoryTypeAPI()->getCategoryID($cat) : $cat;
+                foreach ($postCategoryTypeAPI->getCustomPostCategories($postID) as $cat) {
+                    $categoryID = is_object($cat) ? $postCategoryTypeAPI->getCategoryID($cat) : $cat;
                     /** @var string */
-                    $slug = $this->getPostCategoryTypeAPI()->getCategorySlug($cat);
+                    $slug = $postCategoryTypeAPI->getCategorySlug($cat);
                     $categories[] = $slug . $categoryID;
                 }
                 $elements[] = $this->__('categories:', 'post-categories') . implode('.', $categories);
