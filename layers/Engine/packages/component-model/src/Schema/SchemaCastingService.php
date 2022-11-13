@@ -52,6 +52,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
         WithArgumentsInterface $withArgumentsAST,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
+        $inputCoercingService = $this->getInputCoercingService();
         // Cast all argument values
         foreach ($argumentKeyValues as $argName => $argValue) {
             /**
@@ -121,7 +122,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                  *
                  * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
                  */
-                $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+                $argValue = $inputCoercingService->maybeConvertInputValueFromSingleToList(
                     $argValue,
                     $fieldOrDirectiveArgIsArrayType,
                     $fieldOrDirectiveArgIsArrayOfArraysType,
@@ -139,7 +140,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
 
             // Validate that the expected array/non-array input is provided
             $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-            $this->getInputCoercingService()->validateInputArrayModifiers(
+            $inputCoercingService->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $argName,
@@ -168,7 +169,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              * @var bool $fieldOrDirectiveArgIsArrayType
              * @var bool $fieldOrDirectiveArgIsArrayOfArraysType
              */
-            $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
+            $coercedArgValue = $inputCoercingService->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
@@ -189,7 +190,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              * Obtain the deprecations
              */
             if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
-                $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
+                $deprecationMessages = $inputCoercingService->getInputValueDeprecationMessages(
                     $fieldOrDirectiveArgTypeResolver,
                     $coercedArgValue,
                     $fieldOrDirectiveArgIsArrayType,

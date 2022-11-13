@@ -17,13 +17,14 @@ trait UseObjectDictionaryTypeDataLoaderTrait
      */
     public function getObjects(array $ids): array
     {
+        $objectDictionary = $this->getObjectDictionary();
         $objectTypeResolverClass = get_class($this->getObjectTypeResolver());
         $objects = [];
         foreach ($ids as $id) {
-            if (!$this->getObjectDictionary()->has($objectTypeResolverClass, $id)) {
-                $this->getObjectDictionary()->set($objectTypeResolverClass, $id, $this->getObjectTypeNewInstance($id));
+            if (!$objectDictionary->has($objectTypeResolverClass, $id)) {
+                $objectDictionary->set($objectTypeResolverClass, $id, $this->getObjectTypeNewInstance($id));
             }
-            $objects[] = $this->getObjectDictionary()->get($objectTypeResolverClass, $id);
+            $objects[] = $objectDictionary->get($objectTypeResolverClass, $id);
         }
         return $objects;
     }
