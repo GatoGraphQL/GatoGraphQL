@@ -93,10 +93,11 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         array $fragments,
     ): array {
         $fields = [];
+        $astHelperService = $this->getASTHelperService();
         foreach ($operations as $operation) {
             $fields = array_merge(
                 $fields,
-                $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
+                $astHelperService->getAllFieldsFromFieldsOrFragmentBonds(
                     $operation->getFieldsOrFragmentBonds(),
                     $fragments,
                 )
@@ -204,6 +205,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
+        $astHelperService = $this->getASTHelperService();
+
         $appStateManager = App::getAppStateManager();
 
         $resolvedObjectRet ??= [];
@@ -288,7 +291,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             /** @var ExecutableDocument */
             $executableDocument = App::getState('executable-document-ast');
             $fragments = $executableDocument->getDocument()->getFragments();
-            $relationalNestedFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds(
+            $relationalNestedFields = $astHelperService->getAllFieldsFromFieldsOrFragmentBonds(
                 $relationalField->getFieldsOrFragmentBonds(),
                 $fragments
             );
