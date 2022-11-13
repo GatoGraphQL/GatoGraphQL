@@ -60,12 +60,13 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function getFieldsFromExecutableDocument(
         ExecutableDocument $executableDocument,
     ): array {
+        $graphQLQueryASTTransformationService = $this->getGraphQLQueryASTTransformationService();
         $superRootOperationFields = [];
         $document = $executableDocument->getDocument();
         /** @var OperationInterface[] */
         $operations = $executableDocument->getMultipleOperationsToExecute();
         foreach ($operations as $operation) {
-            $superRootOperationFields[] = $this->getGraphQLQueryASTTransformationService()->getGraphQLSuperRootOperationField(
+            $superRootOperationFields[] = $graphQLQueryASTTransformationService->getGraphQLSuperRootOperationField(
                 $document,
                 $operation
             );
