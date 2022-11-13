@@ -159,6 +159,8 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     {
         $interfaceTypeFieldResolversByField = [];
 
+        $attachableExtensionManager = $this->getAttachableExtensionManager();
+
         // Get the InterfaceTypeFieldResolvers attached to this InterfaceTypeResolver
         // and to all the interfaces it implements
         $classStack = [
@@ -169,7 +171,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
             // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
             do {
                 /** @var InterfaceTypeFieldResolverInterface[] */
-                $attachedInterfaceTypeFieldResolvers = $this->getAttachableExtensionManager()->getAttachedExtensions($class, AttachableExtensionGroups::INTERFACE_TYPE_FIELD_RESOLVERS);
+                $attachedInterfaceTypeFieldResolvers = $attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::INTERFACE_TYPE_FIELD_RESOLVERS);
                 foreach ($attachedInterfaceTypeFieldResolvers as $interfaceTypeFieldResolver) {
                     // Process the fields which have not been processed yet
                     $extensionFieldNames = $this->getFieldNamesResolvedByInterfaceTypeFieldResolver($interfaceTypeFieldResolver);
