@@ -56,10 +56,12 @@ jobs:
             -   id: output_data
                 run: |
                     echo "instawp_config_entries=$(vendor/bin/monorepo-builder instawp-config-entries-json --config=config/monorepo-builder/instawp-config-entries-json.php)" >> $GITHUB_OUTPUT
+                    echo "instawp_instance_sleeping_time=$(vendor/bin/monorepo-builder env-var INSTAWP_INSTANCE_SLEEPING_TIME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
 
         outputs:
             artifact_url: ${{ steps.artifact-url.outputs.result }}
             instawp_config_entries: ${{ steps.output_data.outputs.instawp_config_entries }}
+            instawp_instance_sleeping_time: ${{ steps.output_data.outputs.instawp_instance_sleeping_time }}
 
     process:
         name: Launch InstaWP site from template "${{ matrix.instaWPConfig.templateSlug }}" and execute integration tests against it
@@ -104,8 +106,9 @@ jobs:
                     instawp_domain="$(echo "${{ steps.create-instawp.outputs.instawp_url }}" | sed -e s#https://##)"
                     echo "instawp-domain=$(echo $instawp_domain)" >> $GITHUB_OUTPUT
 
-            -   name: Sleep a bit to make sure InstaWP is ready
-                run: sleep 180s
+            -   name: Sleep ${{ needs.provide_data.outputs.instawp_instance_sleeping_time }} seconds to make sure InstaWP is ready
+                if: ${{ needs.provide_data.outputs.instawp_instance_sleeping_time }}
+                run: "sleep ${{ needs.provide_data.outputs.instawp_instance_sleeping_time }}s"
                 shell: bash
 
             -   name: Run tests
