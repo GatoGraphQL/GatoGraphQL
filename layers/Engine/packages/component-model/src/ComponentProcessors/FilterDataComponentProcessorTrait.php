@@ -22,9 +22,10 @@ trait FilterDataComponentProcessorTrait
     public function filterHeadcomponentDataloadQueryArgs(Component $component, array &$query, ?array $source = null): void
     {
         if ($activeDataloadQueryArgsFilteringComponents = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
+            $componentProcessorManager = $this->getComponentProcessorManager();
             foreach ($activeDataloadQueryArgsFilteringComponents as $subcomponent) {
                 /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($subcomponent);
+                $dataloadQueryArgsFilterInputComponentProcessor = $componentProcessorManager->getComponentProcessor($subcomponent);
                 $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subcomponent, $source);
                 if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($subcomponent)) {
                     $filterInput->filterDataloadQueryArgs($query, $value);
@@ -49,12 +50,13 @@ trait FilterDataComponentProcessorTrait
         $components = [];
         // Check if the component has any filtercomponent
         if ($dataloadQueryArgsFilteringComponents = $this->getDataloadQueryArgsFilteringComponents($component)) {
+            $componentProcessorManager = $this->getComponentProcessorManager();
             // Check if if we're currently filtering by any filtercomponent
             $components = array_filter(
                 $dataloadQueryArgsFilteringComponents,
-                function (Component $component) use ($source) {
+                function (Component $component) use ($source, $componentProcessorManager) {
                     /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-                    $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($component);
+                    $dataloadQueryArgsFilterInputComponentProcessor = $componentProcessorManager->getComponentProcessor($component);
                     return $dataloadQueryArgsFilterInputComponentProcessor->isInputSetInSource($component, $source);
                 }
             );
@@ -69,9 +71,10 @@ trait FilterDataComponentProcessorTrait
      */
     public function getDataloadQueryArgsFilteringComponents(Component $component): array
     {
+        $componentProcessorManager = $this->getComponentProcessorManager();
         return array_values(array_filter(
             $this->getDatasetcomponentTreeSectionFlattenedComponents($component),
-            fn (Component $component) => $this->getComponentProcessorManager()->getComponentProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface
+            fn (Component $component) => $componentProcessorManager->getComponentProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface
         ));
     }
 }
