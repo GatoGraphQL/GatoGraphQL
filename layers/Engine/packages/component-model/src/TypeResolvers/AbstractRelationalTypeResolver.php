@@ -869,11 +869,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $typeResolverDecorators = [];
 
+        $attachableExtensionManager = $this->getAttachableExtensionManager();
+
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
         do {
             // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
             /** @var RelationalTypeResolverDecoratorInterface[] */
-            $attachedRelationalTypeResolverDecorators = array_reverse($this->getAttachableExtensionManager()->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
+            $attachedRelationalTypeResolverDecorators = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::RELATIONAL_TYPE_RESOLVER_DECORATORS));
             // Order them by priority: higher priority are evaluated first
             $extensionPriorities = array_map(
                 fn (RelationalTypeResolverDecoratorInterface $typeResolverDecorator) => $typeResolverDecorator->getPriorityToAttachToClasses(),
@@ -1047,6 +1049,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        $directivePipelineService = $this->getDirectivePipelineService();
         // Iterate while there are directives with data to be processed
         while ($this->directiveIDFieldSet->count() > 0) {
             /**
@@ -1245,7 +1248,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
-            $directivePipeline = $this->getDirectivePipelineService()->getDirectivePipeline($directiveResolvers);
+            $directivePipeline = $directivePipelineService->getDirectivePipeline($directiveResolvers);
             $directivePipeline->resolveDirectivePipeline(
                 $this,
                 $pipelineIDFieldSet,
@@ -1398,6 +1401,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $directiveNameResolvers = [];
 
+        $attachableExtensionManager = $this->getAttachableExtensionManager();
+
         // Directives can also be attached to the interface implemented by this typeResolver
         $classes = array_merge(
             [
@@ -1413,7 +1418,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             do {
                 // Important: do array_reverse to enable more specific hooks, which are initialized later on in the project, to be the chosen ones (if their priority is the same)
                 /** @var FieldDirectiveResolverInterface[] */
-                $attachedFieldDirectiveResolvers = array_reverse($this->getAttachableExtensionManager()->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVE_RESOLVERS));
+                $attachedFieldDirectiveResolvers = array_reverse($attachableExtensionManager->getAttachedExtensions($class, AttachableExtensionGroups::DIRECTIVE_RESOLVERS));
                 // Order them by priority: higher priority are evaluated first
                 $extensionPriorities = array_map(
                     fn (FieldDirectiveResolverInterface $directiveResolver) => $directiveResolver->getPriorityToAttachToClasses(),
