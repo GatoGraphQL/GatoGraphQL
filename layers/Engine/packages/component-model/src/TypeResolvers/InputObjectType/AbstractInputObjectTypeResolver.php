@@ -222,6 +222,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         $coercedInputValue = new stdClass();
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
 
+        $inputCoercingService = $this->getInputCoercingService();
+
         /**
          * Inject all properties with default value
          */
@@ -330,7 +332,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                  *
                  * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
                  */
-                $inputFieldValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+                $inputFieldValue = $inputCoercingService->maybeConvertInputValueFromSingleToList(
                     $inputFieldValue,
                     $inputFieldIsArrayType,
                     $inputFieldIsArrayOfArraysType,
@@ -339,7 +341,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
             // Validate that the expected array/non-array input is provided
             $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-            $this->getInputCoercingService()->validateInputArrayModifiers(
+            $inputCoercingService->validateInputArrayModifiers(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldName,
@@ -369,7 +371,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * @var bool $inputFieldIsArrayType
              * @var bool $inputFieldIsArrayOfArraysType
              */
-            $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
+            $coercedInputFieldValue = $inputCoercingService->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
@@ -500,6 +502,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         $inputValueDeprecationMessages = [];
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
+        $inputCoercingService = $this->getInputCoercingService();
 
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             // Check that the input field exists
@@ -509,7 +512,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $inputFieldIsArrayType = $inputFieldIsArrayOfArraysType || ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
 
-                $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
+                $deprecationMessages = $inputCoercingService->getInputValueDeprecationMessages(
                     $inputFieldTypeResolver,
                     $inputFieldValue,
                     $inputFieldIsArrayType,
