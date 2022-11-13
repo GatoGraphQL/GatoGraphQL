@@ -48,6 +48,8 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
+        $restDataStructureFormatter = $this->getRestDataStructureFormatter();
+
         $ret = array();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -71,7 +73,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                 'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => $this->getRestDataStructureFormatter()->getName(),
+                    'datastructure' => $restDataStructureFormatter->getName(),
                 ],
             ];
         }
