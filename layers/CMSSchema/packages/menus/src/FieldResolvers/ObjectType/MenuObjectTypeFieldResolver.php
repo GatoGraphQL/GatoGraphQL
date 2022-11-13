@@ -196,9 +196,11 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'items':
                 $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
 
+                $menuItemRuntimeRegistry = $this->getMenuItemRuntimeRegistry();
+
                 // Save the MenuItems on the dynamic registry
                 foreach ($menuItems as $menuItem) {
-                    $this->getMenuItemRuntimeRegistry()->storeMenuItem($menuItem);
+                    $menuItemRuntimeRegistry->storeMenuItem($menuItem);
                 }
 
                 // Return the IDs for the top-level items (those with no parent)

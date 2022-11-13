@@ -86,6 +86,8 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
             return false;
         }
 
+        $astHelperService = $this->getASTHelperService();
+
         $thisFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds($this->getFieldsOrFragmentBonds(), $fragments);
         $againstFields = $this->getASTHelperService()->getAllFieldsFromFieldsOrFragmentBonds($relationalField->getFieldsOrFragmentBonds(), $fragments);
 
@@ -113,7 +115,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
         foreach ($thisFields as $thisField) {
             $equivalentFieldsInOppositeSet = array_filter(
                 $againstFields,
-                fn (FieldInterface $oppositeField) => $this->getASTHelperService()->isFieldEquivalentToField($thisField, $oppositeField, $fragments)
+                fn (FieldInterface $oppositeField) => $astHelperService->isFieldEquivalentToField($thisField, $oppositeField, $fragments)
             );
             if ($equivalentFieldsInOppositeSet === []) {
                 return false;
@@ -122,7 +124,7 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
         foreach ($againstFields as $againstField) {
             $equivalentFieldsInOppositeSet = array_filter(
                 $thisFields,
-                fn (FieldInterface $oppositeField) => $this->getASTHelperService()->isFieldEquivalentToField($againstField, $oppositeField, $fragments)
+                fn (FieldInterface $oppositeField) => $astHelperService->isFieldEquivalentToField($againstField, $oppositeField, $fragments)
             );
             if ($equivalentFieldsInOppositeSet === []) {
                 return false;

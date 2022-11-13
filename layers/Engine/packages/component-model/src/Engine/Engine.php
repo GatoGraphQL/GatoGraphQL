@@ -776,12 +776,14 @@ class Engine implements EngineInterface
 
         // Starting from what components must do the rendering. Allow for empty arrays (eg: componentPaths[]=somewhatevervalue)
         $not_excluded_component_sets = $this->getComponentFilterManager()->getNotExcludedComponentSets();
-        if (!is_null($not_excluded_component_sets)) {
+        if ($not_excluded_component_sets !== null) {
+            $componentHelpers = $this->getComponentHelpers();
+
             // Print the settings id of each component. Then, a component can feed data to another one by sharing the same settings id (eg: self::COMPONENT_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::COMPONENT_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = [];
             foreach ($not_excluded_component_sets as $components) {
                 $filteredsettings[] = array_map(
-                    $this->getComponentHelpers()->getComponentOutputName(...),
+                    $componentHelpers->getComponentOutputName(...),
                     $components
                 );
             }
@@ -1135,9 +1137,10 @@ class Engine implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
         $array_pointer = &$array;
+        $componentHelpers = $this->getComponentHelpers();
         foreach ($component_path as $subcomponent) {
             // Notice that when generating the array for the response, we don't use $component anymore, but $componentOutputName
-            $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subcomponent);
+            $subcomponentOutputName = $componentHelpers->getComponentOutputName($subcomponent);
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty])) {
@@ -1148,7 +1151,7 @@ class Engine implements EngineInterface
             $array_pointer = &$array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty];
         }
 
-        $componentOutputName = $this->getComponentHelpers()->getComponentOutputName($component);
+        $componentOutputName = $componentHelpers->getComponentOutputName($component);
         $array_pointer[$componentOutputName][$key] = $value;
     }
 
@@ -1269,6 +1272,11 @@ class Engine implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
+        $componentPathManager = $this->getComponentPathManager();
+        $componentHelpers = $this->getComponentHelpers();
+        $componentProcessorManager = $this->getComponentProcessorManager();
+        $componentPathHelpers = $this->getComponentPathHelpers();
+
         // The components below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
         foreach ($component_fullpaths as $component_path) {
@@ -1276,15 +1284,15 @@ class Engine implements EngineInterface
             // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($component_path);
             /** @var Component $component */
-            $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
+            $componentFullName = $componentHelpers->getComponentFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
-            $this->getComponentPathManager()->setPropagationCurrentPath($component_path);
+            $componentPathManager->setPropagationCurrentPath($component_path);
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
             foreach ($component_path as $subcomponent) {
-                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
+                $subcomponentFullName = $componentHelpers->getComponentFullName($subcomponent);
                 $data_properties = &$data_properties[$subcomponentFullName][$subcomponentsOutputProperty];
             }
             $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
@@ -1313,7 +1321,7 @@ class Engine implements EngineInterface
             $props = &$root_props;
             $model_props = &$root_model_props;
             foreach ($component_path as $subcomponent) {
-                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
+                $subcomponentFullName = $componentHelpers->getComponentFullName($subcomponent);
                 $props = &$props[$subcomponentFullName][Props::SUBCOMPONENTS];
                 $model_props = &$model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
             }
@@ -1333,7 +1341,7 @@ class Engine implements EngineInterface
                 $component_props = &$props;
             }
 
-            $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
+            $processor = $componentProcessorManager->getComponentProcessor($component);
 
             // The component path key is used for storing temporary results for later retrieval
             $component_path_key = $this->getComponentPathKey($component_path, $component);
@@ -1490,14 +1498,14 @@ class Engine implements EngineInterface
             $this->processAndAddComponentData($component_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other components to produce their own feedback using this component's data results
-            if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getComponentPathHelpers()->stringifyComponentPath(array_merge($component_path, array($component)))] ?? null) {
+            if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$componentPathHelpers->stringifyComponentPath(array_merge($component_path, array($component)))] ?? null) {
                 foreach ($referencer_componentfullpaths as $referencer_componentPath) {
                     $referencer_component = array_pop($referencer_componentPath);
 
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
                     foreach ($referencer_componentPath as $subcomponent) {
-                        $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
+                        $subcomponentFullName = $componentHelpers->getComponentFullName($subcomponent);
                         $referencer_props = &$referencer_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                         $referencer_model_props = &$referencer_model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                     }
@@ -1542,7 +1550,7 @@ class Engine implements EngineInterface
 
         // Reset the filtermanager state and the pathmanager current path
         $this->getComponentFilterManager()->setNeverExclude(false);
-        $this->getComponentPathManager()->setPropagationCurrentPath();
+        $componentPathManager->setPropagationCurrentPath();
 
         $ret = [];
 
@@ -1667,6 +1675,8 @@ class Engine implements EngineInterface
         // Initiate a new $messages interchange across directives
         $messages = [];
 
+        $databaseEntryManager = $this->getDatabaseEntryManager();
+
         // Iterate while there are dataloaders with data to be processed
         while (!empty($engineState->relationalTypeOutputKeyIDFieldSets)) {
             // Move the pointer to the first element, and get it
@@ -1732,7 +1742,7 @@ class Engine implements EngineInterface
              */
             if ($iterationResolvedIDFieldValues) {
                 // If the type is union, then add the type corresponding to each object on its ID
-                $resolvedIDFieldValues = $this->getDatabaseEntryManager()->moveEntriesWithIDUnderDBName($iterationResolvedIDFieldValues, $relationalTypeResolver);
+                $resolvedIDFieldValues = $databaseEntryManager->moveEntriesWithIDUnderDBName($iterationResolvedIDFieldValues, $relationalTypeResolver);
                 foreach ($resolvedIDFieldValues as $dbName => $entries) {
                     $databases[$dbName] ??= [];
                     $this->addDatasetToDatabase($databases[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects);
@@ -1879,6 +1889,7 @@ class Engine implements EngineInterface
         array &$unionTypeOutputKeyIDs,
         array &$combinedUnionTypeOutputKeyIDs,
     ): void {
+        $dataloadHelperService = $this->getDataloadHelperService();
         $engineState = App::getEngineState();
         $targetTypeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();
         /** @var ComponentFieldNodeInterface $componentFieldNode */
@@ -1904,12 +1915,12 @@ class Engine implements EngineInterface
              *
              * The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
              */
-            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+            $subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentField(
                 $relationalTypeResolver,
                 $field,
             );
             if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
-                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                $subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentField(
                     $targetObjectTypeResolver,
                     $field,
                 );
@@ -2149,9 +2160,11 @@ class Engine implements EngineInterface
                 $moduleInfo = App::getModule(Module::class)->getInfo();
                 $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
+                $componentHelpers = $this->getComponentHelpers();
+
                 // Advance the position of the array into the current component
                 foreach ($component_path as $subcomponent) {
-                    $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subcomponent);
+                    $subcomponentOutputName = $componentHelpers->getComponentOutputName($subcomponent);
                     $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] = $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] ?? [];
                     $componentdata = &$componentdata[$subcomponentOutputName][$subcomponentsOutputProperty];
                 }

@@ -55,6 +55,8 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
+        $postCategoryTypeAPI = $this->getPostCategoryTypeAPI();
+
         $ret = array();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -80,7 +82,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing' => [
-                        'taxonomy-name' => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
+                        'taxonomy-name' => $postCategoryTypeAPI->getPostCategoryTaxonomyName(),
                     ],
                 ],
             ];

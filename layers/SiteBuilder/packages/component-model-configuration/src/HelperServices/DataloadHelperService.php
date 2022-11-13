@@ -30,12 +30,13 @@ class DataloadHelperService implements DataloadHelperServiceInterface
      */
     public function addFilterParams(string $url, array $componentValues = []): string
     {
+        $componentProcessorManager = $this->getComponentProcessorManager();
         $args = [];
         foreach ($componentValues as $componentValue) {
             $component = $componentValue['component'];
             $value = $componentValue['value'];
             /** @var FilterInputComponentProcessorInterface */
-            $componentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($component);
+            $componentProcessor = $componentProcessorManager->getComponentProcessor($component);
             $args[$componentProcessor->getName($component)] = $value;
         }
         return GeneralUtils::addQueryArgs($args, $url);

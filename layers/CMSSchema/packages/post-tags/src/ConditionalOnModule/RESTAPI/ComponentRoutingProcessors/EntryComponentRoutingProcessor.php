@@ -77,6 +77,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
+        $postTagTypeAPI = $this->getPostTagTypeAPI();
+        $restDataStructureFormatter = $this->getRestDataStructureFormatter();
+
         $ret = array();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -96,7 +99,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => $this->getRestDataStructureFormatter()->getName(),
+                    'datastructure' => $restDataStructureFormatter->getName(),
                 ],
             ];
         }
@@ -118,9 +121,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
-                    'datastructure' => $this->getRestDataStructureFormatter()->getName(),
+                    'datastructure' => $restDataStructureFormatter->getName(),
                     'routing' => [
-                        'taxonomy-name' => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
+                        'taxonomy-name' => $postTagTypeAPI->getPostTagTaxonomyName(),
                     ],
                 ],
             ];
