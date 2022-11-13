@@ -26,6 +26,8 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
      */
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
+        $instanceManager = $this->getInstanceManager();
+
         $mandatoryDirectivesForDirectives = [];
         foreach ($this->getEntries() as $entry) {
             $directiveResolverClass = $entry[0];
@@ -36,13 +38,13 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
              * So check that the instance exists, and if it doesn't, then
              * skip processing the entry
              */
-            if (!$this->getInstanceManager()->hasInstance($directiveResolverClass)) {
+            if (!$instanceManager->hasInstance($directiveResolverClass)) {
                 continue;
             }
             /**
              * Just to be on the safe side, also validate the instance is a directive
              */
-            $directiveResolver = $this->getInstanceManager()->getInstance($directiveResolverClass);
+            $directiveResolver = $instanceManager->getInstance($directiveResolverClass);
             if (!($directiveResolver instanceof FieldDirectiveResolverInterface)) {
                 continue;
             }

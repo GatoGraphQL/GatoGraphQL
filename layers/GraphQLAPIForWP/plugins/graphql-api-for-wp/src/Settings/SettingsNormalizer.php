@@ -35,10 +35,11 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      */
     public function normalizeSettings(array $values): array
     {
+        $moduleRegistry = $this->getModuleRegistry();
         $items = $this->getAllSettingsItems();
         foreach ($items as $item) {
             $module = $item['module'];
-            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
             foreach ($item['settings'] as $itemSetting) {
                 $option = $itemSetting[Properties::INPUT] ?? null;
                 // No option => it is a label
@@ -132,10 +133,11 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      */
     public function getAllSettingsItems(): array
     {
+        $moduleRegistry = $this->getModuleRegistry();
         $items = [];
-        $modules = $this->getModuleRegistry()->getAllModules(true, true, false, true);
+        $modules = $moduleRegistry->getAllModules(true, true, false, true);
         foreach ($modules as $module) {
-            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
             $items[] = [
                 'module' => $module,
                 'id' => $moduleResolver->getID($module),
