@@ -1417,11 +1417,9 @@ The plugin upgraded [GraphiQL](https://github.com/graphql/graphiql/tree/main/pac
 
 ## Finished decoupling the GraphQL server code from WordPress
 
-The underlying GraphQL server powering the plugin can now be installed and executed as a standalone PHP component, i.e. independently of WordPress 🙏🎉👏💪🚀.
+The underlying GraphQL server powering the plugin can now be installed and executed as a standalone PHP component, i.e. independently of WordPress 🙏🎉👏💪🚀. This opens the doors to using the GraphQL API with other frameworks (eg: Laravel), and wherever WordPress is not available (such as when executing a Continous Integration task).
 
-This can be appreciated in the plugin's unit tests, which execute the GraphQL server, yet there's no instance of WordPress running (and as such, they can be executed in GitHub Actions).
-
-For instance, check [this PHPUnit test](https://github.com/leoloso/PoP/blob/b6cc58227a06bc2e58b5d31da0d3fdaeec7eacad/layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/WPFakerFixtureQueryExecutionGraphQLServerTest.php), which asserts that [this GraphQL query](https://github.com/leoloso/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/fixture/success/query.gql) produces [this response](https://github.com/leoloso/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/fixture/success/query.json) (dummy WordPress data is used in these tests via the faker library).
+Full advantage of this feature has been taken to test this same plugin: the unit tests execute the GraphQL server, yet there's no instance of WordPress running, and the tests are being [executed in GitHub Actions](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml)). (For instance, check [this PHPUnit test](https://github.com/leoloso/PoP/blob/b6cc58227a06bc2e58b5d31da0d3fdaeec7eacad/layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/WPFakerFixtureQueryExecutionGraphQLServerTest.php), which asserts that [this GraphQL query](https://github.com/leoloso/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/fixture/success/query.gql) produces [this response](https://github.com/leoloso/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/fixture/success/query.json).)
 
 ## Browse documentation when editing a Schema Configuration, Custom Endpoint and Persisted Query
 
