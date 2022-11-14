@@ -834,7 +834,7 @@ As mentioned earlier on, all fields to fetch a single entity now receive argumen
 
 GraphQL operations (i.e. `query` and `mutation` operations) can now also receive directives.
 
-In the example below, directives `@skip` and `@include` can be declared in the operation, to have the query or mutation be processed or not based on some state (this example can't be run with `v0.9`; it will work in the future, once **Multiple Query Execution**, **Dynamic Variables** and **Function Fields** features are released):
+In the example below, directives `@skip` and `@include` can be declared in the operation, to have the query or mutation be processed or not based on some state (this example is demonstrative, but you can't run it yet: it depends on several features -**Multiple Query Execution**, **Dynamic Variables** and **Function Fields**- which are not available in the current version of the plugin):
 
 ```graphql
 query CheckIfPostExistsAndExportAsDynamicVariable
