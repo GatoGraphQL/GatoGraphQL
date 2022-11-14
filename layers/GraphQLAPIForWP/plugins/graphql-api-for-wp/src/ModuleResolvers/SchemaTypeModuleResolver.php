@@ -823,18 +823,18 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     // not "publish", and the API filters by "publish" entries
                     [
                         'attachment',
-                        'revision',
-                        'nav_menu_item',
                         'custom_css',
                         'customize_changeset',
+                        'nav_menu_item',
                         'oembed_cache',
+                        'revision',
                         'user_request',
-                        'wp_block',
                         'wp_area',
-                        'wp_template',
-                        'wp_template_part',
+                        'wp_block',
                         'wp_global_styles',
                         'wp_navigation',
+                        'wp_template_part',
+                        'wp_template',
                     ]
                 )
             );
