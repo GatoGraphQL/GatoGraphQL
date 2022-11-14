@@ -831,6 +831,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         'user_request',
                         'wp_block',
                         'wp_area',
+                        'wp_template',
+                        'wp_template_part',
+                        'wp_global_styles',
+                        'wp_navigation',
                     ]
                 )
             );
