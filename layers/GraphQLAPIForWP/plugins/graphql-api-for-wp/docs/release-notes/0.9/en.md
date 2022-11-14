@@ -782,7 +782,7 @@ mutation {
 
 This feature is not in the GraphQL spec yet, but it's expected to be eventually added: [graphql/graphql-spec#825](https://github.com/graphql/graphql-spec/pull/825). Since it is extremely valuable, it has already been implemented for the GraphQL API for WordPress.
 
-The "oneof" input object is a particular type of input object, where exactly one of the input fields must be provided as input (or otherwise it returns a validation error). This behavior introduces polymorphism for inputs.
+The "oneof" input object is a particular type of input object, where exactly one of the input fields must be provided as input, or otherwise it returns a validation error. This behavior introduces polymorphism for inputs.
 
 For instance, the field `Root.post` now receives a field argument `by`, which is a oneof input object allowing is to retrieve the post via different properties, such as by `id`:
 
