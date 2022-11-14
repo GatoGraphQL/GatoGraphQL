@@ -477,7 +477,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_GENERIC_CUSTOMPOSTS => [
-                ModuleSettingOptions::CUSTOMPOST_TYPES => ['post'],
+                ModuleSettingOptions::CUSTOMPOST_TYPES => ['post', 'page'],
             ],
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
