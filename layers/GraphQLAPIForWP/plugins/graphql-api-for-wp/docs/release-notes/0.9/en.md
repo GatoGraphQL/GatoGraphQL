@@ -666,7 +666,7 @@ Several standard custom scalar types have been implemented, so they are readily-
 - `URL`
 - `URLAbsolutePath`
 
-You can browse their source code [here](https://github.com/leoloso/PoP/tree/c523c8d58fefde40dee5866f29901da5286bd125/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType).
+You can browse their source code [here](https://github.com/leoloso/PoP/tree/b2d60e9a7ee886c7bd4cadbcae17f259b0c86f6c/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType).
 
 ### Implementation of `Numeric` scalar
 
