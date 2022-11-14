@@ -815,12 +815,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $rejectedGenericCustomPostTypes = \apply_filters(
                 self::HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES,
                 array_merge(
-                    // Post Types from GraphQL API are just for configuration
-                    // and contain private data
+                    /**
+                     * Post Types from GraphQL API are just for configuration
+                     * and contain private data
+                     */
                     $pluginCustomPostTypes,
-                    // WordPress internal CPTs
-                    // Attachment not allowed because its post_status="inherit",
-                    // not "publish", and the API filters by "publish" entries
+                    /**
+                     * WordPress internal CPTs
+                     * Attachment not allowed because its post_status="inherit",
+                     * not "publish", and the API filters by "publish" entries
+                     */
                     [
                         'attachment',
                         'custom_css',
