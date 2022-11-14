@@ -1351,7 +1351,7 @@ extend type __EnumValue {
 
 ### Implemented extension `isSensitiveDataElement`
 
-Several `extensions` fields expose property `isSensitiveDataElement`, to identify which are the “sensitive” data elements from the schema (i.e. elements which can only be accessed when "Expose Sensitive Data in the Schema" is enabled in the Schema Configuration).
+Several `extensions` fields expose property `isSensitiveDataElement`, to identify which are the “sensitive” data elements from the schema (i.e. elements which can only be accessed when "Expose Sensitive Data in the Schema" is enabled in the Schema Configuration, such as `User.roles`, or filtering posts by `status`).
 
 To retrieve this data, execute this query:
 
