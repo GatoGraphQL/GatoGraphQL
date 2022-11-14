@@ -653,7 +653,7 @@ Support for custom [scalar types](https://graphql.org/learn/schema/#scalar-types
 
 Custom scalars allow you to better represent your data, whether for getting an input via a field argument, or printing a customized output in the response.
 
-(The documentation on creating custom scalars will be ready only for v1.0... until then, check the [source code for an example implementation](https://github.com/leoloso/PoP/blob/a882ddf1300ee915b96683fbdf56f09be2ea0447/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType/EmailScalarTypeResolver.php)).
+(Here is the [source code for an example implementation](https://github.com/leoloso/PoP/blob/a882ddf1300ee915b96683fbdf56f09be2ea0447/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType/EmailScalarTypeResolver.php).)
 
 ### Implementation of standard custom scalar types
 
@@ -676,7 +676,7 @@ To support these, the new `Numeric` scalar has been introduced. This type acts a
 
 ### Support for the new "Specified By URL" meta property
 
-The custom scalars can expose the [`specifiedBy` property](https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars) (recently added to the GraphQL spec), providing an URL which defines the behavior of the scalar.
+The custom scalars can expose the [`specifiedBy` property](https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars), providing an URL which defines the behavior of the scalar.
 
 We can query the value via the `specifiedByURL` field, via introspection:
 
@@ -699,7 +699,7 @@ Enums are a special kind of scalar that is restricted to a particular set of all
 - Validate that any arguments of this type are one of the allowed values
 - Communicate through the type system that a field will always be one of a finite set of values
 
-(The documentation on creating custom enums will be ready only for v1.0... until then, check the [source code for an example implementation](https://github.com/leoloso/PoP/blob/c320cb1a4e5db48c5045cb37b66506b4a4a9a695/layers/Schema/packages/comments/src/TypeResolvers/EnumType/CommentStatusEnumTypeResolver.php)).
+(Here is the [source code for an example implementation](https://github.com/leoloso/PoP/blob/c320cb1a4e5db48c5045cb37b66506b4a4a9a695/layers/Schema/packages/comments/src/TypeResolvers/EnumType/CommentStatusEnumTypeResolver.php).)
 
 ### Implementation of several enum types
 
@@ -723,7 +723,7 @@ In addition, the GraphQL server now also supports [input types](https://graphql.
 
 Input objects allow you to pass complex objects as inputs to fields, which is particularly useful for mutations.
 
-(The documentation on creating input objects will be ready only for v1.0... until then, check the [source code for an example implementation](https://github.com/leoloso/PoP/blob/accfd9954aa6b26b9d38c39580764b1a38e0f539/layers/Schema/packages/posts/src/TypeResolvers/InputObjectType/RootPostsFilterInputObjectTypeResolver.php)).
+(Here is the [source code for an example implementation](https://github.com/leoloso/PoP/blob/accfd9954aa6b26b9d38c39580764b1a38e0f539/layers/Schema/packages/posts/src/TypeResolvers/InputObjectType/RootPostsFilterInputObjectTypeResolver.php).)
 
 ### Implementation of several input object types
 
