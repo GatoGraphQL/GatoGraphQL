@@ -735,9 +735,48 @@ For query fields, organize input objects under:
 - `sort`
 - `pagination`
 
+For instance:
+
+```graphql
+query {
+  posts(
+    filter:{
+      search: "Hello"
+    }
+    sort: {
+      by: TITLE
+      order: DESC
+    }
+    pagination: {
+      limit: 3,
+      offset: 3
+    }
+  ) {
+    id
+    title
+    content
+  }
+}
+```
+
 For mutation fields, organize input objects under:
 
 - `input`
+
+For instance:
+
+```graphql
+mutation {
+  createPost(input: {
+    title: "Adding some new post",
+    content: "passing the data via an input object"
+  }) {
+    id
+    title
+    content
+  }
+}
+```
 
 ## Oneof Input Objects
 
@@ -1577,11 +1616,11 @@ Since `content` fields are now of type `HTML`, to obtain it as a `String` the qu
 
 Mutation fields now use input objects instead of field arguments, hence they must be updated.
 
-For instance, mutation `createPost` now receives data via an input object under field argument `filter`:
+For instance, mutation `createPost` now receives data via an input object under field argument `input`:
 
 ```graphql
 mutation {
-  createPost(input:{
+  createPost(input: {
     title: "Saronga donga",
     content: "cento per cento italiano"
     status: publish,
