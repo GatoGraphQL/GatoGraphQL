@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers;
 
+use PoPCMSSchema\CustomPosts\Module;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -46,5 +49,13 @@ class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustom
     public function getPriorityToAttachToClasses(): int
     {
         return 0;
+    }
+
+    public function isServiceEnabled(): bool
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $customPostTypes = $moduleConfiguration->getGenericCustomPostTypes();
+        return $customPostTypes !== [];
     }
 }
