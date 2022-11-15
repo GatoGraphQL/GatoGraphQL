@@ -663,9 +663,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                          */
                         $pluginCustomPostTypes,
                         /**
-                         * WordPress internal CPTs
-                         * Attachment not allowed because its post_status="inherit",
-                         * not "publish", and the API filters by "publish" entries
+                         * WordPress internal CPTs.
+                         *
+                         * Watch out: Attachment has post_status "inherit",
+                         * which is by default not included in the "status"
+                         * filter, so the query must make it explicit:
+                         * `filter: { status: ["inherit"] }`.
+                         *
+                         * Similar with Revision and status "auto-draft"
                          */
                         $this->removeWordPressInternalCustomPostTypes()
                             ? $this->getWordPressInternalCustomPostTypes()
