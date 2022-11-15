@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Posts\ObjectTypeResolverPickers\PostCustomPostObjectTypeResolverPicker:
+        class: \PoPCMSSchema\PostsWP\Overrides\ObjectTypeResolverPickers\PostCustomPostObjectTypeResolverPicker
+
