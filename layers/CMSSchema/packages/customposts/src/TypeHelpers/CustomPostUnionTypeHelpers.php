@@ -65,6 +65,18 @@ class CustomPostUnionTypeHelpers
     }
 
     /**
+     * Obtain the custom post types defined via configuration
+     *
+     * @return string[]
+     */
+    public static function getCustomPostUnionTypeResolverCustomPostTypes(): array
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getGenericCustomPostTypes();
+    }
+
+    /**
      * Based on `getUnionOrTargetObjectTypeResolver` from class
      * \PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers, but applied
      * to the CustomPostUnion type, to add its own configuration.
