@@ -26,17 +26,15 @@ class CustomPostUnionTypeHelpers
      *
      * @return string[]
      */
-    public static function getTargetObjectTypeResolverCustomPostTypes(
-        ?UnionTypeResolverInterface $unionTypeResolver = null,
-    ): array {
-        if ($unionTypeResolver === null) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var CustomPostUnionTypeResolver */
-            $unionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
-        }
+    public static function getCustomPostUnionTypeResolverCustomPostTypes(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var CustomPostUnionTypeResolver */
+        $customPostUnionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+        
         /** @var CustomPostObjectTypeResolverPickerInterface[] */
         $customPostObjectTypeResolverPickers = array_values(array_filter(
-            $unionTypeResolver->getObjectTypeResolverPickers(),
+            $customPostUnionTypeResolver->getObjectTypeResolverPickers(),
             fn (ObjectTypeResolverPickerInterface $objectTypeResolverPicker) => $objectTypeResolverPicker instanceof CustomPostObjectTypeResolverPickerInterface
         ));
         $customPostTypes = [];
