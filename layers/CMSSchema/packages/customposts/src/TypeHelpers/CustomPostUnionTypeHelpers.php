@@ -51,7 +51,7 @@ class CustomPostUnionTypeHelpers
             if ($customPostType === ConfigurationValues::ANY) {
                 $customPostTypes = array_merge(
                     $customPostTypes,
-                    $moduleConfiguration->getGenericCustomPostTypes()
+                    $moduleConfiguration->getQueryableCustomPostTypes()
                 );
                 continue;
             }
@@ -73,7 +73,7 @@ class CustomPostUnionTypeHelpers
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getGenericCustomPostTypes();
+        return $moduleConfiguration->getQueryableCustomPostTypes();
     }
 
     /**

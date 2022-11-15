@@ -55,7 +55,7 @@ class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustom
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $customPostTypes = $moduleConfiguration->getGenericCustomPostTypes();
+        $customPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
         return $customPostTypes !== [];
     }
 }

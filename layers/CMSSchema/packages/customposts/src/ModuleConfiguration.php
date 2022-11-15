@@ -64,9 +64,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     /**
      * @return string[]
      */
-    public function getGenericCustomPostTypes(): array
+    public function getQueryableCustomPostTypes(): array
     {
-        $envVariable = Environment::GENERIC_CUSTOMPOST_TYPES;
+        $envVariable = Environment::QUERYABLE_CUSTOMPOST_TYPES;
         $defaultValue = [];
         $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
 

@@ -336,7 +336,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => CustomPostsModule::class,
-                'envVariable' => CustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
+                'envVariable' => CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
             ],
