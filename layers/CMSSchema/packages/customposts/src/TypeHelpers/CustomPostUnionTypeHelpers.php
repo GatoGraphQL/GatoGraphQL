@@ -26,7 +26,7 @@ class CustomPostUnionTypeHelpers
      *
      * @return string[]
      */
-    public static function getCustomPostUnionTypeResolverCustomPostTypes(): array
+    public static function getCustomPostUnionNonGenericTypeResolverCustomPostTypes(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var CustomPostUnionTypeResolver */
@@ -47,10 +47,6 @@ class CustomPostUnionTypeHelpers
         foreach ($customPostObjectTypeResolverPickers as $customPostObjectTypeResolverPicker) {
             $customPostType = $customPostObjectTypeResolverPicker->getCustomPostType();
             if ($customPostType === ConfigurationValues::ANY) {
-                $customPostTypes = array_merge(
-                    $customPostTypes,
-                    $moduleConfiguration->getQueryableCustomPostTypes()
-                );
                 continue;
             }
             $customPostTypes[] = $customPostType;
