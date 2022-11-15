@@ -44,18 +44,24 @@ class CustomPostUnionTypeHelpers
          * The GenericCustomPost Resolver Picker will return "*", to represent "any" type.
          * When this happens, translate it to the actual represented post types.
          */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         foreach ($customPostObjectTypeResolverPickers as $customPostObjectTypeResolverPicker) {
             $customPostType = $customPostObjectTypeResolverPicker->getCustomPostType();
             if ($customPostType === ConfigurationValues::ANY) {
                 $customPostTypes = array_merge(
                     $customPostTypes,
-                    []
+                    $moduleConfiguration->getGenericCustomPostTypes()
                 );
                 continue;
             }
             $customPostTypes[] = $customPostType;
         }
-        return $customPostTypes;
+        /**
+         * Generic custom posts will include again specific post types,
+         * such as "post" or "page", so remove duplicates
+         */
+        return array_values(array_unique($customPostTypes));
     }
 
     /**
