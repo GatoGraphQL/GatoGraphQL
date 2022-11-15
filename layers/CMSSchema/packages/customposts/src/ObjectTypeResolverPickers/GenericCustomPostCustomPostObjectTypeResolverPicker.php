@@ -15,6 +15,12 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustomPostObjectTypeResolverPicker
 {
+    /**
+     * Implement trait only for coherence, but otherwise none of its methods
+     * is actually needed.
+     */
+    use CustomPostObjectTypeResolverPickerTrait;
+
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?CustomPostObjectTypeResolverPickerRegistryInterface $customPostObjectTypeResolverPickerRegistry = null;
 
@@ -75,7 +81,6 @@ class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustom
             if ($customPostObjectTypeResolverPicker === $this) {
                 continue;
             }
-            /** @var NonGenericCustomPostObjectTypeResolverPickerInterface $customPostObjectTypeResolverPicker */
             $nonGenericCustomPostTypes[] = $customPostObjectTypeResolverPicker->getCustomPostType();
         }
         
@@ -83,5 +88,16 @@ class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustom
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $customPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
         return array_diff($customPostTypes, $nonGenericCustomPostTypes) !== [];
+    }
+
+    /**
+     * Return empty value is OK, because this method will
+     * never be called on this class.
+     *
+     * @see `isServiceEnabled`
+     */
+    public function getCustomPostType(): string
+    {
+        return '';
     }
 }

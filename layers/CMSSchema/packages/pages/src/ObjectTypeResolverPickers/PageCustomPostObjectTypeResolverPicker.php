@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\NonGenericCustomPostObjectTypeResolverPickerInterface;
-use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\NonGenericCustomPostObjectTypeResolverPickerTrait;
+use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
+use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerTrait;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class PageCustomPostObjectTypeResolverPicker extends AbstractPageObjectTypeResolverPicker implements NonGenericCustomPostObjectTypeResolverPickerInterface
+class PageCustomPostObjectTypeResolverPicker extends AbstractPageObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
 {
-    use NonGenericCustomPostObjectTypeResolverPickerTrait;
+    use CustomPostObjectTypeResolverPickerTrait;
     
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

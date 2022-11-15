@@ -8,4 +8,8 @@ use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterfa
 
 interface CustomPostObjectTypeResolverPickerInterface extends ObjectTypeResolverPickerInterface
 {
+    /**
+     * Get the post type of the Type (eg: Post is "post", Media is "attachment", etc)
+     */
+    public function getCustomPostType(): string;
 }
