@@ -667,21 +667,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                          * Attachment not allowed because its post_status="inherit",
                          * not "publish", and the API filters by "publish" entries
                          */
-                        [
-                            'attachment',
-                            'custom_css',
-                            'customize_changeset',
-                            'nav_menu_item',
-                            'oembed_cache',
-                            'revision',
-                            'user_request',
-                            'wp_area',
-                            'wp_block',
-                            'wp_global_styles',
-                            'wp_navigation',
-                            'wp_template_part',
-                            'wp_template',
-                        ]
+                        $this->removeWordPressInternalCustomPostTypes()
+                            ? $this->getWordPressInternalCustomPostTypes()
+                            : []
                     )
                 );
                 $genericCustomPostTypes = array_values(array_diff(
@@ -930,5 +918,32 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         }
 
         return $moduleSettings;
+    }
+
+    protected function removeWordPressInternalCustomPostTypes(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getWordPressInternalCustomPostTypes(): array
+    {
+        return [
+            'attachment',
+            'custom_css',
+            'customize_changeset',
+            'nav_menu_item',
+            'oembed_cache',
+            'revision',
+            'user_request',
+            'wp_area',
+            'wp_block',
+            'wp_global_styles',
+            'wp_navigation',
+            'wp_template_part',
+            'wp_template',
+        ];
     }
 }
