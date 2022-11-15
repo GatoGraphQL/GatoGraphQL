@@ -30,8 +30,5 @@ class Module extends AbstractModule
         array $skipSchemaModuleClasses,
     ): void {
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (Environment::addHighlightTypeToCustomPostUnionTypes()) {
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddHighlightTypeToCustomPostUnionTypes');
-        }
     }
 }

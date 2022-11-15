@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\Highlights\ConditionalOnContext\AddHighlightTypeToCustomPostUnionTypes\SchemaServices\ObjectTypeResolverPickers;
+namespace PoPSchema\Highlights\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPSchema\Highlights\ObjectTypeResolverPickers\AbstractHighlightObjectTypeResolverPicker;
 
 class HighlightCustomPostObjectTypeResolverPicker extends AbstractHighlightObjectTypeResolverPicker
 {
