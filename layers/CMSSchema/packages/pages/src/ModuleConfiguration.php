@@ -34,17 +34,4 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
-
-    public function addPageTypeToCustomPostUnionTypes(): bool
-    {
-        $envVariable = Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES;
-        $defaultValue = true;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
 }

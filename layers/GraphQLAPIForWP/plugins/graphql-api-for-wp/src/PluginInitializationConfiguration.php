@@ -337,12 +337,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
-            [
-                'class' => PagesModule::class,
-                'envVariable' => PagesEnvironment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
-                'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
-            ],
             // Custom post default/max limits
             [
                 'class' => CustomPostsModule::class,

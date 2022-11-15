@@ -49,11 +49,6 @@ class Module extends AbstractModule
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = $this->getConfiguration();
-        if ($moduleConfiguration->addPageTypeToCustomPostUnionTypes()) {
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes');
-        }
         if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
         }

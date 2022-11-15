@@ -45,9 +45,6 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
         return [
             ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
-                \PoPCMSSchema\Pages\Module::class => [
-                    \PoPCMSSchema\Pages\Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES => true,
-                ],
                 \PoPCMSSchema\CommentMutations\Module::class => [
                     \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                 ],
