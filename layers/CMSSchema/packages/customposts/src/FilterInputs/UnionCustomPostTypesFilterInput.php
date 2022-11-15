@@ -25,7 +25,7 @@ class UnionCustomPostTypesFilterInput extends AbstractValueToQueryFilterInput
     {
         $value = array_intersect(
             $value,
-            CustomPostUnionTypeHelpers::getCustomPostUnionTypeResolverCustomPostTypes()
+            CustomPostUnionTypeHelpers::getQueryableCustomPostTypes()
         );
         return FilterInputHelper::maybeGetNonExistingCustomPostTypes($value);
     }

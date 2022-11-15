@@ -69,7 +69,7 @@ class CustomPostUnionTypeHelpers
      *
      * @return string[]
      */
-    public static function getCustomPostUnionTypeResolverCustomPostTypes(): array
+    public static function getQueryableCustomPostTypes(): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

@@ -19,6 +19,6 @@ class CustomPostEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        return CustomPostUnionTypeHelpers::getCustomPostUnionTypeResolverCustomPostTypes();
+        return CustomPostUnionTypeHelpers::getQueryableCustomPostTypes();
     }
 }
