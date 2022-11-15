@@ -74,11 +74,14 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         $customPostUnionTypeResolver = $this->getCustomPostUnionTypeResolver();
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
 
-        // After executing `get_posts` it returns a list of custom posts of class WP_Post,
-        // without converting the object to its own post type (eg: EM_Event for an "event" custom post type)
-        // Cast the custom posts to their own classes
-        // Group all the customPosts by targetResolverPicker,
-        // so that their casting can be executed in a single query per type
+        /**
+         * After executing `get_posts` it returns a list of custom posts
+         * of class WP_Post, without converting the object to its own post
+         * type (eg: EM_Event for an "event" custom post type).
+         * Cast the custom posts to their own classes.
+         * Group all the customPosts by targetResolverPicker,
+         * so that their casting can be executed in a single query per type
+         */
         $customPostTypeTypeResolverPickers = [];
         $customPostTypeItemCustomPosts = [];
         foreach ($customPosts as $customPost) {
