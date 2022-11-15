@@ -18,4 +18,14 @@ class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustom
             CustomPostUnionTypeResolver::class,
         ];
     }
+
+    /**
+     * Process last, as to allow specific Pickers to take precedence,
+     * such as for Post or Page. Only when no other Picker is available,
+     * will GenericCustomPost be used.
+     */
+    public function getPriorityToAttachToClasses(): int
+    {
+        return 0;
+    }
 }
