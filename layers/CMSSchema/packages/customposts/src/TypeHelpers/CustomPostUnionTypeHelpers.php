@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeHelpers;
 
-use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -12,7 +11,7 @@ use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
-use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
+use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\NonGenericCustomPostObjectTypeResolverPickerInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
 /**
@@ -32,28 +31,15 @@ class CustomPostUnionTypeHelpers
         /** @var CustomPostUnionTypeResolver */
         $customPostUnionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
         
-        /** @var CustomPostObjectTypeResolverPickerInterface[] */
-        $customPostObjectTypeResolverPickers = array_values(array_filter(
+        /** @var NonGenericCustomPostObjectTypeResolverPickerInterface[] */
+        $nonGenericCustomPostObjectTypeResolverPickers = array_values(array_filter(
             $customPostUnionTypeResolver->getObjectTypeResolverPickers(),
-            fn (ObjectTypeResolverPickerInterface $objectTypeResolverPicker) => $objectTypeResolverPicker instanceof CustomPostObjectTypeResolverPickerInterface
+            fn (ObjectTypeResolverPickerInterface $objectTypeResolverPicker) => $objectTypeResolverPicker instanceof NonGenericCustomPostObjectTypeResolverPickerInterface
         ));
-        $customPostTypes = [];
-        /**
-         * The GenericCustomPost Resolver Picker will return "*", to represent "any" type.
-         * When this happens, translate it to the actual represented post types.
-         */
-        foreach ($customPostObjectTypeResolverPickers as $customPostObjectTypeResolverPicker) {
-            $customPostType = $customPostObjectTypeResolverPicker->getCustomPostType();
-            if ($customPostType === ConfigurationValues::ANY) {
-                continue;
-            }
-            $customPostTypes[] = $customPostType;
-        }
-        /**
-         * Generic custom posts will include again specific post types,
-         * such as "post" or "page", so remove duplicates
-         */
-        return array_values(array_unique($customPostTypes));
+        return array_map(
+            fn (NonGenericCustomPostObjectTypeResolverPickerInterface $nonGenericCustomPostObjectTypeResolverPicker) => $nonGenericCustomPostObjectTypeResolverPicker->getCustomPostType(),
+            $nonGenericCustomPostObjectTypeResolverPickers
+        );
     }
 
     /**

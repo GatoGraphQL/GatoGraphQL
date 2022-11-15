@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 
-abstract class AbstractCustomPostObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
+abstract class AbstractCustomPostObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
 {
     private ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
