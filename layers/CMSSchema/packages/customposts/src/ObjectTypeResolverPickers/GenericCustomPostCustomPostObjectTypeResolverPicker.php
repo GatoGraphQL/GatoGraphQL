@@ -11,6 +11,7 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustomPostObjectTypeResolverPicker
 {
@@ -51,11 +52,19 @@ class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustom
         return 0;
     }
 
+    /**
+     * Check if there are generic custom post types,
+     * and only then enable it
+     */
     public function isServiceEnabled(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $customPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
-        return $customPostTypes !== [];
+        return array_diff(
+            // All the custom post types
+            $moduleConfiguration->getQueryableCustomPostTypes(),
+            // Non-generic custom post types
+            CustomPostUnionTypeHelpers::getCustomPostUnionTypeResolverNonGenericCustomPostTypes()
+        ) !== [];
     }
 }
