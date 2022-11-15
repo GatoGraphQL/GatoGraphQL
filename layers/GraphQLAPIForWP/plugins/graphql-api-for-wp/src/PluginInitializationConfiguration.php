@@ -218,12 +218,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
-            [
-                'class' => PostsModule::class,
-                'envVariable' => PostsEnvironment::ADD_POST_TYPE_TO_CUSTOMPOST_UNION_TYPES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
-                'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
-            ],
             // User default/max limits
             [
                 'class' => UsersModule::class,
