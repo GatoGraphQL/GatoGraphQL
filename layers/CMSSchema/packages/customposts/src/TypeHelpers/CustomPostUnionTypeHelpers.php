@@ -26,7 +26,7 @@ class CustomPostUnionTypeHelpers
      *
      * @return string[]
      */
-    public static function getCustomPostUnionNonGenericTypeResolverCustomPostTypes(): array
+    public static function getCustomPostUnionTypeResolverNonGenericCustomPostTypes(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var CustomPostUnionTypeResolver */
@@ -42,8 +42,6 @@ class CustomPostUnionTypeHelpers
          * The GenericCustomPost Resolver Picker will return "*", to represent "any" type.
          * When this happens, translate it to the actual represented post types.
          */
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         foreach ($customPostObjectTypeResolverPickers as $customPostObjectTypeResolverPicker) {
             $customPostType = $customPostObjectTypeResolverPicker->getCustomPostType();
             if ($customPostType === ConfigurationValues::ANY) {
