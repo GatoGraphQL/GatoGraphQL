@@ -31,6 +31,22 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     /**
+     * Indicates if the passed object is of type (Generic)CustomPost
+     */
+    public function isInstanceOfCustomPostType(object $object): bool
+    {
+        return $object instanceof WP_Post;
+    }
+
+    /**
+     * Indicate if an post with provided ID exists
+     */
+    public function customPostExists(int|string $id): bool
+    {
+        return $this->getCustomPost($id) !== null;
+    }
+
+    /**
      * Return the post's ID
      */
     public function getID(object $customPost): string|int
