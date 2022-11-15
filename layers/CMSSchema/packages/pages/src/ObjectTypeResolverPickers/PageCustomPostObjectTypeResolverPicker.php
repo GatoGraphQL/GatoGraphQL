@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Pages\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\NonGenericCustomPostObjectTypeResolverPickerInterface;
-use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerTrait;
+use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\NonGenericCustomPostObjectTypeResolverPickerTrait;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class PageCustomPostObjectTypeResolverPicker extends AbstractPageObjectTypeResolverPicker implements NonGenericCustomPostObjectTypeResolverPickerInterface
 {
-    use CustomPostObjectTypeResolverPickerTrait;
+    use NonGenericCustomPostObjectTypeResolverPickerTrait;
     
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

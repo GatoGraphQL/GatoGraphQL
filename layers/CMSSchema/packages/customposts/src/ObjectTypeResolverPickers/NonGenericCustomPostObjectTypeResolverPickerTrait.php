@@ -8,7 +8,7 @@ use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoP\ComponentModel\App;
 
-trait CustomPostObjectTypeResolverPickerTrait
+trait NonGenericCustomPostObjectTypeResolverPickerTrait
 {
     abstract public function getCustomPostType(): string;
 
