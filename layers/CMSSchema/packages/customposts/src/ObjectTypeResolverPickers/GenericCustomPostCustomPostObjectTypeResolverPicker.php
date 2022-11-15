@@ -16,8 +16,9 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustomPostObjectTypeResolverPicker
 {
     /**
-     * Implement trait only for coherence, but otherwise none of its methods
-     * is actually needed.
+     * Implement trait only for consistency with all other
+     * CustomPostObjectTypeResolverPickers, but otherwise
+     * none of its methods is actually needed.
      */
     use CustomPostObjectTypeResolverPickerTrait;
 
