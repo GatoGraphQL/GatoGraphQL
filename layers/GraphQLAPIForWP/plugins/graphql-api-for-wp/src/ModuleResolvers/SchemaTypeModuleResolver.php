@@ -482,12 +482,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
-                ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_PAGES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
-                ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -657,54 +655,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $sensitiveDataDescPlaceholder,
                         \__('custom post status', 'graphql-api'),
                     ),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-            } elseif (
-                in_array($module, [
-                    self::SCHEMA_POSTS,
-                    self::SCHEMA_PAGES,
-                ])
-            ) {
-                $titlePlaceholder = sprintf(
-                    \__('Include type <code>%1$s</code> in <code>%2$s</code>?', 'graphql-api'),
-                    '%1$s',
-                    $this->getCustomPostUnionTypeResolver()->getTypeName()
-                );
-                $moduleTitles = [
-                    self::SCHEMA_POSTS => sprintf(
-                        $titlePlaceholder,
-                        $this->getPostObjectTypeResolver()->getTypeName()
-                    ),
-                    self::SCHEMA_PAGES => sprintf(
-                        $titlePlaceholder,
-                        $this->getPageObjectTypeResolver()->getTypeName()
-                    ),
-                ];
-                $descriptionPlaceholder = sprintf(
-                    \__('Results of type <code>%1$s</code> will be included when querying a field of type <code>%2$s</code> (such as <code>%3$s</code>)', 'graphql-api'),
-                    '%1$s',
-                    $this->getCustomPostUnionTypeResolver()->getTypeName(),
-                    'customPosts'
-                );
-                $moduleDescriptions = [
-                    self::SCHEMA_POSTS => sprintf(
-                        $descriptionPlaceholder,
-                        $this->getPostObjectTypeResolver()->getTypeName()
-                    ),
-                    self::SCHEMA_PAGES => sprintf(
-                        $descriptionPlaceholder,
-                        $this->getPageObjectTypeResolver()->getTypeName()
-                    ),
-                ];
-                $option = ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => $moduleTitles[$module],
-                    Properties::DESCRIPTION => $moduleDescriptions[$module],
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             } elseif ($module === self::SCHEMA_USERS) {
