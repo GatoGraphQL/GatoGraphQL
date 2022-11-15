@@ -709,9 +709,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Included custom post types', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Enable querying these custom post types via any field with type <code>%s</code> (such as <code>%s</code>)<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        $this->getCustomPostUnionTypeResolver()->getTypeName(),
+                        $this->getPostObjectTypeResolver()->getTypeName(),
+                        $this->getPageObjectTypeResolver()->getTypeName(),
                         $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
-                        'customPosts'
                     ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
                     // Fetch all Schema Configurations from the DB
