@@ -11,9 +11,4 @@ use PoPSchema\Highlights\ObjectTypeResolverPickers\HighlightCustomPostObjectType
 class HighlightCustomPostObjectTypeResolverPicker extends UpstreamHighlightCustomPostObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
 {
     use NoCastCustomPostTypeResolverPickerTrait;
-
-    public function getCustomPostType(): string
-    {
-        return \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
-    }
 }

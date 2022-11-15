@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Posts\ObjectTypeResolverPickers;
 
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class PostCustomPostObjectTypeResolverPicker extends AbstractPostObjectTypeResolverPicker
+class PostCustomPostObjectTypeResolverPicker extends AbstractPostObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
@@ -17,5 +18,10 @@ class PostCustomPostObjectTypeResolverPicker extends AbstractPostObjectTypeResol
         return [
             CustomPostUnionTypeResolver::class,
         ];
+    }
+
+    public function getCustomPostType(): string
+    {
+        return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 }

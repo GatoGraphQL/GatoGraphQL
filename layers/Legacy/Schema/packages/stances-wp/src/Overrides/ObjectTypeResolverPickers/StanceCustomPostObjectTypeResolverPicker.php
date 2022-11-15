@@ -11,9 +11,4 @@ use PoPSchema\Stances\ObjectTypeResolverPickers\StanceCustomPostObjectTypeResolv
 class StanceCustomPostObjectTypeResolverPicker extends UpstreamStanceCustomPostObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
 {
     use NoCastCustomPostTypeResolverPickerTrait;
-
-    public function getCustomPostType(): string
-    {
-        return \POP_USERSTANCE_POSTTYPE_USERSTANCE;
-    }
 }

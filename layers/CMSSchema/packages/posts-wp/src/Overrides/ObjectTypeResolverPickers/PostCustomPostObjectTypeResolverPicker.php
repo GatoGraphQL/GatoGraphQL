@@ -11,9 +11,4 @@ use PoPCMSSchema\Posts\ObjectTypeResolverPickers\PostCustomPostObjectTypeResolve
 class PostCustomPostObjectTypeResolverPicker extends UpstreamPostCustomPostObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
 {
     use NoCastCustomPostTypeResolverPickerTrait;
-
-    public function getCustomPostType(): string
-    {
-        return $this->getPostTypeAPI()->getPostCustomPostType();
-    }
 }

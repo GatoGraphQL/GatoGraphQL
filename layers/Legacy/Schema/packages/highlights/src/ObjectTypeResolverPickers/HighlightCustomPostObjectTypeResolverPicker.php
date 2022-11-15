@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\ObjectTypeResolverPickers;
 
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class HighlightCustomPostObjectTypeResolverPicker extends AbstractHighlightObjectTypeResolverPicker
+class HighlightCustomPostObjectTypeResolverPicker extends AbstractHighlightObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
@@ -17,5 +18,10 @@ class HighlightCustomPostObjectTypeResolverPicker extends AbstractHighlightObjec
         return [
             CustomPostUnionTypeResolver::class,
         ];
+    }
+
+    public function getCustomPostType(): string
+    {
+        return \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }
 }
