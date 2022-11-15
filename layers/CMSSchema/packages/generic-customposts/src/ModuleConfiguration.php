@@ -34,20 +34,4 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
-
-    /**
-     * @return string[]
-     */
-    public function getGenericCustomPostTypes(): array
-    {
-        $envVariable = Environment::GENERIC_CUSTOMPOST_TYPES;
-        $defaultValue = ['post'];
-        $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
 }

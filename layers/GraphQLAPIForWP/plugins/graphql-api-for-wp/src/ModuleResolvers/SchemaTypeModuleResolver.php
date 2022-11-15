@@ -12,17 +12,18 @@ use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -81,6 +82,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
@@ -126,6 +128,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var PageObjectTypeResolver */
         return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+    }
+    final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
+    {
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+    }
+    final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
+    {
+        /** @var GenericCustomPostObjectTypeResolver */
+        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
     }
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -454,11 +465,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
+                ModuleSettingOptions::CUSTOMPOST_TYPES => ['post', 'page'],
             ],
-            // @todo Remove GenericCustomPosts\Module!
-            // self::SCHEMA_GENERIC_CUSTOMPOSTS => [
-            //     ModuleSettingOptions::CUSTOMPOST_TYPES => ['post', 'page'],
-            // ],
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
@@ -636,6 +644,80 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
+
+                // Get the list of custom post types from the system
+                $genericCustomPostTypes = \get_post_types();
+                /**
+                 * Not all custom post types make sense or are allowed.
+                 * Remove the ones that do not
+                 */
+                $pluginCustomPostTypes = array_map(
+                    fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
+                    $this->getCustomPostTypeRegistry()->getCustomPostTypes()
+                );
+                $rejectedGenericCustomPostTypes = \apply_filters(
+                    self::HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES,
+                    array_merge(
+                        /**
+                         * Post Types from GraphQL API are just for configuration
+                         * and contain private data
+                         */
+                        $pluginCustomPostTypes,
+                        /**
+                         * WordPress internal CPTs
+                         * Attachment not allowed because its post_status="inherit",
+                         * not "publish", and the API filters by "publish" entries
+                         */
+                        [
+                            'attachment',
+                            'custom_css',
+                            'customize_changeset',
+                            'nav_menu_item',
+                            'oembed_cache',
+                            'revision',
+                            'user_request',
+                            'wp_area',
+                            'wp_block',
+                            'wp_global_styles',
+                            'wp_navigation',
+                            'wp_template_part',
+                            'wp_template',
+                        ]
+                    )
+                );
+                $genericCustomPostTypes = array_values(array_diff(
+                    $genericCustomPostTypes,
+                    $rejectedGenericCustomPostTypes
+                ));
+                // Allow plugins to further remove unwanted custom post types
+                $genericCustomPostTypes = \apply_filters(
+                    self::HOOK_GENERIC_CUSTOMPOST_TYPES,
+                    $genericCustomPostTypes
+                );
+                // The possible values must have key and value
+                $possibleValues = [];
+                foreach ($genericCustomPostTypes as $genericCustomPostType) {
+                    $possibleValues[$genericCustomPostType] = $genericCustomPostType;
+                }
+                // Set the setting
+                $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Included custom post types', 'graphql-api'),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('Enable querying these custom post types via any field with type <code>%s</code> (such as <code>%s</code>)<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
+                        'customPosts'
+                    ),
+                    Properties::TYPE => Properties::TYPE_ARRAY,
+                    // Fetch all Schema Configurations from the DB
+                    Properties::POSSIBLE_VALUES => $possibleValues,
+                    Properties::IS_MULTIPLE => true,
+                ];
             } elseif ($module === self::SCHEMA_USERS) {
                 $option = self::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA;
                 $moduleSettings[] = [
@@ -730,81 +812,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-        // @todo Remove GenericCustomPosts\Module!
-        // } elseif ($module === self::SCHEMA_GENERIC_CUSTOMPOSTS) {
-        //     // Get the list of custom post types from the system
-        //     $genericCustomPostTypes = \get_post_types();
-        //     /**
-        //      * Not all custom post types make sense or are allowed.
-        //      * Remove the ones that do not
-        //      */
-        //     $pluginCustomPostTypes = array_map(
-        //         fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
-        //         $this->getCustomPostTypeRegistry()->getCustomPostTypes()
-        //     );
-        //     $rejectedGenericCustomPostTypes = \apply_filters(
-        //         self::HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES,
-        //         array_merge(
-        //             /**
-        //              * Post Types from GraphQL API are just for configuration
-        //              * and contain private data
-        //              */
-        //             $pluginCustomPostTypes,
-        //             /**
-        //              * WordPress internal CPTs
-        //              * Attachment not allowed because its post_status="inherit",
-        //              * not "publish", and the API filters by "publish" entries
-        //              */
-        //             [
-        //                 'attachment',
-        //                 'custom_css',
-        //                 'customize_changeset',
-        //                 'nav_menu_item',
-        //                 'oembed_cache',
-        //                 'revision',
-        //                 'user_request',
-        //                 'wp_area',
-        //                 'wp_block',
-        //                 'wp_global_styles',
-        //                 'wp_navigation',
-        //                 'wp_template_part',
-        //                 'wp_template',
-        //             ]
-        //         )
-        //     );
-        //     $genericCustomPostTypes = array_values(array_diff(
-        //         $genericCustomPostTypes,
-        //         $rejectedGenericCustomPostTypes
-        //     ));
-        //     // Allow plugins to further remove unwanted custom post types
-        //     $genericCustomPostTypes = \apply_filters(
-        //         self::HOOK_GENERIC_CUSTOMPOST_TYPES,
-        //         $genericCustomPostTypes
-        //     );
-        //     // The possible values must have key and value
-        //     $possibleValues = [];
-        //     foreach ($genericCustomPostTypes as $genericCustomPostType) {
-        //         $possibleValues[$genericCustomPostType] = $genericCustomPostType;
-        //     }
-        //     // Set the setting
-        //     $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
-        //     $moduleSettings[] = [
-        //         Properties::INPUT => $option,
-        //         Properties::NAME => $this->getSettingOptionName(
-        //             $module,
-        //             $option
-        //         ),
-        //         Properties::TITLE => \__('Included custom post types', 'graphql-api'),
-        //         Properties::DESCRIPTION => sprintf(
-        //             \__('Results from these custom post types will be included when querying a field with type <code>%s</code> (such as <code>%s</code>)<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
-        //             $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
-        //             'genericCustomPosts'
-        //         ),
-        //         Properties::TYPE => Properties::TYPE_ARRAY,
-        //         // Fetch all Schema Configurations from the DB
-        //         Properties::POSSIBLE_VALUES => $possibleValues,
-        //         Properties::IS_MULTIPLE => true,
-        //     ];
         } elseif (
             in_array($module, [
                 self::SCHEMA_SETTINGS,

@@ -180,13 +180,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
-            // @todo Remove GenericCustomPosts\Module!
-            // [
-            //     'class' => GenericCustomPostsModule::class,
-            //     'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
-            //     'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-            //     'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
-            // ],
             // Post default/max limits, add to CustomPostUnion
             [
                 'class' => PostsModule::class,
@@ -340,6 +333,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => CustomPostsEnvironment::USE_SINGLE_TYPE_INSTEAD_OF_CUSTOMPOST_UNION_TYPE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,
+            ],
+            [
+                'class' => CustomPostsModule::class,
+                'envVariable' => CustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
             ],
             // White/Blacklisted entries to Root.option
             [
