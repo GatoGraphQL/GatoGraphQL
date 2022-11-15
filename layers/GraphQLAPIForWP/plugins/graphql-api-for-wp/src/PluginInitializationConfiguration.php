@@ -39,8 +39,6 @@ use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
 use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
-use PoPCMSSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
-use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsModule;
 use PoPCMSSchema\Media\Environment as MediaEnvironment;
 use PoPCMSSchema\Media\Module as MediaModule;
 use PoPCMSSchema\Menus\Environment as MenusEnvironment;
@@ -182,27 +180,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
-            // Custom Post default/max limits, Supported custom post types
-            [
-                'class' => GenericCustomPostsModule::class,
-                'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_DEFAULT_LIMIT,
-                'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
-            ],
-            [
-                'class' => GenericCustomPostsModule::class,
-                'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT,
-                'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
-            ],
-            [
-                'class' => GenericCustomPostsModule::class,
-                'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-                'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
-            ],
+            // @todo Remove GenericCustomPosts\Module!
+            // [
+            //     'class' => GenericCustomPostsModule::class,
+            //     'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
+            //     'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
+            //     'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
+            // ],
             // Post default/max limits, add to CustomPostUnion
             [
                 'class' => PostsModule::class,
@@ -635,9 +619,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPCMSSchema\CustomPostsWP\Module::class,
                 \PoPCMSSchema\CustomPostMedia\Module::class,
                 \PoPWPSchema\CustomPosts\Module::class,
-            ],
-            SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS => [
-                \PoPCMSSchema\GenericCustomPosts\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POSTS => [
                 \PoPCMSSchema\Posts\Module::class,
