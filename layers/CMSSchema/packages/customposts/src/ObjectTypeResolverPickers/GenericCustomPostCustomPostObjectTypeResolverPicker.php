@@ -58,13 +58,7 @@ class GenericCustomPostCustomPostObjectTypeResolverPicker extends AbstractCustom
      */
     public function isServiceEnabled(): bool
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return array_diff(
-            // All the custom post types
-            $moduleConfiguration->getQueryableCustomPostTypes(),
-            // Non-generic custom post types
-            CustomPostUnionTypeHelpers::getCustomPostUnionTypeResolverNonGenericCustomPostTypes()
-        ) !== [];
+        // @todo Implement here!
+        return true;
     }
 }

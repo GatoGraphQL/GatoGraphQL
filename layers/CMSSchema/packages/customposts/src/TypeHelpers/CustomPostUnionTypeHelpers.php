@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeHelpers;
 
-use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
-use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\NonGenericCustomPostObjectTypeResolverPickerInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
 /**
@@ -20,28 +18,6 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver
  */
 class CustomPostUnionTypeHelpers
 {
-    /**
-     * Obtain the custom post types from all member typeResolvers
-     *
-     * @return string[]
-     */
-    public static function getCustomPostUnionTypeResolverNonGenericCustomPostTypes(): array
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var CustomPostUnionTypeResolver */
-        $customPostUnionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
-        
-        /** @var NonGenericCustomPostObjectTypeResolverPickerInterface[] */
-        $nonGenericCustomPostObjectTypeResolverPickers = array_values(array_filter(
-            $customPostUnionTypeResolver->getObjectTypeResolverPickers(),
-            fn (ObjectTypeResolverPickerInterface $objectTypeResolverPicker) => $objectTypeResolverPicker instanceof NonGenericCustomPostObjectTypeResolverPickerInterface
-        ));
-        return array_map(
-            fn (NonGenericCustomPostObjectTypeResolverPickerInterface $nonGenericCustomPostObjectTypeResolverPicker) => $nonGenericCustomPostObjectTypeResolverPicker->getCustomPostType(),
-            $nonGenericCustomPostObjectTypeResolverPickers
-        );
-    }
-
     /**
      * Obtain the custom post types defined via configuration
      *
