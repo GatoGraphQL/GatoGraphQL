@@ -6,7 +6,6 @@ namespace PoPSchema\StancesWP;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
-use PoPSchema\Stances\Environment;
 
 class Module extends AbstractModule
 {
@@ -32,8 +31,5 @@ class Module extends AbstractModule
         array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        if (Environment::addStanceTypeToCustomPostUnionTypes()) {
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddStanceTypeToCustomPostUnionTypes/Overrides');
-        }
     }
 }
