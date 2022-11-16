@@ -533,6 +533,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Expose global fields
             \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
         ];
+        $moduleClassConfiguration[CustomPostsModule::class] = [
+            // The default queryable custom post types are defined by this plugin
+            CustomPostsEnvironment::DISABLE_PACKAGES_ADDING_DEFAULT_QUERYABLE_CUSTOMPOST_TYPES => true,
+        ];
 
         // If doing ?behavior=unrestricted, always enable certain features
         // Retrieve this service from the SystemContainer
