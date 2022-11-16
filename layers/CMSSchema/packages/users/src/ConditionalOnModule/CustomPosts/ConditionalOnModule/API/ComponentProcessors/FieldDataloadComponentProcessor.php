@@ -10,24 +10,24 @@ use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProce
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\Posts\ComponentProcessors\PostFilterInputContainerComponentProcessor;
 
 class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
 {
     public final const COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST = 'dataload-relationalfields-authorcustompostlist';
 
-    private ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
+    private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
-    final public function setCustomPostObjectTypeResolver(CustomPostObjectTypeResolver $customPostObjectTypeResolver): void
+    final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {
-        $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
+        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
     }
-    final protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolver
+    final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
-        /** @var CustomPostObjectTypeResolver */
-        return $this->customPostObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
+        /** @var CustomPostUnionTypeResolver */
+        return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
     final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -53,7 +53,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCUSTOMPOSTLIST:
-                return $this->getCustomPostObjectTypeResolver();
+                return $this->getCustomPostUnionTypeResolver();
         }
 
         return parent::getRelationalTypeResolver($component);

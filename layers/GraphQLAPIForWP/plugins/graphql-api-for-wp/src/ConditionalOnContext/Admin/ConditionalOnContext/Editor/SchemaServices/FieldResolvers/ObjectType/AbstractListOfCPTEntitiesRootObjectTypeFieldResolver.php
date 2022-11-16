@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
@@ -22,17 +22,17 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
  */
 abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?CustomPostObjectTypeResolver $customPostObjectTypeResolver = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    final public function setCustomPostObjectTypeResolver(CustomPostObjectTypeResolver $customPostObjectTypeResolver): void
+    final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
     {
-        $this->customPostObjectTypeResolver = $customPostObjectTypeResolver;
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
     }
-    final protected function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolver
+    final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
-        /** @var CustomPostObjectTypeResolver */
-        return $this->customPostObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
+        /** @var GenericCustomPostObjectTypeResolver */
+        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -94,6 +94,6 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): ConcreteTypeResolverInterface {
-        return $this->getCustomPostObjectTypeResolver();
+        return $this->getGenericCustomPostObjectTypeResolver();
     }
 }
