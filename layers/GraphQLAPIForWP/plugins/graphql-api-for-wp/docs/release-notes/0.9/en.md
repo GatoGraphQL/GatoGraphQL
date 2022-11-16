@@ -1551,6 +1551,22 @@ The `Elemental` interface contains field `id: ID!`. It has been renamed to `Node
 
 For consistency, since adding fields `optionValues` and `optionObjectValue`.
 
+### Removed the `genericCustomPosts` fields, unifying their logic into `customPosts`
+
+In the past, there were two fields to select custom posts:
+
+- `customPosts`: to retrieve data for CPTs already mapped to the schema, such as `Post` and `Page`
+- `genericCustomPosts`: to retrieve data for CPTs which are not mapped to the schema
+
+Now, these two fields have been combined into `customPosts`, and `genericCustomPosts` has been removed.
+
+`customPosts` will now return a `CustomPostUnion` which is formed by:
+
+- Every one of the CPT object types mapped to the schema, such as `Post` and `Page`
+- Type `GenericCustomPost` for all other CPTs
+
+And `GenericCustomPost` can only retrieve data for CPTs allowed by configuration (as explained earlier on).
+
 ### Changed type for `date` fields to the new `DateTime`
 
 Date fields in `v0.8` were of type `String`, and had field argument `format`:

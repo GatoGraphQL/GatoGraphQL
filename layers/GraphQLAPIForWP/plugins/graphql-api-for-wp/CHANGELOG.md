@@ -208,6 +208,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
 - Renamed field `Root.option` to `Root.optionValue`
+- Removed the `genericCustomPosts` fields, unifying their logic into `customPosts`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
 - Must update `content(format:PLAIN_TEXT)` to `rawContent`
 - Must update the inputs for mutations
