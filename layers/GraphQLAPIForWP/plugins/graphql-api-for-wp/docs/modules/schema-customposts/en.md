@@ -57,13 +57,11 @@ If we know that the comment was added to a post, we can also query fields specif
 }
 ```
 
-## Allowed Custom Post Types
+## Mapped and Unmapped CPTs
 
-The custom post types that can be queried must be explicitly configured in the Settings page, under section "Included custom post types":
+There are CPTs (such as `"post"` and `"page"`) which already have a corresponding GraphQL type in the schema (`Post` and `Page`), and these types are incorporated directly into `CustomPostUnion`.
 
-![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
-
-There are CPTs (such as `"post"` and `"page"`) which already have a corresponding GraphQL type in the schema (`Post` and `Page`), and these types are incorporated directly into `CustomPostUnion`. For any CPT that has not been modeled in the schema (such as `"attachment"`, `"revision"` or `"nav_menu_item"`, or any CPT installed by any plugin), their data will be accessed via the `GenericCustomPost` type.
+For any CPT that has not been modeled in the schema (such as `"attachment"`, `"revision"` or `"nav_menu_item"`, or any CPT installed by any plugin), their data will be accessed via the `GenericCustomPost` type.
 
 For instance, this query retrieves entries from multiple CPTS:
 
@@ -97,6 +95,10 @@ For instance, this query retrieves entries from multiple CPTS:
 ```
 
 ## Configuration
+
+The custom post types that can be queried must be explicitly configured in the Settings page, under section "Included custom post types":
+
+![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
 
 If there is only one type added to `CustomPostUnion`, we can then have the fields that resolve to `CustomPostUnion` be instead resolved to that unique type instead:
 

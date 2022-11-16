@@ -20,6 +20,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.user`
 - Filter elements via the new `filter` field argument
 - Pagination and sorting fields are accessed via `pagination` and `sort` field args
+- `customPosts` fields now also retrieve data from CPTs which are not mapped to the GraphQL schema
 - Filter custom post fields (`Root.posts`, `User.posts`, etc) via new inputs:
   - `tagIDs: [ID]`
   - `tagSlugs: [String]`
