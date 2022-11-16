@@ -610,40 +610,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ];
 
             if ($module === self::SCHEMA_CUSTOMPOSTS) {
-                $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Use single type instead of union type?', 'graphql-api'),
-                    Properties::DESCRIPTION => sprintf(
-                        \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then directly return this single type, instead of the union type?', 'graphql-api'),
-                        $this->getCustomPostUnionTypeResolver()->getTypeName(),
-                        $this->getPostObjectTypeResolver()->getTypeName(),
-                    ),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-
-                $option = self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => sprintf(
-                        $sensitiveDataTitlePlaceholder,
-                        \__('custom post status', 'graphql-api'),
-                    ),
-                    Properties::DESCRIPTION => sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('custom post status', 'graphql-api'),
-                    ),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-
                 // Get the list of custom post types from the system
                 $genericCustomPostTypes = \get_post_types();
                 /**
@@ -711,6 +677,40 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     // Fetch all Schema Configurations from the DB
                     Properties::POSSIBLE_VALUES => $possibleValues,
                     Properties::IS_MULTIPLE => true,
+                ];
+                
+                $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Use single type instead of union type?', 'graphql-api'),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then directly return this single type, instead of the union type?', 'graphql-api'),
+                        $this->getCustomPostUnionTypeResolver()->getTypeName(),
+                        $this->getPostObjectTypeResolver()->getTypeName(),
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+
+                $option = self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => sprintf(
+                        $sensitiveDataTitlePlaceholder,
+                        \__('custom post status', 'graphql-api'),
+                    ),
+                    Properties::DESCRIPTION => sprintf(
+                        $sensitiveDataDescPlaceholder,
+                        \__('custom post status', 'graphql-api'),
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             } elseif ($module === self::SCHEMA_USERS) {
                 $option = self::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA;
