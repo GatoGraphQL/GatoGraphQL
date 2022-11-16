@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\Posts\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
+
+    PoPCMSSchema\Posts\Hooks\:
+        resource: '../src/Hooks/*'
