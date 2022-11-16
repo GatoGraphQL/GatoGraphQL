@@ -14,7 +14,7 @@ For instance, a comment can be added to a post, but also to a page and to a CPT,
 
 ![`Comment` type](../../images/interactive-schema-comment.png "`Comment` type")
 
-Because all Custom Posts implement interface `IsCustomPost`, we can retrieve data from `CustomPostUnion` using a fragment reference:
+Because all Custom Posts implement interface `IsCustomPost`, we can retrieve data from `CustomPostUnion` using a fragment reference or an inline fragment:
 
 ```graphql
 {
@@ -34,7 +34,7 @@ Because all Custom Posts implement interface `IsCustomPost`, we can retrieve dat
 }
 ```
 
-If we know that the comment was added to a post, we can also query fields specific to the `Post` like this:
+If we know that the comment was added to a post, we can also query fields specific to the `Post`:
 
 ```graphql
 {
