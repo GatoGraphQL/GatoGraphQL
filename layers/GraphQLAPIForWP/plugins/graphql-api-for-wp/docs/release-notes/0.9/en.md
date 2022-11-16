@@ -21,9 +21,6 @@ The following fields have been upgraded, accepting the following properties in t
 - `Root.customPost`:
   - `id`
   - `slug`
-- `Root.genericCustomPost`:
-  - `id`
-  - `slug`
 - `Root.mediaItem`:
   - `id`
   - `slug`
@@ -93,7 +90,6 @@ On fields to retrieve custom posts, such as:
 
 - `Root.posts`
 - `Root.customPosts`
-- `Root.genericCustomPosts`
 - `Root.myPosts`
 - `User.posts`
 - `PostCategory.posts`
@@ -821,7 +817,6 @@ The benefit is that a single field can then be used to tackle different use case
 As mentioned earlier on, all fields to fetch a single entity now receive argument `by`, which is a oneof input filter:
 
 - `Root.customPost(by:)`
-- `Root.genericCustomPost(by:)`
 - `Root.mediaItem(by:)`
 - `Root.menu(by:)`
 - `Root.page(by:)`
@@ -1452,7 +1447,6 @@ Fields to fetch a single entity, such as `Root.post` or `Root.user`, used to rec
 The following fields have been upgraded:
 
 - `Root.customPost`
-- `Root.genericCustomPost`
 - `Root.mediaItem`
 - `Root.menu`
 - `Root.page`

@@ -97,8 +97,6 @@ services:
           ../../layers/CMSSchema/packages/customposts-wp:/app/vendor/pop-cms-schema/customposts-wp
         - >-
           ../../layers/CMSSchema/packages/customposts:/app/vendor/pop-cms-schema/customposts
-        - >-
-          ../../layers/CMSSchema/packages/generic-customposts:/app/vendor/pop-cms-schema/generic-customposts
         - '../../layers/CMSSchema/packages/media-wp:/app/vendor/pop-cms-schema/media-wp'
         - '../../layers/CMSSchema/packages/media:/app/vendor/pop-cms-schema/media'
         - '../../layers/CMSSchema/packages/menus-wp:/app/vendor/pop-cms-schema/menus-wp'
