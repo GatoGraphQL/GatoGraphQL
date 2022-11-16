@@ -79,7 +79,11 @@ For instance, this query retrieves entries from multiple CPTS:
         "custom_css",
         "revision"
       ],
-      status: [publish, inherit, auto_draft]
+      status: [
+        publish,
+        inherit,
+        auto_draft
+      ]
     }
   ) {
     id
@@ -92,11 +96,7 @@ For instance, this query retrieves entries from multiple CPTS:
 }
 ```
 
-However, other CPTs which have been registered in the WordPress site but not as a GraphQL type (such as a CPT for "portfolio" or "product") cannot be retrieved through field `customPosts`.
-
-This module `Schema Generic Custom Posts` enables to represent these other CPTs through the `GenericCustomPost` type, and have their entries retrieved through field `genericCustomPosts` in the `Root`.
-
-## How to use
+## Configuration
 
 If there is only one type added to `CustomPostUnion`, we can then have the fields that resolve to `CustomPostUnion` be instead resolved to that unique type instead:
 
@@ -106,12 +106,9 @@ For instance, if `Post` is the only type, field `customPosts` from type `Root` r
 
 ![`customPosts` field resolves to `Post` type](../../images/interactive-schema-root.png "`customPosts` field resolves to `Post` type")
 
----
-
 Through the Settings for `Schema Custom Posts`, we can also define:
 
 - The default number of elements to retrieve (i.e. when field argument `limit` is not set) when querying for a list of any custom post type
 - The maximum number of elements that can be retrieved in a single query execution
 
 ![Settings for Custom Post limits](../../images/settings-customposts-limits.png "Settings for Custom Post limits")
-
