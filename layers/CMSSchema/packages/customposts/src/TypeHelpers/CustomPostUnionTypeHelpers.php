@@ -19,18 +19,6 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver
 class CustomPostUnionTypeHelpers
 {
     /**
-     * Obtain the custom post types defined via configuration
-     *
-     * @return string[]
-     */
-    public static function getQueryableCustomPostTypes(): array
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getQueryableCustomPostTypes();
-    }
-
-    /**
      * Based on `getUnionOrTargetObjectTypeResolver` from class
      * \PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers, but applied
      * to the CustomPostUnion type, to add its own configuration.

@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\UnionType;
 
+use PoPCMSSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostTypeDataLoader;
 use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader as UpstreamCustomPostUnionTypeDataLoader;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPCMSSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
+use PoP\ComponentModel\App;
 use SplObjectStorage;
 
 /**
@@ -48,7 +50,9 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         $query = $this->getCustomPostTypeDataLoader()->getQueryToRetrieveObjectsForIDs($ids);
 
         // From all post types from the member typeResolvers
-        $query['custompost-types'] = CustomPostUnionTypeHelpers::getQueryableCustomPostTypes();
+        /** @var CustomPostsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
+        $query['custompost-types'] = $moduleConfiguration->getQueryableCustomPostTypes();
 
         return $query;
     }

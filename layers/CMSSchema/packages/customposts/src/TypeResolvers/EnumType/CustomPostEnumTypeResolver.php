@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\EnumType;
 
+use PoP\ComponentModel\App;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class CustomPostEnumTypeResolver extends AbstractEnumTypeResolver
 {
@@ -19,6 +21,8 @@ class CustomPostEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        return CustomPostUnionTypeHelpers::getQueryableCustomPostTypes();
+        /** @var CustomPostsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
+        return $moduleConfiguration->getQueryableCustomPostTypes();
     }
 }
