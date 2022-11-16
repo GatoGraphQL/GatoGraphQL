@@ -1,26 +1,102 @@
 # Custom Posts
 
-Base functionality for all custom posts
+Query Custom Post Types
 
 ## Description
 
-This module provides the basic schema functionality for custom posts, so it must also be enabled whenever any custom post entity (including posts, pages, or any Custom Post Type) must be added to the schema
+This module provides the basic schema functionality for custom posts, so it must also be enabled whenever any custom post entity (including posts, pages, or any Custom Post Type) is to be added to the schema.
 
-In addition, it provides type `CustomPostUnion`, which is used whenever an entity can return custom posts.
+It also provides type `CustomPostUnion`, which is used whenever an entity can return custom posts.
 
 ![`CustomPostUnion` type](../../images/interactive-schema-custompost-union.png "`CustomPostUnion` type")
 
-For instance, a comment can be added to a post, but also to a page and to a CPT, hence type `Comment` must indicate where the comment has been added through field `customPost` of type `CustomPostUnion` (not through field `post` of type `Post`).
+For instance, a comment can be added to a post, but also to a page and to a CPT, hence type `Comment` has field `customPost: CustomPostUnion!` (instead of field `post: Post!`) to retrieve the entity where the comment was added.
 
 ![`Comment` type](../../images/interactive-schema-comment.png "`Comment` type")
 
+Because all Custom Posts implement interface `IsCustomPost`, we can retrieve data from `CustomPostUnion` using a fragment reference:
+
+```graphql
+{
+  comments {
+    id
+    date
+    content
+    customPost {
+      __typename
+      ...on IsCustomPost {
+        id
+        title
+        url
+      }
+    }
+  }
+}
+```
+
+If we know that the comment was added to a post, we can also query fields specific to the `Post` like this:
+
+```graphql
+{
+  comments {
+    id
+    date
+    content
+    customPost {
+      __typename
+      ...on IsCustomPost {
+        id
+        title
+        url
+      }
+      ...on Post {
+        categoryNames
+      }
+    }
+  }
+}
+```
+
+## Allowed Custom Post Types
+
+The custom post types that can be queried must be explicitly configured in the Settings page, under section "Included custom post types":
+
+![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
+
+There are CPTs (such as `"post"` and `"page"`) which already have a corresponding GraphQL type in the schema (`Post` and `Page`), and these types are incorporated directly into `CustomPostUnion`. For any CPT that has not been modeled in the schema (such as `"attachment"`, `"revision"` or `"nav_menu_item"`, or any CPT installed by any plugin), their data will be accessed via the `GenericCustomPost` type.
+
+For instance, this query retrieves entries from multiple CPTS:
+
+```graphql
+{
+  customPosts(
+    filter: {
+      customPostTypes: [
+        "post",
+        "page",
+        "attachment",
+        "nav_menu_item",
+        "custom_css",
+        "revision"
+      ],
+      status: [publish, inherit, auto_draft]
+    }
+  ) {
+    id
+    title
+    content
+    status
+    customPostType
+    __typename
+  }
+}
+```
+
+However, other CPTs which have been registered in the WordPress site but not as a GraphQL type (such as a CPT for "portfolio" or "product") cannot be retrieved through field `customPosts`.
+
+This module `Schema Generic Custom Posts` enables to represent these other CPTs through the `GenericCustomPost` type, and have their entries retrieved through field `genericCustomPosts` in the `Root`.
+
 ## How to use
-
-The different CPT modules can make their type be part of `CustomPostUnion` through their Settings.
-
-For instance, type `Page` is added to `CustomPostUnion` under the Settings for `Schema Pages`:
-
-![Settings for Schema Pages](../../images/settings-schema-pages.png "Settings for Schema Pages")
 
 If there is only one type added to `CustomPostUnion`, we can then have the fields that resolve to `CustomPostUnion` be instead resolved to that unique type instead:
 
