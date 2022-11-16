@@ -81,16 +81,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         ];
     }
 
-    /**
-     * Only enable if there are queryable custom post types
-     */
-    public function isServiceEnabled(): bool
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getQueryableCustomPostTypes() !== [];
-    }
-
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {

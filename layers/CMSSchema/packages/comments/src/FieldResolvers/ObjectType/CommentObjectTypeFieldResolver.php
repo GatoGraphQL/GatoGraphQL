@@ -11,8 +11,6 @@ use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentResponsePaginatio
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentResponsesFilterInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
-use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\CommonFilterInputContainerComponentProcessor;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -23,7 +21,6 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -208,35 +205,23 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
      */
     public function getFieldNamesToResolve(): array
     {
-        /**
-         * Only enable "customPost" fields if there are queryable custom post types
-         *
-         * @var CustomPostsModuleConfiguration
-         */
-        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
-        return array_merge(
-            [
-                'content',
-                'rawContent',
-                'authorName',
-                'authorURL',
-                'authorEmail',
-                'approved',
-                'type',
-                'status',
-                'parent',
-                'date',
-                'dateStr',
-                'responses',
-                'responseCount',
-            ],
-            $moduleConfiguration->getQueryableCustomPostTypes() !== []
-                ? [
-                    'customPost',
-                    'customPostID',
-                ]
-                : []
-        );
+        return [
+            'customPost',
+            'customPostID',
+            'content',
+            'rawContent',
+            'authorName',
+            'authorURL',
+            'authorEmail',
+            'approved',
+            'type',
+            'status',
+            'parent',
+            'date',
+            'dateStr',
+            'responses',
+            'responseCount',
+        ];
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
