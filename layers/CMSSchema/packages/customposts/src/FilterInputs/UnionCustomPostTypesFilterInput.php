@@ -18,10 +18,7 @@ class UnionCustomPostTypesFilterInput extends AbstractValueToQueryFilterInput
     }
 
     /**
-     * Make sure the provided postTypes are part of the UnionTypeResolver.
-     * Otherwise it can create problem if querying for an existing postType (eg: "page")
-     * when it hasn't been added to the UnionTypeResolver, because the ID will not be
-     * qualified with the type, and cause an exception down the road
+     * Make sure the provided postTypes have been whitelisted.
      */
     protected function getValue(mixed $value): mixed
     {
