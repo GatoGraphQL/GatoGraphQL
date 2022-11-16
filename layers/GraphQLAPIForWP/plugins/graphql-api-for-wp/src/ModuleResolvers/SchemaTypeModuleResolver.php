@@ -63,8 +63,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Hooks
      */
-    public final const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
-    public final const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
+    public final const HOOK_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':queryable-custompost-types';
+    public final const HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-queryable-custompost-types';
 
     /**
      * This comment used to be valid when using `autowire` functions
@@ -611,7 +611,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
 
             if ($module === self::SCHEMA_CUSTOMPOSTS) {
                 // Get the list of custom post types from the system
-                $genericCustomPostTypes = \get_post_types();
+                $queryableCustomPostTypes = \get_post_types();
                 /**
                  * Not all custom post types make sense or are allowed.
                  * Remove the ones that do not
@@ -620,8 +620,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
                     $this->getCustomPostTypeRegistry()->getCustomPostTypes()
                 );
-                $rejectedGenericCustomPostTypes = \apply_filters(
-                    self::HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES,
+                $rejectedQueryableCustomPostTypes = \apply_filters(
+                    self::HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
                     array_merge(
                         /**
                          * Post Types from GraphQL API are just for configuration
@@ -643,19 +643,19 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                             : []
                     )
                 );
-                $genericCustomPostTypes = array_values(array_diff(
-                    $genericCustomPostTypes,
-                    $rejectedGenericCustomPostTypes
+                $queryableCustomPostTypes = array_values(array_diff(
+                    $queryableCustomPostTypes,
+                    $rejectedQueryableCustomPostTypes
                 ));
                 // Allow plugins to further remove unwanted custom post types
-                $genericCustomPostTypes = \apply_filters(
-                    self::HOOK_GENERIC_CUSTOMPOST_TYPES,
-                    $genericCustomPostTypes
+                $queryableCustomPostTypes = \apply_filters(
+                    self::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
+                    $queryableCustomPostTypes
                 );
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($genericCustomPostTypes as $genericCustomPostType) {
-                    $possibleValues[$genericCustomPostType] = $genericCustomPostType;
+                foreach ($queryableCustomPostTypes as $queryableCustomPostType) {
+                    $possibleValues[$queryableCustomPostType] = $queryableCustomPostType;
                 }
                 // Set the setting
                 $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
@@ -678,7 +678,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::POSSIBLE_VALUES => $possibleValues,
                     Properties::IS_MULTIPLE => true,
                 ];
-                
+
                 $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
