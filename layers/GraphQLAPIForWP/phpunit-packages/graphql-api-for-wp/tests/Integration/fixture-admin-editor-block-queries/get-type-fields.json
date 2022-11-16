@@ -77,92 +77,6 @@
           "description": "Comments added to custom posts"
         },
         {
-          "name": "GenericCustomPost",
-          "namespacedName": "GenericCustomPost",
-          "fields": [
-            {
-              "name": "areCommentsOpen"
-            },
-            {
-              "name": "author"
-            },
-            {
-              "name": "commentCount"
-            },
-            {
-              "name": "comments"
-            },
-            {
-              "name": "content"
-            },
-            {
-              "name": "contentSource"
-            },
-            {
-              "name": "customPostType"
-            },
-            {
-              "name": "date"
-            },
-            {
-              "name": "dateStr"
-            },
-            {
-              "name": "excerpt"
-            },
-            {
-              "name": "featuredImage"
-            },
-            {
-              "name": "hasComments"
-            },
-            {
-              "name": "hasFeaturedImage"
-            },
-            {
-              "name": "id"
-            },
-            {
-              "name": "isStatus"
-            },
-            {
-              "name": "metaValue"
-            },
-            {
-              "name": "metaValues"
-            },
-            {
-              "name": "modifiedDate"
-            },
-            {
-              "name": "modifiedDateStr"
-            },
-            {
-              "name": "rawContent"
-            },
-            {
-              "name": "self"
-            },
-            {
-              "name": "slug"
-            },
-            {
-              "name": "status"
-            },
-            {
-              "name": "title"
-            },
-            {
-              "name": "url"
-            },
-            {
-              "name": "urlAbsolutePath"
-            }
-          ],
-          "kind": "OBJECT",
-          "description": "Any custom post, with or without its own type for the schema"
-        },
-        {
           "name": "Media",
           "namespacedName": "Media",
           "fields": [
@@ -687,15 +601,6 @@
               "name": "customPosts"
             },
             {
-              "name": "genericCustomPost"
-            },
-            {
-              "name": "genericCustomPostCount"
-            },
-            {
-              "name": "genericCustomPosts"
-            },
-            {
               "name": "id"
             },
             {
@@ -858,15 +763,6 @@
             },
             {
               "name": "customPosts"
-            },
-            {
-              "name": "genericCustomPost"
-            },
-            {
-              "name": "genericCustomPostCount"
-            },
-            {
-              "name": "genericCustomPosts"
             },
             {
               "name": "id"
@@ -1798,13 +1694,6 @@
           "description": null
         },
         {
-          "name": "GenericCustomPostPaginationInput",
-          "namespacedName": "GenericCustomPostPaginationInput",
-          "fields": null,
-          "kind": "INPUT_OBJECT",
-          "description": "Input to paginate generic custom posts"
-        },
-        {
           "name": "LoginCredentialsInput",
           "namespacedName": "LoginCredentialsInput",
           "fields": null,
@@ -1971,13 +1860,6 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter custom posts"
-        },
-        {
-          "name": "RootGenericCustomPostsFilterInput",
-          "namespacedName": "RootGenericCustomPostsFilterInput",
-          "fields": null,
-          "kind": "INPUT_OBJECT",
-          "description": "Input to filter generic custom posts"
         },
         {
           "name": "RootMediaItemPaginationInput",
@@ -2227,13 +2109,6 @@
         {
           "name": "FilterCustomPostStatusEnum",
           "namespacedName": "FilterCustomPostStatusEnum",
-          "fields": null,
-          "kind": "ENUM",
-          "description": null
-        },
-        {
-          "name": "GenericCustomPostEnum",
-          "namespacedName": "GenericCustomPostEnum",
           "fields": null,
           "kind": "ENUM",
           "description": null
