@@ -84,6 +84,12 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                     if (empty($possibleValues)) {
                         $values[$name] = explode("\n", $values[$name]);
                     }
+                } elseif (
+                    $type === Properties::TYPE_ARRAY
+                    && $canBeEmpty
+                    && $values[$name] === null
+                ) {
+                    $values[$name] = [];
                 }
 
                 // Validate it is a valid value, or reset
