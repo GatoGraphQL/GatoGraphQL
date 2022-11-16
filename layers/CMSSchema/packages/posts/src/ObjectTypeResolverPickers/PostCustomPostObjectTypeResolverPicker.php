@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 class PostCustomPostObjectTypeResolverPicker extends AbstractPostObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
 {
     use CustomPostObjectTypeResolverPickerTrait;
-    
+
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
      */

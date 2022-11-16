@@ -24,7 +24,7 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
         /** @var CustomPostTypeDataLoader */
         return $this->customPostTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostTypeDataLoader::class);
     }
-    
+
     public function getTypeName(): string
     {
         return 'GenericCustomPost';

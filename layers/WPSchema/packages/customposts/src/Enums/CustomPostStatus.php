@@ -9,6 +9,6 @@ class CustomPostStatus
     public final const FUTURE = 'future';
     public final const PRIVATE = 'private';
     public final const INHERIT = 'inherit';
-    public final const AUTO_DRAFT = 'auto_draft';    
+    public final const AUTO_DRAFT = 'auto_draft';
     // public final const ANY = 'any';
 }

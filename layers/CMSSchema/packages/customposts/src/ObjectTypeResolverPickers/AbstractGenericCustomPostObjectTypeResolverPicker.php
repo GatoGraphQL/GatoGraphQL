@@ -87,7 +87,7 @@ abstract class AbstractGenericCustomPostObjectTypeResolverPicker extends Abstrac
             }
             $nonGenericCustomPostTypes[] = $customPostObjectTypeResolverPicker->getCustomPostType();
         }
-        
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_diff(

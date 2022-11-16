@@ -20,7 +20,7 @@ class PageAddDefaultCustomPostTypeModuleConfigurationHookSet extends AbstractAdd
         /** @var PageTypeAPIInterface */
         return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
     }
-    
+
     protected function getCustomPostType(): string
     {
         return $this->getPageTypeAPI()->getPageCustomPostType();

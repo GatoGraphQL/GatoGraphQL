@@ -20,7 +20,7 @@ class PostAddDefaultCustomPostTypeModuleConfigurationHookSet extends AbstractAdd
         /** @var PostTypeAPIInterface */
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
-    
+
     protected function getCustomPostType(): string
     {
         return $this->getPostTypeAPI()->getPostCustomPostType();

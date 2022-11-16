@@ -113,7 +113,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
          * Cast all objects from the same type in a single query
          *
          * @var SplObjectStorage<CustomPostObjectTypeResolverPickerInterface,array<string|int,object>>
-         */        
+         */
         $castedCustomPosts = new SplObjectStorage();
         /** @var CustomPostObjectTypeResolverPickerInterface $customPostTypeTypeResolverPicker */
         foreach ($customPostTypeResolverPickerItemCustomPosts as $customPostTypeTypeResolverPicker) {
