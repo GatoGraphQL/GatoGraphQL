@@ -4,35 +4,38 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Component\Component;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use DateTime;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentResponsePaginationInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentResponsesFilterInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\CommonFilterInputContainerComponentProcessor;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -205,23 +208,37 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
      */
     public function getFieldNamesToResolve(): array
     {
-        return [
-            'content',
-            'rawContent',
-            'authorName',
-            'authorURL',
-            'authorEmail',
-            'customPost',
-            'customPostID',
-            'approved',
-            'type',
-            'status',
-            'parent',
-            'date',
-            'dateStr',
-            'responses',
-            'responseCount',
-        ];
+        /**
+         * Only enable "customPost" fields if there are queryable custom post types
+         *
+         * @var CustomPostsModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
+        $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
+        
+        return array_merge(
+            [
+                'content',
+                'rawContent',
+                'authorName',
+                'authorURL',
+                'authorEmail',
+                'approved',
+                'type',
+                'status',
+                'parent',
+                'date',
+                'dateStr',
+                'responses',
+                'responseCount',
+            ],
+            $queryableCustomPostTypes !== []
+                ? [
+                    'customPost',
+                    'customPostID',
+                ]
+                : []
+        );
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
