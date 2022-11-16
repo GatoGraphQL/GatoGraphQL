@@ -35,7 +35,7 @@ abstract class AbstractAddDefaultCustomPostTypeModuleConfigurationHookSet extend
         );
         App::addFilter(
             $hookName,
-            fn (array $queryableCustomPostTypes) => [...$queryableCustomPostTypes, $this->getCustomPostType()]
+            fn (array $queryableCustomPostTypes) => array_values(array_unique([...$queryableCustomPostTypes, $this->getCustomPostType()]))
         );
     }
 
