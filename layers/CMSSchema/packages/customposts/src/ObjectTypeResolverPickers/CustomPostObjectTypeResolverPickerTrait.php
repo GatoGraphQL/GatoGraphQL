@@ -16,7 +16,9 @@ trait CustomPostObjectTypeResolverPickerTrait
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $customPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
-        return in_array($this->getCustomPostType(), $customPostTypes);
+        return in_array(
+            $this->getCustomPostType(),
+            $moduleConfiguration->getQueryableCustomPostTypes()
+        );
     }
 }

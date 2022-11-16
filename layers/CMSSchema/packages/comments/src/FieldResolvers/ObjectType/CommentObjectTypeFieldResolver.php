@@ -214,8 +214,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
          * @var CustomPostsModuleConfiguration
          */
         $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
-        $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
-        
         return array_merge(
             [
                 'content',
@@ -232,7 +230,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 'responses',
                 'responseCount',
             ],
-            $queryableCustomPostTypes !== []
+            $moduleConfiguration->getQueryableCustomPostTypes() !== []
                 ? [
                     'customPost',
                     'customPostID',

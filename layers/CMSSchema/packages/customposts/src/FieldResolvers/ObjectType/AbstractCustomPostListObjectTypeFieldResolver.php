@@ -88,8 +88,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $customPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
-        return $customPostTypes !== [];
+        return $moduleConfiguration->getQueryableCustomPostTypes() !== [];
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
