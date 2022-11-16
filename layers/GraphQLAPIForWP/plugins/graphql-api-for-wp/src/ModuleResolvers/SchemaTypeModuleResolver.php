@@ -611,7 +611,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
 
             if ($module === self::SCHEMA_CUSTOMPOSTS) {
                 // Get the list of custom post types from the system
-                $queryableCustomPostTypes = \get_post_types();
+                $possibleCustomPostTypes = \get_post_types();
                 /**
                  * Not all custom post types make sense or are allowed.
                  * Remove the ones that do not
@@ -643,19 +643,19 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                             : []
                     )
                 );
-                $queryableCustomPostTypes = array_values(array_diff(
-                    $queryableCustomPostTypes,
+                $possibleCustomPostTypes = array_values(array_diff(
+                    $possibleCustomPostTypes,
                     $rejectedQueryableCustomPostTypes
                 ));
                 // Allow plugins to further remove unwanted custom post types
-                $queryableCustomPostTypes = \apply_filters(
+                $possibleCustomPostTypes = \apply_filters(
                     self::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
-                    $queryableCustomPostTypes
+                    $possibleCustomPostTypes
                 );
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($queryableCustomPostTypes as $queryableCustomPostType) {
-                    $possibleValues[$queryableCustomPostType] = $queryableCustomPostType;
+                foreach ($possibleCustomPostTypes as $customPostType) {
+                    $possibleValues[$customPostType] = $customPostType;
                 }
                 // Set the setting
                 $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
