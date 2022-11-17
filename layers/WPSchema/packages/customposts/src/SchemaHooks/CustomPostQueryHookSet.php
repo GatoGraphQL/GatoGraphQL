@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\SchemaHooks;
 
-use PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
-use PoPWPSchema\CustomPosts\Enums\CustomPostStatus;
-use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class CustomPostQueryHookSet extends AbstractHookSet
