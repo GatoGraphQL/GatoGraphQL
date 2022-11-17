@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use Error;
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
@@ -12,8 +13,8 @@ use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
@@ -163,6 +164,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     {
         return false;
     }
+
+    protected function registerHighlightJSCSS(): bool
+    {
+        return false;
+    }
+
     /**
      * The block full name: namespace/blockName
      */
@@ -363,6 +370,20 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
                 (string)filemtime("$dir/$style_css")
             );
             $blockConfiguration['style'] = $blockRegistrationName . '-block';
+        }
+
+        /**
+         * Register Highlight.js CSS file
+         */
+        if ($this->registerHighlightJSCSS()) {
+            $mainPluginURL = App::getMainPlugin()->getPluginURL();
+            $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+            \wp_enqueue_style(
+                'highlight-style',
+                $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css',
+                array(),
+                $mainPluginVersion
+            );
         }
 
         /**
