@@ -43,16 +43,47 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
      */
     protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): string
     {
-        // $scriptSrc = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js'
-        $mainPluginURL = App::getMainPlugin()->getPluginURL();
-        $scriptSrc = $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js';
+        // Commented out Prettify
+        // // $scriptSrc = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js'
+        // $mainPluginURL = App::getMainPlugin()->getPluginURL();
+        // $scriptSrc = $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js';
+        // /**
+        //  * Prettyprint the code
+        //  */
+        // $content .= sprintf(
+        //     '<script src="%s"></script>',
+        //     $scriptSrc
+        // );
+
         /**
-         * Prettyprint the code
+         * Using highlight.js
+         *
+         * @see https://highlightjs.org/usage/
          */
+        $linkTagPlaceholder = '<link rel="stylesheet" href="%s">';
+        $scriptTagPlaceholder = '<script src="%s"></script>';
+        $mainPluginURL = App::getMainPlugin()->getPluginURL();
         $content .= sprintf(
-            '<script src="%s"></script>',
-            $scriptSrc
+            $linkTagPlaceholder,
+            $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css'
         );
+        $content .= sprintf(
+            $scriptTagPlaceholder,
+            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/highlight.min.js'
+        );
+        $content .= sprintf(
+            $scriptTagPlaceholder,
+            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/graphql.min.js'
+        );
+        $content .= sprintf(
+            $scriptTagPlaceholder,
+            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/json.min.js'
+        );
+        $content .= sprintf(
+            $scriptTagPlaceholder,
+            $mainPluginURL . 'assets/js/run_highlight.js'
+        );
+        
         return $content;
     }
 }
