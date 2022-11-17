@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PHPUnitForGraphQLAPI\WPFakerSchema\Unit;
+
+use GraphQLByPoP\GraphQLServer\Unit\EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
+
+abstract class AbstractEnableDisableWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
+{
+    use EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
+}

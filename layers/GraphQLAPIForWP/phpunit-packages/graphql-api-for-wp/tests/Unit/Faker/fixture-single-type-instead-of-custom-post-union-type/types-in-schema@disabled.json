@@ -1,0 +1,983 @@
+{
+    "data": {
+        "__schema": {
+            "types": [
+                {
+                    "name": "MutationRoot",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "self",
+                            "type": {
+                                "name": "MutationRoot!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Page",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "childCount",
+                            "type": {
+                                "name": "Int!"
+                            }
+                        },
+                        {
+                            "name": "children",
+                            "type": {
+                                "name": "[Page!]!"
+                            }
+                        },
+                        {
+                            "name": "content",
+                            "type": {
+                                "name": "HTML!"
+                            }
+                        },
+                        {
+                            "name": "customPostType",
+                            "type": {
+                                "name": "CustomPostEnum!"
+                            }
+                        },
+                        {
+                            "name": "date",
+                            "type": {
+                                "name": "DateTime!"
+                            }
+                        },
+                        {
+                            "name": "dateStr",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "excerpt",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "isStatus",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        },
+                        {
+                            "name": "modifiedDate",
+                            "type": {
+                                "name": "DateTime!"
+                            }
+                        },
+                        {
+                            "name": "modifiedDateStr",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "parent",
+                            "type": {
+                                "name": "Page"
+                            }
+                        },
+                        {
+                            "name": "rawContent",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "self",
+                            "type": {
+                                "name": "Page!"
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "type": {
+                                "name": "CustomPostStatusEnum!"
+                            }
+                        },
+                        {
+                            "name": "title",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "url",
+                            "type": {
+                                "name": "URL!"
+                            }
+                        },
+                        {
+                            "name": "urlAbsolutePath",
+                            "type": {
+                                "name": "URLAbsolutePath!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "QueryRoot",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "customPost",
+                            "type": {
+                                "name": "CustomPostUnion"
+                            }
+                        },
+                        {
+                            "name": "customPostCount",
+                            "type": {
+                                "name": "Int!"
+                            }
+                        },
+                        {
+                            "name": "customPosts",
+                            "type": {
+                                "name": "[CustomPostUnion!]!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "page",
+                            "type": {
+                                "name": "Page"
+                            }
+                        },
+                        {
+                            "name": "pageCount",
+                            "type": {
+                                "name": "Int!"
+                            }
+                        },
+                        {
+                            "name": "pages",
+                            "type": {
+                                "name": "[Page!]!"
+                            }
+                        },
+                        {
+                            "name": "self",
+                            "type": {
+                                "name": "QueryRoot!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Root",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "customPost",
+                            "type": {
+                                "name": "CustomPostUnion"
+                            }
+                        },
+                        {
+                            "name": "customPostCount",
+                            "type": {
+                                "name": "Int!"
+                            }
+                        },
+                        {
+                            "name": "customPosts",
+                            "type": {
+                                "name": "[CustomPostUnion!]!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "page",
+                            "type": {
+                                "name": "Page"
+                            }
+                        },
+                        {
+                            "name": "pageCount",
+                            "type": {
+                                "name": "Int!"
+                            }
+                        },
+                        {
+                            "name": "pages",
+                            "type": {
+                                "name": "[Page!]!"
+                            }
+                        },
+                        {
+                            "name": "self",
+                            "type": {
+                                "name": "Root!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "_DirectiveExtensions",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "fieldDirectiveSupportedTypeNamesOrDescriptions",
+                            "type": {
+                                "name": "[String!]"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "needsDataToExecute",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "_EnumValueExtensions",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "isSensitiveDataElement",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "_FieldExtensions",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "isGlobal",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        },
+                        {
+                            "name": "isMutation",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        },
+                        {
+                            "name": "isSensitiveDataElement",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "_InputValueExtensions",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "isSensitiveDataElement",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "_NamedTypeExtensions",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "elementName",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "namespacedName",
+                            "type": {
+                                "name": "String!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "_SchemaExtensions",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "isNamespaced",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "__Directive",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "args",
+                            "type": {
+                                "name": "[__InputValue!]!"
+                            }
+                        },
+                        {
+                            "name": "description",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "extensions",
+                            "type": {
+                                "name": "_DirectiveExtensions!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "isRepeatable",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        },
+                        {
+                            "name": "locations",
+                            "type": {
+                                "name": "[DirectiveLocation!]!"
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "type": {
+                                "name": "String!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "__EnumValue",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "deprecationReason",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "description",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "extensions",
+                            "type": {
+                                "name": "_EnumValueExtensions!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "isDeprecated",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "type": {
+                                "name": "String!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "__Field",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "args",
+                            "type": {
+                                "name": "[__InputValue!]!"
+                            }
+                        },
+                        {
+                            "name": "deprecationReason",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "description",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "extensions",
+                            "type": {
+                                "name": "_FieldExtensions!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "isDeprecated",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "type",
+                            "type": {
+                                "name": "__Type!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "__InputValue",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "defaultValue",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "description",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "extensions",
+                            "type": {
+                                "name": "_InputValueExtensions!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "type",
+                            "type": {
+                                "name": "__Type!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "__Schema",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "directives",
+                            "type": {
+                                "name": "[__Directive!]!"
+                            }
+                        },
+                        {
+                            "name": "extensions",
+                            "type": {
+                                "name": "_SchemaExtensions!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "mutationType",
+                            "type": {
+                                "name": "__Type"
+                            }
+                        },
+                        {
+                            "name": "queryType",
+                            "type": {
+                                "name": "__Type!"
+                            }
+                        },
+                        {
+                            "name": "subscriptionType",
+                            "type": {
+                                "name": "__Type"
+                            }
+                        },
+                        {
+                            "name": "type",
+                            "type": {
+                                "name": "__Type"
+                            }
+                        },
+                        {
+                            "name": "types",
+                            "type": {
+                                "name": "[__Type!]!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "__Type",
+                    "possibleTypes": null,
+                    "fields": [
+                        {
+                            "name": "description",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "enumValues",
+                            "type": {
+                                "name": "[__EnumValue!]"
+                            }
+                        },
+                        {
+                            "name": "extensions",
+                            "type": {
+                                "name": "_NamedTypeExtensions"
+                            }
+                        },
+                        {
+                            "name": "fields",
+                            "type": {
+                                "name": "[__Field!]"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "inputFields",
+                            "type": {
+                                "name": "[__InputValue!]"
+                            }
+                        },
+                        {
+                            "name": "interfaces",
+                            "type": {
+                                "name": "[__Type!]"
+                            }
+                        },
+                        {
+                            "name": "kind",
+                            "type": {
+                                "name": "TypeKind!"
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "ofType",
+                            "type": {
+                                "name": "__Type"
+                            }
+                        },
+                        {
+                            "name": "possibleTypes",
+                            "type": {
+                                "name": "[__Type!]"
+                            }
+                        },
+                        {
+                            "name": "specifiedByURL",
+                            "type": {
+                                "name": "String"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Boolean",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "Date",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "DateTime",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "HTML",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "ID",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "Int",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "String",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "URL",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "URLAbsolutePath",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "IsCustomPost",
+                    "possibleTypes": [
+                        "types.Object.Page"
+                    ],
+                    "fields": [
+                        {
+                            "name": "content",
+                            "type": {
+                                "name": "HTML!"
+                            }
+                        },
+                        {
+                            "name": "customPostType",
+                            "type": {
+                                "name": "CustomPostEnum!"
+                            }
+                        },
+                        {
+                            "name": "date",
+                            "type": {
+                                "name": "DateTime!"
+                            }
+                        },
+                        {
+                            "name": "dateStr",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "excerpt",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "isStatus",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        },
+                        {
+                            "name": "modifiedDate",
+                            "type": {
+                                "name": "DateTime!"
+                            }
+                        },
+                        {
+                            "name": "modifiedDateStr",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "rawContent",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "type": {
+                                "name": "CustomPostStatusEnum!"
+                            }
+                        },
+                        {
+                            "name": "title",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
+                            "name": "url",
+                            "type": {
+                                "name": "URL!"
+                            }
+                        },
+                        {
+                            "name": "urlAbsolutePath",
+                            "type": {
+                                "name": "URLAbsolutePath!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Node",
+                    "possibleTypes": [
+                        "types.Object.Root",
+                        "types.Object.__Type",
+                        "types.Object._NamedTypeExtensions",
+                        "types.Object.__InputValue",
+                        "types.Object._InputValueExtensions",
+                        "types.Object.__EnumValue",
+                        "types.Object._EnumValueExtensions",
+                        "types.Object.__Field",
+                        "types.Object._FieldExtensions",
+                        "types.Object.__Schema",
+                        "types.Object._SchemaExtensions",
+                        "types.Object.__Directive",
+                        "types.Object._DirectiveExtensions",
+                        "types.Object.MutationRoot",
+                        "types.Object.QueryRoot",
+                        "types.Object.Page"
+                    ],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Queryable",
+                    "possibleTypes": [
+                        "types.Object.Page"
+                    ],
+                    "fields": [
+                        {
+                            "name": "slug",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "url",
+                            "type": {
+                                "name": "URL!"
+                            }
+                        },
+                        {
+                            "name": "urlAbsolutePath",
+                            "type": {
+                                "name": "URLAbsolutePath!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CustomPostEnum",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "CustomPostOrderByEnum",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "CustomPostStatusEnum",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "DirectiveKindEnum",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "DirectiveLocation",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "OrderEnum",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "TypeKind",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "CustomPostByInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "CustomPostPaginationInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "CustomPostSortInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "DateQueryInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "PageByInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "PageChildrenFilterInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "PagePaginationInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "RootCustomPostsFilterInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "RootPagesFilterInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "CustomPostUnion",
+                    "possibleTypes": [
+                        "types.Object.Page"
+                    ],
+                    "fields": null
+                }
+            ]
+        }
+    }
+}
