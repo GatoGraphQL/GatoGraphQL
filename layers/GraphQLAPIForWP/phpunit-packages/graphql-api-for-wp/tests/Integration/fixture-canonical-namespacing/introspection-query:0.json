@@ -16813,12 +16813,6 @@
           "interfaces": null,
           "enumValues": [
             {
-              "name": "auto_draft",
-              "description": "Revisions that WordPress saves automatically while you are editing",
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "draft",
               "description": "Draft content",
               "isDeprecated": false,

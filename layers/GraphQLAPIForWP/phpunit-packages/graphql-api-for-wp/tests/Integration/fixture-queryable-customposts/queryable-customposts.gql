@@ -11,8 +11,7 @@
       ],
       status:[
         publish,
-        inherit,
-        auto_draft
+        inherit
       ]
     },
     pagination: {

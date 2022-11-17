@@ -86,13 +86,6 @@
         "__typename": "GenericCustomPost"
       },
       {
-        "id": 591,
-        "title": "Auto Draft",
-        "customPostType": "post",
-        "status": "auto-draft",
-        "__typename": "Post"
-      },
-      {
         "id": 592,
         "title": "Website",
         "customPostType": "revision",
@@ -102,6 +95,13 @@
       {
         "id": 593,
         "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 594,
+        "title": "New title",
         "customPostType": "revision",
         "status": "inherit",
         "__typename": "GenericCustomPost"
