@@ -155,8 +155,6 @@ services:
           ../../layers/CMSSchema/packages/schema-commons-wp:/app/vendor/pop-cms-schema/schema-commons-wp
         - >-
           ../../layers/CMSSchema/packages/schema-commons:/app/vendor/pop-cms-schema/schema-commons
-        - >-
-          ../../layers/CMSSchema/packages/generic-customposts:/app/vendor/pop-cms-schema/generic-customposts
         - '../../layers/CMSSchema/packages/stances:/app/vendor/pop-cms-schema/stances'
         - >-
           ../../layers/CMSSchema/packages/stances-wp:/app/vendor/pop-cms-schema/stances-wp

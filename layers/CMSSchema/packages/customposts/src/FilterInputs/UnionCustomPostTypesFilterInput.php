@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FilterInputs;
 
-use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 use PoPCMSSchema\CustomPosts\FilterInput\FilterInputHelper;
-use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
 class UnionCustomPostTypesFilterInput extends AbstractValueToQueryFilterInput
 {
@@ -16,16 +18,15 @@ class UnionCustomPostTypesFilterInput extends AbstractValueToQueryFilterInput
     }
 
     /**
-     * Make sure the provided postTypes are part of the UnionTypeResolver.
-     * Otherwise it can create problem if querying for an existing postType (eg: "page")
-     * when it hasn't been added to the UnionTypeResolver, because the ID will not be
-     * qualified with the type, and cause an exception down the road
+     * Make sure the provided postTypes have been whitelisted.
      */
     protected function getValue(mixed $value): mixed
     {
+        /** @var CustomPostsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
         $value = array_intersect(
             $value,
-            CustomPostUnionTypeHelpers::getTargetObjectTypeResolverCustomPostTypes()
+            $moduleConfiguration->getQueryableCustomPostTypes()
         );
         return FilterInputHelper::maybeGetNonExistingCustomPostTypes($value);
     }

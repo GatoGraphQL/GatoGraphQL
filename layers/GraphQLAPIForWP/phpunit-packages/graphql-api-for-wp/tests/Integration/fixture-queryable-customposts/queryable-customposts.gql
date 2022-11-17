@@ -1,0 +1,28 @@
+{
+  customPosts(
+    filter:{
+      customPostTypes: [
+        "post",
+        "page",
+        "attachment",
+        "nav_menu_item",
+        "custom_css",
+        "revision"
+      ],
+      status:[
+        publish,
+        inherit,
+        auto_draft
+      ]
+    },
+    pagination: {
+      limit: 30
+    }
+  ) {
+    id
+    title
+    customPostType
+    status
+    __typename
+  }
+}

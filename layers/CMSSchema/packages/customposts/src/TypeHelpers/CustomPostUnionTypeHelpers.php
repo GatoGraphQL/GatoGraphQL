@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeHelpers;
 
-use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
-use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
 /**
@@ -20,29 +18,6 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver
  */
 class CustomPostUnionTypeHelpers
 {
-    /**
-     * Obtain the custom post types from all member typeResolvers
-     *
-     * @return string[]
-     */
-    public static function getTargetObjectTypeResolverCustomPostTypes(
-        ?UnionTypeResolverInterface $unionTypeResolver = null,
-    ): array {
-        if ($unionTypeResolver === null) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var CustomPostUnionTypeResolver */
-            $unionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
-        }
-        $customPostObjectTypeResolverPickers = array_values(array_filter(
-            $unionTypeResolver->getObjectTypeResolverPickers(),
-            fn (ObjectTypeResolverPickerInterface $objectTypeResolverPicker) => $objectTypeResolverPicker instanceof CustomPostObjectTypeResolverPickerInterface
-        ));
-        return array_map(
-            fn (CustomPostObjectTypeResolverPickerInterface $customPostObjectTypeResolverPicker) => $customPostObjectTypeResolverPicker->getCustomPostType(),
-            $customPostObjectTypeResolverPickers
-        );
-    }
-
     /**
      * Based on `getUnionOrTargetObjectTypeResolver` from class
      * \PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers, but applied

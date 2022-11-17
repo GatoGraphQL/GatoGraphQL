@@ -53,4 +53,12 @@ class Module extends AbstractModule
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
         }
     }
+
+    /**
+     * Initialize services for the system container
+     */
+    protected function initializeSystemContainerServices(): void
+    {
+        $this->initSystemServices(dirname(__DIR__));
+    }
 }

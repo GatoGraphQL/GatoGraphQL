@@ -1,0 +1,216 @@
+{
+  "data": {
+    "customPosts": [
+      {
+        "id": 613,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 612,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 611,
+        "title": "Home user widget",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 610,
+        "title": "Home user widget",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 609,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 608,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 606,
+        "title": "HTTP caching improves performance 33333",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 607,
+        "title": "HTTP caching improves performance",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 605,
+        "title": "Auto Draft",
+        "customPostType": "post",
+        "status": "auto-draft",
+        "__typename": "Post"
+      },
+      {
+        "id": 604,
+        "title": "Auto Draft",
+        "customPostType": "post",
+        "status": "auto-draft",
+        "__typename": "Post"
+      },
+      {
+        "id": 603,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 602,
+        "title": "HTTP caching improves performance",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 600,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 601,
+        "title": "HTTP caching improves performance 33333",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 599,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 598,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 597,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 596,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 594,
+        "title": "New title",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 595,
+        "title": "Released v0.6, check it out",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 593,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 592,
+        "title": "Website",
+        "customPostType": "revision",
+        "status": "inherit",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 591,
+        "title": "Auto Draft",
+        "customPostType": "post",
+        "status": "auto-draft",
+        "__typename": "Post"
+      },
+      {
+        "id": 363,
+        "title": "LICENSE",
+        "customPostType": "attachment",
+        "status": "publish",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 362,
+        "title": "graphql-api-search-results",
+        "customPostType": "attachment",
+        "status": "publish",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 361,
+        "title": "graphql-api-header",
+        "customPostType": "attachment",
+        "status": "publish",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 1,
+        "title": "Hello world!",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 2,
+        "title": "Sample Page",
+        "customPostType": "page",
+        "status": "publish",
+        "__typename": "Page"
+      },
+      {
+        "id": 28,
+        "title": "HTTP caching improves performance",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 25,
+        "title": "Public or Private API mode, for extra security",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      }
+    ]
+  }
+}

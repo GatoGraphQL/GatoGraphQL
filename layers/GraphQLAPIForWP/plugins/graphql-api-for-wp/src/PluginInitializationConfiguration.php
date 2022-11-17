@@ -39,8 +39,6 @@ use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
 use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
-use PoPCMSSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
-use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsModule;
 use PoPCMSSchema\Media\Environment as MediaEnvironment;
 use PoPCMSSchema\Media\Module as MediaModule;
 use PoPCMSSchema\Menus\Environment as MenusEnvironment;
@@ -182,27 +180,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
-            // Custom Post default/max limits, Supported custom post types
-            [
-                'class' => GenericCustomPostsModule::class,
-                'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_DEFAULT_LIMIT,
-                'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
-            ],
-            [
-                'class' => GenericCustomPostsModule::class,
-                'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT,
-                'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-                'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
-            ],
-            [
-                'class' => GenericCustomPostsModule::class,
-                'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
-                'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
-            ],
             // Post default/max limits, add to CustomPostUnion
             [
                 'class' => PostsModule::class,
@@ -217,12 +194,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
-            ],
-            [
-                'class' => PostsModule::class,
-                'envVariable' => PostsEnvironment::ADD_POST_TYPE_TO_CUSTOMPOST_UNION_TYPES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
-                'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
             ],
             // User default/max limits
             [
@@ -337,12 +308,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
-            [
-                'class' => PagesModule::class,
-                'envVariable' => PagesEnvironment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES,
-                'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
-                'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
-            ],
             // Custom post default/max limits
             [
                 'class' => CustomPostsModule::class,
@@ -368,6 +333,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => CustomPostsEnvironment::USE_SINGLE_TYPE_INSTEAD_OF_CUSTOMPOST_UNION_TYPE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,
+            ],
+            [
+                'class' => CustomPostsModule::class,
+                'envVariable' => CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
             ],
             // White/Blacklisted entries to Root.option
             [
@@ -562,6 +533,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Expose global fields
             \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
         ];
+        $moduleClassConfiguration[CustomPostsModule::class] = [
+            // The default queryable custom post types are defined by this plugin
+            CustomPostsEnvironment::DISABLE_PACKAGES_ADDING_DEFAULT_QUERYABLE_CUSTOMPOST_TYPES => true,
+        ];
 
         // If doing ?behavior=unrestricted, always enable certain features
         // Retrieve this service from the SystemContainer
@@ -646,22 +621,24 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPCMSSchema\CustomPosts\Module::class,
                 \PoPCMSSchema\CustomPostsWP\Module::class,
                 \PoPCMSSchema\CustomPostMedia\Module::class,
+                \PoPCMSSchema\CustomPostMediaWP\Module::class,
                 \PoPWPSchema\CustomPosts\Module::class,
-            ],
-            SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS => [
-                \PoPCMSSchema\GenericCustomPosts\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POSTS => [
                 \PoPCMSSchema\Posts\Module::class,
+                \PoPCMSSchema\PostsWP\Module::class,
                 \PoPWPSchema\Posts\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_COMMENTS => [
                 \PoPCMSSchema\Comments\Module::class,
+                \PoPCMSSchema\CommentsWP\Module::class,
                 \PoPWPSchema\Comments\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USERS => [
                 \PoPCMSSchema\Users\Module::class,
+                \PoPCMSSchema\UsersWP\Module::class,
                 \PoPCMSSchema\UserState\Module::class,
+                \PoPCMSSchema\UserStateWP\Module::class,
                 \PoPWPSchema\Users\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_ROLES => [
@@ -670,70 +647,88 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_AVATARS => [
                 \PoPCMSSchema\UserAvatars\Module::class,
+                \PoPCMSSchema\UserAvatarsWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_PAGES => [
                 \PoPCMSSchema\Pages\Module::class,
+                \PoPCMSSchema\PagesWP\Module::class,
                 \PoPWPSchema\Pages\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MEDIA => [
                 \PoPCMSSchema\CustomPostMedia\Module::class,
+                \PoPCMSSchema\CustomPostMediaWP\Module::class,
                 \PoPCMSSchema\Media\Module::class,
                 \PoPWPSchema\Media\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_TAGS => [
                 \PoPCMSSchema\Tags\Module::class,
+                \PoPCMSSchema\TagsWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_TAGS => [
                 \PoPCMSSchema\PostTags\Module::class,
+                \PoPCMSSchema\PostTagsWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_CATEGORIES => [
                 \PoPCMSSchema\Categories\Module::class,
+                \PoPCMSSchema\CategoriesWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_CATEGORIES => [
                 \PoPCMSSchema\PostCategories\Module::class,
+                \PoPCMSSchema\PostCategoriesWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MENUS => [
                 \PoPCMSSchema\Menus\Module::class,
+                \PoPCMSSchema\MenusWP\Module::class,
                 \PoPWPSchema\Menus\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_SETTINGS => [
                 \PoPCMSSchema\Settings\Module::class,
+                \PoPCMSSchema\SettingsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_USER_STATE_MUTATIONS => [
                 \PoPCMSSchema\UserStateMutations\Module::class,
+                \PoPCMSSchema\UserStateMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_MUTATIONS => [
                 \PoPCMSSchema\PostMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => [
                 \PoPCMSSchema\CustomPostMediaMutations\Module::class,
+                \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POSTMEDIA_MUTATIONS => [
                 \PoPCMSSchema\PostMediaMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
                 \PoPCMSSchema\PostTagMutations\Module::class,
+                \PoPCMSSchema\PostTagMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_CATEGORY_MUTATIONS => [
                 \PoPCMSSchema\PostCategoryMutations\Module::class,
+                \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
                 \PoPCMSSchema\CommentMutations\Module::class,
+                \PoPCMSSchema\CommentMutationsWP\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
                 \PoPCMSSchema\CustomPostMeta\Module::class,
+                \PoPCMSSchema\CustomPostMetaWP\Module::class,
                 \PoPWPSchema\CustomPostMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_USER_META => [
                 \PoPCMSSchema\UserMeta\Module::class,
+                \PoPCMSSchema\UserMetaWP\Module::class,
                 \PoPWPSchema\UserMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META => [
                 \PoPCMSSchema\CommentMeta\Module::class,
+                \PoPCMSSchema\CommentMetaWP\Module::class,
                 \PoPWPSchema\CommentMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META => [
                 \PoPCMSSchema\TaxonomyMeta\Module::class,
+                \PoPCMSSchema\TaxonomyMetaWP\Module::class,
                 \PoPWPSchema\TaxonomyMeta\Module::class,
             ],
         ];

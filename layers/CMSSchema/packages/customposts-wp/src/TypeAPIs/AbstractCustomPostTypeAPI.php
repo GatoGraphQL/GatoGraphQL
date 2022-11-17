@@ -29,6 +29,23 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
+    public final const HOOK_STATUS_QUERY_ARG_VALUE = __CLASS__ . ':status-query-arg-value';
+
+    /**
+     * Indicates if the passed object is of type (Generic)CustomPost
+     */
+    public function isInstanceOfCustomPostType(object $object): bool
+    {
+        return $object instanceof WP_Post;
+    }
+
+    /**
+     * Indicate if an post with provided ID exists
+     */
+    public function customPostExists(int|string $id): bool
+    {
+        return $this->getCustomPost($id) !== null;
+    }
 
     /**
      * Return the post's ID
@@ -122,9 +139,22 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
         // Convert the parameters
         if (isset($query['status'])) {
-            // This can be both an array and a single value
-            $query['post_status'] = $query['status'];
+            /**
+             * This can be both an array and a single value
+             *
+             * @var string|string[]
+             */
+            $status = $query['status'];
             unset($query['status']);
+            /**
+             * The status may need to be converted to some underlying value
+             */
+            $query['post_status'] = is_array($status)
+                ? array_map(
+                    $this->getStatusQueryArgValue(...),
+                    $status
+                )
+                : $this->getStatusQueryArgValue($status);
         }
         if (isset($query['include']) && is_array($query['include'])) {
             // It can be an array or a string
@@ -198,6 +228,17 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             self::HOOK_QUERY,
             $query,
             $options
+        );
+    }
+
+    /**
+     * Allow "auto_draft" to be converted to "auto-draft"
+     */
+    protected function getStatusQueryArgValue(string $status): string
+    {
+        return App::applyFilters(
+            self::HOOK_STATUS_QUERY_ARG_VALUE,
+            $status
         );
     }
     protected function getOrderByQueryArgValue(string $orderBy): string

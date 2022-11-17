@@ -72,11 +72,5 @@ class Module extends AbstractModule
                 $this->initServices(dirname(__DIR__), '/ConditionalOnModule/Users/ConditionalOnModule/RESTAPI');
             }
         }
-
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = $this->getConfiguration();
-        if ($moduleConfiguration->addPostTypeToCustomPostUnionTypes()) {
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes');
-        }
     }
 }

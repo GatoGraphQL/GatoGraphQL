@@ -26,7 +26,6 @@
         "pop-cms-schema/custompostmedia-mutations-wp": "dev-master",
         "pop-cms-schema/custompostmedia-wp": "dev-master",
         "pop-cms-schema/custompostmeta-wp": "dev-master",
-        "pop-cms-schema/generic-customposts": "dev-master",
         "pop-cms-schema/post-categories-wp": "dev-master",
         "pop-cms-schema/post-category-mutations-wp": "dev-master",
         "pop-cms-schema/post-mutations": "dev-master",

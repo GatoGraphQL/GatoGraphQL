@@ -1,0 +1,28 @@
+{
+  "errors": [
+    {
+      "message": "Value 'page' for enum type 'CustomPostEnum' is not valid (the only valid values are: 'post', 'attachment', 'nav_menu_item', 'custom_css', 'revision')",
+      "locations": [
+        {
+          "line": 3,
+          "column": 12
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit, auto_draft]}",
+          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit, auto_draft]})",
+          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit, auto_draft]}, pagination: {limit: 30}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit, auto_draft]}, pagination: {limit: 30}) { ... }",
+        "code": "gql@5.6.1[14]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    }
+  ],
+  "data": {
+    "customPosts": null
+  }
+}

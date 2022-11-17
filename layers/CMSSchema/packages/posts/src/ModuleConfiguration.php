@@ -35,19 +35,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function addPostTypeToCustomPostUnionTypes(): bool
-    {
-        $envVariable = Environment::ADD_POST_TYPE_TO_CUSTOMPOST_UNION_TYPES;
-        $defaultValue = true;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function getPostsRoute(): string
     {
         $envVariable = Environment::POSTS_ROUTE;

@@ -167,7 +167,6 @@
         "pop-cms-schema/customposts": "<0.8.9",
         "pop-cms-schema/postmedia-mutations": "<0.8.9",
         "pop-cms-schema/customposts-wp": "<0.8.9",
-        "pop-cms-schema/generic-customposts": "<0.8.9",
         "pop-wp-schema/comments": "<0.8.9",
         "pop-wp-schema/customposts": "<0.8.9"
     },

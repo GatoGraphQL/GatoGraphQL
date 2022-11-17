@@ -12,18 +12,18 @@ use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPCMSSchema\GenericCustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -33,7 +33,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     use SchemaTypeModuleResolverTrait;
 
     public final const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
-    public final const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
     public final const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
     public final const SCHEMA_COMMENTS = Plugin::NAMESPACE . '\schema-comments';
     public final const SCHEMA_USERS = Plugin::NAMESPACE . '\schema-users';
@@ -64,8 +63,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Hooks
      */
-    public final const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
-    public final const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
+    public final const HOOK_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':queryable-custompost-types';
+    public final const HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-queryable-custompost-types';
 
     /**
      * This comment used to be valid when using `autowire` functions
@@ -81,9 +80,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
-    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
@@ -112,15 +111,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var CustomPostUnionTypeResolver */
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
-    final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
-    {
-        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
-    }
-    final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
-    {
-        /** @var GenericCustomPostObjectTypeResolver */
-        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
-    }
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
@@ -138,6 +128,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var PageObjectTypeResolver */
         return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+    }
+    final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
+    {
+        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+    }
+    final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
+    {
+        /** @var GenericCustomPostObjectTypeResolver */
+        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
     }
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -228,7 +227,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return [
             self::SCHEMA_CUSTOMPOSTS,
-            self::SCHEMA_GENERIC_CUSTOMPOSTS,
             self::SCHEMA_POSTS,
             self::SCHEMA_PAGES,
             self::SCHEMA_USERS,
@@ -258,7 +256,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         self::SCHEMA_USERS,
                     ],
                 ];
-            case self::SCHEMA_GENERIC_CUSTOMPOSTS:
             case self::SCHEMA_POSTS:
             case self::SCHEMA_PAGES:
             case self::SCHEMA_COMMENTS:
@@ -294,7 +291,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_GENERIC_CUSTOMPOSTS => \__('Generic Custom Posts', 'graphql-api'),
             self::SCHEMA_POSTS => \__('Posts', 'graphql-api'),
             self::SCHEMA_COMMENTS => \__('Comments', 'graphql-api'),
             self::SCHEMA_USERS => \__('Users', 'graphql-api'),
@@ -316,11 +312,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::SCHEMA_GENERIC_CUSTOMPOSTS:
-                return sprintf(
-                    \__('Query any custom post type (added to the schema or not), through a generic type <code>%1$s</code>', 'graphql-api'),
-                    $this->getGenericCustomPostObjectTypeResolver()->getTypeName()
-                );
             case self::SCHEMA_POSTS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
@@ -426,7 +417,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     [
                         self::SCHEMA_CUSTOMPOSTS,
-                        // self::SCHEMA_GENERIC_CUSTOMPOSTS,
                         self::SCHEMA_POSTS,
                         self::SCHEMA_USERS,
                         self::SCHEMA_MEDIA,
@@ -475,19 +465,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
-            ],
-            self::SCHEMA_GENERIC_CUSTOMPOSTS => [
                 ModuleSettingOptions::CUSTOMPOST_TYPES => ['post', 'page'],
             ],
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
-                ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_PAGES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
-                ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE => true,
             ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -563,7 +549,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         if (
             in_array($module, [
                 self::SCHEMA_CUSTOMPOSTS,
-                // self::SCHEMA_GENERIC_CUSTOMPOSTS,
                 self::SCHEMA_POSTS,
                 self::SCHEMA_USERS,
                 self::SCHEMA_MEDIA,
@@ -625,6 +610,75 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ];
 
             if ($module === self::SCHEMA_CUSTOMPOSTS) {
+                // Get the list of custom post types from the system
+                $possibleCustomPostTypes = \get_post_types();
+                /**
+                 * Not all custom post types make sense or are allowed.
+                 * Remove the ones that do not
+                 */
+                $pluginCustomPostTypes = array_map(
+                    fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
+                    $this->getCustomPostTypeRegistry()->getCustomPostTypes()
+                );
+                $rejectedQueryableCustomPostTypes = \apply_filters(
+                    self::HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
+                    array_merge(
+                        /**
+                         * Post Types from GraphQL API are just for configuration
+                         * and contain private data
+                         */
+                        $pluginCustomPostTypes,
+                        /**
+                         * WordPress internal CPTs.
+                         *
+                         * Watch out: Attachment has post_status "inherit",
+                         * which is by default not included in the "status"
+                         * filter, so the query must make it explicit:
+                         * `filter: { status: ["inherit"] }`.
+                         *
+                         * Similar with Revision and status "auto-draft"
+                         */
+                        $this->removeWordPressInternalCustomPostTypes()
+                            ? $this->getWordPressInternalCustomPostTypes()
+                            : []
+                    )
+                );
+                $possibleCustomPostTypes = array_values(array_diff(
+                    $possibleCustomPostTypes,
+                    $rejectedQueryableCustomPostTypes
+                ));
+                // Allow plugins to further remove unwanted custom post types
+                $possibleCustomPostTypes = \apply_filters(
+                    self::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
+                    $possibleCustomPostTypes
+                );
+                // The possible values must have key and value
+                $possibleValues = [];
+                foreach ($possibleCustomPostTypes as $customPostType) {
+                    $possibleValues[$customPostType] = $customPostType;
+                }
+                // Set the setting
+                $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Included custom post types', 'graphql-api'),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        $this->getCustomPostUnionTypeResolver()->getTypeName(),
+                        $this->getPostObjectTypeResolver()->getTypeName(),
+                        $this->getPageObjectTypeResolver()->getTypeName(),
+                        $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
+                    ),
+                    Properties::TYPE => Properties::TYPE_ARRAY,
+                    // Fetch all Schema Configurations from the DB
+                    Properties::POSSIBLE_VALUES => $possibleValues,
+                    Properties::IS_MULTIPLE => true,
+                ];
+
                 $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -634,10 +688,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Use single type instead of union type?', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then return this single type directly in field <code>%s</code>?', 'graphql-api'),
+                        \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then directly return this single type, instead of the union type?', 'graphql-api'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
                         $this->getPostObjectTypeResolver()->getTypeName(),
-                        'customPosts'
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -657,54 +710,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $sensitiveDataDescPlaceholder,
                         \__('custom post status', 'graphql-api'),
                     ),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-            } elseif (
-                in_array($module, [
-                    self::SCHEMA_POSTS,
-                    self::SCHEMA_PAGES,
-                ])
-            ) {
-                $titlePlaceholder = sprintf(
-                    \__('Include type <code>%1$s</code> in <code>%2$s</code>?', 'graphql-api'),
-                    '%1$s',
-                    $this->getCustomPostUnionTypeResolver()->getTypeName()
-                );
-                $moduleTitles = [
-                    self::SCHEMA_POSTS => sprintf(
-                        $titlePlaceholder,
-                        $this->getPostObjectTypeResolver()->getTypeName()
-                    ),
-                    self::SCHEMA_PAGES => sprintf(
-                        $titlePlaceholder,
-                        $this->getPageObjectTypeResolver()->getTypeName()
-                    ),
-                ];
-                $descriptionPlaceholder = sprintf(
-                    \__('Results of type <code>%1$s</code> will be included when querying a field of type <code>%2$s</code> (such as <code>%3$s</code>)', 'graphql-api'),
-                    '%1$s',
-                    $this->getCustomPostUnionTypeResolver()->getTypeName(),
-                    'customPosts'
-                );
-                $moduleDescriptions = [
-                    self::SCHEMA_POSTS => sprintf(
-                        $descriptionPlaceholder,
-                        $this->getPostObjectTypeResolver()->getTypeName()
-                    ),
-                    self::SCHEMA_PAGES => sprintf(
-                        $descriptionPlaceholder,
-                        $this->getPageObjectTypeResolver()->getTypeName()
-                    ),
-                ];
-                $option = ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => $moduleTitles[$module],
-                    Properties::DESCRIPTION => $moduleDescriptions[$module],
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             } elseif ($module === self::SCHEMA_USERS) {
@@ -800,80 +805,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     \__('comment status', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        } elseif ($module === self::SCHEMA_GENERIC_CUSTOMPOSTS) {
-            // Get the list of custom post types from the system
-            $genericCustomPostTypes = \get_post_types();
-            /**
-             * Not all custom post types make sense or are allowed.
-             * Remove the ones that do not
-             */
-            $pluginCustomPostTypes = array_map(
-                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
-                $this->getCustomPostTypeRegistry()->getCustomPostTypes()
-            );
-            $rejectedGenericCustomPostTypes = \apply_filters(
-                self::HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES,
-                array_merge(
-                    /**
-                     * Post Types from GraphQL API are just for configuration
-                     * and contain private data
-                     */
-                    $pluginCustomPostTypes,
-                    /**
-                     * WordPress internal CPTs
-                     * Attachment not allowed because its post_status="inherit",
-                     * not "publish", and the API filters by "publish" entries
-                     */
-                    [
-                        'attachment',
-                        'custom_css',
-                        'customize_changeset',
-                        'nav_menu_item',
-                        'oembed_cache',
-                        'revision',
-                        'user_request',
-                        'wp_area',
-                        'wp_block',
-                        'wp_global_styles',
-                        'wp_navigation',
-                        'wp_template_part',
-                        'wp_template',
-                    ]
-                )
-            );
-            $genericCustomPostTypes = array_values(array_diff(
-                $genericCustomPostTypes,
-                $rejectedGenericCustomPostTypes
-            ));
-            // Allow plugins to further remove unwanted custom post types
-            $genericCustomPostTypes = \apply_filters(
-                self::HOOK_GENERIC_CUSTOMPOST_TYPES,
-                $genericCustomPostTypes
-            );
-            // The possible values must have key and value
-            $possibleValues = [];
-            foreach ($genericCustomPostTypes as $genericCustomPostType) {
-                $possibleValues[$genericCustomPostType] = $genericCustomPostType;
-            }
-            // Set the setting
-            $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Included custom post types', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Results from these custom post types will be included when querying a field with type <code>%s</code> (such as <code>%s</code>)<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
-                    $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
-                    'genericCustomPosts'
-                ),
-                Properties::TYPE => Properties::TYPE_ARRAY,
-                // Fetch all Schema Configurations from the DB
-                Properties::POSSIBLE_VALUES => $possibleValues,
-                Properties::IS_MULTIPLE => true,
             ];
         } elseif (
             in_array($module, [
@@ -992,5 +923,32 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         }
 
         return $moduleSettings;
+    }
+
+    protected function removeWordPressInternalCustomPostTypes(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getWordPressInternalCustomPostTypes(): array
+    {
+        return [
+            'attachment',
+            'custom_css',
+            'customize_changeset',
+            'nav_menu_item',
+            'oembed_cache',
+            'revision',
+            'user_request',
+            'wp_area',
+            'wp_block',
+            'wp_global_styles',
+            'wp_navigation',
+            'wp_template_part',
+            'wp_template',
+        ];
     }
 }

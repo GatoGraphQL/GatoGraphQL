@@ -78,7 +78,6 @@
         "pop-cms-schema/custompostmedia-mutations-wp": "<0.8.9",
         "pop-cms-schema/user-avatars": "<0.8.9",
         "pop-cms-schema/comments-wp": "<0.8.9",
-        "pop-cms-schema/generic-customposts": "<0.8.9",
         "pop-cms-schema/metaquery-wp": "<0.8.9",
         "pop-cms-schema/pages": "<0.8.9",
         "pop-cms-schema/menus-wp": "<0.8.9",
@@ -145,7 +144,7 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Interfaces and helpers for custom posts (eg: posts, articles, etc)",
+    "description": "Query Custom Post Types",
     "keywords": ["GraphQL", "PHP", "PoP", "customposts"],
     "homepage": "https://github.com/PoPCMSSchema/customposts",
     "license": "GPL-2.0-or-later",

@@ -60,4 +60,33 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    /**
+     * @return string[]
+     */
+    public function getQueryableCustomPostTypes(): array
+    {
+        $envVariable = Environment::QUERYABLE_CUSTOMPOST_TYPES;
+        $defaultValue = [];
+        $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    public function disablePackagesAddingDefaultQueryableCustomTypes(): bool
+    {
+        $envVariable = Environment::DISABLE_PACKAGES_ADDING_DEFAULT_QUERYABLE_CUSTOMPOST_TYPES;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

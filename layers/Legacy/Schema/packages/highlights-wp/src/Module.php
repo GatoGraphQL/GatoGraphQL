@@ -6,7 +6,6 @@ namespace PoPSchema\HighlightsWP;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
-use PoPSchema\Highlights\Environment;
 
 class Module extends AbstractModule
 {
@@ -32,8 +31,6 @@ class Module extends AbstractModule
         array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        if (Environment::addHighlightTypeToCustomPostUnionTypes()) {
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddHighlightTypeToCustomPostUnionTypes/Overrides');
-        }
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
     }
 }

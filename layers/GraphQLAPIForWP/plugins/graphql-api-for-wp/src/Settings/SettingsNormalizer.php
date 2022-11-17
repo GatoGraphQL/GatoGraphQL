@@ -62,13 +62,13 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                  */
                 if (
                     (!$canBeEmpty && empty($values[$name]))
-                    && $type != Properties::TYPE_BOOL
-                    && !($type == Properties::TYPE_INT && $values[$name] == '0')
+                    && $type !== Properties::TYPE_BOOL
+                    && !($type === Properties::TYPE_INT && $values[$name] == '0')
                 ) {
                     $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
-                } elseif ($type == Properties::TYPE_BOOL) {
+                } elseif ($type === Properties::TYPE_BOOL) {
                     $values[$name] = !empty($values[$name]);
-                } elseif ($type == Properties::TYPE_INT) {
+                } elseif ($type === Properties::TYPE_INT) {
                     $values[$name] = (int) $values[$name];
                     // If the value is below its minimum, reset to the default one
                     $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
@@ -76,7 +76,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                         $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                     }
                 } elseif (
-                    $type == Properties::TYPE_ARRAY
+                    $type === Properties::TYPE_ARRAY
                     && is_string($values[$name])
                 ) {
                     // Check if the type is array, but it's delivered as a string via a textarea
@@ -84,6 +84,12 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                     if (empty($possibleValues)) {
                         $values[$name] = explode("\n", $values[$name]);
                     }
+                } elseif (
+                    $type === Properties::TYPE_ARRAY
+                    && $canBeEmpty
+                    && $values[$name] === null
+                ) {
+                    $values[$name] = [];
                 }
 
                 // Validate it is a valid value, or reset

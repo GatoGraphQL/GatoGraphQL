@@ -1,0 +1,9 @@
+{
+  customPosts(
+    filter: {
+      customPostTypes: "nonExistingCPT"
+    }
+  ) {
+    __typename
+  }
+}

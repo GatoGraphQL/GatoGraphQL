@@ -60,7 +60,6 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/custompostmeta": "${workspaceFolder}/layers/CMSSchema/packages/custompostmeta",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/customposts-wp": "${workspaceFolder}/layers/CMSSchema/packages/customposts-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/customposts": "${workspaceFolder}/layers/CMSSchema/packages/customposts",
-              "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/generic-customposts": "${workspaceFolder}/layers/CMSSchema/packages/generic-customposts",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/media-wp": "${workspaceFolder}/layers/CMSSchema/packages/media-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/media": "${workspaceFolder}/layers/CMSSchema/packages/media",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/menus-wp": "${workspaceFolder}/layers/CMSSchema/packages/menus-wp",

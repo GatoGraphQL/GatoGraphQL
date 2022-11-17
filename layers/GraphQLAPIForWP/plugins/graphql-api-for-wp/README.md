@@ -120,8 +120,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/modules/graphiql-explorer/en.md">GraphiQL Explorer</a></td><td>Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)</td></tr>
 <tr><th colspan="2"><br/>Schema Type</th></tr>
 <tr><td><a href="docs/modules/schema-expose-sensitive-data/en.md">Expose Sensitive Data in the Schema</a></td><td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data</td></tr>
-<tr><td><a href="docs/modules/schema-customposts/en.md">Schema Custom Posts</a></td><td>Base functionality for all custom posts</td></tr>
-<tr><td><a href="docs/modules/schema-generic-customposts/en.md">Schema Generic Custom Posts</a></td><td>Query any custom post type (added to the schema or not), through a generic type <code>GenericCustomPost</code></td></tr>
+<tr><td><a href="docs/modules/schema-customposts/en.md">Schema Custom Posts</a></td><td>Query Custom Post Types</td></tr>
 <tr><td>Schema Posts</td><td>Query posts, through type <code>Post</code> added to the schema</td></tr>
 <tr><td>Schema Pages</td><td>Query pages, through type <code>Page</code> added to the schema</td></tr>
 <tr><td>Schema Users</td><td>Query users, through type <code>User</code> added to the schema</td></tr>

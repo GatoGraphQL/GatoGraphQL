@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PagesWP;
 
 use PoP\Root\Module\ModuleInterface;
-use PoP\Root\App;
 use PoP\Root\Module\AbstractModule;
-use PoPCMSSchema\Pages\ModuleConfiguration as PagesModuleConfiguration;
-use PoPCMSSchema\Pages\Module as PagesModule;
 
 class Module extends AbstractModule
 {
@@ -43,10 +40,6 @@ class Module extends AbstractModule
         array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        /** @var PagesModuleConfiguration */
-        $moduleConfiguration = App::getModule(PagesModule::class)->getConfiguration();
-        if ($moduleConfiguration->addPageTypeToCustomPostUnionTypes()) {
-            $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes/Overrides');
-        }
+        $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
     }
 }

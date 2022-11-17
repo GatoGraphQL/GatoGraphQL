@@ -101,7 +101,6 @@
         "pop-cms-schema/custompostmedia-mutations-wp": "<0.8.9",
         "pop-cms-schema/user-avatars": "<0.8.9",
         "pop-cms-schema/comments-wp": "<0.8.9",
-        "pop-cms-schema/generic-customposts": "<0.8.9",
         "pop-cms-schema/metaquery-wp": "<0.8.9",
         "pop-cms-schema/custompostmeta": "<0.8.9",
         "pop-cms-schema/categories": "<0.8.9",

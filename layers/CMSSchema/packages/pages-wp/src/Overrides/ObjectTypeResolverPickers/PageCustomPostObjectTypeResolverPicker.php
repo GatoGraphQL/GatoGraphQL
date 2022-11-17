@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\PagesWP\Overrides\ObjectTypeResolverPickers;
+
+use PoPCMSSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
+use PoPCMSSchema\CustomPostsWP\ObjectTypeResolverPickers\NoCastCustomPostTypeResolverPickerTrait;
+use PoPCMSSchema\Pages\ObjectTypeResolverPickers\PageCustomPostObjectTypeResolverPicker as UpstreamPageCustomPostObjectTypeResolverPicker;
+
+class PageCustomPostObjectTypeResolverPicker extends UpstreamPageCustomPostObjectTypeResolverPicker implements CustomPostObjectTypeResolverPickerInterface
+{
+    use NoCastCustomPostTypeResolverPickerTrait;
+}

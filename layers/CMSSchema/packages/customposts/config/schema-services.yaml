@@ -11,3 +11,6 @@ services:
 
     PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'

@@ -21,9 +21,6 @@ The following fields have been upgraded, accepting the following properties in t
 - `Root.customPost`:
   - `id`
   - `slug`
-- `Root.genericCustomPost`:
-  - `id`
-  - `slug`
 - `Root.mediaItem`:
   - `id`
   - `slug`
@@ -87,13 +84,22 @@ type Root {
 }
 ```
 
+### `customPosts` fields now also retrieve data from CPTs which are not mapped to the GraphQL schema
+
+`customPosts` allowed to fetch data for CPTs which already have a corresponding GraphQL type in the schema (such as `"post"` => `Post` and `"page"` => `Page`), as these types are incorporated directly into `CustomPostUnion`.
+
+Now, `customPosts` can also retrieve data for any CPT that has not been modeled in the schema (such as `"attachment"`, `"revision"` or `"nav_menu_item"`, or any CPT installed by any plugin). This data will be accessed via the `GenericCustomPost` type.
+
+The custom post types that can be queried must be explicitly configured in the Settings page, under section "Included custom post types":
+
+![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
+
 ### Filter custom post fields by tag, category, author and others
 
 On fields to retrieve custom posts, such as:
 
 - `Root.posts`
 - `Root.customPosts`
-- `Root.genericCustomPosts`
 - `Root.myPosts`
 - `User.posts`
 - `PostCategory.posts`
@@ -821,7 +827,6 @@ The benefit is that a single field can then be used to tackle different use case
 As mentioned earlier on, all fields to fetch a single entity now receive argument `by`, which is a oneof input filter:
 
 - `Root.customPost(by:)`
-- `Root.genericCustomPost(by:)`
 - `Root.mediaItem(by:)`
 - `Root.menu(by:)`
 - `Root.page(by:)`
@@ -1452,7 +1457,6 @@ Fields to fetch a single entity, such as `Root.post` or `Root.user`, used to rec
 The following fields have been upgraded:
 
 - `Root.customPost`
-- `Root.genericCustomPost`
 - `Root.mediaItem`
 - `Root.menu`
 - `Root.page`
@@ -1556,6 +1560,22 @@ The `Elemental` interface contains field `id: ID!`. It has been renamed to `Node
 ### Renamed field `Root.option` to `Root.optionValue`
 
 For consistency, since adding fields `optionValues` and `optionObjectValue`.
+
+### Removed the `genericCustomPosts` fields, unifying their logic into `customPosts`
+
+In the past, there were two fields to select custom posts:
+
+- `customPosts`: to retrieve data for CPTs already mapped to the schema, such as `Post` and `Page`
+- `genericCustomPosts`: to retrieve data for CPTs which are not mapped to the schema
+
+Now, these two fields have been combined into `customPosts`, and `genericCustomPosts` has been removed.
+
+`customPosts` will now return a `CustomPostUnion` which is formed by:
+
+- Every one of the CPT object types mapped to the schema, such as `Post` and `Page`
+- Type `GenericCustomPost` for all other CPTs
+
+And `GenericCustomPost` can only retrieve data for CPTs allowed by configuration (as explained earlier on).
 
 ### Changed type for `date` fields to the new `DateTime`
 

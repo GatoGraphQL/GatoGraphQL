@@ -23,7 +23,6 @@ App::stockAndInitializeModuleClasses([
     \PoPCMSSchema\CommentMutationsWP\Module::class,
     \PoPCMSSchema\UserStateMutationsWP\Module::class,
     \PoPCMSSchema\UserAvatarsWP\Module::class,
-    \PoPCMSSchema\GenericCustomPosts\Module::class,
     \PoPWPSchema\Media\Module::class,
     \PoPWPSchema\Menus\Module::class,
     \PoPWPSchema\Pages\Module::class,

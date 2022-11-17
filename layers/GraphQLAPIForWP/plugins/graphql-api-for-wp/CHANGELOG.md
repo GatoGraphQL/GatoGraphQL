@@ -20,6 +20,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.user`
 - Filter elements via the new `filter` field argument
 - Pagination and sorting fields are accessed via `pagination` and `sort` field args
+- `customPosts` fields now also retrieve data from CPTs which are not mapped to the GraphQL schema
 - Filter custom post fields (`Root.posts`, `User.posts`, etc) via new inputs:
   - `tagIDs: [ID]`
   - `tagSlugs: [String]`
@@ -208,6 +209,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 - Renamed interface type `Elemental` to `Node`
 - Renamed field `Root.option` to `Root.optionValue`
+- Removed the `genericCustomPosts` fields, unifying their logic into `customPosts`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
 - Must update `content(format:PLAIN_TEXT)` to `rawContent`
 - Must update the inputs for mutations
