@@ -1063,7 +1063,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "MetaQueryCompareByArrayValueOperator",
+                    "name": "MetaQueryCompareByArrayValueOperatorEnum",
                     "enumValues": [
                         {
                             "name": "BETWEEN"
@@ -1081,7 +1081,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "MetaQueryCompareByKeyOperator",
+                    "name": "MetaQueryCompareByKeyOperatorEnum",
                     "enumValues": [
                         {
                             "name": "EXISTS"
@@ -1093,7 +1093,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "MetaQueryCompareByNumericValueOperator",
+                    "name": "MetaQueryCompareByNumericValueOperatorEnum",
                     "enumValues": [
                         {
                             "name": "EQUALS"
@@ -1117,7 +1117,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "MetaQueryCompareByStringValueOperator",
+                    "name": "MetaQueryCompareByStringValueOperatorEnum",
                     "enumValues": [
                         {
                             "name": "EQUALS"

@@ -16,7 +16,7 @@ class MetaQueryCompareByNumericValueOperatorEnumTypeResolver extends AbstractEnu
 {
     public function getTypeName(): string
     {
-        return 'MetaQueryCompareByNumericValueOperator';
+        return 'MetaQueryCompareByNumericValueOperatorEnum';
     }
 
     public function getTypeDescription(): string

@@ -16,7 +16,7 @@ class MetaQueryCompareByKeyOperatorEnumTypeResolver extends AbstractEnumTypeReso
 {
     public function getTypeName(): string
     {
-        return 'MetaQueryCompareByKeyOperator';
+        return 'MetaQueryCompareByKeyOperatorEnum';
     }
 
     public function getTypeDescription(): string

@@ -16,7 +16,7 @@ class MetaQueryCompareByArrayValueOperatorEnumTypeResolver extends AbstractEnumT
 {
     public function getTypeName(): string
     {
-        return 'MetaQueryCompareByArrayValueOperator';
+        return 'MetaQueryCompareByArrayValueOperatorEnum';
     }
 
     public function getTypeDescription(): string
