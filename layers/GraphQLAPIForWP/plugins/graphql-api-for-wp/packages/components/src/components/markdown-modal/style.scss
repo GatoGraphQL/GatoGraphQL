@@ -25,11 +25,15 @@
 		padding: initial;
 		margin: initial;
 		background: initial;
-	}
 
-	pre {
 		background-color: aliceblue;
 		padding: 5px 10px;
+	}
+
+	pre > code.hljs {
+		// Styles taken from highlight-11.6.0/a11y-dark.min.css
+		background: #2b2b2b;
+		color: #f8f8f2;
 	}
 
 	table {

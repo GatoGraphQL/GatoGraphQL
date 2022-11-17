@@ -66,7 +66,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
         return false;
     }
 
-    protected function prettyprintCode(): bool
+    protected function highlightCode(): bool
     {
         return true;
     }
@@ -95,8 +95,8 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
         /**
          * Add styles/scripts to use a tabpanel
          */
-        if ($this->prettyprintCode()) {
-            $this->enqueuePrettyprintAssets();
+        if ($this->highlightCode()) {
+            $this->enqueueHighlightJSAssets();
         }
     }
 }

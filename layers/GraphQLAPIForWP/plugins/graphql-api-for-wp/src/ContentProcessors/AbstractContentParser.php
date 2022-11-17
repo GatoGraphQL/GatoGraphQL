@@ -177,7 +177,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                 ContentParserOptions::SUPPORT_MARKDOWN_LINKS => true,
                 ContentParserOptions::ADD_CLASSES => true,
                 ContentParserOptions::EMBED_VIDEOS => true,
-                ContentParserOptions::PRETTIFY_CODE => true,
+                ContentParserOptions::HIGHLIGHT_CODE => true,
                 ContentParserOptions::TAB_CONTENT => false,
             ],
             $options
@@ -207,8 +207,8 @@ abstract class AbstractContentParser implements ContentParserInterface
             $htmlContent = $this->embedVideos($htmlContent);
         }
         // Prettify code
-        if ($options[ContentParserOptions::PRETTIFY_CODE] ?? null) {
-            $htmlContent = $this->prettifyCode($htmlContent);
+        if ($options[ContentParserOptions::HIGHLIGHT_CODE] ?? null) {
+            $htmlContent = $this->highlightCode($htmlContent);
         }
         // Convert the <h2> into tabs
         if ($options[ContentParserOptions::TAB_CONTENT] ?? null) {
@@ -390,13 +390,13 @@ abstract class AbstractContentParser implements ContentParserInterface
     }
 
     /**
-     * Use Google's code-prettify to add styles to <pre><code>
+     * Use Highlight.js to add styles to <pre><code>
      */
-    protected function prettifyCode(string $htmlContent): string
+    protected function highlightCode(string $htmlContent): string
     {
         return str_replace(
             '<pre><code class="',
-            '<pre class="prettyprint"><code class="language-',
+            '<pre class="prettyprint hljs"><code class="hljs language-',
             $htmlContent
         );
     }

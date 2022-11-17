@@ -32,6 +32,8 @@ config.resolve.alias['@docs'] = path.resolve(process.cwd(), 'docs/')
 // config.entry.docs = langs.map( lang => `docs-${ lang }` )
 // ---------------------------------------------
 
+const highlight = require('highlight.js');
+
 /**
  * Add support for additional file types
  */
@@ -48,7 +50,15 @@ config.module.rules.push(
 			{
 				loader: "markdown-loader",
 				options: {
-					baseUrl: `${ BASE_URL }/${ MODULE_DOCS_PATH }`
+					baseUrl: `${ BASE_URL }/${ MODULE_DOCS_PATH }`,
+					langPrefix: 'hljs language-',
+					highlight: (code, lang) => {
+					    if (!lang || ['text', 'literal', 'nohighlight'].includes(lang)) {
+						    return `<pre class="hljs">${code}</pre>`;
+					    }
+					    const html = highlight.highlight(lang, code).value;
+					    return `<span class="hljs">${html}</span>`;
+					},
 				}
 			}
 		]

@@ -14,7 +14,7 @@ trait PrettyprintCodePageTrait
     /**
      * Enqueue the required assets
      */
-    protected function enqueuePrettyprintAssets(): void
+    protected function enqueueHighlightJSAssets(): void
     {
         $mainPluginURL = App::getMainPlugin()->getPluginURL();
         $mainPluginVersion = App::getMainPlugin()->getPluginVersion();

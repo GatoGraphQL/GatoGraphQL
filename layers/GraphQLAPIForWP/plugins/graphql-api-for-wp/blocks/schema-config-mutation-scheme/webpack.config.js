@@ -11,6 +11,8 @@ const config = require( '@wordpress/scripts/config/webpack.config' );
 const path = require( 'path' );
 config.resolve.alias['@moduleDocs'] = path.resolve(process.cwd(), `../../${ MODULE_DOCS_PATH }`)
 
+const highlight = require('highlight.js');
+
 config.module.rules.push(
 	{
 		test: /\.md$/,
@@ -21,7 +23,15 @@ config.module.rules.push(
 			{
 				loader: "markdown-loader",
 				options: {
-					baseUrl: `${ BASE_URL }/${ MODULE_DOCS_PATH }`
+					baseUrl: `${ BASE_URL }/${ MODULE_DOCS_PATH }`,
+					langPrefix: 'hljs language-',
+					highlight: (code, lang) => {
+					    if (!lang || ['text', 'literal', 'nohighlight'].includes(lang)) {
+						    return `<pre class="hljs">${code}</pre>`;
+					    }
+					    const html = highlight.highlight(lang, code).value;
+					    return `<span class="hljs">${html}</span>`;
+					},
 				}
 			}
 		]
