@@ -57,8 +57,11 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
                 CustomPostStatus::FUTURE,
                 CustomPostStatus::PRIVATE,
                 CustomPostStatus::INHERIT,
-                CustomPostStatus::AUTO_DRAFT,
-                // CustomPostStatus::ANY,
+                /**
+                 * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
+                 *       Until then, this code is commented
+                 */
+                // CustomPostStatus::AUTO_DRAFT,
             ]
         );
     }
@@ -80,8 +83,11 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
                 CustomPostStatus::FUTURE,
                 CustomPostStatus::PRIVATE,
                 CustomPostStatus::INHERIT,
-                CustomPostStatus::AUTO_DRAFT,
-                // CustomPostStatus::ANY,
+                /**
+                 * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
+                 *       Until then, this code is commented
+                 */
+                //CustomPostStatus::AUTO_DRAFT,
             ]
         );
     }
@@ -98,8 +104,11 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
             CustomPostStatus::FUTURE => $this->__('Future content - custom posts to publish in the future', 'customposts'),
             CustomPostStatus::PRIVATE => $this->__('Private content - not visible to users who are not logged in', 'customposts'),
             CustomPostStatus::INHERIT => $this->__('Used with a child custom post (such as Attachments and Revisions) to determine the actual status from the parent custom post', 'customposts'),
-            CustomPostStatus::AUTO_DRAFT => $this->__('Revisions that WordPress saves automatically while you are editing', 'customposts'),
-            // CustomPostStatus::ANY => $this->__('Custom posts with any status', 'customposts'),
+            /**
+             * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
+             *       Until then, this code is commented
+             */
+            //CustomPostStatus::AUTO_DRAFT => $this->__('Revisions that WordPress saves automatically while you are editing', 'customposts'),
             default => $enumValueDescription,
         };
     }

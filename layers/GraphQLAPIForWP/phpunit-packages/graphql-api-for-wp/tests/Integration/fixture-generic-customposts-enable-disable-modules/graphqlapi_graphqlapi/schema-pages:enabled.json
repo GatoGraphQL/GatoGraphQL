@@ -955,9 +955,6 @@
                     "name": "FilterCustomPostStatusEnum",
                     "enumValues": [
                         {
-                            "name": "auto_draft"
-                        },
-                        {
                             "name": "draft"
                         },
                         {

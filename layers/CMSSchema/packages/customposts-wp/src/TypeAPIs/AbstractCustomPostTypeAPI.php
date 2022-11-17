@@ -147,14 +147,18 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $status = $query['status'];
             unset($query['status']);
             /**
+             * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
+             *       Until then, this code is commented
+             *
              * The status may need to be converted to some underlying value
              */
-            $query['post_status'] = is_array($status)
-                ? array_map(
-                    $this->getStatusQueryArgValue(...),
-                    $status
-                )
-                : $this->getStatusQueryArgValue($status);
+            // $query['post_status'] = is_array($status)
+            //     ? array_map(
+            //         $this->getStatusQueryArgValue(...),
+            //         $status
+            //     )
+            //     : $this->getStatusQueryArgValue($status);
+            $query['post_status'] = $status;
         }
         if (isset($query['include']) && is_array($query['include'])) {
             // It can be an array or a string
@@ -232,15 +236,18 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
 
     /**
+     * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
+     *       Until then, this code is commented
+     *
      * Allow "auto_draft" to be converted to "auto-draft"
      */
-    protected function getStatusQueryArgValue(string $status): string
-    {
-        return App::applyFilters(
-            self::HOOK_STATUS_QUERY_ARG_VALUE,
-            $status
-        );
-    }
+    // protected function getStatusQueryArgValue(string $status): string
+    // {
+    //     return App::applyFilters(
+    //         self::HOOK_STATUS_QUERY_ARG_VALUE,
+    //         $status
+    //     );
+    // }
     protected function getOrderByQueryArgValue(string $orderBy): string
     {
         $orderBy = match ($orderBy) {

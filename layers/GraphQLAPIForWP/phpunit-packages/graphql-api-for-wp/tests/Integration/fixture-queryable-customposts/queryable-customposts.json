@@ -10,13 +10,13 @@
       ],
       "extensions": {
         "path": [
-          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit, auto_draft]}",
-          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit, auto_draft]})",
-          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit, auto_draft]}, pagination: {limit: 15}, sort: {order: ASC}) { ... }",
+          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}",
+          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]})",
+          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 15}, sort: {order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit, auto_draft]}, pagination: {limit: 15}, sort: {order: ASC}) { ... }",
+        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 15}, sort: {order: ASC}) { ... }",
         "code": "gql@5.6.1[14]",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }

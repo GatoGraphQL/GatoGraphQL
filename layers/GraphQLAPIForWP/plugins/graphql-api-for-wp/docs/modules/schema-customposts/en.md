@@ -79,8 +79,7 @@ For instance, this query retrieves entries from multiple CPTS:
       ],
       status: [
         publish,
-        inherit,
-        auto_draft
+        inherit
       ]
     }
   ) {
