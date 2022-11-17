@@ -11,6 +11,6 @@ class ContentParserOptions
     public final const APPEND_PATH_URL_TO_ANCHORS = 'appendPathURLToAnchors';
     public final const ADD_CLASSES = 'addClasses';
     public final const EMBED_VIDEOS = 'embedVideos';
-    public final const PRETTIFY_CODE = 'prettifyCode';
+    public final const HIGHLIGHT_CODE = 'highlightCode';
     public final const TAB_CONTENT = 'tabContent';
 }
