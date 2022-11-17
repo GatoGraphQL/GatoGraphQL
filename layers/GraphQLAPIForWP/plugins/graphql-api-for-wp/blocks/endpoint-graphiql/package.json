@@ -19,6 +19,7 @@
 		"@wordpress/i18n": "^3.14.0",
 		"@wordpress/scripts": "^12.1.0",
 		"file-loader": "^6.2.0",
+		"highlight.js": "^11.6.0",
 		"html-loader": "^1.1.0",
 		"image-webpack-loader": "^8.1.0",
 		"markdown-loader": "^5.1.0"
