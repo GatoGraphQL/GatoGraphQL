@@ -83,7 +83,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
             $scriptTagPlaceholder,
             $mainPluginURL . 'assets/js/run_highlight.js'
         );
-        
+
         return $content;
     }
 }
