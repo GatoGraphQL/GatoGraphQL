@@ -167,7 +167,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
 
     protected function registerHighlightJSCSS(): bool
     {
-        return false;
+        return true;
     }
 
     /**

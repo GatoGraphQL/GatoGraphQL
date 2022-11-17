@@ -59,9 +59,4 @@ class SchemaConfigExposeSensitiveDataBlock extends AbstractDefaultEnableDisableF
     {
         return true;
     }
-
-    protected function registerHighlightJSCSS(): bool
-    {
-        return true;
-    }
 }
