@@ -12508,10 +12508,10 @@
               "description": "The operator to compare against",
               "type": {
                 "kind": "NON_NULL",
-                "name": "MetaQueryCompareByArrayValueOperator!",
+                "name": "MetaQueryCompareByArrayValueOperatorEnum!",
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "MetaQueryCompareByArrayValueOperator",
+                  "name": "MetaQueryCompareByArrayValueOperatorEnum",
                   "ofType": null
                 }
               },
@@ -12606,10 +12606,10 @@
               "description": "The operator to compare against",
               "type": {
                 "kind": "NON_NULL",
-                "name": "MetaQueryCompareByKeyOperator!",
+                "name": "MetaQueryCompareByKeyOperatorEnum!",
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "MetaQueryCompareByKeyOperator",
+                  "name": "MetaQueryCompareByKeyOperatorEnum",
                   "ofType": null
                 }
               },
@@ -12631,10 +12631,10 @@
               "description": "The operator to compare against",
               "type": {
                 "kind": "NON_NULL",
-                "name": "MetaQueryCompareByNumericValueOperator!",
+                "name": "MetaQueryCompareByNumericValueOperatorEnum!",
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "MetaQueryCompareByNumericValueOperator",
+                  "name": "MetaQueryCompareByNumericValueOperatorEnum",
                   "ofType": null
                 }
               },
@@ -12670,10 +12670,10 @@
               "description": "The operator to compare against",
               "type": {
                 "kind": "NON_NULL",
-                "name": "MetaQueryCompareByStringValueOperator!",
+                "name": "MetaQueryCompareByStringValueOperatorEnum!",
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "MetaQueryCompareByStringValueOperator",
+                  "name": "MetaQueryCompareByStringValueOperatorEnum",
                   "ofType": null
                 }
               },
@@ -16971,7 +16971,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "MetaQueryCompareByArrayValueOperator",
+          "name": "MetaQueryCompareByArrayValueOperatorEnum",
           "description": "Operators to compare against an array value",
           "fields": null,
           "inputFields": null,
@@ -17006,7 +17006,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "MetaQueryCompareByKeyOperator",
+          "name": "MetaQueryCompareByKeyOperatorEnum",
           "description": "Operators to compare against the meta key",
           "fields": null,
           "inputFields": null,
@@ -17029,7 +17029,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "MetaQueryCompareByNumericValueOperator",
+          "name": "MetaQueryCompareByNumericValueOperatorEnum",
           "description": "Operators to compare against a numeric value",
           "fields": null,
           "inputFields": null,
@@ -17076,7 +17076,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "MetaQueryCompareByStringValueOperator",
+          "name": "MetaQueryCompareByStringValueOperatorEnum",
           "description": "Operators to compare against a string value",
           "fields": null,
           "inputFields": null,

@@ -2128,29 +2128,29 @@
           "description": null
         },
         {
-          "name": "MetaQueryCompareByArrayValueOperator",
-          "namespacedName": "MetaQueryCompareByArrayValueOperator",
+          "name": "MetaQueryCompareByArrayValueOperatorEnum",
+          "namespacedName": "MetaQueryCompareByArrayValueOperatorEnum",
           "fields": null,
           "kind": "ENUM",
           "description": "Operators to compare against an array value"
         },
         {
-          "name": "MetaQueryCompareByKeyOperator",
-          "namespacedName": "MetaQueryCompareByKeyOperator",
+          "name": "MetaQueryCompareByKeyOperatorEnum",
+          "namespacedName": "MetaQueryCompareByKeyOperatorEnum",
           "fields": null,
           "kind": "ENUM",
           "description": "Operators to compare against the meta key"
         },
         {
-          "name": "MetaQueryCompareByNumericValueOperator",
-          "namespacedName": "MetaQueryCompareByNumericValueOperator",
+          "name": "MetaQueryCompareByNumericValueOperatorEnum",
+          "namespacedName": "MetaQueryCompareByNumericValueOperatorEnum",
           "fields": null,
           "kind": "ENUM",
           "description": "Operators to compare against a numeric value"
         },
         {
-          "name": "MetaQueryCompareByStringValueOperator",
-          "namespacedName": "MetaQueryCompareByStringValueOperator",
+          "name": "MetaQueryCompareByStringValueOperatorEnum",
+          "namespacedName": "MetaQueryCompareByStringValueOperatorEnum",
           "fields": null,
           "kind": "ENUM",
           "description": "Operators to compare against a string value"
