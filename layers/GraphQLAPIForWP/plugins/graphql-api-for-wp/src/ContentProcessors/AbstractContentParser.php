@@ -396,7 +396,7 @@ abstract class AbstractContentParser implements ContentParserInterface
     {
         return str_replace(
             '<pre><code class="',
-            '<pre class="prettyprint"><code class="language-',
+            '<pre class="prettyprint hljs"><code class="hljs language-',
             $htmlContent
         );
     }

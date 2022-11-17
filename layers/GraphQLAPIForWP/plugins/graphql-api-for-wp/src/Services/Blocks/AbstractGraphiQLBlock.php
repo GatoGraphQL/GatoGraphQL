@@ -144,7 +144,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
             \__('GraphQL Query:', 'graphql-api')
         ) . (
             $query ? sprintf(
-                '<pre><code class="prettyprint language-graphql">%s</code></pre>',
+                '<pre><code class="prettyprint hljs language-graphql">%s</code></pre>',
                 $query
             ) : sprintf(
                 '<p><em>%s</em></p>',
@@ -156,7 +156,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
                 '<p><strong>%s</strong></p>',
                 \__('Variables:', 'graphql-api')
             ) . sprintf(
-                '<pre><code class="prettyprint language-json">%s</code></pre>',
+                '<pre><code class="prettyprint hljs language-json">%s</code></pre>',
                 $variables
             );
         }
