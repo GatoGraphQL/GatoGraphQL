@@ -390,7 +390,7 @@ abstract class AbstractContentParser implements ContentParserInterface
     }
 
     /**
-     * Use Google's code-prettify to add styles to <pre><code>
+     * Use Highlight.js to add styles to <pre><code>
      */
     protected function highlightCode(string $htmlContent): string
     {
