@@ -96,7 +96,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
          * Add styles/scripts to use a tabpanel
          */
         if ($this->highlightCode()) {
-            $this->enqueuePrettyprintAssets();
+            $this->enqueueHighlightJSAssets();
         }
     }
 }
