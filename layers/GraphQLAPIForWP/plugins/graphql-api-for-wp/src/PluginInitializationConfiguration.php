@@ -621,19 +621,24 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPCMSSchema\CustomPosts\Module::class,
                 \PoPCMSSchema\CustomPostsWP\Module::class,
                 \PoPCMSSchema\CustomPostMedia\Module::class,
+                \PoPCMSSchema\CustomPostMediaWP\Module::class,
                 \PoPWPSchema\CustomPosts\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POSTS => [
                 \PoPCMSSchema\Posts\Module::class,
+                \PoPCMSSchema\PostsWP\Module::class,
                 \PoPWPSchema\Posts\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_COMMENTS => [
                 \PoPCMSSchema\Comments\Module::class,
+                \PoPCMSSchema\CommentsWP\Module::class,
                 \PoPWPSchema\Comments\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USERS => [
                 \PoPCMSSchema\Users\Module::class,
+                \PoPCMSSchema\UsersWP\Module::class,
                 \PoPCMSSchema\UserState\Module::class,
+                \PoPCMSSchema\UserStateWP\Module::class,
                 \PoPWPSchema\Users\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_ROLES => [
@@ -642,70 +647,88 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_AVATARS => [
                 \PoPCMSSchema\UserAvatars\Module::class,
+                \PoPCMSSchema\UserAvatarsWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_PAGES => [
                 \PoPCMSSchema\Pages\Module::class,
+                \PoPCMSSchema\PagesWP\Module::class,
                 \PoPWPSchema\Pages\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MEDIA => [
                 \PoPCMSSchema\CustomPostMedia\Module::class,
+                \PoPCMSSchema\CustomPostMediaWP\Module::class,
                 \PoPCMSSchema\Media\Module::class,
                 \PoPWPSchema\Media\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_TAGS => [
                 \PoPCMSSchema\Tags\Module::class,
+                \PoPCMSSchema\TagsWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_TAGS => [
                 \PoPCMSSchema\PostTags\Module::class,
+                \PoPCMSSchema\PostTagsWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_CATEGORIES => [
                 \PoPCMSSchema\Categories\Module::class,
+                \PoPCMSSchema\CategoriesWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_CATEGORIES => [
                 \PoPCMSSchema\PostCategories\Module::class,
+                \PoPCMSSchema\PostCategoriesWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MENUS => [
                 \PoPCMSSchema\Menus\Module::class,
+                \PoPCMSSchema\MenusWP\Module::class,
                 \PoPWPSchema\Menus\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_SETTINGS => [
                 \PoPCMSSchema\Settings\Module::class,
+                \PoPCMSSchema\SettingsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_USER_STATE_MUTATIONS => [
                 \PoPCMSSchema\UserStateMutations\Module::class,
+                \PoPCMSSchema\UserStateMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_MUTATIONS => [
                 \PoPCMSSchema\PostMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => [
                 \PoPCMSSchema\CustomPostMediaMutations\Module::class,
+                \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POSTMEDIA_MUTATIONS => [
                 \PoPCMSSchema\PostMediaMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
                 \PoPCMSSchema\PostTagMutations\Module::class,
+                \PoPCMSSchema\PostTagMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_CATEGORY_MUTATIONS => [
                 \PoPCMSSchema\PostCategoryMutations\Module::class,
+                \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
                 \PoPCMSSchema\CommentMutations\Module::class,
+                \PoPCMSSchema\CommentMutationsWP\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
                 \PoPCMSSchema\CustomPostMeta\Module::class,
+                \PoPCMSSchema\CustomPostMetaWP\Module::class,
                 \PoPWPSchema\CustomPostMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_USER_META => [
                 \PoPCMSSchema\UserMeta\Module::class,
+                \PoPCMSSchema\UserMetaWP\Module::class,
                 \PoPWPSchema\UserMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META => [
                 \PoPCMSSchema\CommentMeta\Module::class,
+                \PoPCMSSchema\CommentMetaWP\Module::class,
                 \PoPWPSchema\CommentMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META => [
                 \PoPCMSSchema\TaxonomyMeta\Module::class,
+                \PoPCMSSchema\TaxonomyMetaWP\Module::class,
                 \PoPWPSchema\TaxonomyMeta\Module::class,
             ],
         ];
