@@ -1,0 +1,30 @@
+################################################################
+# When "Schema Pages" is disabled, fetching cpt "page" data
+# must be retrieved via the GenericCustomPost type.
+# Check in introspection that possible types in CustomPostUnion
+# goes from [Post, Page] to [Post, GenericCustomPost]
+################################################################
+{
+  customPosts(
+    filter:{
+      customPostTypes: "page"
+    }
+  ) {
+    id
+    title
+    customPostType
+    __typename
+  }
+  
+  __schema {
+    types {
+      name
+      enumValues {
+        name
+      }
+      possibleTypes {
+        name
+      }
+    }
+  }
+}

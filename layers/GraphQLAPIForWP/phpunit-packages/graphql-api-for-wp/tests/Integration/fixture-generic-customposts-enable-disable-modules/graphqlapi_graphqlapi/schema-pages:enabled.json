@@ -1,0 +1,12 @@
+{
+    "data": {
+        "customPosts": [
+            {
+                "id": 2,
+                "title": "Sample Page",
+                "customPostType": "page",
+                "__typename": "Page"
+            }
+        ]
+    }
+}
