@@ -100,14 +100,6 @@ The custom post types that can be queried must be explicitly configured in the S
 
 ![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
 
-If there is only one type added to `CustomPostUnion`, we can then have the fields that resolve to `CustomPostUnion` be instead resolved to that unique type instead:
-
-![Settings for Custom Posts](../../images/settings-customposts.png "Settings for Custom Posts")
-
-For instance, if `Post` is the only type, field `customPosts` from type `Root` resolves to it directly:
-
-![`customPosts` field resolves to `Post` type](../../images/interactive-schema-root.png "`customPosts` field resolves to `Post` type")
-
 Through the Settings for `Schema Custom Posts`, we can also define:
 
 - The default number of elements to retrieve (i.e. when field argument `limit` is not set) when querying for a list of any custom post type
