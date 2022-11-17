@@ -16,7 +16,10 @@
       ]
     },
     pagination: {
-      limit: 30
+      limit: 15
+    }
+    sort: {
+      order: ASC
     }
   ) {
     id
