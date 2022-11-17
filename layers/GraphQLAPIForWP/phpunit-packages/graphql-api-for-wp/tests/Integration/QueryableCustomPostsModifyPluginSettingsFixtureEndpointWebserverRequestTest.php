@@ -20,7 +20,7 @@ class QueryableCustomPostsModifyPluginSettingsFixtureEndpointWebserverRequestTes
 
     protected function getSettingsKey(): string
     {
-        return ModuleSettingOptions::ENTRIES;
+        return ModuleSettingOptions::CUSTOMPOST_TYPES;
     }
 
     protected function getModuleID(string $dataName): string
@@ -37,7 +37,7 @@ class QueryableCustomPostsModifyPluginSettingsFixtureEndpointWebserverRequestTes
             'custom_css',
             'revision',
         ];
-        
+
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':1')) {
             $value[] = 'page';
