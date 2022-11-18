@@ -25,4 +25,14 @@ abstract class AbstractPayloadClientException extends AbstractClientException
     ) {
         parent::__construct($message, $code, $previous);
     }
+
+    public function getErrorCode(): int|string|null
+    {
+        return $this->errorCode;
+    }
+
+    public function getData(): ?stdClass
+    {
+        return $this->data;
+    }
 }
