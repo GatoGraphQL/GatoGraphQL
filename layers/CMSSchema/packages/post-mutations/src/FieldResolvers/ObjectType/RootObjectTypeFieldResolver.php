@@ -15,7 +15,7 @@ use PoP\Engine\Module as EngineModule;
 use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
-use PoPCMSSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
+use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableUpdatePostMutationResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootCreatePostFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootUpdatePostFilterInputObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -24,7 +24,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?CreatePostMutationResolver $createPostMutationResolver = null;
-    private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
+    private ?PayloadableUpdatePostMutationResolver $updatePostMutationResolver = null;
     private ?RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver = null;
     private ?RootCreatePostFilterInputObjectTypeResolver $rootCreatePostFilterInputObjectTypeResolver = null;
 
@@ -46,14 +46,14 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var CreatePostMutationResolver */
         return $this->createPostMutationResolver ??= $this->instanceManager->getInstance(CreatePostMutationResolver::class);
     }
-    final public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
+    final public function setPayloadableUpdatePostMutationResolver(PayloadableUpdatePostMutationResolver $updatePostMutationResolver): void
     {
         $this->updatePostMutationResolver = $updatePostMutationResolver;
     }
-    final protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
+    final protected function getPayloadableUpdatePostMutationResolver(): PayloadableUpdatePostMutationResolver
     {
-        /** @var UpdatePostMutationResolver */
-        return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
+        /** @var PayloadableUpdatePostMutationResolver */
+        return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(PayloadableUpdatePostMutationResolver::class);
     }
     final public function setRootUpdatePostFilterInputObjectTypeResolver(RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver): void
     {
@@ -138,7 +138,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'createPost' => $this->getCreatePostMutationResolver(),
-            'updatePost' => $this->getUpdatePostMutationResolver(),
+            'updatePost' => $this->getPayloadableUpdatePostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
