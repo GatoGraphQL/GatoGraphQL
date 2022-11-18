@@ -29,8 +29,8 @@ abstract class AbstractTransientObjectObjectTypeResolver extends AbstractObjectT
     final public function getID(object $object): string|int|null
     {
         /** @var AbstractTransientObject */
-        $entityPayloadObject = $object;
-        return $entityPayloadObject->getID();
+        $transientObject = $object;
+        return $transientObject->getID();
     }
 
     /**
