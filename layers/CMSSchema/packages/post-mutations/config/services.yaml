@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\PostMutations\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
+
+    PoPCMSSchema\PostMutations\Hooks\:
+        resource: '../src/Hooks/*'

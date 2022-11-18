@@ -11,3 +11,6 @@ services:
 
     PoPCMSSchema\PostMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\PostMutations\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

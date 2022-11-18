@@ -5,3 +5,6 @@ services:
 
     PoPSchema\SchemaCommons\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPSchema\SchemaCommons\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
