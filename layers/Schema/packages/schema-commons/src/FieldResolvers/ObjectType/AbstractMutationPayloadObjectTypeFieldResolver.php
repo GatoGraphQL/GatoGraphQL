@@ -41,7 +41,7 @@ abstract class AbstractMutationPayloadObjectTypeFieldResolver extends AbstractOb
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
             case 'object':
-                return $transientEntityPayload->getID();
+                return $transientEntityPayload->objectID;
         }
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
