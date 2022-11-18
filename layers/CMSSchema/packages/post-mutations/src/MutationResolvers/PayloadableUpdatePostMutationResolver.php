@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
-use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
-use PoPSchema\SchemaCommons\ObjectModels\ErrorPayload;
-use PoPSchema\SchemaCommons\ObjectModels\MutationPayload;
+use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -15,6 +13,8 @@ use PoP\Root\Exception\AbstractException;
 
 class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
 {
+    use PayloadableMutationResolverTrait;
+    
     private ?ObjectDictionaryInterface $objectDictionary = null;
 
     final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
@@ -36,32 +36,17 @@ class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        $customPostID = null;
         try {
             /** @var string|int */
             $customPostID = parent::executeMutation(
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-            $payload = new MutationPayload(
-                OperationStatusEnum::SUCCESS,
-                $customPostID,
-                null,
-            );
         } catch (CustomPostCRUDMutationException $customPostCRUDMutationException) {
-            $errors = [
-                new ErrorPayload(
-                    $customPostCRUDMutationException->getMessage(),
-                    $customPostCRUDMutationException->getErrorCode(),
-                    $customPostCRUDMutationException->getData(),
-                ),
-            ];
-            $payload = new MutationPayload(
-                OperationStatusEnum::FAILURE,
-                null,
-                $errors,
-            );
+            return $this->createFailurePayloadMutation($customPostCRUDMutationException);
         }
-        $this->getObjectDictionary()->set(MutationPayload::class, $payload->getID(), $payload);
-        return $payload->getID();
+        /** @var string|int $customPostID */
+        return $this->createSuccessPayloadMutation($customPostID);
     }
 }
