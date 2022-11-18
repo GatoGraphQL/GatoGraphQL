@@ -57,26 +57,31 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
             $error = $postIDOrError;
-            /** @var stdClass|null */
-            $errorData = null;
-            if ($error->get_error_data()) {
-                if (is_array($error->get_error_data())) {
-                    $errorData = (object) $error->get_error_data();
-                } else {
-                    $errorData = new stdClass();
-                    $key = $error->get_error_code() ? (string) $error->get_error_code() : 'data';
-                    $errorData->$key = $error->get_error_data();
-                }
-            }
-            throw new CustomPostCRUDMutationException(
-                $error->get_error_message(),
-                $error->get_error_code() ? $error->get_error_code() : null,
-                $errorData,
-            );
+            throw $this->createCustomPostCRUDMutationException($error);
         }
         /** @var int */
         $postID = $postIDOrError;
         return $postID;
+    }
+    
+    protected function createCustomPostCRUDMutationException(WP_Error $error): CustomPostCRUDMutationException
+    {
+        /** @var stdClass|null */
+        $errorData = null;
+        if ($error->get_error_data()) {
+            if (is_array($error->get_error_data())) {
+                $errorData = (object) $error->get_error_data();
+            } else {
+                $errorData = new stdClass();
+                $key = $error->get_error_code() ? (string) $error->get_error_code() : 'data';
+                $errorData->$key = $error->get_error_data();
+            }
+        }
+        return new CustomPostCRUDMutationException(
+            $error->get_error_message(),
+            $error->get_error_code() ? $error->get_error_code() : null,
+            $errorData,
+        );
     }
 
     /**
@@ -92,9 +97,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
             $error = $postIDOrError;
-            throw new CustomPostCRUDMutationException(
-                $error->get_error_message()
-            );
+            throw $this->createCustomPostCRUDMutationException($error);
         }
         /** @var int */
         $postID = $postIDOrError;
