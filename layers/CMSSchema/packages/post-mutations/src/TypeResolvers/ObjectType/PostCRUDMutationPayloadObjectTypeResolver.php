@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\TypeResolvers\ObjectType;
 
 use PoPCMSSchema\PostMutations\RelationalTypeDataLoaders\ObjectType\PostCRUDMutationPayloadObjectTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractTransientObjectObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityPayloadObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientObjectObjectTypeResolver
+class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityPayloadObjectTypeResolver
 {
     private ?PostCRUDMutationPayloadObjectTypeDataLoader $postCRUDMutationPayloadObjectTypeDataLoader = null;
 

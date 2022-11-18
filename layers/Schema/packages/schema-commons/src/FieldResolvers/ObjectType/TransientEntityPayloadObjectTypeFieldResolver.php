@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityPayload;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayload;
+use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\ErrorPayloadObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractTransientObjectObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -15,7 +16,6 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPSchema\SchemaCommons\ObjectModels\ErrorPayload;
 
 class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -57,7 +57,7 @@ class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractTransientObjectObjectTypeResolver::class,
+            AbstractTransientEntityPayloadObjectTypeResolver::class,
         ];
     }
 
