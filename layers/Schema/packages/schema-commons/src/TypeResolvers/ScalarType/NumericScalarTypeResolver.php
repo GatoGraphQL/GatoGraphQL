@@ -19,7 +19,7 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Wildcard type representing any of the numeric types (Int or Float)', 'engine');
+        return $this->__('Wildcard type representing any of the numeric types (Int or Float)', 'schema-commons');
     }
 
     /**
