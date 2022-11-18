@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\TypeResolvers\ObjectType;
 
 use PoPCMSSchema\PostMutations\RelationalTypeDataLoaders\ObjectType\PostCRUDMutationPayloadObjectTypeDataLoader;
-use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientObjectObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractTransientObjectObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
 class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientObjectObjectTypeResolver
