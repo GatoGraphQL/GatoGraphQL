@@ -13,7 +13,10 @@ use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 /**
- * To be used together with RemoveNodeInterfaceObjectTypeResolverTrait
+ * To be used together with:
+ *
+ * - RemoveNodeInterfaceObjectTypeResolverTrait
+ * - AbstractTransientObject
  */
 abstract class AbstractRemoveIDFieldFromObjectTypeHookSet extends AbstractHookSet
 {
