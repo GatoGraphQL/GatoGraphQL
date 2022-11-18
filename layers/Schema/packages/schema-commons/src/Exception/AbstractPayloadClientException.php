@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Exception;
+namespace PoPSchema\SchemaCommons\Exception;
 
 use PoP\Root\Exception\AbstractClientException;
 use stdClass;
