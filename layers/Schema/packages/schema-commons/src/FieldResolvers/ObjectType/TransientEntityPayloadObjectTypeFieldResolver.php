@@ -6,6 +6,7 @@ namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayload;
+use PoPSchema\SchemaCommons\TypeResolvers\EnumType\OperationStatusEnumTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\ErrorPayloadObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -15,12 +16,11 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?OperationStatusEnumTypeResolver $operationStatusEnumTypeResolver = null;
     private ?ErrorPayloadObjectTypeResolver $errorPayloadObjectTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
@@ -32,14 +32,14 @@ class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFi
         /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setOperationStatusEnumTypeResolver(OperationStatusEnumTypeResolver $operationStatusEnumTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->operationStatusEnumTypeResolver = $operationStatusEnumTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getOperationStatusEnumTypeResolver(): OperationStatusEnumTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        /** @var OperationStatusEnumTypeResolver */
+        return $this->operationStatusEnumTypeResolver ??= $this->instanceManager->getInstance(OperationStatusEnumTypeResolver::class);
     }
     final public function setErrorPayloadObjectTypeResolver(ErrorPayloadObjectTypeResolver $errorPayloadObjectTypeResolver): void
     {
@@ -76,7 +76,7 @@ class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'status' => $this->getStringScalarTypeResolver(),
+            'status' => $this->getOperationStatusEnumTypeResolver(),
             'objectID' => $this->getIDScalarTypeResolver(),
             'errors' => $this->getErrorPayloadObjectTypeResolver(),
             default

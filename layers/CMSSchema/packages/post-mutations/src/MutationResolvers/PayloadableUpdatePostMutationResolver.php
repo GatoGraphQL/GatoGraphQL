@@ -10,6 +10,7 @@ use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
+use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayload;
 
 class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
@@ -40,7 +41,11 @@ class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-            $payload = new PostCRUDMutationPayload('success', $customPostID, null);
+            $payload = new PostCRUDMutationPayload(
+                OperationStatusEnum::SUCCESS,
+                $customPostID,
+                null,
+            );
         } catch (CustomPostCRUDMutationException $customPostCRUDMutationException) {
             $errors = [
                 new ErrorPayload(
@@ -49,7 +54,11 @@ class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
                     $customPostCRUDMutationException->getData(),
                 ),
             ];
-            $payload = new PostCRUDMutationPayload('failure', null, $errors);
+            $payload = new PostCRUDMutationPayload(
+                OperationStatusEnum::FAILURE,
+                null,
+                $errors,
+            );
         }
         $this->getObjectDictionary()->set(PostCRUDMutationPayload::class, $payload->getID(), $payload);
         return $payload->getID();
