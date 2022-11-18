@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations\ObjectModels;
+namespace PoPCMSSchema\PostMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityPayload;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\PostMutations\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\PostMutations\RelationalTypeDataLoaders\ObjectType;
 
-use PoPSchema\PostMutations\ObjectModels\PostCRUDMutationPayload;
+use PoPCMSSchema\PostMutations\ObjectModels\PostCRUDMutationPayload;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractDictionaryObjectTypeDataLoader;
 
 class PostCRUDMutationPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
