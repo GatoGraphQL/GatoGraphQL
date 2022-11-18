@@ -37,6 +37,7 @@ class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         try {
+            /** @var string|int */
             $customPostID = parent::executeMutation(
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
