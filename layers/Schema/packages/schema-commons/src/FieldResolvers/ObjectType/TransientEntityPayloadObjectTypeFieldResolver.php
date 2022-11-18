@@ -103,9 +103,6 @@ class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFi
         };
     }
 
-    /**
-     * The parent already resolves all fields
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
@@ -124,6 +121,9 @@ class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFi
                     fn (ErrorPayload $errorPayload) => $errorPayload->getID(),
                     $transientEntityPayload->errors,
                 );
+            /**
+             * The parent already resolves all remaining fields
+             */        
         }
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
