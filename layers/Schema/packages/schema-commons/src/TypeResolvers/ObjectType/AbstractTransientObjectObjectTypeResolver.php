@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ObjectType;
 
-use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityPayload;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
+use PoP\ComponentModel\ObjectModels\AbstractTransientObject;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\RemoveNodeInterfaceObjectTypeResolverTrait;
 
-abstract class AbstractTransientEntityPayloadObjectTypeResolver extends AbstractObjectTypeResolver
+abstract class AbstractTransientObjectObjectTypeResolver extends AbstractObjectTypeResolver
 {
     use RemoveNodeInterfaceObjectTypeResolverTrait;
 
@@ -28,7 +28,7 @@ abstract class AbstractTransientEntityPayloadObjectTypeResolver extends Abstract
 
     final public function getID(object $object): string|int|null
     {
-        /** @var AbstractTransientEntityPayload */
+        /** @var AbstractTransientObject */
         $entityPayloadObject = $object;
         return $entityPayloadObject->getID();
     }
