@@ -370,7 +370,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $post_data
      * @return string|int the ID of the updated custom post
-     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     protected function executeUpdateCustomPost(array $post_data): string|int
     {
@@ -393,7 +393,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,

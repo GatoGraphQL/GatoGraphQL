@@ -68,7 +68,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated custom post
-     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     public function updateCustomPost(array $data): string|int
     {

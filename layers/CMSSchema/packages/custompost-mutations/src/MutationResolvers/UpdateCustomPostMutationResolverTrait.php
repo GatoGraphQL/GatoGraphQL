@@ -26,7 +26,7 @@ trait UpdateCustomPostMutationResolverTrait
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
+     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     abstract protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
