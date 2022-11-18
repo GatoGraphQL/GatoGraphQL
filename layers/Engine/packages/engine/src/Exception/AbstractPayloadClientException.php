@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Exception;
 
 use PoP\Root\Exception\AbstractClientException;
+use stdClass;
 use Throwable;
 
 /**
@@ -18,7 +19,7 @@ abstract class AbstractPayloadClientException extends AbstractClientException
     public function __construct(
         string $message,
         public int|string|null $errorCode = null,
-        public array $data = [],
+        public ?stdClass $data = null,
         int $code = 0,
         Throwable|null $previous = null
     ) {
