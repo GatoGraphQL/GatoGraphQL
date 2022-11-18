@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\TypeResolvers\ScalarType;
+namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
 use CastToType;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
