@@ -6,14 +6,11 @@ namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostCRUDMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityPayload;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class PostCRUDMutationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class PostCRUDMutationPayloadObjectTypeFieldResolver extends AbstractMutationPayloadObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
 
@@ -37,16 +34,6 @@ class PostCRUDMutationPayloadObjectTypeFieldResolver extends AbstractObjectTypeF
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    public function getFieldNamesToResolve(): array
-    {
-        return [
-            'object',
-        ];
-    }
-
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
@@ -54,29 +41,5 @@ class PostCRUDMutationPayloadObjectTypeFieldResolver extends AbstractObjectTypeF
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
-    }
-
-    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        return match ($fieldName) {
-            'object' => $this->__('Affected post object, if the operation was successful', 'post-mutations'),
-            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function resolveValue(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): mixed {
-        /** @var AbstractTransientEntityPayload */
-        $transientEntityPayload = $object;
-        $fieldName = $fieldDataAccessor->getFieldName();
-        switch ($fieldName) {
-            case 'object':
-                return $transientEntityPayload->getID();
-        }
-        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
