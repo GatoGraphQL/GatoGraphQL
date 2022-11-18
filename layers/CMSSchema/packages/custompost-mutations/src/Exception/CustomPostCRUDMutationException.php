@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\Exception;
 
-use PoP\Root\Exception\AbstractClientException;
+use PoP\Engine\Exception\AbstractPayloadClientException;
 
-final class CustomPostCRUDMutationException extends AbstractClientException
+final class CustomPostCRUDMutationException extends AbstractPayloadClientException
 {
 }
