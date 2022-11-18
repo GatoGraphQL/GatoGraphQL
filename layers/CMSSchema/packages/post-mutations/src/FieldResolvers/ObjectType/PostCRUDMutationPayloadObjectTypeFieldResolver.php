@@ -76,9 +76,6 @@ class PostCRUDMutationPayloadObjectTypeFieldResolver extends AbstractObjectTypeF
         switch ($fieldName) {
             case 'object':
                 return $transientEntityPayload->getID();
-            /**
-             * The parent already resolves all remaining fields
-             */        
         }
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
