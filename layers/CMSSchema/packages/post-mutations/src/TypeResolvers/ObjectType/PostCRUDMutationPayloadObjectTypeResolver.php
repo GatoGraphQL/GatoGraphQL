@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\TypeResolvers\ObjectType;
 
-use PoPCMSSchema\PostMutations\RelationalTypeDataLoaders\ObjectType\PostCRUDMutationPayloadObjectTypeDataLoader;
+use PoPSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\TransientEntityPayloadObjectTypeDataLoader;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityPayloadObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
 class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityPayloadObjectTypeResolver
 {
-    private ?PostCRUDMutationPayloadObjectTypeDataLoader $postCRUDMutationPayloadObjectTypeDataLoader = null;
+    private ?TransientEntityPayloadObjectTypeDataLoader $transientEntityPayloadObjectTypeDataLoader = null;
 
-    final public function setPostCRUDMutationPayloadObjectTypeDataLoader(PostCRUDMutationPayloadObjectTypeDataLoader $postCRUDMutationPayloadObjectTypeDataLoader): void
+    final public function setTransientEntityPayloadObjectTypeDataLoader(TransientEntityPayloadObjectTypeDataLoader $transientEntityPayloadObjectTypeDataLoader): void
     {
-        $this->postCRUDMutationPayloadObjectTypeDataLoader = $postCRUDMutationPayloadObjectTypeDataLoader;
+        $this->transientEntityPayloadObjectTypeDataLoader = $transientEntityPayloadObjectTypeDataLoader;
     }
-    final protected function getPostCRUDMutationPayloadObjectTypeDataLoader(): PostCRUDMutationPayloadObjectTypeDataLoader
+    final protected function getTransientEntityPayloadObjectTypeDataLoader(): TransientEntityPayloadObjectTypeDataLoader
     {
-        /** @var PostCRUDMutationPayloadObjectTypeDataLoader */
-        return $this->postCRUDMutationPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(PostCRUDMutationPayloadObjectTypeDataLoader::class);
+        /** @var TransientEntityPayloadObjectTypeDataLoader */
+        return $this->transientEntityPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(TransientEntityPayloadObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -34,6 +34,6 @@ class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityP
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getPostCRUDMutationPayloadObjectTypeDataLoader();
+        return $this->getTransientEntityPayloadObjectTypeDataLoader();
     }
 }

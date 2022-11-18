@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
-use PoPCMSSchema\PostMutations\ObjectModels\PostCRUDMutationPayload;
+use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayload;
+use PoPSchema\SchemaCommons\ObjectModels\MutationPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
-use PoPSchema\SchemaCommons\ObjectModels\ErrorPayload;
 
 class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
 {
@@ -41,7 +41,7 @@ class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-            $payload = new PostCRUDMutationPayload(
+            $payload = new MutationPayload(
                 OperationStatusEnum::SUCCESS,
                 $customPostID,
                 null,
@@ -54,13 +54,13 @@ class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
                     $customPostCRUDMutationException->getData(),
                 ),
             ];
-            $payload = new PostCRUDMutationPayload(
+            $payload = new MutationPayload(
                 OperationStatusEnum::FAILURE,
                 null,
                 $errors,
             );
         }
-        $this->getObjectDictionary()->set(PostCRUDMutationPayload::class, $payload->getID(), $payload);
+        $this->getObjectDictionary()->set(MutationPayload::class, $payload->getID(), $payload);
         return $payload->getID();
     }
 }
