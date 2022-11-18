@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\TypeResolvers\ObjectType;
 
-use PoPSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\TransientEntityPayloadObjectTypeDataLoader;
+use PoPSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\MutationPayloadObjectTypeDataLoader;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityPayloadObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
 class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityPayloadObjectTypeResolver
 {
-    private ?TransientEntityPayloadObjectTypeDataLoader $transientEntityPayloadObjectTypeDataLoader = null;
+    private ?MutationPayloadObjectTypeDataLoader $mutationPayloadObjectTypeDataLoader = null;
 
-    final public function setTransientEntityPayloadObjectTypeDataLoader(TransientEntityPayloadObjectTypeDataLoader $transientEntityPayloadObjectTypeDataLoader): void
+    final public function setTransientEntityPayloadObjectTypeDataLoader(MutationPayloadObjectTypeDataLoader $mutationPayloadObjectTypeDataLoader): void
     {
-        $this->transientEntityPayloadObjectTypeDataLoader = $transientEntityPayloadObjectTypeDataLoader;
+        $this->mutationPayloadObjectTypeDataLoader = $mutationPayloadObjectTypeDataLoader;
     }
-    final protected function getTransientEntityPayloadObjectTypeDataLoader(): TransientEntityPayloadObjectTypeDataLoader
+    final protected function getTransientEntityPayloadObjectTypeDataLoader(): MutationPayloadObjectTypeDataLoader
     {
-        /** @var TransientEntityPayloadObjectTypeDataLoader */
-        return $this->transientEntityPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(TransientEntityPayloadObjectTypeDataLoader::class);
+        /** @var MutationPayloadObjectTypeDataLoader */
+        return $this->mutationPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(MutationPayloadObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string

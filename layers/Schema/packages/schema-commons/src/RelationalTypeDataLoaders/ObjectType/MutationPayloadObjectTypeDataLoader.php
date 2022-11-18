@@ -7,7 +7,7 @@ namespace PoPSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType;
 use PoPSchema\SchemaCommons\ObjectModels\MutationPayload;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractDictionaryObjectTypeDataLoader;
 
-class TransientEntityPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
+class MutationPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
 {
     protected function getObjectClass(): string
     {
