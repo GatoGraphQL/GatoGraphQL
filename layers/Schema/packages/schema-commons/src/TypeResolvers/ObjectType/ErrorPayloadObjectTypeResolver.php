@@ -6,6 +6,7 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\ErrorPayloadObjectTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractTransientObjectObjectTypeResolver;
 
 class ErrorPayloadObjectTypeResolver extends AbstractTransientObjectObjectTypeResolver
 {
