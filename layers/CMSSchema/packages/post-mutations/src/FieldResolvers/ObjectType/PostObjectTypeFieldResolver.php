@@ -8,6 +8,7 @@ use PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType\AbstractCustomPos
 use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableUpdatePostMutationResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\PostUpdateFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostCRUDMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -66,7 +67,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostCRUDMutationPayloadObjectTypeResolver::class,
+            PostObjectTypeResolver::class,
         ];
     }
 
