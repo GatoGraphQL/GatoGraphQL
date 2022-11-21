@@ -273,7 +273,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         $customPost = $this->getCustomPostTypeAPI()->getCustomPost($customPostID);
-        if (!$customPost) {
+        if ($customPost === null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
