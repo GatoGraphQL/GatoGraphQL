@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\ObjectModels;
 
 interface TransientObjectInterface
 {
-    public function getID(): int;
+    public function getID(): int|string;
 }

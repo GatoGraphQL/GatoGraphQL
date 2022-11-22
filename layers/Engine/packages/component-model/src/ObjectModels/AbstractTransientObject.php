@@ -19,7 +19,7 @@ abstract class AbstractTransientObject implements TransientObjectInterface
         $this->id = self::$counter;
     }
 
-    public function getID(): int
+    public function getID(): int|string
     {
         return $this->id;
     }
