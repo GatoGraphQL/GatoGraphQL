@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
+
+use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+
+interface CustomPostDoesNotExistErrorPayloadObjectTypeResolverPickerInterface extends ObjectTypeResolverPickerInterface
+{
+}
