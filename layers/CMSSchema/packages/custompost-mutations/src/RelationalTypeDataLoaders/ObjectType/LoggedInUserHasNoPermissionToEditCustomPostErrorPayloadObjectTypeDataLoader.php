@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\CustomPostMutations\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\CustomPosts\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
+use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractDictionaryObjectTypeDataLoader;
 
 class LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader

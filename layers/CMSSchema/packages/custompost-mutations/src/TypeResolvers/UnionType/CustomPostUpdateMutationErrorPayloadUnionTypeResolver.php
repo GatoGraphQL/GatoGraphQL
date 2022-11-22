@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPosts\TypeResolvers\UnionType;
+namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType;
 
-use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUpdateMutationErrorPayloadUnionTypeDataLoader;
+use PoPCMSSchema\CustomPostMutations\RelationalTypeDataLoaders\UnionType\CustomPostUpdateMutationErrorPayloadUnionTypeDataLoader;
 use PoPSchema\SchemaCommons\TypeResolvers\InterfaceType\IsErrorPayloadInterfaceTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
