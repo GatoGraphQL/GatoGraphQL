@@ -6,7 +6,7 @@ namespace PoPSchema\SchemaCommons\MutationResolvers;
 
 use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
 use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
-use PoPSchema\SchemaCommons\ObjectModels\ErrorPayload;
+use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\MutationPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 
@@ -35,7 +35,7 @@ trait PayloadableMutationResolverTrait
             OperationStatusEnum::FAILURE,
             null,
             [
-                new ErrorPayload(
+                new GenericErrorPayload(
                     $payloadClientException->getMessage(),
                     $payloadClientException->getErrorCode(),
                     $payloadClientException->getData(),
