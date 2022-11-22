@@ -8,4 +8,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractTransientObjectObjectTyp
 
 abstract class AbstractErrorPayloadObjectTypeResolver extends AbstractTransientObjectObjectTypeResolver
 {
+    public function getTypeDescription(): ?string
+    {
+        return $this->__('Error payload', 'schema-commons');
+    }
 }

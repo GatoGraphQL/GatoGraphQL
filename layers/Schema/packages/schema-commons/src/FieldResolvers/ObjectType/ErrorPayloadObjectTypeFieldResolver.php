@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
+use PoPSchema\SchemaCommons\FieldResolvers\InterfaceType\IsErrorPayloadInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractErrorPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\StringOrIntScalarTypeResolver;
@@ -21,6 +22,7 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     private ?StringOrIntScalarTypeResolver $stringOrIntScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?IsErrorPayloadInterfaceTypeFieldResolver $isErrorPayloadInterfaceTypeFieldResolver = null;
 
     final public function setStringOrIntScalarTypeResolver(StringOrIntScalarTypeResolver $stringOrIntScalarTypeResolver): void
     {
@@ -49,6 +51,15 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         /** @var JSONObjectScalarTypeResolver */
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
+    final public function setIsErrorPayloadInterfaceTypeFieldResolver(IsErrorPayloadInterfaceTypeFieldResolver $isErrorPayloadInterfaceTypeFieldResolver): void
+    {
+        $this->isErrorPayloadInterfaceTypeFieldResolver = $isErrorPayloadInterfaceTypeFieldResolver;
+    }
+    final protected function getIsErrorPayloadInterfaceTypeFieldResolver(): IsErrorPayloadInterfaceTypeFieldResolver
+    {
+        /** @var IsErrorPayloadInterfaceTypeFieldResolver */
+        return $this->isErrorPayloadInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsErrorPayloadInterfaceTypeFieldResolver::class);
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -65,10 +76,16 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
      */
     public function getFieldNamesToResolve(): array
     {
+        return [];
+    }
+
+    /**
+     * @return array<InterfaceTypeFieldResolverInterface>
+     */
+    public function getImplementedInterfaceTypeFieldResolvers(): array
+    {
         return [
-            'message',
-            'code',
-            'data',
+            $this->getIsErrorPayloadInterfaceTypeFieldResolver(),
         ];
     }
 
