@@ -9,7 +9,7 @@ use PoP\ComponentModel\ObjectModels\AbstractTransientObject;
 use PoP\Root\Services\StandaloneServiceTrait;
 use RuntimeException;
 
-abstract class AbstractTransientEntityPayload extends AbstractTransientObject
+abstract class AbstractTransientEntityOperationPayload extends AbstractTransientObject
 {
     use StandaloneServiceTrait;
 

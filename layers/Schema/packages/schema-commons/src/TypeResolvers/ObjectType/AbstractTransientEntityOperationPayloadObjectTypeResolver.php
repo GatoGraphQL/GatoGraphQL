@@ -6,6 +6,6 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractTransientObjectObjectTypeResolver;
 
-abstract class AbstractTransientEntityPayloadObjectTypeResolver extends AbstractTransientObjectObjectTypeResolver
+abstract class AbstractTransientEntityOperationPayloadObjectTypeResolver extends AbstractTransientObjectObjectTypeResolver
 {
 }

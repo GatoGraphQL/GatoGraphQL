@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
-use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityPayload;
+use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityOperationPayload;
 use PoPSchema\SchemaCommons\TypeResolvers\EnumType\OperationStatusEnumTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -15,7 +15,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
-class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class TransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?OperationStatusEnumTypeResolver $operationStatusEnumTypeResolver = null;
@@ -45,7 +45,7 @@ class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractTransientEntityPayloadObjectTypeResolver::class,
+            AbstractTransientEntityOperationPayloadObjectTypeResolver::class,
         ];
     }
 
@@ -93,7 +93,7 @@ class TransientEntityPayloadObjectTypeFieldResolver extends AbstractObjectTypeFi
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        /** @var AbstractTransientEntityPayload */
+        /** @var AbstractTransientEntityOperationPayload */
         $transientEntityPayload = $object;
         /**
          * The parent already resolves all remaining fields

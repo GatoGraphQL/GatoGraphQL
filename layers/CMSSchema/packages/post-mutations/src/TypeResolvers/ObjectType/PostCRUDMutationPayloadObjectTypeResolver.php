@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\TypeResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\MutationPayloadObjectTypeDataLoader;
-use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityPayloadObjectTypeResolver
+class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityOperationPayloadObjectTypeResolver
 {
     private ?MutationPayloadObjectTypeDataLoader $mutationPayloadObjectTypeDataLoader = null;
 
-    final public function setTransientEntityPayloadObjectTypeDataLoader(MutationPayloadObjectTypeDataLoader $mutationPayloadObjectTypeDataLoader): void
+    final public function setTransientEntityOperationPayloadObjectTypeDataLoader(MutationPayloadObjectTypeDataLoader $mutationPayloadObjectTypeDataLoader): void
     {
         $this->mutationPayloadObjectTypeDataLoader = $mutationPayloadObjectTypeDataLoader;
     }
-    final protected function getTransientEntityPayloadObjectTypeDataLoader(): MutationPayloadObjectTypeDataLoader
+    final protected function getTransientEntityOperationPayloadObjectTypeDataLoader(): MutationPayloadObjectTypeDataLoader
     {
         /** @var MutationPayloadObjectTypeDataLoader */
         return $this->mutationPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(MutationPayloadObjectTypeDataLoader::class);
@@ -34,6 +34,6 @@ class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityP
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getTransientEntityPayloadObjectTypeDataLoader();
+        return $this->getTransientEntityOperationPayloadObjectTypeDataLoader();
     }
 }
