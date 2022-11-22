@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
+
+use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractErrorPayloadObjectTypeResolverPicker;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+
+abstract class AbstractLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolverPicker extends AbstractErrorPayloadObjectTypeResolverPicker implements LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolverPickerInterface
+{
+    private ?LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver $customPostDoesNotExistErrorPayloadObjectTypeResolver = null;
+
+    final public function setLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver(LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver $customPostDoesNotExistErrorPayloadObjectTypeResolver): void
+    {
+        $this->customPostDoesNotExistErrorPayloadObjectTypeResolver = $customPostDoesNotExistErrorPayloadObjectTypeResolver;
+    }
+    final protected function getLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver(): LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver
+    {
+        /** @var LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver */
+        return $this->customPostDoesNotExistErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver::class);
+    }
+
+    public function getObjectTypeResolver(): ObjectTypeResolverInterface
+    {
+        return $this->getLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver();
+    }
+
+    protected function getTargetObjectClass(): string
+    {
+        return LoggedInUserHasNoPermissionToEditCustomPostErrorPayload::class;
+    }
+}
