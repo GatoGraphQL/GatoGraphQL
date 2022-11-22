@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ObjectModels;
 
-abstract class AbstractTransientObject
+abstract class AbstractTransientObject implements TransientObjectInterface
 {
     /**
      * Static ID generator

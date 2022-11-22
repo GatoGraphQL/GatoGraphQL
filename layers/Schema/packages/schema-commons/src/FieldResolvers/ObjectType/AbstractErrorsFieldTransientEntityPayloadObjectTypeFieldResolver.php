@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityPayload;
-use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityPayloadObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -77,7 +77,7 @@ abstract class AbstractErrorsFieldTransientEntityPayloadObjectTypeFieldResolver 
                     return null;
                 }
                 return array_map(
-                    fn (AbstractErrorPayload $errorPayload) => $errorPayload->getID(),
+                    fn (ErrorPayloadInterface $errorPayload) => $errorPayload->getID(),
                     $transientEntityPayload->errors,
                 );
             /**

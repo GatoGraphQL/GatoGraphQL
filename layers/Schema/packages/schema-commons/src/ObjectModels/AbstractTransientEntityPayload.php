@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ObjectModels;
 
-use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\ObjectModels\AbstractTransientObject;
 use PoP\Root\Services\StandaloneServiceTrait;
 use RuntimeException;
@@ -17,7 +17,7 @@ abstract class AbstractTransientEntityPayload extends AbstractTransientObject
      * Either the object ID or the error must be provided.
      * If both of them are null, it's a development error.
      *
-     * @param AbstractErrorPayload[]|null $errors
+     * @param ErrorPayloadInterface[]|null $errors
      */
      public function __construct(
         public readonly string $status,

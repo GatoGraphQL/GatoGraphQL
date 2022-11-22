@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\FieldResolvers\InterfaceType\IsErrorPayloadInterfaceTypeFieldResolver;
-use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractErrorPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\StringOrIntScalarTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -127,7 +127,7 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        /** @var AbstractErrorPayload */
+        /** @var ErrorPayloadInterface */
         $errorPayload = $object;
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }

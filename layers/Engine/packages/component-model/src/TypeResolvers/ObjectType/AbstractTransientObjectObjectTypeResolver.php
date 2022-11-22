@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
-use PoP\ComponentModel\ObjectModels\AbstractTransientObject;
+use PoP\ComponentModel\ObjectModels\TransientObjectInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\RemoveNodeInterfaceObjectTypeResolverTrait;
 
@@ -28,7 +28,7 @@ abstract class AbstractTransientObjectObjectTypeResolver extends AbstractObjectT
 
     final public function getID(object $object): string|int|null
     {
-        /** @var AbstractTransientObject */
+        /** @var TransientObjectInterface */
         $transientObject = $object;
         return $transientObject->getID();
     }
