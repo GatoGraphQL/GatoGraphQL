@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
 
-use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\ErrorPayloadObjectTypeResolverPickerInterface;
 
-interface CustomPostDoesNotExistErrorPayloadObjectTypeResolverPickerInterface extends ObjectTypeResolverPickerInterface
+interface CustomPostDoesNotExistErrorPayloadObjectTypeResolverPickerInterface extends ErrorPayloadObjectTypeResolverPickerInterface
 {
 }

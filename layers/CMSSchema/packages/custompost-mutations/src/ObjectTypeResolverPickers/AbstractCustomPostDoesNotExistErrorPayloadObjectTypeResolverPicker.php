@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\CustomPostDoesNotExistErrorPayloadObjectTypeResolver;
-use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\CustomPostDoesNotExistErrorPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractErrorPayloadObjectTypeResolverPicker;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-abstract class AbstractCustomPostDoesNotExistErrorPayloadObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements CustomPostDoesNotExistErrorPayloadObjectTypeResolverPickerInterface
+abstract class AbstractCustomPostDoesNotExistErrorPayloadObjectTypeResolverPicker extends AbstractErrorPayloadObjectTypeResolverPicker implements CustomPostDoesNotExistErrorPayloadObjectTypeResolverPickerInterface
 {
     private ?CustomPostDoesNotExistErrorPayloadObjectTypeResolver $customPostDoesNotExistErrorPayloadObjectTypeResolver = null;
 
@@ -28,14 +28,8 @@ abstract class AbstractCustomPostDoesNotExistErrorPayloadObjectTypeResolverPicke
         return $this->getCustomPostDoesNotExistErrorPayloadObjectTypeResolver();
     }
 
-    public function isInstanceOfType(object $object): bool
+    protected function getTargetObjectClass(): string
     {
-        return $object instanceof CustomPostDoesNotExistErrorPayload;
-    }
-
-    public function isIDOfType(string|int $objectID): bool
-    {
-        // @todo Retrieve type from registry!!!!
-        return false;
+        return CustomPostDoesNotExistErrorPayload::class;
     }
 }
