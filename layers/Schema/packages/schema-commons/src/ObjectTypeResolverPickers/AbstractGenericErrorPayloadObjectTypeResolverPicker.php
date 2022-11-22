@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ObjectTypeResolverPickers;
 
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\GenericErrorPayloadObjectTypeResolver;
-use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractTransientObjectObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 
