@@ -51,7 +51,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getNamespace(): string
     {
-        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+        $mainPluginVersion = App::getMainPlugin()->getPluginVersionWithCommitHash();
         // (Needed for development) Don't share cache among plugin versions
         $timestamp = '_v' . $mainPluginVersion;
         // The timestamp from when last saving settings/modules to the DB
