@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
-use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityOperationPayload;
+use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientOperationPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
-use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientOperationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -14,7 +14,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-abstract class AbstractErrorsFieldTransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -22,7 +22,7 @@ abstract class AbstractErrorsFieldTransientEntityOperationPayloadObjectTypeField
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractTransientEntityOperationPayloadObjectTypeResolver::class,
+            AbstractTransientOperationPayloadObjectTypeResolver::class,
         ];
     }
 
@@ -68,17 +68,17 @@ abstract class AbstractErrorsFieldTransientEntityOperationPayloadObjectTypeField
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        /** @var AbstractTransientEntityOperationPayload */
-        $transientEntityPayload = $object;
+        /** @var AbstractTransientOperationPayload */
+        $transientOperationPayload = $object;
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
             case 'errors':
-                if ($transientEntityPayload->errors === null) {
+                if ($transientOperationPayload->errors === null) {
                     return null;
                 }
                 return array_map(
                     fn (ErrorPayloadInterface $errorPayload) => $errorPayload->getID(),
-                    $transientEntityPayload->errors,
+                    $transientOperationPayload->errors,
                 );
             /**
              * The parent already resolves all remaining fields
