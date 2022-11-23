@@ -56,15 +56,19 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
          * for the Main Plugin and Extensions. This way, when deploying
          * a new Plugin or Extension to InstaWP during DEV, the container
          * will be regenerated.
+         *
+         * Please notice: the version with hash contains "#", which is
+         * forbidden in the folder name, but this problem is avoided
+         * when doing `md5` of the string.
          */
         $pluginVersions = [];
         $pluginVersions[] = App::getMainPlugin()->getPluginVersionWithCommitHash();
         foreach (App::getExtensionManager()->getExtensions() as $extensionInstance) {
             $pluginVersions[] = $extensionInstance->getPluginVersionWithCommitHash();
         }
-        $pluginVersion = count($pluginVersions) === 1
-            ? $pluginVersions[0]
-            : hash('md5', implode('|', $pluginVersions));        
+        $pluginVersion = hash('md5', implode('|', $pluginVersions));
+        
+        // Just the first 8 characters is enough
         $pluginVersion = substr($pluginVersion, 0, 8);
 
         // (Needed for development) Don't share cache among plugin versions
