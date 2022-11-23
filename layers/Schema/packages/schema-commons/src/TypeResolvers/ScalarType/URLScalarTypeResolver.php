@@ -36,15 +36,15 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrors();
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
         $this->validateIsString($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
         /** @var string $inputValue */
 
         $this->validateFilterVar($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore, \FILTER_VALIDATE_URL);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 
