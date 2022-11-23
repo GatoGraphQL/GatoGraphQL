@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
+
+use PoPCMSSchema\UserStateMutations\ObjectTypeResolverPickers\AbstractUserIsNotLoggedInErrorPayloadObjectTypeResolverPicker;
+
+class CustomPostUpdateUserIsNotLoggedInMutationErrorPayloadObjectTypeResolverPicker extends AbstractUserIsNotLoggedInErrorPayloadObjectTypeResolverPicker
+{
+    use CustomPostUpdateMutationErrorPayloadObjectTypeResolverPickerTrait;
+}

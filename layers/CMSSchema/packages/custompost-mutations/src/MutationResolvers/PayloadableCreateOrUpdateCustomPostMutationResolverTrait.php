@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
+use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
@@ -59,6 +60,12 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
         $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         /** @var ErrorPayloadInterface */
         return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E1,
+            ] => new UserIsNotLoggedInErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
