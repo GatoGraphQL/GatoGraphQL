@@ -19,18 +19,18 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
     /**
      * @param ObjectTypeFieldResolutionFeedbackInterface[] $objectTypeFieldResolutionFeedbacks
      */
-    protected function createAndStoreErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
+    protected function createErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
         array $objectTypeFieldResolutionFeedbacks
     ): mixed {
         $errorPayloadIDs = [];
         foreach ($objectTypeFieldResolutionFeedbacks as $objectTypeFieldResolutionFeedback) {
-            $errorPayload = $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
+            $errorPayload = $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
             $errorPayloadIDs[] = $errorPayload->getID();
         }
         return $errorPayloadIDs;
     }
 
-    protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
+    protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
         $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
