@@ -36,7 +36,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
                 $this->createErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 )
-            );
+            )->getID();
         }
 
         $customPostID = null;
@@ -55,7 +55,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
                         $customPostCRUDMutationException->getData(),
                     ),
                 ]
-            );
+            )->getID();
         }
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -63,11 +63,11 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
                 $this->createErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 )
-            );
+            )->getID();
         }
 
         /** @var string|int $customPostID */
-        return $this->createAndStoreSuccessPayloadMutation($customPostID);
+        return $this->createAndStoreSuccessPayloadMutation($customPostID)->getID();
     }
 
     /**
