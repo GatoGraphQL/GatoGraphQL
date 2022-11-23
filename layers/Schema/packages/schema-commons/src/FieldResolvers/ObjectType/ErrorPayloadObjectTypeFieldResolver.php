@@ -10,8 +10,6 @@ use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractErrorPayloadObjectT
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
@@ -65,31 +63,6 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         return [
             $this->getIsErrorPayloadInterfaceTypeFieldResolver(),
         ];
-    }
-
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
-    {
-        return match ($fieldName) {
-            'message' => $this->getStringScalarTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
-    {
-        return match ($fieldName) {
-            'message' => SchemaTypeModifiers::NON_NULLABLE,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        return match ($fieldName) {
-            'message' => $this->__('Error message', 'schema-commons'),
-            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
-        };
     }
 
     /**
