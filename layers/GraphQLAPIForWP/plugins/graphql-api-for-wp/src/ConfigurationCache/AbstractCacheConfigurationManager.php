@@ -83,7 +83,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
             $pluginVersions[] = $extensionInstance->getPluginVersionWithCommitHash();
         }
         $pluginVersion = hash('md5', implode('|', $pluginVersions));
-        
+
         // Just the first 8 characters is enough
         return substr($pluginVersion, 0, 8);
     }
