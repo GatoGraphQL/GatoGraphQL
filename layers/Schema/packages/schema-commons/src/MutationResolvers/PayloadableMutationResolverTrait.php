@@ -12,7 +12,7 @@ trait PayloadableMutationResolverTrait
 {
     abstract protected function getObjectDictionary(): ObjectDictionaryInterface;
 
-    protected function createSuccessPayloadMutation(string|int $objectID): string|int
+    protected function createAndStoreSuccessPayloadMutation(string|int $objectID): string|int
     {
         $payload = new MutationPayload(
             OperationStatusEnum::SUCCESS,
@@ -30,7 +30,7 @@ trait PayloadableMutationResolverTrait
     /**
      * @param ErrorPayloadInterface[] $errors
      */
-    protected function createFailurePayloadMutation(
+    protected function createAndStoreFailurePayloadMutation(
         array $errors,
         string|int|null $objectID = null,
     ): string|int {
