@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
-use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
-use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
-use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
-use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
@@ -18,78 +12,16 @@ use PoP\Root\Exception\AbstractException;
 trait UpdateCustomPostMutationResolverTrait
 {
     /**
-     * if isPayloadable(): Validate the app-level errors here.
-     * Otherwise, it will be done in the top-level errors entry.
-     *
      * @throws AbstractException In case of error
      */
     public function executeMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        if ($this->isPayloadable()) {
-            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-            $this->validateUpdateErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
-            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                return $this->createAndStoreErrorPayloadsFromObjectTypeFieldResolutionFeedbacks($separateObjectTypeFieldResolutionFeedbackStore->getErrors());
-            }
-            $result = $this->update(
-                $fieldDataAccessor,
-                $separateObjectTypeFieldResolutionFeedbackStore,
-            );
-            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                return $this->createAndStoreErrorPayloadsFromObjectTypeFieldResolutionFeedbacks($separateObjectTypeFieldResolutionFeedbackStore->getErrors());
-            }    
-            return $result;
-        }
         return $this->update(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-    }
-
-    /**
-     * @param ObjectTypeFieldResolutionFeedbackInterface[] $objectTypeFieldResolutionFeedbacks
-     */
-    protected function createAndStoreErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
-        array $objectTypeFieldResolutionFeedbacks
-    ): mixed {
-        $errorPayloadIDs = [];
-        foreach ($objectTypeFieldResolutionFeedbacks as $objectTypeFieldResolutionFeedback) {
-            $errorPayload = $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
-            $errorPayloadIDs[] = $errorPayload->getID();
-        }
-        return $errorPayloadIDs;
-    }
-
-    protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
-        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
-    ): ErrorPayloadInterface {
-        $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        /** @var ErrorPayloadInterface */
-        return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E7,
-            ] => new CustomPostDoesNotExistErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E8,
-            ] => new LoggedInUserHasNoPermissionToEditCustomPostErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-            ),
-            default => new GenericErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-                $errorFeedbackItemResolution->getCode(),
-            ),
-        };
-    }
-
-    protected function isPayloadable(): bool
-    {
-        return false;
     }
 
     /**
@@ -102,19 +34,12 @@ trait UpdateCustomPostMutationResolverTrait
     ): string|int;
 
     /**
-     * if !isPayloadable(): Validate the app-level errors
-     * in top-level "errors" entry.
-     *
-     * Otherwise, it will be done in executeMutation,
-     * and returned via the Payload.
+     * Validate the app-level errors in top-level "errors" entry.
      */
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if ($this->isPayloadable()) {
-            return;
-        }
         $this->validateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 

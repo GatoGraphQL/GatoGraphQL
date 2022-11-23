@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableUpdateCustomPostMutationResolverTrait;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -13,6 +14,7 @@ use PoP\Root\Exception\AbstractException;
 
 class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
 {
+    use PayloadableUpdateCustomPostMutationResolverTrait;
     use PayloadableMutationResolverTrait;
     
     private ?ObjectDictionaryInterface $objectDictionary = null;
@@ -25,11 +27,6 @@ class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
     {
         /** @var ObjectDictionaryInterface */
         return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
-    }
-
-    protected function isPayloadable(): bool
-    {
-        return true;
     }
 
     /**
