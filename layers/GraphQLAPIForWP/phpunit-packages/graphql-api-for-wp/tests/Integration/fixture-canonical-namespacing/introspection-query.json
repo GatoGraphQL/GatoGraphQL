@@ -481,6 +481,275 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CustomPostDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The requested custom post does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "CustomPostDoesNotExistErrorPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CustomPostDoesNotExistErrorPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GenericErrorPayload",
+          "description": "Generic error payload",
+          "fields": [
+            {
+              "name": "code",
+              "description": "Error code",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "StringOrInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "data",
+              "description": "Error data",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "JSONObject",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "GenericErrorPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "GenericErrorPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+          "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+          "description": "Error payload for: \"The logged-in user has no permission to edit the requested custom post\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+          "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "Media",
           "description": "Media elements (such as images, videos, etc), attached to a post or independent",
           "fields": [
@@ -1579,7 +1848,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "Post",
+                "name": "PostCRUDMutationPayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -3270,6 +3539,93 @@
               "ofType": null
             }
           ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "PostCRUDMutationPayload",
+          "description": "Payload of executing a CRUD mutation involving a post",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[CustomPostUpdateMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "CustomPostUpdateMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "CustomPostUpdateMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "object",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Post",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "objectID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostCRUDMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PostCRUDMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -7860,7 +8216,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "Post",
+                "name": "PostCRUDMutationPayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -8829,6 +9185,55 @@
             {
               "kind": "INTERFACE",
               "name": "Node",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserIsNotLoggedInErrorPayload",
+          "description": "Error payload for: \"The user is not logged-in\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "self",
+              "description": "The same object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "UserIsNotLoggedInErrorPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "UserIsNotLoggedInErrorPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
               "ofType": null
             }
           ],
@@ -10353,6 +10758,16 @@
         },
         {
           "kind": "SCALAR",
+          "name": "StringOrInt",
+          "description": "Wildcard type representing either a String or Int types",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
           "name": "URL",
           "description": "URL scalar, such as https:\/\/mysite.com\/my-fabulous-page",
           "fields": null,
@@ -10850,6 +11265,64 @@
             {
               "kind": "OBJECT",
               "name": "Post",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "IsErrorPayload",
+          "description": "Entities representing an Error payload",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
               "ofType": null
             }
           ]
@@ -17188,6 +17661,29 @@
         },
         {
           "kind": "ENUM",
+          "name": "OperationStatusEnum",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "FAILURE",
+              "description": "Failure",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "SUCCESS",
+              "description": "Success",
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
           "name": "OrderEnum",
           "description": null,
           "fields": null,
@@ -17456,6 +17952,47 @@
             {
               "kind": "OBJECT",
               "name": "Page",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "CustomPostUpdateMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating a custom post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
           ]
