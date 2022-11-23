@@ -64,7 +64,8 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         }
         $pluginVersion = count($pluginVersions) === 1
             ? $pluginVersions[0]
-            : hash('md5', implode('|', $pluginVersions));
+            : hash('md5', implode('|', $pluginVersions));        
+        $pluginVersion = substr($pluginVersion, 0, 8);
 
         // (Needed for development) Don't share cache among plugin versions
         $timestamp = '_v' . $pluginVersion;
