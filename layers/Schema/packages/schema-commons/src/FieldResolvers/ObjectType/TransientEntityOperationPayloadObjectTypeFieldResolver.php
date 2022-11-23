@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
-use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientEntityOperationPayload;
+use PoPSchema\SchemaCommons\ObjectModels\AbstractObjectMutationTransientOperationPayload;
 use PoPSchema\SchemaCommons\TypeResolvers\EnumType\OperationStatusEnumTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -93,8 +93,8 @@ class TransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractObj
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        /** @var AbstractTransientEntityOperationPayload */
-        $transientEntityPayload = $object;
+        /** @var AbstractObjectMutationTransientOperationPayload */
+        $objectMutationTransientOperationPayload = $object;
         /**
          * The parent already resolves all remaining fields
          */

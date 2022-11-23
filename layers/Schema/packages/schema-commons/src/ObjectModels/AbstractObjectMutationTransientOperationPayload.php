@@ -7,7 +7,7 @@ namespace PoPSchema\SchemaCommons\ObjectModels;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use RuntimeException;
 
-abstract class AbstractTransientEntityOperationPayload extends AbstractTransientOperationPayload
+abstract class AbstractObjectMutationTransientOperationPayload extends AbstractTransientOperationPayload
 {
     /**
      * Either the object ID or the error must be provided.
