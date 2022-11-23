@@ -58,7 +58,8 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
             return $this->createAndStoreFailureObjectMutationPayload(
                 $this->createAndStoreErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
-                )
+                ),
+                $customPostID
             )->getID();
         }
 
