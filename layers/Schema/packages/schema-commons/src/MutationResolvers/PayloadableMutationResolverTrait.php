@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\MutationResolvers;
 
 use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
-use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
-use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\MutationPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 
