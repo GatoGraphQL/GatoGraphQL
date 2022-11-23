@@ -20,10 +20,6 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
 {
     abstract protected function getObjectDictionary(): ObjectDictionaryInterface;
     
-    /**
-     * @param ObjectTypeFieldResolutionFeedbackInterface[] $objectTypeFieldResolutionFeedbacks
-     * @return ErrorPayloadInterface[]
-     */
     protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
@@ -56,7 +52,6 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
         $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        /** @var ErrorPayloadInterface */
         return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
             [
                 MutationErrorFeedbackItemProvider::class,
