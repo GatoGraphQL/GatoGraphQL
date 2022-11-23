@@ -85,7 +85,7 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
             ),
             default => new GenericErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
-                $errorFeedbackItemResolution->getCode(),
+                $errorFeedbackItemResolution->getNamespacedCode(),
             ),
         };
     }
