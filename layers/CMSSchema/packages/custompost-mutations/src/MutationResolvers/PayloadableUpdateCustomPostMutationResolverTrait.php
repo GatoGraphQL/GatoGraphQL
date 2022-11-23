@@ -49,11 +49,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
         } catch (CustomPostCRUDMutationException $customPostCRUDMutationException) {
             return $this->createAndStoreFailureObjectMutationPayload(
                 [
-                    new GenericErrorPayload(
-                        $customPostCRUDMutationException->getMessage(),
-                        $customPostCRUDMutationException->getErrorCode(),
-                        $customPostCRUDMutationException->getData(),
-                    ),
+                    $this->createAndStoreGenericErrorPayloadFromPayloadClientException($customPostCRUDMutationException),
                 ]
             )->getID();
         }

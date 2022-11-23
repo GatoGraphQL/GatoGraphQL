@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
+use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
@@ -34,6 +35,22 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
             $errorPayloads[] = $errorPayload;
         }
         return $errorPayloads;
+    }
+    
+    protected function createAndStoreGenericErrorPayloadFromPayloadClientException(
+        AbstractPayloadClientException $payloadClientException
+    ): GenericErrorPayload {
+            $errorPayload = new GenericErrorPayload(
+                $payloadClientException->getMessage(),
+                $payloadClientException->getErrorCode(),
+                $payloadClientException->getData(),
+            );
+            $this->getObjectDictionary()->set(
+                get_class($errorPayload),
+                $errorPayload->getID(),
+                $errorPayload,
+            );
+            return $errorPayload;
     }
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
