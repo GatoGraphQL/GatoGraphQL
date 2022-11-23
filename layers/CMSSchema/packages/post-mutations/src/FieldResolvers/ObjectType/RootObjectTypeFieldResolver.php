@@ -6,6 +6,7 @@ namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableUpdatePostMutationResolver;
+use PoPCMSSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootCreatePostFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootUpdatePostFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostCRUDMutationPayloadObjectTypeResolver;
@@ -29,7 +30,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?PostCRUDMutationPayloadObjectTypeResolver $postCRUDMutationPayloadObjectTypeResolver = null;
     private ?CreatePostMutationResolver $createPostMutationResolver = null;
-    private ?PayloadableUpdatePostMutationResolver $updatePostMutationResolver = null;
+    private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
+    private ?PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver = null;
     private ?RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver = null;
     private ?RootCreatePostFilterInputObjectTypeResolver $rootCreatePostFilterInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
@@ -61,14 +63,23 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var CreatePostMutationResolver */
         return $this->createPostMutationResolver ??= $this->instanceManager->getInstance(CreatePostMutationResolver::class);
     }
-    final public function setPayloadableUpdatePostMutationResolver(PayloadableUpdatePostMutationResolver $updatePostMutationResolver): void
+    final public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
     {
         $this->updatePostMutationResolver = $updatePostMutationResolver;
+    }
+    final protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
+    {
+        /** @var UpdatePostMutationResolver */
+        return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
+    }
+    final public function setPayloadableUpdatePostMutationResolver(PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver): void
+    {
+        $this->payloadableUpdatePostMutationResolver = $payloadableUpdatePostMutationResolver;
     }
     final protected function getPayloadableUpdatePostMutationResolver(): PayloadableUpdatePostMutationResolver
     {
         /** @var PayloadableUpdatePostMutationResolver */
-        return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(PayloadableUpdatePostMutationResolver::class);
+        return $this->payloadableUpdatePostMutationResolver ??= $this->instanceManager->getInstance(PayloadableUpdatePostMutationResolver::class);
     }
     final public function setRootUpdatePostFilterInputObjectTypeResolver(RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver): void
     {
@@ -160,42 +171,58 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        $isPayloadableMuatation = $this->isPayloadableMutation($objectTypeResolver, $fieldName);
         return match ($fieldName) {
             'createPost' => $this->getCreatePostMutationResolver(),
-            'updatePost' => $this->getPayloadableUpdatePostMutationResolver(),
+            'updatePost' => $isPayloadableMuatation
+                ? $this->getPayloadableUpdatePostMutationResolver()
+                : $this->getUpdatePostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
 
+    /**
+     * Indicate if to return the errors in an ObjectMutationPayload
+     * object in the response, or if to use the top-level errors.
+     */
+    protected function isPayloadableMutation(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
+    {
+        return true;
+    }
+
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        $isPayloadableMuatation = $this->isPayloadableMutation($objectTypeResolver, $fieldName);
         return match ($fieldName) {
             'createPost' => $this->getPostObjectTypeResolver(),
-            'updatePost' => $this->getPostCRUDMutationPayloadObjectTypeResolver(),
+            'updatePost' => $isPayloadableMuatation
+                ? $this->getPostCRUDMutationPayloadObjectTypeResolver()
+                : $this->getPostObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
-    /**
-     * @return CheckpointInterface[]
-     */
-    public function getValidationCheckpoints(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        object $object,
-    ): array {
-        $validationCheckpoints = parent::getValidationCheckpoints(
-            $objectTypeResolver,
-            $fieldDataAccessor,
-            $object,
-        );
-        switch ($fieldDataAccessor->getFieldName()) {
-            case 'createPost';
-            case 'updatePost';
-                $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
-                break;
-        }
-        return $validationCheckpoints;
-    }
+    // @todo Uncomment here when generalizing "payloadable app-level errors"
+    // /**
+    //  * @return CheckpointInterface[]
+    //  */
+    // public function getValidationCheckpoints(
+    //     ObjectTypeResolverInterface $objectTypeResolver,
+    //     FieldDataAccessorInterface $fieldDataAccessor,
+    //     object $object,
+    // ): array {
+    //     $validationCheckpoints = parent::getValidationCheckpoints(
+    //         $objectTypeResolver,
+    //         $fieldDataAccessor,
+    //         $object,
+    //     );
+    //     switch ($fieldDataAccessor->getFieldName()) {
+    //         case 'createPost';
+    //         case 'updatePost';
+    //             $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
+    //             break;
+    //     }
+    //     return $validationCheckpoints;
+    // }
 }
