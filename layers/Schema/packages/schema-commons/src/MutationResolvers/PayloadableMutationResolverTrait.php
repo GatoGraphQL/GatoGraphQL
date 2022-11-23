@@ -35,11 +35,7 @@ trait PayloadableMutationResolverTrait
             OperationStatusEnum::FAILURE,
             null,
             [
-                new GenericErrorPayload(
-                    $payloadClientException->getMessage(),
-                    $payloadClientException->getErrorCode(),
-                    $payloadClientException->getData(),
-                ),
+                $this->createGenericErrorPayload($payloadClientException),
             ],
         );
         $this->getObjectDictionary()->set(
@@ -48,5 +44,14 @@ trait PayloadableMutationResolverTrait
             $payload,
         );
         return $payload->getID();
+    }
+
+    protected function createGenericErrorPayload(AbstractPayloadClientException $payloadClientException): GenericErrorPayload
+    {
+        return new GenericErrorPayload(
+            $payloadClientException->getMessage(),
+            $payloadClientException->getErrorCode(),
+            $payloadClientException->getData(),
+        );
     }
 }
