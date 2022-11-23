@@ -237,21 +237,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Either the title or the content must be set
-        if (
-            !$fieldDataAccessor->hasValue(MutationInputProperties::TITLE)
-            && !$fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)
-        ) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E4,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
     }
 
     protected function validateUpdate(
