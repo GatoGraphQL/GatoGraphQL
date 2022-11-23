@@ -7,7 +7,6 @@ namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 use PoPSchema\SchemaCommons\FieldResolvers\InterfaceType\IsErrorPayloadInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractErrorPayloadObjectTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\StringOrIntScalarTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -15,24 +14,12 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?StringOrIntScalarTypeResolver $stringOrIntScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?IsErrorPayloadInterfaceTypeFieldResolver $isErrorPayloadInterfaceTypeFieldResolver = null;
 
-    final public function setStringOrIntScalarTypeResolver(StringOrIntScalarTypeResolver $stringOrIntScalarTypeResolver): void
-    {
-        $this->stringOrIntScalarTypeResolver = $stringOrIntScalarTypeResolver;
-    }
-    final protected function getStringOrIntScalarTypeResolver(): StringOrIntScalarTypeResolver
-    {
-        /** @var StringOrIntScalarTypeResolver */
-        return $this->stringOrIntScalarTypeResolver ??= $this->instanceManager->getInstance(StringOrIntScalarTypeResolver::class);
-    }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
@@ -41,15 +28,6 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     {
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
-    {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-    }
-    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
-    {
-        /** @var JSONObjectScalarTypeResolver */
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
     final public function setIsErrorPayloadInterfaceTypeFieldResolver(IsErrorPayloadInterfaceTypeFieldResolver $isErrorPayloadInterfaceTypeFieldResolver): void
     {
@@ -93,8 +71,6 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     {
         return match ($fieldName) {
             'message' => $this->getStringScalarTypeResolver(),
-            'code' => $this->getStringOrIntScalarTypeResolver(),
-            'data' => $this->getJSONObjectScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -112,8 +88,6 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     {
         return match ($fieldName) {
             'message' => $this->__('Error message', 'schema-commons'),
-            'code' => $this->__('Error code', 'schema-commons'),
-            'data' => $this->__('Error data', 'schema-commons'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

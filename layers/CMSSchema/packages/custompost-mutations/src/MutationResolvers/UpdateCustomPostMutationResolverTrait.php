@@ -63,14 +63,12 @@ trait UpdateCustomPostMutationResolverTrait
                     MutationErrorFeedbackItemProvider::E7,
                 ] => new CustomPostDoesNotExistErrorPayload(
                     $errorFeedbackItemResolution->getMessage(),
-                    $errorFeedbackItemResolution->getCode(),
                 ),
                 [
                     MutationErrorFeedbackItemProvider::class,
                     MutationErrorFeedbackItemProvider::E8,
                 ] => new LoggedInUserHasNoPermissionToEditCustomPostErrorPayload(
                     $errorFeedbackItemResolution->getMessage(),
-                    $errorFeedbackItemResolution->getCode(),
                 ),
                 default => new GenericErrorPayload(
                     $errorFeedbackItemResolution->getMessage(),

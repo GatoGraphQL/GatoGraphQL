@@ -4,6 +4,25 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ObjectModels;
 
-final class GenericErrorPayload extends AbstractErrorPayload
+use stdClass;
+
+final class GenericErrorPayload extends AbstractErrorPayload implements GenericErrorPayloadInterface
 {
+    public function __construct(
+        string $message,
+        public readonly string|int|null $code = null,
+        public readonly ?stdClass $data = null,
+    ) {
+        parent::__construct($message);
+    }
+
+    public function getCode(): string|int|null
+    {
+        return $this->code;
+    }
+
+    public function getData(): ?stdClass
+    {
+        return $this->data;
+    }
 }

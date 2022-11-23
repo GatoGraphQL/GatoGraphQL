@@ -11,8 +11,6 @@ abstract class AbstractErrorPayload extends AbstractTransientObject implements E
 {
     public function __construct(
         public readonly string $message,
-        public readonly string|int|null $code = null,
-        public readonly ?stdClass $data = null,
     ) {
         parent::__construct();
     }
@@ -20,15 +18,5 @@ abstract class AbstractErrorPayload extends AbstractTransientObject implements E
     public function getMessage(): string
     {
         return $this->message;
-    }
-
-    public function getCode(): string|int|null
-    {
-        return $this->code;
-    }
-
-    public function getData(): ?stdClass
-    {
-        return $this->data;
     }
 }
