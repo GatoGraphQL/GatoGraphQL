@@ -51,28 +51,8 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getNamespace(): string
     {
-        /**
-         * Create a combination of the versions + commit hashes (for dev)
-         * for the Main Plugin and Extensions. This way, when deploying
-         * a new Plugin or Extension to InstaWP during DEV, the container
-         * will be regenerated.
-         *
-         * Please notice: the version with hash contains "#", which is
-         * forbidden in the folder name, but this problem is avoided
-         * when doing `md5` of the string.
-         */
-        $pluginVersions = [];
-        $pluginVersions[] = App::getMainPlugin()->getPluginVersionWithCommitHash();
-        foreach (App::getExtensionManager()->getExtensions() as $extensionInstance) {
-            $pluginVersions[] = $extensionInstance->getPluginVersionWithCommitHash();
-        }
-        $pluginVersion = hash('md5', implode('|', $pluginVersions));
-        
-        // Just the first 8 characters is enough
-        $pluginVersion = substr($pluginVersion, 0, 8);
-
         // (Needed for development) Don't share cache among plugin versions
-        $timestamp = '_v' . $pluginVersion;
+        $timestamp = '_v' . $this->getMainPluginAndExtensionsTimestamp();
         // The timestamp from when last saving settings/modules to the DB
         $timestamp .= '_' . $this->getTimestamp();
         // admin/non-admin screens have different services enabled
@@ -83,6 +63,29 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
             : 'c';
         $timestamp .= '_' . $suffix;
         return $timestamp;
+    }
+
+    /**
+     * Create a combination of the versions + commit hashes (for dev)
+     * for the Main Plugin and Extensions. This way, when deploying
+     * a new Plugin or Extension to InstaWP during DEV, the container
+     * will be regenerated.
+     *
+     * Please notice: the version with hash contains "#", which is
+     * forbidden in the folder name, but this problem is avoided
+     * when doing `md5` of the string.
+     */
+    protected function getMainPluginAndExtensionsTimestamp(): string
+    {
+        $pluginVersions = [];
+        $pluginVersions[] = App::getMainPlugin()->getPluginVersionWithCommitHash();
+        foreach (App::getExtensionManager()->getExtensions() as $extensionInstance) {
+            $pluginVersions[] = $extensionInstance->getPluginVersionWithCommitHash();
+        }
+        $pluginVersion = hash('md5', implode('|', $pluginVersions));
+        
+        // Just the first 8 characters is enough
+        return substr($pluginVersion, 0, 8);
     }
 
     /**
