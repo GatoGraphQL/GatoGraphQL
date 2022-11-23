@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
+use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
@@ -41,7 +42,15 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
         } catch (CustomPostCRUDMutationException $customPostCRUDMutationException) {
-            return $this->createFailurePayloadMutation($customPostCRUDMutationException);
+            return $this->createFailurePayloadMutation(
+                [
+                    new GenericErrorPayload(
+                        $customPostCRUDMutationException->getMessage(),
+                        $customPostCRUDMutationException->getErrorCode(),
+                        $customPostCRUDMutationException->getData(),
+                    ),
+                ]
+            );
         }
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {

@@ -29,14 +29,17 @@ trait PayloadableMutationResolverTrait
         return $payload->getID();
     }
 
-    protected function createFailurePayloadMutation(AbstractPayloadClientException $payloadClientException): string|int
-    {
+    /**
+     * @param ErrorPayloadInterface[] $errors
+     */
+    protected function createFailurePayloadMutation(
+        array $errors,
+        string|int|null $objectID = null,
+    ): string|int {
         $payload = new MutationPayload(
             OperationStatusEnum::FAILURE,
-            null,
-            [
-                $this->createGenericErrorPayload($payloadClientException),
-            ],
+            $objectID,
+            $errors,
         );
         $this->getObjectDictionary()->set(
             MutationPayload::class,
@@ -44,14 +47,5 @@ trait PayloadableMutationResolverTrait
             $payload,
         );
         return $payload->getID();
-    }
-
-    protected function createGenericErrorPayload(AbstractPayloadClientException $payloadClientException): GenericErrorPayload
-    {
-        return new GenericErrorPayload(
-            $payloadClientException->getMessage(),
-            $payloadClientException->getErrorCode(),
-            $payloadClientException->getData(),
-        );
     }
 }
