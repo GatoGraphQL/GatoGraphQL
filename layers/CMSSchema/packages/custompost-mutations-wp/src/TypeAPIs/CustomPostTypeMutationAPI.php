@@ -63,7 +63,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         $postID = $postIDOrError;
         return $postID;
     }
-    
+
     protected function createCustomPostCRUDMutationException(WP_Error $error): CustomPostCRUDMutationException
     {
         /** @var stdClass|null */

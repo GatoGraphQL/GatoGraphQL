@@ -15,7 +15,7 @@ abstract class AbstractObjectMutationTransientOperationPayload extends AbstractT
      *
      * @param ErrorPayloadInterface[]|null $errors
      */
-     public function __construct(
+    public function __construct(
         string $status,
         public readonly string|int|null $objectID,
         ?array $errors,

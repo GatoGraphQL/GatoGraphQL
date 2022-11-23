@@ -6,19 +6,18 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
-use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
 trait PayloadableUpdateCustomPostMutationResolverTrait
 {
-    use PayloadableMutationResolverTrait;    
+    use PayloadableMutationResolverTrait;
     use UpdateCustomPostMutationResolverTrait {
         UpdateCustomPostMutationResolverTrait::executeMutation as upstreamExecuteMutation;
     }
     use PayloadableCreateOrUpdateCustomPostMutationResolverTrait;
-    
+
     /**
      * Validate the app-level errors when executing the mutation,
      * return them in the Payload.

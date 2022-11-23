@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\ObjectModels;
 
 use PoP\ComponentModel\ObjectModels\AbstractTransientObject;
-use stdClass;
 
 abstract class AbstractErrorPayload extends AbstractTransientObject implements ErrorPayloadInterface
 {

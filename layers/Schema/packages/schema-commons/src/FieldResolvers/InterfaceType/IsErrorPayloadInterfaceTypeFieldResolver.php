@@ -24,7 +24,7 @@ class IsErrorPayloadInterfaceTypeFieldResolver extends AbstractInterfaceTypeFiel
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    
+
     /**
      * @return array<class-string<InterfaceTypeResolverInterface>>
      */

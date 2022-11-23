@@ -207,7 +207,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      * For Payloadable: The "User Logged-in" checkpoint validation is not added,
      * instead this validation is executed inside the mutation, so the error
      * shows up in the Payload
-     * 
+     *
      * @return CheckpointInterface[]
      */
     public function getValidationCheckpoints(

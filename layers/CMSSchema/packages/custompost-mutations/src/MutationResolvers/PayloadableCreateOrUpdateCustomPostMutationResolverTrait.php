@@ -19,7 +19,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
 {
     abstract protected function getObjectDictionary(): ObjectDictionaryInterface;
-    
+
     protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
@@ -31,7 +31,7 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
         );
         return $errorPayload;
     }
-    
+
     protected function createAndStoreGenericErrorPayloadFromPayloadClientException(
         AbstractPayloadClientException $payloadClientException
     ): GenericErrorPayload {

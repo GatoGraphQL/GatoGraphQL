@@ -12,7 +12,7 @@ abstract class AbstractTransientOperationPayload extends AbstractTransientObject
     /**
      * @param ErrorPayloadInterface[]|null $errors
      */
-     public function __construct(
+    public function __construct(
         public readonly string $status,
         public readonly ?array $errors,
     ) {
