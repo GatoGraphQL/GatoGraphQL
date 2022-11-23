@@ -10,7 +10,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-abstract class AbstractMutationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractObjectMutationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     /**
      * @return string[]

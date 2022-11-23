@@ -11,7 +11,7 @@ use Throwable;
 /**
  * Retrieve extra information when passing the exception.
  *
- * Useful for passing extra data to a MutationPayload type,
+ * Useful for passing extra data to a ObjectMutationPayload type,
  * instead of printing the error under `errors`
  */
 abstract class AbstractPayloadClientException extends AbstractClientException

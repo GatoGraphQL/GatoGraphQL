@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\MutationResolvers;
 
 use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
-use PoPSchema\SchemaCommons\ObjectModels\MutationPayload;
+use PoPSchema\SchemaCommons\ObjectModels\ObjectMutationPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 
 trait PayloadableMutationResolverTrait
@@ -14,14 +14,14 @@ trait PayloadableMutationResolverTrait
 
     protected function createAndStoreSuccessPayloadMutation(
         string|int $objectID,
-    ): MutationPayload {
-        $payload = new MutationPayload(
+    ): ObjectMutationPayload {
+        $payload = new ObjectMutationPayload(
             OperationStatusEnum::SUCCESS,
             $objectID,
             null,
         );
         $this->getObjectDictionary()->set(
-            MutationPayload::class,
+            ObjectMutationPayload::class,
             $payload->getID(),
             $payload,
         );
@@ -34,14 +34,14 @@ trait PayloadableMutationResolverTrait
     protected function createAndStoreFailurePayloadMutation(
         array $errors,
         string|int|null $objectID = null,
-    ): MutationPayload {
-        $payload = new MutationPayload(
+    ): ObjectMutationPayload {
+        $payload = new ObjectMutationPayload(
             OperationStatusEnum::FAILURE,
             $objectID,
             $errors,
         );
         $this->getObjectDictionary()->set(
-            MutationPayload::class,
+            ObjectMutationPayload::class,
             $payload->getID(),
             $payload,
         );
