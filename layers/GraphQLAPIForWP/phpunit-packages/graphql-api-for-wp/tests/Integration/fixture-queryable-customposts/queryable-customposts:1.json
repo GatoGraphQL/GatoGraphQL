@@ -84,27 +84,6 @@
         "customPostType": "attachment",
         "status": "publish",
         "__typename": "GenericCustomPost"
-      },
-      {
-        "id": 592,
-        "title": "Website",
-        "customPostType": "revision",
-        "status": "inherit",
-        "__typename": "GenericCustomPost"
-      },
-      {
-        "id": 593,
-        "title": "Website",
-        "customPostType": "revision",
-        "status": "inherit",
-        "__typename": "GenericCustomPost"
-      },
-      {
-        "id": 594,
-        "title": "New title",
-        "customPostType": "revision",
-        "status": "inherit",
-        "__typename": "GenericCustomPost"
       }
     ]
   }
