@@ -20,7 +20,8 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
     use PayloadableCreateOrUpdateCustomPostMutationResolverTrait;
     
     /**
-     * Validate the app-level errors here, return them in the Payload.
+     * Validate the app-level errors when executing the mutation,
+     * return them in the Payload.
      *
      * @throws AbstractException In case of error
      */
@@ -70,7 +71,8 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
     }
 
     /**
-     * Do nothing
+     * Override: Do nothing, because the app-level errors are
+     * returned in the Payload, not in top-level "errors" entry.
      */
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
