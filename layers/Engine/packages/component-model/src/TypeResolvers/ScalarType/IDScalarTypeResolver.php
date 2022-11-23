@@ -46,9 +46,9 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrors();
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
         $this->validateIsNotStdClass($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() > $errorCount) {
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
         /** @var string|int|float|bool $inputValue */
