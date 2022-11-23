@@ -203,26 +203,31 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    // @todo Uncomment here when generalizing "payloadable app-level errors"
-    // /**
-    //  * @return CheckpointInterface[]
-    //  */
-    // public function getValidationCheckpoints(
-    //     ObjectTypeResolverInterface $objectTypeResolver,
-    //     FieldDataAccessorInterface $fieldDataAccessor,
-    //     object $object,
-    // ): array {
-    //     $validationCheckpoints = parent::getValidationCheckpoints(
-    //         $objectTypeResolver,
-    //         $fieldDataAccessor,
-    //         $object,
-    //     );
-    //     switch ($fieldDataAccessor->getFieldName()) {
-    //         case 'createPost';
-    //         case 'updatePost';
-    //             $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
-    //             break;
-    //     }
-    //     return $validationCheckpoints;
-    // }
+    /**
+     * For Payloadable: The "User Logged-in" checkpoint validation is not added,
+     * instead this validation is executed inside the mutation, so the error
+     * shows up in the Payload
+     * 
+     * @return CheckpointInterface[]
+     */
+    public function getValidationCheckpoints(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        object $object,
+    ): array {
+        $validationCheckpoints = parent::getValidationCheckpoints(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $object,
+        );
+        if (!$this->isPayloadableMutation($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
+            switch ($fieldDataAccessor->getFieldName()) {
+                case 'createPost';
+                case 'updatePost';
+                    $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
+                    break;
+            }
+        }
+        return $validationCheckpoints;
+    }
 }
