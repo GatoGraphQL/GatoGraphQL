@@ -12,7 +12,7 @@ trait PayloadableMutationResolverTrait
 {
     abstract protected function getObjectDictionary(): ObjectDictionaryInterface;
 
-    protected function createAndStoreSuccessPayloadMutation(
+    protected function createAndStoreSuccessObjectMutationPayload(
         string|int $objectID,
     ): ObjectMutationPayload {
         $payload = new ObjectMutationPayload(
@@ -31,7 +31,7 @@ trait PayloadableMutationResolverTrait
     /**
      * @param ErrorPayloadInterface[] $errors
      */
-    protected function createAndStoreFailurePayloadMutation(
+    protected function createAndStoreFailureObjectMutationPayload(
         array $errors,
         string|int|null $objectID = null,
     ): ObjectMutationPayload {
