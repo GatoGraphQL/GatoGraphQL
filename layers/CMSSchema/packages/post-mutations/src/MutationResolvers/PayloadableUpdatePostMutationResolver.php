@@ -27,6 +27,11 @@ class PayloadableUpdatePostMutationResolver extends UpdatePostMutationResolver
         return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
     }
 
+    protected function isPayloadable(): bool
+    {
+        return true;
+    }
+
     /**
      * Catch the CRUD exception, and return it in the Mutation Payload
      * 
