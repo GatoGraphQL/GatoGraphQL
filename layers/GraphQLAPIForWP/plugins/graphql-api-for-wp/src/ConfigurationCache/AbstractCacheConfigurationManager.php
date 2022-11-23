@@ -51,9 +51,23 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getNamespace(): string
     {
-        $mainPluginVersion = App::getMainPlugin()->getPluginVersionWithCommitHash();
+        /**
+         * Create a combination of the versions + commit hashes (for dev)
+         * for the Main Plugin and Extensions. This way, when deploying
+         * a new Plugin or Extension to InstaWP during DEV, the container
+         * will be regenerated.
+         */
+        $pluginVersions = [];
+        $pluginVersions[] = App::getMainPlugin()->getPluginVersionWithCommitHash();
+        foreach (App::getExtensionManager()->getExtensions() as $extensionInstance) {
+            $pluginVersions[] = $extensionInstance->getPluginVersionWithCommitHash();
+        }
+        $pluginVersion = count($pluginVersions) === 1
+            ? $pluginVersions[0]
+            : hash('md5', implode('|', $pluginVersions));
+
         // (Needed for development) Don't share cache among plugin versions
-        $timestamp = '_v' . $mainPluginVersion;
+        $timestamp = '_v' . $pluginVersion;
         // The timestamp from when last saving settings/modules to the DB
         $timestamp .= '_' . $this->getTimestamp();
         // admin/non-admin screens have different services enabled
