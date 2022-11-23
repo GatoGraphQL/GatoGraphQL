@@ -6,13 +6,14 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
+use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
-use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
 
 trait UpdateCustomPostMutationResolverTrait
 {
@@ -54,30 +55,36 @@ trait UpdateCustomPostMutationResolverTrait
         array $objectTypeFieldResolutionFeedbacks
     ): mixed {
         $errorPayloadIDs = [];
-        foreach ($objectTypeFieldResolutionFeedbacks as $errorObjectTypeFieldResolutionFeedback) {
-            $errorFeedbackItemResolution = $errorObjectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-            /** @var ErrorPayloadInterface */
-            $errorPayload = match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
-                [
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E7,
-                ] => new CustomPostDoesNotExistErrorPayload(
-                    $errorFeedbackItemResolution->getMessage(),
-                ),
-                [
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E8,
-                ] => new LoggedInUserHasNoPermissionToEditCustomPostErrorPayload(
-                    $errorFeedbackItemResolution->getMessage(),
-                ),
-                default => new GenericErrorPayload(
-                    $errorFeedbackItemResolution->getMessage(),
-                    $errorFeedbackItemResolution->getCode(),
-                ),
-            };
+        foreach ($objectTypeFieldResolutionFeedbacks as $objectTypeFieldResolutionFeedback) {
+            $errorPayload = $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
             $errorPayloadIDs[] = $errorPayload->getID();
         }
         return $errorPayloadIDs;
+    }
+
+    protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
+        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
+    ): ErrorPayloadInterface {
+        $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
+        /** @var ErrorPayloadInterface */
+        return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
+            ] => new CustomPostDoesNotExistErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E8,
+            ] => new LoggedInUserHasNoPermissionToEditCustomPostErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
+            default => new GenericErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+                $errorFeedbackItemResolution->getCode(),
+            ),
+        };
     }
 
     protected function isPayloadable(): bool
