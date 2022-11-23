@@ -33,7 +33,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
         $this->validateUpdateErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createAndStoreFailureObjectMutationPayload(
-                $this->createErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
+                $this->createAndStoreErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 )
             )->getID();
@@ -60,7 +60,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createAndStoreFailureObjectMutationPayload(
-                $this->createErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
+                $this->createAndStoreErrorPayloadsFromObjectTypeFieldResolutionFeedbacks(
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 )
             )->getID();
