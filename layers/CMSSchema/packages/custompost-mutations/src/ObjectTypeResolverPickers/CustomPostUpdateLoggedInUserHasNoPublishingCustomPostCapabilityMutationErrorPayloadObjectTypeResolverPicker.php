@@ -1,0 +1,10 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
+
+class CustomPostUpdateLoggedInUserHasNoPublishingCustomPostCapabilityMutationErrorPayloadObjectTypeResolverPicker extends AbstractLoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolverPicker
+{
+    use CustomPostUpdateMutationErrorPayloadObjectTypeResolverPickerTrait;
+}
