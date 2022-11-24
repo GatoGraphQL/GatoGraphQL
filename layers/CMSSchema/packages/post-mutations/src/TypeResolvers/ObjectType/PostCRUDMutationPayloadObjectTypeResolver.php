@@ -12,11 +12,11 @@ class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityO
 {
     private ?ObjectMutationPayloadObjectTypeDataLoader $objectMutationPayloadObjectTypeDataLoader = null;
 
-    final public function setTransientEntityOperationPayloadObjectTypeDataLoader(ObjectMutationPayloadObjectTypeDataLoader $objectMutationPayloadObjectTypeDataLoader): void
+    final public function setObjectMutationPayloadObjectTypeDataLoader(ObjectMutationPayloadObjectTypeDataLoader $objectMutationPayloadObjectTypeDataLoader): void
     {
         $this->objectMutationPayloadObjectTypeDataLoader = $objectMutationPayloadObjectTypeDataLoader;
     }
-    final protected function getTransientEntityOperationPayloadObjectTypeDataLoader(): ObjectMutationPayloadObjectTypeDataLoader
+    final protected function getObjectMutationPayloadObjectTypeDataLoader(): ObjectMutationPayloadObjectTypeDataLoader
     {
         /** @var ObjectMutationPayloadObjectTypeDataLoader */
         return $this->objectMutationPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(ObjectMutationPayloadObjectTypeDataLoader::class);
@@ -34,6 +34,6 @@ class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityO
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getTransientEntityOperationPayloadObjectTypeDataLoader();
+        return $this->getObjectMutationPayloadObjectTypeDataLoader();
     }
 }
