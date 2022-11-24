@@ -258,8 +258,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'createPost';
-            case 'updatePost';
+            case 'createPost':
+            case 'updatePost':
                 $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
                 break;
         }

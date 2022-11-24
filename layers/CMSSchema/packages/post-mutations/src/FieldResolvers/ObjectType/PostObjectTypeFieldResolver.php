@@ -171,7 +171,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         }
 
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'update';
+            case 'update':
                 $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
                 break;
         }
