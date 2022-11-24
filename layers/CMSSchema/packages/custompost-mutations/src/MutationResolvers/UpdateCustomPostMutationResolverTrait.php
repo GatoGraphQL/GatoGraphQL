@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 
 trait UpdateCustomPostMutationResolverTrait
 {
@@ -33,6 +33,9 @@ trait UpdateCustomPostMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int;
 
+    /**
+     * Validate the app-level errors in top-level "errors" entry.
+     */
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

@@ -4,11 +4,23 @@ mutation {
     update(input: {
       title: "Hello world! 33333"
     }) {
-      secondTitle: title
-      update(input: {
-        title: "Hello world!"
-      }) {
-        thirdTitle: title
+      status
+      errors {
+        __typename
+        ...on IsErrorPayload {
+          message
+        }
+      }
+      post {
+        secondTitle: title
+        update(input: {
+          title: "Hello world!"
+        }) {
+          status
+          post {
+            thirdTitle: title
+          }
+        }
       }
     }
   }
@@ -17,11 +29,23 @@ mutation {
     update(input: {
       title: "HTTP caching improves performance 33333"
     }) {
-      secondTitle: title
-      update(input: {
-        title: "HTTP caching improves performance"
-      }) {
-        thirdTitle: title
+      status
+      errors {
+        __typename
+        ...on IsErrorPayload {
+          message
+        }
+      }
+      post {
+        secondTitle: title
+        update(input: {
+          title: "HTTP caching improves performance"
+        }) {
+          status
+          post {
+            thirdTitle: title
+          }
+        }
       }
     }
   }

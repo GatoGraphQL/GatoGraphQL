@@ -8,7 +8,10 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverIn
 use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
 
 /**
- * To be used together with AbstractRemoveIDFieldFromObjectTypeHookSet
+ * To be used together with:
+ *
+ * - AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
+ * - AbstractTransientObject
  */
 trait RemoveNodeInterfaceObjectTypeResolverTrait
 {

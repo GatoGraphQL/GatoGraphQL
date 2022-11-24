@@ -17,7 +17,6 @@ use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
@@ -30,21 +29,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     public final const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
     public final const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
 
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
-    {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-    }
-    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
-    {
-        /** @var CustomPostStatusEnumTypeResolver */
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-    }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
         $this->nameResolver = $nameResolver;
@@ -194,25 +183,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Validate that the status is valid
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
-            $status = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
-            if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues())) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E5,
-                            [
-                                $status
-                            ]
-                        ),
-                        $fieldDataAccessor->getField(),
-                    )
-                );
-            }
-        }
-
         // Allow plugins to add validation for their fields
         App::doAction(
             self::HOOK_VALIDATE_CONTENT,
@@ -237,21 +207,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Either the title or the content must be set
-        if (
-            !$fieldDataAccessor->hasValue(MutationInputProperties::TITLE)
-            && !$fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)
-        ) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E4,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
     }
 
     protected function validateUpdate(
@@ -272,8 +227,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        $post = $this->getCustomPostTypeAPI()->getCustomPost($customPostID);
-        if (!$post) {
+        $customPost = $this->getCustomPostTypeAPI()->getCustomPost($customPostID);
+        if ($customPost === null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(

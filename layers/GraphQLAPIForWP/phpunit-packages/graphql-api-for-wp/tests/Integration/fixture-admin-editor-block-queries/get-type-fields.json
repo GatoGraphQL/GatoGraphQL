@@ -77,6 +77,67 @@
           "description": "Comments added to custom posts"
         },
         {
+          "name": "CustomPostDoesNotExistErrorPayload",
+          "namespacedName": "CustomPostDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested custom post does not exist\""
+        },
+        {
+          "name": "GenericErrorPayload",
+          "namespacedName": "GenericErrorPayload",
+          "fields": [
+            {
+              "name": "code"
+            },
+            {
+              "name": "data"
+            },
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Generic error payload"
+        },
+        {
+          "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\""
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to edit the requested custom post\""
+        },
+        {
+          "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\""
+        },
+        {
           "name": "Media",
           "namespacedName": "Media",
           "fields": [
@@ -532,6 +593,26 @@
           "description": "Representation of a category, added to a post"
         },
         {
+          "name": "PostCreateMutationPayload",
+          "namespacedName": "PostCreateMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a post"
+        },
+        {
           "name": "PostTag",
           "namespacedName": "PostTag",
           "fields": [
@@ -574,6 +655,26 @@
           ],
           "kind": "OBJECT",
           "description": "Representation of a tag, added to a post"
+        },
+        {
+          "name": "PostUpdateMutationPayload",
+          "namespacedName": "PostUpdateMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a post"
         },
         {
           "name": "QueryRoot",
@@ -1046,6 +1147,17 @@
           "description": "User avatar"
         },
         {
+          "name": "UserIsNotLoggedInErrorPayload",
+          "namespacedName": "UserIsNotLoggedInErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user is not logged-in\""
+        },
+        {
           "name": "UserRole",
           "namespacedName": "UserRole",
           "fields": [
@@ -1438,6 +1550,13 @@
           "description": "The String scalar type represents textual data, represented as UTF-8 character sequences."
         },
         {
+          "name": "StringOrInt",
+          "namespacedName": "StringOrInt",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Wildcard type representing either a String or Int types"
+        },
+        {
           "name": "URL",
           "namespacedName": "URL",
           "fields": null,
@@ -1520,6 +1639,17 @@
           ],
           "kind": "INTERFACE",
           "description": "Entities representing a custom post"
+        },
+        {
+          "name": "IsErrorPayload",
+          "namespacedName": "IsErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities representing an Error payload"
         },
         {
           "name": "Node",
@@ -2163,6 +2293,13 @@
           "description": "Custom field type"
         },
         {
+          "name": "OperationStatusEnum",
+          "namespacedName": "OperationStatusEnum",
+          "fields": null,
+          "kind": "ENUM",
+          "description": null
+        },
+        {
           "name": "OrderEnum",
           "namespacedName": "OrderEnum",
           "fields": null,
@@ -2198,11 +2335,25 @@
           "description": null
         },
         {
+          "name": "CustomPostCreateMutationErrorPayloadUnion",
+          "namespacedName": "CustomPostCreateMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a custom post"
+        },
+        {
           "name": "CustomPostUnion",
           "namespacedName": "CustomPostUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'custom post' type resolvers"
+        },
+        {
+          "name": "CustomPostUpdateMutationErrorPayloadUnion",
+          "namespacedName": "CustomPostUpdateMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a custom post"
         }
       ]
     }

@@ -156,10 +156,19 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     $targetObjectTypeResolver,
                     $objectIDs
                 );
-                $objectIDTargetTypeResolvers = array_merge(
-                    $objectIDTargetTypeResolvers,
-                    $targetObjectIDTargetTypeResolvers
-                );
+                /**
+                 * For some weird reason, doing `array_merge([], [1 => ...])`
+                 * produces `[0 => ...]` (i.e. ID "1" was changed to "0"),
+                 * so then commented the code below, and instead iterate
+                 * and explicitly set all key => values
+                 */
+                // $objectIDTargetTypeResolvers = array_merge(
+                //     $objectIDTargetTypeResolvers,
+                //     $targetObjectIDTargetTypeResolvers
+                // );
+                foreach ($targetObjectIDTargetTypeResolvers as $targetObjectID => $targetObjectTypeResolver) {
+                    $objectIDTargetTypeResolvers[$targetObjectID] = $targetObjectTypeResolver;
+                }
             }
             return $objectIDTargetTypeResolvers;
         }

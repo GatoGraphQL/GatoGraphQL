@@ -4,29 +4,43 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Root\App;
+use PoPCMSSchema\CustomPostMutations\Module as CustomPostMutationsModule;
+use PoPCMSSchema\CustomPostMutations\ModuleConfiguration as CustomPostMutationsModuleConfiguration;
+use PoPCMSSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
+use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableCreatePostMutationResolver;
+use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableUpdatePostMutationResolver;
+use PoPCMSSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootCreatePostFilterInputObjectTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootUpdatePostFilterInputObjectTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostCreateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostUpdateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Module as EngineModule;
 use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPCMSSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
-use PoPCMSSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootCreatePostFilterInputObjectTypeResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootUpdatePostFilterInputObjectTypeResolver;
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoP\Root\App;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?PostUpdateMutationPayloadObjectTypeResolver $postUpdateMutationPayloadObjectTypeResolver = null;
+    private ?PostCreateMutationPayloadObjectTypeResolver $postCreateMutationPayloadObjectTypeResolver = null;
     private ?CreatePostMutationResolver $createPostMutationResolver = null;
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
+    private ?PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver = null;
+    private ?PayloadableCreatePostMutationResolver $payloadableCreatePostMutationResolver = null;
     private ?RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver = null;
     private ?RootCreatePostFilterInputObjectTypeResolver $rootCreatePostFilterInputObjectTypeResolver = null;
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -36,6 +50,24 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         /** @var PostObjectTypeResolver */
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    final public function setPostUpdateMutationPayloadObjectTypeResolver(PostUpdateMutationPayloadObjectTypeResolver $postUpdateMutationPayloadObjectTypeResolver): void
+    {
+        $this->postUpdateMutationPayloadObjectTypeResolver = $postUpdateMutationPayloadObjectTypeResolver;
+    }
+    final protected function getPostUpdateMutationPayloadObjectTypeResolver(): PostUpdateMutationPayloadObjectTypeResolver
+    {
+        /** @var PostUpdateMutationPayloadObjectTypeResolver */
+        return $this->postUpdateMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(PostUpdateMutationPayloadObjectTypeResolver::class);
+    }
+    final public function setPostCreateMutationPayloadObjectTypeResolver(PostCreateMutationPayloadObjectTypeResolver $postCreateMutationPayloadObjectTypeResolver): void
+    {
+        $this->postCreateMutationPayloadObjectTypeResolver = $postCreateMutationPayloadObjectTypeResolver;
+    }
+    final protected function getPostCreateMutationPayloadObjectTypeResolver(): PostCreateMutationPayloadObjectTypeResolver
+    {
+        /** @var PostCreateMutationPayloadObjectTypeResolver */
+        return $this->postCreateMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(PostCreateMutationPayloadObjectTypeResolver::class);
     }
     final public function setCreatePostMutationResolver(CreatePostMutationResolver $createPostMutationResolver): void
     {
@@ -55,6 +87,24 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var UpdatePostMutationResolver */
         return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
     }
+    final public function setPayloadableUpdatePostMutationResolver(PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver): void
+    {
+        $this->payloadableUpdatePostMutationResolver = $payloadableUpdatePostMutationResolver;
+    }
+    final protected function getPayloadableUpdatePostMutationResolver(): PayloadableUpdatePostMutationResolver
+    {
+        /** @var PayloadableUpdatePostMutationResolver */
+        return $this->payloadableUpdatePostMutationResolver ??= $this->instanceManager->getInstance(PayloadableUpdatePostMutationResolver::class);
+    }
+    final public function setPayloadableCreatePostMutationResolver(PayloadableCreatePostMutationResolver $payloadableCreatePostMutationResolver): void
+    {
+        $this->payloadableCreatePostMutationResolver = $payloadableCreatePostMutationResolver;
+    }
+    final protected function getPayloadableCreatePostMutationResolver(): PayloadableCreatePostMutationResolver
+    {
+        /** @var PayloadableCreatePostMutationResolver */
+        return $this->payloadableCreatePostMutationResolver ??= $this->instanceManager->getInstance(PayloadableCreatePostMutationResolver::class);
+    }
     final public function setRootUpdatePostFilterInputObjectTypeResolver(RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver): void
     {
         $this->rootUpdatePostFilterInputObjectTypeResolver = $rootUpdatePostFilterInputObjectTypeResolver;
@@ -72,6 +122,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         /** @var RootCreatePostFilterInputObjectTypeResolver */
         return $this->rootCreatePostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCreatePostFilterInputObjectTypeResolver::class);
+    }
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        /** @var UserLoggedInCheckpoint */
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
 
     /**
@@ -136,15 +195,32 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        /** @var CustomPostMutationsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         return match ($fieldName) {
-            'createPost' => $this->getCreatePostMutationResolver(),
-            'updatePost' => $this->getUpdatePostMutationResolver(),
+            'createPost' => $usePayloadableCustomPostMutations
+                ? $this->getPayloadableCreatePostMutationResolver()
+                : $this->getCreatePostMutationResolver(),
+            'updatePost' => $usePayloadableCustomPostMutations
+                ? $this->getPayloadableUpdatePostMutationResolver()
+                : $this->getUpdatePostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        /** @var CustomPostMutationsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
+        if ($usePayloadableCustomPostMutations) {
+            return match ($fieldName) {
+                'createPost' => $this->getPostCreateMutationPayloadObjectTypeResolver(),
+                'updatePost' => $this->getPostUpdateMutationPayloadObjectTypeResolver(),
+                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            };
+        }
         return match ($fieldName) {
             'createPost',
             'updatePost'
@@ -152,5 +228,41 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    /**
+     * @return CheckpointInterface[]
+     */
+    public function getValidationCheckpoints(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        object $object,
+    ): array {
+        $validationCheckpoints = parent::getValidationCheckpoints(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $object,
+        );
+
+        /**
+         * For Payloadable: The "User Logged-in" checkpoint validation is not added,
+         * instead this validation is executed inside the mutation, so the error
+         * shows up in the Payload
+         *
+         * @var CustomPostMutationsModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
+        if ($usePayloadableCustomPostMutations) {
+            return $validationCheckpoints;
+        }
+
+        switch ($fieldDataAccessor->getFieldName()) {
+            case 'createPost':
+            case 'updatePost':
+                $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
+                break;
+        }
+        return $validationCheckpoints;
     }
 }

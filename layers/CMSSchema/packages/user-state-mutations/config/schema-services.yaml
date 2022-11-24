@@ -11,3 +11,6 @@ services:
 
     PoPCMSSchema\UserStateMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\UserStateMutations\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'

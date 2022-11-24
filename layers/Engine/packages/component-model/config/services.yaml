@@ -135,6 +135,9 @@ services:
     PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistryInterface:
         class: \PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistry
 
+    PoP\ComponentModel\Registries\TransientObjectRegistryInterface:
+        class: \PoP\ComponentModel\Registries\TransientObjectRegistry
+
     PoP\ComponentModel\Schema\InputCoercingServiceInterface:
         class: \PoP\ComponentModel\Schema\InputCoercingService
 

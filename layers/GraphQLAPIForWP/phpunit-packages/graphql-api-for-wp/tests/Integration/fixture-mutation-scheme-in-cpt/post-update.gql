@@ -4,11 +4,17 @@ mutation {
     update(input: {
       title: "HTTP caching improves performance 33333"
     }) {
-      title
-      update(input: {
-        title: "HTTP caching improves performance"
-      }) {
+      status
+      post {
         title
+        update(input: {
+          title: "HTTP caching improves performance"
+        }) {
+          status
+          post {
+            title
+          }
+        }
       }
     }
   }

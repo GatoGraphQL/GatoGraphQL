@@ -12,30 +12,28 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
-/**
- * To be used together with RemoveNodeInterfaceObjectTypeResolverTrait
- */
-abstract class AbstractRemoveIDFieldFromObjectTypeHookSet extends AbstractHookSet
+abstract class AbstractRemoveFieldsFromObjectTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         App::addFilter(
             HookHelpers::getHookNameToFilterField(),
-            $this->filterIDField(...),
+            $this->filterFields(...),
             10,
             4
         );
     }
 
-    public function filterIDField(
+    public function filterFields(
         bool $include,
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName
     ): bool {
-        if ($fieldName !== 'id') {
+        if (!$this->matchesCondition($objectTypeOrInterfaceTypeResolver, $objectTypeOrInterfaceTypeFieldResolver, $fieldName)) {
             return $include;
         }
+
         $objectTypeOrInterfaceTypeResolverClass = $this->getObjectTypeOrInterfaceTypeResolverClass();
         if (is_a($objectTypeOrInterfaceTypeResolver, $objectTypeOrInterfaceTypeResolverClass, true)) {
             return false;
@@ -43,6 +41,12 @@ abstract class AbstractRemoveIDFieldFromObjectTypeHookSet extends AbstractHookSe
 
         return $include;
     }
+
+    abstract protected function matchesCondition(
+        ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
+        ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
+        string $fieldName
+    ): bool;
 
     /**
      * @phpstan-return class-string<ObjectTypeResolverInterface|InterfaceTypeResolverInterface>

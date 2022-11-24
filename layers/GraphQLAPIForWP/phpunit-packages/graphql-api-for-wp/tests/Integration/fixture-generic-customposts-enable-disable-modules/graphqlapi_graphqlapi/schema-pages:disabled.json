@@ -16,7 +16,32 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "CustomPostDoesNotExistErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "GenericCustomPost",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "GenericErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -51,7 +76,17 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "PostCreateMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "PostTag",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PostUpdateMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -72,6 +107,11 @@
                 },
                 {
                     "name": "UserAvatar",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserIsNotLoggedInErrorPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -201,6 +241,11 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "StringOrInt",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "URL",
                     "enumValues": null,
                     "possibleTypes": null
@@ -231,6 +276,30 @@
                         },
                         {
                             "name": "GenericCustomPost"
+                        }
+                    ]
+                },
+                {
+                    "name": "IsErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
                         }
                     ]
                 },
@@ -1127,6 +1196,18 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "OperationStatusEnum",
+                    "enumValues": [
+                        {
+                            "name": "FAILURE"
+                        },
+                        {
+                            "name": "SUCCESS"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
                     "name": "OrderEnum",
                     "enumValues": [
                         {
@@ -1256,6 +1337,24 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "CustomPostCreateMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
                     "name": "CustomPostUnion",
                     "enumValues": null,
                     "possibleTypes": [
@@ -1264,6 +1363,30 @@
                         },
                         {
                             "name": "GenericCustomPost"
+                        }
+                    ]
+                },
+                {
+                    "name": "CustomPostUpdateMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
                         }
                     ]
                 }

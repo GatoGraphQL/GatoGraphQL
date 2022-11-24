@@ -1,37 +1,31 @@
 {
-  "errors": [
-    {
-      "message": "You don't have permission to edit custom post with ID '1'",
-      "locations": [
-        {
-          "line": 4,
-          "column": 5
-        }
-      ],
-      "extensions": {
-        "path": [
-          "update(input: {title: \"Hello world! 33333\"}) { ... }",
-          "disallowedPost: post(by: {id: 1}) { ... }",
-          "mutation { ... }"
-        ],
-        "type": "Post",
-        "field": "update(input: {title: \"Hello world! 33333\"}) { ... }",
-        "id": 1,
-        "code": "PoPCMSSchema/CustomPostMutations@e8"
-      }
-    }
-  ],
   "data": {
     "disallowedPost": {
       "firstTitle": "Hello world!",
-      "update": null
+      "update": {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+            "message": "You don't have permission to edit custom post with ID '1'"
+          }
+        ],
+        "post": null
+      }
     },
     "allowedPost": {
       "firstTitle": "HTTP caching improves performance",
       "update": {
-        "secondTitle": "HTTP caching improves performance 33333",
-        "update": {
-          "thirdTitle": "HTTP caching improves performance"
+        "status": "SUCCESS",
+        "errors": null,
+        "post": {
+          "secondTitle": "HTTP caching improves performance 33333",
+          "update": {
+            "status": "SUCCESS",
+            "post": {
+              "thirdTitle": "HTTP caching improves performance"
+            }
+          }
         }
       }
     }
