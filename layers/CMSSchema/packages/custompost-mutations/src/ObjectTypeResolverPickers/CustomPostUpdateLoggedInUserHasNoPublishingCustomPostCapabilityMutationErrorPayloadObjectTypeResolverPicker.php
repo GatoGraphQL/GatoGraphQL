@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
 
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\CustomPostNestedUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\CustomPostUpdateMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -16,6 +17,7 @@ class CustomPostUpdateLoggedInUserHasNoPublishingCustomPostCapabilityMutationErr
     {
         return [
             CustomPostUpdateMutationErrorPayloadUnionTypeResolver::class,
+            CustomPostNestedUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
