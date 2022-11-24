@@ -10,6 +10,8 @@ use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface
 use stdClass;
 use WP_Error;
 
+use function user_can;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -106,6 +108,6 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 
     public function canUserEditCustomPost(string|int $userID, string|int $customPostID): bool
     {
-        return \user_can((int)$userID, 'edit_post', $customPostID);
+        return user_can((int)$userID, 'edit_post', $customPostID);
     }
 }
