@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\CustomPostMutations\Module as CustomPostMutationsModule;
+use PoPCMSSchema\CustomPostMutations\ModuleConfiguration as CustomPostMutationsModuleConfiguration;
 use PoPCMSSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableUpdatePostMutationResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
@@ -171,7 +173,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
-        $isPayloadableMutation = $this->isPayloadableMutation($objectTypeResolver, $fieldName);
+        /** @var CustomPostMutationsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $isPayloadableMutation = $moduleConfiguration->usePayloadableCustomPostMutations();
         return match ($fieldName) {
             'createPost' => $this->getCreatePostMutationResolver(),
             'updatePost' => $isPayloadableMutation
@@ -181,18 +185,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * Indicate if to return the errors in an ObjectMutationPayload
-     * object in the response, or if to use the top-level errors.
-     */
-    protected function isPayloadableMutation(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
-    {
-        return true;
-    }
-
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $isPayloadableMutation = $this->isPayloadableMutation($objectTypeResolver, $fieldName);
+        /** @var CustomPostMutationsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $isPayloadableMutation = $moduleConfiguration->usePayloadableCustomPostMutations();
         return match ($fieldName) {
             'createPost' => $this->getPostObjectTypeResolver(),
             'updatePost' => $isPayloadableMutation
@@ -220,7 +217,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $fieldDataAccessor,
             $object,
         );
-        if (!$this->isPayloadableMutation($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
+        /** @var CustomPostMutationsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $isPayloadableMutation = $moduleConfiguration->usePayloadableCustomPostMutations();
+        if (!$isPayloadableMutation) {
             switch ($fieldDataAccessor->getFieldName()) {
                 case 'createPost';
                 case 'updatePost';
