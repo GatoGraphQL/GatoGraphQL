@@ -116,9 +116,9 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
-        $isPayloadableMuatation = $this->isPayloadableMutation($objectTypeResolver, $fieldName);
+        $isPayloadableMutation = $this->isPayloadableMutation($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'update' => $isPayloadableMuatation
+            'update' => $isPayloadableMutation
                 ? $this->getPayloadableUpdatePostMutationResolver()
                 : $this->getUpdatePostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -136,9 +136,9 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $isPayloadableMuatation = $this->isPayloadableMutation($objectTypeResolver, $fieldName);
+        $isPayloadableMutation = $this->isPayloadableMutation($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'update' => $isPayloadableMuatation
+            'update' => $isPayloadableMutation
                 ? $this->getPostCRUDMutationPayloadObjectTypeResolver()
                 : $this->getPostObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
