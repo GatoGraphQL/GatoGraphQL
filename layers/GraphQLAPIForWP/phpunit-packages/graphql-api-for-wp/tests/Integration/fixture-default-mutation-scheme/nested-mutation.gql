@@ -4,13 +4,19 @@ mutation {
     update(input: {
       title: "New title"
     }) {
-      title
-      newTitle: title
-      update(input: {
-        title: "Released v0.6, check it out"
-      }) {
+      status
+      object {
         title
-        originalTitle: title
+        newTitle: title
+        update(input: {
+          title: "Released v0.6, check it out"
+        }) {
+          status
+          object {
+            title
+            originalTitle: title
+          }
+        }
       }
     }
   }
