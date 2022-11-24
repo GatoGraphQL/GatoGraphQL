@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityOperationPayloadObjectTypeResolver
 {
-    private ?ObjectMutationPayloadObjectTypeDataLoader $mutationPayloadObjectTypeDataLoader = null;
+    private ?ObjectMutationPayloadObjectTypeDataLoader $objectMutationPayloadObjectTypeDataLoader = null;
 
-    final public function setTransientEntityOperationPayloadObjectTypeDataLoader(ObjectMutationPayloadObjectTypeDataLoader $mutationPayloadObjectTypeDataLoader): void
+    final public function setTransientEntityOperationPayloadObjectTypeDataLoader(ObjectMutationPayloadObjectTypeDataLoader $objectMutationPayloadObjectTypeDataLoader): void
     {
-        $this->mutationPayloadObjectTypeDataLoader = $mutationPayloadObjectTypeDataLoader;
+        $this->objectMutationPayloadObjectTypeDataLoader = $objectMutationPayloadObjectTypeDataLoader;
     }
     final protected function getTransientEntityOperationPayloadObjectTypeDataLoader(): ObjectMutationPayloadObjectTypeDataLoader
     {
         /** @var ObjectMutationPayloadObjectTypeDataLoader */
-        return $this->mutationPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(ObjectMutationPayloadObjectTypeDataLoader::class);
+        return $this->objectMutationPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(ObjectMutationPayloadObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
