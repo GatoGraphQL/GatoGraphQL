@@ -3,9 +3,15 @@
     "post": {
       "title": "HTTP caching improves performance",
       "update": {
-        "title": "HTTP caching improves performance 33333",
-        "update": {
-          "title": "HTTP caching improves performance"
+        "status": "SUCCESS",
+        "post": {
+          "title": "HTTP caching improves performance 33333",
+          "update": {
+            "status": "SUCCESS",
+            "post": {
+              "title": "HTTP caching improves performance"
+            }
+          }
         }
       }
     }
