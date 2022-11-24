@@ -5,13 +5,13 @@ mutation {
       title: "HTTP caching improves performance 33333"
     }) {
       status
-      object {
+      post {
         title
         update(input: {
           title: "HTTP caching improves performance"
         }) {
           status
-          object {
+          post {
             title
           }
         }

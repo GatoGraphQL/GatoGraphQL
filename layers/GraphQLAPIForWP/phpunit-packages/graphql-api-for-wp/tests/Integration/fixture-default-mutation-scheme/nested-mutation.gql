@@ -5,14 +5,14 @@ mutation {
       title: "New title"
     }) {
       status
-      object {
+      post {
         title
         newTitle: title
         update(input: {
           title: "Released v0.6, check it out"
         }) {
           status
-          object {
+          post {
             title
             originalTitle: title
           }

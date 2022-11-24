@@ -5,13 +5,13 @@ mutation {
       title: "Hello world! 33333"
     }) {
       status
-      object {
+      post {
         secondTitle: title
         update(input: {
           title: "Hello world!"
         }) {
           status
-          object {
+          post {
             thirdTitle: title
           }
         }
@@ -24,13 +24,13 @@ mutation {
       title: "HTTP caching improves performance 33333"
     }) {
       status
-      object {
+      post {
         secondTitle: title
         update(input: {
           title: "HTTP caching improves performance"
         }) {
           status
-          object {
+          post {
             thirdTitle: title
           }
         }
