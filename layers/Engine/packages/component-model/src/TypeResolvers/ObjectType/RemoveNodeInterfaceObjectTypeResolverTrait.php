@@ -10,7 +10,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolv
 /**
  * To be used together with:
  *
- * - AbstractRemoveIDFieldFromObjectTypeHookSet
+ * - AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
  * - AbstractTransientObject
  */
 trait RemoveNodeInterfaceObjectTypeResolverTrait

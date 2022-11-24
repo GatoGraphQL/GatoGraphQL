@@ -18,7 +18,7 @@ use PoP\Root\Hooks\AbstractHookSet;
  * - RemoveNodeInterfaceObjectTypeResolverTrait
  * - AbstractTransientObject
  */
-abstract class AbstractRemoveIDFieldFromObjectTypeHookSet extends AbstractHookSet
+abstract class AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
@@ -41,6 +41,7 @@ abstract class AbstractRemoveIDFieldFromObjectTypeHookSet extends AbstractHookSe
         ) {
             return $include;
         }
+
         $objectTypeOrInterfaceTypeResolverClass = $this->getObjectTypeOrInterfaceTypeResolverClass();
         if (is_a($objectTypeOrInterfaceTypeResolver, $objectTypeOrInterfaceTypeResolverClass, true)) {
             return false;

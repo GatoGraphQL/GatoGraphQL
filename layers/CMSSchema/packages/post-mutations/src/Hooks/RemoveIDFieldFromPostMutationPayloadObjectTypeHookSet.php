@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\Hooks;
 
 use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\AbstractPostMutationPayloadObjectTypeResolver;
-use PoP\ComponentModel\Hooks\AbstractRemoveIDFieldFromObjectTypeHookSet;
+use PoP\ComponentModel\Hooks\AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class RemoveIDFieldFromPostMutationPayloadObjectTypeHookSet extends AbstractRemoveIDFieldFromObjectTypeHookSet
+class RemoveIDFieldFromPostMutationPayloadObjectTypeHookSet extends AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
 {
     /**
      * @phpstan-return class-string<ObjectTypeResolverInterface|InterfaceTypeResolverInterface>
