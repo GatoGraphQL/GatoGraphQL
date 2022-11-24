@@ -1848,7 +1848,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "PostCRUDMutationPayload",
+                "name": "PostUpdateMutationPayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -3544,7 +3544,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "PostCRUDMutationPayload",
+          "name": "PostUpdateMutationPayload",
           "description": "Payload of executing a CRUD mutation involving a post",
           "fields": [
             {
@@ -3597,10 +3597,10 @@
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "PostCRUDMutationPayload!",
+                "name": "PostUpdateMutationPayload!",
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "PostCRUDMutationPayload",
+                  "name": "PostUpdateMutationPayload",
                   "ofType": null
                 }
               },
@@ -8216,7 +8216,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "PostCRUDMutationPayload",
+                "name": "PostUpdateMutationPayload",
                 "ofType": null
               },
               "isDeprecated": false,

@@ -552,8 +552,8 @@
           "description": "Representation of a post"
         },
         {
-          "name": "PostCRUDMutationPayload",
-          "namespacedName": "PostCRUDMutationPayload",
+          "name": "PostUpdateMutationPayload",
+          "namespacedName": "PostUpdateMutationPayload",
           "fields": [
             {
               "name": "errors"

@@ -8,7 +8,7 @@ use PoPSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\ObjectMutationP
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityOperationPayloadObjectTypeResolver
+class PostUpdateMutationPayloadObjectTypeResolver extends AbstractTransientEntityOperationPayloadObjectTypeResolver
 {
     private ?ObjectMutationPayloadObjectTypeDataLoader $objectMutationPayloadObjectTypeDataLoader = null;
 
@@ -24,7 +24,7 @@ class PostCRUDMutationPayloadObjectTypeResolver extends AbstractTransientEntityO
 
     public function getTypeName(): string
     {
-        return 'PostCRUDMutationPayload';
+        return 'PostUpdateMutationPayload';
     }
 
     public function getTypeDescription(): ?string

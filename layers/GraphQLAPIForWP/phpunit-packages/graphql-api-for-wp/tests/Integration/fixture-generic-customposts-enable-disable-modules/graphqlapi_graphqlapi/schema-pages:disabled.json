@@ -71,7 +71,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "PostCRUDMutationPayload",
+                    "name": "PostUpdateMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
