@@ -201,10 +201,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * For Payloadable: The "User Logged-in" checkpoint validation is not added,
-     * instead this validation is executed inside the mutation, so the error
-     * shows up in the Payload
-     *
      * @return CheckpointInterface[]
      */
     public function getValidationCheckpoints(
@@ -217,16 +213,25 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $fieldDataAccessor,
             $object,
         );
-        /** @var CustomPostMutationsModuleConfiguration */
+
+        /**
+         * For Payloadable: The "User Logged-in" checkpoint validation is not added,
+         * instead this validation is executed inside the mutation, so the error
+         * shows up in the Payload
+         *
+         * @var CustomPostMutationsModuleConfiguration
+         */
         $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
         $isPayloadableMutation = $moduleConfiguration->usePayloadableCustomPostMutations();
-        if (!$isPayloadableMutation) {
-            switch ($fieldDataAccessor->getFieldName()) {
-                case 'createPost';
-                case 'updatePost';
-                    $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
-                    break;
-            }
+        if ($isPayloadableMutation) {
+            return $validationCheckpoints;
+        }
+
+        switch ($fieldDataAccessor->getFieldName()) {
+            case 'createPost';
+            case 'updatePost';
+                $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
+                break;
         }
         return $validationCheckpoints;
     }
