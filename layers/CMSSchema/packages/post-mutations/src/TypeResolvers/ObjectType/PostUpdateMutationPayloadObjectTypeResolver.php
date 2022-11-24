@@ -29,7 +29,7 @@ class PostUpdateMutationPayloadObjectTypeResolver extends AbstractTransientEntit
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a CRUD mutation involving a post', 'post-mutations');
+        return $this->__('Payload of executing an update mutation on a post', 'post-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
