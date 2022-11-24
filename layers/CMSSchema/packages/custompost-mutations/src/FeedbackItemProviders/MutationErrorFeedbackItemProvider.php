@@ -38,7 +38,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E2 => $this->__('Your user doesn\'t have permission for editing custom posts.', 'custompost-mutations'),
             self::E3 => $this->__('Your user doesn\'t have permission for publishing custom posts.', 'custompost-mutations'),
             self::E6 => $this->__('The ID is missing', 'custompost-mutations'),
-            self::E7 => $this->__('There is no entity with ID \'%s\'', 'custompost-mutations'),
+            self::E7 => $this->__('There is no custom post with ID \'%s\'', 'custompost-mutations'),
             self::E8 => $this->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
