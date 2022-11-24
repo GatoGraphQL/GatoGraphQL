@@ -175,10 +175,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         /** @var CustomPostMutationsModuleConfiguration */
         $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
-        $isPayloadableMutation = $moduleConfiguration->usePayloadableCustomPostMutations();
+        $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         return match ($fieldName) {
             'createPost' => $this->getCreatePostMutationResolver(),
-            'updatePost' => $isPayloadableMutation
+            'updatePost' => $usePayloadableCustomPostMutations
                 ? $this->getPayloadableUpdatePostMutationResolver()
                 : $this->getUpdatePostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -189,10 +189,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         /** @var CustomPostMutationsModuleConfiguration */
         $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
-        $isPayloadableMutation = $moduleConfiguration->usePayloadableCustomPostMutations();
+        $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         return match ($fieldName) {
             'createPost' => $this->getPostObjectTypeResolver(),
-            'updatePost' => $isPayloadableMutation
+            'updatePost' => $usePayloadableCustomPostMutations
                 ? $this->getPostCRUDMutationPayloadObjectTypeResolver()
                 : $this->getPostObjectTypeResolver(),
             default
@@ -222,8 +222,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
          * @var CustomPostMutationsModuleConfiguration
          */
         $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
-        $isPayloadableMutation = $moduleConfiguration->usePayloadableCustomPostMutations();
-        if ($isPayloadableMutation) {
+        $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
+        if ($usePayloadableCustomPostMutations) {
             return $validationCheckpoints;
         }
 
