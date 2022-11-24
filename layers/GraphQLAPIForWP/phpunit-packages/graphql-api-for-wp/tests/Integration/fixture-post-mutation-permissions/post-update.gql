@@ -5,6 +5,12 @@ mutation {
       title: "Hello world! 33333"
     }) {
       status
+      errors {
+        __typename
+        ...on IsErrorPayload {
+          message
+        }
+      }
       post {
         secondTitle: title
         update(input: {
@@ -24,6 +30,12 @@ mutation {
       title: "HTTP caching improves performance 33333"
     }) {
       status
+      errors {
+        __typename
+        ...on IsErrorPayload {
+          message
+        }
+      }
       post {
         secondTitle: title
         update(input: {
