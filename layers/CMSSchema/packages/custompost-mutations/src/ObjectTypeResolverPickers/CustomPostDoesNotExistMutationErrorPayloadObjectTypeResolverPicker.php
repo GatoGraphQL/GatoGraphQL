@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\CustomPostNestedUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\CustomPostUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractGenericErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class CustomPostUpdateGenericErrorPayloadObjectTypeResolverPicker extends AbstractGenericErrorPayloadObjectTypeResolverPicker
+class CustomPostDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractCustomPostDoesNotExistErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
@@ -18,7 +16,6 @@ class CustomPostUpdateGenericErrorPayloadObjectTypeResolverPicker extends Abstra
     {
         return [
             CustomPostUpdateMutationErrorPayloadUnionTypeResolver::class,
-            CustomPostNestedUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
