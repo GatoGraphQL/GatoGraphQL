@@ -9,7 +9,7 @@ use PoP\ComponentModel\Hooks\AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class RemoveIDFieldFromErrorPayloadObjectTypeHookSet extends AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
+class RemoveIDAndSelfFieldsFromErrorPayloadObjectTypeHookSet extends AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
 {
     /**
      * @phpstan-return class-string<ObjectTypeResolverInterface|InterfaceTypeResolverInterface>
