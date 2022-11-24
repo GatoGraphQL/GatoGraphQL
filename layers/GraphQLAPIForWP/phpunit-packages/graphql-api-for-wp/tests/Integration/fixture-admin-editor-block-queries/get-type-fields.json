@@ -82,9 +82,6 @@
           "fields": [
             {
               "name": "message"
-            },
-            {
-              "name": "self"
             }
           ],
           "kind": "OBJECT",
@@ -102,9 +99,6 @@
             },
             {
               "name": "message"
-            },
-            {
-              "name": "self"
             }
           ],
           "kind": "OBJECT",
@@ -116,9 +110,6 @@
           "fields": [
             {
               "name": "message"
-            },
-            {
-              "name": "self"
             }
           ],
           "kind": "OBJECT",
@@ -130,9 +121,6 @@
           "fields": [
             {
               "name": "message"
-            },
-            {
-              "name": "self"
             }
           ],
           "kind": "OBJECT",
@@ -144,9 +132,6 @@
           "fields": [
             {
               "name": "message"
-            },
-            {
-              "name": "self"
             }
           ],
           "kind": "OBJECT",
@@ -552,29 +537,6 @@
           "description": "Representation of a post"
         },
         {
-          "name": "PostUpdateMutationPayload",
-          "namespacedName": "PostUpdateMutationPayload",
-          "fields": [
-            {
-              "name": "errors"
-            },
-            {
-              "name": "object"
-            },
-            {
-              "name": "objectID"
-            },
-            {
-              "name": "self"
-            },
-            {
-              "name": "status"
-            }
-          ],
-          "kind": "OBJECT",
-          "description": "Payload of executing a CRUD mutation involving a post"
-        },
-        {
           "name": "PostCategory",
           "namespacedName": "PostCategory",
           "fields": [
@@ -631,6 +593,26 @@
           "description": "Representation of a category, added to a post"
         },
         {
+          "name": "PostCreateMutationPayload",
+          "namespacedName": "PostCreateMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a post"
+        },
+        {
           "name": "PostTag",
           "namespacedName": "PostTag",
           "fields": [
@@ -673,6 +655,26 @@
           ],
           "kind": "OBJECT",
           "description": "Representation of a tag, added to a post"
+        },
+        {
+          "name": "PostUpdateMutationPayload",
+          "namespacedName": "PostUpdateMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a post"
         },
         {
           "name": "QueryRoot",
@@ -1150,9 +1152,6 @@
           "fields": [
             {
               "name": "message"
-            },
-            {
-              "name": "self"
             }
           ],
           "kind": "OBJECT",
@@ -2334,6 +2333,13 @@
           "fields": null,
           "kind": "ENUM",
           "description": null
+        },
+        {
+          "name": "CustomPostCreateMutationErrorPayloadUnion",
+          "namespacedName": "CustomPostCreateMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a custom post"
         },
         {
           "name": "CustomPostUnion",

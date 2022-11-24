@@ -71,17 +71,22 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "PostUpdateMutationPayload",
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
                     "name": "PostCategory",
                     "enumValues": null,
                     "possibleTypes": null
                 },
                 {
+                    "name": "PostCreateMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "PostTag",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PostUpdateMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -1330,6 +1335,24 @@
                         }
                     ],
                     "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostCreateMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
                 },
                 {
                     "name": "CustomPostUnion",
