@@ -24,19 +24,21 @@ abstract class AbstractRemoveIDFieldFromObjectTypeHookSet extends AbstractHookSe
     {
         App::addFilter(
             HookHelpers::getHookNameToFilterField(),
-            $this->filterIDField(...),
+            $this->filterFields(...),
             10,
             4
         );
     }
 
-    public function filterIDField(
+    public function filterFields(
         bool $include,
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName
     ): bool {
-        if ($fieldName !== 'id') {
+        if (($fieldName !== 'id' && $fieldName !== 'self') 
+            || ($fieldName === 'self' && !$this->removeSelfField())
+        ) {
             return $include;
         }
         $objectTypeOrInterfaceTypeResolverClass = $this->getObjectTypeOrInterfaceTypeResolverClass();
@@ -45,6 +47,11 @@ abstract class AbstractRemoveIDFieldFromObjectTypeHookSet extends AbstractHookSe
         }
 
         return $include;
+    }
+
+    protected function removeSelfField(): bool
+    {
+        return true;
     }
 
     /**
