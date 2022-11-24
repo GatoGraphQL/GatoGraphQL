@@ -30,7 +30,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     private ?PostUpdateFilterInputObjectTypeResolver $postUpdateFilterInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    
+
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
         $this->postObjectTypeResolver = $postObjectTypeResolver;
@@ -156,7 +156,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
             $fieldDataAccessor,
             $object,
         );
-        
+
         /**
          * For Payloadable: The "User Logged-in" checkpoint validation is not added,
          * instead this validation is executed inside the mutation, so the error

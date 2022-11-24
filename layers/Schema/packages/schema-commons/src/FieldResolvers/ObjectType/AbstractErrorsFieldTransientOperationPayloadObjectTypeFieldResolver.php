@@ -14,7 +14,8 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
-{   /**
+{
+   /**
      * @return string[]
      */
     public function getFieldNamesToResolve(): array

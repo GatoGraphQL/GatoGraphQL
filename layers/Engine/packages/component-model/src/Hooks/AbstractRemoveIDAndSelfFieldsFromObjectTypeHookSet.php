@@ -36,7 +36,8 @@ abstract class AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet extends Abstra
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName
     ): bool {
-        if (($fieldName !== 'id' && $fieldName !== 'self') 
+        if (
+            ($fieldName !== 'id' && $fieldName !== 'self')
             || ($fieldName === 'self' && !$this->removeSelfField())
         ) {
             return $include;
