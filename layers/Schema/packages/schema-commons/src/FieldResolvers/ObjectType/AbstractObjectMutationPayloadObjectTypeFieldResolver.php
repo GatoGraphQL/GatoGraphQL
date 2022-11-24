@@ -18,14 +18,19 @@ abstract class AbstractObjectMutationPayloadObjectTypeFieldResolver extends Abst
     public function getFieldNamesToResolve(): array
     {
         return [
-            'object',
+            $this->getObjectFieldName(),
         ];
+    }
+
+    protected function getObjectFieldName(): string
+    {
+        return 'object';
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'object' => $this->__('Object affected by the mutation, if the operation was successful', 'post-mutations'),
+            $this->getObjectFieldName() => $this->__('Object affected by the mutation, if the operation was successful', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -40,7 +45,7 @@ abstract class AbstractObjectMutationPayloadObjectTypeFieldResolver extends Abst
         $objectMutationTransientOperationPayload = $object;
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
-            case 'object':
+            case $this->getObjectFieldName():
                 return $objectMutationTransientOperationPayload->objectID;
         }
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
