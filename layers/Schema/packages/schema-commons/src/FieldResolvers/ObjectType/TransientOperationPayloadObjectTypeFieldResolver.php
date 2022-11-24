@@ -4,29 +4,28 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
-use PoPSchema\SchemaCommons\ObjectModels\AbstractObjectMutationTransientOperationPayload;
+use PoPSchema\SchemaCommons\ObjectModels\AbstractTransientOperationPayload;
 use PoPSchema\SchemaCommons\TypeResolvers\EnumType\OperationStatusEnumTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractTransientOperationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
-class TransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class TransientOperationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?OperationStatusEnumTypeResolver $operationStatusEnumTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setOperationStatusEnumTypeResolver(OperationStatusEnumTypeResolver $operationStatusEnumTypeResolver): void
     {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->operationStatusEnumTypeResolver = $operationStatusEnumTypeResolver;
     }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getOperationStatusEnumTypeResolver(): OperationStatusEnumTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        /** @var OperationStatusEnumTypeResolver */
+        return $this->operationStatusEnumTypeResolver ??= $this->instanceManager->getInstance(OperationStatusEnumTypeResolver::class);
     }
 
     /**
@@ -35,7 +34,7 @@ class TransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractObj
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractTransientEntityOperationPayloadObjectTypeResolver::class,
+            AbstractTransientOperationPayloadObjectTypeResolver::class,
         ];
     }
 
@@ -45,28 +44,30 @@ class TransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractObj
     public function getFieldNamesToResolve(): array
     {
         return [
-            $this->getObjectIDFieldName(),
+            'status',
         ];
-    }
-
-    protected function getObjectIDFieldName(): string
-    {
-        return 'objectID';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            $this->getObjectIDFieldName() => $this->getIDScalarTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'status' => $this->getOperationStatusEnumTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        return match ($fieldName) {
+            'status' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            $this->getObjectIDFieldName() => $this->__('ID of the entity, if the operation was successful', 'schema-commons'),
+            'status' => $this->__('Status of the operation', 'schema-commons'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -77,8 +78,8 @@ class TransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractObj
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        /** @var AbstractObjectMutationTransientOperationPayload */
-        $objectMutationTransientOperationPayload = $object;
+        /** @var AbstractTransientOperationPayload */
+        $objectTransientOperationPayload = $object;
         /**
          * The parent already resolves all remaining fields
          */
