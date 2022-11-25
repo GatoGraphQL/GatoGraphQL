@@ -143,6 +143,9 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCommentMutations = $moduleConfiguration->usePayloadableCommentMutations();
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
@@ -154,6 +157,9 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCommentMutations = $moduleConfiguration->usePayloadableCommentMutations();
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
