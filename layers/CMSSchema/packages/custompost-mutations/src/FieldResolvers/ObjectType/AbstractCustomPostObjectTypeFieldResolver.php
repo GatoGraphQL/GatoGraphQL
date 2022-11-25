@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoPCMSSchema\CustomPostMutations\Module;
+use PoPCMSSchema\CustomPostMutations\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateFilterInputObjectTypeResolver;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -41,6 +44,20 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return match ($fieldName) {
             'update' => $this->__('Update the custom post', 'custompost-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
+        if (!$usePayloadableCustomPostMutations) {
+            return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
+        }
+        return match ($fieldName) {
+            'update' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
