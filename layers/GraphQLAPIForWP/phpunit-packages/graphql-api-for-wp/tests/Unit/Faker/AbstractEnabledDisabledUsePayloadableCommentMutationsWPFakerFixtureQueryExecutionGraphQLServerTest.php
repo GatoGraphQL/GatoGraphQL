@@ -11,7 +11,7 @@ use PoP\Root\Module\ModuleInterface;
 abstract class AbstractEnabledDisabledUsePayloadableCommentMutationsWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     use EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
-    
+
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-use-payloadable-comment-mutations-or-not';
