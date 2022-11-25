@@ -10,7 +10,7 @@ use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutati
 use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableAddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CustomPostAddCommentFilterInputObjectTypeResolver;
-use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CommentNestedCreateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CustomPostAddCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoP\ComponentModel\App;
@@ -26,7 +26,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
     private ?CustomPostAddCommentFilterInputObjectTypeResolver $customPostAddCommentFilterInputObjectTypeResolver = null;
-    private ?CommentNestedCreateMutationPayloadObjectTypeResolver $commentNestedCreateMutationPayloadObjectTypeResolver = null;
+    private ?CustomPostAddCommentMutationPayloadObjectTypeResolver $customPostAddCommentMutationPayloadObjectTypeResolver = null;
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
 
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
@@ -56,14 +56,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         /** @var CustomPostAddCommentFilterInputObjectTypeResolver */
         return $this->customPostAddCommentFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostAddCommentFilterInputObjectTypeResolver::class);
     }
-    final public function setCommentNestedCreateMutationPayloadObjectTypeResolver(CommentNestedCreateMutationPayloadObjectTypeResolver $commentNestedCreateMutationPayloadObjectTypeResolver): void
+    final public function setCustomPostAddCommentMutationPayloadObjectTypeResolver(CustomPostAddCommentMutationPayloadObjectTypeResolver $customPostAddCommentMutationPayloadObjectTypeResolver): void
     {
-        $this->commentNestedCreateMutationPayloadObjectTypeResolver = $commentNestedCreateMutationPayloadObjectTypeResolver;
+        $this->customPostAddCommentMutationPayloadObjectTypeResolver = $customPostAddCommentMutationPayloadObjectTypeResolver;
     }
-    final protected function getCommentNestedCreateMutationPayloadObjectTypeResolver(): CommentNestedCreateMutationPayloadObjectTypeResolver
+    final protected function getCustomPostAddCommentMutationPayloadObjectTypeResolver(): CustomPostAddCommentMutationPayloadObjectTypeResolver
     {
-        /** @var CommentNestedCreateMutationPayloadObjectTypeResolver */
-        return $this->commentNestedCreateMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CommentNestedCreateMutationPayloadObjectTypeResolver::class);
+        /** @var CustomPostAddCommentMutationPayloadObjectTypeResolver */
+        return $this->customPostAddCommentMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostAddCommentMutationPayloadObjectTypeResolver::class);
     }
     final public function setPayloadableAddCommentToCustomPostMutationResolver(PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver): void
     {
@@ -196,7 +196,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         $usePayloadableCommentMutations = $moduleConfiguration->usePayloadableCommentMutations();
         return match ($fieldName) {
             'addComment' => $usePayloadableCommentMutations
-                ? $this->getCommentNestedCreateMutationPayloadObjectTypeResolver()
+                ? $this->getCustomPostAddCommentMutationPayloadObjectTypeResolver()
                 : $this->getCommentObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
