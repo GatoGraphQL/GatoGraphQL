@@ -641,9 +641,9 @@ Now, we can execute the following query:
 }
 ```
 
-### Settings configuration
+#### Settings configuration
 
-Added additional entries to the default allowlist:
+Additional entries were added to the default allowlist for Settings:
 
 - `"siteurl"`
 - `"WPLANG"`
@@ -652,6 +652,121 @@ Added additional entries to the default allowlist:
 - `"date_format"`
 - `"time_format"`
 - `"blog_charset"`
+
+### Mutations now return "Payload" types
+
+Mutations in the schema now return some "Payload" object, which provides any error(s) resulting from the mutation, or the modified object if successful (these 2 properties are most likely exclusive: either `errors` or `object` will have a value, and the other one will be `null`).
+
+Errors are provided via some "ErrorPayloadUnion" type, containing all possible errors for that mutation. Every possible error is some "ErrorPayload" type that implements the interface `IsErrorPayload`.
+
+For instance, the operation `updatePost` returns a `PostUpdateMutationPayload`, which contains the following fields:
+
+- `status`: whether the operation was successful or not, with either value `SUCCESS` or `FAILURE`
+- `post` and `postID`: the updated post object and its ID, if the update was successful
+- `errors`: a list of `CustomPostUpdateMutationErrorPayloadUnion`, if the update failed.
+
+The union type `CustomPostUpdateMutationErrorPayloadUnion` contains the list of all possible errors that can happen when modifying a custom post:
+
+- `CustomPostDoesNotExistErrorPayload`
+- `GenericErrorPayload`
+- `LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload`
+- `LoggedInUserHasNoPermissionToEditCustomPostErrorPayload`
+- `LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload`
+- `UserIsNotLoggedInErrorPayload`
+
+Error type `GenericErrorPayload` is contained by all "ErrorPayloadUnion" types. It is used whenever the specific reason for the error cannot be pointed out, such as when `wp_update_post` simply produces `WP_Error`. This type provides two additional fields: `code` and `data`.
+
+Then, to execute the `updatePost` mutation, we can execute:
+
+```graphql
+mutation UpdatePost(
+  $postId: ID!
+  $title: String!
+) {
+  updatePost(
+    input: {
+      id: $postId,
+      title: $title,
+    }
+  ) {
+    status
+    errors {
+      __typename
+      ...on IsErrorPayload {
+        message
+      }
+      ...on GenericErrorPayload {
+        code
+      }
+    }
+    post {
+      id
+      title
+    }
+  }
+}
+```
+
+If the operation was successful, we may receive:
+
+```json
+{
+  "data": {
+    "updatePost": {
+      "status": "SUCCESS",
+      "errors": null,
+      "post": {
+        "id": 1724,
+        "title": "This incredible title"
+      }
+    }
+  }
+}
+```
+
+If the user is not logged in, we will receive:
+
+```json
+{
+  "data": {
+    "updatePost": {
+      "status": "FAILURE",
+      "errors": [
+        {
+          "__typename": "UserIsNotLoggedInErrorPayload",
+          "message": "You must be logged in to create or update custom posts"
+        }
+      ],
+      "post": null
+    }
+  }
+}
+```
+
+If the user doesn't have the permission to edit posts, we will receive:
+
+```json
+{
+  "data": {
+    "updatePost": {
+      "status": "FAILURE",
+      "errors": [
+        {
+          "__typename": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+          "message": "Your user doesn't have permission for editing custom posts."
+        }
+      ],
+      "post": null
+    }
+  }
+}
+```
+
+The affected mutations are:
+
+- `Root.createPost: PostCreateMutationPayload!`
+- `Root.updatePost: PostCreateMutationPayload!`
+- `Post.update: PostNestedUpdateMutationPayload!`
 
 ## Custom scalars
 
@@ -1723,6 +1838,39 @@ From now on, field `User.email` is treated as “sensitive” data. As such, it 
 This behavior can be overriden in the Settings page:
 
 ![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.png)
+
+### Mutations now return a "Payload" type
+
+The GraphQL queries must be adapted accordingly. For instance:
+
+```graphql
+mutation UpdatePost(
+  $postId: ID!
+  $title: String!
+) {
+  updatePost(
+    input: {
+      id: $postId,
+      title: $title,
+    }
+  ) {
+    status
+    errors {
+      __typename
+      ...on IsErrorPayload {
+        message
+      }
+      ...on GenericErrorPayload {
+        code
+      }
+    }
+    post {
+      id
+      title
+    }
+  }
+}
+```
 
 ### Removed modules
 
