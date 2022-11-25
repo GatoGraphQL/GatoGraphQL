@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CommentCreateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootAddCommentToCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\CommentCreateMutationErrorPayloadUnionTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -30,7 +30,7 @@ class CommentCreateMutationPayloadErrorsFieldTransientOperationPayloadObjectType
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            CommentCreateMutationPayloadObjectTypeResolver::class,
+            RootAddCommentToCustomPostMutationPayloadObjectTypeResolver::class,
         ];
     }
 
