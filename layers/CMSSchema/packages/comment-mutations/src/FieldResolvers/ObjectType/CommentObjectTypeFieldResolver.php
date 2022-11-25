@@ -8,6 +8,7 @@ use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ModuleConfiguration;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableAddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CommentReplyFilterInputObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CommentCreateMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
