@@ -3,14 +3,23 @@ mutation {
     comment: "Great insight!",
     customPostID: 1724,
   }) {
-    content
-    authorName
-    authorEmail
-    customPost {
+    status
+    errors {
       __typename
-      ...on Post {
-        id
-        title
+      ...on IsErrorPayload {
+        message
+      }
+    }
+    comment {
+      content
+      authorName
+      authorEmail
+      customPost {
+        __typename
+        ...on Post {
+          id
+          title
+        }
       }
     }
   }

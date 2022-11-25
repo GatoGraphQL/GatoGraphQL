@@ -6,6 +6,6 @@ mutation {
     authorEmail: "leo@saronga.com",
     nonExistingArg: "Doesnt Matter"
   }) {
-    id
+    commentID
   }
 }

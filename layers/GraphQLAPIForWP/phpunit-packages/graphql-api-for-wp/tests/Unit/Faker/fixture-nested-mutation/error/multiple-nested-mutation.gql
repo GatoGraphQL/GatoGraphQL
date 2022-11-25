@@ -10,14 +10,23 @@
       authorName: "Leo"
       authorEmail: "leo@saronga.com",
     }) {
-      content
-      authorName
-      authorEmail
-      customPost {
+      status
+      errors {
         __typename
-        ...on Post {
-          id
-          title
+        ...on IsErrorPayload {
+          message
+        }
+      }
+      comment {
+        content
+        authorName
+        authorEmail
+        customPost {
+          __typename
+          ...on Post {
+            id
+            title
+          }
         }
       }
     }
