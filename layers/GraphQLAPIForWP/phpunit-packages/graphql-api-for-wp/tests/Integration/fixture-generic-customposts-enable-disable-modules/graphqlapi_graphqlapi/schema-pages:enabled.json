@@ -16,6 +16,21 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "CommentAuthorEmailIsMissingErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentAuthorNameIsMissingErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentParentCommentDoesNotExistErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "CustomPostDoesNotExistErrorPayload",
                     "enumValues": null,
                     "possibleTypes": null
@@ -97,6 +112,16 @@
                 },
                 {
                     "name": "Root",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootAddCommentToCustomPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootReplyCommentMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -282,19 +307,28 @@
                             "name": "UserIsNotLoggedInErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
-                        },
-                        {
                             "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "GenericErrorPayload"
                         },
                         {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
                             "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorEmailIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorNameIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
                         }
                     ]
                 },
@@ -1389,19 +1423,58 @@
                             "name": "CustomPostDoesNotExistErrorPayload"
                         },
                         {
-                            "name": "GenericErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
-                        },
-                        {
                             "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
                         },
                         {
                             "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
                         },
                         {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
                             "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorNameIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorEmailIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootReplyCommentMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorNameIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorEmailIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
                         }
                     ]
                 }
