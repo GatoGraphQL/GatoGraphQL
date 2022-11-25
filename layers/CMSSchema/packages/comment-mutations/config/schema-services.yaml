@@ -17,3 +17,6 @@ services:
 
     PoPCMSSchema\CommentMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\CommentMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
