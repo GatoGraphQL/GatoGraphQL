@@ -8,7 +8,7 @@ use stdClass;
 
 interface GenericErrorPayloadInterface extends ErrorPayloadInterface
 {
-    public function getCode(): string|int|null;
+    public function getCode(): ?string;
 
     public function getData(): ?stdClass;
 }
