@@ -163,6 +163,17 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
                 )
             );
         }
+        if (!$fieldDataAccessor->getValue(MutationInputProperties::COMMENT)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E5,
+                    ),
+                    $field,
+                )
+            );
+        }
     }
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
