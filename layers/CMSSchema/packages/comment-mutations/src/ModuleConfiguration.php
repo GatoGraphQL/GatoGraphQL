@@ -40,4 +40,20 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+    /**
+     * Indicate if to return the errors in an ObjectMutationPayload
+     * object in the response, or if to use the top-level errors.
+     */
+    public function usePayloadableCommentMutations(): bool
+    {
+        $envVariable = Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
