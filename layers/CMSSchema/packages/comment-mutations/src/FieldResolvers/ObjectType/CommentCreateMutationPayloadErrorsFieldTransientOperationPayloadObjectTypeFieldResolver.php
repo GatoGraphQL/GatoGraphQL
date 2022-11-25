@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CommentPostMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CommentCreateMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\CommentCreateMutationErrorPayloadUnionTypeResolver;
