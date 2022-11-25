@@ -35,9 +35,13 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
     protected function createAndStoreGenericErrorPayloadFromPayloadClientException(
         AbstractPayloadClientException $payloadClientException
     ): GenericErrorPayload {
+        $errorCode = $payloadClientException->getErrorCode();
+        if ($errorCode !== null) {
+            $errorCode = (string) $payloadClientException->getErrorCode();
+        }
         $errorPayload = new GenericErrorPayload(
             $payloadClientException->getMessage(),
-            $payloadClientException->getErrorCode(),
+            $errorCode,
             $payloadClientException->getData(),
         );
         $this->getObjectDictionary()->set(
