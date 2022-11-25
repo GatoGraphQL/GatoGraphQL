@@ -1,25 +1,14 @@
 {
-  "errors": [
-    {
-      "message": "You are not logged in",
-      "locations": [
+  "data": {
+    "addCommentToCustomPost": {
+      "status": "FAILURE",
+      "errors": [
         {
-          "line": 2,
-          "column": 3
+          "__typename": "UserIsNotLoggedInErrorPayload",
+          "message": "You are not logged in"
         }
       ],
-      "extensions": {
-        "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724}) { ... }",
-        "path": [
-          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724}) { ... }",
-          "mutation { ... }"
-        ],
-        "code": "PoPCMSSchema/CommentMutations@e1"
-      }
+      "comment": null
     }
-  ],
-  "data": {
-    "addCommentToCustomPost": null
   }
 }
