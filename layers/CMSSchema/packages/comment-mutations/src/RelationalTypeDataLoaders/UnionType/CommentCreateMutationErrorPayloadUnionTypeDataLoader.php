@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\CommentCreateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class CommentCreateMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?CommentCreateMutationErrorPayloadUnionTypeResolver $commentCreateMutationErrorPayloadUnionTypeResolver = null;
+    private ?RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setCommentCreateMutationErrorPayloadUnionTypeResolver(CommentCreateMutationErrorPayloadUnionTypeResolver $commentCreateMutationErrorPayloadUnionTypeResolver): void
+    final public function setRootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver(RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver): void
     {
-        $this->commentCreateMutationErrorPayloadUnionTypeResolver = $commentCreateMutationErrorPayloadUnionTypeResolver;
+        $this->rootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver = $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver;
     }
-    final protected function getCommentCreateMutationErrorPayloadUnionTypeResolver(): CommentCreateMutationErrorPayloadUnionTypeResolver
+    final protected function getRootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver(): RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver
     {
-        /** @var CommentCreateMutationErrorPayloadUnionTypeResolver */
-        return $this->commentCreateMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(CommentCreateMutationErrorPayloadUnionTypeResolver::class);
+        /** @var RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver */
+        return $this->rootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver::class);
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->getCommentCreateMutationErrorPayloadUnionTypeResolver();
+        return $this->getRootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver();
     }
 }
