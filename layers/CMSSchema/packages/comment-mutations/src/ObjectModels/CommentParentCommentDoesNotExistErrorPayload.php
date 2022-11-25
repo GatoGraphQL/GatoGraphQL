@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CommentMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class CommentParentDoesNotExistErrorPayload extends AbstractErrorPayload
+final class CommentParentCommentDoesNotExistErrorPayload extends AbstractErrorPayload
 {
 }

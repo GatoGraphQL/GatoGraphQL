@@ -10,7 +10,7 @@ use PoPCMSSchema\CommentMutations\ObjectModels\CommentAuthorEmailIsMissingErrorP
 use PoPCMSSchema\CommentMutations\ObjectModels\CommentAuthorNameIsMissingErrorPayload;
 use PoPCMSSchema\CommentMutations\ObjectModels\CommentContentIsEmptyErrorPayload;
 use PoPCMSSchema\CommentMutations\ObjectModels\CommentCustomPostIDIsMissingErrorPayload;
-use PoPCMSSchema\CommentMutations\ObjectModels\CommentParentDoesNotExistErrorPayload;
+use PoPCMSSchema\CommentMutations\ObjectModels\CommentParentCommentDoesNotExistErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -147,7 +147,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
-            ] => new CommentParentDoesNotExistErrorPayload(
+            ] => new CommentParentCommentDoesNotExistErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
             ),
             default => new GenericErrorPayload(
