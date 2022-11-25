@@ -160,7 +160,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCommentMutations = $moduleConfiguration->usePayloadableCommentMutations();
         return match ($fieldName) {
-            'addComment' => $this->getAddCommentToCustomPostMutationResolver(),
+            'addComment' => $usePayloadableCommentMutations
+                ? $this->getPayloadableAddCommentToCustomPostMutationResolver()
+                : $this->getAddCommentToCustomPostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -171,7 +173,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCommentMutations = $moduleConfiguration->usePayloadableCommentMutations();
         return match ($fieldName) {
-            'addComment' => $this->getCommentObjectTypeResolver(),
+            'addComment' => $usePayloadableCommentMutations
+                ? $this->getCommentCreateMutationPayloadObjectTypeResolver()
+                : $this->getCommentObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

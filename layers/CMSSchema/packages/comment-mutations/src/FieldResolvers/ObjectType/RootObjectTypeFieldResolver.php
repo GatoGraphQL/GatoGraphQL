@@ -149,7 +149,9 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
-                => $this->getAddCommentToCustomPostMutationResolver(),
+                => $usePayloadableCommentMutations
+                    ? $this->getPayloadableAddCommentToCustomPostMutationResolver()
+                    : $this->getAddCommentToCustomPostMutationResolver(),
             default
                 => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
@@ -163,7 +165,9 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
-                => $this->getCommentObjectTypeResolver(),
+                => $usePayloadableCommentMutations
+                    ? $this->getCommentCreateMutationPayloadObjectTypeResolver()
+                    : $this->getCommentObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
