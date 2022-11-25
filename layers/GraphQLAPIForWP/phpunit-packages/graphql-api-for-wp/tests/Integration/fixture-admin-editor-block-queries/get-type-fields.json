@@ -1550,13 +1550,6 @@
           "description": "The String scalar type represents textual data, represented as UTF-8 character sequences."
         },
         {
-          "name": "StringOrInt",
-          "namespacedName": "StringOrInt",
-          "fields": null,
-          "kind": "SCALAR",
-          "description": "Wildcard type representing either a String or Int types"
-        },
-        {
           "name": "URL",
           "namespacedName": "URL",
           "fields": null,
