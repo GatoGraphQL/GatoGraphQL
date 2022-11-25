@@ -148,20 +148,21 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             }
         }
         // Make sure the custom post exists
-        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        if (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E7,
-                        [
-                            $customPostID,
-                        ]
-                    ),
-                    $field,
-                )
-            );
+        if ($customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
+            if (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E7,
+                            [
+                                $customPostID,
+                            ]
+                        ),
+                        $field,
+                    )
+                );
+            }
         }
         if (!$fieldDataAccessor->getValue(MutationInputProperties::COMMENT)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
