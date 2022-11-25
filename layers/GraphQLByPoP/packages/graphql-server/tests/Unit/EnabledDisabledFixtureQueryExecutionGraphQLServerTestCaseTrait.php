@@ -14,11 +14,11 @@ trait EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait
         return $filePath . \DIRECTORY_SEPARATOR . $fileName . '@' . $state . '.json';
     }
 
-    protected function getGraphQLVariablesFile(string $filePath, string $fileName): string
-    {
-        $state = $this->getFileState();
-        return $filePath . \DIRECTORY_SEPARATOR . $fileName . '@' . $state . '.var.json';
-    }
+    // protected function getGraphQLVariablesFile(string $filePath, string $fileName): string
+    // {
+    //     $state = $this->getFileState();
+    //     return $filePath . \DIRECTORY_SEPARATOR . $fileName . '@' . $state . '.var.json';
+    // }
 
     protected function getFileState(): string
     {
