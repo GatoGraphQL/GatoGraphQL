@@ -233,11 +233,6 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "StringOrInt",
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
                     "name": "URL",
                     "enumValues": null,
                     "possibleTypes": null

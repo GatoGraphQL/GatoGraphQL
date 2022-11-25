@@ -523,7 +523,7 @@
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "StringOrInt",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -10709,16 +10709,6 @@
           "kind": "SCALAR",
           "name": "String",
           "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "SCALAR",
-          "name": "StringOrInt",
-          "description": "Wildcard type representing either a String or Int types",
           "fields": null,
           "inputFields": null,
           "interfaces": null,

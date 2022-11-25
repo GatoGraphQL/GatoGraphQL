@@ -10,13 +10,13 @@ final class GenericErrorPayload extends AbstractErrorPayload implements GenericE
 {
     public function __construct(
         string $message,
-        public readonly string|int|null $code = null,
+        public readonly ?string $code = null,
         public readonly ?stdClass $data = null,
     ) {
         parent::__construct($message);
     }
 
-    public function getCode(): string|int|null
+    public function getCode(): ?string
     {
         return $this->code;
     }
