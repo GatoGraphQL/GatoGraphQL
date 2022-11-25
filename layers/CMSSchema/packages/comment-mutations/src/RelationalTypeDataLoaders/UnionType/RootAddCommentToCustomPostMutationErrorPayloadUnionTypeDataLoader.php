@@ -8,7 +8,7 @@ use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\RootAddCommentToCustom
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class CommentCreateMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver = null;
 

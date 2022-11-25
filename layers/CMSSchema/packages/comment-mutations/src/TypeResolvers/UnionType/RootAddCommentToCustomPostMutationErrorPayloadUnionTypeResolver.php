@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\TypeResolvers\UnionType;
 
-use PoPCMSSchema\CommentMutations\RelationalTypeDataLoaders\UnionType\CommentCreateMutationErrorPayloadUnionTypeDataLoader;
+use PoPCMSSchema\CommentMutations\RelationalTypeDataLoaders\UnionType\RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader;
 use PoPSchema\SchemaCommons\TypeResolvers\UnionType\AbstractErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
 class RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver extends AbstractErrorPayloadUnionTypeResolver
 {
-    private ?CommentCreateMutationErrorPayloadUnionTypeDataLoader $commentCreateMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setCommentCreateMutationErrorPayloadUnionTypeDataLoader(CommentCreateMutationErrorPayloadUnionTypeDataLoader $commentCreateMutationErrorPayloadUnionTypeDataLoader): void
+    final public function setRootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader(RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader): void
     {
-        $this->commentCreateMutationErrorPayloadUnionTypeDataLoader = $commentCreateMutationErrorPayloadUnionTypeDataLoader;
+        $this->rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader = $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader;
     }
-    final protected function getCommentCreateMutationErrorPayloadUnionTypeDataLoader(): CommentCreateMutationErrorPayloadUnionTypeDataLoader
+    final protected function getRootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader(): RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var CommentCreateMutationErrorPayloadUnionTypeDataLoader */
-        return $this->commentCreateMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(CommentCreateMutationErrorPayloadUnionTypeDataLoader::class);
+        /** @var RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader */
+        return $this->rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -34,6 +34,6 @@ class RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver extends Ab
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getCommentCreateMutationErrorPayloadUnionTypeDataLoader();
+        return $this->getRootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader();
     }
 }
