@@ -1,0 +1,26 @@
+mutation {
+  addCommentToCustomPost(input: {
+    comment: "Great insight!",
+    customPostID: 1724,
+  }) {
+    status
+    errors {
+      __typename
+      ...on IsErrorPayload {
+        message
+      }
+    }
+    comment {
+      content
+      authorName
+      authorEmail
+      customPost {
+        __typename
+        ...on Post {
+          id
+          title
+        }
+      }
+    }
+  }
+}
