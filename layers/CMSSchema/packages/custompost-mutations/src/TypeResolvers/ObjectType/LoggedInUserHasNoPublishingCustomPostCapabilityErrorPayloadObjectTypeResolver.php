@@ -29,7 +29,7 @@ class LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResol
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to edit custom posts"', 'customposts');
+        return $this->__('Error payload for: "The logged-in user has no permission to publish custom posts"', 'customposts');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

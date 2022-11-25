@@ -29,7 +29,7 @@ class CommentAuthorEmailIsMissingErrorPayloadObjectTypeResolver extends Abstract
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to edit custom posts"', 'customposts');
+        return $this->__('Error payload for: "The comment\'s author email is missing"', 'comment-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
