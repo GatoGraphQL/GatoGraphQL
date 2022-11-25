@@ -169,6 +169,23 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        /** @var CustomPostMutationsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
+        if (!$usePayloadableCustomPostMutations) {
+            return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
+        }
+        return match ($fieldName) {
+            'createPost',
+            'updatePost' =>
+                SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
+    }
+
     /**
      * @return array<string,InputTypeResolverInterface>
      */
