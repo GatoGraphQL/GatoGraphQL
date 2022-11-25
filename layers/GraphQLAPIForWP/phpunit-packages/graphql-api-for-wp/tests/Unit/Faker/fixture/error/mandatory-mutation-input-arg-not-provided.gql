@@ -2,6 +2,6 @@ mutation {
   addCommentToCustomPost(input: {
     comment: null
   }) {
-    id
+    commentID
   }
 }

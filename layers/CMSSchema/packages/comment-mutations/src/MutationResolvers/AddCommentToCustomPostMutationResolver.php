@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
+use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
+use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CommentMutations\Module;
+use PoPCMSSchema\CommentMutations\ModuleConfiguration;
+use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
+use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -11,14 +20,6 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
-use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CommentMutations\Module;
-use PoPCMSSchema\CommentMutations\ModuleConfiguration;
-use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
-use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 /**
  * Add a comment to a custom post. The user may be logged-in or not
@@ -30,6 +31,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentTypeMutationAPIInterface $commentTypeMutationAPI = null;
     private ?UserTypeAPIInterface $userTypeAPI = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -57,6 +59,15 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     {
         /** @var UserTypeAPIInterface */
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+    }
+    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        /** @var CustomPostTypeAPIInterface */
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
     public function validateErrors(
@@ -129,6 +140,23 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
                             MutationErrorFeedbackItemProvider::E6,
                             [
                                 $parentCommentID,
+                            ]
+                        ),
+                        $field,
+                    )
+                );
+            }
+        }
+        // Make sure the custom post exists
+        if ($customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
+            if (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E7,
+                            [
+                                $customPostID,
                             ]
                         ),
                         $field,

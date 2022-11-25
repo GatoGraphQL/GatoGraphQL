@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace PoPSchema\SchemaCommons\MutationResolvers;
 
 use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
+use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
+use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ObjectMutationPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 
@@ -47,5 +49,25 @@ trait PayloadableMutationResolverTrait
             $payload,
         );
         return $payload;
+    }
+
+    protected function createAndStoreGenericErrorPayloadFromPayloadClientException(
+        AbstractPayloadClientException $payloadClientException
+    ): GenericErrorPayload {
+        $errorCode = $payloadClientException->getErrorCode();
+        if ($errorCode !== null) {
+            $errorCode = (string) $payloadClientException->getErrorCode();
+        }
+        $errorPayload = new GenericErrorPayload(
+            $payloadClientException->getMessage(),
+            $errorCode,
+            $payloadClientException->getData(),
+        );
+        $this->getObjectDictionary()->set(
+            get_class($errorPayload),
+            $errorPayload->getID(),
+            $errorPayload,
+        );
+        return $errorPayload;
     }
 }

@@ -66,9 +66,11 @@ abstract class AbstractTransientEntityOperationPayloadObjectTypeFieldResolver ex
     ): mixed {
         /** @var AbstractObjectMutationTransientOperationPayload */
         $objectMutationTransientOperationPayload = $object;
-        /**
-         * The parent already resolves all remaining fields
-         */
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case $this->getObjectIDFieldName():
+                return $objectMutationTransientOperationPayload->objectID;
+        }
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

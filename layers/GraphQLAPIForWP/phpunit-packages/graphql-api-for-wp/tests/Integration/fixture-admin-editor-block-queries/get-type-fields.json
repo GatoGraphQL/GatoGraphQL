@@ -77,6 +77,39 @@
           "description": "Comments added to custom posts"
         },
         {
+          "name": "CommentAuthorEmailIsMissingErrorPayload",
+          "namespacedName": "CommentAuthorEmailIsMissingErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The comment's author email is missing\""
+        },
+        {
+          "name": "CommentAuthorNameIsMissingErrorPayload",
+          "namespacedName": "CommentAuthorNameIsMissingErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The comment's author name is missing\""
+        },
+        {
+          "name": "CommentParentCommentDoesNotExistErrorPayload",
+          "namespacedName": "CommentParentCommentDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The comment's parent does not exist\""
+        },
+        {
           "name": "CustomPostDoesNotExistErrorPayload",
           "namespacedName": "CustomPostDoesNotExistErrorPayload",
           "fields": [
@@ -135,7 +168,7 @@
             }
           ],
           "kind": "OBJECT",
-          "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\""
+          "description": "Error payload for: \"The logged-in user has no permission to publish custom posts\""
         },
         {
           "name": "Media",
@@ -1021,6 +1054,46 @@
           ],
           "kind": "OBJECT",
           "description": "Root type, starting from which the query is executed"
+        },
+        {
+          "name": "RootAddCommentToCustomPostMutationPayload",
+          "namespacedName": "RootAddCommentToCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of adding a comment to a custom post"
+        },
+        {
+          "name": "RootReplyCommentMutationPayload",
+          "namespacedName": "RootReplyCommentMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of replying to a comment"
         },
         {
           "name": "User",
@@ -2347,6 +2420,20 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating a custom post"
+        },
+        {
+          "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when adding a comment to a custom post"
+        },
+        {
+          "name": "RootReplyCommentMutationErrorPayloadUnion",
+          "namespacedName": "RootReplyCommentMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when replying to a comment"
         }
       ]
     }

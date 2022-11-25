@@ -1,0 +1,25 @@
+{
+  "errors": [
+    {
+      "message": "You are not logged in",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724}) { ... }",
+        "path": [
+          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724}) { ... }",
+          "mutation { ... }"
+        ],
+        "code": "PoPCMSSchema/CommentMutations@e1"
+      }
+    }
+  ],
+  "data": {
+    "addCommentToCustomPost": null
+  }
+}

@@ -481,6 +481,105 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CommentAuthorEmailIsMissingErrorPayload",
+          "description": "Error payload for: \"The comment's author email is missing\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CommentAuthorNameIsMissingErrorPayload",
+          "description": "Error payload for: \"The comment's author name is missing\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CommentParentCommentDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The comment's parent does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "CustomPostDoesNotExistErrorPayload",
           "description": "Error payload for: \"The requested custom post does not exist\"",
           "fields": [
@@ -638,7 +737,7 @@
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
-          "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\"",
+          "description": "Error payload for: \"The logged-in user has no permission to publish custom posts\"",
           "fields": [
             {
               "name": "message",
@@ -1507,9 +1606,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Comment",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootAddCommentToCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootAddCommentToCustomPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1534,9 +1637,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "PostCreateMutationPayload",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "PostCreateMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PostCreateMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1643,9 +1750,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Comment",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootReplyCommentMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootReplyCommentMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1767,9 +1878,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "PostUpdateMutationPayload",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "PostUpdateMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PostUpdateMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -6224,9 +6339,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Comment",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootAddCommentToCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootAddCommentToCustomPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -6406,9 +6525,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "PostCreateMutationPayload",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "PostCreateMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PostCreateMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8018,9 +8141,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Comment",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootReplyCommentMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootReplyCommentMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8190,9 +8317,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "PostUpdateMutationPayload",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "PostUpdateMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PostUpdateMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8315,6 +8446,148 @@
               "ofType": null
             }
           ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootAddCommentToCustomPostMutationPayload",
+          "description": "Payload of adding a comment to a custom post",
+          "fields": [
+            {
+              "name": "comment",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Comment",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "commentID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootAddCommentToCustomPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootReplyCommentMutationPayload",
+          "description": "Payload of replying to a comment",
+          "fields": [
+            {
+              "name": "comment",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Comment",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "commentID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootReplyCommentMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootReplyCommentMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootReplyCommentMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -11251,17 +11524,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -11271,7 +11539,27 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentAuthorEmailIsMissingErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentAuthorNameIsMissingErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentParentCommentDoesNotExistErrorPayload",
               "ofType": null
             }
           ]
@@ -17952,17 +18240,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "GenericErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
               "ofType": null
             },
             {
@@ -17972,7 +18255,79 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when adding a comment to a custom post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CommentParentCommentDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentAuthorNameIsMissingErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentAuthorEmailIsMissingErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootReplyCommentMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when replying to a comment",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CommentParentCommentDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentAuthorNameIsMissingErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentAuthorEmailIsMissingErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
               "ofType": null
             }
           ]

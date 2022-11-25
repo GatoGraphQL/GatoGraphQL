@@ -10,7 +10,6 @@ use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoEditingCustom
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
-use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
@@ -24,26 +23,6 @@ trait PayloadableCreateOrUpdateCustomPostMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
         $errorPayload = $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
-        $this->getObjectDictionary()->set(
-            get_class($errorPayload),
-            $errorPayload->getID(),
-            $errorPayload,
-        );
-        return $errorPayload;
-    }
-
-    protected function createAndStoreGenericErrorPayloadFromPayloadClientException(
-        AbstractPayloadClientException $payloadClientException
-    ): GenericErrorPayload {
-        $errorCode = $payloadClientException->getErrorCode();
-        if ($errorCode !== null) {
-            $errorCode = (string) $payloadClientException->getErrorCode();
-        }
-        $errorPayload = new GenericErrorPayload(
-            $payloadClientException->getMessage(),
-            $errorCode,
-            $payloadClientException->getData(),
-        );
         $this->getObjectDictionary()->set(
             get_class($errorPayload),
             $errorPayload->getID(),
