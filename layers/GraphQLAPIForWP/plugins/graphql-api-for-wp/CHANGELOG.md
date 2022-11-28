@@ -148,7 +148,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
   - `Root.createPost: RootCreatePostMutationPayload!`
   - `Root.replyComment: RootReplyCommentMutationPayload!`
-  - `Root.updatePost: RootCreatePostMutationPayload!`
+  - `Root.updatePost: RootUpdatePostMutationPayload!`
   - `Comment.reply: CommentReplyMutationPayload!`
   - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
   - `Post.update: PostUpdateMutationPayload!`

@@ -767,7 +767,7 @@ The affected mutations are:
 - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
 - `Root.createPost: RootCreatePostMutationPayload!`
 - `Root.replyComment: RootReplyCommentMutationPayload!`
-- `Root.updatePost: RootCreatePostMutationPayload!`
+- `Root.updatePost: RootUpdatePostMutationPayload!`
 - `Comment.reply: CommentReplyMutationPayload!`
 - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
 - `Post.update: PostUpdateMutationPayload!`
