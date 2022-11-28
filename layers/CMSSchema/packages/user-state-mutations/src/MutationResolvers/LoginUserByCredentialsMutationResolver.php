@@ -129,8 +129,42 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             $userID = $this->getUserTypeAPI()->getUserID($user);
             App::doAction('gd:user:loggedin', $userID);
             return $userID;
-        } catch (UserStateMutationException) {
+        } catch (UserStateMutationException $userStateMutationException) {
+            $this->transferErrorFromUserStateMutationExceptionToFieldResolutionFeedbackStore(
+                $userStateMutationException,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
             return null;
         }
+    }
+
+    protected function transferErrorFromUserStateMutationExceptionToFieldResolutionFeedbackStore(
+        UserStateMutationException $userStateMutationException,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $errorFieldResolutionFeedback = match ($userStateMutationException->getErrorCode()) {
+            'incorrect_password' => new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            ),
+            'invalid_email' => new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
+            ),
+            default => null,
+        };
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                $errorFieldResolutionFeedback !== null
+                    ? $errorFieldResolutionFeedback
+                    : new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E7,
+                    ),
+                    $fieldDataAccessor->getField(),
+            )
+        );
     }
 }
