@@ -142,15 +142,33 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableUserStateMutations = $moduleConfiguration->usePayloadableUserStateMutations();
         return match ($fieldName) {
-            'loginUser' => $this->getLoginUserOneofMutationResolver(),
-            'logoutUser' => $this->getLogoutUserMutationResolver(),
+            'loginUser' => $usePayloadableUserStateMutations
+                ? $this->getPayloadableLoginUserOneofMutationResolver()
+                : $this->getLoginUserOneofMutationResolver(),
+            'logoutUser' => $usePayloadableUserStateMutations
+                ? $this->getPayloadableLogoutUserMutationResolver()
+                : $this->getLogoutUserMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableUserStateMutations = $moduleConfiguration->usePayloadableUserStateMutations();
+        if ($usePayloadableUserStateMutations) {
+            return match ($fieldName) {
+                'loginUser' => $this->getRootLoginUserMutationPayloadObjectTypeResolver(),
+                'logoutUser' => $this->getRootLogoutUserMutationPayloadObjectTypeResolver(),
+                default
+                    => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            };
+        }
         return match ($fieldName) {
             'loginUser',
             'logoutUser'
