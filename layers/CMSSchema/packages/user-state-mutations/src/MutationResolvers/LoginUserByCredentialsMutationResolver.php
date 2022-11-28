@@ -144,14 +144,24 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $userLogin = '';
+        if ($errorData = $userStateMutationException->getData()) {
+            $userLogin = $errorData->userLogin ?? '';
+        }
         $errorFieldResolutionFeedback = match ($userStateMutationException->getErrorCode()) {
             'invalid_username' => new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
+                [
+                    $userLogin,
+                ]
             ),
             'invalid_email' => new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
+                [
+                    $userLogin,
+                ]
             ),
             'incorrect_password' => new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
@@ -171,7 +181,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
                             $userStateMutationException->getMessage(),
                         ]
                     ),
-                    $fieldDataAccessor->getField(),
+                $fieldDataAccessor->getField(),
             )
         );
     }

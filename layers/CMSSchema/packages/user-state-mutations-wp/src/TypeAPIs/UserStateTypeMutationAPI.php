@@ -8,6 +8,7 @@ use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 use PoP\Root\Services\BasicServiceTrait;
+use stdClass;
 use WP_Error;
 
 use function wp_logout;
@@ -81,10 +82,12 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
             default => $errorMessage,
         };
 
+        $errorData = $this->getWPErrorData($wpError) ?? new stdClass();
+        $errorData->userLogin = $credentials['user_login'];
         return new UserStateMutationException(
             $errorMessage,
             $errorCode,
-            $this->getWPErrorData($wpError),
+            $errorData,
         );
     }
 
