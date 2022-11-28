@@ -9,7 +9,6 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
-use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
@@ -43,9 +42,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
             );
         }
     }
-    /**
-     * @throws AbstractException In case of error
-     */
+
     public function executeMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

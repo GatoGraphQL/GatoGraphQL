@@ -33,6 +33,16 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "InvalidUserEmailErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "InvalidUsernameErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
                     "enumValues": null,
                     "possibleTypes": null
@@ -73,6 +83,11 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "PasswordIsIncorrectErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "Post",
                     "enumValues": null,
                     "possibleTypes": null
@@ -108,6 +123,16 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "RootLoginUserMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootLogoutUserMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "RootReplyCommentMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
@@ -124,6 +149,11 @@
                 },
                 {
                     "name": "UserAvatar",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserIsLoggedInErrorPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -321,6 +351,18 @@
                         },
                         {
                             "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "UserIsLoggedInErrorPayload"
+                        },
+                        {
+                            "name": "InvalidUsernameErrorPayload"
+                        },
+                        {
+                            "name": "PasswordIsIncorrectErrorPayload"
+                        },
+                        {
+                            "name": "InvalidUserEmailErrorPayload"
                         }
                     ]
                 },
@@ -1425,6 +1467,39 @@
                         },
                         {
                             "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootLoginUserMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "InvalidUserEmailErrorPayload"
+                        },
+                        {
+                            "name": "PasswordIsIncorrectErrorPayload"
+                        },
+                        {
+                            "name": "InvalidUsernameErrorPayload"
+                        },
+                        {
+                            "name": "UserIsLoggedInErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootLogoutUserMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
                         }
                     ]
                 },

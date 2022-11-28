@@ -138,6 +138,28 @@
           "description": "Generic error payload"
         },
         {
+          "name": "InvalidUserEmailErrorPayload",
+          "namespacedName": "InvalidUserEmailErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"No user is registered with the provided email\""
+        },
+        {
+          "name": "InvalidUsernameErrorPayload",
+          "namespacedName": "InvalidUsernameErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"No user is registered with the provided username\""
+        },
+        {
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
           "namespacedName": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
           "fields": [
@@ -458,6 +480,17 @@
           ],
           "kind": "OBJECT",
           "description": "Representation of a page"
+        },
+        {
+          "name": "PasswordIsIncorrectErrorPayload",
+          "namespacedName": "PasswordIsIncorrectErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The password is incorrect\""
         },
         {
           "name": "Post",
@@ -1056,6 +1089,58 @@
           "description": "Payload of creating a post"
         },
         {
+          "name": "RootLoginUserMutationPayload",
+          "namespacedName": "RootLoginUserMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of logging the user in"
+        },
+        {
+          "name": "RootLogoutUserMutationPayload",
+          "namespacedName": "RootLogoutUserMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of logging the user out"
+        },
+        {
           "name": "RootReplyCommentMutationPayload",
           "namespacedName": "RootReplyCommentMutationPayload",
           "fields": [
@@ -1218,6 +1303,17 @@
           ],
           "kind": "OBJECT",
           "description": "User avatar"
+        },
+        {
+          "name": "UserIsLoggedInErrorPayload",
+          "namespacedName": "UserIsLoggedInErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user is already logged-in\""
         },
         {
           "name": "UserIsNotLoggedInErrorPayload",
@@ -2420,6 +2516,20 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when creating a custom post"
+        },
+        {
+          "name": "RootLoginUserMutationErrorPayloadUnion",
+          "namespacedName": "RootLoginUserMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when logging a user in"
+        },
+        {
+          "name": "RootLogoutUserMutationErrorPayloadUnion",
+          "namespacedName": "RootLogoutUserMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when logging a user out"
         },
         {
           "name": "RootReplyCommentMutationErrorPayloadUnion",

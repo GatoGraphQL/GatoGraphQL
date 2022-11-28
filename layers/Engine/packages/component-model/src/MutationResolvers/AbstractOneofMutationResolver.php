@@ -118,7 +118,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @throws AbstractException In case of error
      */
-    final public function executeMutation(
+    public function executeMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
@@ -134,7 +134,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @throws AbstractValueResolutionPromiseException
      */
-    final public function validateErrors(
+    public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
