@@ -32,8 +32,8 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
-    private ?RootUpdatePostMutationPayloadObjectTypeResolver $postUpdateMutationPayloadObjectTypeResolver = null;
-    private ?RootCreatePostMutationPayloadObjectTypeResolver $postCreateMutationPayloadObjectTypeResolver = null;
+    private ?RootUpdatePostMutationPayloadObjectTypeResolver $rootUpdatePostMutationPayloadObjectTypeResolver = null;
+    private ?RootCreatePostMutationPayloadObjectTypeResolver $rootCreatePostMutationPayloadObjectTypeResolver = null;
     private ?CreatePostMutationResolver $createPostMutationResolver = null;
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
     private ?PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver = null;
@@ -51,23 +51,23 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var PostObjectTypeResolver */
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
-    final public function setRootUpdatePostMutationPayloadObjectTypeResolver(RootUpdatePostMutationPayloadObjectTypeResolver $postUpdateMutationPayloadObjectTypeResolver): void
+    final public function setRootUpdatePostMutationPayloadObjectTypeResolver(RootUpdatePostMutationPayloadObjectTypeResolver $rootUpdatePostMutationPayloadObjectTypeResolver): void
     {
-        $this->postUpdateMutationPayloadObjectTypeResolver = $postUpdateMutationPayloadObjectTypeResolver;
+        $this->rootUpdatePostMutationPayloadObjectTypeResolver = $rootUpdatePostMutationPayloadObjectTypeResolver;
     }
     final protected function getRootUpdatePostMutationPayloadObjectTypeResolver(): RootUpdatePostMutationPayloadObjectTypeResolver
     {
         /** @var RootUpdatePostMutationPayloadObjectTypeResolver */
-        return $this->postUpdateMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(RootUpdatePostMutationPayloadObjectTypeResolver::class);
+        return $this->rootUpdatePostMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(RootUpdatePostMutationPayloadObjectTypeResolver::class);
     }
-    final public function setRootCreatePostMutationPayloadObjectTypeResolver(RootCreatePostMutationPayloadObjectTypeResolver $postCreateMutationPayloadObjectTypeResolver): void
+    final public function setRootCreatePostMutationPayloadObjectTypeResolver(RootCreatePostMutationPayloadObjectTypeResolver $rootCreatePostMutationPayloadObjectTypeResolver): void
     {
-        $this->postCreateMutationPayloadObjectTypeResolver = $postCreateMutationPayloadObjectTypeResolver;
+        $this->rootCreatePostMutationPayloadObjectTypeResolver = $rootCreatePostMutationPayloadObjectTypeResolver;
     }
     final protected function getRootCreatePostMutationPayloadObjectTypeResolver(): RootCreatePostMutationPayloadObjectTypeResolver
     {
         /** @var RootCreatePostMutationPayloadObjectTypeResolver */
-        return $this->postCreateMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(RootCreatePostMutationPayloadObjectTypeResolver::class);
+        return $this->rootCreatePostMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(RootCreatePostMutationPayloadObjectTypeResolver::class);
     }
     final public function setCreatePostMutationResolver(CreatePostMutationResolver $createPostMutationResolver): void
     {
