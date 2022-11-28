@@ -765,9 +765,9 @@ If the user doesn't have the permission to edit posts, we will receive:
 The affected mutations are:
 
 - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
-- `Root.createPost: PostCreateMutationPayload!`
+- `Root.createPost: RootCreatePostMutationPayload!`
 - `Root.replyComment: RootReplyCommentMutationPayload!`
-- `Root.updatePost: PostCreateMutationPayload!`
+- `Root.updatePost: RootCreatePostMutationPayload!`
 - `Comment.reply: CommentReplyMutationPayload!`
 - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
 - `Post.update: PostNestedUpdateMutationPayload!`

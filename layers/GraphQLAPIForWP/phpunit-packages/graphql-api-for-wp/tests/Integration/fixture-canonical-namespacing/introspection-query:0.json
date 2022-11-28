@@ -1638,10 +1638,10 @@
               ],
               "type": {
                 "kind": "NON_NULL",
-                "name": "PostCreateMutationPayload!",
+                "name": "RootCreatePostMutationPayload!",
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "PostCreateMutationPayload",
+                  "name": "RootCreatePostMutationPayload",
                   "ofType": null
                 }
               },
@@ -4019,7 +4019,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "PostCreateMutationPayload",
+          "name": "RootCreatePostMutationPayload",
           "description": "Payload of creating a post",
           "fields": [
             {
@@ -6526,10 +6526,10 @@
               ],
               "type": {
                 "kind": "NON_NULL",
-                "name": "PostCreateMutationPayload!",
+                "name": "RootCreatePostMutationPayload!",
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "PostCreateMutationPayload",
+                  "name": "RootCreatePostMutationPayload",
                   "ofType": null
                 }
               },

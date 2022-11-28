@@ -626,8 +626,8 @@
           "description": "Representation of a category, added to a post"
         },
         {
-          "name": "PostCreateMutationPayload",
-          "namespacedName": "PostCreateMutationPayload",
+          "name": "RootCreatePostMutationPayload",
+          "namespacedName": "RootCreatePostMutationPayload",
           "fields": [
             {
               "name": "errors"

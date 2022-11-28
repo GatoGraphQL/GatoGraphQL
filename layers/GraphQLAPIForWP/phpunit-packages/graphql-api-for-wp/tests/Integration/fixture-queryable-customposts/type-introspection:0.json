@@ -83,7 +83,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "PostCreateMutationPayload",
+                    "name": "RootCreatePostMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
