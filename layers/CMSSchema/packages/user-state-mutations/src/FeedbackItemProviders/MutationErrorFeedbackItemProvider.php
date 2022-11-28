@@ -16,6 +16,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E5 = 'e5';
     public final const E6 = 'e6';
     public final const E7 = 'e7';
+    public final const E8 = 'e8';
 
     /**
      * @return string[]
@@ -30,6 +31,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E5,
             self::E6,
             self::E7,
+            self::E8,
         ];
     }
 
@@ -40,9 +42,10 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E2 => $this->__('Please supply your username or email', 'user-state-mutations'),
             self::E3 => $this->__('Please supply your password', 'user-state-mutations'),
             self::E4 => $this->__('You are already logged in', 'user-state-mutations'),
-            self::E5 => $this->__('Unknown email address', 'user-state-mutations'),
-            self::E6 => $this->__('The password is incorrect', 'user-state-mutations'),
-            self::E7 => $this->__('[%1$s] %2$s', 'user-state-mutations'),
+            self::E5 => $this->__('There is no registered user with the provided username', 'user-state-mutations'),
+            self::E6 => $this->__('Unknown email address', 'user-state-mutations'),
+            self::E7 => $this->__('The password is incorrect', 'user-state-mutations'),
+            self::E8 => $this->__('[%1$s] %2$s', 'user-state-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

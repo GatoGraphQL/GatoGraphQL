@@ -145,13 +145,17 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $errorFieldResolutionFeedback = match ($userStateMutationException->getErrorCode()) {
-            'incorrect_password' => new FeedbackItemResolution(
+            'invalid_username' => new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
             ),
             'invalid_email' => new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
+            ),
+            'incorrect_password' => new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
             ),
             default => null,
         };
@@ -161,7 +165,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
                     ? $errorFieldResolutionFeedback
                     : new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E7,
+                        MutationErrorFeedbackItemProvider::E8,
                         [
                             $userStateMutationException->getErrorCode(),
                             $userStateMutationException->getMessage(),

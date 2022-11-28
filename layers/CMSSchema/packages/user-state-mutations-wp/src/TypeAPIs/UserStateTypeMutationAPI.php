@@ -67,14 +67,19 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         $errorMessage = $wpError->get_error_message();
 
         /**
-         * Override the message to remove HTML tags and links
+         * Override the messages to remove HTML tags and links
          */
-        if ($errorCode === 'incorrect_password') {
-            $errorMessage = sprintf(
+        $errorMessage = match ($errorCode) {
+            'invalid_username' => sprintf(
+                $this->__('The username \'%s\' is not registered on this site.', 'user-state-mutations'),
+                $credentials['user_login']
+            ),
+            'incorrect_password' => sprintf(
                 $this->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
                 $credentials['user_login']
-            );
-        }
+            ),
+            default => $errorMessage,
+        };
 
         return new UserStateMutationException(
             $errorMessage,
