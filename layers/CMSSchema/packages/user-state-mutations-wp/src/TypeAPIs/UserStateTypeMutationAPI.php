@@ -69,7 +69,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
             );
         }
             
-            /** @var stdClass|null */
+        /** @var stdClass|null */
         $errorData = null;
         if ($wpError->get_error_data()) {
             if (is_array($wpError->get_error_data())) {
