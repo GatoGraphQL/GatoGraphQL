@@ -1879,10 +1879,10 @@
               ],
               "type": {
                 "kind": "NON_NULL",
-                "name": "PostUpdateMutationPayload!",
+                "name": "RootUpdatePostMutationPayload!",
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "PostUpdateMutationPayload",
+                  "name": "RootUpdatePostMutationPayload",
                   "ofType": null
                 }
               },
@@ -4381,7 +4381,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "PostUpdateMutationPayload",
+          "name": "RootUpdatePostMutationPayload",
           "description": "Payload of executing an update mutation on a post",
           "fields": [
             {
@@ -8318,10 +8318,10 @@
               ],
               "type": {
                 "kind": "NON_NULL",
-                "name": "PostUpdateMutationPayload!",
+                "name": "RootUpdatePostMutationPayload!",
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "PostUpdateMutationPayload",
+                  "name": "RootUpdatePostMutationPayload",
                   "ofType": null
                 }
               },

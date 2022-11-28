@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\CustomPostUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostUpdateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\RootUpdatePostMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class PostUpdateMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
+class RootUpdatePostMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
 {
     private ?CustomPostUpdateMutationErrorPayloadUnionTypeResolver $customPostUpdateMutationErrorPayloadUnionTypeResolver = null;
 
@@ -30,7 +30,7 @@ class PostUpdateMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFie
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostUpdateMutationPayloadObjectTypeResolver::class,
+            RootUpdatePostMutationPayloadObjectTypeResolver::class,
         ];
     }
 

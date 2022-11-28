@@ -659,7 +659,7 @@ Mutations in the schema now return some "Payload" object, which provides any err
 
 Errors are provided via some "ErrorPayloadUnion" type, containing all possible errors for that mutation. Every possible error is some "ErrorPayload" type that implements the interface `IsErrorPayload`.
 
-For instance, the operation `updatePost` returns a `PostUpdateMutationPayload`, which contains the following fields:
+For instance, the operation `updatePost` returns a `RootUpdatePostMutationPayload`, which contains the following fields:
 
 - `status`: whether the operation was successful or not, with either value `SUCCESS` or `FAILURE`
 - `post` and `postID`: the updated post object and its ID, if the update was successful

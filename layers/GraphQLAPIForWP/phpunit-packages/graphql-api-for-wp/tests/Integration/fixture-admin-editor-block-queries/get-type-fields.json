@@ -690,8 +690,8 @@
           "description": "Representation of a tag, added to a post"
         },
         {
-          "name": "PostUpdateMutationPayload",
-          "namespacedName": "PostUpdateMutationPayload",
+          "name": "RootUpdatePostMutationPayload",
+          "namespacedName": "RootUpdatePostMutationPayload",
           "fields": [
             {
               "name": "errors"
