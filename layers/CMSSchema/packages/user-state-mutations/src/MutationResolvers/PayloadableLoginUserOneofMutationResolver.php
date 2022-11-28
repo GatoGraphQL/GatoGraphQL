@@ -16,6 +16,7 @@ use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\Exception\AbstractException;
 
 class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationResolver
 {

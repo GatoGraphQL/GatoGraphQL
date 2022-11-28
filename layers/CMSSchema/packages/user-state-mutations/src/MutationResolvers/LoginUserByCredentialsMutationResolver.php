@@ -177,7 +177,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
                         MutationErrorFeedbackItemProvider::class,
                         MutationErrorFeedbackItemProvider::E8,
                         [
-                            $userStateMutationException->getErrorCode(),
+                            $userStateMutationException->getErrorCode() ?? 'undefined error code',
                             $userStateMutationException->getMessage(),
                         ]
                     ),
