@@ -61,10 +61,12 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
         } catch (UserStateMutationException $userStateMutationException) {
-            if ($userStateMutationException->getErrorCode() === 'incorrect_password') {
-                return new PasswordIsIncorrectErrorPayload(
-                    $userStateMutationException->getMessage(),
-                );
+            if ($errorPayload = $this->identifyAndStoreSpecificErrorPayloadFromUserStateMutationException($userStateMutationException)) {
+                return $this->createAndStoreFailureObjectMutationPayload(
+                    [
+                        $errorPayload,
+                    ]
+                )->getID();
             }
             return $this->createAndStoreFailureObjectMutationPayload(
                 [
@@ -85,6 +87,25 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
 
         /** @var string|int $userID */
         return $this->createAndStoreSuccessObjectMutationPayload($userID)->getID();
+    }
+
+    protected function identifyAndStoreSpecificErrorPayloadFromUserStateMutationException(
+        UserStateMutationException $userStateMutationException
+    ): ?ErrorPayloadInterface {
+        $errorPayload = match ($userStateMutationException->getErrorCode()) {
+            'incorrect_password' => new PasswordIsIncorrectErrorPayload(
+                $userStateMutationException->getMessage(),
+            ),
+            default => null,
+        };
+        if ($errorPayload !== null) {
+            $this->getObjectDictionary()->set(
+                get_class($errorPayload),
+                $errorPayload->getID(),
+                $errorPayload,
+            );
+        }
+        return $errorPayload;
     }
 
     /**
