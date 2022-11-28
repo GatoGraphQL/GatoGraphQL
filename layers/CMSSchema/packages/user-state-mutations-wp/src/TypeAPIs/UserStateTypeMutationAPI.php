@@ -45,7 +45,10 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         if ($result instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $result;
-            throw new $this->createUserStateMutationException($wpError);
+            throw $this->createUserStateMutationException(
+                $wpError,
+                $credentials,
+            );
         }
 
         $user = $result;
