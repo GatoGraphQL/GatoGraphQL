@@ -9,6 +9,8 @@ use PoPCMSSchema\UserStateMutations\ModuleConfiguration;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\LoginUserOneofMutationResolver;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\LogoutUserMutationResolver;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\PayloadableLoginUserOneofMutationResolver;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\PayloadableLogoutUserMutationResolver;
 use PoPCMSSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginUserByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\App;
