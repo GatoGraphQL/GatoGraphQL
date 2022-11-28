@@ -58,30 +58,30 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         $postIDOrError = \wp_insert_post($data, true);
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
-            $error = $postIDOrError;
-            throw $this->createCustomPostCRUDMutationException($error);
+            $wpError = $postIDOrError;
+            throw $this->createCustomPostCRUDMutationException($wpError);
         }
         /** @var int */
         $postID = $postIDOrError;
         return $postID;
     }
 
-    protected function createCustomPostCRUDMutationException(WP_Error $error): CustomPostCRUDMutationException
+    protected function createCustomPostCRUDMutationException(WP_Error $wpError): CustomPostCRUDMutationException
     {
         /** @var stdClass|null */
         $errorData = null;
-        if ($error->get_error_data()) {
-            if (is_array($error->get_error_data())) {
-                $errorData = (object) $error->get_error_data();
+        if ($wpError->get_error_data()) {
+            if (is_array($wpError->get_error_data())) {
+                $errorData = (object) $wpError->get_error_data();
             } else {
                 $errorData = new stdClass();
-                $key = $error->get_error_code() ? (string) $error->get_error_code() : 'data';
-                $errorData->$key = $error->get_error_data();
+                $key = $wpError->get_error_code() ? (string) $wpError->get_error_code() : 'data';
+                $errorData->$key = $wpError->get_error_data();
             }
         }
         return new CustomPostCRUDMutationException(
-            $error->get_error_message(),
-            $error->get_error_code() ? $error->get_error_code() : null,
+            $wpError->get_error_message(),
+            $wpError->get_error_code() ? $wpError->get_error_code() : null,
             $errorData,
         );
     }
@@ -98,8 +98,8 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
         $postIDOrError = \wp_update_post($data, true);
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
-            $error = $postIDOrError;
-            throw $this->createCustomPostCRUDMutationException($error);
+            $wpError = $postIDOrError;
+            throw $this->createCustomPostCRUDMutationException($wpError);
         }
         /** @var int */
         $postID = $postIDOrError;
