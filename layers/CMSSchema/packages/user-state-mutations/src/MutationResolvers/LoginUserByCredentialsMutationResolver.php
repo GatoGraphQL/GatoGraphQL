@@ -12,7 +12,6 @@ use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPCMSSchema\UserStateMutations\Exception\UserLoginMutationException;
 use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
@@ -102,13 +101,24 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
 
         // Find out if it was a username or an email that was provided
-        $isEmail = strpos($usernameOrEmail, '@');
+        $isEmail = str_contains($usernameOrEmail, '@');
         if ($isEmail) {
-            $user = $this->getUserTypeAPI()->getUserByEmail($usernameOrEmail);
-            if (!$user) {
-                throw new UserLoginMutationException(
-                    $this->__('There is no user registered with that email address.')
+            $email = $usernameOrEmail;
+            $user = $this->getUserTypeAPI()->getUserByEmail($email);
+            if ($user === null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E6,
+                            [
+                                $email,
+                            ]
+                        ),
+                        $fieldDataAccessor->getField(),
+                    )
                 );
+                return null;
             }
             $username = $this->getUserTypeAPI()->getUserLogin($user);
         } else {
