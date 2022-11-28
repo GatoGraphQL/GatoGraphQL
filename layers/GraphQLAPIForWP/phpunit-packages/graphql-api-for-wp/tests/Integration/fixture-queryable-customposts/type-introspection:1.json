@@ -88,17 +88,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "RootCreatePostMutationPayload",
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
                     "name": "PostTag",
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "name": "RootUpdatePostMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -118,7 +108,17 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "RootCreatePostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "RootReplyCommentMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootUpdatePostMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -1416,24 +1416,6 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "RootCreateCustomPostMutationErrorPayloadUnion",
-                    "enumValues": null,
-                    "possibleTypes": [
-                        {
-                            "name": "GenericErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
-                        },
-                        {
-                            "name": "UserIsNotLoggedInErrorPayload"
-                        }
-                    ]
-                },
-                {
                     "name": "CustomPostUnion",
                     "enumValues": null,
                     "possibleTypes": [
@@ -1445,30 +1427,6 @@
                         },
                         {
                             "name": "GenericCustomPost"
-                        }
-                    ]
-                },
-                {
-                    "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
-                    "enumValues": null,
-                    "possibleTypes": [
-                        {
-                            "name": "CustomPostDoesNotExistErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
-                        },
-                        {
-                            "name": "GenericErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
-                        },
-                        {
-                            "name": "UserIsNotLoggedInErrorPayload"
                         }
                     ]
                 },
@@ -1494,6 +1452,24 @@
                     ]
                 },
                 {
+                    "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
                     "name": "RootReplyCommentMutationErrorPayloadUnion",
                     "enumValues": null,
                     "possibleTypes": [
@@ -1508,6 +1484,30 @@
                         },
                         {
                             "name": "GenericErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
                         }
                     ]
                 }
