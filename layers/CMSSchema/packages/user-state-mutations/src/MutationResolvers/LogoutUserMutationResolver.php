@@ -42,7 +42,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
             );
         }
     }
-    
+
     public function executeMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
