@@ -6,6 +6,7 @@ namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
 use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\UserStateMutations\ObjectModels\InvalidUserEmailErrorPayload;
+use PoPCMSSchema\UserStateMutations\ObjectModels\InvalidUsernameErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\PasswordIsIncorrectErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
@@ -109,12 +110,18 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
-            ] => new InvalidUserEmailErrorPayload(
+            ] => new InvalidUsernameErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
+            ] => new InvalidUserEmailErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
             ] => new PasswordIsIncorrectErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
             ),
