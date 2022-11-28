@@ -663,9 +663,9 @@ For instance, the operation `updatePost` returns a `RootUpdatePostMutationPayloa
 
 - `status`: whether the operation was successful or not, with either value `SUCCESS` or `FAILURE`
 - `post` and `postID`: the updated post object and its ID, if the update was successful
-- `errors`: a list of `CustomPostUpdateMutationErrorPayloadUnion`, if the update failed.
+- `errors`: a list of `RootUpdateCustomPostMutationErrorPayloadUnion`, if the update failed.
 
-The union type `CustomPostUpdateMutationErrorPayloadUnion` contains the list of all possible errors that can happen when modifying a custom post:
+The union type `RootUpdateCustomPostMutationErrorPayloadUnion` contains the list of all possible errors that can happen when modifying a custom post:
 
 - `CustomPostDoesNotExistErrorPayload`
 - `GenericErrorPayload`

@@ -2415,8 +2415,8 @@
           "description": "Union of 'custom post' type resolvers"
         },
         {
-          "name": "CustomPostUpdateMutationErrorPayloadUnion",
-          "namespacedName": "CustomPostUpdateMutationErrorPayloadUnion",
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateCustomPostMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating a custom post"

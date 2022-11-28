@@ -4390,13 +4390,13 @@
               "args": [],
               "type": {
                 "kind": "LIST",
-                "name": "[CustomPostUpdateMutationErrorPayloadUnion!]",
+                "name": "[RootUpdateCustomPostMutationErrorPayloadUnion!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "CustomPostUpdateMutationErrorPayloadUnion!",
+                  "name": "RootUpdateCustomPostMutationErrorPayloadUnion!",
                   "ofType": {
                     "kind": "UNION",
-                    "name": "CustomPostUpdateMutationErrorPayloadUnion",
+                    "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
                     "ofType": null
                   }
                 }
@@ -18226,7 +18226,7 @@
         },
         {
           "kind": "UNION",
-          "name": "CustomPostUpdateMutationErrorPayloadUnion",
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when updating a custom post",
           "fields": null,
           "inputFields": null,

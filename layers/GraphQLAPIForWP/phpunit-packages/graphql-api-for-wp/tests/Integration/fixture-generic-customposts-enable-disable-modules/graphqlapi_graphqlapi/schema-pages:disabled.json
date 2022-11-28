@@ -1396,7 +1396,7 @@
                     ]
                 },
                 {
-                    "name": "CustomPostUpdateMutationErrorPayloadUnion",
+                    "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
                     "enumValues": null,
                     "possibleTypes": [
                         {
