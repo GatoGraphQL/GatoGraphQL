@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPCMSSchema\UserStateMutations\Module;
+use PoPCMSSchema\UserStateMutations\ModuleConfiguration;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\LoginUserOneofMutationResolver;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\LogoutUserMutationResolver;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\UserStateMutations\TypeResolvers\InputObjectType\LoginUserByOneofInputObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -88,6 +91,23 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'loginUser' => $this->__('Log the user in', 'user-state-mutations'),
             'logoutUser' => $this->__('Log the user out', 'user-state-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableUserStateMutations = $moduleConfiguration->usePayloadableUserStateMutations();
+        if (!$usePayloadableUserStateMutations) {
+            return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
+        }
+        return match ($fieldName) {
+            'loginUser',
+            'logoutUser' =>
+                SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
