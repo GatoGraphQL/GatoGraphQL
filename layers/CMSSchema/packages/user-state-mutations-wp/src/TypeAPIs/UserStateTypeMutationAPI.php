@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutationsWP\TypeAPIs;
 
+use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 use PoP\Root\Services\BasicServiceTrait;
@@ -12,7 +13,6 @@ use WP_Error;
 use function wp_logout;
 use function wp_set_current_user;
 use function wp_signon;
-use stdClass;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -20,6 +20,7 @@ use stdClass;
 class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 {
     use BasicServiceTrait;
+    use TypeMutationAPITrait;
 
     /**
      * @throws UserStateMutationException In case of error
@@ -68,22 +69,11 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
                 $wpError->get_error_code(),
             );
         }
-            
-        /** @var stdClass|null */
-        $errorData = null;
-        if ($wpError->get_error_data()) {
-            if (is_array($wpError->get_error_data())) {
-                $errorData = (object) $wpError->get_error_data();
-            } else {
-                $errorData = new stdClass();
-                $key = $wpError->get_error_code() ? (string) $wpError->get_error_code() : 'data';
-                $errorData->$key = $wpError->get_error_data();
-            }
-        }
+
         return new UserStateMutationException(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
-            $errorData,
+            $this->getWPErrorData($wpError),
         );
     }
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutationsWP\TypeAPIs;
 
-use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
-use stdClass;
+use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
 use function user_can;
@@ -18,6 +18,7 @@ use function user_can;
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
     use BasicServiceTrait;
+    use TypeMutationAPITrait;
 
     /**
      * @param array<string,mixed> $query
@@ -68,21 +69,10 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 
     protected function createCustomPostCRUDMutationException(WP_Error $wpError): CustomPostCRUDMutationException
     {
-        /** @var stdClass|null */
-        $errorData = null;
-        if ($wpError->get_error_data()) {
-            if (is_array($wpError->get_error_data())) {
-                $errorData = (object) $wpError->get_error_data();
-            } else {
-                $errorData = new stdClass();
-                $key = $wpError->get_error_code() ? (string) $wpError->get_error_code() : 'data';
-                $errorData->$key = $wpError->get_error_data();
-            }
-        }
         return new CustomPostCRUDMutationException(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
-            $errorData,
+            $this->getWPErrorData($wpError),
         );
     }
 
