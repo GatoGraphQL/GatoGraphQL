@@ -770,7 +770,7 @@ The affected mutations are:
 - `Root.updatePost: RootCreatePostMutationPayload!`
 - `Comment.reply: CommentReplyMutationPayload!`
 - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
-- `Post.update: PostNestedUpdateMutationPayload!`
+- `Post.update: PostUpdateMutationPayload!`
 
 ## Custom scalars
 

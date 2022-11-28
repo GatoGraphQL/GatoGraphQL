@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\TypeResolvers\ObjectType;
 
-class PostNestedUpdateMutationPayloadObjectTypeResolver extends AbstractPostMutationPayloadObjectTypeResolver
+class PostUpdateMutationPayloadObjectTypeResolver extends AbstractPostMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'PostNestedUpdateMutationPayload';
+        return 'PostUpdateMutationPayload';
     }
 
     public function getTypeDescription(): ?string
