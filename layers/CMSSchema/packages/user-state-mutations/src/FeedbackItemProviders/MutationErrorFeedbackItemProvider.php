@@ -42,7 +42,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E4 => $this->__('You are already logged in', 'user-state-mutations'),
             self::E5 => $this->__('Unknown email address. Check again or try your username.', 'user-state-mutations'),
             self::E6 => $this->__('The password is incorrect', 'user-state-mutations'),
-            self::E7 => $this->__('Could not log the user in', 'user-state-mutations'),
+            self::E7 => $this->__('[%1$s] %2$s', 'user-state-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

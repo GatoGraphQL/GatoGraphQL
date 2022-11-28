@@ -162,6 +162,10 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
                     : new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
                         MutationErrorFeedbackItemProvider::E7,
+                        [
+                            $userStateMutationException->getErrorCode(),
+                            $userStateMutationException->getMessage(),
+                        ]
                     ),
                     $fieldDataAccessor->getField(),
             )
