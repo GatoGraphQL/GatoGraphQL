@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\UserStateMutations\ObjectModels\InvalidUserEmailErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\PasswordIsIncorrectErrorPayload;
@@ -54,27 +53,11 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
             )->getID();
         }
 
-        $userID = null;
-        try {
-            /** @var string|int */
-            $userID = parent::executeMutation(
-                $fieldDataAccessor,
-                $separateObjectTypeFieldResolutionFeedbackStore,
-            );
-        } catch (UserStateMutationException $userStateMutationException) {
-            if ($errorPayload = $this->identifyAndStoreSpecificErrorPayloadFromUserStateMutationException($userStateMutationException)) {
-                return $this->createAndStoreFailureObjectMutationPayload(
-                    [
-                        $errorPayload,
-                    ]
-                )->getID();
-            }
-            return $this->createAndStoreFailureObjectMutationPayload(
-                [
-                    $this->createAndStoreGenericErrorPayloadFromPayloadClientException($userStateMutationException),
-                ]
-            )->getID();
-        }
+        /** @var string|int */
+        $userID = parent::executeMutation(
+            $fieldDataAccessor,
+            $separateObjectTypeFieldResolutionFeedbackStore,
+        );
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createAndStoreFailureObjectMutationPayload(
@@ -88,28 +71,6 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
 
         /** @var string|int $userID */
         return $this->createAndStoreSuccessObjectMutationPayload($userID)->getID();
-    }
-
-    protected function identifyAndStoreSpecificErrorPayloadFromUserStateMutationException(
-        UserStateMutationException $userStateMutationException
-    ): ?ErrorPayloadInterface {
-        $errorPayload = match ($userStateMutationException->getErrorCode()) {
-            'incorrect_password' => new PasswordIsIncorrectErrorPayload(
-                $userStateMutationException->getMessage(),
-            ),
-            'invalid_email' => new InvalidUserEmailErrorPayload(
-                $userStateMutationException->getMessage(),
-            ),
-            default => null,
-        };
-        if ($errorPayload !== null) {
-            $this->getObjectDictionary()->set(
-                get_class($errorPayload),
-                $errorPayload->getID(),
-                $errorPayload,
-            );
-        }
-        return $errorPayload;
     }
 
     /**
@@ -143,6 +104,18 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new UserIsLoggedInErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            ] => new InvalidUserEmailErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
+            ] => new PasswordIsIncorrectErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
             ),
             default => new GenericErrorPayload(
