@@ -46,10 +46,10 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $username_or_email = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $usernameOrEmail = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
         $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
 
-        if (!$username_or_email) {
+        if (!$usernameOrEmail) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -98,13 +98,13 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // If the user is already logged in, then return the error
-        $username_or_email = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $usernameOrEmail = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
         $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
 
         // Find out if it was a username or an email that was provided
-        $is_email = strpos($username_or_email, '@');
-        if ($is_email) {
-            $user = $this->getUserTypeAPI()->getUserByEmail($username_or_email);
+        $isEmail = strpos($usernameOrEmail, '@');
+        if ($isEmail) {
+            $user = $this->getUserTypeAPI()->getUserByEmail($usernameOrEmail);
             if (!$user) {
                 throw new UserLoginMutationException(
                     $this->__('There is no user registered with that email address.')
@@ -112,7 +112,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             }
             $username = $this->getUserTypeAPI()->getUserLogin($user);
         } else {
-            $username = $username_or_email;
+            $username = $usernameOrEmail;
         }
 
         $credentials = array(
