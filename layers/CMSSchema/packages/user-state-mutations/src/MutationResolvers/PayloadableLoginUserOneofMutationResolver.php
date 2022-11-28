@@ -6,6 +6,7 @@ namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
 use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\UserStateMutations\ObjectModels\PasswordIsIncorrectErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -60,6 +61,11 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
         } catch (UserStateMutationException $userStateMutationException) {
+            if ($userStateMutationException->getErrorCode() === 'incorrect_password') {
+                return new PasswordIsIncorrectErrorPayload(
+                    $userStateMutationException->getMessage(),
+                );
+            }
             return $this->createAndStoreFailureObjectMutationPayload(
                 [
                     $this->createAndStoreGenericErrorPayloadFromPayloadClientException($userStateMutationException),
