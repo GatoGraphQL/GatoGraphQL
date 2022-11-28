@@ -1386,7 +1386,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "CustomPostCreateMutationErrorPayloadUnion",
+                    "name": "RootCreateCustomPostMutationErrorPayloadUnion",
                     "enumValues": null,
                     "possibleTypes": [
                         {
