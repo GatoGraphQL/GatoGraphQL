@@ -147,6 +147,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Mutations now return "Payload" types:
   - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
   - `Root.createPost: RootCreatePostMutationPayload!`
+  - `Root.loginUser: RootLoginUserMutationPayload!`
+  - `Root.logoutUser: RootLogoutUserMutationPayload!`
   - `Root.replyComment: RootReplyCommentMutationPayload!`
   - `Root.updatePost: RootUpdatePostMutationPayload!`
   - `Comment.reply: CommentReplyMutationPayload!`
