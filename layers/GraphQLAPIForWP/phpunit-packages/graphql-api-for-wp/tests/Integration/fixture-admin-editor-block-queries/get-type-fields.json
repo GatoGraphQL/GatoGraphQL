@@ -626,26 +626,6 @@
           "description": "Representation of a category, added to a post"
         },
         {
-          "name": "PostCreateMutationPayload",
-          "namespacedName": "PostCreateMutationPayload",
-          "fields": [
-            {
-              "name": "errors"
-            },
-            {
-              "name": "post"
-            },
-            {
-              "name": "postID"
-            },
-            {
-              "name": "status"
-            }
-          ],
-          "kind": "OBJECT",
-          "description": "Payload of creating a post"
-        },
-        {
           "name": "PostTag",
           "namespacedName": "PostTag",
           "fields": [
@@ -688,26 +668,6 @@
           ],
           "kind": "OBJECT",
           "description": "Representation of a tag, added to a post"
-        },
-        {
-          "name": "PostUpdateMutationPayload",
-          "namespacedName": "PostUpdateMutationPayload",
-          "fields": [
-            {
-              "name": "errors"
-            },
-            {
-              "name": "post"
-            },
-            {
-              "name": "postID"
-            },
-            {
-              "name": "status"
-            }
-          ],
-          "kind": "OBJECT",
-          "description": "Payload of executing an update mutation on a post"
         },
         {
           "name": "QueryRoot",
@@ -1076,6 +1036,26 @@
           "description": "Payload of adding a comment to a custom post"
         },
         {
+          "name": "RootCreatePostMutationPayload",
+          "namespacedName": "RootCreatePostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a post"
+        },
+        {
           "name": "RootReplyCommentMutationPayload",
           "namespacedName": "RootReplyCommentMutationPayload",
           "fields": [
@@ -1094,6 +1074,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of replying to a comment"
+        },
+        {
+          "name": "RootUpdatePostMutationPayload",
+          "namespacedName": "RootUpdatePostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a post"
         },
         {
           "name": "User",
@@ -2401,25 +2401,11 @@
           "description": null
         },
         {
-          "name": "CustomPostCreateMutationErrorPayloadUnion",
-          "namespacedName": "CustomPostCreateMutationErrorPayloadUnion",
-          "fields": null,
-          "kind": "UNION",
-          "description": "Union of 'Error Payload' types when creating a custom post"
-        },
-        {
           "name": "CustomPostUnion",
           "namespacedName": "CustomPostUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'custom post' type resolvers"
-        },
-        {
-          "name": "CustomPostUpdateMutationErrorPayloadUnion",
-          "namespacedName": "CustomPostUpdateMutationErrorPayloadUnion",
-          "fields": null,
-          "kind": "UNION",
-          "description": "Union of 'Error Payload' types when updating a custom post"
         },
         {
           "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
@@ -2429,11 +2415,25 @@
           "description": "Union of 'Error Payload' types when adding a comment to a custom post"
         },
         {
+          "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootCreateCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a custom post"
+        },
+        {
           "name": "RootReplyCommentMutationErrorPayloadUnion",
           "namespacedName": "RootReplyCommentMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when replying to a comment"
+        },
+        {
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a custom post"
         }
       ]
     }

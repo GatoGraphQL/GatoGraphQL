@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\CustomPostNestedUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\CustomPostUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\RootUpdateCustomPostMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class LoggedInUserHasNoPermissionToEditCustomPostMutationErrorPayloadObjectTypeResolverPicker extends AbstractLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolverPicker
@@ -16,8 +16,8 @@ class LoggedInUserHasNoPermissionToEditCustomPostMutationErrorPayloadObjectTypeR
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
+            RootUpdateCustomPostMutationErrorPayloadUnionTypeResolver::class,
             CustomPostUpdateMutationErrorPayloadUnionTypeResolver::class,
-            CustomPostNestedUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

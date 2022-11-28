@@ -659,13 +659,13 @@ Mutations in the schema now return some "Payload" object, which provides any err
 
 Errors are provided via some "ErrorPayloadUnion" type, containing all possible errors for that mutation. Every possible error is some "ErrorPayload" type that implements the interface `IsErrorPayload`.
 
-For instance, the operation `updatePost` returns a `PostUpdateMutationPayload`, which contains the following fields:
+For instance, the operation `updatePost` returns a `RootUpdatePostMutationPayload`, which contains the following fields:
 
 - `status`: whether the operation was successful or not, with either value `SUCCESS` or `FAILURE`
 - `post` and `postID`: the updated post object and its ID, if the update was successful
-- `errors`: a list of `CustomPostUpdateMutationErrorPayloadUnion`, if the update failed.
+- `errors`: a list of `RootUpdateCustomPostMutationErrorPayloadUnion`, if the update failed.
 
-The union type `CustomPostUpdateMutationErrorPayloadUnion` contains the list of all possible errors that can happen when modifying a custom post:
+The union type `RootUpdateCustomPostMutationErrorPayloadUnion` contains the list of all possible errors that can happen when modifying a custom post:
 
 - `CustomPostDoesNotExistErrorPayload`
 - `GenericErrorPayload`
@@ -765,12 +765,12 @@ If the user doesn't have the permission to edit posts, we will receive:
 The affected mutations are:
 
 - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
-- `Root.createPost: PostCreateMutationPayload!`
+- `Root.createPost: RootCreatePostMutationPayload!`
 - `Root.replyComment: RootReplyCommentMutationPayload!`
-- `Root.updatePost: PostCreateMutationPayload!`
+- `Root.updatePost: RootUpdatePostMutationPayload!`
 - `Comment.reply: CommentReplyMutationPayload!`
 - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
-- `Post.update: PostNestedUpdateMutationPayload!`
+- `Post.update: PostUpdateMutationPayload!`
 
 ## Custom scalars
 

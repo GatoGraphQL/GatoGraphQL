@@ -28,7 +28,7 @@ class CustomPostUpdateMutationErrorPayloadUnionTypeResolver extends AbstractCust
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating a custom post', 'customposts');
+        return $this->__('Union of \'Error Payload\' types when updating a custom post (using nested mutations)', 'customposts');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

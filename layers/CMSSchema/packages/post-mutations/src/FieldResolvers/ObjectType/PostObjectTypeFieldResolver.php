@@ -10,7 +10,7 @@ use PoPCMSSchema\CustomPostMutations\ModuleConfiguration as CustomPostMutationsM
 use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableUpdatePostMutationResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\PostUpdateFilterInputObjectTypeResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostNestedUpdateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostUpdateMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\App;
@@ -24,7 +24,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
-    private ?PostNestedUpdateMutationPayloadObjectTypeResolver $postNestedUpdateMutationPayloadObjectTypeResolver = null;
+    private ?PostUpdateMutationPayloadObjectTypeResolver $postUpdateMutationPayloadObjectTypeResolver = null;
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
     private ?PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver = null;
     private ?PostUpdateFilterInputObjectTypeResolver $postUpdateFilterInputObjectTypeResolver = null;
@@ -39,14 +39,14 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         /** @var PostObjectTypeResolver */
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
-    final public function setPostNestedUpdateMutationPayloadObjectTypeResolver(PostNestedUpdateMutationPayloadObjectTypeResolver $postNestedUpdateMutationPayloadObjectTypeResolver): void
+    final public function setPostUpdateMutationPayloadObjectTypeResolver(PostUpdateMutationPayloadObjectTypeResolver $postUpdateMutationPayloadObjectTypeResolver): void
     {
-        $this->postNestedUpdateMutationPayloadObjectTypeResolver = $postNestedUpdateMutationPayloadObjectTypeResolver;
+        $this->postUpdateMutationPayloadObjectTypeResolver = $postUpdateMutationPayloadObjectTypeResolver;
     }
-    final protected function getPostNestedUpdateMutationPayloadObjectTypeResolver(): PostNestedUpdateMutationPayloadObjectTypeResolver
+    final protected function getPostUpdateMutationPayloadObjectTypeResolver(): PostUpdateMutationPayloadObjectTypeResolver
     {
-        /** @var PostNestedUpdateMutationPayloadObjectTypeResolver */
-        return $this->postNestedUpdateMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(PostNestedUpdateMutationPayloadObjectTypeResolver::class);
+        /** @var PostUpdateMutationPayloadObjectTypeResolver */
+        return $this->postUpdateMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(PostUpdateMutationPayloadObjectTypeResolver::class);
     }
     final public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
     {
@@ -136,7 +136,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         return match ($fieldName) {
             'update' => $usePayloadableCustomPostMutations
-                ? $this->getPostNestedUpdateMutationPayloadObjectTypeResolver()
+                ? $this->getPostUpdateMutationPayloadObjectTypeResolver()
                 : $this->getPostObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
