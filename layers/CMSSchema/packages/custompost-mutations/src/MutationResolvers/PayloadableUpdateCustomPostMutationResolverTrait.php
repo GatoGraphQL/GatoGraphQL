@@ -12,9 +12,9 @@ use PoP\Root\Exception\AbstractException;
 
 trait PayloadableUpdateCustomPostMutationResolverTrait
 {
-    use PayloadableMutationResolverTrait;
-    use UpdateCustomPostMutationResolverTrait {
+    use PayloadableMutationResolverTrait, UpdateCustomPostMutationResolverTrait {
         UpdateCustomPostMutationResolverTrait::executeMutation as upstreamExecuteMutation;
+        PayloadableMutationResolverTrait::validateErrors insteadof UpdateCustomPostMutationResolverTrait;
     }
     use PayloadableCreateOrUpdateCustomPostMutationResolverTrait;
 
@@ -66,15 +66,5 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
 
         /** @var string|int $customPostID */
         return $this->createAndStoreSuccessObjectMutationPayload($customPostID)->getID();
-    }
-
-    /**
-     * Override: Do nothing, because the app-level errors are
-     * returned in the Payload, not in top-level "errors" entry.
-     */
-    public function validateErrors(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
     }
 }
