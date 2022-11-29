@@ -12,7 +12,7 @@ use PoP\Root\Exception\AbstractException;
 class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver
 {
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
-    
+
     final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
     {
         $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
