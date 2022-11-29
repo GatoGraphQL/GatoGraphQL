@@ -24,8 +24,8 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
         $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
             [
-                CustomPostsMutationErrorFeedbackItemProvider::class,
-                CustomPostsMutationErrorFeedbackItemProvider::E1,
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
             ] => new UserIsNotLoggedInErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
             ),
