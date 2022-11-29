@@ -25,6 +25,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use stdClass;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -215,6 +216,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $object,
         );
         $customPost = $object;
+        switch ($field->getName()) {
+            case 'removeFeaturedImage':
+                $fieldArgsForMutationForObject[MutationInputProperties::INPUT] ??= new stdClass();
+                break;
+        }
         switch ($field->getName()) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
