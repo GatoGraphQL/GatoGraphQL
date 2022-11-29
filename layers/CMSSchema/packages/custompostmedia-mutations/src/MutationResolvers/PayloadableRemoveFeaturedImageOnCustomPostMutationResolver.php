@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
-use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -18,6 +15,7 @@ use PoP\Root\Exception\AbstractException;
 class PayloadableRemoveFeaturedImageOnCustomPostMutationResolver extends RemoveFeaturedImageOnCustomPostMutationResolver
 {
     use PayloadableMutationResolverTrait;
+    use PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait;
 
     private ?ObjectDictionaryInterface $objectDictionary = null;
 
@@ -92,23 +90,5 @@ class PayloadableRemoveFeaturedImageOnCustomPostMutationResolver extends RemoveF
             $errorPayload,
         );
         return $errorPayload;
-    }
-
-    protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
-        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
-    ): ErrorPayloadInterface {
-        $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new CustomPostDoesNotExistErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-            ),
-            default => new GenericErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-                $errorFeedbackItemResolution->getNamespacedCode(),
-            ),
-        };
     }
 }
