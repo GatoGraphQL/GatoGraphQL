@@ -72,16 +72,6 @@ class PayloadableLogoutUserMutationResolver extends LogoutUserMutationResolver
         return $this->createAndStoreSuccessObjectMutationPayload($userID)->getID();
     }
 
-    /**
-     * Override: Do nothing, because the app-level errors are
-     * returned in the Payload, not in top-level "errors" entry.
-     */
-    public function validateErrors(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-    }
-
     protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {

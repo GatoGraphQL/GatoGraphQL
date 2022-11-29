@@ -10,10 +10,22 @@ use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ObjectMutationPayload;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 trait PayloadableMutationResolverTrait
 {
     abstract protected function getObjectDictionary(): ObjectDictionaryInterface;
+
+    /**
+     * Override: Do nothing, because the app-level errors are
+     * returned in the Payload, not in top-level "errors" entry.
+     */
+    public function validateErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+    }
 
     protected function createAndStoreSuccessObjectMutationPayload(
         string|int $objectID,
