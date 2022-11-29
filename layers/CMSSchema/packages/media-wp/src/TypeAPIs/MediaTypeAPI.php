@@ -43,6 +43,16 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $url;
     }
 
+    public function getMediaItemSrcPath(string|int|object $mediaItemObjectOrID): ?string
+    {
+        $src = $this->getMediaItemSrc($mediaItemObjectOrID);
+        if ($src === null) {
+            return null;
+        }
+        /** @var string */
+        return $this->getCMSHelperService()->getLocalURLPath($src);
+    }
+
     public function getImageSrc(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
     {
         $img = $this->getImageProperties($mediaItemObjectOrID, $size);
@@ -50,6 +60,16 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
             return null;
         }
         return $img['src'];
+    }
+
+    public function getImageSrcPath(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
+    {
+        $src = $this->getImageSrc($mediaItemObjectOrID, $size);
+        if ($src === null) {
+            return null;
+        }
+        /** @var string */
+        return $this->getCMSHelperService()->getLocalURLPath($src);
     }
 
     public function getImageSrcSet(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string

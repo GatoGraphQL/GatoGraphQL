@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Component\Component;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use DateTime;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\CommonFilterInputContainerComponentProcessor;
+use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLAbsolutePathScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -30,6 +31,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?DateTimeScalarTypeResolver $dateTimeScalarTypeResolver = null;
+    private ?URLAbsolutePathScalarTypeResolver $urlAbsolutePathScalarTypeResolver = null;
 
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -85,6 +87,15 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         /** @var DateTimeScalarTypeResolver */
         return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
     }
+    final public function setURLAbsolutePathScalarTypeResolver(URLAbsolutePathScalarTypeResolver $urlAbsolutePathScalarTypeResolver): void
+    {
+        $this->urlAbsolutePathScalarTypeResolver = $urlAbsolutePathScalarTypeResolver;
+    }
+    final protected function getURLAbsolutePathScalarTypeResolver(): URLAbsolutePathScalarTypeResolver
+    {
+        /** @var URLAbsolutePathScalarTypeResolver */
+        return $this->urlAbsolutePathScalarTypeResolver ??= $this->instanceManager->getInstance(URLAbsolutePathScalarTypeResolver::class);
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -103,6 +114,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return [
             'src',
+            'srcPath',
             'srcSet',
             'width',
             'height',
@@ -123,6 +135,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return match ($fieldName) {
             'src' => $this->getURLScalarTypeResolver(),
+            'srcPath' => $this->getURLAbsolutePathScalarTypeResolver(),
             'srcSet' => $this->getStringScalarTypeResolver(),
             'width' => $this->getIntScalarTypeResolver(),
             'height' => $this->getIntScalarTypeResolver(),
@@ -144,6 +157,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return match ($fieldName) {
             'src',
+            'srcPath',
             'date',
             'dateStr',
             'modifiedDate',
@@ -157,20 +171,21 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'src' => $this->__('Media element URL source', 'pop-media'),
-            'srcSet' => $this->__('Media element URL srcset', 'pop-media'),
-            'width' => $this->__('Media element\'s width', 'pop-media'),
-            'height' => $this->__('Media element\'s height', 'pop-media'),
-            'sizes' => $this->__('Media element\'s ‘sizes’ attribute value for an image', 'pop-media'),
-            'title' => $this->__('Media element title', 'pop-media'),
-            'caption' => $this->__('Media element caption', 'pop-media'),
-            'altText' => $this->__('Media element alt text', 'pop-media'),
-            'description' => $this->__('Media element description', 'pop-media'),
-            'date' => $this->__('Media element\'s published date', 'pop-media'),
-            'dateStr' => $this->__('Media element\'s published date, in String format', 'pop-media'),
-            'modifiedDate' => $this->__('Media element\'s modified date', 'pop-media'),
-            'modifiedDateStr' => $this->__('Media element\'s modified date, in String format', 'pop-media'),
-            'mimeType' => $this->__('Media element\'s mime type', 'pop-media'),
+            'src' => $this->__('Media item URL source', 'pop-media'),
+            'srcPath' => $this->__('Media item URL source path', 'pop-media'),
+            'srcSet' => $this->__('Media item URL srcset', 'pop-media'),
+            'width' => $this->__('Media item\'s width', 'pop-media'),
+            'height' => $this->__('Media item\'s height', 'pop-media'),
+            'sizes' => $this->__('Media item\'s ‘sizes’ attribute value for an image', 'pop-media'),
+            'title' => $this->__('Media item title', 'pop-media'),
+            'caption' => $this->__('Media item caption', 'pop-media'),
+            'altText' => $this->__('Media item alt text', 'pop-media'),
+            'description' => $this->__('Media item description', 'pop-media'),
+            'date' => $this->__('Media item\'s published date', 'pop-media'),
+            'dateStr' => $this->__('Media item\'s published date, in String format', 'pop-media'),
+            'modifiedDate' => $this->__('Media item\'s modified date', 'pop-media'),
+            'modifiedDateStr' => $this->__('Media item\'s modified date, in String format', 'pop-media'),
+            'mimeType' => $this->__('Media item\'s mime type', 'pop-media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -182,6 +197,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return match ($fieldName) {
             'src',
+            'srcPath',
             'srcSet',
             'width',
             'height',
@@ -230,6 +246,14 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                     return $imgSrc;
                 }
                 return $this->getMediaTypeAPI()->getMediaItemSrc($media);
+            case 'srcPath':
+                // The media item may be an image, or a video or audio.
+                // If image, $imgSrc will have a value. Otherwise, get the URL
+                $imgSrcPath = $this->getMediaTypeAPI()->getImageSrcPath($media, $size);
+                if ($imgSrcPath !== null) {
+                    return $imgSrcPath;
+                }
+                return $this->getMediaTypeAPI()->getMediaItemSrcPath($media);
             case 'width':
             case 'height':
                 $properties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
