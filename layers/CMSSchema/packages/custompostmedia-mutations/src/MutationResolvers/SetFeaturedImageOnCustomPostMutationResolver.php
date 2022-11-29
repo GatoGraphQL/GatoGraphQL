@@ -4,21 +4,23 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
-use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
 class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
     {
@@ -28,6 +30,15 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     {
         /** @var CustomPostMediaTypeMutationAPIInterface */
         return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+    }
+    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    {
+        $this->customPostTypeAPI = $customPostTypeAPI;
+    }
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        /** @var CustomPostTypeAPIInterface */
+        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
     /**
@@ -58,7 +69,8 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
             );
         }
 
-        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
+        if (!$customPostID) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -68,7 +80,21 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
                     $fieldDataAccessor->getField(),
                 )
             );
+        } elseif (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                        [
+                            $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
         }
+
         if (!$fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(

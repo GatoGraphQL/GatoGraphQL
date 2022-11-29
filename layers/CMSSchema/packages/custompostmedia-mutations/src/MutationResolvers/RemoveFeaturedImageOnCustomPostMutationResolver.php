@@ -79,21 +79,19 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
                     $fieldDataAccessor->getField(),
                 )
             );
-        } else {
-            if (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E3,
-                            [
-                                $customPostID,
-                            ]
-                        ),
-                        $fieldDataAccessor->getField(),
-                    )
-                );
-            }
+        } elseif (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                        [
+                            $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
         }
     }
 }
