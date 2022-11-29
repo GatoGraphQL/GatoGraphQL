@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoPCMSSchema\CustomPostMediaMutations\Module;
+use PoPCMSSchema\CustomPostMediaMutations\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageOnCustomPostMutationResolver;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
@@ -18,6 +13,14 @@ use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType\CustomPo
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -179,15 +182,32 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostMediaMutations = $moduleConfiguration->usePayloadableCustomPostMediaMutations();
         return match ($fieldName) {
-            'setFeaturedImage' => $this->getSetFeaturedImageOnCustomPostMutationResolver(),
-            'removeFeaturedImage' => $this->getRemoveFeaturedImageOnCustomPostMutationResolver(),
+            'setFeaturedImage' => $usePayloadableCustomPostMediaMutations
+                ? $this->getPayloadableSetFeaturedImageOnCustomPostMutationResolver()
+                : $this->getSetFeaturedImageOnCustomPostMutationResolver(),
+            'removeFeaturedImage' => $usePayloadableCustomPostMediaMutations
+                ? $this->getPayloadableRemoveFeaturedImageOnCustomPostMutationResolver()
+                : $this->getRemoveFeaturedImageOnCustomPostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostMediaMutations = $moduleConfiguration->usePayloadableCustomPostMediaMutations();
+        if ($usePayloadableCustomPostMediaMutations) {
+            return match ($fieldName) {
+                'setFeaturedImage' => $this->getCustomPostSetFeaturedImageMutationPayloadObjectTypeResolver(),
+                'removeFeaturedImage' => $this->getCustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver(),
+                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            };
+        }
         return match ($fieldName) {
             'setFeaturedImage',
             'removeFeaturedImage'
