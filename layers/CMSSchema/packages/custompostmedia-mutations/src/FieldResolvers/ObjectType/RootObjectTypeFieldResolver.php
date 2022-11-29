@@ -29,6 +29,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?RemoveFeaturedImageOnCustomPostMutationResolver $removeFeaturedImageOnCustomPostMutationResolver = null;
     private ?RootSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver $rootSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver = null;
     private ?RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver $rootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver = null;
+    private ?PayloadableSetFeaturedImageOnCustomPostMutationResolver $payloadableSetFeaturedImageOnCustomPostMutationResolver = null;
+    private ?PayloadableRemoveFeaturedImageOnCustomPostMutationResolver $payloadableRemoveFeaturedImageOnCustomPostMutationResolver = null;
+    private ?RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver $rootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver = null;
+    private ?RootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver $rootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver = null;
 
     final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {
@@ -74,6 +78,42 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         /** @var RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver */
         return $this->rootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootRemoveFeaturedImageFromCustomPostFilterInputObjectTypeResolver::class);
+    }
+    final public function setPayloadableSetFeaturedImageOnCustomPostMutationResolver(PayloadableSetFeaturedImageOnCustomPostMutationResolver $payloadableSetFeaturedImageOnCustomPostMutationResolver): void
+    {
+        $this->payloadableSetFeaturedImageOnCustomPostMutationResolver = $payloadableSetFeaturedImageOnCustomPostMutationResolver;
+    }
+    final protected function getPayloadableSetFeaturedImageOnCustomPostMutationResolver(): PayloadableSetFeaturedImageOnCustomPostMutationResolver
+    {
+        /** @var PayloadableSetFeaturedImageOnCustomPostMutationResolver */
+        return $this->payloadableSetFeaturedImageOnCustomPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableSetFeaturedImageOnCustomPostMutationResolver::class);
+    }
+    final public function setPayloadableRemoveFeaturedImageOnCustomPostMutationResolver(PayloadableRemoveFeaturedImageOnCustomPostMutationResolver $payloadableRemoveFeaturedImageOnCustomPostMutationResolver): void
+    {
+        $this->payloadableRemoveFeaturedImageOnCustomPostMutationResolver = $payloadableRemoveFeaturedImageOnCustomPostMutationResolver;
+    }
+    final protected function getPayloadableRemoveFeaturedImageOnCustomPostMutationResolver(): PayloadableRemoveFeaturedImageOnCustomPostMutationResolver
+    {
+        /** @var PayloadableRemoveFeaturedImageOnCustomPostMutationResolver */
+        return $this->payloadableRemoveFeaturedImageOnCustomPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableRemoveFeaturedImageOnCustomPostMutationResolver::class);
+    }
+    final public function setRootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver(RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver $rootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver): void
+    {
+        $this->rootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver = $rootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver;
+    }
+    final protected function getRootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver(): RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver
+    {
+        /** @var RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver */
+        return $this->rootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver::class);
+    }
+    final public function setRootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver(RootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver $rootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver): void
+    {
+        $this->rootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver = $rootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver;
+    }
+    final protected function getRootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver(): RootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver
+    {
+        /** @var RootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver */
+        return $this->rootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(RootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver::class);
     }
 
     /**
