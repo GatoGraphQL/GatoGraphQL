@@ -840,7 +840,7 @@
           "fields": [
             {
               "name": "altText",
-              "description": "Media element alt text",
+              "description": "Media item alt text",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -864,7 +864,7 @@
             },
             {
               "name": "caption",
-              "description": "Media element caption",
+              "description": "Media item caption",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -876,7 +876,7 @@
             },
             {
               "name": "date",
-              "description": "Media element's published date",
+              "description": "Media item's published date",
               "args": [
                 {
                   "name": "gmt",
@@ -907,7 +907,7 @@
             },
             {
               "name": "dateStr",
-              "description": "Media element's published date, in String format",
+              "description": "Media item's published date, in String format",
               "args": [
                 {
                   "name": "format",
@@ -952,7 +952,7 @@
             },
             {
               "name": "description",
-              "description": "Media element description",
+              "description": "Media item description",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -964,7 +964,7 @@
             },
             {
               "name": "height",
-              "description": "Media element's height",
+              "description": "Media item's height",
               "args": [
                 {
                   "name": "size",
@@ -1003,7 +1003,7 @@
             },
             {
               "name": "mimeType",
-              "description": "Media element's mime type",
+              "description": "Media item's mime type",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1015,7 +1015,7 @@
             },
             {
               "name": "modifiedDate",
-              "description": "Media element's modified date",
+              "description": "Media item's modified date",
               "args": [
                 {
                   "name": "gmt",
@@ -1046,7 +1046,7 @@
             },
             {
               "name": "modifiedDateStr",
-              "description": "Media element's modified date, in String format",
+              "description": "Media item's modified date, in String format",
               "args": [
                 {
                   "name": "format",
@@ -1107,7 +1107,7 @@
             },
             {
               "name": "sizes",
-              "description": "Media element's \u2018sizes\u2019 attribute value for an image",
+              "description": "Media item's \u2018sizes\u2019 attribute value for an image",
               "args": [
                 {
                   "name": "size",
@@ -1146,7 +1146,7 @@
             },
             {
               "name": "src",
-              "description": "Media element URL source",
+              "description": "Media item URL source",
               "args": [
                 {
                   "name": "size",
@@ -1172,8 +1172,35 @@
               "deprecationReason": null
             },
             {
+              "name": "srcPath",
+              "description": "Media item URL source path",
+              "args": [
+                {
+                  "name": "size",
+                  "description": "Size of the image",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "URLAbsolutePath!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "URLAbsolutePath",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "srcSet",
-              "description": "Media element URL srcset",
+              "description": "Media item URL srcset",
               "args": [
                 {
                   "name": "size",
@@ -1196,7 +1223,7 @@
             },
             {
               "name": "title",
-              "description": "Media element title",
+              "description": "Media item title",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1240,7 +1267,7 @@
             },
             {
               "name": "width",
-              "description": "Media element's width",
+              "description": "Media item's width",
               "args": [
                 {
                   "name": "size",
@@ -1272,6 +1299,39 @@
             {
               "kind": "INTERFACE",
               "name": "Queryable",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "MediaItemDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The requested media item does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
               "ofType": null
             }
           ],
@@ -1797,9 +1857,13 @@
                 }
               ],
               "type": {
-                "kind": "UNION",
-                "name": "CustomPostUnion",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1898,9 +1962,13 @@
                 }
               ],
               "type": {
-                "kind": "UNION",
-                "name": "CustomPostUnion",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootSetFeaturedImageOnCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8087,9 +8155,13 @@
                 }
               ],
               "type": {
-                "kind": "UNION",
-                "name": "CustomPostUnion",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8236,9 +8308,13 @@
                 }
               ],
               "type": {
-                "kind": "UNION",
-                "name": "CustomPostUnion",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootSetFeaturedImageOnCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8772,6 +8848,77 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+          "description": "Payload of removing the featured image from a custom post",
+          "fields": [
+            {
+              "name": "customPost",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "UNION",
+                "name": "CustomPostUnion",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "customPostID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootReplyCommentMutationPayload",
           "description": "Payload of replying to a comment",
           "fields": [
@@ -8812,6 +8959,77 @@
                   "ofType": {
                     "kind": "UNION",
                     "name": "RootReplyCommentMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+          "description": "Payload of setting the featured image to a custom post",
+          "fields": [
+            {
+              "name": "customPost",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "UNION",
+                "name": "CustomPostUnion",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "customPostID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
                     "ofType": null
                   }
                 }
@@ -11899,6 +12117,11 @@
             {
               "kind": "OBJECT",
               "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -18693,6 +18916,47 @@
         },
         {
           "kind": "UNION",
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when removing a featured image from a custom post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
           "name": "RootReplyCommentMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when replying to a comment",
           "fields": null,
@@ -18718,6 +18982,52 @@
             {
               "kind": "OBJECT",
               "name": "GenericErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when setting a featured image to a custom post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
           ]
