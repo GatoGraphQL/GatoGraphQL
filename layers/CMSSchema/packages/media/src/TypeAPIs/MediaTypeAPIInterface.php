@@ -23,11 +23,16 @@ interface MediaTypeAPIInterface
      */
     public function getImageProperties(string|int|object $mediaItemObjectOrID, ?string $size = null): ?array;
     /**
+     * Get the media item with provided ID or, if it doesn't exist, null
+     */
+    public function getMediaItem(int|string $id): ?object;
+    /**
      * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
     public function getMediaItems(array $query, array $options = []): array;
+    public function mediaItemExists(int|string $id): bool;
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
