@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as CustomPostsMutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -18,6 +21,7 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
     use ValidateUserLoggedInMutationResolverTrait;
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -28,11 +32,22 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
         /** @var CustomPostTypeAPIInterface */
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
+    final public function setCustomPostTypeMutationAPI(CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI): void
+    {
+        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+    }
+    final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
+    {
+        /** @var CustomPostTypeMutationAPIInterface */
+        return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
+    }
 
     public function validateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
         if ($errorFeedbackItemResolution !== null) {
@@ -49,8 +64,8 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E1,
+                        CustomPostsMutationErrorFeedbackItemProvider::class,
+                        CustomPostsMutationErrorFeedbackItemProvider::E6,
                     ),
                     $fieldDataAccessor->getField(),
                 )
@@ -59,8 +74,8 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E3,
+                        CustomPostsMutationErrorFeedbackItemProvider::class,
+                        CustomPostsMutationErrorFeedbackItemProvider::E7,
                         [
                             $customPostID,
                         ]
@@ -68,6 +83,28 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
                     $fieldDataAccessor->getField(),
                 )
             );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        // Check that the user has access to the edited custom post
+        $userID = App::getState('current-user-id');
+        if (!$this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        CustomPostsMutationErrorFeedbackItemProvider::class,
+                        CustomPostsMutationErrorFeedbackItemProvider::E8,
+                        [
+                            $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return;
         }
     }
 }
