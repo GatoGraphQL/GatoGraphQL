@@ -55,7 +55,7 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E4,
+                MutationErrorFeedbackItemProvider::E2,
             ] => new MediaItemDoesNotExistErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
             ),

@@ -65,7 +65,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E2,
+                        MutationErrorFeedbackItemProvider::E1,
                     ),
                     $fieldDataAccessor->getField(),
                 )
@@ -75,7 +75,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E4,
+                        MutationErrorFeedbackItemProvider::E2,
                         [
                             $mediaItemID,
                         ]
