@@ -230,6 +230,24 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $fieldArgsForMutationForObject;
     }
 
+    /**
+     * Because "removeFeaturedImage" receives no arguments, it doesn't
+     * know it needs to pass the "input" entry to the MutationResolver,
+     * so explicitly set it up then.
+     */
+    public function getFieldArgsInputObjectSubpropertyName(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): ?string {
+        return match ($field->getName()) {
+            'removeFeaturedImage' => MutationInputProperties::INPUT,
+            default => parent::getFieldArgsInputObjectSubpropertyName(
+                $objectTypeResolver,
+                $field,
+            ),
+        };
+    }
+
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
         /** @var ModuleConfiguration */
