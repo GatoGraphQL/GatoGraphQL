@@ -126,7 +126,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-
         // Validate user permission
         $userID = App::getState('current-user-id');
         $editCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
