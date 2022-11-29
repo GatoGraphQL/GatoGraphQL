@@ -71,6 +71,11 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "MediaItemDoesNotExistErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "Menu",
                     "enumValues": null,
                     "possibleTypes": null
@@ -141,7 +146,17 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "RootReplyCommentMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -350,6 +365,9 @@
                         },
                         {
                             "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
                         },
                         {
                             "name": "CommentAuthorEmailIsMissingErrorPayload"
@@ -1512,6 +1530,30 @@
                     ]
                 },
                 {
+                    "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
                     "name": "RootReplyCommentMutationErrorPayloadUnion",
                     "enumValues": null,
                     "possibleTypes": [
@@ -1526,6 +1568,33 @@
                         },
                         {
                             "name": "GenericErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
                         }
                     ]
                 },

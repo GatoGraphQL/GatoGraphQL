@@ -15,7 +15,9 @@ interface MediaTypeAPIInterface
     public function isInstanceOfMediaType(object $object): bool;
 
     public function getMediaItemSrc(string|int|object $mediaItemObjectOrID): ?string;
+    public function getMediaItemSrcPath(string|int|object $mediaItemObjectOrID): ?string;
     public function getImageSrc(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string;
+    public function getImageSrcPath(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string;
     public function getImageSrcSet(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string;
     public function getImageSizes(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string;
     /**
@@ -23,11 +25,16 @@ interface MediaTypeAPIInterface
      */
     public function getImageProperties(string|int|object $mediaItemObjectOrID, ?string $size = null): ?array;
     /**
+     * Get the media item with provided ID or, if it doesn't exist, null
+     */
+    public function getMediaItem(int|string $id): ?object;
+    /**
      * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
     public function getMediaItems(array $query, array $options = []): array;
+    public function mediaItemExists(int|string $id): bool;
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options

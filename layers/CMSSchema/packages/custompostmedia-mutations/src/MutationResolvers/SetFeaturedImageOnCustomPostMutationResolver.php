@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
-use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 
-class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResolver
+class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver
 {
-    use ValidateUserLoggedInMutationResolverTrait;
-
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
     final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
     {
@@ -28,6 +26,15 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     {
         /** @var CustomPostMediaTypeMutationAPIInterface */
         return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+    }
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    {
+        $this->mediaTypeAPI = $mediaTypeAPI;
+    }
+    final protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    {
+        /** @var MediaTypeAPIInterface */
+        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
 
     /**
@@ -47,18 +54,13 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Check that the user is logged-in
-        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
-        if ($errorFeedbackItemResolution !== null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $errorFeedbackItemResolution,
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
+        parent::validateErrors(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
-        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
+        if (!$mediaItemID) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -68,13 +70,15 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
                     $fieldDataAccessor->getField(),
                 )
             );
-        }
-        if (!$fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID)) {
+        } elseif (!$this->getMediaTypeAPI()->mediaItemExists($mediaItemID)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
                         MutationErrorFeedbackItemProvider::E2,
+                        [
+                            $mediaItemID,
+                        ]
                     ),
                     $fieldDataAccessor->getField(),
                 )

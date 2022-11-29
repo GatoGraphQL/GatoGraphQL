@@ -39,10 +39,10 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E1 => $this->__('You are not logged in', 'user-state-mutations'),
             self::E2 => $this->__('The comment author\'s name is missing', 'comment-mutations'),
             self::E3 => $this->__('The comment author\'s email is missing', 'comment-mutations'),
-            self::E4 => $this->__('The custom post ID is missing.', 'comment-mutations'),
-            self::E5 => $this->__('The comment is empty.', 'comment-mutations'),
-            self::E6 => $this->__('There is no (parent) comment with ID \'%s\'.', 'comment-mutations'),
-            self::E7 => $this->__('There is no custom post with ID \'%s\'.', 'comment-mutations'),
+            self::E4 => $this->__('The custom post ID is missing', 'comment-mutations'),
+            self::E5 => $this->__('The comment is empty', 'comment-mutations'),
+            self::E6 => $this->__('There is no (parent) comment with ID \'%s\'', 'comment-mutations'),
+            self::E7 => $this->__('There is no custom post with ID \'%s\'', 'comment-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

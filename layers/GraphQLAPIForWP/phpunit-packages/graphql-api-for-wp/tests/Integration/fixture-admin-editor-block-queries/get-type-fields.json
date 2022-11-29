@@ -242,6 +242,9 @@
               "name": "src"
             },
             {
+              "name": "srcPath"
+            },
+            {
               "name": "srcSet"
             },
             {
@@ -259,6 +262,17 @@
           ],
           "kind": "OBJECT",
           "description": "Media elements (such as images, videos, etc), attached to a post or independent"
+        },
+        {
+          "name": "MediaItemDoesNotExistErrorPayload",
+          "namespacedName": "MediaItemDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested media item does not exist\""
         },
         {
           "name": "Menu",
@@ -1141,6 +1155,26 @@
           "description": "Payload of logging the user out"
         },
         {
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+          "namespacedName": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of removing the featured image from a custom post"
+        },
+        {
           "name": "RootReplyCommentMutationPayload",
           "namespacedName": "RootReplyCommentMutationPayload",
           "fields": [
@@ -1159,6 +1193,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of replying to a comment"
+        },
+        {
+          "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+          "namespacedName": "RootSetFeaturedImageOnCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of setting the featured image to a custom post"
         },
         {
           "name": "RootUpdatePostMutationPayload",
@@ -2532,11 +2586,25 @@
           "description": "Union of 'Error Payload' types when logging a user out"
         },
         {
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when removing a featured image from a custom post"
+        },
+        {
           "name": "RootReplyCommentMutationErrorPayloadUnion",
           "namespacedName": "RootReplyCommentMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when replying to a comment"
+        },
+        {
+          "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting a featured image to a custom post"
         },
         {
           "name": "RootUpdateCustomPostMutationErrorPayloadUnion",

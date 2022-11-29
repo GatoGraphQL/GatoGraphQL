@@ -9,6 +9,7 @@ use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use WP_Post;
 
+use function get_post;
 use function wp_get_attachment_image_src;
 
 /**
@@ -42,6 +43,16 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $url;
     }
 
+    public function getMediaItemSrcPath(string|int|object $mediaItemObjectOrID): ?string
+    {
+        $src = $this->getMediaItemSrc($mediaItemObjectOrID);
+        if ($src === null) {
+            return null;
+        }
+        /** @var string */
+        return $this->getCMSHelperService()->getLocalURLPath($src);
+    }
+
     public function getImageSrc(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
     {
         $img = $this->getImageProperties($mediaItemObjectOrID, $size);
@@ -49,6 +60,16 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
             return null;
         }
         return $img['src'];
+    }
+
+    public function getImageSrcPath(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
+    {
+        $src = $this->getImageSrc($mediaItemObjectOrID, $size);
+        if ($src === null) {
+            return null;
+        }
+        /** @var string */
+        return $this->getCMSHelperService()->getLocalURLPath($src);
     }
 
     public function getImageSrcSet(string|int|object $mediaItemObjectOrID, ?string $size = null): ?string
@@ -157,6 +178,18 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     }
 
     /**
+     * Get the media item with provided ID or, if it doesn't exist, null
+     */
+    public function getMediaItem(int|string $id): ?object
+    {
+        $post = get_post((int)$id);
+        if ($post === null || $post->post_type !== 'attachment') {
+            return null;
+        }
+        return $post;
+    }
+
+    /**
      * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
@@ -165,6 +198,12 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     {
         return $this->getCustomPosts($query, $options);
     }
+
+    public function mediaItemExists(int|string $id): bool
+    {
+        return $this->getMediaItem($id) !== null;
+    }
+
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options

@@ -145,15 +145,19 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.optionObjectValue: JSONObject`
   - `Root.optionValue: AnyBuiltInScalar` (renamed from `Root.option`)
 - Mutations now return "Payload" types:
+  - `Comment.reply: CommentReplyMutationPayload!`
+  - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
+  - `CustomPost.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
+  - `CustomPost.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+  - `Post.update: PostUpdateMutationPayload!`
   - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
   - `Root.createPost: RootCreatePostMutationPayload!`
   - `Root.loginUser: RootLoginUserMutationPayload!`
   - `Root.logoutUser: RootLogoutUserMutationPayload!`
   - `Root.replyComment: RootReplyCommentMutationPayload!`
+  - `Root.removeFeaturedImageFromCustomPost: RootRemoveFeaturedImageFromCustomPostMutationPayload!`
+  - `Root.setFeaturedImageOnCustomPost: RootSetFeaturedImageOnCustomPostMutationPayload!`
   - `Root.updatePost: RootUpdatePostMutationPayload!`
-  - `Comment.reply: CommentReplyMutationPayload!`
-  - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
-  - `Post.update: PostUpdateMutationPayload!`
 
 ### Added
 
