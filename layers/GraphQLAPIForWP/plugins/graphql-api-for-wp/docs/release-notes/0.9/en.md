@@ -764,15 +764,19 @@ If the user doesn't have the permission to edit posts, we will receive:
 
 The affected mutations are:
 
+- `Comment.reply: CommentReplyMutationPayload!`
+- `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
+- `CustomPost.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
+- `CustomPost.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+- `Post.update: PostUpdateMutationPayload!`
 - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
 - `Root.createPost: RootCreatePostMutationPayload!`
 - `Root.loginUser: RootLoginUserMutationPayload!`
 - `Root.logoutUser: RootLogoutUserMutationPayload!`
 - `Root.replyComment: RootReplyCommentMutationPayload!`
+- `Root.removeFeaturedImageFromCustomPost: RootRemoveFeaturedImageFromCustomPostMutationPayload!`
+- `Root.setFeaturedImageOnCustomPost: RootSetFeaturedImageOnCustomPostMutationPayload!`
 - `Root.updatePost: RootUpdatePostMutationPayload!`
-- `Comment.reply: CommentReplyMutationPayload!`
-- `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
-- `Post.update: PostUpdateMutationPayload!`
 
 ## Custom scalars
 
