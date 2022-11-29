@@ -8,6 +8,10 @@ use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFee
 use PoPCMSSchema\CustomPostMediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as CustomPostsMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
+use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload;
+use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
+use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload;
+use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
@@ -19,6 +23,30 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
     ): ErrorPayloadInterface {
         $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
+            [
+                CustomPostsMutationErrorFeedbackItemProvider::class,
+                CustomPostsMutationErrorFeedbackItemProvider::E1,
+            ] => new UserIsNotLoggedInErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
+            [
+                CustomPostsMutationErrorFeedbackItemProvider::class,
+                CustomPostsMutationErrorFeedbackItemProvider::E2,
+            ] => new LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
+            [
+                CustomPostsMutationErrorFeedbackItemProvider::class,
+                CustomPostsMutationErrorFeedbackItemProvider::E3,
+            ] => new LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
+            [
+                CustomPostsMutationErrorFeedbackItemProvider::class,
+                CustomPostsMutationErrorFeedbackItemProvider::E8,
+            ] => new LoggedInUserHasNoPermissionToEditCustomPostErrorPayload(
+                $errorFeedbackItemResolution->getMessage(),
+            ),
             [
                 CustomPostsMutationErrorFeedbackItemProvider::class,
                 CustomPostsMutationErrorFeedbackItemProvider::E7,
