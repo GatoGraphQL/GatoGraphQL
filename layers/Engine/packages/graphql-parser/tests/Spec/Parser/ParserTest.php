@@ -2117,6 +2117,23 @@ GRAPHQL;
         );
     }
 
+    public function testVariableWithoutValue(): void
+    {
+        $parser          = $this->getParser();
+        $document = $parser->parse('
+            query ($format: String){
+              user {
+                avatar(format: $format)
+              }
+            }
+        ');
+        /** @var Variable $var */
+        $var = $document->getOperations()[0]->getVariables()[0];
+        $var->setContext(new Context());
+        $this->assertTrue($var->hasDefaultValue());
+        $this->assertEquals(false, $var->hasValue());
+    }
+
     public function testNoDuplicateKeysInInputObjectInVariable(): void
     {
         $this->expectException(SyntaxErrorParserException::class);

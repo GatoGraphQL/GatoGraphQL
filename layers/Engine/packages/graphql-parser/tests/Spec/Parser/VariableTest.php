@@ -45,6 +45,21 @@ class VariableTest extends AbstractTestCase
             'default-value',
             $var->getValue()
         );
+        $this->assertEquals(
+            true,
+            $var->hasValue()
+        );
+    }
+
+    public function testHasValue(): void
+    {
+        $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));
+        $var->setContext(new Context());
+
+        $this->assertEquals(
+            false,
+            $var->hasValue()
+        );
     }
 
     public function testGetValueReturnsSetValueEvenWithDefaultValue(): void
