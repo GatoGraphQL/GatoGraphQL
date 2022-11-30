@@ -76,6 +76,15 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        
+        $this->validateIsUserLoggedIn(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
 
         $this->validateCanLoggedInUserCreateCustomPosts(
             $fieldDataAccessor,

@@ -27,11 +27,13 @@ trait CreateUpdateCustomPostMutationResolverTrait
     abstract protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface;
     abstract protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface;
 
-    protected function validateCanLoggedInUserCreateCustomPosts(
+    /**
+     * Check that the user is logged-in
+     */
+    protected function validateIsUserLoggedIn(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
         if ($errorFeedbackItemResolution !== null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -40,9 +42,13 @@ trait CreateUpdateCustomPostMutationResolverTrait
                     $fieldDataAccessor->getField(),
                 )
             );
-            return;
         }
+    }
 
+    protected function validateCanLoggedInUserCreateCustomPosts(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         // Validate user permission
         $userID = App::getState('current-user-id');
         $editCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
