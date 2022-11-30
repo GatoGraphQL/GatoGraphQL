@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public final const E1 = 'e1';
+    public final const E2 = 'e2';
 
     /**
      * @return string[]
@@ -18,6 +19,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
+            self::E2,
         ];
     }
 
@@ -25,6 +27,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => $this->__('You must be logged in to set categories on custom posts', 'custompost-category-mutations'),
+            self::E2 => $this->__('There are no categories with ID(s) \'%s\'', 'custompost-category-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }
