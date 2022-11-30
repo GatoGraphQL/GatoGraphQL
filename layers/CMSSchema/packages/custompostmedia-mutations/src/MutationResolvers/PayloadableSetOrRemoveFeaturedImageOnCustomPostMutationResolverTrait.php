@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableCustomPostMutationResolverTrait;
-use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
@@ -24,12 +23,6 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
         return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new UserIsNotLoggedInErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new MediaItemDoesNotExistErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
@@ -38,5 +31,15 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
                 $objectTypeFieldResolutionFeedback
             ),
         };
+    }
+
+    protected function getUserNotLoggedInErrorFeedbackItemProviderClass(): string
+    {
+        return MutationErrorFeedbackItemProvider::class;
+    }
+
+    protected function getUserNotLoggedInErrorFeedbackItemProviderCode(): string
+    {
+        return MutationErrorFeedbackItemProvider::E3;
     }
 }

@@ -22,8 +22,8 @@ trait PayloadableCustomPostMutationResolverTrait
         $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
             [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E1,
+                $this->getUserNotLoggedInErrorFeedbackItemProviderClass(),
+                $this->getUserNotLoggedInErrorFeedbackItemProviderCode(),
             ] => new UserIsNotLoggedInErrorPayload(
                 $errorFeedbackItemResolution->getMessage(),
             ),
@@ -56,5 +56,15 @@ trait PayloadableCustomPostMutationResolverTrait
                 $errorFeedbackItemResolution->getNamespacedCode(),
             ),
         };
+    }
+
+    protected function getUserNotLoggedInErrorFeedbackItemProviderClass(): string
+    {
+        return MutationErrorFeedbackItemProvider::class;
+    }
+
+    protected function getUserNotLoggedInErrorFeedbackItemProviderCode(): string
+    {
+        return MutationErrorFeedbackItemProvider::E1;
     }
 }
