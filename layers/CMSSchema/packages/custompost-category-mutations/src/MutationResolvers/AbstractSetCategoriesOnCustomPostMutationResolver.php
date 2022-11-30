@@ -129,6 +129,9 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         );
     }
 
+    /**
+     * @param array<string|int> $customPostCategoryIDs
+     */
     protected function validateCategoriesExist(
         array $customPostCategoryIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
