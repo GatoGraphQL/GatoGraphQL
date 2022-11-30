@@ -83,30 +83,11 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
         );
 
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        if (!$customPostID) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        CustomPostsMutationErrorFeedbackItemProvider::class,
-                        CustomPostsMutationErrorFeedbackItemProvider::E6,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        } elseif (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        CustomPostsMutationErrorFeedbackItemProvider::class,
-                        CustomPostsMutationErrorFeedbackItemProvider::E7,
-                        [
-                            $customPostID,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
+        $this->validateCustomPostExists(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;

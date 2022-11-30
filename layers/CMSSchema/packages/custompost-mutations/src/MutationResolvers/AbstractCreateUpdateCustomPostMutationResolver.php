@@ -151,33 +151,16 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        if (!$customPostID) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E6,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-            return;
-        }
+        $this->validateCustomPostExists(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
-        if (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E7,
-                        [
-                            $customPostID,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
 
