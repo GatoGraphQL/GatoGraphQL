@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateUpdateCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
@@ -14,6 +15,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends AbstractMutationResolver
 {
@@ -113,6 +115,14 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function getUserNotLoggedInError(): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E1,
         );
     }
 

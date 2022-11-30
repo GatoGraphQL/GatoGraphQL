@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateUpdateCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
@@ -14,6 +15,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
@@ -113,6 +115,14 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function getUserNotLoggedInError(): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E1,
         );
     }
 

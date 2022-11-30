@@ -24,7 +24,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The %s ID is missing.', 'custompost-category-mutations'),
+            self::E1 => $this->__('You must be logged in to set categories on custom posts', 'custompost-category-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }
