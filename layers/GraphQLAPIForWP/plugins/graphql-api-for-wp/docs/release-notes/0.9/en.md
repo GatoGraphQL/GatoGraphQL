@@ -768,6 +768,8 @@ The affected mutations are:
 - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
 - `CustomPost.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
 - `CustomPost.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+- `Post.setCategories: PostSetCategoriesMutationPayload!`
+- `Post.setTags: PostSetTagsMutationPayload!`
 - `Post.update: PostUpdateMutationPayload!`
 - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
 - `Root.createPost: RootCreatePostMutationPayload!`
@@ -775,7 +777,9 @@ The affected mutations are:
 - `Root.logoutUser: RootLogoutUserMutationPayload!`
 - `Root.replyComment: RootReplyCommentMutationPayload!`
 - `Root.removeFeaturedImageFromCustomPost: RootRemoveFeaturedImageFromCustomPostMutationPayload!`
+- `Root.setCategoriesOnPost: RootSetCategoriesOnPostMutationPayload!`
 - `Root.setFeaturedImageOnCustomPost: RootSetFeaturedImageOnCustomPostMutationPayload!`
+- `Root.setTagsOnPost: RootSetTagsOnPostMutationPayload!`
 - `Root.updatePost: RootUpdatePostMutationPayload!`
 
 ## Custom scalars
