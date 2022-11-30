@@ -26,6 +26,11 @@ class Literal extends AbstractAst implements ArgumentValueAstInterface
         return $this->getGraphQLQueryStringFormatter()->getLiteralAsQueryString($this->value);
     }
 
+    final public function hasValue(): bool
+    {
+        return true;
+    }
+
     /**
      * @return string|int|float|bool|null
      */

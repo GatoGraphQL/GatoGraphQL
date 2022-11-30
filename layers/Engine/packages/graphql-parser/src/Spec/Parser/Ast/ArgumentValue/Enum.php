@@ -26,6 +26,11 @@ class Enum extends AbstractAst implements ArgumentValueAstInterface
         return $this->enumValue;
     }
 
+    final public function hasValue(): bool
+    {
+        return true;
+    }
+
     /**
      * @return string
      */
