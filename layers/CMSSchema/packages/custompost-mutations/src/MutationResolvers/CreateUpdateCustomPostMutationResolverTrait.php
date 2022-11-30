@@ -45,7 +45,7 @@ trait CreateUpdateCustomPostMutationResolverTrait
         }
     }
 
-    protected function validateCanLoggedInUserCreateCustomPosts(
+    protected function validateCanLoggedInUserEditCustomPosts(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -67,28 +67,30 @@ trait CreateUpdateCustomPostMutationResolverTrait
                     $fieldDataAccessor->getField(),
                 )
             );
-            return;
         }
+    }
 
-        // Check if the user can publish custom posts
-        if ($fieldDataAccessor->getValue(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
-            $publishCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
-            if (
-                !$this->getUserRoleTypeAPI()->userCan(
-                    $userID,
-                    $publishCustomPostsCapability
+    protected function validateCanLoggedInUserPublishCustomPosts(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $userID = App::getState('current-user-id');
+        $publishCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
+        if (
+            !$this->getUserRoleTypeAPI()->userCan(
+                $userID,
+                $publishCustomPostsCapability
+            )
+        ) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                    ),
+                    $fieldDataAccessor->getField(),
                 )
-            ) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E3,
-                        ),
-                        $fieldDataAccessor->getField(),
-                    )
-                );
-            }
+            );
         }
     }
 

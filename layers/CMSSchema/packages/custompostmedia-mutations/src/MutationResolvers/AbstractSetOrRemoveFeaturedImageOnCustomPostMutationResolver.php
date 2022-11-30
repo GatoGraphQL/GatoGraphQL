@@ -86,7 +86,7 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
             return;
         }
 
-        $this->validateCanLoggedInUserCreateCustomPosts(
+        $this->validateCanLoggedInUserEditCustomPosts(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
