@@ -5,3 +5,6 @@ services:
 
     PoPCMSSchema\CustomPostCategoryMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
