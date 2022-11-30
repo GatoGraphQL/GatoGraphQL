@@ -2130,7 +2130,7 @@ GRAPHQL;
         /** @var Variable $var */
         $var = $document->getOperations()[0]->getVariables()[0];
         $var->setContext(new Context());
-        $this->assertTrue($var->hasDefaultValue());
+        $this->assertFalse($var->hasDefaultValue());
         $this->assertEquals(false, $var->hasValue());
     }
 
