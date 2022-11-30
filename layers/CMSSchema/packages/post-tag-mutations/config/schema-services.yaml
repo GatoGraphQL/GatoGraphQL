@@ -14,3 +14,6 @@ services:
 
     PoPCMSSchema\PostTagMutations\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
+
+    PoPCMSSchema\PostTagMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
