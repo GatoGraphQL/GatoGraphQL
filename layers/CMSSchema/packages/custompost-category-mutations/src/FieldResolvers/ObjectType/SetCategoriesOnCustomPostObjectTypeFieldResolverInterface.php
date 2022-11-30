@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 
 interface SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
 {
@@ -15,4 +16,6 @@ interface SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
     public function getSetCategoriesMutationResolver(): MutationResolverInterface;
     public function getCustomPostSetCategoriesFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver;
+    public function getPayloadableSetCategoriesMutationResolver(): MutationResolverInterface;
+    public function getRootSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
 }
