@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as CustomPostsMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateUpdateCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -76,7 +74,7 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-        
+
         $this->validateIsUserLoggedIn(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

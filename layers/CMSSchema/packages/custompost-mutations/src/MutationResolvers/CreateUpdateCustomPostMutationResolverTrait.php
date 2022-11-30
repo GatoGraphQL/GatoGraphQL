@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;

@@ -85,7 +85,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-        
+
         $this->validateIsUserLoggedIn(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

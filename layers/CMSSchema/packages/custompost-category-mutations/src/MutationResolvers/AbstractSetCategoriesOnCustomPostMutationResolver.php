@@ -89,7 +89,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-        
+
         $this->validateIsUserLoggedIn(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

@@ -125,5 +125,4 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     }
 
     abstract protected function getRootSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
-
 }

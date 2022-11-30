@@ -147,6 +147,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
-    
+
     abstract protected function getCustomPostSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
 }
