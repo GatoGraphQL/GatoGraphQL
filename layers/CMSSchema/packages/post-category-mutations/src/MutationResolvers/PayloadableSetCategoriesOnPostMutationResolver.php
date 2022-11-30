@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategoryMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableCustomPostMutationResolverTrait;
-use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\PayloadableSetCategoriesOnCustomPostMutationResolverTrait;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Container\ObjectDictionaryInterface;
@@ -17,7 +16,7 @@ use PoP\Root\Exception\AbstractException;
 class PayloadableSetCategoriesOnPostMutationResolver extends SetCategoriesOnPostMutationResolver
 {
     use PayloadableMutationResolverTrait;
-    use PayloadableCustomPostMutationResolverTrait;
+    use PayloadableSetCategoriesOnCustomPostMutationResolverTrait;
 
     private ?ObjectDictionaryInterface $objectDictionary = null;
 
@@ -82,15 +81,5 @@ class PayloadableSetCategoriesOnPostMutationResolver extends SetCategoriesOnPost
             $errorPayload,
         );
         return $errorPayload;
-    }
-
-    protected function getUserNotLoggedInErrorFeedbackItemProviderClass(): string
-    {
-        return MutationErrorFeedbackItemProvider::class;
-    }
-
-    protected function getUserNotLoggedInErrorFeedbackItemProviderCode(): string
-    {
-        return MutationErrorFeedbackItemProvider::E1;
     }
 }
