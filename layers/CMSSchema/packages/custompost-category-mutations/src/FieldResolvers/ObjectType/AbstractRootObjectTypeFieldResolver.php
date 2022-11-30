@@ -63,8 +63,8 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $usePayloadableCustomPostTagMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMutations();
-        if (!$usePayloadableCustomPostTagMutations) {
+        $usePayloadableCustomPostCategoryMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMutations();
+        if (!$usePayloadableCustomPostCategoryMutations) {
             return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
         }
         return match ($fieldName) {
@@ -96,8 +96,13 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostCategoryMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMutations();
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName() => $this->getSetCategoriesMutationResolver(),
+            $this->getSetCategoriesFieldName() => $usePayloadableCustomPostCategoryMutations
+                ? $this->getPayloadableSetCategoriesMutationResolver()
+                : $this->getSetCategoriesMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }

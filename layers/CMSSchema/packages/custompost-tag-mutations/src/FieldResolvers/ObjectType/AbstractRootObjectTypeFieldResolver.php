@@ -96,8 +96,13 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostTagMutations = $moduleConfiguration->usePayloadableCustomPostTagMutations();
         return match ($fieldName) {
-            $this->getSetTagsFieldName() => $this->getSetTagsMutationResolver(),
+            $this->getSetTagsFieldName() => $usePayloadableCustomPostTagMutations
+                ? $this->getPayloadableSetTagsMutationResolver()
+                : $this->getSetTagsMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
