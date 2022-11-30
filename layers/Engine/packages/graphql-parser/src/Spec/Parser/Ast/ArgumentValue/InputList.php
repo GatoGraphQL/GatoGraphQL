@@ -33,6 +33,11 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
         return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
     }
 
+    final public function hasValue(): bool
+    {
+        return true;
+    }
+
     /**
      * Transform from Ast to actual value.
      * Eg: replace VariableReferences with their value,
@@ -45,6 +50,16 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
         $list = [];
         foreach ($this->list as $key => $value) {
             if ($value instanceof WithValueInterface) {
+                /**
+                 * If a Variable is non mandatory, and it is not
+                 * provided a value, then do NOT inject it.
+                 *
+                 * Otherwise, the `null` value would make a non-nullable
+                 * type fail.
+                 */
+                if (!$value->hasValue()) {
+                    continue;
+                }
                 $list[$key] = $value->getValue();
                 continue;
             }

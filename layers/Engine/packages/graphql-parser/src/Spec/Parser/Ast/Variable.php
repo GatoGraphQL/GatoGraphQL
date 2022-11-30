@@ -185,6 +185,32 @@ class Variable extends AbstractAst implements WithValueInterface
     }
 
     /**
+     * If a Variable is non mandatory, and it is not
+     * provided a value, then do NOT inject it.
+     *
+     * Otherwise, the `null` value would make a non-nullable
+     * type fail.
+     */
+    final public function hasValue(): bool
+    {
+        if ($this->context === null) {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Context has not been set for Variable object (with name \'%s\')', 'graphql-server'),
+                    $this->name,
+                )
+            );
+        }
+        if ($this->context->hasVariableValue($this->name)) {
+            return true;
+        }
+        if ($this->hasDefaultValue()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Get the value from the context or from the variable
      *
      * @return InputList|InputObject|Literal|Enum|null
