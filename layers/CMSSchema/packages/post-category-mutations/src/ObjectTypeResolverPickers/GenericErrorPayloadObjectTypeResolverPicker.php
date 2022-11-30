@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategoryMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver;
 use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractGenericErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -16,7 +16,7 @@ class GenericErrorPayloadObjectTypeResolverPicker extends AbstractGenericErrorPa
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver::class,
+            AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

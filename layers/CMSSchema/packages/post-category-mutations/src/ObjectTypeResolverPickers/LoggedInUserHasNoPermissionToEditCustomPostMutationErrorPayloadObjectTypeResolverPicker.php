@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategoryMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers\AbstractLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -16,7 +16,7 @@ class LoggedInUserHasNoPermissionToEditCustomPostMutationErrorPayloadObjectTypeR
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver::class,
+            AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
