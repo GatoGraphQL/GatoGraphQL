@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Root\App;
+use PoPCMSSchema\CustomPostTagMutations\Module;
+use PoPCMSSchema\CustomPostTagMutations\ModuleConfiguration;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Module as EngineModule;
 use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Root\App;
 
 abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
@@ -54,6 +56,20 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostTagMutations = $moduleConfiguration->usePayloadableCustomPostTagMutations();
+        if (!$usePayloadableCustomPostTagMutations) {
+            return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
+        }
+        return match ($fieldName) {
+            $this->getSetTagsFieldName() => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
