@@ -104,7 +104,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getPayloadableSetCategoriesOnPostMutationResolver();
     }
 
-    public function getRootSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
+    protected function getRootSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
     {
         return $this->getRootSetCategoriesOnPostMutationPayloadObjectTypeResolver();
     }

@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 
 interface SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
@@ -15,5 +14,4 @@ interface SetTagsOnCustomPostObjectTypeFieldResolverInterface
     public function getSetTagsMutationResolver(): MutationResolverInterface;
     public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
     public function getPayloadableSetTagsMutationResolver(): MutationResolverInterface;
-    public function getRootSetTagsMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
 }

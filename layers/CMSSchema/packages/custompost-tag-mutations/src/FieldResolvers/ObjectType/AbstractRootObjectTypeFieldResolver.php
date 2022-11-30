@@ -123,4 +123,6 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
+
+    abstract protected function getRootSetTagsMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
 }
