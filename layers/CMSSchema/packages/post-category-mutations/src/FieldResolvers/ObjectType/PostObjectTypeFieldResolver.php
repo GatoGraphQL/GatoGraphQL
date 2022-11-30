@@ -9,8 +9,10 @@ use PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType\AbstractC
 use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\MutationResolvers\PayloadableSetCategoriesOnPostMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType\PostSetCategoriesFilterInputObjectTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\ObjectType\PostSetCategoriesMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -22,7 +24,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?PostSetCategoriesFilterInputObjectTypeResolver $postSetCategoriesFilterInputObjectTypeResolver = null;
     private ?PayloadableSetCategoriesOnPostMutationResolver $payloadableSetCategoriesOnPostMutationResolver = null;
-    private ?CustomPostSetCategoriesOnPostMutationPayloadObjectTypeResolver $customPostSetCategoriesOnPostMutationPayloadObjectTypeResolver = null;
+    private ?PostSetCategoriesMutationPayloadObjectTypeResolver $postSetCategoriesMutationPayloadObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -69,14 +71,14 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         /** @var PayloadableSetCategoriesOnPostMutationResolver */
         return $this->payloadableSetCategoriesOnPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableSetCategoriesOnPostMutationResolver::class);
     }
-    final public function setCustomPostSetCategoriesOnPostMutationPayloadObjectTypeResolver(CustomPostSetCategoriesOnPostMutationPayloadObjectTypeResolver $customPostSetCategoriesOnPostMutationPayloadObjectTypeResolver): void
+    final public function setPostSetCategoriesMutationPayloadObjectTypeResolver(PostSetCategoriesMutationPayloadObjectTypeResolver $postSetCategoriesMutationPayloadObjectTypeResolver): void
     {
-        $this->customPostSetCategoriesOnPostMutationPayloadObjectTypeResolver = $customPostSetCategoriesOnPostMutationPayloadObjectTypeResolver;
+        $this->postSetCategoriesMutationPayloadObjectTypeResolver = $postSetCategoriesMutationPayloadObjectTypeResolver;
     }
-    final protected function getCustomPostSetCategoriesOnPostMutationPayloadObjectTypeResolver(): CustomPostSetCategoriesOnPostMutationPayloadObjectTypeResolver
+    final protected function getPostSetCategoriesMutationPayloadObjectTypeResolver(): PostSetCategoriesMutationPayloadObjectTypeResolver
     {
-        /** @var CustomPostSetCategoriesOnPostMutationPayloadObjectTypeResolver */
-        return $this->customPostSetCategoriesOnPostMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSetCategoriesOnPostMutationPayloadObjectTypeResolver::class);
+        /** @var PostSetCategoriesMutationPayloadObjectTypeResolver */
+        return $this->postSetCategoriesMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(PostSetCategoriesMutationPayloadObjectTypeResolver::class);
     }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
@@ -101,7 +103,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 
     protected function getCustomPostSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
     {
-        return $this->getCustomPostSetCategoriesOnPostMutationPayloadObjectTypeResolver();
+        return $this->getPostSetCategoriesMutationPayloadObjectTypeResolver();
     }
 
     public function getPayloadableSetCategoriesMutationResolver(): MutationResolverInterface
