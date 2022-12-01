@@ -2131,7 +2131,6 @@ GRAPHQL;
         $var = $document->getOperations()[0]->getVariables()[0];
         $var->setContext(new Context());
         $this->assertFalse($var->hasDefaultValue());
-        $this->assertEquals(false, $var->hasValue());
     }
 
     public function testNoDuplicateKeysInInputObjectInVariable(): void

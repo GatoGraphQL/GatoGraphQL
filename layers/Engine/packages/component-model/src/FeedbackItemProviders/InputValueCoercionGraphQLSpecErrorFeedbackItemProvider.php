@@ -12,6 +12,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
     public final const E_5_6_1_1 = '5.6.1[1]';
     public final const E_5_6_1_2 = '5.6.1[2]';
     public final const E_5_6_1_3 = '5.6.1[3]';
+    public final const E_5_6_1_4 = '5.6.1[4]';
     public final const E_5_6_1_6 = '5.6.1[6]';
     public final const E_5_6_1_7 = '5.6.1[7]';
     public final const E_5_6_1_8 = '5.6.1[8]';
@@ -41,6 +42,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
             self::E_5_6_1_1,
             self::E_5_6_1_2,
             self::E_5_6_1_3,
+            self::E_5_6_1_4,
             self::E_5_6_1_6,
             self::E_5_6_1_7,
             self::E_5_6_1_8,
@@ -64,6 +66,7 @@ class InputValueCoercionGraphQLSpecErrorFeedbackItemProvider extends AbstractFee
             self::E_5_6_1_1 => $this->__('An object cannot be cast to type \'%s\'', 'component-model'),
             self::E_5_6_1_2 => $this->__('The format for \'%s\' is not correct for type \'%s\'', 'component-model'),
             self::E_5_6_1_3 => $this->__('Type \'%s\' must be provided as a string', 'component-model'),
+            self::E_5_6_1_4 => $this->__('Argument \'%s\' cannot be `null`', 'component-model'),
             self::E_5_6_1_6 => $this->__('The oneof input object \'%s\' must receive exactly 1 input, but %s inputs were provided (\'%s\')', 'component-model'),
             self::E_5_6_1_7 => $this->__('No input value was provided to the oneof input object \'%s\'', 'component-model'),
             self::E_5_6_1_8 => $this->__('Argument \'%s\' does not expect an array, but array \'%s\' was provided', 'component-model'),

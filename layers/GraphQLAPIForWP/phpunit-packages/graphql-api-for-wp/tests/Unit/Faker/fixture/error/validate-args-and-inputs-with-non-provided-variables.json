@@ -1,0 +1,101 @@
+{
+    "errors": [
+        {
+            "message": "Argument 'status' cannot receive an array with `null` values",
+            "locations": [
+                {
+                    "line": 16,
+                    "column": 13
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{status: $nonProvidedVar}",
+                    "(filter: {status: $nonProvidedVar})",
+                    "posts(filter: {status: $nonProvidedVar}, pagination: {limit: 3}) { ... }",
+                    "query ($nonProvidedVar: String) { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "posts(filter: {status: $nonProvidedVar}, pagination: {limit: 3}) { ... }",
+                "code": "gql@5.6.1[10]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        },
+        {
+            "message": "Argument 'if' in directive 'include' cannot be null",
+            "locations": [
+                {
+                    "line": 12,
+                    "column": 24
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "$nonProvidedVar",
+                    "(if: $nonProvidedVar)",
+                    "@include(if: $nonProvidedVar)",
+                    "title @include(if: $nonProvidedVar)",
+                    "post(by: {id: 1724}) { ... }",
+                    "query ($nonProvidedVar: String) { ... }"
+                ],
+                "type": "Post",
+                "field": "title @include(if: $nonProvidedVar)",
+                "code": "gql@5.4.2.1[d]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
+            }
+        },
+        {
+            "message": "Argument 'status' in field 'isStatus' of type 'Post' cannot be null",
+            "locations": [
+                {
+                    "line": 10,
+                    "column": 22
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "$nonProvidedVar",
+                    "(status: $nonProvidedVar)",
+                    "isStatus(status: $nonProvidedVar)",
+                    "post(by: {id: 1724}) { ... }",
+                    "query ($nonProvidedVar: String) { ... }"
+                ],
+                "type": "Post",
+                "field": "isStatus(status: $nonProvidedVar)",
+                "code": "gql@5.4.2.1[b]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
+            }
+        },
+        {
+            "message": "Argument 'format' in field 'dateStr' of type 'Post' cannot be null",
+            "locations": [
+                {
+                    "line": 11,
+                    "column": 21
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "$nonProvidedVar",
+                    "(format: $nonProvidedVar)",
+                    "dateStr(format: $nonProvidedVar)",
+                    "post(by: {id: 1724}) { ... }",
+                    "query ($nonProvidedVar: String) { ... }"
+                ],
+                "type": "Post",
+                "field": "dateStr(format: $nonProvidedVar)",
+                "code": "gql@5.4.2.1[b]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
+            }
+        }
+    ],
+    "data": {
+        "post": {
+            "id": 1724,
+            "isStatus": null,
+            "dateStr": null,
+            "title": null
+        },
+        "posts": null
+    }
+}

@@ -54,6 +54,9 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
                 \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS => true,
                 ],
+                \PoPCMSSchema\CustomPosts\Module::class => [
+                    \PoPCMSSchema\CustomPosts\Environment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => false,
+                ],
             ]
         ];
     }

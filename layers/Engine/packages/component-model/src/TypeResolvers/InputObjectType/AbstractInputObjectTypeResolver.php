@@ -287,6 +287,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldIsNonNullable = ($inputFieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
             $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
             $inputFieldIsNonNullArrayOfArraysItemsType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS;
             $inputFieldIsArrayType = $inputFieldIsArrayOfArraysType || ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
@@ -317,6 +318,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              *   - [[DangerouslyNonSpecificScalar]] must be array of arrays => $inputIsArrayType => true, $inputIsArrayOfArraysType => true
              */
             if ($isDangerouslyNonSpecificScalar) {
+                if (!$inputFieldIsNonNullable) {
+                    $inputFieldIsNonNullable = null;
+                }
                 if (!$inputFieldIsArrayOfArraysType) {
                     $inputFieldIsArrayOfArraysType = null;
                 }
@@ -368,12 +372,14 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             /**
              * Cast (or "coerce" in GraphQL terms) the value
              *
+             * @var bool $inputFieldIsNonNullable
              * @var bool $inputFieldIsArrayType
              * @var bool $inputFieldIsArrayOfArraysType
              */
             $coercedInputFieldValue = $inputCoercingService->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
+                $inputFieldIsNonNullable,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
                 $astNode,
