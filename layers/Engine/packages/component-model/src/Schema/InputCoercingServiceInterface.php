@@ -58,6 +58,7 @@ interface InputCoercingServiceInterface
     public function coerceInputValue(
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
+        bool $inputIsNonNullable,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
         AstInterface $astNode,
