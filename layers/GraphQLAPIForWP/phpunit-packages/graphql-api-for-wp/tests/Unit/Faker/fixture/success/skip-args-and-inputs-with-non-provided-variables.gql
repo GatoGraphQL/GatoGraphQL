@@ -1,0 +1,11 @@
+############################################################
+# Field `dateStr` has argument `format` that cannot be null.
+# Variable $format is not mandatory and also not provided.
+# Then $format must not be injected into `dateStr`, or otherwise
+# the `null` value would make it fail
+############################################################
+query ($format: String) {
+  post(by: { id: 1724 }) {
+    dateStr(format: $format)
+  }
+}
