@@ -11,6 +11,39 @@
       "types": [
         {
           "kind": "OBJECT",
+          "name": "CategoryDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The requested category does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "Comment",
           "description": "Comments added to custom posts",
           "fields": [
@@ -1935,9 +1968,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Post",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootSetCategoriesOnPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetCategoriesOnPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1993,9 +2030,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Post",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootSetTagsOnPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetTagsOnPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8281,9 +8322,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Post",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootSetCategoriesOnPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetCategoriesOnPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8339,9 +8384,13 @@
                 }
               ],
               "type": {
-                "kind": "OBJECT",
-                "name": "Post",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "RootSetTagsOnPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetTagsOnPostMutationPayload",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -8990,6 +9039,77 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootSetCategoriesOnPostMutationPayload",
+          "description": "Payload of setting categories on a post",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootSetCategoriesOnPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "post",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Post",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "postID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
           "description": "Payload of setting the featured image to a custom post",
           "fields": [
@@ -9033,6 +9153,77 @@
                     "ofType": null
                   }
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetTagsOnPostMutationPayload",
+          "description": "Payload of setting tags on a post",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootSetTagsOnPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootSetTagsOnPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "post",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Post",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "postID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -12101,7 +12292,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
               "ofType": null
             },
             {
@@ -12111,12 +12302,17 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "name": "CustomPostDoesNotExistErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "CustomPostDoesNotExistErrorPayload",
+              "name": "CategoryDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -16637,9 +16833,13 @@
               "name": "append",
               "description": "Append the categories to the existing ones?",
               "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             },
@@ -16729,9 +16929,13 @@
               "name": "append",
               "description": "Append the tags to the existing ones?",
               "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             },
@@ -18988,6 +19192,47 @@
         },
         {
           "kind": "UNION",
+          "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when setting categories on a custom post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CategoryDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
           "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when setting a featured image to a custom post",
           "fields": null,
@@ -19023,6 +19268,42 @@
             {
               "kind": "OBJECT",
               "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when setting tags on a custom post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
