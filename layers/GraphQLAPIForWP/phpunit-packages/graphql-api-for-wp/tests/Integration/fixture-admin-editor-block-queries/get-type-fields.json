@@ -4,7 +4,7 @@
       "types": [
         {
           "name": "CategoryDoesNotExistErrorPayload",
-          "namespacedName": "CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
+          "namespacedName": "CategoryDoesNotExistErrorPayload",
           "fields": [
             {
               "name": "message"

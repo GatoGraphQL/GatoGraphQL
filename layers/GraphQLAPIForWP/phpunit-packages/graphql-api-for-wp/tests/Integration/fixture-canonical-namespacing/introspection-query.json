@@ -11,6 +11,39 @@
       "types": [
         {
           "kind": "OBJECT",
+          "name": "CategoryDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The requested category does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "Comment",
           "description": "Comments added to custom posts",
           "fields": [
@@ -2795,39 +2828,6 @@
           "kind": "OBJECT",
           "name": "PasswordIsIncorrectErrorPayload",
           "description": "Error payload for: \"The password is incorrect\"",
-          "fields": [
-            {
-              "name": "message",
-              "description": "Error message",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "String!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "IsErrorPayload",
-              "ofType": null
-            }
-          ],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
-          "name": "CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
-          "description": "Error payload for: \"The requested category does not exist\"",
           "fields": [
             {
               "name": "message",
@@ -12307,7 +12307,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
+              "name": "CategoryDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -19206,7 +19206,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
+              "name": "CategoryDoesNotExistErrorPayload",
               "ofType": null
             },
             {
