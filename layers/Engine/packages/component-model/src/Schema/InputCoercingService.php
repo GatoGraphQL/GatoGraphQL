@@ -257,11 +257,30 @@ class InputCoercingService implements InputCoercingServiceInterface
     public function coerceInputValue(
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
+        bool $inputIsNonNullable,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        /**
+         * If it is a null, validate the input can be nullable
+         */
+        if ($inputValue === null && $inputIsNonNullable) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_4,
+                        [
+                            $inputTypeResolver->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    $astNode,
+                ),
+            );
+            return null;
+        }
         /**
          * If it is a null, nothing to coerce.
          *

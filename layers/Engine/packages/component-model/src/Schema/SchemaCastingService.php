@@ -73,6 +73,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              * Coerce the value to the appropriate type.
              * Eg: from string to boolean.
              **/
+            $fieldOrDirectiveArgIsNonNullable = $argumentSchemaDefinition[$argName][SchemaDefinition::NON_NULLABLE] ?? false;
             $fieldOrDirectiveArgIsArrayType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY] ?? false;
             $fieldOrDirectiveArgIsNonNullArrayItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
             $fieldOrDirectiveArgIsArrayOfArraysType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
@@ -103,6 +104,9 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              *   - [[DangerouslyNonSpecificScalar]] must be array of arrays => $inputIsArrayType => true, $inputIsArrayOfArraysType => true
              */
             if ($isDangerouslyNonSpecificScalar) {
+                if (!$fieldOrDirectiveArgIsNonNullable) {
+                    $fieldOrDirectiveArgIsNonNullable = null;
+                }
                 if (!$fieldOrDirectiveArgIsArrayType) {
                     $fieldOrDirectiveArgIsArrayType = null;
                 }
@@ -166,12 +170,14 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             /**
              * Cast (or "coerce" in GraphQL terms) the value
              *
+             * @var bool $fieldOrDirectiveArgIsNonNullable
              * @var bool $fieldOrDirectiveArgIsArrayType
              * @var bool $fieldOrDirectiveArgIsArrayOfArraysType
              */
             $coercedArgValue = $inputCoercingService->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
+                $fieldOrDirectiveArgIsNonNullable,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $astNode,

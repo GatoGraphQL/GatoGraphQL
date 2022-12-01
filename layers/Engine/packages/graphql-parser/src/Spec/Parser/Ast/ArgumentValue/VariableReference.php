@@ -50,11 +50,6 @@ class VariableReference extends AbstractAst implements VariableReferenceInterfac
         return $this->name;
     }
 
-    public function hasValue(): bool
-    {
-        return $this->variable?->hasValue() ?? false;
-    }
-
     /**
      * Get the value from the context or from the variable
      *

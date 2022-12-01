@@ -95,15 +95,12 @@ class AstTest extends AbstractTestCase
     {
         $list = new InputList(['a', 'b'], new Location(1, 1));
         $this->assertEquals(['a', 'b'], $list->getValue());
-        $this->assertEquals(true, $list->hasValue());
 
         $inputObject = new InputObject((object) ['a', 'b'], new Location(1, 1));
         $this->assertEquals((object) ['a', 'b'], $inputObject->getValue());
-        $this->assertEquals(true, $inputObject->hasValue());
 
         $literal = new Literal('text', new Location(1, 1));
         $this->assertEquals('text', $literal->getValue());
-        $this->assertEquals(true, $literal->hasValue());
     }
 
     public function testVariable(): void

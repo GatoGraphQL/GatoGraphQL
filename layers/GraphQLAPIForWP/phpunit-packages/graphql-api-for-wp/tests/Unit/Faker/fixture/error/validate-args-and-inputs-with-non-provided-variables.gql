@@ -1,0 +1,21 @@
+############################################################
+# Field `isStatus` has argument `status` that cannot be null.
+# Variable $nonProvidedVar is not mandatory and also not provided.
+# As in that case the provided value is `null`, the validation
+# needs to kick in.
+############################################################
+query ($nonProvidedVar: String) {
+  post(by: { id: 1724 }) {
+    id
+    isStatus(status: $nonProvidedVar)
+    dateStr(format: $nonProvidedVar)
+    title @include(if: $nonProvidedVar)
+  }
+  
+  posts(
+    filter: { status: $nonProvidedVar },
+    pagination: { limit: 3 }
+  ) {
+    id
+  }
+}

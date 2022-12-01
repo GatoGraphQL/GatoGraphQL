@@ -20,13 +20,4 @@ abstract class AbstractRuntimeVariableReference extends VariableReference implem
     ) {
         parent::__construct($name, null, $location);
     }
-
-    /**
-     * Do not constrain the dynamic variables to statically check
-     * if they have value, as it will be satisfied on runtime
-     */
-    public function hasValue(): bool
-    {
-        return true;
-    }
 }

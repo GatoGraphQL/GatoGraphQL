@@ -50,11 +50,6 @@ class Argument extends AbstractAst
         return $this->value;
     }
 
-    final public function hasValue(): bool
-    {
-        return true;
-    }
-
     final public function getValue(): mixed
     {
         return $this->value->getValue();
