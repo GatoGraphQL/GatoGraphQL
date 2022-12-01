@@ -177,6 +177,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $coercedArgValue = $inputCoercingService->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
+                $argName,
                 $fieldOrDirectiveArgIsNonNullable,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,

@@ -379,6 +379,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $coercedInputFieldValue = $inputCoercingService->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
+                $inputFieldName,
                 $inputFieldIsNonNullable,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
