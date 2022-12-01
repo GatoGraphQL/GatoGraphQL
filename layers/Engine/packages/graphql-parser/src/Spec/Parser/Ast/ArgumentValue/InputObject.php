@@ -33,11 +33,6 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
         return $this->getGraphQLQueryStringFormatter()->getObjectAsQueryString($this->object);
     }
 
-    final public function hasValue(): bool
-    {
-        return true;
-    }
-
     /**
      * Transform from Ast to actual value.
      * Eg: replace VariableReferences with their value,
@@ -50,16 +45,6 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
         $object = new stdClass();
         foreach ((array) $this->object as $key => $value) {
             if ($value instanceof WithValueInterface) {
-                /**
-                 * If a Variable is non mandatory, and it is not
-                 * provided a value, then do NOT inject it.
-                 *
-                 * Otherwise, the `null` value would make a non-nullable
-                 * type fail.
-                 */
-                if (!$value->hasValue()) {
-                    continue;
-                }
                 $object->$key = $value->getValue();
                 continue;
             }

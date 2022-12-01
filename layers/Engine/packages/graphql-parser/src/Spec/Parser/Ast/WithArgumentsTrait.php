@@ -75,16 +75,6 @@ trait WithArgumentsTrait
 
         $this->argumentKeyValues = [];
         foreach ($this->getArguments() as $argument) {
-            /**
-             * If a Variable is non mandatory, and it is not
-             * provided a value, then do NOT inject it.
-             *
-             * Otherwise, the `null` value would make a non-nullable
-             * type fail.
-             */
-            if (!$argument->hasValue()) {
-                continue;
-            }
             $this->argumentKeyValues[$argument->getName()] = $argument->getValue();
         }
         return $this->argumentKeyValues;
