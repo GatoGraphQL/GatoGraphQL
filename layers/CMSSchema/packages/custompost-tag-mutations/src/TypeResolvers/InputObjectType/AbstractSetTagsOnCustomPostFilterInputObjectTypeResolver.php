@@ -94,6 +94,7 @@ abstract class AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver extends 
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
+            MutationInputProperties::APPEND => SchemaTypeModifiers::NON_NULLABLE,
             MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
             MutationInputProperties::TAGS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
