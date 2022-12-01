@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\CustomPostTagMutations\Module;
+use PoPCMSSchema\CustomPostTagMutations\ModuleConfiguration;
+use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
@@ -117,17 +120,33 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostTagMutations = $moduleConfiguration->usePayloadableCustomPostTagMutations();
         return match ($fieldName) {
-            'setTags' => $this->getSetTagsMutationResolver(),
+            'setTags' => $usePayloadableCustomPostTagMutations
+                ? $this->getPayloadableSetTagsMutationResolver()
+                : $this->getSetTagsMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostTagMutations = $moduleConfiguration->usePayloadableCustomPostTagMutations();
+        if ($usePayloadableCustomPostTagMutations) {
+            return match ($fieldName) {
+                'setTags' => $this->getCustomPostSetTagsMutationPayloadObjectTypeResolver(),
+                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            };
+        }
         return match ($fieldName) {
             'setTags' => $this->getCustomPostObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
+
+    abstract protected function getCustomPostSetTagsMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
 }

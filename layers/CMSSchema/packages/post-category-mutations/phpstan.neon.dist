@@ -3,3 +3,8 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+		# Some bug in PHPStan: false positive on comparison `$objectTypeFieldResolutionFeedbackStore->getErrors() !== []`
+		- 
+			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
+			path: src/MutationResolvers/PayloadableSetCategoriesOnPostMutationResolver.php

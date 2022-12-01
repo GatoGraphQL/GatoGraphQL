@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTagMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractRootObjectTypeFieldResolver;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
+use PoPCMSSchema\PostTagMutations\MutationResolvers\PayloadableSetTagsOnPostMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\RootSetTagsOnCustomPostFilterInputObjectTypeResolver;
+use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\RootSetTagsOnPostMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 
 class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
     private ?RootSetTagsOnCustomPostFilterInputObjectTypeResolver $rootSetTagsOnCustomPostFilterInputObjectTypeResolver = null;
+    private ?PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver = null;
+    private ?RootSetTagsOnPostMutationPayloadObjectTypeResolver $rootSetTagsOnPostMutationPayloadObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -45,6 +50,24 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         /** @var RootSetTagsOnCustomPostFilterInputObjectTypeResolver */
         return $this->rootSetTagsOnCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetTagsOnCustomPostFilterInputObjectTypeResolver::class);
     }
+    final public function setPayloadableSetTagsOnPostMutationResolver(PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver): void
+    {
+        $this->payloadableSetTagsOnPostMutationResolver = $payloadableSetTagsOnPostMutationResolver;
+    }
+    final protected function getPayloadableSetTagsOnPostMutationResolver(): PayloadableSetTagsOnPostMutationResolver
+    {
+        /** @var PayloadableSetTagsOnPostMutationResolver */
+        return $this->payloadableSetTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableSetTagsOnPostMutationResolver::class);
+    }
+    final public function setRootSetTagsOnPostMutationPayloadObjectTypeResolver(RootSetTagsOnPostMutationPayloadObjectTypeResolver $rootSetTagsOnPostMutationPayloadObjectTypeResolver): void
+    {
+        $this->rootSetTagsOnPostMutationPayloadObjectTypeResolver = $rootSetTagsOnPostMutationPayloadObjectTypeResolver;
+    }
+    final protected function getRootSetTagsOnPostMutationPayloadObjectTypeResolver(): RootSetTagsOnPostMutationPayloadObjectTypeResolver
+    {
+        /** @var RootSetTagsOnPostMutationPayloadObjectTypeResolver */
+        return $this->rootSetTagsOnPostMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetTagsOnPostMutationPayloadObjectTypeResolver::class);
+    }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
@@ -54,6 +77,16 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     public function getSetTagsMutationResolver(): MutationResolverInterface
     {
         return $this->getSetTagsOnPostMutationResolver();
+    }
+
+    public function getPayloadableSetTagsMutationResolver(): MutationResolverInterface
+    {
+        return $this->getPayloadableSetTagsOnPostMutationResolver();
+    }
+
+    protected function getRootSetTagsMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
+    {
+        return $this->getRootSetTagsOnPostMutationPayloadObjectTypeResolver();
     }
 
     protected function getEntityName(): string

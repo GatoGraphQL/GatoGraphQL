@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\CustomPostCategoryMutations\Module;
+use PoPCMSSchema\CustomPostCategoryMutations\ModuleConfiguration;
+use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
 {
@@ -117,17 +120,33 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostCategoryMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMutations();
         return match ($fieldName) {
-            'setCategories' => $this->getSetCategoriesMutationResolver(),
+            'setCategories' => $usePayloadableCustomPostCategoryMutations
+                ? $this->getPayloadableSetCategoriesMutationResolver()
+                : $this->getSetCategoriesMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableCustomPostCategoryMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMutations();
+        if ($usePayloadableCustomPostCategoryMutations) {
+            return match ($fieldName) {
+                'setCategories' => $this->getCustomPostSetCategoriesMutationPayloadObjectTypeResolver(),
+                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            };
+        }
         return match ($fieldName) {
             'setCategories' => $this->getCustomPostObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
+
+    abstract protected function getCustomPostSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
 }

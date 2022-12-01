@@ -11,6 +11,11 @@
         "__schema": {
             "types": [
                 {
+                    "name": "CategoryDoesNotExistErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "Comment",
                     "enumValues": null,
                     "possibleTypes": null
@@ -156,7 +161,17 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "RootSetCategoriesOnPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootSetTagsOnPostMutationPayload",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -355,16 +370,19 @@
                             "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
                         },
                         {
                             "name": "GenericErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                            "name": "CustomPostDoesNotExistErrorPayload"
                         },
                         {
-                            "name": "CustomPostDoesNotExistErrorPayload"
+                            "name": "CategoryDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "MediaItemDoesNotExistErrorPayload"
@@ -1572,6 +1590,30 @@
                     ]
                 },
                 {
+                    "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CategoryDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
                     "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
                     "enumValues": null,
                     "possibleTypes": [
@@ -1592,6 +1634,27 @@
                         },
                         {
                             "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "UserIsNotLoggedInErrorPayload"

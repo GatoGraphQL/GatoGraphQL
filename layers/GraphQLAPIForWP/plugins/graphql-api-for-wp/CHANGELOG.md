@@ -149,6 +149,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
   - `CustomPost.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
   - `CustomPost.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+  - `Post.setCategories: PostSetCategoriesMutationPayload!`
+  - `Post.setTags: PostSetTagsMutationPayload!`
   - `Post.update: PostUpdateMutationPayload!`
   - `Root.addCommentToCustomPost: RootAddCommentToCustomPostMutationPayload!`
   - `Root.createPost: RootCreatePostMutationPayload!`
@@ -156,7 +158,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.logoutUser: RootLogoutUserMutationPayload!`
   - `Root.replyComment: RootReplyCommentMutationPayload!`
   - `Root.removeFeaturedImageFromCustomPost: RootRemoveFeaturedImageFromCustomPostMutationPayload!`
+  - `Root.setCategoriesOnPost: RootSetCategoriesOnPostMutationPayload!`
   - `Root.setFeaturedImageOnCustomPost: RootSetFeaturedImageOnCustomPostMutationPayload!`
+  - `Root.setTagsOnPost: RootSetTagsOnPostMutationPayload!`
   - `Root.updatePost: RootUpdatePostMutationPayload!`
 
 ### Added

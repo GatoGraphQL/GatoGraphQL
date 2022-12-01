@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
+use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
-use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {
@@ -111,10 +109,29 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateCanLoggedInUserCreateCustomPosts(
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        $this->validateIsUserLoggedIn(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->validateCanLoggedInUserEditCustomPosts(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        // Check if the user can publish custom posts
+        if ($fieldDataAccessor->getValue(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
+            $this->validateCanLoggedInUserPublishCustomPosts(
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     protected function validateContent(
@@ -151,33 +168,16 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        if (!$customPostID) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E6,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-            return;
-        }
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        if (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E7,
-                        [
-                            $customPostID,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $this->validateCustomPostExists(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
 
