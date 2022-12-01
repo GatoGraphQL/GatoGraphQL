@@ -4,7 +4,7 @@
       "types": [
         {
           "name": "CategoryDoesNotExistErrorPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
+          "namespacedName": "CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
           "fields": [
             {
               "name": "message"

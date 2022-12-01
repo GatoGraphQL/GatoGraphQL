@@ -2826,7 +2826,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "PoPCMSSchema_CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
+          "name": "CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
           "description": "Error payload for: \"The requested category does not exist\"",
           "fields": [
             {
@@ -12307,7 +12307,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "PoPCMSSchema_CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
+              "name": "CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -19206,7 +19206,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "PoPCMSSchema_CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
+              "name": "CustomPostCategoryMutations_CategoryDoesNotExistErrorPayload",
               "ofType": null
             },
             {
