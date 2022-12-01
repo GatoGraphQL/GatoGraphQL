@@ -1,0 +1,22 @@
+############################################################
+# Make sure that "nonExisting" inputs are still be validated,
+# even though not provided a variable
+############################################################
+query ($nonProvidedVar: String) {
+  post(by: { id: 1724 }) {
+    id
+    nonExistingInputInFieldArg: dateStr(nonExisting: $nonProvidedVar)
+  }
+  
+  nonExistingInputInInputObject: posts(
+    filter: { nonExisting: $nonProvidedVar },
+  ) {
+    id
+  }
+  
+  nonExistingInputInList: customPosts(
+    filter: { customPostTypes: [$nonProvidedVar] },
+  ) {
+    id
+  }
+}
