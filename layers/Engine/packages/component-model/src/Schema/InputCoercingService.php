@@ -257,6 +257,7 @@ class InputCoercingService implements InputCoercingServiceInterface
     public function coerceInputValue(
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
+        string $inputName,
         bool $inputIsNonNullable,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
@@ -273,6 +274,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                         InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
                         InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_4,
                         [
+                            $inputName,
                             $inputTypeResolver->getMaybeNamespacedTypeName(),
                         ]
                     ),
