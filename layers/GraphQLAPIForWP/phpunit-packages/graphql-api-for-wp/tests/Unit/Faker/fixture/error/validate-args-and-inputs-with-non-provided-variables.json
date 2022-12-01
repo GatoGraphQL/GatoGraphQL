@@ -1,75 +1,77 @@
 {
     "errors": [
         {
-            "message": "There is no input field 'nonExisting' in input object 'RootPostsFilterInput'",
+            "message": "Argument 'status' cannot receive an array with `null` values",
             "locations": [
                 {
-                    "line": 12,
+                    "line": 15,
                     "column": 13
                 }
             ],
             "extensions": {
                 "path": [
-                    "{nonExisting: $nonProvidedVar}",
-                    "(filter: {nonExisting: $nonProvidedVar})",
-                    "nonExistingInputInInputObject: posts(filter: {nonExisting: $nonProvidedVar}) { ... }",
+                    "{status: $nonProvidedVar}",
+                    "(filter: {status: $nonProvidedVar})",
+                    "posts(filter: {status: $nonProvidedVar}, pagination: {limit: 3}) { ... }",
                     "query ($nonProvidedVar: String) { ... }"
                 ],
                 "type": "QueryRoot",
-                "field": "nonExistingInputInInputObject: posts(filter: {nonExisting: $nonProvidedVar}) { ... }",
-                "code": "gql@5.6.2",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Field-Names"
-            }
-        },
-        {
-            "message": "Argument 'customPostTypes' cannot receive an array with `null` values",
-            "locations": [
-                {
-                    "line": 18,
-                    "column": 13
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "{customPostTypes: [$nonProvidedVar]}",
-                    "(filter: {customPostTypes: [$nonProvidedVar]})",
-                    "nonExistingInputInList: customPosts(filter: {customPostTypes: [$nonProvidedVar]}) { ... }",
-                    "query ($nonProvidedVar: String) { ... }"
-                ],
-                "type": "QueryRoot",
-                "field": "nonExistingInputInList: customPosts(filter: {customPostTypes: [$nonProvidedVar]}) { ... }",
+                "field": "posts(filter: {status: $nonProvidedVar}, pagination: {limit: 3}) { ... }",
                 "code": "gql@5.6.1[10]",
                 "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
             }
         },
         {
-            "message": "On field 'dateStr' of type 'Post', there is no argument with name 'nonExisting'",
+            "message": "Argument 'status' in field 'isStatus' of type 'Post' cannot be null",
             "locations": [
                 {
-                    "line": 8,
-                    "column": 41
+                    "line": 10,
+                    "column": 22
                 }
             ],
             "extensions": {
                 "path": [
-                    "(nonExisting: $nonProvidedVar)",
-                    "nonExistingInputInFieldArg: dateStr(nonExisting: $nonProvidedVar)",
+                    "$nonProvidedVar",
+                    "(status: $nonProvidedVar)",
+                    "isStatus(status: $nonProvidedVar)",
                     "post(by: {id: 1724}) { ... }",
                     "query ($nonProvidedVar: String) { ... }"
                 ],
                 "type": "Post",
-                "field": "nonExistingInputInFieldArg: dateStr(nonExisting: $nonProvidedVar)",
-                "code": "gql@5.4.1[a]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+                "field": "isStatus(status: $nonProvidedVar)",
+                "code": "gql@5.4.2.1[b]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
+            }
+        },
+        {
+            "message": "Argument 'format' in field 'dateStr' of type 'Post' cannot be null",
+            "locations": [
+                {
+                    "line": 11,
+                    "column": 21
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "$nonProvidedVar",
+                    "(format: $nonProvidedVar)",
+                    "dateStr(format: $nonProvidedVar)",
+                    "post(by: {id: 1724}) { ... }",
+                    "query ($nonProvidedVar: String) { ... }"
+                ],
+                "type": "Post",
+                "field": "dateStr(format: $nonProvidedVar)",
+                "code": "gql@5.4.2.1[b]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
             }
         }
     ],
     "data": {
         "post": {
             "id": 1724,
-            "nonExistingInputInFieldArg": null
+            "isStatus": null,
+            "dateStr": null
         },
-        "nonExistingInputInInputObject": null,
-        "nonExistingInputInList": null
+        "posts": null
     }
 }

@@ -1,0 +1,75 @@
+{
+    "errors": [
+        {
+            "message": "There is no input field 'nonExisting' in input object 'RootPostsFilterInput'",
+            "locations": [
+                {
+                    "line": 12,
+                    "column": 13
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{nonExisting: $nonProvidedVar}",
+                    "(filter: {nonExisting: $nonProvidedVar})",
+                    "nonExistingInputInInputObject: posts(filter: {nonExisting: $nonProvidedVar}) { ... }",
+                    "query ($nonProvidedVar: String) { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "nonExistingInputInInputObject: posts(filter: {nonExisting: $nonProvidedVar}) { ... }",
+                "code": "gql@5.6.2",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Field-Names"
+            }
+        },
+        {
+            "message": "Argument 'customPostTypes' cannot receive an array with `null` values",
+            "locations": [
+                {
+                    "line": 18,
+                    "column": 13
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{customPostTypes: [$nonProvidedVar]}",
+                    "(filter: {customPostTypes: [$nonProvidedVar]})",
+                    "nonExistingInputInList: customPosts(filter: {customPostTypes: [$nonProvidedVar]}) { ... }",
+                    "query ($nonProvidedVar: String) { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "nonExistingInputInList: customPosts(filter: {customPostTypes: [$nonProvidedVar]}) { ... }",
+                "code": "gql@5.6.1[10]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        },
+        {
+            "message": "On field 'dateStr' of type 'Post', there is no argument with name 'nonExisting'",
+            "locations": [
+                {
+                    "line": 8,
+                    "column": 41
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(nonExisting: $nonProvidedVar)",
+                    "nonExistingInputInFieldArg: dateStr(nonExisting: $nonProvidedVar)",
+                    "post(by: {id: 1724}) { ... }",
+                    "query ($nonProvidedVar: String) { ... }"
+                ],
+                "type": "Post",
+                "field": "nonExistingInputInFieldArg: dateStr(nonExisting: $nonProvidedVar)",
+                "code": "gql@5.4.1[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+            }
+        }
+    ],
+    "data": {
+        "post": {
+            "id": 1724,
+            "nonExistingInputInFieldArg": null
+        },
+        "nonExistingInputInInputObject": null,
+        "nonExistingInputInList": null
+    }
+}
