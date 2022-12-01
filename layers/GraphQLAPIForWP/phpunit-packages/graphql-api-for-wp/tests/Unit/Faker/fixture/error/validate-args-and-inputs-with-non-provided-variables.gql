@@ -9,6 +9,7 @@ query ($nonProvidedVar: String) {
     id
     isStatus(status: $nonProvidedVar)
     dateStr(format: $nonProvidedVar)
+    title @include(if: $nonProvidedVar)
   }
   
   posts(
