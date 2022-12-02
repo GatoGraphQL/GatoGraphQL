@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSitesWassup\UserStateMutations\Constants\MutationInputProperties;
+use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -13,9 +17,6 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP_EmailSender_Utils;
-use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
-use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 
 class LostPasswordMutationResolver extends AbstractMutationResolver
 {

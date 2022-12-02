@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
+use PoPCMSSchema\UserStateMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
+use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
+use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -11,11 +17,6 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
-use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
-use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
 {
