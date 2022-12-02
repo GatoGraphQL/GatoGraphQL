@@ -78,6 +78,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
     /**
      * @param string[] $errors
+     * @deprecated Must migrate logic to `validateCreateErrors`
      */
     protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
