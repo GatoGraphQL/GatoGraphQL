@@ -182,6 +182,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     /**
      * @param FeedbackItemResolution[] $errors
+     * @deprecated Must migrate logic to `validateUpdateErrors`
      */
     protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
