@@ -10,7 +10,7 @@ use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootCreatePostMutationErr
 use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootUpdatePostMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class CreateUpdatePostCategoryDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractCategoryDoesNotExistErrorPayloadObjectTypeResolverPicker
+class PostMutationCategoryDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractCategoryDoesNotExistErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
