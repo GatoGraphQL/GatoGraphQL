@@ -49,6 +49,6 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
             );
         }
     }
-    
+
     abstract protected function getCategoryTypeAPI(): CategoryTypeAPIInterface;
 }

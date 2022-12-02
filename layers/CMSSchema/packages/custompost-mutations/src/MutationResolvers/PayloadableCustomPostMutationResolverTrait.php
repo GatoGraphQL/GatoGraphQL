@@ -22,10 +22,12 @@ trait PayloadableCustomPostMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
         $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match ([
+        return match (
+            [
             $feedbackItemResolution->getFeedbackProviderServiceClass(),
             $feedbackItemResolution->getCode()
-        ]) {
+            ]
+        ) {
             [
                 $this->getUserNotLoggedInErrorFeedbackItemProviderClass(),
                 $this->getUserNotLoggedInErrorFeedbackItemProviderCode(),

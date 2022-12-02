@@ -111,7 +111,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-        
+
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $this->validateIsUserLoggedIn(

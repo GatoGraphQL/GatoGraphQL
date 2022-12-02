@@ -22,7 +22,7 @@ use PoP\Root\Hooks\AbstractHookSet;
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
     use SetCategoriesOnCustomPostMutationResolverTrait;
- 
+
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
@@ -102,10 +102,12 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         ErrorPayloadInterface $errorPayload,
         FeedbackItemResolution $feedbackItemResolution
     ): ErrorPayloadInterface {
-        return match ([
+        return match (
+            [
             $feedbackItemResolution->getFeedbackProviderServiceClass(),
             $feedbackItemResolution->getCode()
-        ]) {
+            ]
+        ) {
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
