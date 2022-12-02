@@ -90,35 +90,35 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
-        $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
+        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
+        return match ([$feedbackItemResolution->getFeedbackProviderServiceClass(), $feedbackItemResolution->getCode()]) {
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new UserIsLoggedInErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
             ] => new InvalidUsernameErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
             ] => new InvalidUserEmailErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new PasswordIsIncorrectErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             default => new GenericErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-                $errorFeedbackItemResolution->getNamespacedCode(),
+                $feedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getNamespacedCode(),
             ),
         };
     }
