@@ -8,3 +8,6 @@ services:
 
     PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\CustomPostCategoryMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
