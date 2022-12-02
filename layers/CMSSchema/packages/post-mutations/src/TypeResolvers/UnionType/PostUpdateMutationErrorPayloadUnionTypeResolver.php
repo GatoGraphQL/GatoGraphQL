@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\TypeResolvers\UnionType;
 
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\AbstractCustomPostUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\PostMutations\RelationalTypeDataLoaders\UnionType\PostUpdateMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class PostUpdateMutationErrorPayloadUnionTypeResolver extends AbstractPostMutationErrorPayloadUnionTypeResolver
+class PostUpdateMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostUpdateMutationErrorPayloadUnionTypeResolver
 {
     private ?PostUpdateMutationErrorPayloadUnionTypeDataLoader $postUpdateMutationErrorPayloadUnionTypeDataLoader = null;
 
