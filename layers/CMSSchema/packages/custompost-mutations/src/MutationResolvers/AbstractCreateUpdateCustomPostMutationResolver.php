@@ -141,12 +141,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow plugins to add validation for their fields
-        App::doAction(
-            HookNames::VALIDATE_CONTENT,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore
-        );
     }
 
     protected function validateCreateContent(
