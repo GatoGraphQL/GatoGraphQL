@@ -77,7 +77,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        $this->validateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         $this->validateCreateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
@@ -97,7 +96,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        $this->validateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         $this->validateUpdateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
@@ -135,12 +133,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
-    }
-
-    protected function validateContent(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
     }
 
     protected function validateCreateContent(
