@@ -21,6 +21,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends AbstractMutationResolver
 {
     use CreateUpdateCustomPostMutationResolverTrait;
+    use SetCategoriesOnCustomPostMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
