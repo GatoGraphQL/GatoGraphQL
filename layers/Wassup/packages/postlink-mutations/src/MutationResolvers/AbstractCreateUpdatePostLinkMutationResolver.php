@@ -21,6 +21,7 @@ abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCrea
 
     /**
      * @param string[] $errors
+     * @deprecated Must migrate logic to `validateCreateUpdateErrors`
      */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {

@@ -80,6 +80,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     // Update Post Validation
     /**
      * @param string[] $errors
+     * @deprecated Must migrate logic to `validateCreateUpdateErrors`
      */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
