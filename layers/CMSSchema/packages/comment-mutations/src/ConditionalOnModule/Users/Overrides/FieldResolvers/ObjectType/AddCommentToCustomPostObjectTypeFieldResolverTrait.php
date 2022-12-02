@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\Overrides\Fiel
 use PoP\Root\App;
 use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ModuleConfiguration;
-use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CommentMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 trait AddCommentToCustomPostObjectTypeFieldResolverTrait

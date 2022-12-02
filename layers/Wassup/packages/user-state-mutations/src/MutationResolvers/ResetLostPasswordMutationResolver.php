@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSitesWassup\UserStateMutations\Constants\MutationInputProperties;
+use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
@@ -12,8 +15,6 @@ use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Exception\GenericClientException;
 use PoP\UserAccount\FunctionAPIFactory;
-use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
-use PoPSitesWassup\UserStateMutations\MutationResolverUtils\MutationResolverUtils;
 
 class ResetLostPasswordMutationResolver extends AbstractMutationResolver
 {

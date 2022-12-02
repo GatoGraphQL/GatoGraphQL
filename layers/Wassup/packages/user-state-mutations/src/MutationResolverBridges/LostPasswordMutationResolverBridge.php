@@ -10,7 +10,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Engine\Route\RouteUtils;
 use PoP_Module_Processor_LoginTextFormInputs;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\LostPasswordMutationResolver;
-use PoPSitesWassup\UserStateMutations\MutationResolvers\MutationInputProperties;
+use PoPSitesWassup\UserStateMutations\Constants\MutationInputProperties;
 
 class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

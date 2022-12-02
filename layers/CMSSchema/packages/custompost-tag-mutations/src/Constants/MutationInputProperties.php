@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostTagMutations\Constants;
 
 class MutationInputProperties
 {

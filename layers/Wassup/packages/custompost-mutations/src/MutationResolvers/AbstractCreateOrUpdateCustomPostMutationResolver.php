@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP_ApplicationProcessors_Utils;
 use GD_CreateUpdate_Utils;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\Root\App;
-use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
+use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPCMSSchema\CustomPostMeta\Utils;
+use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver as UpstreamAbstractCreateOrUpdateCustomPostMutationResolver;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP_ApplicationProcessors_Utils;
 
 abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends UpstreamAbstractCreateOrUpdateCustomPostMutationResolver
 {

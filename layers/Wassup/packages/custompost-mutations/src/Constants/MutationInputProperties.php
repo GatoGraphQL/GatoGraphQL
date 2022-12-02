@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
+namespace PoPSitesWassup\CustomPostMutations\Constants;
 
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties as UpstreamMutationInputProperties;
+use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties as UpstreamMutationInputProperties;
 
 class MutationInputProperties extends UpstreamMutationInputProperties
 {
