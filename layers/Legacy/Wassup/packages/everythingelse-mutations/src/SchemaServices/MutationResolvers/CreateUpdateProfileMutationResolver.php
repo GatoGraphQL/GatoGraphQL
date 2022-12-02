@@ -19,7 +19,7 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
 
     /**
      * @param string[] $errors
-     * @deprecated Must migrate logic to `validateCreateUpdateErrors`
+     * @todo Must migrate logic to `validateCreateUpdateErrors`
      */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {

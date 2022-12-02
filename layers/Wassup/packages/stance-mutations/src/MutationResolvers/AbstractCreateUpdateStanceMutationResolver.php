@@ -20,7 +20,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     // Update Post Validation
     /**
      * @param string[] $errors
-     * @deprecated Must migrate logic to `validateCreateUpdateErrors`
+     * @todo Must migrate logic to `validateCreateUpdateErrors`
      */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
@@ -78,7 +78,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
     /**
      * @param string[] $errors
-     * @deprecated Must migrate logic to `validateCreateErrors`
+     * @todo Must migrate logic to `validateCreateErrors`
      */
     protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {

@@ -11,7 +11,7 @@ class MutationResolverUtils
 {
     /**
      * @param string[] $errors
-     * @deprecated Must migrate logic to `validateCreateUpdateErrors`
+     * @todo Must migrate logic to `validateCreateUpdateErrors`
      */
     public static function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
