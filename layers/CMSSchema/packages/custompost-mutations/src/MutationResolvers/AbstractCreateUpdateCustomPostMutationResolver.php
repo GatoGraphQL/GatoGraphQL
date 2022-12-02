@@ -19,6 +19,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 {
     use CreateUpdateCustomPostMutationResolverTrait;
 
+    public final const HOOK_VALIDATE_CREATE_OR_UPDATE = __CLASS__ . ':validate-create-or-update';
+    public final const HOOK_VALIDATE_CREATE = __CLASS__ . ':validate-create';
+    public final const HOOK_VALIDATE_UPDATE = __CLASS__ . ':validate-update';
     public final const HOOK_EXECUTE_CREATE_OR_UPDATE = __CLASS__ . ':execute-create-or-update';
     public final const HOOK_EXECUTE_CREATE = __CLASS__ . ':execute-create';
     public final const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
@@ -162,6 +165,18 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+
+        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        App::doAction(
+            self::HOOK_VALIDATE_CREATE_OR_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(
+            self::HOOK_VALIDATE_CREATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function validateUpdate(
@@ -173,6 +188,18 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $this->validateCustomPostExists(
             $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        App::doAction(
+            self::HOOK_VALIDATE_CREATE_OR_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(
+            self::HOOK_VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
