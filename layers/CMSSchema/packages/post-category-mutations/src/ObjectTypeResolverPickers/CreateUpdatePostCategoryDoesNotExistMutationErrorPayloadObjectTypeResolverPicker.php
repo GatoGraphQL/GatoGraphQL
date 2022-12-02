@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostCategoryMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CustomPostCategoryMutations\ObjectTypeResolverPickers\AbstractCategoryDoesNotExistErrorPayloadObjectTypeResolverPicker;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\AbstractPostMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class CreateUpdatePostCategoryDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractCategoryDoesNotExistErrorPayloadObjectTypeResolverPicker
@@ -15,9 +16,7 @@ class CreateUpdatePostCategoryDoesNotExistMutationErrorPayloadObjectTypeResolver
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootCreatePostMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdatePostMutationErrorPayloadUnionTypeResolver::class,
-            PostUpdateMutationErrorPayloadUnionTypeResolver::class,
+            AbstractPostMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
