@@ -71,13 +71,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        // If already exists any of these errors above, return errors
         $this->validateCreate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return;
-        }
-
-        $this->validateCreateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function validateUpdateErrors(
@@ -133,12 +127,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
-    }
-
-    protected function validateCreateContent(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
     }
 
     protected function validateUpdateContent(
