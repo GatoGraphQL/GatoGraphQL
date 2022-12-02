@@ -23,9 +23,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return 'subscriber';
     }
 
-    /**
-     * @todo Migrate this logic, right now this method is not called by anyone!
-     */
     protected function validateContent(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
