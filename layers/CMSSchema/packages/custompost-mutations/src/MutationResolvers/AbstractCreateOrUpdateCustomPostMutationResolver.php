@@ -16,9 +16,9 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 
-abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
+abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {
-    use CreateUpdateCustomPostMutationResolverTrait;
+    use CreateOrUpdateCustomPostMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
@@ -186,7 +186,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $post_data
      */
-    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function addCreateOrUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)) {
             $post_data['content'] = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT);
@@ -207,7 +207,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $post_data = array(
             'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
         );
-        $this->addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);
+        $this->addCreateOrUpdateCustomPostData($post_data, $fieldDataAccessor);
 
         return $post_data;
     }
@@ -220,7 +220,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $post_data = [
             'custompost-type' => $this->getCustomPostType(),
         ];
-        $this->addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);
+        $this->addCreateOrUpdateCustomPostData($post_data, $fieldDataAccessor);
 
         return $post_data;
     }

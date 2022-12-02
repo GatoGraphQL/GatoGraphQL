@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateUpdateCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateOrUpdateCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
@@ -19,7 +19,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
-    use CreateUpdateCustomPostMutationResolverTrait;
+    use CreateOrUpdateCustomPostMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;

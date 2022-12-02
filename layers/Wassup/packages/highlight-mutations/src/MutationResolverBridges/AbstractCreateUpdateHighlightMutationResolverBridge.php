@@ -9,9 +9,9 @@ use PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues;
 use PoP_Module_Processor_TextareaFormInputs;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
-use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
+use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateOrUpdateCustomPostMutationResolverBridge;
 
-abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends AbstractCreateUpdateCustomPostMutationResolverBridge
+abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends AbstractCreateOrUpdateCustomPostMutationResolverBridge
 {
     protected function supportsTitle(): bool
     {

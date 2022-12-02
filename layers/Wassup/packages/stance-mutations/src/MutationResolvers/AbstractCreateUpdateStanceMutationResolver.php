@@ -13,9 +13,9 @@ use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver;
 
-abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
+abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateOrUpdateCustomPostMutationResolver
 {
     // Update Post Validation
     /**

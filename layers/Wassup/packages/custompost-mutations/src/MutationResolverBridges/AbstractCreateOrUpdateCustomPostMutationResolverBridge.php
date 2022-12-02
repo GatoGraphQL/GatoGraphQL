@@ -25,7 +25,7 @@ use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\Posts\Constants\InputNames;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
-abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge
+abstract class AbstractCreateOrUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge
 {
     public final const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
 
