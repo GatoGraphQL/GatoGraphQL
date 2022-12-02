@@ -91,6 +91,8 @@ class MutationResolverHookSet extends AbstractHookSet
         }
         /**
          * If it has an ID, set the featured image
+         *
+         * @var string|int|null
          */
         $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_ID);
         if ($featuredImageID !== null) {
