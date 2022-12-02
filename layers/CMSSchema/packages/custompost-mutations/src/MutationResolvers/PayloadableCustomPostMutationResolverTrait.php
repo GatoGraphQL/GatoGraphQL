@@ -12,6 +12,7 @@ use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPublishingCus
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
 trait PayloadableCustomPostMutationResolverTrait
@@ -19,6 +20,21 @@ trait PayloadableCustomPostMutationResolverTrait
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
+        /**
+         * Allow components (eg: CustomPostCategoryMutations) to inject
+         * their own validations
+         *
+         * @var ErrorPayloadInterface|null
+         */
+        $errorPayload = App::applyFilters(
+            AbstractCreateUpdateCustomPostMutationResolver::HOOK_ERROR_PAYLOAD,
+            null,
+            $objectTypeFieldResolutionFeedback,
+        );
+        if ($errorPayload !== null) {
+            return $errorPayload;
+        }
+
         $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
             [
