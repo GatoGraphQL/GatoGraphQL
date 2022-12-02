@@ -50,7 +50,7 @@ class MutationResolverHookSet extends AbstractHookSet
         );
         App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
-            $this->setOrRemoveFeaturedImage(...),
+            $this->maybeSetOrRemoveFeaturedImage(...),
             10,
             2
         );
@@ -87,7 +87,7 @@ class MutationResolverHookSet extends AbstractHookSet
     /**
      * If entry "featuredImageID" has an ID, set it. If it is null, remove it
      */
-    public function setOrRemoveFeaturedImage(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    public function maybeSetOrRemoveFeaturedImage(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
