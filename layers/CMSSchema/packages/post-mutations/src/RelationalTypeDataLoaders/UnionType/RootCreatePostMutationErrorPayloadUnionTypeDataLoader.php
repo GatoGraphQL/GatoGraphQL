@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\PostMutations\RelationalTypeDataLoaders\UnionType;
 
 use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootCreatePostMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\RootCreatePostMutationPayloadObjectTypeResolver;
-use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class RootCreatePostMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
+class RootCreatePostMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?RootCreatePostMutationErrorPayloadUnionTypeResolver $rootCreatePostMutationErrorPayloadUnionTypeResolver = null;
 
@@ -24,17 +22,7 @@ class RootCreatePostMutationPayloadErrorsFieldTransientOperationPayloadObjectTyp
         return $this->rootCreatePostMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(RootCreatePostMutationErrorPayloadUnionTypeResolver::class);
     }
 
-    /**
-     * @return array<class-string<ObjectTypeResolverInterface>>
-     */
-    public function getObjectTypeResolverClassesToAttachTo(): array
-    {
-        return [
-            RootCreatePostMutationPayloadObjectTypeResolver::class,
-        ];
-    }
-
-    protected function getErrorsFieldFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
+    protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
         return $this->getRootCreatePostMutationErrorPayloadUnionTypeResolver();
     }
