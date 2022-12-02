@@ -6,5 +6,4 @@ namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType;
 
 abstract class AbstractCustomPostUpdateMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostMutationErrorPayloadUnionTypeResolver
 {
-    
 }
