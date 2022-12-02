@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPSitesWassup\PostMutations\MutationResolvers;
 
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver;
 
-abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
+abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateOrUpdateCustomPostMutationResolver
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
 

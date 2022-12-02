@@ -17,7 +17,7 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-trait CreateUpdateCustomPostMutationResolverTrait
+trait CreateOrUpdateCustomPostMutationResolverTrait
 {
     use ValidateUserLoggedInMutationResolverTrait;
 

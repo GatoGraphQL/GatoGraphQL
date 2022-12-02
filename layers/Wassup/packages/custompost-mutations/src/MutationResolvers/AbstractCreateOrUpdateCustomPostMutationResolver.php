@@ -11,11 +11,11 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPCMSSchema\CustomPostMeta\Utils;
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver as UpstreamAbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver as UpstreamAbstractCreateOrUpdateCustomPostMutationResolver;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
-abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAbstractCreateUpdateCustomPostMutationResolver
+abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends UpstreamAbstractCreateOrUpdateCustomPostMutationResolver
 {
     public final const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
     public final const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
@@ -292,9 +292,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     /**
      * @param array<string,mixed> $post_data
      */
-    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function addCreateOrUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);
+        parent::addCreateOrUpdateCustomPostData($post_data, $fieldDataAccessor);
 
         if (!$this->supportsTitle()) {
             unset($post_data['title']);
