@@ -51,12 +51,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORY_IDS)) {
-            return;
-        }
-        // Only for that specific CPT
-        $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
-        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
+        if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
         $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
@@ -67,13 +62,23 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeSetCategories(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    protected function canExecuteMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): bool {
         if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORY_IDS)) {
-            return;
+            return false;
         }
         // Only for that specific CPT
+        $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
+            return false;
+        }
+        return true;
+    }
+
+    public function maybeSetCategories(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    {
+        if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
         $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
