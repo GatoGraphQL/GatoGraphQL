@@ -382,10 +382,10 @@
                             "name": "CategoryDoesNotExistErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                            "name": "MediaItemDoesNotExistErrorPayload"
                         },
                         {
-                            "name": "MediaItemDoesNotExistErrorPayload"
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "CommentAuthorEmailIsMissingErrorPayload"
@@ -1497,20 +1497,26 @@
                     ]
                 },
                 {
-                    "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+                    "name": "RootCreatePostMutationErrorPayloadUnion",
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "GenericErrorPayload"
+                            "name": "CategoryDoesNotExistErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                            "name": "GenericErrorPayload"
                         },
                         {
                             "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "UserIsNotLoggedInErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
                         }
                     ]
                 },
@@ -1662,9 +1668,12 @@
                     ]
                 },
                 {
-                    "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+                    "name": "RootUpdatePostMutationErrorPayloadUnion",
                     "enumValues": null,
                     "possibleTypes": [
+                        {
+                            "name": "CategoryDoesNotExistErrorPayload"
+                        },
                         {
                             "name": "CustomPostDoesNotExistErrorPayload"
                         },
@@ -1675,13 +1684,16 @@
                             "name": "GenericErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
-                        },
-                        {
                             "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "UserIsNotLoggedInErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
                         }
                     ]
                 }
