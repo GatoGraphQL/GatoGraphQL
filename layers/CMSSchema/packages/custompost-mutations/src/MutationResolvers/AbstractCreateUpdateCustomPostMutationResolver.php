@@ -112,6 +112,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        App::doAction(
+            self::HOOK_VALIDATE_CREATE_OR_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $this->validateIsUserLoggedIn(
@@ -165,13 +172,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-
         // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
-        App::doAction(
-            self::HOOK_VALIDATE_CREATE_OR_UPDATE,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
         App::doAction(
             self::HOOK_VALIDATE_CREATE,
             $fieldDataAccessor,
@@ -183,23 +184,18 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        App::doAction(
+            self::HOOK_VALIDATE_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $this->validateCustomPostExists(
             $customPostID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
-        App::doAction(
-            self::HOOK_VALIDATE_CREATE_OR_UPDATE,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        App::doAction(
-            self::HOOK_VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
