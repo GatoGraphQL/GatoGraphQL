@@ -10,10 +10,7 @@ use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMuta
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateUpdateCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -127,41 +124,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-    }
-
-    /**
-     * @param array<string|int> $customPostCategoryIDs
-     */
-    protected function validateCategoriesExist(
-        array $customPostCategoryIDs,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $query = [
-            'include' => $customPostCategoryIDs,
-        ];
-        $existingCategoryIDs = $this->getCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
-        $nonExistingCategoryIDs = array_values(array_diff(
-            $customPostCategoryIDs,
-            $existingCategoryIDs
-        ));
-        if ($nonExistingCategoryIDs !== []) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E2,
-                        [
-                            implode(
-                                $this->__('\', \'', 'custompost-category-mutations'),
-                                $nonExistingCategoryIDs
-                            ),
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
     }
 
     abstract protected function getCategoryTypeAPI(): CategoryTypeAPIInterface;

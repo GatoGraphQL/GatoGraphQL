@@ -8,8 +8,10 @@ use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedback
 use PoPCMSSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -150,6 +152,41 @@ trait CreateUpdateCustomPostMutationResolverTrait
                         MutationErrorFeedbackItemProvider::E8,
                         [
                             $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    /**
+     * @param array<string|int> $customPostCategoryIDs
+     */
+    protected function validateCategoriesExist(
+        array $customPostCategoryIDs,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $query = [
+            'include' => $customPostCategoryIDs,
+        ];
+        $existingCategoryIDs = $this->getCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+        $nonExistingCategoryIDs = array_values(array_diff(
+            $customPostCategoryIDs,
+            $existingCategoryIDs
+        ));
+        if ($nonExistingCategoryIDs !== []) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E2,
+                        [
+                            implode(
+                                $this->__('\', \'', 'custompost-category-mutations'),
+                                $nonExistingCategoryIDs
+                            ),
                         ]
                     ),
                     $fieldDataAccessor->getField(),
