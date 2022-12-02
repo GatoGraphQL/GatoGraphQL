@@ -76,8 +76,10 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         return true;
     }
 
-    public function maybeSetCategories(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    public function maybeSetCategories(
+        int|string $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
