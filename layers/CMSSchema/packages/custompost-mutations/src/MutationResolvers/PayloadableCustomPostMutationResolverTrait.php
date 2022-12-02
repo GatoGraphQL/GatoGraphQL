@@ -52,19 +52,14 @@ trait PayloadableCustomPostMutationResolverTrait
             ] => new CustomPostDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            /**
-            * Allow components (eg: CustomPostCategoryMutations) to inject
-            * their own validations
-            *
-            * @var ErrorPayloadInterface|null
-            */
+            // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
             default => App::applyFilters(
-               AbstractCreateUpdateCustomPostMutationResolver::HOOK_ERROR_PAYLOAD,
-               new GenericErrorPayload(
+                AbstractCreateUpdateCustomPostMutationResolver::HOOK_ERROR_PAYLOAD,
+                new GenericErrorPayload(
                     $feedbackItemResolution->getMessage(),
                     $feedbackItemResolution->getNamespacedCode(),
                 ),
-               $feedbackItemResolution,
+                $feedbackItemResolution,
             )
         };
     }
