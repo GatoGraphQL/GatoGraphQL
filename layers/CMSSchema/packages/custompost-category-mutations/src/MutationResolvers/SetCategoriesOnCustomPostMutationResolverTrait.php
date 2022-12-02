@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
