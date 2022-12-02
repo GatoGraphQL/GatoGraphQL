@@ -80,6 +80,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     // Update Post Validation
     /**
      * @param string[] $errors
+     * @todo Must migrate logic to `validateCreateUpdateErrors`
      */
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
@@ -181,6 +182,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     /**
      * @param FeedbackItemResolution[] $errors
+     * @todo Must migrate logic to `validateUpdateErrors`
      */
     protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {

@@ -8629,13 +8629,13 @@
               "args": [],
               "type": {
                 "kind": "LIST",
-                "name": "[RootCreateCustomPostMutationErrorPayloadUnion!]",
+                "name": "[RootCreatePostMutationErrorPayloadUnion!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "RootCreateCustomPostMutationErrorPayloadUnion!",
+                  "name": "RootCreatePostMutationErrorPayloadUnion!",
                   "ofType": {
                     "kind": "UNION",
-                    "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+                    "name": "RootCreatePostMutationErrorPayloadUnion",
                     "ofType": null
                   }
                 }
@@ -9261,13 +9261,13 @@
               "args": [],
               "type": {
                 "kind": "LIST",
-                "name": "[RootUpdateCustomPostMutationErrorPayloadUnion!]",
+                "name": "[RootUpdatePostMutationErrorPayloadUnion!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "RootUpdateCustomPostMutationErrorPayloadUnion!",
+                  "name": "RootUpdatePostMutationErrorPayloadUnion!",
                   "ofType": {
                     "kind": "UNION",
-                    "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+                    "name": "RootUpdatePostMutationErrorPayloadUnion",
                     "ofType": null
                   }
                 }
@@ -12312,12 +12312,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "name": "MediaItemDoesNotExistErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "MediaItemDoesNotExistErrorPayload",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -19032,8 +19032,8 @@
         },
         {
           "kind": "UNION",
-          "name": "RootCreateCustomPostMutationErrorPayloadUnion",
-          "description": "Union of 'Error Payload' types when creating a custom post",
+          "name": "RootCreatePostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when creating a post",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -19041,12 +19041,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "GenericErrorPayload",
+              "name": "CategoryDoesNotExistErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "name": "GenericErrorPayload",
               "ofType": null
             },
             {
@@ -19057,6 +19057,16 @@
             {
               "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
               "ofType": null
             }
           ]
@@ -19315,13 +19325,18 @@
         },
         {
           "kind": "UNION",
-          "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
-          "description": "Union of 'Error Payload' types when updating a custom post",
+          "name": "RootUpdatePostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating a post",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
           "enumValues": null,
           "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CategoryDoesNotExistErrorPayload",
+              "ofType": null
+            },
             {
               "kind": "OBJECT",
               "name": "CustomPostDoesNotExistErrorPayload",
@@ -19339,17 +19354,22 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
               "ofType": null
             }
           ]

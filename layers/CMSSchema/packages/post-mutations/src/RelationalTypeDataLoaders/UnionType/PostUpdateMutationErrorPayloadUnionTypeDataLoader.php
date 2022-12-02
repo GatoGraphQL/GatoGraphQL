@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\PostMutations\RelationalTypeDataLoaders\UnionType;
 
 use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\PostUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\PostUpdateMutationPayloadObjectTypeResolver;
-use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class PostUpdateMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
+class PostUpdateMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?PostUpdateMutationErrorPayloadUnionTypeResolver $postUpdateMutationErrorPayloadUnionTypeResolver = null;
 
@@ -24,17 +22,7 @@ class PostUpdateMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFie
         return $this->postUpdateMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(PostUpdateMutationErrorPayloadUnionTypeResolver::class);
     }
 
-    /**
-     * @return array<class-string<ObjectTypeResolverInterface>>
-     */
-    public function getObjectTypeResolverClassesToAttachTo(): array
-    {
-        return [
-            PostUpdateMutationPayloadObjectTypeResolver::class,
-        ];
-    }
-
-    protected function getErrorsFieldFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
+    protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
         return $this->getPostUpdateMutationErrorPayloadUnionTypeResolver();
     }

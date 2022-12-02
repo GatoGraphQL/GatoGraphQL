@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 
 class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver
 {
+    use SetFeaturedImageOnCustomPostMutationResolverTrait;
+
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
@@ -60,29 +59,10 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
         );
 
         $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
-        if (!$mediaItemID) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E1,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        } elseif (!$this->getMediaTypeAPI()->mediaItemExists($mediaItemID)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E2,
-                        [
-                            $mediaItemID,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
+        $this->validateMediaItemExists(
+            $mediaItemID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 }

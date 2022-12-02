@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
 use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload;
@@ -12,6 +13,7 @@ use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPublishingCus
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
 trait PayloadableCustomPostMutationResolverTrait
@@ -19,42 +21,52 @@ trait PayloadableCustomPostMutationResolverTrait
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
-        $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
+        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
+        return match (
+            [
+            $feedbackItemResolution->getFeedbackProviderServiceClass(),
+            $feedbackItemResolution->getCode()
+            ]
+        ) {
             [
                 $this->getUserNotLoggedInErrorFeedbackItemProviderClass(),
                 $this->getUserNotLoggedInErrorFeedbackItemProviderCode(),
             ] => new UserIsNotLoggedInErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E3,
             ] => new LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E8,
             ] => new LoggedInUserHasNoPermissionToEditCustomPostErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new CustomPostDoesNotExistErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
-            default => new GenericErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-                $errorFeedbackItemResolution->getNamespacedCode(),
-            ),
+            // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+            default => App::applyFilters(
+                HookNames::ERROR_PAYLOAD,
+                new GenericErrorPayload(
+                    $feedbackItemResolution->getMessage(),
+                    $feedbackItemResolution->getNamespacedCode(),
+                ),
+                $feedbackItemResolution,
+            )
         };
     }
 

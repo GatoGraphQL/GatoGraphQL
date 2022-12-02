@@ -19,13 +19,18 @@ trait PayloadableSetCategoriesOnCustomPostMutationResolverTrait
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
-        $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
+        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
+        return match (
+            [
+            $feedbackItemResolution->getFeedbackProviderServiceClass(),
+            $feedbackItemResolution->getCode()
+            ]
+        ) {
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new CategoryDoesNotExistErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             default => $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedback

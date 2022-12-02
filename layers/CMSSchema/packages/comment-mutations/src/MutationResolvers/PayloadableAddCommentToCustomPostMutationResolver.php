@@ -101,41 +101,46 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
-        $errorFeedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match ([$errorFeedbackItemResolution->getFeedbackProviderServiceClass(), $errorFeedbackItemResolution->getCode()]) {
+        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
+        return match (
+            [
+            $feedbackItemResolution->getFeedbackProviderServiceClass(),
+            $feedbackItemResolution->getCode()
+            ]
+        ) {
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,
             ] => new UserIsNotLoggedInErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new CommentAuthorNameIsMissingErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E3,
             ] => new CommentAuthorEmailIsMissingErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
             ] => new CommentParentCommentDoesNotExistErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new CustomPostDoesNotExistErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getMessage(),
             ),
             default => new GenericErrorPayload(
-                $errorFeedbackItemResolution->getMessage(),
-                $errorFeedbackItemResolution->getNamespacedCode(),
+                $feedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getNamespacedCode(),
             ),
         };
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
@@ -18,11 +19,6 @@ use PoP\Root\App;
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {
     use CreateUpdateCustomPostMutationResolverTrait;
-
-    public final const HOOK_EXECUTE_CREATE_OR_UPDATE = __CLASS__ . ':execute-create-or-update';
-    public final const HOOK_EXECUTE_CREATE = __CLASS__ . ':execute-create';
-    public final const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
-    public final const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
@@ -75,14 +71,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        // If already exists any of these errors above, return errors
         $this->validateCreate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return;
-        }
-
-        $this->validateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        $this->validateCreateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function validateUpdateErrors(
@@ -95,20 +84,20 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
             return;
         }
 
-        // If already exists any of these errors above, return errors
         $this->validateUpdate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return;
-        }
-
-        $this->validateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        $this->validateUpdateContent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function validateCreateUpdateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        App::doAction(
+            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $this->validateIsUserLoggedIn(
@@ -134,40 +123,29 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    protected function validateContent(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        // Allow plugins to add validation for their fields
-        App::doAction(
-            self::HOOK_VALIDATE_CONTENT,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore
-        );
-    }
-
-    protected function validateCreateContent(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-    }
-
-    protected function validateUpdateContent(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-    }
-
     protected function validateCreate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        App::doAction(
+            HookNames::VALIDATE_CREATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function validateUpdate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        App::doAction(
+            HookNames::VALIDATE_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
@@ -296,8 +274,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $this->updateAdditionals($customPostID, $fieldDataAccessor, $log);
 
         // Inject Share profiles here
-        App::doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
-        App::doAction(self::HOOK_EXECUTE_UPDATE, $customPostID, $log, $fieldDataAccessor);
+        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
+        App::doAction(HookNames::EXECUTE_UPDATE, $customPostID, $log, $fieldDataAccessor);
 
         return $customPostID;
     }
@@ -329,8 +307,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         $this->createAdditionals($customPostID, $fieldDataAccessor);
 
         // Inject Share profiles here
-        App::doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
-        App::doAction(self::HOOK_EXECUTE_CREATE, $customPostID, $fieldDataAccessor);
+        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
+        App::doAction(HookNames::EXECUTE_CREATE, $customPostID, $fieldDataAccessor);
 
         return $customPostID;
     }
