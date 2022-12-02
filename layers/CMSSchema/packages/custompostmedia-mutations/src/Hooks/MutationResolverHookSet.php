@@ -120,9 +120,9 @@ class MutationResolverHookSet extends AbstractHookSet
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
-        ?ErrorPayloadInterface $errorPayload,
+        ErrorPayloadInterface $errorPayload,
         FeedbackItemResolution $feedbackItemResolution
-    ): ?ErrorPayloadInterface {
+    ): ErrorPayloadInterface {
         return match ([$feedbackItemResolution->getFeedbackProviderServiceClass(), $feedbackItemResolution->getCode()]) {
             [
                 MutationErrorFeedbackItemProvider::class,

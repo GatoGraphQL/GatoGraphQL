@@ -21,17 +21,6 @@ trait PayloadableCustomPostMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
         $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        /**
-         * Allow components (eg: CustomPostCategoryMutations) to inject
-         * their own validations
-         *
-         * @var ErrorPayloadInterface|null
-         */
-        $errorPayload = App::applyFilters(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_ERROR_PAYLOAD,
-            null,
-            $feedbackItemResolution,
-        );
         if ($errorPayload !== null) {
             return $errorPayload;
         }
@@ -67,10 +56,20 @@ trait PayloadableCustomPostMutationResolverTrait
             ] => new CustomPostDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            default => new GenericErrorPayload(
-                $feedbackItemResolution->getMessage(),
-                $feedbackItemResolution->getNamespacedCode(),
-            ),
+            /**
+            * Allow components (eg: CustomPostCategoryMutations) to inject
+            * their own validations
+            *
+            * @var ErrorPayloadInterface|null
+            */
+            default => App::applyFilters(
+               AbstractCreateUpdateCustomPostMutationResolver::HOOK_ERROR_PAYLOAD,
+               new GenericErrorPayload(
+                    $feedbackItemResolution->getMessage(),
+                    $feedbackItemResolution->getNamespacedCode(),
+                ),
+               $feedbackItemResolution,
+            )
         };
     }
 
