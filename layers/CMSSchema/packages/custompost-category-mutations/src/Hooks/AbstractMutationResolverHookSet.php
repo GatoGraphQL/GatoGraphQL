@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\Hooks;
 
+use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\SetCategoriesOnCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostCategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties as CustomPostMutationsMutationInputProperties;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
@@ -42,6 +46,12 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             $this->maybeSetCategories(...),
+            10,
+            2
+        );
+        App::addFilter(
+            AbstractCreateUpdateCustomPostMutationResolver::HOOK_ERROR_PAYLOAD,
+            $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2
         );
@@ -86,6 +96,21 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
         $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
+    }
+
+    public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
+        ErrorPayloadInterface $errorPayload,
+        FeedbackItemResolution $feedbackItemResolution
+    ): ErrorPayloadInterface {
+        return match ([$feedbackItemResolution->getFeedbackProviderServiceClass(), $feedbackItemResolution->getCode()]) {
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            ] => new CategoryDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            default => $errorPayload,
+        };
     }
 
     abstract protected function getCustomPostType(): string;
