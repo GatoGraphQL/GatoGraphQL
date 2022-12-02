@@ -44,7 +44,7 @@ class MutationResolverHookSet extends AbstractHookSet
     {
         App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_VALIDATE_CREATE_OR_UPDATE,
-            $this->maybeValidateMediaItem(...),
+            $this->maybeValidateFeaturedImage(...),
             10,
             2
         );
@@ -56,16 +56,19 @@ class MutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeValidateMediaItem(
+    public function maybeValidateFeaturedImage(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
+        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_ID);
+        if ($featuredImageID === null) {
+            return;
+        }
         $this->validateMediaItemExists(
-            $mediaItemID,
+            $featuredImageID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
