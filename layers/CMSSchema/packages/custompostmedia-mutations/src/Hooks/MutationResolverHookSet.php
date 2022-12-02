@@ -9,10 +9,9 @@ use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputPropert
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostMediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
@@ -48,19 +47,19 @@ class MutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_VALIDATE_CREATE_OR_UPDATE,
+            HookNames::VALIDATE_CREATE_OR_UPDATE,
             $this->maybeValidateFeaturedImage(...),
             10,
             2
         );
         App::addAction(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
+            HookNames::EXECUTE_CREATE_OR_UPDATE,
             $this->maybeSetOrRemoveFeaturedImage(...),
             10,
             2
         );
         App::addFilter(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_ERROR_PAYLOAD,
+            HookNames::ERROR_PAYLOAD,
             $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2

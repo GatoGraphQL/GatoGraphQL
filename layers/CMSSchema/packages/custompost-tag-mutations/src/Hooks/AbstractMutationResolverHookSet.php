@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
+use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
+use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\MutationInputProperties;
-use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
@@ -29,7 +29,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
+            HookNames::EXECUTE_CREATE_OR_UPDATE,
             $this->maybeSetTags(...),
             10,
             2

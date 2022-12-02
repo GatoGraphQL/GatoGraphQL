@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProp
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\SetCategoriesOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostCategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties as CustomPostMutationsMutationInputProperties;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -38,19 +38,19 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_VALIDATE_CREATE_OR_UPDATE,
+            HookNames::VALIDATE_CREATE_OR_UPDATE,
             $this->maybeValidateCategories(...),
             10,
             2
         );
         App::addAction(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
+            HookNames::EXECUTE_CREATE_OR_UPDATE,
             $this->maybeSetCategories(...),
             10,
             2
         );
         App::addFilter(
-            AbstractCreateUpdateCustomPostMutationResolver::HOOK_ERROR_PAYLOAD,
+            HookNames::ERROR_PAYLOAD,
             $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2
