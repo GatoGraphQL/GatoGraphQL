@@ -102,7 +102,10 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         ErrorPayloadInterface $errorPayload,
         FeedbackItemResolution $feedbackItemResolution
     ): ErrorPayloadInterface {
-        return match ([$feedbackItemResolution->getFeedbackProviderServiceClass(), $feedbackItemResolution->getCode()]) {
+        return match ([
+            $feedbackItemResolution->getFeedbackProviderServiceClass(),
+            $feedbackItemResolution->getCode()
+        ]) {
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
