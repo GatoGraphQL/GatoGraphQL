@@ -7,7 +7,7 @@ namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
+use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 
 class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMutationResolver
 {

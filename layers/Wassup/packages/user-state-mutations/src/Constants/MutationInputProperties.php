@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
+namespace PoPSitesWassup\UserStateMutations\Constants;
 
-use PoPCMSSchema\UserStateMutations\MutationResolvers\MutationInputProperties as UpstreamMutationInputProperties;
+use PoPCMSSchema\UserStateMutations\Constants\MutationInputProperties as UpstreamMutationInputProperties;
 
 class MutationInputProperties extends UpstreamMutationInputProperties
 {
