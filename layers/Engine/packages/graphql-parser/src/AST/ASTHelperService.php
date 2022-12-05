@@ -11,9 +11,24 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\Root\Services\BasicServiceTrait;
 
 class ASTHelperService implements ASTHelperServiceInterface
 {
+    use BasicServiceTrait;
+    
+    private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
+
+    final public function setASTNodeDuplicatorService(ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService): void
+    {
+        $this->astNodeDuplicatorService = $astNodeDuplicatorService;
+    }
+    final protected function getASTNodeDuplicatorService(): ASTNodeDuplicatorServiceInterface
+    {
+        /** @var ASTNodeDuplicatorServiceInterface */
+        return $this->astNodeDuplicatorService ??= $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
+    }
+    
     /**
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
@@ -29,7 +44,7 @@ class ASTHelperService implements ASTHelperServiceInterface
             if ($fieldOrFragmentBond instanceof FragmentReference) {
                 /** @var FragmentReference */
                 $fragmentReference = $fieldOrFragmentBond;
-                $fragment = $this->getFragment($fragmentReference->getName(), $fragments);
+                $fragment = $this->getASTNodeDuplicatorService()->getFragment($fragmentReference, $fragments);
                 if ($fragment === null) {
                     continue;
                 }
@@ -61,21 +76,6 @@ class ASTHelperService implements ASTHelperServiceInterface
             $fields[] = $field;
         }
         return $fields;
-    }
-
-    /**
-     * @param Fragment[] $fragments
-     */
-    public function getFragment(
-        string $fragmentName,
-        array $fragments,
-    ): ?Fragment {
-        foreach ($fragments as $fragment) {
-            if ($fragment->getName() === $fragmentName) {
-                return $fragment;
-            }
-        }
-        return null;
     }
 
     /**
