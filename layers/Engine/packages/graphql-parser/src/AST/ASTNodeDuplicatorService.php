@@ -129,8 +129,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
             if ($fieldOrFragmentBond instanceof FragmentReference) {
                 /** @var FragmentReference */
                 $fragmentReference = $fieldOrFragmentBond;
-                $clonedFragmentReference = $this->cloneFragmentReference($fragmentReference);
-                $clonedFieldsOrFragmentBonds[] = $clonedFragmentReference;
+                $clonedFieldsOrFragmentBonds[] = $fragmentReference;
                 continue;
             }
             if ($fieldOrFragmentBond instanceof InlineFragment) {
@@ -157,15 +156,6 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
             $clonedFieldsOrFragmentBonds[] = $clonedLeafField;
         }
         return $clonedFieldsOrFragmentBonds;
-    }
-
-    protected function cloneFragmentReference(
-        FragmentReference $fragmentReference,
-    ): FragmentReference {
-        return new FragmentReference(
-            $fragmentReference->getName(),
-            ASTNodesFactory::getNonSpecificLocation(),
-        );
     }
 
     protected function cloneRelationalField(
