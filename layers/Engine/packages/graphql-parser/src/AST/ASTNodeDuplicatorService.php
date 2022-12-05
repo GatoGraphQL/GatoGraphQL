@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\AST;
 
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -65,6 +66,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
         Fragment $fragment,
         array $fragments,
     ): Fragment {
+        // return $fragment;
         return new Fragment(
             $fragment->getName(),
             $fragment->getModel(),
@@ -72,7 +74,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
             $this->recursivelyCloneFieldOrFragmentBonds(
                 $fragment->getFieldsOrFragmentBonds($fragments),
             ),
-            $fragment->getLocation(),
+            ASTNodesFactory::getNonSpecificLocation(),
         );
     }
     
@@ -123,7 +125,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
     ): FragmentReference {
         return new FragmentReference(
             $fragmentReference->getName(),
-            $fragmentReference->getLocation(),
+            ASTNodesFactory::getNonSpecificLocation(),
         );
     }
 
@@ -138,7 +140,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
                 $relationalField->getFieldsOrFragmentBonds(),
             ),
             $relationalField->getDirectives(),
-            $relationalField->getLocation(),
+            ASTNodesFactory::getNonSpecificLocation(),
         );
     }
 
@@ -150,7 +152,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
             $field->getAlias(),
             $field->getArguments(),
             $field->getDirectives(),
-            $field->getLocation(),
+            ASTNodesFactory::getNonSpecificLocation(),
         );
     }
 }
