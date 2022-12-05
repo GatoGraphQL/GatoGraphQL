@@ -48,11 +48,12 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
             if ($fragment->getName() !== $fragmentReference->getName()) {
                 continue;
             }
-            $this->fragmentReferenceFragments[$fragmentReference] = $this->recursivelyCloneFragment(
+            $clonedFragment = $this->recursivelyCloneFragment(
                 $fragment,
                 $fragments
             );
-            return $this->fragmentReferenceFragments[$fragmentReference];
+            $this->fragmentReferenceFragments[$fragmentReference] = $clonedFragment;
+            return $clonedFragment;
         }
         return null;
     }
