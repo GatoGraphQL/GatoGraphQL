@@ -16,5 +16,5 @@ function doCommonContainerConfiguration(RectorConfig $rectorConfig): void
     $rectorConfig->rule(AndAssignsToSeparateLinesRector::class);
     
     $rectorConfig->importNames();
-    $rectorConfig->disableImportShortClasses();
+    $rectorConfig->importShortClasses(false);
 };
