@@ -15,6 +15,45 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
+/**
+ * Fragments can be referenced by different Fields. Because values
+ * are stored and cached under each Field, every reference to a Field
+ * within a Fragment must be unique, as to make sure that a mutated
+ * value is updated.
+ *
+ * For instance, in the following query (with nested mutations),
+ * `PostData` is referenced twice, once before and after mutating
+ * the post's title:
+ * 
+ *   ```
+ *   mutation {
+ *     post(by: { id: 1 }) {
+ *       # This will print title "Hello world!"
+ *       ...PostData
+ *   
+ *       # This will update the title
+ *       update(input: {
+ *         title: "Updated title"
+ *       }) {
+ *         post {
+ *           # This must print title "Updated title"
+ *           ...PostData
+ *         }
+ *       }
+ *     }
+ *   }
+ *   
+ *   fragment PostData on Post {
+ *     title
+ *   }
+ *   ```
+ * 
+ * If the same Fragment AST node is used, both `title` Fields would
+ * produce value "Hello world!", as that's the first value that then
+ * gets cached at the AST node level. By duplicating the node, both
+ * references will be resolved independently, and the second reference
+ * will then produce "Updated title".
+ */
 class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
 {
     use BasicServiceTrait;
