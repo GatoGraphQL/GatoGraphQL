@@ -573,7 +573,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             if ($fieldOrFragmentBond instanceof FragmentReference) {
                 /** @var FragmentReference */
                 $fragmentReference = $fieldOrFragmentBond;
-                $fragment = $this->getASTNodeDuplicatorService()->getFragment($fragmentReference, $fragments);
+                $fragment = $this->getASTNodeDuplicatorService()->getExclusiveFragment($fragmentReference, $fragments);
                 if ($fragment === null) {
                     continue;
                 }

@@ -47,7 +47,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
         /** @var ASTNodeDuplicatorServiceInterface */
         return $this->astNodeDuplicatorService ??= $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
     }
-    
+
     public function __construct()
     {
         /**
@@ -349,7 +349,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
 
         /** @var FragmentReference */
         $fragmentReference = $fieldOrFragmentBond;
-        $fragment = $this->getASTNodeDuplicatorService()->getFragment($fragmentReference, $fragments);
+        $fragment = $this->getASTNodeDuplicatorService()->getExclusiveFragment($fragmentReference, $fragments);
         if ($fragment === null) {
             return $accumulator;
         }

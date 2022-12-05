@@ -77,7 +77,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
      *
      * @param Fragment[] $fragments
      */
-    public function getFragment(
+    public function getExclusiveFragment(
         FragmentReference $fragmentReference,
         array $fragments,
     ): ?Fragment {
