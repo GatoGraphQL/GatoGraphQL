@@ -33,8 +33,8 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         $this->rectorConfig->phpVersion(PhpVersion::PHP_71);
 
         // Do not change the code, other than the required rules
-        $this->rectorConfig->disableImportNames();
-        $this->rectorConfig->disableImportShortClasses();
+        $this->rectorConfig->importNames(false, false);
+        $this->rectorConfig->importShortClasses(false);
 
         // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
         if ($bootstrapFiles = $this->getBootstrapFiles()) {
