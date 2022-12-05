@@ -105,7 +105,6 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
         Fragment $fragment,
         array $fragments,
     ): Fragment {
-        // return $fragment;
         return new Fragment(
             $fragment->getName(),
             $fragment->getModel(),
