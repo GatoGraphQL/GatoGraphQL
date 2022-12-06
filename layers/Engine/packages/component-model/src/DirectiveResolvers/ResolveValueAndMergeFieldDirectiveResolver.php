@@ -260,7 +260,8 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
          */
         /** @var FieldInterface[] */
         $documentObjectResolvedFieldValueReferencedFields = App::getState('document-object-resolved-field-value-referenced-fields');
-        if (!in_array($field, $documentObjectResolvedFieldValueReferencedFields)
+        if (
+            !in_array($field, $documentObjectResolvedFieldValueReferencedFields)
             && (
                 $staticField === null
                 || ($staticField !== null && !in_array($staticField, $documentObjectResolvedFieldValueReferencedFields))
@@ -310,14 +311,14 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
          * Eg: Field Value References in Fragments still point to the static node
          * (they have not been replaced with a clone of the AST), but the Field
          * in the Fragment is a clone:
-         * 
+         *
          *   ```
          *   query {
          *     self {
          *       ...RootFragment
          *     }
          *   }
-         *   
+         *
          *   fragment RootFragment on QueryRoot {
          *     id
          *     _echo(value: $__id)
