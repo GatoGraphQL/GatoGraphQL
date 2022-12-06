@@ -20,6 +20,25 @@
       }
     },
     {
+      "message": "There is no field 'nonExistingInFragment' on type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 12,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "path": [
+          "nonExistingInFragment",
+          "fragment SelfData on QueryRoot { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "nonExistingInFragment",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    },
+    {
       "message": "There is no field 'nonExistingInInlineFragment' on type 'QueryRoot'",
       "locations": [
         {
@@ -36,25 +55,6 @@
         ],
         "type": "QueryRoot",
         "field": "nonExistingInInlineFragment",
-        "code": "gql@5.3.1",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
-      }
-    },
-    {
-      "message": "There is no field 'nonExistingInFragment' on type 'QueryRoot'",
-      "locations": [
-        {
-          "line": 12,
-          "column": 5
-        }
-      ],
-      "extensions": {
-        "path": [
-          "nonExistingInFragment",
-          "fragment SelfData on QueryRoot { ... }"
-        ],
-        "type": "QueryRoot",
-        "field": "nonExistingInFragment",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }

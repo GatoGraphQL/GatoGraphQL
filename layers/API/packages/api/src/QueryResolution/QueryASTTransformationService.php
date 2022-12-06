@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPAPI\API\QueryResolution;
 
 use PoP\ComponentModel\App;
+use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\AST\ASTNodeDuplicatorServiceInterface;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
@@ -16,7 +18,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
@@ -34,6 +35,18 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
      * @var SplObjectStorage<Document,array<string,RelationalField>>
      */
     private SplObjectStorage $fieldInstanceContainer;
+
+    private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
+
+    final public function setASTNodeDuplicatorService(ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService): void
+    {
+        $this->astNodeDuplicatorService = $astNodeDuplicatorService;
+    }
+    final protected function getASTNodeDuplicatorService(): ASTNodeDuplicatorServiceInterface
+    {
+        /** @var ASTNodeDuplicatorServiceInterface */
+        return $this->astNodeDuplicatorService ??= $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
+    }
 
     public function __construct()
     {
@@ -338,7 +351,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
 
         /** @var FragmentReference */
         $fragmentReference = $fieldOrFragmentBond;
-        $fragment = $this->getFragment($fragmentReference->getName(), $fragments);
+        $fragment = $this->getASTNodeDuplicatorService()->getExclusiveFragment($fragmentReference, $fragments);
         if ($fragment === null) {
             return $accumulator;
         }
@@ -369,19 +382,5 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
     protected function getOperationInitialDepth(): int
     {
         return 0;
-    }
-
-    /**
-     * @param Fragment[] $fragments
-     */
-    protected function getFragment(string $name, array $fragments): ?Fragment
-    {
-        foreach ($fragments as $fragment) {
-            if ($fragment->getName() === $name) {
-                return $fragment;
-            }
-        }
-
-        return null;
     }
 }

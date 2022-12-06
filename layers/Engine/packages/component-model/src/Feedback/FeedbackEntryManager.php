@@ -545,15 +545,15 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
          */
         if ($location === null) {
             $location = $astNode->getLocation();
-            /**
-             * If it is a RuntimeLocation and it has a static AST node,
-             * then use that Location
-             */
-            if ($location instanceof RuntimeLocation) {
-                /** @var RuntimeLocation $location */
-                $location = $location->getStaticASTNode()?->getLocation();
-                /** @var Location|null $location */
-            }
+        }
+        /**
+         * If it is a RuntimeLocation and it has a static AST node,
+         * then use that Location
+         */
+        if ($location instanceof RuntimeLocation) {
+            /** @var RuntimeLocation $location */
+            $location = $location->getStaticASTNode()?->getLocation();
+            /** @var Location|null $location */
         }
         $locations = [];
         if ($location !== null && !($location instanceof RuntimeLocation)) {

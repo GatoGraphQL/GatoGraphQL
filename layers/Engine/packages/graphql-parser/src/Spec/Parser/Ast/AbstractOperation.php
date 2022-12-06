@@ -137,18 +137,4 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     {
         return $this->variables;
     }
-
-    /**
-     * @param Fragment[] $fragments
-     */
-    protected function getFragment(array $fragments, string $fragmentName): ?Fragment
-    {
-        foreach ($fragments as $fragment) {
-            if ($fragment->getName() === $fragmentName) {
-                return $fragment;
-            }
-        }
-
-        return null;
-    }
 }

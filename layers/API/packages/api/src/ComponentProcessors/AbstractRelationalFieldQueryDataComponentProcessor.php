@@ -16,6 +16,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponen
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
+use PoP\GraphQLParser\AST\ASTNodeDuplicatorServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -43,6 +44,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     private array $fieldInstanceContainer = [];
 
     private ?QueryASTTransformationServiceInterface $queryASTTransformationService = null;
+    private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
 
     final public function setQueryASTTransformationService(QueryASTTransformationServiceInterface $queryASTTransformationService): void
     {
@@ -52,6 +54,15 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     {
         /** @var QueryASTTransformationServiceInterface */
         return $this->queryASTTransformationService ??= $this->instanceManager->getInstance(QueryASTTransformationServiceInterface::class);
+    }
+    final public function setASTNodeDuplicatorService(ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService): void
+    {
+        $this->astNodeDuplicatorService = $astNodeDuplicatorService;
+    }
+    final protected function getASTNodeDuplicatorService(): ASTNodeDuplicatorServiceInterface
+    {
+        /** @var ASTNodeDuplicatorServiceInterface */
+        return $this->astNodeDuplicatorService ??= $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
     }
 
     /**
@@ -564,7 +575,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             if ($fieldOrFragmentBond instanceof FragmentReference) {
                 /** @var FragmentReference */
                 $fragmentReference = $fieldOrFragmentBond;
-                $fragment = $this->getFragment($fragmentReference->getName(), $fragments);
+                $fragment = $this->getASTNodeDuplicatorService()->getExclusiveFragment($fragmentReference, $fragments);
                 if ($fragment === null) {
                     continue;
                 }
@@ -628,20 +639,5 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             );
         }
         return $recursiveFieldFragmentModelsTuples;
-    }
-
-    /**
-     * @param Fragment[] $fragments
-     */
-    protected function getFragment(
-        string $fragmentName,
-        array $fragments,
-    ): ?Fragment {
-        foreach ($fragments as $fragment) {
-            if ($fragment->getName() === $fragmentName) {
-                return $fragment;
-            }
-        }
-        return null;
     }
 }
