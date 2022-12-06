@@ -65,6 +65,9 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         if (isset($query['status'])) {
             // This can be both an array and a single value
             // Same name => do nothing
+        } else {
+            // Because the "status" input is sensitive it may not be present, then default to only published content
+            $query['status'] = 'approve';
         }
         if (isset($query['types'])) {
             $query['type__in'] = $query['types'];
@@ -98,6 +101,17 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         if (isset($query['custompost-types'])) {
             $query['post_type'] = $query['custompost-types'];
             unset($query['custompost-types']);
+        }
+        if (isset($query['custompost-status'])) {
+            $query['post_status'] = $query['custompost-status'];
+            unset($query['custompost-status']);
+        } else {
+            /**
+             * Because the "status" input is sensitive it may not be present,
+             * then default to only published content and comments on media
+             * items (hence "inherit")
+             */
+            $query['post_status'] = 'publish,inherit';
         }
         // Comment parent ID
         // Pass "0" to retrieve 1st layer of comments added to the post
