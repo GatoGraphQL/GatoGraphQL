@@ -15,6 +15,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\ExtendedSpec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -239,7 +240,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $location->getLine(),
             $location->getColumn()
         );
-        if ($location === ASTNodesFactory::getNonSpecificLocation()) {
+        if ($location instanceof RuntimeLocation) {
             return sprintf(
                 '%s #%s',
                 $fieldUniqueID,

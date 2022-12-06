@@ -18,6 +18,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\ExtendedSpec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -604,8 +605,10 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
      */
     private function getASTNodePath(AstInterface $astNode): array
     {
-        if ($astNode->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
-            return [];
+        $location = $astNode->getLocation();
+        if ($location instanceof RuntimeLocation) {
+            /** @var RuntimeLocation $location */
+            $astNode = $location->getStaticASTNode();
         }
         $astNodePath = [];
         /** @var SplObjectStorage<AstInterface,AstInterface> */
@@ -614,6 +617,11 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
             $astNodePath[] = $astNode->asASTNodeString();
             // Move to the ancestor AST node
             $astNode = $documentASTNodeAncestors[$astNode] ?? null;
+            $location = $astNode->getLocation();
+            if ($location instanceof RuntimeLocation) {
+                /** @var RuntimeLocation $location */
+                $astNode = $location->getStaticASTNode();
+            }
         }
         return $astNodePath;
     }
