@@ -11,6 +11,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -41,10 +42,20 @@ class EnabledMutationsCheckpoint extends AbstractStandaloneCheckpoint
          */
         $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
         $astNode = $this->field;
+        $location = $astNode->getLocation();
+        if ($location instanceof RuntimeLocation) {
+            /** @var RuntimeLocation $location */
+            $astNode = $location->getStaticASTNode();
+        }        
         $astNodeTopMostAncestor = null;
         while ($astNode !== null) {
             $astNodeTopMostAncestor = $astNode;
             $astNode = $documentASTNodeAncestors[$astNode] ?? null;
+            $location = $astNode?->getLocation();
+            if ($location instanceof RuntimeLocation) {
+                /** @var RuntimeLocation $location */
+                $astNode = $location->getStaticASTNode();
+            }
         }
         if ($astNodeTopMostAncestor instanceof OperationInterface) {
             $operation = $astNodeTopMostAncestor;

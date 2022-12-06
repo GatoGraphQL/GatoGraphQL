@@ -617,7 +617,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
             $astNodePath[] = $astNode->asASTNodeString();
             // Move to the ancestor AST node
             $astNode = $documentASTNodeAncestors[$astNode] ?? null;
-            $location = $astNode->getLocation();
+            $location = $astNode?->getLocation();
             if ($location instanceof RuntimeLocation) {
                 /** @var RuntimeLocation $location */
                 $astNode = $location->getStaticASTNode();
