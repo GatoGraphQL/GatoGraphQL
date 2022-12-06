@@ -682,7 +682,8 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
     ): array {
         $key = Tokens::FIELD;
         $location = $field->getLocation();
-        if ($location instanceof RuntimeLocation
+        if (
+            $location instanceof RuntimeLocation
             /**
              * If the AST node is a surrogate for another node,
              * then print it as "field", not "dynamicField"

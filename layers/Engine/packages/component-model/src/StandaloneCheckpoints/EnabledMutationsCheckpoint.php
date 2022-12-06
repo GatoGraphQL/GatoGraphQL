@@ -46,7 +46,7 @@ class EnabledMutationsCheckpoint extends AbstractStandaloneCheckpoint
         if ($location instanceof RuntimeLocation) {
             /** @var RuntimeLocation $location */
             $astNode = $location->getStaticASTNode();
-        }        
+        }
         $astNodeTopMostAncestor = null;
         while ($astNode !== null) {
             $astNodeTopMostAncestor = $astNode;
