@@ -17,6 +17,8 @@ use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoPCMSSchema\CustomPosts\FilterInputs\UnionCustomPostTypesFilterInput;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
@@ -215,6 +217,9 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
         if ($this->treatCommentStatusAsSensitiveData()) {
             $adminInputFieldNames[] = 'status';
         }
+        if ($this->treatCustomPostStatusAsSensitiveData()) {
+            $adminInputFieldNames[] = 'customPostStatus';
+        }
         return $adminInputFieldNames;
     }
 
@@ -223,6 +228,13 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->treatCommentStatusAsSensitiveData();
+    }
+
+    protected function treatCustomPostStatusAsSensitiveData(): bool
+    {
+        /** @var CustomPostsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
+        return $moduleConfiguration->treatCustomPostStatusAsSensitiveData();
     }
 
     abstract protected function addParentInputFields(): bool;
