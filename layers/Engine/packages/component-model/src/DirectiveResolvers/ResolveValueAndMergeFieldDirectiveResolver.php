@@ -324,8 +324,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
          *   }
          *   ```
          *
-         * Please notice: the upstream node will only contain 1 value.
-         * So it doesn't support having two references to the fragment,
+         * This also works when having two references to the fragment,
          * with these values being different (eg: before/after a mutation):
          *
          *   ```
@@ -350,12 +349,14 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
          *     title
          *
          *     # Watch out! Field `title` will have 2 different values
-         *     # coming from the 2 referencing fields, but here the
-         *     # value stored under $__title is always the same, so this
-         *     # use case is not supported!
+         *     # coming from the 2 referencing fields!
          *     _echo(value: $__title)
          *   }
          *   ```
+         *
+         * It still works because the storing of the value happens right
+         * before reading it, then the new value overrides the 1st one
+         * and then it's read again.
          *
          * @see ASTNodeDuplicatorService.php
          */
