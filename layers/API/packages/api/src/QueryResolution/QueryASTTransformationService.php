@@ -19,8 +19,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Services\BasicServiceTrait;
-
 use SplObjectStorage;
+
 use function max;
 
 class QueryASTTransformationService implements QueryASTTransformationServiceInterface

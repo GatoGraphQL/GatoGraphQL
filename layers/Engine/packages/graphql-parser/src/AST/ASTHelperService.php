@@ -16,7 +16,7 @@ use PoP\Root\Services\BasicServiceTrait;
 class ASTHelperService implements ASTHelperServiceInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
 
     final public function setASTNodeDuplicatorService(ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService): void
@@ -28,7 +28,7 @@ class ASTHelperService implements ASTHelperServiceInterface
         /** @var ASTNodeDuplicatorServiceInterface */
         return $this->astNodeDuplicatorService ??= $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
     }
-    
+
     /**
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
