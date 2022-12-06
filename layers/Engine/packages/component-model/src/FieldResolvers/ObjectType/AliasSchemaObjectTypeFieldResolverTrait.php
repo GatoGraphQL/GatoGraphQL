@@ -13,6 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use SplObjectStorage;
 
 /**
@@ -101,14 +102,14 @@ trait AliasSchemaObjectTypeFieldResolverTrait
                     $field->getArguments(),
                     $field->getFieldsOrFragmentBonds(),
                     $field->getDirectives(),
-                    $field->getLocation(),
+                    new RuntimeLocation($field),
                 )
                 : new LeafField(
                     $field->getName(),
                     $this->getAliasedFieldName($field->getName()),
                     $field->getArguments(),
                     $field->getDirectives(),
-                    $field->getLocation(),
+                    new RuntimeLocation($field),
                 );
         }
         return $this->aliasedFieldCache[$field];
