@@ -528,19 +528,35 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
     }
 
     /**
+     * @param Location|null $location If `null` use the Location from the astNode
      * @param array<string,mixed> $extensions
      * @param array<string|int> $ids
      * @return array<string,mixed>
      */
     public function formatObjectOrSchemaFeedbackCommonEntry(
         AstInterface $astNode,
-        Location $location,
+        ?Location $location,
         array $extensions,
         FeedbackItemResolution $feedbackItemResolution,
         array $ids,
     ): array {
+        /**
+         * If `null` use the Location from the astNode
+         */
+        if ($location === null) {
+            $location = $astNode->getLocation();
+            /**
+             * If it is a RuntimeLocation and it has a static AST node,
+             * then use that Location
+             */
+            if ($location instanceof RuntimeLocation) {
+                /** @var RuntimeLocation $location */
+                $location = $location->getStaticASTNode()?->getLocation();
+                /** @var Location|null $location */
+            }
+        }
         $locations = [];
-        if (!($location instanceof RuntimeLocation)) {
+        if ($location !== null && !($location instanceof RuntimeLocation)) {
             $locations[] = $location->toArray();
         }
         $extensions = $this->addFeedbackEntryExtensions(

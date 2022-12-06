@@ -501,7 +501,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
              */
             $item = $this->getFeedbackEntryManager()->formatObjectOrSchemaFeedbackCommonEntry(
                 $field,
-                $field->getLocation(),
+                null,
                 [],
                 new FeedbackItemResolution(
                     GraphQLSpecErrorFeedbackItemProvider::class,
