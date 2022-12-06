@@ -15,7 +15,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
-use PoP\GraphQLParser\ExtendedSpec\Parser\RuntimeLocation;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;

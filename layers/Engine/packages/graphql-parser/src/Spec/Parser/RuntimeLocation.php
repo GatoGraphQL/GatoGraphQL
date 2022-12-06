@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\ExtendedSpec\Parser;
+namespace PoP\GraphQLParser\Spec\Parser;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\GraphQLParser\Spec\Parser\Location;
 
 /**
  * Location for "dynamic" AST nodes, i.e. those
