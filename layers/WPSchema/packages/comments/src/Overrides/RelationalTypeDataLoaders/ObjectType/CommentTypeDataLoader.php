@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Comments\RelationalTypeDataLoaders\ObjectType;
+namespace PoPWPSchema\Comments\Overrides\RelationalTypeDataLoaders\ObjectType;
 
 use PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader as UpstreamCommentTypeDataLoader;
 use PoPWPSchema\CustomPosts\Enums\CustomPostStatus;
