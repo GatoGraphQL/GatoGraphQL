@@ -14858,6 +14858,24 @@
               "defaultValue": null
             },
             {
+              "name": "customPostStatus",
+              "description": "Filter comments added to the custom posts with given status",
+              "type": {
+                "kind": "LIST",
+                "name": "[CustomPostStatusEnum!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "CustomPostStatusEnum!",
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "CustomPostStatusEnum",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": "[\"publish\"]"
+            },
+            {
               "name": "customPostTypes",
               "description": "Filter comments added to custom posts of given types",
               "type": {
@@ -15707,6 +15725,24 @@
                 }
               },
               "defaultValue": null
+            },
+            {
+              "name": "customPostStatus",
+              "description": "Filter comments added to the custom posts with given status",
+              "type": {
+                "kind": "LIST",
+                "name": "[CustomPostStatusEnum!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "CustomPostStatusEnum!",
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "CustomPostStatusEnum",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": "[\"publish\"]"
             },
             {
               "name": "customPostTypes",
