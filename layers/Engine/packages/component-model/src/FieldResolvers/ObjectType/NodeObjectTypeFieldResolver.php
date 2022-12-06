@@ -15,7 +15,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\ExtendedSpec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -87,7 +87,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
              * Enable for internally-executed functionality
              * (eg: Multiple Query Execution)
              */
-            if ($field->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
+            if ($field->getLocation() instanceof RuntimeLocation) {
                 return true;
             }
 
