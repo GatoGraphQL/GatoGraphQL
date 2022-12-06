@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
 class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
@@ -44,6 +45,20 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
                 CommentStatus::SPAM,
                 CommentStatus::TRASH,
             ],
+            'custompost-status' => $this->getAllCustomPostStatuses(),
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getAllCustomPostStatuses(): array
+    {
+        return [
+            CustomPostStatus::PUBLISH,
+            CustomPostStatus::PENDING,
+            CustomPostStatus::DRAFT,
+            CustomPostStatus::TRASH,
         ];
     }
 

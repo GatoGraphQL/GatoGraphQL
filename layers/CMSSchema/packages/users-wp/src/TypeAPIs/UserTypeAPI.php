@@ -343,7 +343,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
     }
     public function getUserWebsiteURL(string|int|object $userObjectOrID): ?string
     {
-        return $this->getUserProperty('user_url', $userObjectOrID);
+        $userURL = $this->getUserProperty('user_url', $userObjectOrID);
+        if (empty($userURL)) {
+            return null;
+        }
+        return $userURL;
     }
     public function getUserSlug(string|int|object $userObjectOrID): ?string
     {

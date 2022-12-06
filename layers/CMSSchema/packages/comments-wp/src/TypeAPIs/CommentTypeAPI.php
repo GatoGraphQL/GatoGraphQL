@@ -302,10 +302,14 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         $comment = $comment;
         return $comment->comment_author_email;
     }
-    public function getCommentAuthorURL(object $comment): string
+    public function getCommentAuthorURL(object $comment): ?string
     {
         /** @var WP_Comment */
         $comment = $comment;
-        return $comment->comment_author_url;
+        $authorURL = $comment->comment_author_url;
+        if (empty($authorURL)) {
+            return null;
+        }
+        return $authorURL;
     }
 }
