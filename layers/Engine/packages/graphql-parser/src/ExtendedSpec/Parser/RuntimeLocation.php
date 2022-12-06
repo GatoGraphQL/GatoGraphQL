@@ -7,6 +7,17 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
+/**
+ * Location for "dynamic" AST nodes, i.e. those
+ * not present in the the GraphQL query, but created
+ * by the engine for ease of implementation.
+ *
+ * These AST nodes may be a surrogate for an actual
+ * AST node in the query (such as the cloned Fragment
+ * nodes, one for each FragmentReference). In this case,
+ * keep a reference to this "static" or "upstream" AST node,
+ * so the path to them can still be added in the response errors.
+ */
 class RuntimeLocation extends Location
 {
     public function __construct(
