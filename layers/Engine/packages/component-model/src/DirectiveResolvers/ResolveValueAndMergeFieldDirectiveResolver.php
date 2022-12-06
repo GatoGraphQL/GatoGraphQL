@@ -320,13 +320,42 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
          *   
          *   fragment RootFragment on QueryRoot {
          *     id
-         *     direct: _echo(value: $__id)
+         *     _echo(value: $__id)
          *   }
          *   ```
          *
          * Please notice: the upstream node will only contain 1 value.
          * So it doesn't support having two references to the fragment,
-         * with these values being different (eg: before/after a mutation)
+         * with these values being different (eg: before/after a mutation):
+         *
+         *   ```
+         *   mutation {
+         *     post(by: { id: 1 }) {
+         *       # This will print title "Hello world!"
+         *       ...PostData
+         *
+         *       # This will update the title
+         *       update(input: {
+         *         title: "Updated title"
+         *       }) {
+         *         post {
+         *           # This must print title "Updated title"
+         *           ...PostData
+         *         }
+         *       }
+         *     }
+         *   }
+         *
+         *   fragment PostData on Post {
+         *     title
+         *
+         *     # Watch out! Field `title` will have 2 different values
+         *     # coming from the 2 referencing fields, but here the
+         *     # value stored under $__title is always the same, so this
+         *     # use case is not supported!
+         *     _echo(value: $__title)
+         *   }
+         *   ```
          *
          * @see ASTNodeDuplicatorService.php
          */
