@@ -18,7 +18,7 @@ class EnvironmentVariablesDataSource
         return [
             self::GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE => false,
             self::RETENTION_DAYS_FOR_GENERATED_PLUGINS => 30,
-            self::INSTAWP_INSTANCE_SLEEPING_TIME => 120,
+            self::INSTAWP_INSTANCE_SLEEPING_TIME => 180,
         ];
     }
 }
