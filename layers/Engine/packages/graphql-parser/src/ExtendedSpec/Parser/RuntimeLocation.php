@@ -21,9 +21,9 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class RuntimeLocation extends Location
 {
     public function __construct(
-        int $line,
-        int $column,
-        protected ?AstInterface $staticASTNode,
+        protected ?AstInterface $staticASTNode = null,
+        int $line = -1,
+        int $column = -1,
     ) {
         parent::__construct(
             $line,
