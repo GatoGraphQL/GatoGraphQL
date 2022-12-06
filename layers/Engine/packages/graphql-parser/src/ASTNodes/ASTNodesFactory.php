@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ASTNodes;
 
+use PoP\GraphQLParser\ExtendedSpec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\Spec\Parser\Location;
 
 /**
  * For the AST nodes provided by this Factory (acting
@@ -16,7 +16,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
  */
 class ASTNodesFactory
 {
-    public static ?Location $nonSpecificLocation = null;
+    public static ?RuntimeLocation $nonSpecificLocation = null;
     public static ?FieldInterface $wildcardField = null;
 
     /**
@@ -32,10 +32,10 @@ class ASTNodesFactory
      *
      * This Location will not be printed on the GraphQL response
      */
-    public static function getNonSpecificLocation(): Location
+    public static function getNonSpecificLocation(): RuntimeLocation
     {
         if (self::$nonSpecificLocation === null) {
-            self::$nonSpecificLocation = new Location(-1, -1);
+            self::$nonSpecificLocation = new RuntimeLocation();
         }
         return self::$nonSpecificLocation;
     }
