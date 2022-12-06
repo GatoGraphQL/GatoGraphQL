@@ -12,7 +12,7 @@ class RuntimeLocation extends Location
     public function __construct(
         int $line,
         int $column,
-        protected AstInterface $astNode,
+        protected ?AstInterface $astNode,
     ) {
         parent::__construct(
             $line,
@@ -20,7 +20,7 @@ class RuntimeLocation extends Location
         );
     }
 
-    public function getASTNode(): AstInterface
+    public function getASTNode(): ?AstInterface
     {
         return $this->astNode;
     }
