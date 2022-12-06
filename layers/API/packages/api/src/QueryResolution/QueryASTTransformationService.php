@@ -101,6 +101,8 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
             return $operationFieldOrFragmentBonds;
         }
 
+        $nonSpecificLocation = ASTNodesFactory::getNonSpecificLocation();
+
         /**
          * The cache must be stored per Document, or otherwise
          * executing multiple PHPUnit tests may access the
@@ -224,7 +226,7 @@ class QueryASTTransformationService implements QueryASTTransformationServiceInte
                         [],
                         $fieldOrFragmentBonds,
                         [],
-                        ASTNodesFactory::getNonSpecificLocation()
+                        $nonSpecificLocation
                     );
                 }
                 $fieldOrFragmentBonds = [
