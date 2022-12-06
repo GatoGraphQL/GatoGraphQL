@@ -19,7 +19,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\ExtendedSpec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -104,7 +104,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         /**
          * Enable when executed within the GraphQL server
          */
-        if ($field->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
+        if ($field->getLocation() instanceof RuntimeLocation) {
             return true;
         }
 
