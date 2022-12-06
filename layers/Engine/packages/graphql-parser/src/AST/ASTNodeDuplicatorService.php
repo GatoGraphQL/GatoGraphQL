@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\AST;
 
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -25,13 +24,13 @@ use SplObjectStorage;
  * For instance, in the following query (with nested mutations),
  * `PostData` is referenced twice, once before and after mutating
  * the post's title:
- * 
+ *
  *   ```
  *   mutation {
  *     post(by: { id: 1 }) {
  *       # This will print title "Hello world!"
  *       ...PostData
- *   
+ *
  *       # This will update the title
  *       update(input: {
  *         title: "Updated title"
@@ -43,12 +42,12 @@ use SplObjectStorage;
  *       }
  *     }
  *   }
- *   
+ *
  *   fragment PostData on Post {
  *     title
  *   }
  *   ```
- * 
+ *
  * If the same Fragment AST node is used, both `title` Fields would
  * produce value "Hello world!", as that's the first value that then
  * gets cached at the AST node level. By duplicating the node, both
@@ -63,7 +62,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
      * @var SplObjectStorage<FragmentReference,Fragment>
      */
     protected SplObjectStorage $fragmentReferenceFragments;
-    
+
     public function __construct()
     {
         /**
@@ -111,12 +110,12 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
             $fragment->getModel(),
             $fragment->getDirectives(),
             $this->recursivelyCloneFieldOrFragmentBonds(
-                $fragment->getFieldsOrFragmentBonds($fragments),
+                $fragment->getFieldsOrFragmentBonds(),
             ),
             new RuntimeLocation($fragment),
         );
     }
-    
+
     /**
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @return array<FieldInterface|FragmentBondInterface>
