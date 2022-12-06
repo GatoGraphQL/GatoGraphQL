@@ -513,6 +513,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
              * it doesn't retrieve it.
              */
             if (!isset($this->fieldInstanceContainer[$query][$alias])) {
+                $nonSpecificLocation = ASTNodesFactory::getNonSpecificLocation();
                 $this->fieldInstanceContainer[$query][$alias] = new LeafField(
                     '_isTypeOrImplementsAll',
                     $alias,
@@ -521,13 +522,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                             'typesOrInterfaces',
                             new InputList(
                                 $fragmentModels,
-                                ASTNodesFactory::getNonSpecificLocation()
+                                $nonSpecificLocation
                             ),
-                            ASTNodesFactory::getNonSpecificLocation()
+                            $nonSpecificLocation
                         ),
                     ],
                     [],
-                    ASTNodesFactory::getNonSpecificLocation()
+                    $nonSpecificLocation
                 );
             }
             $leafField = $this->fieldInstanceContainer[$query][$alias];

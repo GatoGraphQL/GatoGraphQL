@@ -103,6 +103,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
             $operation->getName()
         );
         if (!isset($documentFieldInstanceContainer[$alias])) {
+            $nonSpecificLocation = ASTNodesFactory::getNonSpecificLocation();
             /**
              * Add 2 fields, because validating if a Directive
              * is supported or excluded is executed against the
@@ -131,7 +132,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                         [],
                         $operation->getFieldsOrFragmentBonds(),
                         [],
-                        ASTNodesFactory::getNonSpecificLocation()
+                        $nonSpecificLocation
                     )
                 ],
                 /**
@@ -141,7 +142,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
                  * Field Directive.
                  */
                 $operation->getDirectives(),
-                ASTNodesFactory::getNonSpecificLocation()
+                $nonSpecificLocation
             );
         }
         $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;

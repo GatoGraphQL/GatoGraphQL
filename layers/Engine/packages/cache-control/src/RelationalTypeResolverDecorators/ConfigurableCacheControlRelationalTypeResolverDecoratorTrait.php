@@ -35,6 +35,7 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     protected function getCacheControlDirective(string|int $maxAge): Directive
     {
         if (!isset($this->cacheControlDirectives[$maxAge])) {
+            $nonSpecificLocation = ASTNodesFactory::getNonSpecificLocation();
             $this->cacheControlDirectives[$maxAge] = new Directive(
                 $this->getCacheControlFieldDirectiveResolver()->getDirectiveName(),
                 [
@@ -42,12 +43,12 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
                         'maxAge',
                         new Literal(
                             $maxAge,
-                            ASTNodesFactory::getNonSpecificLocation()
+                            $nonSpecificLocation
                         ),
-                        ASTNodesFactory::getNonSpecificLocation()
+                        $nonSpecificLocation
                     ),
                 ],
-                ASTNodesFactory::getNonSpecificLocation()
+                $nonSpecificLocation
             );
         }
         return $this->cacheControlDirectives[$maxAge];
