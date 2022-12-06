@@ -99,6 +99,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             $query['post_type'] = $query['custompost-types'];
             unset($query['custompost-types']);
         }
+        if (isset($query['custompost-status'])) {
+            $query['post_status'] = $query['custompost-status'];
+            unset($query['custompost-status']);
+        }
         // Comment parent ID
         // Pass "0" to retrieve 1st layer of comments added to the post
         if (isset($query['parent-id'])) {
