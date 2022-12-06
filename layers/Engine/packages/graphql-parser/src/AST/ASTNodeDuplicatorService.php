@@ -12,6 +12,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
@@ -112,7 +113,7 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
             $this->recursivelyCloneFieldOrFragmentBonds(
                 $fragment->getFieldsOrFragmentBonds($fragments),
             ),
-            ASTNodesFactory::getNonSpecificLocation(),
+            new RuntimeLocation($fragment),
         );
     }
     
@@ -168,19 +169,19 @@ class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
                 $relationalField->getFieldsOrFragmentBonds(),
             ),
             $relationalField->getDirectives(),
-            ASTNodesFactory::getNonSpecificLocation(),
+            new RuntimeLocation($relationalField),
         );
     }
 
     protected function cloneLeafField(
-        LeafField $field,
+        LeafField $leafField,
     ): LeafField {
         return new LeafField(
-            $field->getName(),
-            $field->getAlias(),
-            $field->getArguments(),
-            $field->getDirectives(),
-            ASTNodesFactory::getNonSpecificLocation(),
+            $leafField->getName(),
+            $leafField->getAlias(),
+            $leafField->getArguments(),
+            $leafField->getDirectives(),
+            new RuntimeLocation($leafField),
         );
     }
 }
