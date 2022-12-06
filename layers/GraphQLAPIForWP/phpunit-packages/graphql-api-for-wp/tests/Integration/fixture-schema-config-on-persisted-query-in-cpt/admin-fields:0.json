@@ -27,35 +27,35 @@
                 "id": 6,
                 "slug": "editor",
                 "displayName": "Editor Smith",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": null
             },
             {
                 "id": 5,
                 "slug": "author",
                 "displayName": "Author Marquez",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": null
             },
             {
                 "id": 4,
                 "slug": "contributor",
                 "displayName": "Contributor Johnson",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": null
             },
             {
                 "id": 3,
                 "slug": "subscriber",
                 "displayName": "Subscriber Bennett",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": null
             },
             {
                 "id": 2,
                 "slug": "blogger",
                 "displayName": "Blogger Davenport",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": null
             }
         ]

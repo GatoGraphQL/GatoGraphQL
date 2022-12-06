@@ -5,35 +5,35 @@
                 "id": 6,
                 "slug": "editor",
                 "displayName": "Editor Smith",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": "editor@test.com"
             },
             {
                 "id": 5,
                 "slug": "author",
                 "displayName": "Author Marquez",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": "author@test.com"
             },
             {
                 "id": 4,
                 "slug": "contributor",
                 "displayName": "Contributor Johnson",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": "contributor@test.com"
             },
             {
                 "id": 3,
                 "slug": "subscriber",
                 "displayName": "Subscriber Bennett",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": "subscriber@test.com"
             },
             {
                 "id": 2,
                 "slug": "blogger",
                 "displayName": "Blogger Davenport",
-                "websiteURL": "",
+                "websiteURL": null,
                 "email": "blogger@test.com"
             }
         ]

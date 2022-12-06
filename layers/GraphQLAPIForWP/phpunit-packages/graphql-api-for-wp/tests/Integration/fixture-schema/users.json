@@ -2,6 +2,11 @@
     "data": {
         "users": [
             {
+                "avatar": {
+                    "id": "da83a02a60e209782d40d3feb41e00c5",
+                    "size": 96,
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/00941d24f33655ec9e5e6b2f448004b5?s=96&#038;d=mm&#038;r=g"
+                },
                 "capabilities": [
                     "moderate_comments",
                     "manage_categories",
@@ -39,6 +44,13 @@
                     "read_private_pages"
                 ],
                 "customPostCount": 1,
+                "customPosts": [
+                    {
+                        "__typename": "Post",
+                        "id": 19,
+                        "title": "Nested mutations are a must have"
+                    }
+                ],
                 "description": "",
                 "displayName": "Editor Smith",
                 "email": "editor@test.com",
@@ -55,42 +67,35 @@
                 "nicename": "editor",
                 "nickname": "editor",
                 "postCount": 1,
-                "registeredDate": "1982-06-29T17:48:26+00:00",
-                "registeredDateStr": "June 29",
-                "roleNames": [
-                    "editor"
-                ],
-                "slug": "editor",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
-                "urlAbsolutePath": "\/author\/editor\/",
-                "username": "editor",
-                "websiteURL": "",
-                "avatar": {
-                    "id": "da83a02a60e209782d40d3feb41e00c5",
-                    "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/00941d24f33655ec9e5e6b2f448004b5?s=96&#038;d=mm&#038;r=g"
-                },
-                "customPosts": [
-                    {
-                        "__typename": "Post",
-                        "id": 19,
-                        "title": "Nested mutations are a must have"
-                    }
-                ],
                 "posts": [
                     {
                         "id": 19,
                         "title": "Nested mutations are a must have"
                     }
                 ],
+                "registeredDate": "1982-06-29T17:48:26+00:00",
+                "registeredDateStr": "June 29",
+                "roleNames": [
+                    "editor"
+                ],
                 "roles": [
                     {
                         "id": "editor",
                         "name": "editor"
                     }
-                ]
+                ],
+                "slug": "editor",
+                "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
+                "urlAbsolutePath": "\/author\/editor\/",
+                "username": "editor",
+                "websiteURL": null
             },
             {
+                "avatar": {
+                    "id": "4519654833ec6920a78b689fd4295f9f",
+                    "size": 96,
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/b7a8ba9684cc5c1a4a035b34ff2fcb04?s=96&#038;d=mm&#038;r=g"
+                },
                 "capabilities": [
                     "upload_files",
                     "edit_posts",
@@ -104,6 +109,13 @@
                     "delete_published_posts"
                 ],
                 "customPostCount": 1,
+                "customPosts": [
+                    {
+                        "__typename": "Post",
+                        "id": 28,
+                        "title": "HTTP caching improves performance"
+                    }
+                ],
                 "description": "",
                 "displayName": "Author Marquez",
                 "email": "author@test.com",
@@ -120,42 +132,35 @@
                 "nicename": "author",
                 "nickname": "author",
                 "postCount": 1,
-                "registeredDate": "1982-06-29T17:48:25+00:00",
-                "registeredDateStr": "June 29",
-                "roleNames": [
-                    "author"
-                ],
-                "slug": "author",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
-                "urlAbsolutePath": "\/author\/author\/",
-                "username": "author",
-                "websiteURL": "",
-                "avatar": {
-                    "id": "4519654833ec6920a78b689fd4295f9f",
-                    "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/b7a8ba9684cc5c1a4a035b34ff2fcb04?s=96&#038;d=mm&#038;r=g"
-                },
-                "customPosts": [
-                    {
-                        "__typename": "Post",
-                        "id": 28,
-                        "title": "HTTP caching improves performance"
-                    }
-                ],
                 "posts": [
                     {
                         "id": 28,
                         "title": "HTTP caching improves performance"
                     }
                 ],
+                "registeredDate": "1982-06-29T17:48:25+00:00",
+                "registeredDateStr": "June 29",
+                "roleNames": [
+                    "author"
+                ],
                 "roles": [
                     {
                         "id": "author",
                         "name": "author"
                     }
-                ]
+                ],
+                "slug": "author",
+                "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
+                "urlAbsolutePath": "\/author\/author\/",
+                "username": "author",
+                "websiteURL": null
             },
             {
+                "avatar": {
+                    "id": "c311c5482bb63499b8cc002fd51b5d6b",
+                    "size": 96,
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/9ba43933f8e0c00e3345109d69ac948f?s=96&#038;d=mm&#038;r=g"
+                },
                 "capabilities": [
                     "edit_posts",
                     "read",
@@ -164,6 +169,13 @@
                     "delete_posts"
                 ],
                 "customPostCount": 1,
+                "customPosts": [
+                    {
+                        "__typename": "Post",
+                        "id": 16,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
                 "description": "",
                 "displayName": "Contributor Johnson",
                 "email": "contributor@test.com",
@@ -180,40 +192,28 @@
                 "nicename": "contributor",
                 "nickname": "contributor",
                 "postCount": 1,
-                "registeredDate": "1982-06-29T17:48:24+00:00",
-                "registeredDateStr": "June 29",
-                "roleNames": [
-                    "contributor"
-                ],
-                "slug": "contributor",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
-                "urlAbsolutePath": "\/author\/contributor\/",
-                "username": "contributor",
-                "websiteURL": "",
-                "avatar": {
-                    "id": "c311c5482bb63499b8cc002fd51b5d6b",
-                    "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/9ba43933f8e0c00e3345109d69ac948f?s=96&#038;d=mm&#038;r=g"
-                },
-                "customPosts": [
-                    {
-                        "__typename": "Post",
-                        "id": 16,
-                        "title": "Working on flat chain syntax next"
-                    }
-                ],
                 "posts": [
                     {
                         "id": 16,
                         "title": "Working on flat chain syntax next"
                     }
                 ],
+                "registeredDate": "1982-06-29T17:48:24+00:00",
+                "registeredDateStr": "June 29",
+                "roleNames": [
+                    "contributor"
+                ],
                 "roles": [
                     {
                         "id": "contributor",
                         "name": "contributor"
                     }
-                ]
+                ],
+                "slug": "contributor",
+                "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
+                "urlAbsolutePath": "\/author\/contributor\/",
+                "username": "contributor",
+                "websiteURL": null
             }
         ],
         "usersByExcludeIDs": [
