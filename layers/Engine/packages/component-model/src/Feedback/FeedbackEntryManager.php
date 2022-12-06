@@ -666,7 +666,14 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         FieldInterface $field,
     ): array {
         $key = Tokens::FIELD;
-        if ($field->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
+        $location = $field->getLocation();
+        if ($location instanceof RuntimeLocation
+            /**
+             * If the AST node is a surrogate for another node,
+             * then print it as "field", not "dynamicField"
+             */
+            && $location->getStaticASTNode() === null
+        ) {
             $key = Tokens::DYNAMIC_FIELD;
         }
         return array_merge(
