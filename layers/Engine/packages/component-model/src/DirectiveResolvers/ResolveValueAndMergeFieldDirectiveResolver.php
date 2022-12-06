@@ -16,6 +16,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\TypeSerialization\TypeSerializationServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use SplObjectStorage;
 
 final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
@@ -238,12 +239,33 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         /**
+         * If the field has an upstream static node, also consider promises
+         * made under that node (see description below).
+         *
+         * @var FieldInterface|null
+         */
+        $staticField = null;
+        if ($field->getLocation() instanceof RuntimeLocation) {
+            /** @var RuntimeLocation */
+            $location = $field->getLocation();
+            if ($location->getStaticASTNode() !== null) {
+                /** @var FieldInterface */
+                $staticField = $location->getStaticASTNode();
+            }
+        }
+
+        /**
          * Optimization: Check if the field was referenced in the query,
          * otherwise can skip
          */
         /** @var FieldInterface[] */
         $documentObjectResolvedFieldValueReferencedFields = App::getState('document-object-resolved-field-value-referenced-fields');
-        if (!in_array($field, $documentObjectResolvedFieldValueReferencedFields)) {
+        if (!in_array($field, $documentObjectResolvedFieldValueReferencedFields)
+            && (
+                $staticField === null
+                || ($staticField !== null && !in_array($staticField, $documentObjectResolvedFieldValueReferencedFields))
+            )
+        ) {
             return;
         }
 
@@ -281,6 +303,36 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
          */
         $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
         $objectResolvedFieldValues[$field] = $serializedIDFieldValues[$id][$field];
+
+        /**
+         * If the field has an upstream static node, also place the value under that node.
+         *
+         * Eg: Field Value References in Fragments still point to the static node
+         * (they have not been replaced with a clone of the AST), but the Field
+         * in the Fragment is a clone:
+         * 
+         *   ```
+         *   query {
+         *     self {
+         *       ...RootFragment
+         *     }
+         *   }
+         *   
+         *   fragment RootFragment on QueryRoot {
+         *     id
+         *     direct: _echo(value: $__id)
+         *   }
+         *   ```
+         *
+         * Please notice: the upstream node will only contain 1 value.
+         * So it doesn't support having two references to the fragment,
+         * with these values being different (eg: before/after a mutation)
+         *
+         * @see ASTNodeDuplicatorService.php
+         */
+        if ($staticField !== null) {
+            $objectResolvedFieldValues[$staticField] = $objectResolvedFieldValues[$field];
+        }
 
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('engine-iteration-object-resolved-field-values', $objectResolvedFieldValues);
