@@ -45,12 +45,20 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
                 CommentStatus::SPAM,
                 CommentStatus::TRASH,
             ],
-            'custompost-status' => [
-                CustomPostStatus::PUBLISH,
-                CustomPostStatus::PENDING,
-                CustomPostStatus::DRAFT,
-                CustomPostStatus::TRASH,
-            ],
+            'custompost-status' => $this->getAllCustomPostStatuses(),
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getAllCustomPostStatuses(): array
+    {
+        return [
+            CustomPostStatus::PUBLISH,
+            CustomPostStatus::PENDING,
+            CustomPostStatus::DRAFT,
+            CustomPostStatus::TRASH,
         ];
     }
 
