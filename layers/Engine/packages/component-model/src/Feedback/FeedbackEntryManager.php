@@ -17,7 +17,6 @@ use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -541,7 +540,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         array $ids,
     ): array {
         $locations = [];
-        if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
+        if (!($location instanceof RuntimeLocation)) {
             $locations[] = $location->toArray();
         }
         $extensions = $this->addFeedbackEntryExtensions(
@@ -712,7 +711,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         foreach ($documentFeedbackEntries as $documentFeedbackEntry) {
             $locations = [];
             $location = $documentFeedbackEntry->getLocation();
-            if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
+            if (!($location instanceof RuntimeLocation)) {
                 $locations[] = $location->toArray();
             }
             $entry = [
