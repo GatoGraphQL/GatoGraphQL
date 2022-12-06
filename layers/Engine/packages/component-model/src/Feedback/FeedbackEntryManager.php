@@ -17,7 +17,7 @@ use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -528,19 +528,35 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
     }
 
     /**
+     * @param Location|null $location If `null` use the Location from the astNode
      * @param array<string,mixed> $extensions
      * @param array<string|int> $ids
      * @return array<string,mixed>
      */
     public function formatObjectOrSchemaFeedbackCommonEntry(
         AstInterface $astNode,
-        Location $location,
+        ?Location $location,
         array $extensions,
         FeedbackItemResolution $feedbackItemResolution,
         array $ids,
     ): array {
+        /**
+         * If `null` use the Location from the astNode
+         */
+        if ($location === null) {
+            $location = $astNode->getLocation();
+            /**
+             * If it is a RuntimeLocation and it has a static AST node,
+             * then use that Location
+             */
+            if ($location instanceof RuntimeLocation) {
+                /** @var RuntimeLocation $location */
+                $location = $location->getStaticASTNode()?->getLocation();
+                /** @var Location|null $location */
+            }
+        }
         $locations = [];
-        if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
+        if ($location !== null && !($location instanceof RuntimeLocation)) {
             $locations[] = $location->toArray();
         }
         $extensions = $this->addFeedbackEntryExtensions(
@@ -604,8 +620,10 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
      */
     private function getASTNodePath(AstInterface $astNode): array
     {
-        if ($astNode->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
-            return [];
+        $location = $astNode->getLocation();
+        if ($location instanceof RuntimeLocation) {
+            /** @var RuntimeLocation $location */
+            $astNode = $location->getStaticASTNode();
         }
         $astNodePath = [];
         /** @var SplObjectStorage<AstInterface,AstInterface> */
@@ -614,6 +632,11 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
             $astNodePath[] = $astNode->asASTNodeString();
             // Move to the ancestor AST node
             $astNode = $documentASTNodeAncestors[$astNode] ?? null;
+            $location = $astNode?->getLocation();
+            if ($location instanceof RuntimeLocation) {
+                /** @var RuntimeLocation $location */
+                $astNode = $location->getStaticASTNode();
+            }
         }
         return $astNodePath;
     }
@@ -658,7 +681,15 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         FieldInterface $field,
     ): array {
         $key = Tokens::FIELD;
-        if ($field->getLocation() === ASTNodesFactory::getNonSpecificLocation()) {
+        $location = $field->getLocation();
+        if (
+            $location instanceof RuntimeLocation
+            /**
+             * If the AST node is a surrogate for another node,
+             * then print it as "field", not "dynamicField"
+             */
+            && $location->getStaticASTNode() === null
+        ) {
             $key = Tokens::DYNAMIC_FIELD;
         }
         return array_merge(
@@ -697,7 +728,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         foreach ($documentFeedbackEntries as $documentFeedbackEntry) {
             $locations = [];
             $location = $documentFeedbackEntry->getLocation();
-            if ($location !== ASTNodesFactory::getNonSpecificLocation()) {
+            if (!($location instanceof RuntimeLocation)) {
                 $locations[] = $location->toArray();
             }
             $entry = [

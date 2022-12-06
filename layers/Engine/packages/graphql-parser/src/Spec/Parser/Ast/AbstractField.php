@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
@@ -70,7 +70,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
             $location = $this->getLocation();
             $locationComment = ' # Location: ' . $location->getLine() . 'x' . $location->getColumn();
             $this->uniqueID = $this->asFieldOutputQueryString() . $locationComment;
-            if ($location === ASTNodesFactory::getNonSpecificLocation()) {
+            if ($location instanceof RuntimeLocation) {
                 $this->uniqueID .= ' #Hash: ' . spl_object_hash($this);
             }
         }

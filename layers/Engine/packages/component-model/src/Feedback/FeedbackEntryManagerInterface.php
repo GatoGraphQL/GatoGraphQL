@@ -28,13 +28,14 @@ interface FeedbackEntryManagerInterface
     ): array;
 
     /**
+     * @param Location|null $location If `null` use the Location from the astNode
      * @param array<string,mixed> $extensions
      * @param array<string|int> $ids
      * @return array<string,mixed>
      */
     public function formatObjectOrSchemaFeedbackCommonEntry(
         AstInterface $astNode,
-        Location $location,
+        ?Location $location,
         array $extensions,
         FeedbackItemResolution $feedbackItemResolution,
         array $ids,

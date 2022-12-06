@@ -15,6 +15,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\AST\ASTNodeDuplicatorServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -250,7 +251,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $location->getLine(),
             $location->getColumn()
         );
-        if ($location === ASTNodesFactory::getNonSpecificLocation()) {
+        if ($location instanceof RuntimeLocation) {
             return sprintf(
                 '%s #%s',
                 $fieldUniqueID,
@@ -523,6 +524,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
              * it doesn't retrieve it.
              */
             if (!isset($this->fieldInstanceContainer[$query][$alias])) {
+                $nonSpecificLocation = ASTNodesFactory::getNonSpecificLocation();
                 $this->fieldInstanceContainer[$query][$alias] = new LeafField(
                     '_isTypeOrImplementsAll',
                     $alias,
@@ -531,13 +533,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                             'typesOrInterfaces',
                             new InputList(
                                 $fragmentModels,
-                                ASTNodesFactory::getNonSpecificLocation()
+                                $nonSpecificLocation
                             ),
-                            ASTNodesFactory::getNonSpecificLocation()
+                            $nonSpecificLocation
                         ),
                     ],
                     [],
-                    ASTNodesFactory::getNonSpecificLocation()
+                    $nonSpecificLocation
                 );
             }
             $leafField = $this->fieldInstanceContainer[$query][$alias];
