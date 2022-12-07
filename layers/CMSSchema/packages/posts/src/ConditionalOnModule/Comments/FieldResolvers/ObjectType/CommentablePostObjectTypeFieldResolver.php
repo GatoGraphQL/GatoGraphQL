@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Posts\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Posts\ConditionalOnModule\Comments\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Comments\FieldResolvers\ObjectType\AbstractCommentableCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
