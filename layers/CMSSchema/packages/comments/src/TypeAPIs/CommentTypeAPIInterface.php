@@ -41,4 +41,6 @@ interface CommentTypeAPIInterface
     public function getCommentAuthorName(object $comment): string;
     public function getCommentAuthorEmail(object $comment): string;
     public function getCommentAuthorURL(object $comment): ?string;
+
+    public function doesCustomPostTypeSupportComments(string $customPostType): bool;
 }

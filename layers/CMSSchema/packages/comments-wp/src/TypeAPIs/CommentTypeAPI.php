@@ -15,11 +15,12 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 use WP_Post;
 
-use function get_comments;
-use function get_comment;
-use function get_comments_number;
 use function comments_open;
 use function esc_sql;
+use function get_comment;
+use function get_comments_number;
+use function get_comments;
+use function post_type_supports;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -311,5 +312,10 @@ class CommentTypeAPI implements CommentTypeAPIInterface
             return null;
         }
         return $authorURL;
+    }
+
+    public function doesCustomPostTypeSupportComments(string $customPostType): bool
+    {
+        return post_type_supports($customPostType, 'comments');
     }
 }
