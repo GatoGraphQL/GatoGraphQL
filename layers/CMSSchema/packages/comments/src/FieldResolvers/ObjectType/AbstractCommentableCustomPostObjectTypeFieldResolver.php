@@ -41,12 +41,16 @@ abstract class AbstractCommentableCustomPostObjectTypeFieldResolver extends Abst
 
     public function isServiceEnabled(): bool
     {
+        return $this->areCommentsEnabledForCustomPostType();
+    }
+
+    protected function areCommentsEnabledForCustomPostType(): bool
+    {
         return $this->getCommentTypeAPI()->doesCustomPostTypeSupportComments($this->getCustomPostType());
     }
 
     abstract protected function getCustomPostType(): string;
     
-
     /**
      * @return array<InterfaceTypeFieldResolverInterface>
      */
