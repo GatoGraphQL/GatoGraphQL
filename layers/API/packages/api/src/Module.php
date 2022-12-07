@@ -69,7 +69,7 @@ class Module extends AbstractModule
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
         // Conditional packages
-        if (class_exists(AccessControlModule::class)) {
+        if (class_exists(AccessControlModule::class) && App::getModule(AccessControlModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/AccessControl');
 
             /** @var AccessControlModuleConfiguration */

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UsersWP;
 
-use PoP\Root\Module\ModuleInterface;
-use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoP\Root\App;
+use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -51,7 +52,7 @@ class Module extends AbstractModule
         array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        if (class_exists(CustomPostsModule::class)) {
+        if (class_exists(CustomPostsModule::class) && App::getModule(CustomPostsModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPosts');
         }
     }

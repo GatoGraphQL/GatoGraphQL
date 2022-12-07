@@ -48,7 +48,7 @@ class Module extends AbstractModule
         if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
         }
-        if (class_exists(UsersModule::class)) {
+        if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
             $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
