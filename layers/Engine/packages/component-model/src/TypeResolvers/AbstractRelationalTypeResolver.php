@@ -1294,12 +1294,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /**
              * If the field does not exist in the schema, then skip it.
              *
-             * - ObjectTypeResolver returns null
-             * - UnionTypeResolver returns empty SplObjectStorage
-             *
              * @see function doGetObjectTypeResolverObjectFieldData
              */
-            if ($objectTypeResolverObjectFieldData === null || $objectTypeResolverObjectFieldData->count() === 0) {
+            if ($objectTypeResolverObjectFieldData === null) {
                 continue;
             }
             $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
