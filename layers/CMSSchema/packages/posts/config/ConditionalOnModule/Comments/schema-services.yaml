@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Posts\ConditionalOnModule\Comments\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/Comments/FieldResolvers/*'
