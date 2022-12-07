@@ -144,19 +144,30 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $objectTypeFieldResolver = $objectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
 
-        if (
-            /**
-             * Validation that the field exists will have been done
-             * when parsing the Field Data, but possibly not so
-             * for dynamic variables, so execute the validation here too.
-             *
-             * @see layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php:doGetObjectTypeResolverObjectFieldData
-             * @see dynamic-variable-type-casting.gql
-             */
-            $objectTypeFieldResolver === null
-            
+        $feedbackItemResolution = null;
+        
+        /**
+         * Validation that the field exists will have been done
+         * when parsing the Field Data, but possibly not so
+         * for dynamic variables, so execute the validation here too.
+         *
+         * @see layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php:doGetObjectTypeResolverObjectFieldData
+         * @see dynamic-variable-type-casting.gql
+         */
+        $objectTypeFieldResolver = $objectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
+        if ($objectTypeFieldResolver === null) {
+            $feedbackItemResolution = new FeedbackItemResolution(
+                GraphQLSpecErrorFeedbackItemProvider::class,
+                GraphQLSpecErrorFeedbackItemProvider::E_5_3_1,
+                [
+                    $field->getName(),
+                    $objectTypeResolver->getMaybeNamespacedTypeName(),
+                ]
+            );
+        } elseif ($field instanceof RelationalField
+            && !($objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $field->getName()) instanceof RelationalTypeResolverInterface)
+        ) {
             /**
              * Validate that a RelationalField in the AST is not actually
              * a leaf field in the resolver.
@@ -172,21 +183,20 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
              *   }
              *   ```
              */
-            || (
-                $field instanceof RelationalField
-                && !($objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $field->getName()) instanceof RelationalTypeResolverInterface)
-            )
-        ) {
+            $feedbackItemResolution = new FeedbackItemResolution(
+                GraphQLSpecErrorFeedbackItemProvider::class,
+                GraphQLSpecErrorFeedbackItemProvider::E_5_3_3,
+                [
+                    $field->getOutputKey(),
+                    $objectTypeResolver->getMaybeNamespacedTypeName(),
+                ]
+            );
+        }
+
+        if ($feedbackItemResolution !== null) {
             $this->processSchemaFailure(
                 $objectTypeResolver,
-                new FeedbackItemResolution(
-                    GraphQLSpecErrorFeedbackItemProvider::class,
-                    GraphQLSpecErrorFeedbackItemProvider::E_5_3_3,
-                    [
-                        $field->getOutputKey(),
-                        $objectTypeResolver->getMaybeNamespacedTypeName(),
-                    ]
-                ),
+                $feedbackItemResolution,
                 MethodHelpers::filterFieldsInIDFieldSet($idFieldSet, [$field]),
                 $succeedingPipelineIDFieldSet,
                 $field,
