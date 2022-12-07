@@ -1,0 +1,78 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'commentCount' on type 'Page'",
+            "locations": [
+                {
+                    "line": 9,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "commentCount",
+                    "pages(pagination: {limit: 5}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Page",
+                "field": "commentCount",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        },
+        {
+            "message": "There is no field 'comments' on type 'Page'",
+            "locations": [
+                {
+                    "line": 10,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "comments(pagination: {offset: 1, limit: 3}) { ... }",
+                    "pages(pagination: {limit: 5}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Page",
+                "field": "comments(pagination: {offset: 1, limit: 3}) { ... }",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "pages": [
+            {
+                "id": 2,
+                "title": "About The Tests",
+                "commentCount": null,
+                "comments": null
+            },
+            {
+                "id": 146,
+                "title": "Lorem Ipsum",
+                "commentCount": null,
+                "comments": null
+            },
+            {
+                "id": 155,
+                "title": "Page with comments",
+                "commentCount": null,
+                "comments": null
+            },
+            {
+                "id": 156,
+                "title": "Page with comments disabled",
+                "commentCount": null,
+                "comments": null
+            },
+            {
+                "id": 172,
+                "title": "Level 3",
+                "commentCount": null,
+                "comments": null
+            }
+        ]
+    }
+}
