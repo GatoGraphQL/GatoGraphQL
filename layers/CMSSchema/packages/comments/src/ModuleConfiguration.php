@@ -60,4 +60,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function enableCommentsForGenericCustomPosts(): bool
+    {
+        $envVariable = Environment::ENABLE_COMMENTS_FOR_GENERIC_CUSTOMPOSTS;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
