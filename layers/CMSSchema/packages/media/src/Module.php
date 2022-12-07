@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media;
 
-use PoP\Root\Module\ModuleInterface;
-use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\Users\Module as UsersModule;
+use PoP\Root\App;
+use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -48,7 +49,7 @@ class Module extends AbstractModule
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists(UsersModule::class)) {
+        if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
             $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),

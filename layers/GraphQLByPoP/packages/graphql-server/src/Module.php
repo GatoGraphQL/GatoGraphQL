@@ -85,15 +85,15 @@ class Module extends AbstractModule
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
         // Boot conditionals
-        if (class_exists(AccessControlModule::class)) {
+        if (class_exists(AccessControlModule::class) && App::getModule(AccessControlModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/AccessControl/Overrides');
         }
 
-        if (class_exists(CacheControlModule::class)) {
+        if (class_exists(CacheControlModule::class) && App::getModule(CacheControlModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CacheControl/Overrides');
         }
 
-        if (class_exists(AccessControlModule::class)) {
+        if (class_exists(AccessControlModule::class) && App::getModule(AccessControlModule::class)->isEnabled()) {
             /** @var AccessControlModuleConfiguration */
             $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
             if (
