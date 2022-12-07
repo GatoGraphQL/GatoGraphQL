@@ -50,7 +50,7 @@ abstract class AbstractCommentableCustomPostObjectTypeFieldResolver extends Abst
     }
 
     abstract protected function getCustomPostType(): string;
-    
+
     /**
      * @return array<InterfaceTypeFieldResolverInterface>
      */

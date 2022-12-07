@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -146,7 +145,7 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
     ): void {
 
         $feedbackItemResolution = null;
-        
+
         /**
          * Validation that the field exists will have been done
          * when parsing the Field Data, but possibly not so
@@ -165,7 +164,8 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
                     $objectTypeResolver->getMaybeNamespacedTypeName(),
                 ]
             );
-        } elseif ($field instanceof RelationalField
+        } elseif (
+            $field instanceof RelationalField
             && !($objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $field->getName()) instanceof RelationalTypeResolverInterface)
         ) {
             /**
