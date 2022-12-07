@@ -9,6 +9,7 @@ use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
 use PoPAPI\RESTAPI\Module as RESTAPIModule;
 use PoP\Root\Module\AbstractModule;
+use PoPCMSSchema\Comments\Module as CommentsModule;
 use PoPCMSSchema\Users\Module as UsersModule;
 
 class Module extends AbstractModule
@@ -36,6 +37,7 @@ class Module extends AbstractModule
         return [
             \PoPAPI\API\Module::class,
             \PoPAPI\RESTAPI\Module::class,
+            \PoPCMSSchema\Comments\Module::class,
             \PoPCMSSchema\Users\Module::class,
         ];
     }
@@ -71,6 +73,14 @@ class Module extends AbstractModule
             if (class_exists(RESTAPIModule::class) && App::getModule(RESTAPIModule::class)->isEnabled()) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnModule/Users/ConditionalOnModule/RESTAPI');
             }
+        }
+
+        if (class_exists(CommentsModule::class) && App::getModule(CommentsModule::class)->isEnabled()) {
+            $this->initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(CommentsModule::class, $skipSchemaModuleClasses),
+                '/ConditionalOnModule/Comments'
+            );
         }
     }
 }

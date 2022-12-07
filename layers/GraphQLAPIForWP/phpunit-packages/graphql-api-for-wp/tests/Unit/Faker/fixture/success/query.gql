@@ -35,18 +35,6 @@
       id
       name
     }
-    commentCount
-    comments(
-      pagination: {
-        offset: 1
-        limit: 3
-      }
-    ) {
-      ...CommentData
-      responses {
-        ...CommentData
-      }
-    }
   }
 
   postCategories(

@@ -24,7 +24,7 @@ use PoP\Root\AbstractTestCase;
 class RequestValidatorTest extends AbstractTestCase
 {
     /**
-     * @dataProvider invalidRequestProvider: array
+     * @dataProvider invalidRequestProvider
      */
     public function testInvalidRequests(ExecutableDocument $executableDocument): void
     {

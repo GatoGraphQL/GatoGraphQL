@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -144,45 +143,60 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        /**
-         * It has already been validated that the field exists
-         * when parsing the Field Data
-         *
-         * @see layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php:doGetObjectTypeResolverObjectFieldData
-         *
-         * @var ObjectTypeFieldResolverInterface
-         */
-        $objectTypeFieldResolver = $objectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
+
+        $feedbackItemResolution = null;
 
         /**
-         * Validate that a RelationalField in the AST is not actually
-         * a leaf field in the resolver.
+         * Validation that the field exists will have been done
+         * when parsing the Field Data, but possibly not so
+         * for dynamic variables, so execute the validation here too.
          *
-         * Eg: field "id" is built as RelationalField in the AST, but it is
-         * not a connection:
-         *
-         *   ```
-         *   {
-         *     id {
-         *       __typename
-         *     }
-         *   }
-         *   ```
+         * @see layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php:doGetObjectTypeResolverObjectFieldData
+         * @see dynamic-variable-type-casting.gql
          */
-        if (
+        $objectTypeFieldResolver = $objectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
+        if ($objectTypeFieldResolver === null) {
+            $feedbackItemResolution = new FeedbackItemResolution(
+                GraphQLSpecErrorFeedbackItemProvider::class,
+                GraphQLSpecErrorFeedbackItemProvider::E_5_3_1,
+                [
+                    $field->getName(),
+                    $objectTypeResolver->getMaybeNamespacedTypeName(),
+                ]
+            );
+        } elseif (
             $field instanceof RelationalField
             && !($objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $field->getName()) instanceof RelationalTypeResolverInterface)
         ) {
+            /**
+             * Validate that a RelationalField in the AST is not actually
+             * a leaf field in the resolver.
+             *
+             * Eg: field "id" is built as RelationalField in the AST, but it is
+             * not a connection:
+             *
+             *   ```
+             *   {
+             *     id {
+             *       __typename
+             *     }
+             *   }
+             *   ```
+             */
+            $feedbackItemResolution = new FeedbackItemResolution(
+                GraphQLSpecErrorFeedbackItemProvider::class,
+                GraphQLSpecErrorFeedbackItemProvider::E_5_3_3,
+                [
+                    $field->getOutputKey(),
+                    $objectTypeResolver->getMaybeNamespacedTypeName(),
+                ]
+            );
+        }
+
+        if ($feedbackItemResolution !== null) {
             $this->processSchemaFailure(
                 $objectTypeResolver,
-                new FeedbackItemResolution(
-                    GraphQLSpecErrorFeedbackItemProvider::class,
-                    GraphQLSpecErrorFeedbackItemProvider::E_5_3_3,
-                    [
-                        $field->getOutputKey(),
-                        $objectTypeResolver->getMaybeNamespacedTypeName(),
-                    ]
-                ),
+                $feedbackItemResolution,
                 MethodHelpers::filterFieldsInIDFieldSet($idFieldSet, [$field]),
                 $succeedingPipelineIDFieldSet,
                 $field,

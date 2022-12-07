@@ -12,11 +12,10 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\Comments\FieldResolvers\InterfaceType\CommentableInterfaceTypeFieldResolver;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
+abstract class AbstractCommentableCustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver = null;
@@ -40,15 +39,17 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return $this->commentableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CommentableInterfaceTypeFieldResolver::class);
     }
 
-    /**
-     * @return array<class-string<ObjectTypeResolverInterface>>
-     */
-    public function getObjectTypeResolverClassesToAttachTo(): array
+    public function isServiceEnabled(): bool
     {
-        return [
-            AbstractCustomPostObjectTypeResolver::class,
-        ];
+        return $this->areCommentsEnabledForCustomPostType();
     }
+
+    protected function areCommentsEnabledForCustomPostType(): bool
+    {
+        return $this->getCommentTypeAPI()->doesCustomPostTypeSupportComments($this->getCustomPostType());
+    }
+
+    abstract protected function getCustomPostType(): string;
 
     /**
      * @return array<InterfaceTypeFieldResolverInterface>

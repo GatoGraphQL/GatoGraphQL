@@ -162,6 +162,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.setFeaturedImageOnCustomPost: RootSetFeaturedImageOnCustomPostMutationPayload!`
   - `Root.setTagsOnPost: RootSetTagsOnPostMutationPayload!`
   - `Root.updatePost: RootUpdatePostMutationPayload!`
+- `Commentable` interface is only added to CPTs that support comments
 
 ### Added
 

@@ -537,6 +537,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
         $objectTypeResolverObjectFieldData = new SplObjectStorage();
+        $hasError = false;
 
         /**
          * Obtain the fieldArgs from each of the ObjectTypeResolvers,
@@ -549,6 +550,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
              * If the field does not exist, then nothing to do
              */
             if ($executableObjectTypeFieldResolver === null) {
+                $hasError = true;
                 /**
                  * If the field does not exist in the schema, then add an error the first
                  * time, and retrieve it from the cache from then on, so the error is
@@ -600,9 +602,13 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 );
             }
             if ($targetObjectTypeResolverObjectFieldData === null) {
+                $hasError = true;
                 continue;
             }
             $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $targetObjectTypeResolverObjectFieldData[$targetObjectTypeResolver];
+        }
+        if ($hasError) {
+            return null;
         }
         return $objectTypeResolverObjectFieldData;
     }
