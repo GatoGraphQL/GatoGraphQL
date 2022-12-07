@@ -144,34 +144,38 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        /**
-         * It has already been validated that the field exists
-         * when parsing the Field Data
-         *
-         * @see layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php:doGetObjectTypeResolverObjectFieldData
-         *
-         * @var ObjectTypeFieldResolverInterface
-         */
         $objectTypeFieldResolver = $objectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
 
-        /**
-         * Validate that a RelationalField in the AST is not actually
-         * a leaf field in the resolver.
-         *
-         * Eg: field "id" is built as RelationalField in the AST, but it is
-         * not a connection:
-         *
-         *   ```
-         *   {
-         *     id {
-         *       __typename
-         *     }
-         *   }
-         *   ```
-         */
         if (
-            $field instanceof RelationalField
-            && !($objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $field->getName()) instanceof RelationalTypeResolverInterface)
+            /**
+             * Validation that the field exists will have been done
+             * when parsing the Field Data, but possibly not so
+             * for dynamic variables, so execute the validation here too.
+             *
+             * @see layers/Engine/packages/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php:doGetObjectTypeResolverObjectFieldData
+             * @see dynamic-variable-type-casting.gql
+             */
+            $objectTypeFieldResolver === null
+            
+            /**
+             * Validate that a RelationalField in the AST is not actually
+             * a leaf field in the resolver.
+             *
+             * Eg: field "id" is built as RelationalField in the AST, but it is
+             * not a connection:
+             *
+             *   ```
+             *   {
+             *     id {
+             *       __typename
+             *     }
+             *   }
+             *   ```
+             */
+            || (
+                $field instanceof RelationalField
+                && !($objectTypeFieldResolver->getFieldTypeResolver($objectTypeResolver, $field->getName()) instanceof RelationalTypeResolverInterface)
+            )
         ) {
             $this->processSchemaFailure(
                 $objectTypeResolver,
