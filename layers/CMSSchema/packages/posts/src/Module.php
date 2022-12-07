@@ -75,7 +75,7 @@ class Module extends AbstractModule
             }
         }
 
-        if (class_exists(CommentsModule::class)) {
+        if (class_exists(CommentsModule::class) && App::getModule(CommentsModule::class)->isEnabled()) {
             $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(CommentsModule::class, $skipSchemaModuleClasses),
