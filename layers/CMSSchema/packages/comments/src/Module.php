@@ -60,7 +60,7 @@ class Module extends AbstractModule
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/RESTAPI');
         }
 
-        if (class_exists(UsersModule::class)) {
+        if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
             $this->initServices(
                 dirname(__DIR__),
                 '/ConditionalOnModule/Users'
