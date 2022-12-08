@@ -8,10 +8,38 @@ use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Exception\EnvParameterException;
 
 /**
- * Starting from Symfony v2.6, PhpDumper generates code
- * that contains `??=`, so it's compatible with PHP 7.4+.
+ * Starting from Symfony Dependency Injection v2.6,
+ * PhpDumper generates code that contains `??=`,
+ * so it's compatible with PHP 7.4+.
  *
- * Replace the code to make it compatible with PHP 7.1+
+ * For instance, this function is generated in v2.6:
+ * 
+ * ```
+ *   protected function getClientFunctionalityModuleResolverService()
+ *   {
+ *       $this->services['GraphQLAPI\\GraphQLAPI\\ModuleResolvers\\ClientFunctionalityModuleResolver'] = $instance = new \GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver();
+ * 
+ *       $instance->setInstanceManager(($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] ??= new \PoP\Root\Instances\SystemInstanceManager()));
+ * 
+ *       return $instance;
+ *   }
+ * ```
+ *
+ * The same function was generated like this in v2.5:
+ *
+ * ```
+ *   protected function getClientFunctionalityModuleResolverService()
+ *   {
+ *       $this->services['GraphQLAPI\\GraphQLAPI\\ModuleResolvers\\ClientFunctionalityModuleResolver'] = $instance = new \GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver();
+ * 
+ *       $instance->setInstanceManager(($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] ?? ($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] = new \PoP\Root\Instances\SystemInstanceManager())));
+ * 
+ *       return $instance;
+ *   }
+ * ```
+ *
+ * This class extends PhpDumper to replace the `??=` code,
+ * making it compatible with PHP 7.1+ once again.
  */
 class DowngradingPhpDumper extends PhpDumper
 {
