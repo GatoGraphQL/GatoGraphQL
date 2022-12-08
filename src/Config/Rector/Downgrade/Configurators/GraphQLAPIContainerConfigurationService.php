@@ -49,6 +49,8 @@ class GraphQLAPIContainerConfigurationService extends AbstractMainPluginDowngrad
                 $this->pluginDir . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
                 $this->pluginDir . '/vendor/symfony/cache/DoctrineProvider.php',
                 $this->pluginDir . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+                $this->pluginDir . '/vendor/symfony/cache/Traits/Redis6Proxy.php',
+                $this->pluginDir . '/vendor/symfony/cache/Traits/RedisCluster6Proxy.php',
                 $this->pluginDir . '/vendor/symfony/dotenv/Command/DebugCommand.php',
                 $this->pluginDir . '/vendor/symfony/dotenv/Command/DotenvDumpCommand.php',
                 $this->pluginDir . '/vendor/symfony/string/Slugger/AsciiSlugger.php',

@@ -36,6 +36,8 @@ class MonorepoDowngradeContainerConfigurationService extends AbstractDowngradeCo
                 $this->rootDirectory . '/vendor/symfony/cache/DataCollector/CacheDataCollector.php',
                 $this->rootDirectory . '/vendor/symfony/cache/DoctrineProvider.php',
                 $this->rootDirectory . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
+                $this->rootDirectory . '/vendor/symfony/cache/Traits/Redis6Proxy.php',
+                $this->rootDirectory . '/vendor/symfony/cache/Traits/RedisCluster6Proxy.php',
                 $this->rootDirectory . '/vendor/symfony/dotenv/Command/DebugCommand.php',
                 $this->rootDirectory . '/vendor/symfony/dotenv/Command/DotenvDumpCommand.php',
                 $this->rootDirectory . '/vendor/symfony/string/Slugger/AsciiSlugger.php',

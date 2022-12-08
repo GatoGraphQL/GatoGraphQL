@@ -61,6 +61,8 @@ return static function (RectorConfig $rectorConfig): void {
         $pluginDir . '/vendor/symfony/cache/DoctrineProvider.php',
         $pluginDir . '/vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
         $pluginDir . '/vendor/symfony/cache/Psr16Cache.php',
+        $pluginDir . '/vendor/symfony/cache/Traits/Redis6Proxy.php',
+        $pluginDir . '/vendor/symfony/cache/Traits/RedisCluster6Proxy.php',
         $pluginDir . '/vendor/symfony/dotenv/Command/DebugCommand.php',
         $pluginDir . '/vendor/symfony/dotenv/Command/DotenvDumpCommand.php',
         $pluginDir . '/vendor/symfony/string/Slugger/AsciiSlugger.php',
