@@ -53,13 +53,15 @@ class DowngradingPhpDumper extends PhpDumper
      *  * namespace:  The class namespace
      *  * as_files:   To split the container in several files
      *
-     * @return string|array A PHP class representing the service container or an array of PHP files if the "as_files" option is set
+     * @param array<string,mixed> $options
+     * @return string|string[] A PHP class representing the service container or an array of PHP files if the "as_files" option is set
      *
      * @throws EnvParameterException When an env var exists but has not been dumped
      */
     public function dump(array $options = []): string|array
     {
         $dump = parent::dump($options);
+        /** @var string|string[] */
         return preg_replace(
             '/\$this->services\[(.*)\] \?\?= new (.*)\(\)/',
             '$this->services[$1] ?? ($this->services[$1] = new $2())',

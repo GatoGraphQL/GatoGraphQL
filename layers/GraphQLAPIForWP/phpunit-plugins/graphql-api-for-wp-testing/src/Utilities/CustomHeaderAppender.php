@@ -14,7 +14,7 @@ class CustomHeaderAppender
 {
     public function __construct()
     {
-        add_filter(
+        add_action(
             'init',
             $this->addRESTNonceAsHeader(...)
         );
