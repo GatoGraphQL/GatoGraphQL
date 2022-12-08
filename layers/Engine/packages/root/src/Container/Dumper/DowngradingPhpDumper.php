@@ -61,10 +61,15 @@ class DowngradingPhpDumper extends PhpDumper
     public function dump(array $options = []): string|array
     {
         $dump = parent::dump($options);
-        /** @var string|string[] */
+
+        /**
+         * Regex: match anything except whitespaces => it'll capture the service name or class
+         *
+         * @var string|string[]
+         */
         return preg_replace(
-            '/\$this->services\[(.*)\] \?\?= new (.*)\(\)/',
-            '$this->services[$1] ?? ($this->services[$1] = new $2())',
+            '/\$this->services\[\'([^\s]*)\'\] \?\?= new (.*)\(\)/',
+            '$this->services[\'$1\'] ?? ($this->services[\'$1\'] = new $2())',
             $dump
         );
     }
