@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Container;
 
 use InvalidArgumentException;
+use PoP\Root\AppArchitecture;
 use PoP\Root\Container\Dumper\DowngradingPhpDumper;
 use PoP\Root\Environment;
 use RuntimeException;
@@ -187,8 +188,15 @@ trait ContainerBuilderFactoryTrait
         }
     }
 
+    /**
+     * If downgrading the PHP Code, then use the adapted
+     * DowngradingPhpDumper class, as to also downgrade
+     * the code generated for the container
+     */
     protected function createPHPDumper(ContainerBuilder $containerBuilder): PhpDumper
     {
-        return new DowngradingPhpDumper($containerBuilder);
+        return AppArchitecture::isDowngraded()
+            ? new DowngradingPhpDumper($containerBuilder)
+            : new PhpDumper($containerBuilder);
     }
 }
