@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities;
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
 
-use function add_filter;
+use function add_action;
 use function is_user_logged_in;
 use function wp_create_nonce;
 
