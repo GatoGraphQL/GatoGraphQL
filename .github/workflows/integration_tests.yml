@@ -1,13 +1,15 @@
 name: Integration tests
 on:
-    push:
-        branches:
-            - master
+    workflow_run:
+        workflows: [Generate plugins]
+        types:
+            - completed
 env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
     provide_data:
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         name: Retrieve the GitHub Action artifact URLs to install in InstaWP
         runs-on: ubuntu-latest
         steps:
