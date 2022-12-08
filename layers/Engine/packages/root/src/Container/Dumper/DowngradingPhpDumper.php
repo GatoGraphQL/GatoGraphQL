@@ -60,7 +60,10 @@ class DowngradingPhpDumper extends PhpDumper
     public function dump(array $options = []): string|array
     {
         $dump = parent::dump($options);
-
-        return $dump;
+        return preg_replace(
+            "#\$this->services\['([a-zA-Z0-9_\]*)'\] \?\?= new ([a-zA-Z0-9_\]*)\(\)#",
+            "$this->services['$1'] ?? ($this->services['$1'] = new $2())",
+            $dump
+        );
     }
 }
