@@ -6,6 +6,7 @@ namespace PoP\Root;
 
 use PoP\Root\App\Architecture\Downgrade\PHP81\ObserveDowngradeClassSample;
 use ReflectionClass;
+use ReflectionProperty;
 
 /**
  * Indicate how the Application has been coded/compiled.
@@ -40,7 +41,7 @@ class AppArchitecture implements AppArchitectureInterface
          *
          * @see https://www.php.net/manual/en/class.reflectionproperty.php#reflectionproperty.constants.modifiers
          */
-        $reflectionClass = new ReflectionClass(ReflectionClass::class);
+        $reflectionClass = new ReflectionClass(ReflectionProperty::class);
         if (!$reflectionClass->hasConstant('IS_READONLY')) {
             return true;
         }
