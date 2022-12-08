@@ -13,14 +13,14 @@ use Symfony\Component\DependencyInjection\Exception\EnvParameterException;
  * so it's compatible with PHP 7.4+.
  *
  * For instance, this function is generated in v2.6:
- * 
+ *
  * ```
  *   protected function getClientFunctionalityModuleResolverService()
  *   {
  *       $this->services['GraphQLAPI\\GraphQLAPI\\ModuleResolvers\\ClientFunctionalityModuleResolver'] = $instance = new \GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver();
- * 
+ *
  *       $instance->setInstanceManager(($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] ??= new \PoP\Root\Instances\SystemInstanceManager()));
- * 
+ *
  *       return $instance;
  *   }
  * ```
@@ -31,9 +31,9 @@ use Symfony\Component\DependencyInjection\Exception\EnvParameterException;
  *   protected function getClientFunctionalityModuleResolverService()
  *   {
  *       $this->services['GraphQLAPI\\GraphQLAPI\\ModuleResolvers\\ClientFunctionalityModuleResolver'] = $instance = new \GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver();
- * 
+ *
  *       $instance->setInstanceManager(($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] ?? ($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] = new \PoP\Root\Instances\SystemInstanceManager())));
- * 
+ *
  *       return $instance;
  *   }
  * ```

@@ -25,7 +25,7 @@ class AppArchitecture implements AppArchitectureInterface
 
     /**
      * We use Reflection to find out if the code has been downgraded.
-     * 
+     *
      * The code uses PHP 8.1. If it has been downgraded, then no feature
      * from this PHP version will be available. So the strategy is to
      * use a sample class (`ObserveDowngradeClassSample`) that contains
