@@ -10,6 +10,7 @@ use PoP\Root\Environment;
 use RuntimeException;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
 trait ContainerBuilderFactoryTrait
 {
@@ -162,7 +163,7 @@ trait ContainerBuilderFactoryTrait
                 }
                 if ($folderExists) {
                     // Save the container to disk
-                    $dumper = new DowngradingPhpDumper($containerBuilder);
+                    $dumper = $this->createPHPDumper($containerBuilder);
                     file_put_contents(
                         $this->cacheFile,
                         $dumper->dump(
@@ -184,5 +185,10 @@ trait ContainerBuilderFactoryTrait
                 }
             }
         }
+    }
+
+    protected function createPHPDumper(ContainerBuilder $containerBuilder): PhpDumper
+    {
+        return new DowngradingPhpDumper($containerBuilder);
     }
 }
