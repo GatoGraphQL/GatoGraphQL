@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoP\Root\Container;
 
 use InvalidArgumentException;
+use PoP\Root\Container\Dumper\DowngradingPhpDumper;
 use PoP\Root\Environment;
 use RuntimeException;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 
 trait ContainerBuilderFactoryTrait
 {
@@ -162,7 +162,7 @@ trait ContainerBuilderFactoryTrait
                 }
                 if ($folderExists) {
                     // Save the container to disk
-                    $dumper = new PhpDumper($containerBuilder);
+                    $dumper = new DowngradingPhpDumper($containerBuilder);
                     file_put_contents(
                         $this->cacheFile,
                         $dumper->dump(
