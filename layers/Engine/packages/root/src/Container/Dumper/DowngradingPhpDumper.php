@@ -68,8 +68,8 @@ class DowngradingPhpDumper extends PhpDumper
          * @var string|string[]
          */
         return preg_replace(
-            '/\$this->services\[\'([^\s]*)\'\] \?\?= new ([^\s]*)\((.*)\)/',
-            '$this->services[\'$1\'] ?? ($this->services[\'$1\'] = new $2($3))',
+            '/\$this->services\[\'([^\s]*)\'\] \?\?= new ([^\s]*)\(\)/',
+            '$this->services[\'$1\'] ?? ($this->services[\'$1\'] = new $2())',
             $dump
         );
     }
