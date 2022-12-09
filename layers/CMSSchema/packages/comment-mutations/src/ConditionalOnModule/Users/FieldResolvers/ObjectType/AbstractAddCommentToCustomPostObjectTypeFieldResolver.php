@@ -10,6 +10,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver as UpstreamAbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
+/**
+ * This class is placed under ConditionalOnModule/Users/ but there's
+ * no need really, as Users will already exist for Mutations packages.
+ * It's done like this just to organize the code better.
+ */
 abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends UpstreamAbstractAddCommentToCustomPostObjectTypeFieldResolver
 {
     use AddCommentToCustomPostObjectTypeFieldResolverTrait;

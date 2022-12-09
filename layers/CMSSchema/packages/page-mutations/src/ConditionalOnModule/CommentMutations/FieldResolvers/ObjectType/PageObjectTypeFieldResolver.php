@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\ConditionalOnModule\CommentMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver;
+use PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
+/**
+ * Please notice: It extends a class under ConditionalOnModule/Users/
+ * but there's no need to do the same, as Users will already exist
+ * for Mutations packages
+ */
 class PageObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTypeFieldResolver
 {
     private ?PageTypeAPIInterface $pageTypeAPI = null;
