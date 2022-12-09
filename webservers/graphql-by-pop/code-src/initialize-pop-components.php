@@ -17,6 +17,7 @@ App::stockAndInitializeModuleClasses([
     \PoPCMSSchema\SettingsWP\Module::class,
     \PoPWPSchema\BlockMetadataWP\Module::class,
     \PoPCMSSchema\PostMutations\Module::class,
+    \PoPCMSSchema\PageMutations\Module::class,
     \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
     \PoPCMSSchema\PostTagMutationsWP\Module::class,
     \PoPCMSSchema\PostCategoryMutationsWP\Module::class,

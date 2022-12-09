@@ -25,6 +25,7 @@
         "pop-cms-schema/custompost-mutations-wp": "^0.9",
         "pop-cms-schema/custompostmedia-mutations-wp": "^0.9",
         "pop-cms-schema/custompostmedia-wp": "^0.9",
+        "pop-cms-schema/page-mutations": "^0.9",
         "pop-cms-schema/post-categories-wp": "^0.9",
         "pop-cms-schema/post-category-mutations-wp": "^0.9",
         "pop-cms-schema/post-mutations": "^0.9",
