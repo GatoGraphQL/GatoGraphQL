@@ -30,6 +30,7 @@ class Module extends AbstractModule
     {
         return [
             \PoPAPI\API\Module::class,
+            \PoPCMSSchema\CommentMutations\Module::class,
             \PoPCMSSchema\Users\Module::class,
         ];
     }
