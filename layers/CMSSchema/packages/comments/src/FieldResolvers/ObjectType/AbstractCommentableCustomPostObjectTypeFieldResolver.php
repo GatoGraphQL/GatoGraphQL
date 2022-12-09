@@ -17,6 +17,8 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
 abstract class AbstractCommentableCustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    use MaybeCommentableCustomPostObjectTypeFieldResolverTrait;
+
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver = null;
 
@@ -38,18 +40,6 @@ abstract class AbstractCommentableCustomPostObjectTypeFieldResolver extends Abst
         /** @var CommentableInterfaceTypeFieldResolver */
         return $this->commentableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CommentableInterfaceTypeFieldResolver::class);
     }
-
-    public function isServiceEnabled(): bool
-    {
-        return $this->areCommentsEnabledForCustomPostType();
-    }
-
-    protected function areCommentsEnabledForCustomPostType(): bool
-    {
-        return $this->getCommentTypeAPI()->doesCustomPostTypeSupportComments($this->getCustomPostType());
-    }
-
-    abstract protected function getCustomPostType(): string;
 
     /**
      * @return array<InterfaceTypeFieldResolverInterface>
