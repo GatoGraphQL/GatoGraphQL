@@ -36,6 +36,16 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "CustomPostDoesNotExistErrorPayload",
                     "enumValues": null,
                     "possibleTypes": null
@@ -394,7 +404,13 @@
                             "name": "CommentAuthorNameIsMissingErrorPayload"
                         },
                         {
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+                        },
+                        {
                             "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload"
                         },
                         {
                             "name": "UserIsLoggedInErrorPayload"
@@ -1483,6 +1499,12 @@
                             "name": "CommentParentCommentDoesNotExistErrorPayload"
                         },
                         {
+                            "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+                        },
+                        {
                             "name": "CustomPostDoesNotExistErrorPayload"
                         },
                         {
@@ -1583,6 +1605,9 @@
                     "possibleTypes": [
                         {
                             "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
                         },
                         {
                             "name": "CommentAuthorNameIsMissingErrorPayload"

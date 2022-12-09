@@ -16,6 +16,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E5 = 'e5';
     public final const E6 = 'e6';
     public final const E7 = 'e7';
+    public final const E8 = 'e8';
+    public final const E9 = 'e9';
 
     /**
      * @return string[]
@@ -30,6 +32,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E5,
             self::E6,
             self::E7,
+            self::E8,
+            self::E9,
         ];
     }
 
@@ -43,6 +47,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E5 => $this->__('The comment is empty', 'comment-mutations'),
             self::E6 => $this->__('There is no (parent) comment with ID \'%s\'', 'comment-mutations'),
             self::E7 => $this->__('There is no custom post with ID \'%s\'', 'comment-mutations'),
+            self::E8 => $this->__('Comments are not supported for custom post type \'%s\'', 'comment-mutations'),
+            self::E9 => $this->__('Comments are not open for custom post with ID \'%s\'', 'comment-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

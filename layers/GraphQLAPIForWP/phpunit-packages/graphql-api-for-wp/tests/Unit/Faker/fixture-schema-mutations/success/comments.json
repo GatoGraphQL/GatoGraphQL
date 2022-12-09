@@ -1,0 +1,17 @@
+{
+  "data": {
+    "addCommentToCustomPost": {
+      "status": "SUCCESS",
+      "errors": null,
+      "comment": {
+        "content": "Great insight!",
+        "authorName": "Leo",
+        "authorEmail": "leo@saronga.com",
+        "customPost": {
+          "__typename": "Post",
+          "id": 1724
+        }
+      }
+    }
+  }
+}

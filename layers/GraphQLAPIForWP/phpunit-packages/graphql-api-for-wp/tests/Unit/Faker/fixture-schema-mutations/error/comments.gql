@@ -1,0 +1,43 @@
+mutation {
+  commentsNotSupportedByCPT: addCommentToCustomPost(input: {
+    comment: "Great insight!",
+    customPostID: 1809,
+    authorName: "Leo"
+    authorEmail: "leo@saronga.com",
+  }) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+
+  commentsNotOpenForCustomPost: addCommentToCustomPost(input: {
+    comment: "Great insight!",
+    customPostID: 1730,
+    authorName: "Leo"
+    authorEmail: "leo@saronga.com",
+  }) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+}
+
+fragment RootAddCommentToCustomPostMutationPayloadData on RootAddCommentToCustomPostMutationPayload {
+  status
+  errors {
+    __typename
+    ...on IsErrorPayload {
+      message
+    }
+  }
+  comment {
+    content
+    authorName
+    authorEmail
+    customPost {
+      __typename
+      ...on Node {
+        id
+      }
+      ...on Page {
+        title
+      }
+    }
+  }
+}

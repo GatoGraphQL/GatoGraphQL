@@ -613,6 +613,72 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+          "description": "Error payload for: \"Comments are not open for the custom post\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+          "description": "Error payload for: \"Comments are not supported by the custom post type\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "CustomPostDoesNotExistErrorPayload",
           "description": "Error payload for: \"The requested custom post does not exist\"",
           "fields": [
@@ -5640,6 +5706,28 @@
               "description": "Retrieve a single page",
               "args": [
                 {
+                  "name": "status",
+                  "description": "Custom Post Status",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": "[\"publish\"]"
+                },
+                {
                   "name": "by",
                   "description": "Oneof input to specify the property and data to fetch a page",
                   "type": {
@@ -7612,6 +7700,28 @@
               "name": "page",
               "description": "Retrieve a single page",
               "args": [
+                {
+                  "name": "status",
+                  "description": "Custom Post Status",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": "[\"publish\"]"
+                },
                 {
                   "name": "by",
                   "description": "Oneof input to specify the property and data to fetch a page",
@@ -12332,7 +12442,17 @@
             },
             {
               "kind": "OBJECT",
+              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "CommentParentCommentDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
               "ofType": null
             },
             {
@@ -19046,6 +19166,16 @@
             },
             {
               "kind": "OBJECT",
+              "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "CustomPostDoesNotExistErrorPayload",
               "ofType": null
             },
@@ -19217,6 +19347,11 @@
             {
               "kind": "OBJECT",
               "name": "CommentParentCommentDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
               "ofType": null
             },
             {
