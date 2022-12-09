@@ -2,15 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\Overrides\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\CustomPostObjectTypeFieldResolver as UpstreamCustomPostObjectTypeFieldResolver;
+use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver as UpstreamAbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
-class CustomPostObjectTypeFieldResolver extends UpstreamCustomPostObjectTypeFieldResolver
+/**
+ * This class is placed under ConditionalOnModule/Users/ but there's
+ * no need really, as Users will already exist for Mutations packages.
+ * It's done like this just to organize the code better.
+ */
+abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends UpstreamAbstractAddCommentToCustomPostObjectTypeFieldResolver
 {
     use AddCommentToCustomPostObjectTypeFieldResolverTrait;
 

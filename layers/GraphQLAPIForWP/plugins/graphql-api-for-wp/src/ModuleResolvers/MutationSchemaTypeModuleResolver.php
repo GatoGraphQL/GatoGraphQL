@@ -19,6 +19,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public final const SCHEMA_MUTATIONS = Plugin::NAMESPACE . '\schema-mutations';
     public final const SCHEMA_USER_STATE_MUTATIONS = Plugin::NAMESPACE . '\schema-user-state-mutations';
     public final const SCHEMA_CUSTOMPOST_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-mutations';
+    public final const SCHEMA_PAGE_MUTATIONS = Plugin::NAMESPACE . '\schema-page-mutations';
     public final const SCHEMA_POST_MUTATIONS = Plugin::NAMESPACE . '\schema-post-mutations';
     public final const SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-custompostmedia-mutations';
     public final const SCHEMA_POSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-postmedia-mutations';
@@ -47,6 +48,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_MUTATIONS,
             self::SCHEMA_USER_STATE_MUTATIONS,
             self::SCHEMA_CUSTOMPOST_MUTATIONS,
+            self::SCHEMA_PAGE_MUTATIONS,
             self::SCHEMA_POST_MUTATIONS,
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS,
             self::SCHEMA_POSTMEDIA_MUTATIONS,
@@ -80,6 +82,15 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     ],
                     [
                         SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                    ],
+                ];
+            case self::SCHEMA_PAGE_MUTATIONS:
+                return [
+                    [
+                        SchemaTypeModuleResolver::SCHEMA_PAGES,
+                    ],
+                    [
+                        self::SCHEMA_CUSTOMPOST_MUTATIONS,
                     ],
                 ];
             case self::SCHEMA_POST_MUTATIONS:
@@ -146,6 +157,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_MUTATIONS => \__('Mutations', 'graphql-api'),
             self::SCHEMA_USER_STATE_MUTATIONS => \__('User State Mutations', 'graphql-api'),
             self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Custom Post Mutations', 'graphql-api'),
+            self::SCHEMA_PAGE_MUTATIONS => \__('Page Mutations', 'graphql-api'),
             self::SCHEMA_POST_MUTATIONS => \__('Post Mutations', 'graphql-api'),
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Custom Post Media Mutations', 'graphql-api'),
             self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Post Media Mutations', 'graphql-api'),
@@ -165,10 +177,11 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                 return \__('Have the user log-in, and be able to perform mutations', 'graphql-api');
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
                 return \__('Base functionality to mutate custom posts', 'graphql-api');
+            case self::SCHEMA_PAGE_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:
                 return sprintf(
                     \__('Execute mutations on %1$s', 'graphql-api'),
-                    \__('posts', 'graphql-api')
+                    $module === self::SCHEMA_PAGE_MUTATIONS ? \__('pages', 'graphql-api') : \__('posts', 'graphql-api')
                 );
             case self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS:
                 return \__('Execute mutations concerning media items on custom posts', 'graphql-api');
@@ -191,6 +204,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         switch ($module) {
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
+            case self::SCHEMA_PAGE_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:
             case self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS:
             case self::SCHEMA_POSTMEDIA_MUTATIONS:

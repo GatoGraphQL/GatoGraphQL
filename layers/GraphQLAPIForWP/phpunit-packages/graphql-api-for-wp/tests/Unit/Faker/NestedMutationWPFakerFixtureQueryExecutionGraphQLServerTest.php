@@ -7,6 +7,8 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 use PoP\Root\Module\ModuleInterface;
 
+use function Brain\Monkey\Functions\expect;
+
 class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     /**
@@ -30,6 +32,9 @@ class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstra
                 \PoPWPSchema\Pages\Module::class,
                 \PoPWPSchema\Comments\Module::class,
                 \PoPCMSSchema\CommentMutationsWP\Module::class,
+                \PoPCMSSchema\CustomPostMutationsWP\Module::class,
+                \PoPCMSSchema\PostMutations\Module::class,
+                \PoPCMSSchema\PageMutations\Module::class,
             ]
         ];
     }
@@ -50,5 +55,22 @@ class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstra
                 ],
             ]
         ];
+    }
+
+    /**
+     * BrainFaker does not mock WP_Role, so provide
+     * a basic function for the tests to work
+     */
+    protected static function mockFunctions(): void
+    {
+        parent::mockFunctions();
+
+        /**
+         * Override function to also support comments for pages
+         */
+        expect('post_type_supports')
+            ->with('post_type', 'page')
+            ->with('feature', 'comments')
+            ->andReturn(true);
     }
 }

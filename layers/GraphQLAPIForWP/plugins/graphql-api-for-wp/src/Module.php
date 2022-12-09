@@ -33,6 +33,7 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMediaWP\Module::class,
             \PoPCMSSchema\CustomPostMutationsWP\Module::class,
+            \PoPCMSSchema\PageMutations\Module::class,
             \PoPCMSSchema\PostCategoriesWP\Module::class,
             \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
             \PoPCMSSchema\PostMediaMutations\Module::class,

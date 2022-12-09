@@ -103,6 +103,8 @@ services:
         - '../../layers/CMSSchema/packages/menus:/app/vendor/pop-cms-schema/menus'
         - '../../layers/CMSSchema/packages/meta:/app/vendor/pop-cms-schema/meta'
         - '../../layers/CMSSchema/packages/metaquery-wp:/app/vendor/pop-cms-schema/metaquery-wp'
+        - >-
+          ../../layers/CMSSchema/packages/page-mutations:/app/vendor/pop-cms-schema/page-mutations
         - '../../layers/CMSSchema/packages/pages-wp:/app/vendor/pop-cms-schema/pages-wp'
         - '../../layers/CMSSchema/packages/pages:/app/vendor/pop-cms-schema/pages'
         - >-

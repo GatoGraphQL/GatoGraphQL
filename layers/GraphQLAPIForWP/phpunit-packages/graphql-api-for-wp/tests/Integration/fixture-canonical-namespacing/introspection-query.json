@@ -11897,12 +11897,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             }
           ]
@@ -12244,12 +12244,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             }
           ]
@@ -12390,7 +12390,17 @@
             },
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Menu",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MenuItem",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Post",
               "ofType": null
             },
             {
@@ -12410,7 +12420,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "UserRole",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Page",
               "ofType": null
             },
             {
@@ -12426,21 +12441,6 @@
             {
               "kind": "OBJECT",
               "name": "PostCategory",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "UserRole",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Menu",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "MenuItem",
               "ofType": null
             },
             {
@@ -12575,7 +12575,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             },
             {
@@ -12590,7 +12590,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             },
             {
@@ -12645,12 +12645,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             }
           ]
@@ -12683,12 +12683,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             }
           ]
@@ -12763,7 +12763,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             },
             {
@@ -12773,7 +12773,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             },
             {
@@ -19020,12 +19020,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             }
           ]

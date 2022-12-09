@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\CommentMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ModuleConfiguration;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
-use PoPCMSSchema\CommentMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableAddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CommentReplyFilterInputObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CommentReplyMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -21,7 +22,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTypeFieldResolver
+class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;

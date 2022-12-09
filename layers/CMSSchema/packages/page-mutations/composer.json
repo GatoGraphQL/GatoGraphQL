@@ -1,70 +1,5 @@
 {
-    "name": "graphql-api/graphql-api-for-wp",
-    "type": "wordpress-plugin",
-    "description": "GraphQL API for WordPress",
-    "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
-    "homepage": "https://github.com/GraphQLAPI/graphql-api-for-wp",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Leonardo Losoviz",
-            "email": "leo@getpop.org",
-            "homepage": "https://getpop.org"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "getpop/engine-wp": "^0.9",
-        "graphql-api/external-dependency-wrappers": "^0.9",
-        "graphql-api/markdown-convertor": "^0.9",
-        "graphql-api/plugin-utils": "^0.9",
-        "graphql-by-pop/graphql-clients-for-wp": "^0.9",
-        "graphql-by-pop/graphql-endpoint-for-wp": "^0.9",
-        "graphql-by-pop/graphql-server": "^0.9",
-        "pop-cms-schema/comment-mutations-wp": "^0.9",
-        "pop-cms-schema/custompost-mutations-wp": "^0.9",
-        "pop-cms-schema/custompostmedia-mutations-wp": "^0.9",
-        "pop-cms-schema/custompostmedia-wp": "^0.9",
-        "pop-cms-schema/page-mutations": "^0.9",
-        "pop-cms-schema/post-categories-wp": "^0.9",
-        "pop-cms-schema/post-category-mutations-wp": "^0.9",
-        "pop-cms-schema/post-mutations": "^0.9",
-        "pop-cms-schema/post-tag-mutations-wp": "^0.9",
-        "pop-cms-schema/post-tags-wp": "^0.9",
-        "pop-cms-schema/postmedia-mutations": "^0.9",
-        "pop-cms-schema/settings-wp": "^0.9",
-        "pop-cms-schema/taxonomyquery-wp": "^0.9",
-        "pop-cms-schema/user-avatars-wp": "^0.9",
-        "pop-cms-schema/user-roles-wp": "^0.9",
-        "pop-cms-schema/user-state-mutations-wp": "^0.9",
-        "pop-cms-schema/user-state-wp": "^0.9",
-        "pop-wp-schema/commentmeta": "^0.9",
-        "pop-wp-schema/comments": "^0.9",
-        "pop-wp-schema/custompostmeta": "^0.9",
-        "pop-wp-schema/customposts": "^0.9",
-        "pop-wp-schema/media": "^0.9",
-        "pop-wp-schema/menus": "^0.9",
-        "pop-wp-schema/pages": "^0.9",
-        "pop-wp-schema/posts": "^0.9",
-        "pop-wp-schema/taxonomymeta": "^0.9",
-        "pop-wp-schema/usermeta": "^0.9",
-        "pop-wp-schema/users": "^0.9"
-    },
-    "require-dev": {
-        "johnpbloch/wordpress": ">=5.5",
-        "phpstan/phpstan": "^1.8",
-        "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.15",
-        "squizlabs/php_codesniffer": "^3.6",
-        "symfony/var-dumper": "^6.0",
-        "szepeviktor/phpstan-wordpress": "^1.0"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://wpackagist.org"
-        }
-    ],
+    "name": "pop-cms-schema/page-mutations",
     "conflict": {
         "getpop/componentrouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -75,6 +10,7 @@
         "getpop/root-wp": "<0.8.9",
         "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.8.9",
+        "getpop/engine-wp": "<0.8.9",
         "getpop/routing": "<0.8.9",
         "getpop/access-control": "<0.8.9",
         "getpop/definitions": "<0.8.9",
@@ -91,50 +27,78 @@
         "pop-cms-schema/post-category-mutations": "<0.8.9",
         "pop-cms-schema/settings": "<0.8.9",
         "pop-cms-schema/comments": "<0.8.9",
-        "pop-cms-schema/custompost-mutations": "<0.8.9",
+        "pop-cms-schema/users-wp": "<0.8.9",
+        "pop-cms-schema/custompostmeta-wp": "<0.8.9",
+        "pop-cms-schema/post-tag-mutations-wp": "<0.8.9",
         "pop-cms-schema/post-tag-mutations": "<0.8.9",
         "pop-cms-schema/tags-wp": "<0.8.9",
-        "pop-cms-schema/posts": "<0.8.9",
         "pop-cms-schema/custompost-tags-wp": "<0.8.9",
+        "pop-cms-schema/taxonomymeta-wp": "<0.8.9",
         "pop-cms-schema/custompost-category-mutations": "<0.8.9",
         "pop-cms-schema/taxonomymeta": "<0.8.9",
+        "pop-cms-schema/media-wp": "<0.8.9",
+        "pop-cms-schema/user-roles-wp": "<0.8.9",
+        "pop-cms-schema/commentmeta-wp": "<0.8.9",
         "pop-cms-schema/taxonomyquery": "<0.8.9",
+        "pop-cms-schema/custompost-mutations-wp": "<0.8.9",
         "pop-cms-schema/user-state-mutations": "<0.8.9",
         "pop-cms-schema/user-state": "<0.8.9",
+        "pop-cms-schema/posts-wp": "<0.8.9",
         "pop-cms-schema/custompostmedia-mutations": "<0.8.9",
+        "pop-cms-schema/post-categories-wp": "<0.8.9",
         "pop-cms-schema/custompostmedia": "<0.8.9",
+        "pop-cms-schema/user-state-mutations-wp": "<0.8.9",
         "pop-cms-schema/user-roles": "<0.8.9",
         "pop-cms-schema/usermeta": "<0.8.9",
         "pop-cms-schema/queriedobject-wp": "<0.8.9",
+        "pop-cms-schema/user-avatars-wp": "<0.8.9",
+        "pop-cms-schema/taxonomyquery-wp": "<0.8.9",
         "pop-cms-schema/customposts": "<0.8.9",
         "pop-cms-schema/categories-wp": "<0.8.9",
         "pop-cms-schema/meta": "<0.8.9",
         "pop-cms-schema/comment-mutations": "<0.8.9",
         "pop-cms-schema/schema-commons": "<0.8.9",
         "pop-cms-schema/tags": "<0.8.9",
+        "pop-cms-schema/usermeta-wp": "<0.8.9",
         "pop-cms-schema/commentmeta": "<0.8.9",
+        "pop-cms-schema/post-tags-wp": "<0.8.9",
         "pop-cms-schema/custompost-categories-wp": "<0.8.9",
+        "pop-cms-schema/settings-wp": "<0.8.9",
         "pop-cms-schema/users": "<0.8.9",
         "pop-cms-schema/queriedobject": "<0.8.9",
         "pop-cms-schema/customposts-wp": "<0.8.9",
         "pop-cms-schema/taxonomies-wp": "<0.8.9",
+        "pop-cms-schema/comment-mutations-wp": "<0.8.9",
+        "pop-cms-schema/custompostmedia-wp": "<0.8.9",
         "pop-cms-schema/menus": "<0.8.9",
         "pop-wp-schema/block-metadata-for-wp": "<0.8.9",
         "pop-cms-schema/post-categories": "<0.8.9",
+        "pop-cms-schema/pages-wp": "<0.8.9",
+        "pop-cms-schema/custompostmedia-mutations-wp": "<0.8.9",
         "pop-cms-schema/user-avatars": "<0.8.9",
+        "pop-cms-schema/comments-wp": "<0.8.9",
         "pop-cms-schema/metaquery-wp": "<0.8.9",
         "pop-cms-schema/pages": "<0.8.9",
+        "pop-cms-schema/menus-wp": "<0.8.9",
         "pop-cms-schema/custompostmeta": "<0.8.9",
         "pop-cms-schema/categories": "<0.8.9",
         "pop-cms-schema/taxonomies": "<0.8.9",
+        "pop-cms-schema/post-category-mutations-wp": "<0.8.9",
         "pop-cms-schema/custompost-tag-mutations": "<0.8.9",
+        "pop-cms-schema/user-state-wp": "<0.8.9",
         "pop-cms-schema/media": "<0.8.9",
         "pop-cms-schema/post-tags": "<0.8.9",
         "graphql-by-pop/graphiql": "<0.8.9",
         "graphql-by-pop/graphql-voyager": "<0.8.9",
+        "graphql-by-pop/graphql-clients-for-wp": "<0.8.9",
         "graphql-by-pop/graphql-request": "<0.8.9",
+        "graphql-by-pop/graphql-endpoint-for-wp": "<0.8.9",
         "getpop/graphql-parser": "<0.8.9",
+        "graphql-by-pop/graphql-server": "<0.8.9",
+        "graphql-api/external-dependency-wrappers": "<0.8.9",
+        "graphql-api/markdown-convertor": "<0.8.9",
         "graphql-api/extension-demo": "<0.8.9",
+        "graphql-api/graphql-api-for-wp": "<0.8.9",
         "getpop/definitions-emoji": "<0.8.9",
         "getpop/static-site-generator": "<0.8.9",
         "getpop/resources": "<0.8.9",
@@ -168,57 +132,71 @@
         "pop-sites-wassup/share-mutations": "<0.8.9",
         "pop-sites-wassup/system-mutations": "<0.8.9",
         "pop-sites-wassup/custompostlink-mutations": "<0.8.9",
-        "pop-cms-schema/users-wp": "<0.8.9",
-        "pop-cms-schema/media-wp": "<0.8.9",
-        "pop-cms-schema/posts-wp": "<0.8.9",
-        "pop-cms-schema/pages-wp": "<0.8.9",
-        "pop-cms-schema/menus-wp": "<0.8.9",
+        "pop-wp-schema/posts": "<0.8.9",
         "pop-wp-schema/customposts": "<0.8.9",
-        "pop-cms-schema/comments-wp": "<0.8.9",
+        "pop-wp-schema/users": "<0.8.9",
+        "pop-wp-schema/menus": "<0.8.9",
+        "pop-wp-schema/pages": "<0.8.9",
+        "pop-wp-schema/media": "<0.8.9",
+        "pop-cms-schema/postmedia-mutations": "<0.8.9",
+        "pop-wp-schema/comments": "<0.8.9",
         "pop-wp-schema/schema-commons": "<0.8.9"
+    },
+    "type": "library",
+    "description": "Adds support for page mutations",
+    "keywords": ["GraphQL", "PHP", "PoP", "page-mutations"],
+    "homepage": "https://github.com/PoPCMSSchema/page-mutations",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "pop-cms-schema/custompost-mutations": "^0.9",
+        "pop-cms-schema/pages": "^0.9"
+    },
+    "require-dev": {
+        "pop-api/api": "^0.9",
+        "phpstan/phpstan": "^1.8",
+        "phpunit/phpunit": "^9.5",
+        "pop-cms-schema/comment-mutations": "^0.9",
+        "pop-cms-schema/users": "^0.9",
+        "rector/rector": "^0.15",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "suggest": {
+        "pop-api/api": "Integrates well with API",
+        "pop-cms-schema/comment-mutations": "Integrates well with Comment Mutations",
+        "pop-cms-schema/users": "Integrates well with Users"
     },
     "autoload": {
         "psr-4": {
-            "GraphQLAPI\\GraphQLAPI\\": "src"
+            "PoPCMSSchema\\PageMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GraphQLAPI\\GraphQLAPI\\": "tests"
+            "PoPCMSSchema\\PageMutations\\": "tests"
         }
     },
     "scripts": {
-        "build-server": [
-            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-dev",
-            "@start-server"
-        ],
-        "start-server": [
-            "composer install",
-            "lando start"
-        ],
-        "destroy-server": "lando destroy -y",
-        "rebuild-server": "lando rebuild -y",
-        "stop-server": "lando stop",
         "test": "phpunit",
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests",
         "analyse": "phpstan analyse"
     },
     "extra": {
-        "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
             "dev-master": "0.9-dev"
         }
     },
     "config": {
         "sort-packages": true,
-        "allow-plugins": {
-            "boxuk/wp-muplugin-loader": true,
-            "composer/installers": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "johnpbloch/wordpress-core-installer": true,
-            "oomphinc/composer-installers-extender": true
-        }
+        "allow-plugins": {}
     },
     "minimum-stability": "dev",
     "prefer-stable": true
