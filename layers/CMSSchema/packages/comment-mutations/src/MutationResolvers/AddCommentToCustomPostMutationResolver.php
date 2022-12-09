@@ -180,6 +180,19 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
                             $field,
                         )
                     );
+                } elseif (!$this->getCommentTypeAPI()->areCommentsOpen($customPostID)) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                MutationErrorFeedbackItemProvider::class,
+                                MutationErrorFeedbackItemProvider::E9,
+                                [
+                                    $customPostID
+                                ]
+                            ),
+                            $field,
+                        )
+                    );
                 }
             }
         }
