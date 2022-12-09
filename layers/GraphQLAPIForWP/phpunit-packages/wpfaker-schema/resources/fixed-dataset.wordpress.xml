@@ -1126,8 +1126,8 @@
 	 <wp:post_id>1724</wp:post_id>
 	 <wp:post_date><![CDATA[2018-10-20 20:03:48]]></wp:post_date>
 	 <wp:post_date_gmt><![CDATA[2018-10-21 03:03:48]]></wp:post_date_gmt>
-	 <wp:comment_status><![CDATA[closed]]></wp:comment_status>
-	 <wp:ping_status><![CDATA[closed]]></wp:ping_status>
+	 <wp:comment_status><![CDATA[open]]></wp:comment_status>
+	 <wp:ping_status><![CDATA[open]]></wp:ping_status>
 	 <wp:post_name><![CDATA[keyboard-navigation]]></wp:post_name>
 	 <wp:status><![CDATA[publish]]></wp:status>
 	 <wp:post_parent>0</wp:post_parent>
@@ -9939,8 +9939,8 @@ Be sure to test the formatting of the auto-generated excerpt, to ensure that it 
 		<wp:post_id>1730</wp:post_id>
 		<wp:post_date><![CDATA[2018-11-01 07:10:43]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2018-11-01 07:10:43]]></wp:post_date_gmt>
-		<wp:comment_status><![CDATA[open]]></wp:comment_status>
-		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[block-category-common]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
