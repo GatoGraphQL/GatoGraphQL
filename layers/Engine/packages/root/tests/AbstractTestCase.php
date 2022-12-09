@@ -94,7 +94,8 @@ abstract class AbstractTestCase extends TestCase
      * Package's Module class, of type ModuleInterface.
      * By standard, it is "NamespaceOwner\Project\Module::class"
      *
-     * @return class-string<ModuleInterface>
+     * @return string
+     * @phpstan-return class-string<ModuleInterface>
      */
     protected static function getModuleClass(): string
     {
