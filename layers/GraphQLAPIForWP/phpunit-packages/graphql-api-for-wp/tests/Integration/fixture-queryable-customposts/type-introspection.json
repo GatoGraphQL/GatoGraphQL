@@ -337,13 +337,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
-                        },
-                        {
                             "name": "Post"
                         },
                         {
                             "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "Page"
                         }
                     ]
                 },
@@ -352,13 +352,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
-                        },
-                        {
                             "name": "Post"
                         },
                         {
                             "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "Page"
                         }
                     ]
                 },
@@ -421,7 +421,13 @@
                             "name": "Root"
                         },
                         {
-                            "name": "Page"
+                            "name": "Menu"
+                        },
+                        {
+                            "name": "MenuItem"
+                        },
+                        {
+                            "name": "Post"
                         },
                         {
                             "name": "Media"
@@ -433,13 +439,13 @@
                             "name": "UserAvatar"
                         },
                         {
-                            "name": "Post"
-                        },
-                        {
-                            "name": "Comment"
+                            "name": "UserRole"
                         },
                         {
                             "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "Comment"
                         },
                         {
                             "name": "PostTag"
@@ -448,13 +454,7 @@
                             "name": "PostCategory"
                         },
                         {
-                            "name": "UserRole"
-                        },
-                        {
-                            "name": "Menu"
-                        },
-                        {
-                            "name": "MenuItem"
+                            "name": "Page"
                         },
                         {
                             "name": "__Type"
@@ -505,7 +505,7 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
+                            "name": "Post"
                         },
                         {
                             "name": "Media"
@@ -514,9 +514,6 @@
                             "name": "User"
                         },
                         {
-                            "name": "Post"
-                        },
-                        {
                             "name": "GenericCustomPost"
                         },
                         {
@@ -524,6 +521,9 @@
                         },
                         {
                             "name": "PostCategory"
+                        },
+                        {
+                            "name": "Page"
                         }
                     ]
                 },
@@ -532,13 +532,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
-                        },
-                        {
                             "name": "Post"
                         },
                         {
                             "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "Page"
                         }
                     ]
                 },
@@ -547,13 +547,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
-                        },
-                        {
                             "name": "Post"
                         },
                         {
                             "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "Page"
                         }
                     ]
                 },
@@ -562,25 +562,25 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
+                            "name": "Post"
                         },
                         {
                             "name": "User"
                         },
                         {
-                            "name": "Post"
+                            "name": "GenericCustomPost"
                         },
                         {
                             "name": "Comment"
-                        },
-                        {
-                            "name": "GenericCustomPost"
                         },
                         {
                             "name": "PostTag"
                         },
                         {
                             "name": "PostCategory"
+                        },
+                        {
+                            "name": "Page"
                         }
                     ]
                 },

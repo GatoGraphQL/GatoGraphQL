@@ -340,10 +340,10 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
+                            "name": "Post"
                         },
                         {
-                            "name": "Post"
+                            "name": "Page"
                         }
                     ]
                 },
@@ -352,10 +352,10 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
+                            "name": "Post"
                         },
                         {
-                            "name": "Post"
+                            "name": "Page"
                         }
                     ]
                 },
@@ -418,7 +418,13 @@
                             "name": "Root"
                         },
                         {
-                            "name": "Page"
+                            "name": "Menu"
+                        },
+                        {
+                            "name": "MenuItem"
+                        },
+                        {
+                            "name": "Post"
                         },
                         {
                             "name": "Media"
@@ -430,7 +436,10 @@
                             "name": "UserAvatar"
                         },
                         {
-                            "name": "Post"
+                            "name": "UserRole"
+                        },
+                        {
+                            "name": "Page"
                         },
                         {
                             "name": "Comment"
@@ -440,15 +449,6 @@
                         },
                         {
                             "name": "PostCategory"
-                        },
-                        {
-                            "name": "UserRole"
-                        },
-                        {
-                            "name": "Menu"
-                        },
-                        {
-                            "name": "MenuItem"
                         },
                         {
                             "name": "__Type"
@@ -499,7 +499,7 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
+                            "name": "Post"
                         },
                         {
                             "name": "Media"
@@ -508,7 +508,7 @@
                             "name": "User"
                         },
                         {
-                            "name": "Post"
+                            "name": "Page"
                         },
                         {
                             "name": "PostTag"
@@ -523,10 +523,10 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
+                            "name": "Post"
                         },
                         {
-                            "name": "Post"
+                            "name": "Page"
                         }
                     ]
                 },
@@ -535,10 +535,10 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
+                            "name": "Post"
                         },
                         {
-                            "name": "Post"
+                            "name": "Page"
                         }
                     ]
                 },
@@ -547,13 +547,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Page"
+                            "name": "Post"
                         },
                         {
                             "name": "User"
                         },
                         {
-                            "name": "Post"
+                            "name": "Page"
                         },
                         {
                             "name": "Comment"
@@ -1468,10 +1468,10 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Post"
+                            "name": "Page"
                         },
                         {
-                            "name": "Page"
+                            "name": "Post"
                         }
                     ]
                 },
