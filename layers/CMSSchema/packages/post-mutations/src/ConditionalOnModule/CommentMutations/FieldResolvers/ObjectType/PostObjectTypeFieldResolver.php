@@ -27,7 +27,7 @@ class PostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
         /** @var PostTypeAPIInterface */
         return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
     }
-    
+
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
      */
