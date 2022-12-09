@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\PageMutations\ConditionalOnModule\CommentMutations\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/CommentMutations/FieldResolvers/*'
