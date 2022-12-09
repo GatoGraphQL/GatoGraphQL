@@ -11,6 +11,8 @@ use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutati
 use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableAddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CustomPostAddCommentFilterInputObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CustomPostAddCommentMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\Comments\FieldResolvers\ObjectType\MaybeCommentableCustomPostObjectTypeFieldResolverTrait;
+use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -23,11 +25,14 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use MaybeCommentableCustomPostObjectTypeFieldResolverTrait;
+
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
     private ?CustomPostAddCommentFilterInputObjectTypeResolver $customPostAddCommentFilterInputObjectTypeResolver = null;
     private ?CustomPostAddCommentMutationPayloadObjectTypeResolver $customPostAddCommentMutationPayloadObjectTypeResolver = null;
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
+    private ?CommentTypeAPIInterface $commentTypeAPI = null;
 
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
@@ -73,6 +78,15 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     {
         /** @var PayloadableAddCommentToCustomPostMutationResolver */
         return $this->payloadableAddCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableAddCommentToCustomPostMutationResolver::class);
+    }
+    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
+    {
+        $this->commentTypeAPI = $commentTypeAPI;
+    }
+    final protected function getCommentTypeAPI(): CommentTypeAPIInterface
+    {
+        /** @var CommentTypeAPIInterface */
+        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
     }
 
     /**
