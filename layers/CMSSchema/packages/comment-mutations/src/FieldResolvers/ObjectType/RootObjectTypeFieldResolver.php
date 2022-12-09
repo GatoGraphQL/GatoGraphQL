@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\CommentMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ModuleConfiguration;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
-use PoPCMSSchema\CommentMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableAddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootAddCommentToCustomPostFilterInputObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootReplyCommentFilterInputObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootAddCommentToCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootReplyCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -24,7 +25,7 @@ use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
 
-class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTypeFieldResolver
+class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
