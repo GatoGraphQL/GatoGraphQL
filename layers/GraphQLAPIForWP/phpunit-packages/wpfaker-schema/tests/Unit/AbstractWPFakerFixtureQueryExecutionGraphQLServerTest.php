@@ -95,7 +95,8 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
     protected static function getWordPressExportDataFiles(): array
     {
         return [
-            dirname(__DIR__, 2) . '/resources/fixed-dataset.wordpress.php',
+            // dirname(__DIR__, 2) . '/resources/fixed-dataset.wordpress.php',
+            dirname(__DIR__, 2) . '/resources/fixed-dataset.wordpress.xml',
         ];
     }
 
