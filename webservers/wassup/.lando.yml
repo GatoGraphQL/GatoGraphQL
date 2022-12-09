@@ -123,6 +123,8 @@ services:
           ../../layers/CMSSchema/packages/notifications:/app/vendor/pop-cms-schema/notifications
         - >-
           ../../layers/CMSSchema/packages/notifications-wp:/app/vendor/pop-cms-schema/notifications-wp
+        - >-
+          ../../layers/CMSSchema/packages/page-mutations:/app/vendor/pop-cms-schema/page-mutations
         - '../../layers/CMSSchema/packages/pages:/app/vendor/pop-cms-schema/pages'
         - '../../layers/CMSSchema/packages/pages-wp:/app/vendor/pop-cms-schema/pages-wp'
         - >-

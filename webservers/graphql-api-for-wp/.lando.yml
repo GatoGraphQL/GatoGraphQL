@@ -129,6 +129,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/metaquery-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/metaquery-wp
         - >-
+          ../../layers/CMSSchema/packages/page-mutations:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/page-mutations
+        - >-
           ../../layers/CMSSchema/packages/pages-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/pages-wp
         - >-
           ../../layers/CMSSchema/packages/pages:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/pages
