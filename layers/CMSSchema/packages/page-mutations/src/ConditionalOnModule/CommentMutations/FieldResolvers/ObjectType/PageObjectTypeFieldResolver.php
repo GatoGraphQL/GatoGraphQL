@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\CommentMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\PageMutations\ConditionalOnModule\CommentMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
