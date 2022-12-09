@@ -8,6 +8,7 @@ use PoP\Root\Module\ModuleInterface;
 use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
 use PoP\Root\Module\AbstractModule;
+use PoPCMSSchema\CommentMutations\Module as CommentMutationsModule;
 use PoPCMSSchema\Users\Module as UsersModule;
 
 class Module extends AbstractModule
@@ -54,6 +55,13 @@ class Module extends AbstractModule
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
                 '/ConditionalOnModule/Users'
+            );
+        }
+        if (class_exists(CommentMutationsModule::class) && App::getModule(CommentMutationsModule::class)->isEnabled()) {
+            $this->initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(CommentMutationsModule::class, $skipSchemaModuleClasses),
+                '/ConditionalOnModule/CommentMutations'
             );
         }
     }
