@@ -163,6 +163,24 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
                         $field,
                     )
                 );
+            } else {
+                // Validate the corresponding CPT supports comments
+                /** @var string */
+                $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+                if (!$this->getCommentTypeAPI()->doesCustomPostTypeSupportComments($customPostType)) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                MutationErrorFeedbackItemProvider::class,
+                                MutationErrorFeedbackItemProvider::E8,
+                                [
+                                    $customPostType,
+                                ]
+                            ),
+                            $field,
+                        )
+                    );
+                }
             }
         }
         if (!$fieldDataAccessor->getValue(MutationInputProperties::COMMENT)) {
