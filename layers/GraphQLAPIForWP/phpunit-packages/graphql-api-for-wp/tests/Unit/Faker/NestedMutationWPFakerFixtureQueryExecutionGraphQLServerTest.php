@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 
+use Mockery;
 use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
+
 use PoP\Root\Module\ModuleInterface;
+use function Brain\Monkey\Functions\expect;
 
 class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
@@ -32,6 +35,7 @@ class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstra
                 \PoPCMSSchema\CommentMutationsWP\Module::class,                
                 \PoPCMSSchema\CustomPostMutationsWP\Module::class,
                 \PoPCMSSchema\PostMutations\Module::class,
+                \PoPCMSSchema\PageMutations\Module::class,
             ]
         ];
     }
