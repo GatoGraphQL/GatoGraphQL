@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\ConditionalOnModule\CommentMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class PostCommentMutationObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTypeFieldResolver
+class PostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTypeFieldResolver
 {
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
