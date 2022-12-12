@@ -54,18 +54,29 @@ class Module extends AbstractModule
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
+        try {
+            if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
+            }
+        } catch (ComponentNotExistsException) {
         }
-        if (class_exists(RESTAPIModule::class) && App::getModule(RESTAPIModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/RESTAPI');
+
+        try {
+            if (class_exists(RESTAPIModule::class) && App::getModule(RESTAPIModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/RESTAPI');
+            }
+        } catch (ComponentNotExistsException) {
         }
-        if (class_exists(CommentsModule::class) && App::getModule(CommentsModule::class)->isEnabled()) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(CommentsModule::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/Comments'
-            );
+
+        try {
+            if (class_exists(CommentsModule::class) && App::getModule(CommentsModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(CommentsModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/Comments'
+                );
+            }
+        } catch (ComponentNotExistsException) {
         }
 
         try {

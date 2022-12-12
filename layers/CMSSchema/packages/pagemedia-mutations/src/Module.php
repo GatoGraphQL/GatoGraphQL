@@ -6,6 +6,7 @@ namespace PoPCMSSchema\PageMediaMutations;
 
 use PoPCMSSchema\CustomPostMediaMutations\Module as CustomPostMediaMutationsModule;
 use PoP\Root\App;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ModuleInterface;
 
@@ -31,12 +32,15 @@ class Module extends AbstractModule
         bool $skipSchema,
         array $skipSchemaModuleClasses,
     ): void {
-        if (class_exists(CustomPostMediaMutationsModule::class) && App::getModule(CustomPostMediaMutationsModule::class)->isEnabled()) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(CustomPostMediaMutationsModule::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/CustomPostMediaMutations'
-            );
+        try {
+            if (class_exists(CustomPostMediaMutationsModule::class) && App::getModule(CustomPostMediaMutationsModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(CustomPostMediaMutationsModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/CustomPostMediaMutations'
+                );
+            }
+        } catch (ComponentNotExistsException) {
         }
     }
 }

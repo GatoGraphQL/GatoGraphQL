@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer;
 
-use PoP\Root\Module\ModuleInterface;
-use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\ModuleConfiguration as AccessControlModuleConfiguration;
 use PoP\CacheControl\Module as CacheControlModule;
-use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
+use PoP\Engine\Module as EngineModule;
+use PoP\Root\App;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -85,27 +86,36 @@ class Module extends AbstractModule
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
         // Boot conditionals
-        if (class_exists(AccessControlModule::class) && App::getModule(AccessControlModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/AccessControl/Overrides');
-        }
-
-        if (class_exists(CacheControlModule::class) && App::getModule(CacheControlModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CacheControl/Overrides');
-        }
-
-        if (class_exists(AccessControlModule::class) && App::getModule(AccessControlModule::class)->isEnabled()) {
-            /** @var AccessControlModuleConfiguration */
-            $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
-            if (
-                class_exists(CacheControlModule::class)
-                && $moduleConfiguration->canSchemaBePrivate()
-            ) {
-                $this->initSchemaServices(
-                    dirname(__DIR__),
-                    $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
-                    '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
-                );
+        try {
+            if (class_exists(AccessControlModule::class) && App::getModule(AccessControlModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/AccessControl/Overrides');
             }
+        } catch (ComponentNotExistsException) {
+        }
+
+        try {
+            if (class_exists(CacheControlModule::class) && App::getModule(CacheControlModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CacheControl/Overrides');
+            }
+        } catch (ComponentNotExistsException) {
+        }
+
+        try {
+            if (class_exists(AccessControlModule::class) && App::getModule(AccessControlModule::class)->isEnabled()) {
+                /** @var AccessControlModuleConfiguration */
+                $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
+                if (
+                    class_exists(CacheControlModule::class)
+                    && $moduleConfiguration->canSchemaBePrivate()
+                ) {
+                    $this->initSchemaServices(
+                        dirname(__DIR__),
+                        $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
+                        '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
+                    );
+                }
+            }
+        } catch (ComponentNotExistsException) {
         }
     }
 }

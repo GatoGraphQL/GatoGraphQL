@@ -57,33 +57,54 @@ class Module extends AbstractModule
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
-        }
-        if (class_exists(RESTAPIModule::class) && App::getModule(RESTAPIModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/RESTAPI');
-        }
-
-        if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/Users'
-            );
+        try {
             if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
-                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/Users/ConditionalOnModule/API');
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
             }
-            if (class_exists(RESTAPIModule::class) && App::getModule(RESTAPIModule::class)->isEnabled()) {
-                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/Users/ConditionalOnModule/RESTAPI');
-            }
+        } catch (ComponentNotExistsException) {
         }
 
-        if (class_exists(CommentsModule::class) && App::getModule(CommentsModule::class)->isEnabled()) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(CommentsModule::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/Comments'
-            );
+        try {
+            if (class_exists(RESTAPIModule::class) && App::getModule(RESTAPIModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/RESTAPI');
+            }
+        } catch (ComponentNotExistsException) {
+        }
+
+        try {
+            if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/Users'
+                );
+
+                try {
+                    if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
+                        $this->initServices(dirname(__DIR__), '/ConditionalOnModule/Users/ConditionalOnModule/API');
+                    }
+                } catch (ComponentNotExistsException) {
+                }
+
+                try {
+                    if (class_exists(RESTAPIModule::class) && App::getModule(RESTAPIModule::class)->isEnabled()) {
+                        $this->initServices(dirname(__DIR__), '/ConditionalOnModule/Users/ConditionalOnModule/RESTAPI');
+                    }
+                } catch (ComponentNotExistsException) {
+                }
+            }
+        } catch (ComponentNotExistsException) {
+        }
+
+        try {
+            if (class_exists(CommentsModule::class) && App::getModule(CommentsModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(CommentsModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/Comments'
+                );
+            }
+        } catch (ComponentNotExistsException) {
         }
 
         try {

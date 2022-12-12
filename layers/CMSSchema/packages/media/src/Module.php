@@ -6,6 +6,7 @@ namespace PoPCMSSchema\Media;
 
 use PoPCMSSchema\Users\Module as UsersModule;
 use PoP\Root\App;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ModuleInterface;
 
@@ -49,12 +50,15 @@ class Module extends AbstractModule
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/Users'
-            );
+        try {
+            if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/Users'
+                );
+            }
+        } catch (ComponentNotExistsException) {
         }
     }
 }

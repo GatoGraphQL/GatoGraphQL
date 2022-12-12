@@ -6,6 +6,7 @@ namespace PoPSchema\EverythingElseWP;
 
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoP\Root\App;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ModuleInterface;
 
@@ -42,8 +43,11 @@ class Module extends AbstractModule
         bool $skipSchema,
         array $skipSchemaModuleClasses,
     ): void {
-        if (class_exists(CustomPostsModule::class) && App::getModule(CustomPostsModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPosts');
+		try {
+            if (class_exists(CustomPostsModule::class) && App::getModule(CustomPostsModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPosts');
+            }
+        } catch (ComponentNotExistsException) {
         }
     }
 }

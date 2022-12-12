@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations;
 
-use PoP\Root\Module\ModuleInterface;
-use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
-use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\CommentMutations\Module as CommentMutationsModule;
 use PoPCMSSchema\Users\Module as UsersModule;
+use PoP\Root\App;
+use PoP\Root\Exception\ComponentNotExistsException;
+use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -47,22 +48,33 @@ class Module extends AbstractModule
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-        if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
+        try {
+            if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
+            }
+        } catch (ComponentNotExistsException) {
         }
-        if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/Users'
-            );
+
+        try {
+            if (class_exists(UsersModule::class) && App::getModule(UsersModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/Users'
+                );
+            }
+        } catch (ComponentNotExistsException) {
         }
-        if (class_exists(CommentMutationsModule::class) && App::getModule(CommentMutationsModule::class)->isEnabled()) {
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                $skipSchema || in_array(CommentMutationsModule::class, $skipSchemaModuleClasses),
-                '/ConditionalOnModule/CommentMutations'
-            );
+
+        try {
+            if (class_exists(CommentMutationsModule::class) && App::getModule(CommentMutationsModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(CommentMutationsModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/CommentMutations'
+                );
+            }
+        } catch (ComponentNotExistsException) {
         }
     }
 }

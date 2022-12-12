@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts;
 
-use PoP\Root\Module\ModuleInterface;
-use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
+use PoP\Root\App;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -49,8 +50,11 @@ class Module extends AbstractModule
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
+        try {
+            if (class_exists(APIModule::class) && App::getModule(APIModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
+            }
+        } catch (ComponentNotExistsException) {
         }
     }
 
