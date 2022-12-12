@@ -2251,32 +2251,22 @@
                     "possibleTypes": [
                         {
                             "kind": "OBJECT",
+                            "name": "MutationRoot",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "QueryRoot",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "Root",
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
-                            "name": "__Type",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "_NamedTypeExtensions",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "__InputValue",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "_InputValueExtensions",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "__EnumValue",
+                            "name": "_DirectiveExtensions",
                             "ofType": null
                         },
                         {
@@ -2286,17 +2276,17 @@
                         },
                         {
                             "kind": "OBJECT",
-                            "name": "__Field",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
                             "name": "_FieldExtensions",
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
-                            "name": "__Schema",
+                            "name": "_InputValueExtensions",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "_NamedTypeExtensions",
                             "ofType": null
                         },
                         {
@@ -2311,17 +2301,27 @@
                         },
                         {
                             "kind": "OBJECT",
-                            "name": "_DirectiveExtensions",
+                            "name": "__EnumValue",
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
-                            "name": "MutationRoot",
+                            "name": "__Field",
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
-                            "name": "QueryRoot",
+                            "name": "__InputValue",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "__Schema",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "__Type",
                             "ofType": null
                         }
                     ]

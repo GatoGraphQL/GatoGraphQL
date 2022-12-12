@@ -1119,8 +1119,8 @@
                 {
                     "name": "IsCustomPost",
                     "possibleTypes": [
-                        "types.Object.Post",
-                        "types.Object.Page"
+                        "types.Object.Page",
+                        "types.Object.Post"
                     ],
                     "fields": [
                         {
@@ -1212,24 +1212,24 @@
                 {
                     "name": "Node",
                     "possibleTypes": [
+                        "types.Object.Comment",
+                        "types.Object.MutationRoot",
+                        "types.Object.Page",
+                        "types.Object.Post",
+                        "types.Object.QueryRoot",
                         "types.Object.Root",
-                        "types.Object.__Type",
-                        "types.Object._NamedTypeExtensions",
-                        "types.Object.__InputValue",
-                        "types.Object._InputValueExtensions",
-                        "types.Object.__EnumValue",
+                        "types.Object._DirectiveExtensions",
                         "types.Object._EnumValueExtensions",
-                        "types.Object.__Field",
                         "types.Object._FieldExtensions",
-                        "types.Object.__Schema",
+                        "types.Object._InputValueExtensions",
+                        "types.Object._NamedTypeExtensions",
                         "types.Object._SchemaExtensions",
                         "types.Object.__Directive",
-                        "types.Object._DirectiveExtensions",
-                        "types.Object.MutationRoot",
-                        "types.Object.QueryRoot",
-                        "types.Object.Post",
-                        "types.Object.Comment",
-                        "types.Object.Page"
+                        "types.Object.__EnumValue",
+                        "types.Object.__Field",
+                        "types.Object.__InputValue",
+                        "types.Object.__Schema",
+                        "types.Object.__Type"
                     ],
                     "fields": [
                         {
@@ -1243,8 +1243,8 @@
                 {
                     "name": "Queryable",
                     "possibleTypes": [
-                        "types.Object.Post",
-                        "types.Object.Page"
+                        "types.Object.Page",
+                        "types.Object.Post"
                     ],
                     "fields": [
                         {
