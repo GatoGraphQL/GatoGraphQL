@@ -1,4 +1,4 @@
-# Post Media Mutations
+# Page Media Mutations
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,19 +9,19 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support for media mutations on posts
+Adds support for media mutations on pages
 
 ## Install
 
 Via Composer
 
 ``` bash
-composer require pop-cms-schema/postmedia-mutations
+composer require pop-cms-schema/pagemedia-mutations
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/postmedia-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/postmedia-mutations).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/pagemedia-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/pagemedia-mutations).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPCMSSchema\PostMediaMutations\Module::class,
+    \PoPCMSSchema\PageMediaMutations\Module::class,
 ]);
 ```
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/postmedia-mutations.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/pagemedia-mutations.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-cms-schema/postmedia-mutations/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/postmedia-mutations.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/postmedia-mutations.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/postmedia-mutations.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/pagemedia-mutations/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/pagemedia-mutations.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/pagemedia-mutations.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/pagemedia-mutations.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-cms-schema/postmedia-mutations
-[link-travis]: https://travis-ci.org/pop-cms-schema/postmedia-mutations
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/postmedia-mutations/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/postmedia-mutations
-[link-downloads]: https://packagist.org/packages/pop-cms-schema/postmedia-mutations
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/pagemedia-mutations
+[link-travis]: https://travis-ci.org/pop-cms-schema/pagemedia-mutations
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/pagemedia-mutations/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/pagemedia-mutations
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/pagemedia-mutations
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
