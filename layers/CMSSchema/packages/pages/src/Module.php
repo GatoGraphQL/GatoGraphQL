@@ -9,6 +9,7 @@ use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
 use PoPAPI\RESTAPI\Module as RESTAPIModule;
 use PoPCMSSchema\Comments\Module as CommentsModule;
+use PoPCMSSchema\CustomPostMedia\Module as CustomPostMediaModule;
 use PoP\Root\Module\AbstractModule;
 
 class Module extends AbstractModule
@@ -62,6 +63,13 @@ class Module extends AbstractModule
                 dirname(__DIR__),
                 $skipSchema || in_array(CommentsModule::class, $skipSchemaModuleClasses),
                 '/ConditionalOnModule/Comments'
+            );
+        }
+        if (class_exists(CustomPostMediaModule::class) && App::getModule(CustomPostMediaModule::class)->isEnabled()) {
+            $this->initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(CustomPostMediaModule::class, $skipSchemaModuleClasses),
+                '/ConditionalOnModule/CustomPostMedia'
             );
         }
     }
