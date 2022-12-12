@@ -15,7 +15,7 @@ use PoPCMSSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 abstract class AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MaybeSupportingFeaturedImageCustomPostObjectTypeFieldResolverTrait;
-    
+
     private ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
     private ?SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver = null;
 
