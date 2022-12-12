@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMediaMutations;
 
-use PoP\Root\Module\ModuleInterface;
+use PoPCMSSchema\CustomPostMediaMutations\Module as CustomPostMediaMutationsModule;
+use PoP\Root\App;
 use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -20,18 +22,21 @@ class Module extends AbstractModule
         ];
     }
 
-    // Currently there are no services, so disable
-    // /**
-    //  * Initialize services
-    //  *
-    //  * @param array<string,mixed> $configuration
-    //  * @param array<class-string<\PoP\Root\Module\ModuleInterface>> $skipSchemaModuleClasses
-    //  */
-    // protected function initializeContainerServices(
-    //     array $configuration,
-    //     bool $skipSchema,
-    //     array $skipSchemaModuleClasses,
-    // ): void {
-    //     $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-    // }
+    /**
+     * Initialize services
+     *
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
+     */
+    protected function initializeContainerServices(
+        bool $skipSchema,
+        array $skipSchemaModuleClasses,
+    ): void {
+        if (class_exists(CustomPostMediaMutationsModule::class) && App::getModule(CustomPostMediaMutationsModule::class)->isEnabled()) {
+            $this->initSchemaServices(
+                dirname(__DIR__),
+                $skipSchema || in_array(CustomPostMediaMutationsModule::class, $skipSchemaModuleClasses),
+                '/ConditionalOnModule/CustomPostMediaMutations'
+            );
+        }
+    }
 }
