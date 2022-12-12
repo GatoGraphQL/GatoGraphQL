@@ -39,6 +39,7 @@ class Module extends AbstractModule
             \PoPAPI\API\Module::class,
             \PoPAPI\RESTAPI\Module::class,
             \PoPCMSSchema\Comments\Module::class,
+            \PoPCMSSchema\CustomPostMedia\Module::class,
         ];
     }
 

@@ -20,6 +20,7 @@
         "pop-api/api": "^0.9",
         "pop-api/api-rest": "^0.9",
         "pop-cms-schema/comments": "^0.9",
+        "pop-cms-schema/custompostmedia": "^0.9",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.15",
@@ -28,7 +29,8 @@
     "suggest": {
         "pop-api/api": "Integration with the API",
         "pop-api/api-rest": "Integration with the REST API",
-        "pop-cms-schema/comments": "Integrates well with Comments"
+        "pop-cms-schema/comments": "Integrates well with Comments",
+        "pop-cms-schema/custompostmedia": "Integrates well with Custom Post Media"
     },
     "conflict": {
         "getpop/componentrouting": "<0.8.9",
