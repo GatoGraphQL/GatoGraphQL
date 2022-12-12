@@ -69,6 +69,7 @@ includes:
     - layers/WPSchema/packages/meta/phpstan.neon.dist
     - layers/CMSSchema/packages/metaquery-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/page-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/pagemedia-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/pages/phpstan.neon.dist
     - layers/WPSchema/packages/pages/phpstan.neon.dist
     - layers/CMSSchema/packages/pages-wp/phpstan.neon.dist
