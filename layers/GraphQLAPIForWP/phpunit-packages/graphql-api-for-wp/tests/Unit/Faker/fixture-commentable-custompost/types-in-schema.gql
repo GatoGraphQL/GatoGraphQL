@@ -2,7 +2,9 @@ query TypesInSchema {
     __schema {
         types {
             name
-            possibleTypes
+            possibleTypes {
+                name
+            }
             fields {
                 name
                 type {

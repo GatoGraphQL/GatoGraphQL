@@ -746,7 +746,9 @@
                 {
                     "name": "IsCustomPost",
                     "possibleTypes": [
-                        "types.Object.Page"
+                        {
+                            "name": "Page"
+                        }
                     ],
                     "fields": [
                         {
@@ -838,22 +840,54 @@
                 {
                     "name": "Node",
                     "possibleTypes": [
-                        "types.Object.MutationRoot",
-                        "types.Object.Page",
-                        "types.Object.QueryRoot",
-                        "types.Object.Root",
-                        "types.Object._DirectiveExtensions",
-                        "types.Object._EnumValueExtensions",
-                        "types.Object._FieldExtensions",
-                        "types.Object._InputValueExtensions",
-                        "types.Object._NamedTypeExtensions",
-                        "types.Object._SchemaExtensions",
-                        "types.Object.__Directive",
-                        "types.Object.__EnumValue",
-                        "types.Object.__Field",
-                        "types.Object.__InputValue",
-                        "types.Object.__Schema",
-                        "types.Object.__Type"
+                        {
+                            "name": "MutationRoot"
+                        },
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "QueryRoot"
+                        },
+                        {
+                            "name": "Root"
+                        },
+                        {
+                            "name": "_DirectiveExtensions"
+                        },
+                        {
+                            "name": "_EnumValueExtensions"
+                        },
+                        {
+                            "name": "_FieldExtensions"
+                        },
+                        {
+                            "name": "_InputValueExtensions"
+                        },
+                        {
+                            "name": "_NamedTypeExtensions"
+                        },
+                        {
+                            "name": "_SchemaExtensions"
+                        },
+                        {
+                            "name": "__Directive"
+                        },
+                        {
+                            "name": "__EnumValue"
+                        },
+                        {
+                            "name": "__Field"
+                        },
+                        {
+                            "name": "__InputValue"
+                        },
+                        {
+                            "name": "__Schema"
+                        },
+                        {
+                            "name": "__Type"
+                        }
                     ],
                     "fields": [
                         {
@@ -867,7 +901,9 @@
                 {
                     "name": "Queryable",
                     "possibleTypes": [
-                        "types.Object.Page"
+                        {
+                            "name": "Page"
+                        }
                     ],
                     "fields": [
                         {
@@ -973,7 +1009,9 @@
                 {
                     "name": "CustomPostUnion",
                     "possibleTypes": [
-                        "types.Object.Page"
+                        {
+                            "name": "Page"
+                        }
                     ],
                     "fields": null
                 }
