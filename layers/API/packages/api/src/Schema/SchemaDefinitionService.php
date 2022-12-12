@@ -225,6 +225,10 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             ksort($schemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
         }
 
+        foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::UNION] ?? []) as $typeName) {
+            ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::UNION][$typeName][SchemaDefinition::POSSIBLE_TYPES]);
+        }
+
         // Sort fields for each InterfaceType
         /** @var string $typeName */
         foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE] ?? []) as $typeName) {
@@ -234,6 +238,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES])) {
                 ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::INTERFACES]);
             }
+            ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::INTERFACE][$typeName][SchemaDefinition::POSSIBLE_TYPES]);
         }
 
         // Sort input fields for each InputObjectType
