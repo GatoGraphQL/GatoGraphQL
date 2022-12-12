@@ -1,7 +1,7 @@
 {
     "name": "pop-cms-schema/pagemedia-mutations",
     "type": "library",
-    "description": "Integrates media with page mutations",
+    "description": "Adds support for media mutations on pages",
     "keywords": ["GraphQL", "PHP", "PoP", "pagemedia-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/pagemedia-mutations",
     "license": "GPL-2.0-or-later",
