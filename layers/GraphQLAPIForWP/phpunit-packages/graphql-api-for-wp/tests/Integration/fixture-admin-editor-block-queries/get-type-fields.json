@@ -121,6 +121,28 @@
           "description": "Error payload for: \"The comment's parent does not exist\""
         },
         {
+          "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+          "namespacedName": "CommentsAreNotOpenForCustomPostErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"Comments are not open for the custom post\""
+        },
+        {
+          "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+          "namespacedName": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"Comments are not supported by the custom post type\""
+        },
+        {
           "name": "CustomPostDoesNotExistErrorPayload",
           "namespacedName": "CustomPostDoesNotExistErrorPayload",
           "fields": [
