@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\PageMutations\ConditionalOnModule\CustomPostMediaMutations\FieldResolvers\:
+    PoPCMSSchema\PageMediaMutations\ConditionalOnModule\CustomPostMediaMutations\FieldResolvers\:
         resource: '../../../src/ConditionalOnModule/CustomPostMediaMutations/FieldResolvers/*'
