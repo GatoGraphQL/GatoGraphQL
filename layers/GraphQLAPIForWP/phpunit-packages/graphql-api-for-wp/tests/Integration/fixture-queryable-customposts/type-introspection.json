@@ -347,13 +347,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Post"
-                        },
-                        {
                             "name": "GenericCustomPost"
                         },
                         {
                             "name": "Page"
+                        },
+                        {
+                            "name": "Post"
                         }
                     ]
                 },
@@ -362,13 +362,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Post"
-                        },
-                        {
                             "name": "GenericCustomPost"
                         },
                         {
                             "name": "Page"
+                        },
+                        {
+                            "name": "Post"
                         }
                     ]
                 },
@@ -377,28 +377,7 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "UserIsNotLoggedInErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
-                        },
-                        {
-                            "name": "GenericErrorPayload"
-                        },
-                        {
-                            "name": "CustomPostDoesNotExistErrorPayload"
-                        },
-                        {
                             "name": "CategoryDoesNotExistErrorPayload"
-                        },
-                        {
-                            "name": "MediaItemDoesNotExistErrorPayload"
-                        },
-                        {
-                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "CommentAuthorEmailIsMissingErrorPayload"
@@ -407,25 +386,46 @@
                             "name": "CommentAuthorNameIsMissingErrorPayload"
                         },
                         {
-                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
                         },
                         {
-                            "name": "CommentParentCommentDoesNotExistErrorPayload"
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
                         },
                         {
                             "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload"
                         },
                         {
-                            "name": "UserIsLoggedInErrorPayload"
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "InvalidUserEmailErrorPayload"
                         },
                         {
                             "name": "InvalidUsernameErrorPayload"
                         },
                         {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
+                        },
+                        {
                             "name": "PasswordIsIncorrectErrorPayload"
                         },
                         {
-                            "name": "InvalidUserEmailErrorPayload"
+                            "name": "UserIsLoggedInErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
                         }
                     ]
                 },
@@ -434,7 +434,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Root"
+                            "name": "Comment"
+                        },
+                        {
+                            "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "Media"
                         },
                         {
                             "name": "Menu"
@@ -443,10 +449,25 @@
                             "name": "MenuItem"
                         },
                         {
+                            "name": "MutationRoot"
+                        },
+                        {
+                            "name": "Page"
+                        },
+                        {
                             "name": "Post"
                         },
                         {
-                            "name": "Media"
+                            "name": "PostCategory"
+                        },
+                        {
+                            "name": "PostTag"
+                        },
+                        {
+                            "name": "QueryRoot"
+                        },
+                        {
+                            "name": "Root"
                         },
                         {
                             "name": "User"
@@ -458,46 +479,19 @@
                             "name": "UserRole"
                         },
                         {
-                            "name": "GenericCustomPost"
-                        },
-                        {
-                            "name": "Comment"
-                        },
-                        {
-                            "name": "PostTag"
-                        },
-                        {
-                            "name": "PostCategory"
-                        },
-                        {
-                            "name": "Page"
-                        },
-                        {
-                            "name": "__Type"
-                        },
-                        {
-                            "name": "_NamedTypeExtensions"
-                        },
-                        {
-                            "name": "__InputValue"
-                        },
-                        {
-                            "name": "_InputValueExtensions"
-                        },
-                        {
-                            "name": "__EnumValue"
+                            "name": "_DirectiveExtensions"
                         },
                         {
                             "name": "_EnumValueExtensions"
                         },
                         {
-                            "name": "__Field"
-                        },
-                        {
                             "name": "_FieldExtensions"
                         },
                         {
-                            "name": "__Schema"
+                            "name": "_InputValueExtensions"
+                        },
+                        {
+                            "name": "_NamedTypeExtensions"
                         },
                         {
                             "name": "_SchemaExtensions"
@@ -506,13 +500,19 @@
                             "name": "__Directive"
                         },
                         {
-                            "name": "_DirectiveExtensions"
+                            "name": "__EnumValue"
                         },
                         {
-                            "name": "MutationRoot"
+                            "name": "__Field"
                         },
                         {
-                            "name": "QueryRoot"
+                            "name": "__InputValue"
+                        },
+                        {
+                            "name": "__Schema"
+                        },
+                        {
+                            "name": "__Type"
                         }
                     ]
                 },
@@ -521,25 +521,25 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Post"
+                            "name": "GenericCustomPost"
                         },
                         {
                             "name": "Media"
                         },
                         {
-                            "name": "User"
+                            "name": "Page"
                         },
                         {
-                            "name": "GenericCustomPost"
-                        },
-                        {
-                            "name": "PostTag"
+                            "name": "Post"
                         },
                         {
                             "name": "PostCategory"
                         },
                         {
-                            "name": "Page"
+                            "name": "PostTag"
+                        },
+                        {
+                            "name": "User"
                         }
                     ]
                 },
@@ -548,13 +548,10 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Post"
-                        },
-                        {
-                            "name": "GenericCustomPost"
-                        },
-                        {
                             "name": "Page"
+                        },
+                        {
+                            "name": "Post"
                         }
                     ]
                 },
@@ -563,13 +560,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Post"
-                        },
-                        {
                             "name": "GenericCustomPost"
                         },
                         {
                             "name": "Page"
+                        },
+                        {
+                            "name": "Post"
                         }
                     ]
                 },
@@ -578,25 +575,25 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Post"
-                        },
-                        {
-                            "name": "User"
+                            "name": "Comment"
                         },
                         {
                             "name": "GenericCustomPost"
                         },
                         {
-                            "name": "Comment"
+                            "name": "Page"
                         },
                         {
-                            "name": "PostTag"
+                            "name": "Post"
                         },
                         {
                             "name": "PostCategory"
                         },
                         {
-                            "name": "Page"
+                            "name": "PostTag"
+                        },
+                        {
+                            "name": "User"
                         }
                     ]
                 },
@@ -1511,10 +1508,10 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "Post"
+                            "name": "GenericCustomPost"
                         },
                         {
-                            "name": "GenericCustomPost"
+                            "name": "Post"
                         }
                     ]
                 },
@@ -1523,22 +1520,22 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "CommentParentCommentDoesNotExistErrorPayload"
-                        },
-                        {
-                            "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload"
-                        },
-                        {
-                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
-                        },
-                        {
-                            "name": "CustomPostDoesNotExistErrorPayload"
+                            "name": "CommentAuthorEmailIsMissingErrorPayload"
                         },
                         {
                             "name": "CommentAuthorNameIsMissingErrorPayload"
                         },
                         {
-                            "name": "CommentAuthorEmailIsMissingErrorPayload"
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload"
+                        },
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
                         },
                         {
                             "name": "GenericErrorPayload"
@@ -1559,13 +1556,13 @@
                             "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
                         },
                         {
-                            "name": "UserIsNotLoggedInErrorPayload"
-                        },
-                        {
                             "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "MediaItemDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
                         }
                     ]
                 },
@@ -1574,19 +1571,19 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "InvalidUserEmailErrorPayload"
+                            "name": "GenericErrorPayload"
                         },
                         {
-                            "name": "PasswordIsIncorrectErrorPayload"
+                            "name": "InvalidUserEmailErrorPayload"
                         },
                         {
                             "name": "InvalidUsernameErrorPayload"
                         },
                         {
-                            "name": "UserIsLoggedInErrorPayload"
+                            "name": "PasswordIsIncorrectErrorPayload"
                         },
                         {
-                            "name": "GenericErrorPayload"
+                            "name": "UserIsLoggedInErrorPayload"
                         }
                     ]
                 },
@@ -1595,10 +1592,10 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "UserIsNotLoggedInErrorPayload"
+                            "name": "GenericErrorPayload"
                         },
                         {
-                            "name": "GenericErrorPayload"
+                            "name": "UserIsNotLoggedInErrorPayload"
                         }
                     ]
                 },
@@ -1631,16 +1628,16 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "CommentParentCommentDoesNotExistErrorPayload"
-                        },
-                        {
-                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+                            "name": "CommentAuthorEmailIsMissingErrorPayload"
                         },
                         {
                             "name": "CommentAuthorNameIsMissingErrorPayload"
                         },
                         {
-                            "name": "CommentAuthorEmailIsMissingErrorPayload"
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
                         },
                         {
                             "name": "GenericErrorPayload"
@@ -1652,19 +1649,19 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
-                            "name": "CustomPostDoesNotExistErrorPayload"
+                            "name": "CategoryDoesNotExistErrorPayload"
                         },
                         {
-                            "name": "CategoryDoesNotExistErrorPayload"
+                            "name": "CustomPostDoesNotExistErrorPayload"
                         },
                         {
                             "name": "GenericErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
                         },
                         {
                             "name": "UserIsNotLoggedInErrorPayload"
@@ -1675,9 +1672,6 @@
                     "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
                     "enumValues": null,
                     "possibleTypes": [
-                        {
-                            "name": "MediaItemDoesNotExistErrorPayload"
-                        },
                         {
                             "name": "CustomPostDoesNotExistErrorPayload"
                         },
@@ -1692,6 +1686,9 @@
                         },
                         {
                             "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
                         },
                         {
                             "name": "UserIsNotLoggedInErrorPayload"
@@ -1709,10 +1706,10 @@
                             "name": "GenericErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
                         },
                         {
                             "name": "UserIsNotLoggedInErrorPayload"
@@ -1730,22 +1727,22 @@
                             "name": "CustomPostDoesNotExistErrorPayload"
                         },
                         {
-                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
-                        },
-                        {
                             "name": "GenericErrorPayload"
                         },
                         {
                             "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
                         },
                         {
-                            "name": "UserIsNotLoggedInErrorPayload"
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
                         },
                         {
                             "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
                         },
                         {
                             "name": "MediaItemDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
                         }
                     ]
                 }

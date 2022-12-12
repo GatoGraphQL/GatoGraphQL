@@ -12007,12 +12007,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             }
           ]
@@ -12354,12 +12354,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             }
           ]
@@ -12392,42 +12392,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "UserIsNotLoggedInErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "GenericErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "CustomPostDoesNotExistErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "CategoryDoesNotExistErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "MediaItemDoesNotExistErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -12442,12 +12407,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+              "name": "CommentParentCommentDoesNotExistErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "CommentParentCommentDoesNotExistErrorPayload",
+              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
               "ofType": null
             },
             {
@@ -12457,7 +12422,17 @@
             },
             {
               "kind": "OBJECT",
-              "name": "UserIsLoggedInErrorPayload",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "InvalidUserEmailErrorPayload",
               "ofType": null
             },
             {
@@ -12467,12 +12442,37 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "PasswordIsIncorrectErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "InvalidUserEmailErrorPayload",
+              "name": "UserIsLoggedInErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
           ]
@@ -12505,7 +12505,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Root",
+              "name": "Comment",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Media",
               "ofType": null
             },
             {
@@ -12520,12 +12525,37 @@
             },
             {
               "kind": "OBJECT",
+              "name": "MutationRoot",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Page",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "Post",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Media",
+              "name": "PostCategory",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "PostTag",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "QueryRoot",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Root",
               "ofType": null
             },
             {
@@ -12545,47 +12575,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "Page",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Comment",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "PostTag",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "PostCategory",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__Type",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "_NamedTypeExtensions",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__InputValue",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "_InputValueExtensions",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__EnumValue",
+              "name": "_DirectiveExtensions",
               "ofType": null
             },
             {
@@ -12595,17 +12585,17 @@
             },
             {
               "kind": "OBJECT",
-              "name": "__Field",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "_FieldExtensions",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "__Schema",
+              "name": "_InputValueExtensions",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "_NamedTypeExtensions",
               "ofType": null
             },
             {
@@ -12620,17 +12610,27 @@
             },
             {
               "kind": "OBJECT",
-              "name": "_DirectiveExtensions",
+              "name": "__EnumValue",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "MutationRoot",
+              "name": "__Field",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "QueryRoot",
+              "name": "__InputValue",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "__Schema",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "__Type",
               "ofType": null
             }
           ]
@@ -12695,17 +12695,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Post",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "Media",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "User",
               "ofType": null
             },
             {
@@ -12715,12 +12705,22 @@
             },
             {
               "kind": "OBJECT",
-              "name": "PostTag",
+              "name": "Post",
               "ofType": null
             },
             {
               "kind": "OBJECT",
               "name": "PostCategory",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "PostTag",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "User",
               "ofType": null
             }
           ]
@@ -12765,12 +12765,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             }
           ]
@@ -12803,12 +12803,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "Page",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "Page",
+              "name": "Post",
               "ofType": null
             }
           ]
@@ -12883,12 +12883,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Post",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "User",
+              "name": "Comment",
               "ofType": null
             },
             {
@@ -12898,7 +12893,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "Comment",
+              "name": "Post",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "PostCategory",
               "ofType": null
             },
             {
@@ -12908,7 +12908,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "PostCategory",
+              "name": "User",
               "ofType": null
             }
           ]
@@ -19161,22 +19161,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "CommentParentCommentDoesNotExistErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "CustomPostDoesNotExistErrorPayload",
+              "name": "CommentAuthorEmailIsMissingErrorPayload",
               "ofType": null
             },
             {
@@ -19186,7 +19171,22 @@
             },
             {
               "kind": "OBJECT",
-              "name": "CommentAuthorEmailIsMissingErrorPayload",
+              "name": "CommentParentCommentDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -19222,17 +19222,17 @@
             },
             {
               "kind": "OBJECT",
-              "name": "UserIsNotLoggedInErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
               "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
           ]
@@ -19248,12 +19248,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "InvalidUserEmailErrorPayload",
+              "name": "GenericErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "PasswordIsIncorrectErrorPayload",
+              "name": "InvalidUserEmailErrorPayload",
               "ofType": null
             },
             {
@@ -19263,12 +19263,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "UserIsLoggedInErrorPayload",
+              "name": "PasswordIsIncorrectErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "GenericErrorPayload",
+              "name": "UserIsLoggedInErrorPayload",
               "ofType": null
             }
           ]
@@ -19284,12 +19284,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "UserIsNotLoggedInErrorPayload",
+              "name": "GenericErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "GenericErrorPayload",
+              "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
           ]
@@ -19346,12 +19346,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "CommentParentCommentDoesNotExistErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+              "name": "CommentAuthorEmailIsMissingErrorPayload",
               "ofType": null
             },
             {
@@ -19361,7 +19356,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "CommentAuthorEmailIsMissingErrorPayload",
+              "name": "CommentParentCommentDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CommentsAreNotOpenForCustomPostErrorPayload",
               "ofType": null
             },
             {
@@ -19382,12 +19382,12 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "CustomPostDoesNotExistErrorPayload",
+              "name": "CategoryDoesNotExistErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "CategoryDoesNotExistErrorPayload",
+              "name": "CustomPostDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -19397,12 +19397,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
               "ofType": null
             },
             {
@@ -19421,11 +19421,6 @@
           "interfaces": null,
           "enumValues": null,
           "possibleTypes": [
-            {
-              "kind": "OBJECT",
-              "name": "MediaItemDoesNotExistErrorPayload",
-              "ofType": null
-            },
             {
               "kind": "OBJECT",
               "name": "CustomPostDoesNotExistErrorPayload",
@@ -19449,6 +19444,11 @@
             {
               "kind": "OBJECT",
               "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -19479,12 +19479,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
               "ofType": null
             },
             {
@@ -19515,11 +19515,6 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "GenericErrorPayload",
               "ofType": null
             },
@@ -19530,7 +19525,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "UserIsNotLoggedInErrorPayload",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
               "ofType": null
             },
             {
@@ -19541,6 +19536,11 @@
             {
               "kind": "OBJECT",
               "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
           ]

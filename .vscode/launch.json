@@ -67,6 +67,7 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/meta": "${workspaceFolder}/layers/CMSSchema/packages/meta",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/metaquery-wp": "${workspaceFolder}/layers/CMSSchema/packages/metaquery-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/page-mutations": "${workspaceFolder}/layers/CMSSchema/packages/page-mutations",
+              "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/pagemedia-mutations": "${workspaceFolder}/layers/CMSSchema/packages/pagemedia-mutations",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/pages-wp": "${workspaceFolder}/layers/CMSSchema/packages/pages-wp",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/pages": "${workspaceFolder}/layers/CMSSchema/packages/pages",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-cms-schema/post-categories-wp": "${workspaceFolder}/layers/CMSSchema/packages/post-categories-wp",

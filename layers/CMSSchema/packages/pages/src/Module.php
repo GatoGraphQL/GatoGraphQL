@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages;
 
-use PoP\Root\Module\ModuleInterface;
-use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
 use PoPAPI\RESTAPI\Module as RESTAPIModule;
 use PoPCMSSchema\Comments\Module as CommentsModule;
+use PoPCMSSchema\CustomPostMedia\Module as CustomPostMediaModule;
+use PoP\Root\App;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -37,6 +39,7 @@ class Module extends AbstractModule
             \PoPAPI\API\Module::class,
             \PoPAPI\RESTAPI\Module::class,
             \PoPCMSSchema\Comments\Module::class,
+            \PoPCMSSchema\CustomPostMedia\Module::class,
         ];
     }
 
@@ -63,6 +66,17 @@ class Module extends AbstractModule
                 $skipSchema || in_array(CommentsModule::class, $skipSchemaModuleClasses),
                 '/ConditionalOnModule/Comments'
             );
+        }
+
+        try {
+            if (class_exists(CustomPostMediaModule::class) && App::getModule(CustomPostMediaModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(CustomPostMediaModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/CustomPostMedia'
+                );
+            }
+        } catch (ComponentNotExistsException) {
         }
     }
 }

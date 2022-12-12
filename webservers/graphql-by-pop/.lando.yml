@@ -105,6 +105,8 @@ services:
         - '../../layers/CMSSchema/packages/metaquery-wp:/app/vendor/pop-cms-schema/metaquery-wp'
         - >-
           ../../layers/CMSSchema/packages/page-mutations:/app/vendor/pop-cms-schema/page-mutations
+        - >-
+          ../../layers/CMSSchema/packages/pagemedia-mutations:/app/vendor/pop-cms-schema/pagemedia-mutations
         - '../../layers/CMSSchema/packages/pages-wp:/app/vendor/pop-cms-schema/pages-wp'
         - '../../layers/CMSSchema/packages/pages:/app/vendor/pop-cms-schema/pages'
         - >-

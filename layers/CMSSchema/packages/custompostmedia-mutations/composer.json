@@ -143,7 +143,7 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Integrates media with custom post mutations",
+    "description": "Adds support for media mutations on custom posts",
     "keywords": ["GraphQL", "PHP", "PoP", "custompostmedia-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/custompostmedia-mutations",
     "license": "GPL-2.0-or-later",
