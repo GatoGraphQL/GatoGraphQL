@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMediaMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\PostMediaMutations\ConditionalOnModule\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostMediaMutations\FieldResolvers\ObjectType\AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
