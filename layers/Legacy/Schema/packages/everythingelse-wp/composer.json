@@ -28,7 +28,7 @@
         "johnpbloch/wordpress": ">=5.5"
     },
     "suggest": {
-        "pop-cms-schema/customposts": "Integrates well with Custom Posts"
+        "pop-cms-schema/customposts": "Integration with Custom Posts"
     },
     "autoload": {
         "psr-4": {

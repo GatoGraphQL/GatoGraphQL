@@ -26,8 +26,8 @@
         "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
-        "pop-api/api": "Integrates well with API",
-        "pop-api/api-rest": "Integrates well with REST API"
+        "pop-api/api": "Integration with API",
+        "pop-api/api-rest": "Integration with REST API"
     },
     "conflict": {
         "getpop/componentrouting": "<0.8.9",

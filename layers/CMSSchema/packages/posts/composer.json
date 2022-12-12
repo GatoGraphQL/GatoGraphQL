@@ -28,11 +28,11 @@
         "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
-        "pop-api/api": "Integrates well with API",
-        "pop-api/api-rest": "Integrates well with REST API",
-        "pop-cms-schema/comments": "Integrates well with Comments",
-        "pop-cms-schema/custompostmedia": "Integrates well with Custom Post Media",
-        "pop-cms-schema/users": "Integrates well with Users"
+        "pop-api/api": "Integration with API",
+        "pop-api/api-rest": "Integration with REST API",
+        "pop-cms-schema/comments": "Integration with Comments",
+        "pop-cms-schema/custompostmedia": "Integration with Custom Post Media",
+        "pop-cms-schema/users": "Integration with Users"
     },
     "conflict": {
         "getpop/componentrouting": "<0.8.9",

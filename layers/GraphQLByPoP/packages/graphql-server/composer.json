@@ -25,8 +25,8 @@
         "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
-        "getpop/access-control": "Integrates well with Access Control",
-        "getpop/cache-control": "Integrates well with Cache Control"
+        "getpop/access-control": "Integration with Access Control",
+        "getpop/cache-control": "Integration with Cache Control"
     },
     "conflict": {
         "getpop/componentrouting": "<0.8.9",

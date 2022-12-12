@@ -167,7 +167,7 @@
         "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
-        "pop-api/api": "Integrates well with API"
+        "pop-api/api": "Integration with API"
     },
     "autoload": {
         "psr-4": {

@@ -169,9 +169,9 @@
         "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
-        "pop-api/api": "Integrates well with API",
-        "pop-cms-schema/comment-mutations": "Integrates well with Comment Mutations",
-        "pop-cms-schema/users": "Integrates well with Users"
+        "pop-api/api": "Integration with API",
+        "pop-cms-schema/comment-mutations": "Integration with Comment Mutations",
+        "pop-cms-schema/users": "Integration with Users"
     },
     "autoload": {
         "psr-4": {
