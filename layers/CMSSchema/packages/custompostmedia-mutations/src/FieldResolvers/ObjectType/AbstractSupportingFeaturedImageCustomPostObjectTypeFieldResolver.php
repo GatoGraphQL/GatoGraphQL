@@ -14,7 +14,6 @@ use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCu
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType\CustomPostSetFeaturedImageFilterInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoP\ComponentModel\App;
@@ -25,10 +24,14 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoPCMSSchema\CustomPostMedia\FieldResolvers\ObjectType\MaybeSupportingFeaturedImageCustomPostObjectTypeFieldResolverTrait;
+use PoPCMSSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 use stdClass;
 
-class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use MaybeSupportingFeaturedImageCustomPostObjectTypeFieldResolverTrait;
+
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
@@ -38,6 +41,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?PayloadableRemoveFeaturedImageFromCustomPostMutationResolver $payloadableRemoveFeaturedImageFromCustomPostMutationResolver = null;
     private ?CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver $customPostSetFeaturedImageMutationPayloadObjectTypeResolver = null;
     private ?CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver $customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver = null;
+    private ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
 
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
@@ -120,15 +124,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver */
         return $this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver::class);
     }
-
-    /**
-     * @return array<class-string<ObjectTypeResolverInterface>>
-     */
-    public function getObjectTypeResolverClassesToAttachTo(): array
+    final public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
     {
-        return [
-            AbstractCustomPostObjectTypeResolver::class,
-        ];
+        $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
+    }
+    final protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
+    {
+        /** @var CustomPostMediaTypeAPIInterface */
+        return $this->customPostMediaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
     }
 
     /**
