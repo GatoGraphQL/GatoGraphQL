@@ -314,6 +314,9 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         return $authorURL;
     }
 
+    /**
+     * @see https://developer.wordpress.org/reference/functions/post_type_supports/
+     */
     public function doesCustomPostTypeSupportComments(string $customPostType): bool
     {
         return post_type_supports($customPostType, 'comments');

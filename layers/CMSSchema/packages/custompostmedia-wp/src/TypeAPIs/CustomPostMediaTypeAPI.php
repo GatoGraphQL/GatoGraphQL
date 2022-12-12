@@ -15,6 +15,14 @@ use function has_post_thumbnail;
  */
 class CustomPostMediaTypeAPI implements CustomPostMediaTypeAPIInterface
 {
+    /**
+     * @see https://developer.wordpress.org/reference/functions/post_type_supports/
+     */
+    public function doesCustomPostTypeSupportFeaturedImage(string $customPostType): bool
+    {
+        return post_type_supports($customPostType, 'thumbnail');
+    }
+
     public function hasCustomPostThumbnail(string|int|object $customPostObjectOrID): bool
     {
         if (is_object($customPostObjectOrID)) {
