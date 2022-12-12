@@ -76,15 +76,19 @@ class Module extends AbstractModule
 
                 /** @var AccessControlModuleConfiguration */
                 $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
-                if (
-                    class_exists(CacheControlModule::class)
-                    && $moduleConfiguration->canSchemaBePrivate()
-                ) {
-                    $this->initSchemaServices(
-                        dirname(__DIR__),
-                        $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
-                        '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
-                    );
+                try {
+                    if (
+                        class_exists(CacheControlModule::class)
+                        && App::getModule(CacheControlModule::class)->isEnabled()
+                        && $moduleConfiguration->canSchemaBePrivate()
+                    ) {
+                        $this->initSchemaServices(
+                            dirname(__DIR__),
+                            $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
+                            '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
+                        );
+                    }
+                } catch (ComponentNotExistsException) {
                 }
             }
         } catch (ComponentNotExistsException) {
