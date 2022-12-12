@@ -1,0 +1,75 @@
+mutation One {
+  logoutUser {
+    status
+    errors {
+      __typename
+      ...on IsErrorPayload {
+        message
+      }
+    }
+    userID
+    user {
+      username
+    }
+  }
+}
+
+mutation Two {
+  loginUser(by: {
+    credentials: {
+      usernameOrEmail: "admin",
+      password: "password"
+    }
+  }) {
+    status
+    errors {
+      __typename
+      ...on IsErrorPayload {
+        message
+      }
+    }
+    userID
+    user {
+      username
+    }
+  }
+}
+
+mutation Three {
+  loginUserAgain: loginUser(by: {
+    credentials: {
+      usernameOrEmail: "admin",
+      password: "password"
+    }
+  }) {
+    status
+    errors {
+      __typename
+      ...on IsErrorPayload {
+        message
+      }
+    }
+    userID
+    user {
+      username
+    }
+  }
+}
+
+mutation Four {
+  logoutUserAgain: logoutUser {
+    status
+    errors {
+      __typename
+      ...on IsErrorPayload {
+        message
+      }
+    }
+    userID
+    user {
+      username
+    }
+  }
+}
+
+query ExecuteAll @depends(on: ["One", "Two", "Three", "Four"]) {}

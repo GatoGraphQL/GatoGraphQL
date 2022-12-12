@@ -1,0 +1,20 @@
+{
+  "data": {
+    "loginUser": {
+      "status": "SUCCESS",
+      "errors": null,
+      "userID": 1,
+      "user": {
+        "username": "admin"
+      }
+    },
+    "logoutUser": {
+      "status": "SUCCESS",
+      "errors": null,
+      "userID": 1,
+      "user": {
+        "username": "admin"
+      }
+    }
+  }
+}

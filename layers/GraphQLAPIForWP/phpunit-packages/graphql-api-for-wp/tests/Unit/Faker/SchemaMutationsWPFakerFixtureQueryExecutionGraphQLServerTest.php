@@ -31,6 +31,7 @@ class SchemaMutationsWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstr
                 \PoPWPSchema\Comments\Module::class,
                 \PoPCMSSchema\CustomPostMutationsWP\Module::class,
                 \PoPCMSSchema\CommentMutationsWP\Module::class,
+                \GraphQLByPoP\DependsOnOperationsDirective\Module::class,
             ]
         ];
     }
@@ -43,10 +44,23 @@ class SchemaMutationsWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstr
         return [
             ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
+                \PoP\GraphQLParser\Module::class => [
+                    \PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION => true,
+                ],
                 \PoPCMSSchema\CommentMutations\Module::class => [
                     \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                 ],
             ]
         ];
+    }
+
+    protected function getMainFixtureOperationName(string $dataName): ?string
+    {
+        return match ($dataName) {
+            'error/user-state'
+                => 'ExecuteAll',
+            default
+                => parent::getMainFixtureOperationName($dataName),
+        };
     }
 }
