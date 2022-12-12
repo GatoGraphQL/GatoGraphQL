@@ -699,6 +699,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPCMSSchema\CustomPostMediaMutations\Module::class,
                 \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
             ],
+            MutationSchemaTypeModuleResolver::SCHEMA_PAGEMEDIA_MUTATIONS => [
+                \PoPCMSSchema\PageMediaMutations\Module::class,
+            ],
             MutationSchemaTypeModuleResolver::SCHEMA_POSTMEDIA_MUTATIONS => [
                 \PoPCMSSchema\PostMediaMutations\Module::class,
             ],
