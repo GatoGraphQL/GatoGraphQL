@@ -37,7 +37,7 @@ trait AttachableExtensionTrait
         $classesToAttachTo = $this->getClassesToAttachTo();
         $classesToExcludeAttachingTo = $this->getClassesToExcludeAttachingTo();
         foreach ($classesToAttachTo as $attachableClass) {
-            if ($classesToExcludeAttachingTo !== [] && $this->excludeAttachingClass($attachableClass)) {
+            if ($classesToExcludeAttachingTo !== [] && $this->excludeAttachingClass()) {
                 continue;
             }
             $attachableExtensionManager->attachExtensionToClass(
@@ -48,11 +48,11 @@ trait AttachableExtensionTrait
         }
     }
 
-    private function excludeAttachingClass(string $attachableClass): bool
+    private function excludeAttachingClass(): bool
     {
         $classesToExcludeAttachingTo = $this->getClassesToExcludeAttachingTo();
         foreach ($classesToExcludeAttachingTo as $classToExcludeAttachingTo) {
-            if (is_a($attachableClass, $classToExcludeAttachingTo, true)) {
+            if (is_a(get_called_class(), $classToExcludeAttachingTo, true)) {
                 return true;
             }
         }
