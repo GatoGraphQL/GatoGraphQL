@@ -8,6 +8,10 @@ use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
+/**
+ * A Transient Object is automatically added to the Object Dictionary
+ * under the class of the object.
+ */
 abstract class AbstractTransientObject implements TransientObjectInterface
 {
     use StandaloneServiceTrait;
@@ -25,7 +29,8 @@ abstract class AbstractTransientObject implements TransientObjectInterface
     }
 
     /**
-     * Static ID generator
+     * Static ID generator: all Transient Objects, from whatever class,
+     * will have different IDs.
      */
     public static int $counter = 0;
 
