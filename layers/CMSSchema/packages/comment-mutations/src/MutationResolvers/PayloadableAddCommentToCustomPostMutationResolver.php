@@ -53,7 +53,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createAndStoreFailureObjectMutationPayload(
                 array_map(
-                    $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 )
             )->getID();
@@ -77,7 +77,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createAndStoreFailureObjectMutationPayload(
                 array_map(
-                    $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 ),
                 $commentID
@@ -86,18 +86,6 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
 
         /** @var string|int $commentID */
         return $this->createAndStoreSuccessObjectMutationPayload($commentID)->getID();
-    }
-
-    protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
-        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
-    ): ErrorPayloadInterface {
-        $errorPayload = $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
-        $this->getObjectDictionary()->set(
-            get_class($errorPayload),
-            $errorPayload->getID(),
-            $errorPayload,
-        );
-        return $errorPayload;
     }
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
