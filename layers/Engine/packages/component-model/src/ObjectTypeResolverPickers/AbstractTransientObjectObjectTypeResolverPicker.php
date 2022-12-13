@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ObjectTypeResolverPickers;
 
-use PoP\ComponentModel\Registries\TransientObjectRegistryInterface;
+use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 
 abstract class AbstractTransientObjectObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {
-    private ?TransientObjectRegistryInterface $transientObjectRegistry = null;
+    private ?ObjectDictionaryInterface $objectDictionary = null;
 
-    final public function setTransientObjectRegistry(TransientObjectRegistryInterface $transientObjectRegistry): void
+    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
     {
-        $this->transientObjectRegistry = $transientObjectRegistry;
+        $this->objectDictionary = $objectDictionary;
     }
-    final protected function getTransientObjectRegistry(): TransientObjectRegistryInterface
+    final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
-        /** @var TransientObjectRegistryInterface */
-        return $this->transientObjectRegistry ??= $this->instanceManager->getInstance(TransientObjectRegistryInterface::class);
+        /** @var ObjectDictionaryInterface */
+        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
     }
 
     final public function isInstanceOfType(object $object): bool
@@ -29,7 +29,7 @@ abstract class AbstractTransientObjectObjectTypeResolverPicker extends AbstractO
 
     final public function isIDOfType(string|int $objectID): bool
     {
-        $transientObject = $this->getTransientObjectRegistry()->getTransientObject($objectID);
+        $transientObject = $this->getObjectDictionary()->get($this->getTargetObjectClass(), $objectID);
         if ($transientObject === null) {
             return false;
         }

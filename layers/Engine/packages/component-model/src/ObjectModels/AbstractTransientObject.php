@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ObjectModels;
 
-use PoP\ComponentModel\Registries\TransientObjectRegistryInterface;
+use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
@@ -12,16 +12,16 @@ abstract class AbstractTransientObject implements TransientObjectInterface
 {
     use StandaloneServiceTrait;
 
-    private ?TransientObjectRegistryInterface $transientObjectRegistry = null;
+    private ?ObjectDictionaryInterface $objectDictionary = null;
 
-    final public function setTransientObjectRegistry(TransientObjectRegistryInterface $transientObjectRegistry): void
+    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
     {
-        $this->transientObjectRegistry = $transientObjectRegistry;
+        $this->objectDictionary = $objectDictionary;
     }
-    final protected function getTransientObjectRegistry(): TransientObjectRegistryInterface
+    final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
-        /** @var TransientObjectRegistryInterface */
-        return $this->transientObjectRegistry ??= InstanceManagerFacade::getInstance()->getInstance(TransientObjectRegistryInterface::class);
+        /** @var ObjectDictionaryInterface */
+        return $this->objectDictionary ??= InstanceManagerFacade::getInstance()->getInstance(ObjectDictionaryInterface::class);
     }
 
     /**
@@ -37,7 +37,7 @@ abstract class AbstractTransientObject implements TransientObjectInterface
         $this->id = self::$counter;
 
         // Register the object in the registry
-        $this->getTransientObjectRegistry()->addTransientObject($this);
+        $this->getObjectDictionary()->set(get_called_class(), $this->getID(), $this);
     }
 
     public function getID(): int|string
