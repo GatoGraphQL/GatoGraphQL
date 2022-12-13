@@ -14,9 +14,10 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractTransientObjectObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 
 class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -39,6 +40,16 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return [
             AbstractObjectTypeResolver::class,
+        ];
+    }
+
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
+    public function getObjectTypeResolverClassesToExcludeAttachingTo(): array
+    {
+        return [
+            AbstractTransientObjectObjectTypeResolver::class,
         ];
     }
 
