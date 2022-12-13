@@ -7,8 +7,6 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 use PoP\Root\Module\ModuleInterface;
 
-use function Brain\Monkey\Functions\expect;
-
 class SchemaMutationsWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     /**
@@ -31,7 +29,7 @@ class SchemaMutationsWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstr
                 \PoPWPSchema\Posts\Module::class,
                 \PoPWPSchema\Pages\Module::class,
                 \PoPWPSchema\Comments\Module::class,
-                \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
+                \PoPCMSSchema\CustomPostMutationsWP\Module::class,
                 \PoPCMSSchema\CommentMutationsWP\Module::class,
             ]
         ];
@@ -50,24 +48,5 @@ class SchemaMutationsWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstr
                 ],
             ]
         ];
-    }
-
-    protected static function mockFunctions(): void
-    {
-        parent::mockFunctions();
-
-        /**
-         * Override function to not support featured image for pages
-         */
-        expect('post_type_supports')
-            ->andReturnUsing(
-                function (string $post_type, string $feature): bool
-                {
-                    if (in_array($feature, ['comments', 'thumbnail'])) {
-                        return $post_type === 'post';
-                    }
-                    return true;
-                }
-            );
     }
 }
