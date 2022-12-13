@@ -48,7 +48,7 @@ trait PayloadableMutationResolverTrait
         );
     }
 
-    protected function createAndStoreGenericErrorPayloadFromPayloadClientException(
+    protected function createGenericErrorPayloadFromPayloadClientException(
         AbstractPayloadClientException $payloadClientException
     ): GenericErrorPayload {
         $errorCode = $payloadClientException->getErrorCode();

@@ -56,7 +56,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
         } catch (CommentCRUDMutationException $commentCRUDMutationException) {
             return $this->createAndStoreFailureObjectMutationPayload(
                 [
-                    $this->createAndStoreGenericErrorPayloadFromPayloadClientException($commentCRUDMutationException),
+                    $this->createGenericErrorPayloadFromPayloadClientException($commentCRUDMutationException),
                 ]
             )->getID();
         }
