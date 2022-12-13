@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4bf4c621eb9580e4908620009084fa7",
+    "content-hash": "3b5664c574f2370c8f9ab83efd7c948a",
     "packages": [
         {
             "name": "antecedent/patchwork",
@@ -711,12 +711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/BrainFaker.git",
-                "reference": "024c6e22ca04b6c36cd364916f7792f7fe899940"
+                "reference": "d162f0b510377007ca96e3d9b650887d910a8d7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/024c6e22ca04b6c36cd364916f7792f7fe899940",
-                "reference": "024c6e22ca04b6c36cd364916f7792f7fe899940",
+                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/d162f0b510377007ca96e3d9b650887d910a8d7e",
+                "reference": "d162f0b510377007ca96e3d9b650887d910a8d7e",
                 "shasum": ""
             },
             "require": {
@@ -772,7 +772,7 @@
                 "issues": "https://github.com/Brain-WP/BrainFaker/issues",
                 "source": "https://github.com/Brain-WP/BrainFaker"
             },
-            "time": "2022-12-09T09:12:15+00:00"
+            "time": "2022-12-13T04:12:31+00:00"
         },
         {
             "name": "michelf/php-markdown",

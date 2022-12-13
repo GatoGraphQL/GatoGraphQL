@@ -154,6 +154,17 @@
           "description": "Error payload for: \"The requested custom post does not exist\""
         },
         {
+          "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+          "namespacedName": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"Setting the featured image is not supported by the custom post type\""
+        },
+        {
           "name": "GenericErrorPayload",
           "namespacedName": "GenericErrorPayload",
           "fields": [

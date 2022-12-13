@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTypeResolver
 {
-    private ?CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader = null;
+    private ?CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader): void
+    final public function setCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader): void
     {
-        $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader = $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader;
+        $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader;
     }
     final protected function getCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(): CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader
     {
         /** @var CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader */
-        return $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader::class);
+        return $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string

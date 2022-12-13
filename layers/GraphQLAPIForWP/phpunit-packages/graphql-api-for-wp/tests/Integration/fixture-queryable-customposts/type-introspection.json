@@ -43,6 +43,11 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "GenericCustomPost",
                     "enumValues": null,
                     "possibleTypes": null
@@ -396,6 +401,9 @@
                         },
                         {
                             "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload"
                         },
                         {
                             "name": "GenericErrorPayload"
@@ -1607,6 +1615,9 @@
                             "name": "CustomPostDoesNotExistErrorPayload"
                         },
                         {
+                            "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload"
+                        },
+                        {
                             "name": "GenericErrorPayload"
                         },
                         {
@@ -1674,6 +1685,9 @@
                     "possibleTypes": [
                         {
                             "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload"
                         },
                         {
                             "name": "GenericErrorPayload"
