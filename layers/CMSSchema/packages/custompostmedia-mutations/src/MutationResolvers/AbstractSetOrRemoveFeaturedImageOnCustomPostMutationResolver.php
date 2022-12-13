@@ -127,7 +127,7 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
     }
 
     protected function validateDoesCustomPostTypeSupportFeaturedImage(
-        string|int|null $customPostID,
+        string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
