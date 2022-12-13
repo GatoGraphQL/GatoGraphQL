@@ -87,7 +87,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         return $message;
     }
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

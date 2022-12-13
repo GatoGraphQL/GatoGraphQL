@@ -134,14 +134,14 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @param InputObjectSubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @throws AbstractValueResolutionPromiseException
      */
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         try {
             [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
-            $inputFieldMutationResolver->validateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+            $inputFieldMutationResolver->validate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         } catch (QueryResolutionException $e) {
             // Return the error message from the exception
             $objectTypeFieldResolutionFeedbackStore->addError(

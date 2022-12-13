@@ -24,11 +24,11 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        parent::validateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        parent::validate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }

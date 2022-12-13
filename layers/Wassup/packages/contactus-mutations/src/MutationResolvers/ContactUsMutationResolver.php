@@ -14,7 +14,7 @@ use PoP_EmailSender_Utils;
 
 class ContactUsMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

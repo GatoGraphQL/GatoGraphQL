@@ -863,7 +863,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
                 return;
             }
-            $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
+            $mutationResolver->validate($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
         }
     }
 
@@ -1667,7 +1667,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
                 return;
             }
-            $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
+            $mutationResolver->validate($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
         }
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {

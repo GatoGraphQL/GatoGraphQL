@@ -82,7 +82,7 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
         );
     }
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

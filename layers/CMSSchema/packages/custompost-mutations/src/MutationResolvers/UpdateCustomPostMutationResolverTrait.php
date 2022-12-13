@@ -36,7 +36,7 @@ trait UpdateCustomPostMutationResolverTrait
     /**
      * Validate the app-level errors in top-level "errors" entry.
      */
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

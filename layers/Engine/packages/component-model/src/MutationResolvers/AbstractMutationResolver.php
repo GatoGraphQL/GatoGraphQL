@@ -12,7 +12,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
 {
     use BasicServiceTrait;
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

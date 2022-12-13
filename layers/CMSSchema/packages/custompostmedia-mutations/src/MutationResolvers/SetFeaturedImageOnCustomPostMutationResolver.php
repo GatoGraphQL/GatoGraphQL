@@ -50,11 +50,11 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
         return $customPostID;
     }
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        parent::validateErrors(
+        parent::validate(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

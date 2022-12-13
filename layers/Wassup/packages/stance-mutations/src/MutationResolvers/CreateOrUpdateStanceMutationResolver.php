@@ -27,7 +27,7 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
         return $this->create($fieldDataAccessor);
     }
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

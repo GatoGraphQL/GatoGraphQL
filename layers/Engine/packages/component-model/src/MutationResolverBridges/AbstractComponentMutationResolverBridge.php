@@ -81,7 +81,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         ];
         $errorTypeKey = $errorTypeKeys[$errorType];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $mutationResolver->validateErrors($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
+        $mutationResolver->validate($fieldDataAccessorForMutation, $objectTypeFieldResolutionFeedbackStore);
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // @todo Migrate from string to FeedbackItemProvider
             $mutationResponse[$errorTypeKey] = array_map(

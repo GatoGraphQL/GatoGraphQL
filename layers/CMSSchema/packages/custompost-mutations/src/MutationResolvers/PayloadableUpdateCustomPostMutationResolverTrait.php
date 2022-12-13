@@ -14,7 +14,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
 {
     use PayloadableMutationResolverTrait, UpdateCustomPostMutationResolverTrait {
         UpdateCustomPostMutationResolverTrait::executeMutation as upstreamExecuteMutation;
-        PayloadableMutationResolverTrait::validateErrors insteadof UpdateCustomPostMutationResolverTrait;
+        PayloadableMutationResolverTrait::validate insteadof UpdateCustomPostMutationResolverTrait;
     }
     use PayloadableCreateOrUpdateCustomPostMutationResolverTrait;
 
