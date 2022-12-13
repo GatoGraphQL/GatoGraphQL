@@ -2,8 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Container;
+namespace PoP\ComponentModel\Dictionaries;
 
+/**
+ * Store objects in memory, under the class of the object.
+ *
+ * This class is (among others) used by Transient Objects,
+ * which are created on runtime and need to be stored as
+ * to be accessed through their ID in the GraphQL query.
+ */
 class ObjectDictionary implements ObjectDictionaryInterface
 {
     /**

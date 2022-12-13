@@ -4,28 +4,33 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ObjectModels;
 
-use PoP\ComponentModel\Registries\TransientObjectRegistryInterface;
+use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
+/**
+ * A Transient Object is automatically added to the Object Dictionary
+ * under the class of the object.
+ */
 abstract class AbstractTransientObject implements TransientObjectInterface
 {
     use StandaloneServiceTrait;
 
-    private ?TransientObjectRegistryInterface $transientObjectRegistry = null;
+    private ?ObjectDictionaryInterface $objectDictionary = null;
 
-    final public function setTransientObjectRegistry(TransientObjectRegistryInterface $transientObjectRegistry): void
+    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
     {
-        $this->transientObjectRegistry = $transientObjectRegistry;
+        $this->objectDictionary = $objectDictionary;
     }
-    final protected function getTransientObjectRegistry(): TransientObjectRegistryInterface
+    final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
-        /** @var TransientObjectRegistryInterface */
-        return $this->transientObjectRegistry ??= InstanceManagerFacade::getInstance()->getInstance(TransientObjectRegistryInterface::class);
+        /** @var ObjectDictionaryInterface */
+        return $this->objectDictionary ??= InstanceManagerFacade::getInstance()->getInstance(ObjectDictionaryInterface::class);
     }
 
     /**
-     * Static ID generator
+     * Static ID generator: all Transient Objects, from whatever class,
+     * will have different IDs.
      */
     public static int $counter = 0;
 
@@ -36,11 +41,8 @@ abstract class AbstractTransientObject implements TransientObjectInterface
         self::$counter++;
         $this->id = self::$counter;
 
-        /**
-         * Register the object in the registry,
-         * so that it can be part of a Union type.
-         */
-        $this->getTransientObjectRegistry()->addTransientObject($this);
+        // Register the object in the registry
+        $this->getObjectDictionary()->set(get_called_class(), $this->getID(), $this);
     }
 
     public function getID(): int|string

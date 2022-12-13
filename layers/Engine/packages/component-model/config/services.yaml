@@ -17,8 +17,8 @@ services:
             $namespace: '@=service("PoP\\ComponentModel\\Cache\\CacheConfigurationManagerInterface").getNamespace()'
             $directory: '@=service("PoP\\ComponentModel\\Cache\\CacheConfigurationManagerInterface").getDirectory()'
 
-    PoP\ComponentModel\Container\ObjectDictionaryInterface:
-        class: \PoP\ComponentModel\Container\ObjectDictionary
+    PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface:
+        class: \PoP\ComponentModel\Dictionaries\ObjectDictionary
 
     PoP\ComponentModel\Engine\EngineInterface:
         class: \PoP\ComponentModel\Engine\Engine
@@ -134,9 +134,6 @@ services:
 
     PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistryInterface:
         class: \PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistry
-
-    PoP\ComponentModel\Registries\TransientObjectRegistryInterface:
-        class: \PoP\ComponentModel\Registries\TransientObjectRegistry
 
     PoP\ComponentModel\Schema\InputCoercingServiceInterface:
         class: \PoP\ComponentModel\Schema\InputCoercingService

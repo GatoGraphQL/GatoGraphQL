@@ -16,7 +16,6 @@ use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -25,18 +24,6 @@ use PoP\Root\Exception\AbstractException;
 class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCustomPostMutationResolver
 {
     use PayloadableMutationResolverTrait;
-
-    private ?ObjectDictionaryInterface $objectDictionary = null;
-
-    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
-    {
-        $this->objectDictionary = $objectDictionary;
-    }
-    final protected function getObjectDictionary(): ObjectDictionaryInterface
-    {
-        /** @var ObjectDictionaryInterface */
-        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
-    }
 
     /**
      * Validate the app-level errors when executing the mutation,
@@ -51,9 +38,9 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         parent::validate($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
-                    $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 )
             )->getID();
@@ -67,17 +54,17 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
         } catch (CommentCRUDMutationException $commentCRUDMutationException) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 [
-                    $this->createAndStoreGenericErrorPayloadFromPayloadClientException($commentCRUDMutationException),
+                    $this->createGenericErrorPayloadFromPayloadClientException($commentCRUDMutationException),
                 ]
             )->getID();
         }
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
-                    $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 ),
                 $commentID
@@ -85,19 +72,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
         }
 
         /** @var string|int $commentID */
-        return $this->createAndStoreSuccessObjectMutationPayload($commentID)->getID();
-    }
-
-    protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
-        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
-    ): ErrorPayloadInterface {
-        $errorPayload = $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
-        $this->getObjectDictionary()->set(
-            get_class($errorPayload),
-            $errorPayload->getID(),
-            $errorPayload,
-        );
-        return $errorPayload;
+        return $this->createSuccessObjectMutationPayload($commentID)->getID();
     }
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

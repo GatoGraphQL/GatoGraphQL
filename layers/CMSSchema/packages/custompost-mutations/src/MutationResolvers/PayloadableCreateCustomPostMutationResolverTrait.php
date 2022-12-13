@@ -16,7 +16,7 @@ trait PayloadableCreateCustomPostMutationResolverTrait
         CreateCustomPostMutationResolverTrait::executeMutation as upstreamExecuteMutation;
         PayloadableMutationResolverTrait::validate insteadof CreateCustomPostMutationResolverTrait;
     }
-    use PayloadableCreateOrUpdateCustomPostMutationResolverTrait;
+    use PayloadableCustomPostMutationResolverTrait;
 
     /**
      * Validate the app-level errors when executing the mutation,
@@ -31,9 +31,9 @@ trait PayloadableCreateCustomPostMutationResolverTrait
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->validateCreateErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
-                    $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 )
             )->getID();
@@ -47,17 +47,17 @@ trait PayloadableCreateCustomPostMutationResolverTrait
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
         } catch (CustomPostCRUDMutationException $customPostCRUDMutationException) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 [
-                    $this->createAndStoreGenericErrorPayloadFromPayloadClientException($customPostCRUDMutationException),
+                    $this->createGenericErrorPayloadFromPayloadClientException($customPostCRUDMutationException),
                 ]
             )->getID();
         }
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
-                    $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 ),
                 $customPostID
@@ -65,6 +65,6 @@ trait PayloadableCreateCustomPostMutationResolverTrait
         }
 
         /** @var string|int $customPostID */
-        return $this->createAndStoreSuccessObjectMutationPayload($customPostID)->getID();
+        return $this->createSuccessObjectMutationPayload($customPostID)->getID();
     }
 }

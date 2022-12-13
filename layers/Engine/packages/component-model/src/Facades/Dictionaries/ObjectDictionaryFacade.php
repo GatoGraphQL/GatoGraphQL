@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\Container;
+namespace PoP\ComponentModel\Facades\Dictionaries;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
+use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 
 class ObjectDictionaryFacade
 {

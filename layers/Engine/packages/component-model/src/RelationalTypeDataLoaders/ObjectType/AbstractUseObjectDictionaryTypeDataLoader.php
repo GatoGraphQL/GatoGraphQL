@@ -4,12 +4,23 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
+use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-trait UseObjectDictionaryTypeDataLoaderTrait
+abstract class AbstractUseObjectDictionaryTypeDataLoader extends AbstractObjectTypeDataLoader
 {
-    abstract protected function getObjectDictionary(): ObjectDictionaryInterface;
+    private ?ObjectDictionaryInterface $objectDictionary = null;
+
+    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
+    {
+        $this->objectDictionary = $objectDictionary;
+    }
+    final protected function getObjectDictionary(): ObjectDictionaryInterface
+    {
+        /** @var ObjectDictionaryInterface */
+        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
+    }
 
     /**
      * @param array<string|int> $ids

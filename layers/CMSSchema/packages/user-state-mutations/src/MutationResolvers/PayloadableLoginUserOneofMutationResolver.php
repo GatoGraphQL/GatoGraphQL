@@ -12,7 +12,6 @@ use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -21,18 +20,6 @@ use PoP\Root\Exception\AbstractException;
 class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationResolver
 {
     use PayloadableMutationResolverTrait;
-
-    private ?ObjectDictionaryInterface $objectDictionary = null;
-
-    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
-    {
-        $this->objectDictionary = $objectDictionary;
-    }
-    final protected function getObjectDictionary(): ObjectDictionaryInterface
-    {
-        /** @var ObjectDictionaryInterface */
-        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
-    }
 
     /**
      * Validate the app-level errors when executing the mutation,
@@ -47,9 +34,9 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         parent::validate($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
-                    $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 )
             )->getID();
@@ -62,9 +49,9 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
         );
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
-                    $this->createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 ),
                 $userID
@@ -72,19 +59,7 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
         }
 
         /** @var string|int $userID */
-        return $this->createAndStoreSuccessObjectMutationPayload($userID)->getID();
-    }
-
-    protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
-        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
-    ): ErrorPayloadInterface {
-        $errorPayload = $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
-        $this->getObjectDictionary()->set(
-            get_class($errorPayload),
-            $errorPayload->getID(),
-            $errorPayload,
-        );
-        return $errorPayload;
+        return $this->createSuccessObjectMutationPayload($userID)->getID();
     }
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
