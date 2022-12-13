@@ -8,8 +8,14 @@ interface AttachableExtensionManagerInterface
 {
     /**
      * @param string $attachableClass Class or "*" to represent _any_ class
+     * @param string[] $classesToExcludeAttachingTo
      */
-    public function attachExtensionToClass(string $attachableClass, string $group, AttachableExtensionInterface $attachableExtension): void;
+    public function attachExtensionToClass(
+        string $attachableClass,
+        array $classesToExcludeAttachingTo,
+        string $group,
+        AttachableExtensionInterface $attachableExtension,
+    ): void;
     /**
      * @return AttachableExtensionInterface[]
      */
