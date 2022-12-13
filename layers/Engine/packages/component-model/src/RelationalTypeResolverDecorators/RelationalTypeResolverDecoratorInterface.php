@@ -25,6 +25,13 @@ interface RelationalTypeResolverDecoratorInterface extends AttachableExtensionIn
      */
     public function getRelationalTypeResolverClassesToAttachTo(): array;
     /**
+     * Subclasses of those specified in `getRelationalTypeResolverClassesToAttachTo()`
+     * that must not be attached after all.
+     *
+     * @return array<class-string<RelationalTypeResolverInterface>>
+     */
+    public function getRelationalTypeResolverClassesToExcludeAttachingTo(): array;
+    /**
      * Allow to disable the functionality
      */
     public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool;

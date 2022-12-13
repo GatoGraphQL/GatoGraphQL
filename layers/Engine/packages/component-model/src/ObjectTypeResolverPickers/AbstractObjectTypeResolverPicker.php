@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractObjectTypeResolverPicker implements ObjectTypeResolverPickerInterface
@@ -31,6 +32,22 @@ abstract class AbstractObjectTypeResolverPicker implements ObjectTypeResolverPic
     final public function getClassesToAttachTo(): array
     {
         return $this->getUnionTypeResolverClassesToAttachTo();
+    }
+
+    /**
+     * @return string[]
+     */
+    final public function getClassesToExcludeAttachingTo(): array
+    {
+        return $this->getUnionTypeResolverClassesToExcludeAttachingTo();
+    }
+
+    /**
+     * @return array<class-string<UnionTypeResolverInterface>>
+     */
+    public function getUnionTypeResolverClassesToExcludeAttachingTo(): array
+    {
+        return [];
     }
 
     public function isIDOfType(string|int $objectID): bool

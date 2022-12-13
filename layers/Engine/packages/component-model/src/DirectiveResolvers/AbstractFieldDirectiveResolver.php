@@ -39,6 +39,7 @@ use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -171,6 +172,22 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     final public function getClassesToAttachTo(): array
     {
         return $this->getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo();
+    }
+
+    /**
+     * @return string[]
+     */
+    final public function getClassesToExcludeAttachingTo(): array
+    {
+        return $this->getRelationalTypeOrInterfaceTypeResolverClassesToExcludeAttachingTo();
+    }
+
+    /**
+     * @return array<class-string<InterfaceTypeResolverInterface|RelationalTypeResolverInterface>>
+     */
+    public function getRelationalTypeOrInterfaceTypeResolverClassesToExcludeAttachingTo(): array
+    {
+        return [];
     }
 
     /**

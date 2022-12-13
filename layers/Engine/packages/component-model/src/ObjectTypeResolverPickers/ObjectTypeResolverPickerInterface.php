@@ -18,6 +18,13 @@ interface ObjectTypeResolverPickerInterface extends AttachableExtensionInterface
      * @return array<class-string<UnionTypeResolverInterface>>
      */
     public function getUnionTypeResolverClassesToAttachTo(): array;
+    /**
+     * Subclasses of those specified in `getUnionTypeResolverClassesToAttachTo()`
+     * that must not be attached after all.
+     *
+     * @return array<class-string<UnionTypeResolverInterface>>
+     */
+    public function getUnionTypeResolverClassesToExcludeAttachingTo(): array;
     public function getObjectTypeResolver(): ObjectTypeResolverInterface;
     public function isIDOfType(string|int $objectID): bool;
     public function isInstanceOfType(object $object): bool;

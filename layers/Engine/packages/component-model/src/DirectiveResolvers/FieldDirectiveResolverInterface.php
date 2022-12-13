@@ -28,6 +28,14 @@ interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, At
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array;
 
     /**
+     * Subclasses of those specified in `getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo()`
+     * that must not be attached after all.
+     *
+     * @return array<class-string<InterfaceTypeResolverInterface|RelationalTypeResolverInterface>>
+     */
+    public function getRelationalTypeOrInterfaceTypeResolverClassesToExcludeAttachingTo(): array;
+
+    /**
      * Validate and initialize the Directive, such as adding
      * the default values for Arguments which were not provided
      * in the query.

@@ -18,6 +18,13 @@ interface InterfaceTypeFieldResolverInterface extends FieldResolverInterface, In
      */
     public function getInterfaceTypeResolverClassesToAttachTo(): array;
     /**
+     * Subclasses of those specified in `getInterfaceTypeResolverClassesToAttachTo()`
+     * that must not be attached after all.
+     *
+     * @return array<class-string<InterfaceTypeResolverInterface>>
+     */
+    public function getInterfaceTypeResolverClassesToExcludeAttachingTo(): array;
+    /**
      * Get an array with the fieldNames that the fieldResolver must implement
      *
      * @return string[]

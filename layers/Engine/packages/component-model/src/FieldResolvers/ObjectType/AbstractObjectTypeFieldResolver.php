@@ -153,6 +153,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
+     * @return string[]
+     */
+    final public function getClassesToExcludeAttachingTo(): array
+    {
+        return $this->getObjectTypeResolverClassesToExcludeAttachingTo();
+    }
+
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
+    public function getObjectTypeResolverClassesToExcludeAttachingTo(): array
+    {
+        return [];
+    }
+
+    /**
      * @return array<InterfaceTypeFieldResolverInterface>
      */
     public function getImplementedInterfaceTypeFieldResolvers(): array

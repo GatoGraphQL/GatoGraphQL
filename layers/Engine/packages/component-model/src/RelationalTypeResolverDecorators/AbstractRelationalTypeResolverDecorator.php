@@ -37,6 +37,22 @@ abstract class AbstractRelationalTypeResolverDecorator implements RelationalType
     }
 
     /**
+     * @return string[]
+     */
+    final public function getClassesToExcludeAttachingTo(): array
+    {
+        return $this->getRelationalTypeResolverClassesToExcludeAttachingTo();
+    }
+
+    /**
+     * @return array<class-string<RelationalTypeResolverInterface>>
+     */
+    public function getRelationalTypeResolverClassesToExcludeAttachingTo(): array
+    {
+        return [];
+    }
+
+    /**
      * Allow to disable the functionality
      */
     public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool
