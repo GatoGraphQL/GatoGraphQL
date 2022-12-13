@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
+namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
