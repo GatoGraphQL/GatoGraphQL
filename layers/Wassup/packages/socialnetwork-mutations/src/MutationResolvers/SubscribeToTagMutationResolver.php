@@ -17,7 +17,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        parent::validateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        parent::validate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }

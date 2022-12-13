@@ -54,7 +54,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        parent::validateErrors(
+        parent::validate(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

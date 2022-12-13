@@ -42,7 +42,7 @@ class PayloadableSetTagsOnPostMutationResolver extends SetTagsOnPostMutationReso
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        parent::validateErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
+        parent::validate($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createAndStoreFailureObjectMutationPayload(
                 array_map(
