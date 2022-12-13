@@ -12,7 +12,7 @@ use PoPCMSSchema\UserMeta\Utils;
 
 class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommendCustomPostMutationResolver
 {
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

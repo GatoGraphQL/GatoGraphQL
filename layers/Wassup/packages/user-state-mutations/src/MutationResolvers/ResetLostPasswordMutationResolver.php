@@ -35,7 +35,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         return ErrorTypes::CODES;
     }
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

@@ -28,7 +28,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

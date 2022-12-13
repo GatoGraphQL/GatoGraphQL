@@ -29,7 +29,7 @@ trait CreateCustomPostMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int;
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

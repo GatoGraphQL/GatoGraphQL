@@ -21,7 +21,7 @@ trait PayloadableMutationResolverTrait
      * Override: Do nothing, because the app-level errors are
      * returned in the Payload, not in top-level "errors" entry.
      */
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

@@ -29,7 +29,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return true;
     }
 
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

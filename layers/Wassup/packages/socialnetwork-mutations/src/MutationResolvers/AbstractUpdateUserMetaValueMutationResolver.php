@@ -12,7 +12,7 @@ use PoP\Root\Exception\AbstractException;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

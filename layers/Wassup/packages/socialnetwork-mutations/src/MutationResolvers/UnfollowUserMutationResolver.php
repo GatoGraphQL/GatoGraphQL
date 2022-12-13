@@ -12,7 +12,7 @@ use PoPCMSSchema\UserMeta\Utils;
 
 class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
 {
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

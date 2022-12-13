@@ -14,7 +14,7 @@ use PoP_EmailSender_Utils;
 
 class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(
+    public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
