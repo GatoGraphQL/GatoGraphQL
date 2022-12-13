@@ -72,7 +72,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
         }
 
         /** @var string|int $commentID */
-        return $this->createAndStoreSuccessObjectMutationPayload($commentID)->getID();
+        return $this->createSuccessObjectMutationPayload($commentID)->getID();
     }
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

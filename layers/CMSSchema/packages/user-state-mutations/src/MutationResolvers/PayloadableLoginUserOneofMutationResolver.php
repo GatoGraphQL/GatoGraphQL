@@ -59,7 +59,7 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
         }
 
         /** @var string|int $userID */
-        return $this->createAndStoreSuccessObjectMutationPayload($userID)->getID();
+        return $this->createSuccessObjectMutationPayload($userID)->getID();
     }
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

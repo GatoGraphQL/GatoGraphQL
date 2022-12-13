@@ -65,6 +65,6 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
         }
 
         /** @var string|int $customPostID */
-        return $this->createAndStoreSuccessObjectMutationPayload($customPostID)->getID();
+        return $this->createSuccessObjectMutationPayload($customPostID)->getID();
     }
 }

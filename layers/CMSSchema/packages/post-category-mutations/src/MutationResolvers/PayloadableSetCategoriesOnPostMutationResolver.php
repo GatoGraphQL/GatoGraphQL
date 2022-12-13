@@ -53,6 +53,6 @@ class PayloadableSetCategoriesOnPostMutationResolver extends SetCategoriesOnPost
         }
 
         /** @var string|int $postID */
-        return $this->createAndStoreSuccessObjectMutationPayload($postID)->getID();
+        return $this->createSuccessObjectMutationPayload($postID)->getID();
     }
 }

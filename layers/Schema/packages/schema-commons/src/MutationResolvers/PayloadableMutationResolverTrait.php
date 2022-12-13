@@ -24,7 +24,7 @@ trait PayloadableMutationResolverTrait
     ): void {
     }
 
-    protected function createAndStoreSuccessObjectMutationPayload(
+    protected function createSuccessObjectMutationPayload(
         string|int $objectID,
     ): ObjectMutationPayload {
         return new ObjectMutationPayload(

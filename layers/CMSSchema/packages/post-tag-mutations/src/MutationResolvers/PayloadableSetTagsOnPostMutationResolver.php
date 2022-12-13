@@ -54,7 +54,7 @@ class PayloadableSetTagsOnPostMutationResolver extends SetTagsOnPostMutationReso
         }
 
         /** @var string|int $postID */
-        return $this->createAndStoreSuccessObjectMutationPayload($postID)->getID();
+        return $this->createSuccessObjectMutationPayload($postID)->getID();
     }
 
     protected function getUserNotLoggedInErrorFeedbackItemProviderClass(): string
