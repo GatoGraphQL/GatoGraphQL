@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Container;
+namespace PoP\ComponentModel\Dictionaries;
 
 class ObjectDictionary implements ObjectDictionaryInterface
 {

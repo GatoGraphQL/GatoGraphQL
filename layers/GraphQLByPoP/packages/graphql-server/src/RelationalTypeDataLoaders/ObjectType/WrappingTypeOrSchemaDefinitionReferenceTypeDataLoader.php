@@ -11,7 +11,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\WrappingTypeInterface;
 use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInterface;
 use GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface;
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
+use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 
 class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObjectTypeDataLoader

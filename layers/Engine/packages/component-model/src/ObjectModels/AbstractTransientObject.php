@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ObjectModels;
 
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
+use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
+use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 

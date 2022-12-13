@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ObjectTypeResolverPickers;
 
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
+use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 
 abstract class AbstractTransientObjectObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker
 {

@@ -17,8 +17,8 @@ services:
             $namespace: '@=service("PoP\\ComponentModel\\Cache\\CacheConfigurationManagerInterface").getNamespace()'
             $directory: '@=service("PoP\\ComponentModel\\Cache\\CacheConfigurationManagerInterface").getDirectory()'
 
-    PoP\ComponentModel\Container\ObjectDictionaryInterface:
-        class: \PoP\ComponentModel\Container\ObjectDictionary
+    PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface:
+        class: \PoP\ComponentModel\Dictionaries\ObjectDictionary
 
     PoP\ComponentModel\Engine\EngineInterface:
         class: \PoP\ComponentModel\Engine\Engine
