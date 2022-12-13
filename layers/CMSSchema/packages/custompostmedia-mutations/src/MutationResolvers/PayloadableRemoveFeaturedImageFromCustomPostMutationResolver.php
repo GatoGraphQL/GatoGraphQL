@@ -17,18 +17,6 @@ class PayloadableRemoveFeaturedImageFromCustomPostMutationResolver extends Remov
     use PayloadableMutationResolverTrait;
     use PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait;
 
-    private ?ObjectDictionaryInterface $objectDictionary = null;
-
-    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
-    {
-        $this->objectDictionary = $objectDictionary;
-    }
-    final protected function getObjectDictionary(): ObjectDictionaryInterface
-    {
-        /** @var ObjectDictionaryInterface */
-        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
-    }
-
     /**
      * Validate the app-level errors when executing the mutation,
      * return them in the Payload.
@@ -68,17 +56,5 @@ class PayloadableRemoveFeaturedImageFromCustomPostMutationResolver extends Remov
 
         /** @var string|int $customPostID */
         return $this->createAndStoreSuccessObjectMutationPayload($customPostID)->getID();
-    }
-
-    protected function createAndStoreErrorPayloadFromObjectTypeFieldResolutionFeedback(
-        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
-    ): ErrorPayloadInterface {
-        $errorPayload = $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
-        $this->getObjectDictionary()->set(
-            get_class($errorPayload),
-            $errorPayload->getID(),
-            $errorPayload,
-        );
-        return $errorPayload;
     }
 }
