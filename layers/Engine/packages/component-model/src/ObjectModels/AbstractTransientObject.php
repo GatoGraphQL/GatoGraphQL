@@ -36,10 +36,7 @@ abstract class AbstractTransientObject implements TransientObjectInterface
         self::$counter++;
         $this->id = self::$counter;
 
-        /**
-         * Register the object in the registry,
-         * so that it can be part of a Union type.
-         */
+        // Register the object in the registry
         $this->getTransientObjectRegistry()->addTransientObject($this);
     }
 
