@@ -712,6 +712,39 @@
         },
         {
           "kind": "OBJECT",
+          "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+          "description": "Error payload for: \"Setting the featured image is not supported by the custom post type\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "IsErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "GenericErrorPayload",
           "description": "Generic error payload",
           "fields": [
@@ -12427,6 +12460,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "GenericErrorPayload",
               "ofType": null
             },
@@ -19310,6 +19348,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "GenericErrorPayload",
               "ofType": null
             },
@@ -19424,6 +19467,11 @@
             {
               "kind": "OBJECT",
               "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
               "ofType": null
             },
             {
