@@ -28,7 +28,7 @@ class PayloadableSetCategoriesOnPostMutationResolver extends SetCategoriesOnPost
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         parent::validate($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
@@ -43,7 +43,7 @@ class PayloadableSetCategoriesOnPostMutationResolver extends SetCategoriesOnPost
         );
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()

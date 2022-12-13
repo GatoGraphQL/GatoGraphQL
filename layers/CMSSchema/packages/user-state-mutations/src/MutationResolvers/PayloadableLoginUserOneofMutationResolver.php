@@ -34,7 +34,7 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         parent::validate($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
@@ -49,7 +49,7 @@ class PayloadableLoginUserOneofMutationResolver extends LoginUserOneofMutationRe
         );
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()

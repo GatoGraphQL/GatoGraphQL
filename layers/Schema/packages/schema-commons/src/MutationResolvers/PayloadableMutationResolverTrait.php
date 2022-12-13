@@ -37,7 +37,7 @@ trait PayloadableMutationResolverTrait
     /**
      * @param ErrorPayloadInterface[] $errors
      */
-    protected function createAndStoreFailureObjectMutationPayload(
+    protected function createFailureObjectMutationPayload(
         array $errors,
         string|int|null $objectID = null,
     ): ObjectMutationPayload {

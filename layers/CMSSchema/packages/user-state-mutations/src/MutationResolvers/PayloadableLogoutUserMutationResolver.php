@@ -31,7 +31,7 @@ class PayloadableLogoutUserMutationResolver extends LogoutUserMutationResolver
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         parent::validate($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
@@ -46,7 +46,7 @@ class PayloadableLogoutUserMutationResolver extends LogoutUserMutationResolver
         );
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()

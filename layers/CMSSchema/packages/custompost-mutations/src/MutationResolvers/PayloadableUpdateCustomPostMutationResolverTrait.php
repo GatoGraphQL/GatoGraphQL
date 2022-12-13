@@ -31,7 +31,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->validateUpdateErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
@@ -47,7 +47,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
         } catch (CustomPostCRUDMutationException $customPostCRUDMutationException) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 [
                     $this->createGenericErrorPayloadFromPayloadClientException($customPostCRUDMutationException),
                 ]
@@ -55,7 +55,7 @@ trait PayloadableUpdateCustomPostMutationResolverTrait
         }
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()

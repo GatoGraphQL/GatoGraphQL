@@ -38,7 +38,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         parent::validate($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
@@ -54,7 +54,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
         } catch (CommentCRUDMutationException $commentCRUDMutationException) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 [
                     $this->createGenericErrorPayloadFromPayloadClientException($commentCRUDMutationException),
                 ]
@@ -62,7 +62,7 @@ class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCust
         }
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createAndStoreFailureObjectMutationPayload(
+            return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
