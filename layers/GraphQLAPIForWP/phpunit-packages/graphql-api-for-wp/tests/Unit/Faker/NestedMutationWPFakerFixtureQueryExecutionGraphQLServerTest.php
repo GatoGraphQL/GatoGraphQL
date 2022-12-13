@@ -57,10 +57,6 @@ class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstra
         ];
     }
 
-    /**
-     * BrainFaker does not mock WP_Role, so provide
-     * a basic function for the tests to work
-     */
     protected static function mockFunctions(): void
     {
         parent::mockFunctions();
