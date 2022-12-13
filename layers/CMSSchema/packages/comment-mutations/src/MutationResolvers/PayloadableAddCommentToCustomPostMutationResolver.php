@@ -16,7 +16,6 @@ use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
-use PoP\ComponentModel\Container\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -25,18 +24,6 @@ use PoP\Root\Exception\AbstractException;
 class PayloadableAddCommentToCustomPostMutationResolver extends AddCommentToCustomPostMutationResolver
 {
     use PayloadableMutationResolverTrait;
-
-    private ?ObjectDictionaryInterface $objectDictionary = null;
-
-    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
-    {
-        $this->objectDictionary = $objectDictionary;
-    }
-    final protected function getObjectDictionary(): ObjectDictionaryInterface
-    {
-        /** @var ObjectDictionaryInterface */
-        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
-    }
 
     /**
      * Validate the app-level errors when executing the mutation,
