@@ -34,12 +34,28 @@ trait AttachableExtensionTrait
     public function attach(string $group): void
     {
         $attachableExtensionManager = $this->getAttachableExtensionManager();
-        foreach ($this->getClassesToAttachTo() as $attachableClass) {
+        $classesToAttachTo = $this->getClassesToAttachTo();
+        $classesToExcludeAttachingTo = $this->getClassesToExcludeAttachingTo();
+        foreach ($classesToAttachTo as $attachableClass) {
+            if ($classesToExcludeAttachingTo !== [] && $this->excludeAttachingClass($attachableClass)) {
+                continue;
+            }
             $attachableExtensionManager->attachExtensionToClass(
                 $attachableClass,
                 $group,
                 $this
             );
         }
+    }
+
+    private function excludeAttachingClass(string $attachableClass): bool
+    {
+        $classesToExcludeAttachingTo = $this->getClassesToExcludeAttachingTo();
+        foreach ($classesToExcludeAttachingTo as $classToExcludeAttachingTo) {
+            if (is_a($attachableClass, $classToExcludeAttachingTo, true)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
