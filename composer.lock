@@ -711,12 +711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/BrainFaker.git",
-                "reference": "930119b6caf5e0b430e99e750ae4cab8f2adebb5"
+                "reference": "d162f0b510377007ca96e3d9b650887d910a8d7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/930119b6caf5e0b430e99e750ae4cab8f2adebb5",
-                "reference": "930119b6caf5e0b430e99e750ae4cab8f2adebb5",
+                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/d162f0b510377007ca96e3d9b650887d910a8d7e",
+                "reference": "d162f0b510377007ca96e3d9b650887d910a8d7e",
                 "shasum": ""
             },
             "require": {
@@ -772,7 +772,7 @@
                 "issues": "https://github.com/Brain-WP/BrainFaker/issues",
                 "source": "https://github.com/Brain-WP/BrainFaker"
             },
-            "time": "2022-12-13T02:53:18+00:00"
+            "time": "2022-12-13T04:12:31+00:00"
         },
         {
             "name": "michelf/php-markdown",
