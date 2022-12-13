@@ -16,6 +16,11 @@ interface AttachableExtensionInterface extends ServiceInterface
     public function getClassesToAttachTo(): array;
 
     /**
+     * @return string[]
+     */
+    public function getClassesToExcludeAttachingTo(): array;
+
+    /**
      * The priority with which to attach to the class. The higher the priority, the sooner it will be processed
      */
     public function getPriorityToAttachToClasses(): int;
