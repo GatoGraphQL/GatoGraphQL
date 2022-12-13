@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostMediaMutations\ObjectModels\FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload;
 use PoPCMSSchema\CustomPostMediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableCustomPostMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -30,6 +31,12 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new MediaItemDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            ] => new FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
