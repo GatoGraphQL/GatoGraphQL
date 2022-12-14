@@ -16,13 +16,8 @@ use WP_Term;
 use function get_term;
 use function esc_sql;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
-class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
+class TaxonomyTypeAPI extends AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
