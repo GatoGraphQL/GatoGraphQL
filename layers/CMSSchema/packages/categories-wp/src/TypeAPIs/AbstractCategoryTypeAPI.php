@@ -246,15 +246,8 @@ abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI
 
     protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term
     {
-        if (is_object($catObjectOrID)) {
-            /** @var WP_Term */
-            return $catObjectOrID;
-        }
-        $catObject = $this->getTerm($catObjectOrID, $this->getCategoryTaxonomyName());
-        if ($catObject === null) {
-            return null;
-        }
-        return $catObject;
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermFromObjectOrID($catObjectOrID);
     }
 
     public function getCategorySlug(string|int|object $catObjectOrID): ?string

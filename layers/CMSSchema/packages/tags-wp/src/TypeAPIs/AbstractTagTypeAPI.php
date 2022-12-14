@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TagsWP\TypeAPIs;
 
-use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractCustomPostTaxonomyTypeAPI;
+use PoP\Root\App;
 use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
 
 use function get_tag;
-use function get_term_by;
 use function get_tags;
+use function get_term_by;
 use function get_term_link;
 
 /**
@@ -52,11 +52,10 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
         return ($object instanceof WP_Taxonomy) && $object->hierarchical;
     }
 
-    protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?object
+    protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?WP_Term
     {
-        return is_object($tagObjectOrID) ?
-            $tagObjectOrID
-            : $this->getTerm($tagObjectOrID, $this->getTagTaxonomyName());
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermFromObjectOrID($tagObjectOrID);
     }
     public function getTagName(string|int|object $tagObjectOrID): string
     {
