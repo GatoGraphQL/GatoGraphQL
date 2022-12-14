@@ -343,11 +343,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $taxonomyTerm->description;
     }
 
-    public function getTaxonomyTermItemCount(string|int|WP_Term $taxonomyTermObjectOrID): int
+    public function getTaxonomyTermItemCount(string|int|WP_Term $taxonomyTermObjectOrID): ?int
     {
         $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
         if ($taxonomyTerm === null) {
-            return 0;
+            return null;
         }
         /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->count;

@@ -139,6 +139,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 return $tagTypeAPI->getTagDescription($tag);
 
             case 'count':
+                /** @var int */
                 return $tagTypeAPI->getTagItemCount($tag);
         }
 
