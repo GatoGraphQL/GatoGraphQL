@@ -152,7 +152,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         return $this->getTaxonomyTermURLPath($tagObjectOrID);
     }
 
-    public function getTagSlug(string|int|object $tagObjectOrID): string
+    public function getTagSlug(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
         return $this->getTaxonomyTermSlug($tagObjectOrID);

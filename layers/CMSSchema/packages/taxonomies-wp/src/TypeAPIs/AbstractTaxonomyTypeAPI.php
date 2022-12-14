@@ -323,11 +323,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $this->getCMSHelperService()->getLocalURLPath($url);
     }
 
-    public function getTaxonomyTermSlug(string|int|WP_Term $taxonomyTermObjectOrID): string
+    protected function getTaxonomyTermSlug(string|int|WP_Term $taxonomyTermObjectOrID): ?string
     {
         $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
         if ($taxonomyTerm === null) {
-            return '';
+            return null;
         }
         /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->slug;
