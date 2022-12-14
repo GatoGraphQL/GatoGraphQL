@@ -9,7 +9,7 @@ use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use WP_Error;
 use WP_Post;
 use WP_Taxonomy;
@@ -24,7 +24,7 @@ use function get_term_link;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
+abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements TagTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
