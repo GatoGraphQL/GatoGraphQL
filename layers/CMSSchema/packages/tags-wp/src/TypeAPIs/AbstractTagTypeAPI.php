@@ -9,7 +9,7 @@ use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractCustomPostTaxonomyTypeAPI;
 use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
@@ -23,7 +23,7 @@ use function get_term_link;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements TagTypeAPIInterface
+abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI implements TagTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
@@ -37,6 +37,11 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     {
         /** @var CMSHelperServiceInterface */
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+    }
+
+    protected function getCustomPostTaxonomyName(): string
+    {
+        return $this->getTagTaxonomyName();
     }
 
     abstract protected function getTagTaxonomyName(): string;
@@ -175,6 +180,16 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         }
         /** @var object[] */
         return $tags;
+    }
+
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    protected function convertCustomPostTaxonomyQuery(array $query, array $options = []): array
+    {
+        return $this->convertTagsQuery($query, $options);
     }
 
     /**

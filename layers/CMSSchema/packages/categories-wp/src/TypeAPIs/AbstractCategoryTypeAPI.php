@@ -10,7 +10,7 @@ use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractCustomPostTaxonomyTypeAPI;
 use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
@@ -23,7 +23,7 @@ use function get_term_children;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implements CategoryTypeAPIInterface
+abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
@@ -64,6 +64,11 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     }
 
     abstract protected function getCategoryBaseOption(): string;
+
+    protected function getCustomPostTaxonomyName(): string
+    {
+        return $this->getCategoryTaxonomyName();
+    }
 
     abstract protected function getCategoryTaxonomyName(): string;
 
@@ -154,6 +159,16 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         $query = $this->convertCategoriesQuery($query, $options);
         return get_categories($query);
+    }
+
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    protected function convertCustomPostTaxonomyQuery(array $query, array $options = []): array
+    {
+        return $this->convertCategoriesQuery($query, $options);
     }
 
     /**
