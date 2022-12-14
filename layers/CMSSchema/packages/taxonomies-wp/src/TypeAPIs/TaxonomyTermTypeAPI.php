@@ -17,7 +17,7 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
      */
     public function getTermTaxonomyName(object $taxonomyTerm): string
     {
-        /** @var WP_Term */
+        /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->taxonomy;
     }
 }
