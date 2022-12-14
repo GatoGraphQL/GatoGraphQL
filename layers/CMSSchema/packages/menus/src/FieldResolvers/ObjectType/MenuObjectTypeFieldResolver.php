@@ -179,7 +179,6 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  */
                 $arrangedEntries = [];
                 foreach ($entries as $menuItemData) {
-                    $menuItemData = (array) $menuItemData;
                     $arrangedEntriesPointer = &$arrangedEntries;
                     // Reproduce the list of parents
                     if ($menuItemParentID = $menuItemData['parentID']) {

@@ -47,8 +47,8 @@ class MenuTypeAPI implements MenuTypeAPIInterface
             function (object $menuItem): MenuItem {
                 return new MenuItem(
                     $menuItem->ID,
-                    $menuItem->object_id,
-                    $menuItem->menu_item_parent === "0" ? null : $menuItem->menu_item_parent,
+                    (int) $menuItem->object_id,
+                    $menuItem->menu_item_parent === "0" ? null : (int) $menuItem->menu_item_parent,
                     App::applyFilters('the_title', $menuItem->title, $menuItem->object_id),
                     $menuItem->attr_title,
                     $menuItem->url,
