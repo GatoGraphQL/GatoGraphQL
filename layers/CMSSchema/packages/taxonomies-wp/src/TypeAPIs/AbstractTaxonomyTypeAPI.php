@@ -276,7 +276,6 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         unset($query['offset']);
 
         // Execute query and return count
-        /** @var int[] */
         $count = get_terms($query);
 
         if ($count instanceof WP_Error) {
@@ -288,7 +287,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
             return (int) $count[0];
         }
-        
+
         return (int) $count;
     }
 
