@@ -145,6 +145,11 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         );
     }
 
+    protected function isHierarchical(): bool
+    {
+        return false;
+    }
+
     /**
      * @return array<string,mixed>
      * @param array<string,mixed> $query

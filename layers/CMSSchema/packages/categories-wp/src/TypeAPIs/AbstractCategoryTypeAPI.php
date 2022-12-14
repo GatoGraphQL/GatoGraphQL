@@ -136,6 +136,11 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         );
     }
 
+    protected function isHierarchical(): bool
+    {
+        return true;
+    }
+
     /**
      * @return array<string,mixed>
      * @param array<string,mixed> $query

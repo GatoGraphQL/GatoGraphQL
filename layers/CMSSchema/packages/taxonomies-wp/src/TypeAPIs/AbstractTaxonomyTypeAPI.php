@@ -159,7 +159,7 @@ abstract class AbstractTaxonomyTypeAPI
         if (isset($query['slug'])) {
             // Same param name, so do nothing
         }
-        if (isset($query['parent-id'])) {
+        if ($this->isHierarchical() && isset($query['parent-id'])) {
             $query['parent'] = $query['parent-id'];
             unset($query['parent-id']);
         }
@@ -170,6 +170,8 @@ abstract class AbstractTaxonomyTypeAPI
             $options
         );
     }
+
+    abstract protected function isHierarchical(): bool;
 
     protected function getOrderByQueryArgValue(string $orderBy): string
     {
