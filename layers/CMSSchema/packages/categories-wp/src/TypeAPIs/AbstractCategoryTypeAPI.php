@@ -115,7 +115,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         if ($categories instanceof WP_Error) {
             return null;
         }
-        /** @var string[] $categories */
+        /** @var int[] $categories */
         return count($categories);
     }
     /**

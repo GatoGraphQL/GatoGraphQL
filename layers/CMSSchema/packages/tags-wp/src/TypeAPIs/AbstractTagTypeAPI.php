@@ -131,7 +131,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         if ($tags instanceof WP_Error) {
             return 0;
         }
-        /** @var object[] $tags */
+        /** @var int[] $tags */
         return count($tags);
     }
     /**
