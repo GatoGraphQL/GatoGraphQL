@@ -243,7 +243,6 @@ abstract class AbstractTaxonomyTypeAPI
     protected function getTaxonomyCount(array $query = [], array $options = []): int
     {
         $query = $this->convertTaxonomyTermsQuery($query, $options);
-        $query['taxonomy'] = $this->getTaxonomyName();
 
         // Indicate to return the count
         $query['count'] = true;
