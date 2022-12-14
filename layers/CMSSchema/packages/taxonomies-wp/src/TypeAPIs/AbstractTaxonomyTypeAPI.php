@@ -18,7 +18,7 @@ use function get_term_by;
 use function get_terms;
 use function wp_get_post_terms;
 
-abstract class AbstractCustomPostTaxonomyTypeAPI
+abstract class AbstractTaxonomyTypeAPI
 {
     use BasicServiceTrait;
     use TaxonomyTermTypeAPITrait;
