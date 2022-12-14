@@ -16,6 +16,7 @@ use WP_Term;
 
 use function esc_sql;
 use function get_term_by;
+use function get_term_link;
 use function get_terms;
 use function wp_get_post_terms;
 
@@ -274,5 +275,17 @@ abstract class AbstractTaxonomyTypeAPI
             return null;
         }
         return $taxonomyTerm;
+    }
+
+    protected function getTaxonomyTermURL(string|int|WP_Term $taxonomyTermObjectOrID): ?string
+    {
+        $taxonomyTermLink = get_term_link(
+            $taxonomyTermObjectOrID,
+            $this->getTaxonomyName(),
+        );
+        if ($taxonomyTermLink instanceof WP_Error) {
+            return null;
+        }
+        return $taxonomyTermLink;
     }
 }
