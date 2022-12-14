@@ -333,7 +333,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $taxonomyTerm->slug;
     }
 
-    public function getTaxonomyTermDescription(string|int|WP_Term $taxonomyTermObjectOrID): ?string
+    protected function getTaxonomyTermDescription(string|int|WP_Term $taxonomyTermObjectOrID): ?string
     {
         $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
         if ($taxonomyTerm === null) {
@@ -343,7 +343,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $taxonomyTerm->description;
     }
 
-    public function getTaxonomyTermItemCount(string|int|WP_Term $taxonomyTermObjectOrID): ?int
+    protected function getTaxonomyTermItemCount(string|int|WP_Term $taxonomyTermObjectOrID): ?int
     {
         $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
         if ($taxonomyTerm === null) {
@@ -353,12 +353,12 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $taxonomyTerm->count;
     }
     
-    public function getTaxonomyTermID(WP_Term $taxonomyTerm): string|int
+    protected function getTaxonomyTermID(WP_Term $taxonomyTerm): string|int
     {
         return $taxonomyTerm->term_id;
     }
 
-    public function getTaxonomyTermParentID(string|int|WP_Term $taxonomyTermObjectOrID): string|int|null
+    protected function getTaxonomyTermParentID(string|int|WP_Term $taxonomyTermObjectOrID): string|int|null
     {
         $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
         if ($taxonomyTerm === null) {
@@ -374,7 +374,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     /**
      * @return array<string|int>|null
      */
-    public function getTaxonomyTermChildIDs(string|int|WP_Term $taxonomyTermObjectOrID): ?array
+    protected function getTaxonomyTermChildIDs(string|int|WP_Term $taxonomyTermObjectOrID): ?array
     {
         $taxonomyTermID = is_object($taxonomyTermObjectOrID) ? $this->getTaxonomyTermID($taxonomyTermObjectOrID) : $taxonomyTermObjectOrID;
         $childrenIDs = get_term_children((int)$taxonomyTermID, $this->getTaxonomyName());
