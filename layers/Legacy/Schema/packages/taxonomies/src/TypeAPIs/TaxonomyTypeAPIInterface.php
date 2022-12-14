@@ -7,7 +7,7 @@ namespace EverythingElse\PoPCMSSchema\Taxonomies\TypeAPIs;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface TaxonomyTypeAPIInterface
+interface TaxonomyTermTypeAPIInterface
 {
     public function getCustomPostTypeTaxonomies($post_type);
     public function isTaxonomyHierarchical($taxonomy);

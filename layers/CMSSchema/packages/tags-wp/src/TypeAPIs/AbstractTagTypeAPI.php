@@ -4,138 +4,91 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TagsWP\TypeAPIs;
 
-use PoP\Root\App;
-use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
+use PoP\Root\App;
 use WP_Error;
 use WP_Post;
-use WP_Taxonomy;
 use WP_Term;
 
-use function get_tag;
-use function get_term_by;
-use function wp_get_post_terms;
 use function get_tags;
-use function get_term_link;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
+abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements TagTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    private ?CMSHelperServiceInterface $cmsHelperService = null;
-
-    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    protected function getTaxonomyName(): string
     {
-        $this->cmsHelperService = $cmsHelperService;
-    }
-    final protected function getCMSHelperService(): CMSHelperServiceInterface
-    {
-        /** @var CMSHelperServiceInterface */
-        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+        return $this->getTagTaxonomyName();
     }
 
     abstract protected function getTagTaxonomyName(): string;
-
 
     /**
      * Indicates if the passed object is of type Tag
      */
     public function isInstanceOfTagType(object $object): bool
     {
-        return ($object instanceof WP_Taxonomy) && $object->hierarchical;
+        return $this->isInstanceOfTaxonomyType($object);
     }
 
-    protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?object
+    protected function isHierarchical(): bool
     {
-        return is_object($tagObjectOrID) ?
-            $tagObjectOrID
-            : $this->getTerm($tagObjectOrID, $this->getTagTaxonomyName());
+        return false;
     }
-    public function getTagName(string|int|object $tagObjectOrID): string
+
+    protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?WP_Term
     {
-        $tag = $this->getTagFromObjectOrID($tagObjectOrID);
-        if ($tag === null) {
-            return '';
-        }
-        /** @var WP_Term $tag */
-        return $tag->name;
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermFromObjectOrID($tagObjectOrID);
     }
+
+    public function getTagName(string|int|object $tagObjectOrID): ?string
+    {
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermName($tagObjectOrID);
+    }
+
     public function getTag(string|int $tagID): ?object
     {
-        $tag = get_tag((int)$tagID, $this->getTagTaxonomyName());
-        if (!($tag instanceof WP_Term)) {
-            return null;
-        }
-        return $tag;
+        return $this->getTaxonomyTerm($tagID);
     }
+
     public function getTagByName(string $tagName): ?object
     {
-        $tag = get_term_by('name', $tagName, $this->getTagTaxonomyName());
-        if (!($tag instanceof WP_Term)) {
-            return null;
-        }
-        return $tag;
+        return $this->getTaxonomyTermByName($tagName);
     }
 
     /**
-     * @return array<string,int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
+     * @return array<string|int>|object[]
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = $customPostObjectOrID;
-        }
-        $query = $this->convertTagsQuery($query, $options);
-        $tags = wp_get_post_terms((int)$customPostID, $this->getTagTaxonomyName(), $query);
-        if ($tags instanceof WP_Error) {
-            return [];
-        }
-        /** @var object[] $tags */
-        return $tags;
+        /** @var string|int|WP_Post $customPostObjectOrID */
+        return $this->getCustomPostTaxonomyTerms(
+            $customPostObjectOrID,
+            $query,
+            $options,
+        );
     }
+
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
+    public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = $customPostObjectOrID;
-        }
-        // There is no direct way to calculate the total
-        // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_tags`,
-        // but it doesn't work)
-        // So execute a normal `wp_get_post_tags` retrieving all the IDs, and count them
-        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
-        $query = $this->convertTagsQuery($query, $options);
-
-        // All results, no offset
-        $query['number'] = 0;
-        unset($query['offset']);
-
-        // Resolve and count
-        $tags = wp_get_post_terms((int)$customPostID, $this->getTagTaxonomyName(), $query);
-        if ($tags instanceof WP_Error) {
-            return 0;
-        }
-        /** @var object[] $tags */
-        return count($tags);
+        /** @var string|int|WP_Post $customPostObjectOrID */
+        return $this->getCustomPostTaxonomyTermCount(
+            $customPostObjectOrID,
+            $query,
+            $options,
+        );
     }
     /**
      * @param array<string,mixed> $query
@@ -143,29 +96,12 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
      */
     public function getTagCount(array $query = [], array $options = []): int
     {
-        $query = $this->convertTagsQuery($query, $options);
-
-        // Indicate to return the count
-        $query['count'] = true;
-        $query['fields'] = 'count';
-
-        // All results, no offset
-        $query['number'] = 0;
-        unset($query['offset']);
-
-        // Execute query and return count
-        /** @var int[] */
-        $count = get_tags($query);
-        // For some reason, the count is returned as an array of 1 element!
-        if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
-            return (int) $count[0];
-        }
-        // An error happened
-        return -1;
+        /** @var int */
+        return $this->getTaxonomyCount($query, $options);
     }
 
     /**
-     * @return array<string,int>|object[]
+     * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
@@ -185,68 +121,59 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function convertTagsQuery(array $query, array $options = []): array
+    protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
-        $query = $this->convertTaxonomiesQuery($query, $options);
-
-        // Convert the parameters
-        $query['taxonomy'] = $this->getTagTaxonomyName();
-
+        $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
         );
     }
-    public function getTagURL(string|int|object $tagObjectOrID): string
+
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function convertTagsQuery(array $query, array $options = []): array
+    {
+        return $this->convertTaxonomyTermsQuery($query, $options);
+    }
+
+    public function getTagURL(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        $url = get_term_link($tagObjectOrID, $this->getTagTaxonomyName());
-        if ($url instanceof WP_Error) {
-            return '';
-        }
-        return $url;
+        return $this->getTaxonomyTermURL($tagObjectOrID);
     }
 
-    public function getTagURLPath(string|int|object $tagObjectOrID): string
+    public function getTagURLPath(string|int|object $tagObjectOrID): ?string
     {
-        $localURLPath = $this->getCMSHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
-        if ($localURLPath === false) {
-            return '';
-        }
-        return $localURLPath;
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermURLPath($tagObjectOrID);
     }
 
-    public function getTagSlug(string|int|object $tagObjectOrID): string
+    public function getTagSlug(string|int|object $tagObjectOrID): ?string
     {
-        $tag = $this->getTagFromObjectOrID($tagObjectOrID);
-        if ($tag === null) {
-            return '';
-        }
-        /** @var WP_Term $tag */
-        return $tag->slug;
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermSlug($tagObjectOrID);
     }
-    public function getTagDescription(string|int|object $tagObjectOrID): string
+
+    public function getTagDescription(string|int|object $tagObjectOrID): ?string
     {
-        $tag = $this->getTagFromObjectOrID($tagObjectOrID);
-        if ($tag === null) {
-            return '';
-        }
-        /** @var WP_Term $tag */
-        return $tag->description;
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermDescription($tagObjectOrID);
     }
-    public function getTagItemCount(string|int|object $tagObjectOrID): int
+
+    public function getTagItemCount(string|int|object $tagObjectOrID): ?int
     {
-        $tag = $this->getTagFromObjectOrID($tagObjectOrID);
-        if ($tag === null) {
-            return 0;
-        }
-        /** @var WP_Term $tag */
-        return $tag->count;
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermItemCount($tagObjectOrID);
     }
+
     public function getTagID(object $tag): string|int
     {
         /** @var WP_Term $tag */
-        return $tag->term_id;
+        return $this->getTaxonomyTermID($tag);
     }
 }

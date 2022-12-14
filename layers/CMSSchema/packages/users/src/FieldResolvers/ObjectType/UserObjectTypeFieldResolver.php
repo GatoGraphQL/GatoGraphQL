@@ -202,6 +202,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $this->getUserTypeAPI()->getUserURL($user);
 
             case 'urlAbsolutePath':
+                /** @var string */
                 return $this->getUserTypeAPI()->getUserURLPath($user);
 
             case 'slug':

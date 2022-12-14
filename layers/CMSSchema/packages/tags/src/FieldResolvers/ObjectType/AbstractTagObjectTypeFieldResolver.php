@@ -119,21 +119,27 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         $tag = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
+                /** @var string */
                 return $tagTypeAPI->getTagURL($tag);
 
             case 'urlAbsolutePath':
+                /** @var string */
                 return $tagTypeAPI->getTagURLPath($tag);
 
             case 'name':
+                /** @var string */
                 return $tagTypeAPI->getTagName($tag);
 
             case 'slug':
+                /** @var string */
                 return $tagTypeAPI->getTagSlug($tag);
 
             case 'description':
+                /** @var string */
                 return $tagTypeAPI->getTagDescription($tag);
 
             case 'count':
+                /** @var int */
                 return $tagTypeAPI->getTagItemCount($tag);
         }
 

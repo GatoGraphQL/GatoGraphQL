@@ -23,11 +23,11 @@ class CMSHelperService implements CMSHelperServiceInterface
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    public function getLocalURLPath(string $url): string|false
+    public function getLocalURLPath(string $url): ?string
     {
         if (str_starts_with($url, $this->getCMSService()->getHomeURL())) {
             return GeneralUtils::getPath($url);
         }
-        return false;
+        return null;
     }
 }

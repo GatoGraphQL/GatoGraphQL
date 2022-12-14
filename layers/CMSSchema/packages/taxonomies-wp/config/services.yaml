@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface:
-        class: \PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI
+    PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface:
+        class: \PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTermTypeAPI

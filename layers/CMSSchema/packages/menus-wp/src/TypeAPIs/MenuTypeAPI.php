@@ -9,7 +9,7 @@ use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\Menus\ObjectModels\MenuItem;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Term;
 
@@ -185,7 +185,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         }
 
         return App::applyFilters(
-            TaxonomyTypeAPI::HOOK_QUERY,
+            AbstractTaxonomyTypeAPI::HOOK_QUERY,
             App::applyFilters(
                 self::HOOK_QUERY,
                 $query,

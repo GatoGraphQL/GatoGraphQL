@@ -29,8 +29,6 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
         if ($permalink === null) {
             return null;
         }
-
-        /** @var string */
         return $this->getCMSHelperService()->getLocalURLPath($permalink);
     }
 }

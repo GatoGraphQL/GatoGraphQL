@@ -173,11 +173,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return array_keys($this->getMenuItemRuntimeRegistry()->getMenuItemChildren($menuItem));
             case 'localURLPath':
                 $url = $menuItem->url;
-                $pathURL = $this->getCMSHelperService()->getLocalURLPath($url);
-                if ($pathURL === false) {
-                    return null;
-                }
-                return $pathURL;
+                return $this->getCMSHelperService()->getLocalURLPath($url);
             // These are all properties of MenuItem
             // Commented out since this is the default FieldResolver's response
             // case 'label':

@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace EverythingElse\PoPCMSSchema\CategoriesWP\TypeAPIs;
 
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\CategoriesWP\TypeAPIs\AbstractCategoryTypeAPI as UpstreamAbstractCategoryTypeAPI;
 
 use function wp_set_post_terms;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
+abstract class AbstractCategoryTypeAPI extends UpstreamAbstractCategoryTypeAPI implements CategoryTypeAPIInterface
 {
     public function hasCategory($cat_id, $post_id): bool
     {

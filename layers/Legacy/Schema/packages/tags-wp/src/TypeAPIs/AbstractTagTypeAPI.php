@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace EverythingElse\PoPCMSSchema\TagsWP\TypeAPIs;
 
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
+use PoPCMSSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI as UpstreamAbstractTagTypeAPI;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPIInterface
+abstract class AbstractTagTypeAPI extends UpstreamAbstractTagTypeAPI implements TagTypeAPIInterface
 {
     public function getTagBase(): string
     {

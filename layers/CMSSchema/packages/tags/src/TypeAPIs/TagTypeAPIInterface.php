@@ -30,12 +30,12 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
      * @param array<string,mixed> $options
      */
     public function getTagCount(array $query = [], array $options = []): int;
-    public function getTagURL(string|int|object $tagObjectOrID): string;
-    public function getTagURLPath(string|int|object $tagObjectOrID): string;
-    public function getTagName(string|int|object $tagObjectOrID): string;
-    public function getTagSlug(string|int|object $tagObjectOrID): string;
-    public function getTagDescription(string|int|object $tagObjectOrID): string;
-    public function getTagItemCount(string|int|object $tagObjectOrID): int;
+    public function getTagURL(string|int|object $tagObjectOrID): ?string;
+    public function getTagURLPath(string|int|object $tagObjectOrID): ?string;
+    public function getTagName(string|int|object $tagObjectOrID): ?string;
+    public function getTagSlug(string|int|object $tagObjectOrID): ?string;
+    public function getTagDescription(string|int|object $tagObjectOrID): ?string;
+    public function getTagItemCount(string|int|object $tagObjectOrID): ?int;
     /**
      * @return array<string|int>|object[]
      * @param array<string,mixed> $query
@@ -46,5 +46,5 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int;
+    public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int;
 }

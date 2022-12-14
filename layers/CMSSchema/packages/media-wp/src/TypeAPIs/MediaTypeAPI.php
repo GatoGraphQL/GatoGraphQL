@@ -49,7 +49,6 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         if ($src === null) {
             return null;
         }
-        /** @var string */
         return $this->getCMSHelperService()->getLocalURLPath($src);
     }
 
@@ -68,7 +67,6 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         if ($src === null) {
             return null;
         }
-        /** @var string */
         return $this->getCMSHelperService()->getLocalURLPath($src);
     }
 
