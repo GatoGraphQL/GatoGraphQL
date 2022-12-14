@@ -122,7 +122,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    protected function convertCustomPostTaxonomyQuery(array $query, array $options = []): array
+    protected function convertTaxonomyQuery(array $query, array $options = []): array
     {
         return $this->convertCategoriesQuery($query, $options);
     }

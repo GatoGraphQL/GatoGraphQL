@@ -135,7 +135,7 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    protected function convertCustomPostTaxonomyQuery(array $query, array $options = []): array
+    protected function convertTaxonomyQuery(array $query, array $options = []): array
     {
         return $this->convertTagsQuery($query, $options);
     }

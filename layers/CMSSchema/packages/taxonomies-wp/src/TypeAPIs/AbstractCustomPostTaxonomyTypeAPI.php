@@ -137,7 +137,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
     protected function getCustomPostTaxonomyTerms(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
-        $query = $this->convertCustomPostTaxonomyQuery($query, $options);
+        $query = $this->convertTaxonomyQuery($query, $options);
         $taxonomyTerms =  wp_get_post_terms(
             (int)$customPostID,
             $this->getTaxonomyName(),
@@ -166,7 +166,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
         // but it doesn't work)
         // So execute a normal `wp_get_post_categories` retrieving all the IDs, and count them
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
-        $query = $this->convertCustomPostTaxonomyQuery($query, $options);
+        $query = $this->convertTaxonomyQuery($query, $options);
 
         // All results, no offset
         $query['number'] = 0;
@@ -190,7 +190,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    abstract protected function convertCustomPostTaxonomyQuery(array $query, array $options = []): array;
+    abstract protected function convertTaxonomyQuery(array $query, array $options = []): array;
 
     abstract protected function getTaxonomyName(): string;
 
@@ -239,7 +239,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
      */
     protected function getTaxonomyCount(array $query = [], array $options = []): int
     {
-        $query = $this->convertCustomPostTaxonomyQuery($query, $options);
+        $query = $this->convertTaxonomyQuery($query, $options);
         $query['taxonomy'] = $this->getTaxonomyName();
 
         // Indicate to return the count
