@@ -123,7 +123,11 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         unset($query['offset']);
 
         // Resolve and count
-        $tags = wp_get_post_terms((int)$customPostID, $this->getTagTaxonomyName(), $query);
+        $tags = wp_get_post_terms(
+            (int)$customPostID,
+            $this->getTagTaxonomyName(),
+            $query,
+        );
         if ($tags instanceof WP_Error) {
             return 0;
         }

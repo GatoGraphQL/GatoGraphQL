@@ -77,7 +77,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertCategoriesQuery($query, $options);
         $categories =  wp_get_post_terms(
-            $customPostID,
+            (int)$customPostID,
             $this->getCategoryTaxonomyName(),
             $query,
         );
@@ -107,7 +107,11 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         unset($query['offset']);
 
         // Resolve and count
-        $categories = wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
+        $categories = wp_get_post_terms(
+            (int)$customPostID,
+            $this->getCategoryTaxonomyName(),
+            $query,
+        );
         if ($categories instanceof WP_Error) {
             return null;
         }
