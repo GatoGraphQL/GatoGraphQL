@@ -6,8 +6,6 @@ namespace PoPCMSSchema\TagsWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractCustomPostTaxonomyTypeAPI;
 use WP_Error;
@@ -114,30 +112,11 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
      */
     public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
     {
-        $customPostID = $this->getCustomPostID($customPostObjectOrID);
-
-        // There is no direct way to calculate the total
-        // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_tags`,
-        // but it doesn't work)
-        // So execute a normal `wp_get_post_tags` retrieving all the IDs, and count them
-        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
-        $query = $this->convertTagsQuery($query, $options);
-
-        // All results, no offset
-        $query['number'] = 0;
-        unset($query['offset']);
-
-        // Resolve and count
-        $tags = wp_get_post_terms(
-            (int)$customPostID,
-            $this->getTagTaxonomyName(),
+        return $this->getCustomPostTaxonomyTermCount(
+            $customPostObjectOrID,
             $query,
+            $options,
         );
-        if ($tags instanceof WP_Error) {
-            return 0;
-        }
-        /** @var int[] $tags */
-        return count($tags);
     }
     /**
      * @param array<string,mixed> $query

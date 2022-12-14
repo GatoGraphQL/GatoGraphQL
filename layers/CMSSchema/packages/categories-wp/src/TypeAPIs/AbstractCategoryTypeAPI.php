@@ -8,8 +8,6 @@ use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractCustomPostTaxonomyTypeAPI;
 use WP_Error;
 use WP_Taxonomy;
@@ -98,30 +96,11 @@ abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI
      */
     public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
-        $customPostID = $this->getCustomPostID($customPostObjectOrID);
-
-        // There is no direct way to calculate the total
-        // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
-        // but it doesn't work)
-        // So execute a normal `wp_get_post_categories` retrieving all the IDs, and count them
-        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
-        $query = $this->convertCategoriesQuery($query, $options);
-
-        // All results, no offset
-        $query['number'] = 0;
-        unset($query['offset']);
-
-        // Resolve and count
-        $categories = wp_get_post_terms(
-            (int)$customPostID,
-            $this->getCategoryTaxonomyName(),
+        return $this->getCustomPostTaxonomyTermCount(
+            $customPostObjectOrID,
             $query,
+            $options,
         );
-        if ($categories instanceof WP_Error) {
-            return null;
-        }
-        /** @var int[] $categories */
-        return count($categories);
     }
     /**
      * @param array<string,mixed> $query
