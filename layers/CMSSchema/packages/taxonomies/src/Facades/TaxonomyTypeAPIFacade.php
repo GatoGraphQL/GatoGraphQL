@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Taxonomies\Facades;
 
 use PoP\Root\App;
-use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 
 class TaxonomyTypeAPIFacade
 {
-    public static function getInstance(): TaxonomyTypeAPIInterface
+    public static function getInstance(): TaxonomyTermTypeAPIInterface
     {
         /**
-         * @var TaxonomyTypeAPIInterface
+         * @var TaxonomyTermTypeAPIInterface
          */
-        $service = App::getContainer()->get(TaxonomyTypeAPIInterface::class);
+        $service = App::getContainer()->get(TaxonomyTermTypeAPIInterface::class);
         return $service;
     }
 }

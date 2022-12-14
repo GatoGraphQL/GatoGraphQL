@@ -6,7 +6,7 @@ namespace EverythingElse\PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use WP_Error;
 use WP_Taxonomy;
 
@@ -15,7 +15,7 @@ use function wp_set_post_terms;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
+class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
 {
     /**
      * @return string[]|WP_Taxonomy[]

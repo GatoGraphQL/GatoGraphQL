@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Taxonomies\TypeAPIs;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface TaxonomyTypeAPIInterface
+interface TaxonomyTermTypeAPIInterface
 {
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
