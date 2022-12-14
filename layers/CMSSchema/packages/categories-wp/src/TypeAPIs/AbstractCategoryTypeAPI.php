@@ -129,7 +129,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
         $query = parent::convertTaxonomyTermsQuery($query, $options);
-
         return App::applyFilters(
             self::HOOK_QUERY,
             $query,

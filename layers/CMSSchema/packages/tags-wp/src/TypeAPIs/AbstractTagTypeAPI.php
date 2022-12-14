@@ -138,7 +138,6 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
         $query = parent::convertTaxonomyTermsQuery($query, $options);
-
         return App::applyFilters(
             self::HOOK_QUERY,
             $query,
