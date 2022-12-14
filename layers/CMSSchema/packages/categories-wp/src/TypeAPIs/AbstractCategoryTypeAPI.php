@@ -137,7 +137,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function convertCategoriesQuery(array $query, array $options = []): array
     {
-        $query = $this->convertTaxonomiesQuery($query, $options);
+        $query = $this->doConvertTaxonomyTermsQuery($query, $options);
 
         // Convert the parameters
         $query['taxonomy'] = $this->getCategoryTaxonomyName();
