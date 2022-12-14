@@ -164,7 +164,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         if (!$isFlat) {
                             $item_value['children'] = [];
                         }
-                        $entries[] = $item_value;
+                        $entries[] = (object) $item_value;
                     }
                 }
                 if ($isFlat) {
@@ -175,6 +175,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  */
                 $arrangedEntries = [];
                 foreach ($entries as $menuItemData) {
+                    $menuItemData = (array) $menuItemData;
                     $arrangedEntriesPointer = &$arrangedEntries;
                     // Reproduce the list of parents
                     if ($menuItemParentID = $menuItemData['parentID']) {
@@ -190,7 +191,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                             $arrangedEntriesPointer = &$arrangedEntriesPointer[$menuItemAncestorPos]['children'];
                         }
                     }
-                    $arrangedEntriesPointer[] = $menuItemData;
+                    $arrangedEntriesPointer[] = (object) $menuItemData;
                 }
                 return $arrangedEntries;
             case 'items':
