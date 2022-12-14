@@ -103,14 +103,7 @@ abstract class AbstractTaxonomyTypeAPI
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    abstract protected function convertTaxonomyTermsQuery(array $query, array $options = []): array;
-
-    /**
-     * @return array<string,mixed>
-     * @param array<string,mixed> $query
-     * @param array<string,mixed> $options
-     */
-    protected function doConvertTaxonomyTermsQuery(array $query, array $options = []): array
+    protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
         if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type === ReturnTypes::IDS) {

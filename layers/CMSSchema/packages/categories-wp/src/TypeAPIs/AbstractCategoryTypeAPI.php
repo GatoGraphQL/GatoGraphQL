@@ -127,17 +127,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
-        return $this->convertCategoriesQuery($query, $options);
-    }
-
-    /**
-     * @return array<string,mixed>
-     * @param array<string,mixed> $query
-     * @param array<string,mixed> $options
-     */
-    public function convertCategoriesQuery(array $query, array $options = []): array
-    {
-        $query = $this->doConvertTaxonomyTermsQuery($query, $options);
+        $query = parent::convertTaxonomyTermsQuery($query, $options);
 
         if (isset($query['parent-id'])) {
             $query['parent'] = $query['parent-id'];
@@ -149,6 +139,16 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             $query,
             $options
         );
+    }
+
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function convertCategoriesQuery(array $query, array $options = []): array
+    {
+        return $this->convertTaxonomyTermsQuery($query, $options);
     }
 
     public function getCategoryURL(string|int|object $catObjectOrID): ?string

@@ -136,7 +136,13 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
-        return $this->convertTagsQuery($query, $options);
+        $query = parent::convertTaxonomyTermsQuery($query, $options);
+
+        return App::applyFilters(
+            self::HOOK_QUERY,
+            $query,
+            $options
+        );
     }
 
     /**
@@ -146,14 +152,9 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function convertTagsQuery(array $query, array $options = []): array
     {
-        $query = $this->doConvertTaxonomyTermsQuery($query, $options);
-
-        return App::applyFilters(
-            self::HOOK_QUERY,
-            $query,
-            $options
-        );
+        return $this->convertTaxonomyTermsQuery($query, $options);
     }
+
     public function getTagURL(string|int|object $tagObjectOrID): string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
