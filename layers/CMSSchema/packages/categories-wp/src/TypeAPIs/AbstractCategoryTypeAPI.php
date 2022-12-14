@@ -51,7 +51,11 @@ abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI
      */
     public function isInstanceOfCategoryType(object $object): bool
     {
-        return ($object instanceof WP_Taxonomy) && $object->hierarchical;
+        if (!$this->isInstanceOfTaxonomyType($object)) {
+            return false;
+        }
+        /** @var WP_Taxonomy $object */
+        return $object->hierarchical;
     }
 
     public function getCategoryID(object $cat): string|int

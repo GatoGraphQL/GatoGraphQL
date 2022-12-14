@@ -43,13 +43,16 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
 
     abstract protected function getTagTaxonomyName(): string;
 
-
     /**
      * Indicates if the passed object is of type Tag
      */
     public function isInstanceOfTagType(object $object): bool
     {
-        return ($object instanceof WP_Taxonomy) && $object->hierarchical;
+        if (!$this->isInstanceOfTaxonomyType($object)) {
+            return false;
+        }
+        /** @var WP_Taxonomy $object */
+        return !$object->hierarchical;
     }
 
     protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?WP_Term

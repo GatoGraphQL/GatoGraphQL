@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
-use Brain\Faker\Provider\Term;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
-
 use WP_Error;
+use WP_Taxonomy;
+use WP_Term;
+
 use function esc_sql;
 
 abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
@@ -200,5 +201,13 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
             $taxonomyTermObjectOrID,
             $this->getCustomPostTaxonomyName(),
         );
+    }
+
+    /**
+     * Indicates if the passed object is of type Taxonomy
+     */
+    protected function isInstanceOfTaxonomyType(object $object): bool
+    {
+        return $object instanceof WP_Taxonomy;
     }
 }
