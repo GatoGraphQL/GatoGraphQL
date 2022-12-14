@@ -148,59 +148,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         return $this->getCMSService()->getOption($this->getCategoryBaseOption());
     }
 
-    // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
-    // {
-    //     $return_type = $options[QueryOptions::RETURN_TYPE] ?? null;
-    //     if ($return_type === ReturnTypes::IDS) {
-    //         return array_map(
-    //             function ($category) {
-    //                 return $category->term_id;
-    //             },
-    //             $categories
-    //         );
-    //     }
-
-    //     return $categories;
-    // }
-
-    // public function getCategoryCount($query, $options = []): int
-    // {
-    //     $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
-
-    //     // All results, no offset
-    //     $query['number'] = 0;
-    //     unset($query['offset']);
-
-    //     return count($this->getCategories($query, $options));
-    // }
-
-    // public function getCustomPostCategories($post_id, array $options = []): array
-    // {
-    //     $query = [];
-    //     if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-    //         if ($return_type === ReturnTypes::IDS) {
-    //             $query['fields'] = 'ids';
-    //         } elseif ($return_type == ReturnTypes::SLUGS) {
-    //             $query['fields'] = 'slugs';
-    //         }
-    //     }
-    //     return (array) wp_get_post_categories($post_id, $query);
-    // }
-    // public function getCustomPostCategoryCount($query, $options = []): int
-    // {
-    //     $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
-
-    //     // All results, no offset
-    //     $query['number'] = 0;
-    //     unset($query['offset']);
-
-    //     return count($this->getCustomPostCategories($query, $options));
-    // }
-    // public function getCategoryName($cat_id)
-    // {
-    //     return get_cat_name($cat_id);
-    // }
-
     protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term
     {
         /** @var string|int|WP_Term $catObjectOrID */
