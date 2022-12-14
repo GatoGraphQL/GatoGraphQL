@@ -81,14 +81,14 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
+    public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
             $customPostObjectOrID,
             $query,
             $options,
-        ) ?? 0;
+        );
     }
     /**
      * @param array<string,mixed> $query

@@ -163,6 +163,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             case 'tagNames':
                 return $tagTypeAPI->getCustomPostTags($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'tagCount':
+                /** @var int */
                 return $tagTypeAPI->getCustomPostTagCount($customPost, $query);
         }
 
