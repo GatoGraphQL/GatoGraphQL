@@ -71,7 +71,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     {
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTerms(
-            $customPostObjectOrID, 
+            $customPostObjectOrID,
             $query,
             $options,
         );
@@ -167,7 +167,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     public function getTagItemCount(string|int|object $tagObjectOrID): ?int
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-       return $this->getTaxonomyTermItemCount($tagObjectOrID);
+        return $this->getTaxonomyTermItemCount($tagObjectOrID);
     }
 
     public function getTagID(object $tag): string|int

@@ -69,7 +69,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTerms(
-            $customPostObjectOrID, 
+            $customPostObjectOrID,
             $query,
             $options,
         );
@@ -190,6 +190,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
     {
         /** @var string|int|WP_Term $catObjectOrID */
-       return $this->getTaxonomyTermItemCount($catObjectOrID);
+        return $this->getTaxonomyTermItemCount($catObjectOrID);
     }
 }

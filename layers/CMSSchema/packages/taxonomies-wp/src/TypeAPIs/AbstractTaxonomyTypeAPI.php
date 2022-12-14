@@ -13,9 +13,9 @@ use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 use WP_Post;
-
 use WP_Taxonomy;
 use WP_Term;
+
 use function esc_sql;
 use function get_term_by;
 use function get_term_children;
@@ -27,7 +27,7 @@ use function wp_get_post_terms;
 abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
     use BasicServiceTrait;
-    
+
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
@@ -64,7 +64,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         /** @var WP_Term */
         return $term;
     }
-    
+
     abstract protected function getTaxonomyName(): string;
 
     protected function getCustomPostID(string|int|WP_Post $customPostObjectOrID): string|int
@@ -349,7 +349,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->count;
     }
-    
+
     protected function getTaxonomyTermID(WP_Term $taxonomyTerm): string|int
     {
         return $taxonomyTerm->term_id;
