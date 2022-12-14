@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
-use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 use WP_Term;
 
 use function get_term;
 
-abstract class AbstractTaxonomyTypeAPI
+trait TaxonomyTermTypeAPITrait
 {
-    use BasicServiceTrait;
-    
     protected function getTerm(string|int $termObjectID, string $taxonomy = ''): ?WP_Term
     {
         $term = get_term((int)$termObjectID, $taxonomy);

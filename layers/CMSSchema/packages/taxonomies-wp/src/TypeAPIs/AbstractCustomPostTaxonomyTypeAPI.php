@@ -18,9 +18,10 @@ use function get_term_by;
 use function get_terms;
 use function wp_get_post_terms;
 
-abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
+abstract class AbstractCustomPostTaxonomyTypeAPI
 {
     use BasicServiceTrait;
+    use TaxonomyTermTypeAPITrait;
     
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';

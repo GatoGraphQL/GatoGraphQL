@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Term;
 
-class TaxonomyTermTypeAPI extends AbstractTaxonomyTypeAPI implements TaxonomyTermTypeAPIInterface
+class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
 {
+    use BasicServiceTrait;
+    use TaxonomyTermTypeAPITrait;
+
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
