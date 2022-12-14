@@ -109,7 +109,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         string|int|WP_Post $customPostObjectOrID,
         array $query = [],
         array $options = []
-    ): ?int {
+    ): int {
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
 
         // There is no direct way to calculate the total
@@ -130,7 +130,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             $query,
         );
         if ($taxonomyTerms instanceof WP_Error) {
-            return null;
+            return 0;
         }
         /** @var int[] $taxonomyTerms */
         return count($taxonomyTerms);
