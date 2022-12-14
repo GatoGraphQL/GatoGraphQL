@@ -140,7 +140,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         return $this->convertTaxonomyTermsQuery($query, $options);
     }
 
-    public function getTagURL(string|int|object $tagObjectOrID): string
+    public function getTagURL(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
         return $this->getTaxonomyTermURL($tagObjectOrID);

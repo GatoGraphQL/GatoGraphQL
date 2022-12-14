@@ -30,7 +30,7 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
      * @param array<string,mixed> $options
      */
     public function getTagCount(array $query = [], array $options = []): int;
-    public function getTagURL(string|int|object $tagObjectOrID): string;
+    public function getTagURL(string|int|object $tagObjectOrID): ?string;
     public function getTagURLPath(string|int|object $tagObjectOrID): ?string;
     public function getTagName(string|int|object $tagObjectOrID): string;
     public function getTagSlug(string|int|object $tagObjectOrID): string;
