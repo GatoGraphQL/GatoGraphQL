@@ -148,7 +148,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             }
         }
 
-        $query['taxonomy'] = $this->getTaxonomyName();
+        $query['taxonomy'] = [$this->getTaxonomyName()];
 
         if (isset($query['hide-empty'])) {
             $query['hide_empty'] = $query['hide-empty'];
@@ -279,12 +279,17 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         /** @var int[] */
         $count = get_terms($query);
 
+        if ($count instanceof WP_Error) {
+            // An error happened
+            return null;
+        }
+
         // For some reason, the count is returned as an array of 1 element!
         if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
             return (int) $count[0];
         }
-        // An error happened
-        return null;
+        
+        return (int) $count;
     }
 
     protected function getTaxonomyTerm(string|int $taxonomyTermID): ?WP_Term
