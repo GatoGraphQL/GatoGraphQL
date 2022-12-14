@@ -10,6 +10,7 @@ use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use WP_Error;
+use WP_Post;
 use WP_Taxonomy;
 use WP_Term;
 
@@ -80,6 +81,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
+        /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTerms(
             $customPostObjectOrID, 
             $query,
@@ -92,6 +94,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
+        /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
             $customPostObjectOrID,
             $query,

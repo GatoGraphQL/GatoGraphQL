@@ -10,6 +10,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
+use WP_Post;
 use WP_Taxonomy;
 use WP_Term;
 
@@ -120,7 +121,7 @@ abstract class AbstractTaxonomyTypeAPI
     /**
      * @return array<string,int>|object[]
      */
-    protected function getCustomPostID(string|int|object $customPostObjectOrID): string|int
+    protected function getCustomPostID(string|int|WP_Post $customPostObjectOrID): string|int
     {
         if (is_object($customPostObjectOrID)) {
             /** @var WP_Post */
@@ -135,7 +136,7 @@ abstract class AbstractTaxonomyTypeAPI
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    protected function getCustomPostTaxonomyTerms(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
+    protected function getCustomPostTaxonomyTerms(string|int|WP_Post $customPostObjectOrID, array $query = [], array $options = []): array
     {
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertTaxonomyQuery($query, $options);
@@ -156,7 +157,7 @@ abstract class AbstractTaxonomyTypeAPI
      * @param array<string,mixed> $options
      */
     protected function getCustomPostTaxonomyTermCount(
-        string|int|object $customPostObjectOrID,
+        string|int|WP_Post $customPostObjectOrID,
         array $query = [],
         array $options = []
     ): ?int {
@@ -215,17 +216,16 @@ abstract class AbstractTaxonomyTypeAPI
         return $object instanceof WP_Taxonomy;
     }
 
-    protected function getTaxonomyTermName(string|int|object $taxonomyTermObjectOrID): string
+    protected function getTaxonomyTermName(string|int|WP_Term $taxonomyTermObjectOrID): string
     {
         $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
         if ($taxonomyTerm === null) {
             return '';
         }
-        /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->name;
     }
 
-    protected function getTaxonomyTermByName(string $taxonomyTermName): ?object
+    protected function getTaxonomyTermByName(string $taxonomyTermName): ?WP_Term
     {
         $taxonomyTerm = get_term_by('name', $taxonomyTermName, $this->getTaxonomyName());
         if (!($taxonomyTerm instanceof WP_Term)) {
@@ -261,5 +261,17 @@ abstract class AbstractTaxonomyTypeAPI
         }
         // An error happened
         return 0;
+    }
+
+    protected function getTaxonomyTerm(string|int $taxonomyTermID): ?WP_Term
+    {
+        $taxonomyTerm = get_term(
+            (int)$taxonomyTermID,
+            $this->getTaxonomyName(),
+        );
+        if (!($taxonomyTerm instanceof WP_Term)) {
+            return null;
+        }
+        return $taxonomyTerm;
     }
 }

@@ -9,10 +9,10 @@ use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
 use WP_Error;
+use WP_Post;
 use WP_Taxonomy;
 use WP_Term;
 
-use function get_tag;
 use function get_tags;
 use function get_term_link;
 
@@ -56,22 +56,19 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 
     protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?WP_Term
     {
-        /** @var string|int|WP_Term $catObjectOrID */
+        /** @var string|int|WP_Term $tagObjectOrID */
         return $this->getTaxonomyTermFromObjectOrID($tagObjectOrID);
     }
 
     public function getTagName(string|int|object $tagObjectOrID): string
     {
+        /** @var string|int|WP_Term $tagObjectOrID */
         return $this->getTaxonomyTermName($tagObjectOrID);
     }
 
     public function getTag(string|int $tagID): ?object
     {
-        $tag = get_tag((int)$tagID, $this->getTagTaxonomyName());
-        if (!($tag instanceof WP_Term)) {
-            return null;
-        }
-        return $tag;
+        return $this->getTaxonomyTerm($tagID);
     }
 
     public function getTagByName(string $tagName): ?object
@@ -86,6 +83,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
+        /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTerms(
             $customPostObjectOrID, 
             $query,
@@ -99,6 +97,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
     {
+        /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
             $customPostObjectOrID,
             $query,
