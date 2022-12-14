@@ -60,15 +60,12 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
         /** @var string|int|WP_Term $catObjectOrID */
         return $this->getTaxonomyTermFromObjectOrID($tagObjectOrID);
     }
+
     public function getTagName(string|int|object $tagObjectOrID): string
     {
-        $tag = $this->getTagFromObjectOrID($tagObjectOrID);
-        if ($tag === null) {
-            return '';
-        }
-        /** @var WP_Term $tag */
-        return $tag->name;
+        return $this->getTaxonomyTermName($tagObjectOrID);
     }
+
     public function getTag(string|int $tagID): ?object
     {
         $tag = get_tag((int)$tagID, $this->getTagTaxonomyName());
@@ -77,6 +74,7 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
         }
         return $tag;
     }
+
     public function getTagByName(string $tagName): ?object
     {
         $tag = get_term_by('name', $tagName, $this->getTagTaxonomyName());

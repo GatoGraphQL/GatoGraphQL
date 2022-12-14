@@ -265,11 +265,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI
 
     public function getCategoryName(string|int|object $catObjectOrID): ?string
     {
-        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
-        if ($category === null) {
-            return null;
-        }
-        return $category->name;
+        return $this->getTaxonomyTermName($catObjectOrID);
     }
 
     public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
