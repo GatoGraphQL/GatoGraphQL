@@ -260,6 +260,6 @@ abstract class AbstractTaxonomyTypeAPI
             return (int) $count[0];
         }
         // An error happened
-        return -1;
+        return 0;
     }
 }
