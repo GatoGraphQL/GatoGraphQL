@@ -7,25 +7,26 @@ namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 use WP_Post;
-use WP_Taxonomy;
 
+use WP_Taxonomy;
 use WP_Term;
 use function esc_sql;
 use function get_term_by;
+use function get_term_children;
 use function get_term_link;
+use function get_term;
 use function get_terms;
 use function wp_get_post_terms;
-use function get_term_children;
 
-abstract class AbstractTaxonomyTypeAPI
+abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
     use BasicServiceTrait;
-    use TaxonomyTermTypeAPITrait;
     
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
@@ -41,6 +42,30 @@ abstract class AbstractTaxonomyTypeAPI
         /** @var CMSHelperServiceInterface */
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
+
+    protected function getTaxonomyTermFromObjectOrID(string|int|WP_Term $taxonomyTermObjectOrID): ?WP_Term
+    {
+        if (is_object($taxonomyTermObjectOrID)) {
+            /** @var WP_Term */
+            return $taxonomyTermObjectOrID;
+        }
+        return $this->getTerm(
+            $taxonomyTermObjectOrID,
+            $this->getTaxonomyName(),
+        );
+    }
+
+    protected function getTerm(string|int $termObjectID, string $taxonomy = ''): ?WP_Term
+    {
+        $term = get_term((int)$termObjectID, $taxonomy);
+        if ($term instanceof WP_Error) {
+            return null;
+        }
+        /** @var WP_Term */
+        return $term;
+    }
+    
+    abstract protected function getTaxonomyName(): string;
 
     /**
      * @return array<string,int>|object[]
@@ -75,8 +100,6 @@ abstract class AbstractTaxonomyTypeAPI
         /** @var array<string|int>|object[] $taxonomyTerms */
         return $taxonomyTerms;
     }
-
-    abstract protected function getTaxonomyName(): string;
 
     /**
      * @param array<string,mixed> $query
@@ -205,18 +228,6 @@ abstract class AbstractTaxonomyTypeAPI
         return App::applyFilters(
             self::HOOK_ORDERBY_QUERY_ARG_VALUE,
             $orderBy
-        );
-    }
-
-    protected function getTaxonomyTermFromObjectOrID(string|int|WP_Term $taxonomyTermObjectOrID): ?WP_Term
-    {
-        if (is_object($taxonomyTermObjectOrID)) {
-            /** @var WP_Term */
-            return $taxonomyTermObjectOrID;
-        }
-        return $this->getTerm(
-            $taxonomyTermObjectOrID,
-            $this->getTaxonomyName(),
         );
     }
 

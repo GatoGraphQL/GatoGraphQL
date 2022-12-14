@@ -33,8 +33,8 @@ class AppStateProvider extends AbstractAppStateProvider
         // Save the name of the taxonomy as an attribute,
         // needed to match the ComponentRoutingProcessor vars conditions
         if ($nature === RequestNature::TAG) {
-            $termObjectID = $state['routing']['queried-object-id'];
-            $state['routing']['taxonomy-name'] = $this->getTaxonomyTypeAPI()->getTermTaxonomyName($termObjectID);
+            $termObject = $state['routing']['queried-object'];
+            $state['routing']['taxonomy-name'] = $this->getTaxonomyTypeAPI()->getTermTaxonomyName($termObject);
         }
     }
 }

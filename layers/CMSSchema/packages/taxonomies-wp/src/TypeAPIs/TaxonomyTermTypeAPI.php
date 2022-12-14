@@ -11,23 +11,12 @@ use WP_Term;
 class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
 {
     use BasicServiceTrait;
-    use TaxonomyTermTypeAPITrait;
 
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
-    public function getTermTaxonomyName(string|int|object $taxonomyTermObjectOrID): ?string
+    public function getTermTaxonomyName(object $taxonomyTerm): string
     {
-        if (is_object($taxonomyTermObjectOrID)) {
-            /** @var WP_Term */
-            $termObject = $taxonomyTermObjectOrID;
-            return $termObject->taxonomy;
-        }
-        $termObjectID = $taxonomyTermObjectOrID;
-        $termObject = $this->getTerm($termObjectID);
-        if ($termObject === null) {
-            return null;
-        }
-        return $termObject->taxonomy;
+        return $taxonomyTerm->taxonomy;
     }
 }
