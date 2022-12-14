@@ -96,6 +96,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function getTagCount(array $query = [], array $options = []): int
     {
+        /** @var int */
         return $this->getTaxonomyCount($query, $options);
     }
 

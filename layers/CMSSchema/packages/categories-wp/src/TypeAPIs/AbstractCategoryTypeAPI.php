@@ -93,6 +93,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function getCategoryCount(array $query = [], array $options = []): int
     {
+        /** @var int */
         return $this->getTaxonomyCount($query, $options);
     }
     /**

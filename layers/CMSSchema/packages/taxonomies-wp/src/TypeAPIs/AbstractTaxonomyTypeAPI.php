@@ -263,7 +263,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    protected function getTaxonomyCount(array $query = [], array $options = []): int
+    protected function getTaxonomyCount(array $query = [], array $options = []): ?int
     {
         $query = $this->convertTaxonomyTermsQuery($query, $options);
 
@@ -284,7 +284,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             return (int) $count[0];
         }
         // An error happened
-        return 0;
+        return null;
     }
 
     protected function getTaxonomyTerm(string|int $taxonomyTermID): ?WP_Term
