@@ -1,0 +1,50 @@
+query {
+  menus {
+    ...MenuData
+  }
+
+  menuBySlug: menu(by: {slug: "top-menu"}) {
+    ...MenuData
+  }
+
+  # id 15 => "Bottom menu" in the initial dataset
+  menuByID: menu(by: {id: 15}) {
+    ...MenuData
+  }
+}
+
+fragment MenuData on Menu {
+  id
+  name
+  slug
+  count
+  locations
+  itemDataEntries
+  flatItemDataEntries: itemDataEntries(flat: true)
+  items {
+    ...MenuItemData
+    children {
+      ...MenuItemData
+      children {
+        ...MenuItemData
+        children {
+          ...MenuItemData
+        }
+      }
+    }
+  }
+}
+
+fragment MenuItemData on MenuItem {
+  id
+  localURLPath
+  label
+  title
+  url
+  classes
+  target
+  description
+  objectID
+  parentID
+  linkRelationship
+}
