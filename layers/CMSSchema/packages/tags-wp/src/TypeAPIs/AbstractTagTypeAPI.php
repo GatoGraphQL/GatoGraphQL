@@ -47,11 +47,12 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function isInstanceOfTagType(object $object): bool
     {
-        if (!$this->isInstanceOfTaxonomyType($object)) {
-            return false;
-        }
-        /** @var WP_Taxonomy $object */
-        return !$object->hierarchical;
+        return $this->isInstanceOfTaxonomyType($object);
+    }
+
+    protected function isHierarchical(): bool
+    {
+        return false;
     }
 
     protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?WP_Term
@@ -143,11 +144,6 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
             $query,
             $options
         );
-    }
-
-    protected function isHierarchical(): bool
-    {
-        return false;
     }
 
     /**

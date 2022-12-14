@@ -52,11 +52,12 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function isInstanceOfCategoryType(object $object): bool
     {
-        if (!$this->isInstanceOfTaxonomyType($object)) {
-            return false;
-        }
-        /** @var WP_Taxonomy $object */
-        return $object->hierarchical;
+        return $this->isInstanceOfTaxonomyType($object);
+    }
+
+    protected function isHierarchical(): bool
+    {
+        return true;
     }
 
     public function getCategoryID(object $cat): string|int
@@ -134,11 +135,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             $query,
             $options
         );
-    }
-
-    protected function isHierarchical(): bool
-    {
-        return true;
     }
 
     /**

@@ -210,7 +210,12 @@ abstract class AbstractTaxonomyTypeAPI
      */
     protected function isInstanceOfTaxonomyType(object $object): bool
     {
-        return $object instanceof WP_Taxonomy;
+        $isHierarchical = $this->isHierarchical();
+        return ($object instanceof WP_Taxonomy)
+            && (
+                ($isHierarchical && $object->hierarchical)
+                || (!$isHierarchical && !$object->hierarchical)
+            );
     }
 
     protected function getTaxonomyTermName(string|int|WP_Term $taxonomyTermObjectOrID): string
