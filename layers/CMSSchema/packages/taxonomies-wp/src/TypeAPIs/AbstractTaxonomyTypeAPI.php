@@ -67,9 +67,6 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     
     abstract protected function getTaxonomyName(): string;
 
-    /**
-     * @return array<string,int>|object[]
-     */
     protected function getCustomPostID(string|int|WP_Post $customPostObjectOrID): string|int
     {
         if (is_object($customPostObjectOrID)) {

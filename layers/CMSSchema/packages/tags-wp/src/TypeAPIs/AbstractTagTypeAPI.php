@@ -65,7 +65,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
-     * @return array<string,int>|object[]
+     * @return array<string|int>|object[]
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
@@ -100,7 +100,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     }
 
     /**
-     * @return array<string,int>|object[]
+     * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
