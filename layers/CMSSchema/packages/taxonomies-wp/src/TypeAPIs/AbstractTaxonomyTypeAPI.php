@@ -244,11 +244,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             );
     }
 
-    protected function getTaxonomyTermName(string|int|WP_Term $taxonomyTermObjectOrID): string
+    protected function getTaxonomyTermName(string|int|WP_Term $taxonomyTermObjectOrID): ?string
     {
         $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
         if ($taxonomyTerm === null) {
-            return '';
+            return null;
         }
         return $taxonomyTerm->name;
     }
