@@ -154,34 +154,25 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 
     public function getTagSlug(string|int|object $tagObjectOrID): string
     {
-        $tag = $this->getTagFromObjectOrID($tagObjectOrID);
-        if ($tag === null) {
-            return '';
-        }
-        /** @var WP_Term $tag */
-        return $tag->slug;
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermSlug($tagObjectOrID);
     }
+
     public function getTagDescription(string|int|object $tagObjectOrID): string
     {
-        $tag = $this->getTagFromObjectOrID($tagObjectOrID);
-        if ($tag === null) {
-            return '';
-        }
-        /** @var WP_Term $tag */
-        return $tag->description;
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermDescription($tagObjectOrID);
     }
+
     public function getTagItemCount(string|int|object $tagObjectOrID): int
     {
-        $tag = $this->getTagFromObjectOrID($tagObjectOrID);
-        if ($tag === null) {
-            return 0;
-        }
-        /** @var WP_Term $tag */
-        return $tag->count;
+        /** @var string|int|WP_Term $tagObjectOrID */
+       return $this->getTaxonomyTermItemCount($tagObjectOrID);
     }
+
     public function getTagID(object $tag): string|int
     {
         /** @var WP_Term $tag */
-        return $tag->term_id;
+        return $this->getTaxonomyTermID($tag);
     }
 }

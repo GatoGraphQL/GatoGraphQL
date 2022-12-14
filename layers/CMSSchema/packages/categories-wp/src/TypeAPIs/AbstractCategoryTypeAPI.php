@@ -50,7 +50,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCategoryID(object $cat): string|int
     {
         /** @var WP_Term $cat */
-        return $cat->term_id;
+        return $this->getTaxonomyTermID($cat);
     }
 
     abstract protected function getCategoryBaseOption(): string;
@@ -211,11 +211,8 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 
     public function getCategorySlug(string|int|object $catObjectOrID): ?string
     {
-        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
-        if ($category === null) {
-            return null;
-        }
-        return $category->slug;
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermSlug($catObjectOrID);
     }
 
     public function getCategoryName(string|int|object $catObjectOrID): ?string
@@ -251,18 +248,13 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 
     public function getCategoryDescription(string|int|object $catObjectOrID): ?string
     {
-        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
-        if ($category === null) {
-            return null;
-        }
-        return $category->description;
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermDescription($catObjectOrID);
     }
+
     public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
     {
-        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
-        if ($category === null) {
-            return null;
-        }
-        return $category->count;
+        /** @var string|int|WP_Term $catObjectOrID */
+       return $this->getTaxonomyTermItemCount($catObjectOrID);
     }
 }

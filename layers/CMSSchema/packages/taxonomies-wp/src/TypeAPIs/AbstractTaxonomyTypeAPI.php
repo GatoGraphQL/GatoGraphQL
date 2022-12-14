@@ -302,12 +302,47 @@ abstract class AbstractTaxonomyTypeAPI
         return $taxonomyTermLink;
     }
 
-    public function getTaxonomyTermURLPath(string|int|WP_Term $taxonomyTermObjectOrID): ?string
+    protected function getTaxonomyTermURLPath(string|int|WP_Term $taxonomyTermObjectOrID): ?string
     {
         $tagURL = $this->getTaxonomyTermURL($taxonomyTermObjectOrID);
         if ($tagURL === null) {
             return null;
         }
         return $this->getCMSHelperService()->getLocalURLPath($tagURL);
+    }
+
+    public function getTaxonomyTermSlug(string|int|WP_Term $taxonomyTermObjectOrID): string
+    {
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
+        if ($taxonomyTerm === null) {
+            return '';
+        }
+        /** @var WP_Term $taxonomyTerm */
+        return $taxonomyTerm->slug;
+    }
+
+    public function getTaxonomyTermDescription(string|int|WP_Term $taxonomyTermObjectOrID): string
+    {
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
+        if ($taxonomyTerm === null) {
+            return '';
+        }
+        /** @var WP_Term $taxonomyTerm */
+        return $taxonomyTerm->description;
+    }
+
+    public function getTaxonomyTermItemCount(string|int|WP_Term $taxonomyTermObjectOrID): int
+    {
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
+        if ($taxonomyTerm === null) {
+            return 0;
+        }
+        /** @var WP_Term $taxonomyTerm */
+        return $taxonomyTerm->count;
+    }
+    
+    public function getTaxonomyTermID(WP_Term $taxonomyTerm): string|int
+    {
+        return $taxonomyTerm->term_id;
     }
 }
