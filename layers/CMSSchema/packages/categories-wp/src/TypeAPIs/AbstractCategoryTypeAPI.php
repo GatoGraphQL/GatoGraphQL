@@ -129,11 +129,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         $query = parent::convertTaxonomyTermsQuery($query, $options);
 
-        if (isset($query['parent-id'])) {
-            $query['parent'] = $query['parent-id'];
-            unset($query['parent-id']);
-        }
-
         return App::applyFilters(
             self::HOOK_QUERY,
             $query,
