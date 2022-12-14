@@ -161,13 +161,13 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         return $this->getTaxonomyTermURL($tagObjectOrID);
     }
 
-    public function getTagURLPath(string|int|object $tagObjectOrID): string
+    public function getTagURLPath(string|int|object $tagObjectOrID): ?string
     {
-        $localURLPath = $this->getCMSHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
-        if ($localURLPath === false) {
-            return '';
+        $tagURL = $this->getTagURL($tagObjectOrID);
+        if ($tagURL === null) {
+            return null;
         }
-        return $localURLPath;
+        return $this->getCMSHelperService()->getLocalURLPath($tagURL);
     }
 
     public function getTagSlug(string|int|object $tagObjectOrID): string

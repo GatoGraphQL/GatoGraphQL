@@ -158,7 +158,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         if ($categoryURL === null) {
             return null;
         }
-        /** @var string */
         return $this->getCMSHelperService()->getLocalURLPath($categoryURL);
     }
 
