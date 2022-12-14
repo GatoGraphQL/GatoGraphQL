@@ -9,6 +9,7 @@ echo "Installing WordPress..."
 /bin/sh /app/setup/configure.sh
 /bin/sh /app/setup/fix-install.sh
 /bin/sh /app/setup/install-safly-curl-patch.sh
+/bin/sh /app/setup/activate-theme.sh
 /bin/sh /app/setup/activate-plugins.sh
 /bin/sh /app/setup/delete-data.sh
 /bin/sh /app/setup/create-users.sh
