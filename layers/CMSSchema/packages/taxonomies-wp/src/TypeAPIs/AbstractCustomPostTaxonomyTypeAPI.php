@@ -147,16 +147,16 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
         unset($query['offset']);
 
         // Resolve and count
-        $categories = wp_get_post_terms(
+        $taxonomyTerms = wp_get_post_terms(
             (int)$customPostID,
             $this->getCustomPostTaxonomyName(),
             $query,
         );
-        if ($categories instanceof WP_Error) {
+        if ($taxonomyTerms instanceof WP_Error) {
             return null;
         }
-        /** @var string[] $categories */
-        return count($categories);
+        /** @var int[] $taxonomyTerms */
+        return count($taxonomyTerms);
     }
 
     /**
