@@ -75,17 +75,13 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = (int)$customPostObjectOrID;
-        }
-
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertCategoriesQuery($query, $options);
-
-        $categories =  wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
+        $categories =  wp_get_post_terms(
+            $customPostID,
+            $this->getCategoryTaxonomyName(),
+            $query,
+        );
         if ($categories instanceof WP_Error) {
             return [];
         }

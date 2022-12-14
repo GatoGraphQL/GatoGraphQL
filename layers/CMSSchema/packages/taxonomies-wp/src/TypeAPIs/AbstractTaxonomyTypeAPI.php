@@ -121,4 +121,17 @@ abstract class AbstractTaxonomyTypeAPI
         /** @var WP_Term */
         return $term;
     }
+
+    /**
+     * @return array<string,int>|object[]
+     */
+    protected function getCustomPostID(string|int|object $customPostObjectOrID): string|int
+    {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            return $customPost->ID;
+        }
+        return $customPostObjectOrID;
+    }
 }

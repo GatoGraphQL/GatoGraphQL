@@ -90,21 +90,20 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = $customPostObjectOrID;
-        }
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertTagsQuery($query, $options);
-        $tags = wp_get_post_terms((int)$customPostID, $this->getTagTaxonomyName(), $query);
+        $tags = wp_get_post_terms(
+            (int)$customPostID,
+            $this->getTagTaxonomyName(),
+            $query,
+        );
         if ($tags instanceof WP_Error) {
             return [];
         }
         /** @var object[] $tags */
         return $tags;
     }
+
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
