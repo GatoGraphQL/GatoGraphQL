@@ -16,14 +16,14 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
-    public function getTermTaxonomyName(string|int|object $termObjectOrID): ?string
+    public function getTermTaxonomyName(string|int|object $taxonomyTermObjectOrID): ?string
     {
-        if (is_object($termObjectOrID)) {
+        if (is_object($taxonomyTermObjectOrID)) {
             /** @var WP_Term */
-            $termObject = $termObjectOrID;
+            $termObject = $taxonomyTermObjectOrID;
             return $termObject->taxonomy;
         }
-        $termObjectID = $termObjectOrID;
+        $termObjectID = $taxonomyTermObjectOrID;
         $termObject = $this->getTerm($termObjectID);
         if ($termObject === null) {
             return null;
