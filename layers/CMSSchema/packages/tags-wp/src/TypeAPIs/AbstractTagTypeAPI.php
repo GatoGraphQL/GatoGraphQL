@@ -77,11 +77,7 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
 
     public function getTagByName(string $tagName): ?object
     {
-        $tag = get_term_by('name', $tagName, $this->getTagTaxonomyName());
-        if (!($tag instanceof WP_Term)) {
-            return null;
-        }
-        return $tag;
+        return $this->getTaxonomyTermByName($tagName);
     }
 
     /**

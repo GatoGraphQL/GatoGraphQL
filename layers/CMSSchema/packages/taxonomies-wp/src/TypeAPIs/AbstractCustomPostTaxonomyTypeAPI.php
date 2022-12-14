@@ -220,4 +220,13 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
         /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->name;
     }
+
+    protected function getTaxonomyTermByName(string $taxonomyTermName): ?object
+    {
+        $taxonomyTerm = get_term_by('name', $taxonomyTermName, $this->getCustomPostTaxonomyName());
+        if (!($taxonomyTerm instanceof WP_Term)) {
+            return null;
+        }
+        return $taxonomyTerm;
+    }
 }
