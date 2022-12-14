@@ -120,6 +120,8 @@ abstract class AbstractTaxonomyTypeAPI
             }
         }
 
+        $query['taxonomy'] = $this->getTaxonomyName();
+
         if (isset($query['hide-empty'])) {
             $query['hide_empty'] = $query['hide-empty'];
             unset($query['hide-empty']);

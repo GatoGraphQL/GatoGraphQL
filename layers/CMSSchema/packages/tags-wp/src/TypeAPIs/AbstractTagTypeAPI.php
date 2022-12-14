@@ -148,9 +148,6 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     {
         $query = $this->doConvertTaxonomyTermsQuery($query, $options);
 
-        // Convert the parameters
-        $query['taxonomy'] = $this->getTagTaxonomyName();
-
         return App::applyFilters(
             self::HOOK_QUERY,
             $query,
