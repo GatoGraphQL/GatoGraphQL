@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TagsWP\TypeAPIs;
 
-use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
 use WP_Error;
 use WP_Post;
-use WP_Taxonomy;
 use WP_Term;
 
 use function get_tags;
-use function get_term_link;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -22,18 +19,6 @@ use function get_term_link;
 abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements TagTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
-
-    private ?CMSHelperServiceInterface $cmsHelperService = null;
-
-    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
-    {
-        $this->cmsHelperService = $cmsHelperService;
-    }
-    final protected function getCMSHelperService(): CMSHelperServiceInterface
-    {
-        /** @var CMSHelperServiceInterface */
-        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
-    }
 
     protected function getTaxonomyName(): string
     {
@@ -163,11 +148,8 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 
     public function getTagURLPath(string|int|object $tagObjectOrID): ?string
     {
-        $tagURL = $this->getTagURL($tagObjectOrID);
-        if ($tagURL === null) {
-            return null;
-        }
-        return $this->getCMSHelperService()->getLocalURLPath($tagURL);
+        /** @var string|int|WP_Term $tagObjectOrID */
+        return $this->getTaxonomyTermURLPath($tagObjectOrID);
     }
 
     public function getTagSlug(string|int|object $tagObjectOrID): string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
+use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -12,8 +13,8 @@ use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 use WP_Post;
 use WP_Taxonomy;
-use WP_Term;
 
+use WP_Term;
 use function esc_sql;
 use function get_term_by;
 use function get_term_link;
@@ -27,6 +28,18 @@ abstract class AbstractTaxonomyTypeAPI
     
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
+
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
+
+    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    final protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        /** @var CMSHelperServiceInterface */
+        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+    }
 
     /**
      * @return array<string,int>|object[]
@@ -287,5 +300,14 @@ abstract class AbstractTaxonomyTypeAPI
             return null;
         }
         return $taxonomyTermLink;
+    }
+
+    public function getTaxonomyTermURLPath(string|int|WP_Term $taxonomyTermObjectOrID): ?string
+    {
+        $tagURL = $this->getTaxonomyTermURL($taxonomyTermObjectOrID);
+        if ($tagURL === null) {
+            return null;
+        }
+        return $this->getCMSHelperService()->getLocalURLPath($tagURL);
     }
 }

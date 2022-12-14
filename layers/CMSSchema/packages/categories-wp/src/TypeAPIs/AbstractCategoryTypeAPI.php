@@ -5,17 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoriesWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use WP_Error;
 use WP_Post;
-use WP_Taxonomy;
 use WP_Term;
 
 use function get_categories;
-use function get_term_link;
 use function get_term_children;
 
 /**
@@ -25,18 +22,8 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    private ?CMSHelperServiceInterface $cmsHelperService = null;
     private ?CMSServiceInterface $cmsService = null;
 
-    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
-    {
-        $this->cmsHelperService = $cmsHelperService;
-    }
-    final protected function getCMSHelperService(): CMSHelperServiceInterface
-    {
-        /** @var CMSHelperServiceInterface */
-        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
-    }
     final public function setCMSService(CMSServiceInterface $cmsService): void
     {
         $this->cmsService = $cmsService;
@@ -154,11 +141,8 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 
     public function getCategoryURLPath(string|int|object $catObjectOrID): ?string
     {
-        $categoryURL = $this->getCategoryURL($catObjectOrID);
-        if ($categoryURL === null) {
-            return null;
-        }
-        return $this->getCMSHelperService()->getLocalURLPath($categoryURL);
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermURLPath($catObjectOrID);
     }
 
     public function getCategoryBase(): string
