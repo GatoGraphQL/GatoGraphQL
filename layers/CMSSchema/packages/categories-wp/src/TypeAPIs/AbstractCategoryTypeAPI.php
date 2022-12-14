@@ -12,7 +12,6 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use WP_Error;
-use WP_Post;
 use WP_Taxonomy;
 use WP_Term;
 
@@ -94,13 +93,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = (int)$customPostObjectOrID;
-        }
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
 
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,

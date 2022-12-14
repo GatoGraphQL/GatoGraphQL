@@ -11,7 +11,6 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use WP_Error;
-use WP_Post;
 use WP_Taxonomy;
 use WP_Term;
 
@@ -110,13 +109,8 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): int
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = $customPostObjectOrID;
-        }
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+
         // There is no direct way to calculate the total
         // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_tags`,
         // but it doesn't work)
