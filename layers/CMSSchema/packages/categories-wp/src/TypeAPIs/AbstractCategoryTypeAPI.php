@@ -8,12 +8,10 @@ use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
-use WP_Error;
 use WP_Post;
 use WP_Term;
 
 use function get_categories;
-use function get_term_children;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -222,15 +220,8 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 
     public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
     {
-        $category = $this->getCategoryFromObjectOrID($catObjectOrID);
-        if ($category === null) {
-            return null;
-        }
-        // If it has no parent, it is assigned 0. In that case, return null
-        if ($parent = $category->parent) {
-            return $parent;
-        }
-        return null;
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermParentID($catObjectOrID);
     }
 
     /**
@@ -238,12 +229,8 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function getCategoryChildIDs(string|int|object $catObjectOrID): ?array
     {
-        $categoryID = is_object($catObjectOrID) ? $this->getCategoryID($catObjectOrID) : $catObjectOrID;
-        $childrenIDs = get_term_children((int)$categoryID, $this->getCategoryTaxonomyName());
-        if ($childrenIDs instanceof WP_Error) {
-            return null;
-        }
-        return $childrenIDs;
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermChildIDs($catObjectOrID);
     }
 
     public function getCategoryDescription(string|int|object $catObjectOrID): ?string

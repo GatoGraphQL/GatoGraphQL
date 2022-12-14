@@ -20,6 +20,7 @@ use function get_term_by;
 use function get_term_link;
 use function get_terms;
 use function wp_get_post_terms;
+use function get_term_children;
 
 abstract class AbstractTaxonomyTypeAPI
 {
@@ -344,5 +345,31 @@ abstract class AbstractTaxonomyTypeAPI
     public function getTaxonomyTermID(WP_Term $taxonomyTerm): string|int
     {
         return $taxonomyTerm->term_id;
+    }
+
+    public function getTaxonomyTermParentID(string|int|WP_Term $taxonomyTermObjectOrID): string|int|null
+    {
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomyTermObjectOrID);
+        if ($taxonomyTerm === null) {
+            return null;
+        }
+        // If it has no parent, it is assigned 0. In that case, return null
+        if ($parent = $taxonomyTerm->parent) {
+            return $parent;
+        }
+        return null;
+    }
+
+    /**
+     * @return array<string|int>|null
+     */
+    public function getTaxonomyTermChildIDs(string|int|WP_Term $taxonomyTermObjectOrID): ?array
+    {
+        $taxonomyTermID = is_object($taxonomyTermObjectOrID) ? $this->getTaxonomyTermID($taxonomyTermObjectOrID) : $taxonomyTermObjectOrID;
+        $childrenIDs = get_term_children((int)$taxonomyTermID, $this->getTaxonomyName());
+        if ($childrenIDs instanceof WP_Error) {
+            return null;
+        }
+        return $childrenIDs;
     }
 }
