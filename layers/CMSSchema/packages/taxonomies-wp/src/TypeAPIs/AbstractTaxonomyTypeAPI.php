@@ -28,6 +28,84 @@ abstract class AbstractTaxonomyTypeAPI
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     /**
+     * @return array<string,int>|object[]
+     */
+    protected function getCustomPostID(string|int|WP_Post $customPostObjectOrID): string|int
+    {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            return $customPost->ID;
+        }
+        return $customPostObjectOrID;
+    }
+
+    /**
+     * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    protected function getCustomPostTaxonomyTerms(string|int|WP_Post $customPostObjectOrID, array $query = [], array $options = []): array
+    {
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+        $query = $this->convertTaxonomyTermsQuery($query, $options);
+        $taxonomyTerms =  wp_get_post_terms(
+            (int)$customPostID,
+            $this->getTaxonomyName(),
+            $query,
+        );
+        if ($taxonomyTerms instanceof WP_Error) {
+            return [];
+        }
+        /** @var array<string|int>|object[] $taxonomyTerms */
+        return $taxonomyTerms;
+    }
+
+    abstract protected function getTaxonomyName(): string;
+
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    protected function getCustomPostTaxonomyTermCount(
+        string|int|WP_Post $customPostObjectOrID,
+        array $query = [],
+        array $options = []
+    ): ?int {
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+
+        // There is no direct way to calculate the total
+        // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
+        // but it doesn't work)
+        // So execute a normal `wp_get_post_categories` retrieving all the IDs, and count them
+        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
+        $query = $this->convertTaxonomyTermsQuery($query, $options);
+
+        // All results, no offset
+        $query['number'] = 0;
+        unset($query['offset']);
+
+        // Resolve and count
+        $taxonomyTerms = wp_get_post_terms(
+            (int)$customPostID,
+            $this->getTaxonomyName(),
+            $query,
+        );
+        if ($taxonomyTerms instanceof WP_Error) {
+            return null;
+        }
+        /** @var int[] $taxonomyTerms */
+        return count($taxonomyTerms);
+    }
+
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    abstract protected function convertTaxonomyTermsQuery(array $query, array $options = []): array;
+
+    /**
      * @return array<string,mixed>
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
@@ -117,84 +195,6 @@ abstract class AbstractTaxonomyTypeAPI
             $orderBy
         );
     }
-
-    /**
-     * @return array<string,int>|object[]
-     */
-    protected function getCustomPostID(string|int|WP_Post $customPostObjectOrID): string|int
-    {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            return $customPost->ID;
-        }
-        return $customPostObjectOrID;
-    }
-
-    /**
-     * @return array<string|int>|object[]
-     * @param array<string,mixed> $query
-     * @param array<string,mixed> $options
-     */
-    protected function getCustomPostTaxonomyTerms(string|int|WP_Post $customPostObjectOrID, array $query = [], array $options = []): array
-    {
-        $customPostID = $this->getCustomPostID($customPostObjectOrID);
-        $query = $this->convertTaxonomyTermsQuery($query, $options);
-        $taxonomyTerms =  wp_get_post_terms(
-            (int)$customPostID,
-            $this->getTaxonomyName(),
-            $query,
-        );
-        if ($taxonomyTerms instanceof WP_Error) {
-            return [];
-        }
-        /** @var array<string|int>|object[] $taxonomyTerms */
-        return $taxonomyTerms;
-    }
-
-    /**
-     * @param array<string,mixed> $query
-     * @param array<string,mixed> $options
-     */
-    protected function getCustomPostTaxonomyTermCount(
-        string|int|WP_Post $customPostObjectOrID,
-        array $query = [],
-        array $options = []
-    ): ?int {
-        $customPostID = $this->getCustomPostID($customPostObjectOrID);
-
-        // There is no direct way to calculate the total
-        // (Documentation mentions to pass arg "count" => `true` to `wp_get_post_categories`,
-        // but it doesn't work)
-        // So execute a normal `wp_get_post_categories` retrieving all the IDs, and count them
-        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
-        $query = $this->convertTaxonomyTermsQuery($query, $options);
-
-        // All results, no offset
-        $query['number'] = 0;
-        unset($query['offset']);
-
-        // Resolve and count
-        $taxonomyTerms = wp_get_post_terms(
-            (int)$customPostID,
-            $this->getTaxonomyName(),
-            $query,
-        );
-        if ($taxonomyTerms instanceof WP_Error) {
-            return null;
-        }
-        /** @var int[] $taxonomyTerms */
-        return count($taxonomyTerms);
-    }
-
-    /**
-     * @return array<string,mixed>
-     * @param array<string,mixed> $query
-     * @param array<string,mixed> $options
-     */
-    abstract protected function convertTaxonomyTermsQuery(array $query, array $options = []): array;
-
-    abstract protected function getTaxonomyName(): string;
 
     protected function getTaxonomyTermFromObjectOrID(string|int|WP_Term $taxonomyTermObjectOrID): ?WP_Term
     {
