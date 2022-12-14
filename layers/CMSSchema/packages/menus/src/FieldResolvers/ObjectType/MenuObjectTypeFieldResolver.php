@@ -164,11 +164,15 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         if (!$isFlat) {
                             $item_value['children'] = [];
                         }
-                        $entries[] = (object) $item_value;
+                        $entries[] = $item_value;
                     }
                 }
                 if ($isFlat) {
-                    return $entries;
+                    return array_map(
+                        /** @param mixed[] $entry */
+                        fn (array $entry) => (object) $entry,
+                        $entries
+                    );
                 }
                 /**
                  * Reproduce the menu layout in the array
@@ -191,9 +195,13 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                             $arrangedEntriesPointer = &$arrangedEntriesPointer[$menuItemAncestorPos]['children'];
                         }
                     }
-                    $arrangedEntriesPointer[] = (object) $menuItemData;
+                    $arrangedEntriesPointer[] = $menuItemData;
                 }
-                return $arrangedEntries;
+                return array_map(
+                    /** @param mixed[] $entry */
+                    fn (array $entry) => (object) $entry,
+                    $arrangedEntries
+                );
             case 'items':
                 $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
 
