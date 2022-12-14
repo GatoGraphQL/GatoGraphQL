@@ -104,26 +104,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI
      */
     public function getCategoryCount(array $query = [], array $options = []): int
     {
-        $query = $this->convertCategoriesQuery($query, $options);
-
-        // Indicate to return the count
-        $query['count'] = true;
-        $query['fields'] = 'count';
-
-        // All results, no offset
-        $query['number'] = 0;
-        unset($query['offset']);
-
-        // Execute query and return count
-        /** @var int[] */
-        $count = get_categories($query);
-
-        // For some reason, the count is returned as an array of 1 element!
-        if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
-            return (int) $count[0];
-        }
-        // An error happened
-        return -1;
+        return $this->getTaxonomyCount($query, $options);
     }
     /**
      * @return array<string|int>|object[]

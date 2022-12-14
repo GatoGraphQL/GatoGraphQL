@@ -14,6 +14,9 @@ use WP_Taxonomy;
 use WP_Term;
 
 use function esc_sql;
+use function get_term_by;
+use function get_terms;
+use function wp_get_post_terms;
 
 abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
 {
@@ -228,5 +231,34 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
             return null;
         }
         return $taxonomyTerm;
+    }
+
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    protected function getTaxonomyCount(array $query = [], array $options = []): int
+    {
+        $query = $this->convertCustomPostTaxonomyQuery($query, $options);
+        $query['taxonomy'] = $this->getCustomPostTaxonomyName();
+
+        // Indicate to return the count
+        $query['count'] = true;
+        $query['fields'] = 'count';
+
+        // All results, no offset
+        $query['number'] = 0;
+        unset($query['offset']);
+
+        // Execute query and return count
+        /** @var int[] */
+        $count = get_terms($query);
+
+        // For some reason, the count is returned as an array of 1 element!
+        if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
+            return (int) $count[0];
+        }
+        // An error happened
+        return -1;
     }
 }
