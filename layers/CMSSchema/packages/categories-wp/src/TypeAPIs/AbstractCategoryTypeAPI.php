@@ -66,7 +66,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI
 
     abstract protected function getCategoryBaseOption(): string;
 
-    protected function getCustomPostTaxonomyName(): string
+    protected function getTaxonomyName(): string
     {
         return $this->getCategoryTaxonomyName();
     }

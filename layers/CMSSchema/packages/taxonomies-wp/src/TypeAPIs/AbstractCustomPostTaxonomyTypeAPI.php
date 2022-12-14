@@ -140,7 +140,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
         $query = $this->convertCustomPostTaxonomyQuery($query, $options);
         $taxonomyTerms =  wp_get_post_terms(
             (int)$customPostID,
-            $this->getCustomPostTaxonomyName(),
+            $this->getTaxonomyName(),
             $query,
         );
         if ($taxonomyTerms instanceof WP_Error) {
@@ -175,7 +175,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
         // Resolve and count
         $taxonomyTerms = wp_get_post_terms(
             (int)$customPostID,
-            $this->getCustomPostTaxonomyName(),
+            $this->getTaxonomyName(),
             $query,
         );
         if ($taxonomyTerms instanceof WP_Error) {
@@ -192,7 +192,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
      */
     abstract protected function convertCustomPostTaxonomyQuery(array $query, array $options = []): array;
 
-    abstract protected function getCustomPostTaxonomyName(): string;
+    abstract protected function getTaxonomyName(): string;
 
     protected function getTaxonomyTermFromObjectOrID(string|int|WP_Term $taxonomyTermObjectOrID): ?WP_Term
     {
@@ -202,7 +202,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
         }
         return $this->getTerm(
             $taxonomyTermObjectOrID,
-            $this->getCustomPostTaxonomyName(),
+            $this->getTaxonomyName(),
         );
     }
 
@@ -226,7 +226,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
 
     protected function getTaxonomyTermByName(string $taxonomyTermName): ?object
     {
-        $taxonomyTerm = get_term_by('name', $taxonomyTermName, $this->getCustomPostTaxonomyName());
+        $taxonomyTerm = get_term_by('name', $taxonomyTermName, $this->getTaxonomyName());
         if (!($taxonomyTerm instanceof WP_Term)) {
             return null;
         }
@@ -240,7 +240,7 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
     protected function getTaxonomyCount(array $query = [], array $options = []): int
     {
         $query = $this->convertCustomPostTaxonomyQuery($query, $options);
-        $query['taxonomy'] = $this->getCustomPostTaxonomyName();
+        $query['taxonomy'] = $this->getTaxonomyName();
 
         // Indicate to return the count
         $query['count'] = true;

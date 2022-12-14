@@ -35,7 +35,7 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
-    protected function getCustomPostTaxonomyName(): string
+    protected function getTaxonomyName(): string
     {
         return $this->getTagTaxonomyName();
     }
