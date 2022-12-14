@@ -13,7 +13,6 @@ use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
 
-use function wp_get_post_terms;
 use function get_categories;
 use function get_term_link;
 use function get_term_children;
@@ -77,18 +76,11 @@ abstract class AbstractCategoryTypeAPI extends AbstractCustomPostTaxonomyTypeAPI
      */
     public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
-        $customPostID = $this->getCustomPostID($customPostObjectOrID);
-        $query = $this->convertCategoriesQuery($query, $options);
-        $categories =  wp_get_post_terms(
-            (int)$customPostID,
-            $this->getCategoryTaxonomyName(),
+        return $this->getCustomPostTaxonomyTerms(
+            $customPostObjectOrID, 
             $query,
+            $options,
         );
-        if ($categories instanceof WP_Error) {
-            return [];
-        }
-        /** @var array<string|int>|object[] $categories */
-        return $categories;
     }
     /**
      * @param array<string,mixed> $query

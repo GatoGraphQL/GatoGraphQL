@@ -14,7 +14,6 @@ use WP_Term;
 
 use function get_tag;
 use function get_term_by;
-use function wp_get_post_terms;
 use function get_tags;
 use function get_term_link;
 
@@ -92,18 +91,11 @@ abstract class AbstractTagTypeAPI extends AbstractCustomPostTaxonomyTypeAPI impl
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
-        $customPostID = $this->getCustomPostID($customPostObjectOrID);
-        $query = $this->convertTagsQuery($query, $options);
-        $tags = wp_get_post_terms(
-            (int)$customPostID,
-            $this->getTagTaxonomyName(),
+        return $this->getCustomPostTaxonomyTerms(
+            $customPostObjectOrID, 
             $query,
+            $options,
         );
-        if ($tags instanceof WP_Error) {
-            return [];
-        }
-        /** @var object[] $tags */
-        return $tags;
     }
 
     /**

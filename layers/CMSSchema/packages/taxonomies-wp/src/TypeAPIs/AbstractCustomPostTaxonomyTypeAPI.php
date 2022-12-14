@@ -125,6 +125,27 @@ abstract class AbstractCustomPostTaxonomyTypeAPI extends AbstractTaxonomyTypeAPI
     }
 
     /**
+     * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    protected function getCustomPostTaxonomyTerms(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
+    {
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
+        $query = $this->convertCustomPostTaxonomyQuery($query, $options);
+        $taxonomyTerms =  wp_get_post_terms(
+            (int)$customPostID,
+            $this->getCustomPostTaxonomyName(),
+            $query,
+        );
+        if ($taxonomyTerms instanceof WP_Error) {
+            return [];
+        }
+        /** @var array<string|int>|object[] $taxonomyTerms */
+        return $taxonomyTerms;
+    }
+
+    /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
