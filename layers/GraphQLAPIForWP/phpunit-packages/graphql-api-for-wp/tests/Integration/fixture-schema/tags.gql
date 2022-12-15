@@ -3,6 +3,10 @@
     ...PostTagData
   }
 
+  nonEmptyPostTags: postTags(filter: {hideEmpty: true}) {
+    ...PostTagData
+  }
+
   post(by:{ id: 25 }) {
     tags {
       ...PostTagData
