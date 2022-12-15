@@ -124,7 +124,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function convertMenusQuery(array $query, array $options = []): array
+    protected function convertMenusQuery(array $query, array $options = []): array
     {
         if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
             if ($return_type === ReturnTypes::IDS) {
