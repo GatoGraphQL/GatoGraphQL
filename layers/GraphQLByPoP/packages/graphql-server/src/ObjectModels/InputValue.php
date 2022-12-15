@@ -53,10 +53,11 @@ class InputValue extends AbstractSchemaDefinitionReferenceObject
      */
     public function getDefaultValue(): ?string
     {
-        if ($defaultValue = $this->schemaDefinition[SchemaDefinition::DEFAULT_VALUE] ?? null) {
-            return (string)json_encode($defaultValue);
+        $defaultValue = $this->schemaDefinition[SchemaDefinition::DEFAULT_VALUE] ?? null;
+        if ($defaultValue === null) {
+            return null;
         }
-        return null;
+        return (string)json_encode($defaultValue);
     }
 
     public function getExtensions(): InputValueExtensions
