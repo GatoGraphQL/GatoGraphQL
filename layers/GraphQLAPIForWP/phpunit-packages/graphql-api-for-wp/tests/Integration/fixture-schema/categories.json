@@ -64,6 +64,23 @@
                 "children": []
             },
             {
+                "childCount": 0,
+                "childNames": [],
+                "count": 0,
+                "description": "",
+                "id": 5,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Never used",
+                "parent": null,
+                "postCount": 0,
+                "posts": [],
+                "slug": "never-used",
+                "url": "https:\/\/graphql-api.lndo.site\/category\/never-used\/",
+                "urlAbsolutePath": "\/category\/never-used\/",
+                "children": []
+            },
+            {
                 "childCount": 1,
                 "childNames": [
                     "Resource"
@@ -152,6 +169,24 @@
                 "url": "https:\/\/graphql-api.lndo.site\/category\/advanced\/",
                 "urlAbsolutePath": "\/category\/advanced\/",
                 "children": []
+            }
+        ],
+        "nonEmptyPostCategories": [
+            {
+                "id": 1,
+                "name": "Uncategorized"
+            },
+            {
+                "id": 4,
+                "name": "Resource"
+            },
+            {
+                "id": 3,
+                "name": "Blog"
+            },
+            {
+                "id": 2,
+                "name": "Advanced"
             }
         ],
         "post": {
