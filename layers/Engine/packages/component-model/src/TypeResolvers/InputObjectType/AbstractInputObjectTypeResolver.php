@@ -234,7 +234,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 continue;
             }
             // If it has default value, set it
-            if (($inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName)) !== null) {
+            $inputFieldDefaultValue = $this->getConsolidatedInputFieldDefaultValue($inputFieldName);
+            if ($inputFieldDefaultValue !== null) {
                 $inputValue->$inputFieldName = $inputFieldDefaultValue;
                 continue;
             }
@@ -584,7 +585,6 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $this->getConsolidatedInputFieldTypeModifiers($inputFieldName),
         );
         $inputFieldSchemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getConsolidatedInputFieldExtensionsSchemaDefinition($inputFieldName);
-
         $this->schemaDefinitionForInputFieldCache[$inputFieldName] = $inputFieldSchemaDefinition;
         return $this->schemaDefinitionForInputFieldCache[$inputFieldName];
     }
