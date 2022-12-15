@@ -182,12 +182,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
         }
 
         return App::applyFilters(
-            AbstractTaxonomyTypeAPI::HOOK_QUERY,
-            App::applyFilters(
-                self::HOOK_QUERY,
-                $query,
-                $options
-            ),
+            self::HOOK_QUERY,
             $query,
             $options
         );
