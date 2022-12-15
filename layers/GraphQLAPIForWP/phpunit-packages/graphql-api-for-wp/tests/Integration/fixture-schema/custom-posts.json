@@ -41,7 +41,7 @@
                 "customPostType": "page",
                 "date": "2022-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2022",
-                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger [&hellip;]",
+                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip;",
                 "featuredImage": null,
                 "hasComments": false,
                 "hasFeaturedImage": false,
@@ -72,7 +72,7 @@
                 "customPostType": "post",
                 "date": "2020-12-12T03:56:13+00:00",
                 "dateStr": "December 12, 2020",
-                "excerpt": "Heading Block (H2) You are looking at one. (H3) Subhead Block Paragraph Block This is a paragraph block.\u00c2 Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual [&hellip;]",
+                "excerpt": "Heading Block (H2) You are looking at one. (H3) Subhead Block Paragraph Block This is a paragraph block.\u00c2 Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual&hellip;",
                 "featuredImage": {
                     "id": 361,
                     "src": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
