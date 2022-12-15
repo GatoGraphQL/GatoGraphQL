@@ -1,20 +1,11 @@
 {
+  postTags {
+    ...PostTagData
+  }
+
   post(by:{ id: 25 }) {
     tags {
-      count
-      description
-      id
-      metaValue(key: "not-existing")
-      metaValues(key: "also-not-existing")
-      name
-      postCount
-      posts {
-        id
-        title
-      }
-      slug
-      url
-      urlAbsolutePath
+      ...PostTagData
     }
     tagsByExcludeIDs: tags(filter: { excludeIDs: [5] }) {
       id
@@ -48,4 +39,21 @@
       name
     }
   }
+}
+
+fragment PostTagData on PostTag {
+  count
+  description
+  id
+  metaValue(key: "not-existing")
+  metaValues(key: "also-not-existing")
+  name
+  postCount
+  posts {
+    id
+    title
+  }
+  slug
+  url
+  urlAbsolutePath
 }
