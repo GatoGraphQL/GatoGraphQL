@@ -4,7 +4,7 @@
             {
                 "count": 2,
                 "description": "",
-                "id": 12,
+                "id": 13,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "wordpress",
@@ -26,7 +26,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 11,
+                "id": 12,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "security",
@@ -44,7 +44,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 10,
+                "id": 11,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "release",
@@ -62,7 +62,7 @@
             {
                 "count": 3,
                 "description": "",
-                "id": 9,
+                "id": 10,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "plugin",
@@ -88,7 +88,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 8,
+                "id": 9,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "ideas",
@@ -106,7 +106,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 7,
+                "id": 8,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "graphql",
@@ -124,7 +124,7 @@
             {
                 "count": 4,
                 "description": "",
-                "id": 6,
+                "id": 7,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "features",
@@ -152,9 +152,22 @@
                 "urlAbsolutePath": "\/tag\/features\/"
             },
             {
+                "count": 0,
+                "description": "",
+                "id": 14,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "also-never-used",
+                "postCount": 0,
+                "posts": [],
+                "slug": "also-never-used",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/also-never-used\/",
+                "urlAbsolutePath": "\/tag\/also-never-used\/"
+            },
+            {
                 "count": 1,
                 "description": "",
-                "id": 5,
+                "id": 6,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "advanced",
@@ -170,12 +183,46 @@
                 "urlAbsolutePath": "\/tag\/advanced\/"
             }
         ],
+        "nonEmptyPostTags": [
+            {
+                "id": 13,
+                "name": "wordpress"
+            },
+            {
+                "id": 12,
+                "name": "security"
+            },
+            {
+                "id": 11,
+                "name": "release"
+            },
+            {
+                "id": 10,
+                "name": "plugin"
+            },
+            {
+                "id": 9,
+                "name": "ideas"
+            },
+            {
+                "id": 8,
+                "name": "graphql"
+            },
+            {
+                "id": 7,
+                "name": "features"
+            },
+            {
+                "id": 6,
+                "name": "advanced"
+            }
+        ],
         "post": {
             "tags": [
                 {
                     "count": 1,
                     "description": "",
-                    "id": 11,
+                    "id": 12,
                     "metaValue": null,
                     "metaValues": null,
                     "name": "security",
@@ -193,7 +240,7 @@
                 {
                     "count": 4,
                     "description": "",
-                    "id": 6,
+                    "id": 7,
                     "metaValue": null,
                     "metaValues": null,
                     "name": "features",
@@ -223,48 +270,48 @@
             ],
             "tagsByExcludeIDs": [
                 {
-                    "id": 11
+                    "id": 12
                 },
                 {
-                    "id": 6
+                    "id": 7
                 }
             ],
             "tagsByIds": [],
             "tagsByMetaQuery": [
                 {
-                    "id": 11
+                    "id": 12
                 },
                 {
-                    "id": 6
+                    "id": 7
                 }
             ],
             "tagsBySearch": [
                 {
-                    "id": 11
+                    "id": 12
                 }
             ],
             "tagsBySlugs": [
                 {
-                    "id": 6
+                    "id": 7
                 }
             ],
             "tagsBySortASC": [
                 {
-                    "id": 6,
+                    "id": 7,
                     "name": "features"
                 },
                 {
-                    "id": 11,
+                    "id": 12,
                     "name": "security"
                 }
             ],
             "tagsBySortDESC": [
                 {
-                    "id": 11,
+                    "id": 12,
                     "name": "security"
                 },
                 {
-                    "id": 6,
+                    "id": 7,
                     "name": "features"
                 }
             ]
