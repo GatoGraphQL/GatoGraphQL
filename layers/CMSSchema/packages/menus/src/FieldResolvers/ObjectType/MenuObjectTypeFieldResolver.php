@@ -143,6 +143,22 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['itemDataEntries' => 'flat'] => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['itemDataEntries' => 'flat'] => false,
+            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
@@ -152,7 +168,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $menu = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'itemDataEntries':
-                $isFlat = $fieldDataAccessor->getValue('flat') ?? false;
+                $isFlat = $fieldDataAccessor->getValue('flat');
                 $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
                 $entries = array();
                 if ($menuItems) {
