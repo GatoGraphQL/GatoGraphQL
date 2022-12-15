@@ -59,6 +59,12 @@
 		<wp:category_parent><![CDATA[blog]]></wp:category_parent>
 		<wp:cat_name><![CDATA[Resource]]></wp:cat_name>
 	</wp:category>
+	<wp:category>
+		<wp:term_id>14</wp:term_id>
+		<wp:category_nicename><![CDATA[never-used]]></wp:category_nicename>
+		<wp:category_parent><![CDATA[]]></wp:category_parent>
+		<wp:cat_name><![CDATA[Never used]]></wp:cat_name>
+	</wp:category>
 		<wp:category>
 		<wp:term_id>1</wp:term_id>
 		<wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename>
@@ -75,7 +81,7 @@
 		<wp:tag_slug><![CDATA[features]]></wp:tag_slug>
 		<wp:tag_name><![CDATA[features]]></wp:tag_name>
 	</wp:tag>
-		<wp:tag>
+	<wp:tag>
 		<wp:term_id>6</wp:term_id>
 		<wp:tag_slug><![CDATA[graphql]]></wp:tag_slug>
 		<wp:tag_name><![CDATA[graphql]]></wp:tag_name>
@@ -105,6 +111,12 @@
 		<wp:tag_slug><![CDATA[wordpress]]></wp:tag_slug>
 		<wp:tag_name><![CDATA[wordpress]]></wp:tag_name>
 	</wp:tag>
+	<wp:tag>
+		<wp:term_id>12</wp:term_id>
+		<wp:tag_slug><![CDATA[also-never-used]]></wp:tag_slug>
+		<wp:tag_name><![CDATA[also-never-used]]></wp:tag_name>
+	</wp:tag>
+		
 			
 	<generator>https://wordpress.org/?v=6.0</generator>
 
