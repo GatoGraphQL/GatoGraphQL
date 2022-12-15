@@ -69,10 +69,11 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
     public function getMenuIDFromMenuName(string $menuName): string|int|null
     {
-        if ($menuObject = $this->getMenuObject($menuName)) {
-            return $menuObject->term_id;
+        $menuObject = $this->getMenuObject($menuName);
+        if ($menuObject === null) {
+            return null;
         }
-        return null;
+        return $menuObject->term_id;
     }
 
     protected function getMenuObject(string $menuName): ?WP_Term
