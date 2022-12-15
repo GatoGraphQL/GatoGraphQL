@@ -4,21 +4,25 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\FilterInputs\FilterInputInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\SearchFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\SlugsFilterInput;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
+use PoPCMSSchema\Taxonomies\FilterInputs\HideEmptyFilterInput;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?ParentIDFilterInput $parentIDFilterInput = null;
     private ?SearchFilterInput $searchFilterInput = null;
     private ?SlugsFilterInput $slugsFilterInput = null;
+    private ?HideEmptyFilterInput $hideEmptyFilterInput = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -28,6 +32,15 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     {
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        /** @var BooleanScalarTypeResolver */
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
     final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
     {
@@ -56,6 +69,15 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         /** @var SlugsFilterInput */
         return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
     }
+    final public function setHideEmptyFilterInput(HideEmptyFilterInput $hideEmptyFilterInput): void
+    {
+        $this->hideEmptyFilterInput = $hideEmptyFilterInput;
+    }
+    final protected function getHideEmptyFilterInput(): HideEmptyFilterInput
+    {
+        /** @var HideEmptyFilterInput */
+        return $this->hideEmptyFilterInput ??= $this->instanceManager->getInstance(HideEmptyFilterInput::class);
+    }
 
     abstract protected function addParentIDInputField(): bool;
 
@@ -69,6 +91,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             [
                 'search' => $this->getStringScalarTypeResolver(),
                 'slugs' => $this->getStringScalarTypeResolver(),
+                'hideEmpty' => $this->getBooleanScalarTypeResolver(),
             ],
             $this->addParentIDInputField() ? [
                 'parentID' => $this->getIDScalarTypeResolver(),
@@ -81,6 +104,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         return match ($inputFieldName) {
             'search' => $this->__('Search for taxonomies containing the given string', 'taxonomies'),
             'slugs' => $this->__('Search for taxonomies with the given slugs', 'taxonomies'),
+            'hideEmpty' => $this->__('Hide empty taxonomies terms?', 'taxonomies'),
             'parentID' => $this->__('Limit results to taxonomies with the given parent ID. \'0\' means \'no parent\'', 'taxonomies'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
@@ -90,7 +114,16 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     {
         return match ($inputFieldName) {
             'slugs' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            'hideEmpty' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
+        };
+    }
+
+    public function getInputFieldDefaultValue(string $inputFieldName): mixed
+    {
+        return match ($inputFieldName) {
+            'hideEmpty' => false,
+            default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
 
@@ -99,6 +132,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         return match ($inputFieldName) {
             'search' => $this->getSearchFilterInput(),
             'slugs' => $this->getSlugsFilterInput(),
+            'hideEmpty' => $this->getHideEmptyFilterInput(),
             'parentID' => $this->getParentIDFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };

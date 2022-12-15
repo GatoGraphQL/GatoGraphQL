@@ -1,36 +1,250 @@
 {
     "data": {
+        "postTags": [
+            {
+                "count": 2,
+                "description": "",
+                "id": 13,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "wordpress",
+                "postCount": 2,
+                "posts": [
+                    {
+                        "id": 19,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 16,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "slug": "wordpress",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/wordpress\/",
+                "urlAbsolutePath": "\/tag\/wordpress\/"
+            },
+            {
+                "count": 1,
+                "description": "",
+                "id": 12,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "security",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 25,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
+                "slug": "security",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
+                "urlAbsolutePath": "\/tag\/security\/"
+            },
+            {
+                "count": 1,
+                "description": "",
+                "id": 11,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "release",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 13,
+                        "title": "Released v0.6, check it out"
+                    }
+                ],
+                "slug": "release",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/release\/",
+                "urlAbsolutePath": "\/tag\/release\/"
+            },
+            {
+                "count": 3,
+                "description": "",
+                "id": 10,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "plugin",
+                "postCount": 3,
+                "posts": [
+                    {
+                        "id": 19,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 16,
+                        "title": "Working on flat chain syntax next"
+                    },
+                    {
+                        "id": 13,
+                        "title": "Released v0.6, check it out"
+                    }
+                ],
+                "slug": "plugin",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/plugin\/",
+                "urlAbsolutePath": "\/tag\/plugin\/"
+            },
+            {
+                "count": 1,
+                "description": "",
+                "id": 9,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "ideas",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 21,
+                        "title": "Customize the schema for each client"
+                    }
+                ],
+                "slug": "ideas",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/ideas\/",
+                "urlAbsolutePath": "\/tag\/ideas\/"
+            },
+            {
+                "count": 1,
+                "description": "",
+                "id": 8,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "graphql",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 16,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "slug": "graphql",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/graphql\/",
+                "urlAbsolutePath": "\/tag\/graphql\/"
+            },
+            {
+                "count": 4,
+                "description": "",
+                "id": 7,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "features",
+                "postCount": 4,
+                "posts": [
+                    {
+                        "id": 25,
+                        "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 21,
+                        "title": "Customize the schema for each client"
+                    },
+                    {
+                        "id": 19,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 16,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "slug": "features",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/features\/",
+                "urlAbsolutePath": "\/tag\/features\/"
+            },
+            {
+                "count": 0,
+                "description": "",
+                "id": 14,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "also-never-used",
+                "postCount": 0,
+                "posts": [],
+                "slug": "also-never-used",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/also-never-used\/",
+                "urlAbsolutePath": "\/tag\/also-never-used\/"
+            },
+            {
+                "count": 1,
+                "description": "",
+                "id": 6,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "advanced",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 21,
+                        "title": "Customize the schema for each client"
+                    }
+                ],
+                "slug": "advanced",
+                "url": "https:\/\/graphql-api.lndo.site\/tag\/advanced\/",
+                "urlAbsolutePath": "\/tag\/advanced\/"
+            }
+        ],
+        "nonEmptyPostTags": [
+            {
+                "id": 13,
+                "name": "wordpress"
+            },
+            {
+                "id": 12,
+                "name": "security"
+            },
+            {
+                "id": 11,
+                "name": "release"
+            },
+            {
+                "id": 10,
+                "name": "plugin"
+            },
+            {
+                "id": 9,
+                "name": "ideas"
+            },
+            {
+                "id": 8,
+                "name": "graphql"
+            },
+            {
+                "id": 7,
+                "name": "features"
+            },
+            {
+                "id": 6,
+                "name": "advanced"
+            }
+        ],
         "post": {
             "tags": [
                 {
                     "count": 1,
                     "description": "",
-                    "id": 11,
+                    "id": 12,
                     "metaValue": null,
                     "metaValues": null,
                     "name": "security",
                     "postCount": 1,
-                    "slug": "security",
-                    "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
-                    "urlAbsolutePath": "\/tag\/security\/",
                     "posts": [
                         {
                             "id": 25,
                             "title": "Public or Private API mode, for extra security"
                         }
-                    ]
+                    ],
+                    "slug": "security",
+                    "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
+                    "urlAbsolutePath": "\/tag\/security\/"
                 },
                 {
                     "count": 4,
                     "description": "",
-                    "id": 6,
+                    "id": 7,
                     "metaValue": null,
                     "metaValues": null,
                     "name": "features",
                     "postCount": 4,
-                    "slug": "features",
-                    "url": "https:\/\/graphql-api.lndo.site\/tag\/features\/",
-                    "urlAbsolutePath": "\/tag\/features\/",
                     "posts": [
                         {
                             "id": 25,
@@ -48,53 +262,56 @@
                             "id": 16,
                             "title": "Working on flat chain syntax next"
                         }
-                    ]
+                    ],
+                    "slug": "features",
+                    "url": "https:\/\/graphql-api.lndo.site\/tag\/features\/",
+                    "urlAbsolutePath": "\/tag\/features\/"
                 }
             ],
             "tagsByExcludeIDs": [
                 {
-                    "id": 11
+                    "id": 12
                 },
                 {
-                    "id": 6
+                    "id": 7
                 }
             ],
             "tagsByIds": [],
             "tagsByMetaQuery": [
                 {
-                    "id": 11
+                    "id": 12
                 },
                 {
-                    "id": 6
+                    "id": 7
                 }
             ],
             "tagsBySearch": [
                 {
-                    "id": 11
+                    "id": 12
                 }
             ],
             "tagsBySlugs": [
                 {
-                    "id": 6
+                    "id": 7
                 }
             ],
             "tagsBySortASC": [
                 {
-                    "id": 6,
+                    "id": 7,
                     "name": "features"
                 },
                 {
-                    "id": 11,
+                    "id": 12,
                     "name": "security"
                 }
             ],
             "tagsBySortDESC": [
                 {
-                    "id": 11,
+                    "id": 12,
                     "name": "security"
                 },
                 {
-                    "id": 6,
+                    "id": 7,
                     "name": "features"
                 }
             ]

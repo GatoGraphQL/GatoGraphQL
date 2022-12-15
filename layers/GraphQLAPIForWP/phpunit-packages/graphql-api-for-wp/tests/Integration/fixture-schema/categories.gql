@@ -1,4 +1,16 @@
 {
+  postCategories {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
+  nonEmptyPostCategories: postCategories(filter: {hideEmpty: true}) {
+    id
+    name
+  }
+
   post(by:{ id: 25 }) {
     categories {
       ...PostCategoryData

@@ -3,6 +3,10 @@
         "defaultMediaItems": [
             {
                 "altText": "",
+                "author": {
+                    "id": 2,
+                    "name": "Blogger Davenport"
+                },
                 "caption": "",
                 "date": "2022-05-25T05:13:35+00:00",
                 "dateStr": "May 25",
@@ -13,18 +17,18 @@
                 "sizes": "(max-width: 2600px) 100vw, 2600px",
                 "slug": "graphql-api-search-results",
                 "src": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png",
-                "srcSet": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png 2600w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-300x162.png 300w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x551.png 1024w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-768x414.png 768w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1536x827.png 1536w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-2048x1103.png 2048w",
+                "srcSet": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png 2600w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-300x162.png 300w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x551.png 1024w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-768x414.png 768w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1536x827.png 1536w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-2048x1103.png 2048w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1568x844.png 1568w",
                 "title": "graphql-api-search-results",
                 "url": "https:\/\/graphql-api.lndo.site\/graphql-api-search-results\/",
                 "urlAbsolutePath": "\/graphql-api-search-results\/",
-                "width": 2600,
-                "author": {
-                    "id": 2,
-                    "name": "Blogger Davenport"
-                }
+                "width": 2600
             },
             {
                 "altText": "",
+                "author": {
+                    "id": 2,
+                    "name": "Blogger Davenport"
+                },
                 "caption": "",
                 "date": "2022-05-25T05:13:32+00:00",
                 "dateStr": "May 25",
@@ -39,16 +43,16 @@
                 "title": "graphql-api-header",
                 "url": "https:\/\/graphql-api.lndo.site\/graphql-api-header\/",
                 "urlAbsolutePath": "\/graphql-api-header\/",
-                "width": 1291,
-                "author": {
-                    "id": 2,
-                    "name": "Blogger Davenport"
-                }
+                "width": 1291
             }
         ],
         "anyMimeTypeMediaItems": [
             {
                 "altText": "",
+                "author": {
+                    "id": 5,
+                    "name": "Author Marquez"
+                },
                 "caption": "",
                 "date": "2022-05-26T13:01:16+00:00",
                 "dateStr": "May 26",
@@ -63,14 +67,14 @@
                 "title": "LICENSE",
                 "url": "https:\/\/graphql-api.lndo.site\/license\/",
                 "urlAbsolutePath": "\/license\/",
-                "width": null,
-                "author": {
-                    "id": 5,
-                    "name": "Author Marquez"
-                }
+                "width": null
             },
             {
                 "altText": "",
+                "author": {
+                    "id": 2,
+                    "name": "Blogger Davenport"
+                },
                 "caption": "",
                 "date": "2022-05-25T05:13:35+00:00",
                 "dateStr": "May 25",
@@ -81,18 +85,18 @@
                 "sizes": "(max-width: 2600px) 100vw, 2600px",
                 "slug": "graphql-api-search-results",
                 "src": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png",
-                "srcSet": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png 2600w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-300x162.png 300w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x551.png 1024w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-768x414.png 768w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1536x827.png 1536w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-2048x1103.png 2048w",
+                "srcSet": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png 2600w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-300x162.png 300w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x551.png 1024w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-768x414.png 768w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1536x827.png 1536w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-2048x1103.png 2048w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1568x844.png 1568w",
                 "title": "graphql-api-search-results",
                 "url": "https:\/\/graphql-api.lndo.site\/graphql-api-search-results\/",
                 "urlAbsolutePath": "\/graphql-api-search-results\/",
-                "width": 2600,
-                "author": {
-                    "id": 2,
-                    "name": "Blogger Davenport"
-                }
+                "width": 2600
             },
             {
                 "altText": "",
+                "author": {
+                    "id": 2,
+                    "name": "Blogger Davenport"
+                },
                 "caption": "",
                 "date": "2022-05-25T05:13:32+00:00",
                 "dateStr": "May 25",
@@ -107,11 +111,7 @@
                 "title": "graphql-api-header",
                 "url": "https:\/\/graphql-api.lndo.site\/graphql-api-header\/",
                 "urlAbsolutePath": "\/graphql-api-header\/",
-                "width": 1291,
-                "author": {
-                    "id": 2,
-                    "name": "Blogger Davenport"
-                }
+                "width": 1291
             }
         ],
         "mediaItemsByAuthorIDs": [

@@ -108,6 +108,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `PostCategory.children: [PostCategory]!`
   - `PostCategory.childNames: [String]!`
   - `PostCategory.childCount: Int`
+- Added filter input `hideEmpty` to fields `postTags` and `postCategories` to fetch entries with/out any post
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Root.menuCount: Int!`
