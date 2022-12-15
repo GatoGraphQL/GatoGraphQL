@@ -187,7 +187,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -232,7 +232,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -1022,7 +1022,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -1067,7 +1067,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -1161,7 +1161,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -1206,7 +1206,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -1515,11 +1515,15 @@
                   "name": "flat",
                   "description": "Flatten the items",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -2448,7 +2452,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -2493,7 +2497,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -2701,7 +2705,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -2746,7 +2750,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -3276,7 +3280,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -3321,7 +3325,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -3529,7 +3533,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -3574,7 +3578,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -11401,7 +11405,7 @@
                     "name": "Boolean",
                     "ofType": null
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -11572,7 +11576,7 @@
                     "name": "Boolean",
                     "ofType": null
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -11615,7 +11619,7 @@
                     "name": "Boolean",
                     "ofType": null
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -11867,7 +11871,7 @@
         {
           "kind": "SCALAR",
           "name": "MenuLocationSelectableString",
-          "description": "Menu Locations, with possible values: `\"\"`.",
+          "description": "Menu Locations, with possible values: `\"primary\"`, `\"footer\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -12103,7 +12107,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -12148,7 +12152,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -12222,7 +12226,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -12267,7 +12271,7 @@
                       "ofType": null
                     }
                   },
-                  "defaultValue": null
+                  "defaultValue": "false"
                 }
               ],
               "type": {
@@ -13317,6 +13321,20 @@
               "defaultValue": null
             },
             {
+              "name": "hideEmpty",
+              "description": "Hide empty taxonomies terms?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
+            },
+            {
               "name": "ids",
               "description": "Limit results to elements with the given IDs",
               "type": {
@@ -13530,7 +13548,7 @@
                 "name": "ID",
                 "ofType": null
               },
-              "defaultValue": null
+              "defaultValue": "0"
             },
             {
               "name": "parentIDs",
@@ -13753,6 +13771,20 @@
                 }
               },
               "defaultValue": null
+            },
+            {
+              "name": "hideEmpty",
+              "description": "Hide empty taxonomies terms?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -14496,7 +14528,7 @@
                 "name": "Boolean",
                 "ofType": null
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -14834,6 +14866,20 @@
                 }
               },
               "defaultValue": null
+            },
+            {
+              "name": "hideEmpty",
+              "description": "Hide empty taxonomies terms?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -15475,7 +15521,7 @@
                 "name": "Boolean",
                 "ofType": null
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -16175,7 +16221,7 @@
                 "name": "Boolean",
                 "ofType": null
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -16342,7 +16388,7 @@
                 "name": "Boolean",
                 "ofType": null
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -16573,7 +16619,7 @@
                 "name": "Boolean",
                 "ofType": null
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -16796,7 +16842,7 @@
                 "name": "Boolean",
                 "ofType": null
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -17035,7 +17081,7 @@
                   "ofType": null
                 }
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "categoryIDs",
@@ -17131,7 +17177,7 @@
                   "ofType": null
                 }
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "id",
@@ -17193,6 +17239,20 @@
                 }
               },
               "defaultValue": null
+            },
+            {
+              "name": "hideEmpty",
+              "description": "Hide empty taxonomies terms?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
             },
             {
               "name": "ids",
@@ -17518,6 +17578,20 @@
               "defaultValue": null
             },
             {
+              "name": "hideEmpty",
+              "description": "Hide empty taxonomies terms?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
+            },
+            {
               "name": "ids",
               "description": "Limit results to elements with the given IDs",
               "type": {
@@ -17695,7 +17769,7 @@
                 "name": "Boolean",
                 "ofType": null
               },
-              "defaultValue": null
+              "defaultValue": "false"
             },
             {
               "name": "ids",

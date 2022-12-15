@@ -1840,7 +1840,7 @@
           "namespacedName": "MenuLocationSelectableString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Menu Locations, with possible values: `\"\"`."
+          "description": "Menu Locations, with possible values: `\"primary\"`, `\"footer\"`."
         },
         {
           "name": "Numeric",
