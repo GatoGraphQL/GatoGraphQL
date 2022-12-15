@@ -463,6 +463,10 @@ fragment CatProps on PostCategory {
 }
 ```
 
+### Taxonomies (Tags and Categories)
+
+Added filter input `hideEmpty` to fields `postTags` and `postCategories` to fetch entries with/out any post.
+
 ### Menus
 
 Menus have been upgraded, adding the following fields:
