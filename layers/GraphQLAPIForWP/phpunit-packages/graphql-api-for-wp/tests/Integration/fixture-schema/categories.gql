@@ -1,4 +1,11 @@
 {
+  postCategories {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
   post(by:{ id: 25 }) {
     categories {
       ...PostCategoryData
