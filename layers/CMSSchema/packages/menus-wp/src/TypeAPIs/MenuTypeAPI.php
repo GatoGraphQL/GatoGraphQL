@@ -9,7 +9,6 @@ use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\Menus\ObjectModels\MenuItem;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Term;
 
