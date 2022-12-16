@@ -364,9 +364,7 @@ Added fields to retrieve comments and their number:
 - `Root.myComment: Comment`
 - `Root.myComments: [Comment]!`
 - `Root.myCommentCount: Int!`
-- `Commentable.comments: [Comment]!` (`Commentable` is an interface, implemented by types `Post`, `Page` and `GenericCustomPost`)
-- `Commentable.commentCount: Int!`
-- `Comment.responses: [Comment]!`
+- `Commentable.commentCount: Int!` (`Commentable` is an interface, implemented by types `Post`, `Page` and `GenericCustomPost`)
 - `Comment.responseCount: Int!`
 
 Added input fields to filter comments:

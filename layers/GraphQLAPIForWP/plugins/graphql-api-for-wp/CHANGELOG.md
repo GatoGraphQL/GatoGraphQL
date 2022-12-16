@@ -69,7 +69,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.myComment: Comment`
   - `Root.myComments: [Comment]!`
   - `Root.myCommentCount: Int!`
-  - `CustomPost.commentCount: Int!`
+  - `Commentable.commentCount: Int!` (`Commentable` is an interface, implemented by types `Post`, `Page` and `GenericCustomPost`)
   - `Comment.responseCount: Int!`
 - Added field arguments to filter `comments`:
   - `authorIDs: [ID!]`
@@ -147,9 +147,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.optionValue: AnyBuiltInScalar` (renamed from `Root.option`)
 - Mutations now return "Payload" types:
   - `Comment.reply: CommentReplyMutationPayload!`
-  - `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
-  - `CustomPost.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
-  - `CustomPost.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+  - `Commentable.addComment: CustomPostAddCommentMutationPayload!`
   - `Post.setCategories: PostSetCategoriesMutationPayload!`
   - `Post.setTags: PostSetTagsMutationPayload!`
   - `Post.update: PostUpdateMutationPayload!`
@@ -163,6 +161,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.setFeaturedImageOnCustomPost: RootSetFeaturedImageOnCustomPostMutationPayload!`
   - `Root.setTagsOnPost: RootSetTagsOnPostMutationPayload!`
   - `Root.updatePost: RootUpdatePostMutationPayload!`
+  - `SupportingFeaturedImage.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
+  - `SupportingFeaturedImage.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
 - `Commentable` interface is only added to CPTs that support comments
 
 ### Added
