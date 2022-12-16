@@ -749,12 +749,19 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                  * Possibly not all tag taxonomies must be allowed.
                  * Remove the ones that do not
                  */
+                // @todo Add services and replace code below
+                $pluginTagTaxonomyNames = [];
+                // $pluginTagTaxonomyNames = array_map(
+                //     fn (TaxonomyInterface $taxonomy) => $taxonomy->getName(),
+                //     $this->getTaxonomyRegistry()->getTaxonomies(false)
+                // );
                 $rejectedQueryableTagTaxonomyNames = \apply_filters(
                     self::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
                     []
                 );
                 $possibleTagTaxonomyNames = array_values(array_diff(
                     $possibleTagTaxonomyNames,
+                    $pluginTagTaxonomyNames,
                     $rejectedQueryableTagTaxonomyNames
                 ));
                 // Allow plugins to further remove unwanted custom post types
