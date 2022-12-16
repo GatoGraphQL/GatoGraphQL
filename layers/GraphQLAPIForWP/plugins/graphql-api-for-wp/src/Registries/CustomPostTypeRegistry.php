@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 class CustomPostTypeRegistry implements CustomPostTypeRegistryInterface
 {
     /**
-     * @var array<string,CustomPostTypeInterface>
+     * @var array<string,CustomPostTypeInterface> serviceDefinitionID => CPT
      */
     protected array $customPostTypes = [];
 
@@ -23,7 +23,7 @@ class CustomPostTypeRegistry implements CustomPostTypeRegistryInterface
         $this->customPostTypes[$serviceDefinitionID] = $customPostType;
     }
     /**
-     * @return array<string,CustomPostTypeInterface>
+     * @return array<string,CustomPostTypeInterface> serviceDefinitionID => CPT
      */
     public function getCustomPostTypes(): array
     {

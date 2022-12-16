@@ -10,7 +10,7 @@ interface CustomPostTypeRegistryInterface
 {
     public function addCustomPostType(CustomPostTypeInterface $customPostType, string $serviceDefinitionID): void;
     /**
-     * @return CustomPostTypeInterface[]
+     * @return array<string,CustomPostTypeInterface> serviceDefinitionID => CPT
      */
     public function getCustomPostTypes(): array;
 }
