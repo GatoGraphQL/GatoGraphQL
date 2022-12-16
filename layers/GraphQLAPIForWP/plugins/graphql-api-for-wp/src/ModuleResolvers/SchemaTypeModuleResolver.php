@@ -738,7 +738,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ];
             } elseif ($module === self::SCHEMA_TAGS) {
                 // Get the list of tag taxonomies from the system
-                $possibleTagTaxonomies = \get_taxonomies(
+                /** @var string[] */
+                $possibleTagTaxonomyNames = \get_taxonomies(
                     [
                         'hierarchical' => false,
                     ],
@@ -748,23 +749,23 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                  * Possibly not all tag taxonomies must be allowed.
                  * Remove the ones that do not
                  */
-                $rejectedQueryableTagTaxonomies = \apply_filters(
+                $rejectedQueryableTagTaxonomyNames = \apply_filters(
                     self::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
                     []
                 );
-                $possibleTagTaxonomies = array_values(array_diff(
-                    $possibleTagTaxonomies,
-                    $rejectedQueryableTagTaxonomies
+                $possibleTagTaxonomyNames = array_values(array_diff(
+                    $possibleTagTaxonomyNames,
+                    $rejectedQueryableTagTaxonomyNames
                 ));
                 // Allow plugins to further remove unwanted custom post types
-                $possibleTagTaxonomies = \apply_filters(
+                $possibleTagTaxonomyNames = \apply_filters(
                     self::HOOK_QUERYABLE_TAG_TAXONOMIES,
-                    $possibleTagTaxonomies
+                    $possibleTagTaxonomyNames
                 );
 
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($possibleTagTaxonomies as $value) {
+                foreach ($possibleTagTaxonomyNames as $value) {
                     $possibleValues[$value] = $value;
                 }
                 // Set the setting
@@ -791,7 +792,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ];
             } elseif ($module === self::SCHEMA_CATEGORIES) {
                 // Get the list of category taxonomies from the system
-                $possibleCategoryTaxonomies = \get_taxonomies(
+                /** @var string[] */
+                $possibleCategoryTaxonomyNames = \get_taxonomies(
                     [
                         'hierarchical' => true,
                     ],
@@ -802,29 +804,29 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                  * Remove the ones that do not
                  */
                 // @todo Add services and replace code below
-                $pluginCategoryTaxonomies = [];
-                // $pluginCategoryTaxonomies = array_map(
+                $pluginCategoryTaxonomyNames = [];
+                // $pluginCategoryTaxonomyNames = array_map(
                 //     fn (CategoryTaxonomyInterface $tagTaxonomyService) => $tagTaxonomyService->getCategoryTaxonomies(),
                 //     $this->getCategoryTaxonomyRegistry()->getCategoryTaxonomies()
                 // );
-                $rejectedQueryableCategoryTaxonomies = \apply_filters(
+                $rejectedQueryableCategoryTaxonomyNames = \apply_filters(
                     self::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
                     []
                 );
-                $possibleCategoryTaxonomies = array_values(array_diff(
-                    $possibleCategoryTaxonomies,
-                    $pluginCategoryTaxonomies,
-                    $rejectedQueryableCategoryTaxonomies
+                $possibleCategoryTaxonomyNames = array_values(array_diff(
+                    $possibleCategoryTaxonomyNames,
+                    $pluginCategoryTaxonomyNames,
+                    $rejectedQueryableCategoryTaxonomyNames
                 ));
                 // Allow plugins to further remove unwanted custom post types
-                $possibleCategoryTaxonomies = \apply_filters(
+                $possibleCategoryTaxonomyNames = \apply_filters(
                     self::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
-                    $possibleCategoryTaxonomies
+                    $possibleCategoryTaxonomyNames
                 );
                 
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($possibleCategoryTaxonomies as $value) {
+                foreach ($possibleCategoryTaxonomyNames as $value) {
                     $possibleValues[$value] = $value;
                 }
                 // Set the setting
