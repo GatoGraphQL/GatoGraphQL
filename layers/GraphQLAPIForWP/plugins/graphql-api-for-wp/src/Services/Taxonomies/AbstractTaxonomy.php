@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Taxonomies;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
-abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface
 {
     /**
      * Taxonomy
