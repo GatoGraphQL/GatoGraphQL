@@ -801,12 +801,19 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                  * Possibly not all category taxonomies must be allowed.
                  * Remove the ones that do not
                  */
+                // @todo Add services and replace code below
+                $pluginCategoryTaxonomies = [];
+                // $pluginCategoryTaxonomies = array_map(
+                //     fn (CategoryTaxonomyInterface $tagTaxonomyService) => $tagTaxonomyService->getCategoryTaxonomies(),
+                //     $this->getCategoryTaxonomyRegistry()->getCategoryTaxonomies()
+                // );
                 $rejectedQueryableCategoryTaxonomies = \apply_filters(
                     self::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
                     []
                 );
                 $possibleCategoryTaxonomies = array_values(array_diff(
                     $possibleCategoryTaxonomies,
+                    $pluginCategoryTaxonomies,
                     $rejectedQueryableCategoryTaxonomies
                 ));
                 // Allow plugins to further remove unwanted custom post types
