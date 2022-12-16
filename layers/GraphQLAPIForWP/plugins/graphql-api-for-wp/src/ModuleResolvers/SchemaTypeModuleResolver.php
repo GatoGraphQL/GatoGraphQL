@@ -623,7 +623,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                  * Remove the ones that do not
                  */
                 $pluginCustomPostTypes = array_map(
-                    fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
+                    fn (CustomPostTypeInterface $customPostType) => $customPostType->getCustomPostType(),
                     $this->getCustomPostTypeRegistry()->getCustomPostTypes()
                 );
                 $rejectedQueryableCustomPostTypes = \apply_filters(
