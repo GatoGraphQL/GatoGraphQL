@@ -806,7 +806,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 // @todo Add services and replace code below
                 $pluginCategoryTaxonomyNames = [];
                 // $pluginCategoryTaxonomyNames = array_map(
-                //     fn (CategoryTaxonomyInterface $tagTaxonomyService) => $tagTaxonomyService->getCategoryTaxonomies(),
+                //     fn (CategoryTaxonomyInterface $tagTaxonomyService) => $tagTaxonomyService->getName(),
                 //     $this->getCategoryTaxonomyRegistry()->getCategoryTaxonomies()
                 // );
                 $rejectedQueryableCategoryTaxonomyNames = \apply_filters(
