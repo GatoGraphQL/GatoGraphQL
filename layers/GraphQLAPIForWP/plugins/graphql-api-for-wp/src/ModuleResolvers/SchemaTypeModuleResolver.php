@@ -10,7 +10,9 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
@@ -95,6 +97,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     private ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
+    private ?TaxonomyRegistryInterface $taxonomyRegistry = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
@@ -213,6 +216,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var CustomPostTypeRegistryInterface */
         return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+    }
+    final public function setTaxonomyRegistry(TaxonomyRegistryInterface $taxonomyRegistry): void
+    {
+        $this->taxonomyRegistry = $taxonomyRegistry;
+    }
+    final protected function getTaxonomyRegistry(): TaxonomyRegistryInterface
+    {
+        /** @var TaxonomyRegistryInterface */
+        return $this->taxonomyRegistry ??= $this->instanceManager->getInstance(TaxonomyRegistryInterface::class);
     }
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -739,7 +751,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             } elseif ($module === self::SCHEMA_TAGS) {
                 // Get the list of tag taxonomies from the system
                 /** @var string[] */
-                $possibleTagTaxonomyNames = \get_taxonomies(
+                $possibleTagTaxonomies = \get_taxonomies(
                     [
                         'hierarchical' => false,
                     ],
@@ -749,30 +761,28 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                  * Possibly not all tag taxonomies must be allowed.
                  * Remove the ones that do not
                  */
-                // @todo Add services and replace code below
-                $pluginTagTaxonomyNames = [];
-                // $pluginTagTaxonomyNames = array_map(
-                //     fn (TaxonomyInterface $taxonomy) => $taxonomy->getName(),
-                //     $this->getTaxonomyRegistry()->getTaxonomies(false)
-                // );
-                $rejectedQueryableTagTaxonomyNames = \apply_filters(
+                $pluginTagTaxonomies = array_map(
+                    fn (TaxonomyInterface $taxonomy) => $taxonomy->getTaxonomy(),
+                    $this->getTaxonomyRegistry()->getTaxonomies(false)
+                );
+                $rejectedQueryableTagTaxonomies = \apply_filters(
                     self::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
                     []
                 );
-                $possibleTagTaxonomyNames = array_values(array_diff(
-                    $possibleTagTaxonomyNames,
-                    $pluginTagTaxonomyNames,
-                    $rejectedQueryableTagTaxonomyNames
+                $possibleTagTaxonomies = array_values(array_diff(
+                    $possibleTagTaxonomies,
+                    $pluginTagTaxonomies,
+                    $rejectedQueryableTagTaxonomies
                 ));
                 // Allow plugins to further remove unwanted custom post types
-                $possibleTagTaxonomyNames = \apply_filters(
+                $possibleTagTaxonomies = \apply_filters(
                     self::HOOK_QUERYABLE_TAG_TAXONOMIES,
-                    $possibleTagTaxonomyNames
+                    $possibleTagTaxonomies
                 );
 
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($possibleTagTaxonomyNames as $value) {
+                foreach ($possibleTagTaxonomies as $value) {
                     $possibleValues[$value] = $value;
                 }
                 // Set the setting
@@ -800,7 +810,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             } elseif ($module === self::SCHEMA_CATEGORIES) {
                 // Get the list of category taxonomies from the system
                 /** @var string[] */
-                $possibleCategoryTaxonomyNames = \get_taxonomies(
+                $possibleCategoryTaxonomies = \get_taxonomies(
                     [
                         'hierarchical' => true,
                     ],
@@ -810,30 +820,28 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                  * Possibly not all category taxonomies must be allowed.
                  * Remove the ones that do not
                  */
-                // @todo Add services and replace code below
-                $pluginCategoryTaxonomyNames = [];
-                // $pluginCategoryTaxonomyNames = array_map(
-                //     fn (TaxonomyInterface $taxonomy) => $taxonomy->getName(),
-                //     $this->getTaxonomyRegistry()->getTaxonomies(true)
-                // );
-                $rejectedQueryableCategoryTaxonomyNames = \apply_filters(
+                $pluginCategoryTaxonomies = array_map(
+                    fn (TaxonomyInterface $taxonomy) => $taxonomy->getTaxonomy(),
+                    $this->getTaxonomyRegistry()->getTaxonomies(true)
+                );
+                $rejectedQueryableCategoryTaxonomies = \apply_filters(
                     self::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
                     []
                 );
-                $possibleCategoryTaxonomyNames = array_values(array_diff(
-                    $possibleCategoryTaxonomyNames,
-                    $pluginCategoryTaxonomyNames,
-                    $rejectedQueryableCategoryTaxonomyNames
+                $possibleCategoryTaxonomies = array_values(array_diff(
+                    $possibleCategoryTaxonomies,
+                    $pluginCategoryTaxonomies,
+                    $rejectedQueryableCategoryTaxonomies
                 ));
                 // Allow plugins to further remove unwanted custom post types
-                $possibleCategoryTaxonomyNames = \apply_filters(
+                $possibleCategoryTaxonomies = \apply_filters(
                     self::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
-                    $possibleCategoryTaxonomyNames
+                    $possibleCategoryTaxonomies
                 );
                 
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($possibleCategoryTaxonomyNames as $value) {
+                foreach ($possibleCategoryTaxonomies as $value) {
                     $possibleValues[$value] = $value;
                 }
                 // Set the setting
