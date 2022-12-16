@@ -70,7 +70,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     /**
      * Initialize the different post types
      */
-    public function initTaxonomy(): void
+    protected function initTaxonomy(): void
     {
         $names_uc = $this->getTaxonomyPluralNames(true);
         $labels = $this->getTaxonomyLabels(
