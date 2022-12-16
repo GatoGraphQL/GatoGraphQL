@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInte
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryCategoryTaxonomy;
 
 class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
@@ -154,7 +154,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     protected function getTaxonomies(): array
     {
         return [
-            GraphQLQueryTaxonomy::TAXONOMY_CATEGORY,
+            GraphQLQueryCategoryTaxonomy::TAXONOMY_CATEGORY,
         ];
     }
 
