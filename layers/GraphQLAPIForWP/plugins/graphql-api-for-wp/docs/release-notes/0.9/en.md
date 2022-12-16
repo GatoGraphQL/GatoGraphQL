@@ -771,9 +771,9 @@ If the user doesn't have the permission to edit posts, we will receive:
 The affected mutations are:
 
 - `Comment.reply: CommentReplyMutationPayload!`
-- `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
-- `CustomPost.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
-- `CustomPost.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+- `Commentable.addComment: CustomPostAddCommentMutationPayload!`
+- `SupportingFeaturedImage.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!` (`SupportingFeaturedImage` is an interface, implemented by types `Post`, `Page` and `GenericCustomPost`)
+- `SupportingFeaturedImage.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
 - `Post.setCategories: PostSetCategoriesMutationPayload!`
 - `Post.setTags: PostSetTagsMutationPayload!`
 - `Post.update: PostUpdateMutationPayload!`
