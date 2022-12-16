@@ -22,18 +22,18 @@ class GraphQLQueryTaxonomy extends AbstractCategory
     /**
      * Taxonomy name
      */
-    public function getTaxonomyName(bool $uppercase = true): string
+    public function getTaxonomyName(bool $titleCase = true): string
     {
-        return $uppercase ? \__('Category', 'graphql-api') : \__('category', 'graphql-api');
+        return $titleCase ? \__('Category', 'graphql-api') : \__('category', 'graphql-api');
     }
 
     /**
      * Taxonomy plural name
      *
-     * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
+     * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
      */
-    protected function getTaxonomyPluralNames(bool $uppercase = true): string
+    protected function getTaxonomyPluralNames(bool $titleCase = true): string
     {
-        return $uppercase ? \__('Categories', 'graphql-api') : \__('categories', 'graphql-api');
+        return $titleCase ? \__('Categories', 'graphql-api') : \__('categories', 'graphql-api');
     }
 }
