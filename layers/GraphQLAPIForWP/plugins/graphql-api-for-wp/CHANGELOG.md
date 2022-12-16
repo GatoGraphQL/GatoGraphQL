@@ -163,7 +163,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.updatePost: RootUpdatePostMutationPayload!`
   - `SupportingFeaturedImage.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
   - `SupportingFeaturedImage.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
-- `Commentable` interface is only added to CPTs that support comments
+- `Commentable` and `SupportingFeaturedImage` interfaces are only added to CPTs that support the feature
 
 ### Added
 

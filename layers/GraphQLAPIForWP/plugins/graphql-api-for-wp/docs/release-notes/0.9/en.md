@@ -786,7 +786,7 @@ The affected mutations are:
 - `Root.setTagsOnPost: RootSetTagsOnPostMutationPayload!`
 - `Root.updatePost: RootUpdatePostMutationPayload!`
 
-### `Commentable` interface is only added to CPTs that support comments
+### `Commentable` and `SupportingFeaturedImage` interfaces are only added to CPTs that support the feature
 
 The `Commentable` interface has the following fields:
 
@@ -797,7 +797,9 @@ The `Commentable` interface has the following fields:
 
 This interface was added to all types for all custom post types (`Post`, `Page` and `GenericCustomPost`). Now, it is only added to the types for those CPTs that do support comments.
 
-For instance, type `Post` will implement `Commentable` only if `post_type_supports('post', 'comments') === true`.
+Similarly, interface `SupportingFeaturedImage` is now only added to the types for those CPTs that do support a featured image.
+
+For instance, the type `Post` implements both `Commentable` and `SupportingFeaturedImage` (because `post_type_supports('post', 'comments') === true` and because `post_type_supports('post', 'thumbnail') === true`).
 
 ## Custom scalars
 
