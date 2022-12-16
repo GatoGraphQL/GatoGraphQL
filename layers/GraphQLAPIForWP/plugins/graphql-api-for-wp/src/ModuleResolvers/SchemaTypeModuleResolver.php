@@ -65,6 +65,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public final const HOOK_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':queryable-custompost-types';
     public final const HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-queryable-custompost-types';
+    public final const HOOK_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':queryable-tag-taxonomies';
+    public final const HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':rejected-queryable-tag-taxonomies';
+    public final const HOOK_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':queryable-category-taxonomies';
+    public final const HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':rejected-queryable-category-taxonomies';
 
     /**
      * This comment used to be valid when using `autowire` functions
@@ -495,10 +499,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_TAGS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 200,
+                ModuleSettingOptions::TAG_TAXONOMIES => ['post_tag'],
             ],
             self::SCHEMA_CATEGORIES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 200,
+                ModuleSettingOptions::CATEGORY_TAXONOMIES => ['category'],
             ],
             self::SCHEMA_SETTINGS => [
                 ModuleSettingOptions::ENTRIES => $useUnsafe ? [] : [
@@ -654,8 +660,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 );
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($possibleCustomPostTypes as $customPostType) {
-                    $possibleValues[$customPostType] = $customPostType;
+                foreach ($possibleCustomPostTypes as $value) {
+                    $possibleValues[$value] = $value;
                 }
                 // Set the setting
                 $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
@@ -729,6 +735,112 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         \__('user email', 'graphql-api'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+            } elseif ($module === self::SCHEMA_TAGS) {
+                // Get the list of tag taxonomies from the system
+                $possibleTagTaxonomies = \get_taxonomies(
+                    [
+                        'hierarchical' => false,
+                    ],
+                    'names'
+                );
+                /**
+                 * Possibly not all tag taxonomies must be allowed.
+                 * Remove the ones that do not
+                 */
+                $rejectedQueryableTagTaxonomies = \apply_filters(
+                    self::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
+                    []
+                );
+                $possibleTagTaxonomies = array_values(array_diff(
+                    $possibleTagTaxonomies,
+                    $rejectedQueryableTagTaxonomies
+                ));
+                // Allow plugins to further remove unwanted custom post types
+                $possibleTagTaxonomies = \apply_filters(
+                    self::HOOK_QUERYABLE_TAG_TAXONOMIES,
+                    $possibleTagTaxonomies
+                );
+
+                // The possible values must have key and value
+                $possibleValues = [];
+                foreach ($possibleTagTaxonomies as $value) {
+                    $possibleValues[$value] = $value;
+                }
+                // Set the setting
+                $option = ModuleSettingOptions::TAG_TAXONOMIES;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Included tag taxonomies', 'graphql-api'),
+                    // @todo Fix description!!!
+                    Properties::DESCRIPTION => 'Temp desc',
+                    // Properties::DESCRIPTION => sprintf(
+                    //     \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                    //     $this->getCustomPostUnionTypeResolver()->getTypeName(),
+                    //     $this->getPostObjectTypeResolver()->getTypeName(),
+                    //     $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
+                    // ),
+                    Properties::TYPE => Properties::TYPE_ARRAY,
+                    // Fetch all Schema Configurations from the DB
+                    Properties::POSSIBLE_VALUES => $possibleValues,
+                    Properties::IS_MULTIPLE => true,
+                ];
+            } elseif ($module === self::SCHEMA_CATEGORIES) {
+                // Get the list of category taxonomies from the system
+                $possibleCategoryTaxonomies = \get_taxonomies(
+                    [
+                        'hierarchical' => true,
+                    ],
+                    'names'
+                );
+                /**
+                 * Possibly not all category taxonomies must be allowed.
+                 * Remove the ones that do not
+                 */
+                $rejectedQueryableCategoryTaxonomies = \apply_filters(
+                    self::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
+                    []
+                );
+                $possibleCategoryTaxonomies = array_values(array_diff(
+                    $possibleCategoryTaxonomies,
+                    $rejectedQueryableCategoryTaxonomies
+                ));
+                // Allow plugins to further remove unwanted custom post types
+                $possibleCategoryTaxonomies = \apply_filters(
+                    self::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
+                    $possibleCategoryTaxonomies
+                );
+                
+                // The possible values must have key and value
+                $possibleValues = [];
+                foreach ($possibleCategoryTaxonomies as $value) {
+                    $possibleValues[$value] = $value;
+                }
+                // Set the setting
+                $option = ModuleSettingOptions::CATEGORY_TAXONOMIES;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Included category taxonomies', 'graphql-api'),
+                    // @todo Fix description!!!
+                    Properties::DESCRIPTION => 'Temp desc',
+                    // Properties::DESCRIPTION => sprintf(
+                    //     \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                    //     $this->getCustomPostUnionTypeResolver()->getTypeName(),
+                    //     $this->getPostObjectTypeResolver()->getTypeName(),
+                    //     $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
+                    // ),
+                    Properties::TYPE => Properties::TYPE_ARRAY,
+                    // Fetch all Schema Configurations from the DB
+                    Properties::POSSIBLE_VALUES => $possibleValues,
+                    Properties::IS_MULTIPLE => true,
                 ];
             }
         } elseif ($module === self::SCHEMA_COMMENTS) {
