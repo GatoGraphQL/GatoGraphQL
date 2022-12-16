@@ -898,7 +898,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultLimitMessagePlaceholder,
                     sprintf(
                         \__('%s and %s', 'graphql-api'),
-                        '<code>CustomPost.comments</code>',
+                        '<code>Commentable.comments</code>',
                         '<code>Comment.responses</code>'
                     ),
                     $limitArg,
