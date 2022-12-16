@@ -57,14 +57,14 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     /**
      * Taxonomy name
      */
-    abstract public function getTaxonomyName(bool $uppercase = true): string;
+    abstract public function getTaxonomyName(bool $titleCase = true): string;
 
     /**
      * Taxonomy plural name
      *
-     * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
+     * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
      */
-    abstract protected function getTaxonomyPluralNames(bool $uppercase = true): string;
+    abstract protected function getTaxonomyPluralNames(bool $titleCase = true): string;
 
 
     /**

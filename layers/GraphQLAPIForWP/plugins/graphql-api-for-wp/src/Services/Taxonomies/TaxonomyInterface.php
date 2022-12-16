@@ -8,5 +8,5 @@ interface TaxonomyInterface
 {
     public function getTaxonomy(): string;
 
-    public function getTaxonomyName(bool $uppercase = true): string;
+    public function getTaxonomyName(bool $titleCase = true): string;
 }
