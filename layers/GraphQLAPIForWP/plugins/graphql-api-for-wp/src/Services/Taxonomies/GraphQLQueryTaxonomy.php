@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Taxonomies;
 
-class GraphQLQueryTaxonomy extends AbstractTaxonomy
+class GraphQLQueryTaxonomy extends AbstractCategory
 {
     /**
      * "Category" taxonomy

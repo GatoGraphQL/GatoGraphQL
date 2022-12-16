@@ -9,11 +9,6 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface
 {
     /**
-     * Taxonomy
-     */
-    abstract public function getTaxonomy(): string;
-
-    /**
      * Add the hook to initialize the different taxonomies
      */
     final public function initialize(): void
@@ -55,19 +50,6 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     }
 
     /**
-     * Taxonomy name
-     */
-    abstract public function getTaxonomyName(bool $titleCase = true): string;
-
-    /**
-     * Taxonomy plural name
-     *
-     * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
-     */
-    abstract protected function getTaxonomyPluralNames(bool $titleCase = true): string;
-
-
-    /**
      * Initialize the different post types
      */
     protected function initTaxonomy(): void
@@ -104,4 +86,11 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             $args
         );
     }
+
+    /**
+     * Taxonomy plural name
+     *
+     * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
+     */
+    abstract protected function getTaxonomyPluralNames(bool $titleCase = true): string;
 }
