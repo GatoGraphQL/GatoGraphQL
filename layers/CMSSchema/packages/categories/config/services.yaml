@@ -15,3 +15,6 @@ services:
 
     PoPCMSSchema\Categories\FilterInputs\:
         resource: '../src/FilterInputs/*'
+
+    PoPCMSSchema\Categories\Registries\CategoryObjectTypeResolverPickerRegistryInterface:
+        class: \PoPCMSSchema\Categories\Registries\CategoryObjectTypeResolverPickerRegistry

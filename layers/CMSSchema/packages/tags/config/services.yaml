@@ -16,5 +16,5 @@ services:
     PoPCMSSchema\Tags\FilterInputs\:
         resource: '../src/FilterInputs/*'
 
-    PoPCMSSchema\Tags\TypeResolvers\:
-        resource: '../src/TypeResolvers/*'
+    PoPCMSSchema\Tags\Registries\TagObjectTypeResolverPickerRegistryInterface:
+        class: \PoPCMSSchema\Tags\Registries\TagObjectTypeResolverPickerRegistry

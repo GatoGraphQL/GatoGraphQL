@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
-use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    abstract public function getCategoryTypeAPI(): CategoryTypeAPIInterface;
+    abstract public function getCategoryListTypeAPI(): CategoryListTypeAPIInterface;
 
     /**
      * @param array<string|int> $ids
@@ -41,7 +41,7 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryabl
      */
     public function executeQuery(array $query, array $options = []): array
     {
-        $categoryTypeAPI = $this->getCategoryTypeAPI();
+        $categoryTypeAPI = $this->getCategoryListTypeAPI();
         return $categoryTypeAPI->getCategories($query, $options);
     }
 

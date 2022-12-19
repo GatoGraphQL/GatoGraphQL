@@ -3,10 +3,10 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\Categories\TypeResolvers\:
+    PoPCMSSchema\Tags\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPCMSSchema\Categories\ObjectTypeResolverPickers\:
+    PoPCMSSchema\Tags\ObjectTypeResolverPickers\:
         resource: '../src/ObjectTypeResolverPickers/*'
 
     PoPCMSSchema\Categories\RelationalTypeDataLoaders\:

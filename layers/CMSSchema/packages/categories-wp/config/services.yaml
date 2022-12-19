@@ -10,3 +10,6 @@ services:
     PoPCMSSchema\CategoriesWP\Hooks\:
         resource: '../src/Hooks/*'
 
+    PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface:
+        class: \PoPCMSSchema\CategoriesWP\TypeAPIs\QueryableCategoryTypeAPI
+

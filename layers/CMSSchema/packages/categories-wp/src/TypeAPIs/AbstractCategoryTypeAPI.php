@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoriesWP\TypeAPIs;
 
-use PoP\Root\App;
-use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
+use PoP\Root\App;
 use WP_Post;
-use WP_Term;
 
+use WP_Term;
 use function get_categories;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implements CategoryTypeAPIInterface
+abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implements CategoryTypeAPIInterface, CategoryListTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
