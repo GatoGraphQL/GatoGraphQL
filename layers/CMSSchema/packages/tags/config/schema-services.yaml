@@ -9,5 +9,5 @@ services:
     PoPCMSSchema\Tags\ObjectTypeResolverPickers\:
         resource: '../src/ObjectTypeResolverPickers/*'
 
-    PoPCMSSchema\Categories\RelationalTypeDataLoaders\:
+    PoPCMSSchema\Tags\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
