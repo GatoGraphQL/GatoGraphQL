@@ -51,6 +51,16 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         return $this->getTaxonomyTermID($cat);
     }
 
+    public function getCategory(string|int $categoryID): ?object
+    {
+        return $this->getTaxonomyTerm($categoryID);
+    }
+
+    public function categoryExists(int|string $id): bool
+    {
+        return $this->getCategory($id) !== null;
+    }
+
     abstract protected function getCategoryBaseOption(): string;
 
     protected function getTaxonomyName(): string
