@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\App;
-use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
-use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
+use PoPCMSSchema\CustomPosts\Module;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class CustomPostEnumTypeResolver extends AbstractEnumTypeResolver
@@ -21,8 +21,8 @@ class CustomPostEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        /** @var CustomPostsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getQueryableCustomPostTypes();
     }
 }
