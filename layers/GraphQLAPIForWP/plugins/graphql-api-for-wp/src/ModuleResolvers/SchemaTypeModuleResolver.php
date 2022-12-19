@@ -13,6 +13,8 @@ use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
@@ -22,6 +24,8 @@ use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\GenericTagObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\UnionType\TagUnionTypeResolver;
 use PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
@@ -86,9 +90,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
+    private ?TagUnionTypeResolver $tagUnionTypeResolver = null;
+    private ?CategoryUnionTypeResolver $categoryUnionTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
+    private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
+    private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
@@ -118,6 +126,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var CustomPostUnionTypeResolver */
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
     }
+    final public function setTagUnionTypeResolver(TagUnionTypeResolver $tagUnionTypeResolver): void
+    {
+        $this->tagUnionTypeResolver = $tagUnionTypeResolver;
+    }
+    final protected function getTagUnionTypeResolver(): TagUnionTypeResolver
+    {
+        /** @var TagUnionTypeResolver */
+        return $this->tagUnionTypeResolver ??= $this->instanceManager->getInstance(TagUnionTypeResolver::class);
+    }
+    final public function setCategoryUnionTypeResolver(CategoryUnionTypeResolver $categoryUnionTypeResolver): void
+    {
+        $this->categoryUnionTypeResolver = $categoryUnionTypeResolver;
+    }
+    final protected function getCategoryUnionTypeResolver(): CategoryUnionTypeResolver
+    {
+        /** @var CategoryUnionTypeResolver */
+        return $this->categoryUnionTypeResolver ??= $this->instanceManager->getInstance(CategoryUnionTypeResolver::class);
+    }
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
@@ -144,6 +170,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var GenericCustomPostObjectTypeResolver */
         return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+    }
+    final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void
+    {
+        $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
+    }
+    final protected function getGenericTagObjectTypeResolver(): GenericTagObjectTypeResolver
+    {
+        /** @var GenericTagObjectTypeResolver */
+        return $this->genericTagObjectTypeResolver ??= $this->instanceManager->getInstance(GenericTagObjectTypeResolver::class);
+    }
+    final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
+    {
+        $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
+    }
+    final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
+    {
+        /** @var GenericCategoryObjectTypeResolver */
+        return $this->genericCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
     }
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -794,14 +838,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $option
                     ),
                     Properties::TITLE => \__('Included tag taxonomies', 'graphql-api'),
-                    // @todo Fix description!!!
-                    Properties::DESCRIPTION => 'Temp desc',
-                    // Properties::DESCRIPTION => sprintf(
-                    //     \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
-                    //     $this->getCustomPostUnionTypeResolver()->getTypeName(),
-                    //     $this->getPostObjectTypeResolver()->getTypeName(),
-                    //     $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
-                    // ),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        $this->getTagUnionTypeResolver()->getTypeName(),
+                        $this->getPostTagObjectTypeResolver()->getTypeName(),
+                        $this->getGenericTagObjectTypeResolver()->getTypeName(),
+                    ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
                     // Fetch all Schema Configurations from the DB
                     Properties::POSSIBLE_VALUES => $possibleValues,
@@ -853,14 +895,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $option
                     ),
                     Properties::TITLE => \__('Included category taxonomies', 'graphql-api'),
-                    // @todo Fix description!!!
-                    Properties::DESCRIPTION => 'Temp desc',
-                    // Properties::DESCRIPTION => sprintf(
-                    //     \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
-                    //     $this->getCustomPostUnionTypeResolver()->getTypeName(),
-                    //     $this->getPostObjectTypeResolver()->getTypeName(),
-                    //     $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
-                    // ),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        $this->getCategoryUnionTypeResolver()->getTypeName(),
+                        $this->getPostCategoryObjectTypeResolver()->getTypeName(),
+                        $this->getGenericCategoryObjectTypeResolver()->getTypeName(),
+                    ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
                     // Fetch all Schema Configurations from the DB
                     Properties::POSSIBLE_VALUES => $possibleValues,
