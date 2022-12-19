@@ -81,7 +81,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             'urlAbsolutePath',
             'slug',
 
-            // Tag interface
+            // IsTag interface
             'name',
             'description',
             'count',

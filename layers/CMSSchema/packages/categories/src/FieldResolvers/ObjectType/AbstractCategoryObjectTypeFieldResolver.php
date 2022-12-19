@@ -82,7 +82,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'urlAbsolutePath',
             'slug',
 
-            // Taxonomy
+            // IsCategory interface
             'name',
             'description',
             'count',
