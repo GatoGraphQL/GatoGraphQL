@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Categories\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\App;
-use PoPCMSSchema\Categories\Module as CategoriesModule;
-use PoPCMSSchema\Categories\ModuleConfiguration as CategoriesModuleConfiguration;
+use PoPCMSSchema\Categories\Module;
+use PoPCMSSchema\Categories\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class CategoryEnumTypeResolver extends AbstractEnumTypeResolver
@@ -21,8 +21,8 @@ class CategoryEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        /** @var CategoriesModuleConfiguration */
-        $moduleConfiguration = App::getModule(CategoriesModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getQueryableCategoryTaxonomies();
     }
 }

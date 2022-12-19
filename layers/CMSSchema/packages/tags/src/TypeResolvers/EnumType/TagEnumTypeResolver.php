@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Tags\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\App;
-use PoPCMSSchema\Tags\Module as TagsModule;
-use PoPCMSSchema\Tags\ModuleConfiguration as TagsModuleConfiguration;
+use PoPCMSSchema\Tags\Module;
+use PoPCMSSchema\Tags\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class TagEnumTypeResolver extends AbstractEnumTypeResolver
@@ -21,8 +21,8 @@ class TagEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        /** @var TagsModuleConfiguration */
-        $moduleConfiguration = App::getModule(TagsModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getQueryableTagTaxonomies();
     }
 }
