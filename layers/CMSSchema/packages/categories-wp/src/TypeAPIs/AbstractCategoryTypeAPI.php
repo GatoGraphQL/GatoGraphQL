@@ -10,8 +10,8 @@ use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
 use WP_Post;
-
 use WP_Term;
+
 use function get_categories;
 
 /**
