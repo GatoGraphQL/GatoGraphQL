@@ -52,13 +52,14 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     abstract protected function getCategoryTaxonomyName(): string;
 
     /**
-     * @return array<string|int>|object[]
+     * @param string|int|WP_Post $customPostObjectOrID
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
+     * @return array<string|int>|object[]|null
      */
     public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
-        /** @var string|int|WP_Post $customPostObjectOrID */
+        /** @var array<string|int>|object[] */
         return $this->getCustomPostTaxonomyTerms(
             $this->getCategoryTaxonomyName(),
             $customPostObjectOrID,

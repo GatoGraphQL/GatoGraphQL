@@ -155,7 +155,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     [
                         QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
                     ]
-                );
+                ) ?? [];
 
             case 'catSlugs':
                 return $taxonomyapi->getCustomPostTaxonomyTerms(
@@ -164,7 +164,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     [
                         QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS,
                     ]
-                );
+                ) ?? [];
 
             case 'stance':
                 // The stance is the category

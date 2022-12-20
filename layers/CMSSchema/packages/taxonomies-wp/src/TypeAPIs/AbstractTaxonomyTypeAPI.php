@@ -78,16 +78,16 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     }
 
     /**
-     * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
+     * @return array<string|int>|object[]|null
      */
     public function getCustomPostTaxonomyTerms(
         string $taxonomy,
         string|int|object $customPostObjectOrID,
         array $query = [],
         array $options = [],
-    ): array {
+    ): ?array {
         /** @var string|int|WP_Post $customPostObjectOrID */
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertTaxonomyTermsQuery($query, $options);
@@ -97,7 +97,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             $query,
         );
         if ($taxonomyTerms instanceof WP_Error) {
-            return [];
+            return null;
         }
         /** @var array<string|int>|object[] $taxonomyTerms */
         return $taxonomyTerms;
