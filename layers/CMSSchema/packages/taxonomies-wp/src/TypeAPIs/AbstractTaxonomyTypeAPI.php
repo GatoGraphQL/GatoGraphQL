@@ -7,7 +7,6 @@ namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
-use PoPCMSSchema\Taxonomies\TypeAPIs\CustomPostTaxonomyTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\Root\App;
@@ -25,7 +24,7 @@ use function get_term_link;
 use function get_terms;
 use function wp_get_post_terms;
 
-abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface, CustomPostTaxonomyTypeAPIInterface
+abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
     use BasicServiceTrait;
 
