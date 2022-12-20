@@ -12,4 +12,9 @@ interface TagListTypeAPIInterface
      * @param array<string,mixed> $options
      */
     public function getTags(array $query, array $options = []): array;
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function getTagCount(array $query = [], array $options = []): int;
 }
