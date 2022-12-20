@@ -7,6 +7,7 @@ namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
+use PoPCMSSchema\Taxonomies\TypeAPIs\CustomPostTaxonomyTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\Root\App;
@@ -17,14 +18,14 @@ use WP_Taxonomy;
 use WP_Term;
 
 use function esc_sql;
+use function get_term;
 use function get_term_by;
 use function get_term_children;
 use function get_term_link;
-use function get_term;
 use function get_terms;
 use function wp_get_post_terms;
 
-abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
+abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface, CustomPostTaxonomyTypeAPIInterface
 {
     use BasicServiceTrait;
 
@@ -82,12 +83,13 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    protected function getCustomPostTaxonomyTerms(
+    public function getCustomPostTaxonomyTerms(
         string $taxonomy,
-        string|int|WP_Post $customPostObjectOrID,
+        string|int|object $customPostObjectOrID,
         array $query = [],
         array $options = [],
     ): array {
+        /** @var string|int|WP_Post $customPostObjectOrID */
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertTaxonomyTermsQuery($query, $options);
         $taxonomyTerms =  wp_get_post_terms(

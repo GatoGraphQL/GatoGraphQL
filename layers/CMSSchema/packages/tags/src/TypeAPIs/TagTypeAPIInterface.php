@@ -4,12 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\TypeAPIs;
 
-use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
-
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
-interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
+interface TagTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Tag

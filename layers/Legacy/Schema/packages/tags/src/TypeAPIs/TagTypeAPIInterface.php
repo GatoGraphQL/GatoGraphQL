@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace EverythingElse\PoPCMSSchema\Tags\TypeAPIs;
 
-use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface as UpstreamTagTypeAPIInterface;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
-interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
+interface TagTypeAPIInterface extends UpstreamTagTypeAPIInterface
 {
     public function getTagBase(): string;
     /**
