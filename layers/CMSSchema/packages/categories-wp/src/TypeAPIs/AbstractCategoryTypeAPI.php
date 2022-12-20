@@ -136,7 +136,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function convertCategoriesQuery(array $query, array $options = []): array
+    final public function convertCategoriesQuery(array $query, array $options = []): array
     {
         return $this->convertTaxonomyTermsQuery($query, $options);
     }

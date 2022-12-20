@@ -12,6 +12,8 @@ use PoP\ComponentModel\App;
 
 class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagTypeAPIInterface
 {
+    public const HOOK_QUERY = __CLASS__ . ':query';
+    
     protected function getTagBaseOption(): string
     {
         return '';
@@ -33,13 +35,18 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function convertTagsQuery(array $query, array $options = []): array
+    protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
-        $query = parent::convertTagsQuery($query, $options);
+        $query = parent::convertTaxonomyTermsQuery($query, $options);
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $query['taxonomy'] = $moduleConfiguration->getQueryableTagTaxonomies();
-        return $query;
+        
+        return App::applyFilters(
+            self::HOOK_QUERY,
+            $query,
+            $options
+        );
     }
 }

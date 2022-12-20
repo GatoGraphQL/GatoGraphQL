@@ -12,6 +12,8 @@ use PoP\ComponentModel\App;
 
 class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements QueryableCategoryTypeAPIInterface
 {
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     protected function getCategoryBaseOption(): string
     {
         return '';
@@ -33,13 +35,18 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function convertCategoriesQuery(array $query, array $options = []): array
+    protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
-        $query = parent::convertCategoriesQuery($query, $options);
+        $query = parent::convertTaxonomyTermsQuery($query, $options);
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $query['taxonomy'] = $moduleConfiguration->getQueryableCategoryTaxonomies();
-        return $query;
+        
+        return App::applyFilters(
+            self::HOOK_QUERY,
+            $query,
+            $options
+        );
     }
 }

@@ -142,7 +142,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function convertTagsQuery(array $query, array $options = []): array
+    final public function convertTagsQuery(array $query, array $options = []): array
     {
         return $this->convertTaxonomyTermsQuery($query, $options);
     }
