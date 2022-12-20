@@ -11,3 +11,6 @@ services:
 
     PoPCMSSchema\Categories\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\Categories\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
