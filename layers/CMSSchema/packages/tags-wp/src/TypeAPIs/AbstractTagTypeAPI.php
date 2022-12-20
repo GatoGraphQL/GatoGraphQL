@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TagsWP\TypeAPIs;
 
+use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
 use WP_Error;
 use WP_Post;
-use WP_Term;
 
+use WP_Term;
 use function get_tags;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements TagTypeAPIInterface
+abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements TagTypeAPIInterface, TagListTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
