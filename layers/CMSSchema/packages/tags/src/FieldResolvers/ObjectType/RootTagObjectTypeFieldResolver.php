@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagByInputObjectTypeResolver;
-use PoPCMSSchema\Tags\TypeResolvers\UnionType\TagUnionTypeResolver;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
+use PoPCMSSchema\Tags\TypeAPIs\TaxonomyTagListTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\RootTagsFilterInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagByInputObjectTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagPaginationInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\UnionType\TagUnionTypeResolver;
 use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -31,8 +32,9 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?TagUnionTypeResolver $tagUnionTypeResolver = null;
-    private ?TagTypeAPIInterface $tagTypeAPI = null;
+    private ?TaxonomyTagListTypeAPIInterface $taxonomyTagListTypeAPI = null;
     private ?TagByInputObjectTypeResolver $tagByInputObjectTypeResolver = null;
+    private ?TagTaxonomyEnumTypeResolver $tagTaxonomyEnumTypeResolver = null;
     private ?TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
     private ?RootTagsFilterInputObjectTypeResolver $rootTagsFilterInputObjectTypeResolver = null;
@@ -64,14 +66,14 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         /** @var TagUnionTypeResolver */
         return $this->tagUnionTypeResolver ??= $this->instanceManager->getInstance(TagUnionTypeResolver::class);
     }
-    final public function setTagTypeAPI(TagTypeAPIInterface $tagTypeAPI): void
+    final public function setTaxonomyTagListTypeAPI(TaxonomyTagListTypeAPIInterface $taxonomyTagListTypeAPI): void
     {
-        $this->tagTypeAPI = $tagTypeAPI;
+        $this->taxonomyTagListTypeAPI = $taxonomyTagListTypeAPI;
     }
-    final protected function getTagTypeAPI(): TagTypeAPIInterface
+    final protected function getTaxonomyTagListTypeAPI(): TaxonomyTagListTypeAPIInterface
     {
-        /** @var TagTypeAPIInterface */
-        return $this->tagTypeAPI ??= $this->instanceManager->getInstance(TagTypeAPIInterface::class);
+        /** @var TaxonomyTagListTypeAPIInterface */
+        return $this->taxonomyTagListTypeAPI ??= $this->instanceManager->getInstance(TaxonomyTagListTypeAPIInterface::class);
     }
     final public function setTagByInputObjectTypeResolver(TagByInputObjectTypeResolver $tagByInputObjectTypeResolver): void
     {
@@ -81,6 +83,15 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     {
         /** @var TagByInputObjectTypeResolver */
         return $this->tagByInputObjectTypeResolver ??= $this->instanceManager->getInstance(TagByInputObjectTypeResolver::class);
+    }
+    final public function setTagTaxonomyEnumTypeResolver(TagTaxonomyEnumTypeResolver $tagTaxonomyEnumTypeResolver): void
+    {
+        $this->tagTaxonomyEnumTypeResolver = $tagTaxonomyEnumTypeResolver;
+    }
+    final protected function getTagTaxonomyEnumTypeResolver(): TagTaxonomyEnumTypeResolver
+    {
+        /** @var TagTaxonomyEnumTypeResolver */
+        return $this->tagTaxonomyEnumTypeResolver ??= $this->instanceManager->getInstance(TagTaxonomyEnumTypeResolver::class);
     }
     final public function setTagPaginationInputObjectTypeResolver(TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver): void
     {
@@ -178,9 +189,13 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        $commonFieldArgNameTypeResolvers = [
+            'taxonomy' => $this->getTagTaxonomyEnumTypeResolver(),
+        ];
         return match ($fieldName) {
             'tag' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'by' => $this->getTagByInputObjectTypeResolver(),
                 ]
@@ -188,6 +203,7 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             'tags',
             'tagNames' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'filter' => $this->getRootTagsFilterInputObjectTypeResolver(),
                     'pagination' => $this->getTagPaginationInputObjectTypeResolver(),
@@ -196,6 +212,7 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             ),
             'tagCount' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'filter' => $this->getRootTagsFilterInputObjectTypeResolver(),
                 ]
@@ -206,9 +223,23 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
+        if ($fieldArgName === 'taxonomy') {
+            return SchemaTypeModifiers::MANDATORY;
+        }
         return match ([$fieldName => $fieldArgName]) {
             ['tag' => 'by'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        if ($fieldArgName === 'taxonomy') {
+            return $this->__('Taxonomy of the tag', 'tags');
+        }
+        return match ([$fieldName => $fieldArgName]) {
+            ['tag' => 'by'] => $this->__('Parameter by which to select the tag', 'tags'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -219,18 +250,20 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
+        /** @var string */
+        $tagTaxonomy = $fieldDataAccessor->getValue('taxonomy');
         switch ($fieldDataAccessor->getFieldName()) {
             case 'tag':
-                if ($tags = $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                if ($tags = $this->getTaxonomyTagListTypeAPI()->getTaxonomyTags($tagTaxonomy, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $tags[0];
                 }
                 return null;
             case 'tags':
-                return $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getTaxonomyTagListTypeAPI()->getTaxonomyTags($tagTaxonomy, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'tagNames':
-                return $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $this->getTaxonomyTagListTypeAPI()->getTaxonomyTags($tagTaxonomy, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'tagCount':
-                return $this->getTagTypeAPI()->getTagCount($query);
+                return $this->getTaxonomyTagListTypeAPI()->getTaxonomyTagCount($tagTaxonomy, $query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
