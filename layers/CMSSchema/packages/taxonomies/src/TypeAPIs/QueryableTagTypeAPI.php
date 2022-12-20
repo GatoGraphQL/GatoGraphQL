@@ -18,7 +18,7 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
      * There will be more than 1 taxonomies, but this value
      * will get replaced in the query below
      */
-    public function getTagTaxonomyName(): string
+    protected function getTagTaxonomyName(): string
     {
         return '';
     }

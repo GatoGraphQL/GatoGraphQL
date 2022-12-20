@@ -33,7 +33,7 @@ class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterfa
         return 'post_tag';
     }
 
-    public function getTagTaxonomyName(): string
+    protected function getTagTaxonomyName(): string
     {
         return $this->getPostTagTaxonomyName();
     }
