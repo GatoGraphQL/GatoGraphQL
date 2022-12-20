@@ -280,6 +280,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
+            [
+                'class' => TagsModule::class,
+                'envVariable' => TagsEnvironment::QUERYABLE_TAG_TAXONOMIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
+                'option' => ModuleSettingOptions::TAG_TAXONOMIES,
+            ],
             // Categories default/max limits
             [
                 'class' => CategoriesModule::class,
@@ -292,6 +298,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
+            ],
+            [
+                'class' => CategoriesModule::class,
+                'envVariable' => CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
+                'option' => ModuleSettingOptions::CATEGORY_TAXONOMIES,
             ],
             // Page default/max limits, add to CustomPostUnion
             [
