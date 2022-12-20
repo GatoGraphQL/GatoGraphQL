@@ -6,7 +6,6 @@ namespace PoPCMSSchema\CategoriesWP\TypeAPIs;
 
 use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
 use WP_Post;
@@ -20,18 +19,6 @@ use function get_categories;
 abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implements CategoryTypeAPIInterface, CategoryListTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
-
-    private ?CMSServiceInterface $cmsService = null;
-
-    final public function setCMSService(CMSServiceInterface $cmsService): void
-    {
-        $this->cmsService = $cmsService;
-    }
-    final protected function getCMSService(): CMSServiceInterface
-    {
-        /** @var CMSServiceInterface */
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
-    }
 
     /**
      * Indicates if the passed object is of type Category
@@ -61,8 +48,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         return $this->getCategory($id) !== null;
     }
-
-    abstract protected function getCategoryBaseOption(): string;
 
     abstract protected function getCategoryTaxonomyName(): string;
 
@@ -151,11 +136,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         /** @var string|int|WP_Term $catObjectOrID */
         return $this->getTaxonomyTermURLPath($this->getCategoryTaxonomyName(), $catObjectOrID);
-    }
-
-    public function getCategoryBase(): string
-    {
-        return $this->getCMSService()->getOption($this->getCategoryBaseOption());
     }
 
     protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term

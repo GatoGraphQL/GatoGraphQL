@@ -4,16 +4,26 @@ declare(strict_types=1);
 
 namespace EverythingElse\PoPCMSSchema\CategoriesWP\TypeAPIs;
 
-use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use EverythingElse\PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\CategoriesWP\TypeAPIs\AbstractCategoryTypeAPI as UpstreamAbstractCategoryTypeAPI;
+use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 
 use function wp_set_post_terms;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
 abstract class AbstractCategoryTypeAPI extends UpstreamAbstractCategoryTypeAPI implements CategoryTypeAPIInterface
 {
+    private ?CMSServiceInterface $cmsService = null;
+
+    final public function setCMSService(CMSServiceInterface $cmsService): void
+    {
+        $this->cmsService = $cmsService;
+    }
+    final protected function getCMSService(): CMSServiceInterface
+    {
+        /** @var CMSServiceInterface */
+        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+    }
+
     public function hasCategory($cat_id, $post_id): bool
     {
         return has_category($cat_id, $post_id);
@@ -41,5 +51,12 @@ abstract class AbstractCategoryTypeAPI extends UpstreamAbstractCategoryTypeAPI i
     public function setPostCategories(string|int $post_id, array $categories, bool $append = false): void
     {
         wp_set_post_terms($post_id, $categories, $this->getCategoryTaxonomyName(), $append);
+    }
+
+    abstract protected function getCategoryBaseOption(): string;
+
+    public function getCategoryBase(): string
+    {
+        return $this->getCMSService()->getOption($this->getCategoryBaseOption());
     }
 }

@@ -14,11 +14,6 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    protected function getCategoryBaseOption(): string
-    {
-        return '';
-    }
-
     /**
      * There will be more than 1 taxonomies, but this value
      * will get replaced in the query below

@@ -13,11 +13,6 @@ use PoP\ComponentModel\App;
 class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
-    
-    protected function getTagBaseOption(): string
-    {
-        return '';
-    }
 
     /**
      * There will be more than 1 taxonomies, but this value
