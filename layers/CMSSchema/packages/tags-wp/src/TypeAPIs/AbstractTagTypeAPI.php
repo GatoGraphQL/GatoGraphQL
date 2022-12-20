@@ -20,11 +20,6 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    protected function getTaxonomyName(): string
-    {
-        return $this->getTagTaxonomyName();
-    }
-
     abstract protected function getTagTaxonomyName(): string;
 
     /**
@@ -43,18 +38,21 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?WP_Term
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermFromObjectOrID($tagObjectOrID);
+        return $this->getTaxonomyTermFromObjectOrID(
+            $this->getTagTaxonomyName(),
+            $tagObjectOrID,
+        );
     }
 
     public function getTagName(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermName($tagObjectOrID);
+        return $this->getTaxonomyTermName($this->getTagTaxonomyName(), $tagObjectOrID);
     }
 
     public function getTag(string|int $tagID): ?object
     {
-        return $this->getTaxonomyTerm($tagID);
+        return $this->getTaxonomyTerm($this->getTagTaxonomyName(), $tagID);
     }
 
     public function tagExists(int|string $id): bool
@@ -64,7 +62,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 
     public function getTagByName(string $tagName): ?object
     {
-        return $this->getTaxonomyTermByName($tagName);
+        return $this->getTaxonomyTermByName($this->getTagTaxonomyName(), $tagName);
     }
 
     /**
@@ -76,6 +74,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     {
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTerms(
+            $this->getTagTaxonomyName(),
             $customPostObjectOrID,
             $query,
             $options,
@@ -90,6 +89,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     {
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
+            $this->getTagTaxonomyName(),
             $customPostObjectOrID,
             $query,
             $options,
@@ -128,6 +128,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
+        $query['taxonomy'] = $this->getTagTaxonomyName();
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
             self::HOOK_QUERY,
@@ -149,31 +150,31 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     public function getTagURL(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermURL($tagObjectOrID);
+        return $this->getTaxonomyTermURL($this->getTagTaxonomyName(), $tagObjectOrID);
     }
 
     public function getTagURLPath(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermURLPath($tagObjectOrID);
+        return $this->getTaxonomyTermURLPath($this->getTagTaxonomyName(), $tagObjectOrID);
     }
 
     public function getTagSlug(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermSlug($tagObjectOrID);
+        return $this->getTaxonomyTermSlug($this->getTagTaxonomyName(), $tagObjectOrID);
     }
 
     public function getTagDescription(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermDescription($tagObjectOrID);
+        return $this->getTaxonomyTermDescription($this->getTagTaxonomyName(), $tagObjectOrID);
     }
 
     public function getTagItemCount(string|int|object $tagObjectOrID): ?int
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermItemCount($tagObjectOrID);
+        return $this->getTaxonomyTermItemCount($this->getTagTaxonomyName(), $tagObjectOrID);
     }
 
     public function getTagID(object $tag): string|int

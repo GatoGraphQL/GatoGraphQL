@@ -54,7 +54,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 
     public function getCategory(string|int $categoryID): ?object
     {
-        return $this->getTaxonomyTerm($categoryID);
+        return $this->getTaxonomyTerm($this->getCategoryTaxonomyName(), $categoryID);
     }
 
     public function categoryExists(int|string $id): bool
@@ -63,11 +63,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     }
 
     abstract protected function getCategoryBaseOption(): string;
-
-    protected function getTaxonomyName(): string
-    {
-        return $this->getCategoryTaxonomyName();
-    }
 
     abstract protected function getCategoryTaxonomyName(): string;
 
@@ -80,6 +75,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTerms(
+            $this->getCategoryTaxonomyName(),
             $customPostObjectOrID,
             $query,
             $options,
@@ -93,6 +89,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
+            $this->getCategoryTaxonomyName(),
             $customPostObjectOrID,
             $query,
             $options,
@@ -125,6 +122,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
+        $query['taxonomy'] = $this->getCategoryTaxonomyName();
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
             self::HOOK_QUERY,
@@ -146,13 +144,13 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCategoryURL(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermURL($catObjectOrID);
+        return $this->getTaxonomyTermURL($this->getCategoryTaxonomyName(), $catObjectOrID);
     }
 
     public function getCategoryURLPath(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermURLPath($catObjectOrID);
+        return $this->getTaxonomyTermURLPath($this->getCategoryTaxonomyName(), $catObjectOrID);
     }
 
     public function getCategoryBase(): string
@@ -163,25 +161,28 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermFromObjectOrID($catObjectOrID);
+        return $this->getTaxonomyTermFromObjectOrID(
+            $this->getCategoryTaxonomyName(),
+            $catObjectOrID,
+        );
     }
 
     public function getCategorySlug(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermSlug($catObjectOrID);
+        return $this->getTaxonomyTermSlug($this->getCategoryTaxonomyName(), $catObjectOrID);
     }
 
     public function getCategoryName(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermName($catObjectOrID);
+        return $this->getTaxonomyTermName($this->getCategoryTaxonomyName(), $catObjectOrID);
     }
 
     public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermParentID($catObjectOrID);
+        return $this->getTaxonomyTermParentID($this->getCategoryTaxonomyName(), $catObjectOrID);
     }
 
     /**
@@ -190,18 +191,18 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCategoryChildIDs(string|int|object $catObjectOrID): ?array
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermChildIDs($catObjectOrID);
+        return $this->getTaxonomyTermChildIDs($this->getCategoryTaxonomyName(), $catObjectOrID);
     }
 
     public function getCategoryDescription(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermDescription($catObjectOrID);
+        return $this->getTaxonomyTermDescription($this->getCategoryTaxonomyName(), $catObjectOrID);
     }
 
     public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermItemCount($catObjectOrID);
+        return $this->getTaxonomyTermItemCount($this->getCategoryTaxonomyName(), $catObjectOrID);
     }
 }
