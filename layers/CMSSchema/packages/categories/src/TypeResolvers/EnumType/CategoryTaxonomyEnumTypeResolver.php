@@ -9,11 +9,11 @@ use PoPCMSSchema\Categories\Module;
 use PoPCMSSchema\Categories\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
-class CategoryEnumTypeResolver extends AbstractEnumTypeResolver
+class CategoryTaxonomyEnumTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CategoryEnum';
+        return 'CategoryTaxonomyEnum';
     }
 
     /**
