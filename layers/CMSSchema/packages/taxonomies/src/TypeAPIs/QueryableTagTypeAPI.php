@@ -23,6 +23,19 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
         return '';
     }
 
+    public function getTag(string|int $tagID): ?object
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        foreach ($moduleConfiguration->getQueryableTagTaxonomies() as $tagTaxonomy) {
+            $tag = $this->getTaxonomyTerm($tagTaxonomy, $tagID);
+            if ($tag !== null) {
+                return $tag;
+            }
+        }
+        return null;
+    }
+
     /**
      * Replace the single taxonomy with the list of them.
      *

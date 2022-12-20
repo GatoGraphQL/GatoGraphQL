@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Tags\ObjectTypeResolverPickers;
 use PoPCMSSchema\Tags\Module;
 use PoPCMSSchema\Tags\ModuleConfiguration;
 use PoPCMSSchema\Tags\Registries\TagObjectTypeResolverPickerRegistryInterface;
-use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeResolvers\ObjectType\GenericTagObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
@@ -16,7 +16,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements TagObjectTypeResolverPickerInterface
 {
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
-    private ?TagTypeAPIInterface $tagTypeAPI = null;
+    private ?QueryableTagTypeAPIInterface $queryableTagTypeAPI = null;
     private ?TagObjectTypeResolverPickerRegistryInterface $tagObjectTypeResolverPickerRegistry = null;
 
     final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void
@@ -28,14 +28,14 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
         /** @var GenericTagObjectTypeResolver */
         return $this->genericTagObjectTypeResolver ??= $this->instanceManager->getInstance(GenericTagObjectTypeResolver::class);
     }
-    final public function setTagTypeAPI(TagTypeAPIInterface $tagTypeAPI): void
+    final public function setQueryableTagTypeAPI(QueryableTagTypeAPIInterface $queryableTagTypeAPI): void
     {
-        $this->tagTypeAPI = $tagTypeAPI;
+        $this->queryableTagTypeAPI = $queryableTagTypeAPI;
     }
-    final protected function getTagTypeAPI(): TagTypeAPIInterface
+    final protected function getQueryableTagTypeAPI(): QueryableTagTypeAPIInterface
     {
-        /** @var TagTypeAPIInterface */
-        return $this->tagTypeAPI ??= $this->instanceManager->getInstance(TagTypeAPIInterface::class);
+        /** @var QueryableTagTypeAPIInterface */
+        return $this->queryableTagTypeAPI ??= $this->instanceManager->getInstance(QueryableTagTypeAPIInterface::class);
     }
     final public function setTagObjectTypeResolverPickerRegistry(TagObjectTypeResolverPickerRegistryInterface $tagObjectTypeResolverPickerRegistry): void
     {
@@ -54,12 +54,12 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
 
     public function isInstanceOfType(object $object): bool
     {
-        return $this->getTagTypeAPI()->isInstanceOfTagType($object);
+        return $this->getQueryableTagTypeAPI()->isInstanceOfTagType($object);
     }
 
     public function isIDOfType(string|int $objectID): bool
     {
-        return $this->getTagTypeAPI()->tagExists($objectID);
+        return $this->getQueryableTagTypeAPI()->tagExists($objectID);
     }
 
     /**

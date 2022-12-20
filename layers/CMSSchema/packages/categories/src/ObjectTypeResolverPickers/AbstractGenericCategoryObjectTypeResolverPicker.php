@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Categories\ObjectTypeResolverPickers;
 use PoPCMSSchema\Categories\Module;
 use PoPCMSSchema\Categories\ModuleConfiguration;
 use PoPCMSSchema\Categories\Registries\CategoryObjectTypeResolverPickerRegistryInterface;
-use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ObjectTypeResolverPickers\AbstractObjectTypeResolverPicker;
@@ -16,7 +16,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements CategoryObjectTypeResolverPickerInterface
 {
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
-    private ?CategoryTypeAPIInterface $categoryTypeAPI = null;
+    private ?QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI = null;
     private ?CategoryObjectTypeResolverPickerRegistryInterface $categoryObjectTypeResolverPickerRegistry = null;
 
     final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
@@ -28,14 +28,14 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
         /** @var GenericCategoryObjectTypeResolver */
         return $this->genericCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
     }
-    final public function setCategoryTypeAPI(CategoryTypeAPIInterface $categoryTypeAPI): void
+    final public function setQueryableCategoryTypeAPI(QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI): void
     {
-        $this->categoryTypeAPI = $categoryTypeAPI;
+        $this->queryableCategoryTypeAPI = $queryableCategoryTypeAPI;
     }
-    final protected function getCategoryTypeAPI(): CategoryTypeAPIInterface
+    final protected function getQueryableCategoryTypeAPI(): QueryableCategoryTypeAPIInterface
     {
-        /** @var CategoryTypeAPIInterface */
-        return $this->categoryTypeAPI ??= $this->instanceManager->getInstance(CategoryTypeAPIInterface::class);
+        /** @var QueryableCategoryTypeAPIInterface */
+        return $this->queryableCategoryTypeAPI ??= $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
     }
     final public function setCategoryObjectTypeResolverPickerRegistry(CategoryObjectTypeResolverPickerRegistryInterface $categoryObjectTypeResolverPickerRegistry): void
     {
@@ -54,12 +54,12 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
 
     public function isInstanceOfType(object $object): bool
     {
-        return $this->getCategoryTypeAPI()->isInstanceOfCategoryType($object);
+        return $this->getQueryableCategoryTypeAPI()->isInstanceOfCategoryType($object);
     }
 
     public function isIDOfType(string|int $objectID): bool
     {
-        return $this->getCategoryTypeAPI()->categoryExists($objectID);
+        return $this->getQueryableCategoryTypeAPI()->categoryExists($objectID);
     }
 
     /**

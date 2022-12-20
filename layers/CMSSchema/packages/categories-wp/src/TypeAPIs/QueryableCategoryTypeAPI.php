@@ -23,6 +23,19 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
         return '';
     }
 
+    public function getCategory(string|int $categoryID): ?object
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        foreach ($moduleConfiguration->getQueryableCategoryTaxonomies() as $catTaxonomy) {
+            $category = $this->getTaxonomyTerm($catTaxonomy, $categoryID);
+            if ($category !== null) {
+                return $category;
+            }
+        }
+        return null;
+    }
+
     /**
      * Replace the single taxonomy with the list of them.
      *
