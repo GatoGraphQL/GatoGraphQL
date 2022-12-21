@@ -46,4 +46,12 @@ class Module extends AbstractModule
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
+
+    /**
+     * Initialize services for the system container
+     */
+    protected function initializeSystemContainerServices(): void
+    {
+        $this->initSystemServices(dirname(__DIR__));
+    }
 }
