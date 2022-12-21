@@ -15,6 +15,11 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements TagObjectTypeResolverPickerInterface
 {
+    /**
+     * @return string[]|null
+     */
+    protected ?array $genericTagTaxonomies = null;
+
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
     private ?QueryableTagTypeAPIInterface $queryableTagTypeAPI = null;
     private ?TagObjectTypeResolverPickerRegistryInterface $tagObjectTypeResolverPickerRegistry = null;
@@ -85,6 +90,17 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
      * @return string[]
      */
     protected function getGenericTagTaxonomies(): array
+    {
+        if ($this->genericTagTaxonomies === null) {
+            $this->genericTagTaxonomies = $this->doGetGenericTagTaxonomies();
+        }
+        return $this->genericTagTaxonomies;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function doGetGenericTagTaxonomies(): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

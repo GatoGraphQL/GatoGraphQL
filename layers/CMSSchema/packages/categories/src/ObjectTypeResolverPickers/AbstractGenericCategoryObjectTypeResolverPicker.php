@@ -15,6 +15,11 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements CategoryObjectTypeResolverPickerInterface
 {
+    /**
+     * @return string[]|null
+     */
+    protected ?array $genericCategoryTaxonomies = null;
+
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI = null;
     private ?CategoryObjectTypeResolverPickerRegistryInterface $categoryObjectTypeResolverPickerRegistry = null;
@@ -85,6 +90,17 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
      * @return string[]
      */
     protected function getGenericCategoryTaxonomies(): array
+    {
+        if ($this->genericCategoryTaxonomies === null) {
+            $this->genericCategoryTaxonomies = $this->doGetGenericCategoryTaxonomies();
+        }
+        return $this->genericCategoryTaxonomies;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function doGetGenericCategoryTaxonomies(): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
