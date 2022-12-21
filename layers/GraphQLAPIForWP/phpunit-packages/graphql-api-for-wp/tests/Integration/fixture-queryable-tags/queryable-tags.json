@@ -90,9 +90,33 @@
     "postTag": null,
     "postTagCount": null,
     "postTagNames": null,
-    "postFormats": [],
-    "postFormat": null,
-    "postFormatCount": 0,
-    "postFormatNames": []
+    "postFormats": [
+      {
+        "__typename": "GenericTag",
+        "id": 21,
+        "name": "Quote"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 20,
+        "name": "Link"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 19,
+        "name": "Aside"
+      }
+    ],
+    "postFormat": {
+      "__typename": "GenericTag",
+      "id": 20,
+      "name": "Link"
+    },
+    "postFormatCount": 3,
+    "postFormatNames": [
+      "",
+      "",
+      ""
+    ]
   }
 }

@@ -33,11 +33,11 @@
         "path": [
           "post_format",
           "(taxonomy: post_format)",
-          "postFormat: tag(taxonomy: post_format, by: {id: 17}) { ... }",
+          "postFormat: tag(taxonomy: post_format, by: {id: 20}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "postFormat: tag(taxonomy: post_format, by: {id: 17}) { ... }",
+        "field": "postFormat: tag(taxonomy: post_format, by: {id: 20}) { ... }",
         "code": "gql@5.6.1[14]",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
@@ -67,7 +67,7 @@
       "message": "Value 'post_format' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_tag')",
       "locations": [
         {
-          "line": 18,
+          "line": 21,
           "column": 39
         }
       ],
