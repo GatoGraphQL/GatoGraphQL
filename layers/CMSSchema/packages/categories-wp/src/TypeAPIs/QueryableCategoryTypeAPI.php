@@ -25,15 +25,17 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
 
     public function getCategory(string|int $categoryID): ?object
     {
+        $category = parent::getCategory($categoryID);
+        if ($category === null) {
+            return null;
+        }
+        /** @var WP_Term $category */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        foreach ($moduleConfiguration->getQueryableCategoryTaxonomies() as $catTaxonomy) {
-            $category = $this->getTaxonomyTerm($catTaxonomy, $categoryID);
-            if ($category !== null) {
-                return $category;
-            }
+        if (!in_array($category->taxonomy, $moduleConfiguration->getQueryableCategoryTaxonomies())) {
+            return null;
         }
-        return null;
+        return $category;
     }
 
     /**

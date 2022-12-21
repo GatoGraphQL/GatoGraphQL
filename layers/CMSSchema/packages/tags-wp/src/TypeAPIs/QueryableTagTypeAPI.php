@@ -25,15 +25,17 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
 
     public function getTag(string|int $tagID): ?object
     {
+        $tag = parent::getTag($tagID);
+        if ($tag === null) {
+            return null;
+        }
+        /** @var WP_Term $tag */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        foreach ($moduleConfiguration->getQueryableTagTaxonomies() as $tagTaxonomy) {
-            $tag = $this->getTaxonomyTerm($tagTaxonomy, $tagID);
-            if ($tag !== null) {
-                return $tag;
-            }
+        if (!in_array($tag->taxonomy, $moduleConfiguration->getQueryableTagTaxonomies())) {
+            return null;
         }
-        return null;
+        return $tag;
     }
 
     /**

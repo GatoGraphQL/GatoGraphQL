@@ -298,8 +298,8 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     }
 
     protected function getTaxonomyTerm(
-        string $taxonomy,
         string|int $taxonomyTermID,
+        string $taxonomy = '',
     ): ?WP_Term {
         $taxonomyTerm = get_term(
             (int)$taxonomyTermID,

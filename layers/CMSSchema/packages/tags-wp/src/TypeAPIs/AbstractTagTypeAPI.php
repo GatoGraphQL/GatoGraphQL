@@ -57,7 +57,10 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 
     public function getTag(string|int $tagID): ?object
     {
-        return $this->getTaxonomyTerm($this->getTagTaxonomyName(), $tagID);
+        return $this->getTaxonomyTerm(
+            $tagID,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     public function tagExists(int|string $id): bool
