@@ -15,6 +15,9 @@
     ...TagData
   }
   postFormatCount: tagCount(taxonomy: post_format)
+  # Watch out, there's a bug in WP:
+  # Executing `get_tags($query)` with `$query['taxonomy'] = "post_format"` does not bring the names!
+  # That's why the response for this field in tags:1.json is empty
   postFormatNames: tagNames(taxonomy: post_format)
 }
 
