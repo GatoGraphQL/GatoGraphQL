@@ -15,3 +15,4 @@ echo "Installing WordPress..."
 /bin/sh /app/setup/create-users.sh
 /bin/sh /app/setup/import-data.sh
 /bin/sh /app/setup/create-menus.sh
+/bin/sh /app/setup/create-taxonomy-terms.sh
