@@ -86,6 +86,19 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
      */
     protected function getGenericTagTaxonomies(): array
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return array_diff(
+            $moduleConfiguration->getQueryableTagTaxonomies(),
+            $this->getNonGenericTagTaxonomies()
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getNonGenericTagTaxonomies(): array
+    {
         $tagObjectTypeResolverPickers = $this->getTagObjectTypeResolverPickerRegistry()->getTagObjectTypeResolverPickers();
         $nonGenericTagTaxonomies = [];
         foreach ($tagObjectTypeResolverPickers as $tagObjectTypeResolverPicker) {
@@ -96,12 +109,7 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
             $nonGenericTagTaxonomies[] = $tagObjectTypeResolverPicker->getTagTaxonomy();
         }
 
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return array_diff(
-            $moduleConfiguration->getQueryableTagTaxonomies(),
-            $nonGenericTagTaxonomies
-        );
+        return $nonGenericTagTaxonomies;
     }
     
     /**

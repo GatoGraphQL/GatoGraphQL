@@ -86,6 +86,19 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
      */
     protected function getGenericCategoryTaxonomies(): array
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return array_diff(
+            $moduleConfiguration->getQueryableCategoryTaxonomies(),
+            $this->getNonGenericCategoryTaxonomies()
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getNonGenericCategoryTaxonomies(): array
+    {
         $categoryObjectTypeResolverPickers = $this->getCategoryObjectTypeResolverPickerRegistry()->getCategoryObjectTypeResolverPickers();
         $nonGenericCategoryTaxonomies = [];
         foreach ($categoryObjectTypeResolverPickers as $categoryObjectTypeResolverPicker) {
@@ -96,12 +109,7 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
             $nonGenericCategoryTaxonomies[] = $categoryObjectTypeResolverPicker->getCategoryTaxonomy();
         }
 
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return array_diff(
-            $moduleConfiguration->getQueryableCategoryTaxonomies(),
-            $nonGenericCategoryTaxonomies
-        );
+        return $nonGenericCategoryTaxonomies;
     }
     
     /**
