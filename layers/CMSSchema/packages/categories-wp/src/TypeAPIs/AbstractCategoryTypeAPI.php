@@ -150,8 +150,8 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         /** @var string|int|WP_Term $catObjectOrID */
         return $this->getTaxonomyTermFromObjectOrID(
-            $this->getCategoryTaxonomyName(),
             $catObjectOrID,
+            $this->getCategoryTaxonomyName(),
         );
     }
 

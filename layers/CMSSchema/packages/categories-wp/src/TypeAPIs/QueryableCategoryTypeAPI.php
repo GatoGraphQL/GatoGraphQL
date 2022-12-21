@@ -9,6 +9,7 @@ use PoPCMSSchema\Categories\Module;
 use PoPCMSSchema\Categories\ModuleConfiguration;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 use PoP\ComponentModel\App;
+use WP_Term;
 
 class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements QueryableCategoryTypeAPIInterface
 {
@@ -30,12 +31,17 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
             return null;
         }
         /** @var WP_Term $category */
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!in_array($category->taxonomy, $moduleConfiguration->getQueryableCategoryTaxonomies())) {
+        if (!$this->isQueryableCategoryTaxonomy($category)) {
             return null;
         }
         return $category;
+    }
+
+    protected function isQueryableCategoryTaxonomy(WP_Term $taxonomyTerm): bool
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return in_array($taxonomyTerm->taxonomy, $moduleConfiguration->getQueryableCategoryTaxonomies());
     }
 
     /**
@@ -47,9 +53,22 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
             return false;
         }
         /** @var WP_Term $object */
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return in_array($object->taxonomy, $moduleConfiguration->getQueryableCategoryTaxonomies());
+        return $this->isQueryableCategoryTaxonomy($object);
+    }
+
+    protected function getTaxonomyTermFromObjectOrID(
+        string|int|WP_Term $taxonomyTermObjectOrID,
+        string $taxonomy = '',
+    ): ?WP_Term {
+        $taxonomyTerm = parent::getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
+        if ($taxonomyTerm === null) {
+            return $taxonomyTerm;
+        }
+        /** @var WP_Term $taxonomyTerm */
+        return $this->isQueryableCategoryTaxonomy($taxonomyTerm) ? $taxonomyTerm : null;
     }
 
     /**

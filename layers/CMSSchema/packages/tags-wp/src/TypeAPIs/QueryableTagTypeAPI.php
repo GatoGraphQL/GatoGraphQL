@@ -9,6 +9,7 @@ use PoPCMSSchema\Tags\Module;
 use PoPCMSSchema\Tags\ModuleConfiguration;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoP\ComponentModel\App;
+use WP_Term;
 
 class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagTypeAPIInterface
 {
@@ -30,12 +31,17 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
             return null;
         }
         /** @var WP_Term $tag */
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!in_array($tag->taxonomy, $moduleConfiguration->getQueryableTagTaxonomies())) {
+        if (!$this->isQueryableTagTaxonomy($tag)) {
             return null;
         }
         return $tag;
+    }
+
+    protected function isQueryableTagTaxonomy(WP_Term $taxonomyTerm): bool
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return in_array($taxonomyTerm->taxonomy, $moduleConfiguration->getQueryableTagTaxonomies());
     }
 
     /**
@@ -47,9 +53,22 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
             return false;
         }
         /** @var WP_Term $object */
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return in_array($object->taxonomy, $moduleConfiguration->getQueryableTagTaxonomies());
+        return $this->isQueryableTagTaxonomy($object);
+    }
+
+    protected function getTaxonomyTermFromObjectOrID(
+        string|int|WP_Term $taxonomyTermObjectOrID,
+        string $taxonomy = '',
+    ): ?WP_Term {
+        $taxonomyTerm = parent::getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
+        if ($taxonomyTerm === null) {
+            return $taxonomyTerm;
+        }
+        /** @var WP_Term $taxonomyTerm */
+        return $this->isQueryableTagTaxonomy($taxonomyTerm) ? $taxonomyTerm : null;
     }
 
     public function getTagByName(string $tagName): ?object
@@ -59,9 +78,7 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
             return null;
         }
         /** @var WP_Term $object */
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return in_array($object->taxonomy, $moduleConfiguration->getQueryableTagTaxonomies());
+        return $this->isQueryableTagTaxonomy($object);
     }
 
     /**

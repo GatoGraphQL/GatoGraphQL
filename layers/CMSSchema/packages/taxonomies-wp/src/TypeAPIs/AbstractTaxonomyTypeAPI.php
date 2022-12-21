@@ -43,8 +43,8 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     }
 
     protected function getTaxonomyTermFromObjectOrID(
-        string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
+        string $taxonomy = '',
     ): ?WP_Term {
         if (is_object($taxonomyTermObjectOrID)) {
             /** @var WP_Term */
@@ -247,7 +247,10 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
     ): ?string {
-        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomy, $taxonomyTermObjectOrID);
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
         if ($taxonomyTerm === null) {
             return null;
         }
@@ -340,7 +343,10 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
     ): ?string {
-        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomy, $taxonomyTermObjectOrID);
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
         if ($taxonomyTerm === null) {
             return null;
         }
@@ -352,7 +358,10 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
     ): ?string {
-        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomy, $taxonomyTermObjectOrID);
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
         if ($taxonomyTerm === null) {
             return null;
         }
@@ -364,7 +373,10 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
     ): ?int {
-        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomy, $taxonomyTermObjectOrID);
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
         if ($taxonomyTerm === null) {
             return null;
         }
@@ -381,7 +393,10 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
     ): string|int|null {
-        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID($taxonomy, $taxonomyTermObjectOrID);
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
         if ($taxonomyTerm === null) {
             return null;
         }
