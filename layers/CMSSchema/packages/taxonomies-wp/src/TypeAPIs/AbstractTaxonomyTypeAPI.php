@@ -332,7 +332,10 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
     ): ?string {
-        $url = $this->getTaxonomyTermURL($taxonomy, $taxonomyTermObjectOrID);
+        $url = $this->getTaxonomyTermURL(
+            $taxonomyTermObjectOrID,
+            $taxonomy
+        );
         if ($url === null) {
             return null;
         }
