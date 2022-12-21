@@ -19,6 +19,10 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
      * @return string[]|null
      */
     protected ?array $genericTagTaxonomies = null;
+    /**
+     * @return string[]|null
+     */
+    protected ?array $nonGenericTagTaxonomies = null;
 
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
     private ?QueryableTagTypeAPIInterface $queryableTagTypeAPI = null;
@@ -114,6 +118,17 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
      * @return string[]
      */
     protected function getNonGenericTagTaxonomies(): array
+    {
+        if ($this->nonGenericTagTaxonomies === null) {
+            $this->nonGenericTagTaxonomies = $this->doGetNonGenericTagTaxonomies();
+        }
+        return $this->nonGenericTagTaxonomies;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function doGetNonGenericTagTaxonomies(): array
     {
         $tagObjectTypeResolverPickers = $this->getTagObjectTypeResolverPickerRegistry()->getTagObjectTypeResolverPickers();
         $nonGenericTagTaxonomies = [];

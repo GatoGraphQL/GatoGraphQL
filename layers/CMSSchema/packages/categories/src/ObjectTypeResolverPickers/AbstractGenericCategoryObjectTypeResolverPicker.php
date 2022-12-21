@@ -19,6 +19,10 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
      * @return string[]|null
      */
     protected ?array $genericCategoryTaxonomies = null;
+    /**
+     * @return string[]|null
+     */
+    protected ?array $nonGenericCategoryTaxonomies = null;
 
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI = null;
@@ -114,6 +118,17 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
      * @return string[]
      */
     protected function getNonGenericCategoryTaxonomies(): array
+    {
+        if ($this->nonGenericCategoryTaxonomies === null) {
+            $this->nonGenericCategoryTaxonomies = $this->doGetNonGenericCategoryTaxonomies();
+        }
+        return $this->nonGenericCategoryTaxonomies;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function doGetNonGenericCategoryTaxonomies(): array
     {
         $categoryObjectTypeResolverPickers = $this->getCategoryObjectTypeResolverPickerRegistry()->getCategoryObjectTypeResolverPickers();
         $nonGenericCategoryTaxonomies = [];
