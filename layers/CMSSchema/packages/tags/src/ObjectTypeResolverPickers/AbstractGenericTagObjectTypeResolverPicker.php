@@ -79,20 +79,20 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
     public function isServiceEnabled(): bool
     {
         $tagObjectTypeResolverPickers = $this->getTagObjectTypeResolverPickerRegistry()->getTagObjectTypeResolverPickers();
-        $nonGenericTagTypes = [];
+        $nonGenericTagTaxonomies = [];
         foreach ($tagObjectTypeResolverPickers as $tagObjectTypeResolverPicker) {
             // Skip this class, we're interested in all the non-generic ones
             if ($tagObjectTypeResolverPicker === $this) {
                 continue;
             }
-            $nonGenericTagTypes[] = $tagObjectTypeResolverPicker->getTagTaxonomy();
+            $nonGenericTagTaxonomies[] = $tagObjectTypeResolverPicker->getTagTaxonomy();
         }
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_diff(
             $moduleConfiguration->getQueryableTagTaxonomies(),
-            $nonGenericTagTypes
+            $nonGenericTagTaxonomies
         ) !== [];
     }
     

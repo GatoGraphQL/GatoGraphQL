@@ -79,20 +79,20 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
     public function isServiceEnabled(): bool
     {
         $categoryObjectTypeResolverPickers = $this->getCategoryObjectTypeResolverPickerRegistry()->getCategoryObjectTypeResolverPickers();
-        $nonGenericCategoryTypes = [];
+        $nonGenericCategoryTaxonomies = [];
         foreach ($categoryObjectTypeResolverPickers as $categoryObjectTypeResolverPicker) {
             // Skip this class, we're interested in all the non-generic ones
             if ($categoryObjectTypeResolverPicker === $this) {
                 continue;
             }
-            $nonGenericCategoryTypes[] = $categoryObjectTypeResolverPicker->getCategoryTaxonomy();
+            $nonGenericCategoryTaxonomies[] = $categoryObjectTypeResolverPicker->getCategoryTaxonomy();
         }
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_diff(
             $moduleConfiguration->getQueryableCategoryTaxonomies(),
-            $nonGenericCategoryTypes
+            $nonGenericCategoryTaxonomies
         ) !== [];
     }
     
