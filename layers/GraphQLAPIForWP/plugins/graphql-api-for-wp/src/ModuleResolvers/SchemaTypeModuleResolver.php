@@ -16,6 +16,8 @@ use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
@@ -30,6 +32,8 @@ use PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolv
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoP\ComponentModel\App;
+use WP_Taxonomy;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -795,12 +799,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             } elseif ($module === self::SCHEMA_TAGS) {
                 // Get the list of tag taxonomies from the system
                 /** @var string[] */
-                $possibleTagTaxonomies = \get_taxonomies(
-                    [
-                        'hierarchical' => false,
-                    ],
-                    'names'
-                );
+                $possibleTagTaxonomies = $this->getQueryableCustomPostsAssociatedTaxonomies(false);
                 /**
                  * Possibly not all tag taxonomies must be allowed.
                  * Remove the ones that do not
@@ -1126,5 +1125,41 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             'wp_template_part',
             'wp_template',
         ];
+    }
+
+    /**
+     * Retrieve the taxonomies which are associated to custom posts
+     * which have been enabled as queryable.
+     *
+     * Please notice all entries in "object_type" must be in the whitelist.
+     *
+     * @return string[]
+     */
+    protected function getQueryableCustomPostsAssociatedTaxonomies(bool $isHierarchical): array
+    {
+        /** @var CustomPostsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
+        $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
+
+        /** @var WP_Taxonomy[] */
+        $possibleTaxonomyObjects = \get_taxonomies(
+            [
+                'hierarchical' => $isHierarchical,
+            ],
+            'objects'
+        );
+        $possibleTaxonomyObjects = array_filter(
+            $possibleTaxonomyObjects,
+            fn (WP_Taxonomy $taxonomy) => array_diff(
+                $taxonomy->object_type,
+                $queryableCustomPostTypes
+            ) === []
+        );
+
+        /** @var string[] */
+        return array_map(
+            fn (WP_Taxonomy $taxonomy) => $taxonomy->name,
+            $possibleTaxonomyObjects
+        );
     }
 }
