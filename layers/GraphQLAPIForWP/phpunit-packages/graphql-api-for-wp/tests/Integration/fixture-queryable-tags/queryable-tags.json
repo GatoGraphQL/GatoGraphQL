@@ -1,0 +1,98 @@
+{
+  "errors": [
+    {
+      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_format')",
+      "locations": [
+        {
+          "line": 2,
+          "column": 28
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post_tag",
+          "(taxonomy: post_tag)",
+          "postTags: tags(taxonomy: post_tag) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postTags: tags(taxonomy: post_tag) { ... }",
+        "code": "gql@5.6.1[14]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    },
+    {
+      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_format')",
+      "locations": [
+        {
+          "line": 5,
+          "column": 26
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post_tag",
+          "(taxonomy: post_tag)",
+          "postTag: tag(taxonomy: post_tag, by: {id: 13}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postTag: tag(taxonomy: post_tag, by: {id: 13}) { ... }",
+        "code": "gql@5.6.1[14]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    },
+    {
+      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_format')",
+      "locations": [
+        {
+          "line": 8,
+          "column": 36
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post_tag",
+          "(taxonomy: post_tag)",
+          "postTagCount: tagCount(taxonomy: post_tag)",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postTagCount: tagCount(taxonomy: post_tag)",
+        "code": "gql@5.6.1[14]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    },
+    {
+      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_format')",
+      "locations": [
+        {
+          "line": 9,
+          "column": 36
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post_tag",
+          "(taxonomy: post_tag)",
+          "postTagNames: tagNames(taxonomy: post_tag)",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postTagNames: tagNames(taxonomy: post_tag)",
+        "code": "gql@5.6.1[14]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    }
+  ],
+  "data": {
+    "postTags": null,
+    "postTag": null,
+    "postTagCount": null,
+    "postTagNames": null,
+    "postFormats": [],
+    "postFormat": null,
+    "postFormatCount": 0,
+    "postFormatNames": []
+  }
+}

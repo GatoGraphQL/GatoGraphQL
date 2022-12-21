@@ -1,0 +1,1820 @@
+{
+    "data": {
+        "__schema": {
+            "types": [
+                {
+                    "name": "CategoryDoesNotExistErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Comment",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentAuthorEmailIsMissingErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentAuthorNameIsMissingErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentParentCommentDoesNotExistErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostDoesNotExistErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "GenericErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "GenericTag",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "InvalidUserEmailErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "InvalidUsernameErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Media",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MediaItemDoesNotExistErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Menu",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MenuItem",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MutationRoot",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Page",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PasswordIsIncorrectErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Post",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PostCategory",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PostTag",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "QueryRoot",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Root",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootAddCommentToCustomPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootCreatePostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootLoginUserMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootLogoutUserMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootReplyCommentMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootSetCategoriesOnPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootSetTagsOnPostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootUpdatePostMutationPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "User",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserAvatar",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserIsLoggedInErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserIsNotLoggedInErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserRole",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "_DirectiveExtensions",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "_EnumValueExtensions",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "_FieldExtensions",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "_InputValueExtensions",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "_NamedTypeExtensions",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "_SchemaExtensions",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "__Directive",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "__EnumValue",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "__Field",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "__InputValue",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "__Schema",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "__Type",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "AnyBuiltInScalar",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Boolean",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Date",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "DateTime",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Email",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "HTML",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "ID",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Int",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "JSONObject",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MenuLocationSelectableString",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Numeric",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "String",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "URL",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "URLAbsolutePath",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "Commentable",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        }
+                    ]
+                },
+                {
+                    "name": "IsCategory",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "PostCategory"
+                        }
+                    ]
+                },
+                {
+                    "name": "IsCustomPost",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        }
+                    ]
+                },
+                {
+                    "name": "IsErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CategoryDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorEmailIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorNameIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload"
+                        },
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "InvalidUserEmailErrorPayload"
+                        },
+                        {
+                            "name": "InvalidUsernameErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "PasswordIsIncorrectErrorPayload"
+                        },
+                        {
+                            "name": "UserIsLoggedInErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "IsTag",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericTag"
+                        },
+                        {
+                            "name": "PostTag"
+                        }
+                    ]
+                },
+                {
+                    "name": "Node",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "Comment"
+                        },
+                        {
+                            "name": "GenericTag"
+                        },
+                        {
+                            "name": "Media"
+                        },
+                        {
+                            "name": "Menu"
+                        },
+                        {
+                            "name": "MenuItem"
+                        },
+                        {
+                            "name": "MutationRoot"
+                        },
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        },
+                        {
+                            "name": "PostCategory"
+                        },
+                        {
+                            "name": "PostTag"
+                        },
+                        {
+                            "name": "QueryRoot"
+                        },
+                        {
+                            "name": "Root"
+                        },
+                        {
+                            "name": "User"
+                        },
+                        {
+                            "name": "UserAvatar"
+                        },
+                        {
+                            "name": "UserRole"
+                        },
+                        {
+                            "name": "_DirectiveExtensions"
+                        },
+                        {
+                            "name": "_EnumValueExtensions"
+                        },
+                        {
+                            "name": "_FieldExtensions"
+                        },
+                        {
+                            "name": "_InputValueExtensions"
+                        },
+                        {
+                            "name": "_NamedTypeExtensions"
+                        },
+                        {
+                            "name": "_SchemaExtensions"
+                        },
+                        {
+                            "name": "__Directive"
+                        },
+                        {
+                            "name": "__EnumValue"
+                        },
+                        {
+                            "name": "__Field"
+                        },
+                        {
+                            "name": "__InputValue"
+                        },
+                        {
+                            "name": "__Schema"
+                        },
+                        {
+                            "name": "__Type"
+                        }
+                    ]
+                },
+                {
+                    "name": "Queryable",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericTag"
+                        },
+                        {
+                            "name": "Media"
+                        },
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        },
+                        {
+                            "name": "PostCategory"
+                        },
+                        {
+                            "name": "PostTag"
+                        },
+                        {
+                            "name": "User"
+                        }
+                    ]
+                },
+                {
+                    "name": "SupportingFeaturedImage",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        }
+                    ]
+                },
+                {
+                    "name": "WithAuthor",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        }
+                    ]
+                },
+                {
+                    "name": "WithMeta",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "Comment"
+                        },
+                        {
+                            "name": "GenericTag"
+                        },
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        },
+                        {
+                            "name": "PostCategory"
+                        },
+                        {
+                            "name": "PostTag"
+                        },
+                        {
+                            "name": "User"
+                        }
+                    ]
+                },
+                {
+                    "name": "CategoryByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CategoryPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentMetaQueryInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentResponsePaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentResponsesFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentSortInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostCategoriesFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostCommentPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostCommentsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostMetaQueryInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostSortInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostTagsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "DateQueryInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "LoginCredentialsInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "LoginUserByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MediaItemByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MediaItemSortInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MenuByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MenuSortInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByArrayValueInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByKeyInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByNumericValueInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByStringValueInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PageByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PageChildrenFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PagePaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PostByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PostCategoryByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PostPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "PostTagByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootAddCommentToCustomPostFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootCategoriesFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootCommentPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootCommentsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootCreatePostFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootCustomPostsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootMediaItemPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootMediaItemsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootMenuPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootMenusFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootMyCommentsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootMyCustomPostsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootMyPostsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootPagesFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootPostsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootReplyCommentFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootSetCategoriesOnCustomPostFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootSetTagsOnCustomPostFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootTagsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RootUpdatePostFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TagByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TagPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TaxonomyCustomPostsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TaxonomyMetaQueryInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TaxonomySortInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TaxonomyTaxonomiesFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserCustomPostsFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserMetaQueryInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserSearchByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserSortInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UsersFilterInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CategoryTaxonomyEnum",
+                    "enumValues": [
+                        {
+                            "name": "category"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentOrderByEnum",
+                    "enumValues": [
+                        {
+                            "name": "AUTHOR"
+                        },
+                        {
+                            "name": "AUTHOR_EMAIL"
+                        },
+                        {
+                            "name": "AUTHOR_IP"
+                        },
+                        {
+                            "name": "AUTHOR_URL"
+                        },
+                        {
+                            "name": "CONTENT"
+                        },
+                        {
+                            "name": "CUSTOM_POST"
+                        },
+                        {
+                            "name": "DATE"
+                        },
+                        {
+                            "name": "ID"
+                        },
+                        {
+                            "name": "KARMA"
+                        },
+                        {
+                            "name": "META_VALUE"
+                        },
+                        {
+                            "name": "NONE"
+                        },
+                        {
+                            "name": "PARENT"
+                        },
+                        {
+                            "name": "STATUS"
+                        },
+                        {
+                            "name": "TYPE"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentStatusEnum",
+                    "enumValues": [
+                        {
+                            "name": "approve"
+                        },
+                        {
+                            "name": "hold"
+                        },
+                        {
+                            "name": "spam"
+                        },
+                        {
+                            "name": "trash"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CommentTypeEnum",
+                    "enumValues": [
+                        {
+                            "name": "comment"
+                        },
+                        {
+                            "name": "pingback"
+                        },
+                        {
+                            "name": "trackback"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostEnum",
+                    "enumValues": [
+                        {
+                            "name": "page"
+                        },
+                        {
+                            "name": "post"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostOrderByEnum",
+                    "enumValues": [
+                        {
+                            "name": "AUTHOR"
+                        },
+                        {
+                            "name": "COMMENT_COUNT"
+                        },
+                        {
+                            "name": "DATE"
+                        },
+                        {
+                            "name": "ID"
+                        },
+                        {
+                            "name": "MENU_ORDER"
+                        },
+                        {
+                            "name": "META_VALUE"
+                        },
+                        {
+                            "name": "MODIFIED_DATE"
+                        },
+                        {
+                            "name": "NONE"
+                        },
+                        {
+                            "name": "PARENT"
+                        },
+                        {
+                            "name": "RANDOM"
+                        },
+                        {
+                            "name": "RELEVANCE"
+                        },
+                        {
+                            "name": "TITLE"
+                        },
+                        {
+                            "name": "TYPE"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostStatusEnum",
+                    "enumValues": [
+                        {
+                            "name": "draft"
+                        },
+                        {
+                            "name": "pending"
+                        },
+                        {
+                            "name": "publish"
+                        },
+                        {
+                            "name": "trash"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "DirectiveKindEnum",
+                    "enumValues": [
+                        {
+                            "name": "query"
+                        },
+                        {
+                            "name": "schema"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "DirectiveLocation",
+                    "enumValues": [
+                        {
+                            "name": "ARGUMENT_DEFINITION"
+                        },
+                        {
+                            "name": "ENUM"
+                        },
+                        {
+                            "name": "ENUM_VALUE"
+                        },
+                        {
+                            "name": "FIELD"
+                        },
+                        {
+                            "name": "FIELD_DEFINITION"
+                        },
+                        {
+                            "name": "FRAGMENT_DEFINITION"
+                        },
+                        {
+                            "name": "FRAGMENT_SPREAD"
+                        },
+                        {
+                            "name": "INLINE_FRAGMENT"
+                        },
+                        {
+                            "name": "INPUT_FIELD_DEFINITION"
+                        },
+                        {
+                            "name": "INPUT_OBJECT"
+                        },
+                        {
+                            "name": "INTERFACE"
+                        },
+                        {
+                            "name": "MUTATION"
+                        },
+                        {
+                            "name": "OBJECT"
+                        },
+                        {
+                            "name": "QUERY"
+                        },
+                        {
+                            "name": "SCALAR"
+                        },
+                        {
+                            "name": "SCHEMA"
+                        },
+                        {
+                            "name": "SUBSCRIPTION"
+                        },
+                        {
+                            "name": "UNION"
+                        },
+                        {
+                            "name": "VARIABLE_DEFINITION"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "FilterCustomPostStatusEnum",
+                    "enumValues": [
+                        {
+                            "name": "draft"
+                        },
+                        {
+                            "name": "future"
+                        },
+                        {
+                            "name": "inherit"
+                        },
+                        {
+                            "name": "pending"
+                        },
+                        {
+                            "name": "private"
+                        },
+                        {
+                            "name": "publish"
+                        },
+                        {
+                            "name": "trash"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MediaItemOrderByEnum",
+                    "enumValues": [
+                        {
+                            "name": "AUTHOR"
+                        },
+                        {
+                            "name": "COMMENT_COUNT"
+                        },
+                        {
+                            "name": "DATE"
+                        },
+                        {
+                            "name": "ID"
+                        },
+                        {
+                            "name": "MENU_ORDER"
+                        },
+                        {
+                            "name": "MODIFIED_DATE"
+                        },
+                        {
+                            "name": "NONE"
+                        },
+                        {
+                            "name": "PARENT"
+                        },
+                        {
+                            "name": "RANDOM"
+                        },
+                        {
+                            "name": "RELEVANCE"
+                        },
+                        {
+                            "name": "TITLE"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MenuOrderByEnum",
+                    "enumValues": [
+                        {
+                            "name": "DATE"
+                        },
+                        {
+                            "name": "ID"
+                        },
+                        {
+                            "name": "NAME"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByArrayValueOperatorEnum",
+                    "enumValues": [
+                        {
+                            "name": "BETWEEN"
+                        },
+                        {
+                            "name": "IN"
+                        },
+                        {
+                            "name": "NOT_BETWEEN"
+                        },
+                        {
+                            "name": "NOT_IN"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByKeyOperatorEnum",
+                    "enumValues": [
+                        {
+                            "name": "EXISTS"
+                        },
+                        {
+                            "name": "NOT_EXISTS"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByNumericValueOperatorEnum",
+                    "enumValues": [
+                        {
+                            "name": "EQUALS"
+                        },
+                        {
+                            "name": "GREATER_THAN"
+                        },
+                        {
+                            "name": "GREATER_THAN_OR_EQUAL"
+                        },
+                        {
+                            "name": "LESS_THAN"
+                        },
+                        {
+                            "name": "LESS_THAN_OR_EQUAL"
+                        },
+                        {
+                            "name": "NOT_EQUALS"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryCompareByStringValueOperatorEnum",
+                    "enumValues": [
+                        {
+                            "name": "EQUALS"
+                        },
+                        {
+                            "name": "LIKE"
+                        },
+                        {
+                            "name": "NOT_EQUALS"
+                        },
+                        {
+                            "name": "NOT_LIKE"
+                        },
+                        {
+                            "name": "NOT_REGEXP"
+                        },
+                        {
+                            "name": "REGEXP"
+                        },
+                        {
+                            "name": "RLIKE"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "MetaQueryValueTypesEnum",
+                    "enumValues": [
+                        {
+                            "name": "BINARY"
+                        },
+                        {
+                            "name": "CHAR"
+                        },
+                        {
+                            "name": "DATE"
+                        },
+                        {
+                            "name": "DATETIME"
+                        },
+                        {
+                            "name": "DECIMAL"
+                        },
+                        {
+                            "name": "NUMERIC"
+                        },
+                        {
+                            "name": "SIGNED"
+                        },
+                        {
+                            "name": "TIME"
+                        },
+                        {
+                            "name": "UNSIGNED"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "OperationStatusEnum",
+                    "enumValues": [
+                        {
+                            "name": "FAILURE"
+                        },
+                        {
+                            "name": "SUCCESS"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "OrderEnum",
+                    "enumValues": [
+                        {
+                            "name": "ASC"
+                        },
+                        {
+                            "name": "DESC"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "RelationEnum",
+                    "enumValues": [
+                        {
+                            "name": "AND"
+                        },
+                        {
+                            "name": "OR"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TagTaxonomyEnum",
+                    "enumValues": [
+                        {
+                            "name": "post_format"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TaxonomyOrderByEnum",
+                    "enumValues": [
+                        {
+                            "name": "COUNT"
+                        },
+                        {
+                            "name": "DESCRIPTION"
+                        },
+                        {
+                            "name": "ID"
+                        },
+                        {
+                            "name": "INCLUDE"
+                        },
+                        {
+                            "name": "META_VALUE"
+                        },
+                        {
+                            "name": "NAME"
+                        },
+                        {
+                            "name": "NONE"
+                        },
+                        {
+                            "name": "PARENT"
+                        },
+                        {
+                            "name": "SLUG"
+                        },
+                        {
+                            "name": "SLUG__IN"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TypeKind",
+                    "enumValues": [
+                        {
+                            "name": "ENUM"
+                        },
+                        {
+                            "name": "INPUT_OBJECT"
+                        },
+                        {
+                            "name": "INTERFACE"
+                        },
+                        {
+                            "name": "LIST"
+                        },
+                        {
+                            "name": "NON_NULL"
+                        },
+                        {
+                            "name": "OBJECT"
+                        },
+                        {
+                            "name": "SCALAR"
+                        },
+                        {
+                            "name": "UNION"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "UserOrderByEnum",
+                    "enumValues": [
+                        {
+                            "name": "CUSTOMPOST_COUNT"
+                        },
+                        {
+                            "name": "DISPLAY_NAME"
+                        },
+                        {
+                            "name": "EMAIL"
+                        },
+                        {
+                            "name": "ID"
+                        },
+                        {
+                            "name": "INCLUDE"
+                        },
+                        {
+                            "name": "META_VALUE"
+                        },
+                        {
+                            "name": "NAME"
+                        },
+                        {
+                            "name": "NICENAME"
+                        },
+                        {
+                            "name": "REGISTRATION_DATE"
+                        },
+                        {
+                            "name": "USERNAME"
+                        },
+                        {
+                            "name": "WEBSITE_URL"
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CategoryUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "PostCategory"
+                        }
+                    ]
+                },
+                {
+                    "name": "CustomPostUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CommentAuthorEmailIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorNameIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload"
+                        },
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootCreatePostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CategoryDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootLoginUserMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "InvalidUserEmailErrorPayload"
+                        },
+                        {
+                            "name": "InvalidUsernameErrorPayload"
+                        },
+                        {
+                            "name": "PasswordIsIncorrectErrorPayload"
+                        },
+                        {
+                            "name": "UserIsLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootLogoutUserMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootReplyCommentMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CommentAuthorEmailIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentAuthorNameIsMissingErrorPayload"
+                        },
+                        {
+                            "name": "CommentParentCommentDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CategoryDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "RootUpdatePostMutationErrorPayloadUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "CategoryDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "CustomPostDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "GenericErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+                        },
+                        {
+                            "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+                        },
+                        {
+                            "name": "MediaItemDoesNotExistErrorPayload"
+                        },
+                        {
+                            "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "TagUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericTag"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

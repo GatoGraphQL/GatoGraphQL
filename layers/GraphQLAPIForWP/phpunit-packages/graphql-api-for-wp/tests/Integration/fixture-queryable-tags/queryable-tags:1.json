@@ -1,0 +1,72 @@
+{
+  "data": {
+    "postTags": [
+      {
+        "__typename": "PostTag",
+        "id": 13,
+        "name": "wordpress"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 12,
+        "name": "security"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 11,
+        "name": "release"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 10,
+        "name": "plugin"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 9,
+        "name": "ideas"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 8,
+        "name": "graphql"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 7,
+        "name": "features"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 14,
+        "name": "also-never-used"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 6,
+        "name": "advanced"
+      }
+    ],
+    "postTag": {
+      "__typename": "PostTag",
+      "id": 13,
+      "name": "wordpress"
+    },
+    "postTagCount": 9,
+    "postTagNames": [
+      "wordpress",
+      "security",
+      "release",
+      "plugin",
+      "ideas",
+      "graphql",
+      "features",
+      "also-never-used",
+      "advanced"
+    ],
+    "postFormats": [],
+    "postFormat": null,
+    "postFormatCount": 0,
+    "postFormatNames": []
+  }
+}

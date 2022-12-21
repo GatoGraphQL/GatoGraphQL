@@ -1,0 +1,29 @@
+{
+  postTags: tags(taxonomy: post_tag) {
+    ...TagData
+  }
+  postTag: tag(taxonomy: post_tag, by: { id: 13 }) {
+    ...TagData
+  }
+  postTagCount: tagCount(taxonomy: post_tag)
+  postTagNames: tagNames(taxonomy: post_tag)
+
+  postFormats: tags(taxonomy: post_format) {
+    ...TagData
+  }
+  postFormat: tag(taxonomy: post_format, by: { id: 17 }) {
+    ...TagData
+  }
+  postFormatCount: tagCount(taxonomy: post_format)
+  postFormatNames: tagNames(taxonomy: post_format)
+}
+
+fragment TagData on IsTag {
+  __typename
+  ...on Node {
+    id
+  }
+  ...on IsTag {
+    name
+  }
+}
