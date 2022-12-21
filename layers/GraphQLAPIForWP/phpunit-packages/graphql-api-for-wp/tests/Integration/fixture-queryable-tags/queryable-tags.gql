@@ -20,10 +20,6 @@
 
 fragment TagData on IsTag {
   __typename
-  ...on Node {
-    id
-  }
-  ...on IsTag {
-    name
-  }
+  id
+  name
 }
