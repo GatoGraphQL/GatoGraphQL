@@ -206,6 +206,9 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermItemCount($this->getCategoryTaxonomyName(), $catObjectOrID);
+        return $this->getTaxonomyTermItemCount(
+            $catObjectOrID,
+            $this->getCategoryTaxonomyName(),
+        );
     }
 }

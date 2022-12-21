@@ -373,8 +373,8 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     }
 
     protected function getTaxonomyTermItemCount(
-        string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
+        string $taxonomy = '',
     ): ?int {
         $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID(
             $taxonomyTermObjectOrID,
