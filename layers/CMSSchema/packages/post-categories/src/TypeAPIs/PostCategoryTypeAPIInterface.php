@@ -13,11 +13,6 @@ use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 interface PostCategoryTypeAPIInterface extends CategoryTypeAPIInterface, CategoryListTypeAPIInterface
 {
     /**
-     * Indicates if the passed object is of type PostCategory
-     */
-    public function isInstanceOfPostCategoryType(object $object): bool;
-
-    /**
      * The taxonomy name representing a post category ("category")
      */
     public function getPostCategoryTaxonomyName(): string;

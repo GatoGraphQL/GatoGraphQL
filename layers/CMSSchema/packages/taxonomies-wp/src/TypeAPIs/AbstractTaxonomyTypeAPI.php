@@ -13,7 +13,6 @@ use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 use WP_Post;
-use WP_Taxonomy;
 use WP_Term;
 
 use function esc_sql;
@@ -239,14 +238,9 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     /**
      * Indicates if the passed object is of type Taxonomy
      */
-    protected function isInstanceOfTaxonomyType(object $object): bool
+    protected function isInstanceOfTaxonomyTermType(object $object): bool
     {
-        $isHierarchical = $this->isHierarchical();
-        return ($object instanceof WP_Taxonomy)
-            && (
-                ($isHierarchical && $object->hierarchical)
-                || (!$isHierarchical && !$object->hierarchical)
-            );
+        return $object instanceof WP_Term;
     }
 
     protected function getTaxonomyTermName(

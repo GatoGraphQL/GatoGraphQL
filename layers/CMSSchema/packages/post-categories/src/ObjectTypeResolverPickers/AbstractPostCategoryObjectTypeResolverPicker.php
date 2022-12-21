@@ -44,7 +44,7 @@ abstract class AbstractPostCategoryObjectTypeResolverPicker extends AbstractObje
 
     public function isInstanceOfType(object $object): bool
     {
-        return $this->getPostCategoryTypeAPI()->isInstanceOfPostCategoryType($object);
+        return $this->getPostCategoryTypeAPI()->isInstanceOfCategoryType($object);
     }
 
     public function isIDOfType(string|int $objectID): bool

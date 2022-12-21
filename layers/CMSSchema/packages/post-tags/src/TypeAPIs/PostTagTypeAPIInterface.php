@@ -13,11 +13,6 @@ use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 interface PostTagTypeAPIInterface extends TagTypeAPIInterface, TagListTypeAPIInterface
 {
     /**
-     * Indicates if the passed object is of type PostTag
-     */
-    public function isInstanceOfPostTagType(object $object): bool;
-
-    /**
      * The taxonomy name representing a post tag ("post_tag")
      */
     public function getPostTagTaxonomyName(): string;

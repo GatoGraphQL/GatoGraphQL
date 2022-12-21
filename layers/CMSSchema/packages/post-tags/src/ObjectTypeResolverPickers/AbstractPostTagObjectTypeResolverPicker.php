@@ -44,7 +44,7 @@ abstract class AbstractPostTagObjectTypeResolverPicker extends AbstractObjectTyp
 
     public function isInstanceOfType(object $object): bool
     {
-        return $this->getPostTagTypeAPI()->isInstanceOfPostTagType($object);
+        return $this->getPostTagTypeAPI()->isInstanceOfTagType($object);
     }
 
     public function isIDOfType(string|int $objectID): bool

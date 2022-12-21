@@ -10,8 +10,8 @@ use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
 use WP_Error;
 use WP_Post;
-
 use WP_Term;
+
 use function get_tags;
 
 /**
@@ -26,9 +26,13 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     /**
      * Indicates if the passed object is of type Tag
      */
-    public function isInstanceOfTagType(object $object): bool
+    final public function isInstanceOfTagType(object $object): bool
     {
-        return $this->isInstanceOfTaxonomyType($object);
+        if (!$this->isInstanceOfTaxonomyTermType($object)) {
+            return false;
+        }
+        /** @var WP_Term $object */
+        return $object->taxonomy === $this->getTagTaxonomyName();
     }
 
     protected function isHierarchical(): bool

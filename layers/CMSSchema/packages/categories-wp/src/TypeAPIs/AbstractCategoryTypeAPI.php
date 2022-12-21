@@ -23,9 +23,13 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     /**
      * Indicates if the passed object is of type Category
      */
-    public function isInstanceOfCategoryType(object $object): bool
+    final public function isInstanceOfCategoryType(object $object): bool
     {
-        return $this->isInstanceOfTaxonomyType($object);
+        if (!$this->isInstanceOfTaxonomyTermType($object)) {
+            return false;
+        }
+        /** @var WP_Term $object */
+        return $object->taxonomy === $this->getCategoryTaxonomyName();
     }
 
     protected function isHierarchical(): bool
