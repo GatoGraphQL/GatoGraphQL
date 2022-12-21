@@ -164,7 +164,10 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCategoryName(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermName($this->getCategoryTaxonomyName(), $catObjectOrID);
+        return $this->getTaxonomyTermName(
+            $catObjectOrID,
+            $this->getCategoryTaxonomyName(),
+        );
     }
 
     public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
