@@ -78,6 +78,14 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
      */
     public function isServiceEnabled(): bool
     {
+        return $this->getGenericCategoryTaxonomies() !== [];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getGenericCategoryTaxonomies(): array
+    {
         $categoryObjectTypeResolverPickers = $this->getCategoryObjectTypeResolverPickerRegistry()->getCategoryObjectTypeResolverPickers();
         $nonGenericCategoryTaxonomies = [];
         foreach ($categoryObjectTypeResolverPickers as $categoryObjectTypeResolverPicker) {
@@ -93,7 +101,7 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
         return array_diff(
             $moduleConfiguration->getQueryableCategoryTaxonomies(),
             $nonGenericCategoryTaxonomies
-        ) !== [];
+        );
     }
     
     /**

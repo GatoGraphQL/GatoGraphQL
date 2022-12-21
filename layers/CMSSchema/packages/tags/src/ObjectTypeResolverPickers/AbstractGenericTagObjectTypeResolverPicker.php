@@ -78,6 +78,14 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
      */
     public function isServiceEnabled(): bool
     {
+        return $this->getGenericTagTaxonomies() !== [];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getGenericTagTaxonomies(): array
+    {
         $tagObjectTypeResolverPickers = $this->getTagObjectTypeResolverPickerRegistry()->getTagObjectTypeResolverPickers();
         $nonGenericTagTaxonomies = [];
         foreach ($tagObjectTypeResolverPickers as $tagObjectTypeResolverPicker) {
@@ -93,7 +101,7 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
         return array_diff(
             $moduleConfiguration->getQueryableTagTaxonomies(),
             $nonGenericTagTaxonomies
-        ) !== [];
+        );
     }
     
     /**
