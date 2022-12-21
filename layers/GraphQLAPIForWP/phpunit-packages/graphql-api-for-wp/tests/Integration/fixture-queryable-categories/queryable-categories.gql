@@ -1,0 +1,16 @@
+{
+  postCategories: categories(taxonomy: category) {
+    ...CategoryData
+  }
+  postCategory: category(taxonomy: category, by: { id: 1 }) {
+    ...CategoryData
+  }
+  postCategoryCount: categoryCount(taxonomy: category)
+  postCategoryNames: categoryNames(taxonomy: category)
+}
+
+fragment CategoryData on IsCategory {
+  __typename
+  id
+  name
+}

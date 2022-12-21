@@ -1,0 +1,44 @@
+{
+    "data": {
+        "postCategories": [
+            {
+                "__typename": "PostCategory",
+                "id": 1,
+                "name": "Uncategorized"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 4,
+                "name": "Resource"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 5,
+                "name": "Never used"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 3,
+                "name": "Blog"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 2,
+                "name": "Advanced"
+            }
+        ],
+        "postCategory": {
+            "__typename": "PostCategory",
+            "id": 1,
+            "name": "Uncategorized"
+        },
+        "postCategoryCount": 5,
+        "postCategoryNames": [
+            "Uncategorized",
+            "Resource",
+            "Never used",
+            "Blog",
+            "Advanced"
+        ]
+    }
+}

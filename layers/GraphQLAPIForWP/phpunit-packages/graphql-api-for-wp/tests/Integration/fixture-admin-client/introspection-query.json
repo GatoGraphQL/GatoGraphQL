@@ -4319,6 +4319,11 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
+              "name": "IsCategory",
+              "ofType": null
+            },
+            {
+              "kind": "INTERFACE",
               "name": "Node",
               "ofType": null
             },
@@ -4610,6 +4615,11 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
+              "name": "IsTag",
+              "ofType": null
+            },
+            {
+              "kind": "INTERFACE",
               "name": "Node",
               "ofType": null
             },
@@ -4636,6 +4646,226 @@
               "name": "capabilities",
               "description": "All user capabilities",
               "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[String!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[String!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categories",
+              "description": "Categories",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CategoryTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootCategoriesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CategoryPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomySortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[CategoryUnion!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[CategoryUnion!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryUnion!",
+                    "ofType": {
+                      "kind": "UNION",
+                      "name": "CategoryUnion",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "category",
+              "description": "Retrieve a single category",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CategoryTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "by",
+                  "description": "Parameter by which to select the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CategoryByInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "UNION",
+                "name": "CategoryUnion",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categoryCount",
+              "description": "Number of categories",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CategoryTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootCategoriesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categoryNames",
+              "description": "Names of the categories",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CategoryTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootCategoriesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CategoryPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomySortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
               "type": {
                 "kind": "NON_NULL",
                 "name": "[String!]!",
@@ -6393,6 +6623,226 @@
               "deprecationReason": null
             },
             {
+              "name": "tag",
+              "description": "Retrieve a single post tag",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TagTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "by",
+                  "description": "Parameter by which to select the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "TagByInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "UNION",
+                "name": "TagUnion",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagCount",
+              "description": "Number of post tags",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TagTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootTagsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagNames",
+              "description": "Names of the post tags",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TagTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootTagsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TagPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomySortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[String!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[String!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tags",
+              "description": " tags",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TagTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootTagsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TagPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomySortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[TagUnion!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[TagUnion!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "TagUnion!",
+                    "ofType": {
+                      "kind": "UNION",
+                      "name": "TagUnion",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "user",
               "description": "Retrieve a single user",
               "args": [
@@ -6553,6 +7003,226 @@
               "name": "capabilities",
               "description": "All user capabilities",
               "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[String!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[String!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categories",
+              "description": "Categories",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CategoryTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootCategoriesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CategoryPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomySortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[CategoryUnion!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[CategoryUnion!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryUnion!",
+                    "ofType": {
+                      "kind": "UNION",
+                      "name": "CategoryUnion",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "category",
+              "description": "Retrieve a single category",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CategoryTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "by",
+                  "description": "Parameter by which to select the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CategoryByInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "UNION",
+                "name": "CategoryUnion",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categoryCount",
+              "description": "Number of categories",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CategoryTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootCategoriesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categoryNames",
+              "description": "Names of the categories",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the category",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CategoryTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "CategoryTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootCategoriesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate categories",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CategoryPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomySortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
               "type": {
                 "kind": "NON_NULL",
                 "name": "[String!]!",
@@ -8537,6 +9207,226 @@
                   "kind": "OBJECT",
                   "name": "RootSetTagsOnPostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tag",
+              "description": "Retrieve a single post tag",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TagTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "by",
+                  "description": "Parameter by which to select the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "TagByInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "UNION",
+                "name": "TagUnion",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagCount",
+              "description": "Number of post tags",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TagTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootTagsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagNames",
+              "description": "Names of the post tags",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TagTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootTagsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TagPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomySortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[String!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[String!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tags",
+              "description": " tags",
+              "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the tag",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "TagTaxonomyEnum!",
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TagTaxonomyEnum",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "Input to filter tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootTagsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate tags",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TagPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomySortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[TagUnion!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[TagUnion!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "TagUnion!",
+                    "ofType": {
+                      "kind": "UNION",
+                      "name": "TagUnion",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -12056,6 +12946,67 @@
         },
         {
           "kind": "INTERFACE",
+          "name": "IsCategory",
+          "description": "Entities representing a category",
+          "fields": [
+            {
+              "name": "count",
+              "description": "Number of custom posts containing this tag",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": "Category description",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Category",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "PostCategory",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "INTERFACE",
           "name": "IsCustomPost",
           "description": "Entities representing a custom post",
           "fields": [
@@ -12521,6 +13472,67 @@
         },
         {
           "kind": "INTERFACE",
+          "name": "IsTag",
+          "description": "Entities representing a tag",
+          "fields": [
+            {
+              "name": "count",
+              "description": "Number of custom posts containing this tag",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": "Tag description",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Tag",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "PostTag",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "INTERFACE",
           "name": "Node",
           "description": "The fundamental fields that must be implemented by all objects",
           "fields": [
@@ -12954,6 +13966,37 @@
               "ofType": null
             }
           ]
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CategoryByInput",
+          "description": "Oneof input to specify the property and data to fetch a category",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "Query by category ID",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "Query by category slug",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
         },
         {
           "kind": "INPUT_OBJECT",
@@ -17426,6 +18469,37 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "TagByInput",
+          "description": "Oneof input to specify the property and data to fetch a tag",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "Query by tag ID",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "Query by tag slug",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "TagPaginationInput",
           "description": "Input to paginate tags",
           "fields": null,
@@ -18127,6 +19201,23 @@
           ],
           "interfaces": null,
           "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "CategoryTaxonomyEnum",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "category",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
           "possibleTypes": null
         },
         {
@@ -19036,6 +20127,23 @@
         },
         {
           "kind": "ENUM",
+          "name": "TagTaxonomyEnum",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "post_tag",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
           "name": "TaxonomyOrderByEnum",
           "description": null,
           "fields": null,
@@ -19240,6 +20348,22 @@
             }
           ],
           "possibleTypes": null
+        },
+        {
+          "kind": "UNION",
+          "name": "CategoryUnion",
+          "description": "Union of 'category' type resolvers",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "PostCategory",
+              "ofType": null
+            }
+          ]
         },
         {
           "kind": "UNION",
@@ -19663,6 +20787,22 @@
             {
               "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "TagUnion",
+          "description": "Union of 'tag' type resolvers",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "PostTag",
               "ofType": null
             }
           ]

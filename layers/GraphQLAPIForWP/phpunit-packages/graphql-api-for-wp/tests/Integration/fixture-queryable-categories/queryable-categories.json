@@ -1,0 +1,94 @@
+{
+    "errors": [
+        {
+            "message": "Value 'category' for enum type 'CategoryTaxonomyEnum' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 40
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "category",
+                    "(taxonomy: category)",
+                    "postCategories: categories(taxonomy: category) { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "postCategories: categories(taxonomy: category) { ... }",
+                "code": "gql@5.6.1[14]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        },
+        {
+            "message": "Value 'category' for enum type 'CategoryTaxonomyEnum' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "locations": [
+                {
+                    "line": 5,
+                    "column": 36
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "category",
+                    "(taxonomy: category)",
+                    "postCategory: category(taxonomy: category, by: {id: 1}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "postCategory: category(taxonomy: category, by: {id: 1}) { ... }",
+                "code": "gql@5.6.1[14]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        },
+        {
+            "message": "Value 'category' for enum type 'CategoryTaxonomyEnum' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "locations": [
+                {
+                    "line": 8,
+                    "column": 46
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "category",
+                    "(taxonomy: category)",
+                    "postCategoryCount: categoryCount(taxonomy: category)",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "postCategoryCount: categoryCount(taxonomy: category)",
+                "code": "gql@5.6.1[14]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        },
+        {
+            "message": "Value 'category' for enum type 'CategoryTaxonomyEnum' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "locations": [
+                {
+                    "line": 9,
+                    "column": 46
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "category",
+                    "(taxonomy: category)",
+                    "postCategoryNames: categoryNames(taxonomy: category)",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "postCategoryNames: categoryNames(taxonomy: category)",
+                "code": "gql@5.6.1[14]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        }
+    ],
+    "data": {
+        "postCategories": null,
+        "postCategory": null,
+        "postCategoryCount": null,
+        "postCategoryNames": null
+    }
+}
