@@ -799,7 +799,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             } elseif ($module === self::SCHEMA_TAGS) {
                 // Get the list of tag taxonomies from the system
                 /** @var string[] */
-                $possibleTagTaxonomies = $this->getQueryableCustomPostsAssociatedTaxonomies(false);
+                $possibleTagTaxonomies = array_map(
+                    fn (WP_Taxonomy $taxonomy) => $taxonomy->name,
+                    $this->getQueryableCustomPostsAssociatedTaxonomies(false)
+                );
                 /**
                  * Possibly not all tag taxonomies must be allowed.
                  * Remove the ones that do not
@@ -851,11 +854,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             } elseif ($module === self::SCHEMA_CATEGORIES) {
                 // Get the list of category taxonomies from the system
                 /** @var string[] */
-                $possibleCategoryTaxonomies = \get_taxonomies(
-                    [
-                        'hierarchical' => true,
-                    ],
-                    'names'
+                $possibleCategoryTaxonomies = array_map(
+                    fn (WP_Taxonomy $taxonomy) => $taxonomy->name,
+                    $this->getQueryableCustomPostsAssociatedTaxonomies(true)
                 );
                 /**
                  * Possibly not all category taxonomies must be allowed.
@@ -1133,7 +1134,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      *
      * Please notice all entries in "object_type" must be in the whitelist.
      *
-     * @return string[]
+     * @return WP_Taxonomy[]
      */
     protected function getQueryableCustomPostsAssociatedTaxonomies(bool $isHierarchical): array
     {
@@ -1148,18 +1149,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             'objects'
         );
-        $possibleTaxonomyObjects = array_filter(
+
+        return array_filter(
             $possibleTaxonomyObjects,
             fn (WP_Taxonomy $taxonomy) => array_diff(
                 $taxonomy->object_type,
                 $queryableCustomPostTypes
             ) === []
-        );
-
-        /** @var string[] */
-        return array_map(
-            fn (WP_Taxonomy $taxonomy) => $taxonomy->name,
-            $possibleTaxonomyObjects
         );
     }
 }
