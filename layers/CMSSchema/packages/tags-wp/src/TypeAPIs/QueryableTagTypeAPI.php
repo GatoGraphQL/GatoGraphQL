@@ -37,6 +37,20 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
     }
 
     /**
+     * Indicates if the passed object is of type Tag
+     */
+    public function isInstanceOfTagType(object $object): bool
+    {
+        if (!$this->isInstanceOfTaxonomyTermType($object)) {
+            return false;
+        }
+        /** @var WP_Term $object */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return in_array($object->taxonomy, $moduleConfiguration->getQueryableTagTaxonomies());
+    }
+
+    /**
      * Replace the single taxonomy with the list of them.
      *
      * @return array<string,mixed>

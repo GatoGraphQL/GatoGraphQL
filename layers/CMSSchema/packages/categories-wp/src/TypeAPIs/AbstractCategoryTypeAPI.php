@@ -23,7 +23,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     /**
      * Indicates if the passed object is of type Category
      */
-    final public function isInstanceOfCategoryType(object $object): bool
+    public function isInstanceOfCategoryType(object $object): bool
     {
         if (!$this->isInstanceOfTaxonomyTermType($object)) {
             return false;

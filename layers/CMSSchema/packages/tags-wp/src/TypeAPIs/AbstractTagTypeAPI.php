@@ -26,7 +26,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     /**
      * Indicates if the passed object is of type Tag
      */
-    final public function isInstanceOfTagType(object $object): bool
+    public function isInstanceOfTagType(object $object): bool
     {
         if (!$this->isInstanceOfTaxonomyTermType($object)) {
             return false;

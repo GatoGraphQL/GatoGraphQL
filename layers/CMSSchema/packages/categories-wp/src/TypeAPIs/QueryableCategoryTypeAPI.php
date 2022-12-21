@@ -37,6 +37,20 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
     }
 
     /**
+     * Indicates if the passed object is of type Category
+     */
+    public function isInstanceOfCategoryType(object $object): bool
+    {
+        if (!$this->isInstanceOfTaxonomyTermType($object)) {
+            return false;
+        }
+        /** @var WP_Term $object */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return in_array($object->taxonomy, $moduleConfiguration->getQueryableCategoryTaxonomies());
+    }
+
+    /**
      * Replace the single taxonomy with the list of them.
      *
      * @return array<string,mixed>
