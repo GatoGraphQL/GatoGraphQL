@@ -25,7 +25,7 @@ class IsCategoryInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTy
         return match ($fieldName) {
             'name' => $this->__('Category', 'categories'),
             'description' => $this->__('Category description', 'categories'),
-            'count' => $this->__('Number of custom posts containing this tag', 'categories'),
+            'count' => $this->__('Number of custom posts containing this category', 'categories'),
             default => parent::getFieldDescription($fieldName),
         };
     }
