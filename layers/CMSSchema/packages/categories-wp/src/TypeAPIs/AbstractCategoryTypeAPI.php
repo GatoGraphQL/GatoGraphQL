@@ -59,7 +59,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      * @param string|int|WP_Post $customPostObjectOrID
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
-     * @return array<string|int>|object[]|null
+     * @return array<string|int>|object[]
      */
     public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {

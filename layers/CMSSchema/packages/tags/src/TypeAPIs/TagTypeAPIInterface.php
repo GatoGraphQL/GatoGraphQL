@@ -33,9 +33,9 @@ interface TagTypeAPIInterface
     public function getTagDescription(string|int|object $tagObjectOrID): ?string;
     public function getTagItemCount(string|int|object $tagObjectOrID): ?int;
     /**
-     * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
+     * @return array<string|int>|object[]
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array;
     /**
