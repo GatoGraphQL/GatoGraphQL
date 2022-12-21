@@ -315,8 +315,8 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     }
 
     protected function getTaxonomyTermURL(
-        string $taxonomy,
         string|int|WP_Term $taxonomyTermObjectOrID,
+        string $taxonomy = '',
     ): ?string {
         $taxonomyTermLink = get_term_link(
             $taxonomyTermObjectOrID,
