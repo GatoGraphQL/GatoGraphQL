@@ -73,7 +73,7 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
     }
 
     /**
-     * Check if there are generic custom post types,
+     * Check if there are generic category taxonomies,
      * and only then enable it
      */
     public function isServiceEnabled(): bool

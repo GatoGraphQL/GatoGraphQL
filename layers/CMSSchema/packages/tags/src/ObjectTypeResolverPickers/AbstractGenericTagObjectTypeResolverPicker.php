@@ -73,7 +73,7 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
     }
 
     /**
-     * Check if there are generic custom post types,
+     * Check if there are generic tag taxonomies,
      * and only then enable it
      */
     public function isServiceEnabled(): bool
