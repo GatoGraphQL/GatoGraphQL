@@ -611,6 +611,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
         $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
         $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'graphql-api');
+        $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if (
             in_array($module, [
@@ -841,7 +842,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Included tag taxonomies', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        sprintf(
+                            '%s<br/><br/>%s',
+                            sprintf(
+                                $taxonomyDescPlaceholder,
+                                \__('non-', 'graphql-api'),
+                                \__('tag', 'graphql-api'),
+                            ),
+                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        ),
                         $this->getTagUnionTypeResolver()->getTypeName(),
                         $this->getPostTagObjectTypeResolver()->getTypeName(),
                         $this->getGenericTagObjectTypeResolver()->getTypeName(),
@@ -896,7 +905,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Included category taxonomies', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        sprintf(
+                            '%s<br/><br/>%s',
+                            sprintf(
+                                $taxonomyDescPlaceholder,
+                                '',
+                                \__('category', 'graphql-api'),
+                            ),
+                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        ),
                         $this->getCategoryUnionTypeResolver()->getTypeName(),
                         $this->getPostCategoryObjectTypeResolver()->getTypeName(),
                         $this->getGenericCategoryObjectTypeResolver()->getTypeName(),
