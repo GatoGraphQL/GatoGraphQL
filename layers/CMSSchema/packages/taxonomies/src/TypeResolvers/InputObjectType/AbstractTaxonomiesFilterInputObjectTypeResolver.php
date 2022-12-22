@@ -7,6 +7,7 @@ namespace PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType;
 use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\SearchFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\SlugsFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\TaxonomyFilterInput;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPCMSSchema\Taxonomies\FilterInputs\HideEmptyFilterInput;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -23,6 +24,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     private ?SearchFilterInput $searchFilterInput = null;
     private ?SlugsFilterInput $slugsFilterInput = null;
     private ?HideEmptyFilterInput $hideEmptyFilterInput = null;
+    private ?TaxonomyFilterInput $taxonomyFilterInput = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -78,14 +80,29 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         /** @var HideEmptyFilterInput */
         return $this->hideEmptyFilterInput ??= $this->instanceManager->getInstance(HideEmptyFilterInput::class);
     }
+    final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
+    {
+        $this->taxonomyFilterInput = $taxonomyFilterInput;
+    }
+    final protected function getTaxonomyFilterInput(): TaxonomyFilterInput
+    {
+        /** @var TaxonomyFilterInput */
+        return $this->taxonomyFilterInput ??= $this->instanceManager->getInstance(TaxonomyFilterInput::class);
+    }
 
     abstract protected function addParentIDInputField(): bool;
+
+    protected function getTaxonomyInputFieldTypeResolver(): ?InputTypeResolverInterface
+    {
+        return null;
+    }
 
     /**
      * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {
+        $taxonomyInputFieldTypeResolver = $this->getTaxonomyInputFieldTypeResolver();
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
@@ -95,7 +112,10 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             ],
             $this->addParentIDInputField() ? [
                 'parentID' => $this->getIDScalarTypeResolver(),
-            ] : []
+            ] : [],
+            $taxonomyInputFieldTypeResolver !== null ? [
+                'taxonomy' => $taxonomyInputFieldTypeResolver,
+            ] : [],
         );
     }
 
@@ -106,6 +126,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             'slugs' => $this->__('Search for taxonomies with the given slugs', 'taxonomies'),
             'hideEmpty' => $this->__('Hide empty taxonomies terms?', 'taxonomies'),
             'parentID' => $this->__('Limit results to taxonomies with the given parent ID. \'0\' means \'no parent\'', 'taxonomies'),
+            'taxonomy' => $this->__('Fetch results from the indicated taxonomy', 'taxonomies'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -115,6 +136,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         return match ($inputFieldName) {
             'slugs' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             'hideEmpty' => SchemaTypeModifiers::NON_NULLABLE,
+            'taxonomy' => SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
@@ -134,6 +156,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             'slugs' => $this->getSlugsFilterInput(),
             'hideEmpty' => $this->getHideEmptyFilterInput(),
             'parentID' => $this->getParentIDFilterInput(),
+            'taxonomy' => $this->getTaxonomyFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
