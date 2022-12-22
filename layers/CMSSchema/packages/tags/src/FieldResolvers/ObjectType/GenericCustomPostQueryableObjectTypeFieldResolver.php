@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
-use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
-use PoPCMSSchema\Tags\TypeResolvers\ObjectType\GenericTagObjectTypeResolver;
 use PoPCMSSchema\Tags\FieldResolvers\ObjectType\AbstractCustomPostQueryableObjectTypeFieldResolver;
+use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\GenericCustomPostTagsFilterInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\GenericTagObjectTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableObjectTypeFieldResolver
 {
     private ?QueryableTagTypeAPIInterface $queryableTagTypeAPI = null;
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
+    private ?GenericCustomPostTagsFilterInputObjectTypeResolver $genericCustomPostTagsFilterInputObjectTypeResolver = null;
 
     final public function setQueryableTagTypeAPI(QueryableTagTypeAPIInterface $queryableTagTypeAPI): void
     {
@@ -35,6 +37,15 @@ class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPo
         /** @var GenericTagObjectTypeResolver */
         return $this->genericTagObjectTypeResolver ??= $this->instanceManager->getInstance(GenericTagObjectTypeResolver::class);
     }
+    final public function setGenericCustomPostTagsFilterInputObjectTypeResolver(GenericCustomPostTagsFilterInputObjectTypeResolver $genericCustomPostTagsFilterInputObjectTypeResolver): void
+    {
+        $this->genericCustomPostTagsFilterInputObjectTypeResolver = $genericCustomPostTagsFilterInputObjectTypeResolver;
+    }
+    final protected function getGenericCustomPostTagsFilterInputObjectTypeResolver(): GenericCustomPostTagsFilterInputObjectTypeResolver
+    {
+        /** @var GenericCustomPostTagsFilterInputObjectTypeResolver */
+        return $this->genericCustomPostTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostTagsFilterInputObjectTypeResolver::class);
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -44,6 +55,25 @@ class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPo
         return [
             GenericCustomPostObjectTypeResolver::class,
         ];
+    }
+
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        /**
+         * Add the "taxonomy" mandatory fieldArg
+         */
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        if (in_array($fieldName, [
+            'tags',
+            'tagCount',
+            'tagNames',
+        ])) {
+            $fieldArgNameTypeResolvers['filter'] = $this->getGenericCustomPostTagsFilterInputObjectTypeResolver();
+        }
+        return $fieldArgNameTypeResolvers;
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
