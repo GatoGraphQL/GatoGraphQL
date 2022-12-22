@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\Categories\ComponentProcessors\CategoryFilterInputContainerComponentProcessor;
 use PoPCMSSchema\Categories\FieldResolvers\ObjectType\AbstractCustomPostQueryableObjectTypeFieldResolver;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
-use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\GenericCustomPostCategoriesFilterInputObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableObjectTypeFieldResolver
 {
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI = null;
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
-    private ?GenericCustomPostCategoriesFilterInputObjectTypeResolver $genericCustomPostCategoriesFilterInputObjectTypeResolver = null;
 
     final public function setQueryableCategoryTypeAPI(QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI): void
     {
@@ -37,15 +37,6 @@ class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPo
         /** @var GenericCategoryObjectTypeResolver */
         return $this->genericCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
     }
-    final public function setGenericCustomPostCategoriesFilterInputObjectTypeResolver(GenericCustomPostCategoriesFilterInputObjectTypeResolver $genericCustomPostCategoriesFilterInputObjectTypeResolver): void
-    {
-        $this->genericCustomPostCategoriesFilterInputObjectTypeResolver = $genericCustomPostCategoriesFilterInputObjectTypeResolver;
-    }
-    final protected function getGenericCustomPostCategoriesFilterInputObjectTypeResolver(): GenericCustomPostCategoriesFilterInputObjectTypeResolver
-    {
-        /** @var GenericCustomPostCategoriesFilterInputObjectTypeResolver */
-        return $this->genericCustomPostCategoriesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostCategoriesFilterInputObjectTypeResolver::class);
-    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -57,23 +48,19 @@ class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPo
         ];
     }
 
-    /**
-     * @return array<string,InputTypeResolverInterface>
-     */
-    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?Component
     {
-        /**
-         * Add the "taxonomy" mandatory fieldArg
-         */
-        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-        if (in_array($fieldName, [
+        return match ($fieldName) {
             'categories',
             'categoryNames',
-            'categoryCount',
-        ])) {
-            $fieldArgNameTypeResolvers['filter'] = $this->getGenericCustomPostCategoriesFilterInputObjectTypeResolver();
-        }
-        return $fieldArgNameTypeResolvers;
+            'categoryCount'
+                => new Component(
+                    CategoryFilterInputContainerComponentProcessor::class,
+                    CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_GENERICCATEGORIES
+                ),
+            default
+                => parent::getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

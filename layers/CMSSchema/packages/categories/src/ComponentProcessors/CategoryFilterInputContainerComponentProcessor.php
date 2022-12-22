@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\ComponentProcessors;
 
-use PoP\ComponentModel\Component\Component;
+use PoPCMSSchema\Categories\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
+use PoP\ComponentModel\Component\Component;
 
 class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInputContainerComponentProcessor
 {
@@ -16,6 +17,7 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
     public final const COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT = 'filterinputcontainer-categorycount';
     public final const COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES = 'filterinputcontainer-childcategories';
     public final const COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT = 'filterinputcontainer-childcategorycount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_GENERICCATEGORIES = 'filterinputcontainer-genericcategories';
 
     /**
      * @return string[]
@@ -27,6 +29,7 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
             self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT,
             self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES,
             self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_GENERICCATEGORIES,
         );
     }
 
@@ -59,6 +62,9 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
                 ...$topLevelCategoryFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT => $categoryFilterInputComponents,
+            self::COMPONENT_FILTERINPUTCONTAINER_GENERICCATEGORIES => [
+                new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_GENERIC_CATEGORY_TAXONOMY),
+            ],
             default => [],
         };
     }
