@@ -19,7 +19,6 @@ use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
@@ -145,7 +144,6 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         $stance = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'categories':

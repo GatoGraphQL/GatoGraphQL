@@ -19,7 +19,6 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
@@ -290,7 +289,6 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         switch ($fieldDataAccessor->getFieldName()) {
             case 'action':
                 return $notification->action;
