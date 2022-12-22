@@ -16,11 +16,11 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements TagObjectTypeResolverPickerInterface
 {
     /**
-     * @return string[]|null
+     * @var string[]|null
      */
     protected ?array $genericTagTaxonomies = null;
     /**
-     * @return string[]|null
+     * @var string[]|null
      */
     protected ?array $nonGenericTagTaxonomies = null;
 

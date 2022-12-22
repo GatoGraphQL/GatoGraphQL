@@ -16,11 +16,11 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements CategoryObjectTypeResolverPickerInterface
 {
     /**
-     * @return string[]|null
+     * @var string[]|null
      */
     protected ?array $genericCategoryTaxonomies = null;
     /**
-     * @return string[]|null
+     * @var string[]|null
      */
     protected ?array $nonGenericCategoryTaxonomies = null;
 

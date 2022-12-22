@@ -77,8 +77,8 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
         if ($tag === null) {
             return null;
         }
-        /** @var WP_Term $object */
-        return $this->isQueryableTagTaxonomy($object);
+        /** @var WP_Term $tag */
+        return $this->isQueryableTagTaxonomy($tag) ? $tag : null;
     }
 
     /**
