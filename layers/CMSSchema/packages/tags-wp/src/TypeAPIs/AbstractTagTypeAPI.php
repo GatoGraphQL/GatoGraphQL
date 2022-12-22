@@ -143,7 +143,13 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
-        $query['taxonomy'] = $this->getTagTaxonomyName();
+        /**
+         * Allow to set the taxonomy in advance via a fieldArg.
+         * Eg: { customPosts { tags(taxonomy: nav_menu) { id } }
+         */
+        if (!isset($query['taxonomy'])) {
+            $query['taxonomy'] = $this->getTagTaxonomyName();
+        }
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
             self::HOOK_QUERY,

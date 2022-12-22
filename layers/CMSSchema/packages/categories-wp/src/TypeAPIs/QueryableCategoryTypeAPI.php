@@ -80,12 +80,16 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
+        /**
+         * Allow to set the taxonomy in advance via a fieldArg.
+         * Eg: { customPosts { categories(taxonomy: some_category) { id } }
+         */
+        if (!isset($query['taxonomy'])) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            $query['taxonomy'] = $moduleConfiguration->getQueryableCategoryTaxonomies();
+        }        
         $query = parent::convertTaxonomyTermsQuery($query, $options);
-
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $query['taxonomy'] = $moduleConfiguration->getQueryableCategoryTaxonomies();
-        
         return App::applyFilters(
             self::HOOK_QUERY,
             $query,

@@ -90,12 +90,16 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
+        /**
+         * Allow to set the taxonomy in advance via a fieldArg.
+         * Eg: { customPosts { tags(taxonomy: nav_menu) { id } }
+         */
+        if (!isset($query['taxonomy'])) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            $query['taxonomy'] = $moduleConfiguration->getQueryableTagTaxonomies();
+        }
         $query = parent::convertTaxonomyTermsQuery($query, $options);
-
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $query['taxonomy'] = $moduleConfiguration->getQueryableTagTaxonomies();
-        
         return App::applyFilters(
             self::HOOK_QUERY,
             $query,

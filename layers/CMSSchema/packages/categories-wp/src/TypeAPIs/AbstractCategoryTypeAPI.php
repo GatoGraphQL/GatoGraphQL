@@ -115,7 +115,13 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
-        $query['taxonomy'] = $this->getCategoryTaxonomyName();
+        /**
+         * Allow to set the taxonomy in advance via a fieldArg.
+         * Eg: { customPosts { categories(taxonomy: some_category) { id } }
+         */
+        if (!isset($query['taxonomy'])) {
+            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+        }
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
             self::HOOK_QUERY,
