@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\TypeAPIs;
 
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface CategoryTypeAPIInterface
+interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
 {
     /**
      * Indicates if the passed object is of type Category
