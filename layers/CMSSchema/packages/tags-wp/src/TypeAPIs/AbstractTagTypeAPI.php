@@ -87,9 +87,21 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
+        /**
+         * If the "taxonomy" has been set in the query, then use that one.
+         * Otherwise, use the one from this class.
+         * That's so can use the QueryableTagTypeAPI, which accepts the
+         * taxonomy via a fieldArg, and returns an empty `getTagTaxonomyName`.
+         *
+         * Eg: { customPosts { tags(taxonomy: nav_menu) { id } }
+         *
+         * @var string
+         */
+        $tagTaxonomy = isset($query['taxonomy']) ? $query['taxonomy'] : $this->getTagTaxonomyName();
+        
         /** @var array<string|int>|object[] */
         return $this->getCustomPostTaxonomyTerms(
-            $this->getTagTaxonomyName(),
+            $tagTaxonomy,
             $customPostObjectOrID,
             $query,
             $options,
@@ -102,9 +114,21 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
+        /**
+         * If the "taxonomy" has been set in the query, then use that one.
+         * Otherwise, use the one from this class.
+         * That's so can use the QueryableTagTypeAPI, which accepts the
+         * taxonomy via a fieldArg, and returns an empty `getTagTaxonomyName`.
+         *
+         * Eg: { customPosts { tags(taxonomy: nav_menu) { id } }
+         *
+         * @var string
+         */
+        $tagTaxonomy = isset($query['taxonomy']) ? $query['taxonomy'] : $this->getTagTaxonomyName();
+        
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
-            $this->getTagTaxonomyName(),
+            $tagTaxonomy,
             $customPostObjectOrID,
             $query,
             $options,

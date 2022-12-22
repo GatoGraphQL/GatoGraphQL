@@ -66,9 +66,21 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
+        /**
+         * If the "taxonomy" has been set in the query, then use that one.
+         * Otherwise, use the one from this class.
+         * That's so can use the QueryableCategoryTypeAPI, which accepts the
+         * taxonomy via a fieldArg, and returns an empty `getCategoryTaxonomyName`.
+         *
+         * Eg: { customPosts { categories(taxonomy: some_category) { id } }
+         *
+         * @var string
+         */
+        $catTaxonomy = isset($query['taxonomy']) ? $query['taxonomy'] : $this->getCategoryTaxonomyName();
+        
         /** @var array<string|int>|object[] */
         return $this->getCustomPostTaxonomyTerms(
-            $this->getCategoryTaxonomyName(),
+            $catTaxonomy,
             $customPostObjectOrID,
             $query,
             $options,
@@ -80,9 +92,21 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
      */
     public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
+        /**
+         * If the "taxonomy" has been set in the query, then use that one.
+         * Otherwise, use the one from this class.
+         * That's so can use the QueryableCategoryTypeAPI, which accepts the
+         * taxonomy via a fieldArg, and returns an empty `getCategoryTaxonomyName`.
+         *
+         * Eg: { customPosts { categories(taxonomy: some_category) { id } }
+         *
+         * @var string
+         */
+        $catTaxonomy = isset($query['taxonomy']) ? $query['taxonomy'] : $this->getCategoryTaxonomyName();
+        
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
-            $this->getCategoryTaxonomyName(),
+            $catTaxonomy,
             $customPostObjectOrID,
             $query,
             $options,
