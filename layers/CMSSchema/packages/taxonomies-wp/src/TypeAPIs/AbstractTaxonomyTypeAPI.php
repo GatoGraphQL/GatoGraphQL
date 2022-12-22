@@ -81,7 +81,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
      * @param array<string,mixed> $options
      * @return array<string|int>|object[]|null
      */
-    public function getCustomPostTaxonomyTerms(
+    protected function getCustomPostTaxonomyTerms(
         string $taxonomy,
         string|int|object $customPostObjectOrID,
         array $query = [],
