@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategories\SchemaHooks;
+namespace PoPCMSSchema\Tags\SchemaHooks;
 
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -10,15 +10,18 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Categories\FilterInputs\CategoryIDsFilterInput;
-use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostsFilterInputObjectTypeResolverInterface;
+use PoPCMSSchema\Tags\FilterInputs\TagIDsFilterInput;
+use PoPCMSSchema\Tags\FilterInputs\TagSlugsFilterInput;
 
-class InputObjectTypeHookSet extends AbstractHookSet
+abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSet
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?CategoryIDsFilterInput $categoryIDsFilterInput = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?TagSlugsFilterInput $tagSlugsFilterInput = null;
+    private ?TagIDsFilterInput $tagIDsFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -29,14 +32,32 @@ class InputObjectTypeHookSet extends AbstractHookSet
         /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
-    final public function setCategoryIDsFilterInput(CategoryIDsFilterInput $categoryIDsFilterInput): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
-        $this->categoryIDsFilterInput = $categoryIDsFilterInput;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    final protected function getCategoryIDsFilterInput(): CategoryIDsFilterInput
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var CategoryIDsFilterInput */
-        return $this->categoryIDsFilterInput ??= $this->instanceManager->getInstance(CategoryIDsFilterInput::class);
+        /** @var StringScalarTypeResolver */
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setTagSlugsFilterInput(TagSlugsFilterInput $tagSlugsFilterInput): void
+    {
+        $this->tagSlugsFilterInput = $tagSlugsFilterInput;
+    }
+    final protected function getTagSlugsFilterInput(): TagSlugsFilterInput
+    {
+        /** @var TagSlugsFilterInput */
+        return $this->tagSlugsFilterInput ??= $this->instanceManager->getInstance(TagSlugsFilterInput::class);
+    }
+    final public function setTagIDsFilterInput(TagIDsFilterInput $tagIDsFilterInput): void
+    {
+        $this->tagIDsFilterInput = $tagIDsFilterInput;
+    }
+    final protected function getTagIDsFilterInput(): TagIDsFilterInput
+    {
+        /** @var TagIDsFilterInput */
+        return $this->tagIDsFilterInput ??= $this->instanceManager->getInstance(TagIDsFilterInput::class);
     }
 
     protected function init(): void
@@ -75,27 +96,31 @@ class InputObjectTypeHookSet extends AbstractHookSet
         array $inputFieldNameTypeResolvers,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
-        if (!($inputObjectTypeResolver instanceof PostsFilterInputObjectTypeResolverInterface)) {
+        if (!(is_a($inputObjectTypeResolver, $this->getInputObjectTypeResolverClass(), true))) {
             return $inputFieldNameTypeResolvers;
         }
         return array_merge(
             $inputFieldNameTypeResolvers,
             [
-                'categoryIDs' => $this->getIDScalarTypeResolver(),
+                'tagIDs' => $this->getIDScalarTypeResolver(),
+                'tagSlugs' => $this->getStringScalarTypeResolver(),
             ]
         );
     }
+
+    abstract protected function getInputObjectTypeResolverClass(): string;
 
     public function getInputFieldDescription(
         ?string $inputFieldDescription,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): ?string {
-        if (!($inputObjectTypeResolver instanceof PostsFilterInputObjectTypeResolverInterface)) {
+        if (!(is_a($inputObjectTypeResolver, $this->getInputObjectTypeResolverClass(), true))) {
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'categoryIDs' => $this->__('Get results from the categories with given IDs', 'pop-users'),
+            'tagIDs' => $this->__('Get results from the tags with given IDs', 'pop-users'),
+            'tagSlugs' => $this->__('Get results from the tags with given slug', 'pop-users'),
             default => $inputFieldDescription,
         };
     }
@@ -105,11 +130,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): int {
-        if (!($inputObjectTypeResolver instanceof PostsFilterInputObjectTypeResolverInterface)) {
+        if (!(is_a($inputObjectTypeResolver, $this->getInputObjectTypeResolverClass(), true))) {
             return $inputFieldTypeModifiers;
         }
         return match ($inputFieldName) {
-            'categoryIDs'
+            'tagIDs',
+            'tagSlugs'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => $inputFieldTypeModifiers,
@@ -121,11 +147,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?FilterInputInterface {
-        if (!($inputObjectTypeResolver instanceof PostsFilterInputObjectTypeResolverInterface)) {
+        if (!(is_a($inputObjectTypeResolver, $this->getInputObjectTypeResolverClass(), true))) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'categoryIDs' => $this->getCategoryIDsFilterInput(),
+            'tagIDs' => $this->getTagIDsFilterInput(),
+            'tagSlugs' => $this->getTagSlugsFilterInput(),
             default => $inputFieldFilterInput,
         };
     }
