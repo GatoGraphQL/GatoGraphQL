@@ -167,6 +167,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 
         if (isset($query['taxonomy'])) {
             // Same param name, so do nothing
+        } else {
+            $queryDefaultTaxonomyOrTaxonomies = $this->getQueryDefaultTaxonomyOrTaxonomies();
+            if ($queryDefaultTaxonomyOrTaxonomies !== null) {
+                $query['taxonomy'] = $queryDefaultTaxonomyOrTaxonomies;
+            }
         }
 
         if (isset($query['hide-empty'])) {
@@ -226,6 +231,14 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     }
 
     abstract protected function isHierarchical(): bool;
+
+    /**
+     * @return string|string[]|null
+     */
+    protected function getQueryDefaultTaxonomyOrTaxonomies(): string|array|null
+    {
+        return null;
+    }
 
     protected function getOrderByQueryArgValue(string $orderBy): string
     {
