@@ -94,7 +94,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     /**
      * Custom post type name
      */
-    public function getCustomPostTypeName(): string
+    protected function getCustomPostTypeName(): string
     {
         return \__('GraphQL persisted query endpoint', 'graphql-api');
     }

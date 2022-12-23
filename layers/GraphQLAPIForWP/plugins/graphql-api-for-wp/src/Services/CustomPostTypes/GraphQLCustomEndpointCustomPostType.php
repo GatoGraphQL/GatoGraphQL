@@ -89,7 +89,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     /**
      * Custom post type name
      */
-    public function getCustomPostTypeName(): string
+    protected function getCustomPostTypeName(): string
     {
         return \__('GraphQL custom endpoint', 'graphql-api');
     }

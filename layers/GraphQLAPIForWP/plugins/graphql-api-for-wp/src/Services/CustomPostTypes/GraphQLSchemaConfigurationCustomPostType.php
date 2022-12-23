@@ -51,7 +51,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
     /**
      * Custom post type name
      */
-    public function getCustomPostTypeName(): string
+    protected function getCustomPostTypeName(): string
     {
         return \__('Schema Configuration', 'graphql-api');
     }
