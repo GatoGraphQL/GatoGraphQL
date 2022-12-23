@@ -82,17 +82,18 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
      * @return array<string|int>|object[]|null
      */
     protected function getCustomPostTaxonomyTerms(
-        string $taxonomy,
         string|int|object $customPostObjectOrID,
         array $query = [],
         array $options = [],
-    ): ?array {
+    ): ?array {        
         /** @var string|int|WP_Post $customPostObjectOrID */
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertTaxonomyTermsQuery($query, $options);
+        /** @var string|string[] */
+        $taxonomyOrTaxonomies = $query['taxonomy'];
         $taxonomyTerms =  wp_get_post_terms(
             (int)$customPostID,
-            $taxonomy,
+            $taxonomyOrTaxonomies,
             $query,
         );
         if ($taxonomyTerms instanceof WP_Error) {
@@ -107,7 +108,6 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
      * @param array<string,mixed> $options
      */
     protected function getCustomPostTaxonomyTermCount(
-        string $taxonomy,
         string|int|WP_Post $customPostObjectOrID,
         array $query = [],
         array $options = []
@@ -121,6 +121,9 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertTaxonomyTermsQuery($query, $options);
 
+        /** @var string|string[] */
+        $taxonomyOrTaxonomies = $query['taxonomy'];
+        
         // All results, no offset
         $query['number'] = 0;
         unset($query['offset']);
@@ -128,7 +131,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         // Resolve and count
         $taxonomyTerms = wp_get_post_terms(
             (int)$customPostID,
-            $taxonomy,
+            $taxonomyOrTaxonomies,
             $query,
         );
         if ($taxonomyTerms instanceof WP_Error) {

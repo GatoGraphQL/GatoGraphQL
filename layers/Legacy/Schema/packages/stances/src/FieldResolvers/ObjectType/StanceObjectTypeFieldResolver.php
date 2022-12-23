@@ -151,9 +151,10 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  * @todo TaxonomyTypeAPI was removed! This stale code must be fixed
                  */
                 return $this->getTaxonomyTypeAPI()->getCustomPostTaxonomyTerms(
-                    POP_USERSTANCE_TAXONOMY_STANCE,
                     $objectTypeResolver->getID($stance),
-                    [],
+                    [
+                        'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
+                    ],
                     [
                         QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
                     ]
@@ -164,9 +165,10 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  * @todo TaxonomyTypeAPI was removed! This stale code must be fixed
                  */
                 return $this->getTaxonomyTypeAPI()->getCustomPostTaxonomyTerms(
-                    POP_USERSTANCE_TAXONOMY_STANCE,
                     $objectTypeResolver->getID($stance),
-                    [],
+                    [
+                        'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
+                    ],
                     [
                         QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS,
                     ]

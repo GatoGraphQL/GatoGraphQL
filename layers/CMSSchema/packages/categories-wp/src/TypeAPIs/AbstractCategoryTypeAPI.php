@@ -67,20 +67,15 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
         /**
-         * If the "taxonomy" has been set in the query, then use that one.
-         * Otherwise, use the one from this class.
-         * That's so can use the QueryableCategoryTypeAPI, which accepts the
-         * taxonomy via a fieldArg, and returns an empty `getCategoryTaxonomyName`.
-         *
+         * Allow to set the taxonomy in advance via a fieldArg.
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
-         *
-         * @var string
          */
-        $catTaxonomy = isset($query['taxonomy']) ? $query['taxonomy'] : $this->getCategoryTaxonomyName();
+        if (!isset($query['taxonomy'])) {
+            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+        }
         
         /** @var array<string|int>|object[] */
         return $this->getCustomPostTaxonomyTerms(
-            $catTaxonomy,
             $customPostObjectOrID,
             $query,
             $options,
@@ -93,20 +88,15 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
         /**
-         * If the "taxonomy" has been set in the query, then use that one.
-         * Otherwise, use the one from this class.
-         * That's so can use the QueryableCategoryTypeAPI, which accepts the
-         * taxonomy via a fieldArg, and returns an empty `getCategoryTaxonomyName`.
-         *
+         * Allow to set the taxonomy in advance via a fieldArg.
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
-         *
-         * @var string
          */
-        $catTaxonomy = isset($query['taxonomy']) ? $query['taxonomy'] : $this->getCategoryTaxonomyName();
+        if (!isset($query['taxonomy'])) {
+            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+        }
         
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
-            $catTaxonomy,
             $customPostObjectOrID,
             $query,
             $options,
