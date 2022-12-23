@@ -147,7 +147,10 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $stance = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'categories':
-                return $taxonomyapi->getCustomPostTaxonomyTerms(
+                /**
+                 * @todo TaxonomyTypeAPI was removed! This stale code must be fixed
+                 */
+                return $this->getTaxonomyTypeAPI()->getCustomPostTaxonomyTerms(
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     $objectTypeResolver->getID($stance),
                     [],
@@ -157,7 +160,10 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 ) ?? [];
 
             case 'catSlugs':
-                return $taxonomyapi->getCustomPostTaxonomyTerms(
+                /**
+                 * @todo TaxonomyTypeAPI was removed! This stale code must be fixed
+                 */
+                return $this->getTaxonomyTypeAPI()->getCustomPostTaxonomyTerms(
                     POP_USERSTANCE_TAXONOMY_STANCE,
                     $objectTypeResolver->getID($stance),
                     [],
