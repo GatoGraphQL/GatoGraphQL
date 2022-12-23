@@ -388,6 +388,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * Custom Post Type singular name
      */
     abstract protected function getCustomPostTypeName(): string;
+
     /**
      * Custom Post Type under which it will be registered
      * From documentation: Max. 20 characters and may only contain lowercase alphanumeric characters,
