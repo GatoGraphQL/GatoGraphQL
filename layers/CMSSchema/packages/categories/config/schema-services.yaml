@@ -14,3 +14,6 @@ services:
 
     PoPCMSSchema\Categories\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\Categories\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
