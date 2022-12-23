@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\SchemaCommonsWP\Overrides\TypeResolvers;
+namespace PoPCMSSchema\SchemaCommons\Overrides\TypeResolvers;
 
 trait OverridingTypeResolverTrait
 {
