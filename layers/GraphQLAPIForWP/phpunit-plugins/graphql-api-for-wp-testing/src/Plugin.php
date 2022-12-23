@@ -38,6 +38,11 @@ class Plugin
             add_action('init', flush_rewrite_rules(...), PHP_INT_MAX);
         }
 
+        $this->adaptRESTAPIResponse();
+    }
+
+    protected function adaptRESTAPIResponse(): void
+    {
         /**
          * Remove the "_link" entry from the WP REST API response,
          * so that the GraphQL response does not include the domain,
