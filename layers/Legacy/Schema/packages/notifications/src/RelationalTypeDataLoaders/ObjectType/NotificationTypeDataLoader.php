@@ -60,9 +60,9 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
      */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        return array(
+        return [
             'include' => $ids,
-        );
+        ];
     }
 
     /**
