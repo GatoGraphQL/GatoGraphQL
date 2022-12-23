@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Tags\TypeResolvers\UnionType\TagUnionTypeResolver:
+        class: \PoPCMSSchema\TagsWP\Overrides\TypeResolvers\UnionType\TagUnionTypeResolver
