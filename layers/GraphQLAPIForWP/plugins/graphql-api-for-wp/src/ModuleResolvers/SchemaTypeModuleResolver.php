@@ -719,6 +719,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     self::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
                     $possibleCustomPostTypes
                 );
+                sort($possibleCustomPostTypes);
                 // The possible values must have key and value
                 $possibleValues = [];
                 foreach ($possibleCustomPostTypes as $value) {
@@ -826,6 +827,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     self::HOOK_QUERYABLE_TAG_TAXONOMIES,
                     $possibleTagTaxonomies
                 );
+                sort($possibleTagTaxonomies);
 
                 // The possible values must have key and value
                 $possibleValues = [];
@@ -889,6 +891,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     self::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
                     $possibleCategoryTaxonomies
                 );
+                sort($possibleCategoryTaxonomies);
                 
                 // The possible values must have key and value
                 $possibleValues = [];
