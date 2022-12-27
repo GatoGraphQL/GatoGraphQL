@@ -4,6 +4,37 @@
     ...GenericTagData
     ...TagData
   }
+  
+  customPosts(
+    filter: {
+      customPostTypes: ["post","dummy-cpt"]
+    }
+    pagination: {
+      limit: 30
+    }
+  ) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+      customPostType
+    }
+    ...on GenericCustomPost {
+      tags(taxonomy: "dummy-tag") {
+        __typename
+        id
+        name
+        taxonomy
+      }
+    }
+    ...on Post {
+      tags {
+        __typename
+        id
+        name
+      }
+    }
+  }
 }
 
 fragment TagData on IsTag {

@@ -4,6 +4,37 @@
     ...GenericCategoryData
     ...CategoryData
   }
+  
+  customPosts(
+    filter: {
+      customPostTypes: ["post","dummy-cpt"]
+    }
+    pagination: {
+      limit: 30
+    }
+  ) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+      customPostType
+    }
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        __typename
+        id
+        name
+        taxonomy
+      }
+    }
+    ...on Post {
+      categories {
+        __typename
+        id
+        name
+      }
+    }
+  }
 }
 
 fragment CategoryData on IsCategory {
