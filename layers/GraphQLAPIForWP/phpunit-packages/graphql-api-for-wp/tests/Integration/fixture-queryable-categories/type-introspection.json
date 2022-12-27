@@ -1434,7 +1434,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "TagTaxonomyEnum",
+                    "name": "TagTaxonomyEnumString",
                     "enumValues": [
                         {
                             "name": "post_tag"

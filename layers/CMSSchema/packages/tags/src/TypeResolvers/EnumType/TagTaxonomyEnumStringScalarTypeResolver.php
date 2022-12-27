@@ -9,11 +9,11 @@ use PoPCMSSchema\Tags\Module;
 use PoPCMSSchema\Tags\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
-class TagTaxonomyEnumTypeResolver extends AbstractEnumTypeResolver
+class TagTaxonomyEnumStringScalarTypeResolver extends AbstractEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'TagTaxonomyEnum';
+        return 'TagTaxonomyEnumString';
     }
 
     /**

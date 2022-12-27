@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Tags\ComponentProcessors\FormInputs;
 
 use PoPCMSSchema\Tags\FilterInputs\TagIDsFilterInput;
 use PoPCMSSchema\Tags\FilterInputs\TagSlugsFilterInput;
-use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Taxonomies\FilterInputs\TaxonomyFilterInput;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
@@ -29,7 +29,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?TagSlugsFilterInput $tagSlugsFilterInput = null;
     private ?TagIDsFilterInput $tagIDsFilterInput = null;
     private ?TaxonomyFilterInput $taxonomyFilterInput = null;
-    private ?TagTaxonomyEnumTypeResolver $tagTaxonomyEnumTypeResolver = null;
+    private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -76,14 +76,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         /** @var TaxonomyFilterInput */
         return $this->taxonomyFilterInput ??= $this->instanceManager->getInstance(TaxonomyFilterInput::class);
     }
-    final public function setTagTaxonomyEnumTypeResolver(TagTaxonomyEnumTypeResolver $tagTaxonomyEnumTypeResolver): void
+    final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
     {
-        $this->tagTaxonomyEnumTypeResolver = $tagTaxonomyEnumTypeResolver;
+        $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
     }
-    final protected function getTagTaxonomyEnumTypeResolver(): TagTaxonomyEnumTypeResolver
+    final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
     {
-        /** @var TagTaxonomyEnumTypeResolver */
-        return $this->tagTaxonomyEnumTypeResolver ??= $this->instanceManager->getInstance(TagTaxonomyEnumTypeResolver::class);
+        /** @var TagTaxonomyEnumStringScalarTypeResolver */
+        return $this->tagTaxonomyEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(TagTaxonomyEnumStringScalarTypeResolver::class);
     }
 
     /**
@@ -134,7 +134,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_TAG_IDS => $this->getIDScalarTypeResolver(),
-            self::COMPONENT_FILTERINPUT_GENERIC_TAG_TAXONOMY => $this->getTagTaxonomyEnumTypeResolver(),
+            self::COMPONENT_FILTERINPUT_GENERIC_TAG_TAXONOMY => $this->getTagTaxonomyEnumStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

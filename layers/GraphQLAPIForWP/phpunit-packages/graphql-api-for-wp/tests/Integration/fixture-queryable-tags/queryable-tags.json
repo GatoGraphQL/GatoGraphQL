@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_format')",
+      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format')",
       "locations": [
         {
           "line": 2,
@@ -22,7 +22,7 @@
       }
     },
     {
-      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_format')",
+      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format')",
       "locations": [
         {
           "line": 5,
@@ -43,7 +43,7 @@
       }
     },
     {
-      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_format')",
+      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format')",
       "locations": [
         {
           "line": 8,
@@ -64,7 +64,7 @@
       }
     },
     {
-      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnum' is not valid (the only valid values are: 'post_format')",
+      "message": "Value 'post_tag' for enum type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format')",
       "locations": [
         {
           "line": 9,

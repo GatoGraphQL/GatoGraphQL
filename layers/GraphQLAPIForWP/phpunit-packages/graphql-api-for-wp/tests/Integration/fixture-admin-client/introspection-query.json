@@ -6631,10 +6631,10 @@
                   "description": "Taxonomy of the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnum!",
+                    "name": "TagTaxonomyEnumString!",
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "TagTaxonomyEnum",
+                      "name": "TagTaxonomyEnumString",
                       "ofType": null
                     }
                   },
@@ -6672,10 +6672,10 @@
                   "description": "Taxonomy of the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnum!",
+                    "name": "TagTaxonomyEnumString!",
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "TagTaxonomyEnum",
+                      "name": "TagTaxonomyEnumString",
                       "ofType": null
                     }
                   },
@@ -6713,10 +6713,10 @@
                   "description": "Taxonomy of the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnum!",
+                    "name": "TagTaxonomyEnumString!",
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "TagTaxonomyEnum",
+                      "name": "TagTaxonomyEnumString",
                       "ofType": null
                     }
                   },
@@ -6782,10 +6782,10 @@
                   "description": "Taxonomy of the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnum!",
+                    "name": "TagTaxonomyEnumString!",
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "TagTaxonomyEnum",
+                      "name": "TagTaxonomyEnumString",
                       "ofType": null
                     }
                   },
@@ -9221,10 +9221,10 @@
                   "description": "Taxonomy of the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnum!",
+                    "name": "TagTaxonomyEnumString!",
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "TagTaxonomyEnum",
+                      "name": "TagTaxonomyEnumString",
                       "ofType": null
                     }
                   },
@@ -9262,10 +9262,10 @@
                   "description": "Taxonomy of the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnum!",
+                    "name": "TagTaxonomyEnumString!",
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "TagTaxonomyEnum",
+                      "name": "TagTaxonomyEnumString",
                       "ofType": null
                     }
                   },
@@ -9303,10 +9303,10 @@
                   "description": "Taxonomy of the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnum!",
+                    "name": "TagTaxonomyEnumString!",
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "TagTaxonomyEnum",
+                      "name": "TagTaxonomyEnumString",
                       "ofType": null
                     }
                   },
@@ -9372,10 +9372,10 @@
                   "description": "Taxonomy of the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnum!",
+                    "name": "TagTaxonomyEnumString!",
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "TagTaxonomyEnum",
+                      "name": "TagTaxonomyEnumString",
                       "ofType": null
                     }
                   },
@@ -20127,7 +20127,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "TagTaxonomyEnum",
+          "name": "TagTaxonomyEnumString",
           "description": null,
           "fields": null,
           "inputFields": null,
