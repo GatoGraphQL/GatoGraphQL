@@ -6,7 +6,7 @@ namespace PoPWPSchema\Menus\TypeResolvers\ScalarType;
 
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
 
-class MenuLocationEnumStringTypeResolver extends AbstractEnumStringScalarTypeResolver
+class MenuLocationEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
     public function getTypeName(): string
     {
