@@ -611,7 +611,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
         $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
         $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'graphql-api');
-        $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'graphql-api');
+        $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each %2$s taxonomy\'s associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if (
             in_array($module, [
@@ -800,11 +800,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ];
             } elseif ($module === self::SCHEMA_TAGS) {
                 // Get the list of tag taxonomies from the system
-                /** @var string[] */
-                $possibleTagTaxonomies = array_map(
-                    fn (WP_Taxonomy $taxonomy) => $taxonomy->name,
-                    $this->getQueryableCustomPostsAssociatedTaxonomies(false)
-                );
+                $queryableTagTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(false);
                 /**
                  * Possibly not all tag taxonomies must be allowed.
                  * Remove the ones that do not
@@ -818,7 +814,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     []
                 );
                 $possibleTagTaxonomies = array_values(array_diff(
-                    $possibleTagTaxonomies,
+                    array_keys($queryableTagTaxonomyNameObjects),
                     $pluginTagTaxonomies,
                     $rejectedQueryableTagTaxonomies
                 ));
@@ -831,8 +827,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
 
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($possibleTagTaxonomies as $value) {
-                    $possibleValues[$value] = $value;
+                foreach ($possibleTagTaxonomies as $tagTaxonomyName) {
+                    $tagTaxonomyObject = $queryableTagTaxonomyNameObjects[$tagTaxonomyName];
+                    $possibleValues[$tagTaxonomyName] = sprintf(
+                        $this->__('%s (CPT: "%s")', 'graphql-api'),
+                        $tagTaxonomyName,
+                        implode(
+                            $this->__('", "', 'graphql-api'),
+                            $tagTaxonomyObject->object_type
+                        )
+                    );
                 }
                 // Set the setting
                 $option = ModuleSettingOptions::TAG_TAXONOMIES;
@@ -864,11 +868,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ];
             } elseif ($module === self::SCHEMA_CATEGORIES) {
                 // Get the list of category taxonomies from the system
-                /** @var string[] */
-                $possibleCategoryTaxonomies = array_map(
-                    fn (WP_Taxonomy $taxonomy) => $taxonomy->name,
-                    $this->getQueryableCustomPostsAssociatedTaxonomies(true)
-                );
+                $queryableCategoryTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(true);
                 /**
                  * Possibly not all category taxonomies must be allowed.
                  * Remove the ones that do not
@@ -882,7 +882,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     []
                 );
                 $possibleCategoryTaxonomies = array_values(array_diff(
-                    $possibleCategoryTaxonomies,
+                    array_keys($queryableCategoryTaxonomyNameObjects),
                     $pluginCategoryTaxonomies,
                     $rejectedQueryableCategoryTaxonomies
                 ));
@@ -895,8 +895,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($possibleCategoryTaxonomies as $value) {
-                    $possibleValues[$value] = $value;
+                foreach ($possibleCategoryTaxonomies as $categoryTaxonomyName) {
+                    $categoryTaxonomyObject = $queryableCategoryTaxonomyNameObjects[$categoryTaxonomyName];
+                    $possibleValues[$categoryTaxonomyName] = sprintf(
+                        $this->__('%s (CPT: "%s")', 'graphql-api'),
+                        $categoryTaxonomyName,
+                        implode(
+                            $this->__('", "', 'graphql-api'),
+                            $categoryTaxonomyObject->object_type
+                        )
+                    );
                 }
                 // Set the setting
                 $option = ModuleSettingOptions::CATEGORY_TAXONOMIES;
@@ -1154,7 +1162,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      *
      * Please notice all entries in "object_type" must be in the whitelist.
      *
-     * @return WP_Taxonomy[]
+     * @return array<string,WP_Taxonomy> Taxonomy name => taxonomy object
      */
     protected function getQueryableCustomPostsAssociatedTaxonomies(bool $isHierarchical): array
     {
@@ -1170,12 +1178,18 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             'objects'
         );
 
-        return array_filter(
+        $possibleTaxonomyObjects = array_filter(
             $possibleTaxonomyObjects,
             fn (WP_Taxonomy $taxonomy) => array_diff(
                 $taxonomy->object_type,
                 $queryableCustomPostTypes
             ) === []
         );
+
+        $possibleTaxonomyNameObjects = [];
+        foreach ($possibleTaxonomyObjects as $taxonomyObject) {
+            $possibleTaxonomyNameObjects[$taxonomyObject->name] = $taxonomyObject;
+        }
+        return $possibleTaxonomyNameObjects;
     }
 }
