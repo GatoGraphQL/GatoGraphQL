@@ -1,5 +1,5 @@
 query {
-    customPosts(pagination: { limit: 3 }) {
+    customPosts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
         id
         __typename
         self {
