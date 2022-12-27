@@ -13,14 +13,14 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
-use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationSelectableStringTypeResolver;
+use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationEnumStringTypeResolver;
 use WP_Term;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver = null;
+    private ?MenuLocationEnumStringTypeResolver $menuLocationEnumTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -40,14 +40,14 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var IntScalarTypeResolver */
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    final public function setMenuLocationSelectableStringTypeResolver(MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver): void
+    final public function setMenuLocationEnumStringTypeResolver(MenuLocationEnumStringTypeResolver $menuLocationEnumTypeResolver): void
     {
         $this->menuLocationEnumTypeResolver = $menuLocationEnumTypeResolver;
     }
-    final protected function getMenuLocationSelectableStringTypeResolver(): MenuLocationSelectableStringTypeResolver
+    final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringTypeResolver
     {
-        /** @var MenuLocationSelectableStringTypeResolver */
-        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationSelectableStringTypeResolver::class);
+        /** @var MenuLocationEnumStringTypeResolver */
+        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumStringTypeResolver::class);
     }
 
     /**
@@ -80,7 +80,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'slug'
                 => $this->getStringScalarTypeResolver(),
             'locations'
-                => $this->getMenuLocationSelectableStringTypeResolver(),
+                => $this->getMenuLocationEnumStringTypeResolver(),
             'count'
                 => $this->getIntScalarTypeResolver(),
             default

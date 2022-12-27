@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\TypeResolvers\ScalarType;
 
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractSelectableStringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
 
-class MenuLocationSelectableStringTypeResolver extends AbstractSelectableStringScalarTypeResolver
+class MenuLocationEnumStringTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'MenuLocationSelectableString';
+        return 'MenuLocationEnumString';
     }
 
     public function getTypeDescription(): string
