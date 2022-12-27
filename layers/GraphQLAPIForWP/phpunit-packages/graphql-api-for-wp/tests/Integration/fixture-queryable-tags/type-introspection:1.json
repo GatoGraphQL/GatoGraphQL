@@ -963,7 +963,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "CategoryTaxonomyEnum",
+                    "name": "CategoryTaxonomyEnumString",
                     "enumValues": [
                         {
                             "name": "category"

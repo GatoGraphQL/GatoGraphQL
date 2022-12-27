@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Value 'category' for enum type 'CategoryTaxonomyEnum' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "message": "Value 'category' for enum type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'pretend_this_category_exists')",
             "locations": [
                 {
                     "line": 2,
@@ -22,7 +22,7 @@
             }
         },
         {
-            "message": "Value 'category' for enum type 'CategoryTaxonomyEnum' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "message": "Value 'category' for enum type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'pretend_this_category_exists')",
             "locations": [
                 {
                     "line": 5,
@@ -43,7 +43,7 @@
             }
         },
         {
-            "message": "Value 'category' for enum type 'CategoryTaxonomyEnum' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "message": "Value 'category' for enum type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'pretend_this_category_exists')",
             "locations": [
                 {
                     "line": 8,
@@ -64,7 +64,7 @@
             }
         },
         {
-            "message": "Value 'category' for enum type 'CategoryTaxonomyEnum' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "message": "Value 'category' for enum type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'pretend_this_category_exists')",
             "locations": [
                 {
                     "line": 9,

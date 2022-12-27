@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Categories\ComponentProcessors\FormInputs;
 
 use PoPCMSSchema\Categories\FilterInputs\CategoryIDsFilterInput;
-use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Taxonomies\FilterInputs\TaxonomyFilterInput;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
@@ -24,7 +24,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?CategoryIDsFilterInput $categoryIDsFilterInput = null;
     private ?TaxonomyFilterInput $taxonomyFilterInput = null;
-    private ?CategoryTaxonomyEnumTypeResolver $categoryTaxonomyEnumTypeResolver = null;
+    private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -53,14 +53,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         /** @var TaxonomyFilterInput */
         return $this->taxonomyFilterInput ??= $this->instanceManager->getInstance(TaxonomyFilterInput::class);
     }
-    final public function setCategoryTaxonomyEnumTypeResolver(CategoryTaxonomyEnumTypeResolver $categoryTaxonomyEnumTypeResolver): void
+    final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
     {
-        $this->categoryTaxonomyEnumTypeResolver = $categoryTaxonomyEnumTypeResolver;
+        $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
     }
-    final protected function getCategoryTaxonomyEnumTypeResolver(): CategoryTaxonomyEnumTypeResolver
+    final protected function getCategoryTaxonomyEnumStringScalarTypeResolver(): CategoryTaxonomyEnumStringScalarTypeResolver
     {
-        /** @var CategoryTaxonomyEnumTypeResolver */
-        return $this->categoryTaxonomyEnumTypeResolver ??= $this->instanceManager->getInstance(CategoryTaxonomyEnumTypeResolver::class);
+        /** @var CategoryTaxonomyEnumStringScalarTypeResolver */
+        return $this->categoryTaxonomyEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(CategoryTaxonomyEnumStringScalarTypeResolver::class);
     }
 
     /**
@@ -106,7 +106,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_CATEGORY_IDS => $this->getIDScalarTypeResolver(),
-            self::COMPONENT_FILTERINPUT_GENERIC_CATEGORY_TAXONOMY => $this->getCategoryTaxonomyEnumTypeResolver(),
+            self::COMPONENT_FILTERINPUT_GENERIC_CATEGORY_TAXONOMY => $this->getCategoryTaxonomyEnumStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }

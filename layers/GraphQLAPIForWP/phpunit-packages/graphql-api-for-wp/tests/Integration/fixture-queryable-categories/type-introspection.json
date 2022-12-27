@@ -963,7 +963,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "CategoryTaxonomyEnum",
+                    "name": "CategoryTaxonomyEnumString",
                     "enumValues": [
                         {
                             "name": "pretend_this_category_exists"
