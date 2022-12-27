@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'attachment' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'attachment' for type 'CustomPostEnumString' is not valid (the only valid values are: 'page', 'post', 'dummy-cpt')",
       "locations": [
         {
           "line": 3,
@@ -17,12 +17,11 @@
         ],
         "type": "QueryRoot",
         "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {order: ASC}) { ... }",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
     {
-      "message": "Value 'nav_menu_item' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'nav_menu_item' for type 'CustomPostEnumString' is not valid (the only valid values are: 'page', 'post', 'dummy-cpt')",
       "locations": [
         {
           "line": 3,
@@ -38,12 +37,11 @@
         ],
         "type": "QueryRoot",
         "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {order: ASC}) { ... }",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
     {
-      "message": "Value 'custom_css' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'custom_css' for type 'CustomPostEnumString' is not valid (the only valid values are: 'page', 'post', 'dummy-cpt')",
       "locations": [
         {
           "line": 3,
@@ -59,12 +57,11 @@
         ],
         "type": "QueryRoot",
         "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {order: ASC}) { ... }",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
     {
-      "message": "Value 'revision' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'revision' for type 'CustomPostEnumString' is not valid (the only valid values are: 'page', 'post', 'dummy-cpt')",
       "locations": [
         {
           "line": 3,
@@ -80,8 +77,7 @@
         ],
         "type": "QueryRoot",
         "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {order: ASC}) { ... }",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     }
   ],

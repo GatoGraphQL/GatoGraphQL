@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'page' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'attachment', 'nav_menu_item', 'custom_css', 'revision')",
+      "message": "Value 'page' for type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'attachment', 'nav_menu_item', 'custom_css', 'revision')",
       "locations": [
         {
           "line": 3,
@@ -17,8 +17,7 @@
         ],
         "type": "QueryRoot",
         "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {order: ASC}) { ... }",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     }
   ],
