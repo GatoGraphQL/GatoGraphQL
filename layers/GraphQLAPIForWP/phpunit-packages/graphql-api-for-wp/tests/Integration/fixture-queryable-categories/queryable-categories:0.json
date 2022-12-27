@@ -39,6 +39,58 @@
             "Never used",
             "Blog",
             "Advanced"
+        ],
+        "dummyCategories": [
+            {
+                "__typename": "GenericCategory",
+                "id": 28,
+                "name": "World Cup"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 26,
+                "name": "Unexpected Randomness"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 21,
+                "name": "Perestroika"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 25,
+                "name": "Nostradamus"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 27,
+                "name": "Capullo"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 23,
+                "name": "Brontosaurus"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 16,
+                "name": "Absolute Brilliance"
+            }
+        ],
+        "dummyCategory": {
+            "__typename": "GenericCategory",
+            "id": 16,
+            "name": "Absolute Brilliance"
+        },
+        "dummyCategoryCount": 7,
+        "dummyCategoryNames": [
+            "World Cup",
+            "Unexpected Randomness",
+            "Perestroika",
+            "Nostradamus",
+            "Capullo",
+            "Brontosaurus",
+            "Absolute Brilliance"
         ]
     }
 }

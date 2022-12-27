@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Value 'category' for enum type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
             "locations": [
                 {
                     "line": 2,
@@ -17,12 +17,11 @@
                 ],
                 "type": "QueryRoot",
                 "field": "postCategories: categories(taxonomy: category) { ... }",
-                "code": "gql@5.6.1[14]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+                "code": "PoPSchema\/SchemaCommons@e2"
             }
         },
         {
-            "message": "Value 'category' for enum type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
             "locations": [
                 {
                     "line": 5,
@@ -38,12 +37,11 @@
                 ],
                 "type": "QueryRoot",
                 "field": "postCategory: category(taxonomy: category, by: {id: 1}) { ... }",
-                "code": "gql@5.6.1[14]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+                "code": "PoPSchema\/SchemaCommons@e2"
             }
         },
         {
-            "message": "Value 'category' for enum type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
             "locations": [
                 {
                     "line": 8,
@@ -59,12 +57,11 @@
                 ],
                 "type": "QueryRoot",
                 "field": "postCategoryCount: categoryCount(taxonomy: category)",
-                "code": "gql@5.6.1[14]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+                "code": "PoPSchema\/SchemaCommons@e2"
             }
         },
         {
-            "message": "Value 'category' for enum type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'pretend_this_category_exists')",
+            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
             "locations": [
                 {
                     "line": 9,
@@ -80,8 +77,7 @@
                 ],
                 "type": "QueryRoot",
                 "field": "postCategoryNames: categoryNames(taxonomy: category)",
-                "code": "gql@5.6.1[14]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+                "code": "PoPSchema\/SchemaCommons@e2"
             }
         }
     ],
@@ -89,6 +85,58 @@
         "postCategories": null,
         "postCategory": null,
         "postCategoryCount": null,
-        "postCategoryNames": null
+        "postCategoryNames": null,
+        "dummyCategories": [
+            {
+                "__typename": "GenericCategory",
+                "id": 28,
+                "name": "World Cup"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 26,
+                "name": "Unexpected Randomness"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 21,
+                "name": "Perestroika"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 25,
+                "name": "Nostradamus"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 27,
+                "name": "Capullo"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 23,
+                "name": "Brontosaurus"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 16,
+                "name": "Absolute Brilliance"
+            }
+        ],
+        "dummyCategory": {
+            "__typename": "GenericCategory",
+            "id": 16,
+            "name": "Absolute Brilliance"
+        },
+        "dummyCategoryCount": 7,
+        "dummyCategoryNames": [
+            "World Cup",
+            "Unexpected Randomness",
+            "Perestroika",
+            "Nostradamus",
+            "Capullo",
+            "Brontosaurus",
+            "Absolute Brilliance"
+        ]
     }
 }
