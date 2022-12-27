@@ -2426,10 +2426,10 @@
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "CustomPostEnum!",
+                "name": "CustomPostEnumString!",
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "CustomPostEnum",
+                  "name": "CustomPostEnumString",
                   "ofType": null
                 }
               },
@@ -3254,10 +3254,10 @@
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "CustomPostEnum!",
+                "name": "CustomPostEnumString!",
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "CustomPostEnum",
+                  "name": "CustomPostEnumString",
                   "ofType": null
                 }
               },
@@ -5048,16 +5048,16 @@
                   "description": "Return results from Union of the Custom Post Types",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[CustomPostEnum!]!",
+                    "name": "[CustomPostEnumString!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[CustomPostEnum!]",
+                      "name": "[CustomPostEnumString!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "CustomPostEnum!",
+                        "name": "CustomPostEnumString!",
                         "ofType": {
                           "kind": "ENUM",
-                          "name": "CustomPostEnum",
+                          "name": "CustomPostEnumString",
                           "ofType": null
                         }
                       }
@@ -5630,16 +5630,16 @@
                   "description": "Return results from Union of the Custom Post Types",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[CustomPostEnum!]!",
+                    "name": "[CustomPostEnumString!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[CustomPostEnum!]",
+                      "name": "[CustomPostEnumString!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "CustomPostEnum!",
+                        "name": "CustomPostEnumString!",
                         "ofType": {
                           "kind": "ENUM",
-                          "name": "CustomPostEnum",
+                          "name": "CustomPostEnumString",
                           "ofType": null
                         }
                       }
@@ -7436,16 +7436,16 @@
                   "description": "Return results from Union of the Custom Post Types",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[CustomPostEnum!]!",
+                    "name": "[CustomPostEnumString!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[CustomPostEnum!]",
+                      "name": "[CustomPostEnumString!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "CustomPostEnum!",
+                        "name": "CustomPostEnumString!",
                         "ofType": {
                           "kind": "ENUM",
-                          "name": "CustomPostEnum",
+                          "name": "CustomPostEnumString",
                           "ofType": null
                         }
                       }
@@ -8065,16 +8065,16 @@
                   "description": "Return results from Union of the Custom Post Types",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[CustomPostEnum!]!",
+                    "name": "[CustomPostEnumString!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[CustomPostEnum!]",
+                      "name": "[CustomPostEnumString!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "CustomPostEnum!",
+                        "name": "CustomPostEnumString!",
                         "ofType": {
                           "kind": "ENUM",
-                          "name": "CustomPostEnum",
+                          "name": "CustomPostEnumString",
                           "ofType": null
                         }
                       }
@@ -13032,10 +13032,10 @@
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "CustomPostEnum!",
+                "name": "CustomPostEnumString!",
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "CustomPostEnum",
+                  "name": "CustomPostEnumString",
                   "ofType": null
                 }
               },
@@ -16127,13 +16127,13 @@
               "description": "Filter comments added to custom posts of given types",
               "type": {
                 "kind": "LIST",
-                "name": "[CustomPostEnum!]",
+                "name": "[CustomPostEnumString!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "CustomPostEnum!",
+                  "name": "CustomPostEnumString!",
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "CustomPostEnum",
+                    "name": "CustomPostEnumString",
                     "ofType": null
                   }
                 }
@@ -16489,13 +16489,13 @@
               "description": "Filter custom posts of given types",
               "type": {
                 "kind": "LIST",
-                "name": "[CustomPostEnum!]",
+                "name": "[CustomPostEnumString!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "CustomPostEnum!",
+                  "name": "CustomPostEnumString!",
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "CustomPostEnum",
+                    "name": "CustomPostEnumString",
                     "ofType": null
                   }
                 }
@@ -16996,13 +16996,13 @@
               "description": "Filter comments added to custom posts of given types",
               "type": {
                 "kind": "LIST",
-                "name": "[CustomPostEnum!]",
+                "name": "[CustomPostEnumString!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "CustomPostEnum!",
+                  "name": "CustomPostEnumString!",
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "CustomPostEnum",
+                    "name": "CustomPostEnumString",
                     "ofType": null
                   }
                 }
@@ -17207,13 +17207,13 @@
               "description": "Filter custom posts of given types",
               "type": {
                 "kind": "LIST",
-                "name": "[CustomPostEnum!]",
+                "name": "[CustomPostEnumString!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "CustomPostEnum!",
+                  "name": "CustomPostEnumString!",
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "CustomPostEnum",
+                    "name": "CustomPostEnumString",
                     "ofType": null
                   }
                 }
@@ -17374,13 +17374,13 @@
               "description": "Filter custom posts of given types",
               "type": {
                 "kind": "LIST",
-                "name": "[CustomPostEnum!]",
+                "name": "[CustomPostEnumString!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "CustomPostEnum!",
+                  "name": "CustomPostEnumString!",
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "CustomPostEnum",
+                    "name": "CustomPostEnumString",
                     "ofType": null
                   }
                 }
@@ -18786,13 +18786,13 @@
               "description": "Filter custom posts of given types",
               "type": {
                 "kind": "LIST",
-                "name": "[CustomPostEnum!]",
+                "name": "[CustomPostEnumString!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "CustomPostEnum!",
+                  "name": "CustomPostEnumString!",
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "CustomPostEnum",
+                    "name": "CustomPostEnumString",
                     "ofType": null
                   }
                 }
@@ -19381,7 +19381,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "CustomPostEnum",
+          "name": "CustomPostEnumString",
           "description": null,
           "fields": null,
           "inputFields": null,

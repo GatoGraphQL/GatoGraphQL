@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'attachment' for enum type 'CustomPostEnum' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'attachment' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
       "locations": [
         {
           "line": 3,
@@ -22,7 +22,7 @@
       }
     },
     {
-      "message": "Value 'nav_menu_item' for enum type 'CustomPostEnum' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'nav_menu_item' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
       "locations": [
         {
           "line": 3,
@@ -43,7 +43,7 @@
       }
     },
     {
-      "message": "Value 'custom_css' for enum type 'CustomPostEnum' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'custom_css' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
       "locations": [
         {
           "line": 3,
@@ -64,7 +64,7 @@
       }
     },
     {
-      "message": "Value 'revision' for enum type 'CustomPostEnum' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'revision' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
       "locations": [
         {
           "line": 3,

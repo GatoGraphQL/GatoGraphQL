@@ -1056,7 +1056,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "CustomPostEnum",
+                    "name": "CustomPostEnumString",
                     "enumValues": [
                         {
                             "name": "page"

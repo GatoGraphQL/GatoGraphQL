@@ -45,7 +45,7 @@
                         {
                             "name": "customPostType",
                             "type": {
-                                "name": "CustomPostEnum!"
+                                "name": "CustomPostEnumString!"
                             }
                         },
                         {
@@ -760,7 +760,7 @@
                         {
                             "name": "customPostType",
                             "type": {
-                                "name": "CustomPostEnum!"
+                                "name": "CustomPostEnumString!"
                             }
                         },
                         {
@@ -927,7 +927,7 @@
                     ]
                 },
                 {
-                    "name": "CustomPostEnum",
+                    "name": "CustomPostEnumString",
                     "possibleTypes": null,
                     "fields": null
                 },

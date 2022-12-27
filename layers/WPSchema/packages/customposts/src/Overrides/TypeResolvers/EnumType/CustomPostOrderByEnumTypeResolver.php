@@ -22,13 +22,13 @@ class CustomPostOrderByEnumTypeResolver extends UpstreamCustomPostOrderByEnumTyp
     {
         return array_merge(
             parent::getEnumValues(),
-            $this->getAdditionalCustomPostEnumValues()
+            $this->getAdditionalCustomPostEnumStringValues()
         );
     }
 
     public function getEnumValueDescription(string $enumValue): ?string
     {
-        if (($enumValueDescription = $this->getAdditionalCustomPostEnumValueDescription($enumValue)) !== null) {
+        if (($enumValueDescription = $this->getAdditionalCustomPostEnumStringValueDescription($enumValue)) !== null) {
             return $enumValueDescription;
         }
         return parent::getEnumValueDescription($enumValue);

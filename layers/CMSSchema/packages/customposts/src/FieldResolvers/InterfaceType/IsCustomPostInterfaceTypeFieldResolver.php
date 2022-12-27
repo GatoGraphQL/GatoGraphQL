@@ -13,7 +13,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
 use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
@@ -29,7 +29,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
-    private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
+    private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
 
     final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
     {
@@ -85,14 +85,14 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
         /** @var QueryableInterfaceTypeFieldResolver */
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
-    final public function setCustomPostEnumTypeResolver(CustomPostEnumTypeResolver $customPostEnumTypeResolver): void
+    final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
     {
-        $this->customPostEnumTypeResolver = $customPostEnumTypeResolver;
+        $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
     }
-    final protected function getCustomPostEnumTypeResolver(): CustomPostEnumTypeResolver
+    final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {
-        /** @var CustomPostEnumTypeResolver */
-        return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
+        /** @var CustomPostEnumStringScalarTypeResolver */
+        return $this->customPostEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
     }
 
     /**
@@ -155,7 +155,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
             'content'
                 => $this->getHTMLScalarTypeResolver(),
             'customPostType'
-                => $this->getCustomPostEnumTypeResolver(),
+                => $this->getCustomPostEnumStringScalarTypeResolver(),
             'status'
                 => $this->getCustomPostStatusEnumTypeResolver(),
             default

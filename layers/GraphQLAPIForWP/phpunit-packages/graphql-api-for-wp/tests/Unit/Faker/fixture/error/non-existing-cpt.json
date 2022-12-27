@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'nonExistingCPT' for enum type 'CustomPostEnum' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'nonExistingCPT' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
       "locations": [
         {
           "line": 3,

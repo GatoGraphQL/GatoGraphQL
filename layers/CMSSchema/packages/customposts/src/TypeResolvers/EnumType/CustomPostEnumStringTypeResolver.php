@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\EnumType;
 
-use PoP\ComponentModel\App;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
-use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
+use PoP\ComponentModel\App;
 
-class CustomPostEnumTypeResolver extends AbstractEnumTypeResolver
+class CustomPostEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CustomPostEnum';
+        return 'CustomPostEnumString';
     }
 
     /**
      * @return string[]
      */
-    public function getEnumValues(): array
+    public function getPossibleValues(): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

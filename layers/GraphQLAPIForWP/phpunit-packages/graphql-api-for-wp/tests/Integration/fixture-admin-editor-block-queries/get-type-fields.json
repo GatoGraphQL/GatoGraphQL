@@ -2502,8 +2502,8 @@
           "description": null
         },
         {
-          "name": "CustomPostEnum",
-          "namespacedName": "CustomPostEnum",
+          "name": "CustomPostEnumString",
+          "namespacedName": "CustomPostEnumString",
           "fields": null,
           "kind": "ENUM",
           "description": null

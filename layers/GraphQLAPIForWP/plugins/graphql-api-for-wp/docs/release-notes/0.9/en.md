@@ -862,7 +862,7 @@ Several enum types have been implemented, and used whenever appropriate in the G
 - `CommentOrderByEnum`
 - `CommentStatusEnum`
 - `CommentTypeEnum`
-- `CustomPostEnum`
+- `CustomPostEnumString`
 - `CustomPostOrderByEnum`
 - `CustomPostStatusEnum`
 - `MediaItemOrderByEnum`
