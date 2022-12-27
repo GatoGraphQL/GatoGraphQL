@@ -32,12 +32,13 @@ class QueryableTagTaxonomiesModifyPluginSettingsFixtureEndpointWebserverRequestT
     {
         $value = [
             'post_format',
-            'dummy-tag',
         ];
 
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':1')) {
             $value[] = 'post_tag';
+        } else {
+            $value[] = 'dummy-tag';
         }
 
         return $value;

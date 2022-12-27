@@ -1,4 +1,86 @@
 {
+  "errors": [
+    {
+      "message": "Value 'dummy-tag' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format', 'post_tag')",
+      "locations": [
+        {
+          "line": 11,
+          "column": 30
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"dummy-tag\"",
+          "(taxonomy: \"dummy-tag\")",
+          "dummyTags: tags(taxonomy: \"dummy-tag\") { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyTags: tags(taxonomy: \"dummy-tag\") { ... }",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'dummy-tag' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format', 'post_tag')",
+      "locations": [
+        {
+          "line": 14,
+          "column": 28
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"dummy-tag\"",
+          "(taxonomy: \"dummy-tag\")",
+          "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 24}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 24}) { ... }",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'dummy-tag' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format', 'post_tag')",
+      "locations": [
+        {
+          "line": 17,
+          "column": 38
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"dummy-tag\"",
+          "(taxonomy: \"dummy-tag\")",
+          "dummyTagCount: tagCount(taxonomy: \"dummy-tag\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyTagCount: tagCount(taxonomy: \"dummy-tag\")",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'dummy-tag' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format', 'post_tag')",
+      "locations": [
+        {
+          "line": 18,
+          "column": 38
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"dummy-tag\"",
+          "(taxonomy: \"dummy-tag\")",
+          "dummyTagNames: tagNames(taxonomy: \"dummy-tag\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyTagNames: tagNames(taxonomy: \"dummy-tag\")",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    }
+  ],
   "data": {
     "postTags": [
       {
@@ -64,52 +146,10 @@
       "also-never-used",
       "advanced"
     ],
-    "dummyTags": [
-      {
-        "__typename": "GenericTag",
-        "id": 19,
-        "name": "Tango"
-      },
-      {
-        "__typename": "GenericTag",
-        "id": 22,
-        "name": "Rock"
-      },
-      {
-        "__typename": "GenericTag",
-        "id": 18,
-        "name": "Jazz"
-      },
-      {
-        "__typename": "GenericTag",
-        "id": 20,
-        "name": "Hip Hop"
-      },
-      {
-        "__typename": "GenericTag",
-        "id": 17,
-        "name": "Heavy metal"
-      },
-      {
-        "__typename": "GenericTag",
-        "id": 24,
-        "name": "Classical"
-      }
-    ],
-    "dummyTag": {
-      "__typename": "GenericTag",
-      "id": 24,
-      "name": "Classical"
-    },
-    "dummyTagCount": 6,
-    "dummyTagNames": [
-      "Tango",
-      "Rock",
-      "Jazz",
-      "Hip Hop",
-      "Heavy metal",
-      "Classical"
-    ],
+    "dummyTags": null,
+    "dummyTag": null,
+    "dummyTagCount": null,
+    "dummyTagNames": null,
     "postFormats": [
       {
         "__typename": "GenericTag",
