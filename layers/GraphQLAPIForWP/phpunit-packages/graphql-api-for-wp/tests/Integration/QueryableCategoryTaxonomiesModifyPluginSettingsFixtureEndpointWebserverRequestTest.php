@@ -32,16 +32,15 @@ class QueryableCategoryTaxonomiesModifyPluginSettingsFixtureEndpointWebserverReq
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        $value = [
-            // The DB data does not have another category for testing, so use a fake value
-            'pretend_this_category_exists',
-        ];
-
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':1')) {
-            $value[] = 'category';
+            return [
+                'category',
+            ];
         }
 
-        return $value;
+        return [
+            'dummy-category',
+        ];
     }
 }

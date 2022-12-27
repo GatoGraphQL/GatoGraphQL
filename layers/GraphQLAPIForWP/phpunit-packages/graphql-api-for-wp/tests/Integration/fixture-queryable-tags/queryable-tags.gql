@@ -8,10 +8,19 @@
   postTagCount: tagCount(taxonomy: post_tag)
   postTagNames: tagNames(taxonomy: post_tag)
 
+  dummyTags: tags(taxonomy: "dummy-tag") {
+    ...TagData
+  }
+  dummyTag: tag(taxonomy: "dummy-tag", by: { id: 24 }) {
+    ...TagData
+  }
+  dummyTagCount: tagCount(taxonomy: "dummy-tag")
+  dummyTagNames: tagNames(taxonomy: "dummy-tag")
+
   postFormats: tags(taxonomy: post_format) {
     ...TagData
   }
-  postFormat: tag(taxonomy: post_format, by: { id: 20 }) {
+  postFormat: tag(taxonomy: post_format, by: { id: 32 }) {
     ...TagData
   }
   postFormatCount: tagCount(taxonomy: post_format)

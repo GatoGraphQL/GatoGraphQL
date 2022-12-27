@@ -32,6 +32,7 @@ class QueryableTagTaxonomiesModifyPluginSettingsFixtureEndpointWebserverRequestT
     {
         $value = [
             'post_format',
+            'dummy-tag',
         ];
 
         $dataName = $this->getDataName();
