@@ -29,7 +29,20 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
     public function convertCustomPostsQuery(array $query, array $options): array
     {
         if (isset($query['tag-ids'])) {
-            $query['tag__in'] = $query['tag-ids'];
+            if (isset($query['tag-taxonomy'])) {
+                if (!isset($query['tax_query'])) {
+                    $query['tax_query'] = [];
+                } elseif (!in_array($query['tax_query'][0], ['AND', 'OR'])) {
+                    array_unshift($query['tax_query'], 'AND');
+                }
+                $query['tax_query'][] = [
+                    'taxonomy' => $query['tag-taxonomy'],
+                    'terms' => $query['tag-ids']
+                ];
+                unset($query['tag-taxonomy']);
+            } else {
+                $query['tag__in'] = $query['tag-ids'];
+            }
             unset($query['tag-ids']);
         }
         if (isset($query['tag-slugs'])) {

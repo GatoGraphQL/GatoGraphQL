@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType\AbstractCustomPostListObjectTypeFieldResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
-use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomyCustomPostsFilterInputObjectTypeResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -14,6 +15,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class GenericCategoryListObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
     private ?TaxonomyCustomPostsFilterInputObjectTypeResolver $taxonomyCustomPostsFilterInputObjectTypeResolver = null;
+    private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final public function setTaxonomyCustomPostsFilterInputObjectTypeResolver(TaxonomyCustomPostsFilterInputObjectTypeResolver $taxonomyCustomPostsFilterInputObjectTypeResolver): void
     {
@@ -23,6 +25,15 @@ class GenericCategoryListObjectTypeFieldResolver extends AbstractCustomPostListO
     {
         /** @var TaxonomyCustomPostsFilterInputObjectTypeResolver */
         return $this->taxonomyCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomyCustomPostsFilterInputObjectTypeResolver::class);
+    }
+    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
+    {
+        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+    }
+    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
+    {
+        /** @var TaxonomyTermTypeAPIInterface */
+        return $this->taxonomyTermTypeAPI ??= $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
     }
 
     protected function getCustomPostsFilterInputObjectTypeResolver(): AbstractCustomPostsFilterInputObjectTypeResolver
@@ -64,6 +75,7 @@ class GenericCategoryListObjectTypeFieldResolver extends AbstractCustomPostListO
             case 'customPosts':
             case 'customPostCount':
                 $query['category-ids'] = [$objectTypeResolver->getID($category)];
+                $query['category-taxonomy'] = $this->getTaxonomyTermTypeAPI()->getTermTaxonomyName($category);
                 break;
         }
 

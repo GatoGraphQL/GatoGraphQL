@@ -42,7 +42,20 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
             unset($query['category-not-in']);
         }
         if (isset($query['category-ids'])) {
-            $query['category__in'] = $query['category-ids'];
+            if (isset($query['category-taxonomy'])) {
+                if (!isset($query['tax_query'])) {
+                    $query['tax_query'] = [];
+                } elseif (!in_array($query['tax_query'][0], ['AND', 'OR'])) {
+                    array_unshift($query['tax_query'], 'AND');
+                }
+                $query['tax_query'][] = [
+                    'taxonomy' => $query['category-taxonomy'],
+                    'terms' => $query['category-ids']
+                ];
+                unset($query['category-taxonomy']);
+            } else {
+                $query['category__in'] = $query['category-ids'];
+            }
             unset($query['category-ids']);
         }
         if (isset($query['category-id'])) {
