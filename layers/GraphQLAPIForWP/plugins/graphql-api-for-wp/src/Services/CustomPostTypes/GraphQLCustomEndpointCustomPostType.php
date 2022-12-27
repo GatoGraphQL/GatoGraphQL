@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\CustomEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryTaxonomy;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryCategoryTaxonomy;
 
 class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
@@ -89,7 +89,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     /**
      * Custom post type name
      */
-    public function getCustomPostTypeName(): string
+    protected function getCustomPostTypeName(): string
     {
         return \__('GraphQL custom endpoint', 'graphql-api');
     }
@@ -97,9 +97,9 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     /**
      * Custom Post Type plural name
      *
-     * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
+     * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
      */
-    protected function getCustomPostTypePluralNames(bool $uppercase): string
+    protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
         return \__('GraphQL endpoints', 'graphql-api');
     }
@@ -141,7 +141,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     protected function getTaxonomies(): array
     {
         return [
-            GraphQLQueryTaxonomy::TAXONOMY_CATEGORY,
+            GraphQLQueryCategoryTaxonomy::TAXONOMY_CATEGORY,
         ];
     }
 

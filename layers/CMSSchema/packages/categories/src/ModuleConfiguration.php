@@ -34,4 +34,20 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    /**
+     * @return string[]
+     */
+    public function getQueryableCategoryTaxonomies(): array
+    {
+        $envVariable = Environment::QUERYABLE_CATEGORY_TAXONOMIES;
+        $defaultValue = [];
+        $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

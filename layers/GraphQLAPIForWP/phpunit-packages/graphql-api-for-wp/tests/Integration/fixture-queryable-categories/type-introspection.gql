@@ -1,0 +1,13 @@
+query GetTypeInfoByIntrospection {
+  __schema {
+    types {
+      name
+      enumValues {
+        name
+      }
+      possibleTypes {
+        name
+      }
+    }
+  }
+}

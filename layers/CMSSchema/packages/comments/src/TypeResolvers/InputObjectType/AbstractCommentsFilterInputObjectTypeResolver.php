@@ -20,7 +20,7 @@ use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoPCMSSchema\CustomPosts\FilterInputs\UnionCustomPostTypesFilterInput;
-use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeParentIDsFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDFilterInput;
@@ -40,7 +40,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
-    private ?CustomPostEnumTypeResolver $customPostEnumTypeResolver = null;
+    private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CommentStatusFilterInput $commentStatusFilterInput = null;
     private ?CommentTypesFilterInput $commentTypesFilterInput = null;
@@ -90,14 +90,14 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
         /** @var CommentTypeEnumTypeResolver */
         return $this->commentTypeEnumTypeResolver ??= $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
     }
-    final public function setCustomPostEnumTypeResolver(CustomPostEnumTypeResolver $customPostEnumTypeResolver): void
+    final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
     {
-        $this->customPostEnumTypeResolver = $customPostEnumTypeResolver;
+        $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
     }
-    final protected function getCustomPostEnumTypeResolver(): CustomPostEnumTypeResolver
+    final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {
-        /** @var CustomPostEnumTypeResolver */
-        return $this->customPostEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumTypeResolver::class);
+        /** @var CustomPostEnumStringScalarTypeResolver */
+        return $this->customPostEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -263,7 +263,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
                 'customPostIDs' => $this->getIDScalarTypeResolver(),
                 'excludeCustomPostIDs' => $this->getIDScalarTypeResolver(),
                 'customPostStatus' => $this->getCustomPostStatusEnumTypeResolver(),
-                'customPostTypes' => $this->getCustomPostEnumTypeResolver(),
+                'customPostTypes' => $this->getCustomPostEnumStringScalarTypeResolver(),
             ] : []
         );
     }
@@ -299,7 +299,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
             'customPostStatus' => [
                 CustomPostStatus::PUBLISH,
             ],
-            'customPostTypes' => $this->getCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
+            'customPostTypes' => $this->getCustomPostEnumStringScalarTypeResolver()->getConsolidatedPossibleValues(),
             default => parent::getInputFieldDefaultValue($inputFieldName)
         };
     }

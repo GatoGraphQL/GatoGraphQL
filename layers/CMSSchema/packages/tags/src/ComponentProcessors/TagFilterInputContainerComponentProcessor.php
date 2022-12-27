@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\ComponentProcessors;
 
-use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
+use PoPCMSSchema\Tags\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
+use PoP\ComponentModel\Component\Component;
 
 class TagFilterInputContainerComponentProcessor extends AbstractFilterInputContainerComponentProcessor
 {
@@ -14,6 +15,7 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
 
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGS = 'filterinputcontainer-tags';
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT = 'filterinputcontainer-tagcount';
+    public final const COMPONENT_FILTERINPUTCONTAINER_GENERICTAGS = 'filterinputcontainer-generictags';
 
     /**
      * @return string[]
@@ -23,6 +25,7 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
         return array(
             self::COMPONENT_FILTERINPUTCONTAINER_TAGS,
             self::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_GENERICTAGS,
         );
     }
 
@@ -43,6 +46,9 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
                 ...$paginationFilterInputComponents,
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_TAGCOUNT => $tagFilterInputComponents,
+            self::COMPONENT_FILTERINPUTCONTAINER_GENERICTAGS => [
+                new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_GENERIC_TAG_TAXONOMY),
+            ],
             default => [],
         };
     }

@@ -19,6 +19,9 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistry
 
+    GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistry
+
     GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry
 

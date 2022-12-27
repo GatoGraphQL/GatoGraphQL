@@ -45,30 +45,6 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         }
         return get_terms($query);
     }
-    public function getCustomPostTaxonomyTerms($post_id, $taxonomy, $options = [])
-    {
-        if ($terms = get_the_terms($post_id, $taxonomy)) {
-            if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
-                if ($return_type === ReturnTypes::IDS) {
-                    return array_map(
-                        function (WP_Taxonomy $term_object): int {
-                            return $term_object->term_id;
-                        },
-                        $terms
-                    );
-                } elseif ($return_type == ReturnTypes::SLUGS) {
-                    return array_map(
-                        function (WP_Taxonomy $term_object): string {
-                            return $term_object->slug;
-                        },
-                        $terms
-                    );
-                }
-            }
-            return $terms;
-        }
-        return [];
-    }
 
     public function setPostTerms($post_id, $tags, $taxonomy, $append = false): void
     {

@@ -28,7 +28,7 @@ For `QueryRoot`:
 - `optionValue: AnyBuiltInScalar`
 - `optionValues: [AnyBuiltInScalar]`
 
-For `CustomPost`, `Comment`, `User`, `Tag` and `Category`:
+For `Post`, `Page`, `GenericCustomPost`, `Comment`, `User`, `Tag` and `Category`:
 
 - `metaValue: AnyBuiltInScalar`
 - `metaValues: [AnyBuiltInScalar]`

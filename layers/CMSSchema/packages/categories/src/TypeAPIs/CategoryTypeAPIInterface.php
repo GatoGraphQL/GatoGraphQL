@@ -17,6 +17,8 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function isInstanceOfCategoryType(object $object): bool;
 
     public function getCategoryID(object $cat): string|int;
+    public function getCategory(string|int $categoryID): ?object;
+    public function categoryExists(int|string $id): bool;
     /**
      * @return array<string|int>|object[]
      * @param array<string,mixed> $query
@@ -29,9 +31,9 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
      */
     public function getCategoryCount(array $query, array $options = []): int;
     /**
-     * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
+     * @return array<string|int>|object[]
      */
     public function getCustomPostCategories(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array;
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TagsWP\TypeAPIs;
 
+use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
@@ -16,14 +17,9 @@ use function get_tags;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements TagTypeAPIInterface
+abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements TagTypeAPIInterface, TagListTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
-
-    protected function getTaxonomyName(): string
-    {
-        return $this->getTagTaxonomyName();
-    }
 
     abstract protected function getTagTaxonomyName(): string;
 
@@ -32,7 +28,11 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function isInstanceOfTagType(object $object): bool
     {
-        return $this->isInstanceOfTaxonomyType($object);
+        if (!$this->isInstanceOfTaxonomyTermType($object)) {
+            return false;
+        }
+        /** @var WP_Term $object */
+        return $object->taxonomy === $this->getTagTaxonomyName();
     }
 
     protected function isHierarchical(): bool
@@ -43,33 +43,59 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?WP_Term
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermFromObjectOrID($tagObjectOrID);
+        return $this->getTaxonomyTermFromObjectOrID(
+            $tagObjectOrID,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     public function getTagName(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermName($tagObjectOrID);
+        return $this->getTaxonomyTermName(
+            $tagObjectOrID,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     public function getTag(string|int $tagID): ?object
     {
-        return $this->getTaxonomyTerm($tagID);
+        return $this->getTaxonomyTerm(
+            $tagID,
+            $this->getTagTaxonomyName(),
+        );
+    }
+
+    public function tagExists(int|string $id): bool
+    {
+        return $this->getTag($id) !== null;
     }
 
     public function getTagByName(string $tagName): ?object
     {
-        return $this->getTaxonomyTermByName($tagName);
+        return $this->getTaxonomyTermByName(
+            $tagName,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     /**
+     * @param string|int|WP_Post $customPostObjectOrID
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      * @return array<string|int>|object[]
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array
     {
-        /** @var string|int|WP_Post $customPostObjectOrID */
+        /**
+         * Allow to set the taxonomy in advance via a fieldArg.
+         * Eg: { customPosts { categories(taxonomy: some_category) { id } }
+         */
+        if (!isset($query['taxonomy'])) {
+            $query['taxonomy'] = $this->getTagTaxonomyName();
+        }
+
+        /** @var array<string|int>|object[] */
         return $this->getCustomPostTaxonomyTerms(
             $customPostObjectOrID,
             $query,
@@ -83,6 +109,14 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     public function getCustomPostTagCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int
     {
+        /**
+         * Allow to set the taxonomy in advance via a fieldArg.
+         * Eg: { customPosts { categories(taxonomy: some_category) { id } }
+         */
+        if (!isset($query['taxonomy'])) {
+            $query['taxonomy'] = $this->getTagTaxonomyName();
+        }
+
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
             $customPostObjectOrID,
@@ -123,6 +157,13 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      */
     protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
     {
+        /**
+         * Allow to set the taxonomy in advance via a fieldArg.
+         * Eg: { customPosts { tags(taxonomy: nav_menu) { id } }
+         */
+        if (!isset($query['taxonomy'])) {
+            $query['taxonomy'] = $this->getTagTaxonomyName();
+        }
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
             self::HOOK_QUERY,
@@ -136,7 +177,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
-    public function convertTagsQuery(array $query, array $options = []): array
+    final public function convertTagsQuery(array $query, array $options = []): array
     {
         return $this->convertTaxonomyTermsQuery($query, $options);
     }
@@ -144,31 +185,46 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     public function getTagURL(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermURL($tagObjectOrID);
+        return $this->getTaxonomyTermURL(
+            $tagObjectOrID,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     public function getTagURLPath(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermURLPath($tagObjectOrID);
+        return $this->getTaxonomyTermURLPath(
+            $tagObjectOrID,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     public function getTagSlug(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermSlug($tagObjectOrID);
+        return $this->getTaxonomyTermSlug(
+            $tagObjectOrID,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     public function getTagDescription(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermDescription($tagObjectOrID);
+        return $this->getTaxonomyTermDescription(
+            $tagObjectOrID,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     public function getTagItemCount(string|int|object $tagObjectOrID): ?int
     {
         /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermItemCount($tagObjectOrID);
+        return $this->getTaxonomyTermItemCount(
+            $tagObjectOrID,
+            $this->getTagTaxonomyName(),
+        );
     }
 
     public function getTagID(object $tag): string|int

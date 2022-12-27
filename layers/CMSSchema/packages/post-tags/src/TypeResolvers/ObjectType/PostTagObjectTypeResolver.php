@@ -46,7 +46,10 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of a tag, added to a post', 'post-tags');
+        return sprintf(
+            $this->__('Representation of a tag, added to a post (taxonomy: "%s")', 'post-tags'),
+            $this->getPostTagTypeAPI()->getPostTagTaxonomyName()
+        );
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

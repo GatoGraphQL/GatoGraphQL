@@ -12,11 +12,11 @@ class AppStateProvider extends AbstractAppStateProvider
 {
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
-    final public function setTaxonomyTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
+    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
     {
         $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
     }
-    final protected function getTaxonomyTypeAPI(): TaxonomyTermTypeAPIInterface
+    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {
         /** @var TaxonomyTermTypeAPIInterface */
         return $this->taxonomyTermTypeAPI ??= $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
@@ -34,7 +34,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // needed to match the ComponentRoutingProcessor vars conditions
         if ($nature === RequestNature::CATEGORY) {
             $termObject = $state['routing']['queried-object'];
-            $state['routing']['taxonomy-name'] = $this->getTaxonomyTypeAPI()->getTermTaxonomyName($termObject);
+            $state['routing']['taxonomy-name'] = $this->getTaxonomyTermTypeAPI()->getTermTaxonomyName($termObject);
         }
     }
 }

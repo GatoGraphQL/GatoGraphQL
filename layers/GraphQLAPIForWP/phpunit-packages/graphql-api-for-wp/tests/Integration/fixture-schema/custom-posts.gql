@@ -37,84 +37,84 @@ query {
     }
   }
 
-  customPostsByAuthorIDs: customPosts(filter: { authorIDs: 5 }) {
+  customPostsByAuthorIDs: customPosts(filter: { authorIDs: 5 }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByAuthorSlug: customPosts(filter: { authorSlug: "blogger" }) {
+  customPostsByAuthorSlug: customPosts(filter: { authorSlug: "blogger" }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByCustomPostTypes: customPosts(filter: { customPostTypes: "page" }) {
+  customPostsByCustomPostTypes: customPosts(filter: { customPostTypes: "page" }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByDateQuery: customPosts(filter: { dateQuery: { after: "2022-01-01" } }) {
+  customPostsByDateQuery: customPosts(filter: { dateQuery: { after: "2022-01-01" } }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByExcludeAuthorIDs: customPosts(filter: { excludeAuthorIDs: 4 }) {
+  customPostsByExcludeAuthorIDs: customPosts(filter: { excludeAuthorIDs: 4 }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByExcludeIDs: customPosts(filter: { excludeIDs: [1, 28] }) {
+  customPostsByExcludeIDs: customPosts(filter: { excludeIDs: [1, 28] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByHasPassword: customPosts(filter: { hasPassword: true }) {
+  customPostsByHasPassword: customPosts(filter: { hasPassword: true }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByIds: customPosts(filter: { ids: [1, 28] }) {
+  customPostsByIds: customPosts(filter: { ids: [1, 28] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByMetaQuery: customPosts(filter: { metaQuery: { key: "_thumbnail_id", compareBy: { key: { operator: EXISTS } } } }) {
+  customPostsByMetaQuery: customPosts(filter: { metaQuery: { key: "_thumbnail_id", compareBy: { key: { operator: EXISTS } } } }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByPassword: customPosts(filter: { password: "password" }) {
+  customPostsByPassword: customPosts(filter: { password: "password" }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsBySearch: customPosts(filter: { search: "hello" }) {
+  customPostsBySearch: customPosts(filter: { search: "hello" }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
       title
     }
   }
-  customPostsByStatus: customPosts(filter: { status: draft }) {
+  customPostsByStatus: customPosts(filter: { status: draft }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id

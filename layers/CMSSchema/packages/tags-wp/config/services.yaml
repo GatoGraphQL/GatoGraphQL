@@ -9,3 +9,9 @@ services:
 
     PoPCMSSchema\TagsWP\Hooks\:
         resource: '../src/Hooks/*'
+    
+    PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface:
+        class: \PoPCMSSchema\TagsWP\TypeAPIs\QueryableTagTypeAPI
+
+    PoPCMSSchema\Tags\TypeAPIs\QueryableTaxonomyTagListTypeAPIInterface:
+        class: \PoPCMSSchema\TagsWP\TypeAPIs\QueryableTaxonomyTagListTypeAPI

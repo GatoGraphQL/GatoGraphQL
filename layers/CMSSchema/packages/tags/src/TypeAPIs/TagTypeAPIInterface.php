@@ -6,9 +6,6 @@ namespace PoPCMSSchema\Tags\TypeAPIs;
 
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
 interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
 {
     /**
@@ -18,6 +15,7 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
 
     public function getTagID(object $tag): string|int;
     public function getTag(string|int $tagID): ?object;
+    public function tagExists(int|string $id): bool;
     public function getTagByName(string $tagName): ?object;
     /**
      * @return array<string|int>|object[]
@@ -37,9 +35,9 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function getTagDescription(string|int|object $tagObjectOrID): ?string;
     public function getTagItemCount(string|int|object $tagObjectOrID): ?int;
     /**
-     * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
+     * @return array<string|int>|object[]
      */
     public function getCustomPostTags(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array;
     /**

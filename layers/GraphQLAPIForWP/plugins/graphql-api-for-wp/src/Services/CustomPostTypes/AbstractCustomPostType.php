@@ -388,6 +388,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * Custom Post Type singular name
      */
     abstract protected function getCustomPostTypeName(): string;
+
     /**
      * Custom Post Type under which it will be registered
      * From documentation: Max. 20 characters and may only contain lowercase alphanumeric characters,
@@ -401,12 +402,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Custom Post Type plural name
      *
-     * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
+     * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
      */
-    protected function getCustomPostTypePluralNames(bool $uppercase): string
+    protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
         $postTypeName = $this->getCustomPostTypeName();
-        if ($uppercase) {
+        if ($titleCase) {
             return $postTypeName;
         }
         return strtolower($postTypeName);

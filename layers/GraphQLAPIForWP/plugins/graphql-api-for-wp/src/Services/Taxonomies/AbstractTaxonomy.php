@@ -6,13 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\Taxonomies;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
-abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
+abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface
 {
-    /**
-     * Taxonomy
-     */
-    abstract public function getTaxonomy(): string;
-
     /**
      * Add the hook to initialize the different taxonomies
      */
@@ -55,22 +50,9 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     }
 
     /**
-     * Taxonomy name
-     */
-    abstract public function getTaxonomyName(bool $uppercase = true): string;
-
-    /**
-     * Taxonomy plural name
-     *
-     * @param bool $uppercase Indicate if the name must be uppercase (for starting a sentence) or, otherwise, lowercase
-     */
-    abstract protected function getTaxonomyPluralNames(bool $uppercase = true): string;
-
-
-    /**
      * Initialize the different post types
      */
-    public function initTaxonomy(): void
+    protected function initTaxonomy(): void
     {
         $names_uc = $this->getTaxonomyPluralNames(true);
         $labels = $this->getTaxonomyLabels(
@@ -104,4 +86,11 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             $args
         );
     }
+
+    /**
+     * Taxonomy plural name
+     *
+     * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
+     */
+    abstract protected function getTaxonomyPluralNames(bool $titleCase = true): string;
 }

@@ -7,3 +7,4 @@ if [ -d "$UPLOADS_DIR" ]; then
 fi
 
 wp import /app/assets/graphql-api-data.xml --authors=create --path=/app/wordpress
+wp import /app/assets/graphql-api-testing-data.xml --authors=create --path=/app/wordpress

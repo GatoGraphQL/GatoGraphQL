@@ -5,3 +5,15 @@ services:
 
     PoPCMSSchema\Categories\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\Categories\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
+
+    PoPCMSSchema\Categories\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\Categories\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\Categories\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'

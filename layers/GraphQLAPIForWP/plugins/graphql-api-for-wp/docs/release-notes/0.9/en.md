@@ -364,7 +364,7 @@ Added fields to retrieve comments and their number:
 - `Root.myComment: Comment`
 - `Root.myComments: [Comment]!`
 - `Root.myCommentCount: Int!`
-- `CustomPost.commentCount: Int!`
+- `Commentable.commentCount: Int!` (`Commentable` is an interface, implemented by types `Post`, `Page` and `GenericCustomPost`)
 - `Comment.responseCount: Int!`
 
 Added input fields to filter comments:
@@ -466,6 +466,98 @@ fragment CatProps on PostCategory {
 ### Taxonomies (Tags and Categories)
 
 Added filter input `hideEmpty` to fields `postTags` and `postCategories` to fetch entries with/out any post.
+
+Added types `GenericTag` and `GenericCategory` to query any non-mapped custom taxonomy (tags and categories), and fields:
+
+- `Root.categories(taxonomy: String!): [GenericCategory!]`
+- `Root.tags(taxonomy: String!): [GenericTag!]`
+- `GenericCustomPost.categories(taxonomy: String!): [GenericCategory!]`
+- `GenericCustomPost.tags(taxonomy: String!): [GenericTag!]`
+
+For instance, this query retrieves all tags of taxonomy `"custom-tag"` and all categories of taxonomy `"custom-category"`
+
+```graphql
+{
+  # Custom tag taxonomies
+  tags(taxonomy: "custom-tag") {
+    __typename
+    
+    # Common tag interface
+    ... on IsTag {
+      id
+      count
+      name
+      slug
+      url
+    }
+
+    # "Generic" tags
+    ... on GenericTag {
+      taxonomy
+      customPostCount
+      customPosts {
+        __typename
+        id
+      }
+    }
+  }
+
+  # Custom category taxonomies
+  categories(taxonomy: "custom-category") {
+    __typename
+
+    # Common category interface
+    ... on IsCategory {
+      id
+      count
+      name
+      slug
+      url
+    }
+
+    # "Generic" categories
+    ... on GenericCategory {
+      taxonomy
+      customPostCount
+      customPosts {
+        __typename
+        id
+      }
+    }
+  }
+```
+
+We can also query the tags and categories added to some custom post (for CPT `"custom-cpt"` in this example):
+
+```graphql
+  # Custom tags/categories added to a CPT
+  customPosts(filter: { customPostTypes: "custom-cpt" }) {
+    __typename
+    
+    ... on IsCustomPost {
+      id
+      title
+      customPostType
+    }
+
+    ... on GenericCustomPost {
+      tags(taxonomy: "custom-tag") {
+        __typename
+        id
+        name
+        taxonomy
+      }
+
+      categories(taxonomy: "custom-category") {
+        __typename
+        id
+        name
+        taxonomy
+      }
+    }
+  }
+}
+```
 
 ### Menus
 
@@ -769,9 +861,9 @@ If the user doesn't have the permission to edit posts, we will receive:
 The affected mutations are:
 
 - `Comment.reply: CommentReplyMutationPayload!`
-- `CustomPost.addComment: CustomPostAddCommentMutationPayload!`
-- `CustomPost.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
-- `CustomPost.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+- `Commentable.addComment: CustomPostAddCommentMutationPayload!`
+- `SupportingFeaturedImage.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!` (`SupportingFeaturedImage` is an interface, implemented by types `Post`, `Page` and `GenericCustomPost`)
+- `SupportingFeaturedImage.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
 - `Post.setCategories: PostSetCategoriesMutationPayload!`
 - `Post.setTags: PostSetTagsMutationPayload!`
 - `Post.update: PostUpdateMutationPayload!`
@@ -786,7 +878,7 @@ The affected mutations are:
 - `Root.setTagsOnPost: RootSetTagsOnPostMutationPayload!`
 - `Root.updatePost: RootUpdatePostMutationPayload!`
 
-### `Commentable` interface is only added to CPTs that support comments
+### `Commentable` and `SupportingFeaturedImage` interfaces are only added to CPTs that support the feature
 
 The `Commentable` interface has the following fields:
 
@@ -797,7 +889,9 @@ The `Commentable` interface has the following fields:
 
 This interface was added to all types for all custom post types (`Post`, `Page` and `GenericCustomPost`). Now, it is only added to the types for those CPTs that do support comments.
 
-For instance, type `Post` will implement `Commentable` only if `post_type_supports('post', 'comments') === true`.
+Similarly, interface `SupportingFeaturedImage` is now only added to the types for those CPTs that do support a featured image.
+
+For instance, the type `Post` implements both `Commentable` and `SupportingFeaturedImage` (because `post_type_supports('post', 'comments') === true` and because `post_type_supports('post', 'thumbnail') === true`).
 
 ## Custom scalars
 
@@ -860,7 +954,7 @@ Several enum types have been implemented, and used whenever appropriate in the G
 - `CommentOrderByEnum`
 - `CommentStatusEnum`
 - `CommentTypeEnum`
-- `CustomPostEnum`
+- `CustomPostEnumString`
 - `CustomPostOrderByEnum`
 - `CustomPostStatusEnum`
 - `MediaItemOrderByEnum`

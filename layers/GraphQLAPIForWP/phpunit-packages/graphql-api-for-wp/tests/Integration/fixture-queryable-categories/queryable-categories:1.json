@@ -1,0 +1,130 @@
+{
+    "errors": [
+        {
+            "message": "Value 'dummy-category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'category')",
+            "locations": [
+                {
+                    "line": 11,
+                    "column": 42
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "\"dummy-category\"",
+                    "(taxonomy: \"dummy-category\")",
+                    "dummyCategories: categories(taxonomy: \"dummy-category\") { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "dummyCategories: categories(taxonomy: \"dummy-category\") { ... }",
+                "code": "PoPSchema\/SchemaCommons@e2"
+            }
+        },
+        {
+            "message": "Value 'dummy-category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'category')",
+            "locations": [
+                {
+                    "line": 14,
+                    "column": 38
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "\"dummy-category\"",
+                    "(taxonomy: \"dummy-category\")",
+                    "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 16}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 16}) { ... }",
+                "code": "PoPSchema\/SchemaCommons@e2"
+            }
+        },
+        {
+            "message": "Value 'dummy-category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'category')",
+            "locations": [
+                {
+                    "line": 17,
+                    "column": 48
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "\"dummy-category\"",
+                    "(taxonomy: \"dummy-category\")",
+                    "dummyCategoryCount: categoryCount(taxonomy: \"dummy-category\")",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "dummyCategoryCount: categoryCount(taxonomy: \"dummy-category\")",
+                "code": "PoPSchema\/SchemaCommons@e2"
+            }
+        },
+        {
+            "message": "Value 'dummy-category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'category')",
+            "locations": [
+                {
+                    "line": 18,
+                    "column": 48
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "\"dummy-category\"",
+                    "(taxonomy: \"dummy-category\")",
+                    "dummyCategoryNames: categoryNames(taxonomy: \"dummy-category\")",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "dummyCategoryNames: categoryNames(taxonomy: \"dummy-category\")",
+                "code": "PoPSchema\/SchemaCommons@e2"
+            }
+        }
+    ],
+    "data": {
+        "postCategories": [
+            {
+                "__typename": "PostCategory",
+                "id": 1,
+                "name": "Uncategorized"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 4,
+                "name": "Resource"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 5,
+                "name": "Never used"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 3,
+                "name": "Blog"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 2,
+                "name": "Advanced"
+            }
+        ],
+        "postCategory": {
+            "__typename": "PostCategory",
+            "id": 1,
+            "name": "Uncategorized"
+        },
+        "postCategoryCount": 5,
+        "postCategoryNames": [
+            "Uncategorized",
+            "Resource",
+            "Never used",
+            "Blog",
+            "Advanced"
+        ],
+        "dummyCategories": null,
+        "dummyCategory": null,
+        "dummyCategoryCount": null,
+        "dummyCategoryNames": null
+    }
+}

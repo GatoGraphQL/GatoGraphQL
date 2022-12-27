@@ -9,21 +9,21 @@ use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\Menus\TypeResolvers\InputObjectType\RootMenusFilterInputObjectTypeResolver as UpstreamRootMenusFilterInputObjectTypeResolver;
 use PoPWPSchema\Menus\FilterInputs\LocationsFilterInput;
-use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationEnumStringTypeResolver;
+use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationEnumStringScalarTypeResolver;
 
 class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInputObjectTypeResolver
 {
-    private ?MenuLocationEnumStringTypeResolver $menuLocationEnumTypeResolver = null;
+    private ?MenuLocationEnumStringScalarTypeResolver $menuLocationEnumStringScalarTypeResolver = null;
     private ?LocationsFilterInput $locationsFilterInput = null;
 
-    final public function setMenuLocationEnumStringTypeResolver(MenuLocationEnumStringTypeResolver $menuLocationEnumTypeResolver): void
+    final public function setMenuLocationEnumStringTypeResolver(MenuLocationEnumStringScalarTypeResolver $menuLocationEnumStringScalarTypeResolver): void
     {
-        $this->menuLocationEnumTypeResolver = $menuLocationEnumTypeResolver;
+        $this->menuLocationEnumStringScalarTypeResolver = $menuLocationEnumStringScalarTypeResolver;
     }
-    final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringTypeResolver
+    final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringScalarTypeResolver
     {
-        /** @var MenuLocationEnumStringTypeResolver */
-        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumStringTypeResolver::class);
+        /** @var MenuLocationEnumStringScalarTypeResolver */
+        return $this->menuLocationEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumStringScalarTypeResolver::class);
     }
     final public function setLocationsFilterInput(LocationsFilterInput $locationsFilterInput): void
     {

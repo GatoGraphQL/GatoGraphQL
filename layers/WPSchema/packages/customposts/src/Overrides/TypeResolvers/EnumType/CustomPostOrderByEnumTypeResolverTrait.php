@@ -16,7 +16,7 @@ trait CustomPostOrderByEnumTypeResolverTrait
     /**
      * @return string[]
      */
-    public function getAdditionalCustomPostEnumValues(): array
+    public function getAdditionalCustomPostEnumStringValues(): array
     {
         return [
             CustomPostOrderBy::NONE,
@@ -32,7 +32,7 @@ trait CustomPostOrderByEnumTypeResolverTrait
         ];
     }
 
-    public function getAdditionalCustomPostEnumValueDescription(string $enumValue): ?string
+    public function getAdditionalCustomPostEnumStringValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
             CustomPostOrderBy::NONE => $this->getTranslationAPI()->__('Skip ordering', 'customposts'),

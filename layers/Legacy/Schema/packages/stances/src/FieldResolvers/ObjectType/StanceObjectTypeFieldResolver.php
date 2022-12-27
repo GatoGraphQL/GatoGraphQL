@@ -14,13 +14,11 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
@@ -146,26 +144,35 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         $stance = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'categories':
-                return $taxonomyapi->getCustomPostTaxonomyTerms(
+                /**
+                 * @todo TaxonomyTypeAPI was removed! This stale code must be fixed
+                 */
+                return $this->getTaxonomyTypeAPI()->getCustomPostTaxonomyTerms(
                     $objectTypeResolver->getID($stance),
-                    POP_USERSTANCE_TAXONOMY_STANCE,
+                    [
+                        'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
+                    ],
                     [
                         QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
                     ]
-                );
+                ) ?? [];
 
             case 'catSlugs':
-                return $taxonomyapi->getCustomPostTaxonomyTerms(
+                /**
+                 * @todo TaxonomyTypeAPI was removed! This stale code must be fixed
+                 */
+                return $this->getTaxonomyTypeAPI()->getCustomPostTaxonomyTerms(
                     $objectTypeResolver->getID($stance),
-                    POP_USERSTANCE_TAXONOMY_STANCE,
+                    [
+                        'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
+                    ],
                     [
                         QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS,
                     ]
-                );
+                ) ?? [];
 
             case 'stance':
                 // The stance is the category

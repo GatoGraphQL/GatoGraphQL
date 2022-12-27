@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace EverythingElse\PoPCMSSchema\Categories\TypeAPIs;
 
-use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface as UpstreamCategoryTypeAPIInterface;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
-interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
+interface CategoryTypeAPIInterface extends UpstreamCategoryTypeAPIInterface
 {
+    public function getCategoryBase(): string;
     public function hasCategory($catObjectOrID, $post_id);
     public function getCategoryPath($category_id);
     /**

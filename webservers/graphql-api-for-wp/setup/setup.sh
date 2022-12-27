@@ -13,5 +13,8 @@ echo "Installing WordPress..."
 /bin/sh /app/setup/activate-plugins.sh
 /bin/sh /app/setup/delete-data.sh
 /bin/sh /app/setup/create-users.sh
+/bin/sh /app/setup/add-user-application-passwords.sh
+/bin/sh /app/setup/configure-plugin-settings.sh
 /bin/sh /app/setup/import-data.sh
 /bin/sh /app/setup/create-menus.sh
+/bin/sh /app/setup/create-taxonomy-terms.sh

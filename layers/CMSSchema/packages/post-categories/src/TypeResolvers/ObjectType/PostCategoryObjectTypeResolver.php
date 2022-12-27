@@ -41,7 +41,10 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of a category, added to a post', 'post-categories');
+        return sprintf(
+            $this->__('Representation of a category, added to a post (taxonomy: "%s")', 'post-categories'),
+            $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName()
+        );
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

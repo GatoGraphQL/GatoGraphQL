@@ -1,0 +1,200 @@
+{
+  "errors": [
+    {
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag', 'dummy-tag')",
+      "locations": [
+        {
+          "line": 20,
+          "column": 31
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post_format",
+          "(taxonomy: post_format)",
+          "postFormats: tags(taxonomy: post_format) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postFormats: tags(taxonomy: post_format) { ... }",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag', 'dummy-tag')",
+      "locations": [
+        {
+          "line": 23,
+          "column": 29
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post_format",
+          "(taxonomy: post_format)",
+          "postFormat: tag(taxonomy: post_format, by: {id: 32}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postFormat: tag(taxonomy: post_format, by: {id: 32}) { ... }",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag', 'dummy-tag')",
+      "locations": [
+        {
+          "line": 26,
+          "column": 39
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post_format",
+          "(taxonomy: post_format)",
+          "postFormatCount: tagCount(taxonomy: post_format)",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postFormatCount: tagCount(taxonomy: post_format)",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag', 'dummy-tag')",
+      "locations": [
+        {
+          "line": 30,
+          "column": 39
+        }
+      ],
+      "extensions": {
+        "path": [
+          "post_format",
+          "(taxonomy: post_format)",
+          "postFormatNames: tagNames(taxonomy: post_format)",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postFormatNames: tagNames(taxonomy: post_format)",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    }
+  ],
+  "data": {
+    "postTags": [
+      {
+        "__typename": "PostTag",
+        "id": 13,
+        "name": "wordpress"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 12,
+        "name": "security"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 11,
+        "name": "release"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 10,
+        "name": "plugin"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 9,
+        "name": "ideas"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 8,
+        "name": "graphql"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 7,
+        "name": "features"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 14,
+        "name": "also-never-used"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 6,
+        "name": "advanced"
+      }
+    ],
+    "postTag": {
+      "__typename": "PostTag",
+      "id": 13,
+      "name": "wordpress"
+    },
+    "postTagCount": 9,
+    "postTagNames": [
+      "wordpress",
+      "security",
+      "release",
+      "plugin",
+      "ideas",
+      "graphql",
+      "features",
+      "also-never-used",
+      "advanced"
+    ],
+    "dummyTags": [
+      {
+        "__typename": "GenericTag",
+        "id": 19,
+        "name": "Tango"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 22,
+        "name": "Rock"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 18,
+        "name": "Jazz"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 20,
+        "name": "Hip Hop"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 17,
+        "name": "Heavy metal"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 24,
+        "name": "Classical"
+      }
+    ],
+    "dummyTag": {
+      "__typename": "GenericTag",
+      "id": 24,
+      "name": "Classical"
+    },
+    "dummyTagCount": 6,
+    "dummyTagNames": [
+      "Tango",
+      "Rock",
+      "Jazz",
+      "Hip Hop",
+      "Heavy metal",
+      "Classical"
+    ],
+    "postFormats": null,
+    "postFormat": null,
+    "postFormatCount": null,
+    "postFormatNames": null
+  }
+}

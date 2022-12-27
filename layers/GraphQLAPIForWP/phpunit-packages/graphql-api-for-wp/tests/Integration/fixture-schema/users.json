@@ -43,8 +43,23 @@
                     "edit_private_pages",
                     "read_private_pages"
                 ],
-                "customPostCount": 1,
+                "customPostCount": 4,
                 "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 622,
+                        "title": "Dolore ex et deleniti mollitia"
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 627,
+                        "title": "Quis voluptatum tempore veniam est sit"
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 613,
+                        "title": "Dolor facilis repellat pariatur veniam at"
+                    },
                     {
                         "__typename": "Post",
                         "id": 19,
@@ -108,8 +123,23 @@
                     "delete_posts",
                     "delete_published_posts"
                 ],
-                "customPostCount": 1,
+                "customPostCount": 4,
                 "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 619,
+                        "title": "Error debitis nulla vel est"
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 630,
+                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 631,
+                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
+                    },
                     {
                         "__typename": "Post",
                         "id": 28,

@@ -95,7 +95,7 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             ],
             $this->addParentIDInputField() ? [
                 'parentID' => $this->getIDScalarTypeResolver(),
-            ] : []
+            ] : [],
         );
     }
 

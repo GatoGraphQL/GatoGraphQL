@@ -13,14 +13,14 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
-use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationEnumStringTypeResolver;
+use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationEnumStringScalarTypeResolver;
 use WP_Term;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?MenuLocationEnumStringTypeResolver $menuLocationEnumTypeResolver = null;
+    private ?MenuLocationEnumStringScalarTypeResolver $menuLocationEnumStringScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -40,14 +40,14 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var IntScalarTypeResolver */
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
-    final public function setMenuLocationEnumStringTypeResolver(MenuLocationEnumStringTypeResolver $menuLocationEnumTypeResolver): void
+    final public function setMenuLocationEnumStringTypeResolver(MenuLocationEnumStringScalarTypeResolver $menuLocationEnumStringScalarTypeResolver): void
     {
-        $this->menuLocationEnumTypeResolver = $menuLocationEnumTypeResolver;
+        $this->menuLocationEnumStringScalarTypeResolver = $menuLocationEnumStringScalarTypeResolver;
     }
-    final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringTypeResolver
+    final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringScalarTypeResolver
     {
-        /** @var MenuLocationEnumStringTypeResolver */
-        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumStringTypeResolver::class);
+        /** @var MenuLocationEnumStringScalarTypeResolver */
+        return $this->menuLocationEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumStringScalarTypeResolver::class);
     }
 
     /**

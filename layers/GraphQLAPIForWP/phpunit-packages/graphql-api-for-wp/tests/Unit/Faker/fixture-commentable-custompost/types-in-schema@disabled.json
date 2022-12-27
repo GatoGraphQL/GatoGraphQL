@@ -51,7 +51,7 @@
                         {
                             "name": "customPostType",
                             "type": {
-                                "name": "CustomPostEnum!"
+                                "name": "CustomPostEnumString!"
                             }
                         },
                         {
@@ -171,7 +171,7 @@
                         {
                             "name": "customPostType",
                             "type": {
-                                "name": "CustomPostEnum!"
+                                "name": "CustomPostEnumString!"
                             }
                         },
                         {
@@ -872,6 +872,11 @@
                     "fields": null
                 },
                 {
+                    "name": "CustomPostEnumString",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
                     "name": "Date",
                     "possibleTypes": null,
                     "fields": null
@@ -931,7 +936,7 @@
                         {
                             "name": "customPostType",
                             "type": {
-                                "name": "CustomPostEnum!"
+                                "name": "CustomPostEnumString!"
                             }
                         },
                         {
@@ -1102,11 +1107,6 @@
                             }
                         }
                     ]
-                },
-                {
-                    "name": "CustomPostEnum",
-                    "possibleTypes": null,
-                    "fields": null
                 },
                 {
                     "name": "CustomPostOrderByEnum",

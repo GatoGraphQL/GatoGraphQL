@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Tags\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\Tags\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
+
+    PoPCMSSchema\Tags\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\Tags\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\Tags\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'

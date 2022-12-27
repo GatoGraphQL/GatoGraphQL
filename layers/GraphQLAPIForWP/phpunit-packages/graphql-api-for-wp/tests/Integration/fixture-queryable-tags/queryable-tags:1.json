@@ -1,0 +1,182 @@
+{
+  "errors": [
+    {
+      "message": "Value 'dummy-tag' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format', 'post_tag')",
+      "locations": [
+        {
+          "line": 11,
+          "column": 30
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"dummy-tag\"",
+          "(taxonomy: \"dummy-tag\")",
+          "dummyTags: tags(taxonomy: \"dummy-tag\") { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyTags: tags(taxonomy: \"dummy-tag\") { ... }",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'dummy-tag' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format', 'post_tag')",
+      "locations": [
+        {
+          "line": 14,
+          "column": 28
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"dummy-tag\"",
+          "(taxonomy: \"dummy-tag\")",
+          "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 24}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 24}) { ... }",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'dummy-tag' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format', 'post_tag')",
+      "locations": [
+        {
+          "line": 17,
+          "column": 38
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"dummy-tag\"",
+          "(taxonomy: \"dummy-tag\")",
+          "dummyTagCount: tagCount(taxonomy: \"dummy-tag\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyTagCount: tagCount(taxonomy: \"dummy-tag\")",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    },
+    {
+      "message": "Value 'dummy-tag' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_format', 'post_tag')",
+      "locations": [
+        {
+          "line": 18,
+          "column": 38
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"dummy-tag\"",
+          "(taxonomy: \"dummy-tag\")",
+          "dummyTagNames: tagNames(taxonomy: \"dummy-tag\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyTagNames: tagNames(taxonomy: \"dummy-tag\")",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
+    }
+  ],
+  "data": {
+    "postTags": [
+      {
+        "__typename": "PostTag",
+        "id": 13,
+        "name": "wordpress"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 12,
+        "name": "security"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 11,
+        "name": "release"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 10,
+        "name": "plugin"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 9,
+        "name": "ideas"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 8,
+        "name": "graphql"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 7,
+        "name": "features"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 14,
+        "name": "also-never-used"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 6,
+        "name": "advanced"
+      }
+    ],
+    "postTag": {
+      "__typename": "PostTag",
+      "id": 13,
+      "name": "wordpress"
+    },
+    "postTagCount": 9,
+    "postTagNames": [
+      "wordpress",
+      "security",
+      "release",
+      "plugin",
+      "ideas",
+      "graphql",
+      "features",
+      "also-never-used",
+      "advanced"
+    ],
+    "dummyTags": null,
+    "dummyTag": null,
+    "dummyTagCount": null,
+    "dummyTagNames": null,
+    "postFormats": [
+      {
+        "__typename": "GenericTag",
+        "id": 34,
+        "name": "Quote"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 33,
+        "name": "Link"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 32,
+        "name": "Aside"
+      }
+    ],
+    "postFormat": {
+      "__typename": "GenericTag",
+      "id": 32,
+      "name": "Aside"
+    },
+    "postFormatCount": 3,
+    "postFormatNames": [
+      "",
+      "",
+      ""
+    ]
+  }
+}

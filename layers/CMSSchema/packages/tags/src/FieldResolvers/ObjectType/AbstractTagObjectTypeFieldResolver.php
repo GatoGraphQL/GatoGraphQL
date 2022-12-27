@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
+use PoPCMSSchema\Tags\FieldResolvers\InterfaceType\IsTagInterfaceTypeFieldResolver;
+use PoPCMSSchema\Tags\ModuleContracts\TagAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
-use PoPCMSSchema\Tags\ModuleContracts\TagAPIRequestedContractObjectTypeFieldResolverInterface;
 
 abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements TagAPIRequestedContractObjectTypeFieldResolverInterface
 {
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
+    private ?IsTagInterfaceTypeFieldResolver $isTagInterfaceTypeFieldResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -49,6 +49,15 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         /** @var QueryableInterfaceTypeFieldResolver */
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
+    final public function setIsTagInterfaceTypeFieldResolver(IsTagInterfaceTypeFieldResolver $isTagInterfaceTypeFieldResolver): void
+    {
+        $this->isTagInterfaceTypeFieldResolver = $isTagInterfaceTypeFieldResolver;
+    }
+    final protected function getIsTagInterfaceTypeFieldResolver(): IsTagInterfaceTypeFieldResolver
+    {
+        /** @var IsTagInterfaceTypeFieldResolver */
+        return $this->isTagInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsTagInterfaceTypeFieldResolver::class);
+    }
 
     /**
      * @return array<InterfaceTypeFieldResolverInterface>
@@ -57,6 +66,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     {
         return [
             $this->getQueryableInterfaceTypeFieldResolver(),
+            $this->getIsTagInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -66,34 +76,16 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldNamesToResolve(): array
     {
         return [
+            // Queryable interface
             'url',
             'urlAbsolutePath',
             'slug',
+
+            // IsTag interface
             'name',
             'description',
             'count',
         ];
-    }
-
-    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
-    {
-        return match ($fieldName) {
-            'name' => $this->getStringScalarTypeResolver(),
-            'description' => $this->getStringScalarTypeResolver(),
-            'count' => $this->getIntScalarTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
-    {
-        return match ($fieldName) {
-            'name',
-            'count'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
-        };
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
@@ -101,10 +93,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         return match ($fieldName) {
             'url' => $this->__('Tag URL', 'pop-tags'),
             'urlAbsolutePath' => $this->__('Tag URL path', 'pop-tags'),
-            'name' => $this->__('Tag', 'pop-tags'),
             'slug' => $this->__('Tag slug', 'pop-tags'),
-            'description' => $this->__('Tag description', 'pop-tags'),
-            'count' => $this->__('Number of custom posts containing this tag', 'pop-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

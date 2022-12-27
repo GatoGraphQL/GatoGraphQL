@@ -95,6 +95,21 @@
                 "__typename": "Post",
                 "id": 28,
                 "title": "HTTP caching improves performance"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 619,
+                "title": "Error debitis nulla vel est"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
             }
         ],
         "customPostsByAuthorSlug": [
@@ -110,8 +125,8 @@
             },
             {
                 "__typename": "Post",
-                "id": 25,
-                "title": "Public or Private API mode, for extra security"
+                "id": 21,
+                "title": "Customize the schema for each client"
             },
             {
                 "__typename": "Post",
@@ -120,8 +135,33 @@
             },
             {
                 "__typename": "Post",
-                "id": 21,
-                "title": "Customize the schema for each client"
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 620,
+                "title": "Dignissimos sed dolore aut"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 644,
+                "title": "Impedit eaque numquam quas inventore"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 649,
+                "title": "Nulla numquam totam eaque"
             }
         ],
         "customPostsByCustomPostTypes": [
@@ -141,6 +181,46 @@
                 "__typename": "Page",
                 "id": 2,
                 "title": "Sample Page"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 619,
+                "title": "Error debitis nulla vel est"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 620,
+                "title": "Dignissimos sed dolore aut"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 622,
+                "title": "Dolore ex et deleniti mollitia"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 629,
+                "title": "Qui ea incidunt qui"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
             }
         ],
         "customPostsByExcludeAuthorIDs": [
@@ -156,23 +236,8 @@
             },
             {
                 "__typename": "Post",
-                "id": 28,
-                "title": "HTTP caching improves performance"
-            },
-            {
-                "__typename": "Post",
-                "id": 25,
-                "title": "Public or Private API mode, for extra security"
-            },
-            {
-                "__typename": "Post",
-                "id": 23,
-                "title": "GraphQL or REST? Why not both?"
-            },
-            {
-                "__typename": "Post",
-                "id": 21,
-                "title": "Customize the schema for each client"
+                "id": 13,
+                "title": "Released v0.6, check it out"
             },
             {
                 "__typename": "Post",
@@ -181,8 +246,33 @@
             },
             {
                 "__typename": "Post",
-                "id": 13,
-                "title": "Released v0.6, check it out"
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "__typename": "Post",
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "__typename": "Post",
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "__typename": "Post",
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
             }
         ],
         "customPostsByExcludeIDs": [
@@ -193,23 +283,8 @@
             },
             {
                 "__typename": "Post",
-                "id": 25,
-                "title": "Public or Private API mode, for extra security"
-            },
-            {
-                "__typename": "Post",
-                "id": 23,
-                "title": "GraphQL or REST? Why not both?"
-            },
-            {
-                "__typename": "Post",
-                "id": 21,
-                "title": "Customize the schema for each client"
-            },
-            {
-                "__typename": "Post",
-                "id": 19,
-                "title": "Nested mutations are a must have"
+                "id": 13,
+                "title": "Released v0.6, check it out"
             },
             {
                 "__typename": "Post",
@@ -218,8 +293,38 @@
             },
             {
                 "__typename": "Post",
-                "id": 13,
-                "title": "Released v0.6, check it out"
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "__typename": "Post",
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "__typename": "Post",
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "__typename": "Post",
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 619,
+                "title": "Error debitis nulla vel est"
             }
         ],
         "customPostsByHasPassword": [],
@@ -238,8 +343,8 @@
         "customPostsByMetaQuery": [
             {
                 "__typename": "Post",
-                "id": 25,
-                "title": "Public or Private API mode, for extra security"
+                "id": 13,
+                "title": "Released v0.6, check it out"
             },
             {
                 "__typename": "Post",
@@ -248,8 +353,43 @@
             },
             {
                 "__typename": "Post",
-                "id": 13,
-                "title": "Released v0.6, check it out"
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 622,
+                "title": "Dolore ex et deleniti mollitia"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 639,
+                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae"
             }
         ],
         "customPostsByPassword": [],
@@ -269,19 +409,19 @@
         ],
         "customPostsSortedASC": [
             {
-                "__typename": "Post",
-                "id": 21,
-                "title": "Customize the schema for each client"
+                "__typename": "GenericCustomPost",
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus"
             },
             {
-                "__typename": "Post",
-                "id": 23,
-                "title": "GraphQL or REST? Why not both?"
+                "__typename": "GenericCustomPost",
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
             },
             {
-                "__typename": "Post",
-                "id": 1,
-                "title": "Hello world!"
+                "__typename": "GenericCustomPost",
+                "id": 630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
             }
         ],
         "customPostsSortedDESC": [
@@ -291,14 +431,14 @@
                 "title": "Working on flat chain syntax next"
             },
             {
+                "__typename": "GenericCustomPost",
+                "id": 631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
+            },
+            {
                 "__typename": "Page",
                 "id": 2,
                 "title": "Sample Page"
-            },
-            {
-                "__typename": "Post",
-                "id": 13,
-                "title": "Released v0.6, check it out"
             }
         ]
     }

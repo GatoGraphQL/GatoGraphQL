@@ -10,8 +10,14 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
@@ -20,10 +26,14 @@ use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\GenericTagObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\UnionType\TagUnionTypeResolver;
 use PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoP\ComponentModel\App;
+use WP_Taxonomy;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -65,6 +75,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public final const HOOK_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':queryable-custompost-types';
     public final const HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-queryable-custompost-types';
+    public final const HOOK_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':queryable-tag-taxonomies';
+    public final const HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':rejected-queryable-tag-taxonomies';
+    public final const HOOK_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':queryable-category-taxonomies';
+    public final const HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':rejected-queryable-category-taxonomies';
 
     /**
      * This comment used to be valid when using `autowire` functions
@@ -80,9 +94,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
+    private ?TagUnionTypeResolver $tagUnionTypeResolver = null;
+    private ?CategoryUnionTypeResolver $categoryUnionTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
+    private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
+    private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
@@ -91,6 +109,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     private ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
+    private ?TaxonomyRegistryInterface $taxonomyRegistry = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
@@ -110,6 +129,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var CustomPostUnionTypeResolver */
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+    }
+    final public function setTagUnionTypeResolver(TagUnionTypeResolver $tagUnionTypeResolver): void
+    {
+        $this->tagUnionTypeResolver = $tagUnionTypeResolver;
+    }
+    final protected function getTagUnionTypeResolver(): TagUnionTypeResolver
+    {
+        /** @var TagUnionTypeResolver */
+        return $this->tagUnionTypeResolver ??= $this->instanceManager->getInstance(TagUnionTypeResolver::class);
+    }
+    final public function setCategoryUnionTypeResolver(CategoryUnionTypeResolver $categoryUnionTypeResolver): void
+    {
+        $this->categoryUnionTypeResolver = $categoryUnionTypeResolver;
+    }
+    final protected function getCategoryUnionTypeResolver(): CategoryUnionTypeResolver
+    {
+        /** @var CategoryUnionTypeResolver */
+        return $this->categoryUnionTypeResolver ??= $this->instanceManager->getInstance(CategoryUnionTypeResolver::class);
     }
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
@@ -137,6 +174,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var GenericCustomPostObjectTypeResolver */
         return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+    }
+    final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void
+    {
+        $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
+    }
+    final protected function getGenericTagObjectTypeResolver(): GenericTagObjectTypeResolver
+    {
+        /** @var GenericTagObjectTypeResolver */
+        return $this->genericTagObjectTypeResolver ??= $this->instanceManager->getInstance(GenericTagObjectTypeResolver::class);
+    }
+    final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
+    {
+        $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
+    }
+    final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
+    {
+        /** @var GenericCategoryObjectTypeResolver */
+        return $this->genericCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
     }
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -209,6 +264,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var CustomPostTypeRegistryInterface */
         return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+    }
+    final public function setTaxonomyRegistry(TaxonomyRegistryInterface $taxonomyRegistry): void
+    {
+        $this->taxonomyRegistry = $taxonomyRegistry;
+    }
+    final protected function getTaxonomyRegistry(): TaxonomyRegistryInterface
+    {
+        /** @var TaxonomyRegistryInterface */
+        return $this->taxonomyRegistry ??= $this->instanceManager->getInstance(TaxonomyRegistryInterface::class);
     }
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -495,10 +559,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_TAGS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 200,
+                ModuleSettingOptions::TAG_TAXONOMIES => ['post_tag'],
             ],
             self::SCHEMA_CATEGORIES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 200,
+                ModuleSettingOptions::CATEGORY_TAXONOMIES => ['category'],
             ],
             self::SCHEMA_SETTINGS => [
                 ModuleSettingOptions::ENTRIES => $useUnsafe ? [] : [
@@ -545,6 +611,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
         $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
         $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'graphql-api');
+        $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each %2$s taxonomy\'s associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if (
             in_array($module, [
@@ -617,7 +684,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                  * Remove the ones that do not
                  */
                 $pluginCustomPostTypes = array_map(
-                    fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
+                    fn (CustomPostTypeInterface $customPostType) => $customPostType->getCustomPostType(),
                     $this->getCustomPostTypeRegistry()->getCustomPostTypes()
                 );
                 $rejectedQueryableCustomPostTypes = \apply_filters(
@@ -652,10 +719,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     self::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
                     $possibleCustomPostTypes
                 );
+                sort($possibleCustomPostTypes);
                 // The possible values must have key and value
                 $possibleValues = [];
-                foreach ($possibleCustomPostTypes as $customPostType) {
-                    $possibleValues[$customPostType] = $customPostType;
+                foreach ($possibleCustomPostTypes as $value) {
+                    $possibleValues[$value] = $value;
                 }
                 // Set the setting
                 $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
@@ -730,6 +798,142 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
+            } elseif ($module === self::SCHEMA_TAGS) {
+                // Get the list of tag taxonomies from the system
+                $queryableTagTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(false);
+                /**
+                 * Possibly not all tag taxonomies must be allowed.
+                 * Remove the ones that do not
+                 */
+                $pluginTagTaxonomies = array_map(
+                    fn (TaxonomyInterface $taxonomy) => $taxonomy->getTaxonomy(),
+                    $this->getTaxonomyRegistry()->getTaxonomies(false)
+                );
+                $rejectedQueryableTagTaxonomies = \apply_filters(
+                    self::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
+                    []
+                );
+                $possibleTagTaxonomies = array_values(array_diff(
+                    array_keys($queryableTagTaxonomyNameObjects),
+                    $pluginTagTaxonomies,
+                    $rejectedQueryableTagTaxonomies
+                ));
+                // Allow plugins to further remove unwanted custom post types
+                $possibleTagTaxonomies = \apply_filters(
+                    self::HOOK_QUERYABLE_TAG_TAXONOMIES,
+                    $possibleTagTaxonomies
+                );
+                sort($possibleTagTaxonomies);
+
+                // The possible values must have key and value
+                $possibleValues = [];
+                foreach ($possibleTagTaxonomies as $tagTaxonomyName) {
+                    $tagTaxonomyObject = $queryableTagTaxonomyNameObjects[$tagTaxonomyName];
+                    $possibleValues[$tagTaxonomyName] = sprintf(
+                        $this->__('%s (CPT: "%s")', 'graphql-api'),
+                        $tagTaxonomyName,
+                        implode(
+                            $this->__('", "', 'graphql-api'),
+                            $tagTaxonomyObject->object_type
+                        )
+                    );
+                }
+                // Set the setting
+                $option = ModuleSettingOptions::TAG_TAXONOMIES;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Included tag taxonomies', 'graphql-api'),
+                    Properties::DESCRIPTION => sprintf(
+                        sprintf(
+                            '%s<br/><br/>%s',
+                            sprintf(
+                                $taxonomyDescPlaceholder,
+                                \__('non-', 'graphql-api'),
+                                \__('tag', 'graphql-api'),
+                            ),
+                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        ),
+                        $this->getTagUnionTypeResolver()->getTypeName(),
+                        $this->getPostTagObjectTypeResolver()->getTypeName(),
+                        $this->getGenericTagObjectTypeResolver()->getTypeName(),
+                    ),
+                    Properties::TYPE => Properties::TYPE_ARRAY,
+                    // Fetch all Schema Configurations from the DB
+                    Properties::POSSIBLE_VALUES => $possibleValues,
+                    Properties::IS_MULTIPLE => true,
+                ];
+            } elseif ($module === self::SCHEMA_CATEGORIES) {
+                // Get the list of category taxonomies from the system
+                $queryableCategoryTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(true);
+                /**
+                 * Possibly not all category taxonomies must be allowed.
+                 * Remove the ones that do not
+                 */
+                $pluginCategoryTaxonomies = array_map(
+                    fn (TaxonomyInterface $taxonomy) => $taxonomy->getTaxonomy(),
+                    $this->getTaxonomyRegistry()->getTaxonomies(true)
+                );
+                $rejectedQueryableCategoryTaxonomies = \apply_filters(
+                    self::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
+                    []
+                );
+                $possibleCategoryTaxonomies = array_values(array_diff(
+                    array_keys($queryableCategoryTaxonomyNameObjects),
+                    $pluginCategoryTaxonomies,
+                    $rejectedQueryableCategoryTaxonomies
+                ));
+                // Allow plugins to further remove unwanted custom post types
+                $possibleCategoryTaxonomies = \apply_filters(
+                    self::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
+                    $possibleCategoryTaxonomies
+                );
+                sort($possibleCategoryTaxonomies);
+
+                // The possible values must have key and value
+                $possibleValues = [];
+                foreach ($possibleCategoryTaxonomies as $categoryTaxonomyName) {
+                    $categoryTaxonomyObject = $queryableCategoryTaxonomyNameObjects[$categoryTaxonomyName];
+                    $possibleValues[$categoryTaxonomyName] = sprintf(
+                        $this->__('%s (CPT: "%s")', 'graphql-api'),
+                        $categoryTaxonomyName,
+                        implode(
+                            $this->__('", "', 'graphql-api'),
+                            $categoryTaxonomyObject->object_type
+                        )
+                    );
+                }
+                // Set the setting
+                $option = ModuleSettingOptions::CATEGORY_TAXONOMIES;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Included category taxonomies', 'graphql-api'),
+                    Properties::DESCRIPTION => sprintf(
+                        sprintf(
+                            '%s<br/><br/>%s',
+                            sprintf(
+                                $taxonomyDescPlaceholder,
+                                '',
+                                \__('category', 'graphql-api'),
+                            ),
+                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        ),
+                        $this->getCategoryUnionTypeResolver()->getTypeName(),
+                        $this->getPostCategoryObjectTypeResolver()->getTypeName(),
+                        $this->getGenericCategoryObjectTypeResolver()->getTypeName(),
+                    ),
+                    Properties::TYPE => Properties::TYPE_ARRAY,
+                    // Fetch all Schema Configurations from the DB
+                    Properties::POSSIBLE_VALUES => $possibleValues,
+                    Properties::IS_MULTIPLE => true,
+                ];
             }
         } elseif ($module === self::SCHEMA_COMMENTS) {
             $option = self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT;
@@ -762,7 +966,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultLimitMessagePlaceholder,
                     sprintf(
                         \__('%s and %s', 'graphql-api'),
-                        '<code>CustomPost.comments</code>',
+                        '<code>Commentable.comments</code>',
                         '<code>Comment.responses</code>'
                     ),
                     $limitArg,
@@ -950,5 +1154,42 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             'wp_template_part',
             'wp_template',
         ];
+    }
+
+    /**
+     * Retrieve the taxonomies which are associated to custom posts
+     * which have been enabled as queryable.
+     *
+     * Please notice all entries in "object_type" must be in the whitelist.
+     *
+     * @return array<string,WP_Taxonomy> Taxonomy name => taxonomy object
+     */
+    protected function getQueryableCustomPostsAssociatedTaxonomies(bool $isHierarchical): array
+    {
+        /** @var CustomPostsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
+        $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
+
+        /** @var WP_Taxonomy[] */
+        $possibleTaxonomyObjects = \get_taxonomies(
+            [
+                'hierarchical' => $isHierarchical,
+            ],
+            'objects'
+        );
+
+        $possibleTaxonomyObjects = array_filter(
+            $possibleTaxonomyObjects,
+            fn (WP_Taxonomy $taxonomy) => array_diff(
+                $taxonomy->object_type,
+                $queryableCustomPostTypes
+            ) === []
+        );
+
+        $possibleTaxonomyNameObjects = [];
+        foreach ($possibleTaxonomyObjects as $taxonomyObject) {
+            $possibleTaxonomyNameObjects[$taxonomyObject->name] = $taxonomyObject;
+        }
+        return $possibleTaxonomyNameObjects;
     }
 }
