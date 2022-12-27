@@ -56,12 +56,22 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "GenericCategory",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "GenericCustomPost",
                     "enumValues": null,
                     "possibleTypes": null
                 },
                 {
                     "name": "GenericErrorPayload",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "GenericTag",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -291,6 +301,16 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "CategoryTaxonomyEnumString",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostEnumString",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "Date",
                     "enumValues": null,
                     "possibleTypes": null
@@ -341,6 +361,11 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "TagTaxonomyEnumString",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "URL",
                     "enumValues": null,
                     "possibleTypes": null
@@ -359,6 +384,18 @@
                         },
                         {
                             "name": "Post"
+                        }
+                    ]
+                },
+                {
+                    "name": "IsCategory",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericCategory"
+                        },
+                        {
+                            "name": "PostCategory"
                         }
                     ]
                 },
@@ -435,6 +472,18 @@
                     ]
                 },
                 {
+                    "name": "IsTag",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericTag"
+                        },
+                        {
+                            "name": "PostTag"
+                        }
+                    ]
+                },
+                {
                     "name": "Node",
                     "enumValues": null,
                     "possibleTypes": [
@@ -442,7 +491,13 @@
                             "name": "Comment"
                         },
                         {
+                            "name": "GenericCategory"
+                        },
+                        {
                             "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "GenericTag"
                         },
                         {
                             "name": "Media"
@@ -523,7 +578,13 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
+                            "name": "GenericCategory"
+                        },
+                        {
                             "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "GenericTag"
                         },
                         {
                             "name": "Media"
@@ -571,7 +632,13 @@
                             "name": "Comment"
                         },
                         {
+                            "name": "GenericCategory"
+                        },
+                        {
                             "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "GenericTag"
                         },
                         {
                             "name": "Post"
@@ -586,6 +653,11 @@
                             "name": "User"
                         }
                     ]
+                },
+                {
+                    "name": "CategoryByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
                 },
                 {
                     "name": "CategoryPaginationInput",
@@ -843,7 +915,17 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "TagByInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "TagPaginationInput",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TaxonomyCustomPostsFilterInput",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -974,18 +1056,6 @@
                         },
                         {
                             "name": "trackback"
-                        }
-                    ],
-                    "possibleTypes": null
-                },
-                {
-                    "name": "CustomPostEnumString",
-                    "enumValues": [
-                        {
-                            "name": "page"
-                        },
-                        {
-                            "name": "post"
                         }
                     ],
                     "possibleTypes": null
@@ -1465,6 +1535,18 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "CategoryUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericCategory"
+                        },
+                        {
+                            "name": "PostCategory"
+                        }
+                    ]
+                },
+                {
                     "name": "CustomPostUnion",
                     "enumValues": null,
                     "possibleTypes": [
@@ -1710,6 +1792,18 @@
                         },
                         {
                             "name": "UserIsNotLoggedInErrorPayload"
+                        }
+                    ]
+                },
+                {
+                    "name": "TagUnion",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericTag"
+                        },
+                        {
+                            "name": "PostTag"
                         }
                     ]
                 }

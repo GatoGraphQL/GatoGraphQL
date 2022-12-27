@@ -165,6 +165,154 @@
           "description": "Error payload for: \"Setting the featured image is not supported by the custom post type\""
         },
         {
+          "name": "GenericCategory",
+          "namespacedName": "GenericCategory",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "customPostCount"
+            },
+            {
+              "name": "customPosts"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "parent"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "taxonomy"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlAbsolutePath"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "A category that does not have its own type in the schema"
+        },
+        {
+          "name": "GenericCustomPost",
+          "namespacedName": "GenericCustomPost",
+          "fields": [
+            {
+              "name": "areCommentsOpen"
+            },
+            {
+              "name": "author"
+            },
+            {
+              "name": "categories"
+            },
+            {
+              "name": "categoryCount"
+            },
+            {
+              "name": "categoryNames"
+            },
+            {
+              "name": "commentCount"
+            },
+            {
+              "name": "comments"
+            },
+            {
+              "name": "content"
+            },
+            {
+              "name": "contentSource"
+            },
+            {
+              "name": "customPostType"
+            },
+            {
+              "name": "date"
+            },
+            {
+              "name": "dateStr"
+            },
+            {
+              "name": "excerpt"
+            },
+            {
+              "name": "hasComments"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "isStatus"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "modifiedDate"
+            },
+            {
+              "name": "modifiedDateStr"
+            },
+            {
+              "name": "rawContent"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tagCount"
+            },
+            {
+              "name": "tagNames"
+            },
+            {
+              "name": "tags"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlAbsolutePath"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "A custom post that does not have its own type in the schema"
+        },
+        {
           "name": "GenericErrorPayload",
           "namespacedName": "GenericErrorPayload",
           "fields": [
@@ -180,6 +328,53 @@
           ],
           "kind": "OBJECT",
           "description": "Generic error payload"
+        },
+        {
+          "name": "GenericTag",
+          "namespacedName": "GenericTag",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "customPostCount"
+            },
+            {
+              "name": "customPosts"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "taxonomy"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlAbsolutePath"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "A tag that does not have its own type in the schema"
         },
         {
           "name": "InvalidUserEmailErrorPayload",
@@ -714,7 +909,7 @@
             }
           ],
           "kind": "OBJECT",
-          "description": "Representation of a category, added to a post"
+          "description": "Representation of a category, added to a post (taxonomy: \"category\")"
         },
         {
           "name": "PostTag",
@@ -758,7 +953,7 @@
             }
           ],
           "kind": "OBJECT",
-          "description": "Representation of a tag, added to a post"
+          "description": "Representation of a tag, added to a post (taxonomy: \"post_tag\")"
         },
         {
           "name": "QueryRoot",
@@ -766,6 +961,18 @@
           "fields": [
             {
               "name": "capabilities"
+            },
+            {
+              "name": "categories"
+            },
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryCount"
+            },
+            {
+              "name": "categoryNames"
             },
             {
               "name": "comment"
@@ -906,6 +1113,18 @@
               "name": "self"
             },
             {
+              "name": "tag"
+            },
+            {
+              "name": "tagCount"
+            },
+            {
+              "name": "tagNames"
+            },
+            {
+              "name": "tags"
+            },
+            {
               "name": "user"
             },
             {
@@ -927,6 +1146,18 @@
             },
             {
               "name": "capabilities"
+            },
+            {
+              "name": "categories"
+            },
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryCount"
+            },
+            {
+              "name": "categoryNames"
             },
             {
               "name": "comment"
@@ -1089,6 +1320,18 @@
             },
             {
               "name": "setTagsOnPost"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagCount"
+            },
+            {
+              "name": "tagNames"
+            },
+            {
+              "name": "tags"
             },
             {
               "name": "updatePost"
@@ -1787,6 +2030,20 @@
           "description": "The Boolean scalar type represents `true` or `false`."
         },
         {
+          "name": "CategoryTaxonomyEnumString",
+          "namespacedName": "CategoryTaxonomyEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": null
+        },
+        {
+          "name": "CustomPostEnumString",
+          "namespacedName": "CustomPostEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": null
+        },
+        {
           "name": "Date",
           "namespacedName": "Date",
           "fields": null,
@@ -1857,6 +2114,13 @@
           "description": "The String scalar type represents textual data, represented as UTF-8 character sequences."
         },
         {
+          "name": "TagTaxonomyEnumString",
+          "namespacedName": "TagTaxonomyEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": null
+        },
+        {
           "name": "URL",
           "namespacedName": "URL",
           "fields": null,
@@ -1889,6 +2153,23 @@
           ],
           "kind": "INTERFACE",
           "description": "The entity can receive comments"
+        },
+        {
+          "name": "IsCategory",
+          "namespacedName": "IsCategory",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "name"
+            }
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities representing a category"
         },
         {
           "name": "IsCustomPost",
@@ -1950,6 +2231,23 @@
           ],
           "kind": "INTERFACE",
           "description": "Entities representing an Error payload"
+        },
+        {
+          "name": "IsTag",
+          "namespacedName": "IsTag",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "name"
+            }
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities representing a tag"
         },
         {
           "name": "Node",
@@ -2017,6 +2315,13 @@
           ],
           "kind": "INTERFACE",
           "description": "Fields with meta values"
+        },
+        {
+          "name": "CategoryByInput",
+          "namespacedName": "CategoryByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to specify the property and data to fetch a category"
         },
         {
           "name": "CategoryPaginationInput",
@@ -2404,11 +2709,25 @@
           "description": "Input to update a custom post"
         },
         {
+          "name": "TagByInput",
+          "namespacedName": "TagByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to specify the property and data to fetch a tag"
+        },
+        {
           "name": "TagPaginationInput",
           "namespacedName": "TagPaginationInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to paginate tags"
+        },
+        {
+          "name": "TaxonomyCustomPostsFilterInput",
+          "namespacedName": "TaxonomyCustomPostsFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter a taxonomy's custom posts"
         },
         {
           "name": "TaxonomyMetaQueryInput",
@@ -2497,13 +2816,6 @@
         {
           "name": "CommentTypeEnum",
           "namespacedName": "CommentTypeEnum",
-          "fields": null,
-          "kind": "ENUM",
-          "description": null
-        },
-        {
-          "name": "CustomPostEnumString",
-          "namespacedName": "CustomPostEnumString",
           "fields": null,
           "kind": "ENUM",
           "description": null
@@ -2635,6 +2947,13 @@
           "description": null
         },
         {
+          "name": "CategoryUnion",
+          "namespacedName": "CategoryUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'category' type resolvers"
+        },
+        {
           "name": "CustomPostUnion",
           "namespacedName": "CustomPostUnion",
           "fields": null,
@@ -2710,6 +3029,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating a post"
+        },
+        {
+          "name": "TagUnion",
+          "namespacedName": "TagUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'tag' type resolvers"
         }
       ]
     }
