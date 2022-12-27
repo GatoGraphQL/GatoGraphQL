@@ -467,6 +467,98 @@ fragment CatProps on PostCategory {
 
 Added filter input `hideEmpty` to fields `postTags` and `postCategories` to fetch entries with/out any post.
 
+Added types `GenericTag` and `GenericCategory` to query any non-mapped custom taxonomy (tags and categories), and fields:
+
+- `Root.categories(taxonomy: String!): [GenericCategory!]`
+- `Root.tags(taxonomy: String!): [GenericTag!]`
+- `GenericCustomPost.categories(taxonomy: String!): [GenericCategory!]`
+- `GenericCustomPost.tags(taxonomy: String!): [GenericTag!]`
+
+For instance, this query retrieves all tags of taxonomy `"custom-tag"` and all categories of taxonomy `"custom-category"`
+
+```graphql
+{
+  # Custom tag taxonomies
+  tags(taxonomy: "custom-tag") {
+    __typename
+    
+    # Common tag interface
+    ... on IsTag {
+      id
+      count
+      name
+      slug
+      url
+    }
+
+    # "Generic" tags
+    ... on GenericTag {
+      taxonomy
+      customPostCount
+      customPosts {
+        __typename
+        id
+      }
+    }
+  }
+
+  # Custom category taxonomies
+  categories(taxonomy: "custom-category") {
+    __typename
+
+    # Common category interface
+    ... on IsCategory {
+      id
+      count
+      name
+      slug
+      url
+    }
+
+    # "Generic" categories
+    ... on GenericCategory {
+      taxonomy
+      customPostCount
+      customPosts {
+        __typename
+        id
+      }
+    }
+  }
+```
+
+We can also query the tags and categories added to some custom post (for CPT `"custom-cpt"` in this example):
+
+```graphql
+  # Custom tags/categories added to a CPT
+  customPosts(filter: { customPostTypes: "custom-cpt" }) {
+    __typename
+    
+    ... on IsCustomPost {
+      id
+      title
+      customPostType
+    }
+
+    ... on GenericCustomPost {
+      tags(taxonomy: "custom-tag") {
+        __typename
+        id
+        name
+        taxonomy
+      }
+
+      categories(taxonomy: "custom-category") {
+        __typename
+        id
+        name
+        taxonomy
+      }
+    }
+  }
+}
+```
+
 ### Menus
 
 Menus have been upgraded, adding the following fields:

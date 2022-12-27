@@ -109,6 +109,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `PostCategory.childNames: [String]!`
   - `PostCategory.childCount: Int`
 - Added filter input `hideEmpty` to fields `postTags` and `postCategories` to fetch entries with/out any post
+- Added types `GenericTag` and `GenericCategory` to query any non-mapped custom taxonomy (tags and categories), and fields:
+  - `Root.categories(taxonomy: String!): [GenericCategory!]`
+  - `Root.tags(taxonomy: String!): [GenericTag!]`
+  - `GenericCustomPost.categories(taxonomy: String!): [GenericCategory!]`
+  - `GenericCustomPost.tags(taxonomy: String!): [GenericTag!]`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Root.menuCount: Int!`
