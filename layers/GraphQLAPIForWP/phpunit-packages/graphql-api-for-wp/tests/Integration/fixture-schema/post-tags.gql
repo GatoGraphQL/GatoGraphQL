@@ -1,0 +1,64 @@
+{
+  postTags {
+    ...PostTagData
+  }
+
+  nonEmptyPostTags: postTags(filter: {hideEmpty: true}) {
+    id
+    name
+  }
+
+  post(by:{ id: 25 }) {
+    tags {
+      ...PostTagData
+    }
+    tagsByExcludeIDs: tags(filter: { excludeIDs: [5] }) {
+      id
+    }
+    tagsByIds: tags(filter: { ids: [5] }) {
+      id
+    }
+    tagsByMetaQuery: tags(filter: { metaQuery: {
+      key: "someMetaKeyThatDoesntExist",
+      compareBy:{
+        key: {
+          operator: NOT_EXISTS
+        }
+      }
+    } }) {
+      id
+    }
+    tagsBySearch: tags(filter: { search: "secur" }) {
+      id
+    }
+    tagsBySlugs: tags(filter: { slugs: ["features", "non-existing"] }) {
+      id
+    }
+    
+    tagsBySortASC: tags(sort: { by: NAME, order: ASC }) {
+      id
+      name
+    }
+    tagsBySortDESC: tags(sort: { by: NAME, order: DESC }) {
+      id
+      name
+    }
+  }
+}
+
+fragment PostTagData on PostTag {
+  count
+  description
+  id
+  metaValue(key: "not-existing")
+  metaValues(key: "also-not-existing")
+  name
+  postCount
+  posts {
+    id
+    title
+  }
+  slug
+  url
+  urlAbsolutePath
+}
