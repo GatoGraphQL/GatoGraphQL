@@ -9,21 +9,21 @@ use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\Menus\TypeResolvers\InputObjectType\RootMenusFilterInputObjectTypeResolver as UpstreamRootMenusFilterInputObjectTypeResolver;
 use PoPWPSchema\Menus\FilterInputs\LocationsFilterInput;
-use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationSelectableStringTypeResolver;
+use PoPWPSchema\Menus\TypeResolvers\ScalarType\MenuLocationEnumStringTypeResolver;
 
 class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInputObjectTypeResolver
 {
-    private ?MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver = null;
+    private ?MenuLocationEnumStringTypeResolver $menuLocationEnumTypeResolver = null;
     private ?LocationsFilterInput $locationsFilterInput = null;
 
-    final public function setMenuLocationSelectableStringTypeResolver(MenuLocationSelectableStringTypeResolver $menuLocationEnumTypeResolver): void
+    final public function setMenuLocationEnumStringTypeResolver(MenuLocationEnumStringTypeResolver $menuLocationEnumTypeResolver): void
     {
         $this->menuLocationEnumTypeResolver = $menuLocationEnumTypeResolver;
     }
-    final protected function getMenuLocationSelectableStringTypeResolver(): MenuLocationSelectableStringTypeResolver
+    final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringTypeResolver
     {
-        /** @var MenuLocationSelectableStringTypeResolver */
-        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationSelectableStringTypeResolver::class);
+        /** @var MenuLocationEnumStringTypeResolver */
+        return $this->menuLocationEnumTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumStringTypeResolver::class);
     }
     final public function setLocationsFilterInput(LocationsFilterInput $locationsFilterInput): void
     {
@@ -43,7 +43,7 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
-                'locations' => $this->getMenuLocationSelectableStringTypeResolver(),
+                'locations' => $this->getMenuLocationEnumStringTypeResolver(),
             ],
         );
     }

@@ -1836,8 +1836,8 @@
           "description": "Custom scalar representing a JSON Object of unrestricted shape"
         },
         {
-          "name": "MenuLocationSelectableString",
-          "namespacedName": "MenuLocationSelectableString",
+          "name": "MenuLocationEnumString",
+          "namespacedName": "MenuLocationEnumString",
           "fields": null,
           "kind": "SCALAR",
           "description": "Menu Locations, with possible values: `\"primary\"`, `\"footer\"`."
