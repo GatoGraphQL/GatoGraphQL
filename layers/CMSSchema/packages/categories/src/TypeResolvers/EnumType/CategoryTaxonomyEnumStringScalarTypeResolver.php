@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\TypeResolvers\EnumType;
 
-use PoP\ComponentModel\App;
 use PoPCMSSchema\Categories\Module;
 use PoPCMSSchema\Categories\ModuleConfiguration;
-use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
+use PoP\ComponentModel\App;
 
-class CategoryTaxonomyEnumStringScalarTypeResolver extends AbstractEnumTypeResolver
+class CategoryTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
     public function getTypeName(): string
     {
@@ -19,7 +19,7 @@ class CategoryTaxonomyEnumStringScalarTypeResolver extends AbstractEnumTypeResol
     /**
      * @return string[]
      */
-    public function getEnumValues(): array
+    public function getPossibleValues(): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
