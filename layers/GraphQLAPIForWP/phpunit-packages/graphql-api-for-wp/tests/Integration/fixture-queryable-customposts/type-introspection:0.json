@@ -318,7 +318,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "MenuLocationSelectableString",
+                    "name": "MenuLocationEnumString",
                     "enumValues": null,
                     "possibleTypes": null
                 },

@@ -1576,16 +1576,16 @@
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "[MenuLocationSelectableString!]!",
+                "name": "[MenuLocationEnumString!]!",
                 "ofType": {
                   "kind": "LIST",
-                  "name": "[MenuLocationSelectableString!]",
+                  "name": "[MenuLocationEnumString!]",
                   "ofType": {
                     "kind": "NON_NULL",
-                    "name": "MenuLocationSelectableString!",
+                    "name": "MenuLocationEnumString!",
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "MenuLocationSelectableString",
+                      "name": "MenuLocationEnumString",
                       "ofType": null
                     }
                   }
@@ -11870,7 +11870,7 @@
         },
         {
           "kind": "SCALAR",
-          "name": "MenuLocationSelectableString",
+          "name": "MenuLocationEnumString",
           "description": "Menu Locations, with possible values: `\"primary\"`, `\"footer\"`.",
           "fields": null,
           "inputFields": null,
@@ -14139,7 +14139,7 @@
               "description": "Query by location",
               "type": {
                 "kind": "SCALAR",
-                "name": "MenuLocationSelectableString",
+                "name": "MenuLocationEnumString",
                 "ofType": null
               },
               "defaultValue": null
@@ -15850,13 +15850,13 @@
               "description": "Filter menus based on locations",
               "type": {
                 "kind": "LIST",
-                "name": "[MenuLocationSelectableString!]",
+                "name": "[MenuLocationEnumString!]",
                 "ofType": {
                   "kind": "NON_NULL",
-                  "name": "MenuLocationSelectableString!",
+                  "name": "MenuLocationEnumString!",
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "MenuLocationSelectableString",
+                    "name": "MenuLocationEnumString",
                     "ofType": null
                   }
                 }

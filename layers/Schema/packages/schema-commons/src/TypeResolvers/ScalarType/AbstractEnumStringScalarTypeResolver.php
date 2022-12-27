@@ -25,7 +25,7 @@ use stdClass;
  * For whenever the option values may not satisfy these constraints,
  * this type can be used instead
  */
-abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalarTypeResolver
+abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeResolver
 {
     /** @var string[]|null */
     protected ?array $consolidatedPossibleValuesCache = null;
