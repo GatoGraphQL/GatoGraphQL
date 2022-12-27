@@ -73,7 +73,7 @@ return [
             convertRelativeToFullPath('vendor/getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php'),
         ])
     ],
-    'expose-namespaces' => array_values(array_unique([
+    'exclude-namespaces' => array_values(array_unique([
         // Own namespaces
         // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
