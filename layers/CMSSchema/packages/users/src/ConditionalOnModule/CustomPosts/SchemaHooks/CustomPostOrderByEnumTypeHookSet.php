@@ -11,7 +11,7 @@ use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
 use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Constants\CustomPostOrderBy;
 
-class CustomPostEnumTypeHookSet extends AbstractHookSet
+class CustomPostOrderByEnumTypeHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
