@@ -6,5 +6,5 @@ if [ -d "$UPLOADS_DIR" ]; then
     rm -rf $UPLOADS_DIR
 fi
 
-wp import /app/assets/graphql-api-data.xml --authors=create --path=/app/wordpress
-wp import /app/assets/graphql-api-testing-data.xml --authors=create --path=/app/wordpress
+wp import /app/assets/graphql-api-data.xml --url="graphql-api.lndo.site" --authors=create --path=/app/wordpress
+wp import /app/assets/graphql-api-testing-data.xml --url="graphql-api.lndo.site" --authors=create --path=/app/wordpress
