@@ -149,7 +149,7 @@ class Plugin
      * @param string $names_uc Plural name uppercase
      * @param string $name_lc Singulare name lowercase
      * @param string $names_lc Plural name lowercase
-     * @return array<string,string>
+     * @return array<string,mixed>
      */
     protected function getTaxonomyArgs(
         bool $hierarchical,
