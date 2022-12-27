@@ -1040,6 +1040,11 @@
                     "fields": null
                 },
                 {
+                    "name": "CustomPostEnumString",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
                     "name": "Date",
                     "possibleTypes": null,
                     "fields": null
@@ -1325,11 +1330,6 @@
                 },
                 {
                     "name": "CommentTypeEnum",
-                    "possibleTypes": null,
-                    "fields": null
-                },
-                {
-                    "name": "CustomPostEnumString",
                     "possibleTypes": null,
                     "fields": null
                 },

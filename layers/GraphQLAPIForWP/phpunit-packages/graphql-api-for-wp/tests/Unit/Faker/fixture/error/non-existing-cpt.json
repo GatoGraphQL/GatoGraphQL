@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'nonExistingCPT' for enum type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
+      "message": "Value 'nonExistingCPT' for type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'page')",
       "locations": [
         {
           "line": 3,
@@ -17,8 +17,7 @@
         ],
         "type": "QueryRoot",
         "field": "customPosts(filter: {customPostTypes: \"nonExistingCPT\"}) { ... }",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     }
   ],
