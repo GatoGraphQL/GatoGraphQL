@@ -153,7 +153,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
             'status' => [
                 CustomPostStatus::PUBLISH,
             ],
-            'customPostTypes' => $this->getCustomPostEnumStringScalarTypeResolver()->getConsolidatedEnumValues(),
+            'customPostTypes' => $this->getCustomPostEnumStringScalarTypeResolver()->getConsolidatedPossibleValues(),
             default => parent::getInputFieldDefaultValue($inputFieldName)
         };
     }

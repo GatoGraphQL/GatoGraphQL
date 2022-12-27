@@ -136,7 +136,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             self::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS => [
                 CustomPostStatus::PUBLISH,
             ],
-            self::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getCustomPostEnumStringScalarTypeResolver()->getConsolidatedEnumValues(),
+            self::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->getCustomPostEnumStringScalarTypeResolver()->getConsolidatedPossibleValues(),
             default => null,
         };
     }
