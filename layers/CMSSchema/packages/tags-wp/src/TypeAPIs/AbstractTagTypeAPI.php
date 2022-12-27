@@ -94,7 +94,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         if (!isset($query['taxonomy'])) {
             $query['taxonomy'] = $this->getTagTaxonomyName();
         }
-        
+
         /** @var array<string|int>|object[] */
         return $this->getCustomPostTaxonomyTerms(
             $customPostObjectOrID,
@@ -116,7 +116,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         if (!isset($query['taxonomy'])) {
             $query['taxonomy'] = $this->getTagTaxonomyName();
         }
-        
+
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
             $customPostObjectOrID,

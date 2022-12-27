@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 abstract class AbstractPostTagObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements TagObjectTypeResolverPickerInterface
 {
     use TagObjectTypeResolverPickerTrait;
-    
+
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
@@ -51,7 +51,7 @@ abstract class AbstractPostTagObjectTypeResolverPicker extends AbstractObjectTyp
     {
         return $this->getPostTagTypeAPI()->tagExists($objectID);
     }
-    
+
     public function getTagTaxonomy(): string
     {
         return $this->getPostTagTypeAPI()->getPostTagTaxonomyName();

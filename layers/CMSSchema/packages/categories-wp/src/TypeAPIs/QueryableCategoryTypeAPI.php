@@ -88,7 +88,7 @@ class QueryableCategoryTypeAPI extends AbstractCategoryTypeAPI implements Querya
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             $query['taxonomy'] = $moduleConfiguration->getQueryableCategoryTaxonomies();
-        }        
+        }
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
             self::HOOK_QUERY,

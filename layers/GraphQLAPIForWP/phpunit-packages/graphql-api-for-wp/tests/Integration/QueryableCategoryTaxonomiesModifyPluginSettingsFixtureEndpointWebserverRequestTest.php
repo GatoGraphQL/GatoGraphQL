@@ -28,7 +28,7 @@ class QueryableCategoryTaxonomiesModifyPluginSettingsFixtureEndpointWebserverReq
         return 'graphqlapi_graphqlapi_schema-categories';
     }
 
-    
+
 
     protected function getPluginSettingsNewValue(): mixed
     {

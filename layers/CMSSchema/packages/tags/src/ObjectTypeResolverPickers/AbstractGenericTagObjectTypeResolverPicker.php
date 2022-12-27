@@ -142,7 +142,7 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
 
         return $nonGenericTagTaxonomies;
     }
-    
+
     /**
      * Return empty value is OK, because this method will
      * never be called on this class.

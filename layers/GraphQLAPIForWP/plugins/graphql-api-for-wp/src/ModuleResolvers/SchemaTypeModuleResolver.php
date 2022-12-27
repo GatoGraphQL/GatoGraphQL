@@ -892,7 +892,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $possibleCategoryTaxonomies
                 );
                 sort($possibleCategoryTaxonomies);
-                
+
                 // The possible values must have key and value
                 $possibleValues = [];
                 foreach ($possibleCategoryTaxonomies as $categoryTaxonomyName) {

@@ -10,7 +10,7 @@ final class InjectableTaxonomyTagTypeAPI extends AbstractTagTypeAPI
 {
     public function __construct(
         protected string $tagTaxonomy,
-    ) {        
+    ) {
     }
 
     protected function getTagTaxonomyName(): string

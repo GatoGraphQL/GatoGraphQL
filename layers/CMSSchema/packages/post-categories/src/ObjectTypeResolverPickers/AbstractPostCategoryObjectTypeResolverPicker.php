@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 abstract class AbstractPostCategoryObjectTypeResolverPicker extends AbstractObjectTypeResolverPicker implements CategoryObjectTypeResolverPickerInterface
 {
     use CategoryObjectTypeResolverPickerTrait;
-    
+
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
@@ -51,7 +51,7 @@ abstract class AbstractPostCategoryObjectTypeResolverPicker extends AbstractObje
     {
         return $this->getPostCategoryTypeAPI()->categoryExists($objectID);
     }
-    
+
     public function getCategoryTaxonomy(): string
     {
         return $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();

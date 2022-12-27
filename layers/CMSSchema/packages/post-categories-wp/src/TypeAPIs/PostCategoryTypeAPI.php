@@ -6,7 +6,6 @@ namespace PoPCMSSchema\PostCategoriesWP\TypeAPIs;
 
 use PoPCMSSchema\CategoriesWP\TypeAPIs\AbstractCategoryTypeAPI;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
-use WP_Taxonomy;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS

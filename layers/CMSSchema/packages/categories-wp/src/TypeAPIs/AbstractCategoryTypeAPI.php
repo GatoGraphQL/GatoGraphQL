@@ -73,7 +73,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         if (!isset($query['taxonomy'])) {
             $query['taxonomy'] = $this->getCategoryTaxonomyName();
         }
-        
+
         /** @var array<string|int>|object[] */
         return $this->getCustomPostTaxonomyTerms(
             $customPostObjectOrID,
@@ -94,7 +94,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         if (!isset($query['taxonomy'])) {
             $query['taxonomy'] = $this->getCategoryTaxonomyName();
         }
-        
+
         /** @var string|int|WP_Post $customPostObjectOrID */
         return $this->getCustomPostTaxonomyTermCount(
             $customPostObjectOrID,

@@ -49,7 +49,7 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
         return sprintf(
             $this->__('Representation of a tag, added to a post (taxonomy: "%s")', 'post-tags'),
             $this->getPostTagTypeAPI()->getPostTagTaxonomyName()
-        );            
+        );
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

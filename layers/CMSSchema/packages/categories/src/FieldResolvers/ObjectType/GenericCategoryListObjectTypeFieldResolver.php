@@ -40,7 +40,7 @@ class GenericCategoryListObjectTypeFieldResolver extends AbstractCustomPostListO
     {
         return $this->getTaxonomyCustomPostsFilterInputObjectTypeResolver();
     }
-    
+
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
      */

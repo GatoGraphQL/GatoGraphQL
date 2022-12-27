@@ -85,11 +85,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         string|int|object $customPostObjectOrID,
         array $query = [],
         array $options = [],
-    ): ?array {        
+    ): ?array {
         /** @var string|int|WP_Post $customPostObjectOrID */
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertTaxonomyTermsQuery($query, $options);
-        
+
         /** @var string|string[] */
         $taxonomyOrTaxonomies = $query['taxonomy'] ?? '';
         if (empty($taxonomyOrTaxonomies)) {
@@ -131,7 +131,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         if (empty($taxonomyOrTaxonomies)) {
             return 0;
         }
-        
+
         // All results, no offset
         $query['number'] = 0;
         unset($query['offset']);

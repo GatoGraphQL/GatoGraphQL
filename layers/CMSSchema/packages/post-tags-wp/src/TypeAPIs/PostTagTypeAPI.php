@@ -6,7 +6,6 @@ namespace PoPCMSSchema\PostTagsWP\TypeAPIs;
 
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI;
-use WP_Taxonomy;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
