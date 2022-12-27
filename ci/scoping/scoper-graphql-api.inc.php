@@ -77,14 +77,14 @@ return [
         // Own namespaces
         // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
-        'PoPAPI',
-        'PoPBackbone',
-        'PoPCMSSchema',
-        'PoPSchema',
-        'PoPWPSchema',
-        'PoP',
-        'GraphQLByPoP',
-        'GraphQLAPI',
+        'PoPAPI\\',
+        'PoPBackbone\\',
+        'PoPCMSSchema\\',
+        'PoPSchema\\',
+        'PoPWPSchema\\',
+        'PoP\\',
+        'GraphQLByPoP\\',
+        'GraphQLAPI\\',
         // Own container cache namespace
         // Watch out! This value is being hardcoded!
         // In the application, it can be overriden via code:
@@ -92,7 +92,7 @@ return [
         // - SystemContainerBuilderFactory::getContainerNamespace()
         // But can't reference these classes here, since they are not found
         // (unless adding the files to the autoload path)
-        'PoPContainer',
+        'PoPContainer\\',
     ],
     'exclude-files' => [
         // Class Composer\InstalledVersions will be regenerated without scope when
