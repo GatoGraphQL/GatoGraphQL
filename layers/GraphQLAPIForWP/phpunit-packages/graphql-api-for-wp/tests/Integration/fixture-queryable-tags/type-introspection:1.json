@@ -48,6 +48,16 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "GenericCategory",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "GenericCustomPost",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "GenericErrorPayload",
                     "enumValues": null,
                     "possibleTypes": null
@@ -288,6 +298,16 @@
                     "possibleTypes": null
                 },
                 {
+                    "name": "CategoryTaxonomyEnumString",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "CustomPostEnumString",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
                     "name": "Date",
                     "enumValues": null,
                     "possibleTypes": null
@@ -323,7 +343,7 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "MenuLocationSelectableString",
+                    "name": "MenuLocationEnumString",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -334,6 +354,11 @@
                 },
                 {
                     "name": "String",
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "name": "TagTaxonomyEnumString",
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -352,6 +377,9 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
+                            "name": "GenericCustomPost"
+                        },
+                        {
                             "name": "Page"
                         },
                         {
@@ -364,6 +392,9 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
+                            "name": "GenericCategory"
+                        },
+                        {
                             "name": "PostCategory"
                         }
                     ]
@@ -372,6 +403,9 @@
                     "name": "IsCustomPost",
                     "enumValues": null,
                     "possibleTypes": [
+                        {
+                            "name": "GenericCustomPost"
+                        },
                         {
                             "name": "Page"
                         },
@@ -460,6 +494,12 @@
                             "name": "Comment"
                         },
                         {
+                            "name": "GenericCategory"
+                        },
+                        {
+                            "name": "GenericCustomPost"
+                        },
+                        {
                             "name": "GenericTag"
                         },
                         {
@@ -544,6 +584,12 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
+                            "name": "GenericCategory"
+                        },
+                        {
+                            "name": "GenericCustomPost"
+                        },
+                        {
                             "name": "GenericTag"
                         },
                         {
@@ -583,6 +629,9 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
+                            "name": "GenericCustomPost"
+                        },
+                        {
                             "name": "Page"
                         },
                         {
@@ -596,6 +645,12 @@
                     "possibleTypes": [
                         {
                             "name": "Comment"
+                        },
+                        {
+                            "name": "GenericCategory"
+                        },
+                        {
+                            "name": "GenericCustomPost"
                         },
                         {
                             "name": "GenericTag"
@@ -963,15 +1018,6 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "CategoryTaxonomyEnumString",
-                    "enumValues": [
-                        {
-                            "name": "category"
-                        }
-                    ],
-                    "possibleTypes": null
-                },
-                {
                     "name": "CommentOrderByEnum",
                     "enumValues": [
                         {
@@ -1048,18 +1094,6 @@
                         },
                         {
                             "name": "trackback"
-                        }
-                    ],
-                    "possibleTypes": null
-                },
-                {
-                    "name": "CustomPostEnumString",
-                    "enumValues": [
-                        {
-                            "name": "page"
-                        },
-                        {
-                            "name": "post"
                         }
                     ],
                     "possibleTypes": null
@@ -1434,18 +1468,6 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "TagTaxonomyEnumString",
-                    "enumValues": [
-                        {
-                            "name": "post_format"
-                        },
-                        {
-                            "name": "post_tag"
-                        }
-                    ],
-                    "possibleTypes": null
-                },
-                {
                     "name": "TaxonomyOrderByEnum",
                     "enumValues": [
                         {
@@ -1555,6 +1577,9 @@
                     "enumValues": null,
                     "possibleTypes": [
                         {
+                            "name": "GenericCategory"
+                        },
+                        {
                             "name": "PostCategory"
                         }
                     ]
@@ -1563,6 +1588,9 @@
                     "name": "CustomPostUnion",
                     "enumValues": null,
                     "possibleTypes": [
+                        {
+                            "name": "GenericCustomPost"
+                        },
                         {
                             "name": "Page"
                         },

@@ -1,10 +1,10 @@
 {
   "errors": [
     {
-      "message": "Value 'post_format' for enum type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag', 'dummy-tag')",
       "locations": [
         {
-          "line": 11,
+          "line": 20,
           "column": 31
         }
       ],
@@ -17,15 +17,14 @@
         ],
         "type": "QueryRoot",
         "field": "postFormats: tags(taxonomy: post_format) { ... }",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
     {
-      "message": "Value 'post_format' for enum type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag', 'dummy-tag')",
       "locations": [
         {
-          "line": 14,
+          "line": 23,
           "column": 29
         }
       ],
@@ -33,20 +32,19 @@
         "path": [
           "post_format",
           "(taxonomy: post_format)",
-          "postFormat: tag(taxonomy: post_format, by: {id: 20}) { ... }",
+          "postFormat: tag(taxonomy: post_format, by: {id: 32}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "postFormat: tag(taxonomy: post_format, by: {id: 20}) { ... }",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "field": "postFormat: tag(taxonomy: post_format, by: {id: 32}) { ... }",
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
     {
-      "message": "Value 'post_format' for enum type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag', 'dummy-tag')",
       "locations": [
         {
-          "line": 17,
+          "line": 26,
           "column": 39
         }
       ],
@@ -59,15 +57,14 @@
         ],
         "type": "QueryRoot",
         "field": "postFormatCount: tagCount(taxonomy: post_format)",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
     {
-      "message": "Value 'post_format' for enum type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'post_tag', 'dummy-tag')",
       "locations": [
         {
-          "line": 21,
+          "line": 30,
           "column": 39
         }
       ],
@@ -80,8 +77,7 @@
         ],
         "type": "QueryRoot",
         "field": "postFormatNames: tagNames(taxonomy: post_format)",
-        "code": "gql@5.6.1[14]",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+        "code": "PoPSchema\/SchemaCommons@e2"
       }
     }
   ],
@@ -149,6 +145,52 @@
       "features",
       "also-never-used",
       "advanced"
+    ],
+    "dummyTags": [
+      {
+        "__typename": "GenericTag",
+        "id": 19,
+        "name": "Tango"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 22,
+        "name": "Rock"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 18,
+        "name": "Jazz"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 20,
+        "name": "Hip Hop"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 17,
+        "name": "Heavy metal"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 24,
+        "name": "Classical"
+      }
+    ],
+    "dummyTag": {
+      "__typename": "GenericTag",
+      "id": 24,
+      "name": "Classical"
+    },
+    "dummyTagCount": 6,
+    "dummyTagNames": [
+      "Tango",
+      "Rock",
+      "Jazz",
+      "Hip Hop",
+      "Heavy metal",
+      "Classical"
     ],
     "postFormats": null,
     "postFormat": null,
