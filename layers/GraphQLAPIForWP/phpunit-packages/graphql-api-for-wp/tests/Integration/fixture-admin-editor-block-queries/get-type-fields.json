@@ -2278,6 +2278,17 @@
           "description": "Entities that can be queried through an URL"
         },
         {
+          "name": "WithAuthor",
+          "namespacedName": "WithAuthor",
+          "fields": [
+            {
+              "name": "author"
+            }
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities that have an author"
+        },
+        {
           "name": "WithFeaturedImage",
           "namespacedName": "WithFeaturedImage",
           "fields": [
@@ -2290,17 +2301,6 @@
           ],
           "kind": "INTERFACE",
           "description": "Fields concerning an entity's featured image"
-        },
-        {
-          "name": "WithAuthor",
-          "namespacedName": "WithAuthor",
-          "fields": [
-            {
-              "name": "author"
-            }
-          ],
-          "kind": "INTERFACE",
-          "description": "Entities that have an author"
         },
         {
           "name": "WithMeta",

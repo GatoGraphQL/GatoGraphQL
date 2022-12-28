@@ -621,9 +621,12 @@
                     ]
                 },
                 {
-                    "name": "WithFeaturedImage",
+                    "name": "WithAuthor",
                     "enumValues": null,
                     "possibleTypes": [
+                        {
+                            "name": "GenericCustomPost"
+                        },
                         {
                             "name": "Page"
                         },
@@ -633,12 +636,9 @@
                     ]
                 },
                 {
-                    "name": "WithAuthor",
+                    "name": "WithFeaturedImage",
                     "enumValues": null,
                     "possibleTypes": [
-                        {
-                            "name": "GenericCustomPost"
-                        },
                         {
                             "name": "Page"
                         },
