@@ -107,13 +107,12 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
 
         // Replace the current tax_query with a new one
         $taxQuery = $query['tax_query'];
-        $combinedTaxQuery = array(
+        $combinedTaxQuery = [
             'relation' => 'AND',
-        );
-        unset($taxQuery['relation']);
-        foreach ($taxQuery as $taxItem) {
+        ];
+        foreach ($taxQuery as $taxQueryItem) {
             $combinedTaxQuery[] = array(
-                $taxItem,
+                $taxQueryItem,
                 $tagItem,
             );
         }
