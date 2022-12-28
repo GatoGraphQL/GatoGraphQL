@@ -1,6 +1,6 @@
 {
     "data": {
-        "posts": [
+        "postsByIDs": [
             {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security",
@@ -65,6 +65,57 @@
                     },
                     {
                         "id": 7
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            }
+        ],
+        "postsBySlugAndIDs": [
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have",
+                "tags": [
+                    {
+                        "slug": "wordpress"
+                    },
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next",
+                "tags": [
+                    {
+                        "slug": "wordpress"
+                    },
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "graphql"
+                    },
+                    {
+                        "slug": "features"
                     }
                 ],
                 "categories": [

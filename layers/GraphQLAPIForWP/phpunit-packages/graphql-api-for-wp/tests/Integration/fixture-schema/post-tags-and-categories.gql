@@ -1,5 +1,5 @@
 {
-  posts(
+  postsByIDs: posts(
     filter: {
       tagIDs: [13, 12]
       categoryIDs: [1, 4]
@@ -9,6 +9,22 @@
     title
     tags {
       id
+    }
+    categories {
+      id
+    }
+  }
+
+  postsBySlugAndIDs: posts(
+    filter: {
+      tagSlugs: ["release", "plugin"]
+      categoryIDs: [1, 4]
+    }
+  ) {
+    id
+    title
+    tags {
+      slug
     }
     categories {
       id
