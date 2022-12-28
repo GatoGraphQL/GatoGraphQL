@@ -60,15 +60,18 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
         return $query;
     }
     /**
+     * If both "tag" and "tax_query" were set, then the filter will not work for tags.
+     * Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
+     * including both the tag and the already existing taxonomy filtering (eg: categories).
+     * So make that transformation.
+     *
+     * @see https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
+     *
      * @param array<string,mixed> $query
      * @return array<string,mixed>
      */
     private function convertCustomPostTagQuerySpecialCases(array $query): array
     {
-        // If both "tag" and "tax_query" were set, then the filter will not work for tags
-        // Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
-        // including both the tag and the already existing taxonomy filtering (eg: categories)
-        // So make that transformation (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
         if ((isset($query['tag_id']) || isset($query['tag'])) && isset($query['tax_query'])) {
             // Create the tag item in the taxonomy
             $tag_slugs = [];
