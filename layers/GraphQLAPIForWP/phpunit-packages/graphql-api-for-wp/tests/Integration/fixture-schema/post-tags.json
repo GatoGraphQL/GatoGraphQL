@@ -316,7 +316,7 @@
                 }
             ]
         },
-        "postsByTag": [
+        "postsByTagIDs": [
             {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security",
@@ -359,6 +359,53 @@
                     },
                     {
                         "id": 7
+                    }
+                ]
+            }
+        ],
+        "postsByTagSlugs": [
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have",
+                "tags": [
+                    {
+                        "slug": "wordpress"
+                    },
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next",
+                "tags": [
+                    {
+                        "slug": "wordpress"
+                    },
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "graphql"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out",
+                "tags": [
+                    {
+                        "slug": "release"
+                    },
+                    {
+                        "slug": "plugin"
                     }
                 ]
             }
