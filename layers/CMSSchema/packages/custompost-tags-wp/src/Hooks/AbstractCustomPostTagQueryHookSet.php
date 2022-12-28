@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostTagsWP\Hooks;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use WP_Term;
 
 use function get_tags;
 
@@ -113,13 +112,14 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
         }
         if (isset($query['tag'])) {
             /** @var int[] */
+            $slugTagIDs = get_tags([
+                'taxonomy' => $this->getTagTaxonomy(),
+                'fields' => 'ids',
+                'slug' => $query['tag']
+            ]);
             $tagIDs = [
                 ...$tagIDs,
-                ...get_tags([
-                    'taxonomy' => $this->getTagTaxonomy(),
-                    'fields' => 'ids',
-                    'slug' => $query['tag']
-                ])
+                ...$slugTagIDs
             ];
         }
         if ($tagIDs === []) {
