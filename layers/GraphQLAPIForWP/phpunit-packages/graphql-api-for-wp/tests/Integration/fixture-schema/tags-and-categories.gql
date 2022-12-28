@@ -1,0 +1,21 @@
+{
+  customPosts(
+    filter: {
+      tagIDs: [17, 24]
+      tagTaxonomy: "dummy-tag"
+      categoryIDs: [26, 28]
+      categoryTaxonomy: "dummy-category"
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(taxonomy: "dummy-tag") {
+        id
+      }
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+}
