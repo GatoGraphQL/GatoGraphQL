@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostCategoriesWP\Hooks;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use WP_Term;
 
 abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
 {
@@ -82,7 +81,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
         }
         return $query;
     }
-    
+
     /**
      * If both "cat" and "tax_query" were set, then the filter will not work for categories.
      * Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
@@ -121,7 +120,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
 
         // The cat arg is not needed anymore
         unset($query['cat']);
-        
+
         return $query;
     }
 

@@ -111,7 +111,7 @@ abstract class AbstractAddCategoryFilterInputObjectTypeHookSet extends AbstractH
     }
 
     abstract protected function getInputObjectTypeResolverClass(): string;
-    
+
     protected function addCategoryTaxonomyFilterInput(): bool
     {
         return false;

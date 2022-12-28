@@ -134,7 +134,7 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     }
 
     abstract protected function getInputObjectTypeResolverClass(): string;
-    
+
     protected function addTagTaxonomyFilterInput(): bool
     {
         return false;

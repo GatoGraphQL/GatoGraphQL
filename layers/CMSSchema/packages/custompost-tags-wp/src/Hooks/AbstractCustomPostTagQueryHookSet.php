@@ -148,7 +148,7 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
         // The tag arg is not needed anymore
         unset($query['tag_id']);
         unset($query['tag']);
-        
+
         return $query;
     }
 
