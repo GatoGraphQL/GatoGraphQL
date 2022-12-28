@@ -1,1 +1,153 @@
-{}
+{
+    "data": {
+        "customPostsByIDs": [
+            {
+                "id": 648,
+                "title": "Nostrum consequatur non fugit vel",
+                "tags": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 22
+                    },
+                    {
+                        "id": 18
+                    },
+                    {
+                        "id": 17
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 28
+                    },
+                    {
+                        "id": 21
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 644,
+                "title": "Impedit eaque numquam quas inventore",
+                "tags": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 22
+                    },
+                    {
+                        "id": 20
+                    },
+                    {
+                        "id": 17
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 28
+                    },
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 27
+                    },
+                    {
+                        "id": 23
+                    }
+                ]
+            },
+            {
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "tags": [
+                    {
+                        "id": 22
+                    },
+                    {
+                        "id": 18
+                    },
+                    {
+                        "id": 20
+                    },
+                    {
+                        "id": 24
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 25
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                "tags": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 22
+                    },
+                    {
+                        "id": 17
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 23
+                    },
+                    {
+                        "id": 16
+                    }
+                ]
+            }
+        ],
+        "customPostsBySlugAndIDs": [
+            {
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "tags": [
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "jazz"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    },
+                    {
+                        "slug": "classical"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 25
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            }
+        ]
+    }
+}
