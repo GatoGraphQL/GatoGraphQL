@@ -43,15 +43,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
         }
         if (isset($query['category-ids'])) {
             if (isset($query['category-taxonomy'])) {
-                if (!isset($query['tax_query'])) {
-                    $query['tax_query'] = [
-                        [
-                            'relation' => 'AND',
-                        ],
-                    ];
-                } else {
-                    $query['tax_query'][0]['relation'] = 'AND';
-                }
+                $query = $this->initializeTaxQuery($query);
                 $query['tax_query'][] = [
                     'taxonomy' => $query['category-taxonomy'],
                     'terms' => $query['category-ids']
@@ -71,6 +63,26 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
 
         return $query;
     }
+
+
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string,mixed>
+     */
+    protected function initializeTaxQuery(array $query): array
+    {
+        if (!isset($query['tax_query'])) {
+            $query['tax_query'] = [
+                [
+                    'relation' => 'AND',
+                ],
+            ];
+        } else {
+            $query['tax_query'][0]['relation'] = 'AND';
+        }
+        return $query;
+    }
+    
     /**
      * If both "cat" and "tax_query" were set, then the filter will not work for categories.
      * Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,

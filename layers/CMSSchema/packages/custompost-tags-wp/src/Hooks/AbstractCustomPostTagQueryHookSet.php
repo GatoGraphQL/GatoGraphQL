@@ -32,15 +32,7 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
     {
         if (isset($query['tag-ids'])) {
             if (isset($query['tag-taxonomy'])) {
-                if (!isset($query['tax_query'])) {
-                    $query['tax_query'] = [
-                        [
-                            'relation' => 'AND',
-                        ],
-                    ];
-                } else {
-                    $query['tax_query'][0]['relation'] = 'AND';
-                }
+                $query = $this->initializeTaxQuery($query);
                 $query['tax_query'][] = [
                     'taxonomy' => $query['tag-taxonomy'],
                     'terms' => $query['tag-ids']
@@ -76,6 +68,24 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
 
         $query = $this->convertCustomPostTagQuerySpecialCases($query);
 
+        return $query;
+    }
+
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string,mixed>
+     */
+    protected function initializeTaxQuery(array $query): array
+    {
+        if (!isset($query['tax_query'])) {
+            $query['tax_query'] = [
+                [
+                    'relation' => 'AND',
+                ],
+            ];
+        } else {
+            $query['tax_query'][0]['relation'] = 'AND';
+        }
         return $query;
     }
 
