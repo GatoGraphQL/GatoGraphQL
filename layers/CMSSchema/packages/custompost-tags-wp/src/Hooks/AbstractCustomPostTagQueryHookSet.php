@@ -33,9 +33,13 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
         if (isset($query['tag-ids'])) {
             if (isset($query['tag-taxonomy'])) {
                 if (!isset($query['tax_query'])) {
-                    $query['tax_query'] = [];
-                } elseif (!in_array($query['tax_query'][0], ['AND', 'OR'])) {
-                    array_unshift($query['tax_query'], 'OR');
+                    $query['tax_query'] = [
+                        [
+                            'relation' => 'AND',
+                        ],
+                    ];
+                } else {
+                    $query['tax_query'][0]['relation'] = 'AND';
                 }
                 $query['tax_query'][] = [
                     'taxonomy' => $query['tag-taxonomy'],
