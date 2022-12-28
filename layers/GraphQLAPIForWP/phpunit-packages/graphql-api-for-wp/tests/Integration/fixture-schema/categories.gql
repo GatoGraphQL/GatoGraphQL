@@ -35,6 +35,21 @@
       }
     }
   }
+
+  customPostsByCategoryIDs: customPosts(
+    filter: {
+      categoryIDs: [26, 28]
+      categoryTaxonomy: "dummy-category"
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
 }
 
 fragment CategoryData on IsCategory {
