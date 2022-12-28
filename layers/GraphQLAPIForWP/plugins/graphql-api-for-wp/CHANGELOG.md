@@ -114,6 +114,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.tags(taxonomy: String!): [GenericTag!]`
   - `GenericCustomPost.categories(taxonomy: String!): [GenericCategory!]`
   - `GenericCustomPost.tags(taxonomy: String!): [GenericTag!]`
+- Filter custom posts by their associated taxonomy (tags and categories) via new `filter` input properties:
+  - `categoryTaxonomy`
+  - `tagTaxonomy`
 - Added fields for Menus:
   - `Root.menus: [Menu]!`
   - `Root.menuCount: Int!`
