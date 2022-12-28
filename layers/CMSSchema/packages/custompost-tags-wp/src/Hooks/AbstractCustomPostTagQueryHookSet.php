@@ -55,11 +55,6 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
             $query['tag'] = implode(',', $query['tag-slugs']);
             unset($query['tag-slugs']);
         }
-        if (isset($query['tags'])) {
-            // Watch out! In WordPress it is a string (either tag slug or comma-separated tag slugs), but in PoP it is an array of slugs!
-            $query['tag'] = implode(',', $query['tags']);
-            unset($query['tags']);
-        }
 
         $query = $this->convertCustomPostTagQuerySpecialCases($query);
 
