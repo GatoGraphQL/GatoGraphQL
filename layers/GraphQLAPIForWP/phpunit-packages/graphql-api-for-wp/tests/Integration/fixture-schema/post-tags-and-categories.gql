@@ -1,0 +1,17 @@
+{
+  posts(
+    filter: {
+      tagIDs: [13, 12]
+      categoryIDs: [1, 4]
+    }
+  ) {
+    id
+    title
+    tags {
+      id
+    }
+    categories {
+      id
+    }
+  }
+}
