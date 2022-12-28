@@ -9,6 +9,8 @@ use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use WP_Term;
 
+use function get_tags;
+
 abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
 {
     protected function init(): void
@@ -78,43 +80,44 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
         }
 
         // Create the tag item in the taxonomy
-        $tag_slugs = [];
+        $tagIDs = [];
         if (isset($query['tag_id'])) {
-            foreach (explode(',', $query['tag_id']) as $tag_id) {
-                /** @var WP_Term|null */
-                $tag = get_tag((int) $tag_id);
-                if ($tag === null) {
-                    continue;
-                }
-                $tag_slugs[] = $tag->slug;
-            }
+            $tagIDs = explode(',', $query['tag_id']);
         }
         if (isset($query['tag'])) {
-            $tag_slugs = array_merge(
-                $tag_slugs,
-                explode(',', $query['tag'])
-            );
+            /** @var int[] */
+            $tagIDs = [
+                ...$tagIDs,
+                ...get_tags([
+                    'taxonomy' => $this->getTagTaxonomy(),
+                    'fields' => 'ids',
+                    'slug' => $query['tag']
+                ])
+            ];
         }
-        $tag_item = array(
+        if ($tagIDs === []) {
+            return $query;
+        }
+
+        $tagItem = array(
             'taxonomy' => $this->getTagTaxonomy(),
-            'terms' => $tag_slugs,
-            'field' => 'slug'
+            'terms' => $tagIDs,
+            'field' => 'term_id'
         );
 
-        // Will replace the current tax_query with a new one
-        $tax_query = $query['tax_query'];
-        $new_tax_query = array(
-            'relation' => 'AND',//$tax_query['relation']
+        // Replace the current tax_query with a new one
+        $taxQuery = $query['tax_query'];
+        $combinedTaxQuery = array(
+            'relation' => 'AND',
         );
-        unset($tax_query['relation']);
-        foreach ($tax_query as $tax_item) {
-            $new_tax_query[] = array(
-                // 'relation' => 'AND',
-                $tax_item,
-                $tag_item,
+        unset($taxQuery['relation']);
+        foreach ($taxQuery as $taxItem) {
+            $combinedTaxQuery[] = array(
+                $taxItem,
+                $tagItem,
             );
         }
-        $query['tax_query'] = $new_tax_query;
+        $query['tax_query'] = $combinedTaxQuery;
 
         // The tag arg is not needed anymore
         unset($query['tag_id']);
