@@ -73,50 +73,53 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
      */
     private function convertCustomPostTagQuerySpecialCases(array $query): array
     {
-        if ((isset($query['tag_id']) || isset($query['tag'])) && isset($query['tax_query'])) {
-            // Create the tag item in the taxonomy
-            $tag_slugs = [];
-            if (isset($query['tag_id'])) {
-                foreach (explode(',', $query['tag_id']) as $tag_id) {
-                    /** @var WP_Term|null */
-                    $tag = get_tag((int) $tag_id);
-                    if ($tag === null) {
-                        continue;
-                    }
-                    $tag_slugs[] = $tag->slug;
-                }
-            }
-            if (isset($query['tag'])) {
-                $tag_slugs = array_merge(
-                    $tag_slugs,
-                    explode(',', $query['tag'])
-                );
-            }
-            $tag_item = array(
-                'taxonomy' => $this->getTagTaxonomy(),
-                'terms' => $tag_slugs,
-                'field' => 'slug'
-            );
-
-            // Will replace the current tax_query with a new one
-            $tax_query = $query['tax_query'];
-            $new_tax_query = array(
-                'relation' => 'AND',//$tax_query['relation']
-            );
-            unset($tax_query['relation']);
-            foreach ($tax_query as $tax_item) {
-                $new_tax_query[] = array(
-                    // 'relation' => 'AND',
-                    $tax_item,
-                    $tag_item,
-                );
-            }
-            $query['tax_query'] = $new_tax_query;
-
-            // The tag arg is not needed anymore
-            unset($query['tag_id']);
-            unset($query['tag']);
+        if (!(isset($query['tax_query']) && (isset($query['tag_id']) || isset($query['tag'])))) {
+            return $query;
         }
+
+        // Create the tag item in the taxonomy
+        $tag_slugs = [];
+        if (isset($query['tag_id'])) {
+            foreach (explode(',', $query['tag_id']) as $tag_id) {
+                /** @var WP_Term|null */
+                $tag = get_tag((int) $tag_id);
+                if ($tag === null) {
+                    continue;
+                }
+                $tag_slugs[] = $tag->slug;
+            }
+        }
+        if (isset($query['tag'])) {
+            $tag_slugs = array_merge(
+                $tag_slugs,
+                explode(',', $query['tag'])
+            );
+        }
+        $tag_item = array(
+            'taxonomy' => $this->getTagTaxonomy(),
+            'terms' => $tag_slugs,
+            'field' => 'slug'
+        );
+
+        // Will replace the current tax_query with a new one
+        $tax_query = $query['tax_query'];
+        $new_tax_query = array(
+            'relation' => 'AND',//$tax_query['relation']
+        );
+        unset($tax_query['relation']);
+        foreach ($tax_query as $tax_item) {
+            $new_tax_query[] = array(
+                // 'relation' => 'AND',
+                $tax_item,
+                $tag_item,
+            );
+        }
+        $query['tax_query'] = $new_tax_query;
+
+        // The tag arg is not needed anymore
+        unset($query['tag_id']);
+        unset($query['tag']);
+        
         return $query;
     }
 
