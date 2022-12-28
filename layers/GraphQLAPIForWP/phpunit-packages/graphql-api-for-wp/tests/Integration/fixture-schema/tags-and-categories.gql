@@ -1,5 +1,5 @@
 {
-  customPosts(
+  customPostsByIDs: customPosts(
     filter: {
       tagIDs: [17, 24]
       tagTaxonomy: "dummy-tag"
@@ -12,6 +12,26 @@
     ...on GenericCustomPost {
       tags(taxonomy: "dummy-tag") {
         id
+      }
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+
+  customPostsBySlugAndIDs: customPosts(
+    filter: {
+      tagSlugs: "classical"
+      tagTaxonomy: "dummy-tag"
+      categoryIDs: [26, 28]
+      categoryTaxonomy: "dummy-category"
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(taxonomy: "dummy-tag") {
+        slug
       }
       categories(taxonomy: "dummy-category") {
         id
