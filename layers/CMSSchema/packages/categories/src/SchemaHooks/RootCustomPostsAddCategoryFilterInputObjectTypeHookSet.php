@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\SchemaHooks;
 
-use PoPCMSSchema\Categories\SchemaHooks\AbstractAddCategoryFilterInputObjectTypeHookSet;
+use PoPCMSSchema\Categories\SchemaHooks\AbstractCustomPostAddCategoryFilterInputObjectTypeHookSet;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\RootCustomPostsFilterInputObjectTypeResolver;
 
-class RootCustomPostsAddCategoryFilterInputObjectTypeHookSet extends AbstractAddCategoryFilterInputObjectTypeHookSet
+class RootCustomPostsAddCategoryFilterInputObjectTypeHookSet extends AbstractCustomPostAddCategoryFilterInputObjectTypeHookSet
 {
     protected function getInputObjectTypeResolverClass(): string
     {

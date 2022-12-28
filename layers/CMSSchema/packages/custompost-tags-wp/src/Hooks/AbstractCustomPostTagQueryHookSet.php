@@ -7,7 +7,8 @@ namespace PoPCMSSchema\CustomPostTagsWP\Hooks;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use WP_Term;
+
+use function get_tags;
 
 abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
 {
@@ -30,11 +31,7 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
     {
         if (isset($query['tag-ids'])) {
             if (isset($query['tag-taxonomy'])) {
-                if (!isset($query['tax_query'])) {
-                    $query['tax_query'] = [];
-                } elseif (!in_array($query['tax_query'][0], ['AND', 'OR'])) {
-                    array_unshift($query['tax_query'], 'OR');
-                }
+                $query = $this->initializeTaxQuery($query);
                 $query['tax_query'][] = [
                     'taxonomy' => $query['tag-taxonomy'],
                     'terms' => $query['tag-ids']
@@ -46,72 +43,113 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
             unset($query['tag-ids']);
         }
         if (isset($query['tag-slugs'])) {
-            $query['tag'] = implode(',', $query['tag-slugs']);
+            if (isset($query['tag-taxonomy'])) {
+                if (!isset($query['tax_query'])) {
+                    $query['tax_query'] = [
+                        [
+                            'relation' => 'AND',
+                        ],
+                    ];
+                } else {
+                    $query['tax_query'][0]['relation'] = 'AND';
+                }
+                $query['tax_query'][] = [
+                    'taxonomy' => $query['tag-taxonomy'],
+                    'terms' => $query['tag-slugs'],
+                    'field' => 'slug',
+                ];
+                unset($query['tag-taxonomy']);
+            } else {
+                $query['tag'] = implode(',', $query['tag-slugs']);
+            }
             unset($query['tag-slugs']);
         }
-        if (isset($query['tags'])) {
-            // Watch out! In WordPress it is a string (either tag slug or comma-separated tag slugs), but in PoP it is an array of slugs!
-            $query['tag'] = implode(',', $query['tags']);
-            unset($query['tags']);
-        }
 
-        $this->convertPostQuerySpecialCases($query);
+        $query = $this->convertCustomPostTagQuerySpecialCases($query);
 
         return $query;
     }
+
     /**
      * @param array<string,mixed> $query
+     * @return array<string,mixed>
      */
-    private function convertPostQuerySpecialCases(array &$query): void
+    protected function initializeTaxQuery(array $query): array
     {
-        // If both "tag" and "tax_query" were set, then the filter will not work for tags
-        // Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
-        // including both the tag and the already existing taxonomy filtering (eg: categories)
-        // So make that transformation (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
-        if ((isset($query['tag_id']) || isset($query['tag'])) && isset($query['tax_query'])) {
-            // Create the tag item in the taxonomy
-            $tag_slugs = [];
-            if (isset($query['tag_id'])) {
-                foreach (explode(',', $query['tag_id']) as $tag_id) {
-                    /** @var WP_Term|null */
-                    $tag = get_tag((int) $tag_id);
-                    if ($tag === null) {
-                        continue;
-                    }
-                    $tag_slugs[] = $tag->slug;
-                }
-            }
-            if (isset($query['tag'])) {
-                $tag_slugs = array_merge(
-                    $tag_slugs,
-                    explode(',', $query['tag'])
-                );
-            }
-            $tag_item = array(
-                'taxonomy' => $this->getTagTaxonomy(),
-                'terms' => $tag_slugs,
-                'field' => 'slug'
-            );
-
-            // Will replace the current tax_query with a new one
-            $tax_query = $query['tax_query'];
-            $new_tax_query = array(
-                'relation' => 'AND',//$tax_query['relation']
-            );
-            unset($tax_query['relation']);
-            foreach ($tax_query as $tax_item) {
-                $new_tax_query[] = array(
-                    // 'relation' => 'AND',
-                    $tax_item,
-                    $tag_item,
-                );
-            }
-            $query['tax_query'] = $new_tax_query;
-
-            // The tag arg is not needed anymore
-            unset($query['tag_id']);
-            unset($query['tag']);
+        if (!isset($query['tax_query'])) {
+            $query['tax_query'] = [
+                [
+                    'relation' => 'AND',
+                ],
+            ];
+        } else {
+            $query['tax_query'][0]['relation'] = 'AND';
         }
+        return $query;
+    }
+
+    /**
+     * If both "tag" and "tax_query" were set, then the filter will not work for tags.
+     * Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
+     * including both the tag and the already existing taxonomy filtering (eg: categories).
+     * So make that transformation.
+     *
+     * @see https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
+     *
+     * @param array<string,mixed> $query
+     * @return array<string,mixed>
+     */
+    private function convertCustomPostTagQuerySpecialCases(array $query): array
+    {
+        if (!(isset($query['tax_query']) && (isset($query['tag_id']) || isset($query['tag'])))) {
+            return $query;
+        }
+
+        // Create the tag item in the taxonomy
+        $tagIDs = [];
+        if (isset($query['tag_id'])) {
+            $tagIDs = explode(',', $query['tag_id']);
+        }
+        if (isset($query['tag'])) {
+            /** @var int[] */
+            $slugTagIDs = get_tags([
+                'taxonomy' => $this->getTagTaxonomy(),
+                'fields' => 'ids',
+                'slug' => $query['tag']
+            ]);
+            $tagIDs = [
+                ...$tagIDs,
+                ...$slugTagIDs
+            ];
+        }
+        if ($tagIDs === []) {
+            return $query;
+        }
+
+        $tagItem = array(
+            'taxonomy' => $this->getTagTaxonomy(),
+            'terms' => $tagIDs,
+            'field' => 'term_id'
+        );
+
+        // Replace the current tax_query with a new one
+        $taxQuery = $query['tax_query'];
+        $combinedTaxQuery = [
+            'relation' => 'AND',
+        ];
+        foreach ($taxQuery as $taxQueryItem) {
+            $combinedTaxQuery[] = array(
+                $taxQueryItem,
+                $tagItem,
+            );
+        }
+        $query['tax_query'] = $combinedTaxQuery;
+
+        // The tag arg is not needed anymore
+        unset($query['tag_id']);
+        unset($query['tag']);
+
+        return $query;
     }
 
     abstract protected function getTagTaxonomy(): string;

@@ -559,6 +559,71 @@ We can also query the tags and categories added to some custom post (for CPT `"c
 }
 ```
 
+### Filter Custom Posts by Associated Taxonomy (Tags and Categories)
+
+A custom post type can have custom taxonomies (tags and categories) associated to them. For instance, a CPT `"product"` may have associated the category taxonomy `"product-cat"` and the tag taxonomy `"product-tag"`.
+
+The `filter` input to fetch custom posts has been added properties to filter entries by their associated taxonomies:
+
+- `categoryTaxonomy`
+- `tagTaxonomy`
+
+In the query below, we fetch custom posts filtering by category, tag, and both of them:
+
+```graphql
+{
+  customPostsByCat: customPosts(
+    filter: {
+      categoryIDs: [26, 28],
+      categoryTaxonomy: "product-category"
+    }
+  ) {
+    id
+    title
+    ... on GenericCustomPost {
+      categories(taxonomy: "product-category") {
+        id
+      }
+    }
+  }
+
+  customPostsByTag: customPosts(
+    filter: {
+      tagSlugs: ["inventory", "classic"],
+      tagTaxonomy: "product-tag"
+    }
+  ) {
+    id
+    title
+    ... on GenericCustomPost {
+      tags(taxonomy: "product-tag") {
+        slug
+      }
+    }
+  }
+
+  customPostsByTagAndCat: customPosts(
+    filter: {
+      tagSlugs: ["inventory", "classic"],
+      tagTaxonomy: "product-tag"
+      categoryIDs: [26, 28],
+      categoryTaxonomy: "product-category"
+    }
+  ) {
+    id
+    title
+    ... on GenericCustomPost {
+      categories(taxonomy: "product-category") {
+        id
+      }
+      tags(taxonomy: "product-tag") {
+        id
+      }
+    }
+  }
+}
+```
+
 ### Menus
 
 Menus have been upgraded, adding the following fields:

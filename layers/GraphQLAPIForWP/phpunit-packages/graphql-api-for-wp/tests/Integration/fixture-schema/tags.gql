@@ -35,6 +35,42 @@
       }
     }
   }
+
+  customPostsByTagIDs: customPosts(
+    filter: {
+      tagIDs: [17, 24]
+      tagTaxonomy: "dummy-tag"
+    }
+    pagination: {
+      limit: 20
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(taxonomy: "dummy-tag") {
+        id
+      }
+    }
+  }
+
+  customPostsByTagSlugs: customPosts(
+    filter: {
+      tagSlugs: ["tango", "rock"]
+      tagTaxonomy: "dummy-tag"
+    }
+    pagination: {
+      limit: 20
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(taxonomy: "dummy-tag") {
+        slug
+      }
+    }
+  }
 }
 
 fragment TagData on IsTag {

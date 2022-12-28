@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostCategoriesWP\Hooks;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use WP_Term;
 
 abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
 {
@@ -43,11 +42,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
         }
         if (isset($query['category-ids'])) {
             if (isset($query['category-taxonomy'])) {
-                if (!isset($query['tax_query'])) {
-                    $query['tax_query'] = [];
-                } elseif (!in_array($query['tax_query'][0], ['AND', 'OR'])) {
-                    array_unshift($query['tax_query'], 'OR');
-                }
+                $query = $this->initializeTaxQuery($query);
                 $query['tax_query'][] = [
                     'taxonomy' => $query['category-taxonomy'],
                     'terms' => $query['category-ids']
@@ -63,66 +58,70 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
             unset($query['category-id']);
         }
 
-        /**
-         * @todo Check and adapt this function for categories
-         */
-        // $this->convertPostQuerySpecialCases($query);
+        $query = $this->convertCustomPostCategoryQuerySpecialCases($query);
 
         return $query;
     }
+
+
     /**
      * @param array<string,mixed> $query
+     * @return array<string,mixed>
      */
-    private function convertPostQuerySpecialCases(array &$query): void
+    protected function initializeTaxQuery(array $query): array
     {
-        // If both "tag" and "tax_query" were set, then the filter will not work for categories
-        // Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
-        // including both the tag and the already existing taxonomy filtering (eg: categories)
-        // So make that transformation (https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
-        if ((isset($query['tag_id']) || isset($query['tag'])) && isset($query['tax_query'])) {
-            // Create the tag item in the taxonomy
-            $tag_slugs = [];
-            if (isset($query['tag_id'])) {
-                foreach (explode(',', $query['tag_id']) as $tag_id) {
-                    /** @var WP_Term|null */
-                    $tag = get_tag((int)$tag_id);
-                    if ($tag === null) {
-                        continue;
-                    }
-                    $tag_slugs[] = $tag->slug;
-                }
-            }
-            if (isset($query['tag'])) {
-                $tag_slugs = array_merge(
-                    $tag_slugs,
-                    explode(',', $query['tag'])
-                );
-            }
-            $tag_item = array(
-                'taxonomy' => $this->getCategoryTaxonomy(),
-                'terms' => $tag_slugs,
-                'field' => 'slug'
-            );
-
-            // Will replace the current tax_query with a new one
-            $tax_query = $query['tax_query'];
-            $new_tax_query = array(
-                'relation' => 'AND',//$tax_query['relation']
-            );
-            unset($tax_query['relation']);
-            foreach ($tax_query as $tax_item) {
-                $new_tax_query[] = array(
-                    // 'relation' => 'AND',
-                    $tax_item,
-                    $tag_item,
-                );
-            }
-            $query['tax_query'] = $new_tax_query;
-
-            // The tag arg is not needed anymore
-            unset($query['tag_id']);
-            unset($query['tag']);
+        if (!isset($query['tax_query'])) {
+            $query['tax_query'] = [
+                [
+                    'relation' => 'AND',
+                ],
+            ];
+        } else {
+            $query['tax_query'][0]['relation'] = 'AND';
         }
+        return $query;
+    }
+
+    /**
+     * If both "cat" and "tax_query" were set, then the filter will not work for categories.
+     * Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
+     * including both the cat and the already existing taxonomy filtering (eg: tags).
+     * So make that transformation.
+     *
+     * @see https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters)
+     *
+     * @param array<string,mixed> $query
+     * @return array<string,mixed>
+     */
+    private function convertCustomPostCategoryQuerySpecialCases(array $query): array
+    {
+        if (!(isset($query['tax_query']) && isset($query['cat']))) {
+            return $query;
+        }
+
+        $catItem = array(
+            'taxonomy' => $this->getCategoryTaxonomy(),
+            'terms' => $query['cat'],
+            'field' => 'term_id'
+        );
+
+        // Replace the current tax_query with a new one
+        $taxQuery = $query['tax_query'];
+        $combinedTaxQuery = [
+            'relation' => 'AND',
+        ];
+        foreach ($taxQuery as $taxQueryItem) {
+            $combinedTaxQuery[] = array(
+                $taxQueryItem,
+                $catItem,
+            );
+        }
+        $query['tax_query'] = $combinedTaxQuery;
+
+        // The cat arg is not needed anymore
+        unset($query['cat']);
+
+        return $query;
     }
 
     abstract protected function getCategoryTaxonomy(): string;

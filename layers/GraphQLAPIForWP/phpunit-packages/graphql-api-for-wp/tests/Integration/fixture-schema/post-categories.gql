@@ -53,6 +53,16 @@
       name
     }
   }
+
+  postsByCategoryIDs: posts(
+    filter: { categoryIDs: [1, 4] }
+  ) {
+    id
+    title
+    categories {
+      id
+    }
+  }
 }
 
 fragment PostCategoryData on PostCategory {

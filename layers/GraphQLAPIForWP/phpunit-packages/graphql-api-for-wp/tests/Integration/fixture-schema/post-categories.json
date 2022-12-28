@@ -377,6 +377,74 @@
                     "name": "Advanced"
                 }
             ]
-        }
+        },
+        "postsByCategoryIDs": [
+            {
+                "id": 1,
+                "title": "Hello world!",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security",
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have",
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            }
+        ]
     }
 }

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\SchemaHooks;
 
+use PoPCMSSchema\Tags\FilterInputs\TagIDsFilterInput;
+use PoPCMSSchema\Tags\FilterInputs\TagSlugsFilterInput;
+use PoPCMSSchema\Tags\FilterInputs\TagTaxonomyFilterInput;
+use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumStringScalarTypeResolver;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
@@ -13,8 +17,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Tags\FilterInputs\TagIDsFilterInput;
-use PoPCMSSchema\Tags\FilterInputs\TagSlugsFilterInput;
 
 abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSet
 {
@@ -22,6 +24,8 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?TagSlugsFilterInput $tagSlugsFilterInput = null;
     private ?TagIDsFilterInput $tagIDsFilterInput = null;
+    private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
+    private ?TagTaxonomyFilterInput $tagTaxonomyFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -58,6 +62,24 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     {
         /** @var TagIDsFilterInput */
         return $this->tagIDsFilterInput ??= $this->instanceManager->getInstance(TagIDsFilterInput::class);
+    }
+    final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
+    {
+        /** @var TagTaxonomyEnumStringScalarTypeResolver */
+        return $this->tagTaxonomyEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(TagTaxonomyEnumStringScalarTypeResolver::class);
+    }
+    final public function setTagTaxonomyFilterInput(TagTaxonomyFilterInput $tagTaxonomyFilterInput): void
+    {
+        $this->tagTaxonomyFilterInput = $tagTaxonomyFilterInput;
+    }
+    final protected function getTagTaxonomyFilterInput(): TagTaxonomyFilterInput
+    {
+        /** @var TagTaxonomyFilterInput */
+        return $this->tagTaxonomyFilterInput ??= $this->instanceManager->getInstance(TagTaxonomyFilterInput::class);
     }
 
     protected function init(): void
@@ -104,11 +126,19 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
             [
                 'tagIDs' => $this->getIDScalarTypeResolver(),
                 'tagSlugs' => $this->getStringScalarTypeResolver(),
-            ]
+            ],
+            $this->addTagTaxonomyFilterInput() ? [
+                'tagTaxonomy' => $this->getTagTaxonomyEnumStringScalarTypeResolver(),
+            ] : [],
         );
     }
 
     abstract protected function getInputObjectTypeResolverClass(): string;
+
+    protected function addTagTaxonomyFilterInput(): bool
+    {
+        return false;
+    }
 
     public function getInputFieldDescription(
         ?string $inputFieldDescription,
@@ -119,8 +149,9 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'tagIDs' => $this->__('Get results from the tags with given IDs', 'pop-users'),
-            'tagSlugs' => $this->__('Get results from the tags with given slug', 'pop-users'),
+            'tagIDs' => $this->__('Get results from the tags with given IDs', 'tags'),
+            'tagSlugs' => $this->__('Get results from the tags with given slug', 'tags'),
+            'tagTaxonomy' => $this->__('Get results from the tags with given taxonomy', 'tags'),
             default => $inputFieldDescription,
         };
     }
@@ -153,6 +184,7 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
         return match ($inputFieldName) {
             'tagIDs' => $this->getTagIDsFilterInput(),
             'tagSlugs' => $this->getTagSlugsFilterInput(),
+            'tagTaxonomy' => $this->getTagTaxonomyFilterInput(),
             default => $inputFieldFilterInput,
         };
     }

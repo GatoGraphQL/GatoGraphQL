@@ -44,6 +44,26 @@
       name
     }
   }
+
+  postsByTagIDs: posts(
+    filter: { tagIDs: [13, 12] }
+  ) {
+    id
+    title
+    tags {
+      id
+    }
+  }
+
+  postsByTagSlugs: posts(
+    filter: { tagSlugs: ["release", "plugin"] }
+  ) {
+    id
+    title
+    tags {
+      slug
+    }
+  }
 }
 
 fragment PostTagData on PostTag {
