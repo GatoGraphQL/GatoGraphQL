@@ -55,14 +55,14 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
             unset($query['tags']);
         }
 
-        $this->convertPostQuerySpecialCases($query);
+        $this->convertCustomPostTagQuerySpecialCases($query);
 
         return $query;
     }
     /**
      * @param array<string,mixed> $query
      */
-    private function convertPostQuerySpecialCases(array &$query): void
+    private function convertCustomPostTagQuerySpecialCases(array &$query): void
     {
         // If both "tag" and "tax_query" were set, then the filter will not work for tags
         // Instead, what it requires is to create a nested taxonomy filtering inside the tax_query,
