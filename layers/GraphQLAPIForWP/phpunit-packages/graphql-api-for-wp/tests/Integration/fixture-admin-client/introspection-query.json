@@ -4493,7 +4493,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "SupportingFeaturedImage",
+              "name": "WithFeaturedImage",
               "ofType": null
             },
             {
@@ -5462,7 +5462,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "SupportingFeaturedImage",
+              "name": "WithFeaturedImage",
               "ofType": null
             },
             {
@@ -15444,7 +15444,7 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "SupportingFeaturedImage",
+          "name": "WithFeaturedImage",
           "description": "Fields concerning an entity's featured image",
           "fields": [
             {

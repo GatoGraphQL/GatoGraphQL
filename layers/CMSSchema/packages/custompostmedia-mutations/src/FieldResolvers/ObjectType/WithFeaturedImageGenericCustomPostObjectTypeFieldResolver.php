@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMedia\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostMedia\Module;
 use PoPCMSSchema\CustomPostMedia\ModuleConfiguration;
@@ -10,7 +10,7 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTyp
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class SupportingFeaturedImageGenericCustomPostObjectTypeFieldResolver extends AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver
+class WithFeaturedImageGenericCustomPostObjectTypeFieldResolver extends AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver
 {
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -22,7 +22,7 @@ class SupportingFeaturedImageGenericCustomPostObjectTypeFieldResolver extends Ab
         ];
     }
 
-    protected function areCommentsEnabledForCustomPostType(): bool
+    protected function isFeaturedImageEnabledForCustomPostType(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

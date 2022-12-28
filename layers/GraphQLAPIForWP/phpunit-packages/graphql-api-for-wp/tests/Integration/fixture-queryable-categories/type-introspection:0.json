@@ -613,7 +613,7 @@
                     ]
                 },
                 {
-                    "name": "SupportingFeaturedImage",
+                    "name": "WithFeaturedImage",
                     "enumValues": null,
                     "possibleTypes": [
                         {

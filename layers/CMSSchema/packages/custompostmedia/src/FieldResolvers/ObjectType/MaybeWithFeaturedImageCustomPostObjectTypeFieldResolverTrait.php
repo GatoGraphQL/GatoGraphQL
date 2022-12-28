@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostMedia\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 
-trait MaybeSupportingFeaturedImageCustomPostObjectTypeFieldResolverTrait
+trait MaybeWithFeaturedImageCustomPostObjectTypeFieldResolverTrait
 {
     abstract protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface;
 

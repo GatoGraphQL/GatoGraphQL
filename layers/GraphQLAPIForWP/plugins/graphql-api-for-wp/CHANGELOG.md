@@ -169,9 +169,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `Root.setFeaturedImageOnCustomPost: RootSetFeaturedImageOnCustomPostMutationPayload!`
   - `Root.setTagsOnPost: RootSetTagsOnPostMutationPayload!`
   - `Root.updatePost: RootUpdatePostMutationPayload!`
-  - `SupportingFeaturedImage.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
-  - `SupportingFeaturedImage.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
-- `Commentable` and `SupportingFeaturedImage` interfaces are only added to CPTs that support the feature
+  - `WithFeaturedImage.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!`
+  - `WithFeaturedImage.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+- `Commentable` and `WithFeaturedImage` interfaces are only added to CPTs that support the feature
 
 ### Added
 

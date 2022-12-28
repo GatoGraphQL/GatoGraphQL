@@ -927,8 +927,8 @@ The affected mutations are:
 
 - `Comment.reply: CommentReplyMutationPayload!`
 - `Commentable.addComment: CustomPostAddCommentMutationPayload!`
-- `SupportingFeaturedImage.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!` (`SupportingFeaturedImage` is an interface, implemented by types `Post`, `Page` and `GenericCustomPost`)
-- `SupportingFeaturedImage.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
+- `WithFeaturedImage.removeFeaturedImage: CustomPostRemoveFeaturedImageMutationPayload!` (`WithFeaturedImage` is an interface, implemented by types `Post`, `Page` and `GenericCustomPost`)
+- `WithFeaturedImage.setFeaturedImage: CustomPostSetFeaturedImageMutationPayload!`
 - `Post.setCategories: PostSetCategoriesMutationPayload!`
 - `Post.setTags: PostSetTagsMutationPayload!`
 - `Post.update: PostUpdateMutationPayload!`
@@ -943,7 +943,7 @@ The affected mutations are:
 - `Root.setTagsOnPost: RootSetTagsOnPostMutationPayload!`
 - `Root.updatePost: RootUpdatePostMutationPayload!`
 
-### `Commentable` and `SupportingFeaturedImage` interfaces are only added to CPTs that support the feature
+### `Commentable` and `WithFeaturedImage` interfaces are only added to CPTs that support the feature
 
 The `Commentable` interface has the following fields:
 
@@ -954,9 +954,9 @@ The `Commentable` interface has the following fields:
 
 This interface was added to all types for all custom post types (`Post`, `Page` and `GenericCustomPost`). Now, it is only added to the types for those CPTs that do support comments.
 
-Similarly, interface `SupportingFeaturedImage` is now only added to the types for those CPTs that do support a featured image.
+Similarly, interface `WithFeaturedImage` is now only added to the types for those CPTs that do support a featured image.
 
-For instance, the type `Post` implements both `Commentable` and `SupportingFeaturedImage` (because `post_type_supports('post', 'comments') === true` and because `post_type_supports('post', 'thumbnail') === true`).
+For instance, the type `Post` implements both `Commentable` and `WithFeaturedImage` (because `post_type_supports('post', 'comments') === true` and because `post_type_supports('post', 'thumbnail') === true`).
 
 ## Custom scalars
 
