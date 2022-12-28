@@ -18186,6 +18186,16 @@
               "defaultValue": null
             },
             {
+              "name": "categoryTaxonomy",
+              "description": "Get results from the categories with given taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "CategoryTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "customPostTypes",
               "description": "Filter custom posts of given types",
               "type": {
@@ -18374,6 +18384,16 @@
                     "ofType": null
                   }
                 }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "tagTaxonomy",
+              "description": "Get results from the tags with given taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "TagTaxonomyEnumString",
+                "ofType": null
               },
               "defaultValue": null
             }
@@ -20732,6 +20752,16 @@
               "defaultValue": null
             },
             {
+              "name": "categoryTaxonomy",
+              "description": "Get results from the categories with given taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "CategoryTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "customPostTypes",
               "description": "Filter custom posts of given types",
               "type": {
@@ -20902,6 +20932,16 @@
                     "ofType": null
                   }
                 }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "tagTaxonomy",
+              "description": "Get results from the tags with given taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "TagTaxonomyEnumString",
+                "ofType": null
               },
               "defaultValue": null
             }
