@@ -378,7 +378,7 @@
                 }
             ]
         },
-        "postsByCategory": [
+        "postsByCategoryIDs": [
             {
                 "id": 1,
                 "title": "Hello world!",

@@ -54,7 +54,7 @@
     }
   }
 
-  postsByCategory: posts(
+  postsByCategoryIDs: posts(
     filter: { categoryIDs: [1, 4] }
   ) {
     id
