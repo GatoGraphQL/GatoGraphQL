@@ -1098,6 +1098,86 @@
                     }
                 ]
             }
+        ],
+        "customPostsByCategoryIDs": [
+            {
+                "id": 622,
+                "title": "Dolore ex et deleniti mollitia",
+                "categories": [
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 25
+                    },
+                    {
+                        "id": 16
+                    }
+                ]
+            },
+            {
+                "id": 648,
+                "title": "Nostrum consequatur non fugit vel",
+                "categories": [
+                    {
+                        "id": 28
+                    },
+                    {
+                        "id": 21
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 644,
+                "title": "Impedit eaque numquam quas inventore",
+                "categories": [
+                    {
+                        "id": 28
+                    },
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 27
+                    },
+                    {
+                        "id": 23
+                    }
+                ]
+            },
+            {
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "categories": [
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 25
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                "categories": [
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 23
+                    },
+                    {
+                        "id": 16
+                    }
+                ]
+            }
         ]
     }
 }
