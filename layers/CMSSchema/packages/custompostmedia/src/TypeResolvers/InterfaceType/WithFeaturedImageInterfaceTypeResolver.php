@@ -6,11 +6,11 @@ namespace PoPCMSSchema\CustomPostMedia\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
-class SupportingFeaturedImageInterfaceTypeResolver extends AbstractInterfaceTypeResolver
+class WithFeaturedImageInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'SupportingFeaturedImage';
+        return 'WithFeaturedImage';
     }
 
     public function getTypeDescription(): ?string

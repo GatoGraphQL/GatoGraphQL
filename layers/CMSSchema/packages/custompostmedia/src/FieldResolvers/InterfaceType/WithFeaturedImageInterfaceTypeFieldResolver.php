@@ -10,10 +10,10 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPCMSSchema\CustomPostMedia\TypeResolvers\InterfaceType\SupportingFeaturedImageInterfaceTypeResolver;
+use PoPCMSSchema\CustomPostMedia\TypeResolvers\InterfaceType\WithFeaturedImageInterfaceTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 
-class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
+class WithFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
@@ -53,7 +53,7 @@ class SupportingFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfac
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
-            SupportingFeaturedImageInterfaceTypeResolver::class,
+            WithFeaturedImageInterfaceTypeResolver::class,
         ];
     }
 

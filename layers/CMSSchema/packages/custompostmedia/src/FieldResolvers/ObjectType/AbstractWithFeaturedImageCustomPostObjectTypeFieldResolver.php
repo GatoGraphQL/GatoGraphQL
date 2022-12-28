@@ -9,15 +9,15 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPCMSSchema\CustomPostMedia\FieldResolvers\InterfaceType\SupportingFeaturedImageInterfaceTypeFieldResolver;
+use PoPCMSSchema\CustomPostMedia\FieldResolvers\InterfaceType\WithFeaturedImageInterfaceTypeFieldResolver;
 use PoPCMSSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 
-abstract class AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    use MaybeSupportingFeaturedImageCustomPostObjectTypeFieldResolverTrait;
+    use MaybeWithFeaturedImageCustomPostObjectTypeFieldResolverTrait;
 
     private ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
-    private ?SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver = null;
+    private ?WithFeaturedImageInterfaceTypeFieldResolver $withFeaturedImageInterfaceTypeFieldResolver = null;
 
     final public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
     {
@@ -28,14 +28,14 @@ abstract class AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver 
         /** @var CustomPostMediaTypeAPIInterface */
         return $this->customPostMediaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
     }
-    final public function setSupportingFeaturedImageInterfaceTypeFieldResolver(SupportingFeaturedImageInterfaceTypeFieldResolver $supportingFeaturedImageInterfaceTypeFieldResolver): void
+    final public function setWithFeaturedImageInterfaceTypeFieldResolver(WithFeaturedImageInterfaceTypeFieldResolver $withFeaturedImageInterfaceTypeFieldResolver): void
     {
-        $this->supportingFeaturedImageInterfaceTypeFieldResolver = $supportingFeaturedImageInterfaceTypeFieldResolver;
+        $this->withFeaturedImageInterfaceTypeFieldResolver = $withFeaturedImageInterfaceTypeFieldResolver;
     }
-    final protected function getSupportingFeaturedImageInterfaceTypeFieldResolver(): SupportingFeaturedImageInterfaceTypeFieldResolver
+    final protected function getWithFeaturedImageInterfaceTypeFieldResolver(): WithFeaturedImageInterfaceTypeFieldResolver
     {
-        /** @var SupportingFeaturedImageInterfaceTypeFieldResolver */
-        return $this->supportingFeaturedImageInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(SupportingFeaturedImageInterfaceTypeFieldResolver::class);
+        /** @var WithFeaturedImageInterfaceTypeFieldResolver */
+        return $this->withFeaturedImageInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithFeaturedImageInterfaceTypeFieldResolver::class);
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver 
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->getSupportingFeaturedImageInterfaceTypeFieldResolver(),
+            $this->getWithFeaturedImageInterfaceTypeFieldResolver(),
         ];
     }
 

@@ -4493,12 +4493,12 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "SupportingFeaturedImage",
+              "name": "WithAuthor",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "WithAuthor",
+              "name": "WithFeaturedImage",
               "ofType": null
             },
             {
@@ -5462,12 +5462,12 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "SupportingFeaturedImage",
+              "name": "WithAuthor",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "WithAuthor",
+              "name": "WithFeaturedImage",
               "ofType": null
             },
             {
@@ -15444,7 +15444,50 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "SupportingFeaturedImage",
+          "name": "WithAuthor",
+          "description": "Entities that have an author",
+          "fields": [
+            {
+              "name": "author",
+              "description": "The entity's author",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "User!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "User",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericCustomPost",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Page",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Post",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "WithFeaturedImage",
           "description": "Fields concerning an entity's featured image",
           "fields": [
             {
@@ -15480,49 +15523,6 @@
           "interfaces": [],
           "enumValues": null,
           "possibleTypes": [
-            {
-              "kind": "OBJECT",
-              "name": "Page",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Post",
-              "ofType": null
-            }
-          ]
-        },
-        {
-          "kind": "INTERFACE",
-          "name": "WithAuthor",
-          "description": "Entities that have an author",
-          "fields": [
-            {
-              "name": "author",
-              "description": "The entity's author",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "User!",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "User",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": [
-            {
-              "kind": "OBJECT",
-              "name": "GenericCustomPost",
-              "ofType": null
-            },
             {
               "kind": "OBJECT",
               "name": "Page",

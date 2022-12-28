@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PageMediaMutations\ConditionalOnModule\CustomPostMediaMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\Pages\ConditionalOnModule\CustomPostMedia\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CustomPostMediaMutations\FieldResolvers\ObjectType\AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver;
+use PoPCMSSchema\CustomPostMedia\FieldResolvers\ObjectType\AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class SupportingFeaturedImagePageObjectTypeFieldResolver extends AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver
+class WithFeaturedImagePageObjectTypeFieldResolver extends AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver
 {
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 
@@ -36,14 +36,5 @@ class SupportingFeaturedImagePageObjectTypeFieldResolver extends AbstractSupport
     protected function getCustomPostType(): string
     {
         return $this->getPageTypeAPI()->getPageCustomPostType();
-    }
-
-    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        return match ($fieldName) {
-            'setFeaturedImage' => $this->__('Set the featured image on the page', 'pagemedia-mutations'),
-            'removeFeaturedImage' => $this->__('Remove the featured image on the page', 'pagemedia-mutations'),
-            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
-        };
     }
 }

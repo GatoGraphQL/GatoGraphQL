@@ -604,21 +604,21 @@
                     ]
                 },
                 {
-                    "name": "SupportingFeaturedImage",
-                    "enumValues": null,
-                    "possibleTypes": [
-                        {
-                            "name": "Post"
-                        }
-                    ]
-                },
-                {
                     "name": "WithAuthor",
                     "enumValues": null,
                     "possibleTypes": [
                         {
                             "name": "GenericCustomPost"
                         },
+                        {
+                            "name": "Post"
+                        }
+                    ]
+                },
+                {
+                    "name": "WithFeaturedImage",
+                    "enumValues": null,
+                    "possibleTypes": [
                         {
                             "name": "Post"
                         }

@@ -24,13 +24,13 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoPCMSSchema\CustomPostMedia\FieldResolvers\ObjectType\MaybeSupportingFeaturedImageCustomPostObjectTypeFieldResolverTrait;
+use PoPCMSSchema\CustomPostMedia\FieldResolvers\ObjectType\MaybeWithFeaturedImageCustomPostObjectTypeFieldResolverTrait;
 use PoPCMSSchema\CustomPostMedia\TypeAPIs\CustomPostMediaTypeAPIInterface;
 use stdClass;
 
-abstract class AbstractSupportingFeaturedImageCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    use MaybeSupportingFeaturedImageCustomPostObjectTypeFieldResolverTrait;
+    use MaybeWithFeaturedImageCustomPostObjectTypeFieldResolverTrait;
 
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
