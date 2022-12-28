@@ -6,5 +6,5 @@ services:
     PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver:
         class: \PoPCMSSchema\CustomPostsWP\Overrides\TypeResolvers\UnionType\CustomPostUnionTypeResolver
 
-    PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\GenericCustomPostCustomPostObjectTypeResolverPicker:
-        class: \PoPCMSSchema\CustomPostsWP\Overrides\ObjectTypeResolverPickers\GenericCustomPostCustomPostObjectTypeResolverPicker
+    PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostUnionGenericCustomPostObjectTypeResolverPicker:
+        class: \PoPCMSSchema\CustomPostsWP\Overrides\ObjectTypeResolverPickers\CustomPostUnionGenericCustomPostObjectTypeResolverPicker
