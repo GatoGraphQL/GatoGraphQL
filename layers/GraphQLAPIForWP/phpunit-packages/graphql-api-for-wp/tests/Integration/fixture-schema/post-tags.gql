@@ -44,6 +44,16 @@
       name
     }
   }
+
+  postsByTag: posts(
+    filter: {tagIDs: [13, 12]}
+  ) {
+    id
+    title
+    tags {
+      id
+    }
+  }
 }
 
 fragment PostTagData on PostTag {
