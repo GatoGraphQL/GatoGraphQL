@@ -1,26 +1,4 @@
 {
-  "errors": [
-    {
-      "message": "Value 'dummy-cpt' for type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'attachment', 'nav_menu_item', 'custom_css', 'revision', 'page')",
-      "locations": [
-        {
-          "line": 32,
-          "column": 12
-        }
-      ],
-      "extensions": {
-        "path": [
-          "{customPostTypes: \"dummy-cpt\"}",
-          "(filter: {customPostTypes: \"dummy-cpt\"})",
-          "dummyCustomPosts: customPosts(filter: {customPostTypes: \"dummy-cpt\"}) { ... }",
-          "query { ... }"
-        ],
-        "type": "QueryRoot",
-        "field": "dummyCustomPosts: customPosts(filter: {customPostTypes: \"dummy-cpt\"}) { ... }",
-        "code": "PoPSchema\/SchemaCommons@e2"
-      }
-    }
-  ],
   "data": {
     "customPosts": [
       {
@@ -108,6 +86,67 @@
         "__typename": "GenericCustomPost"
       }
     ],
-    "dummyCustomPosts": null
+    "dummyCustomPosts": [
+      {
+        "__typename": "GenericCustomPost",
+        "id": 649,
+        "title": "Nulla numquam totam eaque",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 619,
+        "title": "Error debitis nulla vel est",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 634,
+        "title": "Recusandae vel deleniti est expedita dolores quasi",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 636,
+        "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 639,
+        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 622,
+        "title": "Dolore ex et deleniti mollitia",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 648,
+        "title": "Nostrum consequatur non fugit vel",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 644,
+        "title": "Impedit eaque numquam quas inventore",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 630,
+        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 641,
+        "title": "Impedit necessitatibus dolor est",
+        "customPostType": "dummy-cpt"
+      }
+    ]
   }
 }

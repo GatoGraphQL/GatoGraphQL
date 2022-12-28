@@ -27,4 +27,17 @@
     status
     __typename
   }
+  
+  dummyCustomPosts: customPosts(
+    filter:{
+      customPostTypes: "dummy-cpt"
+    }
+  ) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      customPostType
+    }
+  }
 }

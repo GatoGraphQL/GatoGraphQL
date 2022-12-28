@@ -19,9 +19,30 @@
         "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {order: ASC}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
+    },
+    {
+      "message": "Value 'dummy-cpt' for type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'attachment', 'nav_menu_item', 'custom_css', 'revision')",
+      "locations": [
+        {
+          "line": 32,
+          "column": 12
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{customPostTypes: \"dummy-cpt\"}",
+          "(filter: {customPostTypes: \"dummy-cpt\"})",
+          "dummyCustomPosts: customPosts(filter: {customPostTypes: \"dummy-cpt\"}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "dummyCustomPosts: customPosts(filter: {customPostTypes: \"dummy-cpt\"}) { ... }",
+        "code": "PoPSchema\/SchemaCommons@e2"
+      }
     }
   ],
   "data": {
-    "customPosts": null
+    "customPosts": null,
+    "dummyCustomPosts": null
   }
 }

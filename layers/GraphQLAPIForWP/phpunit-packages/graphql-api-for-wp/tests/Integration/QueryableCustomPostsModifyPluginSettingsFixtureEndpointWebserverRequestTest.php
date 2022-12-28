@@ -41,6 +41,9 @@ class QueryableCustomPostsModifyPluginSettingsFixtureEndpointWebserverRequestTes
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':1')) {
             $value[] = 'page';
+        } elseif (str_ends_with($dataName, ':2')) {
+            $value[] = 'page';
+            $value[] = 'dummy-cpt';
         }
 
         return $value;
