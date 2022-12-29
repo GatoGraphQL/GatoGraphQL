@@ -17,5 +17,10 @@ interface TaxonomyInterface
      */
     public function getTaxonomyPluralNames(bool $titleCase = true): string;
 
+    /**
+     * @return string[]
+     */
+    public function getCustomPostTypes(): array;
+
     public function isHierarchical(): bool;
 }

@@ -56,7 +56,7 @@ class GraphQLQueryCategoryTaxonomy extends AbstractCategory
     /**
      * @return string[]
      */
-    protected function getCustomPostTypes(): array
+    public function getCustomPostTypes(): array
     {
         return [
             $this->getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType(),

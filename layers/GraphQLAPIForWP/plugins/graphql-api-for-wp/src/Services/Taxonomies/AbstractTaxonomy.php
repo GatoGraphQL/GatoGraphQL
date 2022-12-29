@@ -86,9 +86,4 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             $args
         );
     }
-
-    /**
-     * @return string[]
-     */
-    abstract protected function getCustomPostTypes(): array;
 }
