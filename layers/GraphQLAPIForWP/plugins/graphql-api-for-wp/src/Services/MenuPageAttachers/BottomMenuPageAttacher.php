@@ -128,7 +128,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $menuName = $this->getMenuName();
 
         $submenu[$menuName][] = [
-            __('Categories', 'graphql-api'),
+            $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomyPluralNames(true),
             $schemaEditorAccessCapability,
             sprintf(
                 'edit-tags.php?taxonomy=%s',
