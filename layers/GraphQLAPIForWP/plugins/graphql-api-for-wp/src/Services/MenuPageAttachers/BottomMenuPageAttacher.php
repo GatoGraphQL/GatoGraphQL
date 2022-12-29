@@ -126,22 +126,39 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         global $submenu;
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         $menuName = $this->getMenuName();
+        $graphQLEndpointCategoriesLabel = $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomyPluralNames(true);
+        $graphQLEndpointCategoriesCustomPostTypes = $this->getGraphQLEndpointCategoryTaxonomy()->getCustomPostTypes();
+        $graphQLEndpointCategoriesRelativePath = sprintf(
+            'edit-tags.php?taxonomy=%s&post_type=%s',
+            $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy(),
+            implode(
+                ',',
+                $graphQLEndpointCategoriesCustomPostTypes
+            )
+        );
 
-        $graphQLCategoriesLabel = $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomyPluralNames(true);
-        $graphQLCategoriesCustomPostTypes = $this->getGraphQLEndpointCategoryTaxonomy()->getCustomPostTypes();
+        /**
+         * When clicking on "GraphQL Endpoint Categories" it would highlight
+         * the Posts menu. With this code, it highlights the GraphQL API menu.
+         */
+        add_filter(
+            'parent_file',
+            function (string $parent_file) use ($graphQLEndpointCategoriesRelativePath, $graphQLEndpointCategoriesCustomPostTypes)
+            {
+                global $plugin_page, $submenu_file, $taxonomy;
+                if ($taxonomy === $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy()) {
+                    $plugin_page = $submenu_file = $graphQLEndpointCategoriesRelativePath;
+                }
+                return $parent_file;
+            }
+        );
+
         \add_submenu_page(
             $menuName,
-            $graphQLCategoriesLabel,
-            $graphQLCategoriesLabel,
+            $graphQLEndpointCategoriesLabel,
+            $graphQLEndpointCategoriesLabel,
             $schemaEditorAccessCapability,
-            sprintf(
-                'edit-tags.php?taxonomy=%s&post_type=%s',
-                $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy(),
-                implode(
-                    ',',
-                    $graphQLCategoriesCustomPostTypes
-                )
-            ),
+            $graphQLEndpointCategoriesRelativePath,
         );
 
         $modulesMenuPage = $this->getModuleMenuPage();
