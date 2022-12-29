@@ -356,7 +356,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      *
      * @see function `categories_dropdown` in wp-admin/includes/class-wp-posts-list-table.php
      */
-    protected function printTaxonomyDropdowns(TaxonomyInterface $taxonomy)
+    protected function printTaxonomyDropdowns(TaxonomyInterface $taxonomy): void
     {
         // global $cat;
         $post_type = $this->getCustomPostType();
@@ -374,8 +374,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
 
         if (is_object_in_taxonomy($post_type, $taxonomy->getTaxonomy())) {
+            $taxonomyObject = get_taxonomy($taxonomy->getTaxonomy());
             $dropdown_options = array(
-                'show_option_all' => get_taxonomy($taxonomy->getTaxonomy())->labels->all_items,
+                'show_option_all' => $taxonomyObject->labels->all_items,
                 'hide_empty'      => 0,
                 'hierarchical'    => 1,
                 'show_count'      => 0,
@@ -386,7 +387,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'value_field'     => 'slug',
             );
 
-            echo '<label class="screen-reader-text" for="' . $taxonomy->getTaxonomy() . '">' . get_taxonomy($taxonomy->getTaxonomy())->labels->filter_by_item . '</label>';
+            echo '<label class="screen-reader-text" for="' . $taxonomy->getTaxonomy() . '">' . $taxonomyObject->labels->filter_by_item . '</label>';
 
             wp_dropdown_categories($dropdown_options);
         }
