@@ -42,7 +42,7 @@ class GraphQLQueryCategoryTaxonomy extends AbstractCategory
 
     public function getTaxonomyName(bool $titleCase = true): string
     {
-        return $titleCase ? \__('Category', 'graphql-api') : \__('category', 'graphql-api');
+        return $titleCase ? \__('GraphQL Category', 'graphql-api') : \__('GraphQL category', 'graphql-api');
     }
 
     /**
@@ -50,7 +50,7 @@ class GraphQLQueryCategoryTaxonomy extends AbstractCategory
      */
     public function getTaxonomyPluralNames(bool $titleCase = true): string
     {
-        return $titleCase ? \__('Categories', 'graphql-api') : \__('categories', 'graphql-api');
+        return $titleCase ? \__('GraphQL Categories', 'graphql-api') : \__('GraphQL categories', 'graphql-api');
     }
 
     /**
