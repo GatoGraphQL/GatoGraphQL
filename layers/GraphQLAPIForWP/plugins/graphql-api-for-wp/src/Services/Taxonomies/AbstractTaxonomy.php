@@ -73,12 +73,14 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             'show_admin_column' => $this->showAdminColumn(),
         );
         /**
-         * From documentation concerning 2nd parameter ($object_type)
-         * > Setting explicitly to null registers the taxonomy but doesn't associate it
-         * > with any objects, so it won't be directly available within the Admin UI.>
-         * > You will need to manually register it using the 'taxonomy' parameter
-         * > (passed through $args)
-         * > when registering a custom post_type
+         * From documentation concerning 2nd parameter ($object_type):
+         *
+         *   > Setting explicitly to null registers the taxonomy but doesn't associate it
+         *   > with any objects, so it won't be directly available within the Admin UI.>
+         *   > You will need to manually register it using the 'taxonomy' parameter
+         *   > (passed through $args)
+         *   > when registering a custom post_type
+         *
          * @see https://codex.wordpress.org/Function_Reference/register_taxonomy#Parameters
          */
         \register_taxonomy(
