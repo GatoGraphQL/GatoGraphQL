@@ -351,45 +351,46 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
     }
 
-	/**
+    /**
      * Based on function `categories_dropdown`
      *
-	 * @see function `categories_dropdown` in wp-admin/includes/class-wp-posts-list-table.php
-	 */
-	protected function printTaxonomyDropdowns(TaxonomyInterface $taxonomy) {
-		// global $cat;
+     * @see function `categories_dropdown` in wp-admin/includes/class-wp-posts-list-table.php
+     */
+    protected function printTaxonomyDropdowns(TaxonomyInterface $taxonomy)
+    {
+        // global $cat;
         $post_type = $this->getCustomPostType();
 
-		/**
-		 * Filters whether to remove the 'Categories' drop-down from the post list table.
-		 *
-		 * @since 4.6.0
-		 *
-		 * @param bool   $disable   Whether to disable the categories drop-down. Default false.
-		 * @param string $post_type Post type slug.
-		 */
-		if ( false !== apply_filters( 'disable_categories_dropdown', false, $post_type ) ) {
-			return;
-		}
+        /**
+         * Filters whether to remove the 'Categories' drop-down from the post list table.
+         *
+         * @since 4.6.0
+         *
+         * @param bool   $disable   Whether to disable the categories drop-down. Default false.
+         * @param string $post_type Post type slug.
+         */
+        if (false !== apply_filters('disable_categories_dropdown', false, $post_type)) {
+            return;
+        }
 
-		if ( is_object_in_taxonomy( $post_type, $taxonomy->getTaxonomy() ) ) {
-			$dropdown_options = array(
-				'show_option_all' => get_taxonomy( $taxonomy->getTaxonomy() )->labels->all_items,
-				'hide_empty'      => 0,
-				'hierarchical'    => 1,
-				'show_count'      => 0,
-				'orderby'         => 'name',
-				// 'selected'        => $cat,
+        if (is_object_in_taxonomy($post_type, $taxonomy->getTaxonomy())) {
+            $dropdown_options = array(
+                'show_option_all' => get_taxonomy($taxonomy->getTaxonomy())->labels->all_items,
+                'hide_empty'      => 0,
+                'hierarchical'    => 1,
+                'show_count'      => 0,
+                'orderby'         => 'name',
+                // 'selected'        => $cat,
                 'taxonomy'        => $taxonomy->getTaxonomy(),
                 'name'            => $taxonomy->getTaxonomy(),
                 'value_field'     => 'slug',
             );
 
-			echo '<label class="screen-reader-text" for="' . $taxonomy->getTaxonomy() . '">' . get_taxonomy( $taxonomy->getTaxonomy() )->labels->filter_by_item . '</label>';
+            echo '<label class="screen-reader-text" for="' . $taxonomy->getTaxonomy() . '">' . get_taxonomy($taxonomy->getTaxonomy())->labels->filter_by_item . '</label>';
 
-			wp_dropdown_categories( $dropdown_options );
-		}
-	}
+            wp_dropdown_categories($dropdown_options);
+        }
+    }
 
     /**
      * Add extra actions to the Custom Post Type list

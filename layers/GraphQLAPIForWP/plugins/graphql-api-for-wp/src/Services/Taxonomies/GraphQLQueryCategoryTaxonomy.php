@@ -12,7 +12,7 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class GraphQLQueryCategoryTaxonomy extends AbstractCategory
 {
     use StandaloneServiceTrait;
-    
+
     private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
