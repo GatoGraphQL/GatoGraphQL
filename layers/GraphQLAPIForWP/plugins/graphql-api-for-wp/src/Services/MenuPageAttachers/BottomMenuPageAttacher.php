@@ -127,14 +127,23 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         $menuName = $this->getMenuName();
 
-        $submenu[$menuName][] = [
-            $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomyPluralNames(true),
+        $graphQLCategoriesLabel = $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomyPluralNames(true);
+        $graphQLCategoriesCustomPostTypes = $this->getGraphQLQueryCategoryTaxonomy()->getCustomPostTypes();
+        \add_submenu_page(
+            $menuName,
+            $graphQLCategoriesLabel,
+            $graphQLCategoriesLabel,
             $schemaEditorAccessCapability,
             sprintf(
-                'edit-tags.php?taxonomy=%s',
-                $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomy()
-            )
-        ];
+                'edit-tags.php?taxonomy=%s&post_type=%s',
+                $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomy(),
+                implode(
+                    ',',
+                    $graphQLCategoriesCustomPostTypes
+                )
+            ),
+            null
+        );
 
         $modulesMenuPage = $this->getModuleMenuPage();
         /**
