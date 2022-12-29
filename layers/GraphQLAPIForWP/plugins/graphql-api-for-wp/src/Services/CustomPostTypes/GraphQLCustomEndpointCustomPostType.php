@@ -23,6 +23,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     private ?EndpointBlockRegistryInterface $endpointBlockRegistry = null;
     private ?CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry = null;
     private ?CustomEndpointOptionsBlock $customEndpointOptionsBlock = null;
+    private ?GraphQLQueryCategoryTaxonomy $graphQLQueryCategoryTaxonomy = null;
 
     final public function setEndpointBlockRegistry(EndpointBlockRegistryInterface $endpointBlockRegistry): void
     {
@@ -50,6 +51,15 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     {
         /** @var CustomEndpointOptionsBlock */
         return $this->customEndpointOptionsBlock ??= $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
+    }
+    final public function setGraphQLQueryCategoryTaxonomy(GraphQLQueryCategoryTaxonomy $graphQLQueryCategoryTaxonomy): void
+    {
+        $this->graphQLQueryCategoryTaxonomy = $graphQLQueryCategoryTaxonomy;
+    }
+    final protected function getGraphQLQueryCategoryTaxonomy(): GraphQLQueryCategoryTaxonomy
+    {
+        /** @var GraphQLQueryCategoryTaxonomy */
+        return $this->graphQLQueryCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLQueryCategoryTaxonomy::class);
     }
 
     /**
@@ -141,7 +151,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     protected function getTaxonomies(): array
     {
         return [
-            GraphQLQueryCategoryTaxonomy::TAXONOMY_CATEGORY,
+            $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomy(),
         ];
     }
 

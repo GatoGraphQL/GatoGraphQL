@@ -23,6 +23,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     private ?PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry = null;
     private ?PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry = null;
     private ?PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock = null;
+    private ?GraphQLQueryCategoryTaxonomy $graphQLQueryCategoryTaxonomy = null;
 
     final public function setPersistedQueryEndpointBlockRegistry(PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry): void
     {
@@ -50,6 +51,15 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     {
         /** @var PersistedQueryEndpointOptionsBlock */
         return $this->persistedQueryEndpointOptionsBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+    }
+    final public function setGraphQLQueryCategoryTaxonomy(GraphQLQueryCategoryTaxonomy $graphQLQueryCategoryTaxonomy): void
+    {
+        $this->graphQLQueryCategoryTaxonomy = $graphQLQueryCategoryTaxonomy;
+    }
+    final protected function getGraphQLQueryCategoryTaxonomy(): GraphQLQueryCategoryTaxonomy
+    {
+        /** @var GraphQLQueryCategoryTaxonomy */
+        return $this->graphQLQueryCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLQueryCategoryTaxonomy::class);
     }
 
     /**
@@ -154,7 +164,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     protected function getTaxonomies(): array
     {
         return [
-            GraphQLQueryCategoryTaxonomy::TAXONOMY_CATEGORY,
+            $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomy(),
         ];
     }
 
