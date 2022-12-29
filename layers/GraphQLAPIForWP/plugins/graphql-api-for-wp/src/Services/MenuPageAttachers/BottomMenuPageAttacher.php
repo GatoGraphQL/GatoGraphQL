@@ -126,11 +126,30 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         global $submenu;
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         $menuName = $this->getMenuName();
+
+        /**
+         * Add the "GraphQL Endpoint Categories" link to the menu.
+         * Adding `"show_in_menu" => true` or `"show_in_menu" => "graphql_api"`
+         * doesn't work, so we must use a hack.
+         *
+         * @see https://stackoverflow.com/questions/48632394/wordpress-add-custom-taxonomy-to-custom-menu
+         */
         $graphQLEndpointCategoriesLabel = $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomyPluralNames(true);
         $graphQLEndpointCategoriesCustomPostTypes = $this->getGraphQLEndpointCategoryTaxonomy()->getCustomPostTypes();
         $graphQLEndpointCategoriesRelativePath = sprintf(
             'edit-tags.php?taxonomy=%s&post_type=%s',
             $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy(),
+            /**
+             * The custom taxonomy has 2 CPTs associated to it:
+             *
+             * - Custom Endpoints
+             * - Persisted Queries
+             * 
+             * The "count" column shows the number from both of them,
+             * but clicking on it should take to neither. That's why
+             * param "post_type" points to the non-existing "both of them" CPT,
+             * and so the link in "count" is removed.
+             */
             implode(
                 ',',
                 $graphQLEndpointCategoriesCustomPostTypes
