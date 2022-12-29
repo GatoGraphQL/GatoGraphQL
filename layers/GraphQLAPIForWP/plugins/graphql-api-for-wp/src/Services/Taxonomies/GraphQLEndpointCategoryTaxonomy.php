@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpoint
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 
-class GraphQLQueryCategoryTaxonomy extends AbstractCategory
+class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 {
     use StandaloneServiceTrait;
 

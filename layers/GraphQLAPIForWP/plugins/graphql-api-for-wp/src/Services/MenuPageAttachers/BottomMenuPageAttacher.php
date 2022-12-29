@@ -14,7 +14,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLQueryCategoryTaxonomy;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPModuleConfiguration;
 use PoP\Root\App;
@@ -29,7 +29,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ModulesMenuPage $modulesMenuPage = null;
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
-    private ?GraphQLQueryCategoryTaxonomy $graphQLQueryCategoryTaxonomy = null;
+    private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
 
     final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
@@ -103,14 +103,14 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         /** @var AboutMenuPage */
         return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }
-    final public function setGraphQLQueryCategoryTaxonomy(GraphQLQueryCategoryTaxonomy $graphQLQueryCategoryTaxonomy): void
+    final public function setGraphQLEndpointCategoryTaxonomy(GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy): void
     {
-        $this->graphQLQueryCategoryTaxonomy = $graphQLQueryCategoryTaxonomy;
+        $this->graphQLEndpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy;
     }
-    final protected function getGraphQLQueryCategoryTaxonomy(): GraphQLQueryCategoryTaxonomy
+    final protected function getGraphQLEndpointCategoryTaxonomy(): GraphQLEndpointCategoryTaxonomy
     {
-        /** @var GraphQLQueryCategoryTaxonomy */
-        return $this->graphQLQueryCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLQueryCategoryTaxonomy::class);
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        return $this->graphQLEndpointCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
     }
 
     /**
@@ -127,8 +127,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         $menuName = $this->getMenuName();
 
-        $graphQLCategoriesLabel = $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomyPluralNames(true);
-        $graphQLCategoriesCustomPostTypes = $this->getGraphQLQueryCategoryTaxonomy()->getCustomPostTypes();
+        $graphQLCategoriesLabel = $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomyPluralNames(true);
+        $graphQLCategoriesCustomPostTypes = $this->getGraphQLEndpointCategoryTaxonomy()->getCustomPostTypes();
         \add_submenu_page(
             $menuName,
             $graphQLCategoriesLabel,
@@ -136,7 +136,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $schemaEditorAccessCapability,
             sprintf(
                 'edit-tags.php?taxonomy=%s&post_type=%s',
-                $this->getGraphQLQueryCategoryTaxonomy()->getTaxonomy(),
+                $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy(),
                 implode(
                     ',',
                     $graphQLCategoriesCustomPostTypes
