@@ -13,10 +13,11 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\App;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Block_Editor_Context;
 use WP_Post;
 
@@ -275,7 +276,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $taxonomyColumns = [];
         if ($taxonomies = $this->getTaxonomies()) {
             foreach ($taxonomies as $taxonomy) {
-                $taxonomyColumns['taxonomy-' . $taxonomy] = $taxonomy;
+                $taxonomyColumns['taxonomy-' . $taxonomy->getTaxonomy()] = $taxonomy->getTaxonomyName(true);
             }
         }
         // Add the description column after the title
@@ -535,7 +536,10 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $postTypeArgs['rewrite'] = ['slug' => $slugBase];
         }
         if ($taxonomies = $this->getTaxonomies()) {
-            $postTypeArgs['taxonomies'] = $taxonomies;
+            $postTypeArgs['taxonomies'] = array_map(
+                fn (TaxonomyInterface $taxonomy) => $taxonomy->getTaxonomy(),
+                $taxonomies
+            );
         }
         if ($this->isAPIHierarchyModuleEnabled() && $this->isHierarchical()) {
             $postTypeArgs['supports'][] = 'page-attributes';
@@ -607,7 +611,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Taxonomies
      *
-     * @return string[]
+     * @return TaxonomyInterface[]
      */
     protected function getTaxonomies(): array
     {
