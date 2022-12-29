@@ -142,7 +142,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                     $graphQLCategoriesCustomPostTypes
                 )
             ),
-            null
         );
 
         $modulesMenuPage = $this->getModuleMenuPage();
