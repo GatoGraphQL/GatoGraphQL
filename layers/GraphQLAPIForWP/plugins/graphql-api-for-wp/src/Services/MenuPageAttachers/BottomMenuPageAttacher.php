@@ -162,9 +162,9 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          *
          * @see https://stackoverflow.com/a/66094349
          */
-        add_filter(
+        \add_filter(
             'parent_file',
-            function (string $parent_file) use ($graphQLEndpointCategoriesRelativePath, $graphQLEndpointCategoriesCustomPostTypes)
+            function (string $parent_file) use ($graphQLEndpointCategoriesRelativePath)
             {
                 global $plugin_page, $submenu_file, $taxonomy;
                 if ($taxonomy === $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy()) {
