@@ -272,6 +272,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function setTableColumns(array $columns): array
     {
+        $taxonomyColumns = [];
+        if ($taxonomies = $this->getTaxonomies()) {
+            foreach ($taxonomies as $taxonomy) {
+                $taxonomyColumns['taxonomy-' . $taxonomy] = $taxonomy;
+            }
+        }
         // Add the description column after the title
         $titlePos = array_search('title', array_keys($columns));
         return array_merge(
@@ -281,9 +287,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 $titlePos + 1,
                 true
             ),
-            [
-                'description' => \__('Description', 'graphql-api'),
-            ],
+            array_merge(
+                [
+                    'description' => \__('Description', 'graphql-api'),
+                ],
+                $taxonomyColumns
+            ),
             array_slice(
                 $columns,
                 $titlePos + 1,
@@ -510,6 +519,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'hierarchical' => $this->isAPIHierarchyModuleEnabled() && $this->isHierarchical(),
                 'exclude_from_search' => true,
                 'show_in_admin_bar' => $this->showInAdminBar(),
+                'show_admin_column' => true,
                 'show_in_menu' => $canAccessSchemaEditor ? $this->getMenu()->getName() : false,
                 'show_in_rest' => true,
                 'supports' => [
