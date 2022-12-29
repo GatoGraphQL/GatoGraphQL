@@ -144,7 +144,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
              *
              * - Custom Endpoints
              * - Persisted Queries
-             * 
+             *
              * The "count" column shows the number from both of them,
              * but clicking on it should take to neither. That's why
              * param "post_type" points to the non-existing "both of them" CPT,
@@ -164,8 +164,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          */
         \add_filter(
             'parent_file',
-            function (string $parent_file) use ($graphQLEndpointCategoriesRelativePath)
-            {
+            function (string $parent_file) use ($graphQLEndpointCategoriesRelativePath) {
                 global $plugin_page, $submenu_file, $taxonomy;
                 if ($taxonomy === $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy()) {
                     $plugin_page = $submenu_file = $graphQLEndpointCategoriesRelativePath;
