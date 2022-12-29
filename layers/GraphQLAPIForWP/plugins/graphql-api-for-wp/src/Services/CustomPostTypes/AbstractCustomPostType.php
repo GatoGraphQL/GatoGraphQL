@@ -284,12 +284,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function setTableColumns(array $columns): array
     {
-        $taxonomyColumns = [];
-        if ($taxonomies = $this->getTaxonomies()) {
-            foreach ($taxonomies as $taxonomy) {
-                $taxonomyColumns['taxonomy-' . $taxonomy->getTaxonomy()] = $taxonomy->getTaxonomyPluralNames(true);
-            }
-        }
         // Add the description column after the title
         $titlePos = array_search('title', array_keys($columns));
         return array_merge(
@@ -299,12 +293,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 $titlePos + 1,
                 true
             ),
-            array_merge(
-                [
-                    'description' => \__('Description', 'graphql-api'),
-                ],
-                $taxonomyColumns
-            ),
+            [
+                'description' => \__('Description', 'graphql-api'),
+            ],
             array_slice(
                 $columns,
                 $titlePos + 1,

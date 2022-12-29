@@ -70,6 +70,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             'show_in_nav_menus' => true,
             'show_tagcloud' => false,
             'show_in_rest' => true,
+            'show_admin_column' => $this->showAdminColumn(),
         );
         /**
          * From documentation concerning 2nd parameter ($object_type)
@@ -85,5 +86,10 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             $this->getCustomPostTypes(),
             $args
         );
+    }
+
+    protected function showAdminColumn(): bool
+    {
+        return $this->isHierarchical();
     }
 }
