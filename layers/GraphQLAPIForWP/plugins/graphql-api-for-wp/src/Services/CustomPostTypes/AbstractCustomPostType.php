@@ -276,7 +276,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $taxonomyColumns = [];
         if ($taxonomies = $this->getTaxonomies()) {
             foreach ($taxonomies as $taxonomy) {
-                $taxonomyColumns['taxonomy-' . $taxonomy->getTaxonomy()] = $taxonomy->getTaxonomyName(true);
+                $taxonomyColumns['taxonomy-' . $taxonomy->getTaxonomy()] = $taxonomy->getTaxonomyPluralNames(true);
             }
         }
         // Add the description column after the title

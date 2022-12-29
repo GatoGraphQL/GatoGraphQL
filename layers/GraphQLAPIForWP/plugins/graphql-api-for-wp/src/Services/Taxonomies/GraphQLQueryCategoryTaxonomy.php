@@ -48,7 +48,7 @@ class GraphQLQueryCategoryTaxonomy extends AbstractCategory
     /**
      * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
      */
-    protected function getTaxonomyPluralNames(bool $titleCase = true): string
+    public function getTaxonomyPluralNames(bool $titleCase = true): string
     {
         return $titleCase ? \__('Categories', 'graphql-api') : \__('categories', 'graphql-api');
     }
