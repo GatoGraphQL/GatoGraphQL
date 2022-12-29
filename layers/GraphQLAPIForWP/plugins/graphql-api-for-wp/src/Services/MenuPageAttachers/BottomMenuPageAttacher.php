@@ -174,6 +174,9 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             }
         );
 
+        /**
+         * Finally add the "GraphQL Endpoint Categories" link to the menu.
+         */
         \add_submenu_page(
             $menuName,
             $graphQLEndpointCategoriesLabel,
