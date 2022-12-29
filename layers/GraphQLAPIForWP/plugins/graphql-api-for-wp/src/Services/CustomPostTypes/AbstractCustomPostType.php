@@ -20,6 +20,11 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Block_Editor_Context;
 use WP_Post;
+use WP_Taxonomy;
+
+use function get_taxonomy;
+use function is_object_in_taxonomy;
+use function wp_dropdown_categories;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
@@ -373,8 +378,10 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             return;
         }
 
-        if (is_object_in_taxonomy($post_type, $taxonomy->getTaxonomy())) {
-            $taxonomyObject = get_taxonomy($taxonomy->getTaxonomy());
+        $taxonomyName = $taxonomy->getTaxonomy();
+        if (is_object_in_taxonomy($post_type, $taxonomyName)) {
+            /** @var WP_Taxonomy */
+            $taxonomyObject = get_taxonomy($taxonomyName);
             $dropdown_options = array(
                 'show_option_all' => $taxonomyObject->labels->all_items,
                 'hide_empty'      => 0,
@@ -382,12 +389,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'show_count'      => 0,
                 'orderby'         => 'name',
                 // 'selected'        => $cat,
-                'taxonomy'        => $taxonomy->getTaxonomy(),
-                'name'            => $taxonomy->getTaxonomy(),
+                'taxonomy'        => $taxonomyName,
+                'name'            => $taxonomyName,
                 'value_field'     => 'slug',
             );
 
-            echo '<label class="screen-reader-text" for="' . $taxonomy->getTaxonomy() . '">' . $taxonomyObject->labels->filter_by_item . '</label>';
+            echo '<label class="screen-reader-text" for="' . $taxonomyName . '">' . $taxonomyObject->labels->filter_by_item . '</label>';
 
             wp_dropdown_categories($dropdown_options);
         }
