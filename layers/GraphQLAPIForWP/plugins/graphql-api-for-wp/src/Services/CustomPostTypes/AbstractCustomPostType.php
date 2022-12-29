@@ -601,7 +601,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'hierarchical' => $this->isAPIHierarchyModuleEnabled() && $this->isHierarchical(),
                 'exclude_from_search' => true,
                 'show_in_admin_bar' => $this->showInAdminBar(),
-                'show_admin_column' => true,
                 'show_in_menu' => $canAccessSchemaEditor ? $this->getMenu()->getName() : false,
                 'show_in_rest' => true,
                 'supports' => [
