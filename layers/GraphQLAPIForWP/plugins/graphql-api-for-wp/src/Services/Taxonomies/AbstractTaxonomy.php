@@ -82,7 +82,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
          */
         \register_taxonomy(
             $this->getTaxonomy(),
-            [],
+            $this->getCustomPostTypes(),
             $args
         );
     }
@@ -93,4 +93,12 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
      * @param bool $titleCase Indicate if the name must be title case (for starting a sentence) or, otherwise, lowercase
      */
     abstract protected function getTaxonomyPluralNames(bool $titleCase = true): string;
+
+    /**
+     * @return string[]
+     */
+    protected function getCustomPostTypes(): array
+    {
+        return [];
+    }
 }
