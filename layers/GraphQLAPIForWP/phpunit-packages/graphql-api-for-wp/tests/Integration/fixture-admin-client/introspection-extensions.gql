@@ -1,0 +1,53 @@
+query ExtensionsIntrospectionQuery {
+  __schema {
+    extensions {
+      isNamespaced
+    }
+    types {
+      name
+      extensions {
+        elementName
+        namespacedName
+        possibleValues
+      }
+      fields {
+        name
+        extensions {
+          isMutation
+          isSensitiveDataElement
+        }
+        args {
+          name
+          extensions {
+            isSensitiveDataElement
+          }
+        }
+      }
+      inputFields {
+        name
+        extensions {
+          isSensitiveDataElement
+        }
+      }
+      enumValues {
+        name
+        extensions {
+          isSensitiveDataElement
+        }
+      }
+    }
+    directives {
+      name
+      extensions {
+        needsDataToExecute
+        fieldDirectiveSupportedTypeNamesOrDescriptions
+      }
+      args {
+        name
+        extensions {
+          isSensitiveDataElement
+        }
+      }
+    }
+  }
+}
