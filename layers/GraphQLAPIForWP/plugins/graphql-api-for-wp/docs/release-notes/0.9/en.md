@@ -1046,6 +1046,22 @@ For instance, it would make sense to have a `CustomPostEnum` enum type, listing 
 
 Because of this limitation, the GraphQL API cannot provide this type as an `Enum` type. Instead, it implements it as `CustomPostEnumString`, i.e. as a custom "Enum String" type, which is a `String` type that can only receive a value from a pre-defined set, similar to an enum.
 
+We can retrieve the list of accepted values for each `EnumString` type via introspection:
+
+```graphql
+query EnumStringTypePossibleValues {
+  __schema {
+    types {
+      name
+      extensions {
+        # This will print the enum-like "possible values" for EnumString type resolvers, or `null` otherwise
+        possibleValues
+      }
+    }
+  }
+}
+```
+
 (Here is the [source code for an example implementation](https://github.com/leoloso/PoP/blob/d60ce3e2f299cc7cb17d43b4a464862878e60bd5/layers/CMSSchema/packages/customposts/src/TypeResolvers/EnumType/CustomPostEnumStringScalarTypeResolver.php).)
 
 ### Implementation of several "Enum String" types
