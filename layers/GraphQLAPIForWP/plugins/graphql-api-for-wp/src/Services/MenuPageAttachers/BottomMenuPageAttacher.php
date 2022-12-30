@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
-use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
@@ -15,8 +14,10 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPModuleConfiguration;
+use PoP\Root\App;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
@@ -28,6 +29,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ModulesMenuPage $modulesMenuPage = null;
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
+    private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
 
     final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
@@ -101,6 +103,15 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         /** @var AboutMenuPage */
         return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
     }
+    final public function setGraphQLEndpointCategoryTaxonomy(GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy): void
+    {
+        $this->graphQLEndpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy;
+    }
+    final protected function getGraphQLEndpointCategoryTaxonomy(): GraphQLEndpointCategoryTaxonomy
+    {
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        return $this->graphQLEndpointCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+    }
 
     /**
      * After adding the menus for the CPTs
@@ -112,6 +123,67 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
     public function addMenuPages(): void
     {
+        global $submenu;
+        $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
+        $menuName = $this->getMenuName();
+
+        /**
+         * Add the "GraphQL Endpoint Categories" link to the menu.
+         * Adding `"show_in_menu" => true` or `"show_in_menu" => "graphql_api"`
+         * doesn't work, so we must use a hack.
+         *
+         * @see https://stackoverflow.com/questions/48632394/wordpress-add-custom-taxonomy-to-custom-menu
+         */
+        $graphQLEndpointCategoriesLabel = $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomyPluralNames(true);
+        $graphQLEndpointCategoriesCustomPostTypes = $this->getGraphQLEndpointCategoryTaxonomy()->getCustomPostTypes();
+        $graphQLEndpointCategoriesRelativePath = sprintf(
+            'edit-tags.php?taxonomy=%s&post_type=%s',
+            $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy(),
+            /**
+             * The custom taxonomy has 2 CPTs associated to it:
+             *
+             * - Custom Endpoints
+             * - Persisted Queries
+             *
+             * The "count" column shows the number from both of them,
+             * but clicking on it should take to neither. That's why
+             * param "post_type" points to the non-existing "both of them" CPT,
+             * and so the link in "count" is removed.
+             */
+            implode(
+                ',',
+                $graphQLEndpointCategoriesCustomPostTypes
+            )
+        );
+
+        /**
+         * When clicking on "GraphQL Endpoint Categories" it would highlight
+         * the Posts menu. With this code, it highlights the GraphQL API menu.
+         *
+         * @see https://stackoverflow.com/a/66094349
+         */
+        \add_filter(
+            'parent_file',
+            function (string $parent_file) use ($graphQLEndpointCategoriesRelativePath) {
+                global $plugin_page, $submenu_file, $taxonomy;
+                if ($taxonomy === $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy()) {
+                    $plugin_page = $submenu_file = $graphQLEndpointCategoriesRelativePath;
+                }
+                return $parent_file;
+            }
+        );
+
+        /**
+         * Finally add the "GraphQL Endpoint Categories" link to the menu.
+         */
+        \add_submenu_page(
+            $menuName,
+            $graphQLEndpointCategoriesLabel,
+            $graphQLEndpointCategoriesLabel,
+            $schemaEditorAccessCapability,
+            $graphQLEndpointCategoriesRelativePath,
+        );
+
         $modulesMenuPage = $this->getModuleMenuPage();
         /**
          * @var callable
@@ -119,7 +191,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $callable = [$modulesMenuPage, 'print'];
         if (
             $hookName = \add_submenu_page(
-                $this->getMenuName(),
+                $menuName,
                 __('Modules', 'graphql-api'),
                 __('Modules', 'graphql-api'),
                 'manage_options',
@@ -132,7 +204,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         if (
             $hookName = \add_submenu_page(
-                $this->getMenuName(),
+                $menuName,
                 __('Settings', 'graphql-api'),
                 __('Settings', 'graphql-api'),
                 'manage_options',
@@ -146,9 +218,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         /** @var GraphQLClientsForWPModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
-            global $submenu;
             $clientPath = $moduleConfiguration->getGraphiQLClientEndpoint();
-            $submenu[$this->getMenuName()][] = [
+            $submenu[$menuName][] = [
                 __('GraphiQL (public client)', 'graphql-api'),
                 'read',
                 home_url($clientPath),
@@ -156,9 +227,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
 
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
-            global $submenu;
             $clientPath = $moduleConfiguration->getVoyagerClientEndpoint();
-            $submenu[$this->getMenuName()][] = [
+            $submenu[$menuName][] = [
                 __('Interactive Schema (public client)', 'graphql-api'),
                 'read',
                 home_url($clientPath),
@@ -174,7 +244,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (App::query('page') === $aboutMenuPage->getScreenID()) {
             if (
                 $hookName = \add_submenu_page(
-                    $this->getMenuName(),
+                    $menuName,
                     __('About', 'graphql-api'),
                     __('About', 'graphql-api'),
                     'manage_options',

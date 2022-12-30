@@ -209,6 +209,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Support fragment spread on unions
   - Variables are input types
   - Queried fields are unambiguous
+- Organize custom endpoints and persisted queries by category
 - Support block string characters
 - Query schema extensions via introspection
   - Implemented extension `isSensitiveDataElement`

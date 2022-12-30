@@ -1567,6 +1567,22 @@ The following ones where added:
 - Variables are input types ([spec](https://spec.graphql.org/draft/#sec-Variables-Are-Input-Types))
 - Queried fields are unambiguous ([spec](https://spec.graphql.org/draft/#sec-Field-Selection-Merging))
 
+## Organize Custom Endpoints and Persisted Queries by Category
+
+When creating a Custom Endpoint or Persisted Query, we can add a "GraphQL endpoint category" to it, to organize all of our endpoints:
+
+![Endpoint categories when editing a Custom Endpoint](../../images/graphql-custom-endpoint-editor-with-categories.png)
+
+For instance, we can create categories to manage endpoints by client, application, or any other required piece of information:
+
+![List of endpoint categories](../../images/graphql-endpoint-categories.png)
+
+On the list of Custom Endpoints and Persisted Queries, we can visualize their categories and, clicking on any category link, or using the filter at the top, will only display all entries for that category:
+
+![List of Custom Endpoints with their categories](../../images/graphql-custom-endpoints-with-categories.png)
+
+![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
+
 ## Support block string characthers
 
 Added support for the GraphQL spec-defined [block strings](https://spec.graphql.org/draft/#BlockStringCharacter), which are are strings that use `"""` as delimiter instead of `"`, allowing us to input multi-line strings.

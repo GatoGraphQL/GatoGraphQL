@@ -13,12 +13,18 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
+use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\App;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Block_Editor_Context;
 use WP_Post;
+use WP_Taxonomy;
+
+use function get_taxonomy;
+use function is_object_in_taxonomy;
+use function wp_dropdown_categories;
 
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
@@ -149,6 +155,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             add_action(
                 "manage_{$postType}_posts_custom_column",
                 $this->resolveCustomColumn(...),
+                10,
+                2
+            );
+            add_action(
+                "restrict_manage_posts",
+                $this->restrictManageCustomPosts(...),
                 10,
                 2
             );
@@ -306,6 +318,76 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                     echo $this->getCPTUtils()->getCustomPostDescription($post);
                 }
                 break;
+        }
+    }
+
+    /**
+     * Filter by taxonomies
+     *
+     * @see wp-admin/includes/class-wp-posts-list-table.php
+     */
+    public function restrictManageCustomPosts(string $customPostType, string $which): void
+    {
+        if ($customPostType !== $this->getCustomPostType()) {
+            return;
+        }
+        if ($which !== 'top') {
+            return;
+        }
+        $taxonomies = $this->getTaxonomies();
+        if ($taxonomies === []) {
+            return;
+        }
+        foreach ($taxonomies as $taxonomy) {
+            // Skip tags, only categories
+            if (!$taxonomy->isHierarchical()) {
+                continue;
+            }
+            $this->printTaxonomyDropdowns($taxonomy);
+        }
+    }
+
+    /**
+     * Based on function `categories_dropdown`
+     *
+     * @see function `categories_dropdown` in wp-admin/includes/class-wp-posts-list-table.php
+     */
+    protected function printTaxonomyDropdowns(TaxonomyInterface $taxonomy): void
+    {
+        // global $cat;
+        $post_type = $this->getCustomPostType();
+
+        /**
+         * Filters whether to remove the 'Categories' drop-down from the post list table.
+         *
+         * @since 4.6.0
+         *
+         * @param bool   $disable   Whether to disable the categories drop-down. Default false.
+         * @param string $post_type Post type slug.
+         */
+        if (false !== apply_filters('disable_categories_dropdown', false, $post_type)) {
+            return;
+        }
+
+        $taxonomyName = $taxonomy->getTaxonomy();
+        if (is_object_in_taxonomy($post_type, $taxonomyName)) {
+            /** @var WP_Taxonomy */
+            $taxonomyObject = get_taxonomy($taxonomyName);
+            $dropdown_options = array(
+                'show_option_all' => $taxonomyObject->labels->all_items,
+                'hide_empty'      => 0,
+                'hierarchical'    => 1,
+                'show_count'      => 0,
+                'orderby'         => 'name',
+                // 'selected'        => $cat,
+                'taxonomy'        => $taxonomyName,
+                'name'            => $taxonomyName,
+                'value_field'     => 'slug',
+            );
+
+            echo '<label class="screen-reader-text" for="' . $taxonomyName . '">' . $taxonomyObject->labels->filter_by_item . '</label>';
+
+            wp_dropdown_categories($dropdown_options);
         }
     }
 
@@ -525,7 +607,10 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $postTypeArgs['rewrite'] = ['slug' => $slugBase];
         }
         if ($taxonomies = $this->getTaxonomies()) {
-            $postTypeArgs['taxonomies'] = $taxonomies;
+            $postTypeArgs['taxonomies'] = array_map(
+                fn (TaxonomyInterface $taxonomy) => $taxonomy->getTaxonomy(),
+                $taxonomies
+            );
         }
         if ($this->isAPIHierarchyModuleEnabled() && $this->isHierarchical()) {
             $postTypeArgs['supports'][] = 'page-attributes';
@@ -597,7 +682,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Taxonomies
      *
-     * @return string[]
+     * @return TaxonomyInterface[]
      */
     protected function getTaxonomies(): array
     {
